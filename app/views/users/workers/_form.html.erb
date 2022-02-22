@@ -1,0 +1,58 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :name %>
+<%= f.text_field :name, class: "form-control", placeholder: Worker.human_attribute_name(:name) %><br>
+
+<%= f.label :name_kana %>
+<%= f.text_field :name_kana, class: "form-control", placeholder: Worker.human_attribute_name(:name_kana) %><br>
+
+<%= f.label :country %>
+<%= f.text_field :country, class: "form-control", placeholder: Worker.human_attribute_name(:country) %><br>
+
+<%= f.label :my_address %>
+<%= f.text_field :my_address, class: "form-control", placeholder: Worker.human_attribute_name(:my_address) %><br>
+
+<%= f.label :my_phone_number %>
+<%= f.text_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
+
+<%= f.label :family_address %>
+<%= f.text_field :family_address, class: "form-control", placeholder: Worker.human_attribute_name(:family_address) %><br>
+
+<%= f.label :family_phone_number %>
+<%= f.text_field :family_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:family_phone_number) %><br>
+
+<%= f.label :birth_day_on %>
+<%= f.date_field :birth_day_on, class: "form-control", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
+
+<%= f.label :abo_blood_type %>
+<%= f.select :abo_blood_type, Worker.abo_blood_types_i18n.invert, {}, {class: "form-control"} %><br>
+
+<%= f.label :rh_blood_type %>
+<%= f.select :rh_blood_type, Worker.rh_blood_types_i18n.invert, {include_blank: true}, {class: "form-control"} %><br>
+
+<!-- 下記職種はenum未設計の為ひとまずintegerの数字が表示されるようにしています -->
+<%= f.label :job_type %>
+<%= f.number_field :job_type, class: "form-control" %><br>
+<!-- -->
+
+<%= f.label :hiring_on %>
+<%= f.date_field :hiring_on, class: "form-control", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
+
+<%= f.label :experience_term_before_hiring %>
+<%= f.number_field :experience_term_before_hiring, class: "form-control", min: 0 %><br>
+
+<%= f.label :blank_term %>
+<%= f.number_field :blank_term, class: "form-control", min: 0 %><br>
+
+<%= f.label :carrier_up_id %>
+<%= f.text_field :carrier_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:carrier_up_id) %>
+
+<% if worker.images.present? %>
+  <% worker.images.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_worker_update_images_path(worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+<% end %><br>
+
+<%= f.label :images %>
+<%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %><br>

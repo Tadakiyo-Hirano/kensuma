@@ -1,0 +1,83 @@
+<% provide(:title, "作業員詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= Worker.human_attribute_name(:name) %></th>
+          <td><%= @worker.name %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:name_kana) %></th>
+          <td><%= @worker.name_kana %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:country) %></th>
+          <td><%= @worker.country %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:my_address) %></th>
+          <td><%= @worker.my_address %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:my_phone_number) %></th>
+          <td><%= @worker.my_phone_number %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:family_address) %></th>
+          <td><%= @worker.family_address %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:family_phone_number) %></th>
+          <td><%= @worker.family_phone_number %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:birth_day_on) %></th>
+          <td><%= @worker.birth_day_on %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:abo_blood_type) %></th>
+          <td><%= @worker.abo_blood_type_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:rh_blood_type) %></th>
+          <td><%= @worker.rh_blood_type_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:job_type) %></th>
+          <td><%= @worker.job_type %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:hiring_on) %></th>
+          <td><%= @worker.hiring_on %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:experience_term_before_hiring) %></th>
+          <td><%= @worker.experience_term_before_hiring %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:blank_term) %></th>
+          <td><%= @worker.blank_term %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:carrier_up_id) %></th>
+          <td><%= @worker.carrier_up_id %></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:images) %></th>
+          <td>
+            <% @worker.images.each do |image| %>
+              <%= image_tag(image.url) %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to "編集", edit_users_worker_path(@worker), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_worker_path(@worker), method: :delete, data: { confirm: "#{@worker.name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "一覧画面へ", users_workers_path, class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>

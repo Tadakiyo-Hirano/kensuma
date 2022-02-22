@@ -9,7 +9,8 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <div class="input-group mb-3">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class:"form-control", placeholder:"メールアドレス" %>
+          <%# 開発用に初期値を入れています(value: "test_user1@gmail.com") %>
+          <%= f.email_field :email, value: "test_user1@gmail.com", autofocus: true, autocomplete: "email", required: true, class:"form-control", placeholder:"メールアドレス" %>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -17,8 +18,8 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          
-          <%= f.password_field :password, autocomplete: "new-password", required: true, class:"form-control", placeholder:"パスワード" %>
+          <%# 開発用に初期値を入れています(value: "password") %>
+          <%= f.password_field :password, value: "password", autocomplete: "new-password", required: true, class:"form-control", placeholder:"パスワード" %>
           
           <div class="input-group-append">
             <div class="input-group-text">

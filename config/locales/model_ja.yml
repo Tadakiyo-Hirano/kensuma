@@ -2,11 +2,17 @@ ja:
   activerecord:
     models:
       business: 事業部
+      car_insurance_company: ⾃動⾞保険会社
+      car_voluntary_insurance: 任意保険
+      car: 車両情報
+      order: 発注
+      worker: 作業員
+      worker_insurance: 保険情報
     attributes:
       business:
         uuid: 事業所ID
         name: 事業所名
-        name_kane: 事業所名(カナ)
+        name_kana: 事業所名(カナ)
         branch_name: 支店名、営業所名
         representative_name: 代表者名
         email: 事業所メールアドレス
@@ -16,6 +22,59 @@ ja:
         carrier_up_id: 事業者ID
         stamp_images: 電子印
         business_type: 会社形態
+      car:
+        owner_name: 車両所有者氏名
+        safety_manager: 安全運転管理者
+        vehicle_model: 車両型式
+        vehicle_number: 車両番号
+        vehicle_inspection_start_on: 車検初め
+        vehicle_inspection_end_on: 車検終わり
+        car_insurance_company_id: 自賠責保険会社
+        liability_securities_number: 自賠責証券番号
+        liability_insurance_start_on: 自賠責保険初め
+        liability_insurance_end_on: 自賠責保険終わり
+        voluntary_securities_number: 任意保険証券番号
+        voluntary_insurance_start_on: 任意保険初め
+        voluntary_insurance_end_on: 任意保険終わり
+        images: 添付画像
+      car_insurance_company:
+        name: 保険会社名
+      car_voluntary_insurance:
+        personal_insurance: 対人保険金(万円)
+        objective_insurance: 対物保険金(万円)
+        company_voluntary_id: 任意保険会社
+      order:
+        site_uu_id: 現場ID
+        site_name: 現場名
+        order_name: 発注者名前
+        order_post_code: 発注者郵便番号
+        order_address: 発注者住所
+      worker:
+        name: 名前
+        name_kana: 名前カナ
+        country: 国籍
+        my_address: 住所
+        my_phone_number: 電話番号
+        family_address: 家族住所
+        family_phone_number: 家族電話番号
+        birth_day_on: 生年月日
+        abo_blood_type: 血液型(ABO)
+        rh_blood_type: 血液型(Rh)
+        job_type: 職種
+        hiring_on: 雇入年月日
+        experience_term_before_hiring: 雇入前経験年数
+        blank_term: ブランク年数
+        carrier_up_id: 技能者ID
+        images: 免許
+        business: 事業所
+      worker_insurance:
+        health_insurance_type: 健康保険のタイプ
+        health_insurance_name: 健康保険の名前
+        pension_insurance_type: 年金保険のタイプ
+        employment_insurance_type: 雇用保険のタイプ
+        employment_insurance_number: 被保険者番号の下4桁
+        severance_pay_mutual_aid_type: 建設業退職金共済制度
+        severance_pay_mutual_aid_name: 建設業退職金共済制度名前
   attributes:
     created_at: 作成日
     updated_at: 更新日

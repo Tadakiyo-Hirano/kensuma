@@ -1,0 +1,28 @@
+<% provide(:title,  "その他ユーザー一覧") %>
+
+<%= link_to "その他ユーザー新規作成画面へ", new_users_general_user_path, class: "btn btn-lg btn-block btn-outline-primary" %>
+<br>
+<% if @general_users.present? %>
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr align="center">
+            <th><%= User.human_attribute_name(:name) %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @general_users.each do |general_user| %>
+          <tr align="center">
+            <td><%= link_to general_user.name, users_general_user_path(general_user) %></td>
+            <td><%= link_to "編集", edit_users_general_user_path(general_user), class: "btn btn-md btn-success" %></td>
+            <td><%= link_to "削除", users_general_user_path(general_user), method: :delete, data: { confirm: "「#{general_user.name}」を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

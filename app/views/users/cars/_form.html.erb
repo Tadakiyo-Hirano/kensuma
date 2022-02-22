@@ -1,0 +1,67 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :owner_name %>
+<%= f.text_field :owner_name, class: "form-control", placeholder: Car.human_attribute_name(:owner_name) %>
+<br>
+<%= f.label :safety_manager %>
+<%= f.text_field :safety_manager, class: "form-control", placeholder: Car.human_attribute_name(:safety_manager) %>
+<br>
+<%= f.label :vehicle_model %>
+<%= f.text_field :vehicle_model, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_model) %>
+<br>
+<%= f.label :vehicle_number %>
+<%= f.text_field :vehicle_number, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_number) %>
+<br>
+<%= f.label :vehicle_inspection_start_on %>
+<%= f.date_field :vehicle_inspection_start_on, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_inspection_start_on) %>
+<br>
+<%= f.label :vehicle_inspection_end_on %>
+<%= f.date_field :vehicle_inspection_end_on, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_inspection_end_on) %>
+<br>
+<!-- 自賠責保険ここから -->
+<%= f.label :car_insurance_company_id %>
+<%= f.collection_select :car_insurance_company_id, @car_insurance_companies, :id, :name, { prompt: true }, { required: true, class: "form-control" } %>
+<br>
+<%= f.label :liability_securities_number %>
+<%= f.text_field :liability_securities_number, class: "form-control", placeholder: Car.human_attribute_name(:liability_securities_number) %>
+<br>
+<%= f.label :liability_insurance_start_on %>
+<%= f.date_field :liability_insurance_start_on, class: "form-control", placeholder: Car.human_attribute_name(:liability_insurance_start_on) %>
+<br>
+<%= f.label :liability_insurance_end_on %>
+<%= f.date_field :liability_insurance_end_on, class: "form-control", placeholder: Car.human_attribute_name(:liability_insurance_end_on) %>
+<!-- 自賠責保険ここまで -->
+<br>
+<!-- 任意保険ここから -->
+<%= f.fields_for :car_voluntary_insurances do |voluntary| %>
+  <%= voluntary.label :company_voluntary_id %>
+  <%= voluntary.collection_select :company_voluntary_id, @car_insurance_companies, :id, :name, { prompt: true }, { class: "form-control" } %>
+  <br>
+  <%= voluntary.label :personal_insurance %>
+  <%= voluntary.select :personal_insurance, CarVoluntaryInsurance.personal_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+  <br>
+  <%= voluntary.label :objective_insurance %>
+  <%= voluntary.select :objective_insurance, CarVoluntaryInsurance.objective_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<% end %>
+<br>
+<%= f.label :voluntary_securities_number %>
+<%= f.text_field :voluntary_securities_number, class: "form-control", placeholder: Car.human_attribute_name(:voluntary_securities_number) %>
+<br>
+<%= f.label :voluntary_insurance_start_on %>
+<%= f.date_field :voluntary_insurance_start_on, class: "form-control", placeholder: Car.human_attribute_name(:voluntary_insurance_start_on) %>
+<br>
+<%= f.label :voluntary_insurance_end_on %>
+<%= f.date_field :voluntary_insurance_end_on, class: "form-control", placeholder: Car.human_attribute_name(:voluntary_insurance_end_on) %>
+<!-- 任意保険ここまで -->
+<br>
+<% if car.images.present? %>
+  <% car.images.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_car_update_images_path(car, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+  <br>
+<% end %>
+
+<%= f.label :images %>
+<%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+<br>

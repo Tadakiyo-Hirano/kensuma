@@ -7,15 +7,20 @@
           <%= link_to "発注", '#', class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
         </div>
         <div class="card pt-5 pb-5">
-          <%= link_to "事業所", '#', class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
+          <%= link_to "事業所", users_business_path, class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="card pt-5 pb-5">
-          <%= link_to "作業員", '#', class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
+          <%= link_to "作業員", users_workers_path, class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
         </div>
         <div class="card pt-5 pb-5">
-          <%= link_to "ユーザー", '#', class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
+          <%= link_to "ユーザー", users_general_users_path, class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card pt-5 pb-5">
+          <%= link_to "車両", users_cars_path, class: "btn btn-lg byn-block mt-5 mb-5", style: 'font-size:40px;' %>
         </div>
       </div>
     </div>

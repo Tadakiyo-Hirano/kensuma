@@ -9,6 +9,14 @@
           <td><%= @business.uuid %></td>
         </tr>
         <tr>
+          <th><%= Business.human_attribute_name(:name) %></th>
+          <td><%= @business.name %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:name_kana) %></th>
+          <td><%= @business.name_kana %></td>
+        </tr>
+        <tr>
           <th><%= Business.human_attribute_name(:branch_name) %></th>
           <td><%= @business.branch_name %></td>
         </tr>

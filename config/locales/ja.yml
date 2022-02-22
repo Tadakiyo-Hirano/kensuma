@@ -107,12 +107,50 @@ ja:
       month: 月
       year: 年
   enums:
+    user:
+      gender:
+        male: 男
+        female: 女性
+        other: その他
     business:
       business_type:
         corporation: 法人
         freelance: 一人親方
         Individual_five_over: 個人事務所(雇用5人以上)
         Individual_five_less: 個人事務所(雇用5人未満)
+    order:
+      status:
+        created: 作成済み
+        completed: 完成
+    worker:
+      abo_blood_type:
+        a: A型
+        b: B型
+        ab: AB型
+        o: O型
+      rh_blood_type:
+        plus: ＋
+        minus: −
+    worker_insurance:
+      health_insurance_type:
+        health_insurance_association: 健康保険組合
+        japan_health_insurance_association: 協会けんぽ
+        construction_national_health_insurance: 建設国保
+        national_health_insurance: 国民健康保険
+        exemption: 適応除外
+      pension_insurance_type:
+        welfare: 厚生年金
+        national: 国民年金
+        recipient: 受給者
+      employment_insurance_type:
+        insured: 被保険者
+        day: 日雇保険
+        exemption: 適応除外
+      severance_pay_mutual_aid_type:
+        kentaikyo: 建退共手帳
+        tyutaikyo: 中退共手帳
+        other: その他
+        none: 無し
   errors:
     format: "%{attribute}%{message}"
     messages:

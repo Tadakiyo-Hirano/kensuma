@@ -1,0 +1,99 @@
+<% provide(:title, "車両情報詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= Car.human_attribute_name(:owner_name) %></th>
+          <td><%= @car.owner_name %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:safety_manager) %></th>
+          <td><%= @car.safety_manager %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:vehicle_model) %></th>
+          <td><%= @car.vehicle_model %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:vehicle_number) %></th>
+          <td><%= @car.vehicle_number %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:vehicle_inspection_start_on) %></th>
+          <td><%= @car.vehicle_inspection_start_on %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:vehicle_inspection_end_on) %></th>
+          <td><%= @car.vehicle_inspection_end_on %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:car_insurance_company_id) %></th>
+          <td><%= @car.car_insurance_company.name %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:liability_securities_number) %></th>
+          <td><%= @car.liability_securities_number %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:liability_insurance_start_on) %></th>
+          <td><%= @car.liability_insurance_start_on %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:liability_insurance_end_on) %></th>
+          <td><%= @car.liability_insurance_end_on %></td>
+        </tr>
+        <tr>
+          <th><%= CarVoluntaryInsurance.human_attribute_name(:company_voluntary_id) %></th>
+          <td>
+            <% @car.company_voluntaries.each do |voluntary| %>
+              <%= voluntary.name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= CarVoluntaryInsurance.human_attribute_name(:personal_insurance) %></th>
+          <td>
+            <% @car.car_voluntary_insurances.each do |voluntary| %>
+              <%= voluntary.personal_insurance %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= CarVoluntaryInsurance.human_attribute_name(:objective_insurance) %></th>
+          <td>
+            <% @car.car_voluntary_insurances.each do |voluntary| %>
+              <%= voluntary.objective_insurance %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:voluntary_securities_number) %></th>
+          <td><%= @car.voluntary_securities_number %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:voluntary_insurance_start_on) %></th>
+          <td><%= @car.voluntary_insurance_start_on %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:voluntary_insurance_end_on) %></th>
+          <td><%= @car.voluntary_insurance_end_on%></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:images) %></th>
+          <td>
+            <% @car.images.each do |image| %>
+              <%= image_tag(image.url) %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to "編集", edit_users_car_path(@car), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_car_path(@car), method: :delete, data: { confirm: "#{@car.vehicle_model}の車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "一覧画面へ", users_cars_path, class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>

@@ -9,6 +9,9 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'devise'
+# Coverage
+require 'simplecov'
+SimpleCov.start 'rails'
 
 Capybara.register_driver :remote_chrome do |app|
   url = 'http://chrome:4444/wd/hub'

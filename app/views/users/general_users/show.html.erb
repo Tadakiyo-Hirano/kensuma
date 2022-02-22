@@ -1,0 +1,31 @@
+<% provide(:title, "その他ユーザー詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= User.human_attribute_name(:name) %></th>
+          <td><%= @general_user.name %></td>
+        </tr>
+        <tr>
+          <th><%= User.human_attribute_name(:email) %></th>
+          <td><%= @general_user.email %></td>
+        </tr>
+        <tr>
+          <th><%= User.human_attribute_name(:age) %></th>
+          <td><%= @general_user.age %></td>
+        </tr>
+        <tr>
+          <th><%= User.human_attribute_name(:gender) %></th>
+          <td><%= @general_user.gender_i18n %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to "編集", edit_users_general_user_path(@general_user), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_general_user_path(@general_user), method: :delete, data: { confirm: "「#{@general_user.name}」を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "一覧画面へ", users_general_users_path, class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>

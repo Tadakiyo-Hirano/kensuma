@@ -60,7 +60,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('Name kanaを入力してください')
+          expect(subject.errors.full_messages).to include('事業所名(カナ)はカタカナで入力して下さい。')
         end
 
         %i[
@@ -78,7 +78,7 @@ RSpec.describe Business, type: :model do
 
             it 'バリデーションのエラーが正しいこと' do
               subject.valid?
-              expect(subject.errors.full_messages).to include('Name kanaはカタカナで入力して下さい。')
+              expect(subject.errors.full_messages).to include('事業所名(カナ)はカタカナで入力して下さい。')
             end
           end
         end
@@ -267,6 +267,46 @@ RSpec.describe Business, type: :model do
           subject.valid?
           expect(subject.errors.full_messages).to include('会社形態を入力してください')
         end
+      end
+    end
+  end
+
+  describe '車両とのアソシエーションについて' do
+    let :business do
+      create(:business, cars: cars)
+    end
+
+    let :cars do
+      create_list(:car, 2)
+    end
+
+    context '紐つく車両がある場合' do
+      subject do
+        business.cars
+      end
+
+      it '紐つく車両を返すこと' do
+        expect(subject).to eq(cars)
+      end
+    end
+  end
+
+  describe '発注とのアソシエーションについて' do
+    let :business do
+      create(:business, orders: orders)
+    end
+
+    let :orders do
+      create_list(:order, 2)
+    end
+
+    context '紐つく発注がある場合' do
+      subject do
+        business.orders
+      end
+
+      it '紐つく発注を返すこと' do
+        expect(subject).to eq(orders)
       end
     end
   end

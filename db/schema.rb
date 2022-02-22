@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_22_045207) do
+ActiveRecord::Schema.define(version: 2022_02_17_014304) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -82,6 +82,45 @@ ActiveRecord::Schema.define(version: 2022_01_22_045207) do
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
+  create_table "car_insurance_companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "car_voluntary_insurances", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "personal_insurance"
+    t.integer "objective_insurance"
+    t.bigint "car_voluntary_id", null: false
+    t.bigint "company_voluntary_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["car_voluntary_id"], name: "index_car_voluntary_insurances_on_car_voluntary_id"
+    t.index ["company_voluntary_id"], name: "index_car_voluntary_insurances_on_company_voluntary_id"
+  end
+
+  create_table "cars", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "owner_name", null: false
+    t.string "safety_manager"
+    t.string "vehicle_model", null: false
+    t.string "vehicle_number", null: false
+    t.date "vehicle_inspection_start_on", null: false
+    t.date "vehicle_inspection_end_on", null: false
+    t.string "liability_securities_number", null: false
+    t.date "liability_insurance_start_on", null: false
+    t.date "liability_insurance_end_on", null: false
+    t.string "voluntary_securities_number"
+    t.date "voluntary_insurance_start_on"
+    t.date "voluntary_insurance_end_on"
+    t.json "images"
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "car_insurance_company_id", null: false
+    t.index ["business_id"], name: "index_cars_on_business_id"
+    t.index ["car_insurance_company_id"], name: "index_cars_on_car_insurance_company_id"
+  end
+
   create_table "managers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -107,6 +146,19 @@ ActiveRecord::Schema.define(version: 2022_01_22_045207) do
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_managers_on_unlock_token", unique: true
+  end
+
+  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status", default: 0, null: false
+    t.string "site_uu_id", null: false
+    t.string "site_name", null: false
+    t.string "order_name", null: false
+    t.string "order_post_code", null: false
+    t.string "order_address", null: false
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_orders_on_business_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -141,6 +193,50 @@ ActiveRecord::Schema.define(version: 2022_01_22_045207) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "worker_insurances", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "health_insurance_type", null: false
+    t.string "health_insurance_name"
+    t.integer "pension_insurance_type", null: false
+    t.integer "employment_insurance_type", null: false
+    t.string "employment_insurance_number"
+    t.integer "severance_pay_mutual_aid_type", null: false
+    t.string "severance_pay_mutual_aid_name"
+    t.bigint "worker_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
+  end
+
+  create_table "workers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "name_kana", null: false
+    t.string "country", null: false
+    t.string "my_address", null: false
+    t.string "my_phone_number", null: false
+    t.string "family_address", null: false
+    t.string "family_phone_number", null: false
+    t.date "birth_day_on", null: false
+    t.integer "abo_blood_type", default: 0, null: false
+    t.integer "rh_blood_type", default: 0, null: false
+    t.integer "job_type", default: 0, null: false
+    t.date "hiring_on", null: false
+    t.integer "experience_term_before_hiring", null: false
+    t.integer "blank_term", null: false
+    t.string "carrier_up_id"
+    t.json "images"
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_workers_on_business_id"
+  end
+
   add_foreign_key "articles", "users"
   add_foreign_key "businesses", "users"
+  add_foreign_key "car_voluntary_insurances", "car_insurance_companies", column: "company_voluntary_id"
+  add_foreign_key "car_voluntary_insurances", "cars", column: "car_voluntary_id"
+  add_foreign_key "cars", "businesses"
+  add_foreign_key "cars", "car_insurance_companies"
+  add_foreign_key "orders", "businesses"
+  add_foreign_key "worker_insurances", "workers"
+  add_foreign_key "workers", "businesses"
 end

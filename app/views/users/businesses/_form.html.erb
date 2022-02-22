@@ -36,12 +36,12 @@
 <% if business.stamp_images.present? %>
   <% business.stamp_images.each_with_index do |image, index| %>
     <%= image_tag(image.url) %>
-    <%= link_to "削除", update_images_users_business_path(index: index), :method => :delete, data: { confirm: "本当に削除してもよろしいですか？" } %>
+    <%= link_to "削除", update_images_users_business_path(index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
   <% end %>
   <br>
 <% end %>
 
 <%= f.label :stamp_images %>
-<%= f.file_field :stamp_images, multiple: true, class: "form-control" %>
+<%= f.file_field :stamp_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
 
 <%= f.hidden_field :user_id, value: current_user.id %>

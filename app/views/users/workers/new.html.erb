@@ -1,0 +1,13 @@
+<% provide(:title, "作業員登録") %>
+<% provide(:btn_text, "登録") %>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_with model: @worker, url: users_workers_path, method: :post, local: true do |f| %>
+      <%= render partial: "form", locals: { f: f, worker: @worker } %>
+      
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <%= link_to "一覧画面へ", users_workers_path, class: "btn btn-md btn-block btn-default" %>
+    <% end %>
+  </div>
+</div>

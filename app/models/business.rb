@@ -1,7 +1,10 @@
 class Business < ApplicationRecord
   belongs_to :user
-  mount_uploaders :stamp_images, StampImagesUploader
-  before_create -> { self.uuid = SecureRandom.uuid }
+  has_many :cars, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :workers, dependent: :destroy
+
+  enum business_type: { corporation: 0, freelance: 1, Individual_five_over: 2, Individual_five_less: 3 }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :uuid, presence: true
@@ -15,5 +18,7 @@ class Business < ApplicationRecord
   validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/ }
   validates :business_type, presence: true
 
-  enum business_type: { corporation: 0, freelance: 1, Individual_five_over: 2, Individual_five_less: 3 }
+  before_create -> { self.uuid = SecureRandom.uuid }
+
+  mount_uploaders :stamp_images, StampImagesUploader
 end

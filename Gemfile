@@ -47,6 +47,15 @@ gem 'rmagick'
 # enum日本語化
 gem 'enum_help'
 
+# seedデータ分割
+gem 'seed-fu'
+
+# エラー通知用
+gem 'exception_notification'
+
+# slack通知用
+gem 'slack-notifier'
+
 group :development, :test do
   # ERD生成
   gem 'rails-erd'
@@ -78,6 +87,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  # Coverage
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

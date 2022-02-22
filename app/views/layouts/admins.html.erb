@@ -6,13 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'admins', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'admins', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'admins', 'data-turbolinks-track': 'reload' %>
+
+    <%= favicon_link_tag('kensuma/favicon') %>
   </head>
 
   <body>
     <%= render "layouts/flash" %>
-    <% content_for :content do %>  
+    <% content_for :content do %>
       <%= yield %>
     <% end %>
     <%= render template: "layouts/application" %>

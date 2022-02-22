@@ -16,8 +16,7 @@ module Users
         post_code:           '0123456',
         phone_number:        '01234567898',
         carrier_up_id:       'test',
-        business_type:       0,
-        user_id:             current_user.id
+        business_type:       0
       )
     end
 

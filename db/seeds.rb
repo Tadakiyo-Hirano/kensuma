@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# 本番環境での確認の為、一時的に本番環境でもデータ作成されるように変更。本番運用時は元に戻す事。
+# Admin.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+Admin.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 # User
 50.times do |i|
@@ -37,27 +33,3 @@ user.create_business!(
   stamp_images:        [open("#{Rails.root}/public/sample_stamp.png")],
   business_type:       0
 )
-
-# Manager
-manager = Manager.new(
-  email: 'test_manager@gmail.com',
-  name: 'テストmanager1',
-  password: 'password'
-)
-
-manager.skip_confirmation! # deviseの確認メールをスキップ
-manager.save!
-
-# Admin
-# admin = Admin.new(
-#   email: 'test_admin@gmail.com',
-#   name: 'テストadmin1',
-#   password: 'password'
-# )
-
-# admin.skip_confirmation! # deviseの確認メールをスキップ
-# admin.save!
-
-# 本番環境での確認の為、一時的に本番環境でもデータ作成されるように変更。本番運用時は元に戻す事。
-# Admin.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
-Admin.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

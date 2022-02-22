@@ -1,0 +1,17 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :name %>
+<%= f.text_field :name, class: "form-control", placeholder: "名前" %>
+<br>
+<%= f.label :email %>
+<%= f.email_field :email, class: "form-control", placeholder: "Eメール" %>
+<br>
+<%= f.label :age %>
+<%= f.number_field :age, class: "form-control", placeholder: "年齢" %>
+<br>
+<%= f.label :gender %>
+<%= f.select :gender, User.genders.keys.map { |k| [I18n.t("enums.user.gender.#{k}"), k]}, {include_blank: "性別を選択して下さい"}, {class: "form-control"} %>
+<br>
+<%= f.label :password %>
+<%= f.password_field :password, class: "form-control", placeholder: "パスワード" %>
+<br>
