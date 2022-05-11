@@ -68,18 +68,18 @@ module Users
           document_type: 5,
           created_on:    Date.current,
           submitted_on:  Date.current,
-          content:       {
-            doc5_8_001_business_name: '', doc5_8_002_site_id: '', doc5_8_003_site_agent: '', doc5_8_004_created_date: '', doc5_8_005_primary_business_name: '',
-            doc5_8_006_primary_business_id: '', doc5_8_007_hierarchy: '', doc5_8_009_my_business_name: '', doc5_8_010_my_business_id: '', doc5_8_011_submitted_on: '', doc5_8_042_confirmation: '',
-            worker: {
-              doc5_8_012_furigana: [''], doc5_8_013_worker_name: [''], doc5_8_014_skilled_person_id: [''], doc5_8_015_occupation: [''], doc5_8_016_symbol: [''],
-              doc5_8_017_employment_date: [''], doc5_8_018_years_of_experience: [''], doc5_8_019_birthday: [''], doc5_8_020_age: [''], doc5_8_021_address: [''],
-              doc5_8_022_family_contact_address: [''], doc5_8_023_telephone_number: [''], doc5_8_024_family_telephone_number: [''], doc5_8_025_health_check_date: [''], doc5_8_026_maximum_blood_pressure: [''],
-              doc5_8_027_minimum_blood_pressure: [''], doc5_8_028_blood_type: [''], doc5_8_029_special_health_examination_date: [''], doc5_8_030_special_health_check_type: [''], doc5_8_031_health_insurance: [''],
-              doc5_8_032_pension_insurance: [''], doc5_8_033_employment_insurance_number: [''], doc5_8_034_severance_pay: [''], doc5_8_035_severance_pay_businesses: [''], doc5_8_036_special_education: [''],
-              doc5_8_037_skill_training: [''], doc5_8_038_licence: [''], doc5_8_039_beginning: [''], doc5_8_040_new_education: [''], doc5_8_041_notebook: ['']
-            }
-          },
+          content:       {},
+            # doc5_8_001_business_name: '', doc5_8_002_site_id: '', doc5_8_003_site_agent: '', doc5_8_004_created_date: '', doc5_8_005_primary_business_name: '',
+            # doc5_8_006_primary_business_id: '', doc5_8_007_hierarchy: '', doc5_8_009_my_business_name: '', doc5_8_010_my_business_id: '', doc5_8_011_submitted_on: '', doc5_8_042_confirmation: '',
+            # worker: {
+            #   doc5_8_012_furigana: [''], doc5_8_013_worker_name: [''], doc5_8_014_skilled_person_id: [''], doc5_8_015_occupation: [''], doc5_8_016_symbol: [''],
+            #   doc5_8_017_employment_date: [''], doc5_8_018_years_of_experience: [''], doc5_8_019_birthday: [''], doc5_8_020_age: [''], doc5_8_021_address: [''],
+            #   doc5_8_022_family_contact_address: [''], doc5_8_023_telephone_number: [''], doc5_8_024_family_telephone_number: [''], doc5_8_025_health_check_date: [''], doc5_8_026_maximum_blood_pressure: [''],
+            #   doc5_8_027_minimum_blood_pressure: [''], doc5_8_028_blood_type: [''], doc5_8_029_special_health_examination_date: [''], doc5_8_030_special_health_check_type: [''], doc5_8_031_health_insurance: [''],
+            #   doc5_8_032_pension_insurance: [''], doc5_8_033_employment_insurance_number: [''], doc5_8_034_severance_pay: [''], doc5_8_035_severance_pay_businesses: [''], doc5_8_036_special_education: [''],
+            #   doc5_8_037_skill_training: [''], doc5_8_038_licence: [''], doc5_8_039_beginning: [''], doc5_8_040_new_education: [''], doc5_8_041_notebook: ['']
+            # }
+          # },
           business:      current_business
         )
 

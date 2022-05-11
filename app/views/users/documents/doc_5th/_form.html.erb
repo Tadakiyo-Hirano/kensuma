@@ -6,7 +6,7 @@
       <div class="col-md-4">
         <!-- 日付入力フォーム -->
         <%= f.label '8-004 書類作成日(西暦)' %>
-        <%= f.date_field :content, multiple: true,
+        <%#= f.date_field :content, multiple: true,
                                   name: "document[content][doc5_8_004_created_date]",
                                   value: @document.content["doc5_8_004_created_date"],
                                   class: "form-control", placeholder: '書類作成日（西暦）'
@@ -15,7 +15,7 @@
       <div class="col-md-4">
         <!-- 日付入力フォーム -->
         <%= f.label '8-011 提出日(西暦)' %>
-        <%= f.date_field :content, multiple: true,
+        <%#= f.date_field :content, multiple: true,
                                   name: "document[content][doc5_8_011_submitted_on]",
                                   value: @document.content["doc5_8_011_submitted_on"],
                                   class: "form-control", placeholder: '提出日（西暦）'
@@ -23,7 +23,7 @@
       </div>
       <div class="col-md-4">
         <%= f.label '8-042 元請確認欄' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_042_confirmation]",
                                   value: @document.content["doc5_8_042_confirmation"],
                                   class: "form-control", placeholder: '元請確認欄'
@@ -34,7 +34,7 @@
     <div class="row">
       <div class="col-md-4">
         <%= f.label '8-001 事業所の名称' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_001_business_name]",
                                   value: @document.content["doc5_8_001_business_name"],
                                   class: "form-control", placeholder: '事業所の名称'
@@ -42,7 +42,7 @@
       </div>
       <div class="col-md-4">
         <%= f.label '8-002 現場ID(キャリアアップ)' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_002_site_id]",
                                   value: @document.content["doc5_8_002_site_id"],
                                   class: "form-control", placeholder: '現場ID(キャリアアップ)'
@@ -50,7 +50,7 @@
       </div>
       <div class="col-md-4">
         <%= f.label '8-003 元請会社の各会社の現場代理人' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_003_site_agent]",
                                   value: @document.content["doc5_8_003_site_agent"],
                                   class: "form-control", placeholder: '元請会社の各会社の現場代理人'
@@ -61,7 +61,7 @@
     <div class="row">
       <div class="col-md-4">
         <%= f.label '8-005 一次会社名' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_005_primary_business_name]",
                                   value: @document.content["doc5_8_005_primary_business_name"],
                                   class: "form-control", placeholder: '一次会社名'
@@ -69,7 +69,7 @@
       </div>
       <div class="col-md-4">
         <%= f.label '8-006 一次会社の事業者ID' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_006_primary_business_id]",
                                   value: @document.content["doc5_8_006_primary_business_id"],
                                   class: "form-control", placeholder: '一次会社の事業者ID'
@@ -80,7 +80,7 @@
     <div class="row">
       <div class="col-md-4">
         <%= f.label '8-007 次' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_007_hierarchy]",
                                   value: @document.content["doc5_8_007_hierarchy"],
                                   class: "form-control", placeholder: '次 8-007'
@@ -88,7 +88,7 @@
       </div>
       <div class="col-md-4">
         <%= f.label '8-009 自社の会社名' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_009_my_business_name]",
                                   value: @document.content["doc5_8_009_my_business_name"],
                                   class: "form-control", placeholder: '自社の会社名'
@@ -96,7 +96,7 @@
       </div>
       <div class="col-md-4">
         <%= f.label '8-010 自社の事業者ID' %>
-        <%= f.text_field :content, multiple: true,
+        <%#= f.text_field :content, multiple: true,
                                   name: "document[content][doc5_8_010_my_business_id]",
                                   value: @document.content["doc5_8_010_my_business_id"],
                                   class: "form-control", placeholder: '自社の事業者ID'
@@ -105,13 +105,13 @@
     </div>
   </div>
 </div><br>
-
+<%#= Worker.first.attributes %>
 <!-- 作業員情報 -->
-<% @document.content["worker"].values[0].size.times do |index|index %>
-  <div id="worker<%= index + 1 %>">
+<%# @document.content["worker"].values[0].size.times do |index|index %>
+  <div id="worker">
     <div class="card card-success">
       <div class="card-header">
-        <h3 class="card-title">作業員情報 番号<%= index + 1 %></h3>
+        <h3 class="card-title">作業員情報 番号</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
@@ -124,268 +124,16 @@
             <div class="row">
               <div class="col-md-3">
                 <%= f.label '8-012 フリガナ' %>
-                <%= f.select :content, @workers.map{ |worker| [worker.name] }, {}, {name: "document[content][worker][doc5_8_012_furigana][]", class: "js-select form-control", multiple: true} %>
+                <%= f.select :content, @workers.map{ |worker| [worker.name, worker.to_json] }, {include_hidden: false}, {class: "js-select form-control", multiple: true, include_blank: true} %>
                 <%#= f.text_field :content, multiple: true,
                                           name: "document[content][worker][doc5_8_012_furigana][]",
                                           value: @document.content["worker"]["doc5_8_012_furigana"][index],
                                           class: "form-control", placeholder: 'フリガナ'
                 %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-013 氏名' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_013_worker_name][]",
-                                          value: @document.content["worker"]["doc5_8_013_worker_name"][index],
-                                          class: "form-control", placeholder: '氏名'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-014 技能者ID' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_014_skilled_person_id][]",
-                                          value: @document.content["worker"]["doc5_8_014_skilled_person_id"][index],
-                                          class: "form-control", placeholder: '技能者ID'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-015 職種' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_015_occupation][]",
-                                          value: @document.content["worker"]["doc5_8_015_occupation"][index],
-                                          class: "form-control", placeholder: '職種'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-016 記号' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_016_symbol][]",
-                                          value: @document.content["worker"]["doc5_8_016_symbol"][index],
-                                          class: "form-control", placeholder: '記号'
-                %><br>
-              </div>
-            </div>
-        
-            <div class="row">
-              <div class="col-md-3">
-                <!-- 日付入力フォーム -->
-                <%= f.label '8-017 雇入年月日' %>
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_017_employment_date][]",
-                                          value: @document.content["worker"]["doc5_8_017_employment_date"][index],
-                                          class: "form-control", placeholder: '雇入年月日'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-018 経験年数(年)' %>
-                <%= f.number_field :content, multiple: true,
-                                          name: "document[content]worker][doc5_8_018_years_of_experience][]",
-                                          value: @document.content["worker"]["doc5_8_018_years_of_experience"][index],
-                                          class: "form-control", placeholder: '経験年数(年)'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <!-- 日付入力フォーム -->
-                <%= f.label '8-019 生年月日' %>
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content]worker][doc5_8_019_birthday][]",
-                                          value: @document.content["worker"]["doc5_8_019_birthday"][index],
-                                          class: "form-control", placeholder: '生年月日'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-020 年齢' %>
-                <%= f.number_field :content, multiple: true,
-                                          name: "document[content]worker][doc5_8_020_age][]",
-                                          value: @document.content["worker"]["doc5_8_020_age"][index],
-                                          class: "form-control", placeholder: '年齢'
-                %><br>
-              </div>
-            </div>
-        
-            <div class="row">
-              <div class="col-md-3">
-                <%= f.label '8-021 現住所' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content]worker][doc5_8_021_address][]",
-                                          value: @document.content["worker"]["doc5_8_021_address"][index],
-                                          class: "form-control", placeholder: '現住所'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-022 家族連絡先住所' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_022_family_contact_address][]",
-                                          value: @document.content["worker"]["doc5_8_022_family_contact_address"][index],
-                                          class: "form-control", placeholder: '家族連絡先住所'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-023 作業員電話番号' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content]worker][doc5_8_023_telephone_number][]",
-                                          value: @document.content["worker"]["doc5_8_023_telephone_number"][index],
-                                          class: "form-control", placeholder: '作業員電話番号'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-024 家族連絡先電話番号' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_024_family_telephone_number][]",
-                                          value: @document.content["worker"]["doc5_8_024_family_telephone_number"][index],
-                                          class: "form-control", placeholder: '家族連絡先電話番号'
-                %><br>
-              </div>
-            </div>
-        
-            <div class="row">
-              <div class="col-md-2">
-                <!-- 日付入力フォーム -->
-                <%= f.label '8-025 最近の健康診断日' %>
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_025_health_check_date][]",
-                                          value: @document.content["worker"]["doc5_8_025_health_check_date"][index],
-                                          class: "form-control", placeholder: '最近の健康診断日'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-026 最高血圧' %>
-                <%= f.number_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_026_maximum_blood_pressure][]",
-                                          value: @document.content["worker"]["doc5_8_026_maximum_blood_pressure"][index],
-                                          class: "form-control", placeholder: '最高血圧'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-027 最低血圧' %>
-                <%= f.number_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_027_minimum_blood_pressure][]",
-                                          value: @document.content["worker"]["doc5_8_027_minimum_blood_pressure"][index],
-                                          class: "form-control", placeholder: '最低血圧'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-028 血液型' %> <!-- セレクトフォーム要修正 -->
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_028_blood_type][]",
-                                          value: @document.content["worker"]["doc5_8_028_blood_type"][index],
-                                          class: "form-control", placeholder: '血圧型'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <!-- 日付入力フォーム -->
-                <%= f.label '8-029 特殊健康診断日' %>
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_029_special_health_examination_date][]",
-                                          value: @document.content["worker"]["doc5_8_029_special_health_examination_date"][index],
-                                          class: "form-control", placeholder: '特殊健康診断日'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-030 特別健康診断種類' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_030_special_health_check_type][]",
-                                          value: @document.content["worker"]["doc5_8_030_special_health_check_type"][index],
-                                          class: "form-control", placeholder: '特別健康診断種類'
-                %><br>
-              </div>
-            </div>
-        
-            <div class="row">
-              <div class="col-md-2">
-                <%= f.label '8-031 健康保険' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_031_health_insurance][]",
-                                          value: @document.content["worker"]["doc5_8_031_health_insurance"][index],
-                                          class: "form-control", placeholder: '特別健康診断種類'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-032 年金保険' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_032_pension_insurance][]",
-                                          value: @document.content["worker"]["doc5_8_032_pension_insurance"][index],
-                                          class: "form-control", placeholder: '年金保険'
-                %><br>
-              </div>
-              <div class="col-md-2">
-                <%= f.label '8-033 雇用保険番号' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_033_employment_insurance_number][]",
-                                          value: @document.content["worker"]["doc5_8_033_employment_insurance_number"][index],
-                                          class: "form-control", placeholder: '雇用保険番号'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-034 建設業退職金共済制度' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_034_severance_pay][]",
-                                          value: @document.content["worker"]["doc5_8_034_severance_pay"][index],
-                                          class: "form-control", placeholder: '建設業退職金共済制度'
-                %><br>
-              </div>
-              <div class="col-md-3">
-                <%= f.label '8-035 中小企業退職金共済制度' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_035_severance_pay_businesses][]",
-                                          value: @document.content["worker"]["doc5_8_035_severance_pay_businesses"][index],
-                                          class: "form-control", placeholder: '中小企業退職金共済制度'
-                %><br>
-              </div>
-            </div>
-        
-            <div class="row">
-              <div class="col-md-4">
-                <%= f.label '8-036 雇入・職長特別教育' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_036_special_education][]",
-                                          value: @document.content["worker"]["doc5_8_036_special_education"][index],
-                                          class: "form-control", placeholder: '雇入・職長特別教育'
-                %><br>
-              </div>
-              <div class="col-md-4">
-                <%= f.label '8-037 技能講習' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_037_skill_training][]",
-                                          value: @document.content["worker"]["doc5_8_037_skill_training"][index],
-                                          class: "form-control", placeholder: '技能講習'
-                %><br>
-              </div>
-              <div class="col-md-4">
-                <%= f.label '8-038 免許' %>
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_038_licence][]",
-                                          value: @document.content["worker"]["doc5_8_038_licence"][index],
-                                          class: "form-control", placeholder: '免許'
-                %><br>
-              </div>
-            </div>
-        
-            <div class="row">
-              <div class="col-md-4">
-                <!-- 日付入力フォーム -->
-                <%= f.label '8-039 入場年月日' %>
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_039_beginning][]",
-                                          value: @document.content["worker"]["doc5_8_039_beginning"][index],
-                                          class: "form-control", placeholder: '入場年月日'
-                %><br>
-              </div>
-              <div class="col-md-4">
-                <!-- 日付入力フォーム -->
-                <%= f.label '8-040 受入教育 実施年月日' %>
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_040_new_education][]",
-                                          value: @document.content["worker"]["doc5_8_040_new_education"][index],
-                                          class: "form-control", placeholder: '受入教育 実施年月日'
-                %><br>
-              </div>
-              <div class="col-md-4">
-                <%= f.label '8-041 退職金共済手帳所雇入・有の有無' %> <!-- セレクトフォーム要修正 -->
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][worker][doc5_8_041_notebook][]",
-                                          value: @document.content["worker"]["doc5_8_041_notebook"][index],
-                                          class: "form-control", placeholder: '退職金共済手帳所雇入・有の有無'
-                %><br>
+                <%= JSON.parse(@document.content[0])["id"] %>/
+                <%= @document.content.size %>/
+                <%= JSON.parse(@document.content[0]) %>
+                <%= JSON.pretty_generate(@document.content) %>
               </div>
             </div>
           </div>
@@ -393,7 +141,7 @@
       </div>
     </div>
   </div>
-<% end %>
+<%# end %>
 
 <div id="input_data">
   <!--  ここに出力  -->
