@@ -1,5 +1,5 @@
 <% provide(:title,  "書類一覧") %>
-
+<%= link_to "pdf", pdf_download_users_request_order_document_path("a16bf63f-bd54-4314-8dc1-bd115b08d37f", "e7f481ea-3802-422f-b2ad-c5740603dd60"), format: :pdf %>
 <% if @documents.present? %>
   <div class="card">
     <div class="card-body table-responsive p-0">

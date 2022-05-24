@@ -42,6 +42,21 @@ module Users
       end
     end
 
+    def pdf_download
+      respond_to do |format|
+        # format.html
+        format.pdf do
+          pdf = WickedPdf.new.pdf_from_string(
+            render_to_string(
+              # 'templates/pdf',
+              layout: 'pdf'
+            )
+          )
+          send_data(pdf, filename: 'テスト.pdf')
+        end
+      end
+    end
+
     private
 
     def set_documents

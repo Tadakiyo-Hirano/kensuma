@@ -386,7 +386,6 @@ ActiveRecord::Schema.define(version: 2022_05_17_013339) do
     t.index ["business_id"], name: "index_workers_on_business_id"
   end
 
-  add_foreign_key "articles", "users"
   add_foreign_key "business_occupations", "businesses"
   add_foreign_key "business_occupations", "occupations"
   add_foreign_key "businesses", "users"
