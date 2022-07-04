@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_28_093612) do
+ActiveRecord::Schema.define(version: 2022_07_04_062838) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -273,8 +273,65 @@ ActiveRecord::Schema.define(version: 2022_06_28_093612) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_id"
     t.string "uuid", null: false
+    t.string "primary_subcontractor"
+    t.string "sub_company"
+    t.string "construction_name"
+    t.string "construction_details"
+    t.date "start_date"
+    t.date "end_date"
+    t.date "contract_date"
+    t.string "supervisor_name"
+    t.string "supervisor_apply"
+    t.string "professional_engineer_name"
+    t.string "professional_engineer_details"
+    t.integer "professional_construction"
+    t.string "construction_manager_name"
+    t.string "construction_manager_position_name"
+    t.string "site_agent_name"
+    t.string "site_agent_apply"
+    t.string "lead_engineer_name"
+    t.integer "lead_engineer_check"
+    t.string "work_chief_name"
+    t.string "work_conductor_name"
+    t.string "safety_officer_name"
+    t.string "safety_manager_name"
+    t.string "safety_promoter_name"
+    t.string "foreman_name"
+    t.string "registered_core_engineer_name"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
+  end
+
+  create_table "site_info_subcontracts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "construction_name", null: false
+    t.string "construction_details", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.date "contract_date", null: false
+    t.string "site_agent_name", null: false
+    t.string "site_agent_apply", null: false
+    t.string "supervisor_name", null: false
+    t.string "supervisor_apply", null: false
+    t.string "professional_engineer_name"
+    t.string "professional_engineer_details"
+    t.integer "professional_construction"
+    t.string "construction_manager_name", null: false
+    t.string "construction_manager_position_name", null: false
+    t.string "lead_engineer_name", null: false
+    t.integer "lead_engineer_check", null: false
+    t.string "work_chief_name", null: false
+    t.string "work_conductor_name", null: false
+    t.string "safety_officer_name", null: false
+    t.string "safety_manager_name", null: false
+    t.string "safety_promoter_name", null: false
+    t.string "foreman_name", null: false
+    t.string "registered_core_engineer_name", null: false
+    t.bigint "business_id", null: false
+    t.bigint "request_order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_site_info_subcontracts_on_business_id"
+    t.index ["request_order_id"], name: "index_site_info_subcontracts_on_request_order_id"
   end
 
   create_table "skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -443,6 +500,8 @@ ActiveRecord::Schema.define(version: 2022_06_28_093612) do
   add_foreign_key "orders", "businesses"
   add_foreign_key "request_orders", "businesses"
   add_foreign_key "request_orders", "orders"
+  add_foreign_key "site_info_subcontracts", "businesses"
+  add_foreign_key "site_info_subcontracts", "request_orders"
   add_foreign_key "worker_exams", "special_med_exams"
   add_foreign_key "worker_exams", "worker_medicals"
   add_foreign_key "worker_insurances", "workers"
