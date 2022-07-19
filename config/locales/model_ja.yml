@@ -5,6 +5,7 @@ ja:
       car_insurance_company: ⾃動⾞保険会社
       car_voluntary_insurance: 任意保険
       car: 車両情報
+      special_vehicle: 特殊車両情報
       order: 発注
       request_order: 発注依頼
       worker: 作業員
@@ -59,6 +60,22 @@ ja:
         voluntary_securities_number: 任意保険証券番号
         voluntary_insurance_start_on: 任意保険初め
         voluntary_insurance_end_on: 任意保険終わり
+      special_vehicle:
+        name: 名称
+        maker: メーカー
+        standards_performance: 規格・性能
+        year_manufactured: 製造年
+        control_number: 管理番号(整理番号)
+        check_exp_date_year: 自主検査有効期限(正規・年次)
+        check_exp_date_month: 自主検査有効期限(正規・月次)
+        check_exp_date_specific: 自主検査有効期限(特定)
+        check_exp_date_machine: 移動式クレーン等の性能検査有効期限
+        check_exp_date_car: 自動車検査証有効期限
+        personal_insurance: 任意保険加入額(対人)
+        objective_insurance: 任意保険加入額(対物)
+        passenger_insurance: 任意保険加入額(搭乗者)
+        other_insurance: 任意保険加入額(その他)
+        exp_date_insurance: 任意保険加入有効期限
       order:
         status: ステータス
         # 現場
