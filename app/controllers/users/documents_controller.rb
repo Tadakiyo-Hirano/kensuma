@@ -25,7 +25,7 @@ module Users
             render pdf: '書類',
               layout: 'pdf',
               encording: 'UTF-8',
-              page_size: 'A4',
+              page_size: 'A3',
               margin: { top: 0 },
               orientation: 'Landscape'
           end
