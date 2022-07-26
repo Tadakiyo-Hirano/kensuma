@@ -1,1 +1,37 @@
 // (5)全建統一様式第1号－甲(再下請負通知書(変更届))
+// 全体
+#s_5 {
+  overflow: hidden;
+  position: relative;
+  background-color: white;
+  padding: 10px;
+  width: 2400px;
+  height: 1760px;
+}
+
+.s_5_text-container {
+  white-space: normal;
+}
+
+// 背景セル
+.s_5a_00 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 20px;
+}
+
+.s_5b_00 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 20px;
+}
