@@ -1,0 +1,15 @@
+<% provide(:title, "機械情報編集") %>
+<% provide(:btn_text, "更新") %>
+
+<div class="card">
+  <%= form_with model: @machine, url: users_machine_path, method: :patch, local: true do |f| %>
+    <div class="card-body">
+      <%= render partial: "form", locals: { f: f, machine: @machine} %>
+    </div>
+    <div class="card-footer">
+      <%= f.submit yield(:btn_text), class: "btn btn-success btn-md btn-block"  %>
+      <%= link_to "詳細画面へ", users_machine_path(@machine), class: "btn btn-default btn-md btn-block" %>
+      <%= link_to "一覧画面へ", users_machines_path, class: "btn btn-default btn-md btn-block" %>
+    </div>
+  <% end %>
+</div>

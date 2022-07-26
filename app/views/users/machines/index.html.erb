@@ -1,0 +1,39 @@
+<% provide(:title, "機械情報一覧") %>
+
+<%= link_to "機械情報新規作成画面へ", new_users_machine_path, class: "btn btn-lg btn-block btn-outline-primary" %>
+
+<% if @machines.present? %>
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr>
+            <th><%= Machine.human_attribute_name(:name) %></th>
+            <th><%= Machine.human_attribute_name(:standards_performance) %></th>
+            <th><%= Machine.human_attribute_name(:control_number) %></th>
+            <th><%= Machine.human_attribute_name(:inspector) %></th>
+            <th><%= Machine.human_attribute_name(:handler) %></th>
+            <th><%= Machine.human_attribute_name(:inspection_date) %></th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @machines.each do |machine| %>
+            <tr>
+              <td><%= link_to machine.name_i18n, users_machine_path(machine) %></td>
+              <td><%= machine.standards_performance %></td>
+              <td><%= machine.control_number %></td>
+              <td><%= machine.inspector %></td>
+              <td><%= machine.handler %></td>
+              <td><%= machine.inspection_date %></td>
+              <td><%= link_to "編集", edit_users_machine_path(machine), class: "btn btn-success btn-md" %></td>
+              <td><%= link_to "削除", users_machine_path(machine), method: :delete,
+                              data: { confirm: "#{machine.name}の機械情報を削除します。本当によろしいですか？" }, class: "btn btn-danger btn-md" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
