@@ -27,4 +27,13 @@ module ApplicationHelper
   def not_input_display(text)
     text.nil? ? '未登録' : text
   end
+
+  # 自身と、自身の階層下の書類用情報取得
+  def document_info
+    unless params[:sub_request_order_uuid]
+      RequestOrder.find_by(uuid: params[:request_order_uuid])
+    else
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    end
+  end
 end
