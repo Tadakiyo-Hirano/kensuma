@@ -22,19 +22,9 @@ module Users
               encording: 'UTF-8',
               page_size: 'A4'
           when 'doc_8th'
-            render pdf: '書類',
-              layout: 'pdf',
-              encording: 'UTF-8',
-              page_size: 'A4',
-              margin: { top: 0 },
-              orientation: 'Landscape'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4', margin: { top: 0 }, orientation: 'Landscape'
           when 'doc_4th'
-            render pdf: '書類',
-              layout: 'pdf',
-              encording: 'UTF-8',
-              page_size: 'A3',
-              margin: { bottom: 2 },
-              orientation: 'Landscape'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
           end
         end
       end
