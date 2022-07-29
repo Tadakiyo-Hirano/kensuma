@@ -30,14 +30,10 @@ module Users
               orientation: 'Landscape'
           when 'doc_4th'
             render pdf: '書類',
-              # template: "users/documents/doc_4th/_show.html.erb",
               layout: 'pdf',
               encording: 'UTF-8',
               page_size: 'A3',
-              margin: { top:    2,
-                        bottom: 2,
-                        left:   2,
-                        right:  2 },
+              margin: { bottom: 2 },
               orientation: 'Landscape'
           end
         end
