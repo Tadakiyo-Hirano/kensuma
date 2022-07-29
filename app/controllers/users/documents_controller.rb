@@ -34,10 +34,10 @@ module Users
               layout: 'pdf',
               encording: 'UTF-8',
               page_size: 'A3',
-              margin: { top: 2,
+              margin: { top:    2,
                         bottom: 2,
-                        left: 2,
-                        right: 2 },
+                        left:   2,
+                        right:  2 },
               orientation: 'Landscape'
           end
         end
