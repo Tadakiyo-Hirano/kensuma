@@ -28,10 +28,21 @@ module ApplicationHelper
     text.nil? ? '未登録' : text
   end
 
-  # 自身と、自身の階層下の書類用情報取得
-  def document_info
+  # 自身と、自身の階層下の現場情報
+  def document_site_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     unless params[:sub_request_order_uuid]
-      RequestOrder.find_by(uuid: params[:request_order_uuid])
+      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order.order
+    else
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid]).order
+    end
+  end
+
+  # 自身と、自身の階層下の書類情報
+  def document_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    unless params[:sub_request_order_uuid]
+      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
     else
       RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
     end

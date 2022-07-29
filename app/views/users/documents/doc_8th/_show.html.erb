@@ -320,7 +320,7 @@
 					<td class="s11" colspan="3" rowspan="2">事業所の名称</td>
 					<td class="s12" colspan="14" rowspan="2">
 						<a target="_blank" href="#rangeid=736434295">
-							<%= document_info.order.site_name %> <!-- 8-001 事業所名(現場名)-->
+							<%= document_site_info.site_name %> <!-- 8-001 事業所名(現場名)-->
 						</a>
 					</td>
 					<td class="s2"></td>
@@ -399,7 +399,7 @@
 					<td class="s11" colspan="3" rowspan="2">現　場　ID</td>
 					<td class="s12" colspan="14" rowspan="2">
 						<a target="_blank" href="#rangeid=647868659">
-							<%= document_info.order.site_career_up_id %> <!-- 8-002 現場ID(キャリアアップ) -->
+							<%= document_site_info.site_career_up_id %> <!-- 8-002 現場ID(キャリアアップ) -->
 						</a>
 					</td>
 					<td class="s2"></td>
@@ -411,7 +411,7 @@
 					<td class="s11" colspan="4" rowspan="2">一次会社名</td>
 					<td class="s15" colspan="8" rowspan="2">
 						<a target="_blank" href="#rangeid=1504493394">
-							<%= document_info.order.business.name %> <!-- 8-005 一次会社名 -->
+							<%= document_site_info.business.name %> <!-- 8-005 一次会社名 -->
 						</a>
 					</td>
 					<td class="s2"></td>
@@ -445,7 +445,7 @@
 					<td class="s11" colspan="3" rowspan="2">所　長　名</td>
 					<td class="s12" colspan="13" rowspan="2">
 						<a target="_blank" href="#rangeid=846615191">
-							<%= document_info.order.site_agent_name %> <!-- 8-003 元請会社の「現場代理人」 -->
+							<%= document_site_info.site_agent_name %> <!-- 8-003 元請会社の「現場代理人」 -->
 						</a>
 					</td>
 					<td class="s1" rowspan="2">殿</td>
@@ -679,8 +679,12 @@
 					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= l w1.content["hiring_on"].to_date, format: :long %> <!-- 8-017 雇用年月日(1) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= l w1.content["birth_day_on"].to_date, format: :long %> <!-- 8-018 生年月日(1) -->
+					</td>
 					<td class="s56" colspan="9" rowspan="3"></td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
@@ -710,8 +714,12 @@
 				<tr style="height: 13px">
 					<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w1.content["blank_term"] %>年 <!-- 8-018 経験年数(1) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= (w1.created_at.to_date.strftime('%Y%m%d').to_i - w1.content["birth_day_on"].to_date.strftime('%Y%m%d').to_i) / 10000 %>歳 <!-- 8-020 年齢(1) -->
+					</td>
 					<td class="s57" colspan="9" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
