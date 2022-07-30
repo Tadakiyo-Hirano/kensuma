@@ -685,9 +685,15 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= l w1.content["birth_day_on"].to_date, format: :long %> <!-- 8-018 生年月日(1) -->
 					</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= w1.content["my_address"] %> <!-- 8-021 住所(1) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= w1.content["my_phone_number"] %> <!-- 8-023 電話番号 -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= l w1.content["worker_medical"]["med_exam_on"].to_date, format: :long %> <!-- 8-025 健康診断日 -->
+					</td>
 					<td class="s59" rowspan="6"></td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -720,8 +726,12 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= (w1.created_at.to_date.strftime('%Y%m%d').to_i - w1.content["birth_day_on"].to_date.strftime('%Y%m%d').to_i) / 10000 %>歳 <!-- 8-020 年齢(1) -->
 					</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= w1.content["family_address"] %> <!-- 8-022 緊急連絡先住所 -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w1.content["family_phone_number"] %> <!-- 8-024 緊急連絡先電話番号 -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
