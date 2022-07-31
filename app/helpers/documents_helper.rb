@@ -18,4 +18,36 @@ module DocumentsHelper
   def worker_attributes_column(model, column, worker)
     JSON.parse(worker[0])[model].map { |value| value[column] } unless worker.nil?
   end
+
+  # 作業員の文字情報
+  def worker_str(worker, column)
+    worker&.content&.[](column)
+  end
+  
+  # 作業員の日付情報
+  def worker_date(worker, column)
+    unless worker&.content&.[](column).nil?
+      l worker&.content&.[](column)&.to_date, format: :long
+    else
+      '年　月　日'
+    end
+  end
+
+  # 作業員健康診断の日付情報
+  def worker_medical_date(worker, column)
+    unless worker&.content&.[]("worker_medical")&.[](column).nil?
+      l worker&.content&.[]("worker_medical")&.[](column).to_date, format: :long 
+    else
+      '年　月　日'
+    end
+  end
+
+  # 作業員の年齢情報
+  def worker_birth_day_on(worker)
+    unless worker&.content&.[]("birth_day_on").nil?
+      ((worker&.created_at.to_date.strftime('%Y%m%d').to_i - worker&.content&.[]("birth_day_on").to_date.strftime('%Y%m%d').to_i) / 10000).to_s + '歳'
+    else
+      '歳'
+    end
+  end
 end

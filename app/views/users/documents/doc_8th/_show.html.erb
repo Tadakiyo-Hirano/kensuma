@@ -1,5 +1,5 @@
 <!-- (8)全建統⼀様式第5号改(作業員名簿) -->
-<% document_info.field_workers.each_slice(3) do |w1, w2, w3, w4, w5, w6, w7, w8, w9, w10| %>
+<% document_info.field_workers.each_slice(10) do |w1, w2, w3, w4, w5, w6, w7, w8, w9, w10| %>
 	<div class="ritz grid-container" dir="ltr" style="overflow: auto;">
 		<table class="waffle no-grid" cellspacing="0" cellpadding="0">
 			<thead></thead>
@@ -675,24 +675,24 @@
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">1</td>
 					<td class="s56" colspan="6" rowspan="2">
-						<%= w1.content["name_kana"] %> <!-- 8-012 フリガナ(1) -->
+						<%= worker_str(w1, "name_kana") %> <!-- 8-012 フリガナ(1) -->
 					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= l w1.content["hiring_on"].to_date, format: :long %> <!-- 8-017 雇用年月日(1) -->
+						<%= worker_date(w1, "hiring_on") %> <!-- 8-017 雇用年月日(1) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= l w1.content["birth_day_on"].to_date, format: :long %> <!-- 8-018 生年月日(1) -->
+						<%= worker_date(w1, "birth_day_on") %> <!-- 8-018 生年月日(1) -->
 					</td>
 					<td class="s56" colspan="9" rowspan="3">
-						<%= w1.content["my_address"] %> <!-- 8-021 住所(1) -->
+						<%= worker_str(w1, "my_address") %> <!-- 8-021 住所(1) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= w1.content["my_phone_number"] %> <!-- 8-023 電話番号 -->
+						<%= w1&.content&.[]("my_phone_number") %> <!-- 8-023 電話番号(1) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= l w1.content["worker_medical"]["med_exam_on"].to_date, format: :long %> <!-- 8-025 健康診断日 -->
+						<%= worker_medical_date(w1, "med_exam_on") %> <!-- 8-025 健康診断日(1) -->
 					</td>
 					<td class="s59" rowspan="6"></td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
@@ -712,7 +712,7 @@
 					<th id="758879504R28" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w1.content["name"] %> <!-- 8-013 作業員名(1) -->
+						<%= worker_str(w1, "name") %> <!-- 8-013 作業員名(1) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -721,16 +721,16 @@
 					<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w1.content["blank_term"] %>年 <!-- 8-018 経験年数(1) -->
+						<%= worker_str(w1, "blank_term") %>年 <!-- 8-018 経験年数(1) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= (w1.created_at.to_date.strftime('%Y%m%d').to_i - w1.content["birth_day_on"].to_date.strftime('%Y%m%d').to_i) / 10000 %>歳 <!-- 8-020 年齢(1) -->
+						<%= worker_birth_day_on(w1) %> <!-- 8-020 年齢(1) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
-						<%= w1.content["family_address"] %> <!-- 8-022 緊急連絡先住所 -->
+						<%= worker_str(w1, "family_address") %> <!-- 8-022 緊急連絡先住所(1) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w1.content["family_phone_number"] %> <!-- 8-024 緊急連絡先電話番号 -->
+						<%= w1&.content&.[]("family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(1) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -741,7 +741,7 @@
 					<th id="758879504R30" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w1.content["carrier_up_id"] %> <!-- 8-014 キャリアップID(1) -->
+						<%= worker_str(w1, "carrier_up_id") %> <!-- 8-014 キャリアップID(1) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -755,14 +755,24 @@
 					<th id="758879504R26" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">2</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w2, "name_kana")%> <!-- 8-012 フリガナ(2) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w2, "hiring_on") %> <!-- 8-017 雇用年月日(2) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w2, "birth_day_on") %> <!-- 8-018 生年月日(2) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w2, "my_address") %> <!-- 8-021 住所(2) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w2, "med_exam_on") %> <!-- 8-025 健康診断日(2) -->
+					</td>
 					<td class="s59" rowspan="6"></td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -780,16 +790,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R28" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w2&.content&.[]("name") %> <!-- 8-013 作業員名(2) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w2&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(2) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w2) %> <!-- 8-020 年齢(2) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w2, "family_address") %> <!-- 8-022 緊急連絡先住所(2) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -799,7 +817,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R30" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+					<%= w2&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(2) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -811,12 +831,20 @@
 					<th id="758879504R32" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">3</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w3, "name_kana") %> <!-- 8-012 フリガナ(3) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w3, "hiring_on") %> <!-- 8-017 雇用年月日(3) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w3, "birth_day_on") %> <!-- 8-018 生年月日(3) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w3, "my_address") %> <!-- 8-021 住所(3) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -836,16 +864,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R34" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w3&.content&.[]("name") %> <!-- 8-013 作業員名(3) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R35" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w3&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(3) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w3) %> <!-- 8-020 年齢(3) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w3, "family_address") %> <!-- 8-022 緊急連絡先住所(3) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -855,7 +891,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R36" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w3&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(3) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -867,12 +905,20 @@
 					<th id="758879504R38" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">4</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w4, "name_kana")%> <!-- 8-012 フリガナ(4) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w4, "hiring_on") %> <!-- 8-017 雇用年月日(4) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w4, "birth_day_on") %> <!-- 8-018 生年月日(4) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->	
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -892,16 +938,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R40" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w4&.content&.[]("name") %> <!-- 8-013 作業員名(4) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R41" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w4&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(4) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w4) %> <!-- 8-020 年齢(4) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w4, "family_address") %> <!-- 8-022 緊急連絡先住所(4) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -911,7 +965,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R42" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w4&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(4) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -923,12 +979,20 @@
 					<th id="758879504R44" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">5</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w5, "name_kana") %> <!-- 8-012 フリガナ(5) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w5, "hiring_on") %> <!-- 8-017 雇用年月日(5) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w5, "birth_day_on") %> <!-- 8-018 生年月日(5) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w5, "my_address") %> <!-- 8-021 住所(5) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -948,16 +1012,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R46" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w5&.content&.[]("name") %> <!-- 8-013 作業員名(5) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R47" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w5&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(5) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w5) %> <!-- 8-020 年齢(5) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w5, "family_address") %> <!-- 8-022 緊急連絡先住所(5) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -967,7 +1039,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R48" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w5&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(5) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -979,12 +1053,20 @@
 					<th id="758879504R50" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">6</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w6, "name_kana") %> <!-- 8-012 フリガナ(6) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w6, "hiring_on") %> <!-- 8-017 雇用年月日(6) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w6, "birth_day_on") %> <!-- 8-018 生年月日(6) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w6, "my_address") %> <!-- 8-021 住所(6) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -1004,16 +1086,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R52" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w6&.content&.[]("name") %> <!-- 8-013 作業員名(6) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R53" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w6&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(6) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w6) %> <!-- 8-020 年齢(6) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w6, "family_address") %> <!-- 8-022 緊急連絡先住所(6) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -1023,7 +1113,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R54" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w6&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(6) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -1035,12 +1127,20 @@
 					<th id="758879504R56" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">7</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w7, "name_kana") %> <!-- 8-012 フリガナ(7) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w7, "hiring_on") %> <!-- 8-017 雇用年月日(7) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w7, "birth_day_on") %> <!-- 8-018 生年月日(7) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w7, "my_address") %> <!-- 8-021 住所(7) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -1060,16 +1160,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R58" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w7&.content&.[]("name") %> <!-- 8-013 作業員名(7) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R59" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w7&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(7) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w7) %> <!-- 8-020 年齢(7) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w7, "family_address") %> <!-- 8-022 緊急連絡先住所(7) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -1079,7 +1187,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R60" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w7&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(7) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -1091,12 +1201,20 @@
 					<th id="758879504R62" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">8</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w8, "name_kana") %> <!-- 8-012 フリガナ(8) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w8, "hiring_on") %> <!-- 8-017 雇用年月日(8) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w8, "birth_day_on") %> <!-- 8-018 生年月日(8) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w8, "my_address") %> <!-- 8-021 住所(8) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -1116,16 +1234,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R64" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w8&.content&.[]("name") %> <!-- 8-013 作業員名(8) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R65" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w8&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(8) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w8) %> <!-- 8-020 年齢(8) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w8, "family_address") %> <!-- 8-022 緊急連絡先住所(8) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -1135,7 +1261,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R66" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w8&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(8) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -1147,12 +1275,20 @@
 					<th id="758879504R68" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">9</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w9, "name_kana") %> <!-- 8-012 フリガナ(9) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w9, "hiring_on") %> <!-- 8-017 雇用年月日(9) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w9, "birth_day_on") %> <!-- 8-018 生年月日(9) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w9, "my_address") %> <!-- 8-021 住所(9) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -1172,16 +1308,25 @@
 				<tr style="height: 13px">
 					<th id="758879504R70" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w9&.content&.[]("name") %> <!-- 8-013 作業員名(9) -->
+						<%= w9&.content&.[]("name") %> <!-- 8-013 作業員名(9) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R71" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w9&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(9) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w9) %> <!-- 8-020 年齢(9) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w9, "family_address") %> <!-- 8-022 緊急連絡先住所(9) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -1191,7 +1336,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R72" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w9&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(9) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
@@ -1203,12 +1350,20 @@
 					<th id="758879504R74" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s41" rowspan="6">10</td>
-					<td class="s56" colspan="6" rowspan="2"></td>
+					<td class="s56" colspan="6" rowspan="2">
+						<%= worker_str(w10, "name_kana") %> <!-- 8-012 フリガナ(10) -->
+					</td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s58" colspan="4" rowspan="3">年 　月 　日</td>
-					<td class="s56" colspan="9" rowspan="3"></td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w10, "hiring_on") %> <!-- 8-017 雇用年月日(10) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_date(w10, "birth_day_on") %> <!-- 8-018 生年月日(10) -->
+					</td>
+					<td class="s56" colspan="9" rowspan="3">
+						<%= worker_str(w10, "my_address") %> <!-- 8-021 住所(10) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">（ ）</td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" rowspan="6"></td>
@@ -1228,16 +1383,24 @@
 				<tr style="height: 13px">
 					<th id="758879504R76" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s61" colspan="6" rowspan="2"></td>
+					<td class="s61" colspan="6" rowspan="2">
+						<%= w10&.content&.[]("name") %> <!-- 8-013 作業員名(10) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R77" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s59" colspan="4" rowspan="3">年</td>
-					<td class="s59" colspan="4" rowspan="3">歳</td>
-					<td class="s57" colspan="9" rowspan="3"></td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= w10&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(10) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_birth_day_on(w10) %> <!-- 8-020 年齢(10) -->
+					</td>
+					<td class="s57" colspan="9" rowspan="3">
+						<%= worker_str(w10, "family_address") %> <!-- 8-022 緊急連絡先住所(10) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">（ ）</td>
 					<td class="s59" colspan="4" rowspan="3">~</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
@@ -1247,7 +1410,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R78" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s57" colspan="6" rowspan="2"></td>
+					<td class="s57" colspan="6" rowspan="2">
+						<%= w10&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(10) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 				</tr>
