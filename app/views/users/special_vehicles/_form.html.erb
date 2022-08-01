@@ -1,0 +1,138 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :name %>
+<%= f.text_field :name, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:name) %>
+<br>
+<%= f.label :maker %>
+<%= f.text_field :maker, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:maker) %>
+<br>
+<%= f.label :standards_performance %>
+<%= f.text_field :standards_performance, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:standards_performance) %>
+<br>
+<%= f.label :year_manufactured %>
+<%= f.date_field :year_manufactured, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:year_manufactured) %>
+<br>
+<%= f.label :control_number %>
+<%= f.text_field :control_number, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:control_number) %>
+<br>
+<%= f.label :check_exp_date_year %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_year, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_month %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_month, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_specific %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_specific, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_machine %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_machine, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_car %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_car, class: "form-control" %>
+<br>
+<%= f.label :personal_insurance %>
+<%= f.select :personal_insurance, SpecialVehicle.personal_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :objective_insurance %>
+<%= f.select :objective_insurance, SpecialVehicle.objective_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :passenger_insurance %>
+<%= f.select :passenger_insurance, SpecialVehicle.passenger_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :other_insurance %>
+<%= f.select :other_insurance, SpecialVehicle.other_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :exp_date_insurance %>
+<%= f.select :exp_date_insurance, SpecialVehicle.exp_date_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+
+<%# <script>
+  $(function(){
+    $.each(function(key){
+      $.validator.addMethod(key, this);
+    });
+    $(".car-form-validation").validate({
+      rules:{
+        "car[owner_name]": {
+          required: true
+        },
+        "car[safety_manager]": {
+          required: true
+        },
+        "car[vehicle_model]": {
+          required: true
+        },
+        "car[vehicle_number]": {
+          required: true
+        },
+        "car[vehicle_inspection_start_on]": {
+          required: true
+        },
+        "car[vehicle_inspection_end_on]": {
+          required: true
+        },
+        "car[car_insurance_company_id]": {
+          required: true
+        },
+        "car[liability_securities_number]": {
+          required: true
+        },
+        "car[liability_insurance_start_on]": {
+          required: true
+        },
+        "car[liability_insurance_end_on]": {
+          required: true
+        },
+        "car[car_voluntary_insurances_attributes][0][company_voluntary_id]": {
+          required: true
+        },
+        
+      },
+      messages:{
+        "car[owner_name]": {
+          required: "車両所有者氏名を入力してください。"
+        },
+        "car[safety_manager]": {
+          required: "安全運転管理者を入力してください。"
+        },
+        "car[vehicle_model]": {
+          required: "車両型式を入力してください。"
+        },
+        "car[vehicle_number]": {
+          required: "車両番号を入力してください。"
+        },
+        "car[vehicle_inspection_start_on]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "car[vehicle_inspection_end_on]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "car[car_insurance_company_id]": {
+          required: "自賠責保険会社を選択してください。"
+        },
+        "car[liability_securities_number]": {
+          required: "自賠責証券番号を入力してください。"
+        },
+        "car[liability_insurance_start_on]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "car[liability_insurance_end_on]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "car[car_voluntary_insurances_attributes][0][company_voluntary_id]": {
+          required: "任意保険会社を選択してください。"
+        },
+      },
+      errorClass: "input_form_error"
+    });
+    // 入力欄を変更したときにバリデーションを実行
+    $(".car-form-validation").change(function () {
+      $(this).valid();
+    });
+  });
+</script> %>
