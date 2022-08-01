@@ -33,12 +33,36 @@ module DocumentsHelper
     end
   end
 
+  # 作業員の電話番号情報
+  def worker_phone_number(worker, column)
+    worker&.content&.[](column)
+  end
+
+  # 作業員の血圧情報
+  def blood_pressure(worker)
+    unless worker&.content&.[]("worker_medical")&.[]("max_blood_pressure").nil? || worker&.content&.[]("worker_medical")&.[]("min_blood_pressure").nil?
+      worker&.content&.[]("worker_medical")&.[]("min_blood_pressure").to_s + " ~ " + worker&.content&.[]("worker_medical")&.[]("max_blood_pressure").to_s
+    else
+      '~'
+    end
+  end
+
   # 作業員健康診断の日付情報
   def worker_medical_date(worker, column)
     unless worker&.content&.[]("worker_medical")&.[](column).nil?
       l worker&.content&.[]("worker_medical")&.[](column).to_date, format: :long 
     else
       '年　月　日'
+    end
+  end
+
+  # 作業員の血液型
+  def worker_abo_blood_type(worker)
+    case worker&.content&.[]("abo_blood_type")
+    when "a" then "A"
+    when "b" then "B"
+    when "ab" then "AB"
+    when "o" then "O"
     end
   end
 

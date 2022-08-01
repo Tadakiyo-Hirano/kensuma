@@ -689,13 +689,17 @@
 						<%= worker_str(w1, "my_address") %> <!-- 8-021 住所(1) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= w1&.content&.[]("my_phone_number") %> <!-- 8-023 電話番号(1) -->
+						<%= worker_phone_number(w1, "my_phone_number") %> <!-- 8-023 電話番号(1) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w1, "med_exam_on") %> <!-- 8-025 健康診断日(1) -->
 					</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w1) %> <!-- 8-028 血液型(1) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w1, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(1) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -730,9 +734,11 @@
 						<%= worker_str(w1, "family_address") %> <!-- 8-022 緊急連絡先住所(1) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w1&.content&.[]("family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(1) -->
+						<%= worker_phone_number(w1, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(1) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w1) %> <!-- 8-026 8-027 血圧(1) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -769,12 +775,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w2, "my_address") %> <!-- 8-021 住所(2) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w2, "my_phone_number") %> <!-- 8-023 電話番号(2) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w2, "med_exam_on") %> <!-- 8-025 健康診断日(2) -->
 					</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w2) %> <!-- 8-028 血液型(2) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w2, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(2) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -808,8 +820,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w2, "family_address") %> <!-- 8-022 緊急連絡先住所(2) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w2, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(2) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w2) %> <!-- 8-026 8-027 血圧(2) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -845,10 +861,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w3, "my_address") %> <!-- 8-021 住所(3) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w3, "my_phone_number") %> <!-- 8-023 電話番号(3) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w3, "med_exam_on") %> <!-- 8-025 健康診断日(3) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w3) %> <!-- 8-028 血液型() -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w3, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(3) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -882,8 +906,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w3, "family_address") %> <!-- 8-022 緊急連絡先住所(3) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w3, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(3) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w3) %> <!-- 8-026 8-027 血圧(3) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -919,10 +947,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->	
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w4, "my_phone_number") %> <!-- 8-023 電話番号(4) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w4, "med_exam_on") %> <!-- 8-025 健康診断日(4) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w4) %> <!-- 8-028 血液型(4) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w4, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(4) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -956,8 +992,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w4, "family_address") %> <!-- 8-022 緊急連絡先住所(4) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w4, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(4) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w4) %> <!-- 8-026 8-027 血圧(4) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -993,10 +1033,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w5, "my_address") %> <!-- 8-021 住所(5) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w5, "my_phone_number") %> <!-- 8-023 電話番号(5) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w5, "med_exam_on") %> <!-- 8-025 健康診断日(5) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w5) %> <!-- 8-028 血液型(5) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w5, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(5) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1030,8 +1078,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w5, "family_address") %> <!-- 8-022 緊急連絡先住所(5) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w5, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(5) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w5) %> <!-- 8-026 8-027 血圧(5) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -1067,10 +1119,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w6, "my_address") %> <!-- 8-021 住所(6) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w6, "my_phone_number") %> <!-- 8-023 電話番号(6) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w6, "med_exam_on") %> <!-- 8-025 健康診断日(6) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w6) %> <!-- 8-028 血液型(6) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w6, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(6) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1104,8 +1164,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w6, "family_address") %> <!-- 8-022 緊急連絡先住所(6) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w6, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(6) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w6) %> <!-- 8-026 8-027 血圧(6) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -1141,10 +1205,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w7, "my_address") %> <!-- 8-021 住所(7) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w7, "my_phone_number") %> <!-- 8-023 電話番号(7) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w7, "med_exam_on") %> <!-- 8-025 健康診断日(7) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w7) %> <!-- 8-028 血液型(7) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w7, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(7) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1178,8 +1250,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w7, "family_address") %> <!-- 8-022 緊急連絡先住所(7) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w7, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(7) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w7) %> <!-- 8-026 8-027 血圧(7) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -1215,10 +1291,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w8, "my_address") %> <!-- 8-021 住所(8) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w8, "my_phone_number") %> <!-- 8-023 電話番号(8) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w8, "med_exam_on") %> <!-- 8-025 健康診断日(8) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->						
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w8, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(8) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1252,8 +1336,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w8, "family_address") %> <!-- 8-022 緊急連絡先住所(8) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w8, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(8) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w8) %> <!-- 8-026 8-027 血圧(8) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -1289,10 +1377,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w9, "my_address") %> <!-- 8-021 住所(9) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w9, "my_phone_number") %> <!-- 8-023 電話番号(9) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w9, "med_exam_on") %> <!-- 8-025 健康診断日(9) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w9) %> <!-- 8-028 血液型(9) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w9, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(9) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1327,8 +1423,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w9, "family_address") %> <!-- 8-022 緊急連絡先住所(9) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w9, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(9) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w9) %> <!-- 8-026 8-027 血圧(9) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
@@ -1364,10 +1464,18 @@
 					<td class="s56" colspan="9" rowspan="3">
 						<%= worker_str(w10, "my_address") %> <!-- 8-021 住所(10) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">（ ）</td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_phone_number(w10, "my_phone_number") %> <!-- 8-023 電話番号(10) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w10, "med_exam_on") %> <!-- 8-025 健康診断日(10) -->
+					</td>
+					<td class="s59" rowspan="6">
+						<%= worker_abo_blood_type(w10) %> <!-- 8-028 血液型(10) -->
+					</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= worker_medical_date(w10, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(10) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1401,8 +1509,12 @@
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w10, "family_address") %> <!-- 8-022 緊急連絡先住所(10) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">（ ）</td>
-					<td class="s59" colspan="4" rowspan="3">~</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= worker_phone_number(w10, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(10) -->
+					</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= blood_pressure(w10) %> <!-- 8-026 8-027 血圧(10) -->
+					</td>
 					<td class="s57" colspan="4" rowspan="3"></td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>

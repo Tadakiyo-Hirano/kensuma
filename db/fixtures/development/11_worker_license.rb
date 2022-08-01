@@ -4,7 +4,7 @@ Worker.all.each do |worker|
       {
         worker_id:         worker.id,
         license_id:        n+1,
-        got_on:             '2022-02-12'
+        got_on:            rand(Date.current.years_ago(1) .. Date.current.prev_month)
       }
     )
   end
