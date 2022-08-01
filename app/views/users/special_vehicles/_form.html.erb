@@ -51,88 +51,52 @@
 <%= f.select :exp_date_insurance, SpecialVehicle.exp_date_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
 <br>
 
-<%# <script>
+<script>
   $(function(){
     $.each(function(key){
       $.validator.addMethod(key, this);
     });
-    $(".car-form-validation").validate({
+    $(".special-vehicle-form-validation").validate({
       rules:{
-        "car[owner_name]": {
+        "special_vehicle[check_exp_date_year]": {
           required: true
         },
-        "car[safety_manager]": {
+        "special_vehicle[check_exp_date_month]": {
           required: true
         },
-        "car[vehicle_model]": {
+        "special_vehicle[check_exp_date_specific]": {
           required: true
         },
-        "car[vehicle_number]": {
+        "special_vehicle[check_exp_date_machine]": {
           required: true
         },
-        "car[vehicle_inspection_start_on]": {
-          required: true
-        },
-        "car[vehicle_inspection_end_on]": {
-          required: true
-        },
-        "car[car_insurance_company_id]": {
-          required: true
-        },
-        "car[liability_securities_number]": {
-          required: true
-        },
-        "car[liability_insurance_start_on]": {
-          required: true
-        },
-        "car[liability_insurance_end_on]": {
-          required: true
-        },
-        "car[car_voluntary_insurances_attributes][0][company_voluntary_id]": {
+        "special_vehicle[check_exp_date_car]": {
           required: true
         },
         
       },
       messages:{
-        "car[owner_name]": {
-          required: "車両所有者氏名を入力してください。"
-        },
-        "car[safety_manager]": {
-          required: "安全運転管理者を入力してください。"
-        },
-        "car[vehicle_model]": {
-          required: "車両型式を入力してください。"
-        },
-        "car[vehicle_number]": {
-          required: "車両番号を入力してください。"
-        },
-        "car[vehicle_inspection_start_on]": {
+        "special_vehicle[check_exp_date_year]": {
           required: "年月日を入力または選択してください。"
         },
-        "car[vehicle_inspection_end_on]": {
+        "special_vehicle[check_exp_date_month]": {
           required: "年月日を入力または選択してください。"
         },
-        "car[car_insurance_company_id]": {
-          required: "自賠責保険会社を選択してください。"
-        },
-        "car[liability_securities_number]": {
-          required: "自賠責証券番号を入力してください。"
-        },
-        "car[liability_insurance_start_on]": {
+        "special_vehicle[check_exp_date_specific]": {
           required: "年月日を入力または選択してください。"
         },
-        "car[liability_insurance_end_on]": {
+        "special_vehicle[check_exp_date_machine]": {
           required: "年月日を入力または選択してください。"
         },
-        "car[car_voluntary_insurances_attributes][0][company_voluntary_id]": {
-          required: "任意保険会社を選択してください。"
+        "special_vehicle[check_exp_date_car]": {
+          required: "年月日を入力または選択してください。"
         },
       },
       errorClass: "input_form_error"
     });
     // 入力欄を変更したときにバリデーションを実行
-    $(".car-form-validation").change(function () {
+    $(".special-vehicle-form-validation").change(function () {
       $(this).valid();
     });
   });
-</script> %>
+</script>

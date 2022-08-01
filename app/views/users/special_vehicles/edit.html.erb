@@ -2,9 +2,9 @@
 <% provide(:btn_text, "更新") %>
 
 <div class="card">
-  <%= form_with model: @special_vehicle, url: users_special_vehicle_path, method: :patch, local: true, class: "car-form-validation" do |f| %>
+  <%= form_with model: @special_vehicle, url: users_special_vehicle_path, method: :patch, local: true, class: "special-vehicle-form-validation" do |f| %>
     <div class="card-body">
-      <%= render partial: "form", locals: { f: f, car: @special_vehicle} %>
+      <%= render partial: "form", locals: { f: f } %>
     </div>
     <div class="card-footer">
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-success" %>

@@ -3,11 +3,11 @@
 
 <div class="card">
   <div class="card-body">
-    <%= form_with model: @special_vehicle, url: users_special_vehicles_path, method: :post, local: true, class: "car-form-validation" do |f| %>
-      <%= render partial: "form", locals: { f: f, car: @special_vehicle } %>
+    <%= form_with model: @special_vehicle, url: users_special_vehicles_path, method: :post, local: true, class: "special-vehicle-form-validation" do |f| %>
+      <%= render partial: "form", locals: { f: f } %>
       
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
-      <%= link_to "一覧画面へ", users_cars_path, class: "btn btn-md btn-block btn-default" %>
+      <%= link_to "一覧画面へ", users_special_vehicles_path, class: "btn btn-md btn-block btn-default" %>
     <% end %>
   </div>
 </div>
