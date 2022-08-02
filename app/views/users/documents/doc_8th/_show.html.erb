@@ -708,7 +708,7 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s60" colspan="2" rowspan="3"><%= worker_kentaikyo(w1) %>・中</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R27" style="height: 13px;" class="row-headers-background"></th>
@@ -732,7 +732,7 @@
 						<%= worker_str(w1, "blank_term") %>年 <!-- 8-018 経験年数(1) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w1) %> <!-- 8-020 年齢(1) -->
+						<%= worker_age(w1) %> <!-- 8-020 年齢(1) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w1, "family_address") %> <!-- 8-022 緊急連絡先住所(1) -->
@@ -823,7 +823,7 @@
 						<%= w2&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(2) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w2) %> <!-- 8-020 年齢(2) -->
+						<%= worker_age(w2) %> <!-- 8-020 年齢(2) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w2, "family_address") %> <!-- 8-022 緊急連絡先住所(2) -->
@@ -913,7 +913,7 @@
 						<%= w3&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(3) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w3) %> <!-- 8-020 年齢(3) -->
+						<%= worker_age(w3) %> <!-- 8-020 年齢(3) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w3, "family_address") %> <!-- 8-022 緊急連絡先住所(3) -->
@@ -1003,7 +1003,7 @@
 						<%= w4&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(4) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w4) %> <!-- 8-020 年齢(4) -->
+						<%= worker_age(w4) %> <!-- 8-020 年齢(4) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w4, "family_address") %> <!-- 8-022 緊急連絡先住所(4) -->
@@ -1093,7 +1093,7 @@
 						<%= w5&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(5) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w5) %> <!-- 8-020 年齢(5) -->
+						<%= worker_age(w5) %> <!-- 8-020 年齢(5) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w5, "family_address") %> <!-- 8-022 緊急連絡先住所(5) -->
@@ -1183,7 +1183,7 @@
 						<%= w6&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(6) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w6) %> <!-- 8-020 年齢(6) -->
+						<%= worker_age(w6) %> <!-- 8-020 年齢(6) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w6, "family_address") %> <!-- 8-022 緊急連絡先住所(6) -->
@@ -1273,7 +1273,7 @@
 						<%= w7&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(7) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w7) %> <!-- 8-020 年齢(7) -->
+						<%= worker_age(w7) %> <!-- 8-020 年齢(7) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w7, "family_address") %> <!-- 8-022 緊急連絡先住所(7) -->
@@ -1363,7 +1363,7 @@
 						<%= w8&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(8) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w8) %> <!-- 8-020 年齢(8) -->
+						<%= worker_age(w8) %> <!-- 8-020 年齢(8) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w8, "family_address") %> <!-- 8-022 緊急連絡先住所(8) -->
@@ -1454,7 +1454,7 @@
 						<%= w9&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(9) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w9) %> <!-- 8-020 年齢(9) -->
+						<%= worker_age(w9) %> <!-- 8-020 年齢(9) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w9, "family_address") %> <!-- 8-022 緊急連絡先住所(9) -->
@@ -1544,7 +1544,7 @@
 						<%= w10&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(10) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= worker_birth_day_on(w10) %> <!-- 8-020 年齢(10) -->
+						<%= worker_age(w10) %> <!-- 8-020 年齢(10) -->
 					</td>
 					<td class="s57" colspan="9" rowspan="3">
 						<%= worker_str(w10, "family_address") %> <!-- 8-022 緊急連絡先住所(10) -->
@@ -2788,6 +2788,12 @@
 		word-wrap: break-word;
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
+	}
+
+	.severance_pay_mutual_aid {
+		border: 2px solid #000000;
+		border-radius: 11px;
+		padding: 2px;
 	}
 </style>
 	

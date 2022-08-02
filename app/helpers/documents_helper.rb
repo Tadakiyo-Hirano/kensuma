@@ -36,9 +36,19 @@ module DocumentsHelper
   end
 
   # 作業員の年齢情報
-  def worker_birth_day_on(worker)
+  def worker_age(worker)
     birth_day = worker&.content&.[]("birth_day_on")
     birth_day.nil? ? '歳' : ((worker&.created_at.to_date.strftime('%Y%m%d').to_i - birth_day.to_date.strftime('%Y%m%d').to_i) / 10000).to_s + '歳'
+  end
+
+  # 作業員の建設業退職金共済制度情報
+  def worker_kentaikyo(worker)
+    kentaikyo = worker&.content&.[]("worker_insurance")&.[]("severance_pay_mutual_aid_type")
+    if kentaikyo == 'kentaikyo'
+      tag.span '健', class: :severance_pay_mutual_aid
+    else
+      '健'
+    end
   end
 
   # 作業員の血圧情報
