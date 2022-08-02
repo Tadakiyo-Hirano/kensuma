@@ -700,7 +700,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w1, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w1, "health_insurance_type") %> <!-- 8-031 健康保険(1) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -718,7 +720,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w1, "name") %> <!-- 8-013 作業員名(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w1, "pension_insurance_type") %> <!-- 8-032 年金保険(1) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -739,7 +743,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w1) %> <!-- 8-026 8-027 血圧(1) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w1) %> <!-- 8-030 特別健康診断種類(1) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -787,7 +793,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w2, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w2, "health_insurance_type") %> <!-- 8-031 健康保険(2) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -826,7 +834,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w2) %> <!-- 8-026 8-027 血圧(2) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w2) %> <!-- 8-030 特別健康診断種類(2) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -873,7 +883,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w3, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w3, "health_insurance_type") %> <!-- 8-031 健康保険(3) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -912,7 +924,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w3) %> <!-- 8-026 8-027 血圧(3) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w3) %> <!-- 8-030 特別健康診断種類(3) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -959,7 +973,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w4, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w4, "health_insurance_type") %> <!-- 8-031 健康保険(4) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -998,7 +1014,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w4) %> <!-- 8-026 8-027 血圧(4) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w4) %> <!-- 8-030 特別健康診断種類(4) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -1045,7 +1063,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w5, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w5, "health_insurance_type") %> <!-- 8-031 健康保険(5) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1084,7 +1104,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w5) %> <!-- 8-026 8-027 血圧(5) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w5) %> <!-- 8-030 特別健康診断種類(5) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -1131,7 +1153,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w6, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w6, "health_insurance_type") %> <!-- 8-031 健康保険(6) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1170,7 +1194,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w6) %> <!-- 8-026 8-027 血圧(6) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w6) %> <!-- 8-030 特別健康診断種類(6) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -1217,7 +1243,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w7, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w7, "health_insurance_type") %> <!-- 8-031 健康保険(7) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1256,7 +1284,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w7) %> <!-- 8-026 8-027 血圧(7) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w7) %> <!-- 8-030 特別健康診断種類(7) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -1303,7 +1333,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w8, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w8, "health_insurance_type") %> <!-- 8-031 健康保険(8) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1342,7 +1374,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w8) %> <!-- 8-026 8-027 血圧(8) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w8) %> <!-- 8-030 特別健康診断種類(8) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -1389,7 +1423,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w9, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w9, "health_insurance_type") %> <!-- 8-031 健康保険(9) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1429,7 +1465,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w9) %> <!-- 8-026 8-027 血圧(9) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w9) %> <!-- 8-030 特別健康診断種類(9) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>
@@ -1476,7 +1514,9 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w10, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w10, "health_insurance_type") %> <!-- 8-031 健康保険(10) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
@@ -1515,7 +1555,9 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w10) %> <!-- 8-026 8-027 血圧(10) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3"></td>
+					<td class="s57" colspan="4" rowspan="3">
+						<%= worker_special_med_exam(w10) %> <!-- 8-030 特別健康診断種類(10) -->
+					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
 					<td class="s59" colspan="2" rowspan="3">他・無</td>
 				</tr>

@@ -26,11 +26,8 @@ module DocumentsHelper
   
   # 作業員の日付情報
   def worker_date(worker, column)
-    unless worker&.content&.[](column).nil?
-      l worker&.content&.[](column)&.to_date, format: :long
-    else
-      '年　月　日'
-    end
+    date = worker&.content&.[](column)
+    date.nil? ? '年　月　日' : l(date&.to_date, format: :long)
   end
 
   # 作業員の電話番号情報
@@ -38,25 +35,26 @@ module DocumentsHelper
     worker&.content&.[](column)
   end
 
+  # 作業員の年齢情報
+  def worker_birth_day_on(worker)
+    birth_day = worker&.content&.[]("birth_day_on")
+    birth_day.nil? ? '歳' : ((worker&.created_at.to_date.strftime('%Y%m%d').to_i - birth_day.to_date.strftime('%Y%m%d').to_i) / 10000).to_s + '歳'
+  end
+
   # 作業員の血圧情報
   def blood_pressure(worker)
-    unless worker&.content&.[]("worker_medical")&.[]("max_blood_pressure").nil? || worker&.content&.[]("worker_medical")&.[]("min_blood_pressure").nil?
-      worker&.content&.[]("worker_medical")&.[]("min_blood_pressure").to_s + " ~ " + worker&.content&.[]("worker_medical")&.[]("max_blood_pressure").to_s
-    else
-      '~'
-    end
+    min = worker&.content&.[]("worker_medical")&.[]("min_blood_pressure")
+    max = worker&.content&.[]("worker_medical")&.[]("max_blood_pressure")
+    min.nil? || max.nil? ? '~' : min.to_s + " ~ " + max.to_s
   end
 
   # 作業員健康診断の日付情報
   def worker_medical_date(worker, column)
-    unless worker&.content&.[]("worker_medical")&.[](column).nil?
-      l worker&.content&.[]("worker_medical")&.[](column).to_date, format: :long 
-    else
-      '年　月　日'
-    end
+    date = worker&.content&.[]("worker_medical")&.[](column)
+    date.nil? ? '年　月　日' : l(date.to_date, format: :long)
   end
 
-  # 作業員の血液型
+  # 作業員の血液型情報
   def worker_abo_blood_type(worker)
     case worker&.content&.[]("abo_blood_type")
     when "a" then "A"
@@ -66,12 +64,29 @@ module DocumentsHelper
     end
   end
 
-  # 作業員の年齢情報
-  def worker_birth_day_on(worker)
-    unless worker&.content&.[]("birth_day_on").nil?
-      ((worker&.created_at.to_date.strftime('%Y%m%d').to_i - worker&.content&.[]("birth_day_on").to_date.strftime('%Y%m%d').to_i) / 10000).to_s + '歳'
-    else
-      '歳'
+  # 作業員の保険情報
+  def worker_insurance(worker, column)
+    insurance = worker&.content&.[]("worker_insurance")&.[](column)
+    insurance unless insurance.nil?
+    case insurance
+    when 'health_insurance_association' then '健康保険組合'
+    when 'japan_health_insurance_association' then '協会けんぽ'
+    when 'construction_national_health_insurance' then '建設国保'
+    when 'national_health_insurance' then '国民健康保険'
+    when 'exemption' then '適応除外'
+    when 'welfare' then '厚生年金'
+    when 'national' then '国民年金'
+    when 'recipient' then '受給者'
+    when 'insured' then '被保険者'
+    when 'day' then '日雇保険'
+    end
+  end
+
+  # 作業員の特別健康診断の種類
+  def worker_special_med_exam(worker)
+    unless worker&.content&.[]("worker_medical")&.[]("worker_exams").nil?
+      exams = worker&.content&.[]("worker_medical")&.[]("worker_exams").map { |v| SpecialMedExam.find(v["special_med_exam_id"]).name }
+      exams.to_s.gsub(/,|"|\[|\]/) {""}
     end
   end
 end
