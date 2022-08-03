@@ -44,11 +44,22 @@ module DocumentsHelper
   # 作業員の建設業退職金共済制度情報
   def worker_kentaikyo(worker)
     kentaikyo = worker&.content&.[]("worker_insurance")&.[]("severance_pay_mutual_aid_type")
-    if kentaikyo == 'kentaikyo'
-      tag.span '健', class: :severance_pay_mutual_aid
-    else
-      '健'
-    end
+    kentaikyo == 'kentaikyo' ? tag.span('健', class: :severance_pay_mutual_aid) : '健'
+  end
+
+  def worker_tyutaikyo(worker)
+    tyutaikyo = worker&.content&.[]("worker_insurance")&.[]("severance_pay_mutual_aid_type")
+    tyutaikyo == 'tyutaikyo' ? tag.span('中', class: :severance_pay_mutual_aid) : '中'
+  end
+
+  def worker_other(worker)
+    other = worker&.content&.[]("worker_insurance")&.[]("severance_pay_mutual_aid_type")
+    other == 'other' ? tag.span('他', class: :severance_pay_mutual_aid) : '他'
+  end
+
+  def worker_none(worker)
+    none = worker&.content&.[]("worker_insurance")&.[]("severance_pay_mutual_aid_type")
+    none == 'none' ? tag.span('無', class: :severance_pay_mutual_aid) : '無'
   end
 
   # 作業員の血圧情報
@@ -98,5 +109,11 @@ module DocumentsHelper
       exams = worker&.content&.[]("worker_medical")&.[]("worker_exams").map { |v| SpecialMedExam.find(v["special_med_exam_id"]).name }
       exams.to_s.gsub(/,|"|\[|\]/) {""}
     end
+  end
+
+  # 作業員の入場年月日
+  def field_worker_date(worker)
+    date = worker&.admission_date_start
+    date.blank? ? '年　月　日' : l(date, format: :long)
   end
 end

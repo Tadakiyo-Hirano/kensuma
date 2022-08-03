@@ -707,8 +707,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3"><%= worker_kentaikyo(w1) %>・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w1) %> <!-- 8-039 入場年月日･始期(1) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w1) %>・<%= worker_tyutaikyo(w1) %> <!-- 8-041 退職金共済手帳(建･中) (1) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R27" style="height: 13px;" class="row-headers-background"></th>
@@ -747,7 +751,9 @@
 						<%= worker_special_med_exam(w1) %> <!-- 8-030 特別健康診断種類(1) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w1) %>・<%= worker_none(w1) %> <!-- 8-041 退職金共済手帳(他･無) (1) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R30" style="height: 13px;" class="row-headers-background"></th>
@@ -800,8 +806,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w2) %> <!-- 8-039 入場年月日･始期(2) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w2) %>・<%= worker_tyutaikyo(w2) %> <!-- 8-041 退職金共済手帳(建･中) (2) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R27" style="height: 13px;" class="row-headers-background"></th>
@@ -813,7 +823,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w2&.content&.[]("name") %> <!-- 8-013 作業員名(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -838,7 +850,9 @@
 						<%= worker_special_med_exam(w2) %> <!-- 8-030 特別健康診断種類(2) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w2) %>・<%= worker_none(w2) %> <!-- 8-041 退職金共済手帳(他･無) (2) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R30" style="height: 13px;" class="row-headers-background"></th>
@@ -890,8 +904,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w3) %> <!-- 8-039 入場年月日･始期(3) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w3) %>・<%= worker_tyutaikyo(w3) %> <!-- 8-041 退職金共済手帳(建･中) (3) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R33" style="height: 13px;" class="row-headers-background"></th>
@@ -903,7 +921,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w3&.content&.[]("name") %> <!-- 8-013 作業員名(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -928,7 +948,9 @@
 						<%= worker_special_med_exam(w3) %> <!-- 8-030 特別健康診断種類(3) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w3) %>・<%= worker_none(w3) %> <!-- 8-041 退職金共済手帳(他･無) (3) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R36" style="height: 13px;" class="row-headers-background"></th>
@@ -980,8 +1002,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w4) %> <!-- 8-039 入場年月日･始期(4) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w4) %>・<%= worker_tyutaikyo(w4) %> <!-- 8-041 退職金共済手帳(建･中) (4) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R39" style="height: 13px;" class="row-headers-background"></th>
@@ -993,7 +1019,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w4&.content&.[]("name") %> <!-- 8-013 作業員名(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w4, "pension_insurance_type") %> <!-- 8-032 年金保険(4) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -1018,7 +1046,9 @@
 						<%= worker_special_med_exam(w4) %> <!-- 8-030 特別健康診断種類(4) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w4) %>・<%= worker_none(w4) %> <!-- 8-041 退職金共済手帳(他･無) (4) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R42" style="height: 13px;" class="row-headers-background"></th>
@@ -1070,8 +1100,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w5) %> <!-- 8-039 入場年月日･始期(5) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w5) %>・<%= worker_tyutaikyo(w5) %> <!-- 8-041 退職金共済手帳(建･中) (5) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R45" style="height: 13px;" class="row-headers-background"></th>
@@ -1083,7 +1117,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w5&.content&.[]("name") %> <!-- 8-013 作業員名(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w5, "pension_insurance_type") %> <!-- 8-032 年金保険(5) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -1108,7 +1144,9 @@
 						<%= worker_special_med_exam(w5) %> <!-- 8-030 特別健康診断種類(5) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w5) %>・<%= worker_none(w5) %> <!-- 8-041 退職金共済手帳(他･無) (5) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R48" style="height: 13px;" class="row-headers-background"></th>
@@ -1160,8 +1198,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w6) %> <!-- 8-039 入場年月日･始期(6) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w6) %>・<%= worker_tyutaikyo(w6) %> <!-- 8-041 退職金共済手帳(建･中) (6) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R51" style="height: 13px;" class="row-headers-background"></th>
@@ -1173,7 +1215,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w6&.content&.[]("name") %> <!-- 8-013 作業員名(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w6, "pension_insurance_type") %> <!-- 8-032 年金保険(6) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -1198,7 +1242,9 @@
 						<%= worker_special_med_exam(w6) %> <!-- 8-030 特別健康診断種類(6) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w6) %>・<%= worker_none(w6) %> <!-- 8-041 退職金共済手帳(他･無) (6) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R54" style="height: 13px;" class="row-headers-background"></th>
@@ -1250,8 +1296,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w7) %> <!-- 8-039 入場年月日･始期(7) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w7) %>・<%= worker_tyutaikyo(w7) %> <!-- 8-041 退職金共済手帳(建･中) (7) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R57" style="height: 13px;" class="row-headers-background"></th>
@@ -1263,7 +1313,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w7&.content&.[]("name") %> <!-- 8-013 作業員名(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w7, "pension_insurance_type") %> <!-- 8-032 年金保険(7) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -1288,7 +1340,9 @@
 						<%= worker_special_med_exam(w7) %> <!-- 8-030 特別健康診断種類(7) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w7) %>・<%= worker_none(w7) %> <!-- 8-041 退職金共済手帳(他･無) (7) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R60" style="height: 13px;" class="row-headers-background"></th>
@@ -1340,8 +1394,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w8) %> <!-- 8-039 入場年月日･始期(8) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w8) %>・<%= worker_tyutaikyo(w8) %> <!-- 8-041 退職金共済手帳(建･中)  (8) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R63" style="height: 13px;" class="row-headers-background"></th>
@@ -1353,7 +1411,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w8&.content&.[]("name") %> <!-- 8-013 作業員名(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w8, "pension_insurance_type") %> <!-- 8-032 年金保険(8) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -1430,8 +1490,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w9) %> <!-- 8-039 入場年月日･始期(9) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w9) %>・<%= worker_tyutaikyo(w9) %> <!-- 8-041 退職金共済手帳(建･中) (9) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R69" style="height: 13px;" class="row-headers-background"></th>
@@ -1442,9 +1506,10 @@
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w9&.content&.[]("name") %> <!-- 8-013 作業員名(9) -->
-						<%= w9&.content&.[]("name") %> <!-- 8-013 作業員名(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w9, "pension_insurance_type") %> <!-- 8-032 年金保険(9) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -1469,7 +1534,9 @@
 						<%= worker_special_med_exam(w9) %> <!-- 8-030 特別健康診断種類(9) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w9) %>・<%= worker_none(w9) %> <!-- 8-041 退職金共済手帳(他･無) (9) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R72" style="height: 13px;" class="row-headers-background"></th>
@@ -1521,8 +1588,12 @@
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
 					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s58" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s60" colspan="2" rowspan="3">建・中</td>
+					<td class="s58" colspan="4" rowspan="3">
+						<%= field_worker_date(w1) %> <!-- 8-039 入場年月日･始期(10) -->
+					</td>
+					<td class="s60" colspan="2" rowspan="3">
+						<%= worker_kentaikyo(w10) %>・<%= worker_tyutaikyo(w10) %> <!-- 8-041 退職金共済手帳(建･中) (10) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R75" style="height: 13px;" class="row-headers-background"></th>
@@ -1534,7 +1605,9 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= w10&.content&.[]("name") %> <!-- 8-013 作業員名(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= worker_insurance(w10, "pension_insurance_type") %> <!-- 8-032 年金保険(10) -->
+					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
@@ -1559,7 +1632,9 @@
 						<%= worker_special_med_exam(w10) %> <!-- 8-030 特別健康診断種類(10) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w10) %>・<%= worker_none(w10) %> <!-- 8-041 退職金共済手帳(他･無) (10) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R78" style="height: 13px;" class="row-headers-background"></th>
