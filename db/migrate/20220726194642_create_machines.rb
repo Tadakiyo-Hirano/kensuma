@@ -8,7 +8,7 @@ class CreateMachines < ActiveRecord::Migration[6.1]
       t.string      :inspector,             null: false # 点検者
       t.string      :handler,               null: false # 取扱者
       t.date        :inspection_date,       null: false # 点検年月日
-      t.boolean     :inspection_check                   # 機械名 × 点検事項(✓を記載)
+      t.string      :inspection_check                   # 機械名 × 点検事項(✓を記載)
       t.references  :business, null: false, foreign_key: true
 
       t.timestamps

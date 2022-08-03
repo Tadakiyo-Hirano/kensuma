@@ -1,5 +1,7 @@
 class Machine < ApplicationRecord
   belongs_to :business
+  has_many :machine_tags, dependent: :destroy
+  has_many :tags, through: :machine_tags
 
   before_create -> { self.uuid = SecureRandom.uuid }
 

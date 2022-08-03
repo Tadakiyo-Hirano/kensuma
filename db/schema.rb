@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_26_194642) do
+ActiveRecord::Schema.define(version: 2022_08_02_202043) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -167,6 +167,15 @@ ActiveRecord::Schema.define(version: 2022_07_26_194642) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "machine_tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "machine_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["machine_id"], name: "index_machine_tags_on_machine_id"
+    t.index ["tag_id"], name: "index_machine_tags_on_tag_id"
+  end
+
   create_table "machines", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.integer "name", null: false
@@ -175,7 +184,7 @@ ActiveRecord::Schema.define(version: 2022_07_26_194642) do
     t.string "inspector", null: false
     t.string "handler", null: false
     t.date "inspection_date", null: false
-    t.boolean "inspection_check"
+    t.string "inspection_check"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -362,6 +371,12 @@ ActiveRecord::Schema.define(version: 2022_07_26_194642) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -502,6 +517,8 @@ ActiveRecord::Schema.define(version: 2022_07_26_194642) do
   add_foreign_key "cars", "car_insurance_companies"
   add_foreign_key "documents", "businesses"
   add_foreign_key "documents", "request_orders"
+  add_foreign_key "machine_tags", "machines"
+  add_foreign_key "machine_tags", "tags"
   add_foreign_key "machines", "businesses"
   add_foreign_key "news_users", "news"
   add_foreign_key "news_users", "users"

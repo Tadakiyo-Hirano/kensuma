@@ -58,7 +58,7 @@ module Users
       def machine_params
         params.require(:machine).permit(
           :name, :standards_performance, :control_number, :inspector, :handler,
-          :inspection_date, :inspection_check
+          :inspection_date, :inspection_check, tag_ids: []
         )
       end
   end
