@@ -14,35 +14,37 @@ module Users
     end
 
     def edit
-      # テスト用デフォルト値 ==========================
-      if @request_order.construction_name.nil?
-        @request_order.tap do |r|
-          r.construction_name =                  'テスト工事名'
-          r.construction_details =               'テスト工事内容'
-          r.start_date =                         '2022-02-01'
-          r.end_date =                           '2022-02-28'
-          r.contract_date =                      '2022-01-01'
-          r.supervisor_name =                    'テスト監督員名'
-          r.supervisor_apply =                   'テスト申出方法'
-          r.professional_engineer_name =         'テスト専門技術者名'
-          r.professional_engineer_details =      'テスト担当工事内容'
-          r.professional_construction =          0
-          r.construction_manager_name =          'テスト工事担当責任者名'
-          r.construction_manager_position_name = 'テスト工事担当責任者役職名'
-          r.site_agent_name =                    'テスト現場代理人名'
-          r.site_agent_apply =                   'テスト現場申出方法'
-          r.lead_engineer_name =                 'テスト主任技術者名'
-          r.lead_engineer_check =                0
-          r.work_chief_name =                    'テスト作業主任者名'
-          r.work_conductor_name =                'テスト作業指揮者名'
-          r.safety_officer_name =                'テスト安全衛生担当責任者名'
-          r.safety_manager_name =                'テスト安全衛生責任者名'
-          r.safety_promoter_name =               'テスト安全推進者名'
-          r.foreman_name =                       'テスト職長名'
-          r.registered_core_engineer_name =      'テスト登録基幹技能者名'
+      if Rails.env.development?
+        # テスト用デフォルト値 ==========================
+        if @request_order.construction_name.nil?
+          @request_order.tap do |r|
+            r.construction_name =                  'テスト工事名'
+            r.construction_details =               'テスト工事内容'
+            r.start_date =                         '2022-02-01'
+            r.end_date =                           '2022-02-28'
+            r.contract_date =                      '2022-01-01'
+            r.supervisor_name =                    'テスト監督員名'
+            r.supervisor_apply =                   'テスト申出方法'
+            r.professional_engineer_name =         'テスト専門技術者名'
+            r.professional_engineer_details =      'テスト担当工事内容'
+            r.professional_construction =          0
+            r.construction_manager_name =          'テスト工事担当責任者名'
+            r.construction_manager_position_name = 'テスト工事担当責任者役職名'
+            r.site_agent_name =                    'テスト現場代理人名'
+            r.site_agent_apply =                   'テスト現場申出方法'
+            r.lead_engineer_name =                 'テスト主任技術者名'
+            r.lead_engineer_check =                0
+            r.work_chief_name =                    'テスト作業主任者名'
+            r.work_conductor_name =                'テスト作業指揮者名'
+            r.safety_officer_name =                'テスト安全衛生担当責任者名'
+            r.safety_manager_name =                'テスト安全衛生責任者名'
+            r.safety_promoter_name =               'テスト安全推進者名'
+            r.foreman_name =                       'テスト職長名'
+            r.registered_core_engineer_name =      'テスト登録基幹技能者名'
+          end
         end
+        # =============================================
       end
-      # =============================================
     end
 
     def update
