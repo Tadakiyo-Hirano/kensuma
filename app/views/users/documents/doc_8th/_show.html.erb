@@ -704,11 +704,17 @@
 						<%= worker_insurance(w1, "health_insurance_type") %> <!-- 8-031 健康保険(1) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w1) %> <!-- 8-036 特別教育(1) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w1) %> <!-- 8-037 技能講習(1) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w1) %> <!-- 8-038 免許(1) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w1) %> <!-- 8-039 入場年月日･始期(1) -->
+						<%= field_worker_admission_date(w1) %> <!-- 8-039 入場年月日･始期(1) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w1) %>・<%= worker_tyutaikyo(w1) %> <!-- 8-041 退職金共済手帳(建･中) (1) -->
@@ -750,7 +756,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w1) %> <!-- 8-030 特別健康診断種類(1) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w1) %> <!-- 8-040 新規入場時教育年月日(1) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w1) %>・<%= worker_none(w1) %> <!-- 8-041 退職金共済手帳(他･無) (1) -->
 					</td>
@@ -803,11 +811,17 @@
 						<%= worker_insurance(w2, "health_insurance_type") %> <!-- 8-031 健康保険(2) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w2) %> <!-- 8-036 特別教育(2) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w2) %> <!-- 8-037 技能講習(2) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w2) %> <!-- 8-038 免許(2) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w2) %> <!-- 8-039 入場年月日･始期(2) -->
+						<%= field_worker_admission_date(w2) %> <!-- 8-039 入場年月日･始期(2) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w2) %>・<%= worker_tyutaikyo(w2) %> <!-- 8-041 退職金共済手帳(建･中) (2) -->
@@ -821,7 +835,7 @@
 					<th id="758879504R28" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w2&.content&.[]("name") %> <!-- 8-013 作業員名(2) -->
+						<%= worker_str(w2, "name") %> <!-- 8-013 作業員名(2) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
@@ -832,7 +846,7 @@
 					<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w2&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(2) -->
+						<%= worker_str(w2, "blank_term") %>年 <!-- 8-018 経験年数(2) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w2) %> <!-- 8-020 年齢(2) -->
@@ -849,7 +863,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w2) %> <!-- 8-030 特別健康診断種類(2) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w2) %> <!-- 8-040 新規入場時教育年月日(2) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w2) %>・<%= worker_none(w2) %> <!-- 8-041 退職金共済手帳(他･無) (2) -->
 					</td>
@@ -858,7 +874,7 @@
 					<th id="758879504R30" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-					<%= w2&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(2) -->
+						<%= worker_str(w2, "carrier_up_id") %> <!-- 8-014 キャリアップID(2) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -892,7 +908,7 @@
 						<%= worker_medical_date(w3, "med_exam_on") %> <!-- 8-025 健康診断日(3) -->
 					</td>
 					<td class="s59" rowspan="6">
-						<%= worker_abo_blood_type(w3) %> <!-- 8-028 血液型() -->
+						<%= worker_abo_blood_type(w3) %> <!-- 8-028 血液型(3) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w3, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(3) -->
@@ -901,11 +917,17 @@
 						<%= worker_insurance(w3, "health_insurance_type") %> <!-- 8-031 健康保険(3) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w3) %> <!-- 8-036 特別教育(3) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w3) %> <!-- 8-037 技能講習(3) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w3) %> <!-- 8-038 免許(3) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w3) %> <!-- 8-039 入場年月日･始期(3) -->
+						<%= field_worker_admission_date(w3) %> <!-- 8-039 入場年月日･始期(3) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w3) %>・<%= worker_tyutaikyo(w3) %> <!-- 8-041 退職金共済手帳(建･中) (3) -->
@@ -919,7 +941,7 @@
 					<th id="758879504R34" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w3&.content&.[]("name") %> <!-- 8-013 作業員名(3) -->
+						<%= worker_str(w3, "name") %> <!-- 8-013 作業員名(3) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
@@ -930,7 +952,7 @@
 					<th id="758879504R35" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w3&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(3) -->
+						<%= worker_str(w3, "blank_term") %>年 <!-- 8-018 経験年数(3) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w3) %> <!-- 8-020 年齢(3) -->
@@ -947,7 +969,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w3) %> <!-- 8-030 特別健康診断種類(3) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w3) %> <!-- 8-040 新規入場時教育年月日(3) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w3) %>・<%= worker_none(w3) %> <!-- 8-041 退職金共済手帳(他･無) (3) -->
 					</td>
@@ -956,7 +980,7 @@
 					<th id="758879504R36" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w3&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(3) -->
+						<%= worker_str(w3, "carrier_up_id") %> <!-- 8-014 キャリアップID(3) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -999,11 +1023,17 @@
 						<%= worker_insurance(w4, "health_insurance_type") %> <!-- 8-031 健康保険(4) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w4) %> <!-- 8-036 特別教育(4) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w4) %> <!-- 8-037 技能講習(4) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w4) %> <!-- 8-038 免許(4) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w4) %> <!-- 8-039 入場年月日･始期(4) -->
+						<%= field_worker_admission_date(w4) %> <!-- 8-039 入場年月日･始期(4) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w4) %>・<%= worker_tyutaikyo(w4) %> <!-- 8-041 退職金共済手帳(建･中) (4) -->
@@ -1017,7 +1047,7 @@
 					<th id="758879504R40" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w4&.content&.[]("name") %> <!-- 8-013 作業員名(4) -->
+						<%= worker_str(w4, "name") %> <!-- 8-013 作業員名(4) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w4, "pension_insurance_type") %> <!-- 8-032 年金保険(4) -->
@@ -1028,7 +1058,7 @@
 					<th id="758879504R41" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w4&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(4) -->
+						<%= worker_str(w4, "blank_term") %>年 <!-- 8-018 経験年数(4) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w4) %> <!-- 8-020 年齢(4) -->
@@ -1045,7 +1075,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w4) %> <!-- 8-030 特別健康診断種類(4) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w4) %> <!-- 8-040 新規入場時教育年月日(4) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w4) %>・<%= worker_none(w4) %> <!-- 8-041 退職金共済手帳(他･無) (4) -->
 					</td>
@@ -1054,7 +1086,7 @@
 					<th id="758879504R42" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w4&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(4) -->
+						<%= worker_str(w4, "carrier_up_id") %> <!-- 8-014 キャリアップID(4) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -1097,11 +1129,17 @@
 						<%= worker_insurance(w5, "health_insurance_type") %> <!-- 8-031 健康保険(5) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w5) %> <!-- 8-036 特別教育(5) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w5) %> <!-- 8-037 技能講習(5) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w5) %> <!-- 8-038 免許(5) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w5) %> <!-- 8-039 入場年月日･始期(5) -->
+						<%= field_worker_admission_date(w5) %> <!-- 8-039 入場年月日･始期(5) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w5) %>・<%= worker_tyutaikyo(w5) %> <!-- 8-041 退職金共済手帳(建･中) (5) -->
@@ -1115,7 +1153,7 @@
 					<th id="758879504R46" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w5&.content&.[]("name") %> <!-- 8-013 作業員名(5) -->
+						<%= worker_str(w5, "name") %> <!-- 8-013 作業員名(5) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w5, "pension_insurance_type") %> <!-- 8-032 年金保険(5) -->
@@ -1126,7 +1164,7 @@
 					<th id="758879504R47" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w5&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(5) -->
+						<%= worker_str(w5, "blank_term") %>年 <!-- 8-018 経験年数(5) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w5) %> <!-- 8-020 年齢(5) -->
@@ -1143,7 +1181,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w5) %> <!-- 8-030 特別健康診断種類(5) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w5) %> <!-- 8-040 新規入場時教育年月日(5) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w5) %>・<%= worker_none(w5) %> <!-- 8-041 退職金共済手帳(他･無) (5) -->
 					</td>
@@ -1152,7 +1192,7 @@
 					<th id="758879504R48" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w5&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(5) -->
+						<%= worker_str(w5, "carrier_up_id") %> <!-- 8-014 キャリアップID(5) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -1195,11 +1235,17 @@
 						<%= worker_insurance(w6, "health_insurance_type") %> <!-- 8-031 健康保険(6) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w6) %> <!-- 8-036 特別教育(6) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w6) %> <!-- 8-037 技能講習(6) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w6) %> <!-- 8-038 免許(6) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w6) %> <!-- 8-039 入場年月日･始期(6) -->
+						<%= field_worker_admission_date(w6) %> <!-- 8-039 入場年月日･始期(6) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w6) %>・<%= worker_tyutaikyo(w6) %> <!-- 8-041 退職金共済手帳(建･中) (6) -->
@@ -1213,7 +1259,7 @@
 					<th id="758879504R52" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w6&.content&.[]("name") %> <!-- 8-013 作業員名(6) -->
+						<%= worker_str(w6, "name") %> <!-- 8-013 作業員名(6) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w6, "pension_insurance_type") %> <!-- 8-032 年金保険(6) -->
@@ -1224,7 +1270,7 @@
 					<th id="758879504R53" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w6&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(6) -->
+						<%= worker_str(w6, "blank_term") %>年 <!-- 8-018 経験年数(6) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w6) %> <!-- 8-020 年齢(6) -->
@@ -1241,7 +1287,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w6) %> <!-- 8-030 特別健康診断種類(6) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w6) %> <!-- 8-040 新規入場時教育年月日(6) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w6) %>・<%= worker_none(w6) %> <!-- 8-041 退職金共済手帳(他･無) (6) -->
 					</td>
@@ -1250,7 +1298,7 @@
 					<th id="758879504R54" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w6&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(6) -->
+						<%= worker_str(w6, "carrier_up_id") %> <!-- 8-014 キャリアップID(6) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -1293,11 +1341,17 @@
 						<%= worker_insurance(w7, "health_insurance_type") %> <!-- 8-031 健康保険(7) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w7) %> <!-- 8-036 特別教育(7) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w7) %> <!-- 8-037 技能講習(7) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w7) %> <!-- 8-038 免許(7) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w7) %> <!-- 8-039 入場年月日･始期(7) -->
+						<%= field_worker_admission_date(w7) %> <!-- 8-039 入場年月日･始期(7) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w7) %>・<%= worker_tyutaikyo(w7) %> <!-- 8-041 退職金共済手帳(建･中) (7) -->
@@ -1311,7 +1365,7 @@
 					<th id="758879504R58" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w7&.content&.[]("name") %> <!-- 8-013 作業員名(7) -->
+						<%= worker_str(w7, "name") %> <!-- 8-013 作業員名(7) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w7, "pension_insurance_type") %> <!-- 8-032 年金保険(7) -->
@@ -1322,7 +1376,7 @@
 					<th id="758879504R59" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w7&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(7) -->
+						<%= worker_str(w7, "blank_term") %>年 <!-- 8-018 経験年数(7) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w7) %> <!-- 8-020 年齢(7) -->
@@ -1339,7 +1393,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w7) %> <!-- 8-030 特別健康診断種類(7) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w7) %> <!-- 8-040 新規入場時教育年月日(7) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w7) %>・<%= worker_none(w7) %> <!-- 8-041 退職金共済手帳(他･無) (7) -->
 					</td>
@@ -1348,7 +1404,7 @@
 					<th id="758879504R60" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w7&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(7) -->
+						<%= worker_str(w7, "carrier_up_id") %> <!-- 8-014 キャリアップID(7) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -1391,11 +1447,17 @@
 						<%= worker_insurance(w8, "health_insurance_type") %> <!-- 8-031 健康保険(8) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w8) %> <!-- 8-036 特別教育(8) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w8) %> <!-- 8-037 技能講習(8) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w8) %> <!-- 8-038 免許(8) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w8) %> <!-- 8-039 入場年月日･始期(8) -->
+						<%= field_worker_admission_date(w8) %> <!-- 8-039 入場年月日･始期(8) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w8) %>・<%= worker_tyutaikyo(w8) %> <!-- 8-041 退職金共済手帳(建･中)  (8) -->
@@ -1409,7 +1471,7 @@
 					<th id="758879504R64" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w8&.content&.[]("name") %> <!-- 8-013 作業員名(8) -->
+						<%= worker_str(w8, "name") %> <!-- 8-013 作業員名(8) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w8, "pension_insurance_type") %> <!-- 8-032 年金保険(8) -->
@@ -1420,7 +1482,7 @@
 					<th id="758879504R65" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w8&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(8) -->
+						<%= worker_str(w8, "blank_term") %>年 <!-- 8-018 経験年数(8) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w8) %> <!-- 8-020 年齢(8) -->
@@ -1437,14 +1499,18 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w8) %> <!-- 8-030 特別健康診断種類(8) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
-					<td class="s59" colspan="2" rowspan="3">他・無</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w8) %> <!-- 8-040 新規入場時教育年月日(8) -->
+					</td>
+					<td class="s59" colspan="2" rowspan="3">
+						<%= worker_other(w8) %>・<%= worker_none(w8) %> <!-- 8-041 退職金共済手帳(他･無) (8) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R66" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w8&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(8) -->
+						<%= worker_str(w8, "carrier_up_id") %> <!-- 8-014 キャリアップID(8) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -1487,11 +1553,17 @@
 						<%= worker_insurance(w9, "health_insurance_type") %> <!-- 8-031 健康保険(9) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w9) %> <!-- 8-036 特別教育(9) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w9) %> <!-- 8-037 技能講習(9) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w9) %> <!-- 8-038 免許(9) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w9) %> <!-- 8-039 入場年月日･始期(9) -->
+						<%= field_worker_admission_date(w9) %> <!-- 8-039 入場年月日･始期(9) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w9) %>・<%= worker_tyutaikyo(w9) %> <!-- 8-041 退職金共済手帳(建･中) (9) -->
@@ -1505,7 +1577,7 @@
 					<th id="758879504R70" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w9&.content&.[]("name") %> <!-- 8-013 作業員名(9) -->
+						<%= worker_str(w9, "name") %> <!-- 8-013 作業員名(9) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w9, "pension_insurance_type") %> <!-- 8-032 年金保険(9) -->
@@ -1516,7 +1588,7 @@
 					<th id="758879504R71" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w9&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(9) -->
+						<%= worker_str(w9, "blank_term") %>年 <!-- 8-018 経験年数(9) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w9) %> <!-- 8-020 年齢(9) -->
@@ -1533,7 +1605,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w9) %> <!-- 8-030 特別健康診断種類(9) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w9) %> <!-- 8-040 新規入場時教育年月日(9) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w9) %>・<%= worker_none(w9) %> <!-- 8-041 退職金共済手帳(他･無) (9) -->
 					</td>
@@ -1542,7 +1616,7 @@
 					<th id="758879504R72" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w9&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(9) -->
+						<%= worker_str(w9, "carrier_up_id") %> <!-- 8-014 キャリアップID(9) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>
@@ -1585,11 +1659,17 @@
 						<%= worker_insurance(w10, "health_insurance_type") %> <!-- 8-031 健康保険(10) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_special_education(w10) %> <!-- 8-036 特別教育(10) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_skill_training(w10) %> <!-- 8-037 技能講習(10) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_license(w10) %> <!-- 8-038 免許(10) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
-						<%= field_worker_date(w1) %> <!-- 8-039 入場年月日･始期(10) -->
+						<%= field_worker_admission_date(w1) %> <!-- 8-039 入場年月日･始期(10) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
 						<%= worker_kentaikyo(w10) %>・<%= worker_tyutaikyo(w10) %> <!-- 8-041 退職金共済手帳(建･中) (10) -->
@@ -1603,7 +1683,7 @@
 					<th id="758879504R76" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s61" colspan="6" rowspan="2">
-						<%= w10&.content&.[]("name") %> <!-- 8-013 作業員名(10) -->
+						<%= worker_str(w10, "name") %> <!-- 8-013 作業員名(10) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2">
 						<%= worker_insurance(w10, "pension_insurance_type") %> <!-- 8-032 年金保険(10) -->
@@ -1614,7 +1694,7 @@
 					<th id="758879504R77" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s59" colspan="4" rowspan="3">
-						<%= w10&.content&.[]("blank_term") %>年 <!-- 8-018 経験年数(10) -->
+						<%= worker_str(w10, "blank_term") %>年 <!-- 8-018 経験年数(10) -->
 					</td>
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_age(w10) %> <!-- 8-020 年齢(10) -->
@@ -1631,7 +1711,9 @@
 					<td class="s57" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w10) %> <!-- 8-030 特別健康診断種類(10) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">年 月 日</td>
+					<td class="s59" colspan="4" rowspan="3">
+						<%= field_worker_education_date(w10) %> <!-- 8-040 新規入場時教育年月日(10) -->
+					</td>
 					<td class="s59" colspan="2" rowspan="3">
 						<%= worker_other(w10) %>・<%= worker_none(w10) %> <!-- 8-041 退職金共済手帳(他･無) (10) -->
 					</td>
@@ -1640,7 +1722,7 @@
 					<th id="758879504R78" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
 					<td class="s57" colspan="6" rowspan="2">
-						<%= w10&.content&.[]("carrier_up_id") %> <!-- 8-014 キャリアップID(10) -->
+						<%= worker_str(w10, "carrier_up_id") %> <!-- 8-014 キャリアップID(10) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
 					<td class="s57" colspan="4" rowspan="2"></td>

@@ -1,24 +1,4 @@
 module DocumentsHelper
-  # 書類の見出し番号
-  def worker_number(worker)
-    worker[1] + 1 unless worker.nil?
-  end
-
-  # contentの作業員jsonデータ workerモデルの表示
-  def worker_column(column, worker)
-    JSON.parse(worker[0])[column] unless worker.nil?
-  end
-
-  # contentの作業員jsonデータ workerモデルに紐づくモデルの表示
-  def worker_attribute_column(model, column, worker)
-    JSON.parse(worker[0])[model][column] unless worker.nil?
-  end
-
-  # contentの作業員jsonデータ workerモデルに紐づくモデル(has_many)の表示
-  def worker_attributes_column(model, column, worker)
-    JSON.parse(worker[0])[model].map { |value| value[column] } unless worker.nil?
-  end
-
   # 作業員の文字情報
   def worker_str(worker, column)
     worker&.content&.[](column)
@@ -105,15 +85,73 @@ module DocumentsHelper
 
   # 作業員の特別健康診断の種類
   def worker_special_med_exam(worker)
-    unless worker&.content&.[]("worker_medical")&.[]("worker_exams").nil?
-      exams = worker&.content&.[]("worker_medical")&.[]("worker_exams").map { |v| SpecialMedExam.find(v["special_med_exam_id"]).name }
+    exams = worker&.content&.[]("worker_medical")&.[]("worker_exams")
+    unless exams.nil?
+      exams = exams.map { |exam| SpecialMedExam.find(exam["special_med_exam_id"]).name }
       exams.to_s.gsub(/,|"|\[|\]/) {""}
     end
   end
 
+  # 作業員の特別教育情報
+  def worker_special_education(worker)
+    educations = worker&.content&.[]("worker_special_educations")
+    unless educations.nil?
+      educations = educations.map { |education| SpecialEducation.find(education["special_education_id"]).name }
+      educations.to_s.gsub(/,|"|\[|\]/) {""}
+    end
+  end
+
+  # 作業員の技能講習情報
+  def worker_skill_training(worker)
+    trainings = worker&.content&.[]("worker_skill_trainings")
+    unless trainings.nil?
+      trainings = trainings.map { |training| SkillTraining.find(training["skill_training_id"]).short_name }
+      trainings.to_s.gsub(/,|"|\[|\]/) {""}
+    end
+  end
+
+  # 作業員の免許情報
+  def worker_license(worker)
+    licenses = worker&.content&.[]("worker_licenses")
+    unless licenses.nil?
+      licenses = licenses.map { |license| License.find(license["license_id"]).id }
+      licenses.to_s.gsub(/,|"|\[|\]/) {""}
+    end
+  end
+
   # 作業員の入場年月日
-  def field_worker_date(worker)
+  def field_worker_admission_date(worker)
     date = worker&.admission_date_start
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
+
+  # 作業員の受入教育実施年月日
+  def field_worker_education_date(worker)
+    date = worker&.education_date
+    date.blank? ? '年　月　日' : l(date, format: :long)
+  end
+
+  # ===== ↓不要 document controler整理後削除↓ =====
+
+  # 書類の見出し番号
+  def worker_number(worker)
+    worker[1] + 1 unless worker.nil?
+  end
+
+  # contentの作業員jsonデータ workerモデルの表示
+  def worker_column(column, worker)
+    JSON.parse(worker[0])[column] unless worker.nil?
+  end
+
+  # contentの作業員jsonデータ workerモデルに紐づくモデルの表示
+  def worker_attribute_column(model, column, worker)
+    JSON.parse(worker[0])[model][column] unless worker.nil?
+  end
+
+  # contentの作業員jsonデータ workerモデルに紐づくモデル(has_many)の表示
+  def worker_attributes_column(model, column, worker)
+    JSON.parse(worker[0])[model].map { |value| value[column] } unless worker.nil?
+  end
+
+  # ===== ↑不要 document controler整理後削除↑ =====
 end
