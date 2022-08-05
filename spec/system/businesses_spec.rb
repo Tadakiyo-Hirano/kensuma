@@ -7,7 +7,8 @@ RSpec.describe 'Businesses', type: :system do
 
   describe '事業所関連' do
     before(:each) do
-      user.skip_confirmation!
+      # ステージングにて一時的にメール認証スキップ中の為下記コメント
+      # user.skip_confirmation!
       user.save!
       visit new_user_session_path
       fill_in 'user[email]', with: user.email
