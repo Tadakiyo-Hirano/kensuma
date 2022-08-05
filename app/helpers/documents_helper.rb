@@ -114,7 +114,7 @@ module DocumentsHelper
   def worker_license(worker)
     licenses = worker&.content&.[]("worker_licenses")
     unless licenses.nil?
-      licenses = licenses.map { |license| License.find(license["license_id"]).id }
+      licenses = licenses.map { |license| License.find(license["license_id"]).name }
       licenses.to_s.gsub(/,|"|\[|\]/) {""}
     end
   end

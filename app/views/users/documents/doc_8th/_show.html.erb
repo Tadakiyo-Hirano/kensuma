@@ -1,5 +1,5 @@
 <!-- (8)全建統⼀様式第5号改(作業員名簿) -->
-<% document_info.field_workers.each_slice(10) do |w1, w2, w3, w4, w5, w6, w7, w8, w9, w10| %>
+<% document_info.field_workers.each_slice(10).with_index  do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
 	<div class="ritz grid-container" dir="ltr" style="overflow: auto;">
 		<table class="waffle no-grid" cellspacing="0" cellpadding="0">
 			<thead></thead>
@@ -654,9 +654,9 @@
 					<td class="s6" colspan="4" rowspan="3">（ＴＥＬ）</td>
 					<td class="s6" colspan="4" rowspan="3">血圧</td>
 					<td class="s6" colspan="4" rowspan="3">種類</td>
-					<td class="s36" colspan="2" rowspan="3">雇入・職長特別教育</td>
-					<td class="s37" colspan="2" rowspan="3">技能講習</td>
-					<td class="s38" colspan="2" rowspan="3">免許</td>
+					<td class="s36" colspan="1" rowspan="3">雇入・職長特別教育</td>
+					<td class="s37" colspan="1" rowspan="3">技能講習</td>
+					<td class="s38" colspan="4" rowspan="3">免許</td>
 					<td class="s6" colspan="4" rowspan="3">受入教育<br> 実施年月日</td>
 				</tr>
 				<tr style="height: 13px">
@@ -673,7 +673,7 @@
 				<tr style="height: 13px">
 					<th id="758879504R20" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">1</td>
+					<td class="s41" rowspan="6"><%= i + 1 %></td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w1, "name_kana") %> <!-- 8-012 フリガナ(1) -->
 					</td>
@@ -700,20 +700,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w1, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w1, "health_insurance_type") %> <!-- 8-031 健康保険(1) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w1) %> <!-- 8-036 特別教育(1) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w1) %> <!-- 8-037 技能講習(1) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w1) %> <!-- 8-038 免許(1) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w1) %> <!-- 8-039 入場年月日･始期(1) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -730,7 +730,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w1, "name") %> <!-- 8-013 作業員名(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w1, "pension_insurance_type") %> <!-- 8-032 年金保険(1) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -753,10 +753,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w1) %> <!-- 8-026 8-027 血圧(1) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w1) %> <!-- 8-030 特別健康診断種類(1) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w1) %> <!-- 8-040 新規入場時教育年月日(1) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -807,20 +807,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w2, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "health_insurance_type") %> <!-- 8-031 健康保険(2) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w2) %> <!-- 8-036 特別教育(2) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w2) %> <!-- 8-037 技能講習(2) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w2) %> <!-- 8-038 免許(2) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w2) %> <!-- 8-039 入場年月日･始期(2) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -837,7 +837,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w2, "name") %> <!-- 8-013 作業員名(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -860,10 +860,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w2) %> <!-- 8-026 8-027 血圧(2) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w2) %> <!-- 8-030 特別健康診断種類(2) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w2) %> <!-- 8-040 新規入場時教育年月日(2) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -913,20 +913,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w3, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w3, "health_insurance_type") %> <!-- 8-031 健康保険(3) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w3) %> <!-- 8-036 特別教育(3) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w3) %> <!-- 8-037 技能講習(3) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w3) %> <!-- 8-038 免許(3) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w3) %> <!-- 8-039 入場年月日･始期(3) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -943,8 +943,8 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w3, "name") %> <!-- 8-013 作業員名(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
-						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
+					<td class="s56_1" colspan="4" rowspan="2">
+						<%= worker_insurance(w3, "pension_insurance_type") %> <!-- 8-032 年金保険(3) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
 				</tr>
@@ -966,10 +966,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w3) %> <!-- 8-026 8-027 血圧(3) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w3) %> <!-- 8-030 特別健康診断種類(3) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w3) %> <!-- 8-040 新規入場時教育年月日(3) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1019,20 +1019,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w4, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w4, "health_insurance_type") %> <!-- 8-031 健康保険(4) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w4) %> <!-- 8-036 特別教育(4) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w4) %> <!-- 8-037 技能講習(4) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w4) %> <!-- 8-038 免許(4) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w4) %> <!-- 8-039 入場年月日･始期(4) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -1049,7 +1049,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w4, "name") %> <!-- 8-013 作業員名(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w4, "pension_insurance_type") %> <!-- 8-032 年金保険(4) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -1072,10 +1072,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w4) %> <!-- 8-026 8-027 血圧(4) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w4) %> <!-- 8-030 特別健康診断種類(4) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w4) %> <!-- 8-040 新規入場時教育年月日(4) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1125,20 +1125,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w5, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w5, "health_insurance_type") %> <!-- 8-031 健康保険(5) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w5) %> <!-- 8-036 特別教育(5) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w5) %> <!-- 8-037 技能講習(5) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w5) %> <!-- 8-038 免許(5) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w5) %> <!-- 8-039 入場年月日･始期(5) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -1155,7 +1155,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w5, "name") %> <!-- 8-013 作業員名(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w5, "pension_insurance_type") %> <!-- 8-032 年金保険(5) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -1178,10 +1178,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w5) %> <!-- 8-026 8-027 血圧(5) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w5) %> <!-- 8-030 特別健康診断種類(5) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w5) %> <!-- 8-040 新規入場時教育年月日(5) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1231,20 +1231,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w6, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w6, "health_insurance_type") %> <!-- 8-031 健康保険(6) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w6) %> <!-- 8-036 特別教育(6) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w6) %> <!-- 8-037 技能講習(6) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w6) %> <!-- 8-038 免許(6) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w6) %> <!-- 8-039 入場年月日･始期(6) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -1261,7 +1261,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w6, "name") %> <!-- 8-013 作業員名(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w6, "pension_insurance_type") %> <!-- 8-032 年金保険(6) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -1284,10 +1284,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w6) %> <!-- 8-026 8-027 血圧(6) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w6) %> <!-- 8-030 特別健康診断種類(6) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w6) %> <!-- 8-040 新規入場時教育年月日(6) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1337,20 +1337,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w7, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w7, "health_insurance_type") %> <!-- 8-031 健康保険(7) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w7) %> <!-- 8-036 特別教育(7) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w7) %> <!-- 8-037 技能講習(7) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w7) %> <!-- 8-038 免許(7) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w7) %> <!-- 8-039 入場年月日･始期(7) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -1367,7 +1367,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w7, "name") %> <!-- 8-013 作業員名(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w7, "pension_insurance_type") %> <!-- 8-032 年金保険(7) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -1390,10 +1390,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w7) %> <!-- 8-026 8-027 血圧(7) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w7) %> <!-- 8-030 特別健康診断種類(7) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w7) %> <!-- 8-040 新規入場時教育年月日(7) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1443,20 +1443,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w8, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w8, "health_insurance_type") %> <!-- 8-031 健康保険(8) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w8) %> <!-- 8-036 特別教育(8) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w8) %> <!-- 8-037 技能講習(8) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w8) %> <!-- 8-038 免許(8) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w8) %> <!-- 8-039 入場年月日･始期(8) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -1473,7 +1473,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w8, "name") %> <!-- 8-013 作業員名(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w8, "pension_insurance_type") %> <!-- 8-032 年金保険(8) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -1496,10 +1496,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w8) %> <!-- 8-026 8-027 血圧(8) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w8) %> <!-- 8-030 特別健康診断種類(8) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w8) %> <!-- 8-040 新規入場時教育年月日(8) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1549,20 +1549,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w9, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w9, "health_insurance_type") %> <!-- 8-031 健康保険(9) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w9) %> <!-- 8-036 特別教育(9) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w9) %> <!-- 8-037 技能講習(9) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w9) %> <!-- 8-038 免許(9) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w9) %> <!-- 8-039 入場年月日･始期(9) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -1579,7 +1579,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w9, "name") %> <!-- 8-013 作業員名(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w9, "pension_insurance_type") %> <!-- 8-032 年金保険(9) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -1602,10 +1602,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w9) %> <!-- 8-026 8-027 血圧(9) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w9) %> <!-- 8-030 特別健康診断種類(9) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w9) %> <!-- 8-040 新規入場時教育年月日(9) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1655,20 +1655,20 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w10, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w10, "health_insurance_type") %> <!-- 8-031 健康保険(10) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w10) %> <!-- 8-036 特別教育(10) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_skill_training(w10) %> <!-- 8-037 技能講習(10) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6">
+					<td class="s57_1" colspan="4" rowspan="6">
 						<%= worker_license(w10) %> <!-- 8-038 免許(10) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w1) %> <!-- 8-039 入場年月日･始期(10) -->
 					</td>
 					<td class="s60" colspan="2" rowspan="3">
@@ -1685,7 +1685,7 @@
 					<td class="s61" colspan="6" rowspan="2">
 						<%= worker_str(w10, "name") %> <!-- 8-013 作業員名(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w10, "pension_insurance_type") %> <!-- 8-032 年金保険(10) -->
 					</td>
 					<td class="s56" colspan="4" rowspan="2"></td>
@@ -1708,10 +1708,10 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= blood_pressure(w10) %> <!-- 8-026 8-027 血圧(10) -->
 					</td>
-					<td class="s57" colspan="4" rowspan="3">
+					<td class="s57_1" colspan="4" rowspan="3">
 						<%= worker_special_med_exam(w10) %> <!-- 8-030 特別健康診断種類(10) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59_1" colspan="4" rowspan="3">
 						<%= field_worker_education_date(w10) %> <!-- 8-040 新規入場時教育年月日(10) -->
 					</td>
 					<td class="s59" colspan="2" rowspan="3">
@@ -1963,6 +1963,7 @@
 	}
 	
 	.ritz .waffle .s8 {
+		
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
@@ -1971,7 +1972,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -1988,7 +1988,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2004,7 +2003,6 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2013,10 +2011,11 @@
 	}
 	
 	.ritz .waffle .s63 {
+		border-top: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: right;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2025,13 +2024,13 @@
 	}
 	
 	.ritz .waffle .s10 {
+		border-right: 1px SOLID #ffffff;
 		background-color: #ccffcc;
 		text-align: left;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2045,7 +2044,6 @@
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2062,7 +2060,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2076,7 +2073,20 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
+		font-size: 12pt;
+		vertical-align: middle;
+		white-space: nowrap;
+		direction: ltr;
+		padding: 0px 3px 0px 3px;
+	}
+
+	.ritz .waffle .s3 {
+		border-right	: 1px SOLID #000000;
+		border-left	: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
+		background-color: #ffffff;
+		text-align: center;
+		color: #000000;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2093,7 +2103,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2104,10 +2113,12 @@
 	}
 	
 	.ritz .waffle .s11 {
+		border-left: 1px SOLID #ffffff;
+		border-right: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2121,7 +2132,6 @@
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2137,7 +2147,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2156,7 +2165,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2167,11 +2175,12 @@
 	}
 	
 	.ritz .waffle .s9 {
+		border-right: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: center;
 		font-weight: bold;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 24pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2180,10 +2189,11 @@
 	}
 	
 	.ritz .waffle .s13 {
+		border-right: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: right;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2192,11 +2202,12 @@
 	}
 	
 	.ritz .waffle .s65 {
+		border-right: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		border-left: none;
 		background-color: #ffffff;
 		text-align: right;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2205,11 +2216,12 @@
 	}
 	
 	.ritz .waffle .s30 {
+		border-right: 1px SOLID #ffffff;
+		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2218,13 +2230,14 @@
 	}
 	
 	.ritz .waffle .s14 {
+		border-bottom: 1px SOLID #ffffff;
+		border-left: 1px SOLID #ffffff;
 		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2233,11 +2246,12 @@
 	}
 	
 	.ritz .waffle .s29 {
+		border-right: 1px SOLID #ffffff;
+		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2251,7 +2265,6 @@
 		background-color: #ccffcc;
 		text-align: center;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2262,12 +2275,12 @@
 	}
 	
 	.ritz .waffle .s23 {
+		border-top: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		border-right: none;
-		border-bottom: none;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2284,7 +2297,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2300,8 +2312,22 @@
 		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 11pt;
+		vertical-align: middle;
+		white-space: normal;
+		overflow: hidden;
+		word-wrap: break-word;
+		direction: ltr;
+		padding: 0px 3px 0px 3px;
+	}
+
+	.ritz .waffle .s56_1 {
+		border-bottom: 1px DASHED #000000;
+		border-right: 1px SOLID #000000;
+		background-color: #ccffcc;
+		text-align: center;
+		color: #000000;
+		font-size: 6pt;
 		vertical-align: middle;
 		white-space: normal;
 		overflow: hidden;
@@ -2311,11 +2337,11 @@
 	}
 	
 	.ritz .waffle .s28 {
+		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2329,8 +2355,22 @@
 		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 11pt;
+		vertical-align: middle;
+		white-space: normal;
+		overflow: hidden;
+		word-wrap: break-word;
+		direction: ltr;
+		padding: 0px 3px 0px 3px;
+	}
+
+	.ritz .waffle .s59_1 {
+		border-bottom: 1px SOLID #000000;
+		border-right: 1px SOLID #000000;
+		background-color: #ccffcc;
+		text-align: center;
+		color: #000000;
+		font-size: 8pt;
 		vertical-align: middle;
 		white-space: normal;
 		overflow: hidden;
@@ -2346,7 +2386,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 7pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2362,7 +2401,6 @@
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2381,7 +2419,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 8pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2398,7 +2435,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2415,7 +2451,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2426,10 +2461,13 @@
 	}
 	
 	.ritz .waffle .s22 {
+		border-left: 1px SOLID #ffffff;
+		border-right: 1px SOLID #ffffff;
+		border-top: 1px SOLID #000000;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2438,11 +2476,12 @@
 	}
 	
 	.ritz .waffle .s31 {
+		border-bottom: 1px SOLID #ffffff;
+		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2460,7 +2499,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2477,7 +2515,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2493,7 +2530,6 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2508,7 +2544,6 @@
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2517,10 +2552,11 @@
 	}
 	
 	.ritz .waffle .s21 {
+		border-left: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: top;
 		white-space: nowrap;
@@ -2534,7 +2570,6 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2547,7 +2582,6 @@
 		background-color: #ffffff;
 		text-align: left;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2556,11 +2590,12 @@
 	}
 	
 	.ritz .waffle .s7 {
+		border-top: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		border-right: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2574,7 +2609,6 @@
 		background-color: #ccffcc;
 		text-align: center;
 		color: #0000ff;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2593,7 +2627,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2604,10 +2637,12 @@
 	}
 	
 	.ritz .waffle .s18 {
+		border-left: 1px SOLID #ffffff;
+		border-right: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2620,7 +2655,6 @@
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2634,7 +2668,6 @@
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2644,10 +2677,10 @@
 	
 	.ritz .waffle .s60 {
 		border-right: 1px SOLID #000000;
+		border-bottom: 1px SOLID #ccffcc;
 		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2658,10 +2691,13 @@
 	}
 	
 	.ritz .waffle .s2 {
+		border-left: 1px SOLID #ffffff;
+		border-right: 1px SOLID #ffffff;
+		border-top: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: bottom;
 		white-space: nowrap;
@@ -2670,13 +2706,13 @@
 	}
 	
 	.ritz .waffle .s15 {
+		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2685,13 +2721,14 @@
 	}
 	
 	.ritz .waffle .s19 {
+		border-left: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2700,10 +2737,10 @@
 	}
 	
 	.ritz .waffle .s64 {
+		border-bottom: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2717,7 +2754,6 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2731,7 +2767,6 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 8pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2742,6 +2777,8 @@
 	}
 	
 	.ritz .waffle .s20 {
+		border-right: 1px SOLID #ffffff;
+		border-left: 1px SOLID #ccffcc;
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
@@ -2749,7 +2786,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 8pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2768,7 +2804,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2784,7 +2819,6 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2798,8 +2832,7 @@
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
-		font-size: 8pt;
+		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
 		overflow: hidden;
@@ -2809,11 +2842,12 @@
 	}
 	
 	.ritz .waffle .s40 {
+		border-bottom: 1px SOLID #ffffff;
+		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: center;
 		color: #0000ff;
-		font-family: 'Arial';
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2829,8 +2863,22 @@
 		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 11pt;
+		vertical-align: middle;
+		white-space: normal;
+		overflow: hidden;
+		word-wrap: break-word;
+		direction: ltr;
+		padding: 0px 3px 0px 3px;
+	}
+
+	.ritz .waffle .s57_1 {
+		border-bottom: 1px SOLID #000000;
+		border-right: 1px SOLID #000000;
+		background-color: #ccffcc;
+		text-align: center;
+		color: #000000;
+		font-size: 6pt;
 		vertical-align: middle;
 		white-space: normal;
 		overflow: hidden;
@@ -2848,7 +2896,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2859,11 +2906,12 @@
 	}
 	
 	.ritz .waffle .s1 {
+		border-top: 1px SOLID #ffffff;
+		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2872,11 +2920,13 @@
 	}
 	
 	.ritz .waffle .s66 {
+		border-left: 1px SOLID #ffffff;
+		border-right: 1px SOLID #ffffff;
+		border-bottom: 1px SOLID #ffffff;
 		border-left: none;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2890,7 +2940,6 @@
 		background-color: #ead1dc;
 		text-align: center;
 		color: #000000;
-		font-family: 'docs-Calibri', Arial;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2909,7 +2958,6 @@
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
 		color: #1155cc;
-		font-family: 'Arial';
 		font-size: 10pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2920,10 +2968,10 @@
 	}
 	
 	.ritz .waffle .s62 {
+		border: 1px SOLID #ffffff;
 		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2937,8 +2985,22 @@
 		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
-		font-family: 'Arial';
 		font-size: 11pt;
+		vertical-align: middle;
+		white-space: normal;
+		overflow: hidden;
+		word-wrap: break-word;
+		direction: ltr;
+		padding: 0px 3px 0px 3px;
+	}
+
+	.ritz .waffle .s58_1 {
+		border-bottom: 1px DASHED #000000;
+		border-right: 1px SOLID #000000;
+		background-color: #ccffcc;
+		text-align: center;
+		color: #000000;
+		font-size: 8pt;
 		vertical-align: middle;
 		white-space: normal;
 		overflow: hidden;
@@ -2953,4 +3015,3 @@
 		padding: 2px;
 	}
 </style>
-	
