@@ -26,7 +26,7 @@
 }
 
 .s_5b_000 {
-  border:1px SOLID #000000;
+  border:0px SOLID #ffffff;
   background-color:#ffffff;
   text-align:center;
   font-size:10pt;
@@ -78,6 +78,7 @@
   font-size:20pt;
   font-weight: bold;
   vertical-align:middle;
+  line-height: 1;
   direction:ltr;
   width: 20px;
   height: 10px;
@@ -584,7 +585,7 @@
   background-color:#ffffff;
   text-align:center;
   font-size:12pt;
-  vertical-align:bottom;
+  vertical-align:middle;
   direction:ltr;
   width: 20px;
   height: 10px;
@@ -626,6 +627,7 @@
   text-align:center;
   font-size:9pt;
   vertical-align:bottom;
+  line-height: 1;
   direction:ltr;
   width: 20px;
   height: 10px;
@@ -807,6 +809,747 @@
 }
 
 .s_5a_803 {
+  border:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:10pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+  padding: 0rem;
+}
+
+// 様式右半分　《再下請負人に関する事項》〜各下請会社の「契約日」5-111
+.s_5b_101 {
+  border:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:16pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_102 {
+  border:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:9pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_103 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_104 {
+  border-top:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_105 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_106 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_107 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_108 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:0px SOLID #ffffff;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:10pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_109 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_110 {
+  border-top:0px SOLID #ffffff;
+  border-right:0px SOLID #ffffff;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_111 {
+  border-top:0px SOLID #ffffff;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_112 {
+  border-top:0px SOLID #ffffff;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_113 {
+  border-top:0px SOLID #ffffff;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:right;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_114 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+// 様式右半分　建設業の許可〜⇧「建設許可証（特定or一般）」5-119
+.s_5b_201 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_202 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:6pt;
+  vertical-align:middle;
+  letter-spacing: -0.1em;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_203 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:6pt;
+  vertical-align:middle;
+  letter-spacing: -0.1em;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_204 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_205 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_206 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_207 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_208 {
+  border-top:0px SOLID #ffffff;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_209 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_210 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_211 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_212 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_213 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_214 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_215 {
+  border:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:6pt;
+  vertical-align:middle;
+  letter-spacing: -0.1em;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+// 様式右半分　現 場 代 理 人 名〜各下請会社の「専門技術者・担当工事内容」5-132、※登録基幹技能者名・種類
+.s_5b_301 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_302 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_303 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_304 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_305 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_306 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:6pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_307 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:10pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_308 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_309 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_310 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+// 様式右半分　一号特定技能外国人の従事の状況(有無)〜有　　無
+.s_5b_401 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_402 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:9pt;
+  vertical-align:bottom;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_403 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+// 様式右半分　健康保険等の加入状況〜「雇用保険」5-144
+.s_5b_501 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_502 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_503 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:10pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_504 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:right;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_505 {
+  border-top:1px SOLID #000000;
+  border-right:0px SOLID #ffffff;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:right;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_506 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_507 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:12pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_508 {
+  border-top:1px SOLID #000000;
+  border-right:1px SOLID #000000;
+  border-bottom:0px SOLID #ffffff;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:10pt;
+  vertical-align:bottom;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_509 {
+  border-top:0px SOLID #ffffff;
+  border-right:1px SOLID #000000;
+  border-bottom:1px SOLID #000000;
+  border-left:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:10pt;
+  vertical-align:middle;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+.s_5b_510 {
+  border:1px SOLID #000000;
+  background-color:#ffffff;
+  text-align:center;
+  font-size:10pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+}
+
+// 様式右半分　約に係る営業所の名称を、健康保険欄には、〜７）職業能力開発促進法「技能検定」
+.s_5b_601 {
+  border:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:10pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+  padding: 0rem;
+}
+
+.s_5b_602 {
+  border:0px SOLID #ffffff;
+  background-color:#ffffff;
+  text-align:left;
+  font-size:10pt;
+  vertical-align:middle;
+  line-height: 1;
+  direction:ltr;
+  width: 20px;
+  height: 10px;
+  padding: 0rem;
+}
+
+.s_5b_603 {
   border:0px SOLID #ffffff;
   background-color:#ffffff;
   text-align:left;
