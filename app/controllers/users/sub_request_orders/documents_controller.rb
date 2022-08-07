@@ -28,16 +28,12 @@ module Users::SubRequestOrders
               encording: 'UTF-8',
               page_size: 'A4'
           when 'doc_8th'
-            return render pdf: '書類',
-              layout: 'pdf',
-              encording: 'UTF-8',
-              page_size: 'A4',
-              margin: { top: 0 },
-              orientation: 'Landscape'
+            render template: 'users/documents/show',
+              pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
           end
         end
       end
-      render 'users/documents/show'
+      # render 'users/documents/show'
     end
 
     private
