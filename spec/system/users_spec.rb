@@ -21,7 +21,8 @@ RSpec.describe 'Users', type: :system do
       it 'ログイン画面を表示' do
         expect(page).to have_content('ログイン')
         expect(page).to have_content('パスワードを忘れましたか？')
-        expect(page).to have_content('認証メールの再送信')
+        # ステージングにて一時的にメール認証スキップ中の為下記コメント
+        # expect(page).to have_content('認証メールの再送信')
       end
     end
 

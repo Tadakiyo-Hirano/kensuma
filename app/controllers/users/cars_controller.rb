@@ -36,6 +36,7 @@ module Users
         )
       else
         @car = current_business.cars.new
+        @car.car_voluntary_insurances.build
       end
     end
 

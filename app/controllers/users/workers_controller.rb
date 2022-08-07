@@ -73,6 +73,12 @@ module Users
         )
       else
         @worker = current_business.workers.new
+        @worker.worker_licenses.build
+        @worker.worker_skill_trainings.build
+        @worker.worker_special_educations.build
+        worker_medical = @worker.build_worker_medical
+        worker_medical.worker_exams.build
+        @worker.build_worker_insurance
       end
     end
 
