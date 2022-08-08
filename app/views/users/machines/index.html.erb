@@ -20,7 +20,7 @@
         <tbody>
           <% @machines.each do |machine| %>
             <tr>
-              <td><%= link_to machine.name_i18n, users_machine_path(machine) %></td>
+              <td><%= link_to machine.name, users_machine_path(machine) %></td>
               <td><%= machine.standards_performance %></td>
               <td><%= machine.control_number %></td>
               <td><%= machine.inspector %></td>

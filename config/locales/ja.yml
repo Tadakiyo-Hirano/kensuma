@@ -196,27 +196,6 @@ ja:
         tyutaikyo: 中退共手帳
         other: その他
         none: 無し
-    machine:
-      name:
-        electric_plane: 電動カンナ
-        electric_drill: 電動ドリル
-        electric_circular_saw: 電動丸のこ
-        grinder: グラインダー等
-        arc_welding_machine: アーク溶接機
-        winch: ウインチ
-        generator: 発電機
-        trans: トランス
-        compressor: コンプレッサー
-        blower: 送風機
-        pump_class: ポンプ類
-        mixer_class: ミキサー類
-        conveyor: コンベヤー
-        spraying_machine: 吹付機
-        bowling_machine: ボーリングマシン
-        vibration_compactor: 振動コンパクター
-        vibrator: バイブレーター
-        rebar_processing_machine: 鉄筋加工機
-        electric_chain_block: 電動チェーンブロック
   errors:
     format: "%{attribute}%{message}"
     messages:

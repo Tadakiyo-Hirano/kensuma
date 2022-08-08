@@ -1,10 +1,11 @@
 <%= render 'shared/error_massages', object: f.object %>
 
 <%= f.label :name %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :name,
-                  Machine.names_i18n.invert,
-                  { include_blank: true, prompt: "選択してください" },
-                  { class: "form-control single-select" } %><br><br>
+<%= f.select :name, { 電動カンナ: '電動カンナ', 電動ドリル: '電動ドリル', 電動丸のこ: '電動丸のこ', グラインダー等: 'グラインダー等', アーク溶接機: 'アーク溶接機', ウインチ: 'ウインチ', 発電機: '発電機',
+                      トランス: 'トランス', コンプレッサー: 'コンプレッサー', 送風機: '送風機', ポンプ類: 'ポンプ類', ミキサー類: 'ミキサー類', コンベヤー: 'コンベヤー',
+                      吹付機: '吹付機', ボーリングマシン: 'ボーリングマシン', 振動コンパクター: '振動コンパクター', バイブレーター: 'バイブレーター', 鉄筋加工機: '鉄筋加工機', 電動チェーンブロック: '電動チェーンブロック' }.uniq,
+                    { include_blank: true, prompt: '選択してください' },
+                    {class: "form-control single-select", style: "100%"} %><br /><br />
 
 <%= f.label :standards_performance %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :standards_performance, class: "form-control", placeholder: Machine.human_attribute_name(:standards_performance) %><br>
@@ -27,10 +28,9 @@
 <%= f.label :inspection_date %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :inspection_date, class: "form-control", placeholder: Machine.human_attribute_name(:inspection_date) %><br>
 
-<!-- TODO 複数選択登録処理 -->
 <div class="field">
   <%= f.label :inspection_check %><br />
-  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name do |t| %>
+  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name, include_hidden: false do |t| %>
     <%= t.label { t.check_box + t.text } %>
   <% end %>
 </div><br />

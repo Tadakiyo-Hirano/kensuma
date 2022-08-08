@@ -2,7 +2,7 @@ class CreateMachines < ActiveRecord::Migration[6.1]
   def change
     create_table :machines do |t|
       t.string      :uuid,                  null: false
-      t.integer     :name,                 null: false # 機械名
+      t.string      :name,                  null: false # 機械名
       t.string      :standards_performance, null: false # 規格・性能
       t.string      :control_number,        null: false # 管理番号
       t.string      :inspector,             null: false # 点検者

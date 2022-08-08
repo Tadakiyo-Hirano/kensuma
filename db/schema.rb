@@ -178,7 +178,7 @@ ActiveRecord::Schema.define(version: 2022_08_02_202043) do
 
   create_table "machines", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
-    t.integer "name", null: false
+    t.string "name", null: false
     t.string "standards_performance", null: false
     t.string "control_number", null: false
     t.string "inspector", null: false
