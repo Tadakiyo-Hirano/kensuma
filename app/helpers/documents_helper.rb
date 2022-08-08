@@ -1,4 +1,9 @@
 module DocumentsHelper
+  # 作業員名簿の見出し番号
+  def worker_index(number, index)
+    number + index * 10
+  end
+
   # 作業員の文字情報
   def worker_str(worker, column)
     worker&.content&.[](column)

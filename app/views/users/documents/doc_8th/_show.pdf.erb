@@ -2,7 +2,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-<% document_info.field_workers.each_slice(10) do |w1, w2, w3, w4, w5, w6, w7, w8, w9, w10| %>
+<% document_info.field_workers.each_slice(10).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
 	<div class="ritz grid-container page-break" " dir="ltr" style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
 		<table class="waffle no-grid" cellspacing="0" cellpadding="0">
 			<thead></thead>
@@ -116,7 +116,9 @@
 					<td class="s2"></td>
 					<td class="s7"></td>
 					<td class="s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
-					<td class="s8" colspan="8" rowspan="3"><a target="_blank" href="#rangeid=644919434">元請会社の「確認欄」8-042</a></td>
+					<td class="s8" colspan="8" rowspan="3">
+						元請会社の「確認欄」8-042
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R2" style="height: 13px;" class="row-headers-background"></th>
@@ -315,16 +317,16 @@
 					<td class="s2"></td>
 					<td class="s2"></td>
 					<td class="s2" colspan="3" rowspan="2">提 出 日</td>
-					<td class="s10" colspan="6" rowspan="2"><a target="_blank" href="#rangeid=661958397">「提出日（西暦）」8-011</a></td>
+					<td class="s10" colspan="6" rowspan="2">
+						「提出日（西暦）」8-011
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R6" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s11"></td>
 					<td class="s11" colspan="3" rowspan="2">事業所の名称</td>
 					<td class="s12" colspan="14" rowspan="2">
-						<a target="_blank" href="#rangeid=736434295">
-							<%= document_site_info.site_name %> <!-- 8-001 事業所名(現場名)-->
-						</a>
+						<%= document_site_info.site_name %> <!-- 8-001 事業所名(現場名)-->
 					</td>
 					<td class="s2"></td>
 					<td class="s2"></td>
@@ -359,9 +361,7 @@
 					<td class="s2"></td>
 					<td class="s13" rowspan="2">（</td>
 					<td class="s14" colspan="7" rowspan="2">
-						<a target="_blank" href="#rangeid=1851022481">
-							<%= "※※未実装※※" %>	<!-- 8-004 書類作成日(西暦) -->
-						</a>
+						<%= "※※未実装※※" %>	<!-- 8-004 書類作成日(西暦) -->
 					</td>
 					<td class="s2" colspan="2" rowspan="2">作成</td>
 					<td class="s2" rowspan="2">）</td>
@@ -401,9 +401,7 @@
 					<td class="s11"></td>
 					<td class="s11" colspan="3" rowspan="2">現　場　ID</td>
 					<td class="s12" colspan="14" rowspan="2">
-						<a target="_blank" href="#rangeid=647868659">
-							<%= document_site_info.site_career_up_id %> <!-- 8-002 現場ID(キャリアアップ) -->
-						</a>
+						<%= document_site_info.site_career_up_id %> <!-- 8-002 現場ID(キャリアアップ) -->
 					</td>
 					<td class="s2"></td>
 					<td class="s2"></td>
@@ -413,19 +411,17 @@
 					<td class="s2"></td>
 					<td class="s11" colspan="4" rowspan="2">一次会社名</td>
 					<td class="s15" colspan="8" rowspan="2">
-						<a target="_blank" href="#rangeid=1504493394">
-							<%= document_site_info.business.name %> <!-- 8-005 一次会社名 -->
-						</a>
+						<%= document_site_info.business.name %> <!-- 8-005 一次会社名 -->
 					</td>
 					<td class="s2"></td>
 					<td class="s2"></td>
 					<td class="s13" rowspan="2">（</td>
-					<td class="s16" rowspan="2"><a target="_blank" href="#rangeid=954673338">8-007</a></td>
+					<td class="s16" rowspan="2">
+						8-007
+					</td>
 					<td class="s2" colspan="3" rowspan="2">次）会社名</td>
 					<td class="s17" colspan="7" rowspan="2">
-						<a target="_blank" href="#rangeid=1827639109">
-							<%= Business.find(document_info.business_id).name %> <!-- 8-009 自社の「会社名」 -->
-						</a>
+						<%= Business.find(document_info.business_id).name %> <!-- 8-009 自社の「会社名」 -->
 					</td>
 					<td class="s2"></td>
 				</tr>
@@ -447,9 +443,7 @@
 					<td class="s11"></td>
 					<td class="s11" colspan="3" rowspan="2">所　長　名</td>
 					<td class="s12" colspan="13" rowspan="2">
-						<a target="_blank" href="#rangeid=846615191">
-							<%= document_site_info.site_agent_name %> <!-- 8-003 元請会社の「現場代理人」 -->
-						</a>
+						<%= document_site_info.site_agent_name %> <!-- 8-003 元請会社の「現場代理人」 -->
 					</td>
 					<td class="s1" rowspan="2">殿</td>
 					<td class="s2"></td>
@@ -459,17 +453,21 @@
 					<td class="s2"></td>
 					<td class="s2"></td>
 					<td class="s11" colspan="3" rowspan="2">事業者ID</td>
-					<td class="s19" colspan="9" rowspan="2"><a target="_blank" href="#rangeid=249650761">一次会社の「事業者ID（キャリアアップ）」8-006</a></td>
-					<td class="s20" rowspan="2"><a target="_blank" href="#rangeid=1550544932">㊞8-43</a></td>
+					<td class="s19" colspan="9" rowspan="2">
+						一次会社の「事業者ID（キャリアアップ）」8-006
+					</td>
+					<td class="s20" rowspan="2">
+						印8-43
+					</td>
 					<td class="s2"></td>
 					<td class="s21"></td>
 					<td class="s21" colspan="3" rowspan="2">事業者ID</td>
 					<td class="s19" colspan="8" rowspan="2">
-						<a target="_blank" href="#rangeid=249650761">
-							<%= Business.find(document_info.business_id).carrier_up_id %> <!-- 8-010 自社の「事業者ID（キャリアアップ）」 -->
-						</a>
+						<%= Business.find(document_info.business_id).carrier_up_id %> <!-- 8-010 自社の「事業者ID（キャリアアップ）」 -->
 					</td>
-					<td class="s20" rowspan="2"><a target="_blank" href="#rangeid=1550544932">㊞8-44</a></td>
+					<td class="s20" rowspan="2">
+						印8-44
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R11" style="height: 13px;" class="row-headers-background"></th>
@@ -676,7 +674,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R20" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">1</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(1, i) %> <!-- 見出し番号(1) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w1, "name_kana") %> <!-- 8-012 フリガナ(1) -->
 					</td>
@@ -783,7 +783,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R26" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">2</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(2, i) %> <!-- 見出し番号(2) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w2, "name_kana")%> <!-- 8-012 フリガナ(2) -->
 					</td>
@@ -889,7 +891,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R32" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">3</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(3, i) %> <!-- 見出し番号(3) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w3, "name_kana") %> <!-- 8-012 フリガナ(3) -->
 					</td>
@@ -995,7 +999,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R38" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">4</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(4, i) %> <!-- 見出し番号(4) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w4, "name_kana")%> <!-- 8-012 フリガナ(4) -->
 					</td>
@@ -1101,7 +1107,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R44" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">5</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(5, i) %> <!-- 見出し番号(5) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w5, "name_kana") %> <!-- 8-012 フリガナ(5) -->
 					</td>
@@ -1207,7 +1215,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R50" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">6</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(6, i) %> <!-- 見出し番号(6) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w6, "name_kana") %> <!-- 8-012 フリガナ(6) -->
 					</td>
@@ -1313,7 +1323,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R56" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">7</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(7, i) %> <!-- 見出し番号(7) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w7, "name_kana") %> <!-- 8-012 フリガナ(7) -->
 					</td>
@@ -1419,7 +1431,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R62" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">8</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(8, i) %> <!-- 見出し番号(8) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w8, "name_kana") %> <!-- 8-012 フリガナ(8) -->
 					</td>
@@ -1525,7 +1539,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R68" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">9</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(9, i) %> <!-- 見出し番号(9) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w9, "name_kana") %> <!-- 8-012 フリガナ(9) -->
 					</td>
@@ -1631,7 +1647,9 @@
 				<tr style="height: 13px">
 					<th id="758879504R74" style="height: 13px;" class="row-headers-background"></th>
 					<td class="s40"></td>
-					<td class="s41" rowspan="6">10</td>
+					<td class="s41" rowspan="6">
+						<%= worker_index(10, i) %> <!-- 見出し番号(10) -->
+					</td>
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w10, "name_kana") %> <!-- 8-012 フリガナ(10) -->
 					</td>
@@ -2434,10 +2452,8 @@
 	.ritz .waffle .s17 {
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2498,10 +2514,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2611,7 +2625,6 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		color: #0000ff;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2712,10 +2725,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2728,10 +2739,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 9pt;
 		vertical-align: middle;
 		white-space: nowrap;
