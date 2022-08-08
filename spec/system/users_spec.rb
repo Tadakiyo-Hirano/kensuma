@@ -7,9 +7,11 @@ RSpec.describe 'Users', type: :system do
   let(:general_user) { build(:user, role: 'general', admin_user_id: user_a.id) }
 
   before(:each) do
-    user_a.skip_confirmation!
+    # ステージングにて一時的にメール認証スキップ中の為下記コメント
+    # user_a.skip_confirmation!
     user_a.save!
-    user_b.skip_confirmation!
+    # ステージングにて一時的にメール認証スキップ中の為下記コメント
+    # user_b.skip_confirmation!
     user_b.save!
     visit new_user_session_path
   end
@@ -19,7 +21,8 @@ RSpec.describe 'Users', type: :system do
       it 'ログイン画面を表示' do
         expect(page).to have_content('ログイン')
         expect(page).to have_content('パスワードを忘れましたか？')
-        expect(page).to have_content('認証メールの再送信')
+        # ステージングにて一時的にメール認証スキップ中の為下記コメント
+        # expect(page).to have_content('認証メールの再送信')
       end
     end
 
@@ -70,7 +73,8 @@ RSpec.describe 'Users', type: :system do
 
       context 'generalユーザーログインの場合' do
         it 'ログイン後ダッシュボードを表示' do
-          general_user.skip_confirmation!
+          # ステージングにて一時的にメール認証スキップ中の為下記コメント
+          # general_user.skip_confirmation!
           general_user.save!
           fill_in 'user[email]', with: general_user.email
           fill_in 'user[password]', with: general_user.password
@@ -84,7 +88,8 @@ RSpec.describe 'Users', type: :system do
 
   describe 'その他ユーザーCRUD' do
     before(:each) do
-      user_a.skip_confirmation!
+      # ステージングにて一時的にメール認証スキップ中の為下記コメント
+      # user_a.skip_confirmation!
       user_a.save!
       # 事業所登録
       business_a.save!

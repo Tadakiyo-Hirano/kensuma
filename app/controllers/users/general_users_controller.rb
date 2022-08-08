@@ -13,7 +13,8 @@ module Users
 
     def create
       @general_user = current_user.general_users.new(general_user_params)
-      @general_user.skip_confirmation! # email認証スキップ
+      # ステージングにて一時的にメール認証スキップ中の為下記コメント
+      # @general_user.skip_confirmation! # email認証スキップ
       if @general_user.save
         redirect_to users_general_user_url(@general_user)
       else

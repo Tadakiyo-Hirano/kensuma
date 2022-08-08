@@ -8,7 +8,8 @@ RSpec.describe 'RequestOrders', type: :system do
 
   describe '発注依頼関連' do
     before(:each) do
-      user.skip_confirmation!
+      # ステージングにて一時的にメール認証スキップ中の為下記コメント
+      # user.skip_confirmation!
       user.save!
       business.save!
       visit new_user_session_path
