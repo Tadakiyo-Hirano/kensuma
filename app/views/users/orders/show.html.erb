@@ -1,9 +1,22 @@
-<% provide(:title, "発注詳細") %>
+<% provide(:title, "発注詳細(元請)") %>
 
 <div class="card">
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tbody>
+        <tr>
+          <td>
+            <%= link_to "発注一覧", users_orders_path, class: "btn btn-md btn-default" %>
+            <%= link_to "発注修正", edit_users_order_path(@order), class: "btn btn-md btn-md btn-success" %>
+          </td>
+          <td>
+            <%= link_to "入場作業員", users_order_field_workers_path(@order), class: "btn btn-md btn-success" %>
+            <%= link_to "車両", "#", class: "btn btn-md btn-success" %>
+            <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
+            <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
+            <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+          </td>
+        </tr>
         <tr>
           <th><%= Order.human_attribute_name(:status) %></th>
           <td><%= @order.status_i18n %></td>
@@ -204,8 +217,6 @@
     </table>
   </div>
   <div class="card-footer">
-    <%= link_to "編集", edit_users_order_path(@order), class: "btn btn-md btn-block btn-success" %>
     <%= link_to "削除", users_order_path(@order), method: :delete, data: { confirm: "#{@order.site_uu_id}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
-    <%= link_to "一覧画面へ", users_orders_path, class: "btn btn-md btn-block btn-default" %>
   </div>
 </div>

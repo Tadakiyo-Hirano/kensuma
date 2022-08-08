@@ -1,0 +1,76 @@
+<% provide(:title,  "入場作業員一覧") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "発注依頼詳細", users_request_order_path(@request_order), class: "btn btn-md btn-default" %>
+            <%= link_to "発注依頼一覧", users_request_orders_path(@request_order), class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= link_to "入場作業員", users_request_order_field_workers_path(@request_order), class: "btn btn-md btn-success" %>
+          <%= link_to "車両", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with url: users_request_order_field_workers_path, method: :post, local: true do |f| %>
+          <%= f.label "追加する作業員を選択してください。" %>
+          <div class="pb-1">
+            <%= f.collection_select :worker_ids, @worker, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+          </div>
+          <div>
+            <%= f.submit "作業員追加", class: "btn btn-md btn-primary" %>
+            <% if @field_workers.present? %>
+              <%= link_to "作業員情報編集", edit_workers_users_request_order_field_workers_path(@request_order), class: "btn btn-md btn-success" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+<% if @field_workers.present? %>
+  <section class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%= FieldWorker.human_attribute_name(:admission_worker_name) %></th>
+                <th><%= FieldWorker.human_attribute_name(:admission_date_start) %></th>
+                <th><%= FieldWorker.human_attribute_name(:admission_date_end) %></th>
+                <th><%= FieldWorker.human_attribute_name(:education_date) %></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @field_workers.each do |field_worker| %>
+              <tr align="center">
+                <td><%= field_worker.admission_worker_name %></td>
+                <td><%= not_input_display(field_worker.admission_date_start) %></td>
+                <td><%= not_input_display(field_worker.admission_date_end) %></td>
+                <td><%= not_input_display(field_worker.education_date) %></td>
+                <td><%= link_to "削除", users_request_order_field_worker_path(@request_order, field_worker), method: :delete, data: { confirm: "#{field_worker.admission_worker_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

@@ -1,0 +1,56 @@
+<% provide(:title, "入場作業員編集") %>
+<% provide(:btn_text, "更新") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "戻る", users_order_field_workers_path, class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= link_to "入場作業員", users_order_field_workers_path(@order), class: "btn btn-md btn-success" %>
+          <%= link_to "車両", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <%= form_with model: @order, url: update_workers_users_order_field_workers_path, method: :patch, local: true do |f| %>
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%= FieldWorker.human_attribute_name(:admission_worker_name) %></th>
+                <th><%= FieldWorker.human_attribute_name(:admission_date_start) %></th>
+                <th><%= FieldWorker.human_attribute_name(:admission_date_end) %></th>
+                <th><%= FieldWorker.human_attribute_name(:education_date) %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @field_workers.each do |field_worker| %>
+                <%= f.fields_for "field_workers[]", field_worker do |fw| %>
+                <tr>
+                  <td><%= field_worker.admission_worker_name %></td>
+                  <td><%= fw.date_field :admission_date_start, class: "form-control" %></td>
+                  <td><%= fw.date_field :admission_date_end, class: "form-control" %></td>
+                  <td><%= fw.date_field :education_date, class: "form-control" %></td>
+                </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <br>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<% provide(:title, "有機溶剤情報詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= Solvent.human_attribute_name(:name) %></th>
+          <td><%= @solvent.name %></td>
+        </tr>
+        <tr>
+          <th><%= Solvent.human_attribute_name(:maker) %></th>
+          <td><%= @solvent.maker %></td>
+        </tr>
+        <tr>
+          <th><%= Solvent.human_attribute_name(:classification) %></th>
+          <td><%= @solvent.classification %></td>
+        </tr>
+        <tr>
+          <th><%= Solvent.human_attribute_name(:ingredients) %></th>
+          <td><%= @solvent.ingredients %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to "編集", edit_users_solvent_path(@solvent), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_solvent_path(@solvent), method: :delete, data: { confirm: "#{@solvent.name}の有機溶剤情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "一覧画面へ", users_solvents_path, class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>

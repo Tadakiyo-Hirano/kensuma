@@ -6,6 +6,7 @@ class Business < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :request_orders, dependent: :destroy
   has_many :workers, dependent: :destroy
+  has_many :solvents, dependent: :destroy
   has_many :business_occupations
   has_many :occupations, through: :business_occupations
   accepts_nested_attributes_for :business_occupations, allow_destroy: true

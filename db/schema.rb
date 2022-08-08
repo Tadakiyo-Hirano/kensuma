@@ -145,6 +145,20 @@ ActiveRecord::Schema.define(version: 2022_07_18_140049) do
     t.index ["request_order_id"], name: "index_documents_on_request_order_id"
   end
 
+  create_table "field_workers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "admission_worker_name", null: false
+    t.json "content", null: false
+    t.date "admission_date_start"
+    t.date "admission_date_end"
+    t.date "education_date"
+    t.string "field_workerable_type"
+    t.bigint "field_workerable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
+  end
+
   create_table "licenses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
@@ -306,6 +320,18 @@ ActiveRecord::Schema.define(version: 2022_07_18_140049) do
     t.json "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "name", null: false
+    t.string "maker", null: false
+    t.string "classification", null: false
+    t.string "ingredients", null: false
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_solvents_on_business_id"
   end
 
   create_table "special_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -490,6 +516,7 @@ ActiveRecord::Schema.define(version: 2022_07_18_140049) do
   add_foreign_key "request_orders", "businesses"
   add_foreign_key "request_orders", "orders"
   add_foreign_key "special_vehicles", "businesses"
+  add_foreign_key "solvents", "businesses"
   add_foreign_key "worker_exams", "special_med_exams"
   add_foreign_key "worker_exams", "worker_medicals"
   add_foreign_key "worker_insurances", "workers"

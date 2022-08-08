@@ -22,4 +22,29 @@ module ApplicationHelper
       '五次下請け'
     end
   end
+
+  # 未入力表示
+  def not_input_display(text)
+    text.nil? ? '未登録' : text
+  end
+
+  # 自身と、自身の階層下の現場情報
+  def document_site_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if params[:sub_request_order_uuid]
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid]).order
+    else
+      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order.order
+    end
+  end
+
+  # 自身と、自身の階層下の書類情報
+  def document_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if params[:sub_request_order_uuid]
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    else
+      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
+    end
+  end
 end

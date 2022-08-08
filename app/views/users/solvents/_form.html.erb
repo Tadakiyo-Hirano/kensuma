@@ -1,0 +1,62 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :name %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :name, class: "form-control", placeholder: Solvent.human_attribute_name(:name) %>
+<br>
+<%= f.label :maker %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :maker, class: "form-control", placeholder: Solvent.human_attribute_name(:maker) %>
+<br>
+<%= f.label :classification %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :classification, class: "form-control", placeholder: Solvent.human_attribute_name(:classification) %>
+<br>
+<%= f.label :ingredients %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :ingredients, class: "form-control", placeholder: Solvent.human_attribute_name(:ingredients) %>
+<br>
+
+<script>
+  $(function(){
+    $.each(function(key){
+      $.validator.addMethod(key, this);
+    });
+    $(".solvent-form-validation").validate({
+      rules:{
+        "solvent[name]": {
+          required: true
+        },
+        "solvent[maker]": {
+          required: true
+        },
+        "solvent[classification]": {
+          required: true
+        },
+        "solvent[ingredients]": {
+          required: true
+        },
+      },
+
+      messages:{
+        "solvent[name]": {
+          required: "商品名を入力してください。"
+        },
+        "solvent[maker]": {
+          required: "メーカー名を入力してください。"
+        },
+        "solvent[classification]": {
+          required: "種別を入力してください。"
+        },
+        "solvent[ingredients]": {
+          required: "含有成分を入力してください。"
+        },
+      },
+      errorClass: "input_form_error"
+    });
+    // 入力欄を変更したときにバリデーションを実行
+    $(".solvent-form-validation").change(function () {
+      $(this).valid();
+    });
+  });
+</script>

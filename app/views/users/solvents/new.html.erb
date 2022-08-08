@@ -1,0 +1,13 @@
+<% provide(:title, "有機溶剤情報登録") %>
+<% provide(:btn_text, "登録") %>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_with model: @solvent, url: users_solvents_path, method: :post, local: true, class: "solvent-form-validation" do |f| %>
+      <%= render partial: "form", locals: { f: f, solvent: @solvent } %>
+      
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <%= link_to "一覧画面へ", users_solvents_path, class: "btn btn-md btn-block btn-default" %>
+    <% end %>
+  </div>
+</div>

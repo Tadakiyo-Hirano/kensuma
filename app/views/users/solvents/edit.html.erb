@@ -1,0 +1,15 @@
+<% provide(:title, "有機溶剤情報編集") %>
+<% provide(:btn_text, "更新") %>
+
+<div class="card">
+  <%= form_with model: @solvent, url: users_solvent_path, method: :patch, local: true, class: "solvent-form-validation" do |f| %>
+    <div class="card-body">
+      <%= render partial: "form", locals: { f: f, solvent: @solvent} %>
+    </div>
+    <div class="card-footer">
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-success" %>
+      <%= link_to "詳細画面へ", users_solvent_path(@solvent), class: "btn btn-md btn-block btn-default" %>
+      <%= link_to "一覧画面へ", users_solvents_path, class: "btn btn-md btn-block btn-default" %>
+    </div>
+  <% end %>
+</div>

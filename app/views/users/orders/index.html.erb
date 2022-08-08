@@ -1,6 +1,6 @@
-<% provide(:title,  "発注一覧") %>
+<% provide(:title,  "発注一覧(元請)") %>
 
-<%= link_to "発注新規作成画面へ", new_users_order_path, class: "btn btn-lg btn-block btn-outline-primary" %>
+<%= link_to "発注情報作成", new_users_order_path, class: "btn btn-lg btn-block btn-outline-primary" %>
 <br>
 <% if @orders.present? %>
   <div class="card">
@@ -10,8 +10,6 @@
           <tr align="center">
             <th><%= Order.human_attribute_name(:site_name) %></th>
             <th><%= Order.human_attribute_name(:status) %></th>
-            <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -19,8 +17,6 @@
           <tr align="center">
             <td><%= link_to order.site_name, users_order_path(order) %></td>
             <td><%= order.status_i18n %></td>
-            <td><%= link_to "編集", edit_users_order_path(order), class: "btn btn-md btn-success" %></td>
-            <td><%= link_to "削除", users_order_path(order), method: :delete, data: { confirm: "#{order.site_uu_id}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
           </tr>
           <% end %>
         </tbody>

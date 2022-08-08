@@ -1,0 +1,34 @@
+<% provide(:title,  "有機溶剤情報一覧") %>
+
+<%= link_to "有機溶剤情報新規作成画面へ", new_users_solvent_path, class: "btn btn-lg btn-block btn-outline-primary" %>
+<br>
+<% if @solvents.present? %>
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr align="center">
+            <th><%= Solvent.human_attribute_name(:name) %></th>
+            <th><%= Solvent.human_attribute_name(:maker) %></th>
+            <th><%= Solvent.human_attribute_name(:classification) %></th>
+            <th><%= Solvent.human_attribute_name(:ingredients) %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @solvents.each do |solvent| %>
+          <tr align="center">
+            <td><%= link_to solvent.name, users_solvent_path(solvent) %></td>
+            <td><%= solvent.maker %></td>
+            <td><%= solvent.classification %></td>
+            <td><%= solvent.ingredients %></td>
+            <td><%= link_to "編集", edit_users_solvent_path(solvent), class: "btn btn-md btn-success" %></td>
+            <td><%= link_to "削除", users_solvent_path(solvent), method: :delete, data: { confirm: "#{solvent.name}の有機溶剤情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

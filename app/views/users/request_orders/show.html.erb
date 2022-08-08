@@ -1,4 +1,4 @@
-<% provide(:title, "発注依頼詳細") %>
+<% provide(:title, "発注依頼詳細(下請)") %>
 
 <!-- 発注依頼詳細 -->
 <section class="content">
@@ -68,6 +68,13 @@
                 <tr>
                   <td>
                     <%= link_to "現場情報修正", edit_users_request_order_path, class: "btn btn-sm btn-success" %>
+                  </td>
+                  <td>
+                    <%= link_to "入場作業員", users_request_order_field_workers_path(@request_order), class: "btn btn-sm btn-success" %>
+                    <%= link_to "車両", "#", class: "btn btn-sm btn-success" %>
+                    <%= link_to "特殊車両", "#", class: "btn btn-sm btn-success" %>
+                    <%= link_to "機械", "#", class: "btn btn-sm btn-success" %>
+                    <%= link_to "溶剤", "#", class: "btn btn-sm btn-success" %>
                   </td>
                 </tr>
                 <tr>
