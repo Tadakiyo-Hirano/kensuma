@@ -7,7 +7,9 @@ class Car < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  validates :usage, presence: true
   validates :owner_name, presence: true
+  validates :vehicle_name, presence: true
   validates :vehicle_model, presence: true
   validates :vehicle_number, presence: true
   validates :vehicle_inspection_start_on, presence: true
