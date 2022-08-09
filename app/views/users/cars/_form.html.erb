@@ -1,5 +1,9 @@
 <%= render 'shared/error_massages', object: f.object %>
 
+<%= f.label :usage %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :usage, Car.usages.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
 <%= f.label :owner_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :owner_name, class: "form-control", placeholder: Car.human_attribute_name(:owner_name) %>
@@ -8,13 +12,17 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :safety_manager, class: "form-control", placeholder: Car.human_attribute_name(:safety_manager) %>
 <br>
+<%= f.label :vehicle_name %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :vehicle_name, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_name) %>
+<br>
 <%= f.label :vehicle_model %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :vehicle_model, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_model) %>
 <br>
 <%= f.label :vehicle_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :vehicle_number, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_number) %>
+<%= f.text_field :vehicle_number, class: "form-control", placeholder: "#{Car.human_attribute_name(:vehicle_number)} 例: 品川500あ1234" %>
 <br>
 <%= f.label :vehicle_inspection_start_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -83,10 +91,16 @@
     });
     $(".car-form-validation").validate({
       rules:{
+        "car[usage]": {
+          required: true
+        },
         "car[owner_name]": {
           required: true
         },
         "car[safety_manager]": {
+          required: true
+        },
+        "car[vehicle_name]": {
           required: true
         },
         "car[vehicle_model]": {
@@ -119,17 +133,23 @@
         
       },
       messages:{
+        "car[usage]": {
+          required: "使用目的を選択してください。"
+        },
         "car[owner_name]": {
           required: "車両所有者氏名を入力してください。"
         },
         "car[safety_manager]": {
           required: "安全運転管理者を入力してください。"
         },
+        "car[vehicle_name]": {
+          required: "車両名を入力してください。"
+        },
         "car[vehicle_model]": {
           required: "車両型式を入力してください。"
         },
         "car[vehicle_number]": {
-          required: "車両番号を入力してください。"
+          required: "車両番号を入力してください。例: 品川500あ1234"
         },
         "car[vehicle_inspection_start_on]": {
           required: "年月日を入力または選択してください。"

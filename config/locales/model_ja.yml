@@ -41,7 +41,7 @@ ja:
       business_occupation:
         occupation_id: 職種
       car:
-        usage: 用途
+        usage: 使用目的
         owner_name: 車両所有者氏名
         safety_manager: 安全運転管理者
         vehicle_name: 車両名
