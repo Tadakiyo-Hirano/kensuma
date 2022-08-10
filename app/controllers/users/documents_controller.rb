@@ -13,21 +13,15 @@ module Users
         format.html
         format.pdf do
           case @document.document_type
-          when 'cover_document', 'table_of_contents_document', 'doc_3rd', 'doc_4th', 'doc_5th', 'doc_6th',
+          when 'cover_document', 'table_of_contents_document', 'doc_3rd', 'doc_5th', 'doc_6th',
                 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th',
                 'doc_13th', 'doc_14th', 'doc_15th', 'doc_16th', 'doc_17th', 'doc_18th',
                 'doc_19th', 'doc_20th', 'doc_21st', 'doc_22nd', 'doc_23rd', 'doc_24th'
-            render pdf: '書類',
-              layout: 'pdf',
-              encording: 'UTF-8',
-              page_size: 'A4'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_8th'
-            render pdf: '書類',
-              layout: 'pdf',
-              encording: 'UTF-8',
-              page_size: 'A4',
-              margin: { top: 0 },
-              orientation: 'Landscape'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
+          when 'doc_4th'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
           end
         end
       end
@@ -65,44 +59,6 @@ module Users
       when 'doc_3rd'
         document.update(doc_3rd_params)
       when 'doc_8th'
-        if params[:document][:content][:worker]
-          # formから作業員idを受け取る。
-          @worker_ids = params[:document][:content][:worker]
-          # 受け取ったidに対応する各作業員テーブル&作業員テーブルに紐づく各テーブルのデータをハッシュ化して登録する。
-          # 「except:」や「only:」で、不要なカラムは登録から除外する。
-          @worker_json = @worker_ids.map do |worker_id|
-            Worker.find(worker_id).to_json(
-              except:  %i[images created_at updated_at], # 作業員
-              include: {
-                worker_medical:            {
-                  except: %i[id worker_id created_at updated_at] # 作業員の健康情報
-                },
-                worker_insurance:          {
-                  except: %i[id worker_id created_at updated_at] # 保険情報
-                },
-                worker_skill_trainings:    {
-                  only: [:skill_training_id] # 中間テーブル(技能講習マスタ)
-                },
-                worker_special_educations: {
-                  only: [:special_education_id] # 中間テーブル(特別教育マスタ)
-                },
-                worker_licenses:           {
-                  only: [:license_id] # 中間テーブル(免許マスタ)
-                }
-              }
-            )
-          end
-        else
-          @worker_json = [
-            "{
-              \"worker_medical\":{\"med_exam_on\":\"\"},
-              \"worker_insurance\":{\"health_insurance_type\":\"\"},
-              \"worker_skill_trainings\":{},
-              \"worker_special_educations\":{},
-              \"worker_licenses\":{}
-            }"
-          ]
-        end
         document.update(doc_8th_params)
       when 'doc_12th'
         document.update(doc_12th_params)
@@ -131,27 +87,6 @@ module Users
           supervisor_name:        params[:document][:content][6],
           apply:                  params[:document][:content][7],
           submission_destination: params[:document][:content][8]
-        }
-      )
-    end
-
-    # 作業員名簿
-    def doc_8th_params
-      params.require(:document).permit.merge(
-        content: {
-          doc5_8_001_business_name:         params.dig(:document, :content, :doc5_8_001_business_name),
-          doc5_8_002_site_id:               params.dig(:document, :content, :doc5_8_002_site_id),
-          doc5_8_003_site_agent:            params.dig(:document, :content, :doc5_8_003_site_agent),
-          doc5_8_004_created_date:          params.dig(:document, :content, :doc5_8_004_created_date),
-          doc5_8_005_primary_business_name: params.dig(:document, :content, :doc5_8_005_primary_business_name),
-          doc5_8_006_primary_business_id:   params.dig(:document, :content, :doc5_8_006_primary_business_id),
-          doc5_8_007_hierarchy:             params.dig(:document, :content, :doc5_8_007_hierarchy),
-          doc5_8_009_my_business_name:      params.dig(:document, :content, :doc5_8_009_my_business_name),
-          doc5_8_010_my_business_id:        params.dig(:document, :content, :doc5_8_010_my_business_id),
-          doc5_8_011_submitted_on:          params.dig(:document, :content, :doc5_8_011_submitted_on),
-          doc5_8_042_confirmation:          params.dig(:document, :content, :doc5_8_042_confirmation),
-          worker:                           @worker_json,
-          worker_id:                        @worker_ids
         }
       )
     end

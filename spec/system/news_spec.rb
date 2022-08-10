@@ -8,7 +8,8 @@ RSpec.describe 'News', type: :system do
   let!(:news_b) { create(:news, title: 'お知らせ-B', content: 'これはお知らせ-Bの内容です', status: 'published', delivered_at: DateTime.now.yesterday, uuid: SecureRandom.uuid) }
 
   before(:each) do
-    user.skip_confirmation! # ユーザー作成時のメールによる認証をスキップできる
+    # ステージングにて一時的にメール認証スキップ中の為下記コメント
+    # user.skip_confirmation! # ユーザー作成時のメールによる認証をスキップできる
     user.save!
   end
 

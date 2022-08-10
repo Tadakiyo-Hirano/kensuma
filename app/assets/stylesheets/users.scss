@@ -1,24 +1,50 @@
 .logo-item {
-    color: #14ad5e;
-    vertical-align: bottom;
+  color: #14ad5e;
+  vertical-align: bottom;
+  span {
+    margin-left: -12px;
+  }
 }
 
 .logo-item-side {
+  color: #14ad5e;
+  vertical-align: bottom;
+  font-size: 10px;
+  margin-top: 16px;
+  span {
+    margin-left: -12px;
+  }
+}
+
+.logo-item-law {
+  color: #14ad5e;
+  vertical-align: bottom;
+  span {
+    margin-left: -14px;
+  }
+}
+
+@media screen and (max-width: 959px) {
+	.logo-item-law {
     color: #14ad5e;
     vertical-align: bottom;
-    font-size: 10px
+    font-size: 10px;
+    span {
+      margin-left: -7px;
+    }
+  }
 }
 
 .brand-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .first-request-orders {
-    background-color: rgba(0,0,0,.05);
+  background-color: rgba(0,0,0,.05);
 }
 
 .second_request_orders {
-    margin-left: 50px;
+  margin-left: 50px;
 }
 
 .third_request_orders {
@@ -26,29 +52,29 @@
 }
 
 .forth_request_orders {
-    margin-left: 150px;
+  margin-left: 150px;
 
 }
 
 label.input_form_error {
-    color: red;
-    font-weight: normal !important;
-    text-indent: 2rem
+  color: red;
+  font-weight: normal !important;
+  text-indent: 2rem
 }
 
 .rounded {
-    font-size: 0.8rem;
-    width: 2rem;
+  font-size: 0.8rem;
+  width: 2rem;
 }
 
 .p-1 {
-    padding: 0.1rem !important;
+  padding: 0.1rem !important;
 }
 
 .mb-2 {
-    padding: 0.1rem !important;
+  padding: 0.1rem !important;
 }
 
 label {
-    margin-right: 2rem;
+  margin-right: 2rem;
 }

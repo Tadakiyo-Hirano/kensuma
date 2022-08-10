@@ -7,7 +7,8 @@ RSpec.describe 'Workers', type: :system do
   let(:worker_medical) { create(:worker_medical, worker: worker) }
 
   before(:each) do
-    user.skip_confirmation!
+    # ステージングにて一時的にメール認証スキップ中の為下記コメント
+    # user.skip_confirmation!
     user.save!
     business.save!
     sign_in(user)

@@ -1,498 +1,1978 @@
 <!-- (8)全建統⼀様式第5号改(作業員名簿) -->
-<% provide(:title, "#{@document.document_type_i18n}") %>
-
-<%# @document.content["worker"].each_with_index.each_slice(10) do|w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, index|  %>
-  <div class="stl_02">
-    <div class="stl_03"><img src="/doc_8th.png" alt="" class="stl_04"></div>
-    <div class="stl_view">
-      <div class="stl_05 stl_06">
-        <div class="stl_01" style="top: 8.1746em; left:8.5em;"><span class="stl_07 stl_08">全建統一様式第５号改</span></div>
-        <div class="stl_01" style="top: 8.4546em; left:79.27em;">
-          <span class="stl_07" style="word-spacing:0.23em;">元請確認欄 </span>
-          <span class="stl_10 stl_09" style="word-spacing:0.32em;"><%#= @document.content["doc5_8_042_confirmation"] %></span>
-        </div>
-        <div class="stl_01" style="top: 10.5546em; left:82.66em;">
-          <span class="stl_07" style="word-spacing:-0.02em;">提 出 日</span>
-          <span class="stl_07" style="word-spacing:0.76em;">&nbsp;</span>
-          <span class="stl_10 stl_09" style="word-spacing:0.83em;"><%#= @document.content["doc5_8_011_submitted_on"] %></span>
-        </div>
-        <div class="stl_01" style="top: 9.9159em; left:35.57em;"><span class="stl_11" style="font-weight:bold;">作 業 員 名 簿</span></div>
-        <div class="stl_01" style="top: 11.7746em; left:46.63em;"><span class="stl_07 stl_09" style="word-spacing:0.7em;">作成 ）</span></div>
-        <div class="stl_01" style="top: 12.7377em; left:33.93em;"><span class="stl_12 stl_08">本書面に記載した内容は、作業員名簿として、安全衛生管</span></div>
-        <div class="stl_01" style="top: 13.3377em; left:33.93em;"><span class="stl_12 stl_08">理や労働災害発生時の緊急連絡・対応のために元請負業者</span></div>
-        <div class="stl_01" style="top: 13.9377em; left:33.93em;"><span class="stl_12 stl_08">に提示することについて、記載者本人は同意しています。</span></div>
-        <div class="stl_01" style="top: 11.2377em; left:3.93em;"><span class="stl_12 stl_08">事業所の名称</span></div>
-        <div class="stl_01" style="top: 12.4062em; left:3.94em;"><span class="stl_10 stl_08">現 場 I D</span></div>
-        <div class="stl_01" style="top: 13.6062em; left:3.94em;"><span class="stl_10 stl_08">所 長 名</span></div>
-        <div class="stl_01" style="top: 11.4862em; left:8.44em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_001_business_name"] %></span></div>
-        <div class="stl_01" style="top: 12.6862em; left:8.44em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_002_site_id"] %></span></div>
-        <div class="stl_01" style="top: 13.8862em; left:8.44em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_003_site_agent"] %></span></div>
-        <div class="stl_01" style="top: 11.7746em; left:34.46em;"><span class="stl_07 stl_09">（</span></div>
-        <div class="stl_01" style="top: 11.8062em; left:35.44em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_004_created_date"] %></span></div>
-        <div class="stl_01" style="top: 12.4062em; left:54.94em;"><span class="stl_10 stl_08">一次会社名</span></div>
-        <div class="stl_01" style="top: 13.6062em; left:54.94em;"><span class="stl_10 stl_08">事業者ID</span></div>
-        <div class="stl_01" style="top: 12.3046em; left:76.46em;">
-          <span class="stl_07 stl_09" style="word-spacing:-0.09em;">（ </span>
-          <span class="stl_13 stl_09" style="word-spacing:-0.11em;"><%#= @document.content["doc5_8_007_hierarchy"] %></span>
-          <span class="stl_07 stl_08" style="word-spacing:-0.09em;">次）会社名</span>
-        </div>
-        <div class="stl_01" style="top: 13.4246em; left:77.44em;"><span class="stl_07 stl_09">事業者ID</span></div>
-        <div class="stl_01" style="top: 12.6862em; left:60.9395em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_005_primary_business_name"] %></span></div>
-        <div class="stl_01" style="top: 13.8862em; left:59.44em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_006_primary_business_id"] %></span></div>
-        <div class="stl_01" style="top: 12.6862em; left:83.44em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_009_my_business_name"] %></span></div>
-        <div class="stl_01" style="top: 13.6062em; left:81.94em;"><span class="stl_10 stl_09"><%#= @document.content["doc5_8_010_my_business_id"] %></span></div>
-        <div class="stl_01" style="top: 13.5746em; left:28.24em;"><span class="stl_07 stl_09">殿</span></div>
-        <div class="stl_01" style="top: 13.7962em; left:72.94em;"><span class="stl_10 stl_08">㊞</span></div>
-        <div class="stl_01" style="top: 13.7962em; left:93.94em;"><span class="stl_10 stl_08">㊞</span></div>
-        <div class="stl_01" style="top: 14.5993em; left:54.92em;"><span class="stl_14 stl_08">［</span></div>
-        <div class="stl_01" style="top: 14.5993em; left:55.46em;"><span class="stl_14 stl_08" style="word-spacing:0em;">退職金共済制度加入について 建退共・中退共・その他・無］</span></div>
-        <div class="stl_01" style="top: 14.5993em; left:77.42em;"><span class="stl_14 stl_08" style="word-spacing:0em;">［退職金共済制度加入について 建退共・中退共・その他・無］</span></div>
-        <div class="stl_01" style="top: 15.9746em; left:7.33em;"><span class="stl_07 stl_08">フ　リ　ガ　ナ</span></div>
-        <div class="stl_01" style="top: 17.1746em; left:7.33em;"><span class="stl_07 stl_08">氏　　　　　名</span></div>
-        <div class="stl_01" style="top: 18.3746em; left:7.33em;"><span class="stl_07 stl_09">技　能　者　ID</span></div>
-        <div class="stl_01" style="top: 15.9746em; left:66.91em;"><span class="stl_07 stl_08">健康保険</span></div>
-        <div class="stl_01" style="top: 17.1746em; left:66.91em;"><span class="stl_07 stl_08">年金保険</span></div>
-        <div class="stl_01" style="top: 18.3746em; left:66.91em;"><span class="stl_07 stl_08">雇用保険</span></div>
-        <div class="stl_01" style="top: 16.1009em; left:71.92em;"><span class="stl_15 stl_08">建設業退職金共済制度</span></div>
-        <div class="stl_01" style="top: 17.3009em; left:71.68em;"><span class="stl_15 stl_08">中小企業退職金共済制度</span></div>
-        <div class="stl_01" style="top: 16.2746em; left:21.55em;"><span class="stl_07 stl_08">雇入年月日</span></div>
-        <div class="stl_01" style="top: 18.0746em; left:21.91em;"><span class="stl_07 stl_08">経験年数</span></div>
-        <div class="stl_01" style="top: 16.2746em; left:27.91em;"><span class="stl_07 stl_08">生年月日</span></div>
-        <div class="stl_01" style="top: 18.0746em; left:28.63em;"><span class="stl_07 stl_08">年齢</span></div>
-        <div class="stl_01" style="top: 16.2746em; left:38.02em;"><span class="stl_07 stl_08">現住所</span></div>
-        <div class="stl_01" style="top: 16.2746em; left:47.0483em;"><span class="stl_07 stl_08">（ＴＥＬ）</span></div>
-        <div class="stl_01" style="top: 16.2746em; left:51.9728em;">
-          <span class="stl_07 stl_09" style="word-spacing:0.14em;">最近の健康診断日 血</span>
-          <span class="stl_07 stl_09" style="word-spacing:0.72em;">&nbsp;特殊健康診断日</span>
-        </div>
-        <div class="stl_01" style="top: 17.1746em; left:58.21em;"><span class="stl_07 stl_09">液</span></div>
-        <div class="stl_01" style="top: 16.2746em; left:78.97em;"><span class="stl_07 stl_08">教育・資格・免許</span></div>
-        <div class="stl_01" style="top: 16.2746em; left:87.5519em;"><span class="stl_07 stl_08">入場年月日</span></div>
-        <div class="stl_01" style="top: 16.5677em; left:92.43em;"><span class="stl_12 stl_08">退職金共 &nbsp;</span></div>
-        <div class="stl_01" style="top: 17.2377em; left:92.43em;"><span class="stl_12 stl_08">済手帳所 &nbsp;</span></div>
-        <div class="stl_01" style="top: 17.9077em; left:92.43em;"><span class="stl_12 stl_08">有の有無 &nbsp;</span></div>
-        <div class="stl_01" style="top: 16.7846em; left:4.21em;"><span class="stl_07 stl_09">番</span></div>
-        <div class="stl_01" style="top: 17.5746em; left:4.21em;"><span class="stl_07 stl_09">号</span></div>
-        <div class="stl_01" style="top: 17.1746em; left:14.95em;"><span class="stl_07" style="word-spacing:-0.03em;">職 種</span></div>
-        <div class="stl_01" style="top: 17.1746em; left:18.4922em;"><span class="stl_07 stl_09">※</span></div>
-        <div class="stl_01" style="top: 17.9309em; left:77.62em;"><span class="stl_15 stl_16">雇入・職長</span></div>
-        <div class="stl_01" style="top: 18.4809em; left:77.86em;"><span class="stl_15 stl_16">特別教育</span></div>
-        <div class="stl_01" style="top: 17.8077em; left:88.12em;"><span class="stl_12 stl_08">受入教育</span></div>
-        <div class="stl_01" style="top: 18.4777em; left:87.97em;"><span class="stl_12 stl_08">実施年月日</span></div>
-        <div class="stl_01" style="top: 18.0746em; left:37.3em;"><span class="stl_07 stl_08">家族連絡先</span></div>
-        <div class="stl_01" style="top: 18.0746em; left:47.0482em;"><span class="stl_07 stl_08">（ＴＥＬ）</span></div>
-        <div class="stl_01" style="top: 18.0746em; left:54.13em;"><span class="stl_07 stl_08">血圧</span></div>
-        <div class="stl_01" style="top: 17.9646em; left:58.21em;"><span class="stl_07 stl_09">型</span></div>
-        <div class="stl_01" style="top: 18.0746em; left:61.63em;"><span class="stl_07 stl_08">種類</span></div>
-        <div class="stl_01" style="top: 18.1377em; left:80.65em;"><span class="stl_12 stl_08">技能講習</span></div>
-        <div class="stl_01" style="top: 18.1062em; left:84.19em;"><span class="stl_10 stl_08">免許</span></div>
-
-        <!-- 作業員1行目 -->
-        <div class="stl_01" style="top: 20.8062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w1) %></span></div>
-        <div class="stl_01" style="top: 19.6062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w1) %></span></div> <!-- 8-012 フリガナ -->
-        <div class="stl_01" style="top: 20.9962em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w1) %></span></div> <!-- 8-013 作業員名 -->
-        <div class="stl_01" style="top: 22.1962em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w1) %></span></div> <!-- 8-014 技能者ID -->
-        <div class="stl_01" style="top: 20.8062em; left:15.0187em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w1) %></span></div> <!-- 8-015 職種 -->
-        <div class="stl_01" style="top: 20.8062em; left:18.0215em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w1) %></span></div>
-        <div class="stl_01" style="top: 19.9062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w1) %></span></div> <!-- 8-017 雇入年月日 -->
-        <div class="stl_01" style="top: 21.7062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w1) %></span></div> <!-- 8-08 雇入前経験年数 -->
-        <div class="stl_01" style="top: 19.9062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w1) %></span></div> <!-- 8-019 生年月日 -->
-        <div class="stl_01" style="top: 21.7062em; left:28.519em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w1) %></span></div> <!-- 8-020 年齢 -->
-        <div class="stl_01" style="top: 19.9062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w1) %></span></div> <!-- 8-021 住所 -->
-        <div class="stl_01" style="top: 21.7062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w1) %></span></div> <!-- 8-022 家族連絡先住所 -->
-        <div class="stl_01" style="top: 19.9062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w1) %></span></div> <!-- 8-023 作業員電話番号 -->
-        <div class="stl_01" style="top: 21.7062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w1) %></span></div> <!-- 8-024 家族連絡先電話番号 -->
-        <div class="stl_01" style="top: 19.9062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w1) %></span></div> <!-- 8-025 健康診断日 -->
-        <div class="stl_01" style="top: 21.7062em; left:53.2em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w1) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w1) %> <!-- 8-026 最高血圧 ～ 8-027 最低血圧 -->
-          </span>
-        </div>
-        <div class="stl_01" style="top: 20.8062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w1)] %></span></div> <!-- 8-028 血液型 -->
-        <div class="stl_01" style="top: 19.9062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w1) %></span></div> <!-- 8-029 特殊健康診断日 -->
-        <div class="stl_01" style="top: 21.7062em; left:61.52em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w1) %></span></div>
-        <div class="stl_01" style="top: 19.6062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w1)] %></span></div> <!-- 8-031 健康保険のタイプ -->
-        <div class="stl_01" style="top: 20.8062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w1)] %></span></div> <!-- 8-032 年金保険のタイプ -->
-        <div class="stl_01" style="top: 22.0062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w1)] %></span></div> <!-- 8-033 雇用保険のタイプ -->
-        <div class="stl_01" style="top: 19.6062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w1)] %></span></div> <!-- 8-034 建設業退職金共済制度のタイプ -->
-        <div class="stl_01" style="top: 20.8062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w1) %></span></div>
-        <div class="stl_01" style="top: 20.8062em; left:78.02em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w1).to_s&.delete("[]") %></span></div> <!-- 8-036 特別教育 -->
-        <div class="stl_01" style="top: 20.8062em; left:81.0228em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w1).to_s&.delete("[]") %></span></div> <!-- 8-037 技能講習 -->
-        <div class="stl_01" style="top: 20.8062em; left:84.019em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w1).to_s&.delete("[]") %></span></div> <!-- 8-036 免許 -->
-        <div class="stl_01" style="top: 19.9062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w1) %></span></div>
-        <div class="stl_01" style="top: 21.7062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w1) %></span></div>
-        <div class="stl_01" style="top: 19.9062em; left:92.69em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 21.7062em; left:92.69em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員2行目 -->
-        <div class="stl_01" style="top: 24.4062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w2) %></span></div>
-        <div class="stl_01" style="top: 23.2062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w2) %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w2) %></span></div>
-        <div class="stl_01" style="top: 25.6062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w2) %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w2) %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:17.99em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w2) %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w2) %></span></div>
-        <div class="stl_01" style="top: 25.3062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w2) %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w2) %></span></div>
-        <div class="stl_01" style="top: 25.3062em; left:28.489em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w2) %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w2) %></span></div>
-        <div class="stl_01" style="top: 25.3062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w2) %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w2) %></span></div>
-        <div class="stl_01" style="top: 25.3062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w2) %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w2) %></span></div>
-        <div class="stl_01" style="top: 25.3062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w2) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w2) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 24.4062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w2)] %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w2) %></span></div>
-        <div class="stl_01" style="top: 25.3062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w2) %></span></div>
-        <div class="stl_01" style="top: 23.2062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w2)] %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w2)] %></span></div>
-        <div class="stl_01" style="top: 25.6062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w2)] %></span></div>
-        <div class="stl_01" style="top: 23.2062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w2)] %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w2) %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w2).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w2).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 24.4062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w2).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w2) %></span></div>
-        <div class="stl_01" style="top: 25.3062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w2) %></span></div>
-        <div class="stl_01" style="top: 23.5062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 25.3062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員3行目 -->
-        <div class="stl_01" style="top: 28.0062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w3) %></span></div>
-        <div class="stl_01" style="top: 26.8062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w3) %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w3) %></span></div>
-        <div class="stl_01" style="top: 29.2062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w3) %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w3) %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:17.9928em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w3) %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w3) %></span></div>
-        <div class="stl_01" style="top: 28.9062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w3) %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w3) %></span></div>
-        <div class="stl_01" style="top: 28.9062em; left:28.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w3) %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w3) %></span></div>
-        <div class="stl_01" style="top: 28.9062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w3) %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w3) %></span></div>
-        <div class="stl_01" style="top: 28.9062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w3) %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w3) %></span></div>
-        <div class="stl_01" style="top: 28.9062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w3) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w3) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 28.0062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w3)] %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w3) %></span></div>
-        <div class="stl_01" style="top: 28.9062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w3) %></span></div>
-        <div class="stl_01" style="top: 26.8062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w3)] %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w3)] %></span></div>
-        <div class="stl_01" style="top: 29.2062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w3)] %></span></div>
-        <div class="stl_01" style="top: 26.8062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w3)] %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w3) %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w3).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w3).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 28.0062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w3).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w3) %></span></div>
-        <div class="stl_01" style="top: 28.9062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w3) %></span></div>
-        <div class="stl_01" style="top: 27.1062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 28.9062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員4行目 -->
-        <div class="stl_01" style="top: 31.6062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w4) %></span></div>
-        <div class="stl_01" style="top: 30.4062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w4) %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w4) %></span></div>
-        <div class="stl_01" style="top: 32.8062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w4) %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w4) %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:17.9928em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w4) %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w4) %></span></div>
-        <div class="stl_01" style="top: 32.5062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w4) %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w4) %></span></div>
-        <div class="stl_01" style="top: 32.5062em; left:28.489em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w4) %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w4) %></span></div>
-        <div class="stl_01" style="top: 32.5062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w4) %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w4) %></span></div>
-        <div class="stl_01" style="top: 32.5062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w4) %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w4) %></span></div>
-        <div class="stl_01" style="top: 32.5062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w4) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w4) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 31.6062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w4)] %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w4) %></span></div>
-        <div class="stl_01" style="top: 32.5062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w4) %></span></div>
-        <div class="stl_01" style="top: 30.4062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w4)] %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w4)] %></span></div>
-        <div class="stl_01" style="top: 32.8062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w4)] %></span></div>
-        <div class="stl_01" style="top: 30.4062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w4)] %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w4) %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w4).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w4).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 31.6062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w4).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w4) %></span></div>
-        <div class="stl_01" style="top: 32.5062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w4) %></span></div>
-        <div class="stl_01" style="top: 30.7062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 32.5062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員5行目 -->
-        <div class="stl_01" style="top: 35.2062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w5) %></span></div>
-        <div class="stl_01" style="top: 34.0062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w5) %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w5) %></span></div>
-        <div class="stl_01" style="top: 36.4062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w5) %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w5) %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:17.9928em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w5) %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w5) %></span></div>
-        <div class="stl_01" style="top: 36.1062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w5) %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w5) %></span></div>
-        <div class="stl_01" style="top: 36.1062em; left:28.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w5) %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w5) %></span></div>
-        <div class="stl_01" style="top: 36.1062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w5) %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w5) %></span></div>
-        <div class="stl_01" style="top: 36.1062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w5) %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w5) %></span></div>
-        <div class="stl_01" style="top: 36.1062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w5) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w5) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 35.2062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w5)] %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w5) %></span></div>
-        <div class="stl_01" style="top: 36.1062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w5) %></span></div>
-        <div class="stl_01" style="top: 34.0062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w5)] %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w5)] %></span></div>
-        <div class="stl_01" style="top: 36.4062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w5)] %></span></div>
-        <div class="stl_01" style="top: 34.0062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w5)] %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w5) %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w5).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w5).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 35.2062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w5).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w5) %></span></div>
-        <div class="stl_01" style="top: 36.1062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w5) %></span></div>
-        <div class="stl_01" style="top: 34.3062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 36.1062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員6行目 -->
-        <div class="stl_01" style="top: 38.8062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w6) %></span></div>
-        <div class="stl_01" style="top: 37.6062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w6) %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w6) %></span></div>
-        <div class="stl_01" style="top: 40.0062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w6) %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w6) %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:17.9928em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w6) %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w6) %></span></div>
-        <div class="stl_01" style="top: 39.7062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w6) %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w6) %></span></div>
-        <div class="stl_01" style="top: 39.7062em; left:28.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w6) %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w6) %></span></div>
-        <div class="stl_01" style="top: 39.7062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w6) %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w6) %></span></div>
-        <div class="stl_01" style="top: 39.7062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w6) %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w6) %></span></div>
-        <div class="stl_01" style="top: 39.7062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w6) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w6) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 38.8062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w6)] %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w6) %></span></div>
-        <div class="stl_01" style="top: 39.7062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w6) %></span></div>
-        <div class="stl_01" style="top: 37.6062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w6)] %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w6)] %></span></div>
-        <div class="stl_01" style="top: 40.0062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w6)] %></span></div>
-        <div class="stl_01" style="top: 37.6062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w6)] %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w6) %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w6).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w6).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 38.8062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w6).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w6) %></span></div>
-        <div class="stl_01" style="top: 39.7062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w6) %></span></div>
-        <div class="stl_01" style="top: 37.9062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 39.7062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員7行目 -->
-        <div class="stl_01" style="top: 42.4062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w7) %></span></div>
-        <div class="stl_01" style="top: 41.2062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w7) %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w7) %></span></div>
-        <div class="stl_01" style="top: 43.6062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w7) %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w7) %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:17.9928em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w7) %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w7) %></span></div>
-        <div class="stl_01" style="top: 43.3062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w7) %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w7) %></span></div>
-        <div class="stl_01" style="top: 43.3062em; left:28.489em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w7) %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w7) %></span></div>
-        <div class="stl_01" style="top: 43.3062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w7) %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w7) %></span></div>
-        <div class="stl_01" style="top: 43.3062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w7) %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w7) %></span></div>
-        <div class="stl_01" style="top: 43.3062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w7) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w7) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 42.4062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w7)] %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w7) %></span></div>
-        <div class="stl_01" style="top: 43.3062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w7) %></span></div>
-        <div class="stl_01" style="top: 41.2062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w7)] %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w7)] %></span></div>
-        <div class="stl_01" style="top: 43.6062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w7)] %></span></div>
-        <div class="stl_01" style="top: 41.2062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w7)] %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w7) %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w7).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w7).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 42.4062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w7).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w7) %></span></div>
-        <div class="stl_01" style="top: 43.3062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w7) %></span></div>
-        <div class="stl_01" style="top: 41.5062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 43.3062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員8行目 -->
-        <div class="stl_01" style="top: 46.0062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w8) %></span></div>
-        <div class="stl_01" style="top: 44.8062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w8) %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w8) %></span></div>
-        <div class="stl_01" style="top: 47.2062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w8) %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w8) %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:17.99em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w8) %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w8) %></span></div>
-        <div class="stl_01" style="top: 46.9062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w8) %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w8) %></span></div>
-        <div class="stl_01" style="top: 46.9062em; left:28.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w8) %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w8) %></span></div>
-        <div class="stl_01" style="top: 46.9062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w8) %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w8) %></span></div>
-        <div class="stl_01" style="top: 46.9062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w8) %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w8) %></span></div>
-        <div class="stl_01" style="top: 46.9062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w8) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w8) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 46.0062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w8)] %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w8) %></span></div>
-        <div class="stl_01" style="top: 46.9062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w8) %></span></div>
-        <div class="stl_01" style="top: 44.8062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w8)] %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w8)] %></span></div>
-        <div class="stl_01" style="top: 47.2062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w8)] %></span></div>
-        <div class="stl_01" style="top: 44.8062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w8)] %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w8) %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w8).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w8).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 46.0062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w8).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w8) %></span></div>
-        <div class="stl_01" style="top: 46.9062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w8) %></span></div>
-        <div class="stl_01" style="top: 45.1062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 46.9062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員9行目 -->
-        <div class="stl_01" style="top: 49.6062em; left:4.4em;"><span class="stl_10 stl_09"><%#= worker_number(w9) %></span></div>
-        <div class="stl_01" style="top: 48.4062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w9) %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w9) %></span></div>
-        <div class="stl_01" style="top: 50.8062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w9) %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:14.99em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w9) %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:17.9928em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w9) %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w9) %></span></div>
-        <div class="stl_01" style="top: 50.5062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w9) %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w9) %></span></div>
-        <div class="stl_01" style="top: 50.5062em; left:28.489em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w9) %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w9) %></span></div>
-        <div class="stl_01" style="top: 50.5062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w9) %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w9) %></span></div>
-        <div class="stl_01" style="top: 50.5062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w9) %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w9) %></span></div>
-        <div class="stl_01" style="top: 50.5062em; left:53.17em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w9) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w9) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 49.6062em; left:58em;"><span class="stl_10 stl_08"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w9)] %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w9) %></span></div>
-        <div class="stl_01" style="top: 50.5062em; left:61.49em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w9) %></span></div>
-        <div class="stl_01" style="top: 48.4062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w9)] %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w9)] %></span></div>
-        <div class="stl_01" style="top: 50.8062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w9)] %></span></div>
-        <div class="stl_01" style="top: 48.4062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w9)] %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w9) %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:77.99em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w9).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:80.9928em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w9).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 49.6062em; left:83.989em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w9).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w9) %></span></div>
-        <div class="stl_01" style="top: 50.5062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w9) %></span></div>
-        <div class="stl_01" style="top: 48.7062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 50.5062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <!-- 作業員10行目 -->
-        <div class="stl_01" style="top: 53.2062em; left:4.24em;"><span class="stl_10 stl_09"><%#= worker_number(w10) %></span></div>
-        <div class="stl_01" style="top: 52.0062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name_kana", w10) %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("name", w10) %></span></div>
-        <div class="stl_01" style="top: 54.4062em; left:5.44em;"><span class="stl_10 stl_09"><%#= worker_column("carrier_up_id", w10) %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:14.83em;"><span class="stl_10 stl_09"><%#= worker_column("job_type", w10) %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:17.8328em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_016_symbol", w10) %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:22em;"><span class="stl_10 stl_09"><%#= worker_column("hiring_on", w10) %></span></div>
-        <div class="stl_01" style="top: 54.1062em; left:23em;"><span class="stl_10 stl_09"><%#= worker_column("experience_term_before_hiring", w10) %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:28em;"><span class="stl_10 stl_09"><%#= worker_column("birth_day_on", w10) %></span></div>
-        <div class="stl_01" style="top: 54.1062em; left:28.329em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_020_age", w10) %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("my_address", w10) %></span></div>
-        <div class="stl_01" style="top: 54.1062em; left:32.44em;"><span class="stl_10 stl_09"><%#= worker_column("family_address", w10) %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("my_phone_number", w10) %></span></div>
-        <div class="stl_01" style="top: 54.1062em; left:47em;"><span class="stl_10 stl_09"><%#= worker_column("family_phone_number", w10) %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:53em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "med_exam_on", w10) %></span></div>
-        <div class="stl_01" style="top: 54.1062em; left:53em;">
-          <span class="stl_10 stl_09">
-            <%#= worker_attribute_column("worker_medical", "max_blood_pressure", w10) %>～<%#= worker_attribute_column("worker_medical", "min_blood_pressure", w10) %>
-          </span>
-        </div>
-        <div class="stl_01" style="top: 53.2062em; left:58em;"><span class="stl_10 stl_09"><%#= Worker.abo_blood_types_i18n[worker_column("abo_blood_type", w10)] %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:61em;"><span class="stl_10 stl_09"><%#= worker_attribute_column("worker_medical", "special_med_exam_on", w10) %></span></div>
-        <div class="stl_01" style="top: 54.1062em; left:61.33em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_030_special_health_check_type", w10) %></span></div>
-        <div class="stl_01" style="top: 52.0062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.health_insurance_types_i18n[worker_attribute_column("worker_insurance", "health_insurance_type", w10)] %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.pension_insurance_types_i18n[worker_attribute_column("worker_insurance", "pension_insurance_type", w10)] %></span></div>
-        <div class="stl_01" style="top: 54.4062em; left:66.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.employment_insurance_types_i18n[worker_attribute_column("worker_insurance", "employment_insurance_type", w10)] %></span></div>
-        <div class="stl_01" style="top: 52.0062em; left:72.5em;"><span class="stl_10 stl_09"><%#= WorkerInsurance.severance_pay_mutual_aid_types_i18n[worker_attribute_column("worker_insurance", "severance_pay_mutual_aid_type", w10)] %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:72.5em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_035_severance_pay_businesses", w10) %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:77.83em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_special_educations", "special_education_id", w10).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:80.8328em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_skill_trainings", "skill_training_id", w10).to_s&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 53.2062em; left:83.829em;"><span class="stl_10 stl_09"><%#= worker_attributes_column("worker_licenses", "license_id", w10)&.delete("[]") %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_039_beginning", w10) %></span></div>
-        <div class="stl_01" style="top: 54.1062em; left:88em;"><span class="stl_10 stl_09"><%#= worker_column("doc5_8_040_new_education", w10) %></span></div>
-        <div class="stl_01" style="top: 52.3062em; left:92.66em;"><span class="stl_10 stl_08">建・中</span></div>
-        <div class="stl_01" style="top: 54.1062em; left:92.66em;"><span class="stl_10 stl_08">他・無</span></div>
-
-        <div class="stl_01" style="top: 55.9993em; left:4em;"><span class="stl_14 stl_08">（</span></div>
-        <div class="stl_01" style="top: 55.9593em; left:4.54em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">注）１． ※印欄には次の記号等を入れる。（表示されない情報があります。）</span></div>
-        <div class="stl_01" style="top: 55.9593em; left:46em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">（注）７． 健康保険欄には、健康保険の名称（健康保険組合、協会けんぽ、建設国保、国民健康保険）を記載。 </span></div>
-        <div class="stl_01" style="top: 56.5593em; left:5.83em;"><span class="stl_14 stl_08" style="word-spacing:0.53em;">現 …現場代理人</span></div>
-        <div class="stl_01" style="top: 57.1593em; left:5.83em;"><span class="stl_14 stl_08" style="word-spacing:0.53em;">主 …主任技術者</span></div>
-        <div class="stl_01" style="top: 57.7593em; left:5.83em;"><span class="stl_14 stl_08" style="word-spacing:0.53em;">再 …危険有害業務・再発防止教育</span></div>
-        <div class="stl_01" style="top: 56.5593em; left:17.83em;"><span class="stl_14 stl_08" style="word-spacing:0.52em;">作 …作業主任者（（注）２．）</span></div>
-        <div class="stl_01" style="top: 57.1593em; left:17.83em;"><span class="stl_14" style="word-spacing:0.44em;">職 …職長</span></div>
-        <div class="stl_01" style="top: 57.7593em; left:17.83em;"><span class="stl_14 stl_08" style="word-spacing:0.52em;">習 …外国人技能実習生</span></div>
-        <div class="stl_01" style="top: 56.5593em; left:28.33em;"><span class="stl_14 stl_08" style="word-spacing:0.53em;">女 …女性作業員</span></div>
-        <div class="stl_01" style="top: 57.1593em; left:28.33em;"><span class="stl_14 stl_09" style="word-spacing:0.44em;">安 …安全衛生責任者</span></div>
-        <div class="stl_01" style="top: 57.7593em; left:28.33em;"><span class="stl_14 stl_08" style="word-spacing:0.53em;">就 …外国人建設就労者</span></div>
-        <div class="stl_01" style="top: 56.5593em; left:37.33em;"><span class="stl_14 stl_09" style="word-spacing:0.43em;">未 …18歳未満の作業員</span></div>
-        <div class="stl_01" style="top: 57.1593em; left:37.33em;"><span class="stl_14 stl_08" style="word-spacing:0.53em;">歳 …能力向上教育</span></div>
-        <div class="stl_01" style="top: 57.7593em; left:37.19em;"><span class="stl_14 stl_08" style="word-spacing:0.29em;">1特 …１号特定技能外国人</span></div>
-        <div class="stl_01" style="top: 56.5593em; left:48.92em;"><span class="stl_14 stl_08">上記の保険に加入しておらず、後期高齢者である等により、国民健康保険の適用除外である場合には、「適用除外」と記載。</span></div>
-        <div class="stl_01" style="top: 57.1593em; left:46em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">（注）８． 年金保険欄には、年金保険の名称（厚生年金、国民年金等）を記載。各年金の受給者である場合は、「受給者」と記載。</span></div>
-        <div class="stl_01" style="top: 57.7593em; left:46em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">（注）９． 雇用保険欄には被保険者番号の下４けたを記載。（日雇労働被保険者の場合には「日雇保険」と追記）</span></div>
-        <div class="stl_01" style="top: 58.3593em; left:48.92em;"><span class="stl_14 stl_08">事業主である等により雇用保険の適用除外である場合には「適用除外」と記載。</span></div>
-        <div class="stl_01" style="top: 58.9593em; left:46em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">（注）10． 安全衛生に関する教育の内容（例：雇入時教育、職長教育、建設用リフトの運転の業務に係る特別教育）については「雇入・職長特別教育」欄に記載。</span></div>
-        <div class="stl_01" style="top: 59.5593em; left:46em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">（注）11． 建設工事に係る知識及び技術又は技能に関する資格（例：登録〇〇基幹技能者、〇級〇〇技能士）を有する場合は、「免許」欄に記入。</span></div>
-        <div class="stl_01" style="top: 60.1593em; left:46em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">（注）12． 退職金共済手帳所有の有無については、建退共手帳所有の場合には「建」を、中退共手帳所有の場合には「中」を、その他の手帳所有の場合には「他」を、</span></div>
-        <div class="stl_01" style="top: 60.7593em; left:48.92em;"><span class="stl_14 stl_08">所有していない場合には「無」を〇で囲む。</span></div>
-        <div class="stl_01" style="top: 58.3993em; left:4em;"><span class="stl_14 stl_08">（</span></div>
-        <div class="stl_01" style="top: 58.3593em; left:4.54em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">注）２． 作業主任者は作業を直接指揮する義務を負うので、同時に施工されている他の現場や、同一現場においても他の作業個所との作業主任者を</span></div>
-        <div class="stl_01" style="top: 58.9593em; left:6.92em;"><span class="stl_14 stl_08">兼務することは、法的に認められていないので、複数の選任としなければならない。</span></div>
-        <div class="stl_01" style="top: 59.5593em; left:4.54em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">注）３． 事業者及び技能者が建設キャリアアップシステムに登録されている場合は、当該事業者の事業者ID及び現場ID並びに当該技能者の技能者IDを記載。</span></div>
-        <div class="stl_01" style="top: 60.1593em; left:4.54em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">注）４． 経験年数は現在担当している仕事の経験年数を記入する。</span></div>
-        <div class="stl_01" style="top: 59.5993em; left:4em;"><span class="stl_14 stl_08">（</span></div>
-        <div class="stl_01" style="top: 60.1993em; left:4em;"><span class="stl_14 stl_08">（</span></div>
-        <div class="stl_01" style="top: 60.7993em; left:4em;"><span class="stl_14 stl_08">（</span></div>
-        <div class="stl_01" style="top: 61.3993em; left:4em;"><span class="stl_14 stl_08">（</span></div>
-        <div class="stl_01" style="top: 60.7593em; left:4.54em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">注）５． 各社別に作成するのが原則であるが、リース機械等の運転者は一緒でもよい。</span></div>
-        <div class="stl_01" style="top: 61.3593em; left:4.54em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">注）６． 資格・免許等の写しを添付すること。</span></div>
-        <div class="stl_01" style="top: 61.3593em; left:46em;"><span class="stl_14 stl_08" style="word-spacing:-0.09em;">（注）13． 記載事項の一部について、別紙を用いて記載しても差し支えない。</span></div>
-      </div>
-    </div>
-  </div>
-<%# end %>
+<div style="overflow: auto;">
+	<% document_info.field_workers.each_slice(10).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
+		<div class="ritz grid-container" dir="ltr">
+			<table class="waffle no-grid" cellspacing="0" cellpadding="0">
+				<thead></thead>
+				<tbody>
+					<tr style="height: 13px">
+						<th id="758879504R0" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+						<td class="doc_8th_s1"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R1" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s3"></td>
+						<td class="doc_8th_s6" colspan="11" rowspan="2">全建統一様式第５号改</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s7"></td>
+						<td class="doc_8th_s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
+						<td class="doc_8th_s8" colspan="8" rowspan="3">
+							元請会社の「確認欄」8-042
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R2" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s3"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s7"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R3" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s9"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s7"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R4" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s9" colspan="11" rowspan="3">作　 業　 員 　名 　簿</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R5" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2" colspan="3" rowspan="2">提 出 日</td>
+						<td class="doc_8th_s10" colspan="6" rowspan="2">
+							「提出日（西暦）」8-011
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R6" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s11"></td>
+						<td class="doc_8th_s11" colspan="3" rowspan="2">事業所の名称</td>
+						<td class="doc_8th_s12" colspan="14" rowspan="2">
+							<%= document_site_info.site_name %> <!-- 8-001 事業所名(現場名)-->
+						</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R7" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s11"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s13" rowspan="2">（</td>
+						<td class="doc_8th_s14" colspan="7" rowspan="2">
+							<%= "※※未実装※※" %>	<!-- 8-004 書類作成日(西暦) -->
+						</td>
+						<td class="doc_8th_s2" colspan="2" rowspan="2">作成</td>
+						<td class="doc_8th_s2" rowspan="2">）</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R8" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s11"></td>
+						<td class="doc_8th_s11" colspan="3" rowspan="2">現　場　ID</td>
+						<td class="doc_8th_s12" colspan="14" rowspan="2">
+							<%= document_site_info.site_career_up_id %> <!-- 8-002 現場ID(キャリアアップ) -->
+						</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s11" colspan="4" rowspan="2">一次会社名</td>
+						<td class="doc_8th_s15" colspan="8" rowspan="2">
+							<%= document_site_info.business.name %> <!-- 8-005 一次会社名 -->
+						</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s13" rowspan="2">（</td>
+						<td class="doc_8th_s16" rowspan="2">
+							8-007
+						</td>
+						<td class="doc_8th_s2" colspan="3" rowspan="2">次）会社名</td>
+						<td class="doc_8th_s17" colspan="7" rowspan="2">
+							<%= Business.find(document_info.business_id).name %> <!-- 8-009 自社の「会社名」 -->
+						</td>
+						<td class="doc_8th_s2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R9" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s11"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s18" colspan="12">本書面に記載した内容は、作業員名簿として、安全衛生管</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s13"></td>
+						<td class="doc_8th_s2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R10" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s11"></td>
+						<td class="doc_8th_s11" colspan="3" rowspan="2">所　長　名</td>
+						<td class="doc_8th_s12" colspan="13" rowspan="2">
+							<%= document_site_info.site_agent_name %> <!-- 8-003 元請会社の「現場代理人」 -->
+						</td>
+						<td class="doc_8th_s1" rowspan="2">殿</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s18" colspan="12">理や労働災害発生時の緊急連絡・対応のために元請負業者</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s11" colspan="3" rowspan="2">事業者ID</td>
+						<td class="doc_8th_s19" colspan="9" rowspan="2">
+							一次会社の「事業者ID（キャリアアップ）」8-006
+						</td>
+						<td class="doc_8th_s20" rowspan="2">
+							&#12958;8-43
+						</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s21"></td>
+						<td class="doc_8th_s21" colspan="3" rowspan="2">事業者ID</td>
+						<td class="doc_8th_s19" colspan="8" rowspan="2">
+							<%= Business.find(document_info.business_id).carrier_up_id %> <!-- 8-010 自社の「事業者ID（キャリアアップ）」 -->
+						</td>
+						<td class="doc_8th_s20" rowspan="2">
+							&#12958;8-44
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R11" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s11"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s18" colspan="12">に提示することについて、記載者本人は同意しています。</td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s21"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R12" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s23 softmerge">
+							<div class="softmerge-inner" style="width:148px;left:-1px">［退職金共済制度加入について 建退共・中退共・その他・無］</div>
+						</td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>	
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s22"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s23 softmerge">
+							<div class="softmerge-inner" style="width:148px;left:-1px">［退職金共済制度加入について 建退共・中退共・その他・無］</div>
+						</td>
+						<td class="doc_8th_s26"></td>
+						<td class="doc_8th_s26"></td>
+						<td class="doc_8th_s26"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+						<td class="doc_8th_s18"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R13" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s2"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s29"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s30"></td>
+						<td class="doc_8th_s28"></td>
+						<td class="doc_8th_s28"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R14" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s31"></td>
+						<td class="doc_8th_s32" rowspan="6">番号</td>
+						<td class="doc_8th_s33" colspan="6" rowspan="2">フ　リ　ガ　ナ</td>
+						<td class="doc_8th_s6" colspan="2" rowspan="6">職 種</td>
+						<td class="doc_8th_s6" colspan="2" rowspan="6">※</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="3">雇入年月日</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="3">生年月日</td>
+						<td class="doc_8th_s33" colspan="9" rowspan="3">現住所</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="3">（ＴＥＬ）</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="3">最近の健康診断日</td>
+						<td class="doc_8th_s32" rowspan="6">血液型</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="3">特殊健康診断日</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="2">健康保険</td>
+						<td class="doc_8th_s34" colspan="4" rowspan="2">建設業退職金共済制度</td>
+						<td class="doc_8th_s33" colspan="6" rowspan="3">教育・資格・免許</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="3">入場年月日</td>
+						<td class="doc_8th_s35" colspan="2" rowspan="6">退職金共済手帳所有の有無</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R15" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s31"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R16" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s31"></td>
+						<td class="doc_8th_s33" colspan="6" rowspan="2">氏　　　　　名</td>
+						<td class="doc_8th_s33" colspan="4" rowspan="2">年金保険</td>
+						<td class="doc_8th_s34" colspan="4" rowspan="2">中小企業退職金共済制度</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R17" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s31"></td>
+						<td class="doc_8th_s6" colspan="4" rowspan="3">経験年数</td>
+						<td class="doc_8th_s6" colspan="4" rowspan="3">年齢</td>
+						<td class="doc_8th_s6" colspan="9" rowspan="3">家族連絡先</td>
+						<td class="doc_8th_s6" colspan="4" rowspan="3">（ＴＥＬ）</td>
+						<td class="doc_8th_s6" colspan="4" rowspan="3">血圧</td>
+						<td class="doc_8th_s6" colspan="4" rowspan="3">種類</td>
+						<td class="doc_8th_s36" colspan="1" rowspan="3">雇入・職長特別教育</td>
+						<td class="doc_8th_s37" colspan="1" rowspan="3">技能講習</td>
+						<td class="doc_8th_s38" colspan="4" rowspan="3">免許</td>
+						<td class="doc_8th_s6" colspan="4" rowspan="3">受入教育<br> 実施年月日</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R18" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s31"></td>
+						<td class="doc_8th_s6" colspan="6" rowspan="2">技　能　者　ID</td>
+						<td class="doc_8th_s6" colspan="4" rowspan="2">雇用保険</td>
+						<td class="doc_8th_s39" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R19" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s31"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R20" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(1, i) %> <!-- 見出し番号(1) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w1, "name_kana") %> <!-- 8-012 フリガナ(1) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w1, "hiring_on") %> <!-- 8-017 雇用年月日(1) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w1, "birth_day_on") %> <!-- 8-018 生年月日(1) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w1, "my_address") %> <!-- 8-021 住所(1) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w1, "my_phone_number") %> <!-- 8-023 電話番号(1) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w1, "med_exam_on") %> <!-- 8-025 健康診断日(1) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w1) %> <!-- 8-028 血液型(1) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w1, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(1) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w1, "health_insurance_type") %> <!-- 8-031 健康保険(1) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w1) %> <!-- 8-036 特別教育(1) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w1) %> <!-- 8-037 技能講習(1) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w1) %> <!-- 8-038 免許(1) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w1) %> <!-- 8-039 入場年月日･始期(1) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w1) %>・<%= worker_tyutaikyo(w1) %> <!-- 8-041 退職金共済手帳(建･中) (1) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R27" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R28" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w1, "name") %> <!-- 8-013 作業員名(1) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w1, "pension_insurance_type") %> <!-- 8-032 年金保険(1) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w1, "blank_term") %>年 <!-- 8-018 経験年数(1) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w1) %> <!-- 8-020 年齢(1) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w1, "family_address") %> <!-- 8-022 緊急連絡先住所(1) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w1, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(1) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w1) %> <!-- 8-026 8-027 血圧(1) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w1) %> <!-- 8-030 特別健康診断種類(1) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w1) %> <!-- 8-040 新規入場時教育年月日(1) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w1) %>・<%= worker_none(w1) %> <!-- 8-041 退職金共済手帳(他･無) (1) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R30" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w1, "carrier_up_id") %> <!-- 8-014 キャリアップID(1) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R31" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R26" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(2, i) %> <!-- 見出し番号(2) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w2, "name_kana")%> <!-- 8-012 フリガナ(2) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w2, "hiring_on") %> <!-- 8-017 雇用年月日(2) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w2, "birth_day_on") %> <!-- 8-018 生年月日(2) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w2, "my_address") %> <!-- 8-021 住所(2) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w2, "my_phone_number") %> <!-- 8-023 電話番号(2) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w2, "med_exam_on") %> <!-- 8-025 健康診断日(2) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w2) %> <!-- 8-028 血液型(2) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w2, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(2) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w2, "health_insurance_type") %> <!-- 8-031 健康保険(2) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w2) %> <!-- 8-036 特別教育(2) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w2) %> <!-- 8-037 技能講習(2) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w2) %> <!-- 8-038 免許(2) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w2) %> <!-- 8-039 入場年月日･始期(2) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w2) %>・<%= worker_tyutaikyo(w2) %> <!-- 8-041 退職金共済手帳(建･中) (2) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R27" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R28" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w2, "name") %> <!-- 8-013 作業員名(2) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w2, "blank_term") %>年 <!-- 8-018 経験年数(2) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w2) %> <!-- 8-020 年齢(2) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w2, "family_address") %> <!-- 8-022 緊急連絡先住所(2) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w2, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(2) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w2) %> <!-- 8-026 8-027 血圧(2) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w2) %> <!-- 8-030 特別健康診断種類(2) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w2) %> <!-- 8-040 新規入場時教育年月日(2) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w2) %>・<%= worker_none(w2) %> <!-- 8-041 退職金共済手帳(他･無) (2) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R30" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w2, "carrier_up_id") %> <!-- 8-014 キャリアップID(2) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R31" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R32" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(3, i) %> <!-- 見出し番号(3) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w3, "name_kana") %> <!-- 8-012 フリガナ(3) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w3, "hiring_on") %> <!-- 8-017 雇用年月日(3) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w3, "birth_day_on") %> <!-- 8-018 生年月日(3) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w3, "my_address") %> <!-- 8-021 住所(3) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w3, "my_phone_number") %> <!-- 8-023 電話番号(3) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w3, "med_exam_on") %> <!-- 8-025 健康診断日(3) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w3) %> <!-- 8-028 血液型(3) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w3, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(3) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w3, "health_insurance_type") %> <!-- 8-031 健康保険(3) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w3) %> <!-- 8-036 特別教育(3) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w3) %> <!-- 8-037 技能講習(3) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w3) %> <!-- 8-038 免許(3) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w3) %> <!-- 8-039 入場年月日･始期(3) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w3) %>・<%= worker_tyutaikyo(w3) %> <!-- 8-041 退職金共済手帳(建･中) (3) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R33" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R34" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w3, "name") %> <!-- 8-013 作業員名(3) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w3, "pension_insurance_type") %> <!-- 8-032 年金保険(3) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R35" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w3, "blank_term") %>年 <!-- 8-018 経験年数(3) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w3) %> <!-- 8-020 年齢(3) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w3, "family_address") %> <!-- 8-022 緊急連絡先住所(3) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w3, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(3) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w3) %> <!-- 8-026 8-027 血圧(3) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w3) %> <!-- 8-030 特別健康診断種類(3) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w3) %> <!-- 8-040 新規入場時教育年月日(3) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w3) %>・<%= worker_none(w3) %> <!-- 8-041 退職金共済手帳(他･無) (3) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R36" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w3, "carrier_up_id") %> <!-- 8-014 キャリアップID(3) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R37" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R38" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(4, i) %> <!-- 見出し番号(4) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w4, "name_kana")%> <!-- 8-012 フリガナ(4) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w4, "hiring_on") %> <!-- 8-017 雇用年月日(4) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w4, "birth_day_on") %> <!-- 8-018 生年月日(4) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->	
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w4, "my_phone_number") %> <!-- 8-023 電話番号(4) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w4, "med_exam_on") %> <!-- 8-025 健康診断日(4) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w4) %> <!-- 8-028 血液型(4) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w4, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(4) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w4, "health_insurance_type") %> <!-- 8-031 健康保険(4) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w4) %> <!-- 8-036 特別教育(4) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w4) %> <!-- 8-037 技能講習(4) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w4) %> <!-- 8-038 免許(4) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w4) %> <!-- 8-039 入場年月日･始期(4) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w4) %>・<%= worker_tyutaikyo(w4) %> <!-- 8-041 退職金共済手帳(建･中) (4) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R39" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R40" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w4, "name") %> <!-- 8-013 作業員名(4) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w4, "pension_insurance_type") %> <!-- 8-032 年金保険(4) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R41" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w4, "blank_term") %>年 <!-- 8-018 経験年数(4) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w4) %> <!-- 8-020 年齢(4) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w4, "family_address") %> <!-- 8-022 緊急連絡先住所(4) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w4, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(4) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w4) %> <!-- 8-026 8-027 血圧(4) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w4) %> <!-- 8-030 特別健康診断種類(4) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w4) %> <!-- 8-040 新規入場時教育年月日(4) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w4) %>・<%= worker_none(w4) %> <!-- 8-041 退職金共済手帳(他･無) (4) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R42" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w4, "carrier_up_id") %> <!-- 8-014 キャリアップID(4) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R43" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R44" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(5, i) %> <!-- 見出し番号(5) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w5, "name_kana") %> <!-- 8-012 フリガナ(5) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w5, "hiring_on") %> <!-- 8-017 雇用年月日(5) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w5, "birth_day_on") %> <!-- 8-018 生年月日(5) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w5, "my_address") %> <!-- 8-021 住所(5) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w5, "my_phone_number") %> <!-- 8-023 電話番号(5) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w5, "med_exam_on") %> <!-- 8-025 健康診断日(5) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w5) %> <!-- 8-028 血液型(5) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w5, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(5) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w5, "health_insurance_type") %> <!-- 8-031 健康保険(5) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w5) %> <!-- 8-036 特別教育(5) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w5) %> <!-- 8-037 技能講習(5) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w5) %> <!-- 8-038 免許(5) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w5) %> <!-- 8-039 入場年月日･始期(5) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w5) %>・<%= worker_tyutaikyo(w5) %> <!-- 8-041 退職金共済手帳(建･中) (5) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R45" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R46" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w5, "name") %> <!-- 8-013 作業員名(5) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w5, "pension_insurance_type") %> <!-- 8-032 年金保険(5) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R47" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w5, "blank_term") %>年 <!-- 8-018 経験年数(5) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w5) %> <!-- 8-020 年齢(5) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w5, "family_address") %> <!-- 8-022 緊急連絡先住所(5) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w5, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(5) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w5) %> <!-- 8-026 8-027 血圧(5) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w5) %> <!-- 8-030 特別健康診断種類(5) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w5) %> <!-- 8-040 新規入場時教育年月日(5) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w5) %>・<%= worker_none(w5) %> <!-- 8-041 退職金共済手帳(他･無) (5) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R48" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w5, "carrier_up_id") %> <!-- 8-014 キャリアップID(5) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R49" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R50" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(6, i) %> <!-- 見出し番号(6) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w6, "name_kana") %> <!-- 8-012 フリガナ(6) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w6, "hiring_on") %> <!-- 8-017 雇用年月日(6) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w6, "birth_day_on") %> <!-- 8-018 生年月日(6) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w6, "my_address") %> <!-- 8-021 住所(6) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w6, "my_phone_number") %> <!-- 8-023 電話番号(6) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w6, "med_exam_on") %> <!-- 8-025 健康診断日(6) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w6) %> <!-- 8-028 血液型(6) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w6, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(6) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w6, "health_insurance_type") %> <!-- 8-031 健康保険(6) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w6) %> <!-- 8-036 特別教育(6) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w6) %> <!-- 8-037 技能講習(6) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w6) %> <!-- 8-038 免許(6) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w6) %> <!-- 8-039 入場年月日･始期(6) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w6) %>・<%= worker_tyutaikyo(w6) %> <!-- 8-041 退職金共済手帳(建･中) (6) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R51" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R52" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w6, "name") %> <!-- 8-013 作業員名(6) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w6, "pension_insurance_type") %> <!-- 8-032 年金保険(6) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R53" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w6, "blank_term") %>年 <!-- 8-018 経験年数(6) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w6) %> <!-- 8-020 年齢(6) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w6, "family_address") %> <!-- 8-022 緊急連絡先住所(6) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w6, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(6) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w6) %> <!-- 8-026 8-027 血圧(6) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w6) %> <!-- 8-030 特別健康診断種類(6) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w6) %> <!-- 8-040 新規入場時教育年月日(6) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w6) %>・<%= worker_none(w6) %> <!-- 8-041 退職金共済手帳(他･無) (6) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R54" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w6, "carrier_up_id") %> <!-- 8-014 キャリアップID(6) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R55" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R56" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(7, i) %> <!-- 見出し番号(7) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w7, "name_kana") %> <!-- 8-012 フリガナ(7) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w7, "hiring_on") %> <!-- 8-017 雇用年月日(7) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w7, "birth_day_on") %> <!-- 8-018 生年月日(7) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w7, "my_address") %> <!-- 8-021 住所(7) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w7, "my_phone_number") %> <!-- 8-023 電話番号(7) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w7, "med_exam_on") %> <!-- 8-025 健康診断日(7) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w7) %> <!-- 8-028 血液型(7) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w7, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(7) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w7, "health_insurance_type") %> <!-- 8-031 健康保険(7) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w7) %> <!-- 8-036 特別教育(7) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w7) %> <!-- 8-037 技能講習(7) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w7) %> <!-- 8-038 免許(7) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w7) %> <!-- 8-039 入場年月日･始期(7) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w7) %>・<%= worker_tyutaikyo(w7) %> <!-- 8-041 退職金共済手帳(建･中) (7) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R57" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R58" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w7, "name") %> <!-- 8-013 作業員名(7) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w7, "pension_insurance_type") %> <!-- 8-032 年金保険(7) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R59" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w7, "blank_term") %>年 <!-- 8-018 経験年数(7) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w7) %> <!-- 8-020 年齢(7) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w7, "family_address") %> <!-- 8-022 緊急連絡先住所(7) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w7, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(7) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w7) %> <!-- 8-026 8-027 血圧(7) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w7) %> <!-- 8-030 特別健康診断種類(7) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w7) %> <!-- 8-040 新規入場時教育年月日(7) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w7) %>・<%= worker_none(w7) %> <!-- 8-041 退職金共済手帳(他･無) (7) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R60" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w7, "carrier_up_id") %> <!-- 8-014 キャリアップID(7) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R61" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R62" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(8, i) %> <!-- 見出し番号(8) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w8, "name_kana") %> <!-- 8-012 フリガナ(8) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w8, "hiring_on") %> <!-- 8-017 雇用年月日(8) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w8, "birth_day_on") %> <!-- 8-018 生年月日(8) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w8, "my_address") %> <!-- 8-021 住所(8) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w8, "my_phone_number") %> <!-- 8-023 電話番号(8) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w8, "med_exam_on") %> <!-- 8-025 健康診断日(8) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->						
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w8, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(8) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w8, "health_insurance_type") %> <!-- 8-031 健康保険(8) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w8) %> <!-- 8-036 特別教育(8) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w8) %> <!-- 8-037 技能講習(8) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w8) %> <!-- 8-038 免許(8) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w8) %> <!-- 8-039 入場年月日･始期(8) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w8) %>・<%= worker_tyutaikyo(w8) %> <!-- 8-041 退職金共済手帳(建･中)  (8) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R63" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R64" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w8, "name") %> <!-- 8-013 作業員名(8) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w8, "pension_insurance_type") %> <!-- 8-032 年金保険(8) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R65" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w8, "blank_term") %>年 <!-- 8-018 経験年数(8) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w8) %> <!-- 8-020 年齢(8) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w8, "family_address") %> <!-- 8-022 緊急連絡先住所(8) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w8, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(8) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w8) %> <!-- 8-026 8-027 血圧(8) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w8) %> <!-- 8-030 特別健康診断種類(8) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w8) %> <!-- 8-040 新規入場時教育年月日(8) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w8) %>・<%= worker_none(w8) %> <!-- 8-041 退職金共済手帳(他･無) (8) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R66" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w8, "carrier_up_id") %> <!-- 8-014 キャリアップID(8) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R67" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R68" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(9, i) %> <!-- 見出し番号(9) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w9, "name_kana") %> <!-- 8-012 フリガナ(9) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w9, "hiring_on") %> <!-- 8-017 雇用年月日(9) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w9, "birth_day_on") %> <!-- 8-018 生年月日(9) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w9, "my_address") %> <!-- 8-021 住所(9) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w9, "my_phone_number") %> <!-- 8-023 電話番号(9) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w9, "med_exam_on") %> <!-- 8-025 健康診断日(9) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w9) %> <!-- 8-028 血液型(9) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w9, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(9) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w9, "health_insurance_type") %> <!-- 8-031 健康保険(9) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w9) %> <!-- 8-036 特別教育(9) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w9) %> <!-- 8-037 技能講習(9) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w9) %> <!-- 8-038 免許(9) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w9) %> <!-- 8-039 入場年月日･始期(9) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w9) %>・<%= worker_tyutaikyo(w9) %> <!-- 8-041 退職金共済手帳(建･中) (9) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R69" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R70" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w9, "name") %> <!-- 8-013 作業員名(9) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w9, "pension_insurance_type") %> <!-- 8-032 年金保険(9) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R71" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w9, "blank_term") %>年 <!-- 8-018 経験年数(9) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w9) %> <!-- 8-020 年齢(9) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w9, "family_address") %> <!-- 8-022 緊急連絡先住所(9) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w9, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(9) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w9) %> <!-- 8-026 8-027 血圧(9) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w9) %> <!-- 8-030 特別健康診断種類(9) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w9) %> <!-- 8-040 新規入場時教育年月日(9) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w9) %>・<%= worker_none(w9) %> <!-- 8-041 退職金共済手帳(他･無) (9) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R72" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w9, "carrier_up_id") %> <!-- 8-014 キャリアップID(9) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R73" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R74" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s41" rowspan="6">
+							<%= worker_index(10, i) %> <!-- 見出し番号(10) -->
+						</td>
+						<td class="doc_8th_s56" colspan="6" rowspan="2">
+							<%= worker_str(w10, "name_kana") %> <!-- 8-012 フリガナ(10) -->
+						</td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w10, "hiring_on") %> <!-- 8-017 雇用年月日(10) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_date(w10, "birth_day_on") %> <!-- 8-018 生年月日(10) -->
+						</td>
+						<td class="doc_8th_s56" colspan="9" rowspan="3">
+							<%= worker_str(w10, "my_address") %> <!-- 8-021 住所(10) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_phone_number(w10, "my_phone_number") %> <!-- 8-023 電話番号(10) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w10, "med_exam_on") %> <!-- 8-025 健康診断日(10) -->
+						</td>
+						<td class="doc_8th_s59" rowspan="6">
+							<%= worker_abo_blood_type(w10) %> <!-- 8-028 血液型(10) -->
+						</td>
+						<td class="doc_8th_s58" colspan="4" rowspan="3">
+							<%= worker_medical_date(w10, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(10) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w10, "health_insurance_type") %> <!-- 8-031 健康保険(10) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_special_education(w10) %> <!-- 8-036 特別教育(10) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="1" rowspan="6">
+							<%= worker_skill_training(w10) %> <!-- 8-037 技能講習(10) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="6">
+							<%= worker_license(w10) %> <!-- 8-038 免許(10) -->
+						</td>
+						<td class="doc_8th_s58_1" colspan="4" rowspan="3">
+							<%= field_worker_admission_date(w1) %> <!-- 8-039 入場年月日･始期(10) -->
+						</td>
+						<td class="doc_8th_s60" colspan="2" rowspan="3">
+							<%= worker_kentaikyo(w10) %>・<%= worker_tyutaikyo(w10) %> <!-- 8-041 退職金共済手帳(建･中) (10) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R75" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R76" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s61" colspan="6" rowspan="2">
+							<%= worker_str(w10, "name") %> <!-- 8-013 作業員名(10) -->
+						</td>
+						<td class="doc_8th_s56_1" colspan="4" rowspan="2">
+							<%= worker_insurance(w10, "pension_insurance_type") %> <!-- 8-032 年金保険(10) -->
+						</td>
+						<td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R77" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_str(w10, "blank_term") %>年 <!-- 8-018 経験年数(10) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_age(w10) %> <!-- 8-020 年齢(10) -->
+						</td>
+						<td class="doc_8th_s57" colspan="9" rowspan="3">
+							<%= worker_str(w10, "family_address") %> <!-- 8-022 緊急連絡先住所(10) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= worker_phone_number(w10, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(10) -->
+						</td>
+						<td class="doc_8th_s59" colspan="4" rowspan="3">
+							<%= blood_pressure(w10) %> <!-- 8-026 8-027 血圧(10) -->
+						</td>
+						<td class="doc_8th_s57_1" colspan="4" rowspan="3">
+							<%= worker_special_med_exam(w10) %> <!-- 8-030 特別健康診断種類(10) -->
+						</td>
+						<td class="doc_8th_s59_1" colspan="4" rowspan="3">
+							<%= field_worker_education_date(w10) %> <!-- 8-040 新規入場時教育年月日(10) -->
+						</td>
+						<td class="doc_8th_s59" colspan="2" rowspan="3">
+							<%= worker_other(w10) %>・<%= worker_none(w10) %> <!-- 8-041 退職金共済手帳(他･無) (10) -->
+						</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R78" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+						<td class="doc_8th_s57" colspan="6" rowspan="2">
+							<%= worker_str(w10, "carrier_up_id") %> <!-- 8-014 キャリアップID(10) -->
+						</td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+						<td class="doc_8th_s57" colspan="4" rowspan="2"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R79" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s40"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R79" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R81" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）１．</td>
+						<td class="doc_8th_s62" colspan="14">※印欄には次の記号等を入れる。（表示されない情報があります。）</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）７．</td>
+						<td class="doc_8th_s62" colspan="31">健康保険欄には、健康保険の名称（健康保険組合、協会けんぽ、建設国保、国民健康保険）を記載。</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R82" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">現</td>
+						<td class="doc_8th_s62" colspan="6">…現場代理人</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">作</td>
+						<td class="doc_8th_s62" colspan="5">…作業主任者（（注）２．）</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">女</td>
+						<td class="doc_8th_s62" colspan="4">…女性作業員</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">未</td>
+						<td class="doc_8th_s62" colspan="4">…18歳未満の作業員</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63"></td>
+						<td class="doc_8th_s62" colspan="31">上記の保険に加入しておらず、後期高齢者である等により、国民健康保険の適用除外である場合には、「適用除外」と記載。</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R83" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">主</td>
+						<td class="doc_8th_s62" colspan="6">…主任技術者</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">職</td>
+						<td class="doc_8th_s62" colspan="5">…職長</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">安</td>
+						<td class="doc_8th_s62" colspan="4">…安全衛生責任者</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">歳</td>
+						<td class="doc_8th_s62" colspan="4">…能力向上教育</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）８．</td>
+						<td class="doc_8th_s62" colspan="31">年金保険欄には、年金保険の名称（厚生年金、国民年金等）を記載。各年金の受給者である場合は、「受給者」と記載。</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R84" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">再</td>
+						<td class="doc_8th_s62" colspan="6">…危険有害業務・再発防止教育</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">習</td>
+						<td class="doc_8th_s62" colspan="5">…外国人技能実習生</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">就</td>
+						<td class="doc_8th_s62" colspan="4">…外国人建設就労者</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s64">1特</td>
+						<td class="doc_8th_s62" colspan="4">…１号特定技能外国人</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）９．</td>
+						<td class="doc_8th_s62" colspan="31">雇用保険欄には被保険者番号の下４けたを記載。（日雇労働被保険者の場合には「日雇保険」と追記）</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R85" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）２．</td>
+						<td class="doc_8th_s62" colspan="25">作業主任者は作業を直接指揮する義務を負うので、同時に施工されている他の現場や、同一現場においても他の作業個所との作業主任者を</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63"></td>
+						<td class="doc_8th_s62" colspan="31">事業主である等により雇用保険の適用除外である場合には「適用除外」と記載。</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R86" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63"></td>
+						<td class="doc_8th_s62" colspan="25">兼務することは、法的に認められていないので、複数の選任としなければならない。</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s23"></td>
+						<td class="doc_8th_s65 softmerge">
+							<div class="softmerge-inner" style="width:37px;left:-10px">（注）10．</div>
+						</td>
+						<td class="doc_8th_s66" colspan="31">安全衛生に関する教育の内容（例：雇入時教育、職長教育、建設用リフトの運転の業務に係る特別教育）については「雇入・職長特別教育」欄に記載。</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R87" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）３．</td>
+						<td class="doc_8th_s62" colspan="25">事業者及び技能者が建設キャリアアップシステムに登録されている場合は、当該事業者の事業者ID及び現場ID並びに当該技能者の技能者IDを記載。</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s23"></td>
+						<td class="doc_8th_s65 softmerge">
+							<div class="softmerge-inner" style="width:36px;left:-9px">（注）11．</div>
+						</td>
+						<td class="doc_8th_s66" colspan="31">建設工事に係る知識及び技術又は技能に関する資格（例：登録〇〇基幹技能者、〇級〇〇技能士）を有する場合は、「免許」欄に記入。</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R88" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）４．</td>
+						<td class="doc_8th_s62" colspan="25">経験年数は現在担当している仕事の経験年数を記入する。</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s23"></td>
+						<td class="doc_8th_s65 softmerge">
+							<div class="softmerge-inner" style="width:37px;left:-10px">（注）12．</div>
+						</td>
+						<td class="doc_8th_s66" colspan="31">退職金共済手帳所有の有無については、建退共手帳所有の場合には「建」を、中退共手帳所有の場合には「中」を、その他の手帳所有の場合には「他」を、</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R89" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）５．</td>
+						<td class="doc_8th_s62" colspan="25">各社別に作成するのが原則であるが、リース機械等の運転者は一緒でもよい。</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62" colspan="31">所有していない場合には「無」を〇で囲む。</td>
+					</tr>
+					<tr style="height: 13px">
+						<th id="758879504R90" style="height: 13px;" class="row-headers-background"></th>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s63">（注）６．</td>
+						<td class="doc_8th_s62" colspan="25">資格・免許等の写しを添付すること。</td>
+						<td class="doc_8th_s62"></td>
+						<td class="doc_8th_s23"></td>
+						<td class="doc_8th_s65 softmerge">
+							<div class="softmerge-inner" style="width:37px;left:-10px">（注）13．</div>
+						</td>
+						<td class="doc_8th_s66" colspan="31">記載事項の一部について、別紙を用いて記載しても差し支えない。</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<% end %>
+</div>
