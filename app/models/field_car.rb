@@ -1,0 +1,2 @@
+class FieldCar < ApplicationRecord
+end
