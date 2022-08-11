@@ -12,10 +12,12 @@ module Users
       if Rails.env.development?
         @car = current_business.cars.new(
           # テスト用デフォルト値 ==========================
+          usage:                        rand(0..1),
           owner_name:                   current_user.name,
           safety_manager:               'anzen taro',
+          vehicle_name:                 'ハイエース',
           vehicle_model:                'ZVW30',
-          vehicle_number:               '12-34',
+          vehicle_number:               "品川#{rand(1..500)}あ#{rand(1..9999)}",
           vehicle_inspection_start_on:  Date.today,
           vehicle_inspection_end_on:    Date.today.since(3.years),
           liability_securities_number:  SecureRandom.hex(5),
@@ -83,8 +85,8 @@ module Users
     end
 
     def car_params
-      params.require(:car).permit(:owner_name, :safety_manager,
-        :vehicle_model, :vehicle_number, :vehicle_inspection_start_on, :vehicle_inspection_end_on,
+      params.require(:car).permit(:usage, :owner_name, :safety_manager,
+        :vehicle_name, :vehicle_model, :vehicle_number, :vehicle_inspection_start_on, :vehicle_inspection_end_on,
         :liability_securities_number, :liability_insurance_start_on, :liability_insurance_end_on,
         :voluntary_securities_number, :voluntary_insurance_start_on, :voluntary_insurance_end_on,
         :car_insurance_company_id, { images: [] },

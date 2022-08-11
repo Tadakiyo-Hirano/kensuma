@@ -223,6 +223,7 @@ ja:
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
+      vehicle_number_invalid: は地域名,分類番号,平仮名等,一連指定番号で入力してください(例：品川500あ1234)
     template:
       body: 次の項目を確認してください
       header:
