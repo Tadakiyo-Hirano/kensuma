@@ -3,7 +3,7 @@
 
 <div class="card">
   <div class="card-body">
-    <%= form_with model: @machine, url: users_machines_path, method: :post, local: true do |f| %>
+    <%= form_with model: @machine, url: users_machines_path, method: :post, local: true, class: "machine-form-validation" do |f| %>
       <%= render partial: "form", locals: { f: f, machine: @machine } %>
       <%= f.submit yield(:btn_text), class: "btn btn-primary btn-block btn-md" %>
       <%= link_to "一覧画面へ", users_machines_path, class: "btn btn-default btn-block btn-md" %>
