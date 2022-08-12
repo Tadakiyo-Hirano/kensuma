@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :machine do
     uuid { SecureRandom.uuid }
-    name { 0 }
+    name { '電動ドリル' }
     standards_performance { 'サンプル性能' }
     control_number { '123-456-789' }
     inspector { 'サンプル取扱者' }
