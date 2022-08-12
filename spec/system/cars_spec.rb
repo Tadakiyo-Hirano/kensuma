@@ -33,10 +33,14 @@ RSpec.describe 'Cars', type: :system do
 
         visit new_users_car_path
 
+        # 使用目的
+        select '通勤用', from: 'car[usage]'
         # 車両所有者氏名
         fill_in 'car[owner_name]', with: car.owner_name
         # 安全運転管理者
         fill_in 'car[safety_manager]', with: car.safety_manager
+        # 車両型名
+        fill_in 'car[vehicle_name]', with: car.vehicle_name
         # 車両型式
         fill_in 'car[vehicle_model]', with: car.vehicle_model
         # 車両番号

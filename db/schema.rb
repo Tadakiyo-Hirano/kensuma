@@ -127,6 +127,8 @@ ActiveRecord::Schema.define(version: 2022_08_10_052834) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "car_insurance_company_id", null: false
     t.string "uuid", null: false
+    t.integer "usage", null: false
+    t.string "vehicle_name", null: false
     t.index ["business_id"], name: "index_cars_on_business_id"
     t.index ["car_insurance_company_id"], name: "index_cars_on_car_insurance_company_id"
   end

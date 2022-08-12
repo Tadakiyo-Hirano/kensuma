@@ -41,8 +41,10 @@ ja:
       business_occupation:
         occupation_id: 職種
       car:
+        usage: 使用目的
         owner_name: 車両所有者氏名
         safety_manager: 安全運転管理者
+        vehicle_name: 車両名
         vehicle_model: 車両型式
         vehicle_number: 車両番号
         vehicle_inspection_start_on: 車検初め
