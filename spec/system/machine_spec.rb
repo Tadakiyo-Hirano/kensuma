@@ -7,7 +7,8 @@ RSpec.describe 'Machines', type: :system do
 
   describe '機械関連' do
     before(:each) do
-      user.skip_confirmation!
+      # ユーザーメール認証スキップのためコメントアウト
+      # user.skip_confirmation!
       user.save!
       business.save!
       visit new_user_session_path
