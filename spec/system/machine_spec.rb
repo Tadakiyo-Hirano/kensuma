@@ -36,13 +36,13 @@ RSpec.describe 'Machines', type: :system do
         expect(page).to have_content '機械情報を登録しました'
       end
     end
-    
+
     context '機械情報編集' do
       it '機械情報が編集できること' do
         visit edit_users_machine_path(machine)
-        
+
         select '電動ドリル', from: 'machine[name]'
-    
+
         click_button '更新'
         expect(page).to have_content '更新しました'
       end
