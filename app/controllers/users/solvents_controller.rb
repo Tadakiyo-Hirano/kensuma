@@ -7,14 +7,18 @@ module Users
     end
 
     def new
-      @solvent = current_business.solvents.new(
-        # テスト用デフォルト値 =====================
-        name:           'テスト塗料液　硬化剤',
-        maker:          'テスト化学工業',
-        classification: 'エポキシ塗料',
-        ingredients:    'アシン類'
-        # =======================================
-      )
+      if Rails.env.development?
+        @solvent = current_business.solvents.new(
+          # テスト用デフォルト値 =====================
+          name:           'テスト塗料液　硬化剤',
+          maker:          'テスト化学工業',
+          classification: 'エポキシ塗料',
+          ingredients:    'アシン類'
+          # =======================================
+        )
+      else
+        @solvent = current_business.solvents.new
+      end
     end
 
     def create

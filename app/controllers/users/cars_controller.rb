@@ -9,30 +9,37 @@ module Users
     def show; end
 
     def new
-      @car = current_business.cars.new(
-        # テスト用デフォルト値 ==========================
-        owner_name:                   current_user.name,
-        safety_manager:               'anzen taro',
-        vehicle_model:                'ZVW30',
-        vehicle_number:               '12-34',
-        vehicle_inspection_start_on:  Date.today,
-        vehicle_inspection_end_on:    Date.today.since(3.years),
-        liability_securities_number:  SecureRandom.hex(5),
-        liability_insurance_start_on: Date.today,
-        liability_insurance_end_on:   Date.today.next_year,
-        car_insurance_company_id:     1
-        # ============================================
-      )
-      @car.car_voluntary_insurances.build(
-        # テスト用デフォルト値 ==========================
-        personal_insurance:           1,
-        objective_insurance:          2,
-        voluntary_securities_number:  SecureRandom.hex(5),
-        voluntary_insurance_start_on: Date.today,
-        voluntary_insurance_end_on:   Date.today.next_year,
-        company_voluntary_id:         3
-        # ============================================
-      )
+      if Rails.env.development?
+        @car = current_business.cars.new(
+          # テスト用デフォルト値 ==========================
+          usage:                        rand(0..1),
+          owner_name:                   current_user.name,
+          safety_manager:               'anzen taro',
+          vehicle_name:                 'ハイエース',
+          vehicle_model:                'ZVW30',
+          vehicle_number:               "品川#{rand(1..500)}あ#{rand(1..9999)}",
+          vehicle_inspection_start_on:  Date.today,
+          vehicle_inspection_end_on:    Date.today.since(3.years),
+          liability_securities_number:  SecureRandom.hex(5),
+          liability_insurance_start_on: Date.today,
+          liability_insurance_end_on:   Date.today.next_year,
+          car_insurance_company_id:     1
+          # ============================================
+        )
+        @car.car_voluntary_insurances.build(
+          # テスト用デフォルト値 ==========================
+          personal_insurance:           1,
+          objective_insurance:          2,
+          voluntary_securities_number:  SecureRandom.hex(5),
+          voluntary_insurance_start_on: Date.today,
+          voluntary_insurance_end_on:   Date.today.next_year,
+          company_voluntary_id:         3
+          # ============================================
+        )
+      else
+        @car = current_business.cars.new
+        @car.car_voluntary_insurances.build
+      end
     end
 
     def create
@@ -78,8 +85,8 @@ module Users
     end
 
     def car_params
-      params.require(:car).permit(:owner_name, :safety_manager,
-        :vehicle_model, :vehicle_number, :vehicle_inspection_start_on, :vehicle_inspection_end_on,
+      params.require(:car).permit(:usage, :owner_name, :safety_manager,
+        :vehicle_name, :vehicle_model, :vehicle_number, :vehicle_inspection_start_on, :vehicle_inspection_end_on,
         :liability_securities_number, :liability_insurance_start_on, :liability_insurance_end_on,
         :voluntary_securities_number, :voluntary_insurance_start_on, :voluntary_insurance_end_on,
         :car_insurance_company_id, { images: [] },

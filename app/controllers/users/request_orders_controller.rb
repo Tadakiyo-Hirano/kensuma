@@ -15,7 +15,7 @@ module Users
 
     def edit
       # テスト用デフォルト値 ==========================
-      if @request_order.construction_name.nil?
+      if Rails.env.development? && @request_order.construction_name.nil?
         @request_order.tap do |r|
           r.construction_name =                  'テスト工事名'
           r.construction_details =               'テスト工事内容'
