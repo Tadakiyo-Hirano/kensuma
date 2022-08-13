@@ -27,44 +27,38 @@ RSpec.describe 'Cars', type: :system do
       it '新規登録したあと詳細画面へ遷移すること' do
         visit new_users_special_vehicle_path
 
-        # 車両所有者氏名
-        fill_in 'car[owner_name]', with: car.owner_name
-        # 安全運転管理者
-        fill_in 'car[safety_manager]', with: car.safety_manager
-        # 車両型式
-        fill_in 'car[vehicle_model]', with: car.vehicle_model
-        # 車両番号
-        fill_in 'car[vehicle_number]', with: car.vehicle_number
-        # 車検初め
-        fill_in 'car[vehicle_inspection_start_on]', with: car.vehicle_inspection_start_on
-        # 車検終わり
-        fill_in 'car[vehicle_inspection_end_on]', with: car.vehicle_inspection_end_on
-
-        # ========== 自賠責保険ここから ==========
-        # 自賠責保険会社
-        select 'test_company1', from: 'car_car_insurance_company_id'
-        # 自賠責証券番号
-        fill_in 'car[liability_securities_number]', with: car.liability_securities_number
-        # 自賠責保険初め
-        fill_in 'car[liability_insurance_start_on]', with: car.liability_insurance_start_on
-        # 自賠責保険終わり
-        fill_in 'car[liability_insurance_end_on]', with: car.liability_insurance_end_on
-
-        # ========== 自賠責保険ここまで ==========
-
+        # 名称
+        fill_in 'special_vehicle[name]', with: special_vehicle.name
+        # メーカー
+        fill_in 'special_vehicle[maker]', with: special_vehicle.maker
+        # 規格・性能
+        fill_in 'special_vehicle[standards_performance]', with: special_vehicle.standards_performance
+        # 製造年
+        fill_in 'special_vehicle[year_manufactured]', with: special_vehicle.year_manufactured
+        # 管理番号(整理番号)
+        fill_in 'special_vehicle[control_number]', with: special_vehicle.control_number
+        # 自主検査有効期限(正規・年次)
+        fill_in 'special_vehicle[check_exp_date_year]', with: special_vehicle.check_exp_date_year
+        # 自主検査有効期限(正規・月次)
+        fill_in 'special_vehicle[check_exp_date_month]', with: special_vehicle.check_exp_date_month
+        # 自主検査有効期限(特定)
+        fill_in 'special_vehicle[check_exp_date_specific]', with: special_vehicle.check_exp_date_specific
+        # 移動式クレーン等の性能検査有効期限
+        fill_in 'special_vehicle[check_exp_date_machine]', with: special_vehicle.check_exp_date_machine
+        # 自動車検査証有効期限
+        fill_in 'special_vehicle[check_exp_date_car]', with: special_vehicle.check_exp_date_car
+        
         # ========== 任意保険ここから ==========
-        # 任意保険会社
-        select 'test_company2', from: 'car_car_voluntary_insurances_attributes_0_company_voluntary_id'
-        # 対人保険金
-        select car_voluntary_insurance.personal_insurance, from: 'car_car_voluntary_insurances_attributes_0_personal_insurance'
-        # 対物保険金
-        select car_voluntary_insurance.objective_insurance, from: 'car_car_voluntary_insurances_attributes_0_objective_insurance'
-        # 任意保険証券番号
-        fill_in 'car[car_voluntary_insurances_attributes][0][voluntary_securities_number]', with: car_voluntary_insurance.voluntary_securities_number.to_i
-        # 任意保険初め
-        fill_in 'car[car_voluntary_insurances_attributes][0][voluntary_insurance_start_on]', with: car_voluntary_insurance.voluntary_insurance_start_on
-        # 任意保険終わり
-        fill_in 'car[car_voluntary_insurances_attributes][0][voluntary_insurance_end_on]', with: car_voluntary_insurance.voluntary_insurance_end_on
+        # 任意保険加入額(対人)
+        select special_vehicle.personal_insurance, from: ''
+        # 任意保険加入額(対物)
+        select special_vehicle.objective_insurance, from: ''
+        # 任意保険加入額(搭乗者)
+        select special_vehicle.personal_insurance, from: ''
+        # 任意保険加入額(その他)
+        select special_vehicle.objective_insurance, from: ''
+        # 任意保険加入有効期限
+        fill_in '', with: special_vehicle.exp_date_insurance
         # ========== 任意保険ここまで ==========
 
         click_button '登録'

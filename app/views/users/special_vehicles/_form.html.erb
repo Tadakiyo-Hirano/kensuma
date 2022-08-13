@@ -53,7 +53,7 @@
 <%= f.select :other_insurance, SpecialVehicle.other_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
 <br>
 <%= f.label :exp_date_insurance %>
-<%= f.select :exp_date_insurance, SpecialVehicle.exp_date_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<%= f.date_field :exp_date_insurance, class: "form-control" %>
 <br>
 
 <script>

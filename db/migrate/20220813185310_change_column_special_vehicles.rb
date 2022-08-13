@@ -5,5 +5,6 @@ class ChangeColumnSpecialVehicles < ActiveRecord::Migration[6.1]
     change_column :special_vehicles, :standards_performance, :string, null: false
     change_column :special_vehicles, :year_manufactured, :date, null: false
     change_column :special_vehicles, :control_number, :string, null: false
+    change_column :special_vehicles, :exp_date_insurance, :date
   end
 end

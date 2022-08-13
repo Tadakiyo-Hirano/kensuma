@@ -363,7 +363,7 @@ ActiveRecord::Schema.define(version: 2022_08_13_185310) do
     t.integer "objective_insurance"
     t.integer "passenger_insurance"
     t.integer "other_insurance"
-    t.integer "exp_date_insurance"
+    t.date "exp_date_insurance"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

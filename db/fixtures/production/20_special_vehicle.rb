@@ -18,7 +18,7 @@
       objective_insurance:       2,
       passenger_insurance:       3,
       other_insurance:           4,
-      exp_date_insurance:        5
+      exp_date_insurance:        '2023-01-01'
     }
   )
 end
@@ -43,7 +43,7 @@ end
       objective_insurance:       2,
       passenger_insurance:       3,
       other_insurance:           4,
-      exp_date_insurance:        5
+      exp_date_insurance:        '2023-01-01'
     }
   )
 end
@@ -68,7 +68,7 @@ end
       objective_insurance:       2,
       passenger_insurance:       3,
       other_insurance:           4,
-      exp_date_insurance:        5
+      exp_date_insurance:        '2023-01-01'
     }
   )
 end
@@ -93,7 +93,7 @@ end
       objective_insurance:       2,
       passenger_insurance:       3,
       other_insurance:           4,
-      exp_date_insurance:        5
+      exp_date_insurance:        '2023-01-01'
     }
   )
 end
@@ -118,7 +118,7 @@ end
       objective_insurance:       2,
       passenger_insurance:       3,
       other_insurance:           4,
-      exp_date_insurance:        5
+      exp_date_insurance:        '2023-01-01'
     }
   )
 end
