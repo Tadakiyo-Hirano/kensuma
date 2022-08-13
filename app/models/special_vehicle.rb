@@ -3,6 +3,11 @@ class SpecialVehicle < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  validates :name, presence: true
+  validates :maker, presence: true
+  validates :standards_performance, presence: true
+  validates :year_manufactured, presence: true
+  validates :control_number, presence: true
   validates :check_exp_date_year, presence: true
   validates :check_exp_date_month, presence: true
   validates :check_exp_date_specific, presence: true

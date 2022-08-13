@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_18_140049) do
+ActiveRecord::Schema.define(version: 2022_08_13_185310) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -349,11 +349,11 @@ ActiveRecord::Schema.define(version: 2022_07_18_140049) do
 
   create_table "special_vehicles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
-    t.string "name"
-    t.string "maker"
-    t.string "standards_performance"
-    t.date "year_manufactured"
-    t.string "control_number"
+    t.string "name", null: false
+    t.string "maker", null: false
+    t.string "standards_performance", null: false
+    t.date "year_manufactured", null: false
+    t.string "control_number", null: false
     t.date "check_exp_date_year", null: false
     t.date "check_exp_date_month", null: false
     t.date "check_exp_date_specific", null: false
@@ -515,8 +515,8 @@ ActiveRecord::Schema.define(version: 2022_07_18_140049) do
   add_foreign_key "orders", "businesses"
   add_foreign_key "request_orders", "businesses"
   add_foreign_key "request_orders", "orders"
-  add_foreign_key "special_vehicles", "businesses"
   add_foreign_key "solvents", "businesses"
+  add_foreign_key "special_vehicles", "businesses"
   add_foreign_key "worker_exams", "special_med_exams"
   add_foreign_key "worker_exams", "worker_medicals"
   add_foreign_key "worker_insurances", "workers"
