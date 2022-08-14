@@ -1,10 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'Cars', type: :system do
+RSpec.describe 'Special_Vehicles', type: :system do
   let(:user) { create(:user) }
   let(:business) { create(:business, user: user) }
   let(:special_vehicle) { create(:special_vehicle, business: business) }
-  end
 
   describe '特殊車両関連' do
     before(:each) do
@@ -50,50 +49,50 @@ RSpec.describe 'Cars', type: :system do
         
         # ========== 任意保険ここから ==========
         # 任意保険加入額(対人)
-        select special_vehicle.personal_insurance, from: ''
+        select '1,000', from: 'special_vehicle[personal_insurance]'
         # 任意保険加入額(対物)
-        select special_vehicle.objective_insurance, from: ''
+        select '2,000', from: 'special_vehicle[objective_insurance]'
         # 任意保険加入額(搭乗者)
-        select special_vehicle.personal_insurance, from: ''
+        select '3,000', from: 'special_vehicle[passenger_insurance]'
         # 任意保険加入額(その他)
-        select special_vehicle.objective_insurance, from: ''
+        select '4,000', from: 'special_vehicle[other_insurance]'
         # 任意保険加入有効期限
-        fill_in '', with: special_vehicle.exp_date_insurance
+        fill_in 'special_vehicle[exp_date_insurance]', with: '2022-01-28'
         # ========== 任意保険ここまで ==========
 
         click_button '登録'
 
-        visit users_car_path(car)
-        expect(page).to have_content '車両情報詳細'
-        expect(page).to have_content car.owner_name
+        visit users_special_vehicle_path(special_vehicle)
+        expect(page).to have_content '特殊車両情報詳細'
+        expect(page).to have_content special_vehicle.name
       end
     end
 
-    context '車両情報編集' do
+    context '特殊車両情報編集' do
       it '更新したあと詳細画面へ遷移すること' do
-        visit edit_users_car_path(car)
+        visit edit_users_special_vehicle_path(special_vehicle)
 
-        fill_in 'car[owner_name]', with: 'edit name'
+        fill_in 'special_vehicle[name]', with: '編集後名称'
         click_button '更新'
 
-        visit users_car_path(car)
-        expect(page).to have_content '車両情報詳細'
-        expect(page).to have_content 'edit name'
+        visit users_special_vehicle_path(special_vehicle)
+        expect(page).to have_content '特殊車両情報詳細'
+        expect(page).to have_content '編集後名称'
       end
     end
 
-    context '車両情報削除' do
+    context '特殊車両情報削除' do
       it '削除したあと一覧画面に遷移すること', js: true do
-        visit users_car_path(car)
+        visit users_special_vehicle_path(special_vehicle)
         click_on '削除'
 
         expect {
-          expect(page.accept_confirm).to eq "#{car.vehicle_model}の車両情報を削除します。本当によろしいですか？"
-          expect(page).to have_content "#{car.vehicle_model}を削除しました"
-        }.to change(Car, :count).by(-1)
+          expect(page.accept_confirm).to eq "#{special_vehicle.name}の車両情報を削除します。本当によろしいですか？"
+          expect(page).to have_content "#{special_vehicle.name}を削除しました"
+        }.to change(SpecialVehicle, :count).by(-1)
 
-        visit users_cars_path
-        expect(page).to have_content '車両情報一覧'
+        visit users_special_vehicles_path
+        expect(page).to have_content '特殊車両情報一覧'
       end
     end
   end

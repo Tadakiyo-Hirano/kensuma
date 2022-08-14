@@ -69,7 +69,7 @@
   </div>
   <div class="card-footer">
     <%= link_to "編集", edit_users_special_vehicle_path(@special_vehicle), class: "btn btn-md btn-block btn-success" %>
-    <%= link_to "削除", users_special_vehicle_path(@special_vehicle), method: :delete, data: { confirm: "#{@special_vehicle.maker}の車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "削除", users_special_vehicle_path(@special_vehicle), method: :delete, data: { confirm: "#{@special_vehicle.name}の車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
     <%= link_to "一覧画面へ", users_special_vehicles_path, class: "btn btn-md btn-block btn-default" %>
   </div>
 </div>
