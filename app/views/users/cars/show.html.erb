@@ -5,12 +5,20 @@
     <table class="table table-hover text-nowrap">
       <tbody>
         <tr>
+          <th><%= Car.human_attribute_name(:usage) %></th>
+          <td><%= @car.usage %></td>
+        </tr>
+        <tr>
           <th><%= Car.human_attribute_name(:owner_name) %></th>
           <td><%= @car.owner_name %></td>
         </tr>
         <tr>
           <th><%= Car.human_attribute_name(:safety_manager) %></th>
           <td><%= @car.safety_manager %></td>
+        </tr>
+        <tr>
+          <th><%= Car.human_attribute_name(:vehicle_name) %></th>
+          <td><%= @car.vehicle_name %></td>
         </tr>
         <tr>
           <th><%= Car.human_attribute_name(:vehicle_model) %></th>

@@ -6,6 +6,7 @@ class Business < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :request_orders, dependent: :destroy
   has_many :workers, dependent: :destroy
+  has_many :machines, dependent: :destroy
   has_many :solvents, dependent: :destroy
   has_many :business_occupations
   has_many :occupations, through: :business_occupations

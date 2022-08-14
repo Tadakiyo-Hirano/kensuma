@@ -1,0 +1,110 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :name %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :name, { 電動カンナ: '電動カンナ', 電動ドリル: '電動ドリル', 電動丸のこ: '電動丸のこ', グラインダー等: 'グラインダー等', アーク溶接機: 'アーク溶接機', ウインチ: 'ウインチ', 発電機: '発電機',
+                      トランス: 'トランス', コンプレッサー: 'コンプレッサー', 送風機: '送風機', ポンプ類: 'ポンプ類', ミキサー類: 'ミキサー類', コンベヤー: 'コンベヤー',
+                      吹付機: '吹付機', ボーリングマシン: 'ボーリングマシン', 振動コンパクター: '振動コンパクター', バイブレーター: 'バイブレーター', 鉄筋加工機: '鉄筋加工機', 電動チェーンブロック: '電動チェーンブロック' }.uniq,
+                    { include_blank: true, prompt: '選択してください' },
+                    {class: "form-control single-select", style: "100%"} %><br /><br />
+
+<%= f.label :standards_performance %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :standards_performance, class: "form-control", placeholder: Machine.human_attribute_name(:standards_performance) %><br>
+
+<%= f.label :control_number %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :control_number, class: "form-control", placeholder: Machine.human_attribute_name(:control_number) %><br>
+
+<%= f.label :handler %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :handler,
+                  (@business_workers_name + [@machine.handler]).uniq,
+                  { include_blank: true, prompt: "選択してください"  },
+                  { class: "single-select form-control", style: "100%" }%><br><br>
+
+<%= f.label :inspector %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :inspector,
+                  (@business_workers_name + [@machine.inspector]).uniq,
+                  { include_blank: true, prompt: "選択してください"  },
+                  { class: "single-select form-control", style: "100%" }%><br><br>
+
+<%= f.label :inspection_date %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :inspection_date, class: "form-control", placeholder: Machine.human_attribute_name(:inspection_date) %><br>
+
+<div class="field">
+  <%= f.label :inspection_check %><br />
+  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name, include_hidden: false do |t| %>
+    <%= t.label { t.check_box + t.text } %>
+  <% end %>
+</div><br />
+
+<!--
+<div class="submenu btn btn-default btn-block text-left">
+  <h3 class="pt-3">点検事項 追加</h3>
+  <ul class="hidden">
+    <li>追加項目予定最大6個</li>
+  </ul>
+</div>
+-->
+
+<script>
+// hidden
+  $(document).ready(function(){
+    $('.submenu h3').on('click', function(){
+      $(this).next().toggleClass('hidden');
+    });
+  });
+
+
+// 入力フォームのバリデーション
+  $(function(){
+    $.each(function(key){
+      $.validator.addMethod(key, this);
+    });
+    $(".machine-form-validation").validate({
+      rules:{
+        "machine[name]": {
+          required: true
+        },
+        "machine[standards_performance]": {
+          required: true
+        },
+        "machine[control_number]": {
+          required: true
+        },
+        "machine[inspector]": {
+          required: true
+        },
+        "machine[handler]": {
+          required: true
+        },
+        "machine[inspection_date]": {
+          required: true
+        },
+      },
+
+      messages:{
+        "machine[name]": {
+          required: "機械名を入力してください。"
+        },
+        "machine[standards_performance]": {
+          required: "規格・性能を入力してください。"
+        },
+        "machine[control_number]": {
+          required: "管理番号を入力してください。"
+        },
+        "machine[inspector]": {
+          required: "点検者を入力してください。"
+        },
+        "machine[handler]": {
+          required: "取扱者を入力してください。"
+        },
+        "machine[inspection_date]": {
+          required: "点検年月日を入力してください。"
+        },
+      },
+      errorClass: "input_form_error"
+    });
+    // 入力欄を変更したときにバリデーションを実行
+    $(".machine-form-validation").change(function () {
+      $(this).valid();
+    });
+  });
+</script>

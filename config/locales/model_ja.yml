@@ -25,6 +25,7 @@ ja:
       worker_exam: 中間テーブル(特別健康診断種類マスタ)
       special_med_exam: 特別健康診断種類マスタ
       solvent: 有機溶剤情報
+      machine: 機械情報
     attributes:
       business:
         uuid: 事業所ID
@@ -43,8 +44,10 @@ ja:
       business_occupation:
         occupation_id: 職種
       car:
+        usage: 使用目的
         owner_name: 車両所有者氏名
         safety_manager: 安全運転管理者
+        vehicle_name: 車両名
         vehicle_model: 車両型式
         vehicle_number: 車両番号
         vehicle_inspection_start_on: 車検初め
@@ -246,6 +249,14 @@ ja:
         maker: メーカー名
         classification: 種別
         ingredients: 含有成分
+      machine:
+        name: 機械名
+        standards_performance: 規格・性能
+        control_number: 管理番号
+        inspector: 点検者
+        handler: 取扱者
+        inspection_date: 点検年月日
+        inspection_check: 点検事項
   attributes:
     created_at: 作成日
     updated_at: 更新日
