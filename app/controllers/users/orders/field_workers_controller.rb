@@ -9,8 +9,6 @@ module Users::Orders
       @worker = current_business.workers.where.not(id: current_user).where.not(id: field_worker_ids)
     end
 
-    def new; end
-
     def create
       ActiveRecord::Base.transaction do
         params[:worker_ids].each do |worker_id|

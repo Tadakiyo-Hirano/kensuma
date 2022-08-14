@@ -1,4 +1,4 @@
-<% provide(:title,  "入場作業員一覧") %>
+<% provide(:title,  "現場車両一覧") %>
 
 <div class="card">
   <div class="card-body table-responsive p-0">
@@ -24,15 +24,15 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <%= form_with url: users_order_field_workers_path, method: :post, local: true do |f| %>
+        <%= form_with url: users_order_field_cars_path, method: :post, local: true do |f| %>
           <%= f.label "追加する作業員を選択してください。" %>
           <div class="pb-1">
-            <%= f.collection_select :worker_ids, @worker, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+            <%= f.collection_select :car_ids, @car, :id, :vehicle_name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
           </div>
           <div>
             <%= f.submit "作業員追加", class: "btn btn-md btn-primary" %>
-            <% if @field_workers.present? %>
-              <%= link_to "作業員情報編集", edit_workers_users_order_field_workers_path(@order), class: "btn btn-md btn-success" %>
+            <% if @field_cars.present? %>
+              <%= link_to "現場車両情報編集", edit_cars_users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
             <% end %>
           </div>
         <% end %>
@@ -42,7 +42,7 @@
 </section>
 
 <br>
-<% if @field_workers.present? %>
+<% if @field_cars.present? %>
   <section class="content">
     <div class="col-md-12">
       <div class="card">
@@ -50,21 +50,21 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr align="center">
-                <th><%= FieldWorker.human_attribute_name(:admission_worker_name) %></th>
-                <th><%= FieldWorker.human_attribute_name(:admission_date_start) %></th>
-                <th><%= FieldWorker.human_attribute_name(:admission_date_end) %></th>
-                <th><%= FieldWorker.human_attribute_name(:education_date) %></th>
+                <th><%= FieldCar.human_attribute_name(:car_name) %></th>
+                <th><%= FieldCar.human_attribute_name(:driver_name) %></th>
+                <th><%= FieldCar.human_attribute_name(:usage_period_start) %></th>
+                <th><%= FieldCar.human_attribute_name(:usage_period_end) %></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <% @field_workers.each do |field_worker| %>
+              <% @field_cars.each do |field_car| %>
               <tr align="center">
-                <td><%= field_worker.admission_worker_name %></td>
-                <td><%= not_input_display(field_worker.admission_date_start) %></td>
-                <td><%= not_input_display(field_worker.admission_date_end) %></td>
-                <td><%= not_input_display(field_worker.education_date) %></td>
-                <td><%= link_to "削除", users_order_field_worker_path(@order, field_worker), method: :delete, data: { confirm: "#{field_worker.admission_worker_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+                <td><%= field_car.car_name %></td>
+                <td><%= not_input_display(field_car.driver_name) %></td>
+                <td><%= not_input_display(field_car.usage_period_start) %></td>
+                <td><%= not_input_display(field_car.usage_period_end) %></td>
+                <td><%= link_to "削除", users_order_field_car_path(@order, field_car), method: :delete, data: { confirm: "#{field_car.car_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
               </tr>
               <% end %>
             </tbody>
