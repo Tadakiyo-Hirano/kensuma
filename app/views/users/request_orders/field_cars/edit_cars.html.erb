@@ -6,11 +6,11 @@
     <table class="table text-nowrap">
       <tbody>
         <td>
-          <%= link_to "戻る", users_order_field_cars_path, class: "btn btn-md btn-default" %>
+          <%= link_to "戻る", users_request_order_field_cars_path, class: "btn btn-md btn-default" %>
         </td>
         <td>
-          <%= link_to "入場作業員", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
-          <%= link_to "車両", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
+          <%= link_to "入場作業員", users_request_order_field_cars_path(@request_order), class: "btn btn-md btn-success" %>
+          <%= link_to "車両", users_request_order_field_cars_path(@request_order), class: "btn btn-md btn-success" %>
           <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
           <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
           <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
@@ -22,7 +22,7 @@
 
 <section class="content">
   <div class="col-md-12">
-    <%= form_with model: @order, url: update_cars_users_order_field_cars_path, method: :patch, local: true do |f| %>
+    <%= form_with model: @request_order, url: update_cars_users_request_order_field_cars_path, method: :patch, local: true do |f| %>
       <div class="card">
         <div class="card-body table-responsive p-0">
           <table class="table table-hover text-nowrap">

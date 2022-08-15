@@ -67,7 +67,7 @@ module Users::Orders
     def car_info(car)
       JSON.parse(
         car.to_json(
-          except:  %i[uuid images created_at updated_at], # 車両
+          except: %i[uuid images created_at updated_at] # 車両
         )
       )
     end
