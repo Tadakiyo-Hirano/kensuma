@@ -1,6 +1,7 @@
 module Users::Orders
   class FieldCarsController < Users::Base
     before_action :set_order
+    before_action :set_business_workers_name, only: %i[edit_cars update_cars]
     before_action :set_field_car, only: :destroy
     before_action :set_field_cars, only: %i[index edit_cars update_cars]
 
@@ -38,6 +39,7 @@ module Users::Orders
         field_car = FieldCar.find(id)
         field_car.update(item)
       end
+      flash[:success] = '車両情報を更新しました'
       redirect_to users_order_field_cars_url
     end
 
@@ -62,14 +64,6 @@ module Users::Orders
           starting_point waypoint_first waypoint_second arrival_point
         ]
       )[:field_cars]
-    end
-
-    def car_info(car)
-      JSON.parse(
-        car.to_json(
-          except: %i[uuid images created_at updated_at] # 車両
-        )
-      )
     end
   end
 end

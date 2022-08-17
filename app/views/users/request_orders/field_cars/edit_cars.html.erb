@@ -25,32 +25,46 @@
     <%= form_with model: @request_order, url: update_cars_users_request_order_field_cars_path, method: :patch, local: true do |f| %>
       <div class="card">
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap">
-            <thead>
-              <tr align="center">
-                <th><%= FieldCar.human_attribute_name(:car_name) %></th>
-                <th><%= FieldCar.human_attribute_name(:driver_name) %></th>
-                <th><%= FieldCar.human_attribute_name(:usage_period_start) %></th>
-                <th><%= FieldCar.human_attribute_name(:usage_period_end) %></th>
-                <th><%= FieldCar.human_attribute_name(:starting_point) %></th>
-                <th><%= FieldCar.human_attribute_name(:waypoint_first) %></th>
-                <th><%= FieldCar.human_attribute_name(:waypoint_second) %></th>
-                <th><%= FieldCar.human_attribute_name(:arrival_point) %></th>
-              </tr>
-            </thead>
+          <table class="table text-nowrap">
             <tbody>
               <% @field_cars.each do |field_car| %>
                 <%= f.fields_for "field_cars[]", field_car do |fc| %>
-                <tr>
-                  <td><%= field_car.car_name %></td>
-                  <td><%= fc.text_field :driver_name, class: "form-control" %></td>
-                  <td><%= fc.date_field :usage_period_start, class: "form-control" %></td>
-                  <td><%= fc.date_field :usage_period_end, class: "form-control" %></td>
-                  <td><%= fc.text_field :starting_point, class: "form-control" %></td>
-                  <td><%= fc.text_field :waypoint_first, class: "form-control" %></td>
-                  <td><%= fc.text_field :waypoint_second, class: "form-control" %></td>
-                  <td><%= fc.text_field :arrival_point, class: "form-control" %></td>
-                </tr>
+                  <tr style="border-bottom: 0px #fff;">
+                    <td>
+                      <%= fc.label :car_name %><br>
+                      <%= field_car.car_name %>
+                    </td>
+                    <td>
+                      <%= fc.label :driver_name %>
+                      <%= fc.select :driver_name, @business_workers_name, { prompt: '選択してください' }, { class: "form-control" } %>
+                    </td>
+                    <td>
+                      <%= fc.label :usage_period_start %>
+                      <%= fc.date_field :usage_period_start, class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fc.label :usage_period_end %>
+                      <%= fc.date_field :usage_period_end, class: "form-control" %>
+                    </td>
+                  </tr>
+                  <tr style="border-top: 0px #fff;">
+                    <td>
+                      <%= fc.label :starting_point %>
+                      <%= fc.text_field :starting_point, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fc.label :waypoint_first %>
+                      <%= fc.text_field :waypoint_first, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fc.label :waypoint_second %>
+                      <%= fc.text_field :waypoint_second, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fc.label :arrival_point %>
+                      <%= fc.text_field :arrival_point, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                    </td>
+                  </tr>
                 <% end %>
               <% end %>
             </tbody>
