@@ -187,6 +187,30 @@ ActiveRecord::Schema.define(version: 2022_08_10_052834) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "machine_tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "machine_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["machine_id"], name: "index_machine_tags_on_machine_id"
+    t.index ["tag_id"], name: "index_machine_tags_on_tag_id"
+  end
+
+  create_table "machines", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "name", null: false
+    t.string "standards_performance", null: false
+    t.string "control_number", null: false
+    t.string "inspector", null: false
+    t.string "handler", null: false
+    t.date "inspection_date", null: false
+    t.string "inspection_check"
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_machines_on_business_id"
+  end
+
   create_table "managers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -367,6 +391,12 @@ ActiveRecord::Schema.define(version: 2022_08_10_052834) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -507,6 +537,9 @@ ActiveRecord::Schema.define(version: 2022_08_10_052834) do
   add_foreign_key "cars", "car_insurance_companies"
   add_foreign_key "documents", "businesses"
   add_foreign_key "documents", "request_orders"
+  add_foreign_key "machine_tags", "machines"
+  add_foreign_key "machine_tags", "tags"
+  add_foreign_key "machines", "businesses"
   add_foreign_key "news_users", "news"
   add_foreign_key "news_users", "users"
   add_foreign_key "orders", "businesses"
