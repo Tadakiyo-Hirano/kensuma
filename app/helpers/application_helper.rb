@@ -25,7 +25,7 @@ module ApplicationHelper
 
   # 未入力表示
   def not_input_display(text)
-    text.nil? ? '未登録' : text
+    text.nil? || text.blank? ? '未登録' : text
   end
 
   # 自身と、自身の階層下の現場情報

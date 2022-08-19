@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :business
   has_many :request_orders, dependent: :destroy
   has_many :field_workers, as: :field_workerable, dependent: :destroy
+  has_many :field_cars, as: :field_carable, dependent: :destroy
 
   enum status: { created: 0, completed: 1 }
   enum supervising_engineer_check: { full_time: 0, non_dedicated: 1 }

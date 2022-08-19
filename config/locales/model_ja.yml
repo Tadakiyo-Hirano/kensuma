@@ -64,6 +64,15 @@ ja:
         voluntary_securities_number: 任意保険証券番号
         voluntary_insurance_start_on: 任意保険初め
         voluntary_insurance_end_on: 任意保険終わり
+      field_car:
+        car_name: 車両名
+        driver_name: 運転者名
+        usage_period_start: 使用期間(始期)
+        usage_period_end: 使用期間(終期)
+        starting_point: 運行経路(自)
+        waypoint_first: 経由地1
+        waypoint_second: 経由地2
+        arrival_point: 目的地(至)
       field_worker:
         admission_worker_name: 作業員名
         admission_date_start: 入場年月日(始期)

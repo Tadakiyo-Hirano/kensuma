@@ -9,8 +9,6 @@ module Users::Orders
       @worker = current_business.workers.where.not(id: current_user).where.not(id: field_worker_ids)
     end
 
-    def new; end
-
     def create
       ActiveRecord::Base.transaction do
         params[:worker_ids].each do |worker_id|
@@ -40,6 +38,7 @@ module Users::Orders
         field_worker = FieldWorker.find(id)
         field_worker.update(item)
       end
+      flash[:success] = '作業員情報を更新しました'
       redirect_to users_order_field_workers_url
     end
 
@@ -59,36 +58,6 @@ module Users::Orders
 
     def field_workers_params
       params.require(:order).permit(field_workers: %i[admission_date_start admission_date_end education_date])[:field_workers]
-    end
-
-    def worker_info(worker)
-      JSON.parse(
-        worker.to_json(
-          except:  %i[uuid images created_at updated_at], # 作業員
-          include: {
-            worker_medical:            {
-              except:  %i[id worker_id created_at updated_at], # 作業員の健康情報
-              include: {
-                worker_exams: {
-                  except: %i[id worker_medical_id images created_at updated_at] # 中間テーブル(特別健康診断種類マスタ))
-                }
-              }
-            },
-            worker_insurance:          {
-              except: %i[id worker_id created_at updated_at] # 保険情報
-            },
-            worker_skill_trainings:    {
-              only: [:skill_training_id] # 中間テーブル(技能講習マスタ)
-            },
-            worker_special_educations: {
-              only: [:special_education_id] # 中間テーブル(特別教育マスタ)
-            },
-            worker_licenses:           {
-              only: [:license_id] # 中間テーブル(免許マスタ)
-            }
-          }
-        )
-      )
     end
   end
 end

@@ -10,7 +10,7 @@
         </td>
         <td>
           <%= link_to "入場作業員", users_request_order_field_workers_path(@request_order), class: "btn btn-md btn-success" %>
-          <%= link_to "車両", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "車両", users_request_order_field_cars_path(@request_order), class: "btn btn-md btn-success" %>
           <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
           <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
           <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
@@ -47,7 +47,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap">
+          <table class="table text-nowrap">
             <thead>
               <tr align="center">
                 <th><%= FieldWorker.human_attribute_name(:admission_worker_name) %></th>
