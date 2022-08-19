@@ -52,7 +52,7 @@
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :professional_engineer_details %> <!-- 専門技術者(担当工事内容) -->
-    <%= f.text_field :professional_engineer_details, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_details) %>
+    <%= f.text_field :professional_engineer_details, class: "form-control", placeholder: RequestOrder.human_attribute_name(:professional_engineer_details) %>
     <%#= f.select :professional_engineer_details,
                   (@current_business.request_orders.map { |request_order|request_order.professional_engineer_details }).uniq,
                   { include_blank: true },
@@ -105,7 +105,7 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :work_conductor_name %> <!-- 作業指揮者名(氏名) -->
+    <%= f.label :work_conductor_name %> <!-- 作業指揮者(氏名) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :work_conductor_name,
                   (@business_workers_name + [@request_order.work_conductor_name]).uniq,
@@ -194,6 +194,27 @@
         "request_order[lead_engineer_name]": {
           required: true
         },
+        "request_order[lead_engineer_check]": {
+          required: true
+        },
+        "request_order[work_chief_name]": {
+          required: true
+        },
+        "request_order[work_conductor_name]": {
+          required: true
+        },
+        "request_order[safety_officer_name]": {
+          required: true
+        },
+        "request_order[safety_manager_name]": {
+          required: true
+        },
+        "request_order[safety_promoter_name]": {
+          required: true
+        },
+        "request_order[foreman_name]": {
+          required: true
+        },
       },
       messages: {
         "request_order[construction_name]": {
@@ -231,6 +252,27 @@
         },
         "request_order[lead_engineer_name]": {
           required: "主任技術者名を入力してください。"
+        },
+        "request_order[lead_engineer_check]": {
+          required: "専任or非専任を選択してください。"
+        },
+        "request_order[work_chief_name]": {
+          required: "作業主任者名を入力してください。"
+        },
+        "request_order[work_conductor_name]": {
+          required: "作業指揮者名を入力してください。"
+        },
+        "request_order[safety_officer_name]": {
+          required: "安全衛生担当責任者名を入力してください。"
+        },
+        "request_order[safety_manager_name]": {
+          required: "安全衛生責任者名を入力してください。"
+        },
+        "request_order[safety_promoter_name]": {
+          required: "安全推進者名を入力してください。"
+        },
+        "request_order[foreman_name]": {
+          required: "職長名を入力してください。"
         },
       },
       errorClass: "input_form_error"
