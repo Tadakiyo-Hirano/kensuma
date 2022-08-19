@@ -46,7 +46,7 @@ RSpec.describe 'Special_Vehicles', type: :system do
         fill_in 'special_vehicle[check_exp_date_machine]', with: special_vehicle.check_exp_date_machine
         # 自動車検査証有効期限
         fill_in 'special_vehicle[check_exp_date_car]', with: special_vehicle.check_exp_date_car
-        
+
         # ========== 任意保険ここから ==========
         # 任意保険加入額(対人)
         select '1,000', from: 'special_vehicle[personal_insurance]'

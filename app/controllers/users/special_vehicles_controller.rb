@@ -11,9 +11,9 @@ module Users
     def new
       @special_vehicle = current_business.special_vehicles.new(
         # テスト用デフォルト値 ==========================
-        name:                   'コンテナ用セミトレーラ1',
-        maker:                  '三菱',
-        standards_performance:  '幅2.5M',
+        name:                    'コンテナ用セミトレーラ1',
+        maker:                   '三菱',
+        standards_performance:   '幅2.5M',
         year_manufactured:       Date.today.ago(3.years),
         control_number:          SecureRandom.hex(5),
         check_exp_date_year:     Date.today.since(2.years),
