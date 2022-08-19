@@ -147,6 +147,24 @@ ActiveRecord::Schema.define(version: 2022_08_13_185310) do
     t.index ["request_order_id"], name: "index_documents_on_request_order_id"
   end
 
+  create_table "field_cars", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "car_name", null: false
+    t.json "content", null: false
+    t.string "driver_name"
+    t.date "usage_period_start"
+    t.date "usage_period_end"
+    t.string "starting_point"
+    t.string "waypoint_first"
+    t.string "waypoint_second"
+    t.string "arrival_point"
+    t.string "field_carable_type"
+    t.bigint "field_carable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_carable_type", "field_carable_id"], name: "index_field_cars_on_field_carable"
+  end
+
   create_table "field_workers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "admission_worker_name", null: false
