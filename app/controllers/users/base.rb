@@ -66,8 +66,13 @@ module Users
       )
     end
 
+    # def car_insurance_company_id
+    #   CarInsuranceCompany.find([:car_insurance_company_id]).name
+    # end
+
     # 書類に反映させる車両情報
     def car_info(car)
+      # json =
       JSON.parse(
         car.to_json(
           except:  %i[uuid images created_at updated_at], # 車両
@@ -78,6 +83,7 @@ module Users
           }
         )
       )
+      # json[car_insurance_company]
     end
   end
 end
