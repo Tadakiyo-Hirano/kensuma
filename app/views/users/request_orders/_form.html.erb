@@ -4,41 +4,41 @@
 <div class="list-group">
   <div class="list-group-item">
     <%= f.label :construction_name %> <!-- 工事名 -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :construction_name, class: "form-control", placeholder: RequestOrder.human_attribute_name(:construction_name) %>
     <br>
     <%= f.label :construction_details %> <!-- 工事内容 -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :construction_details, class: "form-control", placeholder: RequestOrder.human_attribute_name(:construction_details) %>
     <br>
     <div class="row">
       <div class="col-md-3">
         <%= f.label :start_date %> <!-- 工期(自) -->
-        <span class="text-danger">※必須</span>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <%= f.date_field :start_date, class: "form-control" %>
       </div>
       <div class="col-md-3">
         <%= f.label :end_date %> <!-- 工期(至) -->
-        <span class="text-danger">※必須</span>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <%= f.date_field :end_date, class: "form-control" %>
       </div>
     </div><br>
     <div class="row">
       <div class="col-md-3">
         <%= f.label :contract_date %> <!-- 契約日 -->
-        <span class="text-danger">※必須</span>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <%= f.date_field :contract_date, class: "form-control" %>
       </div>
     </div><br>
     <%= f.label :supervisor_name %> <!-- 監督員(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :supervisor_name,
                   (@business_workers_name + [@request_order.supervisor_name]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :supervisor_apply, class: "form-control", placeholder: Order.human_attribute_name(:supervisor_apply) %>
     <%#= f.select :supervisor_apply,
                   (@current_business.request_orders.map { |request_order|request_order.supervisor_apply }).uniq,
@@ -52,7 +52,7 @@
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :professional_engineer_details %> <!-- 専門技術者(担当工事内容) -->
-    <%= f.text_field :professional_engineer_details, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_details) %>
+    <%= f.text_field :professional_engineer_details, class: "form-control", placeholder: RequestOrder.human_attribute_name(:professional_engineer_details) %>
     <%#= f.select :professional_engineer_details,
                   (@current_business.request_orders.map { |request_order|request_order.professional_engineer_details }).uniq,
                   { include_blank: true },
@@ -62,25 +62,25 @@
     <%= f.select :professional_construction, RequestOrder.professional_constructions_i18n.invert, { prompt: true }, { class: "form-control" } %>
     <br>
     <%= f.label :construction_manager_name %> <!-- 工事担任責任者(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :construction_manager_name,
                       (@business_workers_name + [@request_order.construction_manager_name]).uniq,
                       { include_blank: true },
                       { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :construction_manager_position_name %> <!-- 工事担任責任者(役職名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :construction_manager_position_name, class: "form-control", placeholder: RequestOrder.human_attribute_name(:construction_manager_position_name) %>
     <br>
     <%= f.label :site_agent_name %> <!-- 現場代理人(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :site_agent_name,
                   (@business_workers_name + [@request_order.site_agent_name]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :site_agent_apply %> <!-- 現場代理人(権限及び意見の申出方法) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :site_agent_apply, class: "form-control", placeholder: Order.human_attribute_name(:site_agent_apply) %>
     <%#= f.select :site_agent_apply,
                   (@current_business.request_orders.map { |request_order|request_order.site_agent_apply }).uniq,
@@ -88,25 +88,25 @@
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :lead_engineer_name %> <!-- 主任技術者(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :lead_engineer_name,
                   (@business_workers_name + [@request_order.lead_engineer_name]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :lead_engineer_check %> <!-- 主任技術者(専任or非専任) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :lead_engineer_check, RequestOrder.lead_engineer_checks_i18n.invert, { prompt: true }, { class: "form-control" } %>
     <br>
     <%= f.label :work_chief_name %> <!-- 作業主任者(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :work_chief_name,
                   (@business_workers_name + [@request_order.work_chief_name]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :work_conductor_name %> <!-- 作業指揮者名(氏名) -->
-    <span class="text-danger">※必須</span>
+    <%= f.label :work_conductor_name %> <!-- 作業指揮者(氏名) -->
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :work_conductor_name,
                   (@business_workers_name + [@request_order.work_conductor_name]).uniq,
                   { include_blank: true },
@@ -114,28 +114,28 @@
     %>
     <br><br>
     <%= f.label :safety_officer_name %> <!-- 安全衛生担当責任者(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :safety_officer_name,
                   (@business_workers_name + [@request_order.safety_officer_name]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :safety_manager_name %> <!-- 安全衛生責任者(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :safety_manager_name,
                   (@business_workers_name + [@request_order.safety_manager_name]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :safety_promoter_name %> <!-- 安全推進者(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :safety_promoter_name,
                       (@business_workers_name + [@request_order.safety_promoter_name]).uniq,
                       { include_blank: true },
                       { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :foreman_name %> <!-- 職長(氏名) -->
-    <span class="text-danger">※必須</span>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :foreman_name,
                       (@business_workers_name + [@request_order.foreman_name]).uniq,
                       { include_blank: true },
@@ -149,3 +149,137 @@
     %><br><br>
   </div>
 </div><br>
+
+<script>
+  // 入力フォームのバリデーション
+  $(function(){
+    $.each(function(key){
+      $.validator.addMethod(key, this);
+    });
+    $(".order-form-validation").validate({
+      rules: {
+        "request_order[construction_name]": {
+          required: true
+        },
+        "request_order[construction_details]": {
+          required: true
+        },
+        "request_order[start_date]": {
+          required: true
+        },
+        "request_order[end_date]": {
+          required: true
+        },
+        "request_order[contract_date]": {
+          required: true
+        },
+        "request_order[supervisor_name]": {
+          required: true
+        },
+        "request_order[supervisor_apply]": {
+          required: true
+        },
+        "request_order[construction_manager_name]": {
+          required: true
+        },
+        "request_order[construction_manager_position_name]": {
+          required: true
+        },
+        "request_order[site_agent_name]": {
+          required: true
+        },
+        "request_order[site_agent_apply]": {
+          required: true
+        },
+        "request_order[lead_engineer_name]": {
+          required: true
+        },
+        "request_order[lead_engineer_check]": {
+          required: true
+        },
+        "request_order[work_chief_name]": {
+          required: true
+        },
+        "request_order[work_conductor_name]": {
+          required: true
+        },
+        "request_order[safety_officer_name]": {
+          required: true
+        },
+        "request_order[safety_manager_name]": {
+          required: true
+        },
+        "request_order[safety_promoter_name]": {
+          required: true
+        },
+        "request_order[foreman_name]": {
+          required: true
+        },
+      },
+      messages: {
+        "request_order[construction_name]": {
+          required: "工事名を入力してください。"
+        },
+        "request_order[construction_details]": {
+          required: "工事内容を入力してください。"
+        },
+        "request_order[start_date]": {
+          required: "工期(自)を入力してください。"
+        },
+        "request_order[end_date]": {
+          required: "工期(至)を入力してください。"
+        },
+        "request_order[contract_date]": {
+          required: "契約日を入力してください。"
+        },
+        "request_order[supervisor_name]": {
+          required: "監督員名を入力してください。"
+        },
+        "request_order[supervisor_apply]": {
+          required: "権限及び意見の申出方法を入力してください。"
+        },
+        "request_order[construction_manager_name]": {
+          required: "工事担任責任者名を入力してください。"
+        },
+        "request_order[construction_manager_position_name]": {
+          required: "工事担任責任者の役職名を入力してください。"
+        },
+        "request_order[site_agent_name]": {
+          required: "現場代理人名を入力してください。"
+        },
+        "request_order[site_agent_apply]": {
+          required: "権限及び意見の申出方法を入力してください。"
+        },
+        "request_order[lead_engineer_name]": {
+          required: "主任技術者名を入力してください。"
+        },
+        "request_order[lead_engineer_check]": {
+          required: "専任or非専任を選択してください。"
+        },
+        "request_order[work_chief_name]": {
+          required: "作業主任者名を入力してください。"
+        },
+        "request_order[work_conductor_name]": {
+          required: "作業指揮者名を入力してください。"
+        },
+        "request_order[safety_officer_name]": {
+          required: "安全衛生担当責任者名を入力してください。"
+        },
+        "request_order[safety_manager_name]": {
+          required: "安全衛生責任者名を入力してください。"
+        },
+        "request_order[safety_promoter_name]": {
+          required: "安全推進者名を入力してください。"
+        },
+        "request_order[foreman_name]": {
+          required: "職長名を入力してください。"
+        },
+      },
+      errorClass: "input_form_error"
+    });
+    // 入力欄を変更したときにバリデーションを実行
+    $(".order-form-validation").change(function () {
+      $(this).valid();
+    });
+  });
+</script>
