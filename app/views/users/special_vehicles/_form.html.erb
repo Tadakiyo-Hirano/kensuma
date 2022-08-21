@@ -1,0 +1,137 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :name %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :name, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:name) %>
+<br>
+<%= f.label :maker %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :maker, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:maker) %>
+<br>
+<%= f.label :standards_performance %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :standards_performance, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:standards_performance) %>
+<br>
+<%= f.label :year_manufactured %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :year_manufactured, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:year_manufactured) %>
+<br>
+<%= f.label :control_number %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :control_number, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:control_number) %>
+<br>
+<%= f.label :check_exp_date_year %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_year, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_month %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_month, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_specific %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_specific, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_machine %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_machine, class: "form-control" %>
+<br>
+<%= f.label :check_exp_date_car %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :check_exp_date_car, class: "form-control" %>
+<br>
+<%= f.label :personal_insurance %>
+<%= f.select :personal_insurance, SpecialVehicle.personal_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :objective_insurance %>
+<%= f.select :objective_insurance, SpecialVehicle.objective_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :passenger_insurance %>
+<%= f.select :passenger_insurance, SpecialVehicle.passenger_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :other_insurance %>
+<%= f.select :other_insurance, SpecialVehicle.other_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<br>
+<%= f.label :exp_date_insurance %>
+<%= f.date_field :exp_date_insurance, class: "form-control" %>
+<br>
+
+<script>
+  $(function(){
+    $.each(function(key){
+      $.validator.addMethod(key, this);
+    });
+    $(".special-vehicle-form-validation").validate({
+      rules:{
+        "special_vehicle[name]": {
+          required: true
+        },
+        "special_vehicle[maker]": {
+          required: true
+        },
+        "special_vehicle[standards_performance]": {
+          required: true
+        },
+        "special_vehicle[year_manufactured]": {
+          required: true
+        },
+        "special_vehicle[control_number]": {
+          required: true
+        },
+        "special_vehicle[check_exp_date_year]": {
+          required: true
+        },
+        "special_vehicle[check_exp_date_month]": {
+          required: true
+        },
+        "special_vehicle[check_exp_date_specific]": {
+          required: true
+        },
+        "special_vehicle[check_exp_date_machine]": {
+          required: true
+        },
+        "special_vehicle[check_exp_date_car]": {
+          required: true
+        },
+        
+      },
+      messages:{
+        "special_vehicle[name]": {
+          required: "名称を入力してください。"
+        },
+        "special_vehicle[maker]": {
+          required: "メーカーを入力してください。"
+        },
+        "special_vehicle[standards_performance]": {
+          required: "規格・性能を入力してください。"
+        },
+        "special_vehicle[year_manufactured]": {
+          required: "製造年を入力または選択してください。"
+        },
+        "special_vehicle[control_number]": {
+          required: "管理番号（整理番号）を入力してください。"
+        },
+        "special_vehicle[check_exp_date_year]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "special_vehicle[check_exp_date_month]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "special_vehicle[check_exp_date_specific]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "special_vehicle[check_exp_date_machine]": {
+          required: "年月日を入力または選択してください。"
+        },
+        "special_vehicle[check_exp_date_car]": {
+          required: "年月日を入力または選択してください。"
+        },
+      },
+      errorClass: "input_form_error"
+    });
+    // 入力欄を変更したときにバリデーションを実行
+    $(".special-vehicle-form-validation").change(function () {
+      $(this).valid();
+    });
+  });
+</script>

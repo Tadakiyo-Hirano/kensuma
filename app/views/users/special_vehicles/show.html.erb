@@ -1,0 +1,75 @@
+<% provide(:title, "特殊車両情報詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:name) %></th>
+          <td><%= @special_vehicle.name %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:maker) %></th>
+          <td><%= @special_vehicle.maker %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:standards_performance) %></th>
+          <td><%= @special_vehicle.standards_performance %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:year_manufactured) %></th>
+          <td><%= @special_vehicle.year_manufactured %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:control_number) %></th>
+          <td><%= @special_vehicle.control_number %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_year) %></th>
+          <td><%= @special_vehicle.check_exp_date_year %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_month) %></th>
+          <td><%= @special_vehicle.check_exp_date_month %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_specific) %></th>
+          <td><%= @special_vehicle.check_exp_date_specific %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_machine) %></th>
+          <td><%= @special_vehicle.check_exp_date_machine %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_car) %></th>
+          <td><%= @special_vehicle.check_exp_date_car %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:personal_insurance) %></th>
+          <td><%= @special_vehicle.personal_insurance %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:objective_insurance) %></th>
+          <td><%= @special_vehicle.objective_insurance %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:passenger_insurance) %></th>
+          <td><%= @special_vehicle.passenger_insurance %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:other_insurance) %></th>
+          <td><%= @special_vehicle.other_insurance %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:exp_date_insurance) %></th>
+          <td><%= @special_vehicle.exp_date_insurance %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to "編集", edit_users_special_vehicle_path(@special_vehicle), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_special_vehicle_path(@special_vehicle), method: :delete, data: { confirm: "#{@special_vehicle.name}の車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "一覧画面へ", users_special_vehicles_path, class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>
