@@ -524,11 +524,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="6" rowspan="2">使用期間</td>
                 <td class="doc_12_s17" dir="ltr" colspan="14" rowspan="2">
-                  <%= l field_car.usage_period_start, format: :long %> <!-- 12-012 使用期間(始期) -->
+                  <%= car_date(field_car.usage_period_start) %> <!-- 12-012 使用期間(始期) -->
                 </td>
                 <td class="doc_12_s17" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" dir="ltr" colspan="14" rowspan="2">
-                  <%= l field_car.usage_period_end, format: :long %> <!-- 12-012 使用期間(終期) -->
+                  <%= car_date(field_car.usage_period_end) %> <!-- 12-013 使用期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -562,11 +562,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="5" rowspan="2">車検期間</td>
                 <td class="doc_12_s17" colspan="14" rowspan="2">
-                  <%= l field_car.content["liability_insurance_start_on"].to_date, format: :long %> <!-- 12-018 車検期間(始期) -->
+                  <%= car_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-018 車検期間(始期) -->
                 </td>
                 <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" colspan="14" rowspan="2">
-                  <%= l field_car.content["liability_insurance_end_on"].to_date, format: :long %> <!-- 12-019 車検期間(終期) -->
+                  <%= car_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-019 車検期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -608,11 +608,11 @@
                 <td class="doc_12_s25" rowspan="4">自賠責</td>
                 <td class="doc_12_s4" colspan="5" rowspan="2">保険会社名</td>
                 <td class="doc_12_s25" colspan="13" rowspan="2">
-                  <%#= @document.content["vehicle_liability_insurance_company_name"] %> 12-025
+                  <%= field_car.content["car_insurance_company"] %> <!-- 12-025 自賠責保険会社名 -->
                 </td>
                 <td class="doc_12_s25" colspan="5" rowspan="2">証券番号</td>
                 <td class="doc_12_s25" colspan="12" rowspan="2">
-                  <%#= @document.content["vehicle_liability_insurance_number"] %> 12-026
+                  <%= field_car.content["liability_securities_number"] %> <!-- 12-026 自賠責保険会証券番号 -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -620,11 +620,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="5" rowspan="2">保険期間</td>
                 <td class="doc_12_s17" colspan="14" rowspan="2">
-                  <%#= @document.content["vehicle_liability_insurance_start_of_validity"] %> 12-027
+                  <%= car_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-027 自賠責保険期間(始期) -->
                 </td>
                 <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" colspan="14" rowspan="2">
-                  <%#= @document.content["vehicle_liability_insurance_end_of_validity"] %> 12-028
+                  <%= car_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-028 自賠責保険期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -633,11 +633,11 @@
                 <td class="doc_12_s25" rowspan="6">任意保険</td>
                 <td class="doc_12_s4" colspan="5" rowspan="2">保険会社名</td>
                 <td class="doc_12_s25" colspan="13" rowspan="2">
-                  <%#= @document.content["voluntary_insurance_company_name"] %> 12-029
+                  <%= field_car.content["voluntary_insurance_company"] %> <!-- 12-029 任意保険会社名 -->
                 </td>
                 <td class="doc_12_s25" colspan="5" rowspan="2">証券番号</td>
                 <td class="doc_12_s25" colspan="12" rowspan="2">
-                  <%#= @document.content["voluntary_insurance_number"] %> 12-030
+                  <%= field_car.content["car_voluntary_insurances"][0]["voluntary_securities_number"] %> <!-- 12-030 任意保険証券番号 -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -645,12 +645,12 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="5" rowspan="2">対 人</td>
                 <td class="doc_12_s17" colspan="10" rowspan="2">
-                  <%#= @document.content["voluntary_insurance_bodily_injury_liability_amount"] %> 12-031
+                  <%= field_car.content["car_voluntary_insurances"][0]["personal_insurance"] %> <!-- 12-031 任意保険の対人 -->
                 </td>
                 <td class="doc_12_s25" colspan="3" rowspan="2">万円</td>
                 <td class="doc_12_s25" colspan="5" rowspan="2">対 物</td>
                 <td class="doc_12_s17" colspan="9" rowspan="2">
-                  <%#= @document.content["voluntary_insurance_property_damage_liability_amount"] %> 12-032
+                  <%= field_car.content["car_voluntary_insurances"][0]["objective_insurance"] %> <!-- 12-032 任意保険の対物 -->
                 </td>
                 <td class="doc_12_s25" colspan="3" rowspan="2">万円</td>
               </tr>
@@ -659,11 +659,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="5" rowspan="2">保険期間</td>
                 <td class="doc_12_s17" colspan="14" rowspan="2">
-                  <%#= @document.content["voluntary_insurance_start_of_validity"] %> 12-033
+                  <%= car_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_start_on"].to_date) %> <!-- 12-033 任意保険期間(始期) -->
                 </td>
                 <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" colspan="14" rowspan="2">
-                  <%#= @document.content["voluntary_insurance_end_of_validity"] %> 12-034
+                  <%= car_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_end_on"].to_date) %> <!-- 12-034 任意保険期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -754,5 +754,4 @@
       </div>
     </div>
   </div>
-  <%= field_car.to_json %>
 <% end %>

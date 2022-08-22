@@ -143,4 +143,9 @@ module DocumentsHelper
     date = worker&.education_date
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
+
+  # 車両の日付情報
+  def car_date(column)
+    l(column, format: :long) unless column.nil?
+  end
 end
