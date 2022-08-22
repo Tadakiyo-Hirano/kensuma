@@ -82,11 +82,12 @@ module Users
       params.require(:business).permit(
         :uuid, :name, :name_kana, :branch_name, :representative_name, :email, :address, :post_code,
         :phone_number, :carrier_up_id, :business_type, { stamp_images: [] }, :user_id,
-        occupation_ids: [], :business_health_insurance_status, :business_health_insurance_association,
+        :business_health_insurance_status, :business_health_insurance_association,
         :business_health_insurance_office_number, :business_welfare_pension_insurance_join_status,
         :business_welfare_pension_insurance_office_number, :business_pension_insurance_join_status,
         :business_employment_insurance_join_status, :business_employment_insurance_number,
-        :business_retirement_benefit_mutual_aid_status
+        :business_retirement_benefit_mutual_aid_status,
+        occupation_ids: []
       )
     end
   end
