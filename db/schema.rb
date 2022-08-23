@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_13_185310) do
+ActiveRecord::Schema.define(version: 2022_08_23_013528) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -162,6 +162,9 @@ ActiveRecord::Schema.define(version: 2022_08_13_185310) do
     t.bigint "field_carable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "driver_worker_id"
+    t.string "driver_address"
+    t.date "driver_birth_day_on"
     t.index ["field_carable_type", "field_carable_id"], name: "index_field_cars_on_field_carable"
   end
 

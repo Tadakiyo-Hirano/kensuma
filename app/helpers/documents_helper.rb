@@ -148,4 +148,12 @@ module DocumentsHelper
   def car_date(column)
     l(column, format: :long) unless column.nil?
   end
+
+  def car_usage_commute(usage)
+    usage == '通勤用' ? tag.span('通勤', class: :usage) : '通勤'
+  end
+
+  def car_usage_const(usage)
+    usage == '工事用' ? tag.span('工事', class: :usage) : '工事'
+  end
 end

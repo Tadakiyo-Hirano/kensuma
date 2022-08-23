@@ -148,7 +148,11 @@
                 <td class="s6"></td>
                 <td class="s6"></td>
                 <td class="s6"></td>
-                <td class="s12" colspan="5" rowspan="4"><%#= @document.content["construction_or_commute1"] %> 12-003</td>
+                <td class="s12" colspan="5" rowspan="4">
+                  <%= car_usage_const(field_car.content["usage"]) %> <!-- 13-003 車両情報(工事･通勤) -->
+                  <br>
+                  <%= car_usage_commute(field_car.content["usage"]) %>
+                </td>
                 <td class="s12" colspan="7" rowspan="4">用 車 両 届</td>
                 <td class="s13"></td>
                 <td class="s13"></td>
@@ -429,7 +433,7 @@
                 <td class="s6"></td>
                 <td class="s22" colspan="4">下記の通り</td>
                 <td class="s22" colspan="6">
-                  （工事・通勤）用 <!-- 12-011 工事･通勤用選択 -->
+                  （<%= car_usage_const(field_car.content["usage"]) %>・<%= car_usage_commute(field_car.content["usage"]) %>）用 <!-- 12-011 工事･通勤用選択 -->
                 </td>
                 <td class="s22" colspan="12">
                   車両を運行しますので、お届けいたします。
@@ -580,7 +584,7 @@
                 </td>
                 <td class="s25" colspan="5" rowspan="2">生年月日</td>
                 <td class="s25" colspan="12" rowspan="2">
-                  <%#= @document.content["vehicle_operator_birth_date"] %> 12-021
+                  <%= car_date(field_car.driver_birth_day_on) %> <!-- 12-021 運転者生年月日 -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -588,7 +592,7 @@
               <tr style="height: 25px">
                 <td class="s4" colspan="5" rowspan="2">住所</td>
                 <td class="s25" colspan="30" rowspan="2">
-                  <%#= @document.content["vehicle_operator_address"] %> 12-022
+                  <%= field_car.driver_address %> <!-- 12-022 運転者住所 -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -1112,6 +1116,12 @@
     .eighth-text-container {
       white-space: normal;
     }
+  }
+
+  .usage {
+    border: 2px solid #000000;
+    border-radius: 25px;
+    padding: 4px;
   }
 
   .page-break {
