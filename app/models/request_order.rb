@@ -3,6 +3,7 @@ class RequestOrder < ApplicationRecord
   belongs_to :business
   has_many :documents, dependent: :destroy
   has_many :field_workers, as: :field_workerable, dependent: :destroy
+  has_many :field_cars, as: :field_carable, dependent: :destroy
 
   enum status: { requested: 0, submitted: 1, fix_requested: 2, approved: 3 }
   enum professional_construction: { y: 0, n: 1 }

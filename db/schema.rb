@@ -156,6 +156,24 @@ ActiveRecord::Schema.define(version: 2022_08_18_130528) do
     t.index ["request_order_id"], name: "index_documents_on_request_order_id"
   end
 
+  create_table "field_cars", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "car_name", null: false
+    t.json "content", null: false
+    t.string "driver_name"
+    t.date "usage_period_start"
+    t.date "usage_period_end"
+    t.string "starting_point"
+    t.string "waypoint_first"
+    t.string "waypoint_second"
+    t.string "arrival_point"
+    t.string "field_carable_type"
+    t.bigint "field_carable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_carable_type", "field_carable_id"], name: "index_field_cars_on_field_carable"
+  end
+
   create_table "field_workers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "admission_worker_name", null: false
@@ -176,6 +194,30 @@ ActiveRecord::Schema.define(version: 2022_08_18_130528) do
     t.integer "license_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "machine_tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "machine_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["machine_id"], name: "index_machine_tags_on_machine_id"
+    t.index ["tag_id"], name: "index_machine_tags_on_tag_id"
+  end
+
+  create_table "machines", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "name", null: false
+    t.string "standards_performance", null: false
+    t.string "control_number", null: false
+    t.string "inspector", null: false
+    t.string "handler", null: false
+    t.date "inspection_date", null: false
+    t.string "inspection_check"
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_machines_on_business_id"
   end
 
   create_table "managers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -358,6 +400,35 @@ ActiveRecord::Schema.define(version: 2022_08_18_130528) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "special_vehicles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "name", null: false
+    t.string "maker", null: false
+    t.string "standards_performance", null: false
+    t.date "year_manufactured", null: false
+    t.string "control_number", null: false
+    t.date "check_exp_date_year", null: false
+    t.date "check_exp_date_month", null: false
+    t.date "check_exp_date_specific", null: false
+    t.date "check_exp_date_machine", null: false
+    t.date "check_exp_date_car", null: false
+    t.integer "personal_insurance"
+    t.integer "objective_insurance"
+    t.integer "passenger_insurance"
+    t.integer "other_insurance"
+    t.date "exp_date_insurance"
+    t.bigint "business_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_special_vehicles_on_business_id"
+  end
+
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -498,12 +569,16 @@ ActiveRecord::Schema.define(version: 2022_08_18_130528) do
   add_foreign_key "cars", "car_insurance_companies"
   add_foreign_key "documents", "businesses"
   add_foreign_key "documents", "request_orders"
+  add_foreign_key "machine_tags", "machines"
+  add_foreign_key "machine_tags", "tags"
+  add_foreign_key "machines", "businesses"
   add_foreign_key "news_users", "news"
   add_foreign_key "news_users", "users"
   add_foreign_key "orders", "businesses"
   add_foreign_key "request_orders", "businesses"
   add_foreign_key "request_orders", "orders"
   add_foreign_key "solvents", "businesses"
+  add_foreign_key "special_vehicles", "businesses"
   add_foreign_key "worker_exams", "special_med_exams"
   add_foreign_key "worker_exams", "worker_medicals"
   add_foreign_key "worker_insurances", "workers"
