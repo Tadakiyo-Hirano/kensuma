@@ -156,14 +156,4 @@ module DocumentsHelper
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :usage) : '工事'
   end
-
-  # 現在の階層構造の一次下請けの情報を取得
-  # def subcon_first_info(request_order)
-  #   if request_order.class == RequestOrder
-  #     subcons = request_order.self_and_ancestors_ids.map {|ancestors_id|RequestOrder.find(ancestors_id).depth}
-  #     subcon = subcons.select { |subcon| subcon == 1 }
-  #   else
-  #     request_order.subcontractor_name
-  #   end
-  # end
 end

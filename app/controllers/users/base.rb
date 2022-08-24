@@ -80,8 +80,8 @@ module Users
           )
         )
 
-      insurance_company = { car_insurance_company: CarInsuranceCompany.find(json["car_insurance_company_id"]).name }
-      voluntary_insurance_company = { voluntary_insurance_company: CarInsuranceCompany.find(json["car_voluntary_insurances"][0]["car_voluntary_id"]).name }
+      insurance_company = { car_insurance_company: CarInsuranceCompany.find(json['car_insurance_company_id']).name }
+      voluntary_insurance_company = { voluntary_insurance_company: CarInsuranceCompany.find(json['car_voluntary_insurances'][0]['car_voluntary_id']).name }
 
       json.merge(insurance_company, voluntary_insurance_company)
     end
