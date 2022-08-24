@@ -88,6 +88,15 @@ ActiveRecord::Schema.define(version: 2022_08_23_013528) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "business_health_insurance_status", null: false
+    t.string "business_health_insurance_association"
+    t.string "business_health_insurance_office_number"
+    t.integer "business_welfare_pension_insurance_join_status", null: false
+    t.string "business_welfare_pension_insurance_office_number"
+    t.integer "business_pension_insurance_join_status", null: false
+    t.integer "business_employment_insurance_join_status", null: false
+    t.string "business_employment_insurance_number"
+    t.integer "business_retirement_benefit_mutual_aid_status", null: false
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 

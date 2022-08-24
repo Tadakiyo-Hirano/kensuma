@@ -118,6 +118,25 @@ ja:
         freelance: 一人親方
         Individual_five_over: 個人事務所(雇用5人以上)
         Individual_five_less: 個人事務所(雇用5人未満)
+      business_health_insurance_status: # 健康保険(加入状況)
+        join: 加入
+        not_join: 未加入
+        not_coverd: 対象外
+      business_welfare_pension_insurance_join_status: # 厚生年金保険(加入状況)
+        join: 加入
+        not_join: 未加入
+        not_coverd: 対象外
+      business_pension_insurance_join_status: # 年金保険(加入状況)
+        welfare: 厚生年金
+        national: 国民年金
+        recipient: 受給者
+      business_employment_insurance_join_status: # 雇用保険(加入状況)
+        join: 加入
+        not_join: 未加入
+        not_coverd: 対象外
+      business_retirement_benefit_mutual_aid_status: # 退職金共済制度(加入状況)
+        available: 有
+        not_available: 無
     document:
       document_type:
         cover_document: 表紙
