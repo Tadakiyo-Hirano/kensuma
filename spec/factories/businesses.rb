@@ -11,6 +11,15 @@ FactoryBot.define do
     phone_number { '09001230123' }
     carrier_up_id { '1' }
     business_type { 0 }
+    business_health_insurance_status { 0 }                                # 健康保険(加入状況)
+    business_health_insurance_association { "TEST健康保険組合" }            # 健康保険(組合名)
+    business_health_insurance_office_number { '01234567' }                # 健康保険(事業所整理記号及び事業所番号)
+    business_welfare_pension_insurance_join_status { 0 }                  # 厚生年金保険(加入状況)
+    business_welfare_pension_insurance_office_number { '01234567890123' } # 厚生年金保険(事業所整理記号)
+    business_pension_insurance_join_status { 0 }                          # 年金保険(加入状況)
+    business_employment_insurance_join_status { 0 }                       # 雇用保険(加入状況)
+    business_employment_insurance_number { '01234567890' }                # 雇用保険(番号)
+    business_retirement_benefit_mutual_aid_status { 0 }                   # 退職金共済制度(加入状況)
     user
   end
 end
