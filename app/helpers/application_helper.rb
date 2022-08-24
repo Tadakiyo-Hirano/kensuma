@@ -7,19 +7,21 @@ module ApplicationHelper
 
   # 下請け階層表示
   def sc_hierarchy(request_order)
-    case request_order.depth # .depthメソッドで階層の世代を取得できる。
-    when 0
+    if request_order.class == RequestOrder
+      case request_order.depth # .depthメソッドで階層の世代を取得できる。
+      when 1
+        '一次'
+      when 2
+        '二次'
+      when 3
+        '三次'
+      when 4
+        '四次'
+      when 5
+        '五次'
+      end
+    else
       '元請'
-    when 1
-      '一次'
-    when 2
-      '二次'
-    when 3
-      '三次'
-    when 4
-      '四次'
-    when 5
-      '五次'
     end
   end
 

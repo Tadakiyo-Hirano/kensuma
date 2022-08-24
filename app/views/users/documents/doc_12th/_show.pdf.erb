@@ -301,14 +301,16 @@
                 <td class="s8"></td>
                 <td class="s9" colspan="5">使用会社名</td>
                 <td class="s16" dir="ltr" colspan="12" rowspan="2">
-                  <%#= @document.content["subcontractor_name"] %> 12-008
+                  <%= Business.find(document_info.business_id).name %> <!-- 12-008 自社の会社名 -->
                 </td>
               </tr>
               <tr style="height: 25px">
                 <td class="s8"></td>
                 <td class="s8"></td>
                 <td class="s9">（</td>
-                <td class="s18" dir="ltr" colspan="3">「<%#= @document.content["subcontructor_number"] %>次」12-7</td>
+                <td class="s18" dir="ltr" colspan="3">
+                  「<%= sc_hierarchy(document_info) %>」 <!-- 12-007 次 -->
+                </td>
                 <td class="s9">）</td>
               </tr>
               <tr style="height: 25px">
@@ -335,7 +337,9 @@
                 <td class="s17" dir="ltr" colspan="10" rowspan="2">
                   <%= document_info.site_agent_name %> <!-- 12-009 各会社の現場代理人名 -->
                 </td>
-                <td class="s19" dir="ltr" colspan="2" rowspan="2"><%#= @document.content["seal"] %> 12-010</td>
+                <td class="s19" dir="ltr" colspan="2" rowspan="2">
+                  <%#= %>印 <!-- 12-010 社印 -->
+                </td>
               </tr>
               <tr style="height: 25px">
                 <td class="s7"></td>
