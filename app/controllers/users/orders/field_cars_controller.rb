@@ -36,6 +36,9 @@ module Users::Orders
 
     def update_cars
       field_cars_params.each do |id, item|
+        item[:driver_name] = Worker.find(item[:driver_worker_id]).name
+        item[:driver_address] = Worker.find(item[:driver_worker_id]).my_address
+        item[:driver_birth_day_on] = Worker.find(item[:driver_worker_id]).birth_day_on
         field_car = FieldCar.find(id)
         field_car.update(item)
       end
@@ -62,6 +65,7 @@ module Users::Orders
         field_cars: %i[
           car_name driver_name usage_period_start usage_period_end
           starting_point waypoint_first waypoint_second arrival_point
+          driver_worker_id driver_address driver_birth_day_on
         ]
       )[:field_cars]
     end

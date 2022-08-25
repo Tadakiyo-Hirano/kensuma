@@ -117,7 +117,7 @@
 					<td class="s7"></td>
 					<td class="s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
 					<td class="s8" colspan="8" rowspan="3">
-						元請会社の「確認欄」8-042
+						<%= '※8-042未実装※' %> <!-- 8-042 元請会社の確認欄 -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -318,7 +318,7 @@
 					<td class="s2"></td>
 					<td class="s2" colspan="3" rowspan="2">提 出 日</td>
 					<td class="s10" colspan="6" rowspan="2">
-						「提出日（西暦）」8-011
+						<%= '※8-011未実装※' %> <!-- 8-011 提出日 -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -361,7 +361,7 @@
 					<td class="s2"></td>
 					<td class="s13" rowspan="2">（</td>
 					<td class="s14" colspan="7" rowspan="2">
-						<%= "※※未実装※※" %>	<!-- 8-004 書類作成日(西暦) -->
+						<%= '※8-004未実装※' %>	<!-- 8-004 書類作成日(西暦) -->
 					</td>
 					<td class="s2" colspan="2" rowspan="2">作成</td>
 					<td class="s2" rowspan="2">）</td>
@@ -417,9 +417,9 @@
 					<td class="s2"></td>
 					<td class="s13" rowspan="2">（</td>
 					<td class="s16" rowspan="2">
-						8-007
+						<%= sc_hierarchy(document_info) %> <!-- 8-007 次 -->
 					</td>
-					<td class="s2" colspan="3" rowspan="2">次）会社名</td>
+					<td class="s2" colspan="3" rowspan="2">）会社名</td>
 					<td class="s17" colspan="7" rowspan="2">
 						<%= Business.find(document_info.business_id).name %> <!-- 8-009 自社の「会社名」 -->
 					</td>
@@ -457,7 +457,7 @@
 						一次会社の「事業者ID（キャリアアップ）」8-006
 					</td>
 					<td class="s20" rowspan="2">
-						印8-43
+						印 <!-- 8-043 印 ※未実装※ -->
 					</td>
 					<td class="s2"></td>
 					<td class="s21"></td>
@@ -466,7 +466,7 @@
 						<%= Business.find(document_info.business_id).carrier_up_id %> <!-- 8-010 自社の「事業者ID（キャリアアップ）」 -->
 					</td>
 					<td class="s20" rowspan="2">
-						印8-44
+						印 <!-- 8-044 印 ※未実装※ -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -1984,15 +1984,12 @@
 	}
 	
 	.ritz .waffle .s8 {
-		
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2048,10 +2045,8 @@
 		border-right: 1px SOLID #ffffff;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 12pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2255,10 +2250,8 @@
 		border-left: 1px SOLID #ffffff;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 11pt;
 		vertical-align: middle;
 		white-space: nowrap;
@@ -2403,11 +2396,9 @@
 	.ritz .waffle .s16 {
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
-		font-size: 7pt;
+		font-size: 10pt;
 		vertical-align: middle;
 		white-space: normal;
 		overflow: hidden;
@@ -2451,6 +2442,7 @@
 	
 	.ritz .waffle .s17 {
 		background-color: #ccffcc;
+		border-bottom: 1px SOLID #000000;
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;

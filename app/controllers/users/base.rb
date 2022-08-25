@@ -68,16 +68,22 @@ module Users
 
     # 書類に反映させる車両情報
     def car_info(car)
-      JSON.parse(
-        car.to_json(
-          except:  %i[uuid images created_at updated_at], # 車両
-          include: {
-            car_voluntary_insurances: {
-              except: %i[id created_at updated_at] # 任意保険
+      json =
+        JSON.parse(
+          car.to_json(
+            except:  %i[uuid images created_at updated_at], # 車両
+            include: {
+              car_voluntary_insurances: {
+                except: %i[id created_at updated_at] # 任意保険
+              }
             }
-          }
+          )
         )
-      )
+
+      insurance_company = { car_insurance_company: CarInsuranceCompany.find(json['car_insurance_company_id']).name }
+      voluntary_insurance_company = { voluntary_insurance_company: CarInsuranceCompany.find(json['car_voluntary_insurances'][0]['car_voluntary_id']).name }
+
+      json.merge(insurance_company, voluntary_insurance_company)
     end
   end
 end

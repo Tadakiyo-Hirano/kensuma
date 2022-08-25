@@ -37,7 +37,7 @@
                     </td>
                     <td>
                       <%= fc.label :driver_name %>
-                      <%= fc.select :driver_name, @business_workers_name, { prompt: '選択してください' }, { class: "form-control" } %>
+                      <%= fc.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
                     </td>
                     <td>
                       <%= fc.label :usage_period_start %>
