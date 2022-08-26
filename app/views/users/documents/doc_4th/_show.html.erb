@@ -9,7 +9,9 @@
           <tbody>
             <tr>
               <td>(全建統一様式第3号)</td>
-              <td class="text-right">「提出日(西暦)」4-001</td><!-- 「提出日(西暦)」4-001 -->
+              <td class="text-right">
+                <%= '※4-001未実装※' %> <!-- 4-001 提出日(西暦) -->
+              </td>
             </tr>
           </tbody>
         </table>
@@ -22,8 +24,13 @@
           <tbody>
             <tr>
               <td>[会 社 名・事業者ID]</td>
-              <td>「元請会社名」4-002</td><!-- 「元請会社名」4-002 -->
-              <td>「事業者ID（キャリアアップ）」4-003</td><!-- 「事業者ID（キャリアアップ）」4-003 -->
+              <td>
+                <%= document_site_info.general_contractor_name %> <!-- 4-002 元請会社名 -->
+              </td>
+              <td>
+                <%= document_site_info.site_career_up_id %> <!-- 4-003 事業者ID(キャリアアップ) -->
+              </td>
+              <%= document_site_info.general_contractor_name %>
             </tr>
           </tbody>
         </table>
@@ -33,7 +40,9 @@
           <tbody>
             <tr>
               <td>[事業所名・現場ID]</td>
-              <td>「事業所名」4-004</td><!-- 「事業所名」4-004 -->
+              <td>
+                <%= document_site_info.site_name %> <!-- 4-004 事業所名(現場名) -->
+              </td>
               <td>「現場ID(キャリアアップ)」4-005</td><!-- 「現場ID(キャリアアップ)」4-005 -->
             </tr>
           </tbody>
@@ -87,27 +96,46 @@
           <tbody>
             <tr>
               <td rowspan="2" width="10%">工事名称<br />及び<br />工事内容</td>
-              <td colspan="3">元請会社の「工事名」4-016</td><!-- 元請会社の「工事名」4-016 -->
+              <td colspan="3">
+                <%= document_site_info.construction_name %> <!-- 4-016 元請会社の工事名 -->
+              </td>
             </tr>
             <tr>
-              <td colspan="3">元請会社の「工事内容」4-017</td><!-- 元請会社の「工事内容」4-017 -->
+              <td colspan="3">
+                <%= document_site_info.construction_details %> <!-- 4-017 元請会社の工事内容 -->
+              </td>
             </tr>
             <tr>
               <td rowspan="2" width="10%">発注者<br />及び<br />住所</td>
-              <td colspan="3">「発注者名」4-018</td><!-- 「発注者名」4-018 -->
+              <td colspan="3">
+                <%= document_site_info.order_name %> <!-- 4-018 発注者名 -->
+              </td>
             </tr>
             <tr>
-              <td width="30%"><span>〒</span>発注者の「郵便番号」4-019</td><!-- 発注者の「郵便番号」4-019 -->
-              <td colspan="2">「発注者住所」4-020</td><!-- 「発注者住所」4-020 -->
+              <td width="30%">
+                <span>〒</span>
+                <%= document_site_info.order_post_code %> <!-- 4-019 発注者の郵便番号 -->
+              </td>
+              <td colspan="2">
+                <%= document_site_info.order_address %> <!-- 4-020 発注者住所 -->
+              </td>
             </tr>
             <tr>
               <td rowspan="2" width="10%">工期</td>
-              <td width="40%"><span>自　</span>元請会社の「工期（自）」4-021</td><!-- 元請会社の「工期（自）」4-021 -->
+              <td width="40%">
+                <span>自　</span>
+                <%= l document_site_info.start_date, format: :long %> <!-- 4-021　元請会社の工期(自) -->
+              </td>
               <td rowspan="2" width="10%">契 約 日</td>
-              <td rowspan="2" width="40%">元請会社の「契約日」4-023</td><!-- 元請会社の「契約日」4-023 -->
+              <td rowspan="2" width="40%">
+                <%= l document_site_info.contract_date, format: :long %> <!-- 4-023 元請会社の契約日 -->
+              </td>
             </tr>
             <tr>
-              <td><span>至　</span>元請会社の「工期（自）」4-022</td><!-- 元請会社の「工期（自）」4-022 -->
+              <td>
+                <span>至　</span>
+                <%= l document_site_info.end_date, format: :long %> <!-- 4-022 元請会社の工期(至) -->
+              </td>
             </tr>
           </tbody>
         </table>
@@ -154,9 +182,13 @@
           <tbody>
             <tr>
               <td colspan="2" width="10%">監督員名</td>
-              <td colspan="2" width="40%">元請会社の「監督員名」4-032</td><!-- 元請会社の「監督員名」4-032 -->
+              <td colspan="2" width="40%">
+                <%= document_site_info.supervisor_name %> <!-- 4-032 元請会社の監督員名 -->
+              </td>
               <td colspan="2" width="10%">権限及び<br />意見申出方法</td>
-              <td width="40%">元請会社の「監督員名・権限及び意見の申出方法」4-033</td><!-- 元請会社の「監督員名・権限及び意見の申出方法」4-033 -->
+              <td width="40%">
+                <%= document_site_info.supervisor_apply %> <!-- 4-033 元請会社の監督員名・権限及び意見の申出方法 -->
+              </td>
             </tr>
             <tr>
               <td colspan="2">現場代理人名</td>

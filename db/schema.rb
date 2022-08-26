@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_23_013528) do
+ActiveRecord::Schema.define(version: 2022_08_26_053128) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -324,6 +324,7 @@ ActiveRecord::Schema.define(version: 2022_08_23_013528) do
     t.string "confirm_name", null: false
     t.date "accept_confirm_date"
     t.string "subcontractor_name", null: false
+    t.string "general_contractor_name"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
 

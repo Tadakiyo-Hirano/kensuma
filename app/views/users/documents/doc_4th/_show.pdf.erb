@@ -12,7 +12,9 @@
                 <th rowspan="95"><div>　<!-- 文字がないと文字化けする --></div></th>
                 <td class="s0" colspan="41">（全建統一様式第3号）</td>
                 <td class="s1" colspan="13">
-                  <a href="#rangeid=107635100" target="_blank">「提出日（西暦）」4-001</a>
+                  <a href="#rangeid=107635100" target="_blank">
+                    <%= '※4-001未実装※' %> <!-- 4-001 提出日(西暦) -->
+                  </a>
                 </td>
                 <td class="s2"></td>
                 <td class="s3" colspan="54">《下請負人に関する事項》</td>
@@ -42,10 +44,14 @@
               <tr style="height: 8px">
                 <td class="s9" colspan="11" rowspan="2">[会 社 名・事業者ID]</td>
                 <td class="s10" colspan="21" rowspan="2">
-                  <a href="#rangeid=2142472686" target="_blank">「元請会社名」4-002</a>
+                  <a href="#rangeid=2142472686" target="_blank">
+                    <%= document_site_info.general_contractor_name %> <!-- 4-002 元請会社名 -->
+                  </a>
                 </td>
                 <td class="s10" colspan="22" rowspan="2">
-                  <a href="#rangeid=430541270" target="_blank">「事業者ID（キャリアアップ）」4-003</a>
+                  <a href="#rangeid=430541270" target="_blank">
+                    <%= document_site_info.site_career_up_id %> <!-- 4-003 事業者ID(キャリアアップ) -->
+                  </a>
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -120,7 +126,9 @@
               <tr style="height: 8px">
                 <td class="s9" colspan="11" rowspan="2">[事業所名・現場ID]</td>
                 <td class="s10" colspan="21" rowspan="2">
-                  <a href="#rangeid=1061545336" target="_blank">「事業所名」4-004</a>
+                  <a href="#rangeid=1061545336" target="_blank">
+                    <%= document_site_info.site_name %> <!-- 4-004 事業所名(現場名) -->
+                  </a>
                 </td>
                 <td class="s10" colspan="22" rowspan="2">
                   <a href="#rangeid=995591132" target="_blank">「現場ID(キャリアアップ)」4-005</a>
@@ -422,7 +430,9 @@
               <tr style="height: 20px">
                 <td class="s6" colspan="6" rowspan="4" style="border-left: 1px solid;">工事名称<br>及 び<br>工事内容</td>
                 <td class="s8" colspan="48" rowspan="2">
-                  <a href="#rangeid=498668107" target="_blank">元請会社の「工事名」4-016</a>
+                  <a href="#rangeid=498668107" target="_blank">
+                    <%= document_site_info.construction_name %> <!-- 4-016 元請会社の工事名 -->
+                  </a>
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -460,7 +470,9 @@
               <tr style="height: 8px">
                 <td class="s35" colspan="6" rowspan="4" style="border: 1px solid;">発注者名<br>及 び<br>住 所</td>
                 <td class="s7" colspan="48" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=1924971855" target="_blank">「発注者名」4-018</a>
+                  <a href="#rangeid=1924971855" target="_blank">
+                    <%= document_site_info.order_name %> <!-- 4-018 発注者名 -->
+                  </a>
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -472,10 +484,14 @@
               <tr style="height: 8px">
                 <td class="s36" colspan="3" rowspan="2">〒</td>
                 <td class="s37" colspan="8" rowspan="2">
-                  <a href="#rangeid=817834490" target="_blank">発注者の「郵便番号」4-019</a>
+                  <a href="#rangeid=817834490" target="_blank">
+                    <%= document_site_info.order_post_code %> <!-- 4-019 発注者の郵便番号 -->
+                  </a>
                 </td>
                 <td class="s8" colspan="37" rowspan="2">
-                  <a href="#rangeid=936066008" target="_blank">「発注者住所」4-020</a>
+                  <a href="#rangeid=936066008" target="_blank">
+                    <%= document_site_info.order_address %> <!-- 4-020 発注者住所 -->
+                  </a>
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -540,11 +556,15 @@
                 <td class="s6" colspan="6" rowspan="4" style="border: 1px solid;">工 期</td>
                 <td class="s26" colspan="3" rowspan="2" style="border: 1px solid;">自</td>
                 <td class="s7" colspan="19" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=240870217" target="_blank">元請会社の「工期（自）」4-021</a>
+                  <a href="#rangeid=240870217" target="_blank">
+                    <%= l document_site_info.start_date, format: :long %> <!-- 4-021　元請会社の工期(自) -->
+                  </a>
                 </td>
                 <td class="s6" colspan="6" rowspan="4">契 約 日</td>
                 <td class="s8" colspan="20" rowspan="4">
-                  <a href="#rangeid=953121991" target="_blank">元請会社の「契約日」4-023</a>
+                  <a href="#rangeid=953121991" target="_blank">
+                    <%= l document_site_info.contract_date, format: :long %> <!-- 4-023 元請会社の契約日 -->
+                  </a>
                 </td>
                 <td class="s5"></td>
                 <td class="s39" colspan="10" rowspan="3" style="border: 1px solid;">現 場 代 理 人 名</td>
@@ -564,7 +584,9 @@
               <tr style="height: 8px">
                 <td class="s29" colspan="3" rowspan="2" style="border: 1px solid;">至</td>
                 <td class="s8" colspan="19" rowspan="2">
-                  <a href="#rangeid=608729669" target="_blank">元請会社の「工期（至）」4-022</a>
+                  <a href="#rangeid=608729669" target="_blank">
+                    <%= l document_site_info.end_date, format: :long %> <!-- 4-022 元請会社の工期(至) -->
+                  </a>
                 </td>
                 <td class="s5"></td>
                 <td class="s5"></td>
@@ -953,11 +975,15 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="6" rowspan="3" style="border: 1px solid;">監督員名</td>
                 <td class="s8" colspan="22" rowspan="3">
-                  <a href="#rangeid=979958270" target="_blank">元請会社の「監督員名」4-032</a>
+                  <a href="#rangeid=979958270" target="_blank">
+                    <%= document_site_info.supervisor_name %> <!-- 4-032 元請会社の監督員名 -->
+                  </a>
                 </td>
                 <td class="s6" colspan="6" rowspan="3">権限及び<br>意見申出方法</td>
                 <td class="s40" colspan="20" rowspan="3">
-                  <a href="#rangeid=816208492" target="_blank">元請会社の「監督員名・権限及び意見の申出方法」4-033</a>
+                  <a href="#rangeid=816208492" target="_blank">
+                    <%= document_site_info.supervisor_apply %> <!-- 4-033 元請会社の監督員名・権限及び意見の申出方法 -->
+                  </a>
                 </td>
                 <td class="s5"></td>
                 <td class="s6" colspan="8" rowspan="4">一号特定技能<br>外国人の従事<br>の状況(有無)</td>

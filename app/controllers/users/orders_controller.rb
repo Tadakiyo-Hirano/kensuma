@@ -156,8 +156,8 @@ module Users
         :health_and_safety_promoter_position_name,
         :confirm_name,
         :accept_confirm_date,
-        :subcontractor_name
-      )
+        :subcontractor_name,
+      ).merge(general_contractor_name: current_business.name)
     end
   end
 end
