@@ -1,6 +1,9 @@
 ja:
   activerecord:
     models:
+      user: ユーザー
+      admin: 管理者
+      comment: コメント
       business: 事業部
       car: 車両情報
       car_insurance_company: ⾃動⾞保険会社
@@ -27,6 +30,11 @@ ja:
       solvent: 有機溶剤情報
       machine: 機械情報
     attributes:
+      user:
+      # 下記記述は、businessのカラムと名称が重複が発生してしまうので、どちらを使うか決まるまで一旦コメントアウト
+      #   name: 会社名
+      #   email: 会社メール
+        role: 権限
       business:
         uuid: 事業所ID
         name: 事業所名
