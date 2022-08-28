@@ -1,4 +1,4 @@
-<% provide(:title, "発注詳細(元請)") %>
+<% provide(:title, "現場情報詳細(元請)") %>
 
 <div class="card">
   <div class="card-body table-responsive p-0">
@@ -6,15 +6,15 @@
       <tbody>
         <tr>
           <td>
-            <%= link_to "発注一覧", users_orders_path, class: "btn btn-md btn-default" %>
-            <%= link_to "発注修正", edit_users_order_path(@order), class: "btn btn-md btn-md btn-success" %>
+            <%= link_to "現場情報一覧", users_orders_path, class: "btn btn-md btn-default" %>
+            <%= link_to "現場情報修正", edit_users_order_path(@order), class: "btn btn-md btn-md btn-success" %>
           </td>
           <td>
-            <%= link_to "入場作業員", users_order_field_workers_path(@order), class: "btn btn-md btn-success" %>
-            <%= link_to "車両", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
-            <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
-            <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
-            <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+            <%= link_to "入場作業員情報", users_order_field_workers_path(@order), class: "btn btn-md btn-success" %>
+            <%= link_to "車両情報", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
+            <%= link_to "特殊車両情報", "#", class: "btn btn-md btn-success" %>
+            <%= link_to "持込機械情報", "#", class: "btn btn-md btn-success" %>
+            <%= link_to "有機溶剤情報", "#", class: "btn btn-md btn-success" %>
           </td>
         </tr>
         <tr>
