@@ -49,4 +49,12 @@ module ApplicationHelper
       request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
     end
   end
+
+  def document_subcon_info
+    if params[:sub_request_order_uuid]
+      RequestOrder.where(uuid: params[:sub_request_order_uuid], parent_id: 1).ids
+    else
+      # request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order.order
+    end
+  end
 end

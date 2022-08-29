@@ -25,7 +25,9 @@
                 <td class="s5"></td>
                 <td class="s6" colspan="6" rowspan="4">会 社 名</td>
                 <td class="s7" colspan="21" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=2139286466" target="_blank">「会社名」4-101</a>
+                  <a href="#rangeid=2139286466" target="_blank">
+                    <%= '※4-101未実装※' %> <!-- 4-101 元請会社名 -->
+                  </a>
                 </td>
                 <td class="s6" colspan="6" rowspan="4">代表者名</td>
                 <td class="s8" colspan="21" rowspan="4">
@@ -38,7 +40,9 @@
               <tr style="height: 8px">
                 <td class="s5"></td>
                 <td class="s8" colspan="21" rowspan="2">
-                  <a href="#rangeid=430541270" target="_blank">「事業者ID（キャリアアップ）」4-102</a>
+                  <a href="#rangeid=430541270" target="_blank">
+                    <%= '※4-003未実装※' %> <!-- 4-003 事業者ID(キャリアアップ) -->
+                  </a>
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -50,7 +54,7 @@
                 </td>
                 <td class="s10" colspan="22" rowspan="2">
                   <a href="#rangeid=430541270" target="_blank">
-                    <%= document_site_info.site_career_up_id %> <!-- 4-003 事業者ID(キャリアアップ) -->
+                    <%= '※4-003未実装※' %> <!-- 4-003 事業者ID(キャリアアップ) -->
                   </a>
                 </td>
                 <td class="s5"></td>
@@ -131,7 +135,9 @@
                   </a>
                 </td>
                 <td class="s10" colspan="22" rowspan="2">
-                  <a href="#rangeid=995591132" target="_blank">「現場ID(キャリアアップ)」4-005</a>
+                  <a href="#rangeid=995591132" target="_blank">
+                    <%= document_site_info.site_career_up_id %> <!-- 4-005 現場ID(キャリアアップ)-->
+                  </a>
                 </td>
                 <td class="s5"></td>
                 <td class="s11"></td>
@@ -688,7 +694,9 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="3">元請契約</td>
                 <td class="s8" colspan="17" rowspan="3">
-                  <a href="#rangeid=2139286466" target="_blank">各会社の「会社名」4-024</a>
+                  <a href="#rangeid=2139286466" target="_blank">
+                    <%= document_site_info.general_contractor_name %> <!-- 元請会社名 4-024 -->
+                  </a>
                 </td>
                 <td class="s8" colspan="26" rowspan="3">
                   <a href="#rangeid=1741597372" target="_blank">各会社の「住所」4-025</a>
@@ -1652,15 +1660,33 @@
                 <td class="s62"></td>
               </tr>
               <tr style="height: 8px">
-                <td class="s14" colspan="4" rowspan="2">加入</td>
-                <td class="s14" colspan="4" rowspan="2">未加入　</td>
-                <td class="s16" colspan="5" rowspan="2">適用除外</td>
-                <td class="s14" colspan="4" rowspan="2">加入</td>
-                <td class="s14" colspan="4" rowspan="2">未加入</td>
-                <td class="s16" colspan="6" rowspan="2">適用除外</td>
-                <td class="s14" colspan="4" rowspan="2">　加入</td>
-                <td class="s14" colspan="4" rowspan="2">　未加入</td>
-                <td class="s16" colspan="6" rowspan="2">　適用除外</td>
+                <td class="s14" colspan="4" rowspan="2">
+                  <%= insurance_join(document_site_info.health_insurance_status) %> <!-- 健康保険加入(加入) 4-050 -->
+                </td>
+                <td class="s14" colspan="4" rowspan="2">
+                  <%= insurance_not_join(document_site_info.health_insurance_status) %> <!-- 健康保険加入の有無(未加入) 4-050 -->
+                </td>
+                <td class="s16" colspan="5" rowspan="2">
+                  <%= insurance_not_coverd(document_site_info.health_insurance_status) %> <!-- 健康保険加入(適用除外) 4-050 -->
+                </td>
+                <td class="s14" colspan="4" rowspan="2">
+                  <%= insurance_join(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(加入) 4-051 -->
+                </td>
+                <td class="s14" colspan="4" rowspan="2">
+                  <%= insurance_not_join(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(未加入) 4-051 -->
+                </td>
+                <td class="s16" colspan="6" rowspan="2">
+                  <%= insurance_not_coverd(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(適用除外) 4-051 -->
+                </td>
+                <td class="s14" colspan="4" rowspan="2">
+                  <%= insurance_join(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(加入) 4-052 -->
+                </td>
+                <td class="s14" colspan="4" rowspan="2">
+                  <%= insurance_not_join(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(未加入) 4-052 -->
+                </td>
+                <td class="s16" colspan="6" rowspan="2">
+                  <%= insurance_not_coverd(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(適用除外) 4-052 -->
+                </td>
                 <td class="s2"></td>
                 <td class="s57"></td>
                 <td class="s57"></td>
@@ -1699,7 +1725,9 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="2">元請契約</td>
                 <td class="s8" colspan="8" rowspan="2">
-                  <a href="#rangeid=2139286466" target="_blank">「会社名」4-053</a>
+                  <a href="#rangeid=2139286466" target="_blank">
+                    <%= document_site_info.general_contractor_name %> <!-- 元請会社名 4-053 -->
+                  </a>
                 </td>
                 <td class="s54" colspan="9">
                   <a href="#rangeid=781495097" target="_blank">「健康保険」4-054</a>
@@ -3321,4 +3349,10 @@
 		direction: ltr;
 		padding: 2px 3px 2px 3px;
 	}
+
+  .circle {
+    border: 2px solid #000000;
+    border-radius: 25px;
+    padding: 4px;
+  }
 </style>

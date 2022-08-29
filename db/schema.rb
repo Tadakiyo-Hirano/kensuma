@@ -325,6 +325,9 @@ ActiveRecord::Schema.define(version: 2022_08_26_053128) do
     t.date "accept_confirm_date"
     t.string "subcontractor_name", null: false
     t.string "general_contractor_name"
+    t.string "health_insurance_status"
+    t.string "welfare_pension_insurance_join_status"
+    t.string "employment_insurance_join_status"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
 

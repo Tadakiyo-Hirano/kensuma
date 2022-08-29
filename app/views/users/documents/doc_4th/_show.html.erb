@@ -28,7 +28,7 @@
                 <%= document_site_info.general_contractor_name %> <!-- 4-002 元請会社名 -->
               </td>
               <td>
-                <%= document_site_info.site_career_up_id %> <!-- 4-003 事業者ID(キャリアアップ) -->
+                <%= '※4-003未実装※' %> <!-- 4-003 事業者ID(キャリアアップ) -->
               </td>
               <%= document_site_info.general_contractor_name %>
             </tr>
@@ -43,7 +43,9 @@
               <td>
                 <%= document_site_info.site_name %> <!-- 4-004 事業所名(現場名) -->
               </td>
-              <td>「現場ID(キャリアアップ)」4-005</td><!-- 「現場ID(キャリアアップ)」4-005 -->
+              <td>
+                <%= document_site_info.site_career_up_id %> <!-- 4-005 現場ID(キャリアアップ)-->
+              </td>
             </tr>
           </tbody>
         </table>
@@ -151,7 +153,9 @@
             </tr>
             <tr>
               <td>元請契約</td>
-              <td>各会社の「会社名」4-024</td><!-- 各会社の「会社名」4-024 -->
+              <td>
+                <%= document_site_info.general_contractor_name %> <!-- 元請会社名 4-024 -->
+              </td>
               <td>各会社の「住所」4-025</td><!-- 各会社の「住所」4-025 -->
             </tr>
             <tr>
@@ -289,15 +293,33 @@
               <td colspan="3" width="26%">雇用保険</td>
             </tr>
             <tr>
-              <td width="7%">加入</td> <!-- 健康保険加入の有無」4-050 -->
-              <td width="7%">未加入</td> <!-- 「健康保険加入の有無」4-050 -->
-              <td width="7%">適用外</td> <!-- 「健康保険加入の有無」4-050 -->
-              <td width="8.5%">加入</td> <!-- 「年金保険加入の有無」4-051 -->
-              <td width="9%">未加入</td> <!-- 「年金保険加入の有無」4-051 -->
-              <td width="8.5%">適用外</td> <!-- 「年金保険加入の有無」4-051 -->
-              <td width="9%">加入</td> <!-- 「雇用保険加入の有無」4-052 -->
-              <td width="9%">未加入</td> <!-- 「雇用保険加入の有無」4-052 -->
-              <td width="8%">適用外</td> <!-- 「雇用保険加入の有無」4-052 -->
+              <td width="7%">
+                <%= insurance_join(document_site_info.health_insurance_status) %> <!-- 健康保険(加入) 4-050 -->
+              </td>
+              <td width="7%">
+                <%= insurance_not_join(document_site_info.health_insurance_status) %> <!-- 健康保険加(未加入) 4-050 -->
+              </td>
+              <td width="7%">
+                <%= insurance_not_coverd(document_site_info.health_insurance_status) %> <!-- 健康保険加入(適用除外) 4-050 -->
+              </td>
+              <td width="8.5%">
+                <%= insurance_join(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(加入) 4-051 -->
+              </td>
+              <td width="9%">
+                <%= insurance_not_join(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(未加入) 4-051 -->
+              </td>
+              <td width="8.5%">
+                <%= insurance_not_coverd(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(適用除外) 4-051 -->
+              </td>
+              <td width="9%">
+                <%= insurance_join(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(加入) 4-052 -->
+              </td>
+              <td width="9%">
+                <%= insurance_not_join(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(未加入) 4-052 -->
+              </td>
+              <td width="8%">
+                <%= insurance_not_coverd(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(適用除外) 4-052 -->
+              </td>
             </tr>
             <tr>
               <td rowspan="3">事業所<br /> 整理記号等</td>
@@ -309,7 +331,9 @@
             </tr>
             <tr>
               <td>元請契約</td>
-              <td colspan="2">「会社名」4-053</td><!-- 「会社名」4-053 -->
+              <td colspan="2">
+                <%= document_site_info.general_contractor_name %> <!-- 元請会社名 4-053 -->
+              </td>
               <td colspan="2">「健康保険」4-054<br />「健康保険番号」4-055</td><!-- 「健康保険」4-054 & 「健康保険番号」4-055 -->
               <td colspan="2">「厚生年金保険番号」4-056</td><!-- 「厚生年金保険番号」4-056 -->
               <td colspan="2">「雇用保険」4-057</td><!-- 「雇用保険」4-057 -->
@@ -363,12 +387,16 @@
           <tbody>
             <tr>
               <td rowspan="2" width="10%">会 社 名</td>
-              <td colspan="2" width="40%">「会社名」4-101</td><!-- 「会社名」4-101 -->
+              <td colspan="2" width="40%">
+                <%= '※4-101未実装※' %> <!-- 4-101 下請会社名 -->
+              </td>
               <td rowspan="2" width="15%">代表者名</td>
               <td rowspan="2" width="35%">「代表者名」4-103</td><!-- 「代表者名」4-103 -->
             </tr>
             <tr>
-              <td colspan="2">「事業者ID（キャリアアップ）」4-102</td><!-- 「事業者ID（キャリアアップ）」4-102 -->
+              <td colspan="2">
+                <%= '※4-003未実装※' %> <!-- 4-003 事業者ID(キャリアアップ) -->
+              </td>
             </tr>
             <tr>
               <td rowspan="2">住 所<Br />電話番号</td>
@@ -447,8 +475,8 @@
         <table class="table table-sm table-bordered" width="100%">
           <tbody>
             <tr>
-              <td colspan="2" width="14%">現 場 代 理 人 名</td>
-              <td colspan="2" width="35%">各下請会社の「現場代理人名」4-122</td><!-- 各下請会社の「現場代理人名」4-122 -->
+              <td colspan="2" width="14%">現 場 代 理 人 名<%= document_subcon_info %></td>
+              <td colspan="2" width="35%">各下請会社の「現場代理人名」4-122<%= document_info.site_agent_name %></td><!-- 各下請会社の「現場代理人名」4-122 -->
               <td rowspan="7" width="1%"></td>
               <td colspan="2" width="15%">安全衛生責任者名</td>
               <td width="35%">各下請会社の「安全衛生責任者名」4-127</td><!-- 各下請会社の「安全衛生責任者名」4-127 -->
