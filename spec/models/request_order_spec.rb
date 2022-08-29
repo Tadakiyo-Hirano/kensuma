@@ -14,10 +14,10 @@ RSpec.describe RequestOrder, type: :model do
       end
     end
 
-    context '紐つく発注がある場合' do
+    context '紐つく現場情報がある場合' do
       subject { request_order.order }
 
-      it '紐つく発注を返すこと' do
+      it '紐つく現場情報を返すこと' do
         expect(subject).to eq(order)
       end
     end

@@ -8,7 +8,7 @@ ja:
       car: 車両情報
       special_vehicle: 特殊車両情報
       field_worker: 現場作業員情報
-      order: 発注
+      order: 現場情報
       request_order: 発注依頼
       worker: 作業員
       license: 免許マスタ
