@@ -6,10 +6,10 @@ RSpec.describe RequestOrder, type: :model do
   let(:request_order) { create(:request_order, business: business, order: order) }
 
   describe 'アソシエーションについて' do
-    context '紐つく事業所がある場合' do
+    context '紐つく会社情報がある場合' do
       subject { request_order.business }
 
-      it '紐つく事業所を返すこと' do
+      it '紐つく会社情報を返すこと' do
         expect(subject).to eq(business)
       end
     end
