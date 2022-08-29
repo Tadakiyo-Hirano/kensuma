@@ -15,26 +15,26 @@ RSpec.describe 'Workers', type: :system do
     visit users_dash_boards_path
   end
 
-  describe '作業員のCRUDテスト' do
+  describe '作業員情報のCRUDテスト' do
     before(:each) do
       worker.save!
       worker_medical.save!
     end
 
     describe '一覧機能' do
-      it '作業員一覧ページに遷移' do
+      it '作業員情報一覧ページに遷移' do
         click_on '作業員'
         expect(page).to have_current_path users_workers_path, ignore_query: true
-        expect(page).to have_content('作業員一覧')
+        expect(page).to have_content('作業員情報一覧')
       end
     end
 
     describe '新規登録機能' do
-      it '作業員登録画面へ遷移する' do
+      it '作業員情報登録画面へ遷移する' do
         visit users_workers_path
-        click_on '作業員新規作成画面へ'
+        click_on '作業員情報新規作成画面へ'
         expect(page).to have_current_path new_users_worker_path, ignore_query: true
-        expect(page).to have_content('作業員登録')
+        expect(page).to have_content('作業員情報登録')
       end
 
       context '入力内容が正しい場合' do
@@ -92,8 +92,8 @@ RSpec.describe 'Workers', type: :system do
           }.to change(Worker,
             :count).by(1).and change(WorkerLicense,
               :count).by(1).and change(WorkerSkillTraining, :count).by(1).and change(WorkerSpecialEducation, :count).by(1)
-          expect(page).to have_content '作業員を作成しました'
-          expect(page).to have_content '作業員詳細'
+          expect(page).to have_content '作業員情報を作成しました'
+          expect(page).to have_content '作業員情報詳細'
           expect(page).to have_content 'TestWorker'
         end
       end
@@ -118,8 +118,8 @@ RSpec.describe 'Workers', type: :system do
           fill_in 'worker[blank_term]', with: 1
           click_button '登録'
           expect(page).to have_content '入力エラー'
-          expect(page).to have_content '作業員登録'
-          expect(page).to have_no_content '作業員詳細'
+          expect(page).to have_content '作業員情報登録'
+          expect(page).to have_no_content '作業員情報詳細'
         end
       end
     end
@@ -131,7 +131,7 @@ RSpec.describe 'Workers', type: :system do
           fill_in 'worker[name]', with: '編集後ワーカー'
           click_button '更新'
           expect(page).to have_current_path users_worker_path(worker), ignore_query: true
-          expect(page).to have_content '作業員詳細'
+          expect(page).to have_content '作業員情報詳細'
           expect(page).to have_content '編集後ワーカー'
         end
       end
@@ -143,7 +143,7 @@ RSpec.describe 'Workers', type: :system do
           click_button '更新'
           expect(page).to have_content '入力エラー'
           expect(page).to have_content '作業員情報編集'
-          expect(page).to have_no_content '作業員詳細'
+          expect(page).to have_no_content '作業員情報詳細'
         end
       end
     end
@@ -159,7 +159,7 @@ RSpec.describe 'Workers', type: :system do
           :count).by(-1).and change(WorkerLicense,
             :count).by(-1).and change(WorkerSkillTraining, :count).by(-1).and change(WorkerSpecialEducation, :count).by(-1)
         expect(page).to have_current_path users_workers_path, ignore_query: true
-        expect(page).to have_content '作業員一覧'
+        expect(page).to have_content '作業員情報一覧'
       end
     end
   end

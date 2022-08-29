@@ -39,7 +39,7 @@ module Users
     def worker_info(worker)
       JSON.parse(
         worker.to_json(
-          except:  %i[uuid images created_at updated_at], # 作業員
+          except:  %i[uuid images created_at updated_at], # 作業員情報
           include: {
             worker_medical:            {
               except:  %i[id worker_id created_at updated_at], # 作業員の健康情報
