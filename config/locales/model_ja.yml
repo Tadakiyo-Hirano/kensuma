@@ -25,7 +25,7 @@ ja:
       worker_exam: 中間テーブル(特別健康診断種類マスタ)
       special_med_exam: 特別健康診断種類マスタ
       solvent: 有機溶剤情報
-      machine: 機械情報
+      machine: 持込機械情報
     attributes:
       business:
         uuid: 事業所ID
