@@ -312,8 +312,8 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe '発注依頼とのアソシエーションについて' do
-    context '紐つく発注依頼がある場合' do
+  describe '下請発注情報とのアソシエーションについて' do
+    context '紐つく下請発注情報がある場合' do
       subject do
         order.request_orders
       end
@@ -322,7 +322,7 @@ RSpec.describe Order, type: :model do
         create_list(:request_order, 2, order: order)
       end
 
-      it '紐つく発注依頼を返すこと' do
+      it '紐つく下請発注情報を返すこと' do
         expect(subject).to eq(request_orders)
       end
     end

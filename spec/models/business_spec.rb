@@ -415,13 +415,13 @@ RSpec.describe Business, type: :model do
     end
   end
 
-  describe '発注依頼とのアソシエーションについて' do
+  describe '下請発注情報とのアソシエーションについて' do
     let(:request_orders) { create_list(:request_order, 2, business: business) }
 
-    context '紐つく発注依頼がある場合' do
+    context '紐つく下請発注情報がある場合' do
       subject { business.request_orders }
 
-      it '紐つく発注依頼を返すこと' do
+      it '紐つく下請発注情報を返すこと' do
         expect(subject).to eq(request_orders)
       end
     end

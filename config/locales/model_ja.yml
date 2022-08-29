@@ -9,7 +9,7 @@ ja:
       special_vehicle: 特殊車両情報
       field_worker: 現場作業員情報
       order: 現場情報
-      request_order: 発注依頼
+      request_order: 下請発注情報
       worker: 作業員
       license: 免許マスタ
       worker_license: 中間テーブル(免許マスタ)
