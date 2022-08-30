@@ -87,7 +87,7 @@ RSpec.describe 'Special_Vehicles', type: :system do
         click_on '削除'
 
         expect {
-          expect(page.accept_confirm).to eq "#{special_vehicle.name}の車両情報を削除します。本当によろしいですか？"
+          expect(page.accept_confirm).to eq "#{special_vehicle.name}の特殊車両情報を削除します。本当によろしいですか？"
           expect(page).to have_content "#{special_vehicle.name}を削除しました"
         }.to change(SpecialVehicle, :count).by(-1)
 

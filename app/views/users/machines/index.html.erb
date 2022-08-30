@@ -1,6 +1,6 @@
-<% provide(:title, "機械情報一覧") %>
+<% provide(:title, "持込機械情報一覧") %>
 
-<%= link_to "機械情報新規作成画面へ", new_users_machine_path, class: "btn btn-lg btn-block btn-outline-primary" %>
+<%= link_to "持込機械情報規作成画面へ", new_users_machine_path, class: "btn btn-lg btn-block btn-outline-primary" %>
 
 <% if @machines.present? %>
   <div class="card">
@@ -28,7 +28,7 @@
               <td><%= machine.inspection_date %></td>
               <td><%= link_to "編集", edit_users_machine_path(machine), class: "btn btn-success btn-md" %></td>
               <td><%= link_to "削除", users_machine_path(machine), method: :delete,
-                              data: { confirm: "#{machine.name}の機械情報を削除します。本当によろしいですか？" }, class: "btn btn-danger btn-md" %>
+                              data: { confirm: "#{machine.name}の持込機械情報を削除します。本当によろしいですか？" }, class: "btn btn-danger btn-md" %>
               </td>
             </tr>
           <% end %>

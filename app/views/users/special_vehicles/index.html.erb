@@ -20,7 +20,7 @@
             <td><%= link_to special_vehicle.name, users_special_vehicle_path(special_vehicle) %></td>
             <td><%= special_vehicle.maker %></td>
             <td><%= link_to "編集", edit_users_special_vehicle_path(special_vehicle), class: "btn btn-md btn-success" %></td>
-            <td><%= link_to "削除", users_special_vehicle_path(special_vehicle), method: :delete, data: { confirm: "#{special_vehicle.name}の車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+            <td><%= link_to "削除", users_special_vehicle_path(special_vehicle), method: :delete, data: { confirm: "#{special_vehicle.name}の特殊車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
           </tr>
           <% end %>
         </tbody>

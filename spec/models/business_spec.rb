@@ -389,39 +389,39 @@ RSpec.describe Business, type: :model do
     end
   end
 
-  describe '車両とのアソシエーションについて' do
+  describe '車両情報とのアソシエーションについて' do
     let(:business) { create(:business, cars: cars) }
     let(:cars) { create_list(:car, 2) }
 
-    context '紐つく車両がある場合' do
+    context '紐つく車両情報がある場合' do
       subject { business.cars }
 
-      it '紐つく車両を返すこと' do
+      it '紐つく車両情報を返すこと' do
         expect(subject).to eq(cars)
       end
     end
   end
 
-  describe '発注とのアソシエーションについて' do
+  describe '現場情報とのアソシエーションについて' do
     let(:business) { create(:business, orders: orders) }
     let(:orders) { create_list(:order, 2) }
 
-    context '紐つく発注がある場合' do
+    context '紐つく現場情報がある場合' do
       subject { business.orders }
 
-      it '紐つく発注を返すこと' do
+      it '紐つく現場情報を返すこと' do
         expect(subject).to eq(orders)
       end
     end
   end
 
-  describe '発注依頼とのアソシエーションについて' do
+  describe '下請発注情報とのアソシエーションについて' do
     let(:request_orders) { create_list(:request_order, 2, business: business) }
 
-    context '紐つく発注依頼がある場合' do
+    context '紐つく下請発注情報がある場合' do
       subject { business.request_orders }
 
-      it '紐つく発注依頼を返すこと' do
+      it '紐つく下請発注情報を返すこと' do
         expect(subject).to eq(request_orders)
       end
     end

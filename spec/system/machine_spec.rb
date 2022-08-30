@@ -17,12 +17,12 @@ RSpec.describe 'Machines', type: :system do
       click_button 'ログイン'
     end
 
-    it 'ログイン後機械情報一覧へ画面遷移できること' do
+    it 'ログイン後持込機械情報一覧へ画面遷移できること' do
       visit users_machines_path
-      expect(page).to have_content '機械情報一覧'
+      expect(page).to have_content '持込機械情報一覧'
     end
 
-    context '機械情報登録' do
+    context '持込機械情報登録' do
       it '新規登録した後に詳細画面へ遷移できること' do
         visit new_users_machine_path
 
@@ -34,12 +34,12 @@ RSpec.describe 'Machines', type: :system do
         fill_in 'machine[inspection_date]', with: machine.inspection_date
 
         click_button '登録'
-        expect(page).to have_content '機械情報を登録しました'
+        expect(page).to have_content '持込機械情報を登録しました'
       end
     end
 
-    context '機械情報編集' do
-      it '機械情報が編集できること' do
+    context '持込機械情報編集' do
+      it '持込機械情報が編集できること' do
         visit edit_users_machine_path(machine)
 
         select '電動ドリル', from: 'machine[name]'
@@ -49,18 +49,18 @@ RSpec.describe 'Machines', type: :system do
       end
     end
 
-    context '機械情報削除' do
-      it '機械情報を削除できること', js: true do
+    context '持込機械情報削除' do
+      it '持込機械情報を削除できること', js: true do
         visit users_machine_path(machine)
         click_on '削除'
 
         expect {
-          expect(page.accept_confirm).to eq "#{machine.name}の機械情報を削除します。本当によろしいですか？"
+          expect(page.accept_confirm).to eq "#{machine.name}の持込機械情報を削除します。本当によろしいですか？"
           expect(page).to have_content "#{machine.name}を削除しました"
         }.to change(Machine, :count).by(-1)
 
         visit users_machines_path
-        expect(page).to have_content '機械情報一覧'
+        expect(page).to have_content '持込機械情報一覧'
       end
     end
   end

@@ -7,21 +7,21 @@ module Users
     before_action :unread_news_count
     layout 'users'
 
-    # 事業所が登録してあればダッシュボードへ
+    # 会社情報が登録してあればダッシュボードへ
     def business_present_access
       redirect_to users_dash_boards_path if current_user.business.present?
     end
 
-    # 事業所が登録してなければ事業所登録画面へ
+    # 会社情報が登録してなければ会社情報登録画面へ
     def business_nil_access
-      redirect_to new_users_business_path, flash: { danger: '事業所を登録して下さい' } if current_user.business.nil? && current_user.admin?
+      redirect_to new_users_business_path, flash: { danger: '会社情報を登録して下さい' } if current_user.business.nil? && current_user.admin?
     end
 
     def unread_news_count
       @unread_news_count = News.unread(current_user).count
     end
 
-    # 現在のユーザーの事業所を取得
+    # 現在のユーザーの会社情報を取得
     def current_business
       if current_user.admin_user_id.nil?
         @current_business ||= current_user&.business
@@ -39,7 +39,7 @@ module Users
     def worker_info(worker)
       JSON.parse(
         worker.to_json(
-          except:  %i[uuid images created_at updated_at], # 作業員
+          except:  %i[uuid images created_at updated_at], # 作業員情報
           include: {
             worker_medical:            {
               except:  %i[id worker_id created_at updated_at], # 作業員の健康情報
