@@ -39,6 +39,9 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      # パスワードの一時表示一旦コメントアウト
+      # f.button "表示", type: :button, id: "btn_passview"
+      # f.input :password_confirmation, type: "password", id: "input_pass", name: "input_pass", value: ""
       f.hidden_field :role, :value => "admin"
     end
     f.actions
