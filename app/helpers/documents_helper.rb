@@ -5,7 +5,7 @@ module DocumentsHelper
   INSURANCE_TYPE = {
     'join'       => '加入',
     'not_join'   => '未加入',
-    'not_coverd' => '適用除外',
+    'not_coverd' => '適用除外'
   }.freeze
 
   def insurance_join(insurance_type)
@@ -21,6 +21,25 @@ module DocumentsHelper
   def insurance_not_coverd(insurance_type)
     status = INSURANCE_TYPE[insurance_type]
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
+  end
+
+  # 一次下請の情報
+  def subcon_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order if request_order.parent_id == 1
+  end
+
+  def subcons_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order.children if request_order.parent_id.nil?
+  end
+
+  def document_subcon_info
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+      subcon_info
+    else
+      @subcon
+    end
   end
 
   # ====================================================================

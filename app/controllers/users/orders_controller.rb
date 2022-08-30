@@ -156,13 +156,13 @@ module Users
         :health_and_safety_promoter_position_name,
         :confirm_name,
         :accept_confirm_date,
-        :subcontractor_name,
+        :subcontractor_name
       ).merge(
-          general_contractor_name: current_business.name,
-          health_insurance_status: current_business.business_health_insurance_status,
-          welfare_pension_insurance_join_status: current_business.business_welfare_pension_insurance_join_status,
-          employment_insurance_join_status: current_business.business_employment_insurance_join_status
-        )
+        general_contractor_name:               current_business.name,
+        health_insurance_status:               current_business.business_health_insurance_status,
+        welfare_pension_insurance_join_status: current_business.business_welfare_pension_insurance_join_status,
+        employment_insurance_join_status:      current_business.business_employment_insurance_join_status
+      )
     end
   end
 end
