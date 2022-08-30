@@ -5,7 +5,7 @@ RSpec.describe 'Orders', type: :system do
   let(:business) { create(:business, user: user) }
   let(:order) { create(:order, business: business) }
 
-  describe '発注関連' do
+  describe '現場情報関連' do
     before(:each) do
       # ステージングにて一時的にメール認証スキップ中の為下記コメント
       # user.skip_confirmation!
@@ -17,12 +17,12 @@ RSpec.describe 'Orders', type: :system do
       click_button 'ログイン'
     end
 
-    it 'ログイン後発注一覧画面へ遷移できること' do
+    it 'ログイン後現場情報一覧画面へ遷移できること' do
       visit users_orders_path
-      expect(page).to have_content '発注一覧'
+      expect(page).to have_content '現場情報一覧'
     end
 
-    context '発注登録' do
+    context '現場情報登録' do
       it '新規登録したあと詳細画面へ遷移すること' do
         visit new_users_order_path
 
@@ -33,12 +33,12 @@ RSpec.describe 'Orders', type: :system do
         click_button '登録'
 
         visit users_order_path(order)
-        expect(page).to have_content '発注詳細'
+        expect(page).to have_content '現場情報詳細'
         expect(page).to have_content order.site_uu_id
       end
     end
 
-    context '発注編集' do
+    context '現場情報編集' do
       it '更新したあと詳細画面へ遷移すること' do
         visit edit_users_order_path(order)
 
@@ -46,12 +46,12 @@ RSpec.describe 'Orders', type: :system do
         click_button '更新'
 
         visit users_order_path(order)
-        expect(page).to have_content '発注詳細'
+        expect(page).to have_content '現場情報詳細'
         expect(page).to have_content 'edit site_name'
       end
     end
 
-    context '発注削除' do
+    context '現場情報削除' do
       it '削除したあと一覧画面に遷移すること', js: true do
         visit users_order_path(order)
         click_on '削除'
@@ -62,7 +62,7 @@ RSpec.describe 'Orders', type: :system do
         }.to change(Order, :count).by(-1)
 
         visit users_orders_path
-        expect(page).to have_content '発注一覧'
+        expect(page).to have_content '現場情報一覧'
       end
     end
   end

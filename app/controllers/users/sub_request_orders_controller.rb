@@ -14,11 +14,11 @@ module Users
           request_order = @request_order.order.request_orders.create!(business_id: business_id, parent_id: @request_order.id)
           create_documents!(request_order)
         end
-        flash[:success] = "#{params[:business_ids].count}件の発注依頼を作成しました。"
+        flash[:success] = "#{params[:business_ids].count}件の下請発注情報を作成しました。"
         redirect_to users_request_order_url(@request_order)
       end
     rescue ActiveRecord::RecordInvalid
-      flash[:danger] = '発注依頼に失敗しました。再度作成してください。'
+      flash[:danger] = '下請発注情報に失敗しました。再度作成してください。'
       redirect_to new_users_request_order_sub_request_order_path
     end
 

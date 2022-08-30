@@ -8,12 +8,11 @@ ja:
       car: 車両情報
       car_insurance_company: ⾃動⾞保険会社
       car_voluntary_insurance: 任意保険
-      car: 車両情報
       special_vehicle: 特殊車両情報
       field_worker: 現場作業員情報
-      order: 発注
-      request_order: 発注依頼
-      worker: 作業員
+      order: 現場情報
+      request_order: 下請発注情報
+      worker: 作業員情報
       license: 免許マスタ
       worker_license: 中間テーブル(免許マスタ)
       skill_training: 技能講習マスタ
@@ -28,7 +27,7 @@ ja:
       worker_exam: 中間テーブル(特別健康診断種類マスタ)
       special_med_exam: 特別健康診断種類マスタ
       solvent: 有機溶剤情報
-      machine: 機械情報
+      machine: 持込機械情報
     attributes:
       user:
       # 下記記述は、businessのカラムと名称が重複が発生してしまうので、どちらを使うか決まるまで一旦コメントアウト
@@ -49,6 +48,15 @@ ja:
         stamp_images: 電子印
         business_type: 会社形態
         occupation_ids: 職種（複数選択）
+        business_health_insurance_status: 健康保険(加入状況)
+        business_health_insurance_association: 健康保険(組合名)
+        business_health_insurance_office_number: 健康保険(事業所整理記号及び事業所番号)
+        business_welfare_pension_insurance_join_status: 厚生年金保険(加入状況)
+        business_welfare_pension_insurance_office_number: 厚生年金保険(事業所整理記号)
+        business_pension_insurance_join_status: 年金保険(加入状況)
+        business_employment_insurance_join_status: 雇用保険(加入状況)
+        business_employment_insurance_number: 雇用保険(番号)
+        business_retirement_benefit_mutual_aid_status: 退職金共済制度(加入状況)
       business_occupation:
         occupation_id: 職種
       car:

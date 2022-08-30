@@ -58,6 +58,40 @@
 <%= f.label :stamp_images %>
 <%= f.file_field :stamp_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
 
+<br>
+<%= f.label :business_health_insurance_status %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :business_health_insurance_status, Business.business_health_insurance_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :business_health_insurance_association %>
+<%= f.text_field :business_health_insurance_association, class: "form-control", placeholder: "Enter business_health_insurance_association" %>
+<br>
+<%= f.label :business_health_insurance_office_number %>
+<%= f.text_field :business_health_insurance_office_number, class: "form-control", placeholder: "Enter business_health_insurance_office_number" %>
+<br>
+<%= f.label :business_welfare_pension_insurance_join_status %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :business_welfare_pension_insurance_office_number %>
+<%= f.text_field :business_welfare_pension_insurance_office_number, class: "form-control", placeholder: "Enter business_welfare_pension_insurance_office_number" %>
+<br>
+<%= f.label :business_pension_insurance_join_status %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :business_pension_insurance_join_status, Business.business_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :business_employment_insurance_join_status %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :business_employment_insurance_number %>
+<%= f.text_field :business_employment_insurance_number, class: "form-control", placeholder: "Enter business_employment_insurance_number" %>
+<br>
+<%= f.label :business_retirement_benefit_mutual_aid_status %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+
 <%= f.hidden_field :user_id, value: current_user.id %>
 
 <script>
@@ -94,7 +128,22 @@
         "business[business_type]": {
           required: true
         },
-         "business[occupation_ids][]": {
+        "business[occupation_ids][]": {
+          required: true
+        },
+        "business[business_health_insurance_status]": {
+          required: true
+        },
+        "business[business_welfare_pension_insurance_join_status]": {
+          required: true
+        },
+        "business[business_pension_insurance_join_status]": {
+          required: true
+        },
+        "business[business_employment_insurance_join_status]": {
+          required: true
+        },
+        "business[business_retirement_benefit_mutual_aid_status]": {
           required: true
         }
       },
@@ -129,6 +178,21 @@
         "business[occupation_ids][]": {
           required: "職種を選択してください。"
         },
+        "business[business_health_insurance_status]": {
+          required: "どれか一つを選択してください。"
+        },
+        "business[business_welfare_pension_insurance_join_status]": {
+          required: "どれか一つを選択してください。"
+        },
+        "business[business_pension_insurance_join_status]": {
+          required: "どれか一つを選択してください。"
+        },
+        "business[business_employment_insurance_join_status]": {
+          required: "どれか一つを選択してください。"
+        },
+        "business[business_retirement_benefit_mutual_aid_status]": {
+          required: "どちらかを選択してください。"
+        }
       },
       errorClass: "input_form_error"
     });

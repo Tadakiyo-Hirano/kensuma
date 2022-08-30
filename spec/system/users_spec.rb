@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :system do
     end
 
     context '正常系' do
-      context 'adminかつ、事業所作成済ユーザー（ユーザーA）ログインの場合' do
+      context 'adminかつ、会社情報作成済ユーザー（ユーザーA）ログインの場合' do
         it 'ログイン後ダッシュボードを表示' do
           fill_in 'user[email]', with: 'aaa-user@example.com'
           fill_in 'user[password]', with: '123456'
@@ -60,14 +60,14 @@ RSpec.describe 'Users', type: :system do
         end
       end
 
-      context 'adminかつ、事業所未作成ユーザー（ユーザーB）ログインの場合' do
-        it 'ログイン後事業所登録画面を表示' do
+      context 'adminかつ、会社情報未作成ユーザー（ユーザーB）ログインの場合' do
+        it 'ログイン後会社情報登録画面を表示' do
           fill_in 'user[email]', with: 'bbb-user@example.com'
           fill_in 'user[password]', with: '123456'
           click_button 'ログイン'
           expect(page).to have_current_path new_users_business_path, ignore_query: true
           expect(page).to have_content('ログインしました。')
-          expect(page).to have_content('事業所登録')
+          expect(page).to have_content('会社情報登録')
         end
       end
 
@@ -91,7 +91,7 @@ RSpec.describe 'Users', type: :system do
       # ステージングにて一時的にメール認証スキップ中の為下記コメント
       # user_a.skip_confirmation!
       user_a.save!
-      # 事業所登録
+      # 会社情報登録
       business_a.save!
       visit new_user_session_path
       fill_in 'user[email]', with: user_a.email

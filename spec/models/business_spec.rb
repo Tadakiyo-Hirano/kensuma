@@ -237,41 +237,191 @@ RSpec.describe Business, type: :model do
         end
       end
     end
+
+    describe '#business_health_insurance_status' do
+      context '存在しない場合' do
+        before(:each) { subject.business_health_insurance_status = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('健康保険(加入状況)を入力してください')
+        end
+      end
+    end
+
+    describe '#business_health_insurance_association' do
+      context '不正なbusiness_health_insurance_associationの場合' do
+        before(:each) { subject.business_health_insurance_association = 'テスト健康保険組合012345678901' }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('健康保険(組合名)は20文字以内で入力してください')
+        end
+      end
+    end
+
+    describe '#business_health_insurance_office_number' do
+      %i[
+        01234
+        012345678
+      ].each do |business_health_insurance_office_number|
+        context '不正なbusiness_health_insurance_office_numberの場合' do
+          before(:each) { subject.business_health_insurance_office_number = business_health_insurance_office_number }
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('健康保険(事業所整理記号及び事業所番号)は数字6桁または8桁で入力してください')
+          end
+        end
+      end
+    end
+
+    describe '#business_welfare_pension_insurance_join_status' do
+      context '存在しない場合' do
+        before(:each) { subject.business_welfare_pension_insurance_join_status = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('厚生年金保険(加入状況)を入力してください')
+        end
+      end
+    end
+
+    describe '#business_welfare_pension_insurance_office_number' do
+      %i[
+        0123456789012
+        012345678901234
+      ].each do |business_welfare_pension_insurance_office_number|
+        context '不正なbusiness_welfare_pension_insurance_office_numberの場合' do
+          before(:each) { subject.business_welfare_pension_insurance_office_number = business_welfare_pension_insurance_office_number }
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('厚生年金保険(事業所整理記号)は数字14桁で入力してください')
+          end
+        end
+      end
+    end
+
+    describe '#business_pension_insurance_join_status' do
+      context '存在しない場合' do
+        before(:each) { subject.business_pension_insurance_join_status = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('年金保険(加入状況)を入力してください')
+        end
+      end
+    end
+
+    describe '#business_employment_insurance_join_status' do
+      context '存在しない場合' do
+        before(:each) { subject.business_employment_insurance_join_status = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('雇用保険(加入状況)を入力してください')
+        end
+      end
+    end
+
+    describe '#business_employment_insurance_number' do
+      %i[
+        0123456789
+        012345678901
+      ].each do |business_employment_insurance_number|
+        context '不正なbusiness_employment_insurance_numberの場合' do
+          before(:each) { subject.business_employment_insurance_number = business_employment_insurance_number }
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('雇用保険(番号)は数字11桁で入力してください')
+          end
+        end
+      end
+    end
+
+    describe '#business_retirement_benefit_mutual_aid_status' do
+      context '存在しない場合' do
+        before(:each) { subject.business_retirement_benefit_mutual_aid_status = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('退職金共済制度(加入状況)を入力してください')
+        end
+      end
+    end
   end
 
-  describe '車両とのアソシエーションについて' do
+  describe '車両情報とのアソシエーションについて' do
     let(:business) { create(:business, cars: cars) }
     let(:cars) { create_list(:car, 2) }
 
-    context '紐つく車両がある場合' do
+    context '紐つく車両情報がある場合' do
       subject { business.cars }
 
-      it '紐つく車両を返すこと' do
+      it '紐つく車両情報を返すこと' do
         expect(subject).to eq(cars)
       end
     end
   end
 
-  describe '発注とのアソシエーションについて' do
+  describe '現場情報とのアソシエーションについて' do
     let(:business) { create(:business, orders: orders) }
     let(:orders) { create_list(:order, 2) }
 
-    context '紐つく発注がある場合' do
+    context '紐つく現場情報がある場合' do
       subject { business.orders }
 
-      it '紐つく発注を返すこと' do
+      it '紐つく現場情報を返すこと' do
         expect(subject).to eq(orders)
       end
     end
   end
 
-  describe '発注依頼とのアソシエーションについて' do
+  describe '下請発注情報とのアソシエーションについて' do
     let(:request_orders) { create_list(:request_order, 2, business: business) }
 
-    context '紐つく発注依頼がある場合' do
+    context '紐つく下請発注情報がある場合' do
       subject { business.request_orders }
 
-      it '紐つく発注依頼を返すこと' do
+      it '紐つく下請発注情報を返すこと' do
         expect(subject).to eq(request_orders)
       end
     end
