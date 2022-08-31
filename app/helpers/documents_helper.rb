@@ -1,4 +1,9 @@
 module DocumentsHelper
+  # 日付
+  def document_date(column)
+    l(column, format: :long) unless column.nil?
+  end
+
   # (4) 施工体制台帳 ====================================================
 
   # 会社の保険加入状況
@@ -196,11 +201,6 @@ module DocumentsHelper
   # ====================================================================
 
   # (12) 工事･車両通勤届 ================================================
-
-  # 車両の日付情報
-  def car_date(column)
-    l(column, format: :long) unless column.nil?
-  end
 
   def car_usage_commute(usage)
     usage == '通勤用' ? tag.span('通勤', class: :circle) : '通勤'

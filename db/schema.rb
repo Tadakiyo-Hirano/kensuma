@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_26_053128) do
+ActiveRecord::Schema.define(version: 2022_08_31_081413) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -324,10 +324,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_053128) do
     t.string "confirm_name", null: false
     t.date "accept_confirm_date"
     t.string "subcontractor_name", null: false
-    t.string "general_contractor_name"
-    t.string "health_insurance_status"
-    t.string "welfare_pension_insurance_join_status"
-    t.string "employment_insurance_join_status"
+    t.json "content"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
 
@@ -370,6 +367,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_053128) do
     t.string "safety_promoter_name"
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
+    t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
   end

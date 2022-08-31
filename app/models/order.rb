@@ -38,7 +38,6 @@ class Order < ApplicationRecord
   validates :confirm_name,                           presence: true # 確認欄(氏名)
   validates :accept_confirm_date,                    presence: true # 受付確認(年月日)
   validates :subcontractor_name,                     presence: true # 下請会社名
-  validates :general_contractor_name,                presence: true # 元請会社名
 
   before_create -> { self.site_uu_id = SecureRandom.uuid }
 

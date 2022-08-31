@@ -158,10 +158,18 @@ module Users
         :accept_confirm_date,
         :subcontractor_name
       ).merge(
-        general_contractor_name:               current_business.name,
-        health_insurance_status:               current_business.business_health_insurance_status,
-        welfare_pension_insurance_join_status: current_business.business_welfare_pension_insurance_join_status,
-        employment_insurance_join_status:      current_business.business_employment_insurance_join_status
+        content: {
+          genecon_name:                                    current_business.name,
+          genecon_address:                                 current_business.address,
+          genecon_carrier_up_id:                           current_business.carrier_up_id,
+          genecon_health_insurance_status:                 current_business.business_health_insurance_status,
+          genecon_health_insurance_association:            current_business.business_health_insurance_association,
+          genecon_health_insurance_office_number:          current_business.business_health_insurance_office_number,
+          genecon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,
+          genecon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number,
+          genecon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,
+          genecon_employment_insurance_number:             current_business.business_employment_insurance_number
+        }
       )
     end
   end

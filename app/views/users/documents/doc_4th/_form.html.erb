@@ -24,12 +24,11 @@
             <tr>
               <td>[会 社 名・事業者ID]</td>
               <td>
-                <%= document_site_info.general_contractor_name %> <!-- 4-002 元請会社名 -->
+                <%= document_site_info.content["genecon_name"] %> <!-- 4-002 元請会社名 -->
               </td>
               <td>
-                <%= '※4-003未実装※' %> <!-- 4-003 事業者ID(キャリアアップ) -->
+                <%= document_site_info.content["genecon_carrier_up_id"] %> <!-- 4-003 事業者ID(キャリアアップ) -->
               </td>
-              <%= document_site_info.general_contractor_name %>
             </tr>
           </tbody>
         </table>
@@ -153,9 +152,11 @@
             <tr>
               <td>元請契約</td>
               <td>
-                <%= document_site_info.general_contractor_name %> <!-- 元請会社名 4-024 -->
+                <%= document_site_info.content["genecon_name"] %> <!-- 元請会社名 4-024 -->
               </td>
-              <td>各会社の「住所」4-025</td><!-- 各会社の「住所」4-025 -->
+              <td>
+                <%= document_site_info.content["genecon_address"] %> <!-- 4-025 元請会社の住所 -->
+              </td>
             </tr>
             <tr>
               <td>下請契約</td>
@@ -293,31 +294,31 @@
             </tr>
             <tr>
               <td width="7%">
-                <%= insurance_join(document_site_info.health_insurance_status) %> <!-- 健康保険(加入) 4-050 -->
+                <%= insurance_join(document_site_info.content["genedon_health_insurance_status"]) %> <!-- 健康保険(加入) 4-050 -->
               </td>
               <td width="7%">
-                <%= insurance_not_join(document_site_info.health_insurance_status) %> <!-- 健康保険加(未加入) 4-050 -->
+                <%= insurance_not_join(document_site_info.content["genedon_health_insurance_status"]) %> <!-- 健康保険加(未加入) 4-050 -->
               </td>
               <td width="7%">
-                <%= insurance_not_coverd(document_site_info.health_insurance_status) %> <!-- 健康保険加入(適用除外) 4-050 -->
+                <%= insurance_not_coverd(document_site_info.content["genedon_health_insurance_status"]) %> <!-- 健康保険加入(適用除外) 4-050 -->
               </td>
               <td width="8.5%">
-                <%= insurance_join(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(加入) 4-051 -->
+                <%= insurance_join(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 年金保険(加入) 4-051 -->
               </td>
               <td width="9%">
-                <%= insurance_not_join(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(未加入) 4-051 -->
+                <%= insurance_not_join(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 年金保険(未加入) 4-051 -->
               </td>
               <td width="8.5%">
-                <%= insurance_not_coverd(document_site_info.welfare_pension_insurance_join_status) %> <!-- 年金保険(適用除外) 4-051 -->
+                <%= insurance_not_coverd(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 年金保険(適用除外) 4-051 -->
               </td>
               <td width="9%">
-                <%= insurance_join(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(加入) 4-052 -->
+                <%= insurance_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 雇用保険(加入) 4-052 -->
               </td>
               <td width="9%">
-                <%= insurance_not_join(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(未加入) 4-052 -->
+                <%= insurance_not_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 雇用保険(未加入) 4-052 -->
               </td>
               <td width="8%">
-                <%= insurance_not_coverd(document_site_info.employment_insurance_join_status) %> <!-- 雇用保険(適用除外) 4-052 -->
+                <%= insurance_not_coverd(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 雇用保険(適用除外) 4-052 -->
               </td>
             </tr>
             <tr>
@@ -331,11 +332,19 @@
             <tr>
               <td>元請契約</td>
               <td colspan="2">
-                <%= document_site_info.general_contractor_name %> <!-- 元請会社名 4-053 -->
+                <%= document_site_info.content["genecon_name"] %> <!-- 元請会社名 4-053 -->
               </td>
-              <td colspan="2">「健康保険」4-054<br />「健康保険番号」4-055</td><!-- 「健康保険」4-054 & 「健康保険番号」4-055 -->
-              <td colspan="2">「厚生年金保険番号」4-056</td><!-- 「厚生年金保険番号」4-056 -->
-              <td colspan="2">「雇用保険」4-057</td><!-- 「雇用保険」4-057 -->
+              <td colspan="2">
+                <%= document_site_info.content["genecon_health_insurance_association"] %> <!-- 4-054 元請の健康保険会社名 -->
+                <br />
+                <%= document_site_info.content["genecon_health_insurance_office_number"] %> <!-- 5-055 元請の健康保険番号 -->
+              </td>
+              <td colspan="2">
+                <%= document_site_info.content["genecon_welfare_pension_insurance_office_number"] %> <!-- 4-056 元請の厚生年金保険番号 -->
+              </td>
+              <td colspan="2">
+                <%= document_site_info.content["genecon_employment_insurance_number"] %> <!-- 4-057 元請の雇用保険番号 -->
+              </td>
             </tr>
             <tr>
               <td>下請契約</td>
@@ -422,17 +431,17 @@
               <td rowspan="2">工 期</td>
               <td>自</td>
               <td>
-                <%= document_subcon_info.start_date %> <!-- 4-109 各下請会社の工期(自) -->
+                <%= document_date(document_subcon_info.start_date) %> <!-- 4-109 各下請会社の工期(自) -->
               </td>
               <td rowspan="2">契 約 日</td>
               <td rowspan="2">
-                <%= a= document_subcon_info.contract_date %> <!-- 4-111 各下請会社の契約日 -->
+                <%= document_date(document_subcon_info.contract_date) %> <!-- 4-111 各下請会社の契約日 -->
               </td>
             </tr>
             <tr>
               <td>至</td>
               <td>
-                <%= document_subcon_info.start_date %> <!-- 4-110 各下請会社の工期(至) -->
+                <%= document_date(document_subcon_info.start_date) %> <!-- 4-110 各下請会社の工期(至) -->
               </td>
             </tr>
           </tbody>
