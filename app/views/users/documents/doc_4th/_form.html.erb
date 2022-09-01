@@ -27,7 +27,7 @@
                 <%= document_site_info.content["genecon_name"] %> <!-- 4-002 元請会社名 -->
               </td>
               <td>
-                <%= document_site_info.content["genecon_carrier_up_id"] %> <!-- 4-003 事業者ID(キャリアアップ) -->
+                <%= document_site_info.content["genecon_carrier_up_id"] %> <!-- 4-003 元請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
           </tbody>
@@ -294,31 +294,31 @@
             </tr>
             <tr>
               <td width="7%">
-                <%= insurance_join(document_site_info.content["genedon_health_insurance_status"]) %> <!-- 健康保険(加入) 4-050 -->
+                <%= insurance_join(document_site_info.content["genecon_health_insurance_status"]) %> <!-- 元請会社の健康保険(加入) 4-050 -->
               </td>
               <td width="7%">
-                <%= insurance_not_join(document_site_info.content["genedon_health_insurance_status"]) %> <!-- 健康保険加(未加入) 4-050 -->
+                <%= insurance_not_join(document_site_info.content["genecon_health_insurance_status"]) %> <!-- 元請会社の健康保険加(未加入) 4-050 -->
               </td>
               <td width="7%">
-                <%= insurance_not_coverd(document_site_info.content["genedon_health_insurance_status"]) %> <!-- 健康保険加入(適用除外) 4-050 -->
+                <%= insurance_not_coverd(document_site_info.content["genecon_health_insurance_status"]) %> <!-- 元請会社の健康保険加入(適用除外) 4-050 -->
               </td>
               <td width="8.5%">
-                <%= insurance_join(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 年金保険(加入) 4-051 -->
+                <%= insurance_join(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 元請会社の年金保険(加入) 4-051 -->
               </td>
               <td width="9%">
-                <%= insurance_not_join(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 年金保険(未加入) 4-051 -->
+                <%= insurance_not_join(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 元請会社の年金保険(未加入) 4-051 -->
               </td>
               <td width="8.5%">
-                <%= insurance_not_coverd(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 年金保険(適用除外) 4-051 -->
+                <%= insurance_not_coverd(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 元請会社の年金保険(適用除外) 4-051 -->
               </td>
               <td width="9%">
-                <%= insurance_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 雇用保険(加入) 4-052 -->
+                <%= insurance_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(加入) 4-052 -->
               </td>
               <td width="9%">
-                <%= insurance_not_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 雇用保険(未加入) 4-052 -->
+                <%= insurance_not_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(未加入) 4-052 -->
               </td>
               <td width="8%">
-                <%= insurance_not_coverd(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 雇用保険(適用除外) 4-052 -->
+                <%= insurance_not_coverd(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(適用除外) 4-052 -->
               </td>
             </tr>
             <tr>
@@ -348,10 +348,20 @@
             </tr>
             <tr>
               <td>下請契約</td>
-              <td colspan="2">「会社名」4-058</td><!-- 「会社名」4-058 -->
-              <td colspan="2">「健康保険」4-059<br />「健康保険番号」4-060</td><!-- 「健康保険」4-059 & 「健康保険番号」4-060 -->
-              <td colspan="2">「厚生年金保険番号」4-061</td><!-- 「厚生年金保険番号」4-061 -->
-              <td colspan="2">「雇用保険」4-062</td><!-- 「雇用保険」4-062 -->
+              <td colspan="2">
+                <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-058 下請会社名 -->
+              </td>
+              <td colspan="2">
+                <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->
+                <br />
+                <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-060 下請会社の健康保険番号 -->
+              </td>
+              <td colspan="2">
+                <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-061 下請会社の厚生年金保険番号 -->
+              </td>
+              <td colspan="2">
+                <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-062 下請会社の雇用保険番号 -->
+              </td>
             </tr>
           </tbody>
         </table>
@@ -396,25 +406,32 @@
             <tr>
               <td rowspan="2" width="10%">会 社 名</td>
               <td colspan="2" width="40%">
-                <%= '※4-101未実装※' %> <!-- 4-101 下請会社名 -->
+                <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-101 下請会社名 -->
               </td>
               <td rowspan="2" width="15%">代表者名</td>
-              <td rowspan="2" width="35%">「代表者名」4-103</td><!-- 「代表者名」4-103 -->
+              <td rowspan="2" width="35%">
+                <%= document_subcon_info.content&.[]('subcon_representative_name') %> <!-- 4-103 下請会社の代表者名 -->
+              </td>
             </tr>
             <tr>
               <td colspan="2">
-                <%= '※4-003未実装※' %> <!-- 4-003 事業者ID(キャリアアップ) -->
+                <%= document_subcon_info.content&.[]('subcon_carrier_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
             <tr>
               <td rowspan="2">住 所<Br />電話番号</td>
               <td width="5%">〒</td>
-              <td width="35%">「郵便番号」4-104</td><!-- 「郵便番号」4-104 -->
-              <td colspan="2">「住所」4-105</td><!-- 「住所」4-105 -->
+              <td width="35%">
+                <%= document_subcon_info.content&.[]('subcon_post_code') %> <!-- 4-104 下請会社の郵便番号 -->
+              </td>
+              <td colspan="2">
+                <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-105 下請会社の住所 -->
+              </td>
             </tr>
             <tr>
-              <td colspan="2">「住所」4-105</td><!-- 「住所」4-105 -->
-              <td colspan="2">（TEL「電話番号」4-106）</td><!-- 「電話番号」4-106） -->
+              <td colspan="4">
+                <%= document_subcon_info.content&.[]('subcon_phone_number') %> <!-- 4-106 下請会社の電話番号 -->
+              </td>
             </tr>
             <tr>
               <td rowspan="2">工事名称<br /> 及 び<br /> 工事内容</td>
@@ -586,15 +603,33 @@
               <td colspan="3" width="25%">雇用保険</td>
             </tr>
             <tr>
-              <td>加入</td><!-- ⇩　「健康保険」4-138 -->
-              <td>未加入</td><!-- ⇩　「健康保険」4-138 -->
-              <td>適用外</td><!-- ⇩　「健康保険」4-138 -->
-              <td>加入</td><!-- ⇩　「年金保険」4-139 -->
-              <td>未加入</td><!-- ⇩　「年金保険」4-139 -->
-              <td>適用外</td><!-- ⇩　「年金保険」4-139 -->
-              <td>加入</td><!-- ⇩　「雇用保険」4-140 -->
-              <td>未加入</td><!-- ⇩　「雇用保険」4-140 -->
-              <td>適用外</td><!-- ⇩　「雇用保険」4-140 -->
+              <td>
+                <%= insurance_join(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(加入) 4-138 -->
+              </td>
+              <td>
+                <%= insurance_not_join(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(未加入) 4-138 -->
+              </td>
+              <td>
+                <%= insurance_not_coverd(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(適用除外) 4-138 -->
+              </td>
+              <td>
+                <%= insurance_join(document_subcon_info.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(加入) 4-139 -->
+              </td>
+              <td>
+                <%= insurance_not_join(document_subcon_info.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(未加入) 4-139 -->
+              </td>
+              <td>
+                <%= insurance_not_coverd(document_subcon_info.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(適用除外) 4-139 -->
+              </td>
+              <td>
+                <%= insurance_join(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(加入) 4-140 -->
+              </td>
+              <td>
+                <%= insurance_not_join(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(未加入) 4-140 -->
+              </td>
+              <td>
+                <%= insurance_not_coverd(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(適用除外) 4-140 -->
+              </td>
             </tr>
             <tr>
               <td rowspan="2">事業所<br /> 整理記号等</td>
@@ -603,9 +638,17 @@
               <td colspan="3">雇用保険</td>
             </tr>
             <tr>
-              <td colspan="3">「健康保険」4-141<br />「健康保険番号」4-142</td><!-- 「健康保険」4-141 & 「健康保険番号」4-142 -->
-              <td colspan="3">「厚生年金保険番号」4-143</td><!-- 「厚生年金保険番号」4-143 -->
-              <td colspan="3">「雇用保険」4-144</td><!-- 「雇用保険」4-144 -->
+              <td colspan="3">
+                <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-141 下請会社の健康保険会社名 -->
+                <br />
+                <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-142 下請会社の健康保険番号 -->
+              </td>
+              <td colspan="3">
+                <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-143 下請会社の厚生年金保険番号 -->
+              </td>
+              <td colspan="3">
+                <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-144 下請会社の雇用保険番号 -->
+              </td>
             </tr>
           </tbody>
         </table>
