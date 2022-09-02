@@ -11,9 +11,7 @@
                 <th rowspan="95"><div>　<!-- 文字がないと文字化けする --></div></th>
                 <td class="s0" colspan="41">（全建統一様式第3号）</td>
                 <td class="s1" colspan="13">
-                  <a>
-                    <%= '※4-001未実装※' %> <!-- 4-001 提出日(西暦) -->
-                  </a>
+                  <%= '※4-001未実装※' %> <!-- 4-001 提出日(西暦) -->
                 </td>
                 <td class="s2"></td>
                 <td class="s3" colspan="54">《下請負人に関する事項》</td>
@@ -24,15 +22,11 @@
                 <td class="s5"></td>
                 <td class="s6" colspan="6" rowspan="4">会 社 名</td>
                 <td class="s7" colspan="21" rowspan="2" style="border: 1px solid;">
-                  <a>
-                    <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-101 下請会社名 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-101 下請会社名 -->
                 </td>
                 <td class="s6" colspan="6" rowspan="4">代表者名</td>
                 <td class="s8" colspan="21" rowspan="4">
-                  <a href="#rangeid=1271348610" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_representative_name') %> <!-- 4-103 下請会社の代表者名 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_representative_name') %> <!-- 4-103 下請会社の代表者名 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -41,22 +35,16 @@
               <tr style="height: 8px">
                 <td class="s5"></td>
                 <td class="s8" colspan="21" rowspan="2">
-                  <a>
-                    <%= document_site_info.content["genecon_carrier_up_id"] %> <!-- 4-003 元請会社の事業者ID(キャリアアップ) -->
-                  </a>
+                  <%= document_site_info.content["genecon_carrier_up_id"] %> <!-- 4-003 元請会社の事業者ID(キャリアアップ) -->
                 </td>
               </tr>
               <tr style="height: 8px">
                 <td class="s9" colspan="11" rowspan="2">[会 社 名・事業者ID]</td>
                 <td class="s10" colspan="21" rowspan="2">
-                  <a>
-                    <%= document_site_info.content["genecon_name"] %> <!-- 4-002 元請会社名 -->
-                  </a>
+                  <%= document_site_info.content["genecon_name"] %> <!-- 4-002 元請会社名 -->
                 </td>
                 <td class="s10" colspan="22" rowspan="2">
-                  <a href="#rangeid=430541270" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_carrier_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_carrier_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -65,14 +53,10 @@
                 <td class="s6" colspan="6" rowspan="4">住 所<br>電話番号</td>
                 <td class="s11" rowspan="2">〒</td>
                 <td class="s12" colspan="6" rowspan="2">
-                  <a href="#rangeid=2173066" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_post_code') %> <!-- 4-104 下請会社の郵便番号 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_post_code') %> <!-- 4-104 下請会社の郵便番号 -->
                 </td>
                 <td class="s7" colspan="41" rowspan="2">
-                  <a href="#rangeid=2009358609" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-105 下請会社の住所 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-105 下請会社の住所 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -135,23 +119,17 @@
               <tr style="height: 8px">
                 <td class="s9" colspan="11" rowspan="2">[事業所名・現場ID]</td>
                 <td class="s10" colspan="21" rowspan="2">
-                  <a>
-                    <%= document_site_info.site_name %> <!-- 4-004 事業所名(現場名) -->
-                  </a>
+                  <%= document_site_info.site_name %> <!-- 4-004 事業所名(現場名) -->
                 </td>
                 <td class="s10" colspan="22" rowspan="2">
-                  <a href="#rangeid=995591132" target="_blank">
-                    <%= document_site_info.site_career_up_id %> <!-- 4-005 現場ID(キャリアアップ)-->
-                  </a>
+                  <%= document_site_info.site_career_up_id %> <!-- 4-005 現場ID(キャリアアップ)-->
                 </td>
                 <td class="s5"></td>
                 <td class="s11"></td>
                 <td class="s13" colspan="28" rowspan="2"></td>
                 <td class="s14" colspan="4" rowspan="2">（ＴＥＬ</td>
                 <td class="s15" colspan="14" rowspan="2">
-                  <a href="#rangeid=825659152" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_phone_number') %> <!-- 4-106 下請会社の電話番号 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_phone_number') %> <!-- 4-106 下請会社の電話番号 -->
                 </td>
                 <td class="s16" rowspan="2">）</td>
               </tr>
@@ -217,9 +195,7 @@
                 <td class="s5"></td>
                 <td class="s6" colspan="6" rowspan="4">工事名称<br>及 び<br>工事内容</td>
                 <td class="s7" colspan="48" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=893447236" target="_blank">
-                    <%= document_subcon_info.construction_name %> <!-- 4-107 各下請会社の工事名 -->
-                  </a>
+                  <%= document_subcon_info.construction_name %> <!-- 4-107 各下請会社の工事名 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -232,28 +208,26 @@
               <tr style="height: 8px">
                 <td class="s5"></td>
                 <td class="s8" colspan="48" rowspan="2">
-                  <a href="#rangeid=1499754527" target="_blank">
-                    <%= document_subcon_info.construction_details %> <!-- 4-108 各下請会社の工事内容 -->
-                  </a>
+                  <%= document_subcon_info.construction_details %> <!-- 4-108 各下請会社の工事内容 -->
                 </td>
               </tr>
               <tr style="height: 8px">
                 <td class="s19" colspan="10" rowspan="4">
-                  <a href="#rangeid=951482641" target="_blank">各会社の「建設許可業種」4-006</a>
+                  <%= '※4-006未実装※' %> <!-- 4-006 元請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4" style="border: 1px solid;">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">大臣</td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">特定</td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <a href="#rangeid=489675714" target="_blank">「建設許可番号・前半」4-063</a>
+                  <%= '※4-063未実装※' %> <!-- 4-063元請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s25" colspan="4" rowspan="4">
-                  <a href="#rangeid=1911009380" target="_blank">「建設許可番号・後半」4-009</a>
+                  <%= '※4-009未実装※' %> <!-- 4-009　元請会社の建設許可番号･後半 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <a href="#rangeid=694118974" target="_blank">「建設許可証更新日（西暦)」4-010</a>
+                  <%= '※4-010未実装※' %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -262,15 +236,11 @@
                 <td class="s6" colspan="6" rowspan="4">工 期</td>
                 <td class="s26" colspan="2" rowspan="2" style="border: 1px solid;">自</td>
                 <td class="s7" colspan="19" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=659095661" target="_blank">
-                    <%= document_date(document_subcon_info.start_date) %> <!-- 4-109 各下請会社の工期(自) -->
-                  </a>
+                  <%= document_date(document_subcon_info.start_date) %> <!-- 4-109 各下請会社の工期(自) -->
                 </td>
                 <td class="s6" colspan="6" rowspan="4">契 約 日</td>
                 <td class="s8" colspan="21" rowspan="4">
-                  <a href="#rangeid=748655437" target="_blank">
-                    <%= document_date(document_subcon_info.contract_date) %> <!-- 4-111 各下請会社の契約日 -->
-                  </a>
+                  <%= document_date(document_subcon_info.contract_date) %> <!-- 4-111 各下請会社の契約日 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -282,28 +252,26 @@
                 <td class="s28"></td>
                 <td class="s29" colspan="2" rowspan="2" style="border: 1px solid;">至</td>
                 <td class="s8" colspan="19" rowspan="2">
-                  <a href="#rangeid=143702778" target="_blank">
-                    <%= document_date(document_subcon_info.start_date) %> <!-- 4-110 各下請会社の工期(至) -->
-                  </a>
+                  <%= document_date(document_subcon_info.start_date) %> <!-- 4-110 各下請会社の工期(至) -->
                 </td>
               </tr>
               <tr style="height: 8px">
                 <td class="s19" colspan="10" rowspan="4">
-                  <a href="#rangeid=951482641" target="_blank">各会社の「建設許可業種」4-011</a>
+                  <%= '※4-011未実装※' %> <!-- 4-011 元請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4" style="border: 1px solid;">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">大臣</td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">特定</td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <a href="#rangeid=489675714" target="_blank">「建設許可番号・前半」4-064</a>
+                  <%= '※4-064未実装※' %> <!-- 4-064 元請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s25" colspan="4" rowspan="4">
-                  <a href="#rangeid=1911009380" target="_blank">「建設許可番号・後半」4-014</a>
+                  <%= '※4-014未実装※' %> <!-- 4-014 元請会社の建設許可番号･後半 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <a href="#rangeid=694118974" target="_blank">「建設許可証更新日（西暦)」4-015</a>
+                  <%= '※4-015未実装※' %> <!-- 4-014 元請会社の建設許可証更新日(西暦) -->
                 </td>
                 <td class="s30"></td>
               </tr>
@@ -433,29 +401,27 @@
                 <td class="s32"></td>
                 <td class="s5"></td>
                 <td class="s19" colspan="10" rowspan="4" style="border: 1px solid;">
-                  <a href="#rangeid=951482641" target="_blank">各会社の「建設許可業種」4-112</a>
+                  <%= '※4-112未実装※' %> <!-- 4-112 下請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">大臣</td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">特定</td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <a href="#rangeid=489675714" target="_blank">「建設許可番号・前半」4-145</a>
+                  <%= '※4-145未実装※' %> <!-- 4-145 下請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s34" colspan="4" rowspan="4">
-                  <a href="#rangeid=1911009380" target="_blank">「建設許可番号」4-115</a>
+                  <%= '※4-145未実装※' %> <!-- 4-115 下請会社の建設許可番号 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <a href="#rangeid=694118974" target="_blank">「建設許可証更新日（西暦)」4-116</a>
+                  <%= '※4-116未実装※' %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
                 </td>
               </tr>
               <tr style="height: 20px">
                 <td class="s6" colspan="6" rowspan="4" style="border-left: 1px solid;">工事名称<br>及 び<br>工事内容</td>
                 <td class="s8" colspan="48" rowspan="2">
-                  <a href="#rangeid=498668107" target="_blank">
-                    <%= document_site_info.construction_name %> <!-- 4-016 元請会社の工事名 -->
-                  </a>
+                  <%= document_site_info.construction_name %> <!-- 4-016 元請会社の工事名 -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -473,29 +439,27 @@
               <tr style="height: 8px">
                 <td class="s5"></td>
                 <td class="s19" colspan="10" rowspan="4" style="border: 1px solid;">
-                  <a href="#rangeid=951482641" target="_blank">各会社の「建設許可業種」4-117</a>
+                  <%= '※4-117未実装※' %> <!--4-117 下請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">大臣</td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">特定</td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <a href="#rangeid=489675714" target="_blank">「建設許可番号・前半」4-063</a>
+                  <%= '※4-063未実装※' %> <!-- 4-063　下請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s34" colspan="4" rowspan="4">
-                  <a href="#rangeid=1911009380" target="_blank">「建設許可番号」4-146</a>
+                  <%= '※4-146未実装※' %> <!-- 4-146 下請会社の建設許可番号 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <a href="#rangeid=694118974" target="_blank">「建設許可証更新日（西暦)」4-121</a>
+                  <%= '※4-141未実装※' %> <!-- 4-121 下請会社の建設許可証更新日(西暦) -->
                 </td>
               </tr>
               <tr style="height: 8px">
                 <td class="s35" colspan="6" rowspan="4" style="border: 1px solid;">発注者名<br>及 び<br>住 所</td>
                 <td class="s7" colspan="48" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=1924971855" target="_blank">
-                    <%= document_site_info.order_name %> <!-- 4-018 発注者名 -->
-                  </a>
+                  <%= document_site_info.order_name %> <!-- 4-018 発注者名 -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -507,14 +471,10 @@
               <tr style="height: 8px">
                 <td class="s36" colspan="3" rowspan="2">〒</td>
                 <td class="s37" colspan="8" rowspan="2">
-                  <a href="#rangeid=817834490" target="_blank">
-                    <%= document_site_info.order_post_code %> <!-- 4-019 発注者の郵便番号 -->
-                  </a>
+                  <%= document_site_info.order_post_code %> <!-- 4-019 発注者の郵便番号 -->
                 </td>
                 <td class="s8" colspan="37" rowspan="2">
-                  <a href="#rangeid=936066008" target="_blank">
-                    <%= document_site_info.order_address %> <!-- 4-020 発注者住所 -->
-                  </a>
+                  <%= document_site_info.order_address %> <!-- 4-020 発注者住所 -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -579,29 +539,21 @@
                 <td class="s6" colspan="6" rowspan="4" style="border: 1px solid;">工 期</td>
                 <td class="s26" colspan="3" rowspan="2" style="border: 1px solid;">自</td>
                 <td class="s7" colspan="19" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=240870217" target="_blank">
-                    <%= document_date(document_site_info.start_date) %> <!-- 4-021　元請会社の工期(自) -->
-                  </a>
+                  <%= document_date(document_site_info.start_date) %> <!-- 4-021　元請会社の工期(自) -->
                 </td>
                 <td class="s6" colspan="6" rowspan="4">契 約 日</td>
                 <td class="s8" colspan="20" rowspan="4">
-                  <a href="#rangeid=953121991" target="_blank">
-                    <%= document_date(document_site_info.contract_date) %> <!-- 4-023 元請会社の契約日 -->
-                  </a>
+                  <%= document_date(document_site_info.contract_date) %> <!-- 4-023 元請会社の契約日 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s39" colspan="10" rowspan="3" style="border: 1px solid;">現 場 代 理 人 名</td>
                 <td class="s8" colspan="17" rowspan="3">
-                  <a href="#rangeid=552934488" target="_blank">
-                    <%= document_subcon_info.site_agent_name %> <!-- 4-122 各下請会社の現場代理人名 -->
-                  </a>
+                  <%= document_subcon_info.site_agent_name %> <!-- 4-122 各下請会社の現場代理人名 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s6" colspan="10" rowspan="3">安全衛生責任者名</td>
                 <td class="s40" colspan="16" rowspan="3">
-                  <a href="#rangeid=357191237" target="_blank">
-                    <%= document_subcon_info.safety_manager_name %> <!-- 4-127 各下請会社の安全衛生責任者名 -->
-                  </a>
+                  <%= document_subcon_info.safety_manager_name %> <!-- 4-127 各下請会社の安全衛生責任者名 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -611,9 +563,7 @@
               <tr style="height: 8px">
                 <td class="s29" colspan="3" rowspan="2" style="border: 1px solid;">至</td>
                 <td class="s8" colspan="19" rowspan="2">
-                  <a href="#rangeid=608729669" target="_blank">
-                    <%= l document_site_info.end_date, format: :long %> <!-- 4-022 元請会社の工期(至) -->
-                  </a>
+                  <%= l document_site_info.end_date, format: :long %> <!-- 4-022 元請会社の工期(至) -->
                 </td>
                 <td class="s5"></td>
                 <td class="s5"></td>
@@ -623,16 +573,12 @@
                 <td class="s41" colspan="3" rowspan="3"></td>
                 <td class="s42" colspan="7" rowspan="3">権限及び<br>意見申出方法</td>
                 <td class="s40" colspan="17" rowspan="3">
-                  <a href="#rangeid=1234309413" target="_blank">
-                    <%= document_subcon_info.site_agent_apply %> <!-- 4-123 下請各会社の現場代理人名･権限及び意見の申出方法 -->
-                  </a>
+                  <%= document_subcon_info.site_agent_apply %> <!-- 4-123 下請各会社の現場代理人名･権限及び意見の申出方法 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s6" colspan="10" rowspan="3">安全衛生推進者名</td>
                 <td class="s43" colspan="16" rowspan="3">
-                  <a href="#rangeid=806100123" target="_blank">
-                    <%= document_subcon_info.safety_promoter_name %> <!-- 4-128 各下請会社の安全推進者名 -->
-                  </a>
+                  <%= document_subcon_info.safety_promoter_name %> <!-- 4-128 各下請会社の安全推進者名 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -705,34 +651,24 @@
                 <td class="s5"></td>
                 <td class="s39" colspan="10" rowspan="3" style="border: 1px solid;">※主 任 技 術 者</td>
                 <td class="s44" colspan="4" rowspan="3">
-                  <a href="#rangeid=881171275" target="_blank">
-                    <%= document_subcon_info.lead_engineer_check_i18n %> <!-- 4-124 各下請会社の主任技術者の(専任or非専任)-->
-                  </a>
+                  <%= document_subcon_info.lead_engineer_check_i18n %> <!-- 4-124 各下請会社の主任技術者の(専任or非専任)-->
                 </td>
                 <td class="s40" colspan="13" rowspan="3">
-                  <a href="#rangeid=1615178152" target="_blank">
-                    <%= document_subcon_info.lead_engineer_name %> <!-- 4-125 各下請会社の主任技術者名 -->
-                  </a>
+                  <%= document_subcon_info.lead_engineer_name %> <!-- 4-125 各下請会社の主任技術者名 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s6" colspan="10" rowspan="3">雇用管理責任者名</td>
                 <td class="s43" colspan="16" rowspan="3">
-                  <a href="#rangeid=1623944229" target="_blank">
-                    <%= '※4-129未実装※' %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
-                  </a>
+                  <%= '※4-129未実装※' %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
                 </td>
               </tr>
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="3">元請契約</td>
                 <td class="s8" colspan="17" rowspan="3">
-                  <a href="#rangeid=2139286466" target="_blank">
-                    <%= document_site_info.content["genecon_name"] %> <!-- 元請会社名 4-024 -->
-                  </a>
+                  <%= document_site_info.content["genecon_name"] %> <!-- 元請会社名 4-024 -->
                 </td>
                 <td class="s8" colspan="26" rowspan="3">
-                  <a href="#rangeid=1741597372" target="_blank">
-                    <%= document_site_info.content["genecon_address"] %> <!-- 4-025 元請会社の住所 -->
-                  </a>
+                  <%= document_site_info.content["genecon_address"] %> <!-- 4-025 元請会社の住所 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s5"></td>
@@ -746,28 +682,24 @@
                 <td class="s41" colspan="3" rowspan="3"></td>
                 <td class="s6" colspan="7" rowspan="3">資 格 内 容</td>
                 <td class="s40" colspan="17" rowspan="3">
-                  <a href="#rangeid=1091664867" target="_blank">
-                    <%= '※4-126未実装※' %> <!-- 4-126 主任技術者の必要資格 -->
-                  </a>
+                  <%= '※4-126未実装※' %> <!-- 4-126 主任技術者の必要資格 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s39" colspan="10" rowspan="3" style="border: 1px solid;">※専 門 技 術 者 名</td>
                 <td class="s8" colspan="16" rowspan="3">
-                  <a href="#rangeid=1032053299" target="_blank">
-                    <%= document_subcon_info.professional_engineer_name %> <!-- 4-130 各下請会社の専門技術者名 -->
-                  </a>
+                  <%= document_subcon_info.professional_engineer_name %> <!-- 4-130 各下請会社の専門技術者名 -->
                 </td>
               </tr>
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="3">下請契約</td>
                 <td class="s12" colspan="8" rowspan="2">
-                  <a href="#rangeid=2139286466" target="_blank">各会社の「会社名」4-026</a>
+                  <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-026 下請会社名 -->
                 </td>
                 <td class="s45" colspan="9" rowspan="2">
-                  <a href="#rangeid=684684689" target="_blank">「支店名 又は 営業所名」4-027</a>
+                  <%= document_subcon_info.content&.[]('subcon_branch_name') %> <!-- 4-027 下請会社の支店･営業所名-->
                 </td>
                 <td class="s7" colspan="26" rowspan="2">
-                  <a href="#rangeid=1741597372" target="_blank">各会社の「住所」4-028</a>
+                  <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-028 下請会社の住所4-028 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s5"></td>
@@ -777,8 +709,8 @@
                 <td class="s5"></td>
               </tr>
               <tr style="height: 8px">
-                <td class="s46" colspan="17">※支店 又は 営業所がない場合は、“同上”と記載</td>
-                <td class="s46" colspan="26">※支店 又は 営業所がない場合は、“同上”と記載</td>
+                <td class="s46" colspan="17"><!-- ※支店 又は 営業所がない場合は、“同上”と記載 --></td>
+                <td class="s46" colspan="26"><!-- ※支店 又は 営業所がない場合は、“同上”と記載 --></td>
                 <td class="s2"></td>
                 <td class="s18"></td>
                 <td class="s18"></td>
@@ -874,42 +806,34 @@
                 <td class="s5"></td>
                 <td class="s42" colspan="10" rowspan="4">※登録基幹技能者<br>名・種類</td>
                 <td class="s48" colspan="17" rowspan="2" style="border: 1px solid;">
-                  <a href="#rangeid=548856318" target="_blank">「登録基幹技能者」4-133</a>
+                  <%= document_subcon_info.registered_core_engineer_name %> <!-- 4-133 下請会社の登録基幹技能者名 -->
                 </td>
                 <td class="s47"></td>
               </tr>
               <tr style="height: 8px">
                 <td class="s6" colspan="6" rowspan="3" style="border: 1px solid;">発注者の<br>監督員名</td>
                 <td class="s7" colspan="22" style="border: 1px solid;">
-                  <a href="#rangeid=1475456003" target="_blank">
-                    <%= document_site_info.order_supervisor_company %> <!-- 4-029 発注者の監督員所属会社名 -->
-                  </a>
+                  <%= document_site_info.order_supervisor_company %> <!-- 4-029 発注者の監督員所属会社名 -->
                 </td>
                 <td class="s6" colspan="6" rowspan="3">権限及び<br>意見申出方法</td>
                 <td class="s8" colspan="20" rowspan="3">
-                  <a href="#rangeid=1888837556" target="_blank">
-                    <%= document_site_info.order_supervisor_apply %> <!-- 4-031 発注者の権限及び意見の申出方法 -->
-                  </a>
+                  <%= document_site_info.order_supervisor_apply %> <!-- 4-031 発注者の権限及び意見の申出方法 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s47"></td>
               </tr>
               <tr style="height: 8px">
                 <td class="s8" colspan="22" rowspan="2">
-                  <a href="#rangeid=1466712635" target="_blank">
-                    <%= document_site_info.order_supervisor_name %> <!-- 4-030 発注者の監督員名 -->
-                  </a>
+                  <%= document_site_info.order_supervisor_name %> <!-- 4-030 発注者の監督員名 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s8" colspan="17" rowspan="2">
-                  <a href="#rangeid=1091664867" target="_blank">登録基幹技能者「必要資格」4-134</a>
+                  <%= '※4-134未実装※' %> <!-- 4-134 下請会社の登録基幹技能者の必要資格 -->
                 </td>
                 <td class="s47"></td>
                 <td class="s6" colspan="7" rowspan="2">担当工事内容</td>
                 <td class="s49" colspan="16" rowspan="2">
-                  <a href="#rangeid=511169322" target="_blank">
-                    <%= document_subcon_info.professional_engineer_details %> <!-- 4-132 各下請会社の専門技術者･担当工事内容 -->
-                  </a>
+                  <%= document_subcon_info.professional_engineer_details %> <!-- 4-132 各下請会社の専門技術者･担当工事内容 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -1030,15 +954,11 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="6" rowspan="3" style="border: 1px solid;">監督員名</td>
                 <td class="s8" colspan="22" rowspan="3">
-                  <a href="#rangeid=979958270" target="_blank">
-                    <%= document_site_info.supervisor_name %> <!-- 4-032 元請会社の監督員名 -->
-                  </a>
+                  <%= document_site_info.supervisor_name %> <!-- 4-032 元請会社の監督員名 -->
                 </td>
                 <td class="s6" colspan="6" rowspan="3">権限及び<br>意見申出方法</td>
                 <td class="s40" colspan="20" rowspan="3">
-                  <a href="#rangeid=816208492" target="_blank">
-                    <%= document_site_info.supervisor_apply %> <!-- 4-033 元請会社の監督員名・権限及び意見の申出方法 -->
-                  </a>
+                  <%= document_site_info.supervisor_apply %> <!-- 4-033 元請会社の監督員名・権限及び意見の申出方法 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s6" colspan="8" rowspan="4">一号特定技能<br>外国人の従事<br>の状況(有無)</td>
@@ -1066,15 +986,11 @@
               <tr style="height: 20px">
                 <td class="s6" colspan="6" rowspan="3" style="border: 1px solid;">現場代理人名</td>
                 <td class="s8" colspan="22" rowspan="3">
-                  <a href="#rangeid=678508630" target="_blank">
-                    <%= document_site_info.site_agent_name %> <!-- 4-034 元請会社の現場代理人名 -->
-                  </a>
+                  <%= document_site_info.site_agent_name %> <!-- 4-034 元請会社の現場代理人名 -->
                 </td>
                 <td class="s6" colspan="6" rowspan="3">権限及び<br>意見申出方法</td>
                 <td class="s40" colspan="20" rowspan="3">
-                  <a href="#rangeid=86277074" target="_blank">
-                    <%= document_site_info.site_agent_apply %> <!-- 4-035 元請会社の現場代理人名･権限及び意見の申出方法 -->
-                  </a>
+                  <%= document_site_info.site_agent_apply %> <!-- 4-035 元請会社の現場代理人名･権限及び意見の申出方法 -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -1146,14 +1062,10 @@
               <tr style="height: 8px">
                 <td class="s52" colspan="6" rowspan="3" style="border: 1px solid;">監理技術者・主任技術者名</td>
                 <td class="s53" colspan="5" rowspan="3">
-                  <a href="#rangeid=277320551" target="_blank">
-                    <%= document_site_info.supervising_engineer_check_i18n %> <!-- 4-036 元請会社の監督技術者･主任技術者(専任or非専任) -->
-                  </a>
+                  <%= document_site_info.supervising_engineer_check_i18n %> <!-- 4-036 元請会社の監督技術者･主任技術者(専任or非専任) -->
                 </td>
                 <td class="s40" colspan="17" rowspan="3">
-                  <a href="#rangeid=1340702462" target="_blank">
-                    <%= document_site_info.supervising_engineer_name %> <!-- 4-037 元請会社の監督技術者･主任技術者名-->
-                  </a>
+                  <%= document_site_info.supervising_engineer_name %> <!-- 4-037 元請会社の監督技術者･主任技術者名-->
                 </td>
                 <td class="s6" colspan="6" rowspan="3">資格内容</td>
                 <td class="s40" colspan="20" rowspan="3">
@@ -1192,7 +1104,7 @@
                   <%= insurance_join(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(加入) 4-140 -->
                 </td>
                 <td class="s14" colspan="4" rowspan="2">
-                  <%= insurance_join(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(加入) 4-140 -->
+                  <%= insurance_not_join(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(加入) 4-140 -->
                 </td>
                 <td class="s16" colspan="4" rowspan="2">
                   <%= insurance_not_coverd(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(適用除外) 4-140 -->
@@ -1201,9 +1113,7 @@
               <tr style="height: 8px">
                 <td class="s52" colspan="6" rowspan="3" style="border: 1px solid;">監督技術者<br>補佐名</td>
                 <td class="s8" colspan="22" rowspan="3">
-                  <a href="#rangeid=1160760033" target="_blank">
-                    <%= document_site_info.supervising_engineer_assistant_name %> <!-- 4-039 元請会社の監督技術者補佐名 -->
-                  </a>
+                  <%= document_site_info.supervising_engineer_assistant_name %> <!-- 4-039 元請会社の監督技術者補佐名 -->
                 </td>
                 <td class="s6" colspan="6" rowspan="3">資格内容</td>
                 <td class="s40" colspan="20" rowspan="3">
@@ -1226,31 +1136,21 @@
               <tr style="height: 8px">
                 <td class="s39" colspan="6" rowspan="3" style="border: 1px solid;">専 門<br>技術者名</td>
                 <td class="s8" colspan="22" rowspan="3">
-                  <a href="#rangeid=1277817834" target="_blank">
-                    <%= document_site_info.professional_engineer_name %> <!-- 4-041 元請会社の専門技術者名 -->
-                  </a>
+                  <%= document_site_info.professional_engineer_name %> <!-- 4-041 元請会社の専門技術者名 -->
                 </td>
                 <td class="s39" colspan="6" rowspan="3" style="border: 1px solid;">専 門<br>技術者名</td>
                 <td class="s8" colspan="20" rowspan="3">
-                  <a href="#rangeid=1277817834" target="_blank">
-                    <%= document_site_info.professional_engineer_name %> <!-- 4-044 元請会社の専門技術者名 -->
-                  </a>
+                  <%= document_site_info.professional_engineer_name %> <!-- 4-044 元請会社の専門技術者名 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s54" colspan="13">
-                  <a href="#rangeid=781495097" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-141 下請会社の健康保険会社名 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-141 下請会社の健康保険会社名 -->
                 </td>
                 <td class="s55" colspan="14" rowspan="2">
-                  <a href="#rangeid=932398071" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-143 下請会社の厚生年金保険番号 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-143 下請会社の厚生年金保険番号 -->
                 </td>
                 <td class="s8" colspan="14" rowspan="2">
-                  <a href="#rangeid=1437487834" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-144 下請会社の雇用保険番号 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-144 下請会社の雇用保険番号 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -1363,15 +1263,11 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="3">担 当<br>工事内容</td>
                 <td class="s8" colspan="22" rowspan="3">
-                  <a href="#rangeid=486730275" target="_blank">
-                    <%= document_site_info.professional_engineer_construction_details %> <!-- 4-043 元請会社の専門技術者･担当工事内容 -->
-                  </a>
+                  <%= document_site_info.professional_engineer_construction_details %> <!-- 4-043 元請会社の専門技術者･担当工事内容 -->
                 </td>
                 <td class="s6" colspan="5" rowspan="3">担 当<br>工事内容</td>
                 <td class="s8" colspan="20" rowspan="3">
-                  <a href="#rangeid=486730275" target="_blank">
-                    <%= document_site_info.professional_engineer_construction_details %> <!-- 4-046 元請会社の専門技術者･担当工事内容 -->
-                  </a>
+                  <%= document_site_info.professional_engineer_construction_details %> <!-- 4-046 元請会社の専門技術者･担当工事内容 -->
                 </td>
                 <td class="s2"></td>
                 <td class="s2"></td>
@@ -1744,13 +1640,13 @@
                   <%= insurance_not_coverd(document_site_info.content["genecon_welfare_pension_insurance_join_status"]) %> <!-- 元請会社の年金保険(適用除外) 4-051 -->
                 </td>
                 <td class="s14" colspan="4" rowspan="2">
-                  <%= insurance_join(document_site_info.content["employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(加入) 4-052 -->
+                  <%= insurance_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(加入) 4-052 -->
                 </td>
                 <td class="s14" colspan="4" rowspan="2">
-                  <%= insurance_not_join(document_site_info.content["employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(未加入) 4-052 -->
+                  <%= insurance_not_join(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(未加入) 4-052 -->
                 </td>
                 <td class="s16" colspan="6" rowspan="2">
-                  <%= insurance_not_coverd(document_site_info.content["employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(適用除外) 4-052 -->
+                  <%= insurance_not_coverd(document_site_info.content["genecon_employment_insurance_join_status"]) %> <!-- 元請会社の雇用保険(適用除外) 4-052 -->
                 </td>
                 <td class="s2"></td>
                 <td class="s57"></td>
@@ -1790,24 +1686,16 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="2">元請契約</td>
                 <td class="s8" colspan="8" rowspan="2">
-                  <a href="#rangeid=2139286466" target="_blank">
-                    <%= document_site_info.content["genecon_name"] %> <!-- 元請会社名 4-053 -->
-                  </a>
+                  <%= document_site_info.content["genecon_name"] %> <!-- 元請会社名 4-053 -->
                 </td>
                 <td class="s54" colspan="9">
-                  <a href="#rangeid=781495097" target="_blank">
-                    <%= document_site_info.content["genecon_health_insurance_association"] %> <!-- 4-054 元請の健康保険会社名 -->
-                  </a>
+                  <%= document_site_info.content["genecon_health_insurance_association"] %> <!-- 4-054 元請の健康保険会社名 -->
                 </td>
                 <td class="s55" colspan="10" rowspan="2">
-                  <a href="#rangeid=932398071" target="_blank">
-                    <%= document_site_info.content["genecon_welfare_pension_insurance_office_number"] %> <!-- 4-056 元請の厚生年金保険番号 -->
-                  </a>
+                  <%= document_site_info.content["genecon_welfare_pension_insurance_office_number"] %> <!-- 4-056 元請の厚生年金保険番号 -->
                 </td>
                 <td class="s55" colspan="9" rowspan="2">
-                  <a href="#rangeid=138731704" target="_blank">
-                    <%= document_site_info.content["genecon_employment_insurance_number"] %> <!-- 4-057 元請の雇用保険番号 -->
-                  </a>
+                  <%= document_site_info.content["genecon_employment_insurance_number"] %> <!-- 4-057 元請の雇用保険番号 -->
                 </td>
                 <td class="s2"></td>
                 <td class="s57"></td>
@@ -1835,9 +1723,7 @@
               </tr>
               <tr style="height: 8px">
                 <td class="s55" colspan="9">
-                  <a href="#rangeid=1915316596" target="_blank">
-                    <%= document_site_info.content["genecon_health_insurance_office_number"] %> <!-- 4-055 元請の健康保険番号 -->
-                  </a>
+                  <%= document_site_info.content["genecon_health_insurance_office_number"] %> <!-- 4-055 元請の健康保険番号 -->
                 </td>
                 <td class="s2"></td>
                 <td class="s57"></td>
@@ -1857,24 +1743,16 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="2">下請契約</td>
                 <td class="s8" colspan="8" rowspan="2">
-                  <a href="#rangeid=2139286466" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-058 下請会社名 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-058 下請会社名 -->
                 </td>
                 <td class="s54" colspan="9">
-                  <a href="#rangeid=1561278964" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->
                 </td>
                 <td class="s55" colspan="10" rowspan="2">
-                  <a href="#rangeid=932398071" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-061 下請会社の厚生年金保険番号 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-061 下請会社の厚生年金保険番号 -->
                 </td>
                 <td class="s55" colspan="9" rowspan="2">
-                  <a href="#rangeid=138731704" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-062 下請会社の雇用保険番号 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-062 下請会社の雇用保険番号 -->
                 </td>
                 <td class="s2"></td>
                 <td class="s57"></td>
@@ -1894,9 +1772,7 @@
               </tr>
               <tr style="height: 8px">
                 <td class="s55" colspan="9">
-                  <a href="#rangeid=498952702" target="_blank">
-                    <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-060 下請会社の健康保険番号 -->
-                  </a>
+                  <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-060 下請会社の健康保険番号 -->
                 </td>
                 <td class="s2"></td>
                 <td class="s57"></td>
@@ -2433,7 +2309,7 @@
                 <td class="s61"></td>
                 <td class="s59"></td>
               </tr>
-              <tr style="height: 8px; boreder: none;">
+              <tr style="height: 8px;">
                 <td class="s59"></td>
                 <td class="s59"></td>
                 <td class="s59"></td>
@@ -2538,10 +2414,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
@@ -2565,10 +2439,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
@@ -2581,7 +2453,6 @@
 	.ritz .waffle .s38 {
 		background-color: #ffffff;
 		text-align: center;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 6pt;
 		vertical-align: middle;
@@ -2593,10 +2464,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
@@ -2622,10 +2491,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: middle;
@@ -2686,7 +2553,6 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 7.5pt;
 		vertical-align: middle;
@@ -2734,10 +2600,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
@@ -2801,10 +2665,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 6pt;
 		vertical-align: middle;
@@ -2818,10 +2680,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: middle;
@@ -2868,10 +2728,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
@@ -2885,10 +2743,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: bottom;
@@ -2924,10 +2780,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: middle;
@@ -3004,10 +2858,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
@@ -3060,7 +2912,6 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: center;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
@@ -3083,7 +2934,6 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: center;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 6pt;
 		vertical-align: middle;
@@ -3119,7 +2969,6 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: left;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: bottom;
@@ -3131,10 +2980,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 7.5pt;
 		vertical-align: middle;
@@ -3184,7 +3031,6 @@
 	.ritz .waffle .s31 {
 		background-color: #ffffff;
 		text-align: left;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: bottom;
@@ -3197,10 +3043,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: middle;
@@ -3224,10 +3068,8 @@
 	.ritz .waffle .s1 {
 		background-color: #ccffcc;
 		text-align: left;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: middle;
@@ -3276,10 +3118,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 6.75pt;
 		vertical-align: middle;
@@ -3305,10 +3145,8 @@
 		border-bottom: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: middle;
@@ -3322,10 +3160,8 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 8.25pt;
 		vertical-align: middle;
@@ -3350,7 +3186,6 @@
 		border-right: 1px SOLID #000000;
 		background-color: #ffffff;
 		text-align: center;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: bottom;
@@ -3362,11 +3197,9 @@
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
 		background-color: #ccffcc;
-		text-align: left;
-		text-decoration: underline;
+		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 10.5pt;
 		vertical-align: middle;
@@ -3390,10 +3223,8 @@
 	.ritz .waffle .s12 {
 		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-family: 'Arial';
 		font-size: 9pt;
 		vertical-align: middle;
