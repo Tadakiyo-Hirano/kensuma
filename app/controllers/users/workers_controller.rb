@@ -85,7 +85,7 @@ module Users
     def create
       @worker = current_business.workers.build(worker_params)
       if @worker.save
-        flash[:success] = '作業員を作成しました'
+        flash[:success] = '作業員情報を作成しました'
         redirect_to users_worker_path(@worker)
       else
         render :new

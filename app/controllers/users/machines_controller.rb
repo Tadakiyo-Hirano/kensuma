@@ -23,7 +23,7 @@ module Users
     def create
       @machine = current_business.machines.build(machine_params)
       if @machine.save
-        flash[:success] = '機械情報を登録しました'
+        flash[:success] = '持込機械情報を登録しました'
         redirect_to users_machines_url(@machine)
       else
         render :new

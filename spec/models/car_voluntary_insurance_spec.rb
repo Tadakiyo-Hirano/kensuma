@@ -14,12 +14,12 @@ RSpec.describe CarVoluntaryInsurance, type: :model do
   end
 
   describe 'アソシエーションについて' do
-    context '紐つく車両がある場合' do
+    context '紐つく車両情報がある場合' do
       subject do
         voluntary.car_voluntary
       end
 
-      it '紐つく車両を返すこと' do
+      it '紐つく車両情報を返すこと' do
         expect(subject).to eq(car)
       end
     end

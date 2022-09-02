@@ -9,7 +9,7 @@ RSpec.describe 'Cars', type: :system do
     create(:car_voluntary_insurance, car_voluntary_id: car.id, company_voluntary_id: car_insurance_company.id)
   end
 
-  describe '車両関連' do
+  describe '車両情報関連' do
     before(:each) do
       # ステージングにて一時的にメール認証スキップ中の為下記コメント
       # user.skip_confirmation!

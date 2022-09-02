@@ -57,10 +57,10 @@ module Users
     def submit
       if @request_order.parent_id.nil? && @request_order.children.all? { |r| r.status == 'approved' }
         @request_order.approved!
-        flash[:success] = '発注依頼を承認しました'
+        flash[:success] = '下請発注情報を承認しました'
       elsif @request_order.children.all? { |r| r.status == 'approved' }
         @request_order.submitted!
-        flash[:success] = '発注依頼を提出済にしました'
+        flash[:success] = '下請発注情報を提出済にしました'
       else
         flash[:danger] = '下請けの書類がまだ未承認です'
       end
