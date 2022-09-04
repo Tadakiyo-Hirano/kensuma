@@ -121,6 +121,23 @@ module Users
         :safety_promoter_name,
         :foreman_name,
         :registered_core_engineer_name
+      ).merge(
+        content: {
+          subcon_name:                                    current_business.name,                                             # 会社名
+          subcon_branch_name:                             current_business.branch_name,                                      # 支店･営業所名
+          subcon_address:                                 current_business.address,                                          # 会社住所
+          subcon_post_code:                               current_business.post_code,                                        # 会社郵便番号
+          subcon_phone_number:                            current_business.phone_number,                                     # 会社電話番号
+          subcon_carrier_up_id:                           current_business.carrier_up_id,                                    # 事業所ID(キャリアアップ)
+          subcon_representative_name:                     current_business.representative_name,                              # 代表者社名
+          subcon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
+          subcon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
+          subcon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
+          subcon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
+          subcon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
+          subcon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
+          subcon_employment_insurance_number:             current_business.business_employment_insurance_number              # 雇用保険番号
+        }
       )
     end
   end

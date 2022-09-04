@@ -532,11 +532,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="6" rowspan="2">使用期間</td>
                 <td class="doc_12_s17" dir="ltr" colspan="14" rowspan="2">
-                  <%= car_date(field_car.usage_period_start) %> <!-- 12-012 使用期間(始期) -->
+                  <%= document_date(field_car.usage_period_start) %> <!-- 12-012 使用期間(始期) -->
                 </td>
                 <td class="doc_12_s17" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" dir="ltr" colspan="14" rowspan="2">
-                  <%= car_date(field_car.usage_period_end) %> <!-- 12-013 使用期間(終期) -->
+                  <%= document_date(field_car.usage_period_end) %> <!-- 12-013 使用期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -570,11 +570,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="5" rowspan="2">車検期間</td>
                 <td class="doc_12_s17" colspan="14" rowspan="2">
-                  <%= car_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-018 車検期間(始期) -->
+                  <%= document_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-018 車検期間(始期) -->
                 </td>
                 <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" colspan="14" rowspan="2">
-                  <%= car_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-019 車検期間(終期) -->
+                  <%= document_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-019 車検期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -587,7 +587,7 @@
                 </td>
                 <td class="doc_12_s25" colspan="5" rowspan="2">生年月日</td>
                 <td class="doc_12_s25" colspan="12" rowspan="2">
-                  <%= car_date(field_car.driver_birth_day_on) %> <!-- 12-021 運転者生年月日 -->
+                  <%= document_date(field_car.driver_birth_day_on) %> <!-- 12-021 運転者生年月日 -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -628,11 +628,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="5" rowspan="2">保険期間</td>
                 <td class="doc_12_s17" colspan="14" rowspan="2">
-                  <%= car_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-027 自賠責保険期間(始期) -->
+                  <%= document_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-027 自賠責保険期間(始期) -->
                 </td>
                 <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" colspan="14" rowspan="2">
-                  <%= car_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-028 自賠責保険期間(終期) -->
+                  <%= document_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-028 自賠責保険期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -667,11 +667,11 @@
               <tr style="height: 25px">
                 <td class="doc_12_s4" colspan="5" rowspan="2">保険期間</td>
                 <td class="doc_12_s17" colspan="14" rowspan="2">
-                  <%= car_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_start_on"].to_date) %> <!-- 12-033 任意保険期間(始期) -->
+                  <%= document_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_start_on"].to_date) %> <!-- 12-033 任意保険期間(始期) -->
                 </td>
                 <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
                 <td class="doc_12_s25" colspan="14" rowspan="2">
-                  <%= car_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_end_on"].to_date) %> <!-- 12-034 任意保険期間(終期) -->
+                  <%= document_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_end_on"].to_date) %> <!-- 12-034 任意保険期間(終期) -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -763,11 +763,3 @@
     </div>
   </div>
 <% end %>
-
-<style>
-.usage {
-  border: 2px solid #000000;
-  border-radius: 25px;
-  padding: 4px;
-}
-</style>

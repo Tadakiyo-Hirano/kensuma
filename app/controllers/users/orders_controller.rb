@@ -157,6 +157,19 @@ module Users
         :confirm_name,
         :accept_confirm_date,
         :subcontractor_name
+      ).merge(
+        content: {
+          genecon_name:                                    current_business.name,                                             # 会社名
+          genecon_address:                                 current_business.address,                                          # 会社住所
+          genecon_carrier_up_id:                           current_business.carrier_up_id,                                    # 事業所ID(キャリアアップ)
+          genecon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
+          genecon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
+          genecon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
+          genecon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
+          genecon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
+          genecon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
+          genecon_employment_insurance_number:             current_business.business_employment_insurance_number              # 雇用保険番号
+        }
       )
     end
   end

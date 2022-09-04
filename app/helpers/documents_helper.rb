@@ -1,4 +1,56 @@
 module DocumentsHelper
+  # 日付
+  def document_date(column)
+    l(column, format: :long) unless column.nil?
+  end
+
+  # (4) 施工体制台帳 ====================================================
+
+  # 会社の保険加入状況
+  INSURANCE_TYPE = {
+    'join'       => '加入',
+    'not_join'   => '未加入',
+    'not_coverd' => '適用除外'
+  }.freeze
+
+  def insurance_join(insurance_type)
+    status = INSURANCE_TYPE[insurance_type]
+    status == '加入' ? tag.span(status, class: :circle) : '加入'
+  end
+
+  def insurance_not_join(insurance_type)
+    status = INSURANCE_TYPE[insurance_type]
+    status == '未加入' ? tag.span(status, class: :circle) : '未加入'
+  end
+
+  def insurance_not_coverd(insurance_type)
+    status = INSURANCE_TYPE[insurance_type]
+    status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
+  end
+
+  # 一次下請の情報
+  def subcon_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order if request_order.parent_id == 1
+  end
+
+  def subcons_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order.children if request_order.parent_id.nil?
+  end
+
+  def document_subcon_info
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+      subcon_info
+    else
+      @subcon
+    end
+  end
+
+  # ====================================================================
+
+  # (8)作業員名簿 =======================================================
+
   # 作業員名簿の見出し番号
   def worker_index(number, index)
     number + index * 10
@@ -72,6 +124,7 @@ module DocumentsHelper
     'ab' => 'AB',
     'o'  => 'O'
   }.freeze
+
   def worker_abo_blood_type(worker)
     blood_type = worker&.content&.[]('abo_blood_type')
     BLOOD_TYPE[blood_type]
@@ -90,6 +143,7 @@ module DocumentsHelper
     'insured'                                => '被保険者',
     'day'                                    => '日雇保険'
   }.freeze
+
   def worker_insurance(worker, column)
     insurance = worker&.content&.[]('worker_insurance')&.[](column)
     insurance unless insurance.nil?
@@ -144,16 +198,17 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
 
-  # 車両の日付情報
-  def car_date(column)
-    l(column, format: :long) unless column.nil?
-  end
+  # ====================================================================
+
+  # (12) 工事･車両通勤届 ================================================
 
   def car_usage_commute(usage)
-    usage == '通勤用' ? tag.span('通勤', class: :usage) : '通勤'
+    usage == '通勤用' ? tag.span('通勤', class: :circle) : '通勤'
   end
 
   def car_usage_const(usage)
-    usage == '工事用' ? tag.span('工事', class: :usage) : '工事'
+    usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
   end
+
+  # ====================================================================
 end
