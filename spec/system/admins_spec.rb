@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admins', type: :system do
+RSpec.describe '管理者', type: :system do
   # テストユーザーを作成する
   let!(:admin) { create(:admin, email: 'foo@example.com', password: '123456', password_confirmation: '123456') }
 
@@ -72,19 +72,19 @@ RSpec.describe 'Admins', type: :system do
         end
       end
 
-      context 'Adminsをクリックした場合' do
-        it 'Admins一覧を表示' do
-          click_link 'Admins'
+      context '管理者をクリックした場合' do
+        it '管理者一覧を表示' do
+          click_link '管理者'
           expect(page).to have_current_path _system__admins_path, ignore_query: true
-          expect(page).to have_content('Admins')
+          expect(page).to have_content('管理者')
         end
       end
 
-      context 'Commentsをクリックした場合' do
-        it 'Comments一覧を表示' do
-          click_link 'Comments'
+      context 'コメントをクリックした場合' do
+        it 'コメント一覧を表示' do
+          click_link 'コメント'
           expect(page).to have_current_path _system__comments_path, ignore_query: true
-          expect(page).to have_content('Comments')
+          expect(page).to have_content('コメント')
         end
       end
 
@@ -104,7 +104,7 @@ RSpec.describe 'Admins', type: :system do
         it '管理者詳細ページを表示' do
           click_link '閲覧'
           expect(page).to have_current_path _system__admin_path(admin), ignore_query: true
-          expect(page).to have_content('Admin の詳細')
+          expect(page).to have_content('管理者 の詳細')
         end
       end
 
@@ -112,19 +112,19 @@ RSpec.describe 'Admins', type: :system do
         it '管理者編集ページを表示' do
           click_link '編集'
           expect(page).to have_current_path edit__system__admin_path(admin), ignore_query: true
-          expect(page).to have_content('Admin を編集する')
+          expect(page).to have_content('管理者 を編集する')
         end
       end
     end
 
-    describe 'Admin詳細ページからの遷移' do
+    describe '管理者詳細ページからの遷移' do
       before(:each) { visit _system__admin_path(admin) }
 
-      context 'Adminを編集するをクリックした場合' do
+      context '管理者を編集するをクリックした場合' do
         it '管理者編集ページを表示' do
-          click_link 'Admin を編集する'
+          click_link '管理者 を編集する'
           expect(page).to have_current_path edit__system__admin_path(admin), ignore_query: true
-          expect(page).to have_content('Admin を編集する')
+          expect(page).to have_content('管理者 を編集する')
         end
       end
     end
