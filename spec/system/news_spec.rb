@@ -26,7 +26,7 @@ RSpec.describe 'News', type: :system do
         fill_in 'news[title]', with: 'お知らせ-Aの編集' # 内容を書き換える
         fill_in 'news[content]', with: 'お知らせ-Aの内容の編集です' # 内容を書き換える
         fill_in 'news[delivered_at]', with: '2022-01-01 09:00' # 内容を書き換える
-        select 'Published', from: 'news[status]' # 全ての項目が入力された状態で「Published」を選択する
+        select '公開', from: 'news[status]' # 全ての項目が入力された状態で「公開」を選択する
         click_button 'お知らせを更新'
         expect(page).to have_content('お知らせ')
       end
@@ -37,9 +37,9 @@ RSpec.describe 'News', type: :system do
         fill_in 'news[title]', with: nil # 「タイトル」にnilを入力
         fill_in 'news[content]', with: 'お知らせ-Aの内容の編集です'
         fill_in 'news[delivered_at]', with: '2022-01-01 09:00' # 内容を書き換える
-        select 'Published', from: 'news[status]' # 「タイトル」がnilのまま「Published」を選択
+        select '公開', from: 'news[status]' # 「タイトル」がnilのまま「公開」を選択
         click_button 'お知らせを更新'
-        # 入力項目に空が一つでもあると、「Published」では更新できない
+        # 入力項目に空が一つでもあると、「公開」では更新できない
         expect(page).not_to have_content('お知らせ の詳細')
       end
     end
