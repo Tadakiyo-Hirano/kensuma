@@ -61,7 +61,7 @@ module Users
       #     # =============================================
       #   )
       # else
-        @order = current_business.orders.new
+      @order = current_business.orders.new
       # end
     end
 
