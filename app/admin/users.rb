@@ -9,16 +9,14 @@ ActiveAdmin.register User do
 
   controller do
     def scoped_collection
-      end_of_association_chain.where(role: "admin")
+      end_of_association_chain.where(role: 'admin')
     end
   end
 
   index do
     column :name
     column :email
-    column :role do |user|
-      user.role_i18n
-    end
+    column :role, &:role_i18n
 
     # 閲覧編集削除などのリンク表示
     actions
@@ -42,7 +40,7 @@ ActiveAdmin.register User do
       # パスワードの一時表示一旦コメントアウト
       # f.button "表示", type: :button, id: "btn_passview"
       # f.input :password_confirmation, type: "password", id: "input_pass", name: "input_pass", value: ""
-      f.hidden_field :role, :value => "admin"
+      f.hidden_field :role, value: 'admin'
     end
     f.actions
   end
