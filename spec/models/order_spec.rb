@@ -356,7 +356,7 @@ RSpec.describe Order, type: :model do
         end
       end
     end
-    # ===================================
+
     describe '#supervising_engineer_name' do
       context '存在しない場合' do
         before(:each) { subject.supervising_engineer_name = nil }
@@ -393,7 +393,7 @@ RSpec.describe Order, type: :model do
         before(:each) { subject.safety_officer_name = nil }
 
         it 'バリデーションに落ちること' do
-          expect(subject.safety_officer_name).to be_falsey
+          expect(subject).to be_invalid
         end
       end
     end
@@ -403,7 +403,7 @@ RSpec.describe Order, type: :model do
         before(:each) { subject.safety_officer_position_name = nil }
 
         it 'バリデーションに落ちること' do
-          expect(subject.safety_officer_position_name).to be_falsey
+          expect(subject).to be_invalid
         end
       end
     end
@@ -414,7 +414,7 @@ RSpec.describe Order, type: :model do
         before(:each) { subject.vice_president_name = nil }
 
         it 'バリデーションに落ちること' do
-          expect(subject.vice_president_name).to be_falsey
+          expect(subject).to be_invalid
         end
       end
     end
@@ -424,7 +424,7 @@ RSpec.describe Order, type: :model do
         before(:each) { subject.vice_president_company_name = nil }
 
         it 'バリデーションに落ちること' do
-          expect(subject.vice_president_company_name).to be_falsey
+          expect(subject).to be_invalid
         end
       end
     end
@@ -434,7 +434,7 @@ RSpec.describe Order, type: :model do
         before(:each) { subject.secretary_name = nil }
 
         it 'バリデーションに落ちること' do
-          expect(subject.secretary_name).to be_falsey
+          expect(subject).to be_invalid
         end
       end
     end
@@ -444,7 +444,7 @@ RSpec.describe Order, type: :model do
         before(:each) { subject.health_and_safety_manager_name = nil }
 
         it 'バリデーションに落ちること' do
-          expect(subject.health_and_safety_manager_name).to be_falsey
+          expect(subject).to be_invalid
         end
       end
     end
