@@ -34,6 +34,14 @@ RSpec.describe Order, type: :model do
 
     # 現場
     describe '#site_career_up_id' do
+      context 'nilの場合' do
+        before(:each) { subject.site_career_up_id = nil }
+
+        it 'バリデーションが通ること' do
+          expect(subject).to be_valid
+        end
+      end
+
       context '数値14桁の場合' do
         before(:each) { subject.site_career_up_id = '0' * 14 }
 
