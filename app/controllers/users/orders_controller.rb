@@ -13,7 +13,7 @@ module Users
       if Rails.env.development?
         @order = current_business.orders.new(
           # テスト用デフォルト値 ==========================
-          site_career_up_id:                          '1234-5678-9000',
+          site_career_up_id:                          "123456789#{rand(10000..99999)}",
           site_name:                                  Faker::Company.name,
           site_address:                               current_business.address,
 

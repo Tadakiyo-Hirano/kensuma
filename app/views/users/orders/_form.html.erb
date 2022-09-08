@@ -11,7 +11,7 @@
 <div class="list-group">
   <div class="list-group-item">
     <%= f.label :site_career_up_id %> <!-- 現場ID(キャリアアップ) -->
-    <%= f.text_field :site_career_up_id, class: "form-control", placeholder: Order.human_attribute_name(:site_career_up_id), minlength: 14, maxlength: 14 %>
+    <%= f.text_field :site_career_up_id, class: "form-control", placeholder: "#{Order.human_attribute_name(:site_career_up_id)} 数字14桁", minlength: 14, maxlength: 14 %>
     <br>
     <%= f.label :site_name %> <!-- 事業所名(現場名) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
