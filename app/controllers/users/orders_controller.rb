@@ -13,7 +13,7 @@ module Users
       if Rails.env.development?
         @order = current_business.orders.new(
           # テスト用デフォルト値 ==========================
-          site_career_up_id:                          '1234-5678-9000',
+          site_career_up_id:                          "123456789#{rand(10000..99999)}",
           site_name:                                  Faker::Company.name,
           site_address:                               current_business.address,
 
@@ -66,26 +66,23 @@ module Users
     end
 
     def create
-      ActiveRecord::Base.transaction do
-        @order = current_business.orders.build(order_params)
-        request_order = @order.request_orders.build(business: current_business)
+      @order = current_business.orders.build(order_params)
+      request_order = @order.request_orders.build(business: current_business)
 
-        24.times do |n|
-          request_order.documents.build(
-            document_type: n + 1,
-            created_on:    Date.current,
-            submitted_on:  Date.current,
-            business:      current_business
-          )
-        end
-
-        if @order.save!
-          redirect_to users_order_url(@order)
-        end
+      24.times do |n|
+        request_order.documents.build(
+          document_type: n + 1,
+          created_on:    Date.current,
+          submitted_on:  Date.current,
+          business:      current_business
+        )
       end
-    rescue ActiveRecord::RecordInvalid
-      flash[:danger] = '登録に失敗しました。再度作成してください。'
-      redirect_to new_users_order_path
+
+      if @order.save
+        redirect_to users_order_url(@order)
+      else
+        render :new
+      end
     end
 
     def edit; end

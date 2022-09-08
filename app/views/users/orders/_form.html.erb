@@ -11,15 +11,15 @@
 <div class="list-group">
   <div class="list-group-item">
     <%= f.label :site_career_up_id %> <!-- 現場ID(キャリアアップ) -->
-    <%= f.text_field :site_career_up_id, class: "form-control", placeholder: Order.human_attribute_name(:site_career_up_id) %>
+    <%= f.text_field :site_career_up_id, class: "form-control", placeholder: "#{Order.human_attribute_name(:site_career_up_id)} 数字14桁", minlength: 14, maxlength: 14 %>
     <br>
     <%= f.label :site_name %> <!-- 事業所名(現場名) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :site_name, class: "form-control", placeholder: Order.human_attribute_name(:site_name) %>
+    <%= f.text_field :site_name, class: "form-control", placeholder: Order.human_attribute_name(:site_name), maxlength: 100 %>
     <br>
     <%= f.label :site_address %> <!-- 施工場所(住所) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :site_address, class: "form-control", placeholder: Order.human_attribute_name(:site_address) %>
+    <%= f.text_field :site_address, class: "form-control", placeholder: Order.human_attribute_name(:site_address), maxlength: 50 %>
     <br>
   </div>
 </div><br>
@@ -66,7 +66,6 @@
     <%= f.text_field :construction_name, class: "form-control", placeholder: Order.human_attribute_name(:construction_name) %>
     <br>
     <%= f.label :construction_details %> <!-- 工事内容 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :construction_details, class: "form-control", placeholder: Order.human_attribute_name(:construction_details) %>
     <br>
     <div class="row">
@@ -156,8 +155,11 @@
     %><br><br>
     <%= f.label :supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :supervisor_apply, class: "form-control", placeholder: Order.human_attribute_name(:supervisor_apply) %>
-    <br>
+    <%= f.select :supervisor_apply,
+                      (@current_business.orders.map { |order|order.supervisor_apply }).uniq,
+                      { include_blank: true },
+                      { class: "single-select", style: "width: 100%" }
+    %><br><br>
   </div>
   <div class="list-group-item">
     <%= f.label :site_agent_name %> <!-- 現場代理人(氏名) -->
@@ -169,8 +171,11 @@
     %><br><br>
     <%= f.label :site_agent_apply %> <!-- 現場代理人(権限及び意見の申出方法) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :site_agent_apply, class: "form-control", placeholder: Order.human_attribute_name(:site_agent_apply) %>
-    <br>
+    <%= f.select :site_agent_apply,
+                      (@current_business.orders.map { |order|order.site_agent_apply }).uniq,
+                      { include_blank: true },
+                      { class: "single-select", style: "width: 100%" }
+    %><br><br>
   </div>
   <div class="list-group-item">
     <%= f.label :supervising_engineer_name %> <!-- 監督技術者･主任技術者(氏名) -->
@@ -181,6 +186,7 @@
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :supervising_engineer_check %> <!-- 監督技術者・主任技術者(専任or非専任) -->
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :supervising_engineer_check, Order.supervising_engineer_checks_i18n.invert, { prompt: true }, { class: "form-control" } %>
     <br>
     <%= f.label :supervising_engineer_assistant_name %> <!-- 監督技術者補佐(氏名) -->
@@ -269,6 +275,7 @@
     <div class="row">
       <div class="col-md-3">
         <%= f.label :accept_confirm_date %> <!-- 受付確認(年月日) -->
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <%= f.date_field :accept_confirm_date, class: "form-control" %>
       </div>
     </div><br>
@@ -320,9 +327,6 @@
         "order[construction_name]": {
           required: true
         },
-        "order[construction_details]": {
-          required: true
-        },
         "order[start_date]": {
           required: true
         },
@@ -350,6 +354,9 @@
         "order[health_and_safety_manager_name]": {
           required: true
         },
+        "order[general_safety_agent_name]": {
+          required: true
+        },
         "order[supervisor_name]": {
           required: true
         },
@@ -365,6 +372,9 @@
         "order[supervising_engineer_name]": {
           required: true
         },
+        "order[supervising_engineer_check]": {
+          required: true
+        },
         "order[safety_officer_name]": {
           required: true
         },
@@ -374,11 +384,17 @@
         "order[confirm_name]": {
           required: true
         },
-        "order[subcontractor_name]": {
+        "order[accept_confirm_date]": {
           required: true
         },
+        "order[subcontractor_name]": {
+          required: true
+        }
       },
       messages: {
+        "order[site_career_up_id]": {
+          minlength: '数字のみ{0}桁で入力して下さい。'
+        },
         "order[site_name]": {
           required: "現場名を入力してください。"
         },
@@ -403,9 +419,6 @@
         },
         "order[construction_name]": {
           required: "工事名を入力してください。"
-        },
-        "order[construction_details]": {
-          required: "工事内容を入力してください。"
         },
         "order[start_date]": {
           required: "工期(自)を入力してください。"
@@ -434,6 +447,9 @@
         "order[health_and_safety_manager_name]": {
           required: "元方安全衛生管理者名を入力してください。"
         },
+        "order[general_safety_agent_name]": {
+          required: "統括安全衛生責任者代行者名を入力してください。"
+        },
         "order[supervisor_name]": {
           required: "監督員名を入力してください。"
         },
@@ -449,6 +465,9 @@
         "order[supervising_engineer_name]": {
           required: "監督技術者･主任技術者名を入力してください。"
         },
+        "order[supervising_engineer_check]": {
+          required: "専任又は非専任を選択してください。"
+        },
         "order[safety_officer_name]": {
           required: "安全衛生担当役員名を入力してください。"
         },
@@ -457,6 +476,9 @@
         },
         "order[confirm_name]": {
           required: "確認欄を入力してください。"
+        },
+        "order[accept_confirm_date]": {
+          required: "受付確認日を入力してください。"
         },
         "order[subcontractor_name]": {
           required: "下請会社名を入力してください。"
