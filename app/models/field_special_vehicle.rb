@@ -3,6 +3,9 @@ class FieldSpecialVehicle < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  enum vehicle_type: { crane: 0, construction: 1 }
+  enum lease_type: { own: 0, lease: 1 }
+
   validates :vehicle_type, presence: true
   validates :carry_on_company_name, presence: true
   validates :owning_company_name, presence: true
