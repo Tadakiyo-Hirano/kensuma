@@ -1,0 +1,42 @@
+<% provide(:title,  "現場特殊車両一覧") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "現場情報詳細", users_order_path(@order), class: "btn btn-md btn-default" %>
+          <%= link_to "現場情報一覧", users_orders_path(@order), class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= link_to "入場作業員", users_order_field_workers_path(@order), class: "btn btn-md btn-success" %>
+          <%= link_to "車両", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
+          <%= link_to "特殊車両", users_order_field_special_vehicles_path(@order), class: "btn btn-md btn-success" %>
+          <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with url: users_order_field_special_vehicles_path, method: :post, local: true do |f| %>
+          <%= f.label "追加する特殊車両を選択してください。" %>
+          <div class="pb-1">
+            <%= f.collection_select :special_vehicle_ids, @special_vehicle, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+          </div>
+          <div>
+            <%= f.submit "現場特殊車両追加", class: "btn btn-md btn-primary" %>
+            <% if @field_special_vehicles.present? %>
+              <%= link_to "現場特殊車両情報編集", edit_special_vehicles_users_order_field_special_vehicles_path(@order), class: "btn btn-md btn-success" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

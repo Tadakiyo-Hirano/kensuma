@@ -6,7 +6,7 @@ module Users::Orders
 
     def index
       field_worker_ids = @field_workers.map { |field_worker| field_worker.content['id'] }
-      @worker = current_business.workers.where.not(id: current_user).where.not(id: field_worker_ids)
+      @worker = current_business.workers
     end
 
     def create

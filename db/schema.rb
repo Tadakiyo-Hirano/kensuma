@@ -179,14 +179,14 @@ ActiveRecord::Schema.define(version: 2022_09_09_052619) do
 
   create_table "field_special_vehicles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
-    t.integer "vehicle_type", null: false
-    t.string "carry_on_company_name", null: false
-    t.string "owning_company_name", null: false
-    t.string "use_company_name", null: false
-    t.date "carry_on_date", null: false
-    t.date "carry_out_date", null: false
-    t.string "use_place", null: false
-    t.integer "lease_type", null: false
+    t.integer "vehicle_type"
+    t.string "carry_on_company_name"
+    t.string "owning_company_name"
+    t.string "use_company_name"
+    t.date "carry_on_date"
+    t.date "carry_out_date"
+    t.string "use_place"
+    t.integer "lease_type"
     t.string "precautions"
     t.json "content"
     t.string "field_special_vehicleable_type"
