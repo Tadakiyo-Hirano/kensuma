@@ -7,7 +7,7 @@ module Users::RequestOrders
 
     def index
       field_car_ids = @field_cars.map { |field_car| field_car.content['id'] }
-      @car = current_business.cars
+      @car = current_business.cars.where.not(id: field_car_ids)
     end
 
     def create

@@ -40,3 +40,61 @@
     </div>
   </div>
 </section>
+
+<br>
+<% if @field_special_vehicles.present? %>
+  <section class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table text-nowrap">
+            <tbody>
+              <% @field_special_vehicles.each do |field_special_vehicle| %>
+                <tr style="border-bottom: 0px #fff;">
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:car_name) %><br>
+                    <%#= not_input_display(field_car.car_name) %>
+                  </td>
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:driver_name) %><br>
+                    <%#= not_input_display(field_car.driver_name) %>
+                  </td>
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:usage_period_start) %><br>
+                    <%#= not_input_display(field_car.usage_period_start) %>
+                  </td>
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:usage_period_end) %><br>
+                    <%#= not_input_display(field_car.usage_period_end) %>
+                  </td>
+                  <td>
+                    <%#= link_to "削除", users_order_field_car_path(@order, field_car), method: :delete, data: { confirm: "#{field_car.car_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
+                  </td>
+                </tr>
+                <tr style="border-top: 0px #fff;">
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:starting_point) %><br>
+                    <%#= not_input_display(field_car.starting_point) %>
+                  </td>
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:waypoint_first) %><br>
+                    <%#= not_input_display(field_car.waypoint_first) %>
+                  </td>
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:waypoint_second) %><br>
+                    <%#= not_input_display(field_car.waypoint_second) %>
+                  </td>
+                  <td>
+                    <%#= FieldCar.human_attribute_name(:arrival_point) %><br>
+                    <%#= not_input_display(field_car.arrival_point) %>
+                  </td>
+                  <td></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
