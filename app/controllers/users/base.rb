@@ -90,7 +90,7 @@ module Users
     def special_vehicle_info(special_vehicle)
       JSON.parse(
         special_vehicle.to_json(
-          except:  %i[uuid created_at updated_at], # 特殊車両情報
+          except: %i[uuid created_at updated_at] # 特殊車両情報
         )
       )
     end

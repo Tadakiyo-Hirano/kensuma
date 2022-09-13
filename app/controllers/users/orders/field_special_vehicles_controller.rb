@@ -14,7 +14,7 @@ module Users::Orders
         params[:special_vehicle_ids].each do |special_vehicle_id|
           @order.field_special_vehicles.create!(
             vehicle_name: SpecialVehicle.find(special_vehicle_id).name,
-            content:  special_vehicle_info(SpecialVehicle.find(special_vehicle_id))
+            content:      special_vehicle_info(SpecialVehicle.find(special_vehicle_id))
           )
         end
         flash[:success] = "#{params[:special_vehicle_ids].count}件追加しました。"
@@ -35,10 +35,15 @@ module Users::Orders
 
     def update_special_vehicles
       field_special_vehicles_params.each do |id, item|
-        item[:driver_name] = Worker.find(item[:driver_worker_id]).name
-        item[:driver_license] = Worker.find(item[:driver_worker_id]).worker_licenses.map {|worker_license|License.find(worker_license.license_id).name}.to_s.gsub(/,|"|\[|\]/) { '' }
-        field_special_vehicle = FieldSpecialVehicle.find(id)
-        field_special_vehicle.update(item)
+        unless item[:driver_worker_id].blank?
+          item[:driver_name] = Worker.find(item[:driver_worker_id]).name
+          item[:driver_license] = Worker.find(item[:driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
+          field_special_vehicle = FieldSpecialVehicle.find(id)
+          field_special_vehicle.update(item)
+        else
+          field_special_vehicle = FieldSpecialVehicle.find(id)
+          field_special_vehicle.update(item)
+        end
       end
       flash[:success] = '特殊車両情報を更新しました'
       redirect_to users_order_field_special_vehicles_url
