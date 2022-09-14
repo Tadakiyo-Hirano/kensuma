@@ -31,19 +31,20 @@ module Users::Orders
       redirect_to users_order_field_special_vehicles_url
     end
 
-    def edit_special_vehicles; end
+    def edit_special_vehicles
+      @carry_on_companies = @field_special_vehicles.distinct.pluck(:carry_on_company_name)
+      @owning_companies = @field_special_vehicles.distinct.pluck(:owning_company_name)
+      @use_companies = @field_special_vehicles.distinct.pluck(:use_company_name)
+    end
 
     def update_special_vehicles
       field_special_vehicles_params.each do |id, item|
         unless item[:driver_worker_id].blank?
           item[:driver_name] = Worker.find(item[:driver_worker_id]).name
           item[:driver_license] = Worker.find(item[:driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
-          field_special_vehicle = FieldSpecialVehicle.find(id)
-          field_special_vehicle.update(item)
-        else
-          field_special_vehicle = FieldSpecialVehicle.find(id)
-          field_special_vehicle.update(item)
         end
+        field_special_vehicle = FieldSpecialVehicle.find(id)
+        field_special_vehicle.update(item)
       end
       flash[:success] = '特殊車両情報を更新しました'
       redirect_to users_order_field_special_vehicles_url

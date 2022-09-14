@@ -59,12 +59,15 @@
                     <%= FieldSpecialVehicle.human_attribute_name(:driver_name) %><br>
                     <%= not_input_display(field_special_vehicle.driver_name) %>
                   </td>
-                  <td colspan="2"></td>
+                  <td></td>
+                  <td>
+                    <%= link_to "削除", users_order_field_special_vehicle_path(@order, field_special_vehicle), method: :delete, data: { confirm: "#{field_special_vehicle.vehicle_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
+                  </td>
                 </tr>
                 <tr style="border: 0px #fff;">
                   <td>
                     <%= FieldSpecialVehicle.human_attribute_name(:vehicle_type) %><br>
-                    <%= not_input_display(field_special_vehicle.vehicle_type) %>
+                    <%= not_input_display(field_special_vehicle.vehicle_type_i18n) %>
                   </td>
                   <td>
                     <%= FieldSpecialVehicle.human_attribute_name(:carry_on_company_name) %><br>
@@ -94,7 +97,7 @@
                   </td>
                   <td>
                     <%= FieldSpecialVehicle.human_attribute_name(:lease_type) %><br>
-                    <%= not_input_display(field_special_vehicle.lease_type) %>
+                    <%= not_input_display(field_special_vehicle.lease_type_i18n) %>
                   </td>
                 </tr>
               <% end %>
