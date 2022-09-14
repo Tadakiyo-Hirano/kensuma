@@ -3,6 +3,8 @@ FactoryBot.define do
     field_special_vehicleable_type { 'Order' }
     association :field_special_vehicleable, factory: :order
     uuid { SecureRandom.uuid }
+    sequence(:vehicle_name) { |n| "vehicle_name#{n}" }
+    sequence(:content) { |n| { "id": n + 1 } }
     vehicle_type { 1 }
     sequence(:carry_on_company_name) { |n| "carry_on_company_name#{n}" }
     sequence(:owning_company_name) { |n| "owning_company_name#{n}" }
@@ -17,6 +19,8 @@ FactoryBot.define do
     field_special_vehicleable_type { 'RequestOrder' }
     association :field_special_vehicleable, factory: :request_order
     uuid { SecureRandom.uuid }
+    sequence(:vehicle_name) { |n| "vehicle_name#{n}" }
+    sequence(:content) { |n| { "id": n + 1 } }
     vehicle_type { 1 }
     sequence(:carry_on_company_name) { |n| "carry_on_company_name#{n}" }
     sequence(:owning_company_name) { |n| "owning_company_name#{n}" }

@@ -8,6 +8,9 @@ class FieldSpecialVehicle < ApplicationRecord
 
   validates :vehicle_name, presence: true
   validates :content, presence: true
+  validates :use_place, length: { maximum: 100 }
+  validates :contact_prevention, length: { maximum: 40 }
+  validates :precautions, length: { maximum: 500 }
 
   def to_param
     uuid
