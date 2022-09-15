@@ -82,7 +82,7 @@
                     <%= not_input_display(field_special_vehicle.use_company_name) %>
                   </td>
                 </tr>
-                <tr style="border-top: 0px #fff;">
+                <tr style="border: 0px #fff;">
                   <td>
                     <%= FieldSpecialVehicle.human_attribute_name(:carry_on_date) %><br>
                     <%= not_input_display(field_special_vehicle.carry_on_date) %>
@@ -100,6 +100,15 @@
                     <%= not_input_display(field_special_vehicle.lease_type_i18n) %>
                   </td>
                 </tr>
+                <td colspan="2">
+                  <%= FieldSpecialVehicle.human_attribute_name(:contact_prevention) %><br>
+                  <%= not_input_display(field_special_vehicle.contact_prevention) %>
+                </td>
+                <td colspan="2">
+                  <%= FieldSpecialVehicle.human_attribute_name(:precautions) %><br>
+                  <%= not_input_display(field_special_vehicle.precautions) %>
+                </td>
+              </tr>
               <% end %>
             </tbody>
           </table>
