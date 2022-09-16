@@ -36,9 +36,11 @@ module Users::Orders
 
     def update_cars
       field_cars_params.each do |id, item|
-        item[:driver_name] = Worker.find(item[:driver_worker_id]).name
-        item[:driver_address] = Worker.find(item[:driver_worker_id]).my_address
-        item[:driver_birth_day_on] = Worker.find(item[:driver_worker_id]).birth_day_on
+        unless item[:driver_worker_id].blank?
+          item[:driver_name] = Worker.find(item[:driver_worker_id]).name
+          item[:driver_address] = Worker.find(item[:driver_worker_id]).my_address
+          item[:driver_birth_day_on] = Worker.find(item[:driver_worker_id]).birth_day_on
+        end
         field_car = FieldCar.find(id)
         field_car.update(item)
       end
