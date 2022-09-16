@@ -342,7 +342,9 @@
           </tr>
           <tr><!-- 7行目 -->
             <td class="s_5a_104" dir="ltr" colspan="6">現場代理人名</td><!-- 1列目 -->
-            <td class="s_5a_105" dir="ltr" colspan="17" rowspan="2">元請会社の「現場代理人名」5-003</td>
+            <td class="s_5a_105" dir="ltr" colspan="17" rowspan="2">
+              <%= document_site_info.site_agent_name %> <!-- 5-003 元請会社の現場代理人名 -->
+            </td>
             <td class="s_5a_106" dir="ltr" rowspan="2">殿</td>
             <td class="s_5a_000"></td>
             <td class="s_5a_000"></td>
@@ -501,7 +503,9 @@
             <td class="s_5a_000"></td>
             <td class="s_5a_000"></td>
             <td class="s_5a_000"></td>
-            <td class="s_5a_108" dir="ltr" colspan="10" rowspan="2">各会社の「会社名」<br>5-010</td>
+            <td class="s_5a_108" dir="ltr" colspan="10" rowspan="2">
+              <%= document_info.content&.[]('subcon_name') %> <!-- 5-010 各会社の会社名 -->
+            </td>
             <td class="s_5a_000"></td>
             <td class="s_5a_112" dir="ltr" colspan="10" rowspan="2">各会社の「事業者ID（キャリアアップ）」5-011</td>
             <td class="s_5c_00"></td>
