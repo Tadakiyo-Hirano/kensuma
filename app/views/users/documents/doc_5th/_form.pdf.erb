@@ -730,7 +730,9 @@
                   <%= document_date(@child&.start_date) %> <!-- 5-109 各下請会社の工期(自) -->
                 </td>
                 <td class="s_5b_103" dir="ltr" colspan="6" rowspan="4">契約日</td>
-                <td class="s_5b_106" dir="ltr" colspan="21" rowspan="4">各下請会社の「契約日」5-111</td>
+                <td class="s_5b_106" dir="ltr" colspan="21" rowspan="4">
+                  <%= document_date(@child&.contract_date) %> <!-- 5-111 各下請会社の契約日 -->
+                </td>
               </tr>
               <tr><!-- 17行目 -->
                 <td class="s_5c_00"></td>
@@ -763,7 +765,9 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5b_103" dir="ltr" colspan="2" rowspan="2">至</td>
-                <td class="s_5b_105" dir="ltr" colspan="19" rowspan="2">各下請会社の「工期（至）」5-110</td>
+                <td class="s_5b_105" dir="ltr" colspan="19" rowspan="2">
+                  <%= document_date(@child&.start_date) %> <!-- 5-110 各下請会社の工期(至) -->
+                </td>
               </tr>
               <tr><!-- 19行目 -->
                 <td class="s_5c_00"></td>
@@ -907,15 +911,21 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">各会社の「建設許可業種」5-112</td>
+                <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">
+                  <%= '※5-112未実装※' %> <!-- 5-112 各会社の建設許可業種 -->
+                </td>
                 <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
                 <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2">大臣</td>
                 <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2">特定</td>
                 <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"></td>
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
-                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">「建設許可番号」5-115</td>
+                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">
+                  <%= '※5-115未実装※' %> <!-- 5-115 建設許可番号 -->
+                </td>
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">「建設許可証更新日（西暦)」5-116</td>
+                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">
+                  <%= '※5-116未実装※' %> <!--5-116 建設許可証更新日(西暦) -->
+                </td>
               </tr>
               <tr><!-- 24行目 -->
                 <td class="s_5a_000"></td><!-- 1列目 -->
@@ -1049,15 +1059,21 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">各会社の「建設許可業種」5-117</td>
+                <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">
+                  <%= '※5-117未実装※' %> <!-- 5-117 各会社の建設許可業種 -->
+                </td>
                 <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
                 <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2">大臣</td>
                 <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2">特定</td>
                 <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"></td>
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
-                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">「建設許可番号」5-120</td>
+                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">
+                  <%= '※5-120未実装※' %> <!--5-120 建設許可番号 -->
+                </td>
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">「建設許可証更新日（西暦)」5-121</td>
+                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">
+                  <%= '※5-121未実装※' %> <!-- 5-121 建設許可証更新日(西暦) -->
+                </td>
               </tr>
               <tr><!-- 28行目 -->
                 <td class="s_5c_00"></td>
@@ -1181,10 +1197,14 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5b_301" dir="ltr" colspan="10" rowspan="3">現 場 代 理 人 名</td>
-                <td class="s_5b_302" dir="ltr" colspan="17" rowspan="3">各下請会社の「現場代理人名」5-122</td>
+                <td class="s_5b_302" dir="ltr" colspan="17" rowspan="3">
+                  <%= @child&.site_agent_name %> <!-- 5-122 各下請会社の現場代理人名 -->
+                </td>
                 <td class="s_5b_000"></td>
                 <td class="s_5b_303" dir="ltr" colspan="10" rowspan="3">安全衛生責任者名</td>
-                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">各下請会社の「安全衛生責任者名」5-127</td>
+                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
+                  <%= @child&.safety_manager_name %> <!-- 5-127 各下請会社の安全衛生責任者名 -->
+                </td>
               </tr>
               <tr><!-- 33行目 -->
                 <td class="s_5a_308" dir="ltr" colspan="4" rowspan="2">知事</td>
@@ -1265,10 +1285,14 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5b_304" dir="ltr" colspan="3" rowspan="3"></td>
                 <td class="s_5b_305" dir="ltr" colspan="7" rowspan="3">権限及び<br>　意見申出方法</td>
-                <td class="s_5b_302" dir="ltr" colspan="17" rowspan="3">各下請会社の「現場代理人名・権限及び意見の申出方法」5-123</td>
+                <td class="s_5b_302" dir="ltr" colspan="17" rowspan="3">
+                  <%= @child&.site_agent_apply %> <!-- 5-123　各下請会社の現場代理人名･権限及び意見の申出方法 -->
+                </td>
                 <td class="s_5b_000"></td>
                 <td class="s_5b_303" dir="ltr" colspan="10" rowspan="3">安全衛生推進者名</td>
-                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">各下請会社の「安全推進者名」5-128</td>
+                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
+                  <%= @child&.safety_promoter_name %> <!-- 5-128 各下請会社の安全推進者名 -->
+                </td>
               </tr>
               <tr><!-- 36行目 -->
                 <td class="s_5a_401" dir="ltr" colspan="10" rowspan="3">監 督 員 名</td><!-- 1列目 -->
@@ -1323,11 +1347,19 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5b_301" dir="ltr" colspan="10" rowspan="3">※主 任 技 術 者</td>
-                <td class="s_5b_306" dir="ltr" colspan="4" rowspan="3">[各下請会社の主任技術者]（専任or非専任）〇を付ける 5-124</td>
-                <td class="s_5b_302" dir="ltr" colspan="13" rowspan="3">各下請会社の「主任技術者名」5-125</td>
+                <td class="s_5b_306" dir="ltr" colspan="4" rowspan="3">
+                  <%= full_time_check(@child&.lead_engineer_check) %> <!-- 5-124 各下請会社の主任技術者(専任or非専任) ◯を付ける -->
+                  <br><br>
+                  <%= non_dedicated_check(@child&.lead_engineer_check) %>
+                </td>
+                <td class="s_5b_302" dir="ltr" colspan="13" rowspan="3">
+                  <%= @child&.lead_engineer_name %> <!-- 5-125 各下請会社の主任技術者名 -->
+                </td>
                 <td class="s_5b_000"></td><!-- 70列目 -->
                 <td class="s_5b_303" dir="ltr" colspan="10" rowspan="3">雇用管理責任者名</td>
-                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">各会社の「雇用管理責任者名」5-129</td>
+                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
+                  <%= '※5-129未実装※' %> <!-- 5-129 各会社の雇用管理責任者名 -->
+                </td>
               </tr>
               <tr><!-- 39行目 -->
                 <td class="s_5a_404" dir="ltr" colspan="3" rowspan="3"></td><!-- 1列目 -->
@@ -1383,10 +1415,14 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5b_304" dir="ltr" colspan="3" rowspan="3"></td>
                 <td class="s_5b_305" dir="ltr" colspan="7" rowspan="3">資 格 内 容</td>
-                <td class="s_5b_302" dir="ltr" colspan="17" rowspan="3">主任技術者の「必要資格」5-126</td>
+                <td class="s_5b_302" dir="ltr" colspan="17" rowspan="3">
+                  <%= '※5-126未実装※' %> <!--  5-126 主任技術者の必要資格 -->
+                </td>
                 <td class="s_5b_000"></td>
                 <td class="s_5b_301" dir="ltr" colspan="10" rowspan="3">※専 門 技 術 者 名</td>
-                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">各下請会社の「専門技術者名」5-130</td>
+                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
+                  <%= @child&.professional_engineer_name %> <!-- 5-130 各下請会社の専門技術者名 -->
+                </td>
               </tr>
               <tr><!-- 42行目 -->
                 <td class="s_5a_401" dir="ltr" colspan="10" rowspan="3">現 場 代 理 人 名</td><!-- 1列目 -->
@@ -1470,7 +1506,9 @@
                 <td class="s_5b_000"></td>
                 <td class="s_5b_304" dir="ltr" colspan="3" rowspan="5"></td>
                 <td class="s_5b_303" dir="ltr" colspan="7" rowspan="3">資 格 内 容</td>
-                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">専門技術者の「必要資格」5-131</td><!-- 30列目 -->
+                <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
+                  <%= '※5-131未実装※' %> <!-- 5-131 専門技術者の必要資格 -->
+                </td><!-- 30列目 -->
               </tr>
               <tr><!-- 45行目 -->
                 <td class="s_5a_404" dir="ltr" colspan="3" rowspan="3"></td><!-- 1列目 -->
@@ -1496,7 +1534,9 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5b_308" dir="ltr" colspan="10" rowspan="4">※登録基幹技能者<br>　名・種類</td>
-                <td class="s_5b_309" dir="ltr" colspan="17" rowspan="2">「登録基幹技能者」5-133</td>
+                <td class="s_5b_309" dir="ltr" colspan="17" rowspan="2">
+                  <%= @child&.registered_core_engineer_name %> <!-- 5-133 登録基幹技能者 -->
+                </td>
                 <td class="s_5b_000"></td>
               </tr>
               <tr><!-- 46行目 -->
@@ -1528,15 +1568,21 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_310" dir="ltr" colspan="17" rowspan="2">登録基幹技能者の「必要資格」5-134</td>
+                <td class="s_5b_310" dir="ltr" colspan="17" rowspan="2">
+                  <%= '※5-134未実装※' %> <!-- 5-134 登録基幹技能者の必要資格 -->
+                </td>
                 <td class="s_5b_000"></td>
                 <td class="s_5b_303" dir="ltr" colspan="7" rowspan="2">担当工事内容</td>
-                <td class="s_5b_307" dir="ltr" colspan="16" rowspan="2">各下請会社の「専門技術者・担当工事内容」5-132</td>
+                <td class="s_5b_307" dir="ltr" colspan="16" rowspan="2">
+                  <%= @child&.professional_engineer_details %> <!-- 5-132 各下請会社の専門技術者･担当工事内容 -->
+                </td>
               </tr>
               <tr><!-- 48行目 -->
                 <td class="s_5a_401" dir="ltr" colspan="10" rowspan="3">※主 任 技 術 者</td><!-- 1列目 -->
                 <td class="s_5a_406" dir="ltr" colspan="4" rowspan="3">
-                  <%= document_info.lead_engineer_check_i18n %> <!-- 5-033 各下請会社の主任技術者(専任or非専任) ◯を付ける -->
+                  <%= full_time_check(document_info.lead_engineer_check) %> <!-- 5-033 各下請会社の主任技術者(専任or非専任) ◯を付ける -->
+                  <br><br>
+                  <%= non_dedicated_check(document_info.lead_engineer_check) %>
                 </td>
                 <td class="s_5a_402" dir="ltr" colspan="13" rowspan="3">
                   <%= document_info.lead_engineer_name %> <!-- 5-034 各下請会社の主任技術者名 -->
@@ -1963,9 +2009,9 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_503" dir="ltr" colspan="13">⇩　「健康保険」5-138</td>
-                <td class="s_5b_503" dir="ltr" colspan="14">⇩　「年金保険」5-139</td>
-                <td class="s_5b_503" dir="ltr" colspan="14">⇩　「雇用保険」5-140</td>
+                <td class="s_5b_503" dir="ltr" colspan="13"></td>
+                <td class="s_5b_503" dir="ltr" colspan="14"></td>
+                <td class="s_5b_503" dir="ltr" colspan="14"></td>
               </tr>
               <tr><!-- 58行目 -->
                 <td class="s_5a_000"></td>
@@ -2007,15 +2053,33 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">加入</td>
-                <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">未加入</td>
-                <td class="s_5b_506" dir="ltr" colspan="5" rowspan="2">適用除外</td>
-                <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">加入</td>
-                <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">未加入</td>
-                <td class="s_5b_506" dir="ltr" colspan="6" rowspan="2">適用除外</td>
-                <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">加入</td>
-                <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">未加入</td>
-                <td class="s_5b_506" dir="ltr" colspan="6" rowspan="2">適用除外</td>
+                <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">
+                  <%= insurance_join(@child.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
+                </td>
+                <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">
+                  <%= insurance_not_join(@child.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
+                </td>
+                <td class="s_5b_506" dir="ltr" colspan="5" rowspan="2">
+                  <%= insurance_not_coverd(@child.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
+                </td>
+                <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">
+                  <%= insurance_join(@child.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
+                </td>
+                <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">
+                  <%= insurance_not_join(@child.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
+                </td>
+                <td class="s_5b_506" dir="ltr" colspan="6" rowspan="2">
+                  <%= insurance_not_coverd(@child.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
+                </td>
+                <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">
+                  <%= insurance_join(@child.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
+                </td>
+                <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">
+                  <%= insurance_not_join(@child.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
+                </td>
+                <td class="s_5b_506" dir="ltr" colspan="6" rowspan="2">
+                  <%= insurance_not_coverd(@child.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
+                </td>
               </tr>
               <tr><!-- 59行目 -->
                 <td class="s_5a_000"></td><!-- 1列目 -->
@@ -2139,9 +2203,15 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_508" dir="ltr" colspan="13">「健康保険」5-141</td>
-                <td class="s_5b_510" dir="ltr" colspan="14" rowspan="2">「厚生年金保険番号」5-143</td>
-                <td class="s_5b_507" dir="ltr" colspan="14" rowspan="2">「雇用保険」5-144</td>
+                <td class="s_5b_508" dir="ltr" colspan="13">
+                  <%= @child.content&.[]('subcon_health_insurance_association') %> <!-- 5-141 健康保険 -->
+                </td>
+                <td class="s_5b_510" dir="ltr" colspan="14" rowspan="2">
+                  <%= @child.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 5-143 厚生年金保険番号 -->
+                </td>
+                <td class="s_5b_507" dir="ltr" colspan="14" rowspan="2">
+                  <%= @child.content&.[]('subcon_employment_insurance_number') %> <!-- 5-144 雇用保険番号 -->
+                </td>
               </tr>
               <tr><!-- 63行目 -->
                 <td class="s_5c_00"></td>
@@ -2156,7 +2226,9 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_509" dir="ltr" colspan="13">「健康保険番号」5-142</td>
+                <td class="s_5b_509" dir="ltr" colspan="13">
+                  <%= @child.content&.[]('subcon_health_insurance_office_number') %> <!-- 5-142 健康保険番号 -->
+                </td>
               </tr>
               <tr><!-- 64行目 -->
                 <td class="s_5a_000"></td><!-- 1列目 -->

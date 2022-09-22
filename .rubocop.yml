@@ -214,6 +214,7 @@ Metrics/ModuleLength:
     - array
     - hash
     - heredoc
+  Max: 500
 
 # キーワード引数をパラメータ数制限から除外
 Metrics/ParameterLists:

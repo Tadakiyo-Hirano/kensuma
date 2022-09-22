@@ -4,8 +4,6 @@ module DocumentsHelper
     l(column, format: :long) unless column.nil?
   end
 
-  # (4) 施工体制台帳 ====================================================
-
   # 会社の保険加入状況
   INSURANCE_TYPE = {
     'join'       => '加入',
@@ -28,6 +26,22 @@ module DocumentsHelper
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
 
+  # 専任･非専任
+  FULL_TIME_CHECK = {
+    'full_time'     => '専任',
+    'non_dedicated' => '非専任'
+  }.freeze
+
+  def full_time_check(check)
+    status = FULL_TIME_CHECK[check]
+    status == '専任' ? tag.span(status, class: :circle) : '専任'
+  end
+
+  def non_dedicated_check(check)
+    status = FULL_TIME_CHECK[check]
+    status == '非専任' ? tag.span(status, class: :circle) : '非専任'
+  end
+
   # 一次下請の情報
   def subcon_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
@@ -46,10 +60,6 @@ module DocumentsHelper
       @subcon
     end
   end
-
-  # ====================================================================
-
-  # (8)作業員名簿 =======================================================
 
   # 作業員名簿の見出し番号
   def worker_index(number, index)
@@ -198,10 +208,6 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
 
-  # ====================================================================
-
-  # (12) 工事･車両通勤届 ================================================
-
   def car_usage_commute(usage)
     usage == '通勤用' ? tag.span('通勤', class: :circle) : '通勤'
   end
@@ -209,6 +215,4 @@ module DocumentsHelper
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
   end
-
-  # ====================================================================
 end
