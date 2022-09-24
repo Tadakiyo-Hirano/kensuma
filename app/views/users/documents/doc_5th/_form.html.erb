@@ -158,7 +158,9 @@
             <td class="s_5a_000"></td>
             <td class="s_5a_000"></td><!-- 40列目 -->
             <td class="s_5a_000"></td>
-            <td class="s_5a_102" dir="ltr" colspan="13">「提出日（西暦）」5-001</td>
+            <td class="s_5a_102" dir="ltr" colspan="13">
+              <%= '※5-001未実装※' %> <!-- 5-001 提出日(西暦) -->
+            </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -269,7 +271,9 @@
           </tr>
           <tr><!-- 5行目 -->
             <td class="s_5a_104" dir="ltr" colspan="6">直近上位の</td><!-- 1列目 -->
-            <td class="s_5a_105" dir="ltr" colspan="18" rowspan="2">「直近上位の注文者名」5-002</td>
+            <td class="s_5a_105" dir="ltr" colspan="18" rowspan="2">
+              <%= document_site_info.order_name %> <!-- 5-002 直近上位の注文者名 -->
+            </td>
             <td class="s_5a_000"></td>
             <td class="s_5a_000"></td>
             <td class="s_5a_106" dir="ltr" colspan="9">【報告下請負業者】</td>
@@ -2050,31 +2054,31 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">
-              <%= insurance_join(@child.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
+              <%= insurance_join(@child&.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
             </td>
             <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">
-              <%= insurance_not_join(@child.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
+              <%= insurance_not_join(@child&.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
             </td>
             <td class="s_5b_506" dir="ltr" colspan="5" rowspan="2">
-              <%= insurance_not_coverd(@child.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
+              <%= insurance_not_coverd(@child&.content&.[]('subcon_health_insurance_status')) %> <!-- 5-138 健康保険加入の有無 -->
             </td>
             <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">
-              <%= insurance_join(@child.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
+              <%= insurance_join(@child&.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
             </td>
             <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">
-              <%= insurance_not_join(@child.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
+              <%= insurance_not_join(@child&.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
             </td>
             <td class="s_5b_506" dir="ltr" colspan="6" rowspan="2">
-              <%= insurance_not_coverd(@child.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
+              <%= insurance_not_coverd(@child&.content&.[]('subcon_welfare_pension_insurance_join_status')) %> <!-- 5-139 年金保険加入の有無 -->
             </td>
             <td class="s_5b_504" dir="ltr" colspan="4" rowspan="2">
-              <%= insurance_join(@child.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
+              <%= insurance_join(@child&.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
             </td>
             <td class="s_5b_505" dir="ltr" colspan="4" rowspan="2">
-              <%= insurance_not_join(@child.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
+              <%= insurance_not_join(@child&.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
             </td>
             <td class="s_5b_506" dir="ltr" colspan="6" rowspan="2">
-              <%= insurance_not_coverd(@child.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
+              <%= insurance_not_coverd(@child&.content&.[]('subcon_employment_insurance_join_status')) %> <!-- 5-140 雇用保険加入の有無 -->
             </td>
           </tr>
           <tr><!-- 59行目 -->
@@ -2200,13 +2204,13 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_508" dir="ltr" colspan="13">
-              <%= @child.content&.[]('subcon_health_insurance_association') %> <!-- 5-141 健康保険 -->
+              <%= @child&.content&.[]('subcon_health_insurance_association') %> <!-- 5-141 健康保険 -->
             </td>
             <td class="s_5b_510" dir="ltr" colspan="14" rowspan="2">
-              <%= @child.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 5-143 厚生年金保険番号 -->
+              <%= @child&.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 5-143 厚生年金保険番号 -->
             </td>
             <td class="s_5b_507" dir="ltr" colspan="14" rowspan="2">
-              <%= @child.content&.[]('subcon_employment_insurance_number') %> <!-- 5-144 雇用保険番号 -->
+              <%= @child&.content&.[]('subcon_employment_insurance_number') %> <!-- 5-144 雇用保険番号 -->
             </td>
           </tr>
           <tr><!-- 63行目 -->
@@ -2223,7 +2227,7 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_509" dir="ltr" colspan="13">
-              <%= @child.content&.[]('subcon_health_insurance_office_number') %> <!-- 5-142 健康保険番号 -->
+              <%= @child&.content&.[]('subcon_health_insurance_office_number') %> <!-- 5-142 健康保険番号 -->
             </td>
           </tr>
           <tr><!-- 64行目 -->
@@ -2538,10 +2542,18 @@
           </tr>
           <tr><!-- 72行目 -->
             <td class="s_5a_701" dir="ltr" colspan="5" rowspan="2">元請契約</td>
-            <td class="s_5a_707" dir="ltr" colspan="8" rowspan="2">「会社名」5-050</td>
-            <td class="s_5a_708" dir="ltr" colspan="9">「健康保険」5-051</td>
-            <td class="s_5a_710" dir="ltr" colspan="10" rowspan="2">「厚生年金保険番号」5-053</td>
-            <td class="s_5a_707" dir="ltr" colspan="9" rowspan="2">「雇用保険」5-054</td>
+            <td class="s_5a_707" dir="ltr" colspan="8" rowspan="2">
+              <%= '※5-050未実装※' %> <!-- 5-050 会社名 -->
+            </td>
+            <td class="s_5a_708" dir="ltr" colspan="9">
+              <%= '※5-051未実装※' %> <!-- 5-051 健康保険 -->
+            </td>
+            <td class="s_5a_710" dir="ltr" colspan="10" rowspan="2">
+              <%= '※5-053未実装※' %> <!-- 5-053 厚生年金保険番号 -->
+            </td>
+            <td class="s_5a_707" dir="ltr" colspan="9" rowspan="2">
+              <%= '※5-054未実装※' %> <!-- 5-054 雇用保険 -->
+            </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -2571,7 +2583,9 @@
             <td class="s_5b_000"></td><!-- 120列目 -->
           </tr>
           <tr><!-- 73行目 -->
-            <td class="s_5a_709" dir="ltr" colspan="9">「健康保険番号」5-052</td>
+            <td class="s_5a_709" dir="ltr" colspan="9">
+              <%= '※5-052未実装※' %> <!-- 5-052 健康保険番号 -->
+            </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -2594,10 +2608,18 @@
           </tr>
           <tr><!-- 74行目 -->
             <td class="s_5a_701" dir="ltr" colspan="5" rowspan="2">下請契約</td>
-            <td class="s_5a_707" dir="ltr" colspan="8" rowspan="2">「会社名」5-055</td>
-            <td class="s_5a_708" dir="ltr" colspan="9">「健康保険」5-056</td>
-            <td class="s_5a_710" dir="ltr" colspan="10" rowspan="2">「厚生年金保険番号」5-058</td>
-            <td class="s_5a_707" dir="ltr" colspan="9" rowspan="2">「雇用保険」5-059</td>
+            <td class="s_5a_707" dir="ltr" colspan="8" rowspan="2">
+              <%= '※5-055未実装※' %> <!-- 5-055 会社名 -->
+            </td>
+            <td class="s_5a_708" dir="ltr" colspan="9">
+              <%= '※5-056※' %> <!-- 5-056 健康保険 -->
+            </td>
+            <td class="s_5a_710" dir="ltr" colspan="10" rowspan="2">
+              <%= '※5-058未実装※' %> <!-- 5-058 厚生年金保険番号 -->
+            </td>
+            <td class="s_5a_707" dir="ltr" colspan="9" rowspan="2">
+              <%= '※5-059未実装※' %> <!-- 5-059 雇用保険 -->
+            </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -2619,7 +2641,9 @@
             <td class="s_5b_000"></td><!-- 120列目 -->
           </tr>
           <tr><!-- 75行目 -->
-            <td class="s_5a_709" dir="ltr" colspan="9">「健康保険番号」5-057</td>
+            <td class="s_5a_709" dir="ltr" colspan="9">
+              <%= '※5-057未実装※' %> <!-- 5-057 健康保険番号 -->
+            </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>

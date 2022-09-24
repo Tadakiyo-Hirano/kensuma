@@ -1,8 +1,12 @@
 <!-- (5)全建統一様式第1号－甲(再下請負通知書(変更届)) -->
-<% if document_info.leaf? %>
-  <%= render "users/documents/doc_5th/form" %>
-<% else %>
-  <% document_info.children.each do |child| @child = child %>
-    <%= render "users/documents/doc_5th/form" %>
+<div style="overflow: auto;">
+  <% unless document_info.class == Order %>
+    <% if document_info.leaf? %>
+      <%= render "users/documents/doc_5th/form" %>
+    <% else %>
+      <% document_info.children.each do |child| @child = child %>
+        <%= render "users/documents/doc_5th/form" %>
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
