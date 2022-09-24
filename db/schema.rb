@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_31_081413) do
+ActiveRecord::Schema.define(version: 2022_09_09_052619) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -175,6 +175,30 @@ ActiveRecord::Schema.define(version: 2022_08_31_081413) do
     t.string "driver_address"
     t.date "driver_birth_day_on"
     t.index ["field_carable_type", "field_carable_id"], name: "index_field_cars_on_field_carable"
+  end
+
+  create_table "field_special_vehicles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.integer "driver_worker_id"
+    t.string "driver_name"
+    t.string "driver_license"
+    t.string "vehicle_name", null: false
+    t.json "content", null: false
+    t.integer "vehicle_type"
+    t.string "carry_on_company_name"
+    t.string "owning_company_name"
+    t.string "use_company_name"
+    t.date "carry_on_date"
+    t.date "carry_out_date"
+    t.string "use_place"
+    t.integer "lease_type"
+    t.string "contact_prevention"
+    t.string "precautions"
+    t.string "field_special_vehicleable_type"
+    t.bigint "field_special_vehicleable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
   end
 
   create_table "field_workers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|

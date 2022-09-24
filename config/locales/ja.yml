@@ -166,6 +166,13 @@ ja:
         doc_22nd: 参考様式第５号(作業間連絡調整書)
         doc_23rd: 全建統一様式第８号(安全ミーティング報告書)
         doc_24th: 参考資料第４号(新規入場者調査票)
+    field_special_vehicle:
+      vehicle_type:
+        crane: 移動式クレーン
+        construction: 車両系建設機械
+      lease_type:
+        own: 自社
+        lease: リース
     news:
       status:
         draft: 下書き

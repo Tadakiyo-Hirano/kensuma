@@ -107,6 +107,19 @@ ja:
         waypoint_first: 経由地1
         waypoint_second: 経由地2
         arrival_point: 目的地(至)
+      field_special_vehicle:
+        driver_name: 運転者名
+        vehicle_name: 特殊車両名
+        vehicle_type: 区分
+        carry_on_company_name: 持込会社名
+        owning_company_name: 所有会社名
+        use_company_name: 使用会社名
+        carry_on_date: 持込年月日
+        carry_out_date: 搬出予定年月日
+        use_place: 使用場所
+        lease_type: リース区分
+        contact_prevention: 接触防止措置等
+        precautions: 機械等の特性・その他その使用上注意すべき事項
       field_worker:
         admission_worker_name: 作業員名
         admission_date_start: 入場年月日(始期)

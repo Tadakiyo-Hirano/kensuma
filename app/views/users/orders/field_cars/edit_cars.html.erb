@@ -11,7 +11,7 @@
         <td>
           <%= link_to "入場作業員", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
           <%= link_to "車両", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
-          <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
+          <%= link_to "特殊車両", users_order_field_special_vehicles_path(@order), class: "btn btn-md btn-success" %>
           <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
           <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
         </td>
