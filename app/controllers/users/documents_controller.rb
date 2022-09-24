@@ -18,12 +18,12 @@ module Users
                 'doc_13th', 'doc_14th', 'doc_15th', 'doc_16th', 'doc_17th', 'doc_18th',
                 'doc_19th', 'doc_20th', 'doc_21st', 'doc_22nd', 'doc_23rd', 'doc_24th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
-          when 'doc_8th'
-            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
           when 'doc_4th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
           when 'doc_5th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
+          when 'doc_8th'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
           end
         end
       end
