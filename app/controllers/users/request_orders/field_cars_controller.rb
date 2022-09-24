@@ -7,7 +7,7 @@ module Users::RequestOrders
 
     def index
       field_car_ids = @field_cars.map { |field_car| field_car.content['id'] }
-      @car = current_business.cars.where.not(id: current_user).where.not(id: field_car_ids)
+      @car = current_business.cars.where.not(id: field_car_ids)
     end
 
     def create
@@ -36,6 +36,11 @@ module Users::RequestOrders
 
     def update_cars
       field_cars_params.each do |id, item|
+        unless item[:driver_worker_id].blank?
+          item[:driver_name] = Worker.find(item[:driver_worker_id]).name
+          item[:driver_address] = Worker.find(item[:driver_worker_id]).my_address
+          item[:driver_birth_day_on] = Worker.find(item[:driver_worker_id]).birth_day_on
+        end
         field_car = FieldCar.find(id)
         field_car.update(item)
       end
@@ -62,6 +67,7 @@ module Users::RequestOrders
         field_cars: %i[
           car_name driver_name usage_period_start usage_period_end
           starting_point waypoint_first waypoint_second arrival_point
+          driver_worker_id driver_address driver_birth_day_on
         ]
       )[:field_cars]
     end
