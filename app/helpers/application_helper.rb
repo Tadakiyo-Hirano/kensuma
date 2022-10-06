@@ -40,15 +40,6 @@ module ApplicationHelper
     end
   end
 
-  def document_site_info_p
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if params[:sub_request_order_uuid]
-      RequestOrder.find_by(uuid: params[:sub_request_order_uuid]).children.order
-    else
-      request_order.parent_id.nil? ? Order.find(request_order.order_id).children : request_order.children.order
-    end
-  end
-
   # 自身と、自身の階層下の書類情報
   def document_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
