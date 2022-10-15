@@ -493,7 +493,7 @@
 }
 
 .ritz .waffle .doc_19_s41 {
-  border-right: none;
+  border-right: 1px SOLID #000000;
   border-bottom: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
@@ -513,7 +513,7 @@
   text-align: left;
   color: #000000;
   font-family: 'Arial';
-  font-size: 9pt;
+  font-size: 8pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -719,7 +719,7 @@
   text-decoration-skip-ink: none;
   color: #1155cc;
   font-family: 'docs-Calibri', Arial;
-  font-size: 9pt;
+  font-size: 7pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -741,11 +741,4 @@
   white-space: nowrap;
   direction: ltr;
   padding: 0px 3px 0px 3px;
-}
-
-.doc_19_sheet {
-  /* 用紙サイズ A3 */
-  width: 420mm;
-  height: 297mm;
-  size: A3 landscape;
 }
