@@ -1,0 +1,2 @@
+class FieldMachine < ApplicationRecord
+end
