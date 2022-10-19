@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   has_many :field_workers, as: :field_workerable, dependent: :destroy
   has_many :field_cars, as: :field_carable, dependent: :destroy
   has_many :field_special_vehicles, as: :field_special_vehicleable, dependent: :destroy
-  has_many :field_machines, as: :field_machine, dependent: :destroy
+  has_many :field_machines, as: :field_machineable, dependent: :destroy
 
   enum status: { created: 0, completed: 1 }
   enum supervising_engineer_check: { full_time: 0, non_dedicated: 1 }
