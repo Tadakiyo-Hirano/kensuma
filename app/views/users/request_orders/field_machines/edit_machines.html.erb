@@ -1,0 +1,52 @@
+<% provide(:title, "現場機械編集") %>
+<% provide(:btn_text, "更新") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "戻る", users_request_order_field_machines_path, class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= render '/users/documents/shares/show_request_order_link', request_order: @request_order %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <%= form_with model: @request_order, url: update_machines_users_request_order_field_machines_path, method: :patch, local: true do |f| %>
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%= FieldMachine.human_attribute_name(:machine_name) %></th>
+                <th><%= FieldMachine.human_attribute_name(:carry_on_date) %></th>
+                <th><%= FieldMachine.human_attribute_name(:carry_out_date) %></th>
+                <th><%= FieldMachine.human_attribute_name(:precautions) %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @field_machines.each do |field_machine| %>
+                <%= f.fields_for "field_machines[]", field_machine do |fm| %>
+                  <tr>
+                    <td><%= field_machine.machine_name %></td>
+                    <td><%= fm.date_field :carry_on_date, class: "form-control" %></td>
+                    <td><%= fm.date_field :carry_out_date, class: "form-control" %></td>
+                    <td><%= fm.text_area :precautions, maxlength: 300, placeholder: "300文字以内", class: "form-control" %></td >
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <br>
+    <% end %>
+  </div>
+</section>
