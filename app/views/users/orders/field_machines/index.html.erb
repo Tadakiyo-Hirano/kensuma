@@ -41,50 +41,36 @@
 <% if @field_machines.present? %>
   <section class="content">
     <div class="col-md-12">
-      <div class="machined">
-        <div class="machined-body table-responsive p-0">
+      <div class="card">
+        <div class="card-body table-responsive p-0">
           <table class="table text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%= FieldMachine.human_attribute_name(:machine_name) %></th>
+                <th><%= FieldMachine.human_attribute_name(:carry_on_date) %></th>
+                <th><%= FieldMachine.human_attribute_name(:carry_out_date) %></th>
+                <th><%= FieldMachine.human_attribute_name(:precautions) %></th>
+                <th></th>
+              </tr>
+            </thead>
             <tbody>
               <% @field_machines.each do |field_machine| %>
-                <tr style="border-bottom: 0px #fff;">
+                <tr align="center">
                   <td>
-                    <%= FieldMachine.human_attribute_name(:machine_name) %><br>
                     <%= not_input_display(field_machine.machine_name) %>
                   </td>
                   <td>
-                    <%= FieldMachine.human_attribute_name(:carry_on_date) %><br>
-                    <%#= not_input_display(field_machine.driver_name) %>
+                    <%= not_input_display(field_machine.carry_on_date) %>
                   </td>
                   <td>
-                    <%= FieldMachine.human_attribute_name(:carry_out_date) %><br>
-                    <%#= not_input_display(field_machine.usage_period_start) %>
+                    <%= not_input_display(field_machine.carry_out_date) %>
                   </td>
                   <td>
-                    <%= FieldMachine.human_attribute_name(:precautions) %><br>
-                    <%#= not_input_display(field_machine.usage_period_end) %>
+                    <%= not_input_display(field_machine.precautions) %>
                   </td>
                   <td>
                     <%= link_to "削除", users_order_field_machine_path(@order, field_machine), method: :delete, data: { confirm: "#{field_machine.machine_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
                   </td>
-                </tr>
-                <tr style="border-top: 0px #fff;">
-                  <td>
-                    <%#= FieldCar.human_attribute_name(:starting_point) %><br>
-                    <%#= not_input_display(field_machine.starting_point) %>
-                  </td>
-                  <td>
-                    <%#= FieldCar.human_attribute_name(:waypoint_first) %><br>
-                    <%#= not_input_display(field_machine.waypoint_first) %>
-                  </td>
-                  <td>
-                    <%#= FieldCar.human_attribute_name(:waypoint_second) %><br>
-                    <%#= not_input_display(field_machine.waypoint_second) %>
-                  </td>
-                  <td>
-                    <%#= FieldCar.human_attribute_name(:arrival_point) %><br>
-                    <%#= not_input_display(field_machine.arrival_point) %>
-                  </td>
-                  <td></td>
                 </tr>
               <% end %>
             </tbody>

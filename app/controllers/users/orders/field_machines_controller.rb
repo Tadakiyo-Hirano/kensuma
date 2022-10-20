@@ -33,7 +33,14 @@ module Users::Orders
 
     def edit_machines; end
 
-    def updte_machines; end
+    def update_machines
+      field_machines_params.each do |id, item|
+        field_machine = FieldMachine.find(id)
+        field_machine.update(item)
+      end
+      flash[:success] = '機械情報を更新しました'
+      redirect_to users_order_field_machines_url
+    end
 
     private
 
