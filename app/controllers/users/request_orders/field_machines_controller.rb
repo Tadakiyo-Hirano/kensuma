@@ -3,7 +3,7 @@ module Users::RequestOrders
     before_action :set_request_order
     before_action :set_field_machine, only: :destroy
     before_action :set_field_machines, only: %i[index edit_machines update_machines]
-    
+
     def index
       field_machine_ids = @field_machines.map { |field_machine| field_machine.content['id'] }
       @machine = current_business.machines.where.not(id: field_machine_ids)
@@ -14,7 +14,7 @@ module Users::RequestOrders
         params[:machine_ids].each do |machine_id|
           @request_order.field_machines.create!(
             machine_name: Machine.find(machine_id).name,
-            content:  machine_info(Machine.find(machine_id))
+            content:      machine_info(Machine.find(machine_id))
           )
         end
         flash[:success] = "#{params[:machine_ids].count}件追加しました。"

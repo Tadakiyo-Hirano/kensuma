@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe FieldMachine, type: :model do
   let(:order_field_machine) { build(:order_field_machine) }
   let(:request_order_field_machine) { build(:request_order_field_machine) }
-  
+
   describe 'order側バリデーションについて' do
     subject { order_field_machine }
 
