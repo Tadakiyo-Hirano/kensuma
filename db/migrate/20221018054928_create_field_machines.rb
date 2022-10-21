@@ -6,7 +6,7 @@ class CreateFieldMachines < ActiveRecord::Migration[6.1]
       t.json :content, null: false
       t.date :carry_on_date
       t.date :carry_out_date
-      t.string :precautions
+      t.text :precautions
       t.references :field_machineable, polymorphic: true
 
       t.timestamps

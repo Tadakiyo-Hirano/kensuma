@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2022_10_18_054928) do
     t.json "content", null: false
     t.date "carry_on_date"
     t.date "carry_out_date"
-    t.string "precautions"
+    t.text "precautions"
     t.string "field_machineable_type"
     t.bigint "field_machineable_id"
     t.datetime "created_at", precision: 6, null: false
