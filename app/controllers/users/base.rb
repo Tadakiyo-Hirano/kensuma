@@ -94,5 +94,14 @@ module Users
         )
       )
     end
+
+    # 書類に反映させる機械情報
+    def machine_info(machine)
+      JSON.parse(
+        machine.to_json(
+          except: %i[uuid created_at updated_at] # 機械情報
+        )
+      )
+    end
   end
 end
