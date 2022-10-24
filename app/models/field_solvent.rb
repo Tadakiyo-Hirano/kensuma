@@ -1,0 +1,2 @@
+class FieldSolvent < ApplicationRecord
+end
