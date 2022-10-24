@@ -1,2 +1,82 @@
-<h1>FieldSolvents#index</h1>
-<p>Find me in app/views/field_solvents/index.html.erb</p>
+<% provide(:title,  "現場溶剤一覧") %>
+
+<div class="solventd">
+  <div class="solventd-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "現場情報詳細", users_order_path(@order), class: "btn btn-md btn-default" %>
+          <%= link_to "現場情報一覧", users_orders_path(@order), class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= render '/users/documents/shares/show_order_link', order: @order %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <div class="solventd">
+      <div class="solventd-body">
+        <%= form_with url: users_order_field_solvents_path, method: :post, local: true do |f| %>
+          <%= f.label "追加する溶剤を選択してください。" %>
+          <div class="pb-1">
+            <%= f.collection_select :solvent_ids, @solvent, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+          </div>
+          <div>
+            <%= f.submit "現場溶剤追加", class: "btn btn-md btn-primary" %>
+            <% if @field_solvents.present? %>
+              <%= link_to "現場溶剤情報編集", edit_solvents_users_order_field_solvents_path(@order), class: "btn btn-md btn-success" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+<% if @field_solvents.present? %>
+  <section class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%#= FieldSolvent.human_attribute_name(:solvent_name) %></th>
+                <th><%#= FieldSolvent.human_attribute_name(:carry_on_date) %></th>
+                <th><%#= FieldSolvent.human_attribute_name(:carry_out_date) %></th>
+                <th><%#= FieldSolvent.human_attribute_name(:precautions) %></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @field_solvents.each do |field_solvent| %>
+                <tr align="center">
+                  <td>
+                    <%#= not_input_display(field_solvent.solvent_name) %>
+                  </td>
+                  <td>
+                    <%#= not_input_display(field_solvent.carry_on_date) %>
+                  </td>
+                  <td>
+                    <%#= not_input_display(field_solvent.carry_out_date) %>
+                  </td>
+                  <td>
+                    <%#= not_input_display(field_solvent.precautions) %>
+                  </td>
+                  <td>
+                    <%#= link_to "削除", users_order_field_solvent_path(@order, field_solvent), method: :delete, data: { confirm: "#{field_solvent.solvent_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

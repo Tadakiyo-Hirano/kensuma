@@ -5,6 +5,8 @@ module Users::Orders
     before_action :set_field_solvents, only: %i[index edit_solvents update_solvents]
 
     def index
+      field_solvent_ids = @field_solvents.map { |field_solvent| field_solvent.content['id'] }
+      @solvent = current_business.solvents.where.not(id: field_solvent_ids)
     end
 
     def create

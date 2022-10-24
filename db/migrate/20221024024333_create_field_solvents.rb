@@ -13,6 +13,7 @@ class CreateFieldSolvents < ActiveRecord::Migration[6.1]
       t.integer :working_process
       t.integer :sds
       t.string :ventilation_control
+      t.references :field_solventable, polymorphic: true
 
       t.timestamps
     end

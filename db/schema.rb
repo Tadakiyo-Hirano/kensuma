@@ -204,8 +204,11 @@ ActiveRecord::Schema.define(version: 2022_10_24_024333) do
     t.integer "working_process"
     t.integer "sds"
     t.string "ventilation_control"
+    t.string "field_solventable_type"
+    t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
   create_table "field_special_vehicles", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
