@@ -10,6 +10,8 @@ module Users
       respond_to do |format|
         format.html
         format.pdf do
+          request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+          @order = Order.find(request_order.order_id)
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
                 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th', 'doc_15th', 'doc_16th',
@@ -24,6 +26,9 @@ module Users
           end
         end
       end
+
+      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+      @order = Order.find(request_order.order_id)
     end
 
     private
