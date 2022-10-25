@@ -46,30 +46,34 @@
           <table class="table text-nowrap">
             <thead>
               <tr align="center">
-                <th><%#= FieldSolvent.human_attribute_name(:solvent_name) %></th>
-                <th><%#= FieldSolvent.human_attribute_name(:carry_on_date) %></th>
-                <th><%#= FieldSolvent.human_attribute_name(:carry_out_date) %></th>
-                <th><%#= FieldSolvent.human_attribute_name(:precautions) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:solvent_name) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:carried_quantity) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:using_location) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:storing_place) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:using_tool) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:usage_period_start) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:usage_period_end) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:working_process) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:sds) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:ventilation_control) %></th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <% @field_solvents.each do |field_solvent| %>
                 <tr align="center">
+                  <td><%= field_solvent.solvent_name %></td>
+                  <td><%= not_input_display(field_solvent.carried_quantity) %></td>
+                  <td><%= not_input_display(field_solvent.using_location) %></td>
+                  <td><%= not_input_display(field_solvent.storing_place) %></td>
+                  <td><%= not_input_display(field_solvent.using_tool) %></td>
+                  <td><%= not_input_display(field_solvent.usage_period_start) %></td>
+                  <td><%= not_input_display(field_solvent.usage_period_end) %></td>
+                  <td><%= not_input_display(field_solvent.working_process) %></td>
+                  <td><%= not_input_display(field_solvent.sds) %></td>
+                  <td><%= not_input_display(field_solvent.ventilation_control) %></td>
                   <td>
-                    <%#= not_input_display(field_solvent.solvent_name) %>
-                  </td>
-                  <td>
-                    <%#= not_input_display(field_solvent.carry_on_date) %>
-                  </td>
-                  <td>
-                    <%#= not_input_display(field_solvent.carry_out_date) %>
-                  </td>
-                  <td>
-                    <%#= not_input_display(field_solvent.precautions) %>
-                  </td>
-                  <td>
-                    <%#= link_to "削除", users_order_field_solvent_path(@order, field_solvent), method: :delete, data: { confirm: "#{field_solvent.solvent_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
+                    <%= link_to "削除", users_order_field_solvent_path(@order, field_solvent), method: :delete, data: { confirm: "#{field_solvent.solvent_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
                   </td>
                 </tr>
               <% end %>
