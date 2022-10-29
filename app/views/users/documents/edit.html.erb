@@ -1,0 +1,50 @@
+<% provide(:title, "#{@document.document_type_i18n}") %>
+
+<%= render '/users/documents/shares/edit_link', document: @document %>
+
+<% case @document.document_type %>
+<% when 'doc_3rd' %>
+  <%= render 'users/documents/doc_3rd/edit' %> <!-- (3)施工体制台帳作成建設工事の通知 -->
+<% when 'doc_4th' %>
+  <%= render 'users/documents/doc_4th/edit' %> <!-- (4)施工体制台帳 -->
+<% when 'doc_5th' %>
+  <%= render 'users/documents/doc_5th/edit' %> <!-- (5)全建統一様式第１号－甲(再下請負通知書(変更届)) -->
+<% when 'doc_6th' %>
+  <%= render 'users/documents/doc_6th/edit' %> <!-- (6)安全衛生管理に関する契約書(一次会社用) -->
+<% when 'doc_7th' %>
+  <%= render 'users/documents/doc_7th/edit' %> <!-- (7)安全衛生管理に関する契約書(再下請会社用) -->
+<% when 'doc_8th' %>
+  <%= render 'users/documents/doc_8th/edit' %> <!-- (8)作業員名簿 -->
+<% when 'doc_9th' %>
+  <%= render 'users/documents/doc_9th/edit' %> <!-- (9)全建統一様式第１号-甲-別紙(外国人建設就労者建設現場入場届出書) -->
+<% when 'doc_10th' %>
+  <%= render 'users/documents/doc_10th/edit' %> <!-- (10)高年齢者作業申告書 -->
+<% when 'doc_11th' %>
+  <%= render 'users/documents/doc_11th/edit' %> <!-- (11)年少者就労報告書 -->
+<% when 'doc_12th' %>
+  <%= render 'users/documents/doc_12th/edit' %> <!-- (12)工事用・通勤用車両届 -->
+<% when 'doc_13th' %>
+  <%= render 'users/documents/doc_13th/edit' %> <!-- (13)全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届) -->
+<% when 'doc_14th' %>
+  <%= render 'users/documents/doc_14th/edit' %> <!-- (14)参考様式第６号(持込機械等(電動工具電気溶接機等)使用届 -->
+<% when 'doc_15th' %>
+  <%= render 'users/documents/doc_15th/edit' %> <!-- (15)有機溶剤・特定化学物質等持込使用届 -->
+<% when 'doc_16th' %>
+  <%= render 'users/documents/doc_16th/edit' %> <!-- (16)火器使用届 -->
+<% when 'doc_17th' %>
+  <%= render 'users/documents/doc_17th/edit' %> <!-- (17)全建統一様式第１号－乙(下請負業者編成表) -->
+<% when 'doc_18th' %>
+  <%= render 'users/documents/doc_18th/edit' %> <!-- (18)全建統一様式第４号(工事作業所災害防止協議会兼施工体系図) -->
+<% when 'doc_19th' %>
+  <%= render 'users/documents/doc_19th/edit' %> <!-- (19)全建統一様式第６号(工事安全衛生計画書) -->
+<% when 'doc_20th' %>
+  <%= render 'users/documents/doc_20th/edit' %> <!-- (20)参考様式第３号(年間安全衛生計画書) -->
+<% when 'doc_21st' %>
+  <%= render 'users/documents/doc_21st/edit' %> <!-- (21)全建統一様式第７号(新規入場時等教育実施報告書) -->
+<% when 'doc_22nd' %>
+  <%= render 'users/documents/doc_22nd/edit' %> <!-- (22)参考様式第５号(作業間連絡調整書) -->
+<% when 'doc_23rd' %>
+  <%= render 'users/documents/doc_23rd/edit' %> <!-- (23)全建統一様式第８号(安全ミーティング報告書) -->
+<% when 'doc_24th' %>
+  <%= render 'users/documents/doc_24th/edit' %> <!-- (24)参考資料第４号(新規入場者調査票) -->
+<% end %>
