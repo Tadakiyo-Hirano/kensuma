@@ -1,0 +1,82 @@
+<% provide(:title,  "現場火気") %>
+
+<div class="fired">
+  <div class="fired-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "現場情報詳細", users_order_path(@order), class: "btn btn-md btn-default" %>
+          <%= link_to "現場情報一覧", users_orders_path(@order), class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= render '/users/documents/shares/show_order_link', order: @order %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <div class="fired">
+      <div class="fired-body">
+        <%= form_with url: users_order_field_fires_path, method: :post, local: true do |f| %>
+          <%= f.label "追加する機械を選択してください。" %>
+          <div class="pb-1">
+            <%#= f.collection_select :fire_ids, @fire, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+          </div>
+          <div>
+            <%= f.submit "現場機械追加", class: "btn btn-md btn-primary" %>
+            <% if @field_fires.present? %>
+              <%= link_to "現場機械情報編集", edit_fires_users_order_field_fires_path(@order), class: "btn btn-md btn-success" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+<% if @field_fires.present? %>
+  <section class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%= FieldFire.human_attribute_name(:fire_name) %></th>
+                <th><%= FieldFire.human_attribute_name(:carry_on_date) %></th>
+                <th><%= FieldFire.human_attribute_name(:carry_out_date) %></th>
+                <th><%= FieldFire.human_attribute_name(:precautions) %></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%# @field_fires.each do |field_fire| %>
+                <tr align="center">
+                  <td>
+                    <%#= not_input_display(field_fire.fire_name) %>
+                  </td>
+                  <td>
+                    <%#= not_input_display(field_fire.carry_on_date) %>
+                  </td>
+                  <td>
+                    <%#= not_input_display(field_fire.carry_out_date) %>
+                  </td>
+                  <td>
+                    <%#= not_input_display(field_fire.precautions) %>
+                  </td>
+                  <td>
+                    <%#= link_to "削除", users_order_field_fire_path(@order, field_fire), method: :delete, data: { confirm: "#{field_fire.fire_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
+                  </td>
+                </tr>
+              <%# end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
