@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_24_024333) do
+ActiveRecord::Schema.define(version: 2022_10_31_023601) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -175,6 +175,27 @@ ActiveRecord::Schema.define(version: 2022_10_24_024333) do
     t.string "driver_address"
     t.date "driver_birth_day_on"
     t.index ["field_carable_type", "field_carable_id"], name: "index_field_cars_on_field_carable"
+  end
+
+  create_table "field_fires", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "use_place", null: false
+    t.integer "usage"
+    t.string "other_usages"
+    t.date "usage_period_start"
+    t.date "usage_period_end"
+    t.time "usage_time_start"
+    t.time "usage_time_end"
+    t.integer "type_of_fire"
+    t.string "management_method"
+    t.string "precautions"
+    t.string "fire_origin_responsible"
+    t.string "fire_use_responsible"
+    t.string "field_fireable_type"
+    t.bigint "field_fireable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_fireable_type", "field_fireable_id"], name: "index_field_fires_on_field_fireable"
   end
 
   create_table "field_machines", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|

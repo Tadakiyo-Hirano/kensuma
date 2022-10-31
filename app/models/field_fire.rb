@@ -1,0 +1,2 @@
+class FieldFire < ApplicationRecord
+end
