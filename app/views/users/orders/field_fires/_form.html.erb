@@ -1,0 +1,40 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :use_place %>
+<%= f.text_field :use_place, class: "form-control", placeholder: FieldFire.human_attribute_name(:use_place) %>
+<br>
+<%= f.label :usage %>
+<%#= f.check_box :usage, class: "" %>
+<%#= f.collection_check_boxes(:usage, User.all, :id, :name, include_hidden: false) %>
+<br>
+<%= f.label :other_usages %>
+<%#= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
+<%= f.collection_check_boxes(:other_usages, User.all, :id, :name, include_hidden: false, checked: @field_fire.other_usages) %>
+<br>
+<%= f.label :usage_period_start %>
+<%= f.date_field :usage_period_start, class: "form-control" %>
+<br>
+<%= f.label :usage_period_end %>
+<%= f.date_field :usage_period_end, class: "form-control" %>
+<br>
+<%= f.label :usage_time_start %>
+<%= f.time_field :usage_time_start, class: "form-control" %>
+<br>
+<%= f.label :usage_time_end %>
+<%= f.time_field :usage_time_end, class: "form-control" %>
+<br>
+<%= f.label :type_of_fire %>
+<%= f.number_field :type_of_fire, class: "form-control" %>
+<br>
+<%= f.label :management_method %>
+<%= f.text_field :management_method, class: "form-control", placeholder: FieldFire.human_attribute_name(:management_method) %>
+<br>
+<%= f.label :precautions %>
+<%= f.text_field :precautions, class: "form-control", placeholder: FieldFire.human_attribute_name(:precautions) %>
+<br>
+<%= f.label :fire_origin_responsible %>
+<%= f.text_field :fire_origin_responsible, class: "form-control", placeholder: FieldFire.human_attribute_name(:fire_origin_responsible) %>
+<br>
+<%= f.label :fire_use_responsible %>
+<%= f.text_field :fire_use_responsible, class: "form-control", placeholder: FieldFire.human_attribute_name(:fire_use_responsible) %>
+<br>

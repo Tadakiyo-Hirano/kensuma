@@ -3,7 +3,7 @@ class FieldFire < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
-  validates :use_plase, presence: true, length: { maximum: 100 }
+  validates :use_place, presence: true, length: { maximum: 100 }
 
   def to_param
     uuid

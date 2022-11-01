@@ -1,50 +1,42 @@
 module Users::Orders
   class FieldFiresController < Users::Base
     before_action :set_order
-    before_action :set_field_fire, only: :destroy
-    before_action :set_field_fires, only: %i[index edit_fires update_fires]
+    before_action :set_field_fire, only: %i[show edit update destroy]
+    before_action :set_field_fires, only: %i[index]
 
-    def index
-      # field_fire_ids = @field_fires.map { |field_fire| field_fire.content['id'] }
-      # @fire = current_business.fires.where.not(id: field_fire_ids)
+    def index; end
+
+    def show; end
+
+    def new
+      @field_fire = @order.field_fires.new
     end
 
     def create
-    #   ActiveRecord::Base.transaction do
-    #     params[:fire_ids].each do |fire_id|
-    #       @order.field_fires.create!(
-    #         fire_name: Fire.find(fire_id).vehicle_name,
-    #         content:  fire_info(Fire.find(fire_id))
-    #       )
-    #     end
-    #     flash[:success] = "#{params[:fire_ids].count}件追加しました。"
-    #     redirect_to users_order_field_fires_url
-    #   end
-    # rescue ActiveRecord::RecordInvalid
-    #   flash[:danger] = '登録に失敗しました。再度登録してください。'
-    #   redirect_to users_order_field_fires_url
+      @field_fire = @order.field_fires.build(field_fire_params)
+      if @field_fire.save
+        flash[:success] = "火気情報を登録しました。"
+        redirect_to users_order_field_fires_url
+      else
+        render :new
+      end
+    end
+
+    def edit; end
+
+    def update
+      if @field_fire.update(field_fire_params)
+        flash[:success] = '更新しました'
+        redirect_to users_order_field_fire_path
+      else
+        render 'edit'
+      end
     end
 
     def destroy
-      # @field_fire.destroy!
-      # flash[:danger] = "#{@field_fire.fire_name}を削除しました"
-      # redirect_to users_order_field_fires_url
-    end
-
-    def edit_fires; end
-
-    def update_fires
-      # field_fires_params.each do |id, item|
-      #   unless item[:driver_worker_id].blank?
-      #     item[:driver_name] = Worker.find(item[:driver_worker_id]).name
-      #     item[:driver_address] = Worker.find(item[:driver_worker_id]).my_address
-      #     item[:driver_birth_day_on] = Worker.find(item[:driver_worker_id]).birth_day_on
-      #   end
-      #   field_fire = FieldFire.find(id)
-      #   field_fire.update(item)
-      # end
-      # flash[:success] = '火気情報を更新しました'
-      # redirect_to users_order_field_fires_url
+      @field_fire.destroy!
+      flash[:danger] = "火気情報を削除しました"
+      redirect_to users_order_field_fires_url
     end
 
     private
@@ -61,11 +53,10 @@ module Users::Orders
       @field_fires = @order.field_fires
     end
 
-    def field_fires_params
-      params.require(:order).permit(
-        field_fires: %i[
-
-        ]
+    def field_fire_params
+      params.require(:field_fire).permit(
+        :use_place, :usage, {other_usages: []}, :usage_period_start, :usage_period_end, :usage_time_start, :usage_time_end,
+        :type_of_fire, :management_method, :precautions, :fire_origin_responsible, :fire_use_responsible
       )
     end
   end
