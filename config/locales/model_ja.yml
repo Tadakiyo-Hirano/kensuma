@@ -57,8 +57,19 @@ ja:
         business_employment_insurance_join_status: 雇用保険(加入状況)
         business_employment_insurance_number: 雇用保険(番号)
         business_retirement_benefit_mutual_aid_status: 退職金共済制度(加入状況)
+        construction_license_status: 建設許可証(取得状況)
+        industry_ids: 業種（複数選択）
+        construction_license_permission_type_minister_governor: 建設許可証(種別)
+        construction_license_governor_permission_prefecture: 建設許可証(都道府県)
+        construction_license_permission_type_identification_general: 建設許可証(種別)
+        construction_license_number_double_digit: 建設許可証(番号)
+        construction_license_number_six_digits: 建設許可証(番号)
+        construction_license_number: 建設許可証(建設許可番号)
+        construction_license_updated_at: 建設許可証(更新日)
       business_occupation:
         occupation_id: 職種
+      business_industry:
+        industry_id: 業種
       car:
         usage: 使用目的
         owner_name: 車両所有者氏名
