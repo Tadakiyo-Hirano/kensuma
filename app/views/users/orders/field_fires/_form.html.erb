@@ -4,12 +4,15 @@
 <%= f.text_field :use_place, class: "form-control", placeholder: FieldFire.human_attribute_name(:use_place) %>
 <br>
 <%= f.label :usage %>
-<%#= f.check_box :usage, class: "" %>
-<%#= f.collection_check_boxes(:usage, User.all, :id, :name, include_hidden: false) %>
+<%= f.collection_check_boxes(
+      :usage, Tag.all, :id, :name,
+      include_hidden: false, multiple: true,
+      checked: field_fire.usage.nil? ? nil : field_fire.usage.delete("^0-9","^,").split(',')
+    )
+%>
 <br>
 <%= f.label :other_usages %>
-<%#= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
-<%= f.collection_check_boxes(:other_usages, User.all, :id, :name, include_hidden: false, checked: @field_fire.other_usages) %>
+<%= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
 <br>
 <%= f.label :usage_period_start %>
 <%= f.date_field :usage_period_start, class: "form-control" %>

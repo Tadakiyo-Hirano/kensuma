@@ -55,7 +55,7 @@ module Users::Orders
 
     def field_fire_params
       params.require(:field_fire).permit(
-        :use_place, :usage, {other_usages: []}, :usage_period_start, :usage_period_end, :usage_time_start, :usage_time_end,
+        :use_place, { usage: [] }, :other_usages, :usage_period_start, :usage_period_end, :usage_time_start, :usage_time_end,
         :type_of_fire, :management_method, :precautions, :fire_origin_responsible, :fire_use_responsible
       )
     end
