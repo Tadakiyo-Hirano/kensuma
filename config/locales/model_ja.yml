@@ -9,6 +9,10 @@ ja:
       car_insurance_company: ⾃動⾞保険会社
       car_voluntary_insurance: 任意保険
       special_vehicle: 特殊車両情報
+      field_car: 現場車両情報
+      field_machine: 現場機械情報
+      field_solvent: 現場溶剤情報
+      field_special_vehicle: 現場特殊車両情報
       field_worker: 現場作業員情報
       order: 現場情報
       request_order: 下請発注情報
@@ -118,6 +122,22 @@ ja:
         waypoint_first: 経由地1
         waypoint_second: 経由地2
         arrival_point: 目的地(至)
+      field_machine:
+        machine_name: 機械名
+        carry_on_date: 持込年月日
+        carry_out_date: 搬出予定日
+        precautions: 機械等の特性・使用上注意すべき事項
+      field_solvent:
+        solvent_name: 溶剤名
+        carried_quantity: 搬入量
+        using_location: 使用場所
+        storing_place: 保管場所
+        using_tool: 使用機械又は工具
+        usage_period_start: 使用期間(始期)
+        usage_period_end: 使用期間(終期)
+        working_process: 作業手順書の添付
+        sds: SDS(安全データシート)の添付
+        ventilation_control: 換気等対策
       field_special_vehicle:
         driver_name: 運転者名
         vehicle_name: 特殊車両名

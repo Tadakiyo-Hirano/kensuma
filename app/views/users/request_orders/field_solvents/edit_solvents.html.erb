@@ -1,0 +1,68 @@
+<% provide(:title, "現場溶剤編集") %>
+<% provide(:btn_text, "更新") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "戻る", users_request_order_field_solvents_path, class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= render '/users/documents/shares/show_request_order_link', request_order: @request_order %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <%= form_with model: @request_order, url: update_solvents_users_request_order_field_solvents_path, method: :patch, local: true do |f| %>
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%= FieldSolvent.human_attribute_name(:solvent_name) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:carried_quantity) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:using_location) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:storing_place) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:using_tool) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:usage_period_start) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:usage_period_end) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:working_process) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:sds) %></th>
+                <th><%= FieldSolvent.human_attribute_name(:ventilation_control) %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @field_solvents.each do |field_solvent| %>
+                <%= f.fields_for "field_solvents[]", field_solvent do |fm| %>
+                  <tr>
+                    <td><%= field_solvent.solvent_name %></td>
+                    <td><%= fm.text_field :carried_quantity, class: "form-control" %></td>
+                    <td><%= fm.text_field :using_location, class: "form-control" %></td>
+                    <td><%= fm.text_field :storing_place, class: "form-control" %></td >
+                    <td><%= fm.text_field :using_tool, class: "form-control" %></td >
+                    <td><%= fm.date_field :usage_period_start, class: "form-control" %></td >
+                    <td><%= fm.date_field :usage_period_end, class: "form-control" %></td >
+                    <td>
+                      <%= fm.select :working_process, FieldSolvent.working_processes_i18n.invert, { prompt: true }, { class: "form-control" } %>
+                    </td >
+                    <td>
+                      <%= fm.select :sds, FieldSolvent.sds_i18n.invert, { prompt: true }, { class: "form-control" } %>
+                    </td >
+                    <td><%= fm.text_field :ventilation_control, class: "form-control" %></td >
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <br>
+    <% end %>
+  </div>
+</section>

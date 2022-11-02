@@ -94,5 +94,23 @@ module Users
         )
       )
     end
+
+    # 書類に反映させる機械情報
+    def machine_info(machine)
+      JSON.parse(
+        machine.to_json(
+          except: %i[uuid created_at updated_at] # 機械情報
+        )
+      )
+    end
+
+    # 書類に反映させる溶剤情報
+    def solvent_info(solvent)
+      JSON.parse(
+        solvent.to_json(
+          except: %i[uuid created_at updated_at] # 溶剤情報
+        )
+      )
+    end
   end
 end

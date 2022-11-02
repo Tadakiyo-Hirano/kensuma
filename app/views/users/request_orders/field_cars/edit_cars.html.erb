@@ -9,11 +9,7 @@
           <%= link_to "戻る", users_request_order_field_cars_path, class: "btn btn-md btn-default" %>
         </td>
         <td>
-          <%= link_to "入場作業員", users_request_order_field_cars_path(@request_order), class: "btn btn-md btn-success" %>
-          <%= link_to "車両", users_request_order_field_cars_path(@request_order), class: "btn btn-md btn-success" %>
-          <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
-          <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
-          <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+          <%= render '/users/documents/shares/show_request_order_link', request_order: @request_order %>
         </td>
       </tbody>
     </table>
