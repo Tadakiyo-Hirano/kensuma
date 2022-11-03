@@ -70,8 +70,7 @@ class Business < ApplicationRecord
     oita: 43,
     miyazaki: 44,
     kagoshima: 45,
-    kagoshima: 46,
-    okinawa: 47
+    okinawa: 46
   }                                                                                                 # 建設許可証(都道府県)
   enum construction_license_permission_type_identification_general: { identification: 0, general: 1 }  # 建設許可証(許可種別)
 
