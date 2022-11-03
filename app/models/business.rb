@@ -21,7 +21,7 @@ class Business < ApplicationRecord
   enum business_pension_insurance_join_status: { welfare: 0, national: 1, recipient: 2 }                      # 年金保険(加入状況)
   enum business_employment_insurance_join_status: { join: 0, not_join: 1, not_coverd: 2 }, _prefix: true      # 雇用保険(加入状況)
   enum business_retirement_benefit_mutual_aid_status: { available: 0, not_available: 1 }, _prefix: true       # 退職金共済制度(加入状況)
-  enum construction_license_status: { available: 0, not_available: 1 }, _prefix: true                         # 建設許可証(保持情報)
+  enum construction_license_status: { available: 0, not_available: 1 }, _prefix: true                         # 建設許可証(許可状況)
   enum construction_license_permission_type_minister_governor: { minister_permission: 0, governor_permission: 1 } # 建設許可証(許可種別)
   enum construction_license_governor_permission_prefecture: {
     hokkaido: 0,
