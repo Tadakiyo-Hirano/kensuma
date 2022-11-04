@@ -6,6 +6,8 @@
 <%= f.label FireUseTarget.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_use_target_ids, FireUseTarget.all, :id, :name %>
 <br>
+<%= f.collection_check_boxes :fire_type_ids, FireUseTarget.all, :id, :name %>
+<br>
 <%= f.label :other_usages %>
 <%= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
 <br>
