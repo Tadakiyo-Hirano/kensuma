@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_31_023601) do
+ActiveRecord::Schema.define(version: 2022_11_04_051037) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -177,17 +177,23 @@ ActiveRecord::Schema.define(version: 2022_10_31_023601) do
     t.index ["field_carable_type", "field_carable_id"], name: "index_field_cars_on_field_carable"
   end
 
+  create_table "field_fire_fire_use_targets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "field_fire_id", null: false
+    t.bigint "fire_use_target_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_fire_id"], name: "index_field_fire_fire_use_targets_on_field_fire_id"
+    t.index ["fire_use_target_id"], name: "index_field_fire_fire_use_targets_on_fire_use_target_id"
+  end
+
   create_table "field_fires", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "use_place", null: false
-    t.string "usage"
     t.string "other_usages"
     t.date "usage_period_start"
     t.date "usage_period_end"
     t.time "usage_time_start"
     t.time "usage_time_end"
-    t.string "type_of_fire"
-    t.string "management_method"
     t.string "precautions"
     t.string "fire_origin_responsible"
     t.string "fire_use_responsible"
@@ -268,6 +274,12 @@ ActiveRecord::Schema.define(version: 2022_10_31_023601) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
+  end
+
+  create_table "fire_use_targets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "licenses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -653,6 +665,8 @@ ActiveRecord::Schema.define(version: 2022_10_31_023601) do
   add_foreign_key "cars", "car_insurance_companies"
   add_foreign_key "documents", "businesses"
   add_foreign_key "documents", "request_orders"
+  add_foreign_key "field_fire_fire_use_targets", "field_fires"
+  add_foreign_key "field_fire_fire_use_targets", "fire_use_targets"
   add_foreign_key "machine_tags", "machines"
   add_foreign_key "machine_tags", "tags"
   add_foreign_key "machines", "businesses"

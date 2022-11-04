@@ -3,13 +3,8 @@
 <%= f.label :use_place %>
 <%= f.text_field :use_place, class: "form-control", placeholder: FieldFire.human_attribute_name(:use_place) %>
 <br>
-<%= f.label :usage %>
-<%= f.collection_check_boxes(
-      :usage, Tag.all, :id, :name,
-      include_hidden: false, multiple: true,
-      checked: field_fire.usage.nil? ? nil : field_fire.usage.delete("^0-9","^,").split(',')
-    )
-%>
+<%= f.label FireUseTarget.human_attribute_name(:name) %><br>
+<%= f.collection_check_boxes :fire_use_target_ids, FireUseTarget.all, :id, :name %>
 <br>
 <%= f.label :other_usages %>
 <%= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
