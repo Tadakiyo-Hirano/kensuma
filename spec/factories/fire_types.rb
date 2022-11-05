@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :fire_type do
-    name { "MyString" }
+    name { 'MyString' }
   end
 end

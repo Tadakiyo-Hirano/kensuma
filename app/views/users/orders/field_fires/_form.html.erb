@@ -5,9 +5,7 @@
 <br>
 <%= f.label FireUseTarget.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_use_target_ids, FireUseTarget.all, :id, :name %>
-<br>
-<%= f.collection_check_boxes :fire_type_ids, FireUseTarget.all, :id, :name %>
-<br>
+<br><br>
 <%= f.label :other_usages %>
 <%= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
 <br>
@@ -23,8 +21,9 @@
 <%= f.label :usage_time_end %>
 <%= f.time_field :usage_time_end, class: "form-control" %>
 <br>
-<%= f.label :type_of_fire %>
-<%= f.number_field :type_of_fire, class: "form-control" %>
+<%= f.label FireType.human_attribute_name(:name) %><br>
+<%= f.collection_check_boxes :fire_type_ids, FireType.all, :id, :name %>
+<br><br>
 <br>
 <%= f.label :management_method %>
 <%= f.text_field :management_method, class: "form-control", placeholder: FieldFire.human_attribute_name(:management_method) %>

@@ -15,7 +15,7 @@ module Users::Orders
     def create
       @field_fire = @order.field_fires.build(field_fire_params)
       if @field_fire.save
-        flash[:success] = "火気情報を登録しました。"
+        flash[:success] = '火気情報を登録しました。'
         redirect_to users_order_field_fires_url
       else
         render :new
@@ -35,7 +35,7 @@ module Users::Orders
 
     def destroy
       @field_fire.destroy!
-      flash[:danger] = "火気情報を削除しました"
+      flash[:danger] = '火気情報を削除しました'
       redirect_to users_order_field_fires_url
     end
 

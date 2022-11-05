@@ -34,5 +34,5 @@ FireUseTarget.seed(
   {
     id: 9,
     name: 'その他'
-  },
+  }
 )

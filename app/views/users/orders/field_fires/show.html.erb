@@ -25,16 +25,16 @@
           <td><%= @field_fire.usage_period_end %></td>
         </tr>
         <tr>
-          <th><%= FieldFire.human_attribute_name(:sage_time_start) %></th>
+          <th><%= FieldFire.human_attribute_name(:usage_time_start) %></th>
           <td><%= @field_fire.usage_time_start %></td>
         </tr>
         <tr>
-          <th><%= FieldFire.human_attribute_name(:sage_time_end) %></th>
+          <th><%= FieldFire.human_attribute_name(:usage_time_end) %></th>
           <td><%= @field_fire.usage_time_end %></td>
         </tr>
         <tr>
-          <th><%= FieldFire.human_attribute_name(:type_of_fire) %></th>
-          <td><%#= @field_fire.type_of_fire %></td>
+          <th><%= FireType.human_attribute_name(:name) %></th>
+          <td><%= @field_fire.fire_types.map {|fire_type|fire_type.name}.join(', ') %></td>
         </tr>
         <tr>
           <th><%= FieldFire.human_attribute_name(:management_method) %></th>

@@ -12,6 +12,7 @@ ja:
       field_car: 現場車両情報
       field_fire: 現場火気情報
       fire_use_target: 火気使用目的
+      fire_type: 火気の種類
       field_machine: 現場機械情報
       field_solvent: 現場溶剤情報
       field_special_vehicle: 現場特殊車両情報
@@ -125,6 +126,8 @@ ja:
         fire_use_responsible: 火気使用責任者
       fire_use_target:
         name: 使用目的
+      fire_type:
+        name: 火気の種類
       field_machine:
         machine_name: 機械名
         carry_on_date: 持込年月日
