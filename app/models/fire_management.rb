@@ -1,0 +1,2 @@
+class FireManagement < ApplicationRecord
+end
