@@ -1,6 +1,7 @@
 module Users::Orders
   class FieldFiresController < Users::Base
     before_action :set_order
+    before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_field_fire, only: %i[show edit update destroy]
     before_action :set_field_fires, only: %i[index]
 
@@ -55,8 +56,9 @@ module Users::Orders
 
     def field_fire_params
       params.require(:field_fire).permit(
-        :use_place, { fire_use_target_ids: [], fire_type_ids: [], fire_management_ids: [] }, :other_usages, :usage_period_start, :usage_period_end,
-        :usage_time_start, :usage_time_end, :precautions, :fire_origin_responsible, :fire_use_responsible
+        :use_place, :other_usages, :usage_period_start, :usage_period_end,
+        :usage_time_start, :usage_time_end, :precautions, :fire_origin_responsible, :fire_use_responsible,
+        { fire_use_target_ids: [], fire_type_ids: [], fire_management_ids: [] }
       )
     end
   end
