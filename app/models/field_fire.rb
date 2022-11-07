@@ -4,6 +4,8 @@ class FieldFire < ApplicationRecord
   has_many :fire_use_targets, through: :field_fire_fire_use_targets
   has_many :field_fire_fire_types
   has_many :fire_types, through: :field_fire_fire_types
+  has_many :field_fire_fire_managements
+  has_many :fire_managements, through: :field_fire_fire_managements
 
   before_create -> { self.uuid = SecureRandom.uuid }
 

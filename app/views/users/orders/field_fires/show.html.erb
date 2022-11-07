@@ -37,8 +37,8 @@
           <td><%= @field_fire.fire_types.map {|fire_type|fire_type.name}.join(', ') %></td>
         </tr>
         <tr>
-          <th><%= FieldFire.human_attribute_name(:management_method) %></th>
-          <td><%#= @field_fire.management_method %></td>
+          <th><%= FireManagement.human_attribute_name(:name) %></th>
+          <td><%= @field_fire.fire_managements.map {|fire_management|fire_management.name}.join(', ') %></td>
         </tr>
         <tr>
           <th><%= FieldFire.human_attribute_name(:precautions) %></th>
