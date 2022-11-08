@@ -1,62 +1,61 @@
 require 'rails_helper'
 
 RSpec.describe '管理者', type: :system do
-  pending "add some examples (or delete) #{__FILE__}"
-  # # テストユーザーを作成する
-  # let!(:admin) { create(:admin, email: 'foo@example.com', password: '123456', password_confirmation: '123456') }
+  # テストユーザーを作成する
+  let!(:admin) { create(:admin, email: 'foo@example.com', password: '123456', password_confirmation: '123456') }
 
-  # describe 'active_admin/devise/sessions' do
-  #   context '管理者ログインページへアクセスした場合' do
-  #     it 'ログイン画面を表示' do
-  #       visit new_admin_session_path
-  #       expect(page).to have_content('ログイン')
-  #     end
-  #   end
+  describe 'active_admin/devise/sessions' do
+    context '管理者ログインページへアクセスした場合' do
+      it 'ログイン画面を表示' do
+        visit new_admin_session_path
+        expect(page).to have_content('ログイン')
+      end
+    end
 
-  #   context 'メールアドレスとパスワードが登録済み情報と合致する場合' do
-  #     it 'ログインしダッシュボードを表示' do
-  #       visit new_admin_session_path
-  #       fill_in 'admin[email]', with: 'foo@example.com'
-  #       fill_in 'admin[password]', with: '123456'
-  #       click_button 'ログイン'
-  #       # ログイン後遷移先変更時に修正の必要あり
-  #       expect(page).to have_current_path _system__dashboard_path, ignore_query: true
-  #       expect(page).to have_content('ログインしました。')
-  #     end
-  #   end
+    # context 'メールアドレスとパスワードが登録済み情報と合致する場合' do
+    #   it 'ログインしダッシュボードを表示' do
+    #     visit new_admin_session_path
+    #     fill_in 'admin[email]', with: 'foo@example.com'
+    #     fill_in 'admin[password]', with: '123456'
+    #     click_button 'ログイン'
+    #     # ログイン後遷移先変更時に修正の必要あり
+    #     expect(page).to have_current_path _system__dashboard_path, ignore_query: true
+    #     expect(page).to have_content('ログインしました。')
+    #   end
+    # end
 
-  #   context 'メールアドレスとパスワードが登録済み情報と合致しない場合' do
-  #     it 'ログインできない' do
-  #       visit new_admin_session_path
-  #       fill_in 'admin[email]', with: 'bar@example.com'
-  #       fill_in 'admin[password]', with: '123456'
-  #       click_button 'ログイン'
-  #       expect(page).to have_current_path new_admin_session_path, ignore_query: true
-  #       expect(page).to have_content('Eメールまたはパスワードが違います。')
-  #     end
-  #   end
+    # context 'メールアドレスとパスワードが登録済み情報と合致しない場合' do
+    #   it 'ログインできない' do
+    #     visit new_admin_session_path
+    #     fill_in 'admin[email]', with: 'bar@example.com'
+    #     fill_in 'admin[password]', with: '123456'
+    #     click_button 'ログイン'
+    #     expect(page).to have_current_path new_admin_session_path, ignore_query: true
+    #     expect(page).to have_content('Eメールまたはパスワードが違います。')
+    #   end
+    # end
 
-  #   context 'メールアドレスとパスワードが未入力の場合' do
-  #     it 'ログインできない' do
-  #       visit new_admin_session_path
-  #       fill_in 'admin[email]', with: ''
-  #       fill_in 'admin[password]', with: ''
-  #       click_button 'ログイン'
-  #       expect(page).to have_current_path new_admin_session_path, ignore_query: true
-  #       expect(page).to have_content('Eメールまたはパスワードが違います。')
-  #     end
-  #   end
+    # context 'メールアドレスとパスワードが未入力の場合' do
+    #   it 'ログインできない' do
+    #     visit new_admin_session_path
+    #     fill_in 'admin[email]', with: ''
+    #     fill_in 'admin[password]', with: ''
+    #     click_button 'ログイン'
+    #     expect(page).to have_current_path new_admin_session_path, ignore_query: true
+    #     expect(page).to have_content('Eメールまたはパスワードが違います。')
+    #   end
+    # end
 
-  #   context 'ログアウトをクリックした場合' do
-  #     it 'ログアウトしログイン画面を表示' do
-  #       sign_in(admin)
-  #       visit _system__dashboard_path
-  #       click_link 'ログアウト'
-  #       expect(page).to have_current_path new_admin_session_path, ignore_query: true
-  #       expect(page).to have_content('ログイン')
-  #     end
-  #   end
-  # end
+    # context 'ログアウトをクリックした場合' do
+    #   it 'ログアウトしログイン画面を表示' do
+    #     sign_in(admin)
+    #     visit _system__dashboard_path
+    #     click_link 'ログアウト'
+    #     expect(page).to have_current_path new_admin_session_path, ignore_query: true
+    #     expect(page).to have_content('ログイン')
+    #   end
+    # end
+  end
 
   # describe '管理者ログイン後' do
   #   before(:each) do
