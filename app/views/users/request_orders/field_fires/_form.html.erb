@@ -1,0 +1,50 @@
+<%= render 'shared/error_massages', object: f.object %>
+
+<%= f.label :use_place %>
+<%= f.text_field :use_place, class: "form-control", placeholder: FieldFire.human_attribute_name(:use_place), maxlength: 100 %>
+<br>
+<%= f.label FireUseTarget.human_attribute_name(:name) %><br>
+<%= f.collection_check_boxes :fire_use_target_ids, FireUseTarget.all, :id, :name, include_hidden: false %>
+<br><br>
+<%= f.label :other_usages %>
+<%= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
+<br>
+<div class="form-inline">
+  <div>
+    <%= f.label :usage_period_start %>
+    <%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
+  </div>
+  &emsp;
+  <div>
+    <%= f.label :usage_period_end %>
+    <%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
+  </div>
+</div>
+<br>
+<div class="form-inline">
+  <div>
+    <%= f.label :usage_time_start %>
+    <%= f.time_select :usage_time_start, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+  </div>
+  <div>
+    <%= f.label :usage_time_end %>
+    <%= f.time_select :usage_time_end, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+  </div>
+</div>
+<br>
+<%= f.label FireType.human_attribute_name(:name) %><br>
+<%= f.collection_check_boxes :fire_type_ids, FireType.all, :id, :name, include_hidden: false %>
+<br><br>
+<%= f.label FireManagement.human_attribute_name(:name) %><br>
+<%= f.collection_check_boxes :fire_management_ids, FireManagement.all, :id, :name, include_hidden: false %>
+<br><br>
+<%= f.label :precautions %>
+<%= f.text_field :precautions, class: "form-control", placeholder: FieldFire.human_attribute_name(:precautions), maxlength: 40 %>
+<br>
+<%= f.label :fire_origin_responsible %>
+<%#= f.text_field :fire_origin_responsible, class: "form-control", placeholder: FieldFire.human_attribute_name(:fire_origin_responsible) %>
+<%= f.select :fire_origin_responsible, @business_workers_name, { include_blank: true }, { class: "form-control" } %>
+<br>
+<%= f.label :fire_use_responsible %>
+<%= f.select :fire_use_responsible, @business_workers_name, { include_blank: true }, { class: "form-control" } %>
+<br>

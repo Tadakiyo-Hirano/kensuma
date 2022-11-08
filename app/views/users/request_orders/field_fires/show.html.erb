@@ -56,8 +56,8 @@
     </table>
   </div>
   <div class="field_fired-footer">
-    <%= link_to "編集", edit_users_order_field_fire_path(@order, @field_fire), class: "btn btn-md btn-block btn-success" %>
-    <%= link_to "削除", users_order_field_fire_path(@order, @field_fire), method: :delete, data: { confirm: "火気情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
-    <%= link_to "一覧画面へ", users_order_field_fires_path, class: "btn btn-md btn-block btn-default" %>
+    <%= link_to "編集", edit_users_request_order_field_fire_path(@request_order, @field_fire), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_request_order_field_fire_path(@request_order, @field_fire), method: :delete, data: { confirm: "火気情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "一覧画面へ", users_request_order_field_fires_path, class: "btn btn-md btn-block btn-default" %>
   </div>
 </div>

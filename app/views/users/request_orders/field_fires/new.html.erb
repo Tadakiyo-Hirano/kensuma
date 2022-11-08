@@ -1,0 +1,13 @@
+<% provide(:title, "火気情報登録") %>
+<% provide(:btn_text, "登録") %>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_with model: @field_fire, url: users_request_order_field_fires_path, method: :post, local: true do |f| %>
+      <%= render "form", f: f, field_fire: @field_fire %>
+
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <%= link_to "一覧画面へ", users_request_order_field_fires_path, class: "btn btn-md btn-block btn-default" %>
+    <% end %>
+  </div>
+</div>
