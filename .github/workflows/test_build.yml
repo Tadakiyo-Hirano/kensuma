@@ -23,7 +23,6 @@ jobs:
         # データベースの作成
         docker-compose run app rake db:create
 
-        docker-compose run app rails webpacker:install
         docker-compose run app bundle exec rails webpacker:compile
       env:
         RAILS_ENV: test
