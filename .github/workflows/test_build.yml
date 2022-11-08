@@ -19,11 +19,10 @@ jobs:
         # イメージのビルド
         docker-compose build
         # 必要なアップデート
+        docker-compose run app bundle install
         docker-compose run app yarn install
         # データベースの作成
         docker-compose run app rake db:create
-
-        docker-compose run app bundle exec rails webpacker:compile
       env:
         RAILS_ENV: test
 
