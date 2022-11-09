@@ -13,8 +13,8 @@
           <td><%= @field_fire.fire_use_targets.map {|fire_use_target|fire_use_target.name}.join(', ') %></td>
         </tr>
         <tr>
-          <th><%= FieldFire.human_attribute_name(:other_usages) %></th>
-          <td><%= @field_fire.other_usages %></td>
+          <th><%= FieldFire.human_attribute_name(:other_use_target) %></th>
+          <td><%= @field_fire.other_use_target %></td>
         </tr>
         <tr>
           <th><%= FieldFire.human_attribute_name(:usage_period_start) %></th>

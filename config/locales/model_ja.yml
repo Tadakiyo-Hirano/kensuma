@@ -117,11 +117,12 @@ ja:
         arrival_point: 目的地(至)
       field_fire:
         use_place: 使用場所
-        other_usages: その他の使用目的
+        other_use_target: 使用目的(その他)
         usage_period_start: 使用期間(始期)
         usage_period_end: 使用期間(終期)
         usage_time_start: 使用時間(始期)
         usage_time_end: 使用時間(終期)
+        other_fire_management: 火気の種類(その他)
         precautions: 取扱上の注意
         fire_origin_responsible: 火元責任者(後始末巡回者)
         fire_use_responsible: 火気使用責任者

@@ -3,9 +3,10 @@ class CreateFieldFires < ActiveRecord::Migration[6.1]
     create_table :field_fires do |t|
       t.string :uuid, null: false
       t.string :use_place, null: false
-      t.string :other_usages
+      t.string :other_use_target
       t.date :usage_period_start
       t.date :usage_period_end
+      t.string :other_fire_management
       t.time :usage_time_start
       t.time :usage_time_end
       t.string :precautions

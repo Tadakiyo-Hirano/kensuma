@@ -4,9 +4,10 @@ FactoryBot.define do
     association :field_fireable, factory: :order
     uuid { SecureRandom.uuid }
     sequence(:use_place) { |n| "use_place#{n}" }
-    sequence(:other_usages) { |n| "other_usages#{n}" }
+    sequence(:other_use_target) { |n| "other#{n}" }
     usage_period_start { '2022-01-01' }
     usage_period_end { '2022-01-01' }
+    sequence(:other_fire_management) { |n| "other#{n}" }
     usage_time_start { '15:00:00' }
     usage_time_end { '15:00:00' }
     sequence(:precautions) { |n| "precautions#{n}" }
@@ -19,9 +20,10 @@ FactoryBot.define do
     association :field_fireable, factory: :request_order
     uuid { SecureRandom.uuid }
     sequence(:use_place) { |n| "use_place#{n}" }
-    sequence(:other_usages) { |n| "other_usages#{n}" }
+    sequence(:other_use_target) { |n| "other#{n}" }
     usage_period_start { '2022-01-01' }
     usage_period_end { '2022-01-01' }
+    sequence(:other_fire_management) { |n| "other#{n}" }
     usage_time_start { '15:00:00' }
     usage_time_end { '15:00:00' }
     sequence(:precautions) { |n| "precautions#{n}" }

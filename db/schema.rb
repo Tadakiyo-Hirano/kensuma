@@ -207,9 +207,10 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
   create_table "field_fires", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "use_place", null: false
-    t.string "other_usages"
+    t.string "other_use_target"
     t.date "usage_period_start"
     t.date "usage_period_end"
+    t.string "other_fire_management"
     t.time "usage_time_start"
     t.time "usage_time_end"
     t.string "precautions"

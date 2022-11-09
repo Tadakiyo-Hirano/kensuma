@@ -37,6 +37,24 @@ RSpec.describe FieldFire, type: :model do
       end
     end
 
+    describe '#other_use_target' do
+      context '10文字の場合' do
+        before(:each) { subject.other_use_target = 'a' * 10 }
+
+        it 'バリデーションが通ること' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context '11文字の場合' do
+        before(:each) { subject.other_use_target = 'a' * 11 }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
     describe '#usage_period_start' do
       context '存在しない場合' do
         before(:each) { subject.usage_period_start = nil }
@@ -50,6 +68,24 @@ RSpec.describe FieldFire, type: :model do
     describe '#usage_period_end' do
       context '存在しない場合' do
         before(:each) { subject.usage_period_end = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#other_fire_management' do
+      context '10文字の場合' do
+        before(:each) { subject.other_fire_management = 'a' * 20 }
+
+        it 'バリデーションが通ること' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context '11文字の場合' do
+        before(:each) { subject.other_fire_management = 'a' * 21 }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid
@@ -157,6 +193,24 @@ RSpec.describe FieldFire, type: :model do
       end
     end
 
+    describe '#other_use_target' do
+      context '10文字の場合' do
+        before(:each) { subject.other_use_target = 'a' * 10 }
+
+        it 'バリデーションが通ること' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context '11文字の場合' do
+        before(:each) { subject.other_use_target = 'a' * 11 }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
     describe '#usage_period_start' do
       context '存在しない場合' do
         before(:each) { subject.usage_period_start = nil }
@@ -170,6 +224,24 @@ RSpec.describe FieldFire, type: :model do
     describe '#usage_period_end' do
       context '存在しない場合' do
         before(:each) { subject.usage_period_end = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#other_fire_management' do
+      context '10文字の場合' do
+        before(:each) { subject.other_fire_management = 'a' * 20 }
+
+        it 'バリデーションが通ること' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context '11文字の場合' do
+        before(:each) { subject.other_fire_management = 'a' * 21 }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid

@@ -4,10 +4,8 @@
 <%= f.text_field :use_place, class: "form-control", placeholder: FieldFire.human_attribute_name(:use_place), maxlength: 100 %>
 <br>
 <%= f.label FireUseTarget.human_attribute_name(:name) %><br>
-<%= f.collection_check_boxes :fire_use_target_ids, FireUseTarget.all, :id, :name, include_hidden: false %>
-<br><br>
-<%= f.label :other_usages %>
-<%= f.text_field :other_usages, class: "form-control", placeholder: FieldFire.human_attribute_name(:other_usages) %>
+<%= f.collection_check_boxes :fire_use_target_ids, FireUseTarget.all, :id, :name %>
+<%= f.text_field :other_use_target, class: "form-control form-control-sm", style: "width: 25%", placeholder: "その他", maxlength: 10 %>
 <br>
 <div class="form-inline">
   <div>
@@ -33,10 +31,11 @@
 </div>
 <br>
 <%= f.label FireType.human_attribute_name(:name) %><br>
-<%= f.collection_check_boxes :fire_type_ids, FireType.all, :id, :name, include_hidden: false %>
-<br><br>
+<%= f.collection_check_boxes :fire_type_ids, FireType.all, :id, :name %>
+<%= f.text_field :other_fire_management, class: "form-control form-control-sm", style: "width: 25%", placeholder: "その他", maxlength: 100 %>
+<br>
 <%= f.label FireManagement.human_attribute_name(:name) %><br>
-<%= f.collection_check_boxes :fire_management_ids, FireManagement.all, :id, :name, include_hidden: false %>
+<%= f.collection_check_boxes :fire_management_ids, FireManagement.all, :id, :name %>
 <br><br>
 <%= f.label :precautions %>
 <%= f.text_field :precautions, class: "form-control", placeholder: FieldFire.human_attribute_name(:precautions), maxlength: 40 %>
