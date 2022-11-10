@@ -7,7 +7,7 @@ FactoryBot.define do
     sequence(:other_use_target) { |n| "other#{n}" }
     usage_period_start { '2022-01-01' }
     usage_period_end { '2022-01-01' }
-    sequence(:other_fire_management) { |n| "other#{n}" }
+    sequence(:other_fire_type) { |n| "other#{n}" }
     usage_time_start { '15:00:00' }
     usage_time_end { '15:00:00' }
     sequence(:precautions) { |n| "precautions#{n}" }
@@ -23,7 +23,7 @@ FactoryBot.define do
     sequence(:other_use_target) { |n| "other#{n}" }
     usage_period_start { '2022-01-01' }
     usage_period_end { '2022-01-01' }
-    sequence(:other_fire_management) { |n| "other#{n}" }
+    sequence(:other_fire_type) { |n| "other#{n}" }
     usage_time_start { '15:00:00' }
     usage_time_end { '15:00:00' }
     sequence(:precautions) { |n| "precautions#{n}" }

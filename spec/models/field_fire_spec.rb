@@ -75,9 +75,9 @@ RSpec.describe FieldFire, type: :model do
       end
     end
 
-    describe '#other_fire_management' do
+    describe '#other_fire_type' do
       context '10文字の場合' do
-        before(:each) { subject.other_fire_management = 'a' * 20 }
+        before(:each) { subject.other_fire_type = 'a' * 20 }
 
         it 'バリデーションが通ること' do
           expect(subject).to be_valid
@@ -85,7 +85,7 @@ RSpec.describe FieldFire, type: :model do
       end
 
       context '11文字の場合' do
-        before(:each) { subject.other_fire_management = 'a' * 21 }
+        before(:each) { subject.other_fire_type = 'a' * 21 }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid
@@ -231,9 +231,9 @@ RSpec.describe FieldFire, type: :model do
       end
     end
 
-    describe '#other_fire_management' do
+    describe '#other_fire_type' do
       context '10文字の場合' do
-        before(:each) { subject.other_fire_management = 'a' * 20 }
+        before(:each) { subject.other_fire_type = 'a' * 20 }
 
         it 'バリデーションが通ること' do
           expect(subject).to be_valid
@@ -241,7 +241,7 @@ RSpec.describe FieldFire, type: :model do
       end
 
       context '11文字の場合' do
-        before(:each) { subject.other_fire_management = 'a' * 21 }
+        before(:each) { subject.other_fire_type = 'a' * 21 }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid

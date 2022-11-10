@@ -15,7 +15,7 @@ class FieldFire < ApplicationRecord
   validates :usage_period_end, presence: true
   validates :usage_time_start, presence: true
   validates :usage_time_end, presence: true
-  validates :other_fire_management, length: { maximum: 20 }
+  validates :other_fire_type, length: { maximum: 20 }
   validates :precautions, presence: true, length: { maximum: 40 }
   validates :fire_origin_responsible, presence: true
   validates :fire_use_responsible, presence: true

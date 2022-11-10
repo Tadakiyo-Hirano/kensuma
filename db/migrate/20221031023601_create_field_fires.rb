@@ -6,7 +6,7 @@ class CreateFieldFires < ActiveRecord::Migration[6.1]
       t.string :other_use_target
       t.date :usage_period_start
       t.date :usage_period_end
-      t.string :other_fire_management
+      t.string :other_fire_type
       t.time :usage_time_start
       t.time :usage_time_end
       t.string :precautions

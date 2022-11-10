@@ -16,6 +16,8 @@ module Users::RequestOrders
     def create
       @field_fire = @request_order.field_fires.build(field_fire_params)
       if @field_fire.save
+        other_use_target_reset(@field_fire.fire_use_targets, @field_fire)
+        other_fire_type_reset(@field_fire.fire_types, @field_fire)
         flash[:success] = '火気情報を登録しました。'
         redirect_to users_request_order_field_fires_url
       else
@@ -27,6 +29,8 @@ module Users::RequestOrders
 
     def update
       if @field_fire.update(field_fire_params)
+        other_use_target_reset(@field_fire.fire_use_targets, @field_fire)
+        other_fire_type_reset(@field_fire.fire_types, @field_fire)
         flash[:success] = '更新しました'
         redirect_to users_request_order_field_fire_path
       else
@@ -54,9 +58,22 @@ module Users::RequestOrders
       @field_fires = @request_order.field_fires
     end
 
+    # その他のcheckを外した場合はその他の入力用カラムをnilにする。
+    def other_use_target_reset(others, field_fire)
+      unless others.map { |other| other.id }.include?(9)
+        field_fire.update(other_use_target: nil)
+      end
+    end
+
+    def other_fire_type_reset(others, field_fire)
+      unless others.map { |other| other.id }.include?(7)
+        field_fire.update(other_fire_type: nil)
+      end
+    end
+
     def field_fire_params
       params.require(:field_fire).permit(
-        :use_place, :other_use_target, :usage_period_start, :usage_period_end, :other_fire_management,
+        :use_place, :other_use_target, :usage_period_start, :usage_period_end, :other_fire_type,
         :usage_time_start, :usage_time_end, :precautions, :fire_origin_responsible, :fire_use_responsible,
         { fire_use_target_ids: [], fire_type_ids: [], fire_management_ids: [] }
       )

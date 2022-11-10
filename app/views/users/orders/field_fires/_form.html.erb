@@ -32,7 +32,7 @@
 <br>
 <%= f.label FireType.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_type_ids, FireType.all, :id, :name %>
-<%= f.text_field :other_fire_management, class: "form-control form-control-sm", style: "width: 25%", placeholder: "その他", maxlength: 100 %>
+<%= f.text_field :other_fire_type, class: "form-control form-control-sm", style: "width: 25%", placeholder: "その他", maxlength: 100 %>
 <br>
 <%= f.label FireManagement.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_management_ids, FireManagement.all, :id, :name %>

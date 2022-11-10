@@ -36,6 +36,12 @@
           <th><%= FireType.human_attribute_name(:name) %></th>
           <td><%= @field_fire.fire_types.map {|fire_type|fire_type.name}.join(', ') %></td>
         </tr>
+        <% if @field_fire.other_fire_type.present? %>
+          <tr>
+            <th><%= FieldFire.human_attribute_name(:other_fire_type) %></th>
+            <td><%= @field_fire.other_fire_type %></td>
+          </tr>
+        <% end %>
         <tr>
           <th><%= FireManagement.human_attribute_name(:name) %></th>
           <td><%= @field_fire.fire_managements.map {|fire_management|fire_management.name}.join(', ') %></td>
