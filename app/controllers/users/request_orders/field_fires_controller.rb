@@ -10,7 +10,11 @@ module Users::RequestOrders
     def show; end
 
     def new
-      @field_fire = @request_order.field_fires.new
+      if @request_order.field_fires.present?
+        redirect_to users_request_order_field_fire_path(@request_order,  @request_order.field_fires.first)
+      else
+        @field_fire = @request_order.field_fires.new
+      end
     end
 
     def create
@@ -19,7 +23,7 @@ module Users::RequestOrders
         other_use_target_reset(@field_fire.fire_use_targets, @field_fire)
         other_fire_type_reset(@field_fire.fire_types, @field_fire)
         flash[:success] = '火気情報を登録しました。'
-        redirect_to users_request_order_field_fires_url
+        redirect_to users_request_order_field_fire_url(@request_order, @field_fire)
       else
         render :new
       end
@@ -32,7 +36,7 @@ module Users::RequestOrders
         other_use_target_reset(@field_fire.fire_use_targets, @field_fire)
         other_fire_type_reset(@field_fire.fire_types, @field_fire)
         flash[:success] = '更新しました'
-        redirect_to users_request_order_field_fire_path
+        redirect_to users_request_order_field_fire_url(@request_order, @field_fire)
       else
         render 'edit'
       end
@@ -41,7 +45,7 @@ module Users::RequestOrders
     def destroy
       @field_fire.destroy!
       flash[:danger] = '火気情報を削除しました'
-      redirect_to users_request_order_field_fires_url
+      redirect_to users_request_order_url(@request_order)
     end
 
     private
