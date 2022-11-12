@@ -3,15 +3,12 @@ module Users::RequestOrders
     before_action :set_request_order
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_field_fire, only: %i[show edit update destroy]
-    # before_action :set_field_fires, only: %i[index]
-
-    # def index; end
 
     def show; end
 
     def new
       if @request_order.field_fires.present?
-        redirect_to users_request_order_field_fire_path(@request_order,  @request_order.field_fires.first)
+        redirect_to users_request_order_field_fire_path(@request_order, @request_order.field_fires.first)
       else
         @field_fire = @request_order.field_fires.new
       end
@@ -57,10 +54,6 @@ module Users::RequestOrders
     def set_field_fire
       @field_fire = @request_order.field_fires.find_by(uuid: params[:uuid])
     end
-
-    # def set_field_fires
-    #   @field_fires = @request_order.field_fires
-    # end
 
     # その他のcheckを外した場合はその他の入力用カラムをnilにする。
     def other_use_target_reset(others, field_fire)

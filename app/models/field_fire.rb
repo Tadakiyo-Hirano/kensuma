@@ -10,7 +10,7 @@ class FieldFire < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   before_validation(on: :create) do
-    errors[:base] << "火気情報は1件までしか登録できません" if field_fireable && field_fireable.field_fires.count >= 1
+    errors[:base] << '火気情報は1件までしか登録できません' if field_fireable && field_fireable.field_fires.count >= 1
   end
 
   validates :use_place, presence: true, length: { maximum: 100 }
