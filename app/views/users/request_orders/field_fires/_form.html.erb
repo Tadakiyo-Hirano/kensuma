@@ -41,7 +41,6 @@
 <%= f.text_field :precautions, class: "form-control", placeholder: FieldFire.human_attribute_name(:precautions), maxlength: 40 %>
 <br>
 <%= f.label :fire_origin_responsible %>
-<%#= f.text_field :fire_origin_responsible, class: "form-control", placeholder: FieldFire.human_attribute_name(:fire_origin_responsible) %>
 <%= f.select :fire_origin_responsible, @business_workers_name, { include_blank: true }, { class: "form-control" } %>
 <br>
 <%= f.label :fire_use_responsible %>
