@@ -162,9 +162,7 @@
           <tr style="height: 24px">
             <td class="doc_20_s9"></td>
             <td class="doc_20_s9" colspan="4" rowspan="2">事業所の名称</td>
-            <td class="doc_20_s10" colspan="9" rowspan="2"><a target="_blank"
-                href="#rangeid=946408470">「事業所名（現場名）」20-002</a>
-            </td>
+            <td class="doc_20_s10" colspan="9" rowspan="2"><%= document_site_info.site_name %></td><!-- 20-002「事業所名(現場名)」-->
             <td class="doc_20_s3"></td>
             <td class="doc_20_s3"></td>
             <td class="doc_20_s3"></td>
@@ -180,8 +178,7 @@
             <td class="doc_20_s3"></td>
             <td class="doc_20_s3"></td>
             <td class="doc_20_s9" colspan="3" rowspan="2">会社名</td>
-            <td class="doc_20_s10" colspan="10" rowspan="2"><a target="_blank" href="#rangeid=525841685">「会社名」20-004</a>
-            </td>
+            <td class="doc_20_s10" colspan="10" rowspan="2"><%= Business.find(document_info.business_id).name %></td><!-- 20-004「会社名」-->
             <td class="doc_20_s3"></td>
           </tr>
           <tr style="height: 24px">
@@ -249,9 +246,7 @@
           <tr style="height: 24px">
             <td class="doc_20_s9"></td>
             <td class="doc_20_s9" colspan="4" rowspan="2">所長名</td>
-            <td class="doc_20_s12" colspan="8" rowspan="2"><a target="_blank"
-                href="#rangeid=749445535">元請会社の「現場代理人名」20-003</a>
-            </td>
+            <td class="doc_20_s12" colspan="8" rowspan="2"><%= document_site_info.site_agent_name %></td><!--20-003「元請会社の「現場代理人名」」-->
             <td class="doc_20_s13" rowspan="2">殿</td>
             <td class="doc_20_s3"></td>
             <td class="doc_20_s3"></td>
@@ -268,8 +263,7 @@
             <td class="doc_20_s3"></td>
             <td class="doc_20_s3"></td>
             <td class="doc_20_s9" colspan="3" rowspan="2">代表者名</td>
-            <td class="doc_20_s10" colspan="9" rowspan="2"><a target="_blank"
-                href="#rangeid=1891977826">「代表者名」20-005</a></td>
+            <td class="doc_20_s10" colspan="9" rowspan="2"><%= Business.find(document_info.business_id).representative_name %></td><!--20-005「代表者名」-->
             <td class="doc_20_s14" rowspan="2"><a target="_blank" href="#rangeid=286220191">㊞<br>20-006</a></td>
             <td class="doc_20_s3"></td>
           </tr>
@@ -1789,17 +1783,13 @@
 }
 
 .ritz .waffle .doc_20_s12 {
-  border-top: 1px SOLID #ffffff;
-  border-bottom: 1px SOLID #ffffff;
-  border-right: 1px SOLID #ffffff;
-  border-left: 1px SOLID #ffffff;
   border-bottom: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
+  font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
   white-space: normal;
@@ -1982,17 +1972,13 @@
 }
 
 .ritz .waffle .doc_20_s10 {
-  border-top: 1px SOLID #ffffff;
-  border-bottom: 1px SOLID #ffffff;
-  border-right: 1px SOLID #ffffff;
-  border-left: 1px SOLID #ffffff;
   border-bottom: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
+  font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
   white-space: nowrap;

@@ -1,6 +1,11 @@
-<!-- (20)参考様式第3号(年間安全衛生計画書) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 <div id="doc_20_sheet">
   <div class="ritz grid-container" dir="ltr">
+    <%= form_with(model: @document, url: users_request_order_document_path(params[:request_order_uuid], @document), local: true, method: :patch) do |f| %>
     <table class="waffle" cellspacing="0" cellpadding="0">
       <tbody>
         <tr style="height: 24px">
@@ -74,7 +79,11 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s7"></td>
           <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
-          <td class="doc_20_s8" colspan="9" rowspan="2"><a target="_blank" href="#rangeid=6213486">「元請会社の確認欄」20-001</a></td>
+          <td class="doc_20_s8" colspan="9" rowspan="2">
+            <%= f.text_field :content["prime_contractor_confirmation"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-001「元請会社の確認欄」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -354,8 +363,10 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s15" colspan="4"></td>
           <td class="doc_20_s2"></td>
-          <td class="doc_20_s10" colspan="7" rowspan="2"><a target="_blank" href="#rangeid=1692183882">「書類作成日（西暦）20-007</a>
-          </td>
+          <td class="doc_20_s10" colspan="7" rowspan="2">
+            <%= f.date_field(:content["date_created"], class: "form-control", style: "width: 100%")
+            %>
+          </td><!-- 20-007「書類作成日（西暦）」-->
           <td class="doc_20_s13" colspan="2" rowspan="2">作成</td>
           <td class="doc_20_s3"></td>
         </tr>
@@ -448,7 +459,11 @@
           <td class="doc_20_s19" colspan="7" rowspan="2"><a target="_blank" href="#rangeid=123902136">「年度（和暦）」20-008</a></td>
           <td class="doc_20_s20" colspan="2" rowspan="2">年度</td>
           <td class="doc_20_s20" rowspan="2">（</td>
-          <td class="doc_20_s21" colspan="4" rowspan="2"><a target="_blank" href="#rangeid=542196945">「計画期間（始期）年月」20-009</a>
+          <td class="doc_20_s21" colspan="4" rowspan="2">
+          <%= raw sprintf(f.date_select(:content["planning_period_beginning"],
+              start_year: (Time.now.year - 2), end_year: (Time.now.year + 2), discard_day: true, use_month_numbers: true,
+              class: "form-control", style: "width: 100%", date_separator: '%s'), '年 ') + '月'
+          %>
           </td>
           <td class="doc_20_s20" rowspan="2">～</td>
           <td class="doc_20_s21" colspan="4" rowspan="2"><a target="_blank" href="#rangeid=1153377183">「計画期間（終期）年月」20-010</a>
@@ -531,7 +546,12 @@
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 方 針</td>
-          <td class="doc_20_s23" colspan="33" rowspan="2"><a target="_blank" href="#rangeid=542505868">「安全衛生方針」20-011</a></td>
+          <td class="doc_20_s23" colspan="33" rowspan="2">
+            <%= f.text_field :content["health_and_safety_policy"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-011「安全衛生方針」-->
+          </td>
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -585,7 +605,12 @@
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 目 標</td>
-          <td class="doc_20_s23" colspan="33" rowspan="2"><a target="_blank" href="#rangeid=369804138">「安全衛生目標」20-012</a></td>
+          <td class="doc_20_s23" colspan="33" rowspan="2">
+            <%= f.text_field :content["health_and_safety_goals"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-012「安全衛生目標」-->
+          </td>
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -643,9 +668,12 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s24"></td>
-          <td class="doc_20_s23" colspan="40" rowspan="2"><a target="_blank" href="#rangeid=2014806487">「安全衛生上の課題及び
-              特定した危険性又は有害性」20-013</a></td>
-          <td class="doc_20_s3"></td>
+          <td class="doc_20_s23" colspan="40" rowspan="2">
+            <%= f.text_field :content["health_and_safety_issues"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-013「安全衛生上の課題及び 特定した危険性又は有害性」-->
+          </td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s24"></td>
@@ -720,25 +748,51 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s25"></td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"><a target="_blank" href="#rangeid=557254157">「安全衛生計画・重点施策」20-014</a>
-          </td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"><a target="_blank" href="#rangeid=1213531750">「安全衛生計画・実施事項」20-015</a>
-          </td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"><a target="_blank"
-              href="#rangeid=604206057">「安全衛生計画・管理目標（管理点）」20-016</a></td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"><a target="_blank" href="#rangeid=1382634110">「安全衛生計画・実施担当」20-017</a>
-          </td>
-          <td class="doc_20_s27" colspan="4" rowspan="2"><a target="_blank"
-              href="#rangeid=404634873">「実施スケジュールと評価スケジュール（4月～6月）」20-018</a></td>
-          <td class="doc_20_s27" colspan="4" rowspan="2"><a target="_blank"
-              href="#rangeid=1831665738">「実施スケジュールと評価スケジュール（7月～9月）」20-019</a></td>
-          <td class="doc_20_s27" colspan="4" rowspan="2"><a target="_blank"
-              href="#rangeid=238921366">「実施スケジュールと評価スケジュール（10月～12月）」20-020</a></td>
-          <td class="doc_20_s28" colspan="4" rowspan="2"><a target="_blank"
-              href="#rangeid=686190816">「実施スケジュールと評価スケジュール（10月～12月）」20-021</a></td>
-          <td class="doc_20_s26" colspan="4" rowspan="3"><a target="_blank"
-              href="#rangeid=353601222">「安全衛生計画・実施上の留意点」20-023</a>
-          </td>
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_priority_measures_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-014「重点施策1」-->
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_items_to_be_implemented_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-015「重点事項1」-->
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_management_goals_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-016「管理目標1」-->
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_responsible_for_implementation_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-017「実施担当1」-->
+          <td class="doc_20_s27" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_april_june_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-018「実施スケジュールと評価スケジュール（4月～6月）1」-->
+          <td class="doc_20_s27" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_july_september_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-019「実施スケジュールと評価スケジュール（7月～9月）1」-->
+          <td class="doc_20_s27" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_october_december_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-020「実施スケジュールと評価スケジュール（10月～12月）1」-->
+          <td class="doc_20_s28" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_january~march_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）1」-->
+          <td class="doc_20_s26" colspan="4" rowspan="3">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_points_to_note_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-023「安全衛生計画・実施上の留意点1」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -747,8 +801,11 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s25"></td>
-          <td class="doc_20_s26" colspan="16"><a target="_blank" href="#rangeid=874291028">「実施スケジュールと評価スケジュール（備考欄）」20-022</a>
-          </td>
+          <td class="doc_20_s26" colspan="16">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_remarks_1st"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-022「実施スケジュールと評価スケジュール（備考欄）1」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -967,49 +1024,97 @@
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">４月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=508453633">「安全衛生行事・4月」20-028</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_april"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-028「安全衛生行事・4月」-->
           <td class="doc_20_s6" colspan="2">10月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=2037798006">「安全衛生行事・10月」20-034</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_october"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-034「安全衛生行事・10月」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">５月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=351520186">「安全衛生行事・5月」20-029</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_may"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-030「安全衛生行事・5月」-->
           <td class="doc_20_s6" colspan="2">11月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=1515978543">「安全衛生行事・11月」20-035</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_november"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-035「安全衛生行事・11月」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">６月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=715991280">「安全衛生行事・6月」20-030</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_june"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-031「安全衛生行事・6月」-->
           <td class="doc_20_s6" colspan="2">12月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=854135411">「安全衛生行事・12月」20-036</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_december"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-036「安全衛生行事・12月」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">７月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=1583096860">「安全衛生行事・7月」20-031</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_july"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-032「安全衛生行事・7月」-->
           <td class="doc_20_s6" colspan="2">１月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=857514628">「安全衛生行事・1月」20-037</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_january"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-037「安全衛生行事・1月」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">８月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=741843583">「安全衛生行事・8月」20-032</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_august"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-033「安全衛生行事・8月」-->
           <td class="doc_20_s6" colspan="2">２月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=1588783612">「安全衛生行事・2月」20-038</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_february"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-038「安全衛生行事・2月」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">９月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=1614747029">「安全衛生行事・9月」20-033</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_september"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-034「安全衛生行事・9月」-->
           <td class="doc_20_s6" colspan="2">３月</td>
-          <td class="doc_20_s23" colspan="18"><a target="_blank" href="#rangeid=1735186426">「安全衛生行事・3月」20-039</a></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= f.text_field :content["health_and_safety_events_march"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-039「安全衛生行事・3月」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -1245,5 +1350,9 @@
         </tr>
       </tbody>
     </table>
+    <div class="center">
+      <%= f.submit "更新", class: "btn btn-block btn-outline-secondary" %>
+    </div>
+    <% end %>
   </div>
 </div>
