@@ -6,6 +6,8 @@ module Users::Orders
 
     def show; end
 
+    def index; end
+
     def new
       if @order.field_fires.present?
         redirect_to users_order_field_fire_path(@order, @order.field_fires.first)

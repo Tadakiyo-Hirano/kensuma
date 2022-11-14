@@ -1,48 +1,128 @@
 <%= render 'shared/error_massages', object: f.object %>
 
 <%= f.label :use_place %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :use_place, class: "form-control", placeholder: FieldFire.human_attribute_name(:use_place), maxlength: 100 %>
 <br>
 <%= f.label FireUseTarget.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_use_target_ids, FireUseTarget.all, :id, :name %>
 <%= f.text_field :other_use_target, class: "form-control form-control-sm", style: "width: 25%", placeholder: "その他", maxlength: 10 %>
 <br>
-<div class="form-inline">
-  <div>
-    <%= f.label :usage_period_start %>
-    <%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
-  </div>
-  &emsp;
-  <div>
-    <%= f.label :usage_period_end %>
-    <%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
-  </div>
-</div>
+<%= f.label :usage_period_start %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <br>
-<div class="form-inline">
-  <div>
-    <%= f.label :usage_time_start %>
-    <%= f.time_select :usage_time_start, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
-  </div>
-  <div>
-    <%= f.label :usage_time_end %>
-    <%= f.time_select :usage_time_end, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
-  </div>
-</div>
+<%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
+<br><br>
+<%= f.label :usage_period_end %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <br>
+<%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
+<br><br>
+<%= f.label :usage_time_start %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<br>
+<%= f.time_select :usage_time_start, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+<br><br>
+<%= f.label :usage_time_end %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<br>
+<%= f.time_select :usage_time_end, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+<br><br>
 <%= f.label FireType.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_type_ids, FireType.all, :id, :name %>
-<%= f.text_field :other_fire_type, class: "form-control form-control-sm", style: "width: 25%", placeholder: "その他", maxlength: 100 %>
+<%= f.text_field :other_fire_type, class: "form-control form-control-sm", style: "width: 25%", placeholder: "その他", maxlength: 20 %>
 <br>
 <%= f.label FireManagement.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_management_ids, FireManagement.all, :id, :name %>
 <br><br>
 <%= f.label :precautions %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :precautions, class: "form-control", placeholder: FieldFire.human_attribute_name(:precautions), maxlength: 40 %>
 <br>
 <%= f.label :fire_origin_responsible %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :fire_origin_responsible, @business_workers_name, { include_blank: true }, { class: "form-control" } %>
 <br>
 <%= f.label :fire_use_responsible %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :fire_use_responsible, @business_workers_name, { include_blank: true }, { class: "form-control" } %>
 <br>
+
+<script>
+  $(function(){
+    $.each(function(key){
+      $.validator.addMethod(key, this);
+    });
+    $(".field_fire-form-validation").validate({
+      rules:{
+        "field_fire[use_place]": {
+          required: true
+        },
+        "field_fire[usage_period_start]": {
+          required: true
+        },
+        "field_fire[usage_period_end]": {
+          required: true
+        },
+        "field_fire[usage_time_start(4i)]": {
+          required: true
+        },
+        "field_fire[usage_time_start(5i)]": {
+          required: true
+        },
+        "field_fire[usage_time_end(4i)]": {
+          required: true
+        },
+        "field_fire[usage_time_end(5i)]": {
+          required: true
+        },
+        "field_fire[precautions]": {
+          required: true
+        },
+        "field_fire[fire_origin_responsible]": {
+          required: true
+        },
+        "field_fire[fire_use_responsible]": {
+          required: true
+        },
+      },
+      messages:{
+        "field_fire[use_place]": {
+          required: "使用場所を入力してください。"
+        },
+        "field_fire[usage_period_start]": {
+          required: "使用期間(始期)を入力してください。"
+        },
+        "field_fire[usage_period_end]": {
+          required: "使用期間(終期)を入力してください。"
+        },
+        "field_fire[usage_time_start(4i)]": {
+          required: "使用時間(始時)を入力してください。"
+        },
+        "field_fire[usage_time_start(5i)]": {
+          required: "使用時間(始時)を入力してください。"
+        },
+        "field_fire[usage_time_end(4i)]": {
+          required: "使用時間(終時)を入力してください。"
+        },
+        "field_fire[usage_time_end(5i)]": {
+          required: "使用時間(終時)を入力してください。"
+        },
+        "field_fire[precautions]": {
+          required: "取扱上の注意を入力してください。"
+        },
+        "field_fire[fire_origin_responsible]": {
+          required: "火元責任者(後始末巡回者)を入力してください。"
+        },
+        "field_fire[fire_use_responsible]": {
+          required: "火気使用責任者を入力してください。"
+        },
+      },
+      errorClass: "input_form_error"
+    });
+    // 入力欄を変更したときにバリデーションを実行
+    $(".field_fire-form-validation").change(function () {
+      $(this).valid();
+    });
+  });
+</script>

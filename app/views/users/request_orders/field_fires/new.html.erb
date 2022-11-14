@@ -3,7 +3,7 @@
 
 <div class="card">
   <div class="card-body">
-    <%= form_with model: @field_fire, url: users_request_order_field_fires_path, method: :post, local: true do |f| %>
+    <%= form_with model: @field_fire, url: users_request_order_field_fires_path, method: :post, local: true, class: "field_fire-form-validation" do |f| %>
       <%= render "form", f: f, field_fire: @field_fire %>
 
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
