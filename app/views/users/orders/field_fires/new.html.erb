@@ -7,7 +7,7 @@
       <%= render "form", f: f, field_fire: @field_fire %>
 
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
-      <%= link_to "一覧画面へ", users_order_field_fires_path, class: "btn btn-md btn-block btn-default" %>
+      <%= link_to "現場詳細画面へ", users_order_url(@order), class: "btn btn-md btn-block btn-default" %>
     <% end %>
   </div>
 </div>

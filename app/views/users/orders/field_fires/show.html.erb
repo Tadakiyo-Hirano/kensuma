@@ -46,7 +46,7 @@
         <% end %>
         <tr>
           <th><%= FireManagement.human_attribute_name(:name) %></th>
-          <td>a<%= @field_fire.fire_managements.map(&:name).join(', ') %></td>
+          <td><%= @field_fire.fire_managements.map(&:name).join(', ') %></td>
         </tr>
         <tr>
           <th><%= FieldFire.human_attribute_name(:precautions) %></th>
