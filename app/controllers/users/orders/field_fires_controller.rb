@@ -57,13 +57,13 @@ module Users::Orders
 
     # その他のcheckを外した場合はその他の入力用カラムをnilにする。
     def other_use_target_reset(others, field_fire)
-      unless others.map { |other| other.id }.include?(9)
+      unless others.map(&:id).include?(9)
         field_fire.update(other_use_target: nil)
       end
     end
 
     def other_fire_type_reset(others, field_fire)
-      unless others.map { |other| other.id }.include?(7)
+      unless others.map(&:id).include?(7)
         field_fire.update(other_fire_type: nil)
       end
     end

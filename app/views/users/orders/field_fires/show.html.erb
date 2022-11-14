@@ -10,7 +10,7 @@
         </tr>
         <tr>
           <th><%= FireUseTarget.human_attribute_name(:name) %></th>
-          <td><%= @field_fire.fire_use_targets.map {|fire_use_target|fire_use_target.name}.join(', ') %></td>
+          <td><%= @field_fire.fire_use_targets.map(&:name).join(', ') %></td>
         </tr>
         <% if @field_fire.other_use_target.present? %>
           <tr>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
           <th><%= FireType.human_attribute_name(:name) %></th>
-          <td><%= @field_fire.fire_types.map {|fire_type|fire_type.name}.join(', ') %></td>
+          <td><%= @field_fire.fire_types.map(&:name).join(', ') %></td>
         </tr>
         <% if @field_fire.other_fire_type.present? %>
           <tr>
@@ -46,7 +46,7 @@
         <% end %>
         <tr>
           <th><%= FireManagement.human_attribute_name(:name) %></th>
-          <td><%= @field_fire.fire_managements.map {|fire_management|fire_management.name}.join(', ') %></td>
+          <td>a<%= @field_fire.fire_managements.map(&:name).join(', ') %></td>
         </tr>
         <tr>
           <th><%= FieldFire.human_attribute_name(:precautions) %></th>
