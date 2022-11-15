@@ -3,9 +3,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<!--更新処理がうまくいかなかったためペンディング-->
 <div id="doc_20_sheet">
   <div class="ritz grid-container" dir="ltr">
-    <%= form_with(model: @document, url: users_request_order_document_path(params[:request_order_uuid], @document), local: true, method: :patch) do |f| %>
+    <!--<%= form_with(model: @document, url: users_request_order_document_path, local: true, method: :patch) do |f| %>-->
     <table class="waffle" cellspacing="0" cellpadding="0">
       <tbody>
         <tr style="height: 24px">
@@ -810,15 +811,51 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3">〃</td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s31" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s31" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s31" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s32" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s30" colspan="4" rowspan="3"></td>
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_priority_measures_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-014「重点施策2」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_items_to_be_implemented_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-015「重点事項2」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_management_goals_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-016「管理目標2」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_responsible_for_implementation_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-017「実施担当2」-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_april_june_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-018「実施スケジュールと評価スケジュール（4月～6月）2」-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_july_september_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-019「実施スケジュールと評価スケジュール（7月～9月）2」-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_october_december_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-020「実施スケジュールと評価スケジュール（10月～12月）2」-->
+          <td class="doc_20_s32" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_january~march_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）2」-->
+          <td class="doc_20_s30" colspan="4" rowspan="3">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_points_to_note_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-023「安全衛生計画・実施上の留意点2」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -827,20 +864,60 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s33" colspan="16"></td>
+          <td class="doc_20_s33" colspan="16">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_remarks_2nd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-022「実施スケジュールと評価スケジュール（備考欄）2」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3">〃</td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s35" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s30" colspan="4" rowspan="3"></td>
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_priority_measures_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-014「重点施策3」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_items_to_be_implemented_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-015「重点事項3」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_management_goals_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-016「管理目標3」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_responsible_for_implementation_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-017「実施担当3」-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_april_june_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-018「実施スケジュールと評価スケジュール（4月～6月）3」-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_july_september_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-019「実施スケジュールと評価スケジュール（7月～9月）3」-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_october_december_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-020「実施スケジュールと評価スケジュール（10月～12月）3」-->
+          <td class="doc_20_s35" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_january~march_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）3」-->
+          <td class="doc_20_s30" colspan="4" rowspan="3">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_points_to_note_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-023「安全衛生計画・実施上の留意点3」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -849,20 +926,60 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="16"></td>
+          <td class="doc_20_s30" colspan="16">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_remarks_3rd"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-022「実施スケジュールと評価スケジュール（備考欄）3」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3">〃</td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s35" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s30" colspan="4" rowspan="3"></td>
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_priority_measures_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-014「重点施策4」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_items_to_be_implemented_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-015「重点事項4」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_management_goals_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-016「管理目標4」-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= f.text_field :content["health_and_safety_plan_responsible_for_implementation_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-017「実施担当4」-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_april_june_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-018「実施スケジュールと評価スケジュール（4月～6月）4」-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_july_september_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-019「実施スケジュールと評価スケジュール（7月～9月）4」-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_october_december_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-020「実施スケジュールと評価スケジュール（10月～12月）4」-->
+          <td class="doc_20_s35" colspan="4" rowspan="2">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_january~march_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）4」-->
+          <td class="doc_20_s30" colspan="4" rowspan="3">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_points_to_note_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-023「安全衛生計画・実施上の留意点4」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -871,7 +988,11 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="16"></td>
+          <td class="doc_20_s30" colspan="16">
+            <%= f.text_field :content["implementation_and_evaluation_schedules_remarks_4th"],
+                { class: "form-control", style: "width: 100%" }
+            %>
+          </td><!-- 20-022「実施スケジュールと評価スケジュール（備考欄）4」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -1350,9 +1471,9 @@
         </tr>
       </tbody>
     </table>
-    <div class="center">
+    <!--<div class="center">
       <%= f.submit "更新", class: "btn btn-block btn-outline-secondary" %>
     </div>
-    <% end %>
+    <% end %>-->
   </div>
 </div>
