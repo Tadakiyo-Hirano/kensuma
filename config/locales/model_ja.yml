@@ -10,6 +10,10 @@ ja:
       car_voluntary_insurance: 任意保険
       special_vehicle: 特殊車両情報
       field_car: 現場車両情報
+      field_fire: 現場火気情報
+      fire_use_target: 火気使用目的
+      fire_type: 火気の種類
+      fire_management: 火気の管理方法
       field_machine: 現場機械情報
       field_solvent: 現場溶剤情報
       field_special_vehicle: 現場特殊車両情報
@@ -111,6 +115,23 @@ ja:
         waypoint_first: 経由地1
         waypoint_second: 経由地2
         arrival_point: 目的地(至)
+      field_fire:
+        use_place: 使用場所
+        other_use_target: 使用目的(その他)
+        usage_period_start: 使用期間(始期)
+        usage_period_end: 使用期間(終期)
+        usage_time_start: 使用時間(始時)
+        usage_time_end: 使用時間(終時)
+        other_fire_type: 火気の種類(その他)
+        precautions: 取扱上の注意
+        fire_origin_responsible: 火元責任者(後始末巡回者)
+        fire_use_responsible: 火気使用責任者
+      fire_use_target:
+        name: 使用目的
+      fire_type:
+        name: 火気の種類
+      fire_management:
+        name: 管理方法
       field_machine:
         machine_name: 機械名
         carry_on_date: 持込年月日
