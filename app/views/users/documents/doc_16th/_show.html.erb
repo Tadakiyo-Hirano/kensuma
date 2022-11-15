@@ -1,14 +1,9 @@
 <!-- (16)参考様式第9号(火気使用届) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-<div class="document-outer">
-  <div id="sixteenth-document" class="document-inner">
-    <div class="sixteenth-text-container">
+<div class="document-outer" style="overflow: auto;">
+  <div class="document-inner">
+    <section class="doc_16_sheet">
       <div class="ritz grid-container" dir="ltr">
-        <table class="waffle" cellspacing="0" cellpadding="0">
+        <table class="waffle" cellspacing="0" cellpadding="0" style="width: 100%; zoom: 70%;">
           <tbody>
             <tr style="height: 29px">
               <td class="doc_16_m001 d16_l_full" dir="ltr" colspan="11">（参考様式第９号）</td>
@@ -105,62 +100,48 @@
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">使 用 場 所</td>
               <td class="doc_16_m002 d16_l_full" dir="ltr" colspan="31" rowspan="2">
-                <a target="_blank" href="#rangeid=16010">「使用場所」16-010</a></td>
+                <%= document_info.field_fires.map(&:use_place).first %> <!-- 16-010 使用場所 -->
+              </td>
             </tr>
             <tr style="height: 29px">
             </tr>
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">使 用 目 的</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">溶接、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">溶断、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">圧接、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">防水、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">乾燥、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">採暖、</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">溶接</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">溶断</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">圧接</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">防水</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">乾燥</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">採暖</td>
               <td class="doc_16_" dir="ltr" colspan="4"></td>
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">使 用 期 間<br>使用時間（原則）</td>
               <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="4" rowspan="2">
-                <a target="_blank" href="#rangeid=16020">「使用期間（始期）月日」16-020</a></td>
+                <%= document_date(document_info.field_fires.map(&:usage_period_start).first) %> <!-- 16-020 使用期間(始期） -->
+              </td>
               <td class="doc_16_m006" dir="ltr" colspan="1" rowspan="2">～</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_right" dir="ltr" colspan="4" rowspan="2">
-                <a target="_blank" href="#rangeid=16021">「使用期間（終期）月日」16-021</a></td>
+                <%= document_date(document_info.field_fires.map(&:usage_period_end).first) %> <!-- 16-021 使用期間(終期） -->
+              </td>
             </tr>
+            <tr style="height: 29px"></tr>
             <tr style="height: 29px">
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16011">16-011</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16012">16-012</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16013">16-013</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16014">16-014</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16015">16-015</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16016">16-016</a></td>
-              <td class="doc_16_" dir="ltr" colspan="4"></td>
-            </tr>
-            <tr style="height: 29px">
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">湯沸、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">炊事、</td>
-              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="2">その他</td>
-              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1">（</td>
-              <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="8">
-                <a target="_blank" href="#rangeid=16019">「使用目的（その他）」16-019</a></td>
-              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1">）</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">湯沸</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">炊事</td>
+              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">その他</td>
+              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">（</td>
+              <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="8" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">
+                <%= "「使用目的(その他)」" %> <!-- 16-019 使用目的(その他) -->
+              </td>
+              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1"  rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">）</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom" dir="ltr" colspan="4" rowspan="2">
-                <a target="_blank" href="#rangeid=16022">「使用時間（始期）時分」16-022</a></td>
+                <%= document_date(document_info.field_fires.map(&:usage_time_start).first) %> <!-- 16-022 使用時間(始期) -->
+              </td>
               <td class="doc_16_m006 d16_l_bottom" dir="ltr" colspan="1" rowspan="2">～</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom d16_l_right" dir="ltr" colspan="4" rowspan="2">
-                <a target="_blank" href="#rangeid=16023">「使用時間（終期）時分」16-023</a></td>
+                <%= document_date(document_info.field_fires.map(&:usage_time_end).first) %> <!-- 16-023 使用時間(終期) -->
+              </td>
             </tr>
-            <tr style="height: 29px">
-              <td id="d16_size12" class="doc_16_m008 d16_l_bottom" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16017">16-017</a></td>
-              <td id="d16_size12" class="doc_16_m008 d16_l_bottom" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16018">16-018</a></td>
-              <td class="doc_16_ d16_l_bottom d16_l_right" dir="ltr" colspan="12">
-            </tr>
+            <tr style="height: 29px"></tr>
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火 気 の 種 類</td>
               <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">電気、</td>
@@ -220,7 +201,8 @@
             <tr style="height: 29px">
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="5" rowspan="2">取扱上の注意（</td>
               <td id="d16_size14" class="doc_16_m002" dir="ltr" colspan="25" rowspan="2">
-                <a target="_blank" href="#rangeid=16038">「取扱上の注意」16-038</a></td>
+                <%= document_info.field_fires.map(&:precautions).first %> <!-- 16-038 取扱上の注意 -->
+              </td>
               <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2">）</td>
             </tr>
             <tr style="height: 29px"> 
@@ -228,14 +210,16 @@
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火 元 責 任 者<br>（後始末巡回者）</td>
               <td class="doc_16_m002 d16_l_full" dir="ltr" colspan="31" rowspan="2">
-                <a target="_blank" href="#rangeid=16039">「火元責任者（後始末巡回者）」16-039</a></td>
+                <%= document_info.field_fires.map(&:fire_origin_responsible).first %> <!-- 16-039 火元責任者(後始末巡回者) -->
+              </td>
             </tr>
             <tr style="height: 29px">
             </tr>
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火気使用責任者</td>
               <td class="doc_16_m002 d16_l_full" dir="ltr" colspan="31" rowspan="2">
-                <a target="_blank" href="#rangeid=16040">「火気使用責任者」16-040</a></td>
+                <%= document_info.field_fires.map(&:fire_use_responsible).first %> <!-- 16-040 火気使用責任者 -->
+              </td>
             </tr>
             <tr style="height: 29px">
             </tr>
@@ -292,6 +276,15 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
   </div>
 </div>
+
+<style>
+  .doc_16_sheet {
+    width: 250mm;
+    height: 320mm;
+    margin-bottom: 100px;
+    size: A4;
+  }
+</style>
