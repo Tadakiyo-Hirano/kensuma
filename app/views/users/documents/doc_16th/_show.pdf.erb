@@ -48,11 +48,13 @@
             <tr style="height: 29px">
               <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">事業所の名称</td>
               <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="13" rowspan="2">
-                <a target="_blank" href="#rangeid=16003">「事業所名（現場名）」16-003</a></td>
+                <%= document_site_info.site_name %> <!-- 16-003 事業所名(現場名) -->
+              </td>
               <td class="doc_16_" colspan="2"></td>
               <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">一次会社名</td>
               <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="12" rowspan="2">
-                <a target="_blank" href="#rangeid=16005">「一次会社名」16-005</a></td>
+                <a target="_blank" href="#rangeid=16005">「一次会社名」16-005</a>
+              </td>
             </tr>
             <tr style="height: 29px">
             </tr>
@@ -61,20 +63,23 @@
             <tr style="height: 29px">
               <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">所 長 名</td>
               <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="11" rowspan="2">
-                <a target="_blank" href="#rangeid=16004">「各会社の現場代理人名」<br>16-004</a></td>
+                <%= document_info.site_agent_name%> <!-- 16-004 各会社の現場代理人名 -->
+              </td>
               <td class="doc_16_m001 d16_l_bottom" dir="ltr" colspan="2" rowspan="2">殿</td>
               <td class="doc_16_" dir="ltr" colspan="2"></td>
               <td class="doc_16_m001" dir="ltr" colspan="5">使用会社名</td>
               <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="12" rowspan="2">
-                <a target="_blank" href="#rangeid=16007">「会社名」16-007</a></td>
+                <%= document_info.business.name %> <!--16-007 会社名 -->
+              </td>
             </tr>
             <tr style="height: 29px">
               
               <td class="doc_16_" dir="ltr" colspan="2"></td>
               <td class="doc_16_m001" dir="ltr" colspan="1">（</td>
               <td id="d16_size14" class="doc_16_m004" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16006">16-006</a></td>
-              <td class="doc_16_m001" dir="ltr" colspan="2">次）</td>
+                <%= sc_hierarchy(document_info) %> <!-- 16-006 次 -->
+              </td>
+              <td class="doc_16_m001" dir="ltr" colspan="2">）</td>
             </tr>
             <tr style="height: 29px">
             </tr>
@@ -82,7 +87,8 @@
               <td class="doc_16_" dir="ltr" colspan="20"></td>
               <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">現場代理人<br>(現場責任者)</td>
               <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="10" rowspan="2">
-                <a target="_blank" href="#rangeid=16008">「各会社の現場代理人名」16-008</a></td>
+                <%= document_info.site_agent_name%> <!-- 16-008 各会社の現場代理人名 -->
+              </td>
               <td id="d16_size12" class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="2" rowspan="2">
                 <a target="_blank" href="#rangeid=16009">㊞16-009</a>
               </td>
@@ -142,70 +148,41 @@
               </td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">）</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom" dir="ltr" colspan="4" rowspan="2">
-                <%= document_date(document_info.field_fires.map(&:usage_time_start).first) %> <!-- 16-022 使用時間(始期) -->
+                <%= document_info.field_fires.map(&:usage_time_start).first.strftime("%-H時%-M分") %> <!-- 16-022 使用時間(始期) -->
               </td>
               <td class="doc_16_m006 d16_l_bottom" dir="ltr" colspan="1" rowspan="2">～</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom d16_l_right" dir="ltr" colspan="4" rowspan="2">
-                <%= document_date(document_info.field_fires.map(&:usage_time_end).first) %> <!-- 16-023 使用時間(終期) -->
+                <%= document_info.field_fires.map(&:usage_time_end).first.strftime("%-H時%-M分") %> <!-- 16-023 使用時間(終期) -->
               </td>
             </tr>
             <tr style="height: 29px"></tr>
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火 気 の 種 類</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">電気、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">ガス、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">灯油、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">重油、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">木炭、</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2">薪、</td>
-              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="3">その他（</td>
-              <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="15">
-                <a target="_blank" href="#rangeid=16030">「火器の種類（その他）」16-030</a></td>
-              <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1">）</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">電気</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">ガス</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">灯油</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">重油</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">木炭</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">薪</td>
+              <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">その他（</td>
+              <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="15" rowspan="2" style="vertical-align: middle;">
+                「火器の種類（その他）」16-030
+              </td>
+              <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle;">）</td>
             </tr>
-            <tr style="height: 29px">
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16024">16-024</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16025">16-025</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16026">16-026</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16027">16-027</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16028">16-028</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16029">16-029</a></td>
-              <td class="doc_16_ d16_l_right" dir="ltr" colspan="19"></td>
-            </tr>
+            <tr style="height: 29px"></tr>
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">管 理 方 法</td>
-              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3">消火器、</td>
-              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3">防火用水、</td>
-              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3">消化砂、</td>
-              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="4">防災シート、</td>
-              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2">受皿、</td>
-              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2">標識、</td>
-              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2">監視</td>
-              <td class="doc_16_ d16_l_top d16_l_right" dir="ltr" colspan="12"></td>
+              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">消火器</td>
+              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">防火用水</td>
+              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">消化砂</td>
+              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="4" rowspan="2" style="vertical-align: middle;">防災シート</td>
+              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">受皿</td>
+              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">標識</td>
+              <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">監視</td>
+              <td class="doc_16_ d16_l_top d16_l_right" dir="ltr" colspan="12" rowspan="2" style="vertical-align: middle;"></td>
             </tr>
-            <tr style="height: 29px">
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="3">
-                <a target="_blank" href="#rangeid=16031">16-031</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="3">
-                <a target="_blank" href="#rangeid=16032">16-032</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="3">
-                <a target="_blank" href="#rangeid=16033">16-033</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="4">
-                <a target="_blank" href="#rangeid=16034">16-034</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16035">16-035</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16036">16-036</a></td>
-              <td id="d16_size12" class="doc_16_m008" dir="ltr" colspan="2">
-                <a target="_blank" href="#rangeid=16037">16-037</a></td>
-              <td class="doc_16_ d16_l_right" dir="ltr" colspan="12"></td>
-            </tr>
+            <tr style="height: 29px"></tr>
             <tr style="height: 29px">
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="5" rowspan="2">取扱上の注意（</td>
               <td id="d16_size14" class="doc_16_m002" dir="ltr" colspan="25" rowspan="2">
@@ -213,8 +190,7 @@
               </td>
               <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2">）</td>
             </tr>
-            <tr style="height: 29px"> 
-            </tr>
+            <tr style="height: 29px"></tr>
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火 元 責 任 者<br>（後始末巡回者）</td>
               <td class="doc_16_m002 d16_l_full" dir="ltr" colspan="31" rowspan="2">
