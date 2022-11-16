@@ -13,7 +13,7 @@ module Users
       if Rails.env.development?
         @order = current_business.orders.new(
           # テスト用デフォルト値 ==========================
-          site_career_up_id:                          "12345678910000",
+          site_career_up_id:                          '12345678910000',
           site_name:                                  'サイト株式会社',
           site_address:                               '東京都サイト区1-2-1',
 
