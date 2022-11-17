@@ -31,6 +31,23 @@ module Users
       @order = Order.find(request_order.order_id)
     end
 
+    def edit
+      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+      @order = Order.find(request_order.order_id)
+      @workers = current_business.workers
+      @sub_workers = request_order.children.map{|sub_request_order| Business.find_by(id:sub_request_order.id).workers}
+    end
+
+    def update
+      binding.pry
+      if @document.update(document_params)
+        redirect_to users_request_order_document_url, success: "保存に成功しました"
+      else
+        flash[:danger] = '失敗しました'
+        render action: :edit 
+      end
+    end
+
     private
 
     def set_documents
@@ -39,6 +56,10 @@ module Users
 
     def set_document
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
+    end
+
+    def document_params
+      params.require(:document).permit(content:[])
     end
   end
 end
