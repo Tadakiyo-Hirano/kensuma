@@ -45,7 +45,13 @@
               <td class="doc_16_" colspan="2"></td>
               <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">一次会社名</td>
               <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="12" rowspan="2">
-                <%=  %> <!-- 16-005 一次会社名 -->
+                <% if document_info.class == Order %>
+                <%= "元請" %>
+                <% elsif document_info.ancestors.count > 1 %>
+                <%= RequestOrder.find(document_info.ancestor_ids[-2]).content["subcon_name"] %> <!-- 16-005 一次会社名 -->
+                <% else document_info.ancestors.count == 1 %>
+                <%= document_info.content["subcon_name"]%>
+                <% end %>
               </td>
             </tr>
             <tr style="height: 29px">
@@ -79,7 +85,7 @@
               <td class="doc_16_" dir="ltr" colspan="20"></td>
               <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">現場代理人<br>(現場責任者)</td>
               <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="10" rowspan="2">
-                <%= document_info.site_agent_name%> <!-- 16-008 各会社の現場代理人名 -->
+                <%= document_info.site_agent_name %> <!-- 16-008 各会社の現場代理人名 -->
               </td>
               <td id="d16_size12" class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="2" rowspan="2">
                 <a target="_blank" href="#rangeid=16009">㊞16-009</a>
@@ -113,12 +119,24 @@
             </tr>
             <tr style="height: 29px">
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">使 用 目 的</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">溶接</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">溶断</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">圧接</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">防水</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">乾燥</td>
-              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">採暖</td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                <%= fire_use_target('溶接', 1) %> <!-- 16-011 溶接 -->
+              </td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                <%= fire_use_target('溶断', 2) %> <!-- 16-012 溶断 -->
+              </td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                <%= fire_use_target('圧接', 3) %> <!-- 16-013 圧接 -->
+              </td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                <%= fire_use_target('防水', 4) %> <!-- 16-014 防水 -->
+              </td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                <%= fire_use_target('乾燥', 5) %> <!-- 16-015 乾燥 -->
+              </td>
+              <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                <%= fire_use_target('採暖', 6) %> <!-- 16-016 採暖 -->
+              </td>
               <td class="doc_16_" dir="ltr" colspan="4"></td>
               <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">使 用 期 間<br>使用時間（原則）</td>
               <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="4" rowspan="2">
@@ -136,15 +154,15 @@
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">その他</td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">（</td>
               <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="8" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">
-                <%= "「使用目的(その他)」" %> <!-- 16-019 使用目的(その他) -->
+                <%= document_info.field_fires.map(&:other_use_target).first %> <!-- 16-019 使用目的(その他) -->
               </td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1"  rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">）</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom" dir="ltr" colspan="4" rowspan="2">
-                <%= document_info.field_fires.map(&:usage_time_start).first.strftime("%-H時%-M分") %> <!-- 16-022 使用時間(始期) -->
+                <%= document_info.field_fires.map(&:usage_time_start).first&.strftime("%-H時%-M分") %> <!-- 16-022 使用時間(始期) -->
               </td>
               <td class="doc_16_m006 d16_l_bottom" dir="ltr" colspan="1" rowspan="2">～</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom d16_l_right" dir="ltr" colspan="4" rowspan="2">
-                <%= document_site_info.field_fires.map(&:usage_time_end).first.strftime("%-H時%-M分") %> <!-- 16-023 使用時間(終期) -->
+                <%= document_site_info.field_fires.map(&:usage_time_end).first&.strftime("%-H時%-M分") %> <!-- 16-023 使用時間(終期) -->
               </td>
             </tr>
             <tr style="height: 29px"></tr>
@@ -158,7 +176,7 @@
               <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">薪</td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">その他（</td>
               <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="15" rowspan="2" style="vertical-align: middle;">
-                「火器の種類（その他）」16-030
+                <%= document_info.field_fires.map(&:other_fire_type).first %> <!-- 16-030 火気の種類(その他) -->
               </td>
               <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle;">）</td>
             </tr>

@@ -215,4 +215,10 @@ module DocumentsHelper
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
   end
+
+  # 現場火気情報(使用目的)
+  def fire_use_target(name, num)
+    use_target = document_info.field_fires.first.fire_use_targets.map(&:id).include?(num)
+    use_target ? tag.span(name, class: :severance_pay_mutual_aid) : name
+  end
 end

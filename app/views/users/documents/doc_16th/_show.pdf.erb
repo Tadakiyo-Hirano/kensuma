@@ -144,7 +144,7 @@
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">その他</td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">（</td>
               <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="8" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">
-                <%= "「使用目的(その他)」" %> <!-- 16-019 使用目的(その他) -->
+                <%= document_info.field_fires.map(&:other_use_target).first %> <!-- 16-019 使用目的(その他) -->
               </td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">）</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom" dir="ltr" colspan="4" rowspan="2">
@@ -166,7 +166,7 @@
               <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">薪</td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">その他（</td>
               <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="15" rowspan="2" style="vertical-align: middle;">
-                「火器の種類（その他）」16-030
+                <%= document_info.field_fires.map(&:other_fire_type).first %> <!-- 16-030 火気の種類(その他) -->
               </td>
               <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle;">）</td>
             </tr>
