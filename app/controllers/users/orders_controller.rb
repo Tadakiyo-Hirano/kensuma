@@ -13,15 +13,15 @@ module Users
       if Rails.env.development?
         @order = current_business.orders.new(
           # テスト用デフォルト値 ==========================
-          site_career_up_id:                          "123456789#{rand(10000..99999)}",
-          site_name:                                  Faker::Company.name,
-          site_address:                               current_business.address,
+          site_career_up_id:                          '12345678910000',
+          site_name:                                  'サイト株式会社',
+          site_address:                               '東京都サイト区1-2-1',
 
-          order_name:                                 Faker::Company.name,
-          order_post_code:                            current_business.post_code,
-          order_address:                              current_business.address,
-          order_supervisor_name:                      Faker::Name.name,
-          order_supervisor_company:                   Faker::Company.name,
+          order_name:                                 'オーダー株式会社',
+          order_post_code:                            '0123456',
+          order_address:                              '東京都オーダー区1-2-1',
+          order_supervisor_name:                      'テストスーパーバイザー',
+          order_supervisor_company:                   'テストスーパーバイザー株式会社',
           order_supervisor_apply:                     %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
 
           construction_name:                          '工事名',
@@ -41,7 +41,7 @@ module Users
           site_agent_name:                            '現場代理人名',
           site_agent_apply:                           %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
           supervising_engineer_name:                  '監督技術者･主任技術者名',
-          supervising_engineer_check:                 [0, 1].sample,
+          supervising_engineer_check:                 0,
           supervising_engineer_assistant_name:        '監督技術者補佐名',
           professional_engineer_name:                 '専門技術者名',
           professional_engineer_construction_details: '専門技術者(担当工事内容)',
