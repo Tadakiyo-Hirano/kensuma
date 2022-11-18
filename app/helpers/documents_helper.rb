@@ -219,6 +219,18 @@ module DocumentsHelper
   # 現場火気情報(使用目的)
   def fire_use_target(name, num)
     use_target = document_info.field_fires.first.fire_use_targets.map(&:id).include?(num)
-    use_target ? tag.span(name, class: :severance_pay_mutual_aid) : name
+    use_target ? tag.span(name, class: :fire_check) : name
+  end
+
+  # 現場火気情報(火気の種類)
+  def fire_type(name, num)
+    type = document_info.field_fires.first.fire_types.map(&:id).include?(num)
+    type ? tag.span(name, class: :fire_check) : name
+  end
+
+  # 現場火気情報(火気の管理方法)
+  def fire_management(name, num)
+    management = document_info.field_fires.first.fire_managements.map(&:id).include?(num)
+    management ? tag.span(name, class: :fire_check) : name
   end
 end
