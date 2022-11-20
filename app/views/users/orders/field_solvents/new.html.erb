@@ -1,0 +1,13 @@
+<% provide(:title, "現場溶剤情報登録") %>
+<% provide(:btn_text, "更新") %>
+
+<div class="card">
+  <div class="card-body">
+    <%= form_with model: @field_solvent, url: users_order_field_solvents_path, method: :patch, local: true, class: "field_solvent-form-validation" do |f| %>
+      <%= render "form", f: f, field_solvent: @field_solvent %>
+
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <%= link_to "現場詳細画面へ", users_order_url(@order), class: "btn btn-md btn-block btn-default" %>
+    <% end %>
+  </div>
+</div>
