@@ -330,6 +330,12 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "licenses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
