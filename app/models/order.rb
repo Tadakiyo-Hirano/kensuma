@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   has_many :request_orders, dependent: :destroy
   has_many :field_workers, as: :field_workerable, dependent: :destroy
   has_many :field_cars, as: :field_carable, dependent: :destroy
+  has_many :field_fires, as: :field_fireable, dependent: :destroy
   has_many :field_solvents, as: :field_solventable, dependent: :destroy
   has_many :field_special_vehicles, as: :field_special_vehicleable, dependent: :destroy
   has_many :field_machines, as: :field_machineable, dependent: :destroy
