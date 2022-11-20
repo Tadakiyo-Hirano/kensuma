@@ -70,9 +70,9 @@ class Business < ApplicationRecord
     oita: 43,
     miyazaki: 44,
     kagoshima: 45,
-    okinawa: 46
-  }                                                                                                 # 建設許可証(都道府県)
-  enum construction_license_permission_type_identification_general: { identification: 0, general: 1 }  # 建設許可証(許可種別)
+    okinawa: 46 
+  } # 建設許可証(都道府県)
+  enum construction_license_permission_type_identification_general: { identification: 0, general: 1 } # 建設許可証(許可種別)
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :uuid, presence: true
@@ -102,8 +102,6 @@ class Business < ApplicationRecord
   validates :construction_license_number_six_digits, format: { with: /\A\d{1,6}\z/, message: 'は数字6桁以下で入力してください' }, presence: true
   validates :construction_license_number, presence: true
   validates :construction_license_updated_at, presence: true
-
-
 
   before_create -> { self.uuid = SecureRandom.uuid }
 

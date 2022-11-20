@@ -449,21 +449,6 @@ RSpec.describe Business, type: :model do
     end
 
     describe '#construction_license_number_double_digit' do
-      context '存在しない場合' do
-        before(:each) { subject.construction_license_number_double_digit = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('建設許可証(番号)を入力してください')
-        end
-      end
-    end
-
-    describe '#construction_license_number_double_digit' do
       %i[
         0
         012
@@ -479,21 +464,6 @@ RSpec.describe Business, type: :model do
             subject.valid?
             expect(subject.errors.full_messages).to include('建設許可証(番号)は数字2桁で入力してください')
           end
-        end
-      end
-    end
-
-    describe '#construction_license_number_six_digits' do
-      context '存在しない場合' do
-        before(:each) { subject.construction_license_number_six_digits = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('建設許可証(番号)を入力してください')
         end
       end
     end
@@ -546,7 +516,6 @@ RSpec.describe Business, type: :model do
         end
       end
     end
-
   end
 
   describe '車両情報とのアソシエーションについて' do
