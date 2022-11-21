@@ -1,4 +1,15 @@
 module DocumentsHelper
+  # 1次下請会社名の表示
+  def primary_subcon_name(document_info)
+    if document_info.class == Order
+      "元請"
+    elsif document_info.ancestors.count > 1
+      RequestOrder.find(document_info.ancestor_ids[-2]).content["subcon_name"]
+    else document_info.ancestors.count == 1
+      document_info.content["subcon_name"]
+    end
+  end
+
   # 日付
   def document_date(column)
     l(column, format: :long) unless column.nil?

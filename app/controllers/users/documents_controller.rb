@@ -30,7 +30,15 @@ module Users
 
     def edit; end
 
-    def update; end
+    def update
+      if update_document(@document)
+        flash[:success] = '更新に成功しました'
+        redirect_to users_request_order_document_url
+      else
+        flash[:danger] = '更新に失敗しました'
+        render :show
+      end
+    end
 
     private
 
@@ -40,6 +48,27 @@ module Users
 
     def set_document
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
+    end
+
+    def document_params
+      params.require(:document).permit(content:[])
+    end
+
+    # 更新書類の判定
+    def update_document(document)
+      case document.document_type
+      when 'doc_16th'
+        document.update(doc_16nd_params)
+      end
+    end
+
+    def doc_16nd_params
+      params.require(:document).permit.merge(
+        content: {
+          prime_contractor_confirmation: params[:document][:content][0],
+          date_submitted:                params[:document][:content][1]
+        }
+      )
     end
   end
 end
