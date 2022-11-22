@@ -167,11 +167,11 @@
               </td>
               <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">）</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom" dir="ltr" colspan="4" rowspan="2">
-                <%= document_info.field_fires.map(&:usage_time_start).first.strftime("%-H時%-M分") %> <!-- 16-022 使用時間(始期) -->
+                <%= document_info.field_fires.map(&:usage_time_start).first&.strftime("%-H時%-M分") %> <!-- 16-022 使用時間(始期) -->
               </td>
               <td class="doc_16_m006 d16_l_bottom" dir="ltr" colspan="1" rowspan="2">～</td>
               <td id="d16_size12" class="doc_16_m002 d16_l_bottom d16_l_right" dir="ltr" colspan="4" rowspan="2">
-                <%= document_info.field_fires.map(&:usage_time_end).first.strftime("%-H時%-M分") %> <!-- 16-023 使用時間(終期) -->
+                <%= document_info.field_fires.map(&:usage_time_end).first&.strftime("%-H時%-M分") %> <!-- 16-023 使用時間(終期) -->
               </td>
             </tr>
             <tr style="height: 29px"></tr>
