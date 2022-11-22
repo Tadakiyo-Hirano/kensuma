@@ -31,7 +31,8 @@ module Users::Orders
       redirect_to users_order_field_solvents_url
     end
 
-    def edit_solvents; end
+    # def edit_solvents; end
+    def edit; end
 
     def update_solvents
       field_solvents_params.each do |id, item|

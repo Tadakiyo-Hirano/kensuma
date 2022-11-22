@@ -1,0 +1,19 @@
+<% provide(:title, "溶剤情報詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="field_fired-footer">
+    <%= link_to "編集", edit_users_order_field_solvent_path, class: "btn btn-md btn-block btn-success" %>
+    <%# <%= link_to "編集", edit_users_order_field_solvent_path(@order, @field_solvent), class: "btn btn-md btn-block btn-success" %> %>
+    <%= link_to "削除", users_order_field_solvent_path, method: :delete, data: { confirm: "溶剤情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%# <%= link_to "削除", users_order_field_solvent_path(@order, @field_solvent), method: :delete, data: { confirm: "溶剤情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %> %>
+    <%= link_to "現場詳細画面へ", users_order_url(@order), class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>

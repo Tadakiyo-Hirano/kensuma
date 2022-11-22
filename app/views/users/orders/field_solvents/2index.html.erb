@@ -28,7 +28,8 @@
           <div>
             <%= f.submit "現場溶剤追加", class: "btn btn-md btn-primary" %>
             <% if @field_solvents.present? %>
-              <%= link_to "現場溶剤情報編集", edit_solvents_users_order_field_solvents_path(@order), class: "btn btn-md btn-success" %>
+              <%# <%= link_to "現場溶剤情報編集", edit_solvents_users_order_field_solvents_path(@order), class: "btn btn-md btn-success" %> %>
+              <%= link_to "現場溶剤情報編集", "#", class: "btn btn-md btn-success" %>
             <% end %>
           </div>
         <% end %>
