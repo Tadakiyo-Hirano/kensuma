@@ -138,8 +138,10 @@ ja:
         carry_out_date: 搬出予定日
         precautions: 機械等の特性・使用上注意すべき事項
       field_solvent:
-        solvent_name: 溶剤名
+        solvent_name: 商品名
         carried_quantity: 搬入量
+        solvent_classification: 種別
+        solvent_ingredients: 含有成分
         using_location: 使用場所
         storing_place: 保管場所
         using_tool: 使用機械又は工具

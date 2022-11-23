@@ -1,12 +1,23 @@
 module Users::Orders
   class FieldSolventsController < Users::Base
     before_action :set_order
-    before_action :set_field_solvent, only: :destroy
-    before_action :set_field_solvents, only: %i[index edit_solvents update_solvents]
+    # before_action :set_field_solvent, only: :destroy
+    before_action :set_field_solvent, only: %i[show edit update destroy]
+    # before_action :set_field_solvents, only: %i[edit update]
 
-    def index
-      field_solvent_ids = @field_solvents.map { |field_solvent| field_solvent.content['id'] }
-      @solvent = current_business.solvents.where.not(id: field_solvent_ids)
+    def show; end
+
+    # def index
+    #   field_solvent_ids = @field_solvents.map { |field_solvent| field_solvent.content['id'] }
+    #   @solvent = current_business.solvents.where.not(id: field_solvent_ids)
+    # end
+
+    def new
+      if @order.field_solvents.present?
+        redirect_to users_order_field_solvent_path(@order, @order.field_solvents.first)
+      else
+        @field_solvent = @order.field_solvents.new
+      end
     end
 
     def create
@@ -31,16 +42,24 @@ module Users::Orders
       redirect_to users_order_field_solvents_url
     end
 
-    # def edit_solvents; end
     def edit; end
 
-    def update_solvents
-      field_solvents_params.each do |id, item|
-        field_solvent = FieldSolvent.find(id)
-        field_solvent.update(item)
+    # def update
+    #   field_solvents_params.each do |id, item|
+    #     field_solvent = FieldSolvent.find(id)
+    #     field_solvent.update(item)
+    #   end
+    #   flash[:success] = '溶剤情報を更新しました'
+    #   redirect_to users_order_field_solvents_url
+    # end
+
+    def update
+      if @field_solvent.update(field_solvents_params)
+        flash[:success] = '溶剤情報を更新しました'
+        redirect_to users_order_field_solvent_url(@order, @field_solvent)
+      else
+        render 'edit'
       end
-      flash[:success] = '溶剤情報を更新しました'
-      redirect_to users_order_field_solvents_url
     end
 
     private
@@ -58,12 +77,10 @@ module Users::Orders
     end
 
     def field_solvents_params
-      params.require(:order).permit(
-        field_solvents: %i[
-          solvent_name carried_quantity using_location storing_place using_tool
-          usage_period_start usage_period_end working_process sds ventilation_control
-        ]
-      )[:field_solvents]
+      params.require(:field_solvent).permit(
+          :solvent_name, :carried_quantity, :solvent_classification, :solvent_ingredients, :using_location, :storing_place,
+          :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
+      )
     end
   end
 end
