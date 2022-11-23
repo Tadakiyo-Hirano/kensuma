@@ -96,6 +96,42 @@
           <th><%= Business.human_attribute_name(:business_retirement_benefit_mutual_aid_status) %></th>
           <td><%= @business.business_retirement_benefit_mutual_aid_status_i18n %></td>
         </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_status) %></th>
+          <td><%= @business.construction_license_status_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:industry_ids) %></th>
+          <td><%= @business.industries.pluck(:name).join(', ') %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_permission_type_minister_governor) %></th>
+          <td><%= @business.construction_license_permission_type_minister_governor_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_governor_permission_prefecture) %></th>
+          <td><%= @business.construction_license_governor_permission_prefecture_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_permission_type_identification_general) %></th>
+          <td><%= @business.construction_license_permission_type_identification_general_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_number_double_digit) %></th>
+          <td><%= @business.construction_license_number_double_digit %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_number_six_digits) %></th>
+          <td><%= @business.construction_license_number_six_digits %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_number) %></th>
+          <td><%= @business.construction_license_number %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:construction_license_updated_at) %></th>
+          <td><%= @business.construction_license_updated_at %></td>
+        </tr>
       </tbody>
     </table>
 

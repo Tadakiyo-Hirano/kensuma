@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
+  create_table "business_industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "business_id", null: false
+    t.bigint "industry_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["business_id"], name: "index_business_industries_on_business_id"
+    t.index ["industry_id"], name: "index_business_industries_on_industry_id"
+  end
+
   create_table "business_occupations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "business_id", null: false
     t.bigint "occupation_id", null: false
@@ -97,6 +106,14 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.integer "business_employment_insurance_join_status", null: false
     t.string "business_employment_insurance_number"
     t.integer "business_retirement_benefit_mutual_aid_status", null: false
+    t.integer "construction_license_status", null: false
+    t.integer "construction_license_permission_type_minister_governor"
+    t.integer "construction_license_governor_permission_prefecture"
+    t.integer "construction_license_permission_type_identification_general"
+    t.string "construction_license_number_double_digit"
+    t.string "construction_license_number_six_digits"
+    t.string "construction_license_number"
+    t.date "construction_license_updated_at"
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
@@ -308,6 +325,12 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
   end
 
   create_table "fire_use_targets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -687,6 +710,8 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
   end
 
   add_foreign_key "articles", "users"
+  add_foreign_key "business_industries", "businesses"
+  add_foreign_key "business_industries", "industries"
   add_foreign_key "business_occupations", "businesses"
   add_foreign_key "business_occupations", "occupations"
   add_foreign_key "businesses", "users"
