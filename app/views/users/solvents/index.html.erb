@@ -9,7 +9,6 @@
         <thead>
           <tr align="center">
             <th><%= Solvent.human_attribute_name(:name) %></th>
-            <th><%= Solvent.human_attribute_name(:maker) %></th>
             <th><%= Solvent.human_attribute_name(:classification) %></th>
             <th><%= Solvent.human_attribute_name(:ingredients) %></th>
             <th></th>
@@ -20,7 +19,6 @@
           <% @solvents.each do |solvent| %>
           <tr align="center">
             <td><%= link_to solvent.name, users_solvent_path(solvent) %></td>
-            <td><%= solvent.maker %></td>
             <td><%= solvent.classification %></td>
             <td><%= solvent.ingredients %></td>
             <td><%= link_to "編集", edit_users_solvent_path(solvent), class: "btn btn-md btn-success" %></td>

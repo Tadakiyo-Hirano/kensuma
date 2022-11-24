@@ -327,7 +327,6 @@ ja:
         name: 名称
       solvent:
         name: 商品名
-        maker: メーカー名
         classification: 種別
         ingredients: 含有成分
       machine:
