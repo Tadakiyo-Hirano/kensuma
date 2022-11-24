@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_05_031631) do
+ActiveRecord::Schema.define(version: 2022_11_23_084035) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -254,6 +254,8 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "solvent_classification", null: false
+    t.string "solvent_ingredients", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 

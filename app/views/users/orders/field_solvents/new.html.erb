@@ -3,7 +3,7 @@
 
 <div class="card">
   <div class="card-body">
-    <%= form_with model: @field_solvent, url: users_order_field_solvents_path, method: :patch, local: true, class: "field_solvent-form-validation" do |f| %>
+    <%= form_with model: @field_solvent, url: users_order_field_solvents_path, method: :post, local: true, class: "field_solvent-form-validation" do |f| %>
       <%= render "form", f: f, field_solvent: @field_solvent %>
 
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>

@@ -40,11 +40,13 @@
 <br><br>
 <%= f.label :working_process %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :working_process, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:working_process) %>
+<%# <%= f.text_field :working_process, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:working_process) %> %>
+<%= f.select :working_process, FieldSolvent.working_processes_i18n.invert,{include_blank: true}, {class: "form-control"} %>
 <br>
 <%= f.label :sds %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :sds, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:sds) %>
+<%# <%= f.text_field :sds, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:sds) %> %>
+<%= f.select :sds, FieldSolvent.sds_i18n.invert,{include_blank: true}, {class: "form-control"} %>
 <br>
 <%= f.label :ventilation_control %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>

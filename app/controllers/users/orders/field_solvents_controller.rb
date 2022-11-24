@@ -20,20 +20,32 @@ module Users::Orders
       end
     end
 
+    # def create
+    #   ActiveRecord::Base.transaction do
+    #     params[:solvent_ids].each do |solvent_id|
+    #       @order.field_solvents.create!(
+    #         solvent_name: Solvent.find(solvent_id).name,
+    #         content:      solvent_info(Solvent.find(solvent_id))
+    #       )
+    #     end
+    #     flash[:success] = "#{params[:solvent_ids].count}件追加しました。"
+    #     redirect_to users_order_field_solvents_url
+    #   end
+    # rescue ActiveRecord::RecordInvalid
+    #   flash[:danger] = '登録に失敗しました。再度登録してください。'
+    #   redirect_to users_order_field_solvents_url
+    # end
+
     def create
-      ActiveRecord::Base.transaction do
-        params[:solvent_ids].each do |solvent_id|
-          @order.field_solvents.create!(
-            solvent_name: Solvent.find(solvent_id).name,
-            content:      solvent_info(Solvent.find(solvent_id))
-          )
-        end
-        flash[:success] = "#{params[:solvent_ids].count}件追加しました。"
-        redirect_to users_order_field_solvents_url
+      @field_solvent = @order.field_solvents.build(field_solvent_params)
+      if @field_solvent.save
+        other_use_target_reset(@field_solvent.fire_use_targets, @field_solvent)
+        other_fire_type_reset(@field_solvent.fire_types, @field_solvent)
+        flash[:success] = '溶剤情報を登録しました。'
+        redirect_to users_order_field_solvent_url(@order, @field_solvent)
+      else
+        render :new
       end
-    rescue ActiveRecord::RecordInvalid
-      flash[:danger] = '登録に失敗しました。再度登録してください。'
-      redirect_to users_order_field_solvents_url
     end
 
     def destroy
@@ -54,7 +66,7 @@ module Users::Orders
     # end
 
     def update
-      if @field_solvent.update(field_solvents_params)
+      if @field_solvent.update(field_solvent_params)
         flash[:success] = '溶剤情報を更新しました'
         redirect_to users_order_field_solvent_url(@order, @field_solvent)
       else
@@ -76,7 +88,7 @@ module Users::Orders
       @field_solvents = @order.field_solvents
     end
 
-    def field_solvents_params
+    def field_solvent_params
       params.require(:field_solvent).permit(
           :solvent_name, :carried_quantity, :solvent_classification, :solvent_ingredients, :using_location, :storing_place,
           :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
