@@ -30,7 +30,7 @@
       <span id="sd_t1a_1" class="sd_t sd_s6">下請負業者の皆さんへ </span>
       <span id="sd_t1b_1" class="sd_t sd_s2">【元請負業者】 </span>
       <span id="sd_t1c_1" class="sd_t sd_s2">
-        <%= '※3-002未実装※' %> <!-- 3-002 元請会社名 -->
+        <%= document_site_info.content&.[]("genecon_name") %> <!-- 3-002 会社名(元請会社名) -->
       </span>
       <span id="sd_t1f_1_1" class="sd_t sd_s2"></span>
       <span id="sd_t13_1" class="sd_t sd_s2">
@@ -48,26 +48,28 @@
             <tr>
               <td class="sd_td_1">元 請 名</td>
               <td class="sd_td_1" colspan="3">
-                <%= '※3-004未実装※' %> <!-- 3-004 元請会社名 -->
+                <%= document_site_info.content&.[]("genecon_name") %> <!-- 3-004 元請会社名 -->
               </td>
             </tr>
             <tr>
               <td class="sd_td_1">発 注 者 名</td>
               <td class="sd_td_1" colspan="3">
-                <%= '※3-005未実装※' %> <!-- 3-005 発注者(会社名or氏名) -->
+                <%= document_site_info.order_name %> <!-- 3-005 発注者(会社名or氏名) -->
               </td>
             </tr>
             <tr>
               <td class="sd_td_1">工 事 名</td>
-              <td class="sd_td_1" colspan="3"><%= "※※ 未実装 下請会社(工事名) ※※" %></td> <!-- 3-006 -->
+              <td class="sd_td_1" colspan="3">
+                <%= document_site_info.construction_name %> <!-- 3-006 元請会社の工事名 -->
+              </td>
             <tr>
               <td class="sd_td_1" style="width: 15%">監 督 員 名</td>
               <td class="sd_td_1" style="width: 20%">
-                <%= document_info.supervisor_name %> <!-- 3-007 元請会社の監督員名 -->
+                <%= document_site_info.supervisor_name %> <!-- 3-007 元請会社の監督員名 -->
               </td>
               <td class="sd_td_1" style="width: 15%">権限及び意見<br>申出方法</td>
               <td class="sd_td_1" style="vertical-align: middle !important">
-                <%= document_info.supervisor_apply %> <!-- 3-008 監督員名・権限及び意見の申出方法 -->
+                <%= document_site_info.supervisor_apply %> <!-- 3-008 監督員名・権限及び意見の申出方法 -->
               </td>
             </tr>
           </tbody>
@@ -80,7 +82,7 @@
             <tr>
               <td class="sd_td_1" style="width: 15%">提出先及び<br>担 当 者</td>
               <td class="sd_td_1" style="vertical-align: middle !important">
-                <%= '※3-009未実装※' %> <!-- 3-009 元請会社の提出先及び担当者 -->
+                <%= document_site_info.submission_destination %> <!-- 3-009 元請会社の提出先及び担当者 -->
               </td>
             </tr>
           </tbody>
