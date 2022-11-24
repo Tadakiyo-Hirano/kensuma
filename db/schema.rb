@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_23_084035) do
+ActiveRecord::Schema.define(version: 2022_11_24_035700) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -240,7 +240,6 @@ ActiveRecord::Schema.define(version: 2022_11_23_084035) do
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "solvent_name", null: false
-    t.json "content", null: false
     t.string "carried_quantity"
     t.string "using_location"
     t.string "storing_place"
