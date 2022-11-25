@@ -15,7 +15,7 @@ module Users
         maker:                   '三菱',
         standards_performance:   '幅2.5M',
         year_manufactured:       Date.today.ago(3.years),
-        control_number:          SecureRandom.hex(5),
+        control_number:          '52e22363d7',
         check_exp_date_year:     Date.today.since(2.years),
         check_exp_date_month:    Date.today.since(2.years).since(3.month),
         check_exp_date_specific: Date.today.since(2.years).since(6.month),

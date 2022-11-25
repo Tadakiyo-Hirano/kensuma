@@ -1,4 +1,15 @@
 module DocumentsHelper
+  # 1次下請会社名の表示
+  def primary_subcon_name(document_info)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.ancestors.count > 1
+      RequestOrder.find(document_info.ancestor_ids[-2]).content['subcon_name']
+    elsif document_info.ancestors.count == 1
+      document_info.content['subcon_name']
+    end
+  end
+
   # 日付
   def document_date(column)
     l(column, format: :long) unless column.nil?
@@ -214,5 +225,35 @@ module DocumentsHelper
 
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
+  end
+
+  # 現場火気情報(使用目的)
+  def fire_use_target(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_use_targets.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
+  end
+
+  # 現場火気情報(火気の種類)
+  def fire_type(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_types.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
+  end
+
+  # 現場火気情報(火気の管理方法)
+  def fire_management(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_managements.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
   end
 end

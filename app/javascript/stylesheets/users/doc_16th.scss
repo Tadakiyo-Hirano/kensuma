@@ -5,9 +5,6 @@
   padding: 10px;
 }
 
-.sixteenth-text-container {
-}
-
 .ritz .waffle {
   table-layout: fixed;
   width: 100%;
@@ -33,10 +30,8 @@
 .ritz .waffle .doc_16_m002 {
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 18pt;
   vertical-align: middle;
@@ -59,10 +54,8 @@
 .ritz .waffle .doc_16_m004 {
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 18pt;
   vertical-align: middle;
@@ -106,10 +99,8 @@
 .ritz .waffle .doc_16_m008 {
   background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 18pt;
   vertical-align: middle;
@@ -120,10 +111,8 @@
 .ritz .waffle .doc_16_m009 {
   background-color: #ccffcc;
   text-align: start;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 18pt;
   vertical-align: middle;
@@ -174,4 +163,17 @@
 
 #d16_size10{
   font-size: 10pt;
+}
+
+.doc_16_sheet {
+  width: 250mm;
+  height: 320mm;
+  margin-bottom: 100px;
+  size: A4;
+}
+
+.fire_check {
+  border: 2px solid #000000;
+  border-radius: 25px;
+  padding: 5px;
 }

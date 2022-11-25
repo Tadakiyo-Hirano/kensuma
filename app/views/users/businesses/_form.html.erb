@@ -91,6 +91,43 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
 <br>
+<%= f.label :construction_license_status %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :construction_license_status, Business.construction_license_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :industry_ids %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.collection_select :industry_ids, Industry.all, :id, :name, { selected: f.object.industries.ids }, { class: "pref multiple-select", multiple: true, style: "width: 100%" } %>
+<br>
+<br>
+<%= f.label :construction_license_permission_type_minister_governor %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :construction_license_permission_type_minister_governor, Business.construction_license_permission_type_minister_governors_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :construction_license_governor_permission_prefecture %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :construction_license_governor_permission_prefecture, Business.construction_license_governor_permission_prefectures_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :construction_license_permission_type_identification_general %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :construction_license_permission_type_identification_general, Business.construction_license_permission_type_identification_generals_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :construction_license_number_double_digit %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :construction_license_number_double_digit, class: "form-control", placeholder: "2桁の番号" %>
+<br>
+<%= f.label :construction_license_number_six_digits %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :construction_license_number_six_digits, class: "form-control", placeholder: "6桁以下の番号" %>
+<br>
+<%= f.label :construction_license_number %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :construction_license_number, class: "form-control", placeholder: "建設許可証(建設許可番号)" %>
+<br>
+<%= f.label :construction_license_updated_at %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :construction_license_updated_at, class: "form-control", placeholder: "建設許可証(更新日)" %>
+<br>
 
 <%= f.hidden_field :user_id, value: current_user.id %>
 
@@ -145,6 +182,33 @@
         },
         "business[business_retirement_benefit_mutual_aid_status]": {
           required: true
+        },
+        "business[construction_license_status]": {
+          required: true
+        },
+        "business[industry_ids][]": {
+          required: true
+        },
+        "business[construction_license_permission_type_minister_governor]": {
+          required: true
+        },
+        "business[construction_license_governor_permission_prefecture]": {
+          required: true
+        },
+        "business[construction_license_permission_type_identification_general]": {
+          required: true
+        },
+        "business[construction_license_number_double_digit]": {
+          required: true
+        },
+        "business[construction_license_number_six_digits]": {
+          required: true
+        },
+        "business[construction_license_number]": {
+          required: true
+        },
+        "business[construction_license_updated_at]": {
+          required: true
         }
       },
       messages: {
@@ -192,6 +256,30 @@
         },
         "business[business_retirement_benefit_mutual_aid_status]": {
           required: "どちらかを選択してください。"
+        },
+        "business[construction_license_status]": {
+          required: "どちらかを選択してください。"
+        },
+        "business[industry_ids][]": {
+          required: "業種を選択してください。"
+        },
+        "business[construction_license_permission_type_minister_governor]": {
+          required: "どちらかを選択してください。"
+        },
+        "business[construction_license_governor_permission_prefecture]": {
+          required: "どれか一つを選択してください。"
+        },
+        "business[construction_license_permission_type_identification_general]": {
+          required: "どちらかを選択してください。"
+        },
+        "business[construction_license_number_double_digit]": {
+          required: "2桁の番号を入力してください。"
+        },
+        "business[construction_license_number_six_digits]": {
+          required: "6桁以下の番号を入力してください。"
+        },
+        "business[construction_license_updated_at]": {
+          required: "日付を選択してください。"
         }
       },
       errorClass: "input_form_error"

@@ -387,6 +387,135 @@ RSpec.describe Business, type: :model do
         end
       end
     end
+
+    describe '#construction_license_status' do
+      context '存在しない場合' do
+        before(:each) { subject.construction_license_status = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('建設許可証(取得状況)を入力してください')
+        end
+      end
+    end
+
+    describe '#construction_license_permission_type_minister_governor' do
+      context '存在しない場合' do
+        before(:each) { subject.construction_license_permission_type_minister_governor = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('建設許可証(種別)を入力してください')
+        end
+      end
+    end
+
+    describe '#construction_license_governor_permission_prefecture' do
+      context '存在しない場合' do
+        before(:each) { subject.construction_license_governor_permission_prefecture = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('建設許可証(都道府県)を入力してください')
+        end
+      end
+    end
+
+    describe '#construction_license_permission_type_identification_general' do
+      context '存在しない場合' do
+        before(:each) { subject.construction_license_permission_type_identification_general = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('建設許可証(種別)を入力してください')
+        end
+      end
+    end
+
+    describe '#construction_license_number_double_digit' do
+      %i[
+        0
+        012
+      ].each do |construction_license_number_double_digit|
+        context '不正なbusiness_welfare_pension_insurance_office_numberの場合' do
+          before(:each) { subject.construction_license_number_double_digit = construction_license_number_double_digit }
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('建設許可証(番号)は数字2桁で入力してください')
+          end
+        end
+      end
+    end
+
+    describe '#construction_license_number_six_digits' do
+      %i[
+        0123456
+      ].each do |construction_license_number_six_digits|
+        context '不正なconstruction_license_number_six_digitsの場合' do
+          before(:each) { subject.construction_license_number_six_digits = construction_license_number_six_digits }
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('建設許可証(番号)は数字6桁以下で入力してください')
+          end
+        end
+      end
+    end
+
+    describe '#construction_license_number' do
+      context '存在しない場合' do
+        before(:each) { subject.construction_license_number = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('建設許可証(建設許可番号)を入力してください')
+        end
+      end
+    end
+
+    describe '#construction_license_updated_at' do
+      context '存在しない場合' do
+        before(:each) { subject.construction_license_updated_at = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('建設許可証(更新日)を入力してください')
+        end
+      end
+    end
   end
 
   describe '車両情報とのアソシエーションについて' do
