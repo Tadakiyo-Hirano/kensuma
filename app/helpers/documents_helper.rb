@@ -256,4 +256,9 @@ module DocumentsHelper
       name
     end
   end
+
+  # document.contentの日付データ表示(nilの場合のstrftime表示エラー回避)
+  def doc_content_date(date)
+    date.nil? ? "" : date
+  end
 end

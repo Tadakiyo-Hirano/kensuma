@@ -122,8 +122,52 @@ module Users
     def doc_content(document_type)
       case document_type
       when 1
-        {}
+        { date_submitted: ""}
       when 2
+        {}
+      when 3
+        {}
+      when 4
+        {}
+      when 5
+        {}
+      when 6
+        {}
+      when 7
+        {}
+      when 8
+        {}
+      when 9
+        {}
+      when 10
+        {}
+      when 11
+        {}
+      when 12
+        {}
+      when 13
+        {}
+      when 14
+        {}
+      when 15
+        {}
+      when 16
+        {}
+      when 17
+        {}
+      when 18
+        {}
+      when 19
+        {}
+      when 20
+        {}
+      when 21
+        {}
+      when 22
+        {}
+      when 23
+        {}
+      when 24
         {}
       end
     end
