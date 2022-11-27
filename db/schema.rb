@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_24_091524) do
+ActiveRecord::Schema.define(version: 2022_11_27_090118) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -256,7 +256,7 @@ ActiveRecord::Schema.define(version: 2022_11_24_091524) do
 
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
-    t.string "solvent_name", null: false
+    t.string "solvent_name_1"
     t.string "carried_quantity"
     t.string "using_location"
     t.string "storing_place"
@@ -270,8 +270,20 @@ ActiveRecord::Schema.define(version: 2022_11_24_091524) do
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "solvent_classification", null: false
-    t.string "solvent_ingredients", null: false
+    t.string "solvent_classification_1"
+    t.string "solvent_ingredients_1"
+    t.string "solvent_name_2"
+    t.string "solvent_name_3"
+    t.string "solvent_name_4"
+    t.string "solvent_name_5"
+    t.string "solvent_classification_2"
+    t.string "solvent_classification_3"
+    t.string "solvent_classification_4"
+    t.string "solvent_classification_5"
+    t.string "solvent_ingredients_2"
+    t.string "solvent_ingredients_3"
+    t.string "solvent_ingredients_4"
+    t.string "solvent_ingredients_5"
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
