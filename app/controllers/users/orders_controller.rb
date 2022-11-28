@@ -136,7 +136,7 @@ module Users
       when 7
         {}
       when 8
-        {}
+        { date_submitted: '', prime_contractor_confirmation: '', date_created: '' }
       when 9
         {}
       when 10

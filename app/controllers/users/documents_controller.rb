@@ -47,6 +47,8 @@ module Users
       case document.document_type
       when 'doc_3rd'
         document.update(doc_3_params)
+      when 'doc_8th'
+        document.update(doc_8_params)
       end
     end
 
@@ -54,6 +56,16 @@ module Users
       params.require(:document).permit.merge(
         content: {
           date_submitted: params.dig(:document, :content, :date_submitted)
+        }
+      )
+    end
+
+    def doc_8_params
+      params.require(:document).permit.merge(
+        content: {
+          date_submitted:                params.dig(:document, :content, :date_submitted),
+          prime_contractor_confirmation: params.dig(:document, :content, :prime_contractor_confirmation),
+          date_created: params.dig(:document, :content, :date_created)
         }
       )
     end
