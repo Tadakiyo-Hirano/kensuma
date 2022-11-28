@@ -1,6 +1,13 @@
 <!-- (3)全建統一様式(第2号施⼯体制台帳作成建設⼯事の通知) -->
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
   <div class="document-outer">
+    <div class="card">  
+      <div class="card-body">
+        <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+        <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+      </div>
+    </div>
+
     <div id="sd_p1" class="document-inner">
       <div class="sd_text-container">
         <span id="sd_t5_1" class="sd_t sd_s2">写しの交付が必要である」旨を伝えなければなりません。 </span>
@@ -93,12 +100,6 @@
           </table>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="card">  
-    <div class="card-body">
-      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
     </div>
   </div>
 <% end %>
