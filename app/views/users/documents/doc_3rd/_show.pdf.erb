@@ -26,7 +26,9 @@
       <span id="sd_t16_1" class="sd_t sd_s2">当工事は、建設業法（昭和24年法律第100号）第24条の7に基づく施工体制台帳の作成を要する建設工事 </span>
       <span id="sd_t17_1" class="sd_t sd_s2">です。 </span>
       <span id="sd_t18_1" class="sd_t sd_s1">(全建統一様式第２号) </span>
-      <span id="sd_t19_1" class="sd_t sd_s2"><%= "※※ 未実装 日付 ※※" %></span> <!-- 3-001 -->
+      <span id="sd_t19_1" class="sd_t sd_s2">
+        <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 3-001 提出日（西暦 -->
+      </span>
       <span id="sd_t1a_1" class="sd_t sd_s6">下請負業者の皆さんへ </span>
       <span id="sd_t1b_1" class="sd_t sd_s2">【元請負業者】 </span>
       <span id="sd_t1c_1" class="sd_t sd_s2">
