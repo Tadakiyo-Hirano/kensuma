@@ -122,7 +122,7 @@ module Users
     def doc_content(document_type)
       case document_type
       when 1
-        { date_submitted: ""}
+        { date_submitted: '' }
       when 2
         {}
       when 3
