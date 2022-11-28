@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_27_090118) do
+ActiveRecord::Schema.define(version: 2022_11_27_115638) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -257,7 +257,7 @@ ActiveRecord::Schema.define(version: 2022_11_27_090118) do
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "solvent_name_1"
-    t.string "carried_quantity"
+    t.string "carried_quantity_1"
     t.string "using_location"
     t.string "storing_place"
     t.string "using_tool"
@@ -284,6 +284,10 @@ ActiveRecord::Schema.define(version: 2022_11_27_090118) do
     t.string "solvent_ingredients_3"
     t.string "solvent_ingredients_4"
     t.string "solvent_ingredients_5"
+    t.string "carried_quantity_2"
+    t.string "carried_quantity_3"
+    t.string "carried_quantity_4"
+    t.string "carried_quantity_5"
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
