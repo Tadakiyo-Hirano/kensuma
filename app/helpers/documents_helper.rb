@@ -262,7 +262,7 @@ module DocumentsHelper
     if action_name == 'edit'
       date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
     else
-      date.nil? || date == [''] ? '年　月　日' : date[0].to_date&.strftime('%Y年%-m月%-d日')
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date[0].to_date&.strftime('%Y年%-m月%-d日')
     end
   end
 end
