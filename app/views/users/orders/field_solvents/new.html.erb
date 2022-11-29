@@ -4,7 +4,245 @@
 <div class="card">
   <div class="card-body">
     <%= form_with model: @field_solvent, url: users_order_field_solvents_path, method: :post, local: true, class: "field_solvent-form-validation" do |f| %>
-      <%= render "form", f: f, field_solvent: @field_solvent %>
+
+      <%= render 'shared/error_massages', object: f.object %>
+
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.label :solvent_name_1 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名1を選択してください' }, { class: "form-control" } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :carried_quantity_1 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :carried_quantity_1, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_1) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_classification_1 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_classification_1, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_1) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_ingredients_1 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_ingredients_1, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_1) %>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.label :solvent_name_2 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名2を選択してください' }, { class: "form-control" } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :carried_quantity_2 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :carried_quantity_2, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_2) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_classification_2 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_classification_2, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_2) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_ingredients_2 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_ingredients_2, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_2) %>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.label :solvent_name_3 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名3を選択してください' }, { class: "form-control" } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :carried_quantity_3 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :carried_quantity_3, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_3) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_classification_3 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_classification_3, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_3) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_ingredients_3 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_ingredients_3, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_3) %>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.label :solvent_name_4 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名4を選択してください' }, { class: "form-control" } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :carried_quantity_4 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :carried_quantity_4, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_4) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_classification_4 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_classification_4, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_4) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_ingredients_4 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_ingredients_4, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_4) %>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.label :solvent_name_5 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名5を選択してください' }, { class: "form-control" } %>
+        </div>
+        <div class="col-md-3">
+          <%= f.label :carried_quantity_5 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :carried_quantity_5, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_5) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_classification_5 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_classification_5, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_5) %>
+        </div><br>
+        <div class="col-md-3">
+          <%= f.label :solvent_ingredients_5 %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.text_field :solvent_ingredients_5, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_5) %>
+        </div>
+      </div><br>
+      <br>
+      <%= f.label :using_location %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :using_location, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:using_location), maxlength: 100 %>
+      <br>
+      <%= f.label :storing_place %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :storing_place, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:storing_place), maxlength: 100 %>
+      <br>
+      <%= f.label :using_tool %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :using_tool, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:using_tool), maxlength: 40 %>
+      <br>
+      <%= f.label :usage_period_start %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <br>
+      <%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
+      <br><br>
+      <%= f.label :usage_period_end %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <br>
+      <%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
+      <br><br>
+      <%= f.label :working_process %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.select :working_process, FieldSolvent.working_processes_i18n.invert,{include_blank: true}, {class: "form-control"} %>
+      <br>
+      <%= f.label :sds %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.select :sds, FieldSolvent.sds_i18n.invert,{include_blank: true}, {class: "form-control"} %>
+      <br>
+      <%= f.label :ventilation_control %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :ventilation_control, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:ventilation_control) %>
+      <br>
+
+      <script>
+        $(function(){
+          $.each(function(key){
+            $.validator.addMethod(key, this);
+          });
+          $(".field_solvent-form-validation").validate({
+            rules:{
+              // "field_solvent[solvent_name]": {
+              //   required: true
+              // },
+              // "field_solvent[carried_quantity]": {
+              //   required: true
+              // },
+              // "field_solvent[solvent_classification]": {
+              //   required: true
+              // },
+              // "field_solvent[solvent_ingredients]": {
+              //   required: true
+              // },
+              "field_solvent[using_location]": {
+                required: true
+              },
+              "field_solvent[storing_place]": {
+                required: true
+              },
+              "field_solvent[using_tool]": {
+                required: true
+              },
+              "field_solvent[usage_period_start]": {
+                required: true
+              },
+              "field_solvent[usage_period_end]": {
+                required: true
+              },
+              "field_solvent[working_process]": {
+                required: true
+              },
+              "field_solvent[sds]": {
+                required: true
+              },
+              "field_solvent[ventilation_control]": {
+                required: true
+              },
+            },
+            messages:{
+              // "field_solvent[solvent_name]": {
+              //   required: "商品名を入力してください。"
+              // },
+              // "field_solvent[carried_quantity]": {
+              //   required: "搬入量を入力してください。"
+              // },
+              // "field_solvent[solvent_classification]": {
+              //   required: "種別を入力してください。"
+              // },
+              // "field_solvent[solvent_ingredients]": {
+              //   required: "含有成分を入力してください。"
+              // },
+              "field_solvent[using_location]": {
+                required: "使用場所を入力してください。"
+              },
+              "field_solvent[storing_place]": {
+                required: "保管場所を入力してください。"
+              },
+              "field_solvent[using_tool]": {
+                required: "使用機械又は工具を入力してください。"
+              },
+              "field_solvent[usage_period_start]": {
+                required: "使用期間(始期)を入力してください。"
+              },
+              "field_solvent[usage_period_end]": {
+                required: "使用期間(終期)を入力してください。"
+              },
+              "field_solvent[working_process]": {
+                required: "作業手順書の添付の有無を入力してください。"
+              },
+              "field_solvent[sds]": {
+                required: "SDS(安全データシート)の添付の有無を入力してください。"
+              },
+              "field_solvent[ventilation_control]": {
+                required: "換気等対策を入力してください。"
+              },
+            },
+            errorClass: "input_form_error"
+          });
+          // 入力欄を変更したときにバリデーションを実行
+          $(".field_solvent-form-validation").change(function () {
+            $(this).valid();
+          });
+        });
+      </script>
 
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
       <%= link_to "現場詳細画面へ", users_order_url(@order), class: "btn btn-md btn-block btn-default" %>

@@ -4,41 +4,95 @@
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tbody>
-        <tr>
-          <th><%= FieldSolvent.human_attribute_name(:solvent_name) %></th>
-          <td><%= @field_solvent.solvent_name %></td>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_1) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_1) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_1) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_1) %></th>
         </tr>
         <tr>
-          <th><%= FieldSolvent.human_attribute_name(:carried_quantity) %></th>
-          <td><%= @field_solvent.carried_quantity %></td>
+          <td><%= @field_solvent.solvent_name_1 %></td>
+          <td><%= @field_solvent.carried_quantity_1 %></td>
+          <td><%= @field_solvent.solvent_classification_1 %></td>
+          <td><%= @field_solvent.solvent_ingredients_1 %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_2) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_2) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_2) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_2) %></th>
         </tr>
         <tr>
-          <th><%= FieldSolvent.human_attribute_name(:solvent_classification) %></th>
-          <td><%= @field_solvent.solvent_classification %></td>
+          <td><%= @field_solvent.solvent_name_2 %></td>
+          <td><%= @field_solvent.carried_quantity_2 %></td>
+          <td><%= @field_solvent.solvent_classification_2 %></td>
+          <td><%= @field_solvent.solvent_ingredients_2 %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_3) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_3) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_3) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_3) %></th>
         </tr>
         <tr>
-          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients) %></th>
-          <td><%= @field_solvent.solvent_ingredients %></td>
+          <td><%= @field_solvent.solvent_name_3 %></td>
+          <td><%= @field_solvent.carried_quantity_3 %></td>
+          <td><%= @field_solvent.solvent_classification_3 %></td>
+          <td><%= @field_solvent.solvent_ingredients_3 %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_4) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_4) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_4) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_4) %></th>
+        </tr>
+        <tr>
+          <td><%= @field_solvent.solvent_name_4 %></td>
+          <td><%= @field_solvent.carried_quantity_4 %></td>
+          <td><%= @field_solvent.solvent_classification_4 %></td>
+          <td><%= @field_solvent.solvent_ingredients_4 %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_5) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_5) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_5) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_5) %></th>
+        </tr>
+        <tr>
+          <td><%= @field_solvent.solvent_name_5 %></td>
+          <td><%= @field_solvent.carried_quantity_5 %></td>
+          <td><%= @field_solvent.solvent_classification_5 %></td>
+          <td><%= @field_solvent.solvent_ingredients_5 %></td>
         </tr>
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:using_location) %></th>
           <td><%= @field_solvent.using_location %></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:storing_place) %></th>
           <td><%= @field_solvent.storing_place %></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:using_tool) %></th>
           <td><%= @field_solvent.using_tool %></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:usage_period_start) %></th>
           <td><%= @field_solvent.usage_period_start %></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:usage_period_end) %></th>
           <td><%= @field_solvent.usage_period_end %></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:working_process) %></th>
@@ -47,10 +101,14 @@
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:sds) %></th>
           <td><%= @field_solvent.sds_i18n %></td>
+          <td></td>
+          <td></td>
         </tr>
         <tr>
           <th><%= FieldSolvent.human_attribute_name(:ventilation_control) %></th>
           <td><%= @field_solvent.ventilation_control %></td>
+          <td></td>
+          <td></td>
         </tr>
       </tbody>
     </table>
