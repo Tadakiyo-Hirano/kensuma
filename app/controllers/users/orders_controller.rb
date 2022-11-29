@@ -70,13 +70,13 @@ module Users
       request_order = @order.request_orders.build(business: current_business)
 
       24.times do |n|
-        create_document(request_order.documents, (n + 1))
-        # request_order.documents.build(
-        #   document_type: n + 1,
-        #   created_on:    Date.current,
-        #   submitted_on:  Date.current,
-        #   business:      current_business
-        # )
+        request_order.documents.build(
+          document_type: n + 1,
+          created_on:    Date.current,
+          submitted_on:  Date.current,
+          content:       {},
+          business:      current_business
+        )
       end
 
       if @order.save
@@ -107,69 +107,6 @@ module Users
 
     def set_order
       @order = current_business.orders.find_by(site_uu_id: params[:site_uu_id])
-    end
-
-    def create_document(document, document_type)
-      document.build(
-        document_type: document_type,
-        created_on:    Date.current,
-        submitted_on:  Date.current,
-        content:       doc_content(document_type),
-        business:      current_business
-      )
-    end
-
-    def doc_content(document_type)
-      case document_type
-      when 1
-        { date_submitted: '' }
-      when 2
-        {}
-      when 3
-        {}
-      when 4
-        {}
-      when 5
-        {}
-      when 6
-        {}
-      when 7
-        {}
-      when 8
-        {}
-      when 9
-        {}
-      when 10
-        {}
-      when 11
-        {}
-      when 12
-        {}
-      when 13
-        {}
-      when 14
-        {}
-      when 15
-        {}
-      when 16
-        {}
-      when 17
-        {}
-      when 18
-        {}
-      when 19
-        {}
-      when 20
-        {}
-      when 21
-        {}
-      when 22
-        {}
-      when 23
-        {}
-      when 24
-        {}
-      end
     end
 
     def order_params
