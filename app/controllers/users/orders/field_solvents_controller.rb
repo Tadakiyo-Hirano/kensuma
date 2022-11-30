@@ -25,7 +25,7 @@ module Users::Orders
 
     def destroy
       @field_solvent.destroy!
-      flash[:danger] = "#{@field_solvent.solvent_name}を削除しました"
+      flash[:danger] = '溶剤情報を削除しました'
       redirect_to users_order_url(@order)
     end
 

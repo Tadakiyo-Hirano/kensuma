@@ -11,7 +11,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_1 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名1を選択してください' }, { class: "form-control" } %>
+          <%= f.collection_select :solvent_name_1, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: "form-control" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_1 %>
@@ -33,7 +33,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_2 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名2を選択してください' }, { class: "form-control" } %>
+          <%= f.collection_select :solvent_name_2, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名2を選択してください' }, { class: "form-control" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_2 %>
@@ -55,7 +55,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_3 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名3を選択してください' }, { class: "form-control" } %>
+          <%= f.collection_select :solvent_name_3, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名3を選択してください' }, { class: "form-control" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_3 %>
@@ -77,7 +77,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_4 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名4を選択してください' }, { class: "form-control" } %>
+          <%= f.collection_select :solvent_name_4, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名4を選択してください' }, { class: "form-control" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_4 %>
@@ -99,7 +99,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_5 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_id, Solvent.where(business_id: @order.business_id), :id, :name, { prompt: '商品名5を選択してください' }, { class: "form-control" } %>
+          <%= f.collection_select :solvent_name_5, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名5を選択してください' }, { class: "form-control" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_5 %>
