@@ -1,5 +1,12 @@
 <!-- (8)全建統⼀様式第5号改(作業員名簿) -->
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
+  <div class="card">  
+    <div class="card-body">
+      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+      <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+    </div>
+  </div>
+
   <div style="overflow: auto;">
     <% document_info.field_workers.each_slice(10).first(1).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
       <div class="ritz grid-container" dir="ltr">
@@ -116,8 +123,7 @@
               <td class="doc_8th_s7"></td>
               <td class="doc_8th_s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
               <td class="doc_8th_s8" colspan="8" rowspan="3">
-                <%= f.text_field :content, multiple: true,
-                                          name: "document[content][prime_contractor_confirmation][]",
+                <%= f.text_field :content, name: "document[content][prime_contractor_confirmation][]",
                                           value: @document.content&.[]("prime_contractor_confirmation"),
                                           class: 'form-control form-control-sm'
                 %> <!-- 8-042 元請会社の確認欄 -->
@@ -321,8 +327,7 @@
               <td class="doc_8th_s2"></td>
               <td class="doc_8th_s2" colspan="3" rowspan="2">提 出 日</td>
               <td class="doc_8th_s10" colspan="6" rowspan="2">
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content][date_submitted][]",
+                <%= f.date_field :content, name: "document[content][date_submitted][]",
                                           value: doc_content_date(@document.content&.[]("date_submitted")),
                                           class: 'form-control form-control-sm'
                 %> <!-- 8-011 提出日（西暦 -->
@@ -368,8 +373,7 @@
               <td class="doc_8th_s2"></td>
               <td class="doc_8th_s13" rowspan="2">（</td>
               <td class="doc_8th_s14" colspan="7" rowspan="2">
-                <%= f.date_field :content, multiple: true,
-                                          name: "document[content][date_created][]",
+                <%= f.date_field :content, name: "document[content][date_created][]",
                                           value: doc_content_date(@document.content&.[]("date_created")),
                                           class: 'form-control form-control-sm'
                 %> <!-- 8-004 提出日（西暦 -->
@@ -1988,11 +1992,5 @@
         </table>
       </div>
     <% end %>
-  </div>
-
-  <div class="card">  
-    <div class="card-body">
-      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
-    </div>
   </div>
 <% end %>

@@ -115,7 +115,7 @@
 						<td class="doc_8th_s7"></td>
 						<td class="doc_8th_s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
 						<td class="doc_8th_s8" colspan="8" rowspan="3">
-							<%= @document.content&.[]("prime_contractor_confirmation")[0] %> <!-- 8-042 元請会社の確認欄 -->
+							<%= @document.content&.[]("prime_contractor_confirmation")&.first %> <!-- 8-042 元請会社の確認欄 -->
 						</td>
 					</tr>
 					<tr style="height: 13px">
