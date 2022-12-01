@@ -419,11 +419,15 @@
             </th>
             <td class="doc_13_s0"></td>
             <td class="doc_13_s0" colspan="5" rowspan="2">事業所の名称</td>
-            <td class="doc_13_s25" dir="ltr" colspan="13" rowspan="2">「事業所名（現場名）」13-003</td>
+            <td class="doc_13_s25" dir="ltr" colspan="13" rowspan="2">
+              <%= document_site_info.site_name %> <!-- 13-003 事業所名(現場名) -->
+            </td>
             <td class="doc_13_s2"></td>
             <td class="doc_13_s2"></td>
             <td class="doc_13_s0" colspan="5" rowspan="2">一次会社名</td>
-            <td class="doc_13_s25" dir="ltr" colspan="12" rowspan="2">「一次会社名」13-005</td>
+            <td class="doc_13_s25" dir="ltr" colspan="12" rowspan="2">
+              <%= primary_subcon_name(document_info) %> <!-- 13-005 一次会社名 -->
+            </td>
             <td class="doc_13_s4"></td>
             <td class="doc_13_s4"></td>
             <td class="doc_13_s4"></td>
@@ -457,12 +461,16 @@
             </th>
             <td class="doc_13_s0"></td>
             <td class="doc_13_s0" colspan="5" rowspan="2">所 長 名</td>
-            <td class="doc_13_s26" dir="ltr" colspan="11" rowspan="2">元請会社の「各会社の現場代理人名」13-004</td>
+            <td class="doc_13_s26" dir="ltr" colspan="11" rowspan="2">
+              <%= document_site_info.site_agent_name %> <!-- 13-004 元請会社の現場代理人名 -->
+            </td>
             <td class="doc_13_s1" colspan="2" rowspan="2">殿</td>
             <td class="doc_13_s2"></td>
             <td class="doc_13_s2"></td>
             <td class="doc_13_s0" colspan="5">持込会社名</td>
-            <td class="doc_13_s25" dir="ltr" colspan="12" rowspan="2">「持込会社名」13-007</td>
+            <td class="doc_13_s25" dir="ltr" colspan="12" rowspan="2">
+              <%= document_info.content&.[]('subcon_name') %> <!-- 13-007 持込会社名(自社名) -->
+            </td>
             <td class="doc_13_s4"></td>
             <td class="doc_13_s4"></td>
             <td class="doc_13_s4"></td>
@@ -482,8 +490,9 @@
             <td class="doc_13_s2"></td>
             <td class="doc_13_s2"></td>
             <td class="doc_13_s0">（</td>
-            <td class="doc_13_s27" dir="ltr" colspan="2">13-006</td>
-            <td class="doc_13_s0">次</td>
+            <td class="doc_13_s27" dir="ltr" colspan="3">
+              <%= sc_hierarchy(document_info) %> <!-- 13-006 次 -->
+            </td>
             <td class="doc_13_s0">）</td>
             <td class="doc_13_s4"></td>
             <td class="doc_13_s4"></td>
@@ -528,7 +537,9 @@
             <td class="doc_13_s2"></td>
             <td class="doc_13_s2"></td>
             <td class="doc_13_s0" colspan="5" rowspan="2">代 表 者 名</td>
-            <td class="doc_13_s25" dir="ltr" colspan="10" rowspan="2">持込会社の「代表者名」13-008</td>
+            <td class="doc_13_s25" dir="ltr" colspan="10" rowspan="2">
+              <%= document_info.content&.[]('subcon_representative_name') %> <!-- 13-008 持込会社の代表者名 -->
+            </td>
             <td class="doc_13_s31" dir="ltr" colspan="2" rowspan="2">㊞13-259</td>
             <td class="doc_13_s4"></td>
             <td class="doc_13_s4"></td>

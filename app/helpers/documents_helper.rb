@@ -6,7 +6,7 @@ module DocumentsHelper
     elsif document_info.ancestors.count > 1
       RequestOrder.find(document_info.ancestor_ids[-2]).content['subcon_name']
     elsif document_info.ancestors.count == 1
-      document_info.content['subcon_name']
+      document_info.content.nil? ? nil : document_info.content['subcon_name']
     end
   end
 
@@ -254,6 +254,15 @@ module DocumentsHelper
       fires.first.fire_managements.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
     else
       name
+    end
+  end
+
+  # document.contentの日付データ表示
+  def doc_content_date(date)
+    if action_name == 'edit'
+      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+    else
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
     end
   end
 end
