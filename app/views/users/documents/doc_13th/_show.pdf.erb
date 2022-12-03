@@ -49,7 +49,9 @@
             <td class="s3"></td>
             <td class="s3"></td>
             <td class="s3"></td>
-            <td class="s4">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td> <!-- 中心調整 -->
+            <td class="s4">
+              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            </td> <!-- 中心調整 -->
             <td class="s4"></td>
             <td class="s5"></td>
             <td class="s5"></td>
@@ -327,9 +329,15 @@
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s20"></td>
-            <td class="s23" dir="ltr" colspan="14" rowspan="3">「所有会社名」13-101</td>
-            <td class="s23" dir="ltr" colspan="12" rowspan="3">「代表者名」13-102</td>
-            <td class="s24" dir="ltr" colspan="2" rowspan="3">印13-261</td>
+            <td class="s23" dir="ltr" colspan="14" rowspan="3">
+              <%= field_special_vehicle.owning_company_name %> <!-- 13-101 所有会社名 -->
+            </td>
+            <td class="s23" dir="ltr" colspan="12" rowspan="3">
+              <!-- 13-102 代表者名 ※未実装※ -->
+            </td>
+            <td class="s24" dir="ltr" colspan="2" rowspan="3">
+              印 <!-- 13-261 印 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(２) 移動式クレーン</td>
           </tr>
@@ -1408,10 +1416,14 @@
             <td class="s8" colspan="6" rowspan="4">任 意 保 険</td>
             <td class="s8" colspan="4" rowspan="4">加入額</td>
             <td class="s8" colspan="3" rowspan="2">対人</td>
-            <td class="s31" dir="ltr" colspan="5" rowspan="2">「任意保険加入額・対人」13-030</td>
+            <td class="s31" dir="ltr" colspan="5" rowspan="2">
+              <%= field_special_vehicle.content&.[]("personal_insurance") %> <!-- 13-030 任意保険加入額・対人 -->
+            </td>
             <td class="s8" colspan="2" rowspan="2">千円</td>
             <td class="s8" colspan="3" rowspan="2">搭乗者</td>
-            <td class="s31" dir="ltr" colspan="5" rowspan="2">「任意保険加入額・搭乗者」13-032</td>
+            <td class="s31" dir="ltr" colspan="5" rowspan="2">
+              <%= field_special_vehicle.content&.[]("passenger_insurance") %> <!-- 13-032 任意保険加入額・搭乗者 -->
+            </td>
             <td class="s8" colspan="2" rowspan="2">千円</td>
             <td class="s8" colspan="7" rowspan="2">有 効 期 限</td>
             <td class="s4"></td>
@@ -1422,14 +1434,22 @@
             <td class="s28" rowspan="3">点検日</td>
             <td class="s42" colspan="6">年 月 日</td>
             <td class="s28" rowspan="3">点検者</td>
-            <td class="s24" dir="ltr" colspan="4" rowspan="3">「(a)点検年月日」13-256</td>
-            <td class="s43" dir="ltr" rowspan="3">印13-262</td>
+            <td class="s24" dir="ltr" colspan="4" rowspan="3">
+              <!-- 13-256 (a)点検年月日 ※未実装※ -->
+            </td>
+            <td class="s43" dir="ltr" rowspan="3">
+              印 <!-- 13-262 印 -->
+            </td>
             <td class="s21" rowspan="3">(b)</td>
             <td class="s28" rowspan="3">点検日</td>
             <td class="s42" colspan="6">年 月 日</td>
             <td class="s28" rowspan="3">点検者</td>
-            <td class="s24" dir="ltr" colspan="4" rowspan="3">「(b)点検者名」13-258</td>
-            <td class="s43" dir="ltr" rowspan="3">印13-263</td>
+            <td class="s24" dir="ltr" colspan="4" rowspan="3">
+              <!-- 13-258 (b)点検者名 ※未実装※ -->
+            </td>
+            <td class="s43" dir="ltr" rowspan="3">
+              印 <!-- 13-263 印 -->
+            </td>
             <td class="s4"></td>
             <td class="s22" colspan="7">(40) 鉄骨切断機</td>
           </tr>
@@ -1442,8 +1462,12 @@
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s20"></td>
-            <td class="s38" dir="ltr" colspan="6" rowspan="2">「(a)点検年月日」13-255</td>
-            <td class="s38" dir="ltr" colspan="6" rowspan="2">「(b)点検年月日」13-257</td>
+            <td class="s38" dir="ltr" colspan="6" rowspan="2">
+              <!-- 13-255 (a)点検年月日 ※未実装※ --> 
+            </td>
+            <td class="s38" dir="ltr" colspan="6" rowspan="2">
+              <!-- 13-257 (b)点検年月日 ※未実装※ -->
+            </td>
             <td class="s4"></td>
             <td class="s22" colspan="7">(41) 解体用つかみ機</td>
           </tr>
@@ -1453,12 +1477,18 @@
             </th>
             <td class="s7"></td>
             <td class="s8" colspan="3" rowspan="2">対物</td>
-            <td class="s31" dir="ltr" colspan="5" rowspan="2">「任意保険加入額・対物」13-031</td>
+            <td class="s31" dir="ltr" colspan="5" rowspan="2">
+              <%= field_special_vehicle.content&.[]("objective_insurance") %> <!-- 13-031 任意保険加入額・対物 -->
+            </td>
             <td class="s8" colspan="2" rowspan="2">千円</td>
             <td class="s8" colspan="3" rowspan="2">その他</td>
-            <td class="s31" dir="ltr" colspan="5" rowspan="2">「任意保険加入額・その他」13-033</td>
+            <td class="s31" dir="ltr" colspan="5" rowspan="2">
+              <%= field_special_vehicle.content&.[]("other_insurance") %> <!-- 13-033 任意保険加入額・その他 -->
+            </td>
             <td class="s8" colspan="2" rowspan="2">千円</td>
-            <td class="s36" dir="ltr" colspan="7" rowspan="2">「有効期限」13-034</td>
+            <td class="s36" dir="ltr" colspan="7" rowspan="2">
+              <%= field_special_vehicle.content&.[]("exp_date_insurance").to_date.strftime('%Y年%-m月%-d日') %> <!-- 13-034 有効期限 -->
+            </td>
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s4"></td>
@@ -1547,7 +1577,9 @@
             </th>
             <td class="s7"></td>
             <td class="s8" colspan="6" rowspan="8">機械等の特性<br> ・その他その<br> 使用上注意す<br> べき事項</td>
-            <td class="s23" dir="ltr" colspan="31" rowspan="8">「機械等の特性・その他その使用上注意すべき事項」13-036</td>
+            <td class="s23" dir="ltr" colspan="31" rowspan="8">
+              <%= field_special_vehicle.precautions %> <!-- 13-036 機械等の特性・その他その使用上注意すべき事項 -->
+            </td>
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s4"></td>
@@ -1754,10 +1786,18 @@
             </th>
             <td class="s7"></td>
             <td class="s8" colspan="2" rowspan="3">担当者</td>
-            <td class="s23" dir="ltr" colspan="11" rowspan="3">「元請確認欄・担当者」13-037</td>
-            <td class="s23" dir="ltr" colspan="12" rowspan="3">「受付番号」13-038</td>
-            <td class="s36" dir="ltr" colspan="7" rowspan="3">「受付確認年月日」13-039</td>
-            <td class="s36" dir="ltr" colspan="5" rowspan="3">「受付確認者」13-040</td>
+            <td class="s23" dir="ltr" colspan="11" rowspan="3">
+              <!-- 13-037 元請確認欄・担当者 ※未実装※ -->
+            </td>
+            <td class="s23" dir="ltr" colspan="12" rowspan="3">
+              <!-- 13-038 受付番号 ※未実装※ -->
+            </td>
+            <td class="s36" dir="ltr" colspan="7" rowspan="3">
+              <!-- 13-039 受付確認年月日 ※未実装※ -->
+            </td>
+            <td class="s36" dir="ltr" colspan="5" rowspan="3">
+              <!-- 13-040 受付確認者 ※未実装※ -->
+            </td>
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s4"></td>
