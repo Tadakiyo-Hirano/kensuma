@@ -228,7 +228,9 @@
             <td class="s6"></td>
             <td class="s6"></td>
             <td class="s6"></td>
-            <td class="s14" colspan="9" rowspan="2">移動式クレーン</td>
+            <td class="s14" colspan="9" rowspan="2">
+              <%= vehicle_type_crane(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
+            </td>
             <td class="s15" colspan="2" rowspan="4">　等</td>
             <td class="s0"></td>
             <td class="s15" colspan="4" rowspan="4">使用届</td>
@@ -313,7 +315,9 @@
             <td class="s18"></td>
             <td class="s19"></td>
             <td class="s6"></td>
-            <td class="s14" colspan="9" rowspan="2">車両系建設機械</td>
+            <td class="s14" colspan="9" rowspan="2">
+              <%= vehicle_type_construction(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
+            </td>
             <td class="s2"></td>
             <td class="s3"></td>
             <td class="s6"></td>
@@ -1123,7 +1127,9 @@
             <td class="s23" dir="ltr" colspan="7" rowspan="2">
               <%= document_date(field_special_vehicle.carry_out_date) %> <!-- 13-018 搬出予定年月日 -->
             </td>
-            <td class="s23" colspan="7" rowspan="2">自社・リース</td>
+            <td class="s23" colspan="7" rowspan="2">
+              <%= lease_type_own(field_special_vehicle.lease_type) %>・<%= lease_type_lease(field_special_vehicle.lease_type) %> <!-- 13-020 自社・リース -->
+            </td>
             <td class="s0" rowspan="2"></td>
             <td class="s20"></td>
             <td class="s28" rowspan="9">安全装置等</td>
@@ -2581,7 +2587,18 @@
   .doc_13th_image {
     position: relative;
     bottom: 1490px;
-    left: 375px;
+    left: 375
+    px;
+  }
+
+  .circle {
+    border: 2px solid #000000;
+    border-radius: 25px;
+    padding: 4px;
+  }
+
+  .line_through {
+    text-decoration: line-through;
   }
 
   .page-break {
