@@ -1194,7 +1194,7 @@
                 <%= field_special_vehicle.driver_name %> <!-- 13-021 入場する作業員名(運転者名・正) -->
               </td>
               <td class="doc_13_s23" dir="ltr" colspan="19" rowspan="2">
-                <%= field_special_vehicle.driver_license.split[0][0..20] %>　<!-- 13-022 資格の種類 --> 
+                <%= field_special_vehicle.driver_license.split[0][0..20] if field_special_vehicle.driver_license %>　<!-- 13-022 資格の種類 --> 
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s35"></td>
