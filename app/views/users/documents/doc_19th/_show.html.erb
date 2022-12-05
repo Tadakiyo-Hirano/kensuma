@@ -72,7 +72,7 @@
           <td class="doc_19_s0"></td>
           <td class="doc_19_s5"></td>
           <td class="doc_19_s6" dir="ltr" colspan="2" rowspan="2">元 請<br> 確認欄</td>
-          <td class="doc_19_s7" dir="ltr" colspan="9" rowspan="2"><%= @document.content['prime_contractor_confirmation']%></td>
+          <td class="doc_19_s7" dir="ltr" colspan="9" rowspan="2"><%= @document.content&.[]('prime_contractor_confirmation')%></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -162,7 +162,7 @@
           <td class="doc_19_s3"></td>
           <td class="doc_19_s3"></td>
           <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">会 社 名</td>
-          <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2"><a target="_blank" href="#rangeid=18844400">「会社名」19-004</a></td>
+          <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2"><%=@document.content&.[]('company_name')%></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -343,7 +343,7 @@
           <td class="doc_19_s8" dir="ltr"></td>
           <td class="doc_19_s8" dir="ltr"></td>
           <td class="doc_19_s8" dir="ltr"></td>
-          <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><a target="_blank" href="#rangeid=324670978">「書類作成日（西暦）」19-007</a></td>
+          <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><%= @document.content&.[]('date_created') %></td>
           <td class="doc_19_s8" dir="ltr" colspan="2" rowspan="2">作成</td>
           <td class="doc_19_s2"></td>
         </tr>
@@ -481,7 +481,7 @@
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
           <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生方針</td>
-          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><a target="_blank" href="#rangeid=1047036298">「工事安全衛生方針」19-008</a></td>
+          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><%=@document.content&.[]('safety_and_health_construction_policy') %></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -535,7 +535,7 @@
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
           <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生目標</td>
-          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><a target="_blank" href="#rangeid=185682563">「工事安全衛生目標」19-009</a></td>
+          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><%=@document.content&.[]('safety_and_health_construction_objective')%></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -595,63 +595,90 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s15" dir="ltr"></td>
-          <td class="doc_19_s16" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=1156549270">「工種別工事期間（月）」19-010</a></td>
+          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_1st')%>月</td>
           <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">「工種別工事期間（週）」19-011</a></td>
-          <td class="doc_19_s16" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=1156549270">「工種別工事期間（月）」19-012</a></td>
+          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_2st')%>月</td>
           <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">「工種別工事期間（週）」19-013</a></td>
-          <td class="doc_19_s16" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=1156549270">「工種別工事期間（月）」19-014</a></td>
+          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_3rd')%>月</td>
           <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">「工種別工事期間（週）」19-015</a></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s18" dir="ltr" colspan="7"><a target="_blank" href="#rangeid=1953804282">「工種」19-016</a></td>
-          <td class="doc_19_s19" dir="ltr" colspan="8"><a target="_blank" href="#rangeid=366150222">「工種別工事期間　↔で期間を表す」19-017</a></td>
-          <td class="doc_19_s19" dir="ltr" colspan="8"><a target="_blank" href="#rangeid=366150222">「工種別工事期間　↔で期間を表す」19-018</a></td>
-          <td class="doc_19_s19" dir="ltr" colspan="8"><a target="_blank" href="#rangeid=366150222">「工種別工事期間　↔で期間を表す」19-019</a></td>
-          <td class="doc_19_s20" dir="ltr" colspan="9"><a target="_blank" href="#rangeid=1349486237">「日常の安全衛生活動」19-020</a></td>
+          <td class="doc_19_s18" dir="ltr" colspan="7"><%=@document.content&.[]('construction_type_1st')%></td>
+          <td class="doc_19_s19" dir="ltr" colspan="8"><%= @document.content&.[]('construction_type_1st_period_1st')%></td>
+          <td class="doc_19_s19" dir="ltr" colspan="8"><%=@document.content&.[]('construction_type_1st_period_2nd') %></td>
+          <td class="doc_19_s19" dir="ltr" colspan="8"><%=@document.content&.[]('construction_type_1st_period_3rd')%></td>
+          <td class="doc_19_s19" dir="ltr" colspan="9" rowspan="11"><%=@document.content&.[]('daily_safety_and_health_activity')%></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s21" dir="ltr" colspan="7"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s23" dir="ltr" colspan="9"></td>
+          <td class="doc_19_s18" dir="ltr" colspan="7">
+            <%=@document.content&.[]('construction_type_2nd')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_2nd_period_1st') %>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_2nd_period_2nd')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_2nd_period_3rd')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s21" dir="ltr" colspan="7"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s23" dir="ltr" colspan="9"></td>
+          <td class="doc_19_s18" dir="ltr" colspan="7">
+            <%=@document.content&.[]('construction_type_3rd')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_3rd_period_1st')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_3rd_period_2nd')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_3rd_period_3rd')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s21" dir="ltr" colspan="7"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s23" dir="ltr" colspan="9"></td>
+          <td class="doc_19_s18" dir="ltr" colspan="7">
+            <%=@document.content&.[]('construction_type_4th')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_4th_period_1st')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_4th_period_2nd') %>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%= @document.content&.[]('construction_type_4th_period_3rd')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s21" dir="ltr" colspan="7"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s22" colspan="8"></td>
-          <td class="doc_19_s23" dir="ltr" colspan="9"></td>
+          <td class="doc_19_s18" dir="ltr" colspan="7">
+            <%=@document.content&.[]('construction_type_5th')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_5th_period_1st')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_5th_period_2nd')%>
+          </td>
+          <td class="doc_19_s18" colspan="8">
+            <%=@document.content&.[]('construction_type_5th_period_3rd')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
           <td class="doc_19_s24" dir="ltr" colspan="31">資機材・保護具・資格の区分／その種類</td>
-          <td class="doc_19_s23" dir="ltr" colspan="9"></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -659,8 +686,9 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機械設備</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24"><a target="_blank" href="#rangeid=1414293760">「主な使用機械設備」19-021</a></td>
-          <td class="doc_19_s30" colspan="9"></td>
+          <td class="doc_19_s29" dir="ltr" colspan="24">
+            <%=@document.content&.[]('main_machine_equipment')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -668,8 +696,9 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機器・工具</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24"><a target="_blank" href="#rangeid=288675393">「主な使用機器・工具」19-022</a></td>
-          <td class="doc_19_s30" colspan="9"></td>
+          <td class="doc_19_s29" dir="ltr" colspan="24">
+            <%=@document.content&.[]('main_tool')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -677,8 +706,9 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">主な使用資材枠</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24"><a target="_blank" href="#rangeid=1913528388">「主な使用資材枠」19-023</a></td>
-          <td class="doc_19_s30" colspan="9"></td>
+          <td class="doc_19_s29" dir="ltr" colspan="24">
+            <%=@document.content&.[]('main_material')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -686,8 +716,9 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">使用保護具</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24"><a target="_blank" href="#rangeid=760036759">「使用保護具」19-024</a></td>
-          <td class="doc_19_s30" colspan="9"></td>
+          <td class="doc_19_s29" dir="ltr" colspan="24">
+            <%=@document.content&.[]('protective_equipment')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -695,8 +726,9 @@
           <td class="doc_19_s1"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">有資格者・配置予定者</td>
           <td class="doc_19_s31"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24"><a target="_blank" href="#rangeid=954296829">「有資格者・配置予定者」19-025</a></td>
-          <td class="doc_19_s22" colspan="9"></td>
+          <td class="doc_19_s29" dir="ltr" colspan="24">
+            <%=@document.content&.[]('qualified_staff')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -723,13 +755,19 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s18" dir="ltr" colspan="7" rowspan="4"><a target="_blank" href="#rangeid=1278179573">「作業区分」19-026</a></td>
-          <td class="doc_19_s32" dir="ltr" colspan="9" rowspan="2"><a target="_blank" href="#rangeid=1592800442">「予測される災害（危険性又は有害性）」19-027</a></td>
+          <td class="doc_19_s18" dir="ltr" colspan="7" rowspan="4">
+            <%=@document.content&.[]('work_classification_1st')%>
+          </td>
+          <td class="doc_19_s32" dir="ltr" colspan="9" rowspan="2">
+            <%=@document.content&.[]('predicted_disaster_1st')%>
+          </td>
           <td class="doc_19_s33" dir="ltr" colspan="2" rowspan="2"><a target="_blank" href="#rangeid=83173426">「可能性 (度合)」19-028</a></td>
           <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2"><a target="_blank" href="#rangeid=1753288011">「重大性 (重篤度)」19-029</a></td>
           <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2"><a target="_blank" href="#rangeid=1354691058">「見積り」19-030</a></td>
           <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2"><a target="_blank" href="#rangeid=1233970442">「リスクレベル」19-031</a></td>
-          <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2"><a target="_blank" href="#rangeid=695401785">「リスク低減措置」19-032</a></td>
+          <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
+            <%=@document.content&.[]('risk_reduction_measures_1st')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -737,13 +775,18 @@
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
-          <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2"></td>
+          <td class="doc_19_s5" dir="ltr">
+          </td>
+          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
+            <%=@document.content&.[]('predicted_disaster_2nd')%>
+          </td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
+            <%=@document.content&.[]('risk_reduction_measures_2nd')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -752,13 +795,19 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s35" dir="ltr" colspan="7" rowspan="6"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2"></td>
+          <td class="doc_19_s35" dir="ltr" colspan="7" rowspan="6">
+            <%=@document.content&.[]('work_classification_2nd')%>
+          </td>
+          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
+            <%=@document.content&.[]('predicted_disaster_3rd')%>
+          </td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
+            <%=@document.content&.[]('risk_reduction_measures_3rd')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -767,12 +816,16 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
+            <%=@document.content&.[]('work_classification_3rd')%>
+          </td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
+            <%=@document.content&.[]('risk_reduction_measures_4th')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -781,12 +834,16 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
+            <%=@document.content&.[]('work_classification_4th')%>
+          </td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
+            <%= @document.content&.[]('risk_reduction_measures_5th')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -795,13 +852,19 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s35" dir="ltr" colspan="7" rowspan="8"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2"></td>
+          <td class="doc_19_s35" dir="ltr" colspan="7" rowspan="8">
+            <%=@document.content&.[]('work_classification_5th')%>
+          </td>
+          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
+            <%=@document.content&.[]('work_classification_6th')%>
+          </td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
+            <%=@document.content&.[]('risk_reduction_measures_6th')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -810,12 +873,16 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
+            <%=@document.content&.[]('work_classification_7th')%>
+          </td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
           <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
+            <%=@document.content&.[]('risk_reduction_measures_7th')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -824,12 +891,16 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="4"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="4">
+            <%=@document.content&.[]('work_classification_8th')%>
+          </td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4"></td>
           <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4"></td>
           <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="4"></td>
-          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="4"></td>
+          <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="4">
+            <%=@document.content&.[]('risk_reduction_measures_8th')%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">

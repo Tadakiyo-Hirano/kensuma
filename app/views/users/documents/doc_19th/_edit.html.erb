@@ -75,7 +75,7 @@
             <td class="doc_19_s5"></td>
             <td class="doc_19_s6" dir="ltr" colspan="2" rowspan="2">元 請<br> 確認欄</td>
             <td class="doc_19_s7" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[prime_contractor_confirmation]' %>
+              <%= f.text_field name = 'content[prime_contractor_confirmation]',value:@document.content&.[]('prime_contractor_confirmation')%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -167,7 +167,7 @@
             <td class="doc_19_s3"></td>
             <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">会 社 名</td>
             <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2">
-              <%= f.text_field name = 'content[company_name]' %>
+              <%= f.text_field name = 'content[company_name]',value:@document.content&.[]('company_name') %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -350,7 +350,7 @@
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2">
-              <%= f.date_field name = 'content[date_created]' %>
+              <%= f.date_field name = 'content[date_created]', value:@document.content&.[]('date_created') %>
             </td>
             <td class="doc_19_s8" dir="ltr" colspan="2" rowspan="2">作成</td>
             <td class="doc_19_s2"></td>
@@ -490,7 +490,7 @@
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生方針</td>
             <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
-              <%= f.text_area name = 'content[safety_and_health_construction_policy]', size: "150x2"%>
+              <%= f.text_area name = 'content[safety_and_health_construction_policy]',value:@document.content&.[]('safety_and_health_construction_policy') , size: "150x2"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -546,7 +546,7 @@
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生目標</td>
             <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
-              <%= f.text_area name = 'content[safety_and_health_construction_objective]', size: "150x2"%>
+              <%= f.text_area name = 'content[safety_and_health_construction_objective]',value:@document.content&.[]('safety_and_health_construction_objective'), size: "150x2"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -608,143 +608,138 @@
           <tr style="height: 24px">
             <td class="doc_19_s15" dir="ltr"></td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
-              <%= f.date_select name = 'content[construction_type_1st_period_month_1st]', {discard_year: true, discard_day: true } %>
+              <%= f.select name = 'content[construction_type_1st_period_month_1st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_1st')}%>月
             </td>
             <td class="doc_19_s17" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_one_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_one_1st]' %></br>
               <%= f.label :week_two, "2週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_two_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_two_1st]' %></br>
               <%= f.label :week_three, "3週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_three_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_three_1st]' %></br>
               <%= f.label :week_four, "4週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_four_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_four_1st]' %></br>
               <%= f.label :week_five, "5週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_five_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_five_1st]' %></br>
             </td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
-              <%= f.date_select name = 'content[construction_type_1st_period_month_2st]', {discard_year: true, discard_day: true } %>
+              <%= f.select name = 'content[construction_type_1st_period_month_2st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_2st')}%>月
             </td>
             <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">
               <%= f.label :week_one, "1週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_one_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_one_2nd]' %></br>
               <%= f.label :week_two, "2週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_two_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_two_2nd]' %></br>
               <%= f.label :week_three, "3週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_three_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_three_2nd]' %></br>
               <%= f.label :week_four, "4週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_four_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_four_2nd]' %></br>
               <%= f.label :week_five, "5週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_five_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_five_2nd]' %></br>
             </td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
-              <%= f.date_select name = 'content[construction_type_1st_period_month_3rd]', {discard_year: true, discard_day: true } %>
+              <%= f.select name = 'content[construction_type_1st_period_month_3rd]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_3rd')} %>
             </td>
             <td class="doc_19_s17" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_one_3rd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_one_3rd]' %></br>
               <%= f.label :week_two, "2週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_two_3rd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_two_3rd]' %></br>
               <%= f.label :week_three, "3週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_three_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_three_2nd]' %></br>
               <%= f.label :week_four, "4週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_four_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_four_2nd]' %></br>
               <%= f.label :week_five, "5週" %>
-              <%= f.check_box name = 'content[construction_type_1st_period_week_five_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_five_2nd]' %></br>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[construction_type_1st]' %>
+              <%= f.text_field name = 'content[construction_type_1st]',value:@document.content&.[]('construction_type_1st') %>
             </td>
             <td class="doc_19_s19" dir="ltr" colspan="8">
-              <%= f.text_field name = 'content[construction_type_1st_period_1st]' %>
+              <%= f.text_field name = 'content[construction_type_1st_period_1st]',value:@document.content&.[]('construction_type_1st_period_1st') %>
             </td>
             <td class="doc_19_s19" dir="ltr" colspan="8">
-              <%= f.text_field name = 'content[construction_type_1st_period_2nd]' %>
+              <%= f.text_field name = 'content[construction_type_1st_period_2nd]',value:@document.content&.[]('construction_type_1st_period_2nd') %>
             </td>
             <td class="doc_19_s19" dir="ltr" colspan="8">
-              <%= f.text_field name = 'content[construction_type_1st_period_3rd]' %>
+              <%= f.text_field name = 'content[construction_type_1st_period_3rd]',value:@document.content&.[]('construction_type_1st_period_3rd') %>
             </td>
-            <td class="doc_19_s20" dir="ltr" colspan="9">
-              <%= f.text_area name = 'content[daily_safety_and_health_activity]', size: "50x1"%>
+            <td class="doc_19_s19" dir="ltr" colspan="9" rowspan="11">
+              <%= f.text_area name = 'content[daily_safety_and_health_activity]',value:@document.content&.[]('daily_safety_and_health_activity'), size: "50x1"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[construction_type_2nd]' %>
+              <%= f.text_field name = 'content[construction_type_2nd]',value:@document.content&.[]('construction_type_2nd') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_2nd_period_1st]' %>
+              <%= f.text_field name = 'content[construction_type_2nd_period_1st]',value:@document.content&.[]('construction_type_2nd_period_1st') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_2nd_period_2nd]' %>
+              <%= f.text_field name = 'content[construction_type_2nd_period_2nd]',value:@document.content&.[]('construction_type_2nd_period_2nd')%>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_2nd_period_3rd]' %>
+              <%= f.text_field name = 'content[construction_type_2nd_period_3rd]',value:@document.content&.[]('construction_type_2nd_period_3rd') %>
             </td>
-            <td class="doc_19_s23" dir="ltr" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[construction_type_3rd]' %>
+              <%= f.text_field name = 'content[construction_type_3rd]',value:@document.content&.[]('construction_type_3rd') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_3rd_period_1st]' %>
+              <%= f.text_field name = 'content[construction_type_3rd_period_1st]',value:@document.content&.[]('construction_type_3rd_period_1st') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_3rd_period_2nd]' %>
+              <%= f.text_field name = 'content[construction_type_3rd_period_2nd]',value:@document.content&.[]('construction_type_3rd_period_2nd') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_3rd_period_3rd]' %>
+              <%= f.text_field name = 'content[construction_type_3rd_period_3rd]',value:@document.content&.[]('construction_type_3rd_period_3rd') %>
             </td>
-            <td class="doc_19_s23" dir="ltr" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[construction_type_4th]' %>
+              <%= f.text_field name = 'content[construction_type_4th]',value:@document.content&.[]('construction_type_4th') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_4th_period_1st]' %>
+              <%= f.text_field name = 'content[construction_type_4th_period_1st]',value:@document.content&.[]('construction_type_4th_period_1st')%>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_4th_period_2nd]' %>
+              <%= f.text_field name = 'content[construction_type_4th_period_2nd]',value:@document.content&.[]('construction_type_4th_period_2nd') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_4th_period_3rd]' %>
+              <%= f.text_field name = 'content[construction_type_4th_period_3rd]',value:@document.content&.[]('construction_type_4th_period_3rd') %>
             </td>
-            <td class="doc_19_s23" dir="ltr" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[construction_type_5th]' %>
+              <%= f.text_field name = 'content[construction_type_5th]',value:@document.content&.[]('construction_type_5th') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_5th_period_1st]' %>
+              <%= f.text_field name = 'content[construction_type_5th_period_1st]',value:@document.content&.[]('construction_type_5th_period_1st') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_5th_period_2nd]' %>
+              <%= f.text_field name = 'content[construction_type_5th_period_2nd]',value:@document.content&.[]('construction_type_5th_period_2nd') %>
             </td>
             <td class="doc_19_s19" colspan="8">
-              <%= f.text_field name = 'content[construction_type_5th_period_3rd]' %>
+              <%= f.text_field name = 'content[construction_type_5th_period_3rd]',value:@document.content&.[]('construction_type_5th_period_3rd') %>
             </td>
-            <td class="doc_19_s23" dir="ltr" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s24" dir="ltr" colspan="31">資機材・保護具・資格の区分／その種類</td>
-            <td class="doc_19_s23" dir="ltr" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -753,9 +748,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機械設備</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s29" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[main_machine_equipment]', size: "80x1" %>
+              <%= f.text_field name = 'content[main_machine_equipment]',value:@document.content&.[]('main_machine_equipment'), size: "80x1" %>
             </td>
-            <td class="doc_19_s30" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -764,9 +758,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機器・工具</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s29" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[main_tool]', size: "80x1" %>
+              <%= f.text_field name = 'content[main_tool]',value:@document.content&.[]('main_tool'), size: "80x1" %>
             </td>
-            <td class="doc_19_s30" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -775,9 +768,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用資材枠</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s29" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[main_material]', size: "80x1" %>
+              <%= f.text_field name = 'content[main_material]',value:@document.content&.[]('main_material'), size: "80x1" %>
             </td>
-            <td class="doc_19_s30" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -786,9 +778,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">使用保護具</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s29" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[protective_equipment]', size: "80x1" %>
+              <%= f.text_field name = 'content[protective_equipment]',value:@document.content&.[]('protective_equipment'), size: "80x1" %>
             </td>
-            <td class="doc_19_s30" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -797,9 +788,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">有資格者・配置予定者</td>
             <td class="doc_19_s31"></td>
             <td class="doc_19_s29" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[qualified_staff]', size: "80x1" %>
+              <%= f.text_field name = 'content[qualified_staff]',value:@document.content&.[]('qualified_staff'), size: "80x1" %>
             </td>
-            <td class="doc_19_s22" colspan="9"></td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -827,10 +817,10 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7" rowspan="4">
-              <%= f.text_field name = 'content[work_classification_1st]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_1st]',value:@document.content&.[]('work_classification_1st'), size: "40x1" %>
             </td>
             <td class="doc_19_s32" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_1st]', size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_1st]',value:@document.content&.[]('predicted_disaster_1st'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -851,7 +841,7 @@
             <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-              <%= f.text_area name = 'content[risk_reduction_measures_1st]', size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_1st]',value:@document.content&.[]('risk_reduction_measures_1st'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -862,7 +852,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_2nd]', size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_2nd]',value:@document.content&.[]('predicted_disaster_2nd'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -883,7 +873,7 @@
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-               <%= f.text_area name = 'content[risk_reduction_measures_2nd]', size: "90x5"%>
+               <%= f.text_area name = 'content[risk_reduction_measures_2nd]',value:@document.content&.[]('risk_reduction_measures_2nd'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -894,10 +884,10 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s35" dir="ltr" colspan="7" rowspan="6">
-              <%= f.text_field name = 'content[work_classification_2nd]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_2nd]',value:@document.content&.[]('work_classification_2nd'), size: "40x1" %>
             </td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_2nd]', size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_3rd]',value:@document.content&.[]('predicted_disaster_3rd'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -918,7 +908,7 @@
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-              <%= f.text_area name = 'content[risk_reduction_measures_3rd]', size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_3rd]',value:@document.content&.[]('risk_reduction_measures_3rd'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -929,7 +919,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_3rd]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_3rd]',value:@document.content&.[]('work_classification_3rd'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -950,7 +940,7 @@
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-              <%= f.text_area name = 'content[risk_reduction_measures_4th]', size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_4th]',value:@document.content&.[]('risk_reduction_measures_4th'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -961,7 +951,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_4th]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_4th]',value:@document.content&.[]('work_classification_4th'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -982,7 +972,7 @@
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-              <%= f.text_area name = 'content[risk_reduction_measures_5th]', size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_5th]',value:@document.content&.[]('risk_reduction_measures_5th'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -993,10 +983,10 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s35" dir="ltr" colspan="7" rowspan="8">
-              <%= f.text_field name = 'content[work_classification_5th]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_5th]',value:@document.content&.[]('work_classification_5th'), size: "40x1" %>
             </td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_6th]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_6th]',value:@document.content&.[]('work_classification_6th'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -1017,7 +1007,7 @@
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-              <%= f.text_area name = 'content[risk_reduction_measures_6th]', size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_6th]',value:@document.content&.[]('risk_reduction_measures_6th'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1028,7 +1018,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_7th]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_7th]', value:@document.content&.[]('work_classification_7th'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -1049,7 +1039,7 @@
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-              <%= f.text_area name = 'content[risk_reduction_measures_7th]', size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_7th]',value:@document.content&.[]('risk_reduction_measures_7th'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1060,7 +1050,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="4">
-              <%= f.text_field name = 'content[work_classification_8th]', size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_8th]',value:@document.content&.[]('work_classification_8th'), size: "40x1" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4">
               <%= f.radio_button name = 'content[risk_possibility]', :low %>
@@ -1081,7 +1071,7 @@
             <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4"></td>
             <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="4"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="4">
-              <%= f.text_area name = 'content[risk_reduction_measures_8th]', size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_8th]',value:@document.content&.[]('risk_reduction_measures_8th'), size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1409,7 +1399,7 @@
             <td class="doc_19_s27" dir="ltr"></td>
             <td class="doc_19_s28" dir="ltr"></td>
             <td class="doc_19_s41" dir="ltr">
-              <%= f.check_box name = 'content[carry-on_machine]' %>
+              <%= f.check_box name = 'content[carry_on_machine]' %>
             </td>
             <td class="doc_19_s42 softmerge" dir="ltr" colspan="2">
               <div class="doc_19_softmerge-inner" style="width:29px;left:-3px"></div>
@@ -1734,7 +1724,7 @@
         </tbody>
       </table>
       <div style="text-align: center">
-        <%= f.submit "更新する" %>
+        <%= f.submit %>
       </div>
     <%end%>
   </div>
