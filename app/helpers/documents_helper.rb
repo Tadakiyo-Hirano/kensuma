@@ -215,4 +215,9 @@ module DocumentsHelper
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
   end
+
+  #チェックボックスにチェックが入っているかを判別
+  def box_checked?(checked_status)
+    return true if checked_status == '1'
+  end
 end

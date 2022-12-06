@@ -612,45 +612,45 @@
             </td>
             <td class="doc_19_s17" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_one_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_one_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_one_1st')) %></br>
               <%= f.label :week_two, "2週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_two_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_two_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_two_1st')) %></br>
               <%= f.label :week_three, "3週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_three_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_three_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_three_1st')) %></br>
               <%= f.label :week_four, "4週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_four_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_four_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_four_1st')) %></br>
               <%= f.label :week_five, "5週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_five_1st]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_five_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_five_1st')) %></br>
             </td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
               <%= f.select name = 'content[construction_type_1st_period_month_2st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_2st')}%>月
             </td>
             <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">
               <%= f.label :week_one, "1週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_one_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_one_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_one_2nd')) %></br>
               <%= f.label :week_two, "2週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_two_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_two_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_two_2nd')) %></br>
               <%= f.label :week_three, "3週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_three_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_three_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_three_2nd')) %></br>
               <%= f.label :week_four, "4週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_four_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_four_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_four_2nd')) %></br>
               <%= f.label :week_five, "5週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_five_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_five_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_five_2nd')) %></br>
             </td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
               <%= f.select name = 'content[construction_type_1st_period_month_3rd]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_3rd')} %>
             </td>
             <td class="doc_19_s17" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_one_3rd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_one_3rd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_one_3rd')) %></br>
               <%= f.label :week_two, "2週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_two_3rd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_two_3rd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_two_3rd')) %></br>
               <%= f.label :week_three, "3週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_three_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_three_3rd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_three_3rd')) %></br>
               <%= f.label :week_four, "4週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_four_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_four_3rd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_four_3rd')) %></br>
               <%= f.label :week_five, "5週" %>
-              <%= f.check_box name = 'content[construction_type_period_week_five_2nd]' %></br>
+              <%= f.check_box name = 'content[construction_type_period_week_five_3rd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_five_3rd')) %></br>
             </td>
             <td class="doc_19_s2"></td>
           </tr>

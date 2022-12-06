@@ -28,7 +28,6 @@ module Users
       end
       request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
       @order = Order.find(request_order.order_id)
-      #@construction_type_periods = checked_periods(@document)
     end
 
     def edit
@@ -86,6 +85,9 @@ module Users
             :construction_type_1st_period_month_3rd,
             :construction_type_period_week_one_3rd,
             :construction_type_period_week_two_3rd,
+            :construction_type_period_week_three_3rd,
+            :construction_type_period_week_four_3rd,
+            :construction_type_period_week_five_3rd,
             :construction_type_1st,
             :construction_type_1st_period_1st,
             :construction_type_1st_period_2nd,

@@ -39,4 +39,5 @@ class Document < ApplicationRecord
   def to_param
     uuid
   end
+
 end

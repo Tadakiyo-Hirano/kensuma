@@ -596,11 +596,29 @@
         <tr style="height: 24px">
           <td class="doc_19_s15" dir="ltr"></td>
           <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_1st')%>月</td>
-          <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">「工種別工事期間（週）」19-011</a></td>
+          <td class="doc_19_s17" dir="ltr" colspan="4">
+            <%= '1週' if @document.content&.[]('construction_type_period_week_one_1st') == '1'%>
+            <%= '2週' if @document.content&.[]('construction_type_period_week_two_1st') == '1'%>
+            <%= '3週' if @document.content&.[]('construction_type_period_week_three_1st') == '1'%>
+            <%= '4週' if @document.content&.[]('construction_type_period_week_four_1st') == '1'%>
+            <%= '5週' if @document.content&.[]('construction_type_period_week_five_1st') == '1'%>
+          </td>
           <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_2st')%>月</td>
-          <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">「工種別工事期間（週）」19-013</a></td>
+          <td class="doc_19_s17" dir="ltr" colspan="4">
+            <%= '1週' if @document.content&.[]('construction_type_period_week_one_2nd') == '1'%>
+            <%= '2週' if @document.content&.[]('construction_type_period_week_two_2nd') == '1'%>
+            <%= '3週' if @document.content&.[]('construction_type_period_week_three_2nd') == '1'%>
+            <%= '4週' if @document.content&.[]('construction_type_period_week_four_2nd') == '1'%>
+            <%= '5週' if @document.content&.[]('construction_type_period_week_five_2nd') == '1'%>
+          </td>
           <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_3rd')%>月</td>
-          <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">「工種別工事期間（週）」19-015</a></td>
+          <td class="doc_19_s17" dir="ltr" colspan="4">
+            <%= '1週' if @document.content&.[]('construction_type_period_week_one_3rd') == '1'%>
+            <%= '2週' if @document.content&.[]('construction_type_period_week_two_3rd') == '1'%>
+            <%= '3週' if @document.content&.[]('construction_type_period_week_three_3rd') == '1'%>
+            <%= '4週' if @document.content&.[]('construction_type_period_week_four_3rd') == '1'%>
+            <%= '5週' if @document.content&.[]('construction_type_period_week_five_3rd') == '1'%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
