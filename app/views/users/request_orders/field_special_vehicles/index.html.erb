@@ -55,7 +55,10 @@
                     <%= FieldSpecialVehicle.human_attribute_name(:driver_name) %><br>
                     <%= not_input_display(field_special_vehicle.driver_name) %>
                   </td>
-                  <td></td>
+                  <td>
+                    <%= FieldSpecialVehicle.human_attribute_name(:sub_driver_name) %><br>
+                    <%= not_input_display(field_special_vehicle.sub_driver_name) %>
+                  </td>
                   <td>
                     <%= link_to "削除", users_request_order_field_special_vehicle_path(@request_order, field_special_vehicle), method: :delete, data: { confirm: "#{field_special_vehicle.vehicle_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>                    
                   </td>
