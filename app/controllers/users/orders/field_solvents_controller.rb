@@ -13,6 +13,16 @@ module Users::Orders
       end
     end
 
+    def set_solvent_name_1
+      # field_solvent = FieldSolvent.find(params[:name])
+      solvent = Solvent.where(business_id: @order.business_id)
+      @solvent_classification_1 = solvent.find_by(name: params[:solvent_name_1]).classification
+      @solvent_ingredients_1 = solvent.find_by(name: params[:solvent_name_1]).ingredients
+      respond_to do |format|
+        format.js
+      end
+    end
+
     def create
       @field_solvent = @order.field_solvents.build(field_solvent_params)
       if @field_solvent.save

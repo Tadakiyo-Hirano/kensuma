@@ -14,7 +14,7 @@ require("packs/jquery.jpostal");
 require("./orders/postcode");
 require("./users/select2");
 require("./users/input_form");
-require("./users/field_solvent_form");
+require("./users/set_solvent_name_1");
 
 import 'bootstrap';
 import '../stylesheets/users';

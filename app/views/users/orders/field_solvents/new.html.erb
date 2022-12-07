@@ -11,7 +11,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_1 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_name_1, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: "form-control" } %>
+          <%= f.collection_select :solvent_name_1, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: 'form-control', :onChange => "setSolventName1($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_1 %>
@@ -21,12 +21,13 @@
         <div class="col-md-3">
           <%= f.label :solvent_classification_1 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.text_field :solvent_classification_1, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_1) %>
+          <%= f.text_field :solvent_classification_1, id: :solvent_classification_1, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_1) %>
+          
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_ingredients_1 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.text_field :solvent_ingredients_1, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_1) %>
+          <%= f.text_field :solvent_ingredients_1, id: :solvent_ingredients_1, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_1) %>
         </div>
       </div><br>
       <div class="row">
@@ -242,6 +243,21 @@
             $(this).valid();
           });
         });
+      </script>
+
+      <script>
+        function setSolventName1(val){
+          var solvent_name_1 = val;
+
+          $.ajax({
+            url: 'set_solvent_name_1',
+            type: "GET",
+            data: {
+              solvent_name_1: solvent_name_1
+            }
+          //   dataType: 'json'
+          })
+        }
       </script>
 
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
