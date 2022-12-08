@@ -27,6 +27,62 @@ module Users::Orders
       end
     end
 
+    def get_solvent_name_2
+      if params[:solvent_name_2].present?
+        solvent = Solvent.where(business_id: @order.business_id)
+        @solvent_classification_2 = solvent.find_by(name: params[:solvent_name_2]).classification
+        @solvent_ingredients_2 = solvent.find_by(name: params[:solvent_name_2]).ingredients
+      else
+        @solvent_classification_2 = ""
+        @solvent_ingredients_2 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def get_solvent_name_3
+      if params[:solvent_name_3].present?
+        solvent = Solvent.where(business_id: @order.business_id)
+        @solvent_classification_3 = solvent.find_by(name: params[:solvent_name_3]).classification
+        @solvent_ingredients_3 = solvent.find_by(name: params[:solvent_name_3]).ingredients
+      else
+        @solvent_classification_3 = ""
+        @solvent_ingredients_3 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def get_solvent_name_4
+      if params[:solvent_name_4].present?
+        solvent = Solvent.where(business_id: @order.business_id)
+        @solvent_classification_4 = solvent.find_by(name: params[:solvent_name_4]).classification
+        @solvent_ingredients_4 = solvent.find_by(name: params[:solvent_name_4]).ingredients
+      else
+        @solvent_classification_4 = ""
+        @solvent_ingredients_4 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def get_solvent_name_5
+      if params[:solvent_name_5].present?
+        solvent = Solvent.where(business_id: @order.business_id)
+        @solvent_classification_5 = solvent.find_by(name: params[:solvent_name_5]).classification
+        @solvent_ingredients_5 = solvent.find_by(name: params[:solvent_name_5]).ingredients
+      else
+        @solvent_classification_5 = ""
+        @solvent_ingredients_5 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
     def create
       @field_solvent = @order.field_solvents.build(field_solvent_params)
       if @field_solvent.save
