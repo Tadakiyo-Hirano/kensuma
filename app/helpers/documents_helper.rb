@@ -10,6 +10,17 @@ module DocumentsHelper
     end
   end
 
+  # 1次下請会社名の情報
+  def primary_subcon_info(document_info, content_key)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.ancestors.count > 1
+      RequestOrder.find(document_info.ancestor_ids[-2]).content[content_key]
+    elsif document_info.ancestors.count == 1
+      document_info.content.nil? ? nil : document_info.content[content_key]
+    end
+  end
+
   # 日付
   def document_date(column)
     l(column, format: :long) unless column.nil?
