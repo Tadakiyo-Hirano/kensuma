@@ -1243,10 +1243,10 @@
             </th>
             <td class="s7"></td>
             <td class="s23" dir="ltr" colspan="12" rowspan="2">
-              <!-- 13-023 入場する作業員名 ※未実装※ -->
+              <%= field_special_vehicle.sub_driver_name %> <!-- 13-023 入場する作業員名(運転者名・副) -->
             </td>
             <td class="s23" dir="ltr" colspan="19" rowspan="2">
-              <!--13-024 資格の種類 ※未実装※ -->
+              <%= field_special_vehicle.sub_driver_license.split[0][0..20] if field_special_vehicle.sub_driver_license %>　<!-- 13-024 資格の種類 --> 
             </td>
             <td class="s4"></td>
             <td class="s35"></td>
