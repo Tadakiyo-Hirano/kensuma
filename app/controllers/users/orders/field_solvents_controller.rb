@@ -13,11 +13,15 @@ module Users::Orders
       end
     end
 
-    def set_solvent_name_1
-      # field_solvent = FieldSolvent.find(params[:name])
-      solvent = Solvent.where(business_id: @order.business_id)
-      @solvent_classification_1 = solvent.find_by(name: params[:solvent_name_1]).classification
-      @solvent_ingredients_1 = solvent.find_by(name: params[:solvent_name_1]).ingredients
+    def get_solvent_name_1
+      if params[:solvent_name_1].present?
+        solvent = Solvent.where(business_id: @order.business_id)
+        @solvent_classification_1 = solvent.find_by(name: params[:solvent_name_1]).classification
+        @solvent_ingredients_1 = solvent.find_by(name: params[:solvent_name_1]).ingredients
+      else
+        @solvent_classification_1 = ""
+        @solvent_ingredients_1 = ""
+      end
       respond_to do |format|
         format.js
       end

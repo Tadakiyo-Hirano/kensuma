@@ -59,7 +59,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       end
       resources :field_solvents, except: :index, module: :orders, param: :uuid do
         collection do
-          get 'set_solvent_name_1'
+          get 'get_solvent_name_1'
         end
       end
       resources :field_special_vehicles, except: %i[new show edit update], module: :orders, param: :uuid do

@@ -11,7 +11,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_1 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_name_1, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: 'form-control', :onChange => "setSolventName1($(this).val())" } %>
+          <%= f.collection_select :solvent_name_1, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: 'form-control', :onchange => "getSolventName1($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_1 %>
@@ -161,18 +161,18 @@
           });
           $(".field_solvent-form-validation").validate({
             rules:{
-              // "field_solvent[solvent_name]": {
-              //   required: true
-              // },
-              // "field_solvent[carried_quantity]": {
-              //   required: true
-              // },
-              // "field_solvent[solvent_classification]": {
-              //   required: true
-              // },
-              // "field_solvent[solvent_ingredients]": {
-              //   required: true
-              // },
+              "field_solvent[solvent_name_1]": {
+                required: true
+              },
+              "field_solvent[carried_quantity_1]": {
+                required: true
+              },
+              "field_solvent[solvent_classification_1]": {
+                required: true
+              },
+              "field_solvent[solvent_ingredients_1]": {
+                required: true
+              },
               "field_solvent[using_location]": {
                 required: true
               },
@@ -199,18 +199,18 @@
               },
             },
             messages:{
-              // "field_solvent[solvent_name]": {
-              //   required: "商品名を入力してください。"
-              // },
-              // "field_solvent[carried_quantity]": {
-              //   required: "搬入量を入力してください。"
-              // },
-              // "field_solvent[solvent_classification]": {
-              //   required: "種別を入力してください。"
-              // },
-              // "field_solvent[solvent_ingredients]": {
-              //   required: "含有成分を入力してください。"
-              // },
+              "field_solvent[solvent_name_1]": {
+                required: "商品名1を入力してください。"
+              },
+              "field_solvent[carried_quantity_1]": {
+                required: "搬入量1を入力してください。"
+              },
+              "field_solvent[solvent_classification_1]": {
+                required: "種別1を入力してください。"
+              },
+              "field_solvent[solvent_ingredients_1]": {
+                required: "含有成分1を入力してください。"
+              },
               "field_solvent[using_location]": {
                 required: "使用場所を入力してください。"
               },
@@ -246,16 +246,15 @@
       </script>
 
       <script>
-        function setSolventName1(val){
+        function getSolventName1(val){
           var solvent_name_1 = val;
 
           $.ajax({
-            url: 'set_solvent_name_1',
+            url: 'get_solvent_name_1',
             type: "GET",
             data: {
               solvent_name_1: solvent_name_1
             }
-          //   dataType: 'json'
           })
         }
       </script>
