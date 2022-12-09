@@ -297,17 +297,6 @@ module DocumentsHelper
 
   # (13)移動式クレーン/車両系建設機械等使用届,(16)火気使用届,(17)下請負業者編成表
 
-  # 1次下請会社名の表示
-  def primary_subcon_name(document_info)
-    if document_info.instance_of?(Order)
-      nil
-    elsif document_info.ancestors.count > 1
-      RequestOrder.find(document_info.ancestor_ids[-2]).content['subcon_name']
-    elsif document_info.ancestors.count == 1
-      document_info.content.nil? ? nil : document_info.content['subcon_name']
-    end
-  end
-
   # 1次下請会社名の情報
   def primary_subcon_info(document_info)
     if document_info.instance_of?(Order)
