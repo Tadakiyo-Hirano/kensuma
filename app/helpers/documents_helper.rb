@@ -307,4 +307,15 @@ module DocumentsHelper
       document_info.content.nil? ? nil : document_info
     end
   end
+
+  # 2次下請会社名の情報
+  def secondary_subcon_info(document_info, child_id)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.child_ids[child_id].nil?
+      nil
+    else
+      RequestOrder.find(document_info.child_ids[child_id])
+    end
+  end
 end
