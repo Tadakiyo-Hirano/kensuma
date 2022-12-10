@@ -129,7 +129,7 @@
               <td class="s_15_00"></td>
               <td class="s_15_00"></td>
               <td class="s_15_2" dir="ltr" colspan="8" rowspan="2">
-                <%= '※15-002未実装※' %><!-- 15-002 「提出日(西暦)」 -->
+                <%= document_date(field_solvent.date_submitted) %><!-- 15-002 「提出日(西暦)」 -->
               </td>
             </tr>
             <tr><!-- 5行目 -->
@@ -622,76 +622,90 @@
             </tr>
             <tr><!-- 25行目 -->
               <td class="s_15_11" dir="ltr" colspan="5" rowspan="12">使用材料</td><!-- 1列目 -->
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">商品名</td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">メーカー名</td>
-              <td class="s_15_13" dir="ltr" colspan="3" rowspan="2">搬入量</td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">種別</td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">含有成分</td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">商品名</td>
+              <td class="s_15_13" dir="ltr" colspan="4" rowspan="2">搬入量</td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">種別</td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">含有成分</td>
             </tr>
             <tr><!-- 26行目 -->
             </tr>
             <tr><!-- 27行目 -->
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-010 「商品名」 -->
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_name_1 %> <!-- 15-010 「商品名1」 -->
               </td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-011 「メーカー名」 -->
+              <td class="s_15_13" dir="ltr" colspan="4" rowspan="2">
+                <%= field_solvent.carried_quantity_1 %> <!-- 15-012 「搬入量1(書類作成時に記載)」 -->
               </td>
-              <td class="s_15_14" dir="ltr" colspan="3" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-012 「搬入量(書類作成時に記載)」 -->
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_classification_1 %> <!-- 15-013 「種別1」 -->
               </td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-013 「種別」 -->
-              </td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-014 「含有成分」 -->
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_ingredients_1 %> <!-- 15-014 「含有成分1」 -->
               </td>
             </tr>
             <tr><!-- 28行目 -->
             </tr>
             <tr><!-- 29行目 -->
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-010 「商品名」 -->
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_name_2 %> <!-- 15-010 「商品名2」 -->
               </td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-011 「メーカー名」 -->
+              <td class="s_15_13" dir="ltr" colspan="4" rowspan="2">
+                <%= field_solvent.carried_quantity_2 %> <!-- 15-012 「搬入量2(書類作成時に記載)」 -->
               </td>
-              <td class="s_15_13" dir="ltr" colspan="3" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-012 「搬入量(書類作成時に記載)」 -->
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_classification_2 %> <!-- 15-013 「種別2」 -->
               </td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-013 「種別」 -->
-              </td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2">
-                <%= field_solvent.using_location %> <!-- 15-014 「含有成分」 -->
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_ingredients_2 %> <!-- 15-014 「含有成分2」 -->
               </td>
             </tr>
             <tr><!-- 30行目 -->
             </tr>
             <tr><!-- 31行目 -->
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_13" dir="ltr" colspan="3" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_name_3 %> <!-- 15-010 「商品名3」 -->
+              </td>
+              <td class="s_15_13" dir="ltr" colspan="4" rowspan="2">
+                <%= field_solvent.carried_quantity_3 %> <!-- 15-012 「搬入量3(書類作成時に記載)」 -->
+              </td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_classification_3 %> <!-- 15-013 「種別3」 -->
+              </td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_ingredients_3 %> <!-- 15-014 「含有成分3」 -->
+              </td>
             </tr>
             <tr><!-- 32行目 -->
             </tr>
             <tr><!-- 33行目 -->
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_13" dir="ltr" colspan="3" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_name_4 %> <!-- 15-010 「商品名4」 -->
+              </td>
+              <td class="s_15_13" dir="ltr" colspan="4" rowspan="2">
+                <%= field_solvent.carried_quantity_4 %> <!-- 15-012 「搬入量4(書類作成時に記載)」 -->
+              </td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_classification_4 %> <!-- 15-013 「種別4」 -->
+              </td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_ingredients_4 %> <!-- 15-014 「含有成分4」 -->
+              </td>
             </tr>
             <tr><!-- 34行目 -->
             </tr>
             <tr><!-- 35行目 -->
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_13" dir="ltr" colspan="3" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
-              <td class="s_15_12" dir="ltr" colspan="7" rowspan="2"></td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_name_5 %> <!-- 15-010 「商品名5」 -->
+              </td>
+              <td class="s_15_13" dir="ltr" colspan="4" rowspan="2">
+                <%= field_solvent.carried_quantity_5 %> <!-- 15-012 「搬入量5(書類作成時に記載)」 -->
+              </td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_classification_5 %> <!-- 15-013 「種別5」 -->
+              </td>
+              <td class="s_15_12" dir="ltr" colspan="9" rowspan="2">
+                <%= field_solvent.solvent_ingredients_5 %> <!-- 15-014 「含有成分5」 -->
+              </td>
             </tr>
             <tr><!-- 36行目 -->
             </tr>
@@ -709,9 +723,13 @@
             </tr>
             <tr><!-- 41行目 -->
               <td class="s_15_30" dir="ltr" colspan="5" rowspan="4">保管場所</td><!-- 1列目 -->
-              <td class="s_15_31" dir="ltr" colspan="12" rowspan="4">「保管場所」15-016</td>
+              <td class="s_15_31" dir="ltr" colspan="12" rowspan="4">
+                <%= field_solvent.storing_place %> <!-- 15-016 「保管場所」 -->
+              </td>
               <td class="s_15_31" dir="ltr" colspan="7" rowspan="4">使用機械<br>又は工具</td>
-              <td class="s_15_31" dir="ltr" colspan="12" rowspan="4">「使用機械または工具」15-017</td>
+              <td class="s_15_31" dir="ltr" colspan="12" rowspan="4">
+                <%= field_solvent.using_tool %> <!-- 15-017 「使用機械または工具」 -->
+              </td>
             </tr>
             <tr><!-- 42行目 -->
             </tr>
@@ -721,9 +739,13 @@
             </tr>
             <tr><!-- 45行目 -->
               <td class="s_15_40" dir="ltr" colspan="5" rowspan="4">使用期間</td><!-- 1列目 -->
-              <td class="s_15_41" dir="ltr" colspan="13" rowspan="4">「使用期間(始期)」15-018</td>
+              <td class="s_15_41" dir="ltr" colspan="13" rowspan="4">
+                <%= wareki(field_solvent.usage_period_start) %><!-- 15-018 「使用期間(始期)」 -->
+              </td>
               <td class="s_15_42" dir="ltr" colspan="2" rowspan="4">〜</td>
-              <td class="s_15_43" dir="ltr" colspan="13" rowspan="4">「使用期間(終期)」15-019</td>
+              <td class="s_15_43" dir="ltr" colspan="13" rowspan="4">
+                <%= wareki(field_solvent.usage_period_end) %><!-- 15-019 「使用期間(終期)」 -->
+              </td>
               <td class="s_15_44" dir="ltr" colspan="3" rowspan="4">(予定)</td>
             </tr>
             <tr><!-- 46行目 -->
@@ -735,7 +757,9 @@
             <tr><!-- 49行目 -->
               <td class="s_15_50" dir="ltr" colspan="5" rowspan="4">作業主任者等</td><!-- 1列目 -->
               <td class="s_15_51" dir="ltr" colspan="6" rowspan="2">氏名</td>
-              <td class="s_15_52" dir="ltr" colspan="25" rowspan="2">「各会社の作業主任者」15-020</td>
+              <td class="s_15_52" dir="ltr" colspan="25" rowspan="2">
+                <%= '※15-020未実装※' %> <!-- 15-020 「各会社の作業主任者」 -->
+              </td>
             </tr>
             <tr><!-- 50行目 -->
             </tr>
@@ -743,9 +767,13 @@
               <td class="s_15_53" dir="ltr" colspan="6" rowspan="2">作業手順書</td>
               <td class="s_15_54" dir="ltr" colspan="4" rowspan="2">添付</td>
               <td class="s_15_54" dir="ltr" colspan="2" rowspan="2">(</td>
-              <td class="s_15_55" dir="ltr" colspan="5" rowspan="2">有・無</td>
+              <%# <td class="s_15_55" dir="ltr" colspan="5" rowspan="2">有・無</td> %>
+              <td class="s_15_55" dir="ltr" colspan="5" rowspan="2">
+                <%= field_solvent_working_process_y(field_solvent.working_process) %> <!-- 15-021 ⇦「作業手順書の添付の有無」 -->
+                ・<%= field_solvent_working_process_n(field_solvent.working_process) %>
+              </td>
               <td class="s_15_54" dir="ltr" colspan="2" rowspan="2">)</td>
-              <td class="s_15_56" dir="ltr" colspan="12" rowspan="2">⇦「作業手順書の添付の有無」15-021</td><!-- 10列目 -->
+              <td class="s_15_56" dir="ltr" colspan="12" rowspan="2"></td><!-- 10列目 -->
             </tr>
             <tr><!-- 52行目 -->
             </tr>
@@ -754,9 +782,12 @@
               <td class="s_15_61" dir="ltr" colspan="6" rowspan="4">SDS</td>
               <td class="s_15_62" dir="ltr" colspan="4" rowspan="4">添付</td>
               <td class="s_15_63" dir="ltr" colspan="2" rowspan="4">(</td>
-              <td class="s_15_64" dir="ltr" colspan="5" rowspan="4">有・無</td>
+              <td class="s_15_55" dir="ltr" colspan="5" rowspan="2">
+                <%= field_solvent_sds_y(field_solvent.sds) %> <!-- 15-022 ⇦「SDS(安全データシート)の添付の有無」 -->
+                ・<%= field_solvent_sds_n(field_solvent.sds) %>
+              </td>
               <td class="s_15_63" dir="ltr" colspan="2" rowspan="4">)</td>
-              <td class="s_15_65" dir="ltr" colspan="12" rowspan="4">⇦「SDS(安全データシート)の添付の有無」15-022</td>
+              <td class="s_15_65" dir="ltr" colspan="12" rowspan="4"></td>
             </tr>
             <tr><!-- 54行目 -->
             </tr>
@@ -766,7 +797,9 @@
             </tr>
             <tr><!-- 57行目 -->
               <td class="s_15_70" dir="ltr" colspan="5" rowspan="4">換気等対策</td><!-- 1列目 -->
-              <td class="s_15_71" dir="ltr" colspan="31" rowspan="4">「換気等対策」15-023</td>
+              <td class="s_15_71" dir="ltr" colspan="31" rowspan="4">
+                <%= field_solvent.ventilation_control %> <!-- 15-023 「換気等対策」 -->
+              </td>
             </tr>
             <tr><!-- 58行目 -->
             </tr>
