@@ -4,6 +4,12 @@
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tbody>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:date_submitted) %></th>
+          <td><%= @field_solvent.date_submitted %></td>
+          <td></td>
+          <td></td>
+        </tr>
         <tr bgcolor="#dee2e6">
           <th><%= FieldSolvent.human_attribute_name(:solvent_name_1) %></th>
           <th><%= FieldSolvent.human_attribute_name(:carried_quantity_1) %></th>

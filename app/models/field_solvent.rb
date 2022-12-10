@@ -10,6 +10,7 @@ class FieldSolvent < ApplicationRecord
   enum working_process: { y: 0, n: 1 }, _prefix: true
   enum sds: { y: 0, n: 1 }, _prefix: true
 
+  validates :date_submitted, presence: true
   validates :solvent_name_1, presence: true
   validates :carried_quantity_1, presence: true
   validates :using_location, length: { maximum: 100 }

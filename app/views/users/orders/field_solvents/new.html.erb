@@ -9,6 +9,13 @@
 
       <div class="row">
         <div class="col-md-3">
+          <%= f.label :date_submitted %>
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <%= f.date_field :date_submitted, class: "form-control" %>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
           <%= f.label :solvent_name_1 %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
           <%= f.collection_select :solvent_name_1, Solvent.where(business_id: @order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: 'form-control', :onchange => "getSolventName1($(this).val())" } %>
@@ -145,6 +152,9 @@
           });
           $(".field_solvent-form-validation").validate({
             rules:{
+              "field_solvent[date_submitted]": {
+                required: true
+              },
               "field_solvent[solvent_name_1]": {
                 required: true
               },
@@ -183,6 +193,9 @@
               },
             },
             messages:{
+              "field_solvent[date_submitted]": {
+                required: "提出日を入力してください。"
+              },
               "field_solvent[solvent_name_1]": {
                 required: "商品名1を入力してください。"
               },

@@ -126,7 +126,7 @@ module Users::Orders
 
     def field_solvent_params
       params.require(:field_solvent).permit(
-          :solvent_name_1, :solvent_name_2, :solvent_name_3, :solvent_name_4, :solvent_name_5,
+          :date_submitted, :solvent_name_1, :solvent_name_2, :solvent_name_3, :solvent_name_4, :solvent_name_5,
           :carried_quantity_1, :carried_quantity_2, :carried_quantity_3, :carried_quantity_4, :carried_quantity_5,
           :solvent_classification_1, :solvent_classification_2, :solvent_classification_3, :solvent_classification_4, :solvent_classification_5,
           :solvent_ingredients_1, :solvent_ingredients_2, :solvent_ingredients_3, :solvent_ingredients_4, :solvent_ingredients_5,
