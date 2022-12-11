@@ -186,7 +186,23 @@ module Users
             :use_notification_for_others_5th,
             :use_notification_name_for_others_5th,
             :use_notification_for_others_6th,
-            :use_notification_name_for_others_6th
+            :use_notification_name_for_others_6th,
+            :risk_possibility_1st,
+            :risk_possibility_2nd,
+            :risk_possibility_3rd,
+            :risk_possibility_4th,
+            :risk_possibility_5th,
+            :risk_possibility_6th,
+            :risk_possibility_7th,
+            :risk_possibility_8th,
+            :risk_seriousness_1st,
+            :risk_seriousness_2nd,
+            :risk_seriousness_3rd,
+            :risk_seriousness_4th,
+            :risk_seriousness_5th,
+            :risk_seriousness_6th,
+            :risk_seriousness_7th,
+            :risk_seriousness_8th
           ]
         )
       end

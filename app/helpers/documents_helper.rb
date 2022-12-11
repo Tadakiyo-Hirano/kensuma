@@ -220,4 +220,82 @@ module DocumentsHelper
   def box_checked?(checked_status)
     return true if checked_status == '1'
   end
+
+  
+  def checked_box(checked_status)
+    if checked_status == '1'
+      return '✅' 
+    else
+      return '▢'
+    end
+  end
+
+  #リスクの見積り
+  def risk_estimation_level(risk_possibility,risk_seriousness)
+    possibility_point, possibility_comment = risk_possibility(risk_possibility)
+    seriousness_point, seriousness_comment = risk_seriousness(risk_seriousness)
+    return (possibility_point + seriousness_point)
+  end
+
+  #重大性
+  def risk_seriousness_level(risk_possibility,risk_seriousness)
+    possibility_point, possibility_comment = risk_possibility(risk_possibility)
+    seriousness_point, seriousness_comment = risk_seriousness(risk_seriousness)
+    return (possibility_point + seriousness_point - 1)
+  end
+
+  #リスクの見積りコメント
+  def risk_estimation_comment(risk_possibility)
+    possibility_point, possibility_comment = risk_possibility(risk_possibility)
+    return possibility_comment
+  end
+
+  #リスクの重大性コメント
+  def risk_seriousness_comment(risk_seriousness)
+    seriousness_point, seriousness_comment = risk_seriousness(risk_seriousness)
+    return seriousness_comment
+  end
+
+
+  private
+
+  #リスクの可能性
+  def risk_possibility(risk_possibility)
+    if risk_possibility == 'low'
+      possibility_point = 1
+      possibility_comment = 'ほとんどない'
+    elsif risk_possibility == 'middle'
+      possibility_point = 2
+      possibility_comment = '可能性がある'
+    elsif risk_possibility == 'high'
+      possibility_point = 3
+      possibility_comment = '極めて高い'
+    else
+      possibility_point = 0
+      possibility_comment = ''
+    end
+    return possibility_point, possibility_comment
+  end
+
+
+  #リスクの重大性
+  def risk_seriousness(risk_seriousness)
+    if risk_seriousness == 'low'
+      seriousness_point = 1
+      seriousness_comment = '軽微'
+    elsif risk_seriousness == 'middle'
+      seriousness_point = 2
+      seriousness_comment = '重大'
+    elsif risk_seriousness == 'high'
+      seriousness_point = 3
+      seriousness_comment = '極めて重大'
+    else
+      seriousness_point = 0
+      seriousness_comment = ''
+    end
+    return seriousness_point, seriousness_comment
+  end
+
+
+
 end
