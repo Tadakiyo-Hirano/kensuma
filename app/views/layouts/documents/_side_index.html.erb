@@ -3,7 +3,7 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <%= link_to users_dash_boards_path, class:"brand-link", style: "display: flex" do %>
+  <%= link_to users_orders_path, class:"brand-link", style: "display: flex" do %>
     <table>
       <tr>
         <td><%= image_tag "kensuma/03", class:"brand-image elevation-3", style: "opacity: .8" %>
@@ -16,17 +16,11 @@
     <%# <span class="brand-text font-weight-light">建スマ</span> %>
   <% end %>
 
-  <!-- Sidebar -->
+	<!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <%#= image_tag "user2-160x160.jpg", class:"img-circle elevation-2" %>
-      </div>
-      <div class="info">
-        <%= link_to current_user.name, users_profile_path, class:"d-block" %>
-        <%= link_to "ログアウト", destroy_user_session_path, class:"d-block mt-3", method: :delete %>
-      </div>
+    <!-- Sidebar business panel (optional) -->
+    <div class="business-panel mt-3 d-flex">
+      <p>会社名：<%= current_business.name unless current_business.nil? %></p>
     </div>
 
     <!-- Sidebar Menu -->

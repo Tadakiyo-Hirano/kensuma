@@ -129,7 +129,7 @@ module Users
           subcon_post_code:                               current_business.post_code,                                        # 会社郵便番号
           subcon_phone_number:                            current_business.phone_number,                                     # 会社電話番号
           subcon_carrier_up_id:                           current_business.carrier_up_id,                                    # 事業所ID(キャリアアップ)
-          subcon_representative_name:                     current_business.representative_name,                              # 代表者社名
+          subcon_representative_name:                     current_business.representative_name,                              # 代表者名
           subcon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
           subcon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
           subcon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
