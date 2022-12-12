@@ -160,7 +160,8 @@ ja:
         sds: SDS(安全データシート)の添付
         ventilation_control: 換気等対策
       field_special_vehicle:
-        driver_name: 運転者名
+        driver_name: 運転者名(正)
+        sub_driver_name: 運転者名(副)
         vehicle_name: 特殊車両名
         vehicle_type: 区分
         carry_on_company_name: 持込会社名
