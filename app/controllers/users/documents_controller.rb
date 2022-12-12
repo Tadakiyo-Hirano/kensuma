@@ -31,9 +31,8 @@ module Users
     def edit; end
 
     def update
-      if update_document(@document)
-        flash[:success] = '更新に成功しました'
-        redirect_to users_request_order_document_url
+      if @document.update(document_params(@document))
+        redirect_to users_request_order_document_url, success: "保存に成功しました"
       else
         flash[:danger] = '更新に失敗しました'
         render :edit
@@ -42,28 +41,23 @@ module Users
 
     private
 
-    # 更新書類の判定
-    def update_document(document)
-      case document.document_type
-      when 'doc_3rd'
-        document.update(doc_3_params)
-      end
-    end
-
-    def doc_3_params
-      params.require(:document).permit.merge(
-        content: {
-          date_submitted: params.dig(:document, :content, :date_submitted)
-        }
-      )
-    end
-
     def set_documents
       @documents = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.order(id: :asc)
     end
 
     def set_document
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
+    end
+
+    def document_params(document)
+      case document.document_type
+      when 'doc_3rd'
+        params.require(:document).permit.merge(
+          content: {
+            date_submitted: params.dig(:document, :content, :date_submitted)
+          }
+        )
+      end
     end
   end
 end

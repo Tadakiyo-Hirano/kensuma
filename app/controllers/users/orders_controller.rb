@@ -74,7 +74,6 @@ module Users
           document_type: n + 1,
           created_on:    Date.current,
           submitted_on:  Date.current,
-          content:       {},
           business:      current_business
         )
       end
