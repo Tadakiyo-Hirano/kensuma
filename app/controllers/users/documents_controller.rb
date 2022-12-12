@@ -32,7 +32,7 @@ module Users
 
     def update
       if @document.update(document_params(@document))
-        redirect_to users_request_order_document_url, success: "保存に成功しました"
+        redirect_to users_request_order_document_url, success: '保存に成功しました'
       else
         flash[:danger] = '更新に失敗しました'
         render :edit
