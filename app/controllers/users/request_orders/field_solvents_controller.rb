@@ -1,45 +1,113 @@
 module Users::RequestOrders
   class FieldSolventsController < Users::Base
     before_action :set_request_order
-    before_action :set_field_solvent, only: :destroy
-    before_action :set_field_solvents, only: %i[index edit_solvents update_solvents]
+    before_action :set_field_solvent, only: %i[show edit update destroy]
 
-    def index
-      field_solvent_ids = @field_solvents.map { |field_solvent| field_solvent.content['id'] }
-      @solvent = current_business.solvents.where.not(id: field_solvent_ids)
+    def show; end
+
+    def new
+      if @request_order.field_solvents.present?
+        redirect_to users_request_order_field_solvent_path(@request_order, @request_order.field_solvents.first)
+      else
+        @field_solvent = @request_request_order.field_solvents.new
+      end
+    end
+
+    def get_solvent_name_1
+      if params[:solvent_name_1].present?
+        solvent = Solvent.where(business_id: @request_request_order.business_id)
+        @solvent_classification_1 = solvent.find_by(name: params[:solvent_name_1]).classification
+        @solvent_ingredients_1 = solvent.find_by(name: params[:solvent_name_1]).ingredients
+      else
+        @solvent_classification_1 = ""
+        @solvent_ingredients_1 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def get_solvent_name_2
+      if params[:solvent_name_2].present?
+        solvent = Solvent.where(business_id: @request_order.business_id)
+        @solvent_classification_2 = solvent.find_by(name: params[:solvent_name_2]).classification
+        @solvent_ingredients_2 = solvent.find_by(name: params[:solvent_name_2]).ingredients
+      else
+        @solvent_classification_2 = ""
+        @solvent_ingredients_2 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def get_solvent_name_3
+      if params[:solvent_name_3].present?
+        solvent = Solvent.where(business_id: @request_order.business_id)
+        @solvent_classification_3 = solvent.find_by(name: params[:solvent_name_3]).classification
+        @solvent_ingredients_3 = solvent.find_by(name: params[:solvent_name_3]).ingredients
+      else
+        @solvent_classification_3 = ""
+        @solvent_ingredients_3 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def get_solvent_name_4
+      if params[:solvent_name_4].present?
+        solvent = Solvent.where(business_id: @request_order.business_id)
+        @solvent_classification_4 = solvent.find_by(name: params[:solvent_name_4]).classification
+        @solvent_ingredients_4 = solvent.find_by(name: params[:solvent_name_4]).ingredients
+      else
+        @solvent_classification_4 = ""
+        @solvent_ingredients_4 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
+    end
+
+    def get_solvent_name_5
+      if params[:solvent_name_5].present?
+        solvent = Solvent.where(business_id: @request_order.business_id)
+        @solvent_classification_5 = solvent.find_by(name: params[:solvent_name_5]).classification
+        @solvent_ingredients_5 = solvent.find_by(name: params[:solvent_name_5]).ingredients
+      else
+        @solvent_classification_5 = ""
+        @solvent_ingredients_5 = ""
+      end
+      respond_to do |format|
+        format.js
+      end
     end
 
     def create
-      ActiveRecord::Base.transaction do
-        params[:solvent_ids].each do |solvent_id|
-          @request_order.field_solvents.create!(
-            solvent_name: Solvent.find(solvent_id).name,
-            content:      solvent_info(Solvent.find(solvent_id))
-          )
-        end
-        flash[:success] = "#{params[:solvent_ids].count}件追加しました。"
-        redirect_to users_request_order_field_solvents_url
+      @field_solvent = @request_order.field_solvents.build(field_solvent_params)
+      if @field_solvent.save
+        flash[:success] = '溶剤情報を登録しました。'
+        redirect_to users_request_order_field_solvent_url(@request_order, @field_solvent)
+      else
+        render :new
       end
-    rescue ActiveRecord::RecordInvalid
-      flash[:danger] = '登録に失敗しました。再度登録してください。'
-      redirect_to users_request_order_field_solvents_url
     end
 
     def destroy
       @field_solvent.destroy!
-      flash[:danger] = "#{@field_solvent.solvent_name}を削除しました"
-      redirect_to users_request_order_field_solvents_url
+      flash[:danger] = '溶剤情報を削除しました'
+      redirect_to users_request_order_url(@request_order)
     end
 
-    def edit_solvents; end
+    def edit; end
 
-    def update_solvents
-      field_solvents_params.each do |id, item|
-        field_solvent = FieldSolvent.find(id)
-        field_solvent.update(item)
+    def update
+      if @field_solvent.update(field_solvent_params)
+        flash[:success] = '溶剤情報を更新しました'
+        redirect_to users_request_order_field_solvent_url(@request_order, @field_solvent)
+      else
+        render 'edit'
       end
-      flash[:success] = '溶剤情報を更新しました'
-      redirect_to users_request_order_field_solvents_url
     end
 
     private
@@ -56,13 +124,14 @@ module Users::RequestOrders
       @field_solvents = @request_order.field_solvents
     end
 
-    def field_solvents_params
-      params.require(:request_order).permit(
-        field_solvents: %i[
-          solvent_name carried_quantity using_location storing_place using_tool
-          usage_period_start usage_period_end working_process sds ventilation_control
-        ]
-      )[:field_solvents]
+    def field_solvent_params
+      params.require(:field_solvent).permit(
+          :date_submitted, :solvent_name_1, :solvent_name_2, :solvent_name_3, :solvent_name_4, :solvent_name_5,
+          :carried_quantity_1, :carried_quantity_2, :carried_quantity_3, :carried_quantity_4, :carried_quantity_5,
+          :solvent_classification_1, :solvent_classification_2, :solvent_classification_3, :solvent_classification_4, :solvent_classification_5,
+          :solvent_ingredients_1, :solvent_ingredients_2, :solvent_ingredients_3, :solvent_ingredients_4, :solvent_ingredients_5,
+          :using_location, :storing_place, :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
+      )
     end
   end
 end

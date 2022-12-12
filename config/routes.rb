@@ -97,10 +97,13 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           patch 'update_machines'
         end
       end
-      resources :field_solvents, except: %i[new show edit update], module: :request_orders, param: :uuid do
+      resources :field_solvents, except: :index, module: :request_orders, param: :uuid do
         collection do
-          get 'edit_solvents'
-          patch 'update_solvents'
+          get 'get_solvent_name_1'
+          get 'get_solvent_name_2'
+          get 'get_solvent_name_3'
+          get 'get_solvent_name_4'
+          get 'get_solvent_name_5'
         end
       end
       resources :field_special_vehicles, except: %i[new show edit update], module: :request_orders, param: :uuid do
