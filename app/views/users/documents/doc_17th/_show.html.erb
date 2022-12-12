@@ -1005,21 +1005,33 @@
             <tr class="doc_17_s45" style="height: 12px">
               <td class="doc_17_s18">事</td>
               <td class="doc_17_s17" colspan="5" rowspan="2">特定専門工事の該当</td>
-              <td class="doc_17_s20" colspan="2" rowspan="2">有</td>
+              <td class="doc_17_s20" colspan="2" rowspan="2">
+                <%= professional_construction_yes(secondary_subcon_info(document_info, 0)&.professional_construction) %> <!-- 17-022-1 特定専門工事の有無(二次) -->
+              </td>
               <td class="doc_17_s21" dir="ltr" colspan="2" rowspan="2">・</td>
-              <td class="doc_17_s22" colspan="2" rowspan="2">無</td>
+              <td class="doc_17_s22" colspan="2" rowspan="2">
+                <%= professional_construction_no(secondary_subcon_info(document_info, 0)&.professional_construction) %> <!-- 17-022-1 特定専門工事の有無(二次) -->
+              </td>
               <td class="doc_17_s16"></td>
               <td class="doc_17_s18">事</td>
               <td class="doc_17_s17" colspan="5" rowspan="2">特定専門工事の該当</td>
-              <td class="doc_17_s20" colspan="2" rowspan="2">有</td>
+              <td class="doc_17_s20" colspan="2" rowspan="2">
+                <%= professional_construction_yes(secondary_subcon_info(document_info, 1)&.professional_construction) %> <!-- 17-022-2 特定専門工事の有無(二次) -->
+              </td>
               <td class="doc_17_s7" colspan="2" rowspan="2">・</td>
-              <td class="doc_17_s22" colspan="2" rowspan="2">無</td>
+              <td class="doc_17_s22" colspan="2" rowspan="2">
+                <%= professional_construction_no(secondary_subcon_info(document_info, 1)&.professional_construction) %> <!-- 17-022-2 特定専門工事の有無(二次) -->
+              </td>
               <td class="doc_17_s16"></td>
               <td class="doc_17_s18">事</td>
               <td class="doc_17_s17" colspan="5" rowspan="2">特定専門工事の該当</td>
-              <td class="doc_17_s20" colspan="2" rowspan="2">有</td>
+              <td class="doc_17_s20" colspan="2" rowspan="2">
+                <%= professional_construction_yes(secondary_subcon_info(document_info, 2)&.professional_construction) %> <!-- 17-022-3 特定専門工事の有無(二次) -->
+              </td>
               <td class="doc_17_s7" colspan="2" rowspan="2">・</td>
-              <td class="doc_17_s22" colspan="2" rowspan="2">無</td>
+              <td class="doc_17_s22" colspan="2" rowspan="2">
+                <%= professional_construction_no(secondary_subcon_info(document_info, 2)&.professional_construction) %> <!-- 17-022-3 特定専門工事の有無(二次) -->
+              </td>
             </tr>
             <tr class="doc_17_s45" style="height: 12px">
               <td class="doc_17_s17" style="border-top: none;"></td>
@@ -1030,19 +1042,31 @@
             </tr>
             <tr class="doc_17_s45" style="height: 12px">
               <td class="doc_17_s17" colspan="2" rowspan="2">工期</td>
-              <td class="doc_17_s24" dir="ltr" colspan="4" rowspan="2"></td>
+              <td class="doc_17_s24" dir="ltr" colspan="4" rowspan="2">
+                <%= document_date(secondary_subcon_info(document_info, 0)&.start_date) %> <!-- 17-023-1 各会社の工期(自)(二次) -->
+              </td>
               <td class="doc_17_s7" dir="ltr" colspan="2" rowspan="2">~</td>
-              <td class="doc_17_s25" dir="ltr" colspan="4" rowspan="2"></td>
+              <td class="doc_17_s25" dir="ltr" colspan="4" rowspan="2">
+                <%= document_date(secondary_subcon_info(document_info, 0)&.end_date) %> <!-- 17-024-1 各会社の工期(自)(二次) -->
+              </td>
               <td class="doc_17_s16"></td>
               <td class="doc_17_s17" colspan="2" rowspan="2">工期</td>
-              <td class="doc_17_s36" colspan="4" rowspan="2"></td>
+              <td class="doc_17_s36" colspan="4" rowspan="2">
+                <%= document_date(secondary_subcon_info(document_info, 1)&.start_date) %> <!-- 17-023-2 各会社の工期(自)(二次) -->
+              </td>
               <td class="doc_17_s7" dir="ltr" colspan="2" rowspan="2">~</td>
-              <td class="doc_17_s37" colspan="4" rowspan="2"></td>
+              <td class="doc_17_s37" colspan="4" rowspan="2">
+                <%= document_date(secondary_subcon_info(document_info, 1)&.end_date) %> <!-- 17-024-2 各会社の工期(自)(二次) -->
+              </td>
               <td class="doc_17_s16"></td>
               <td class="doc_17_s17" colspan="2" rowspan="2">工期</td>
-              <td class="doc_17_s36" colspan="4" rowspan="2"></td>
+              <td class="doc_17_s36" colspan="4" rowspan="2">
+                <%= document_date(secondary_subcon_info(document_info, 2)&.start_date) %> <!-- 17-023-3 各会社の工期(自)(二次) -->
+              </td>
               <td class="doc_17_s7" dir="ltr" colspan="2" rowspan="2">~</td>
-              <td class="doc_17_s37" colspan="4" rowspan="2"></td>
+              <td class="doc_17_s37" colspan="4" rowspan="2">
+                <%= document_date(secondary_subcon_info(document_info, 2)&.end_date) %> <!-- 17-024-3 各会社の工期(自)(二次) -->
+              </td>
             </tr>
             <tr class="doc_17_s45" style="height: 12px">
               <td class="doc_17_s16"></td>
