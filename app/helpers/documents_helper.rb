@@ -295,20 +295,7 @@ module DocumentsHelper
     type == 'n' ? tag.span('無', class: :circle) : '無'
   end
 
-  # (13)移動式クレーン/車両系建設機械等使用届,(16)火気使用届,(17)下請負業者編成表
-
-  # 1次下請会社名の情報
-  def primary_subcon_info(document_info)
-    if document_info.instance_of?(Order)
-      nil
-    elsif document_info.ancestors.count > 1
-      RequestOrder.find(document_info.ancestor_ids[-2])
-    elsif document_info.ancestors.count == 1
-      document_info.content.nil? ? nil : document_info
-    end
-  end
-
-  # 2次下請会社名の情報
+  # 　二次下請会社名の情報
   def secondary_subcon_info(document_info, child_id)
     if document_info.instance_of?(Order)
       nil
@@ -316,6 +303,31 @@ module DocumentsHelper
       nil
     else
       RequestOrder.find(document_info.child_ids[child_id])
+    end
+  end
+
+  # 三次下請会社名の情報
+  def third_subcon_info(document_info, child_id)
+    third_subcon = document_info.find_all_by_generation(2)
+    if document_info.instance_of?(Order)
+      nil
+    elsif third_subcon.nil?
+      nil
+    else
+      RequestOrder.find(third_subcon.ids[child_id]) if third_subcon.ids[child_id]
+    end
+  end
+
+  # (13)移動式クレーン/車両系建設機械等使用届,(16)火気使用届,(17)下請負業者編成表
+
+  # 一次下請会社名の情報
+  def primary_subcon_info(document_info)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.ancestors.count > 1
+      RequestOrder.find(document_info.ancestor_ids[-2])
+    elsif document_info.ancestors.count == 1
+      document_info.content.nil? ? nil : document_info
     end
   end
 end
