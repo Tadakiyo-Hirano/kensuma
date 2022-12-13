@@ -295,7 +295,7 @@ module DocumentsHelper
     type == 'n' ? tag.span('無', class: :circle) : '無'
   end
 
-  # 　二次下請会社名の情報
+  # 二次下請会社情報
   def secondary_subcon_info(document_info, child_id)
     if document_info.instance_of?(Order)
       nil
@@ -306,15 +306,15 @@ module DocumentsHelper
     end
   end
 
-  # 三次下請会社名の情報
-  def third_subcon_info(document_info, child_id)
-    third_subcon = document_info.find_all_by_generation(2)
+  # 三次下請以下の会社情報
+  def hierarchy_subcon_info(document_info, hierarchy, child_id) # hierarchyは階層の深さを指定する
+    hierarchy_subcon = document_info.find_all_by_generation(hierarchy)
     if document_info.instance_of?(Order)
       nil
-    elsif third_subcon.nil?
+    elsif hierarchy_subcon.nil?
       nil
     else
-      RequestOrder.find(third_subcon.ids[child_id]) if third_subcon.ids[child_id]
+      RequestOrder.find(hierarchy_subcon.ids[child_id]) if hierarchy_subcon.ids[child_id]
     end
   end
 
