@@ -11,13 +11,13 @@ class FieldSolvent < ApplicationRecord
   enum sds: { y: 0, n: 1 }, _prefix: true
 
   validates :date_submitted, presence: true
-  validates :solvent_name_1, presence: true
-  validates :carried_quantity_1, presence: true
+  validates :solvent_name_one, presence: true
+  validates :carried_quantity_one, presence: true
   validates :using_location, length: { maximum: 100 }
   validates :storing_place, length: { maximum: 100 }
   validates :using_tool, length: { maximum: 40 }
-  validates :solvent_classification_1, presence: true
-  validates :solvent_ingredients_1, presence: true
+  validates :solvent_classification_one, presence: true
+  validates :solvent_ingredients_one, presence: true
 
   def to_param
     uuid

@@ -150,26 +150,26 @@ ja:
         precautions: 機械等の特性・使用上注意すべき事項
       field_solvent:
         date_submitted: 提出日
-        solvent_name_1: 商品名1
-        solvent_name_2: 商品名2
-        solvent_name_3: 商品名3
-        solvent_name_4: 商品名4
-        solvent_name_5: 商品名5
-        carried_quantity_1: 搬入量1
-        carried_quantity_2: 搬入量2
-        carried_quantity_3: 搬入量3
-        carried_quantity_4: 搬入量4
-        carried_quantity_5: 搬入量5
-        solvent_classification_1: 種別1
-        solvent_classification_2: 種別2
-        solvent_classification_3: 種別3
-        solvent_classification_4: 種別4
-        solvent_classification_5: 種別5
-        solvent_ingredients_1: 含有成分1
-        solvent_ingredients_2: 含有成分2
-        solvent_ingredients_3: 含有成分3
-        solvent_ingredients_4: 含有成分4
-        solvent_ingredients_5: 含有成分5
+        solvent_name_one: 商品名1
+        solvent_name_two: 商品名2
+        solvent_name_three: 商品名3
+        solvent_name_four: 商品名4
+        solvent_name_five: 商品名5
+        carried_quantity_one: 搬入量1
+        carried_quantity_two: 搬入量2
+        carried_quantity_three: 搬入量3
+        carried_quantity_four: 搬入量4
+        carried_quantity_five: 搬入量5
+        solvent_classification_one: 種別1
+        solvent_classification_two: 種別2
+        solvent_classification_three: 種別3
+        solvent_classification_four: 種別4
+        solvent_classification_five: 種別5
+        solvent_ingredients_one: 含有成分1
+        solvent_ingredients_two: 含有成分2
+        solvent_ingredients_three: 含有成分3
+        solvent_ingredients_four: 含有成分4
+        solvent_ingredients_five: 含有成分5
         using_location: 使用場所
         storing_place: 保管場所
         using_tool: 使用機械又は工具

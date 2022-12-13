@@ -13,70 +13,70 @@ module Users::RequestOrders
       end
     end
 
-    def get_solvent_name_1
-      if params[:solvent_name_1].present?
+    def set_solvent_name_0ne
+      if params[:solvent_name_0ne].present?
         solvent = Solvent.where(business_id: @request_request_order.business_id)
-        @solvent_classification_1 = solvent.find_by(name: params[:solvent_name_1]).classification
-        @solvent_ingredients_1 = solvent.find_by(name: params[:solvent_name_1]).ingredients
+        @solvent_classification_0ne = solvent.find_by(name: params[:solvent_name_0ne]).classification
+        @solvent_ingredients_0ne = solvent.find_by(name: params[:solvent_name_0ne]).ingredients
       else
-        @solvent_classification_1 = ""
-        @solvent_ingredients_1 = ""
+        @solvent_classification_0ne = ''
+        @solvent_ingredients_0ne = ''
       end
       respond_to do |format|
         format.js
       end
     end
 
-    def get_solvent_name_2
-      if params[:solvent_name_2].present?
+    def set_solvent_name_two
+      if params[:solvent_name_two].present?
         solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_2 = solvent.find_by(name: params[:solvent_name_2]).classification
-        @solvent_ingredients_2 = solvent.find_by(name: params[:solvent_name_2]).ingredients
+        @solvent_classification_two = solvent.find_by(name: params[:solvent_name_two]).classification
+        @solvent_ingredients_two = solvent.find_by(name: params[:solvent_name_two]).ingredients
       else
-        @solvent_classification_2 = ""
-        @solvent_ingredients_2 = ""
+        @solvent_classification_two = ''
+        @solvent_ingredients_two = ''
       end
       respond_to do |format|
         format.js
       end
     end
 
-    def get_solvent_name_3
-      if params[:solvent_name_3].present?
+    def set_solvent_name_three
+      if params[:solvent_name_three].present?
         solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_3 = solvent.find_by(name: params[:solvent_name_3]).classification
-        @solvent_ingredients_3 = solvent.find_by(name: params[:solvent_name_3]).ingredients
+        @solvent_classification_three = solvent.find_by(name: params[:solvent_name_three]).classification
+        @solvent_ingredients_three = solvent.find_by(name: params[:solvent_name_three]).ingredients
       else
-        @solvent_classification_3 = ""
-        @solvent_ingredients_3 = ""
+        @solvent_classification_three = ''
+        @solvent_ingredients_three = ''
       end
       respond_to do |format|
         format.js
       end
     end
 
-    def get_solvent_name_4
-      if params[:solvent_name_4].present?
+    def set_solvent_name_four
+      if params[:solvent_name_four].present?
         solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_4 = solvent.find_by(name: params[:solvent_name_4]).classification
-        @solvent_ingredients_4 = solvent.find_by(name: params[:solvent_name_4]).ingredients
+        @solvent_classification_four = solvent.find_by(name: params[:solvent_name_four]).classification
+        @solvent_ingredients_four = solvent.find_by(name: params[:solvent_name_four]).ingredients
       else
-        @solvent_classification_4 = ""
-        @solvent_ingredients_4 = ""
+        @solvent_classification_four = ''
+        @solvent_ingredients_four = ''
       end
       respond_to do |format|
         format.js
       end
     end
 
-    def get_solvent_name_5
-      if params[:solvent_name_5].present?
+    def set_solvent_name_five
+      if params[:solvent_name_five].present?
         solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_5 = solvent.find_by(name: params[:solvent_name_5]).classification
-        @solvent_ingredients_5 = solvent.find_by(name: params[:solvent_name_5]).ingredients
+        @solvent_classification_five = solvent.find_by(name: params[:solvent_name_five]).classification
+        @solvent_ingredients_five = solvent.find_by(name: params[:solvent_name_five]).ingredients
       else
-        @solvent_classification_5 = ""
-        @solvent_ingredients_5 = ""
+        @solvent_classification_five = ''
+        @solvent_ingredients_five = ''
       end
       respond_to do |format|
         format.js
@@ -126,11 +126,13 @@ module Users::RequestOrders
 
     def field_solvent_params
       params.require(:field_solvent).permit(
-          :date_submitted, :solvent_name_1, :solvent_name_2, :solvent_name_3, :solvent_name_4, :solvent_name_5,
-          :carried_quantity_1, :carried_quantity_2, :carried_quantity_3, :carried_quantity_4, :carried_quantity_5,
-          :solvent_classification_1, :solvent_classification_2, :solvent_classification_3, :solvent_classification_4, :solvent_classification_5,
-          :solvent_ingredients_1, :solvent_ingredients_2, :solvent_ingredients_3, :solvent_ingredients_4, :solvent_ingredients_5,
-          :using_location, :storing_place, :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
+        :date_submitted, :solvent_name_0ne, :solvent_name_two, :solvent_name_three, :solvent_name_four, :solvent_name_five,
+        :carried_quantity_0ne, :carried_quantity_two, :carried_quantity_three, :carried_quantity_four, :carried_quantity_five,
+        :solvent_classification_0ne, :solvent_classification_two, :solvent_classification_three, :solvent_classification_four,
+        :solvent_classification_five,
+        :solvent_ingredients_0ne, :solvent_ingredients_two, :solvent_ingredients_three, :solvent_ingredients_four,
+        :solvent_ingredients_five,
+        :using_location, :storing_place, :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
       )
     end
   end

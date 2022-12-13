@@ -260,16 +260,16 @@ module DocumentsHelper
   # 有機溶剤情報（使用期間）
   # date は必ず jisx0301 で変換できる値
   def wareki(date)
-    _wareki, mon, day = date.jisx0301.split(".")
-    gengou, year = _wareki.partition(/\d+/).take(2)
-  
-    gengou.sub!(/[MTSHR]/,
-                'M' => '明治',
-                'T' => '大正',
-                'S' => '昭和',
-                'H' => '平成',
-                'R' => '令和')
- 
+    wareki, mon, day = date.jisx0301.split('.')
+    gengou, year = wareki.partition(/\d+/).take(2)
+    gengou.sub!(
+      /[MTSHR]/,
+      'M' => '明治',
+      'T' => '大正',
+      'S' => '昭和',
+      'H' => '平成',
+      'R' => '令和'
+    )
     "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
   end
 
