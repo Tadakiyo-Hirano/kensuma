@@ -1475,15 +1475,21 @@
         <tr class="s45" style="height: 12px">
           <td class="s34" rowspan="12"></td>
           <td class="s10" colspan="5" rowspan="2">会社名</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 0)&.content&.[]("subcon_name") %> <!-- 17-015-1 会社名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s34" rowspan="12"></td>
           <td class="s10" colspan="5" rowspan="2">会社名</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 1)&.content&.[]("subcon_name") %> <!-- 17-015-2 会社名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s34" rowspan="12"></td>
           <td class="s10" colspan="5" rowspan="2">会社名</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 2)&.content&.[]("subcon_name") %> <!-- 17-015-3 会社名(四次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16"></td>
@@ -1491,13 +1497,19 @@
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s10" colspan="5" rowspan="2">代表者名</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 0)&.content&.[]("subcon_representative_name") %> <!-- 17-016-1 代表者名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">代表者名</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 1)&.content&.[]("subcon_representative_name") %> <!-- 17-016-2 代表者名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">代表者名</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 2)&.content&.[]("subcon_representative_name") %> <!-- 17-016-3 代表者名(四次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16"></td>
@@ -1505,13 +1517,19 @@
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s10" colspan="5" rowspan="2">建設業許可番号</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <!-- 17-017-1 建設業許可番号(短縮)(四次) ※未実装※ -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">建設業許可番号</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <!-- 17-017-2 建設業許可番号(短縮)(四次) ※未実装※ -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">建設業許可番号</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <!-- 17-017-3 建設業許可番号(短縮)(四次) ※未実装※ -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16"></td>
@@ -1519,13 +1537,19 @@
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s10" colspan="5" rowspan="2">安全衛生責任者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 0)&.safety_manager_name %> <!-- 17-018-1 安全衛生責任者名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">安全衛生責任者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 1)&.safety_manager_name %> <!-- 17-018-2 安全衛生責任者名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">安全衛生責任者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 2)&.safety_manager_name %> <!-- 17-018-3 安全衛生責任者名(四次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16"></td>
@@ -1533,13 +1557,19 @@
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s10" colspan="5" rowspan="2">主任技術者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 0)&.lead_engineer_name %> <!-- 17-019-1 主任技術者名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">主任技術者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 1)&.lead_engineer_name %> <!-- 17-019-2 主任技術者名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">主任技術者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 2)&.lead_engineer_name %> <!-- 17-019-3 主任技術者名(四次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16"></td>
@@ -1547,13 +1577,19 @@
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16" colspan="5" rowspan="2">専門技術者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 0)&.professional_engineer_name %> <!-- 17-020-1 専門技術者名(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s16" colspan="5" rowspan="2">専門技術者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 1)&.professional_engineer_name %> <!-- 17-020-2 専門技術者名(三次) -->
+          </td>
           <td class="s16"></td>
           <td class="s16" colspan="5" rowspan="2">専門技術者</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 2)&.professional_engineer_name %> <!-- 17-020-3 専門技術者名(三次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16"></td>
@@ -1563,17 +1599,23 @@
           <td class="s18"></td>
           <td class="s10" rowspan="2" style="border-top: none;"></td>
           <td class="s17" colspan="4" rowspan="2" style="border-top: 1px solid #000000;">担当工事内容</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 0)&.professional_engineer_details %> <!-- 17-021-1 担当工事内容(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s18"></td>
           <td class="s10" rowspan="2" style="border-top: none;"></td>
           <td class="s17" colspan="4" rowspan="2" style="border-top: 1px solid #000000;">担当工事内容</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 1)&.professional_engineer_details %> <!-- 17-021-2 担当工事内容(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s18"></td>
           <td class="s10" rowspan="2" style="border-top: none;"></td>
           <td class="s17" colspan="4" rowspan="2" style="border-top: 1px solid #000000;">担当工事内容</td>
-          <td class="s35" colspan="6" rowspan="2"></td>
+          <td class="s35" colspan="6" rowspan="2">
+            <%= hierarchy_subcon_info(document_info, 3, 2)&.professional_engineer_details %> <!-- 17-021-3 担当工事内容(四次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s18">工</td>
@@ -1585,21 +1627,33 @@
         <tr class="s45" style="height: 12px">
           <td class="s18">事</td>
           <td class="s17" colspan="5" rowspan="2">特定専門工事の該当</td>
-          <td class="s20" colspan="2" rowspan="2">有</td>
+          <td class="s20" colspan="2" rowspan="2">
+            <%= professional_construction_yes(hierarchy_subcon_info(document_info, 3, 0)&.professional_construction) %> <!-- 17-022-1 特定専門工事の有無(四次) -->
+          </td>
           <td class="s7" colspan="2" rowspan="2">・</td>
-          <td class="s22" colspan="2" rowspan="2">無</td>
+          <td class="s22" colspan="2" rowspan="2">
+            <%= professional_construction_no(hierarchy_subcon_info(document_info, 3, 0)&.professional_construction) %> <!-- 17-022-1 特定専門工事の有無(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s18">事</td>
           <td class="s17" colspan="5" rowspan="2">特定専門工事の該当</td>
-          <td class="s20" colspan="2" rowspan="2">有</td>
+          <td class="s20" colspan="2" rowspan="2">
+            <%= professional_construction_yes(hierarchy_subcon_info(document_info, 3, 1)&.professional_construction) %> <!-- 17-022-2 特定専門工事の有無(四次) -->
+          </td>
           <td class="s7" colspan="2" rowspan="2">・</td>
-          <td class="s22" colspan="2" rowspan="2">無</td>
+          <td class="s22" colspan="2" rowspan="2">
+            <%= professional_construction_no(hierarchy_subcon_info(document_info, 3, 1)&.professional_construction) %> <!-- 17-022-2 特定専門工事の有無(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s18">事</td>
           <td class="s17" colspan="5" rowspan="2">特定専門工事の該当</td>
-          <td class="s20" colspan="2" rowspan="2">有</td>
+          <td class="s20" colspan="2" rowspan="2">
+            <%= professional_construction_yes(hierarchy_subcon_info(document_info, 3, 2)&.professional_construction) %> <!-- 17-022-3 特定専門工事の有無(四次) -->
+          </td>
           <td class="s7" colspan="2" rowspan="2">・</td>
-          <td class="s22" colspan="2" rowspan="2">無</td>
+          <td class="s22" colspan="2" rowspan="2">
+            <%= professional_construction_no(hierarchy_subcon_info(document_info, 3, 2)&.professional_construction) %> <!-- 17-022-3 特定専門工事の有無(四次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s17"></td>
@@ -1610,19 +1664,31 @@
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s17" colspan="2" rowspan="2">工期</td>
-          <td class="s36" colspan="4" rowspan="2"></td>
+          <td class="s36" colspan="4" rowspan="2">
+            <%= document_date(hierarchy_subcon_info(document_info, 3, 0)&.start_date) %> <!-- 17-023-1 各会社の工期(自)(四次) -->
+          </td>
           <td class="s7" dir="ltr" colspan="2" rowspan="2">~</td>
-          <td class="s37" colspan="4" rowspan="2"></td>
+          <td class="s37" colspan="4" rowspan="2">
+            <%= document_date(hierarchy_subcon_info(document_info, 3, 0)&.end_date) %> <!-- 17-023-1 各会社の工期(自)(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s17" colspan="2" rowspan="2">工期</td>
-          <td class="s36" colspan="4" rowspan="2"></td>
+          <td class="s36" colspan="4" rowspan="2">
+            <%= document_date(hierarchy_subcon_info(document_info, 3, 1)&.start_date) %> <!-- 17-023-2 各会社の工期(自)(四次) -->
+          </td>
           <td class="s7" dir="ltr" colspan="2" rowspan="2">~</td>
-          <td class="s37" colspan="4" rowspan="2"></td>
+          <td class="s37" colspan="4" rowspan="2">
+            <%= document_date(hierarchy_subcon_info(document_info, 3, 1)&.end_date) %> <!-- 17-023-2 各会社の工期(自)(四次) -->
+          </td>
           <td class="s16"></td>
           <td class="s17" colspan="2" rowspan="2">工期</td>
-          <td class="s36" colspan="4" rowspan="2"></td>
+          <td class="s36" colspan="4" rowspan="2">
+            <%= document_date(hierarchy_subcon_info(document_info, 3, 2)&.start_date) %> <!-- 17-023-3 各会社の工期(自)(四次) -->
+          </td>
           <td class="s7" dir="ltr" colspan="2" rowspan="2">~</td>
-          <td class="s37" colspan="4" rowspan="2"></td>
+          <td class="s37" colspan="4" rowspan="2">
+            <%= document_date(hierarchy_subcon_info(document_info, 3, 2)&.end_date) %> <!-- 17-023-3 各会社の工期(自)(四次) -->
+          </td>
         </tr>
         <tr class="s45" style="height: 12px">
           <td class="s16"></td>
