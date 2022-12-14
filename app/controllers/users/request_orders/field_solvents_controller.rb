@@ -9,18 +9,18 @@ module Users::RequestOrders
       if @request_order.field_solvents.present?
         redirect_to users_request_order_field_solvent_path(@request_order, @request_order.field_solvents.first)
       else
-        @field_solvent = @request_request_order.field_solvents.new
+        @field_solvent = @request_order.field_solvents.new
       end
     end
 
-    def set_solvent_name_0ne
-      if params[:solvent_name_0ne].present?
-        solvent = Solvent.where(business_id: @request_request_order.business_id)
-        @solvent_classification_0ne = solvent.find_by(name: params[:solvent_name_0ne]).classification
-        @solvent_ingredients_0ne = solvent.find_by(name: params[:solvent_name_0ne]).ingredients
+    def set_solvent_name_one
+      if params[:solvent_name_one].present?
+        solvent = Solvent.where(business_id: @request_order.business_id)
+        @solvent_classification_one = solvent.find_by(name: params[:solvent_name_one]).classification
+        @solvent_ingredients_one = solvent.find_by(name: params[:solvent_name_one]).ingredients
       else
-        @solvent_classification_0ne = ''
-        @solvent_ingredients_0ne = ''
+        @solvent_classification_one = ''
+        @solvent_ingredients_one = ''
       end
       respond_to do |format|
         format.js
@@ -126,11 +126,11 @@ module Users::RequestOrders
 
     def field_solvent_params
       params.require(:field_solvent).permit(
-        :date_submitted, :solvent_name_0ne, :solvent_name_two, :solvent_name_three, :solvent_name_four, :solvent_name_five,
-        :carried_quantity_0ne, :carried_quantity_two, :carried_quantity_three, :carried_quantity_four, :carried_quantity_five,
-        :solvent_classification_0ne, :solvent_classification_two, :solvent_classification_three, :solvent_classification_four,
+        :date_submitted, :solvent_name_one, :solvent_name_two, :solvent_name_three, :solvent_name_four, :solvent_name_five,
+        :carried_quantity_one, :carried_quantity_two, :carried_quantity_three, :carried_quantity_four, :carried_quantity_five,
+        :solvent_classification_one, :solvent_classification_two, :solvent_classification_three, :solvent_classification_four,
         :solvent_classification_five,
-        :solvent_ingredients_0ne, :solvent_ingredients_two, :solvent_ingredients_three, :solvent_ingredients_four,
+        :solvent_ingredients_one, :solvent_ingredients_two, :solvent_ingredients_three, :solvent_ingredients_four,
         :solvent_ingredients_five,
         :using_location, :storing_place, :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
       )
