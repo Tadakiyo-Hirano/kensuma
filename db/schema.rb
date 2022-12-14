@@ -313,6 +313,9 @@ ActiveRecord::Schema.define(version: 2022_12_13_121354) do
     t.bigint "field_special_vehicleable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "sub_driver_worker_id"
+    t.string "sub_driver_name"
+    t.string "sub_driver_license"
     t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
   end
 

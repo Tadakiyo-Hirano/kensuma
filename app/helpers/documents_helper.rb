@@ -6,7 +6,7 @@ module DocumentsHelper
     elsif document_info.ancestors.count > 1
       RequestOrder.find(document_info.ancestor_ids[-2]).content['subcon_name']
     elsif document_info.ancestors.count == 1
-      document_info.content['subcon_name']
+      document_info.content.nil? ? nil : document_info.content['subcon_name']
     end
   end
 
@@ -219,6 +219,7 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
 
+  # 車両情報(工事･通勤)
   def car_usage_commute(usage)
     usage == '通勤用' ? tag.span('通勤', class: :circle) : '通勤'
   end
@@ -287,5 +288,30 @@ module DocumentsHelper
 
   def field_solvent_sds_n(sds)
     sds == 'n' ? tag.span('無', class: :circle) : '無'
+  # 特殊車両情報(自社･リース)
+  def lease_type_own(type)
+    type == 'own' ? tag.span('自社', class: :circle) : '自社'
+  end
+
+  def lease_type_lease(type)
+    type == 'lease' ? tag.span('リース', class: :circle) : 'リース'
+  end
+
+  # 特殊車両情報(区分)
+  def vehicle_type_crane(type)
+    type == 'crane' ? tag.span('移動式クレーン', class: :circle) : tag.span('移動式クレーン', class: :line_through)
+  end
+
+  def vehicle_type_construction(type)
+    type == 'construction' ? tag.span('車両系建設機械', class: :circle) : tag.span('車両系建設機械', class: :line_through)
+  end
+
+  # document.contentの日付データ表示
+  def doc_content_date(date)
+    if action_name == 'edit'
+      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+    else
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
+    end
   end
 end
