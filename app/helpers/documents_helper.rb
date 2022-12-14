@@ -313,8 +313,8 @@ module DocumentsHelper
       nil
     elsif hierarchy_subcon.nil?
       nil
-    else
-      RequestOrder.find(hierarchy_subcon.ids[child_id]) if hierarchy_subcon.ids[child_id]
+    elsif hierarchy_subcon.ids[child_id]
+      RequestOrder.find(hierarchy_subcon.ids[child_id])
     end
   end
 
