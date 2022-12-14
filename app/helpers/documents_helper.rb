@@ -308,13 +308,12 @@ module DocumentsHelper
 
   # 三次下請以下の会社情報
   def hierarchy_subcon_info(document_info, hierarchy, child_id) # hierarchyは階層の深さを指定する
-    hierarchy_subcon = document_info.find_all_by_generation(hierarchy)
     if document_info.instance_of?(Order)
       nil
-    elsif hierarchy_subcon.nil?
+    elsif document_info.find_all_by_generation(hierarchy).nil?
       nil
-    elsif hierarchy_subcon.ids[child_id]
-      RequestOrder.find(hierarchy_subcon.ids[child_id])
+    elsif document_info.find_all_by_generation(hierarchy).ids[child_id]
+      RequestOrder.find(document_info.find_all_by_generation(hierarchy).ids[child_id])
     end
   end
 
