@@ -11,9 +11,9 @@ RSpec.describe FieldSolvent, type: :model do
       expect(subject).to be_valid
     end
 
-    describe '#content' do
+    describe '#date_submitted' do
       context '存在しない場合' do
-        before(:each) { subject.content = nil }
+        before(:each) { subject.date_submitted = nil }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid
@@ -21,9 +21,39 @@ RSpec.describe FieldSolvent, type: :model do
       end
     end
 
-    describe '#solvent_name' do
+    describe '#solvent_name_one' do
       context '存在しない場合' do
-        before(:each) { subject.solvent_name = nil }
+        before(:each) { subject.solvent_name_one = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#carried_quantity_one' do
+      context '存在しない場合' do
+        before(:each) { subject.carried_quantity_one = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#solvent_classification_one' do
+      context '存在しない場合' do
+        before(:each) { subject.solvent_classification_one = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#solvent_ingredients_one' do
+      context '存在しない場合' do
+        before(:each) { subject.solvent_ingredients_one = nil }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid
@@ -93,9 +123,9 @@ RSpec.describe FieldSolvent, type: :model do
       expect(subject).to be_valid
     end
 
-    describe '#content' do
+    describe '#date_submitted' do
       context '存在しない場合' do
-        before(:each) { subject.content = nil }
+        before(:each) { subject.date_submitted = nil }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid
@@ -103,9 +133,39 @@ RSpec.describe FieldSolvent, type: :model do
       end
     end
 
-    describe '#solvent_name' do
+    describe '#solvent_name_one' do
       context '存在しない場合' do
-        before(:each) { subject.solvent_name = nil }
+        before(:each) { subject.solvent_name_one = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#carried_quantity_one' do
+      context '存在しない場合' do
+        before(:each) { subject.carried_quantity_one = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#solvent_classification_one' do
+      context '存在しない場合' do
+        before(:each) { subject.solvent_classification_one = nil }
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
+
+    describe '#solvent_ingredients_one' do
+      context '存在しない場合' do
+        before(:each) { subject.solvent_ingredients_one = nil }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid
