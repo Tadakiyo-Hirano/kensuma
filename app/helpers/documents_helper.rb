@@ -289,7 +289,7 @@ module DocumentsHelper
   def field_solvent_sds_n(sds)
     sds == 'n' ? tag.span('無', class: :circle) : '無'
   end
-  
+
   # 特殊車両情報(自社･リース)
   def lease_type_own(type)
     type == 'own' ? tag.span('自社', class: :circle) : '自社'
