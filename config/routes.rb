@@ -58,6 +58,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         end
       end
       resources :field_solvents, except: :index, module: :orders, param: :uuid do
+        get 'set_solvent_name_one', to: 'field_solvents#set_solvent_name_one'
+        get 'set_solvent_name_two', to: 'field_solvents#set_solvent_name_two'
+        get 'set_solvent_name_three', to: 'field_solvents#set_solvent_name_three'
+        get 'set_solvent_name_four', to: 'field_solvents#set_solvent_name_four'
+        get 'set_solvent_name_five', to: 'field_solvents#set_solvent_name_five'
         collection do
           get 'set_solvent_name_one'
           get 'set_solvent_name_two'
@@ -79,6 +84,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         end
       end
     end
+    # get 'orders/:order_site_uu_id/field_solvents/:uuid/set_solvent_name_one', to: 'users/orders/field_solvents#edit_set_solvent_name_one', as: :set_solvent_name_one_users_order_field_solvents
     resources :request_orders, only: %i[index show edit update], param: :uuid do
       resources :sub_request_orders, except: %i[edit destroy show], param: :uuid do
         resources :documents, only: %i[index show edit update], param: :uuid, controller: 'sub_request_orders/documents'
