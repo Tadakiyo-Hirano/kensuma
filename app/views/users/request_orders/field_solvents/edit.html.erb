@@ -18,7 +18,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_one %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.text_field :solvent_name_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_name_one) %>
+          <%= f.collection_select :solvent_name_one, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: 'form-control', :onchange => "catchSolventName1($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_one %>
@@ -28,18 +28,18 @@
         <div class="col-md-3">
           <%= f.label :solvent_classification_one %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.text_field :solvent_classification_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_one) %>
+          <%= f.text_field :solvent_classification_one, id: :solvent_classification_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_one) %>
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_ingredients_one %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.text_field :solvent_ingredients_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_one) %>
+          <%= f.text_field :solvent_ingredients_one, id: :solvent_ingredients_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_one) %>
         </div>
       </div><br>
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_two %>
-          <%= f.text_field :solvent_name_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_name_two) %>
+          <%= f.collection_select :solvent_name_two, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名2を選択してください' }, { class: 'form-control', :onchange => "catchSolventName2($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_two %>
@@ -47,17 +47,17 @@
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_classification_two %>
-          <%= f.text_field :solvent_classification_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_two) %>
+          <%= f.text_field :solvent_classification_two, id: :solvent_classification_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_two) %>
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_ingredients_two %>
-          <%= f.text_field :solvent_ingredients_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_two) %>
+          <%= f.text_field :solvent_ingredients_two, id: :solvent_ingredients_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_two) %>
         </div>
       </div><br>
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_three %>
-          <%= f.text_field :solvent_name_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_name_three) %>
+          <%= f.collection_select :solvent_name_three, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名3を選択してください' }, { class: 'form-control', :onchange => "catchSolventName3($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_three %>
@@ -65,17 +65,17 @@
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_classification_three %>
-          <%= f.text_field :solvent_classification_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_three) %>
+          <%= f.text_field :solvent_classification_three, id: :solvent_classification_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_three) %>
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_ingredients_three %>
-          <%= f.text_field :solvent_ingredients_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_three) %>
+          <%= f.text_field :solvent_ingredients_three, id: :solvent_ingredients_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_three) %>
         </div>
       </div><br>
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_four %>
-          <%= f.text_field :solvent_name_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_name_four) %>
+          <%= f.collection_select :solvent_name_four, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名4を選択してください' }, { class: 'form-control', :onchange => "catchSolventName4($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_four %>
@@ -83,17 +83,17 @@
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_classification_four %>
-          <%= f.text_field :solvent_classification_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_four) %>
+          <%= f.text_field :solvent_classification_four, id: :solvent_classification_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_four) %>
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_ingredients_four %>
-          <%= f.text_field :solvent_ingredients_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_four) %>
+          <%= f.text_field :solvent_ingredients_four, id: :solvent_ingredients_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_four) %>
         </div>
       </div><br>
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_five %>
-          <%= f.text_field :solvent_name_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_name_five) %>
+          <%= f.collection_select :solvent_name_five, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名5を選択してください' }, { class: 'form-control', :onchange => "catchSolventName5($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_five %>
@@ -101,11 +101,11 @@
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_classification_five %>
-          <%= f.text_field :solvent_classification_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_five) %>
+          <%= f.text_field :solvent_classification_five, id: :solvent_classification_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_five) %>
         </div><br>
         <div class="col-md-3">
           <%= f.label :solvent_ingredients_five %>
-          <%= f.text_field :solvent_ingredients_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_five) %>
+          <%= f.text_field :solvent_ingredients_five, id: :solvent_ingredients_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_five) %>
         </div>
       </div><br>
       <br>
@@ -239,6 +239,68 @@
             $(this).valid();
           });
         });
+      </script>
+
+      <script>
+        function catchSolventName1(val){
+          var solvent_name_one = val;
+
+          $.ajax({
+            url: 'set_solvent_name_one',
+            type: "GET",
+            data: {
+              solvent_name_one: solvent_name_one
+            }
+          })
+        }
+
+        function catchSolventName2(val){
+          var solvent_name_two = val;
+
+          $.ajax({
+            url: 'set_solvent_name_two',
+            type: "GET",
+            data: {
+              solvent_name_two: solvent_name_two
+            }
+          })
+        }
+
+        function catchSolventName3(val){
+          var solvent_name_three = val;
+
+          $.ajax({
+            url: 'set_solvent_name_three',
+            type: "GET",
+            data: {
+              solvent_name_three: solvent_name_three
+            }
+          })
+        }
+
+        function catchSolventName4(val){
+          var solvent_name_four = val;
+
+          $.ajax({
+            url: 'set_solvent_name_four',
+            type: "GET",
+            data: {
+              solvent_name_four: solvent_name_four
+            }
+          })
+        }
+
+        function catchSolventName5(val){
+          var solvent_name_five = val;
+
+          $.ajax({
+            url: 'set_solvent_name_five',
+            type: "GET",
+            data: {
+              solvent_name_five: solvent_name_five
+            }
+          })
+        }
       </script>
 
       <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
