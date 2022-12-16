@@ -18,7 +18,7 @@
         <div class="col-md-3">
           <%= f.label :solvent_name_one %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.collection_select :solvent_name_one, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名1を選択してください' }, { class: 'form-control', :onchange => "getSolventName1($(this).val())" } %>
+          <%= f.collection_select :solvent_name_one, Solvent.where(business_id: @request_order.business_id), :name, :name, { include_blank: '商品名1を選択してください' }, { class: 'form-control', :onchange => "getSolventName1($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_one %>
@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_two %>
-          <%= f.collection_select :solvent_name_two, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名2を選択してください' }, { class: 'form-control', :onchange => "getSolventName2($(this).val())" } %>
+          <%= f.collection_select :solvent_name_two, Solvent.where(business_id: @request_order.business_id), :name, :name, { include_blank: '商品名2を選択してください' }, { class: 'form-control', :onchange => "getSolventName2($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_two %>
@@ -57,7 +57,7 @@
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_three %>
-          <%= f.collection_select :solvent_name_three, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名3を選択してください' }, { class: 'form-control', :onchange => "getSolventName3($(this).val())" } %>
+          <%= f.collection_select :solvent_name_three, Solvent.where(business_id: @request_order.business_id), :name, :name, { include_blank: '商品名3を選択してください' }, { class: 'form-control', :onchange => "getSolventName3($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_three %>
@@ -75,7 +75,7 @@
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_four %>
-          <%= f.collection_select :solvent_name_four, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名4を選択してください' }, { class: 'form-control', :onchange => "getSolventName4($(this).val())" } %>
+          <%= f.collection_select :solvent_name_four, Solvent.where(business_id: @request_order.business_id), :name, :name, { include_blank: '商品名4を選択してください' }, { class: 'form-control', :onchange => "getSolventName4($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_four %>
@@ -93,7 +93,7 @@
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_five %>
-          <%= f.collection_select :solvent_name_five, Solvent.where(business_id: @request_order.business_id), :name, :name, { prompt: '商品名5を選択してください' }, { class: 'form-control', :onchange => "getSolventName5($(this).val())" } %>
+          <%= f.collection_select :solvent_name_five, Solvent.where(business_id: @request_order.business_id), :name, :name, { include_blank: '商品名5を選択してください' }, { class: 'form-control', :onchange => "getSolventName5($(this).val())" } %>
         </div>
         <div class="col-md-3">
           <%= f.label :carried_quantity_five %>
