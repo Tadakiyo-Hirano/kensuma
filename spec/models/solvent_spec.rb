@@ -31,23 +31,6 @@ RSpec.describe Solvent, type: :model do
       end
     end
 
-    describe '#maker' do
-      context '存在しない場合' do
-        before :each do
-          subject.maker = nil
-        end
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('メーカー名を入力してください')
-        end
-      end
-    end
-
     describe '#classification' do
       context '存在しない場合' do
         before :each do

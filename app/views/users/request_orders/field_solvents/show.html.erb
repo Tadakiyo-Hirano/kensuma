@@ -1,0 +1,127 @@
+<% provide(:title, "溶剤情報詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:date_submitted) %></th>
+          <td><%= @field_solvent.date_submitted %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_one) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_one) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_one) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_one) %></th>
+        </tr>
+        <tr>
+          <td><%= @field_solvent.solvent_name_one %></td>
+          <td><%= @field_solvent.carried_quantity_one %></td>
+          <td><%= @field_solvent.solvent_classification_one %></td>
+          <td><%= @field_solvent.solvent_ingredients_one %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_two) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_two) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_two) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_two) %></th>
+        </tr>
+        <tr>
+          <td><%= @field_solvent.solvent_name_two %></td>
+          <td><%= @field_solvent.carried_quantity_two %></td>
+          <td><%= @field_solvent.solvent_classification_two %></td>
+          <td><%= @field_solvent.solvent_ingredients_two %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_three) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_three) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_three) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_three) %></th>
+        </tr>
+        <tr>
+          <td><%= @field_solvent.solvent_name_three %></td>
+          <td><%= @field_solvent.carried_quantity_three %></td>
+          <td><%= @field_solvent.solvent_classification_three %></td>
+          <td><%= @field_solvent.solvent_ingredients_three %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_four) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_four) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_four) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_four) %></th>
+        </tr>
+        <tr>
+          <td><%= @field_solvent.solvent_name_four %></td>
+          <td><%= @field_solvent.carried_quantity_four %></td>
+          <td><%= @field_solvent.solvent_classification_four %></td>
+          <td><%= @field_solvent.solvent_ingredients_four %></td>
+        </tr>
+        <tr bgcolor="#dee2e6">
+          <th><%= FieldSolvent.human_attribute_name(:solvent_name_five) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:carried_quantity_five) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_classification_five) %></th>
+          <th><%= FieldSolvent.human_attribute_name(:solvent_ingredients_five) %></th>
+        </tr>
+        <tr>
+          <td><%= @field_solvent.solvent_name_five %></td>
+          <td><%= @field_solvent.carried_quantity_five %></td>
+          <td><%= @field_solvent.solvent_classification_five %></td>
+          <td><%= @field_solvent.solvent_ingredients_five %></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:using_location) %></th>
+          <td><%= @field_solvent.using_location %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:storing_place) %></th>
+          <td><%= @field_solvent.storing_place %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:using_tool) %></th>
+          <td><%= @field_solvent.using_tool %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:usage_period_start) %></th>
+          <td><%= @field_solvent.usage_period_start %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:usage_period_end) %></th>
+          <td><%= @field_solvent.usage_period_end %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:working_process) %></th>
+          <td><%= @field_solvent.working_process_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:sds) %></th>
+          <td><%= @field_solvent.sds_i18n %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= FieldSolvent.human_attribute_name(:ventilation_control) %></th>
+          <td><%= @field_solvent.ventilation_control %></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <%= link_to "編集", edit_users_request_order_field_solvent_path(@request_order, @field_solvent), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_request_order_field_solvent_path(@request_order, @field_solvent), method: :delete, data: { confirm: "溶剤情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "現場詳細画面へ", users_request_order_url(@request_order), class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>
