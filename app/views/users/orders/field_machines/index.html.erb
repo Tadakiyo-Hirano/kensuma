@@ -1,0 +1,82 @@
+<% provide(:title,  "現場機械一覧") %>
+
+<div class="machined">
+  <div class="machined-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "現場情報詳細", users_order_path(@order), class: "btn btn-md btn-default" %>
+          <%= link_to "現場情報一覧", users_orders_path(@order), class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= render '/users/documents/shares/show_order_link', order: @order %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <div class="machined">
+      <div class="machined-body">
+        <%= form_with url: users_order_field_machines_path, method: :post, local: true do |f| %>
+          <%= f.label "追加する機械を選択してください。" %>
+          <div class="pb-1">
+            <%= f.collection_select :machine_ids, @machine, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+          </div>
+          <div>
+            <%= f.submit "現場機械追加", class: "btn btn-md btn-primary" %>
+            <% if @field_machines.present? %>
+              <%= link_to "現場機械情報編集", edit_machines_users_order_field_machines_path(@order), class: "btn btn-md btn-success" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+<% if @field_machines.present? %>
+  <section class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table text-nowrap">
+            <thead>
+              <tr align="center">
+                <th><%= FieldMachine.human_attribute_name(:machine_name) %></th>
+                <th><%= FieldMachine.human_attribute_name(:carry_on_date) %></th>
+                <th><%= FieldMachine.human_attribute_name(:carry_out_date) %></th>
+                <th><%= FieldMachine.human_attribute_name(:precautions) %></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @field_machines.each do |field_machine| %>
+                <tr align="center">
+                  <td>
+                    <%= not_input_display(field_machine.machine_name) %>
+                  </td>
+                  <td>
+                    <%= not_input_display(field_machine.carry_on_date) %>
+                  </td>
+                  <td>
+                    <%= not_input_display(field_machine.carry_out_date) %>
+                  </td>
+                  <td>
+                    <%= not_input_display(field_machine.precautions) %>
+                  </td>
+                  <td>
+                    <%= link_to "削除", users_order_field_machine_path(@order, field_machine), method: :delete, data: { confirm: "#{field_machine.machine_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

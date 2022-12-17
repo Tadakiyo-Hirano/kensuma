@@ -7,25 +7,35 @@ module Users
     def index; end
 
     def show
-      @order_info = current_business.request_orders.find_by(uuid: params[:request_order_uuid])
-      @request_order_info = current_business.request_orders.find_by(uuid: params[:request_order_uuid])
       respond_to do |format|
         format.html
         format.pdf do
           case @document.document_type
-          when 'cover_document', 'table_of_contents_document', 'doc_3rd', 'doc_6th',
-                'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th',
-                'doc_13th', 'doc_14th', 'doc_15th', 'doc_16th', 'doc_17th', 'doc_18th',
-                'doc_19th', 'doc_20th', 'doc_21st', 'doc_22nd', 'doc_23rd', 'doc_24th'
+          when 'cover_document', 'table_of_contents_document',
+                'doc_3rd', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th', 'doc_15th', 'doc_16th',
+                'doc_17th', 'doc_19th', 'doc_21st', 'doc_22nd', 'doc_23rd', 'doc_24th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
-          when 'doc_8th'
-            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
           when 'doc_4th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
-          when 'doc_5th'
+          when 'doc_5th', 'doc_13th', 'doc_14th', 'doc_18th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
+          when 'doc_8th'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
+          when 'doc_20th'
+            render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }
           end
         end
+      end
+    end
+
+    def edit; end
+
+    def update
+      if @document.update(document_params(@document))
+        redirect_to users_request_order_document_url, success: '保存に成功しました'
+      else
+        flash[:danger] = '更新に失敗しました'
+        render :edit
       end
     end
 
@@ -37,6 +47,17 @@ module Users
 
     def set_document
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
+    end
+
+    def document_params(document)
+      case document.document_type
+      when 'doc_3rd'
+        params.require(:document).permit.merge(
+          content: {
+            date_submitted: params.dig(:document, :content, :date_submitted)
+          }
+        )
+      end
     end
   end
 end

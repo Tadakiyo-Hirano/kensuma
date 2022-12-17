@@ -10,7 +10,7 @@
       order_post_code: "123456#{n+1}",
       order_address:   "埼玉県発注市1-2-#{n+1}",
 
-      site_career_up_id:                          "ABC-#{n+1}",
+      site_career_up_id:                          "123456789#{rand(10000..99999)}",
       site_address:                               "埼玉県現場市2-3-#{n+1}",
       order_supervisor_name:                      "発注監督員名#{n+1}",
       order_supervisor_company:                   "発注監督会社#{n+1}",
@@ -65,7 +65,7 @@ end
       order_post_code: "123456#{n+4}",
       order_address:   "埼玉県発注市1-2-#{n+4}",
 
-      site_career_up_id:                          "ABC-#{n+1}",
+      site_career_up_id:                          "123456789#{rand(10000..99999)}",
       site_address:                               "埼玉県現場市2-3-#{n+1}",
       order_supervisor_name:                      "発注監督員名#{n+1}",
       order_supervisor_company:                   "発注監督会社#{n+1}",
@@ -120,7 +120,7 @@ end
       order_post_code: "123456#{n+7}",
       order_address:   "埼玉県発注市1-2-#{n+7}",
 
-      site_career_up_id:                          "ABC-#{n+1}",
+      site_career_up_id:                          "123456789#{rand(10000..99999)}",
       site_address:                               "埼玉県現場市2-3-#{n+1}",
       order_supervisor_name:                      "発注監督員名#{n+1}",
       order_supervisor_company:                   "発注監督会社#{n+1}",
@@ -175,7 +175,7 @@ end
       order_post_code: "123456#{n+10}",
       order_address:   "埼玉県発注市1-2-#{n+10}",
 
-      site_career_up_id:                          "ABC-#{n+1}",
+      site_career_up_id:                          "123456789#{rand(10000..99999)}",
       site_address:                               "埼玉県現場市2-3-#{n+1}",
       order_supervisor_name:                      "発注監督員名#{n+1}",
       order_supervisor_company:                   "発注監督会社#{n+1}",
@@ -230,7 +230,7 @@ end
       order_post_code: "123456#{n+13}",
       order_address:   "埼玉県発注市1-2-#{n+13}",
 
-      site_career_up_id:                          "ABC-#{n+1}",
+      site_career_up_id:                          "123456789#{rand(10000..99999)}",
       site_address:                               "埼玉県現場市2-3-#{n+1}",
       order_supervisor_name:                      "発注監督員名#{n+1}",
       order_supervisor_company:                   "発注監督会社#{n+1}",

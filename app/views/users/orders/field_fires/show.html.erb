@@ -1,0 +1,71 @@
+<% provide(:title, "火気情報詳細") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <tbody>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:use_place) %></th>
+          <td><%= @field_fire.use_place %></td>
+        </tr>
+        <tr>
+          <th><%= FireUseTarget.human_attribute_name(:name) %></th>
+          <td><%= @field_fire.fire_use_targets.map(&:name).join(', ') %></td>
+        </tr>
+        <% if @field_fire.other_use_target.present? %>
+          <tr>
+            <th><%= FieldFire.human_attribute_name(:other_use_target) %></th>
+            <td><%= @field_fire.other_use_target %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:usage_period_start) %></th>
+          <td><%= @field_fire.usage_period_start.strftime('%Y年%-m月%-d日') %></td>
+        </tr>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:usage_period_end) %></th>
+          <td><%= @field_fire.usage_period_end.strftime('%Y年%-m月%-d日') %></td>
+        </tr>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:usage_time_start) %></th>
+          <td><%= @field_fire.usage_time_start.strftime('%-H時%-M分') %></td>
+        </tr>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:usage_time_end) %></th>
+          <td><%= @field_fire.usage_time_end.strftime('%-H時%-M分') %></td>
+        </tr>
+        <tr>
+          <th><%= FireType.human_attribute_name(:name) %></th>
+          <td><%= @field_fire.fire_types.map(&:name).join(', ') %></td>
+        </tr>
+        <% if @field_fire.other_fire_type.present? %>
+          <tr>
+            <th><%= FieldFire.human_attribute_name(:other_fire_type) %></th>
+            <td><%= @field_fire.other_fire_type %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <th><%= FireManagement.human_attribute_name(:name) %></th>
+          <td><%= @field_fire.fire_managements.map(&:name).join(', ') %></td>
+        </tr>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:precautions) %></th>
+          <td><%= @field_fire.precautions %></td>
+        </tr>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:fire_origin_responsible) %></th>
+          <td><%= @field_fire.fire_origin_responsible %></td>
+        </tr>
+        <tr>
+          <th><%= FieldFire.human_attribute_name(:fire_use_responsible) %></th>
+          <td><%= @field_fire.fire_use_responsible %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="field_fired-footer">
+    <%= link_to "編集", edit_users_order_field_fire_path(@order, @field_fire), class: "btn btn-md btn-block btn-success" %>
+    <%= link_to "削除", users_order_field_fire_path(@order, @field_fire), method: :delete, data: { confirm: "火気情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger btn-block" %>
+    <%= link_to "現場詳細画面へ", users_order_url(@order), class: "btn btn-md btn-block btn-default" %>
+  </div>
+</div>

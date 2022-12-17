@@ -70,11 +70,7 @@
                     <%= link_to "現場情報修正", edit_users_request_order_path, class: "btn btn-sm btn-success" %>
                   </td>
                   <td>
-                    <%= link_to "入場作業員", users_request_order_field_workers_path(@request_order), class: "btn btn-sm btn-success" %>
-                    <%= link_to "車両", users_request_order_field_cars_path(@request_order), class: "btn btn-sm btn-success" %>
-                    <%= link_to "特殊車両", "#", class: "btn btn-sm btn-success" %>
-                    <%= link_to "機械", "#", class: "btn btn-sm btn-success" %>
-                    <%= link_to "溶剤", "#", class: "btn btn-sm btn-success" %>
+                    <%= render '/users/documents/shares/show_request_order_link', request_order: @request_order %>
                   </td>
                 </tr>
                 <tr>

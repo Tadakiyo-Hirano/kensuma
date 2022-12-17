@@ -12,15 +12,15 @@ module Users
       if Rails.env.development?
         @car = current_business.cars.new(
           # テスト用デフォルト値 ==========================
-          usage:                        rand(0..1),
-          owner_name:                   current_user.name,
+          usage:                        0,
+          owner_name:                   'テストuser1',
           safety_manager:               'anzen taro',
           vehicle_name:                 'ハイエース',
           vehicle_model:                'ZVW30',
-          vehicle_number:               "品川#{rand(1..500)}あ#{rand(1..9999)}",
+          vehicle_number:               '品川111あ1111',
           vehicle_inspection_start_on:  Date.today,
           vehicle_inspection_end_on:    Date.today.since(3.years),
-          liability_securities_number:  SecureRandom.hex(5),
+          liability_securities_number:  '7c97466446',
           liability_insurance_start_on: Date.today,
           liability_insurance_end_on:   Date.today.next_year,
           car_insurance_company_id:     1
@@ -30,7 +30,7 @@ module Users
           # テスト用デフォルト値 ==========================
           personal_insurance:           1,
           objective_insurance:          2,
-          voluntary_securities_number:  SecureRandom.hex(5),
+          voluntary_securities_number:  '9a87456380',
           voluntary_insurance_start_on: Date.today,
           voluntary_insurance_end_on:   Date.today.next_year,
           company_voluntary_id:         3

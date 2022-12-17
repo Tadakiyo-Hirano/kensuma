@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :order do
     status { 0 }
     site_uu_id { SecureRandom.uuid }
-    sequence(:site_career_up_id) { |n| "site_career_up_id#{n}" }
+    site_career_up_id { 12345678901234 }
     sequence(:site_name) { |n| "site_name#{n}" }
     sequence(:site_address) { |n| "site_address#{n}" }
     sequence(:order_name) { |n| "order_name#{n}" }
@@ -31,7 +31,7 @@ FactoryBot.define do
     supervising_engineer_check { 0 }
     sequence(:supervising_engineer_assistant_name) { |n| "supervising_engineer_assistant_name#{n}" }
     sequence(:professional_engineer_name) { |n| "professional_engineer_name#{n}" }
-    sequence(:professional_engineer_construction_details) { |n| "professional_engineer_construction_details#{n}" }
+    sequence(:professional_engineer_construction_details) { |n| "details#{n}" }
     sequence(:safety_officer_name) { |n| "safety_officer_name#{n}" }
     sequence(:safety_officer_position_name) { |n| "safety_officer_position_name#{n}" }
     sequence(:general_safety_manager_name) { |n| "general_safety_manager_name#{n}" }

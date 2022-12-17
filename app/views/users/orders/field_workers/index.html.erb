@@ -9,11 +9,7 @@
           <%= link_to "現場情報一覧", users_orders_path(@order), class: "btn btn-md btn-default" %>
         </td>
         <td>
-          <%= link_to "入場作業員", users_order_field_workers_path(@order), class: "btn btn-md btn-success" %>
-          <%= link_to "車両", users_order_field_cars_path(@order), class: "btn btn-md btn-success" %>
-          <%= link_to "特殊車両", "#", class: "btn btn-md btn-success" %>
-          <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
-          <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+          <%= render '/users/documents/shares/show_order_link', order: @order %>
         </td>
       </tbody>
     </table>

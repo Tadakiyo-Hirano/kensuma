@@ -1,0 +1,115 @@
+<% provide(:title, "現場特殊車両編集") %>
+<% provide(:btn_text, "更新") %>
+
+<div class="card">
+  <div class="card-body table-responsive p-0">
+    <table class="table text-nowrap">
+      <tbody>
+        <td>
+          <%= link_to "戻る", users_request_order_field_special_vehicles_path, class: "btn btn-md btn-default" %>
+        </td>
+        <td>
+          <%= render '/users/documents/shares/show_request_order_link', request_order: @request_order %>
+        </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<section class="content">
+  <div class="col-md-12">
+    <%= form_with model: @request_order, url: update_special_vehicles_users_request_order_field_special_vehicles_path, method: :patch, local: true do |f| %>
+      <div class="card">
+        <div class="card-body table-responsive p-0">
+          <table class="table text-nowrap">
+            </thead>
+            <tbody>
+              <% @field_special_vehicles.each do |field_special_vehicle| %>
+                <%= f.fields_for "field_special_vehicles[]", field_special_vehicle do |fs| %>
+                  <tr style="border-bottom: 0px #fff;">
+                    <td> 
+                      <%= fs.label :vehicle_name %><br>
+                      <%= field_special_vehicle.vehicle_name %>
+                    </td>
+                    <td>
+                      <%= fs.label :driver_name %><br>
+                      <%= fs.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
+                    </td>
+                    <td>
+                      <%= fs.label :sub_driver_name %><br>
+                      <%= fs.select :sub_driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
+                    </td>
+                    <td colspan="2"></td>
+                  </tr>
+                  <tr style="border-bottom: 0px #fff;">
+                    <td>
+                      <%= fs.label :vehicle_type %><br>
+                      <%= fs.select :vehicle_type, FieldSpecialVehicle.vehicle_types_i18n.invert, { prompt: true }, { class: "form-control" } %>
+                    </td>
+                    <td>
+                      <%= fs.label :carry_on_company_name %>
+                      <%= fs.text_field :carry_on_company_name, list: 'carry_on', class: "form-control" %>
+                      <datalist id="carry_on">
+                        <% @carry_on_companies.each do |company| %>
+                        <option><%= company %></option>
+                        <% end %>
+                      </datalist>
+                    </td>
+                    <td>
+                      <%= fs.label :owning_company_name %>
+                      <%= fs.text_field :owning_company_name, list: 'owning', class: "form-control" %>
+                      <datalist id="owning">
+                        <% @owning_companies.each do |company| %>
+                        <option><%= company %></option>
+                        <% end %>
+                      </datalist>
+                    </td>
+                    <td>
+                      <%= fs.label :use_company_name %>
+                      <%= fs.text_field :use_company_name, list: 'use', class: "form-control" %>
+                      <datalist id="use">
+                        <% @use_companies.each do |company| %>
+                        <option><%= company %></option>
+                        <% end %>
+                      </datalist>
+                    </td>
+                  </tr>
+                  <tr style="border: 0px #fff;">
+                    <td>
+                      <%= fs.label :carry_on_date %>
+                      <%= fs.date_field :carry_on_date, class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fs.label :carry_out_date %>
+                      <%= fs.date_field :carry_out_date, class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fs.label :use_place %>
+                      <%= fs.text_field :use_place, placeholder: "100文字以内", class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fs.label :lease_type %>
+                      <%= fs.select :lease_type, FieldSpecialVehicle.lease_types_i18n.invert, { prompt: true }, { class: "form-control" } %>
+                    </td>
+                  </tr>
+                  <tr style="border-top: 0px #fff;">
+                    <td colspan="2" >
+                      <%= fs.label :contact_prevention %>
+                      <%= fs.text_area :contact_prevention, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                    </td>
+                    <td colspan="2">
+                      <%= fs.label :precautions %>
+                      <%= fs.text_area :precautions, maxlength: 500, placeholder: "500文字以内", class: "form-control" %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+      <br>
+    <% end %>
+  </div>
+</section>
