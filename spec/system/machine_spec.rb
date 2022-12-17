@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.describe 'Machines', type: :system do
   let(:user) { create(:user) }
   let(:business) { create(:business, user: user) }
-  let(:machine) { create(:machine, name: '電動ドリル', standards_performance: 'sample_standards_performance', control_number: 'sample_control_number', inspector: 'sample_inspector', handler: 'sample_handler', inspection_date: DateTime.now.yesterday, business: business) }
-
+  let(:machine) { create(:machine, name: '電動ドリル', standards_performance: 'sample_standards_performance', 
+                                   control_number: 'sample_control_number', inspector: 'sample_inspector',
+                                   handler: 'sample_handler', inspection_date: DateTime.now.yesterday, business: business,
+                                   extra_inspection_item1: 'test', extra_inspection_item2: 'test') }
   describe '機械関連' do
     before(:each) do
       # ユーザーメール認証スキップのためコメントアウト
@@ -32,9 +34,19 @@ RSpec.describe 'Machines', type: :system do
         select 'サンプル取扱者', from: 'machine[handler]'
         select 'サンプル管理者', from: 'machine[inspector]'
         fill_in 'machine[inspection_date]', with: machine.inspection_date
+        fill_in 'machine[extra_inspection_item1]', with: machine.extra_inspection_item1
+        fill_in 'machine[extra_inspection_item2]', with: machine.extra_inspection_item2
 
         click_button '登録'
         expect(page).to have_content '持込機械情報を登録しました'
+      end
+    end
+
+    context '持込機械情報編集-重複削除（新規登録後）' do
+      it '追加点検事項の重複が削除されていること' do
+        visit edit_users_machine_path(machine)
+
+        expect(Machine.last.extra_inspection_item2).not_to eq ''
       end
     end
 
@@ -43,12 +55,21 @@ RSpec.describe 'Machines', type: :system do
         visit edit_users_machine_path(machine)
 
         select '電動ドリル', from: 'machine[name]'
+        fill_in 'machine[extra_inspection_item2]', with: 'test'
 
         click_button '更新'
         expect(page).to have_content '更新しました'
       end
     end
 
+    context '持込機械情報編集-重複削除（更新後）' do
+      it '追加点検事項の重複が削除されていること' do
+        visit edit_users_machine_path(machine)
+
+        expect(Machine.last.extra_inspection_item2).not_to eq ''
+      end
+    end
+    
     context '持込機械情報削除' do
       it '持込機械情報を削除できること', js: true do
         visit users_machine_path(machine)

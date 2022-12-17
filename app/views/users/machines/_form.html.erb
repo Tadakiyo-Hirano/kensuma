@@ -1,4 +1,8 @@
+<%#= stylesheet_pack_tag 'users', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 <%= render 'shared/error_massages', object: f.object %>
+<%#= f.hidden_field :id, :value => machine.id %>
 
 <%= f.label :name %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :name, { 電動カンナ: '電動カンナ', 電動ドリル: '電動ドリル', 電動丸のこ: '電動丸のこ', グラインダー等: 'グラインダー等', アーク溶接機: 'アーク溶接機', ウインチ: 'ウインチ', 発電機: '発電機',
@@ -30,19 +34,17 @@
 
 <div class="field">
   <%= f.label :inspection_check %><br />
-  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name, include_hidden: false do |t| %>
+  <%= collection_check_boxes(:machine, :tag_ids, Tag.where(id: ..18), :id, :name, include_hidden: false) do |t| %>
     <%= t.label { t.check_box + t.text } %>
   <% end %>
-</div><br />
+</div><br>
 
-<!--
-<div class="submenu btn btn-default btn-block text-left">
-  <h3 class="pt-3">点検事項 追加</h3>
-  <ul class="hidden">
-    <li>追加項目予定最大6個</li>
-  </ul>
-</div>
--->
+<%= f.label "追加の点検事項" %><br />
+  <% i = 1 %>
+  <%= while i <= 5 do %>
+    <%= f.text_field :"extra_inspection_item#{i}", class: "form-control", placeholder: "追加する点検事項名を記入してください" %><br>
+    <% i += 1 %>
+<% end %>
 
 <script>
 // hidden
