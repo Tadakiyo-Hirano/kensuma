@@ -1201,7 +1201,7 @@
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">代表者名</td>
           <td class="s35" colspan="6" rowspan="2">
-            <%= hierarchy_subcon_info(document_info, 2, 3)&.content&.[]("subcon_representative_name") %> <!-- 17-016-3 代表者名(三次) -->
+            <%= hierarchy_subcon_info(document_info, 2, 2)&.content&.[]("subcon_representative_name") %> <!-- 17-016-3 代表者名(三次) -->
           </td>
         </tr>
         <tr class="s45" style="height: 12px">
@@ -1261,7 +1261,7 @@
           <td class="s16"></td>
           <td class="s10" colspan="5" rowspan="2">主任技術者</td>
           <td class="s35" colspan="6" rowspan="2">
-            <%= hierarchy_subcon_info(document_info, 2, 3)&.lead_engineer_name %> <!-- 17-019-3 主任技術者名(三次) -->
+            <%= hierarchy_subcon_info(document_info, 2, 2)&.lead_engineer_name %> <!-- 17-019-3 主任技術者名(三次) -->
           </td>
         </tr>
         <tr class="s45" style="height: 12px">
