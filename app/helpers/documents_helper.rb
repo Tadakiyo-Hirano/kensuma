@@ -325,11 +325,6 @@ module DocumentsHelper
     type == 'y' ? tag.span('有', class: :circle) : '有'
   end
 
-  # 特殊車両情報(自社･リース)
-  def lease_type_own(type)
-    type == 'own' ? tag.span('自社', class: :circle) : '自社'
-  end
-
   def professional_construction_no(type)
     type == 'n' ? tag.span('無', class: :circle) : '無'
   end

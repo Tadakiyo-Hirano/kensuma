@@ -142,7 +142,7 @@
               <td class="doc_17_s1"></td>
               <td class="doc_17_s1"></td>
               <td class="doc_17_s4" dir="ltr" colspan="8">
-                <!-- 17-001 提出日(西暦) ※未実装※ -->
+                <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 17-001 提出日(西暦) -->
               </td>
             </tr>
             <tr class="doc_17_s45">
