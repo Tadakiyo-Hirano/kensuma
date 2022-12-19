@@ -5,7 +5,7 @@ RSpec.describe 'Solvents', type: :system do
   # let(:user) { create(:user) }
   # let(:business) { create(:business, user: user) }
   # # let(:solvent) { create(:solvent, business: business) }
-  # let(:solvent_a) { create(:solvent, name: 'TESTシンナー', maker: 'TESTペイント', classification: 'シンナー', ingredients: 'トルエン・キシレン', business: business) }
+  # let(:solvent_a) { create(:solvent, name: 'TESTシンナー', classification: 'シンナー', ingredients: 'トルエン・キシレン', business: business) }
 
   # describe '有機溶剤関連' do
   #   before(:each) do
@@ -29,7 +29,6 @@ RSpec.describe 'Solvents', type: :system do
   #       visit new_users_solvent_path
 
   #       fill_in 'solvent[name]', with: 'TESTシンナー' # 商品名
-  #       fill_in 'solvent[maker]', with: solvent_a.maker # メーカー名
   #       fill_in 'solvent[classification]', with: solvent_a.classification # 種別
   #       fill_in 'solvent[ingredients]', with: solvent_a.ingredients # 含有成分
 
@@ -46,7 +45,6 @@ RSpec.describe 'Solvents', type: :system do
   #       visit new_users_solvent_path
 
   #       fill_in 'solvent[name]', with: '' # 商品名
-  #       fill_in 'solvent[maker]', with: solvent_a.maker # メーカー名
   #       fill_in 'solvent[classification]', with: solvent_a.classification # 種別
   #       fill_in 'solvent[ingredients]', with: solvent_a.ingredients # 含有成分
 
