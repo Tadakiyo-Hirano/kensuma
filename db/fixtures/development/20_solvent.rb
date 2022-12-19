@@ -4,8 +4,7 @@
       id:                  n+1,
       business_id:         n+1,
       uuid:                SecureRandom.uuid,
-      name:                "テスト100",
-      maker:               "テストペイント",
+      name:                "テストペイント　テスト100",
       classification:      "塩ビ塗料",
       ingredients:         "トルエン・キシレン",
     }
@@ -18,8 +17,7 @@ end
       id:                  n+6,
       business_id:         n+1,
       uuid:                SecureRandom.uuid,
-      name:                "テスト塗料液",
-      maker:               "テスト化学工業",
+      name:                "テスト化学工業　テスト塗料液",
       classification:      "エポキシ塗料",
       ingredients:         "トルエン・MIBK",
     }
@@ -32,8 +30,7 @@ end
       id:                  n+11,
       business_id:         n+1,
       uuid:                SecureRandom.uuid,
-      name:                "シンナー",
-      maker:               "テスト化学工業",
+      name:                "テスト化学工業　シンナー",
       classification:      "シンナー",
       ingredients:         "トルエン・キシレン",
     }

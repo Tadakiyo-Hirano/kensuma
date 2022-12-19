@@ -252,6 +252,40 @@ module DocumentsHelper
     type == 'construction' ? tag.span('車両系建設機械', class: :circle) : tag.span('車両系建設機械', class: :line_through)
   end
 
+  # (15)有機溶剤・特定化学物質等持込使用届
+
+  # 有機溶剤情報(使用期間)
+  # date は必ず jisx0301 で変換できる値
+  def wareki(date)
+    wareki, mon, day = date.jisx0301.split('.')
+    gengou, year = wareki.partition(/\d+/).take(2)
+    gengou.sub!(
+      /[MTSHR]/,
+      'M' => '明治',
+      'T' => '大正',
+      'S' => '昭和',
+      'H' => '平成',
+      'R' => '令和'
+    )
+    "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
+  end
+
+  def field_solvent_working_process_y(working_process)
+    working_process == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def field_solvent_working_process_n(working_process)
+    working_process == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
+  def field_solvent_sds_y(sds)
+    sds == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def field_solvent_sds_n(sds)
+    sds == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
   # (16)火気使用届
 
   # 現場火気情報(使用目的)
@@ -289,6 +323,11 @@ module DocumentsHelper
   # 特定専門工事の有無(有･無)
   def professional_construction_yes(type)
     type == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  # 特殊車両情報(自社･リース)
+  def lease_type_own(type)
+    type == 'own' ? tag.span('自社', class: :circle) : '自社'
   end
 
   def professional_construction_no(type)
