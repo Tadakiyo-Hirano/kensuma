@@ -5,16 +5,16 @@
   # let(:user) { create(:user) }
   # let(:business) { create(:business, user: user) }
   # let(:machine) { create(:machine, name: '電動ドリル', standards_performance: 'sample_standards_performance', control_number: 'sample_control_number', inspector: 'sample_inspector', handler: 'sample_handler', inspection_date: DateTime.now.yesterday, business: business, extra_inspection_item1: 'test', extra_inspection_item2: 'test') }
-  # describe '機械関連' do
-　　  # #before(:each) do
-      # #ユーザーメール認証スキップのためコメントアウト
-      # user.skip_confirmation!
-      # user.save!
-      # business.save!
-      # visit new_user_session_path
-      # fill_in 'user[email]', with: user.email
-      # fill_in 'user[password]', with: user.password
-      # click_button 'ログイン'
+    # describe '機械関連' do
+        # #before(:each) do
+        # #ユーザーメール認証スキップのためコメントアウト
+        # user.skip_confirmation!
+        # user.save!
+        # business.save!
+        # visit new_user_session_path
+        # fill_in 'user[email]', with: user.email
+        # fill_in 'user[password]', with: user.password
+        # click_button 'ログイン'
     # end
 
     # it 'ログイン後持込機械情報一覧へ画面遷移できること' do
