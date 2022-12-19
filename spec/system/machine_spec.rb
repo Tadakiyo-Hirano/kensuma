@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Machines', type: :system do
+# RSpec.describe 'Machines', type: :system do
   # pending "add some examples (or delete) #{__FILE__}"    
   # let(:user) { create(:user) }
   # let(:business) { create(:business, user: user) }
@@ -86,4 +86,4 @@ RSpec.describe 'Machines', type: :system do
        # end
      # end
    # end
-end
+# end
