@@ -149,8 +149,27 @@ ja:
         carry_out_date: 搬出予定日
         precautions: 機械等の特性・使用上注意すべき事項
       field_solvent:
-        solvent_name: 溶剤名
-        carried_quantity: 搬入量
+        date_submitted: 提出日
+        solvent_name_one: 商品名1
+        solvent_name_two: 商品名2
+        solvent_name_three: 商品名3
+        solvent_name_four: 商品名4
+        solvent_name_five: 商品名5
+        carried_quantity_one: 搬入量1
+        carried_quantity_two: 搬入量2
+        carried_quantity_three: 搬入量3
+        carried_quantity_four: 搬入量4
+        carried_quantity_five: 搬入量5
+        solvent_classification_one: 種別1
+        solvent_classification_two: 種別2
+        solvent_classification_three: 種別3
+        solvent_classification_four: 種別4
+        solvent_classification_five: 種別5
+        solvent_ingredients_one: 含有成分1
+        solvent_ingredients_two: 含有成分2
+        solvent_ingredients_three: 含有成分3
+        solvent_ingredients_four: 含有成分4
+        solvent_ingredients_five: 含有成分5
         using_location: 使用場所
         storing_place: 保管場所
         using_tool: 使用機械又は工具
@@ -160,7 +179,8 @@ ja:
         sds: SDS(安全データシート)の添付
         ventilation_control: 換気等対策
       field_special_vehicle:
-        driver_name: 運転者名
+        driver_name: 運転者名(正)
+        sub_driver_name: 運転者名(副)
         vehicle_name: 特殊車両名
         vehicle_type: 区分
         carry_on_company_name: 持込会社名
@@ -336,7 +356,6 @@ ja:
         name: 名称
       solvent:
         name: 商品名
-        maker: メーカー名
         classification: 種別
         ingredients: 含有成分
       machine:

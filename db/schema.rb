@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_05_031631) do
+ActiveRecord::Schema.define(version: 2022_12_13_121354) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -256,9 +256,8 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
 
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
-    t.string "solvent_name", null: false
-    t.json "content", null: false
-    t.string "carried_quantity"
+    t.string "solvent_name_one", null: false
+    t.string "carried_quantity_one", null: false
     t.string "using_location"
     t.string "storing_place"
     t.string "using_tool"
@@ -271,6 +270,25 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "solvent_classification_one", null: false
+    t.string "solvent_ingredients_one", null: false
+    t.string "solvent_name_two"
+    t.string "solvent_name_three"
+    t.string "solvent_name_four"
+    t.string "solvent_name_five"
+    t.string "solvent_classification_two"
+    t.string "solvent_classification_three"
+    t.string "solvent_classification_four"
+    t.string "solvent_classification_five"
+    t.string "solvent_ingredients_two"
+    t.string "solvent_ingredients_three"
+    t.string "solvent_ingredients_four"
+    t.string "solvent_ingredients_five"
+    t.string "carried_quantity_two"
+    t.string "carried_quantity_three"
+    t.string "carried_quantity_four"
+    t.string "carried_quantity_five"
+    t.date "date_submitted", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
@@ -295,6 +313,9 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.bigint "field_special_vehicleable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "sub_driver_worker_id"
+    t.string "sub_driver_name"
+    t.string "sub_driver_license"
     t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
   end
 
@@ -528,7 +549,6 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
   create_table "solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "name", null: false
-    t.string "maker", null: false
     t.string "classification", null: false
     t.string "ingredients", null: false
     t.bigint "business_id", null: false

@@ -6,7 +6,7 @@ module DocumentsHelper
     elsif document_info.ancestors.count > 1
       RequestOrder.find(document_info.ancestor_ids[-2]).content['subcon_name']
     elsif document_info.ancestors.count == 1
-      document_info.content['subcon_name']
+      document_info.content.nil? ? nil : document_info.content['subcon_name']
     end
   end
 
@@ -219,6 +219,7 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
 
+  # 車両情報(工事･通勤)
   def car_usage_commute(usage)
     usage == '通勤用' ? tag.span('通勤', class: :circle) : '通勤'
   end
@@ -254,6 +255,65 @@ module DocumentsHelper
       fires.first.fire_managements.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
     else
       name
+    end
+  end
+
+  # 有機溶剤情報（使用期間）
+  # date は必ず jisx0301 で変換できる値
+  def wareki(date)
+    wareki, mon, day = date.jisx0301.split('.')
+    gengou, year = wareki.partition(/\d+/).take(2)
+    gengou.sub!(
+      /[MTSHR]/,
+      'M' => '明治',
+      'T' => '大正',
+      'S' => '昭和',
+      'H' => '平成',
+      'R' => '令和'
+    )
+    "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
+  end
+
+  def field_solvent_working_process_y(working_process)
+    working_process == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def field_solvent_working_process_n(working_process)
+    working_process == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
+  def field_solvent_sds_y(sds)
+    sds == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def field_solvent_sds_n(sds)
+    sds == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
+  # 特殊車両情報(自社･リース)
+  def lease_type_own(type)
+    type == 'own' ? tag.span('自社', class: :circle) : '自社'
+  end
+
+  def lease_type_lease(type)
+    type == 'lease' ? tag.span('リース', class: :circle) : 'リース'
+  end
+
+  # 特殊車両情報(区分)
+  def vehicle_type_crane(type)
+    type == 'crane' ? tag.span('移動式クレーン', class: :circle) : tag.span('移動式クレーン', class: :line_through)
+  end
+
+  def vehicle_type_construction(type)
+    type == 'construction' ? tag.span('車両系建設機械', class: :circle) : tag.span('車両系建設機械', class: :line_through)
+  end
+
+  # document.contentの日付データ表示
+  def doc_content_date(date)
+    if action_name == 'edit'
+      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+    else
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
     end
   end
 end

@@ -10,8 +10,7 @@ module Users
       if Rails.env.development?
         @solvent = current_business.solvents.new(
           # テスト用デフォルト値 =====================
-          name:           'テスト塗料液　硬化剤',
-          maker:          'テスト化学工業',
+          name:           'テスト化学工業　テスト塗料液　硬化剤',
           classification: 'エポキシ塗料',
           ingredients:    'アシン類'
           # =======================================
@@ -56,7 +55,7 @@ module Users
     end
 
     def solvent_params
-      params.require(:solvent).permit(:name, :maker, :classification, :ingredients)
+      params.require(:solvent).permit(:name, :classification, :ingredients)
     end
   end
 end
