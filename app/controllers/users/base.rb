@@ -14,7 +14,7 @@ module Users
 
     # 会社情報が登録してなければ会社情報登録画面へ
     def business_nil_access
-      redirect_to new_users_business_path, flash: { danger: '会社情報を登録して下さい' } if current_user.business.nil? && current_user.admin?
+      redirect_to new_users_business_path, flash: { danger: '会社情報を登録して下さい' } if current_user.business.nil?
     end
 
     def unread_news_count

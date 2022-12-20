@@ -17,7 +17,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     sessions:      'users/sessions',
     passwords:     'users/passwords',
     confirmations: 'users/confirmations',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    invitations: 'users/invitations'
   }
 
   namespace :users do
