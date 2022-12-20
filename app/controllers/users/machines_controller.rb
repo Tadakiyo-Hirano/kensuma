@@ -26,7 +26,7 @@ module Users
         params[:machine][:extra_inspection_item1], params[:machine][:extra_inspection_item2],
         params[:machine][:extra_inspection_item3], params[:machine][:extra_inspection_item4],
         params[:machine][:extra_inspection_item5], params[:machine][:extra_inspection_item6]
-        ).flatten.compact_blank.uniq
+      ).flatten.compact_blank.uniq
       i = 1
       extra_item.each do |extra|
         @machine.send("extra_inspection_item#{i}=", extra)
@@ -63,7 +63,7 @@ module Users
         params[:machine][:extra_inspection_item1], params[:machine][:extra_inspection_item2],
         params[:machine][:extra_inspection_item3], params[:machine][:extra_inspection_item4],
         params[:machine][:extra_inspection_item5], params[:machine][:extra_inspection_item6]
-        ).flatten.compact_blank.uniq
+      ).flatten.compact_blank.uniq
       i = 1
       extra_item.each do |extra|
         @machine.send("extra_inspection_item#{i}=", extra)
