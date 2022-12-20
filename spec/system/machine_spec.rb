@@ -5,6 +5,7 @@ RSpec.xdescribe 'Machines', type: :system do
   let(:user) { create(:user) }
   let(:business) { create(:business, user: user) }
   let(:machine) { create(:machine, name: '電動ドリル', standards_performance: 'sample_standards_performance', control_number: 'sample_control_number', inspector: 'sample_inspector', handler: 'sample_handler', inspection_date: DateTime.now.yesterday, business: business, extra_inspection_item1: 'test', extra_inspection_item2: 'test') }
+
   describe '機械関連' do
     before(:each) do
       # ユーザーメール認証スキップのためコメントアウト
@@ -40,8 +41,8 @@ RSpec.xdescribe 'Machines', type: :system do
       end
     end
 
-    context '持込機械情報編集の重複確認（新規登録）' do
-      it '追加点検事項の重複が削除されていること' do
+    context '持込機械情報の重複確認１' do
+      it '新規登録時の重複内容が削除されていること' do
         visit edit_users_machine_path(machine)
 
         expect(Machine.last.extra_inspection_item2).not_to eq ''
@@ -60,8 +61,8 @@ RSpec.xdescribe 'Machines', type: :system do
       end
     end
 
-    context '持込機械情報編集の重複確認（更新）' do
-      it '追加点検事項の重複が削除されていること' do
+    context '持込機械情報の重複確認２' do
+      it '更新時の重複内容が削除されていること' do
         visit edit_users_machine_path(machine)
 
         expect(Machine.last.extra_inspection_item2).not_to eq ''
@@ -74,8 +75,8 @@ RSpec.xdescribe 'Machines', type: :system do
         click_on '削除'
 
         expect {
-        expect(page.accept_confirm).to eq "#{machine.name}の持込機械情報を削除します。本当によろしいですか？"
-        expect(page).to have_content "#{machine.name}を削除しました"
+          expect(page.accept_confirm).to eq "#{machine.name}の持込機械情報を削除します。本当によろしいですか？"
+          expect(page).to have_content "#{machine.name}を削除しました"
         }.to change(Machine, :count).by(-1)
 
         visit users_machines_path
