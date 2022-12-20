@@ -37,8 +37,8 @@
 
 <%= f.label "追加の点検事項" %><br />
   <% i = 1 %>
-  <%= while i <= 5 do %>
-    <%= f.text_field :"extra_inspection_item#{i}", class: "form-control", placeholder: "追加する点検事項名を記入してください" %><br>
+  <%= while i <= 6 do %>
+    <%= f.text_field :"extra_inspection_item#{i}", class: "form-control", placeholder: "※追加の点検事項名称#{i}" %><br>
     <% i += 1 %>
 <% end %>
 

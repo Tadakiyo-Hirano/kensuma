@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.xdescribe 'Machines', type: :system do #「describe」を「xdescribe」とすることでテスト全体をpending
+RSpec.xdescribe 'Machines', type: :system do # 「describe」を「xdescribe」とすることでテスト全体をpending
   pending "add some examples (or delete) #{__FILE__}"
   let(:user) { create(:user) }
   let(:business) { create(:business, user: user) }
