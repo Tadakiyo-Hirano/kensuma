@@ -22,9 +22,11 @@ module Users
 
     def create
       @machine = current_business.machines.build(machine_params)
-      extra_item = [].append(params[:machine][:extra_inspection_item1], params[:machine][:extra_inspection_item2],
+      extra_item = [].append(
+        params[:machine][:extra_inspection_item1], params[:machine][:extra_inspection_item2],
         params[:machine][:extra_inspection_item3], params[:machine][:extra_inspection_item4],
-        params[:machine][:extra_inspection_item5], params[:machine][:extra_inspection_item6]).flatten.compact_blank.uniq
+        params[:machine][:extra_inspection_item5], params[:machine][:extra_inspection_item6]
+        ).flatten.compact_blank.uniq
       i = 1
       extra_item.each do |extra|
         @machine.send("extra_inspection_item#{i}=", extra)
@@ -57,9 +59,11 @@ module Users
     def edit; end
 
     def update
-      extra_item = [].append(params[:machine][:extra_inspection_item1], params[:machine][:extra_inspection_item2],
+      extra_item = [].append(
+        params[:machine][:extra_inspection_item1], params[:machine][:extra_inspection_item2],
         params[:machine][:extra_inspection_item3], params[:machine][:extra_inspection_item4],
-        params[:machine][:extra_inspection_item5], params[:machine][:extra_inspection_item6]).flatten.compact_blank.uniq
+        params[:machine][:extra_inspection_item5], params[:machine][:extra_inspection_item6]
+        ).flatten.compact_blank.uniq
       i = 1
       extra_item.each do |extra|
         @machine.send("extra_inspection_item#{i}=", extra)
