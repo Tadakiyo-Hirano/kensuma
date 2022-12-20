@@ -1,7 +1,7 @@
-# require 'rails_helper'
+require 'rails_helper'
 
-# RSpec.describe 'Machines', type: :system do
-  # pending "add some examples (or delete) #{__FILE__}"
+RSpec.xdescribe 'Machines', type: :system do
+  pending "add some examples (or delete) #{__FILE__}"
   # let(:user) { create(:user) }
   # let(:business) { create(:business, user: user) }
   # let(:machine) { create(:machine, name: '電動ドリル', standards_performance: 'sample_standards_performance', control_number: 'sample_control_number', inspector: 'sample_inspector', handler: 'sample_handler', inspection_date: DateTime.now.yesterday, business: business, extra_inspection_item1: 'test', extra_inspection_item2: 'test') }
@@ -83,4 +83,4 @@
       # end
     # end
   # end
-# end
+end
