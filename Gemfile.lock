@@ -154,6 +154,9 @@ GEM
     devise-bootstrap-views (1.1.0)
     devise-i18n (1.10.1)
       devise (>= 4.8.0)
+    devise_invitable (2.0.6)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.5.0)
     disposable (0.6.2)
       declarative (>= 0.0.9, < 1.0.0)
@@ -501,6 +504,7 @@ DEPENDENCIES
   devise
   devise-bootstrap-views (~> 1.0)
   devise-i18n
+  devise_invitable
   dotenv-rails
   dry-validation
   enum_help
