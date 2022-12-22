@@ -28,6 +28,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       patch 'update_images'
     end
     resources :general_users
+    resources :subcon_users
     resources :dash_boards, only: [:index]
     resources :articles, only: %i[index show]
     resources :news, only: %i[index show], param: :uuid
