@@ -259,19 +259,24 @@ module DocumentsHelper
   end
 
   # 有機溶剤情報（使用期間）
+  # 持込機械・現場機械情報の日付情報
   # date は必ず jisx0301 で変換できる値
   def wareki(date)
-    wareki, mon, day = date.jisx0301.split('.')
-    gengou, year = wareki.partition(/\d+/).take(2)
-    gengou.sub!(
-      /[MTSHR]/,
-      'M' => '明治',
-      'T' => '大正',
-      'S' => '昭和',
-      'H' => '平成',
-      'R' => '令和'
-    )
-    "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
+    if date.nil?
+      '年　月　日'
+    else
+      wareki, mon, day = date.to_date.jisx0301.split('.')
+      gengou, year = wareki.partition(/\d+/).take(2)
+      gengou.sub!(
+        /[MTSHR]/,
+        'M' => '明治',
+        'T' => '大正',
+        'S' => '昭和',
+        'H' => '平成',
+        'R' => '令和'
+      )
+      "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
+    end
   end
 
   def field_solvent_working_process_y(working_process)
@@ -315,5 +320,25 @@ module DocumentsHelper
     else
       date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
     end
+  end
+
+  # 持込機械の文字情報
+  def machine_str(machine, column)
+    machine&.content&.[](column)
+  end
+
+  # 持込機械の日付情報
+  def machine_date(machine, column)
+    date = machine&.content&.[](column)
+  end
+
+  # 現場機械情報の持込年月日
+  def field_machine_carry_on_date(machine)
+    date = machine&.carry_on_date
+  end
+
+  # 現場機械情報の搬出予定日
+  def field_machine_carry_out_date(machine)
+    date = machine&.carry_out_date
   end
 end
