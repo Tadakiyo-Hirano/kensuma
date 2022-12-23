@@ -70,6 +70,7 @@ module DocumentsHelper
     #下請けが自身の書類確認するとき
     elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
       request_order
+    #下請けが存在しない場合
     else
       nil
     end

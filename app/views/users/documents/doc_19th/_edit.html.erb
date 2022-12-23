@@ -166,7 +166,7 @@
             <td class="doc_19_s3"></td>
             <td class="doc_19_s3"></td>
             <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">会 社 名</td>
-            <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2">
+            <td class="doc_19_s30" dir="ltr" colspan="10" rowspan="2">
               <%= f.text_field name = 'content[company_name]',value:@document.content&.[]('company_name') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -252,7 +252,7 @@
             <td class="doc_19_s3"></td>
             <td class="doc_19_s0" dir="ltr" colspan="4">現場代理人</td>
             <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><%= document_site_info.site_agent_name %></td>
-            <td class="doc_19_s11" dir="ltr" colspan="2" rowspan="2">㊞</td>
+            <td class="doc_19_s9" dir="ltr" colspan="2" rowspan="2">㊞</td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -349,7 +349,7 @@
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s8" dir="ltr"></td>
-            <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2">
+            <td class="doc_19_s30" dir="ltr" colspan="8" rowspan="2">
               <%= f.date_field name = 'content[date_created]', value:@document.content&.[]('date_created') %>
             </td>
             <td class="doc_19_s8" dir="ltr" colspan="2" rowspan="2">作成</td>
@@ -610,7 +610,7 @@
             <td class="doc_19_s16" dir="ltr" colspan="4">
               <%= f.select name = 'content[construction_type_1st_period_month_1st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_1st')}%>月
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="4">
+            <td class="doc_19_s23" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
               <%= f.check_box name = 'content[construction_type_period_week_one_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_one_1st')) %></br>
               <%= f.label :week_two, "2週" %>
@@ -625,7 +625,7 @@
             <td class="doc_19_s16" dir="ltr" colspan="4">
               <%= f.select name = 'content[construction_type_1st_period_month_2st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_2st')}%>月
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="4">
+            <td class="doc_19_s23" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
               <%= f.check_box name = 'content[construction_type_period_week_one_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_one_2nd')) %></br>
               <%= f.label :week_two, "2週" %>
@@ -640,7 +640,7 @@
             <td class="doc_19_s16" dir="ltr" colspan="4">
               <%= f.select name = 'content[construction_type_1st_period_month_3rd]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_3rd')} %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="4">
+            <td class="doc_19_s23" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
               <%= f.check_box name = 'content[construction_type_period_week_one_3rd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_one_3rd')) %></br>
               <%= f.label :week_two, "2週" %>
@@ -747,7 +747,7 @@
             <td class="doc_19_s26"></td>
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機械設備</td>
             <td class="doc_19_s28"></td>
-            <td class="doc_19_s29" dir="ltr" colspan="24">
+            <td class="doc_19_s18" dir="ltr" colspan="24">
               <%= f.text_field name = 'content[main_machine_equipment]',value:@document.content&.[]('main_machine_equipment'), size: "80x1" %>
             </td>
             <td class="doc_19_s2"></td>
@@ -757,7 +757,7 @@
             <td class="doc_19_s26"></td>
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機器・工具</td>
             <td class="doc_19_s28"></td>
-            <td class="doc_19_s29" dir="ltr" colspan="24">
+            <td class="doc_19_s18" dir="ltr" colspan="24">
               <%= f.text_field name = 'content[main_tool]',value:@document.content&.[]('main_tool'), size: "80x1" %>
             </td>
             <td class="doc_19_s2"></td>
@@ -767,7 +767,7 @@
             <td class="doc_19_s26"></td>
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用資材枠</td>
             <td class="doc_19_s28"></td>
-            <td class="doc_19_s29" dir="ltr" colspan="24">
+            <td class="doc_19_s18" dir="ltr" colspan="24">
               <%= f.text_field name = 'content[main_material]',value:@document.content&.[]('main_material'), size: "80x1" %>
             </td>
             <td class="doc_19_s2"></td>
@@ -777,7 +777,7 @@
             <td class="doc_19_s26"></td>
             <td class="doc_19_s27" dir="ltr" colspan="5">使用保護具</td>
             <td class="doc_19_s28"></td>
-            <td class="doc_19_s29" dir="ltr" colspan="24">
+            <td class="doc_19_s18" dir="ltr" colspan="24">
               <%= f.text_field name = 'content[protective_equipment]',value:@document.content&.[]('protective_equipment'), size: "80x1" %>
             </td>
             <td class="doc_19_s2"></td>
@@ -787,7 +787,7 @@
             <td class="doc_19_s1"></td>
             <td class="doc_19_s27" dir="ltr" colspan="5">有資格者・配置予定者</td>
             <td class="doc_19_s31"></td>
-            <td class="doc_19_s29" dir="ltr" colspan="24">
+            <td class="doc_19_s18" dir="ltr" colspan="24">
               <%= f.text_field name = 'content[qualified_staff]',value:@document.content&.[]('qualified_staff'), size: "80x1" %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1145,16 +1145,16 @@
               <%=document_subcon_info_for_19th&.construction_manager_name %>
             </td>
             <td class="doc_19_s15"></td>
-            <td class="doc_19_s17" dir="ltr" colspan="5">
+            <td class="doc_19_s34" dir="ltr" colspan="5">
               <%= f.text_field name = 'content[subcontractor_construction_workers_position_1st]',value:@document.content&.[]('subcontractor_construction_workers_position_1st'), size: "30x1" %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="5">
+            <td class="doc_19_s34" dir="ltr" colspan="5">
                <%= f.select name = 'content[subcontractor_construction_workers_name_1st]',
                     @workers_name_uuid,
                     { selected: @document.content&.[]('subcontractor_construction_workers_name_1st'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="11">
+            <td class="doc_19_s29" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_1st]',value:@document.content&.[]('subcontractor_company_name_1st') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1164,16 +1164,16 @@
             <td class="doc_19_s37" colspan="7"></td>
             <td class="doc_19_s37" colspan="10"></td>
             <td class="doc_19_s15"></td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.text_field name = 'content[subcontractor_construction_workers_position_2nd]',value:@document.content&.[]('subcontractor_construction_workers_position_2nd'), size: "30x1" %>
             </td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_2nd]',
                   @workers_name_uuid,
                   { selected: @document.content&.[]('subcontractor_construction_workers_name_2nd'), include_blank: "選択して下さい" }
               %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="11">
+            <td class="doc_19_s29" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_2nd]',value:@document.content&.[]('subcontractor_company_name_2nd') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1188,16 +1188,16 @@
               <%=document_subcon_info_for_19th&.site_agent_name%>
             </td>
             <td class="doc_19_s15"></td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.text_field name = 'content[subcontractor_construction_workers_position_3rd]',value:@document.content&.[]('subcontractor_construction_workers_position_3rd'), size: "30x1" %>
             </td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_3rd]',
                   @workers_name_uuid,
                   { selected: @document.content&.[]('subcontractor_construction_workers_name_3rd'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="11">
+            <td class="doc_19_s29" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_3rd]',value:@document.content&.[]('subcontractor_company_name_3rd') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1211,16 +1211,16 @@
               <%= document_subcon_info_for_19th&.safety_manager_name %>
             </td>
             <td class="doc_19_s15"></td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.text_field name = 'content[subcontractor_construction_workers_position_4th]',value:@document.content&.[]('subcontractor_construction_workers_position_4th'), size: "30x1" %>
             </td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_4th]',
                   @workers_name_uuid,
                   { selected: @document.content&.[]('subcontractor_construction_workers_name_4th'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="11">
+            <td class="doc_19_s29" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_4th]',value:@document.content&.[]('subcontractor_company_name_4th') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1234,16 +1234,16 @@
                <%= document_subcon_info_for_19th&.foreman_name %>
             </td>
             <td class="doc_19_s15"></td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.text_field name = 'content[subcontractor_construction_workers_position_5th]' ,value:@document.content&.[]('subcontractor_company_name_5th'), size: "30x1" %>
             </td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_5th]',
                   @workers_name_uuid,
                   { selected: @document.content&.[]('subcontractor_construction_workers_name_5th'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="11">
+            <td class="doc_19_s29" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_5th]',value:@document.content&.[]('subcontractor_company_name_5th') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1253,16 +1253,16 @@
             <td class="doc_19_s37" colspan="7"></td>
             <td class="doc_19_s37" colspan="10"></td>
             <td class="doc_19_s15"></td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.text_field name = 'content[subcontractor_construction_workers_position_6th]',value:@document.content&.[]('subcontractor_construction_workers_position_6th'), size: "30x1" %>
             </td>
-            <td class="doc_19_s17" colspan="5">
+            <td class="doc_19_s34" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_6th]',
                   @workers_name_uuid,
                   { selected: @document.content&.[]('subcontractor_construction_workers_name_6th'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="11">
+            <td class="doc_19_s29" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_6th]',value:@document.content&.[]('subcontractor_company_name_6th') %>
             </td>
             <td class="doc_19_s2"></td>

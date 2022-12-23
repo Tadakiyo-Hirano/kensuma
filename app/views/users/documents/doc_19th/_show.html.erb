@@ -246,7 +246,7 @@
           <td class="doc_19_s3"></td>
           <td class="doc_19_s0" dir="ltr" colspan="4">現場代理人</td>
           <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><%= document_site_info.site_agent_name %></td>
-          <td class="doc_19_s11" dir="ltr" colspan="2" rowspan="2">㊞</td>
+          <td class="doc_19_s9" dir="ltr" colspan="2" rowspan="2">㊞</td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -343,8 +343,8 @@
           <td class="doc_19_s8" dir="ltr"></td>
           <td class="doc_19_s8" dir="ltr"></td>
           <td class="doc_19_s8" dir="ltr"></td>
-          <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><%= @document.content&.[]('date_created') %></td>
-          <td class="doc_19_s8" dir="ltr" colspan="2" rowspan="2">作成</td>
+          <td class="doc_19_s21" dir="ltr" colspan="8" rowspan="2"><%= @document.content&.[]('date_created') %></td>
+          <td class="doc_19_s10" dir="ltr" colspan="2" rowspan="2">作成</td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -436,7 +436,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s3"></td>
-          <td class="doc_19_s4"></td>
+          <td class="doc_19_s4">
+            <font color="red">※ 緑枠は入力項目です。必要あれば入力してください。</a>
+          </td>
           <td class="doc_19_s4"></td>
           <td class="doc_19_s4"></td>
           <td class="doc_19_s4"></td>
@@ -596,7 +598,7 @@
         <tr style="height: 24px">
           <td class="doc_19_s15" dir="ltr"></td>
           <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_1st')%>月</td>
-          <td class="doc_19_s17" dir="ltr" colspan="4">
+          <td class="doc_19_s23" dir="ltr" colspan="4">
             <%= '1週' if @document.content&.[]('construction_type_period_week_one_1st') == '1'%>
             <%= '2週' if @document.content&.[]('construction_type_period_week_two_1st') == '1'%>
             <%= '3週' if @document.content&.[]('construction_type_period_week_three_1st') == '1'%>
@@ -604,7 +606,7 @@
             <%= '5週' if @document.content&.[]('construction_type_period_week_five_1st') == '1'%>
           </td>
           <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_2st')%>月</td>
-          <td class="doc_19_s17" dir="ltr" colspan="4">
+          <td class="doc_19_s23" dir="ltr" colspan="4">
             <%= '1週' if @document.content&.[]('construction_type_period_week_one_2nd') == '1'%>
             <%= '2週' if @document.content&.[]('construction_type_period_week_two_2nd') == '1'%>
             <%= '3週' if @document.content&.[]('construction_type_period_week_three_2nd') == '1'%>
@@ -612,7 +614,7 @@
             <%= '5週' if @document.content&.[]('construction_type_period_week_five_2nd') == '1'%>
           </td>
           <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_3rd')%>月</td>
-          <td class="doc_19_s17" dir="ltr" colspan="4">
+          <td class="doc_19_s23" dir="ltr" colspan="4">
             <%= '1週' if @document.content&.[]('construction_type_period_week_one_3rd') == '1'%>
             <%= '2週' if @document.content&.[]('construction_type_period_week_two_3rd') == '1'%>
             <%= '3週' if @document.content&.[]('construction_type_period_week_three_3rd') == '1'%>
@@ -704,7 +706,7 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機械設備</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24">
+          <td class="doc_19_s18" dir="ltr" colspan="24">
             <%=@document.content&.[]('main_machine_equipment')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -714,7 +716,7 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機器・工具</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24">
+          <td class="doc_19_s18" dir="ltr" colspan="24">
             <%=@document.content&.[]('main_tool')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -724,7 +726,7 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">主な使用資材枠</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24">
+          <td class="doc_19_s18" dir="ltr" colspan="24">
             <%=@document.content&.[]('main_material')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -734,7 +736,7 @@
           <td class="doc_19_s26"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">使用保護具</td>
           <td class="doc_19_s28"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24">
+          <td class="doc_19_s18" dir="ltr" colspan="24">
             <%=@document.content&.[]('protective_equipment')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -744,7 +746,7 @@
           <td class="doc_19_s1"></td>
           <td class="doc_19_s27" dir="ltr" colspan="5">有資格者・配置予定者</td>
           <td class="doc_19_s31"></td>
-          <td class="doc_19_s29" dir="ltr" colspan="24">
+          <td class="doc_19_s18" dir="ltr" colspan="24">
             <%=@document.content&.[]('qualified_staff')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -812,7 +814,7 @@
           <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_comment(@document.content&.[]('risk_seriousness_2nd'))%>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_estimation_level(@document.content&.[]('risk_possibility_2nd'), @document.content&.[]('risk_seriousness_2nd')) %>
           </td>
           <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
@@ -841,7 +843,7 @@
           <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_comment(@document.content&.[]('risk_seriousness_3rd'))%>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_estimation_level(@document.content&.[]('risk_possibility_3rd'), @document.content&.[]('risk_seriousness_3rd')) %>
           </td>
           <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
@@ -867,10 +869,10 @@
           <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_comment(@document.content&.[]('risk_seriousness_4th'))%>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_estimation_level(@document.content&.[]('risk_possibility_4th'), @document.content&.[]('risk_seriousness_4th')) %>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_level(@document.content&.[]('risk_possibility_4th'), @document.content&.[]('risk_seriousness_4th')) %>
           </td>
           <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
@@ -893,10 +895,10 @@
           <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_comment(@document.content&.[]('risk_seriousness_5th'))%>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_estimation_level(@document.content&.[]('risk_possibility_5th'), @document.content&.[]('risk_seriousness_5th')) %>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_level(@document.content&.[]('risk_possibility_5th'), @document.content&.[]('risk_seriousness_5th')) %>
           </td>
           <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
@@ -922,10 +924,10 @@
           <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_comment(@document.content&.[]('risk_seriousness_6th'))%>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_estimation_level(@document.content&.[]('risk_possibility_6th'), @document.content&.[]('risk_seriousness_6th')) %>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_level(@document.content&.[]('risk_possibility_6th'), @document.content&.[]('risk_seriousness_6th')) %>
           </td>
           <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
@@ -948,10 +950,10 @@
           <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_comment(@document.content&.[]('risk_seriousness_7th'))%>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_estimation_level(@document.content&.[]('risk_possibility_7th'), @document.content&.[]('risk_seriousness_7th')) %>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="2">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2">
             <%=risk_seriousness_level(@document.content&.[]('risk_possibility_7th'), @document.content&.[]('risk_seriousness_7th')) %>
           </td>
           <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="2">
@@ -974,10 +976,10 @@
           <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="4">
             <%=risk_seriousness_comment(@document.content&.[]('risk_seriousness_8th'))%>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="4">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="4">
             <%=risk_estimation_level(@document.content&.[]('risk_possibility_8th'), @document.content&.[]('risk_seriousness_8th')) %>
           </td>
-          <td class="doc_19_s34" dir="ltr" colspan="2" rowspan="4">
+          <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="4">
             <%=risk_seriousness_level(@document.content&.[]('risk_possibility_8th'), @document.content&.[]('risk_seriousness_8th')) %>
           </td>
           <td class="doc_19_s34" dir="ltr" colspan="16" rowspan="4">
@@ -1073,17 +1075,17 @@
             <%=document_subcon_info_for_19th&.construction_manager_name %>
           </td>
           <td class="doc_19_s15"></td>
-          <td class="doc_19_s17" dir="ltr" colspan="5">
+          <td class="doc_19_s34" dir="ltr" colspan="5">
             <%=@document.content&.[]('subcontractor_construction_workers_position_1st')%>
           </td>
-          <td class="doc_19_s17" dir="ltr" colspan="5">
+          <td class="doc_19_s34" dir="ltr" colspan="5">
             <%= worker(@document.content&.[]('subcontractor_construction_workers_name_1st'))%>
           </td>
-          <td class="doc_19_s16" dir="ltr">
+          <td class="doc_19_s38" dir="ltr">
             <%=subcontractor_num(@document.content&.[]('subcontractor_construction_workers_name_1st'), @second_workers, @third_workers, @forth_workers)%>
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
-          <td class="doc_19_s17" dir="ltr" colspan="9">
+          <td class="doc_19_s29" dir="ltr" colspan="9">
             <%=@document.content&.[]('subcontractor_company_name_1st')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -1093,17 +1095,17 @@
           <td class="doc_19_s37" colspan="7"></td>
           <td class="doc_19_s37" colspan="10"></td>
           <td class="doc_19_s15"></td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%=@document.content&.[]('subcontractor_construction_workers_position_2nd')%>
           </td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%= worker(@document.content&.[]('subcontractor_construction_workers_name_2nd'))%>
           </td>
           <td class="doc_19_s38">
             <%=subcontractor_num(@document.content&.[]('subcontractor_construction_workers_name_2nd'), @second_workers, @third_workers, @forth_workers)%>
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
-          <td class="doc_19_s17" dir="ltr" colspan="9">
+          <td class="doc_19_s29" dir="ltr" colspan="9">
             <%=@document.content&.[]('subcontractor_company_name_2nd')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -1118,17 +1120,17 @@
             <%=document_subcon_info_for_19th&.site_agent_name%>
           </td>
           <td class="doc_19_s15"></td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%=@document.content&.[]('subcontractor_construction_workers_position_3rd')%>
           </td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%= worker(@document.content&.[]('subcontractor_construction_workers_name_3rd'))%>
           </td>
           <td class="doc_19_s38">
             <%=subcontractor_num(@document.content&.[]('subcontractor_construction_workers_name_3rd'), @second_workers, @third_workers, @forth_workers)%>
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
-          <td class="doc_19_s17" dir="ltr" colspan="9">
+          <td class="doc_19_s29" dir="ltr" colspan="9">
             <%=@document.content&.[]('subcontractor_company_name_3rd')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -1142,17 +1144,17 @@
             <%= document_subcon_info_for_19th&.safety_manager_name %>
           </td>
           <td class="doc_19_s15"></td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%=@document.content&.[]('subcontractor_construction_workers_position_4th')%>
           </td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%= worker(@document.content&.[]('subcontractor_construction_workers_name_4th'))%>
           </td>
           <td class="doc_19_s38">
             <%=subcontractor_num(@document.content&.[]('subcontractor_construction_workers_name_4th'), @second_workers, @third_workers, @forth_workers)%>
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
-          <td class="doc_19_s17" dir="ltr" colspan="9">
+          <td class="doc_19_s29" dir="ltr" colspan="9">
             <%=@document.content&.[]('subcontractor_company_name_4th')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -1166,17 +1168,17 @@
             <%= document_subcon_info_for_19th&.foreman_name %>
           </td>
           <td class="doc_19_s15"></td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%=@document.content&.[]('subcontractor_construction_workers_position_5th')%>
           </td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%= worker(@document.content&.[]('subcontractor_construction_workers_name_5th'))%>
           </td>
           <td class="doc_19_s38">
             <%=subcontractor_num(@document.content&.[]('subcontractor_construction_workers_name_5th'), @second_workers, @third_workers, @forth_workers)%>
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
-          <td class="doc_19_s17" dir="ltr" colspan="9">
+          <td class="doc_19_s29" dir="ltr" colspan="9">
             <%=@document.content&.[]('subcontractor_company_name_5th')%>
           </td>
           <td class="doc_19_s2"></td>
@@ -1186,17 +1188,17 @@
           <td class="doc_19_s37" colspan="7"></td>
           <td class="doc_19_s37" colspan="10"></td>
           <td class="doc_19_s15"></td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%=@document.content&.[]('subcontractor_construction_workers_position_6th')%>
           </td>
-          <td class="doc_19_s17" colspan="5">
+          <td class="doc_19_s34" colspan="5">
             <%= worker(@document.content&.[]('subcontractor_construction_workers_name_6th'))%>
           </td>
           <td class="doc_19_s38">
             <%=subcontractor_num(@document.content&.[]('subcontractor_construction_workers_name_6th'), @second_workers, @third_workers, @forth_workers)%>
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
-          <td class="doc_19_s17" dir="ltr" colspan="9">
+          <td class="doc_19_s29" dir="ltr" colspan="9">
             <%=@document.content&.[]('subcontractor_company_name_6th')%>
           </td>
           <td class="doc_19_s2"></td>
