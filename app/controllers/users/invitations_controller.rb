@@ -5,7 +5,7 @@ module Users
     layout :invitation_layout
 
     def invitation_layout
-      if action_name == 'new' || 'create'
+      if action_name == 'new' || action_name == 'create'
         'users'
       else
         'users_auth'
