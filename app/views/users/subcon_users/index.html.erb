@@ -12,19 +12,17 @@
             <th><%= User.human_attribute_name(:name) %></th>
             <th><%= User.human_attribute_name(:email) %></th>
             <th></th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @subcon_users.each do |subcon_user| %>
             <tr align="center">
               <td>
-                <%= subcon_user.invitation_token.nil? ? '✓' : '招待中' %>
+                <%= subcon_user.invitation_accepted? ? '✓' : '承認待ち' %>
               </td>
               <td><%= subcon_user.name %></td>
               <td><%= subcon_user.email %></td>
-              <td><%#= link_to "編集", edit_users_subcon_user_path(subcon_user), class: "btn btn-md btn-success" %></td>
-              <td><%#= link_to "削除", users_subcon_user_path(subcon_user), method: :delete, data: { confirm: "「#{subcon_user.name}」を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+              <td><%= link_to "削除", users_subcon_user_path(subcon_user), method: :delete, data: { confirm: "「#{subcon_user.name}」を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
             </tr>
           <% end %>
         </tbody>

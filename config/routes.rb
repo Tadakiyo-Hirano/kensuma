@@ -18,7 +18,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     passwords:     'users/passwords',
     confirmations: 'users/confirmations',
     registrations: 'users/registrations',
-    invitations: 'users/invitations'
+    invitations:   'users/invitations'
   }
 
   namespace :users do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       patch 'update_images'
     end
     resources :general_users
-    resources :subcon_users
+    resources :subcon_users, only: %i[index destroy]
     resources :dash_boards, only: [:index]
     resources :articles, only: %i[index show]
     resources :news, only: %i[index show], param: :uuid
