@@ -61,6 +61,25 @@ module DocumentsHelper
     end
   end
 
+  # 一次下請の情報 (工事安全衛生計画書用)
+  def document_subcon_info_for_19th
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    #元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    #下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+    else
+      nil
+    end
+  end
+
+  #作業員情報
+  def worker(worker_uuid)
+    Worker.find_by(uuid: worker_uuid)&.name
+  end
+
   # 作業員名簿の見出し番号
   def worker_index(number, index)
     number + index * 10
@@ -224,7 +243,7 @@ module DocumentsHelper
   
   def checked_box(checked_status)
     if checked_status == '1'
-      return '✅' 
+      return '☑︎' 
     else
       return '▢'
     end
@@ -234,14 +253,24 @@ module DocumentsHelper
   def risk_estimation_level(risk_possibility,risk_seriousness)
     possibility_point, possibility_comment = risk_possibility(risk_possibility)
     seriousness_point, seriousness_comment = risk_seriousness(risk_seriousness)
-    return (possibility_point + seriousness_point)
+
+    if risk_possibility.nil? || risk_seriousness.nil?
+      return ''
+    else
+      return (possibility_point + seriousness_point)
+    end
   end
 
   #重大性
   def risk_seriousness_level(risk_possibility,risk_seriousness)
     possibility_point, possibility_comment = risk_possibility(risk_possibility)
     seriousness_point, seriousness_comment = risk_seriousness(risk_seriousness)
-    return (possibility_point + seriousness_point - 1)
+
+    if risk_possibility.nil? || risk_seriousness.nil?
+      return ''
+    else
+      return (possibility_point + seriousness_point - 1)
+    end
   end
 
   #リスクの見積りコメント
@@ -256,6 +285,30 @@ module DocumentsHelper
     return seriousness_comment
   end
 
+  #n次下請のn算出
+  def subcontractor_num(worker_uuid, second_workers, third_workers, forth_workers)
+    second_workers_uuid = []
+    third_workers_uuid = []
+    forth_workers_uuid = []
+
+    second_workers&.each do |second_worker|
+      second_workers_uuid.push(second_worker.uuid)
+    end
+
+    third_workers&.each do |third_worker|
+      third_workers_uuid.push(third_worker.uuid)
+    end
+
+    if second_workers_uuid.include?(worker_uuid)
+      '2'
+    elsif third_workers_uuid.include?(worker_uuid)
+      '3'
+    elsif forth_workers_uuid.include?(worker_uuid)
+      '4'
+    else
+      ''
+    end
+  end
 
   private
 
@@ -295,7 +348,5 @@ module DocumentsHelper
     end
     return seriousness_point, seriousness_comment
   end
-
-
 
 end

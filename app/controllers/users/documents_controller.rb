@@ -3,6 +3,7 @@ module Users
     layout 'documents'
     before_action :set_documents # サイドバーに常時表示させるために必要
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
+    before_action :set_workers, only: [:show, :edit] # 2次下請以下の作業員を定義する
 
     def index; end
 
@@ -10,8 +11,6 @@ module Users
       respond_to do |format|
         format.html
         format.pdf do
-          request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-          @order = Order.find(request_order.order_id)
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
                 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th', 'doc_15th', 'doc_16th',
@@ -26,15 +25,11 @@ module Users
           end
         end
       end
-      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-      @order = Order.find(request_order.order_id)
     end
 
     def edit
-      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-      @order = Order.find(request_order.order_id)
-      @workers = current_business.workers
-      @sub_workers = request_order.children.map{|sub_request_order| Business.find_by(id:sub_request_order.business_id).workers}
+      merge_workers = @workers&.map {|sub_worker| {sub_worker&.name => sub_worker&.uuid}}
+      @workers_name_uuid = {}.merge(*merge_workers)
     end
 
     def update
@@ -54,6 +49,40 @@ module Users
 
     def set_document
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
+    end
+
+    def set_workers
+      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+      @workers = []
+      #元請が資料を確認、作成するとき
+      if request_order.parent_id.nil?
+        request_order.children.each do |first_request_order|
+          @second_workers = first_request_order.children.map{|second_request_order| Business.find_by(id:second_request_order.business_id).workers}.flatten!
+          @workers.push(@second_workers).flatten!
+          first_request_order.children.each do |second_request_order|
+            @third_workers = second_request_order.children.map{|third_request_order| Business.find_by(id:third_request_order.business_id).workers}.flatten!
+            @workers.push(@third_workers).flatten!
+            second_request_order.children.each do |third_request_order|
+              @forth_workers = third_request_order.children.map{|forth_request_order| Business.find_by(id:forth_request_order.business_id).workers}.flatten!
+              @workers.push(@forth_workers).flatten!
+            end
+          end
+        end
+      #1次下請けが資料を確認、作成するとき
+      else
+        request_order.children.each do |second_request_order|
+          @second_workers = request_order.children.map{|second_request_order| Business.find_by(id:second_request_order.business_id).workers}.flatten!
+          @workers.push(@second_workers).flatten!
+          second_request_order.children.each do |third_request_order|
+            @third_workers = second_request_order.children.map{|third_request_order| Business.find_by(id:third_request_order.business_id).workers}.flatten!
+            @workers.push(@third_workers).flatten!
+            third_request_order.children.each do |forth_request_order|
+              @forth_workers = third_request_order.children.map{|forth_request_order| Business.find_by(id:forth_request_order.business_id).workers}.flatten!
+            end
+          end
+        end
+      end
+
     end
 
     def document_params(document)
@@ -124,14 +153,14 @@ module Users
             :risk_reduction_measures_3rd,
             :work_classification_3rd,
             :risk_reduction_measures_4th,
-            :work_classification_4th,
+            :predicted_disaster_4th,
             :risk_reduction_measures_5th,
-            :work_classification_5th,
-            :work_classification_6th,
+            :predicted_disaster_5th,
+            :predicted_disaster_6th,
             :risk_reduction_measures_6th,
-            :work_classification_7th,
+            :predicted_disaster_7th,
             :risk_reduction_measures_7th,
-            :work_classification_8th,
+            :predicted_disaster_8th,
             :risk_reduction_measures_8th,
             :construction_manager,
             :subcontractor_construction_workers_position_1st,

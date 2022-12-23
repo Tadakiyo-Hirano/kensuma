@@ -151,7 +151,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">事業所の名称</td>
-            <td class="doc_19_s9" dir="ltr" colspan="9" rowspan="2"><a target="_blank" href="#rangeid=1915910623"><%= @order.site_name%></a></td>
+            <td class="doc_19_s9" dir="ltr" colspan="9" rowspan="2"><%= document_site_info.site_name%></td>
             <td class="doc_19_s3"></td>
             <td class="doc_19_s3"></td>
             <td class="doc_19_s3"></td>
@@ -236,7 +236,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">所長名</td>
-            <td class="doc_19_s9" dir="ltr" colspan="9" rowspan="2"><a target="_blank" href="#rangeid=1214881273"><%= @order.site_agent_name %></a></td>
+            <td class="doc_19_s9" dir="ltr" colspan="9" rowspan="2"><%= document_site_info.site_agent_name %></td>
             <td class="doc_19_s10" dir="ltr" rowspan="2">殿</td>
             <td class="doc_19_s3"></td>
             <td class="doc_19_s3"></td>
@@ -251,8 +251,8 @@
             <td class="doc_19_s3"></td>
             <td class="doc_19_s3"></td>
             <td class="doc_19_s0" dir="ltr" colspan="4">現場代理人</td>
-            <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><a target="_blank" href="#gid=2130279024&amp;range=U322"><%= @order.site_agent_name %></a></td>
-            <td class="doc_19_s11" dir="ltr" colspan="2" rowspan="2"><a target="_blank" href="#gid=2130279024&amp;range=U52">㊞<br>19-006</a></td>
+            <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><%= document_site_info.site_agent_name %></td>
+            <td class="doc_19_s11" dir="ltr" colspan="2" rowspan="2">㊞</td>
             <td class="doc_19_s2"></td>
           </tr>
           <tr style="height: 24px">
@@ -625,7 +625,7 @@
             <td class="doc_19_s16" dir="ltr" colspan="4">
               <%= f.select name = 'content[construction_type_1st_period_month_2st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_2st')}%>月
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=248091639">
+            <td class="doc_19_s17" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
               <%= f.check_box name = 'content[construction_type_period_week_one_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_one_2nd')) %></br>
               <%= f.label :week_two, "2週" %>
@@ -803,10 +803,8 @@
             <td class="doc_19_s25" dir="ltr"></td>
             <td class="doc_19_s31" dir="ltr" colspan="7" rowspan="2">作業区分</td>
             <td class="doc_19_s31" dir="ltr" colspan="9" rowspan="2">予測される災害（危険性又は有害性）</td>
-            <td class="doc_19_s31" dir="ltr" colspan="2" rowspan="2">可能性<br> (度合)</td>
-            <td class="doc_19_s31" dir="ltr" colspan="2" rowspan="2">重大性<br> (重篤度)</td>
-            <td class="doc_19_s31" dir="ltr" colspan="2" rowspan="2">見積り</td>
-            <td class="doc_19_s31" dir="ltr" colspan="2" rowspan="2">リスク<br> レベル</td>
+            <td class="doc_19_s31" dir="ltr" colspan="4" rowspan="2">見積り</td>
+            <td class="doc_19_s31" dir="ltr" colspan="4" rowspan="2">リスク<br> レベル</td>
             <td class="doc_19_s31" dir="ltr" colspan="16" rowspan="2">リスク低減措置</td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -822,7 +820,7 @@
             <td class="doc_19_s32" dir="ltr" colspan="9" rowspan="2">
               <%= f.text_field name = 'content[predicted_disaster_1st]',value:@document.content&.[]('predicted_disaster_1st'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_1st]', :low, :checked => (true if @document.content&.[]('risk_possibility_1st') == "low") %>
               <%= f.label :risk_possibility_1st, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_1st]', :middle, :checked => (true if @document.content&.[]('risk_possibility_1st') == "middle") %>
@@ -830,7 +828,7 @@
               <%= f.radio_button name = 'content[risk_possibility_1st]', :high, :checked => (true if @document.content&.[]('risk_possibility_1st') == "high") %>
               <%= f.label :risk_possibility_1st, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_seriousness_1st]', :low, :checked => (true if @document.content&.[]('risk_seriousness_1st') == "low") %>
               <%= f.label :risk_seriousness_1st, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_1st]', :middle, :checked => (true if @document.content&.[]('risk_seriousness_1st') == "middle") %>
@@ -838,8 +836,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_1st]', :high, :checked => (true if @document.content&.[]('risk_seriousness_1st') == "high") %>
               <%= f.label :risk_seriousness_1st, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2"></td>
-            <td class="doc_19_s17" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
               <%= f.text_area name = 'content[risk_reduction_measures_1st]',value:@document.content&.[]('risk_reduction_measures_1st'), size: "90x5"%>
             </td>
@@ -854,7 +850,7 @@
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
               <%= f.text_field name = 'content[predicted_disaster_2nd]',value:@document.content&.[]('predicted_disaster_2nd'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_2nd]', :low, :checked => (true if @document.content&.[]('risk_possibility_2nd') == "low") %>
               <%= f.label :risk_possibility_2nd, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_2nd]', :middle %>
@@ -862,7 +858,7 @@
               <%= f.radio_button name = 'content[risk_possibility_2nd]', :high %>
               <%= f.label :risk_possibility_2nd, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_seriousness_2nd]', :low, :checked => (true if @document.content&.[]('risk_seriousness_2nd') == "low") %>
               <%= f.label :risk_seriousness_2nd, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_2nd]', :middle, :checked => (true if @document.content&.[]('risk_seriousness_2nd') == "middle") %>
@@ -870,8 +866,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_2nd]', :high, :checked => (true if @document.content&.[]('risk_seriousness_2nd') == "high") %>
               <%= f.label :risk_seriousness_2nd, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
-            <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
                <%= f.text_area name = 'content[risk_reduction_measures_2nd]',value:@document.content&.[]('risk_reduction_measures_2nd'), size: "90x5"%>
             </td>
@@ -889,7 +883,7 @@
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
               <%= f.text_field name = 'content[predicted_disaster_3rd]',value:@document.content&.[]('predicted_disaster_3rd'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_3rd]', :low, :checked => (true if @document.content&.[]('risk_possibility_3rd') == "low") %>
               <%= f.label :risk_possibility_3rd, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_3rd]', :middle, :checked => (true if @document.content&.[]('risk_possibility_3rd') == "middle") %>
@@ -897,7 +891,7 @@
               <%= f.radio_button name = 'content[risk_possibility_3rd]', :high, :checked => (true if @document.content&.[]('risk_possibility_3rd') == "high") %>
               <%= f.label :risk_possibility_2nd, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_seriousness_3rd]', :low, :checked => (true if @document.content&.[]('risk_seriousness_3rd') == "low") %>
               <%= f.label :risk_seriousness_3rd, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_3rd]', :middle, :checked => (true if @document.content&.[]('risk_seriousness_3rd') == "middle") %>
@@ -905,8 +899,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_3rd]', :high, :checked => (true if @document.content&.[]('risk_seriousness_3rd') == "high") %>
               <%= f.label :risk_seriousness_3rd, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
-            <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
               <%= f.text_area name = 'content[risk_reduction_measures_3rd]',value:@document.content&.[]('risk_reduction_measures_3rd'), size: "90x5"%>
             </td>
@@ -919,9 +911,9 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_3rd]',value:@document.content&.[]('work_classification_3rd'), size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_4th]',value:@document.content&.[]('predicted_disaster_4th'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_4th]', :low, :checked => (true if @document.content&.[]('risk_possibility_4th') == "low") %>
               <%= f.label :risk_possibility_4th, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_4th]', :middle, :checked => (true if @document.content&.[]('risk_possibility_4th') == "middle") %>
@@ -929,7 +921,7 @@
               <%= f.radio_button name = 'content[risk_possibility_4th]', :high, :checked => (true if @document.content&.[]('risk_possibility_4th') == "high") %>
               <%= f.label :risk_possibility_4th, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_seriousness_4th]', :low, :checked => (true if @document.content&.[]('risk_seriousness_4th') == "low") %>
               <%= f.label :risk_seriousness_4th, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_4th]', :middle, :checked => (true if @document.content&.[]('risk_seriousness_4th') == "middle") %>
@@ -937,8 +929,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_4th]', :high, :checked => (true if @document.content&.[]('risk_seriousness_4th') == "high") %>
               <%= f.label :risk_seriousness_4th, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
-            <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
               <%= f.text_area name = 'content[risk_reduction_measures_4th]',value:@document.content&.[]('risk_reduction_measures_4th'), size: "90x5"%>
             </td>
@@ -951,9 +941,9 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_4th]',value:@document.content&.[]('work_classification_4th'), size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_5th]',value:@document.content&.[]('predicted_disaster_5th'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_5th]', :low, :checked => (true if @document.content&.[]('risk_possibility_5th') == "low") %>
               <%= f.label :risk_possibility_5th, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_5th]', :middle, :checked => (true if @document.content&.[]('risk_possibility_5th') == "middle") %>
@@ -961,7 +951,7 @@
               <%= f.radio_button name = 'content[risk_possibility_5th]', :high, :checked => (true if @document.content&.[]('risk_possibility_5th') == "high") %>
               <%= f.label :risk_possibility_5th, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_seriousness_5th]', :low, :checked => (true if @document.content&.[]('risk_seriousness_5th') == "low") %>
               <%= f.label :risk_seriousness_5th, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_5th]', :middle, :checked => (true if @document.content&.[]('risk_seriousness_5th') == "middle") %>
@@ -969,8 +959,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_5th]', :high, :checked => (true if @document.content&.[]('risk_seriousness_5th') == "high") %>
               <%= f.label :risk_seriousness_5th, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
-            <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
               <%= f.text_area name = 'content[risk_reduction_measures_5th]',value:@document.content&.[]('risk_reduction_measures_5th'), size: "90x5"%>
             </td>
@@ -983,12 +971,12 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s35" dir="ltr" colspan="7" rowspan="8">
-              <%= f.text_field name = 'content[work_classification_5th]',value:@document.content&.[]('work_classification_5th'), size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_3rd]',value:@document.content&.[]('work_classification_3rd'), size: "40x1" %>
             </td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_6th]',value:@document.content&.[]('work_classification_6th'), size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_6th]',value:@document.content&.[]('predicted_disaster_6th'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_6th]', :low, :checked => (true if @document.content&.[]('risk_possibility_6th') == "low") %>
               <%= f.label :risk_possibility_6th, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_6th]', :middle, :checked => (true if @document.content&.[]('risk_possibility_6th') == "middle") %>
@@ -996,7 +984,7 @@
               <%= f.radio_button name = 'content[risk_possibility_6th]', :high, :checked => (true if @document.content&.[]('risk_possibility_6th') == "high") %>
               <%= f.label :risk_possibility_6th, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_seriousness_6th]', :low, :checked => (true if @document.content&.[]('risk_possibility_6th') == "low") %>
               <%= f.label :risk_seriousness_6th, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_6th]', :middle, :checked => (true if @document.content&.[]('risk_possibility_6th') == "middle") %>
@@ -1004,8 +992,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_6th]', :high, :checked => (true if @document.content&.[]('risk_possibility_6th') == "high") %>
               <%= f.label :risk_seriousness_6th, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
-            <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
               <%= f.text_area name = 'content[risk_reduction_measures_6th]',value:@document.content&.[]('risk_reduction_measures_6th'), size: "90x5"%>
             </td>
@@ -1018,9 +1004,9 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[work_classification_7th]', value:@document.content&.[]('work_classification_7th'), size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_7th]', value:@document.content&.[]('predicted_disaster_7th'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_7th]', :low, :checked => (true if @document.content&.[]('risk_possibility_7th') == "low") %>
               <%= f.label :risk_possibility_7th, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_7th]', :middle, :checked => (true if @document.content&.[]('risk_possibility_7th') == "middle") %>
@@ -1028,7 +1014,7 @@
               <%= f.radio_button name = 'content[risk_possibility_7th]', :high, :checked => (true if @document.content&.[]('risk_possibility_7th') == "high") %>
               <%= f.label :risk_possibility_7th, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_seriousness_7th]', :low, :checked => (true if @document.content&.[]('risk_seriousness_7th') == "low") %>
               <%= f.label :risk_seriousness_7th, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_7th]', :middle, :checked => (true if @document.content&.[]('risk_seriousness_7th') == "middle") %>
@@ -1036,8 +1022,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_7th]', :high, :checked => (true if @document.content&.[]('risk_seriousness_7th') == "high") %>
               <%= f.label :risk_seriousness_7th, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="2"></td>
-            <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="2"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
               <%= f.text_area name = 'content[risk_reduction_measures_7th]',value:@document.content&.[]('risk_reduction_measures_7th'), size: "90x5"%>
             </td>
@@ -1050,9 +1034,9 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="4">
-              <%= f.text_field name = 'content[work_classification_8th]',value:@document.content&.[]('work_classification_8th'), size: "40x1" %>
+              <%= f.text_field name = 'content[predicted_disaster_8th]',value:@document.content&.[]('predicted_disaster_8th'), size: "40x1" %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="4">
               <%= f.radio_button name = 'content[risk_possibility_8th]', :low, :checked => (true if @document.content&.[]('risk_possibility_8th') == "low") %>
               <%= f.label :risk_possibility_8th, "１.ほとんどない", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_possibility_8th]', :middle, :checked => (true if @document.content&.[]('risk_possibility_8th') == "middle") %>
@@ -1060,7 +1044,7 @@
               <%= f.radio_button name = 'content[risk_possibility_8th]', :high, :checked => (true if @document.content&.[]('risk_possibility_8th') == "high") %>
               <%= f.label :risk_possibility_8th, "３.極めて高い", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4">
+            <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="4">
               <%= f.radio_button name = 'content[risk_seriousness_8th]', :low, :checked => (true if @document.content&.[]('risk_seriousness_8th') == "low") %>
               <%= f.label :risk_seriousness_8th, "１.軽微", {value: :low, style: "display: inline-block;"} %></br>
               <%= f.radio_button name = 'content[risk_seriousness_8th]', :middle, :checked => (true if @document.content&.[]('risk_seriousness_8th') == "middle") %>
@@ -1068,8 +1052,6 @@
               <%= f.radio_button name = 'content[risk_seriousness_8th]', :high, :checked => (true if @document.content&.[]('risk_seriousness_8th') == "high") %>
               <%= f.label :risk_seriousness_8th, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
-            <td class="doc_19_s35" dir="ltr" colspan="2" rowspan="4"></td>
-            <td class="doc_19_s36" dir="ltr" colspan="2" rowspan="4"></td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="4">
               <%= f.text_area name = 'content[risk_reduction_measures_8th]',value:@document.content&.[]('risk_reduction_measures_8th'), size: "90x5"%>
             </td>
@@ -1146,7 +1128,7 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">安全衛生担当責任者</td>
             <td class="doc_19_s31"></td>
             <td class="doc_19_s29" dir="ltr" colspan="10">
-              <%= @order.safety_officer_name %>
+              <%= document_subcon_info_for_19th&.safety_officer_name %>
             </td>
             <td class="doc_19_s15"></td>
             <td class="doc_19_s31" dir="ltr" colspan="5">職 名</td>
@@ -1160,10 +1142,7 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">工事担当責任者</td>
             <td class="doc_19_s31"></td>
             <td class="doc_19_s29" dir="ltr" colspan="10">
-              <%= f.select name = 'content[construction_manager]',
-                      (@workers.map { |worker|worker.name }),
-                      { include_blank: "選択して下さい"}
-              %>
+              <%=document_subcon_info_for_19th&.construction_manager_name %>
             </td>
             <td class="doc_19_s15"></td>
             <td class="doc_19_s17" dir="ltr" colspan="5">
@@ -1171,13 +1150,11 @@
             </td>
             <td class="doc_19_s17" dir="ltr" colspan="5">
                <%= f.select name = 'content[subcontractor_construction_workers_name_1st]',
-                      (@sub_workers[0].map { |sub_worker|sub_worker.name }),
-                      { include_blank: "選択して下さい"}
+                    @workers_name_uuid,
+                    { selected: @document.content&.[]('subcontractor_construction_workers_name_1st'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s16" dir="ltr"><a target="_blank" href="#rangeid=150871509">19-<br>040</a></td>
-            <td class="doc_19_s27" dir="ltr">次</td>
-            <td class="doc_19_s7" dir="ltr" colspan="9">
+            <td class="doc_19_s17" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_1st]',value:@document.content&.[]('subcontractor_company_name_1st') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1192,13 +1169,11 @@
             </td>
             <td class="doc_19_s17" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_2nd]',
-                      (@sub_workers[0].map { |sub_worker|sub_worker.name }),
-                      { include_blank: "選択して下さい"}
+                  @workers_name_uuid,
+                  { selected: @document.content&.[]('subcontractor_construction_workers_name_2nd'), include_blank: "選択して下さい" }
               %>
             </td>
-            <td class="doc_19_s38"></td>
-            <td class="doc_19_s27" dir="ltr">次</td>
-            <td class="doc_19_s7" dir="ltr" colspan="9">
+            <td class="doc_19_s17" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_2nd]',value:@document.content&.[]('subcontractor_company_name_2nd') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1210,20 +1185,19 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">現 場 代 理 人</td>
             <td class="doc_19_s31"></td>
             <td class="doc_19_s29" dir="ltr" colspan="10">
-              <%= @order.site_agent_name %></td>
+              <%=document_subcon_info_for_19th&.site_agent_name%>
+            </td>
             <td class="doc_19_s15"></td>
             <td class="doc_19_s17" colspan="5">
               <%= f.text_field name = 'content[subcontractor_construction_workers_position_3rd]',value:@document.content&.[]('subcontractor_construction_workers_position_3rd'), size: "30x1" %>
             </td>
             <td class="doc_19_s17" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_3rd]',
-                      (@sub_workers[0].map { |sub_worker|sub_worker.name }),
-                      { include_blank: "選択して下さい"}
+                  @workers_name_uuid,
+                  { selected: @document.content&.[]('subcontractor_construction_workers_name_3rd'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s38"></td>
-            <td class="doc_19_s27" dir="ltr">次</td>
-            <td class="doc_19_s7" dir="ltr" colspan="9">
+            <td class="doc_19_s17" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_3rd]',value:@document.content&.[]('subcontractor_company_name_3rd') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1234,7 +1208,7 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">安全衛生責任者</td>
             <td class="doc_19_s31"></td>
             <td class="doc_19_s29" dir="ltr" colspan="10">
-              <%= @order.general_safety_responsible_person_name %>
+              <%= document_subcon_info_for_19th&.safety_manager_name %>
             </td>
             <td class="doc_19_s15"></td>
             <td class="doc_19_s17" colspan="5">
@@ -1242,13 +1216,11 @@
             </td>
             <td class="doc_19_s17" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_4th]',
-                      (@sub_workers[0].map { |sub_worker|sub_worker.name }),
-                      { include_blank: "選択して下さい"}
+                  @workers_name_uuid,
+                  { selected: @document.content&.[]('subcontractor_construction_workers_name_4th'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s38"></td>
-            <td class="doc_19_s27" dir="ltr">次</td>
-            <td class="doc_19_s7" dir="ltr" colspan="9">
+            <td class="doc_19_s17" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_4th]',value:@document.content&.[]('subcontractor_company_name_4th') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1259,24 +1231,19 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">職 長</td>
             <td class="doc_19_s31"></td>
             <td class="doc_19_s29" dir="ltr" colspan="10">
-              <%= f.select name = 'content[safety_and_health_manager]',
-                      (@workers.map { |worker|worker.name }),
-                      { include_blank: "選択して下さい"}
-              %>
+               <%= document_subcon_info_for_19th&.foreman_name %>
             </td>
             <td class="doc_19_s15"></td>
             <td class="doc_19_s17" colspan="5">
-              <%= f.text_field name = 'content[subcontractor_construction_workers_position_5th]', size: "30x1" %>
+              <%= f.text_field name = 'content[subcontractor_construction_workers_position_5th]' ,value:@document.content&.[]('subcontractor_company_name_5th'), size: "30x1" %>
             </td>
             <td class="doc_19_s17" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_5th]',
-                      (@sub_workers[0].map { |sub_worker|sub_worker.name }),
-                      { include_blank: "選択して下さい"}
+                  @workers_name_uuid,
+                  { selected: @document.content&.[]('subcontractor_construction_workers_name_5th'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s38"></td>
-            <td class="doc_19_s27" dir="ltr">次</td>
-            <td class="doc_19_s7" dir="ltr" colspan="9">
+            <td class="doc_19_s17" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_5th]',value:@document.content&.[]('subcontractor_company_name_5th') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1291,13 +1258,11 @@
             </td>
             <td class="doc_19_s17" colspan="5">
               <%= f.select name = 'content[subcontractor_construction_workers_name_6th]',
-                      (@sub_workers[0].map { |sub_worker|sub_worker.name }),
-                      { include_blank: "選択して下さい"}
+                  @workers_name_uuid,
+                  { selected: @document.content&.[]('subcontractor_construction_workers_name_6th'), include_blank: "選択して下さい" }
                %>
             </td>
-            <td class="doc_19_s38"></td>
-            <td class="doc_19_s27" dir="ltr">次</td>
-            <td class="doc_19_s7" dir="ltr" colspan="9">
+            <td class="doc_19_s17" dir="ltr" colspan="11">
               <%= f.text_field name = 'content[subcontractor_company_name_6th]',value:@document.content&.[]('subcontractor_company_name_6th') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -1405,7 +1370,7 @@
               <div class="doc_19_softmerge-inner" style="width:29px;left:-3px"></div>
             </td>
             <td class="doc_19_s27" dir="ltr" colspan="2">持込機械等（</td>
-            <td class="doc_19_s40">
+            <td class="doc_19_s48">
                <%= f.text_field name = 'content[use_notification]',value:@document.content&.[]('use_notification') , size: "12x1"%>
             </td>
             <td class="doc_19_s45" dir="ltr" colspan="2"></td>
@@ -1579,7 +1544,7 @@
               <div class="doc_19_softmerge-inner" style="width:29px;left:-3px"></div>
             </td>
             <td class="doc_19_s47" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[use_notification_name_for_others_3rd]' , size: "12x1"%>
+              <%= f.text_field name = 'content[use_notification_name_for_others_3rd]',value:@document.content&.[]('use_notification_name_for_others_3rd'), size: "12x1"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1649,7 +1614,7 @@
             <td class="doc_19_s27" dir="ltr"></td>
             <td class="doc_19_s28" dir="ltr"></td>
             <td class="doc_19_s41" dir="ltr">
-              <%= f.check_box name = 'content[use_notification_for_others_4th]', checked: box_checked?(@document.content&.[]('use_notification_for_others_4th'))  %>
+              <%= f.check_box name = 'content[use_notification_for_others_4th]', checked: box_checked?(@document.content&.[]('use_notification_for_others_4th')) %>
             </td>
             <td class="doc_19_s42 softmerge" dir="ltr" colspan="2">
               <div class="doc_19_softmerge-inner" style="width:29px;left:-3px"></div>
@@ -1664,7 +1629,7 @@
               <div class="doc_19_softmerge-inner" style="width:29px;left:-3px"></div>
             </td>
             <td class="doc_19_s47" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[use_notification_name_for_others_5th]' , size: "12x1"%>
+              <%= f.text_field name = 'content[use_notification_name_for_others_5th]',value:@document.content&.[]('use_notification_name_for_others_5th') , size: "12x1"%>
             </td>
             <td class="doc_19_s41" dir="ltr">
               <%= f.check_box name = 'content[use_notification_for_others_6th]', checked: box_checked?(@document.content&.[]('use_notification_for_others_6th')) %>
