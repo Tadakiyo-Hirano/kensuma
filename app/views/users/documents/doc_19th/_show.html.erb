@@ -483,7 +483,9 @@
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
           <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生方針</td>
-          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><%=@document.content&.[]('safety_and_health_construction_policy') %></td>
+          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
+            <%=safe_join(@document.content&.[]('safety_and_health_construction_policy').split("\n"),tag(:br)) %>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -537,7 +539,9 @@
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
           <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生目標</td>
-          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><%=@document.content&.[]('safety_and_health_construction_objective')%></td>
+          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
+            <%=safe_join(@document.content&.[]('safety_and_health_construction_objective').split("\n"),tag(:br)) %>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">

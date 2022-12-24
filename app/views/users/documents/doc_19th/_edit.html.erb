@@ -166,7 +166,7 @@
             <td class="doc_19_s3"></td>
             <td class="doc_19_s3"></td>
             <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">会 社 名</td>
-            <td class="doc_19_s30" dir="ltr" colspan="10" rowspan="2">
+            <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2">
               <%= f.text_field name = 'content[company_name]',value:@document.content&.[]('company_name') %>
             </td>
             <td class="doc_19_s2"></td>
@@ -490,7 +490,9 @@
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生方針</td>
             <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
-              <%= f.text_area name = 'content[safety_and_health_construction_policy]',value:@document.content&.[]('safety_and_health_construction_policy') , size: "150x2"%>
+              <%= f.text_area name = 'content[safety_and_health_construction_policy]',value:@document.content&.[]('safety_and_health_construction_policy') , size: "150x3",
+              placeholder: safety_and_health_construction_policy_example
+              %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -546,7 +548,9 @@
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生目標</td>
             <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
-              <%= f.text_area name = 'content[safety_and_health_construction_objective]',value:@document.content&.[]('safety_and_health_construction_objective'), size: "150x2"%>
+              <%= f.text_area name = 'content[safety_and_health_construction_objective]',value:@document.content&.[]('safety_and_health_construction_objective'), size: "150x3",
+                placeholder: safety_and_health_construction_objective_example
+              %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -657,10 +661,10 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7">
-              <%= f.text_field name = 'content[construction_type_1st]',value:@document.content&.[]('construction_type_1st') %>
+              <%= f.text_field name = 'content[construction_type_1st]',value:@document.content&.[]('construction_type_1st'), :placeholder => '例)足場組立て工事' %>
             </td>
             <td class="doc_19_s19" dir="ltr" colspan="8">
-              <%= f.text_field name = 'content[construction_type_1st_period_1st]',value:@document.content&.[]('construction_type_1st_period_1st') %>
+              <%= f.text_field name = 'content[construction_type_1st_period_1st]',value:@document.content&.[]('construction_type_1st_period_1st'), :placeholder => '例)24/1/5 ↔︎ 24/1/19' %>
             </td>
             <td class="doc_19_s19" dir="ltr" colspan="8">
               <%= f.text_field name = 'content[construction_type_1st_period_2nd]',value:@document.content&.[]('construction_type_1st_period_2nd') %>
@@ -669,7 +673,9 @@
               <%= f.text_field name = 'content[construction_type_1st_period_3rd]',value:@document.content&.[]('construction_type_1st_period_3rd') %>
             </td>
             <td class="doc_19_s19" dir="ltr" colspan="9" rowspan="11">
-              <%= f.text_area name = 'content[daily_safety_and_health_activity]',value:@document.content&.[]('daily_safety_and_health_activity'), size: "50x1"%>
+              <%= f.text_area name = 'content[daily_safety_and_health_activity]',value:@document.content&.[]('daily_safety_and_health_activity'), size: "50x10",
+              placeholder: daily_safety_and_health_activity_example
+              %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -748,7 +754,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機械設備</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s18" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[main_machine_equipment]',value:@document.content&.[]('main_machine_equipment'), size: "80x1" %>
+              <%= f.text_field name = 'content[main_machine_equipment]',value:@document.content&.[]('main_machine_equipment'),
+               :placeholder => '例)積載型移動式クレーン、鉄筋切断機、 鉄筋曲げ機', size: "100x1" %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -758,7 +765,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用機器・工具</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s18" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[main_tool]',value:@document.content&.[]('main_tool'), size: "80x1" %>
+              <%= f.text_field name = 'content[main_tool]',value:@document.content&.[]('main_tool'),
+               :placeholder => '例)工具 ハンマ ラチェット、玉掛ワイヤロープ、手ハッカー ', size: "100x1" %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -768,7 +776,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">主な使用資材枠</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s18" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[main_material]',value:@document.content&.[]('main_material'), size: "80x1" %>
+              <%= f.text_field name = 'content[main_material]',value:@document.content&.[]('main_material'),
+               :placeholder => '例)枠組み足場材 鉄筋、 結束番線 ', size: "100x1" %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -778,7 +787,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">使用保護具</td>
             <td class="doc_19_s28"></td>
             <td class="doc_19_s18" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[protective_equipment]',value:@document.content&.[]('protective_equipment'), size: "80x1" %>
+              <%= f.text_field name = 'content[protective_equipment]',value:@document.content&.[]('protective_equipment'),
+              :placeholder => '例)保護帽、 安全帯 安全靴、 手袋 (軍手・革)', size: "100x1" %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -788,7 +798,8 @@
             <td class="doc_19_s27" dir="ltr" colspan="5">有資格者・配置予定者</td>
             <td class="doc_19_s31"></td>
             <td class="doc_19_s18" dir="ltr" colspan="24">
-              <%= f.text_field name = 'content[qualified_staff]',value:@document.content&.[]('qualified_staff'), size: "80x1" %>
+              <%= f.text_field name = 'content[qualified_staff]',value:@document.content&.[]('qualified_staff'),
+              :placeholder => '例)移動式クレーン運転免許者、 玉掛技能講習修了者、合図者、 鉄筋組立て作業指揮者(職長) ', size: "100x1" %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -815,10 +826,12 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s18" dir="ltr" colspan="7" rowspan="4">
-              <%= f.text_field name = 'content[work_classification_1st]',value:@document.content&.[]('work_classification_1st'), size: "40x1" %>
+              <%= f.text_field name = 'content[work_classification_1st]',value:@document.content&.[]('work_classification_1st'),
+              :placeholder => '例)移動式クレーンの設置 ', size: "40x1" %>
             </td>
             <td class="doc_19_s32" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_1st]',value:@document.content&.[]('predicted_disaster_1st'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_1st]',value:@document.content&.[]('predicted_disaster_1st'), 
+              :placeholder => '例)クレーンの設置場所の地盤状態が悪く、クレーンが転倒する。', size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_1st]', :low, :checked => (true if @document.content&.[]('risk_possibility_1st') == "low") %>
@@ -837,7 +850,8 @@
               <%= f.label :risk_seriousness_1st, "３.極めて重大", {value: :high, style: "display: inline-block;"} %>
             </td>
             <td class="doc_19_s18" dir="ltr" colspan="16" rowspan="2">
-              <%= f.text_area name = 'content[risk_reduction_measures_1st]',value:@document.content&.[]('risk_reduction_measures_1st'), size: "90x5"%>
+              <%= f.text_area name = 'content[risk_reduction_measures_1st]',value:@document.content&.[]('risk_reduction_measures_1st'),
+               placeholder: risk_reduction_measures_example, size: "90x5"%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -848,7 +862,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_2nd]',value:@document.content&.[]('predicted_disaster_2nd'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_2nd]',value:@document.content&.[]('predicted_disaster_2nd'), size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_2nd]', :low, :checked => (true if @document.content&.[]('risk_possibility_2nd') == "low") %>
@@ -881,7 +895,7 @@
               <%= f.text_field name = 'content[work_classification_2nd]',value:@document.content&.[]('work_classification_2nd'), size: "40x1" %>
             </td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_3rd]',value:@document.content&.[]('predicted_disaster_3rd'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_3rd]',value:@document.content&.[]('predicted_disaster_3rd'), size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_3rd]', :low, :checked => (true if @document.content&.[]('risk_possibility_3rd') == "low") %>
@@ -911,7 +925,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_4th]',value:@document.content&.[]('predicted_disaster_4th'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_4th]',value:@document.content&.[]('predicted_disaster_4th'), size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_4th]', :low, :checked => (true if @document.content&.[]('risk_possibility_4th') == "low") %>
@@ -941,7 +955,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_5th]',value:@document.content&.[]('predicted_disaster_5th'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_5th]',value:@document.content&.[]('predicted_disaster_5th'), size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_5th]', :low, :checked => (true if @document.content&.[]('risk_possibility_5th') == "low") %>
@@ -974,7 +988,7 @@
               <%= f.text_field name = 'content[work_classification_3rd]',value:@document.content&.[]('work_classification_3rd'), size: "40x1" %>
             </td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_6th]',value:@document.content&.[]('predicted_disaster_6th'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_6th]',value:@document.content&.[]('predicted_disaster_6th'), size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_6th]', :low, :checked => (true if @document.content&.[]('risk_possibility_6th') == "low") %>
@@ -1004,7 +1018,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[predicted_disaster_7th]', value:@document.content&.[]('predicted_disaster_7th'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_7th]', value:@document.content&.[]('predicted_disaster_7th'), size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
               <%= f.radio_button name = 'content[risk_possibility_7th]', :low, :checked => (true if @document.content&.[]('risk_possibility_7th') == "low") %>
@@ -1034,7 +1048,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s5" dir="ltr"></td>
             <td class="doc_19_s34" dir="ltr" colspan="9" rowspan="4">
-              <%= f.text_field name = 'content[predicted_disaster_8th]',value:@document.content&.[]('predicted_disaster_8th'), size: "40x1" %>
+              <%= f.text_area name = 'content[predicted_disaster_8th]',value:@document.content&.[]('predicted_disaster_8th'), size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="4">
               <%= f.radio_button name = 'content[risk_possibility_8th]', :low, :checked => (true if @document.content&.[]('risk_possibility_8th') == "low") %>
@@ -1146,7 +1160,8 @@
             </td>
             <td class="doc_19_s15"></td>
             <td class="doc_19_s34" dir="ltr" colspan="5">
-              <%= f.text_field name = 'content[subcontractor_construction_workers_position_1st]',value:@document.content&.[]('subcontractor_construction_workers_position_1st'), size: "30x1" %>
+              <%= f.text_field name = 'content[subcontractor_construction_workers_position_1st]',value:@document.content&.[]('subcontractor_construction_workers_position_1st'),
+                :placeholder => '例)職長兼オペレーター', size: "30x1" %>
             </td>
             <td class="doc_19_s34" dir="ltr" colspan="5">
                <%= f.select name = 'content[subcontractor_construction_workers_name_1st]',
@@ -1371,7 +1386,7 @@
             </td>
             <td class="doc_19_s27" dir="ltr" colspan="2">持込機械等（</td>
             <td class="doc_19_s48">
-               <%= f.text_field name = 'content[use_notification]',value:@document.content&.[]('use_notification') , size: "12x1"%>
+               <%= f.text_field name = 'content[use_notification]',value:@document.content&.[]('use_notification') ,size: "16x1"%>
             </td>
             <td class="doc_19_s45" dir="ltr" colspan="2"></td>
             <td class="doc_19_s27" dir="ltr">）使用届</td>
@@ -1558,7 +1573,8 @@
             </td>
             <td class="doc_19_s27" dir="ltr">（</td>
             <td class="doc_19_s48" dir="ltr" colspan="4">
-              <%= f.text_field name = 'content[work_plan_name_1st]',value:@document.content&.[]('work_plan_name_1st'), size: "12x1"%>
+              <%= f.text_field name = 'content[work_plan_name_1st]',value:@document.content&.[]('work_plan_name_1st'),
+              :placeholder => '例)移動式クレーン',  size: "16x1"%>
             </td>
             <td class="doc_19_s49" dir="ltr" colspan="3">）作業計画書</td>
             <td class="doc_19_s41" dir="ltr">

@@ -311,6 +311,40 @@ module DocumentsHelper
     end
   end
 
+  def safety_and_health_construction_policy_example
+    <<-"EOS".strip_heredoc
+    例)当社及び作業所の安全衛生ルールを遵守。
+       特定した危険有害要因に対しての実施事項。
+       (除去・低減策)の実施。作業開始前、 作業中の安全状態の指差し確認。
+    EOS
+  end
+
+  def safety_and_health_construction_objective_example
+    <<-"EOS".strip_heredoc
+    例)墜落危険作業では安全帯を使用 (使用率 100%) する。
+       移動式クレーン災害ゼロの実現のため、移動式クレーンの旋回範囲への立入禁止、アウトリガーの張出し、適正な玉掛けを徹底する。
+       KY 活動における 「私たちはこうする」 を全員で遵守し、 不安全行動を排除する。
+    EOS
+  end
+
+  def daily_safety_and_health_activity_example
+    <<-"EOS".strip_heredoc
+    例)・安全ミーティング
+        ・KYK 
+        ・作業中の指揮・監督 
+        ・安全工程打合せ会 
+        ・終業時片付け 
+        ・作業終了報告 
+    EOS
+  end
+
+  def risk_reduction_measures_example
+    <<-"EOS".strip_heredoc
+    例)1 設置地盤に凸凹、傾斜等がある場合は、地盤を整地するか角材等により水平にする。
+         2 地耐力不足の場合は、地盤改良、敷き鉄板等で補強する。
+    EOS
+  end
+
   private
 
   #リスクの可能性
