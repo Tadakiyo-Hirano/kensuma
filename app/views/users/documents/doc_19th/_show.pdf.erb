@@ -166,7 +166,7 @@
           <td class="doc_19_s3"></td>
           <td class="doc_19_s3"></td>
           <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">会 社 名</td>
-          <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2"><%=@document.content&.[]('company_name')%></td>
+          <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2"><%=document_subcon_info_for_19th.business.name%></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -1102,7 +1102,7 @@
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
           <td class="doc_19_s17" dir="ltr" colspan="8">
-            <%=@document.content&.[]('subcontractor_company_name_1st')%>
+            <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_1st'))%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>
@@ -1122,7 +1122,7 @@
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
           <td class="doc_19_s17" dir="ltr" colspan="8">
-            <%=@document.content&.[]('subcontractor_company_name_2nd')%>
+            <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_2nd'))%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>
@@ -1147,7 +1147,7 @@
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
           <td class="doc_19_s17" dir="ltr" colspan="8">
-            <%=@document.content&.[]('subcontractor_company_name_3rd')%>
+            <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_3rd'))%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>
@@ -1171,7 +1171,7 @@
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
           <td class="doc_19_s17" dir="ltr" colspan="8">
-            <%=@document.content&.[]('subcontractor_company_name_4th')%>
+            <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_4th'))%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>
@@ -1195,7 +1195,7 @@
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
           <td class="doc_19_s17" dir="ltr" colspan="8">
-            <%=@document.content&.[]('subcontractor_company_name_5th')%>
+            <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_5th'))%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>
@@ -1215,7 +1215,7 @@
           </td>
           <td class="doc_19_s27" dir="ltr">次</td>
           <td class="doc_19_s17" dir="ltr" colspan="8">
-            <%=@document.content&.[]('subcontractor_company_name_6th')%>
+            <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_6th'))%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>

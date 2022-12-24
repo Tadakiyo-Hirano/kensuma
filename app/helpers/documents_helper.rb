@@ -61,6 +61,16 @@ module DocumentsHelper
     end
   end
 
+  # 元請の確認欄
+  def document_info_for_19th_prime_contractor_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order.parent_id.nil?
+      Order.find(request_order.order_id).confirm_name
+    else
+      Order.find(request_order.parent.order_id).confirm_name
+    end
+  end
+
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
@@ -73,6 +83,24 @@ module DocumentsHelper
     #下請けが存在しない場合
     else
       nil
+    end
+  end
+
+  #会社の名前
+  def company_name(worker_id)
+    worker = Worker.find_by(uuid: worker_id)
+    Business.find_by(id: worker&.business_id)&.name
+  end
+
+  #書類作成会社の名前
+  def document_preparation_company_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+      Business.find_by(id:sub_request_order.business_id).name
+    #下請けが自身の書類確認するとき
+    else
+      Business.find_by(id:request_order.business_id).name
     end
   end
 

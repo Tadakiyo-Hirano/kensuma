@@ -75,7 +75,7 @@
             <td class="doc_19_s5"></td>
             <td class="doc_19_s6" dir="ltr" colspan="2" rowspan="2">元 請<br> 確認欄</td>
             <td class="doc_19_s7" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_field name = 'content[prime_contractor_confirmation]',value:@document.content&.[]('prime_contractor_confirmation')%>
+              <%=document_info_for_19th_prime_contractor_name%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -167,7 +167,7 @@
             <td class="doc_19_s3"></td>
             <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">会 社 名</td>
             <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2">
-              <%= f.text_field name = 'content[company_name]',value:@document.content&.[]('company_name') %>
+              <%=document_preparation_company_name%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1170,7 +1170,7 @@
                %>
             </td>
             <td class="doc_19_s29" dir="ltr" colspan="11">
-              <%= f.text_field name = 'content[subcontractor_company_name_1st]',value:@document.content&.[]('subcontractor_company_name_1st') %>
+              <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_1st'))%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1189,7 +1189,7 @@
               %>
             </td>
             <td class="doc_19_s29" dir="ltr" colspan="11">
-              <%= f.text_field name = 'content[subcontractor_company_name_2nd]',value:@document.content&.[]('subcontractor_company_name_2nd') %>
+              <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_2nd'))%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1213,7 +1213,7 @@
                %>
             </td>
             <td class="doc_19_s29" dir="ltr" colspan="11">
-              <%= f.text_field name = 'content[subcontractor_company_name_3rd]',value:@document.content&.[]('subcontractor_company_name_3rd') %>
+              <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_3rd'))%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1236,7 +1236,7 @@
                %>
             </td>
             <td class="doc_19_s29" dir="ltr" colspan="11">
-              <%= f.text_field name = 'content[subcontractor_company_name_4th]',value:@document.content&.[]('subcontractor_company_name_4th') %>
+              <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_4th'))%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1259,7 +1259,7 @@
                %>
             </td>
             <td class="doc_19_s29" dir="ltr" colspan="11">
-              <%= f.text_field name = 'content[subcontractor_company_name_5th]',value:@document.content&.[]('subcontractor_company_name_5th') %>
+              <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_5th'))%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -1278,7 +1278,7 @@
                %>
             </td>
             <td class="doc_19_s29" dir="ltr" colspan="11">
-              <%= f.text_field name = 'content[subcontractor_company_name_6th]',value:@document.content&.[]('subcontractor_company_name_6th') %>
+              <%= company_name(@document.content&.[]('subcontractor_construction_workers_name_6th'))%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
