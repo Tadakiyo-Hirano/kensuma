@@ -377,7 +377,7 @@
               <td colspan="2">
                 <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->
                 <br />
-                <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-060 下請会社の健康保険番号 -->
+                <%= .content&.[]('subcon_health_insurance_office_number') %> <!-- 4-060 下請会社の健康保険番号 -->
               </td>
               <td colspan="2">
                 <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-061 下請会社の厚生年金保険番号 -->
@@ -573,7 +573,7 @@
             <tr>
               <td colspan="2">※主 任 技 術 者</td>
               <td width="10%%">
-                <%= document_subcon_info.lead_engineer_check_i18n %> <!-- 4-124 各下請会社の主任技術者の(専任or非専任)-->
+                <%= document_.lead_engineer_check_i18n %> <!-- 4-124 各下請会社の主任技術者の(専任or非専任)-->
               </td>
               <td width="25%">
                 <%= document_subcon_info.lead_engineer_name %> <!-- 4-125 各下請会社の主任技術者名 -->

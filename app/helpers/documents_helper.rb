@@ -1,18 +1,53 @@
 module DocumentsHelper
-  # 1次下請会社名の表示
-  def primary_subcon_name(document_info)
-    if document_info.instance_of?(Order)
-      nil
-    elsif document_info.ancestors.count > 1
-      RequestOrder.find(document_info.ancestor_ids[-2]).content['subcon_name']
-    elsif document_info.ancestors.count == 1
-      document_info.content.nil? ? nil : document_info.content['subcon_name']
-    end
-  end
-
   # 日付
   def document_date(column)
     l(column, format: :long) unless column.nil?
+  end
+
+  # document.contentの日付
+  def doc_content_date(date)
+    if action_name == 'edit'
+      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+    else
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
+    end
+  end
+
+  # (4)施工体制台帳
+
+  # 一次下請の情報
+  def subcon_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order if request_order.parent_id == 1
+  end
+
+  def subcons_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order.children if request_order.parent_id.nil?
+  end
+
+  def document_subcon_info
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+      subcon_info
+    else
+      @subcon
+    end
+  end
+
+  # 専任･非専任
+  FULL_TIME_CHECK = {
+    'full_time'     => '専任',
+    'non_dedicated' => '非専任'
+  }.freeze
+
+  def full_time_check(check)
+    status = FULL_TIME_CHECK[check]
+    status == '専任' ? tag.span(status, class: :circle) : '専任'
+  end
+
+  def non_dedicated_check(check)
+    status = FULL_TIME_CHECK[check]
+    status == '非専任' ? tag.span(status, class: :circle) : '非専任'
   end
 
   # 会社の保険加入状況
@@ -37,40 +72,7 @@ module DocumentsHelper
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
 
-  # 専任･非専任
-  FULL_TIME_CHECK = {
-    'full_time'     => '専任',
-    'non_dedicated' => '非専任'
-  }.freeze
-
-  def full_time_check(check)
-    status = FULL_TIME_CHECK[check]
-    status == '専任' ? tag.span(status, class: :circle) : '専任'
-  end
-
-  def non_dedicated_check(check)
-    status = FULL_TIME_CHECK[check]
-    status == '非専任' ? tag.span(status, class: :circle) : '非専任'
-  end
-
-  # 一次下請の情報
-  def subcon_info
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order if request_order.parent_id == 1
-  end
-
-  def subcons_info
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.children if request_order.parent_id.nil?
-  end
-
-  def document_subcon_info
-    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
-      subcon_info
-    else
-      @subcon
-    end
-  end
+  # (8)作業員名簿
 
   # 作業員名簿の見出し番号
   def worker_index(number, index)
@@ -219,6 +221,8 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
 
+  # (12)工事・通勤用車両届
+
   # 車両情報(工事･通勤)
   def car_usage_commute(usage)
     usage == '通勤用' ? tag.span('通勤', class: :circle) : '通勤'
@@ -228,37 +232,29 @@ module DocumentsHelper
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
   end
 
-  # 現場火気情報(使用目的)
-  def fire_use_target(name, num)
-    fires = document_info.field_fires
-    if fires.present?
-      fires.first.fire_use_targets.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
-    else
-      name
-    end
+  # (13)移動式クレーン/車両系建設機械等使用届
+
+  # 特殊車両情報(自社･リース)
+  def lease_type_own(type)
+    type == 'own' ? tag.span('自社', class: :circle) : '自社'
   end
 
-  # 現場火気情報(火気の種類)
-  def fire_type(name, num)
-    fires = document_info.field_fires
-    if fires.present?
-      fires.first.fire_types.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
-    else
-      name
-    end
+  def lease_type_lease(type)
+    type == 'lease' ? tag.span('リース', class: :circle) : 'リース'
   end
 
-  # 現場火気情報(火気の管理方法)
-  def fire_management(name, num)
-    fires = document_info.field_fires
-    if fires.present?
-      fires.first.fire_managements.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
-    else
-      name
-    end
+  # 特殊車両情報(区分)
+  def vehicle_type_crane(type)
+    type == 'crane' ? tag.span('移動式クレーン', class: :circle) : tag.span('移動式クレーン', class: :line_through)
   end
 
-  # 有機溶剤情報（使用期間）
+  def vehicle_type_construction(type)
+    type == 'construction' ? tag.span('車両系建設機械', class: :circle) : tag.span('車両系建設機械', class: :line_through)
+  end
+
+  # (15)有機溶剤・特定化学物質等持込使用届
+
+  # 有機溶剤情報(使用期間)
   # date は必ず jisx0301 で変換できる値
   def wareki(date)
     wareki, mon, day = date.jisx0301.split('.')
@@ -290,30 +286,81 @@ module DocumentsHelper
     sds == 'n' ? tag.span('無', class: :circle) : '無'
   end
 
-  # 特殊車両情報(自社･リース)
-  def lease_type_own(type)
-    type == 'own' ? tag.span('自社', class: :circle) : '自社'
-  end
+  # (16)火気使用届
 
-  def lease_type_lease(type)
-    type == 'lease' ? tag.span('リース', class: :circle) : 'リース'
-  end
-
-  # 特殊車両情報(区分)
-  def vehicle_type_crane(type)
-    type == 'crane' ? tag.span('移動式クレーン', class: :circle) : tag.span('移動式クレーン', class: :line_through)
-  end
-
-  def vehicle_type_construction(type)
-    type == 'construction' ? tag.span('車両系建設機械', class: :circle) : tag.span('車両系建設機械', class: :line_through)
-  end
-
-  # document.contentの日付データ表示
-  def doc_content_date(date)
-    if action_name == 'edit'
-      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+  # 現場火気情報(使用目的)
+  def fire_use_target(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_use_targets.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
     else
-      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
+      name
+    end
+  end
+
+  # 現場火気情報(火気の種類)
+  def fire_type(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_types.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
+  end
+
+  # 現場火気情報(火気の管理方法)
+  def fire_management(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_managements.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
+  end
+
+  # (17)下請負業者編成表
+
+  # 特定専門工事の有無(有･無)
+  def professional_construction_yes(type)
+    type == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def professional_construction_no(type)
+    type == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
+  # 二次下請会社情報
+  def secondary_subcon_info(document_info, child_id)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.child_ids[child_id].nil?
+      nil
+    else
+      RequestOrder.find(document_info.child_ids[child_id])
+    end
+  end
+
+  # 三次下請以下の会社情報
+  def hierarchy_subcon_info(document_info, hierarchy, child_id) # hierarchyは階層の深さを指定する
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.find_all_by_generation(hierarchy).nil?
+      nil
+    elsif document_info.find_all_by_generation(hierarchy).ids[child_id]
+      RequestOrder.find(document_info.find_all_by_generation(hierarchy).ids[child_id])
+    end
+  end
+
+  # (13)移動式クレーン/車両系建設機械等使用届,(16)火気使用届,(17)下請負業者編成表
+
+  # 一次下請会社名の情報
+  def primary_subcon_info(document_info)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.ancestors.count > 1
+      RequestOrder.find(document_info.ancestor_ids[-2])
+    elsif document_info.ancestors.count == 1
+      document_info.content.nil? ? nil : document_info
     end
   end
 end
