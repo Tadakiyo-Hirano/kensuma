@@ -52,37 +52,38 @@ module Users
     end
 
     def set_workers
-      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-      @workers = []
-      #元請が資料を確認、作成するとき
-      if request_order.parent_id.nil?
-        request_order.children.each do |first_request_order|
-          @second_workers = first_request_order.children.map{|second_request_order| Business.find_by(id:second_request_order.business_id).workers}.flatten!
-          @workers.push(@second_workers).flatten!
-          first_request_order.children.each do |second_request_order|
-            @third_workers = second_request_order.children.map{|third_request_order| Business.find_by(id:third_request_order.business_id).workers}.flatten!
-            @workers.push(@third_workers).flatten!
-            second_request_order.children.each do |third_request_order|
-              @forth_workers = third_request_order.children.map{|forth_request_order| Business.find_by(id:forth_request_order.business_id).workers}.flatten!
-              @workers.push(@forth_workers).flatten!
+      if current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid]).document_type == 'doc_19th'
+        request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+        @workers = []
+        #元請が資料を確認、作成するとき
+        if request_order.parent_id.nil?
+          request_order.children.each do |first_request_order|
+            @second_workers = first_request_order.children.map{|second_request_order| Business.find_by(id:second_request_order.business_id).workers}.flatten!
+            @workers.push(@second_workers).flatten!
+            first_request_order.children.each do |second_request_order|
+              @third_workers = second_request_order.children.map{|third_request_order| Business.find_by(id:third_request_order.business_id).workers}.flatten!
+              @workers.push(@third_workers).flatten!
+              second_request_order.children.each do |third_request_order|
+                @forth_workers = third_request_order.children.map{|forth_request_order| Business.find_by(id:forth_request_order.business_id).workers}.flatten!
+                @workers.push(@forth_workers).flatten!
+              end
             end
           end
-        end
-      #1次下請けが資料を確認、作成するとき
-      else
-        request_order.children.each do |second_request_order|
-          @second_workers = request_order.children.map{|second_request_order| Business.find_by(id:second_request_order.business_id).workers}.flatten!
-          @workers.push(@second_workers).flatten!
-          second_request_order.children.each do |third_request_order|
-            @third_workers = second_request_order.children.map{|third_request_order| Business.find_by(id:third_request_order.business_id).workers}.flatten!
-            @workers.push(@third_workers).flatten!
-            third_request_order.children.each do |forth_request_order|
-              @forth_workers = third_request_order.children.map{|forth_request_order| Business.find_by(id:forth_request_order.business_id).workers}.flatten!
+        #1次下請けが資料を確認、作成するとき
+        else
+          request_order.children.each do |second_request_order|
+            @second_workers = request_order.children.map{|second_request_order| Business.find_by(id:second_request_order.business_id).workers}.flatten!
+            @workers.push(@second_workers).flatten!
+            second_request_order.children.each do |third_request_order|
+              @third_workers = second_request_order.children.map{|third_request_order| Business.find_by(id:third_request_order.business_id).workers}.flatten!
+              @workers.push(@third_workers).flatten!
+              third_request_order.children.each do |forth_request_order|
+                @forth_workers = third_request_order.children.map{|forth_request_order| Business.find_by(id:forth_request_order.business_id).workers}.flatten!
+              end
             end
           end
         end
       end
-
     end
 
     def document_params(document)
