@@ -189,12 +189,59 @@ module DocumentsHelper
     end
   end
 
+  # 新規入場者調査票用（資格-特別教育-その他枠）
+  def worker_special_education_other(worker)
+    educations = worker&.content&.[]('worker_special_educations')
+
+    unless educations.nil?
+      educations = educations.map { |education| SpecialEducation.find(education['special_education_id']).name }
+      educations.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_education =
+        %w[酸素欠乏危険作業 車両系建設機械（基礎工事用） 基礎工事用建設機械 ローラー 車両系建設機械（コンクリート打設用）
+           小型車両系建設機械 不整地運搬車 高所作業車 ボーリングマシン フォークリフト ショベルローダー 巻上げ機
+           建設用リフト 玉掛け ゴンドラ アーク溶接 研削といし 電気取扱 足場の組立て ロープ高所作業 墜落制止用器具]
+      educations.delete_if do |e_work|
+        no_education.include?(e_work)
+      end
+    end
+
+    educations2 = educations
+    if educations2.present?
+      "■その他( #{educations2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
+    end
+  end
+
   # 作業員の技能講習情報
   def worker_skill_training(worker)
     trainings = worker&.content&.[]('worker_skill_trainings')
     unless trainings.nil?
       trainings = trainings.map { |training| SkillTraining.find(training['skill_training_id']).short_name }
       trainings.to_s.gsub(/,|"|\[|\]/) { '' }
+    end
+  end
+
+  # 新規入場者調査票用（資格-技能講習-作業主任者-その他枠）
+  def worker_skill_training_work_other(worker)
+    trainings = worker&.content&.[]('worker_skill_trainings')
+
+    unless trainings.nil?
+      trainings = trainings.map { |training| SkillTraining.find(training['skill_training_id']).short_name }
+      trainings.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_work =
+        %w[整地 基礎 解体 不整 高所 フォ ショ 小ク 床ク
+           ガス 玉掛 コ破 地山 石綿 有機 型枠 足場 ボ取 コ解 酸欠]
+      trainings.delete_if do |t_work|
+        no_work.include?(t_work)
+      end
+    end
+
+    trainings2 = trainings
+    if trainings2.present?
+      "■その他( #{trainings2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
     end
   end
 
