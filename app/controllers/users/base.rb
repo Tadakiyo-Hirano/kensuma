@@ -99,7 +99,12 @@ module Users
     def machine_info(machine)
       JSON.parse(
         machine.to_json(
-          except: %i[uuid created_at updated_at] # 機械情報
+          except: %i[uuid created_at updated_at], # 機械情報
+          include: {
+            machine_tags:          {
+              only: [:tag_id] # 中間テーブル(機械名マスタ)
+            }
+          }
         )
       )
     end

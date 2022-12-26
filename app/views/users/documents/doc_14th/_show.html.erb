@@ -143,7 +143,7 @@
               <td class="doc_14_s14" colspan="6" rowspan="3"></td>
               <td class="doc_14_s1" colspan="2" rowspan="3">点検</td>
               <td class="doc_14_s15" dir="ltr" colspan="11" rowspan="3">
-                <%= wareki(machine_date(m1, 'inspection_date')) %> <!-- 14-021 「点検年月日」 -->
+                <%= machine_date(m1, 'inspection_date') %> <!-- 14-021 「点検年月日」 -->
               </td>
               <td class="doc_14_s4"></td>
               <td class="doc_14_s6"></td>
@@ -352,16 +352,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">アース線</td>
-              <td class="doc_14_s23" dir="ltr" colspan="2" rowspan="3">14-028</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-052</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-076</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-100</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-124</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-148</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-172</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-196</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-220</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-244</td>
+              <td class="doc_14_s23_1" dir="ltr" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m1) %> <!-- 14-028 「アース線/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m2) %> <!-- 14-052 「アース線/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m3) %> <!-- 14-076 「アース線/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m4) %> <!-- 14-100 「アース線/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m5) %> <!-- 14-124 「アース線/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m6) %> <!-- 14-148 「アース線/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m7) %> <!-- 14-172 「アース線/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m8) %> <!-- 14-196 「アース線/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m9) %> <!-- 14-220 「アース線/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_1st(m10) %> <!-- 14-244 「アース線/10」 -->
+              </td>
               <td class="doc_14_s18" colspan="8" rowspan="2"> ５）アーク溶接機</td>
             </tr>
             <tr style="height: 12px">
@@ -399,16 +419,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s25" colspan="8" rowspan="3">接地クランプ</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-029</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-053</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-077</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-101</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-125</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-149</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-173</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-197</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-221</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-245</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m1) %> <!-- 14-029 「接地クランプ/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m2) %> <!-- 14-053 「接地クランプ/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m3) %> <!-- 14-077 「接地クランプ/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m4) %> <!-- 14-101 「接地クランプ/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m5) %> <!-- 14-125 「接地クランプ/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m6) %> <!-- 14-149 「接地クランプ/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m7) %> <!-- 14-173 「接地クランプ/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m8) %> <!-- 14-197 「接地クランプ/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m9) %> <!-- 14-221 「接地クランプ/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_2nd(m10) %> <!-- 14-245 「接地クランプ/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R22" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -446,16 +486,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">キャップタイヤ</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-030</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-054</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-078</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-102</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-126</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-150</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-174</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-198</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-222</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-246</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m1) %> <!-- 14-030 「キャップタイヤ/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m2) %> <!-- 14-054 「キャップタイヤ/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m3) %> <!-- 14-078 「キャップタイヤ/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m4) %> <!-- 14-102 「キャップタイヤ/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m5) %> <!-- 14-126 「キャップタイヤ/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m6) %> <!-- 14-150 「キャップタイヤ/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m7) %> <!-- 14-174 「キャップタイヤ/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m8) %> <!-- 14-198 「キャップタイヤ/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m9) %> <!-- 14-222 「キャップタイヤ/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_3rd(m10) %> <!-- 14-246 「キャップタイヤ10」 -->
+              </td>
               <td class="doc_14_s18" colspan="8" rowspan="2"> ８）トランス</td>
             </tr>
             <tr style="height: 12px">
@@ -496,16 +556,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">コネクタ</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-031</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-055</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-079</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-103</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-127</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-151</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-175</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-199</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-223</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-247</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m1) %> <!-- 14-031 「コネクタ/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m2) %> <!-- 14-055 「コネクタ/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m3) %> <!-- 14-079 「コネクタ/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m4) %> <!-- 14-103 「コネクタ/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m5) %> <!-- 14-127 「コネクタ/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m6) %> <!-- 14-151 「コネクタ/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m7) %> <!-- 14-175 「コネクタ/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m8) %> <!-- 14-199 「コネクタ/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m9) %> <!-- 14-223 「コネクタ/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_4th(m10) %> <!-- 14-247 「コネクタ/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R28" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -539,16 +619,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">接地端子の締結</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-032</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-056</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-080</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-104</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-128</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-152</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-176</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-200</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-224</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-248</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m1) %> <!-- 14-031 「接地端子の締結/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m2) %> <!-- 14-055 「接地端子の締結/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m3) %> <!-- 14-080 「接地端子の締結/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m4) %> <!-- 14-104 「接地端子の締結/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m5) %> <!-- 14-128 「接地端子の締結/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m6) %> <!-- 14-152 「接地端子の締結/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m7) %> <!-- 14-176 「接地端子の締結/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m8) %> <!-- 14-200 「接地端子の締結/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m9) %> <!-- 14-224 「接地端子の締結/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_5th(m10) %> <!-- 14-248 「接地端子の締結/10」 -->
+              </td>
               <td class="doc_14_s18" colspan="8" rowspan="2"> 11）ポンプ類</td>
             </tr>
             <tr style="height: 12px">
@@ -586,16 +686,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">充電部の絶縁</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-033</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-057</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-081</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-105</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-129</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-153</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-177</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-201</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-225</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-249</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m1) %> <!-- 14-033 「充電部の絶縁/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m2) %> <!-- 14-057 「充電部の絶縁/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m3) %> <!-- 14-081 「充電部の絶縁/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m4) %> <!-- 14-105 「充電部の絶縁/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m5) %> <!-- 14-129 「充電部の絶縁/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m6) %> <!-- 14-153 「充電部の絶縁/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m7) %> <!-- 14-177 「充電部の絶縁/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m8) %> <!-- 14-201 「充電部の絶縁/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m9) %> <!-- 14-225 「充電部の絶縁/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_6th(m10) %> <!-- 14-249 「充電部の絶縁/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R34" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -627,16 +747,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">自動電撃防止装置</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-034</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-058</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-082</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-106</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-130</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-154</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-178</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-202</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-226</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-250</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m1) %> <!-- 14-034 「自動電撃防止装置/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m2) %> <!-- 14-058 「自動電撃防止装置/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m3) %> <!-- 14-082 「自動電撃防止装置/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m4) %> <!-- 14-106 「自動電撃防止装置/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m5) %> <!-- 14-130 「自動電撃防止装置/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m6) %> <!-- 14-154 「自動電撃防止装置/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m7) %> <!-- 14-178 「自動電撃防止装置/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m8) %> <!-- 14-202 「自動電撃防止装置/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m9) %> <!-- 14-224 「自動電撃防止装置/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_7th(m10) %> <!-- 14-250 「自動電撃防止装置/10」 -->
+              </td>
               <td class="doc_14_s18" colspan="8" rowspan="2"> 14）吹付機</td>
             </tr>
             <tr style="height: 12px">
@@ -665,16 +805,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">絶縁ホルダー</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-035</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-059</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-083</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-107</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-131</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-155</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-179</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-203</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-227</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-251</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m1) %> <!-- 14-035 「絶縁ホルダー/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m2) %> <!-- 14-059 「絶縁ホルダー/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m3) %> <!-- 14-083 「絶縁ホルダー/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m4) %> <!-- 14-107 「絶縁ホルダー/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m5) %> <!-- 14-131 「絶縁ホルダー/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m6) %> <!-- 14-155 「絶縁ホルダー/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m7) %> <!-- 14-179 「絶縁ホルダー/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m8) %> <!-- 14-203 「絶縁ホルダー/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m9) %> <!-- 14-225 「絶縁ホルダー/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_8th(m10) %> <!-- 14-251 「絶縁ホルダー/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R40" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -703,16 +863,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">溶接保護面</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-036</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-060</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-084</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-108</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-132</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-156</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-180</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-204</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-228</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-252</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m1) %> <!-- 14-036 「溶接保護面/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m2) %> <!-- 14-060 「溶接保護面/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m3) %> <!-- 14-084 「溶接保護面/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m4) %> <!-- 14-108 「溶接保護面/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m5) %> <!-- 14-132 「溶接保護面/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m6) %> <!-- 14-156 「溶接保護面/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m7) %> <!-- 14-180 「溶接保護面/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m8) %> <!-- 14-204 「溶接保護面/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m9) %> <!-- 14-226 「溶接保護面/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_9th(m10) %> <!-- 14-252 「溶接保護面/10」 -->
+              </td>
               <td class="doc_14_s18" colspan="8" rowspan="2"> 17）バイブレーター</td>
             </tr>
             <tr style="height: 12px">
@@ -749,16 +929,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">操作スイッチ</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-037</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-061</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-085</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-109</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-133</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-157</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-181</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-205</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-229</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-253</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m1) %> <!-- 14-037 「操作スイッチ/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m2) %> <!-- 14-061 「操作スイッチ/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m3) %> <!-- 14-085 「操作スイッチ/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m4) %> <!-- 14-109 「操作スイッチ/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m5) %> <!-- 14-133 「操作スイッチ/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m6) %> <!-- 14-157 「操作スイッチ/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m7) %> <!-- 14-181 「操作スイッチ/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m8) %> <!-- 14-205 「操作スイッチ/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m9) %> <!-- 14-227 「操作スイッチ/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_10th(m10) %> <!-- 14-253 「操作スイッチ/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R46" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -788,7 +988,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">1</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m1, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -798,28 +998,48 @@
                 <%= machine_str(m1, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m1)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m1) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m1, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m1, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">絶縁抵抗測定値</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-038</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-062</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-086</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-110</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-134</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-158</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-182</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-206</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-230</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-254</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m1) %> <!-- 14-038 「絶縁抵抗測定値/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m2) %> <!-- 14-062 「絶縁抵抗測定値/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m3) %> <!-- 14-086 「絶縁抵抗測定値/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m4) %> <!-- 14-110 「絶縁抵抗測定値/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m5) %> <!-- 14-134 「絶縁抵抗測定値/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m6) %> <!-- 14-158 「絶縁抵抗測定値/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m7) %> <!-- 14-182 「絶縁抵抗測定値/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m8) %> <!-- 14-206 「絶縁抵抗測定値/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m9) %> <!-- 14-228 「絶縁抵抗測定値/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_11th(m10) %> <!-- 14-254 「絶縁抵抗測定値/10」 -->
+              </td>
               <td class="doc_14_s18" dir="ltr" colspan="8" rowspan="2"> 20）その他</td>
             </tr>
             <tr style="height: 12px">
@@ -836,12 +1056,12 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m1)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m1) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -856,16 +1076,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">各種ブレーキの作動</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-039</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-063</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-087</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-111</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-135</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-159</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-183</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-207</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-231</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-255</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m1) %> <!-- 14-039 「各種ブレーキの作動/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m2) %> <!-- 14-063 「各種ブレーキの作動/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m3) %> <!-- 14-087 「各種ブレーキの作動/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m4) %> <!-- 14-111 「各種ブレーキの作動/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m5) %> <!-- 14-135 「各種ブレーキの作動/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m6) %> <!-- 14-159 「各種ブレーキの作動/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m7) %> <!-- 14-183 「各種ブレーキの作動/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m8) %> <!-- 14-207 「各種ブレーキの作動/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m9) %> <!-- 14-229 「各種ブレーキの作動/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_12th(m10) %> <!-- 14-255 「各種ブレーキの作動/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R52" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -873,7 +1113,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">2</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m2, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -883,14 +1123,14 @@
                 <%= machine_str(m2, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m2)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m2) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m2, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m2, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -910,26 +1150,46 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m2)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m2) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">手すり・囲い</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-040</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-064</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-088</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-112</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-136</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-160</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-184</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-208</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-232</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-256</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m1) %> <!-- 14-040 「手すり・囲い/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m2) %> <!-- 14-064 「手すり・囲い/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m3) %> <!-- 14-088 「手すり・囲い/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m4) %> <!-- 14-112 「手すり・囲い/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m5) %> <!-- 14-136 「手すり・囲い/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m6) %> <!-- 14-160 「手すり・囲い/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m7) %> <!-- 14-184 「手すり・囲い/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m8) %> <!-- 14-208 「手すり・囲い/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m9) %> <!-- 14-230 「手すり・囲い/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_13th(m10) %> <!-- 14-256 「手すり・囲い/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R55" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -946,7 +1206,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">3</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m3, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -956,14 +1216,14 @@
                 <%= machine_str(m3, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m3)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m3) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m3, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m3, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -977,28 +1237,48 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">フックのはずれ止め</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-041</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-065</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-089</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-113</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-137</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-161</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-185</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-209</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-233</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-257</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m1) %> <!-- 14-041 「フックのはずれ止め/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m2) %> <!-- 14-065 「フックのはずれ止め/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m3) %> <!-- 14-089 「フックのはずれ止め/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m4) %> <!-- 14-113 「フックのはずれ止め/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m5) %> <!-- 14-137 「フックのはずれ止め/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m6) %> <!-- 14-161 「フックのはずれ止め/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m7) %> <!-- 14-185 「フックのはずれ止め/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m8) %> <!-- 14-209 「フックのはずれ止め/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m9) %> <!-- 14-231 「フックのはずれ止め/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_14th(m10) %> <!-- 14-257 「手フックのはずれ止め/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R58" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m3)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m3) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1018,7 +1298,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">4</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m4, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -1028,28 +1308,48 @@
                 <%= machine_str(m4, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m4)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m4) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m4, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m4, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">ワイヤロープ･チェーン</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-042</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-066</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-090</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-114</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-138</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-162</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-186</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-210</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-234</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-258</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m1) %> <!-- 14-042 「ワイヤロープ･チェーン/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m2) %> <!-- 14-066 「ワイヤロープ･チェーン/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m3) %> <!-- 14-090 「ワイヤロープ･チェーン/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m4) %> <!-- 14-114 「ワイヤロープ･チェーン/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m5) %> <!-- 14-138 「ワイヤロープ･チェーン/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m6) %> <!-- 14-162 「ワイヤロープ･チェーン/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m7) %> <!-- 14-186 「ワイヤロープ･チェーン/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m8) %> <!-- 14-210 「ワイヤロープ･チェーン/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m9) %> <!-- 14-232 「ワイヤロープ･チェーン/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_15th(m10) %> <!-- 14-258 「ワイヤロープ･チェーン/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R61" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1065,12 +1365,12 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m4)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m4) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1084,16 +1384,36 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">滑車</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-043</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-067</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-091</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-115</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-139</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-163</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-187</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-211</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-235</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-259</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m1) %> <!-- 14-043 「滑車/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m2) %> <!-- 14-067 「滑車/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m3) %> <!-- 14-091 「滑車/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m4) %> <!-- 14-115 「滑車/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m5) %> <!-- 14-139 「滑車/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m6) %> <!-- 14-163 「滑車/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m7) %> <!-- 14-187 「滑車/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m8) %> <!-- 14-211 「滑車/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m9) %> <!-- 14-233 「滑車/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_16th(m10) %> <!-- 14-259 「滑車/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R64" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1101,7 +1421,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">5</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m5, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -1111,14 +1431,14 @@
                 <%= machine_str(m5, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m5)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m5) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m5, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m5, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1137,26 +1457,46 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m5)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m5) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">回転部の囲い等</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-044</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-068</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-092</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-116</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-140</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-164</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-188</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-212</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-236</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-260</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m1) %> <!-- 14-044 「回転部の囲い等/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m2) %> <!-- 14-068 「回転部の囲い等/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m3) %> <!-- 14-092 「回転部の囲い等/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m4) %> <!-- 14-116 「回転部の囲い等/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m5) %> <!-- 14-140 「回転部の囲い等/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m6) %> <!-- 14-164 「回転部の囲い等/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m7) %> <!-- 14-188 「回転部の囲い等/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m8) %> <!-- 14-212 「回転部の囲い等/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m9) %> <!-- 14-234 「回転部の囲い等/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_17th(m10) %> <!-- 14-260 「回転部の囲い等/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R67" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1173,7 +1513,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">6</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m6, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -1183,14 +1523,14 @@
                 <%= machine_str(m6, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m6)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m6) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m6, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m6, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1204,28 +1544,48 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">危険表示</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-045</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-069</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-093</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-117</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-141</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-165</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-189</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-213</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-237</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-261</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m1) %> <!-- 14-045 「危険表示/1」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m2) %> <!-- 14-069 「危険表示/2」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m3) %> <!-- 14-093 「危険表示/3」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m4) %> <!-- 14-117 「危険表示/4」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m5) %> <!-- 14-141 「危険表示/5」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m6) %> <!-- 14-165 「危険表示/6」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m7) %> <!-- 14-189 「危険表示/7」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m8) %> <!-- 14-213 「危険表示/8」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m9) %> <!-- 14-235 「危険表示/9」 -->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_tag_18th(m10) %> <!-- 14-261 「危険表示/10」 -->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R70" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m6)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m6) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1245,7 +1605,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">7</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m7, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -1255,14 +1615,14 @@
                 <%= machine_str(m7, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m7)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m7) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m7, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m7, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1282,12 +1642,12 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m7)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m7) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1300,17 +1660,17 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目）」14-022</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-046</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-070</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-094</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-118</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-142</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-166</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-190</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-214</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-238</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-262</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目①）」14-022</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-046</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-070</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-094</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-118</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-142</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-166</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-190</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-214</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-238</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-262</td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R76" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1318,7 +1678,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">8</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m8, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -1328,14 +1688,14 @@
                 <%= machine_str(m8, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m8)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m8) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m8, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m8, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1354,26 +1714,26 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m8)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m8) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目）」14-023</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-047</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-071</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-095</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-119</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-143</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-167</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-191</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-215</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-239</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-263</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目②）」14-023</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-047</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-071</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-095</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-119</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-143</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-167</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-191</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-215</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-239</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-263</td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R79" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1390,7 +1750,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">9</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m9, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -1400,14 +1760,14 @@
                 <%= machine_str(m9, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m9)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m9) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m9, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m9, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1420,29 +1780,29 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目）」14-024</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-048</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-072</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-096</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-120</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-144</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-168</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-192</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-216</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-240</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-264</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目③）」14-024</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-048</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-072</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-096</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-120</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-144</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-168</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-192</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-216</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-240</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-264</td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R82" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m9)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m9) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1462,7 +1822,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">10</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4"> <!--each_slice start_1 -->
+              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m10, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
@@ -1472,28 +1832,28 @@
                 <%= machine_str(m10, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_on_date(m10)) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= field_machine_carry_on_date(m10) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m10, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m10, "handler") %> <!-- 14-016 「取扱者」 -->
-              </td> <!--each_slice end_1 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目）」14-025</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-049</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-073</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-097</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-121</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-145</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-169</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-193</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-217</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-241</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-265</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目④）」14-025</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-049</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-073</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-097</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-121</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-145</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-169</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-193</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-217</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-241</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-265</td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R85" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1509,12 +1869,12 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2"> <!--each_slice start_2 -->
+              <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= wareki(field_machine_carry_out_date(m10)) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
-              </td> <!--each_slice end_2 -->
+                <%= field_machine_carry_out_date(m10) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
@@ -1527,17 +1887,17 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目）」14-026</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-050</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-074</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-098</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-122</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-146</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-170</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-194</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-218</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-242</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-266</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目⑤）」14-026</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-050</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-074</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-098</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-122</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-146</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-170</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-194</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-218</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-242</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-266</td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R88" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1569,17 +1929,17 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目）」14-027</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-051</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-075</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-099</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-123</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-147</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-171</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-195</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-219</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-243</td>
-              <td class="doc_14_s23" colspan="2" rowspan="3">14-267</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目⑥）」14-027</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-051</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-075</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-099</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-123</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-147</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-171</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-195</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-219</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-243</td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-267</td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R91" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
