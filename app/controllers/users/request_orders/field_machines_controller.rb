@@ -59,7 +59,7 @@ module Users::RequestOrders
     def field_machines_params
       params.require(:request_order).permit(
         field_machines: %i[
-          machine_name carry_on_date carry_out_date precautions
+          machine_name carry_on_date carry_out_date
         ]
       )[:field_machines]
     end

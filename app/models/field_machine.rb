@@ -5,7 +5,6 @@ class FieldMachine < ApplicationRecord
 
   validates :machine_name, presence: true
   validates :content, presence: true
-  validates :precautions, length: { maximum: 300 }
 
   def to_param
     uuid

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_20_055915) do
+ActiveRecord::Schema.define(version: 2022_12_26_114222) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -246,7 +246,6 @@ ActiveRecord::Schema.define(version: 2022_12_20_055915) do
     t.json "content", null: false
     t.date "carry_on_date"
     t.date "carry_out_date"
-    t.text "precautions"
     t.string "field_machineable_type"
     t.bigint "field_machineable_id"
     t.datetime "created_at", precision: 6, null: false
