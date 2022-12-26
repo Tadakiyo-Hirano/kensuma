@@ -113,8 +113,8 @@ ja:
         female: 女性
         other: その他
       role:
-        admin: 元請ユーザー
-        general: 下請ユーザー
+        admin: 管理
+        general: 一般ユーザー
     business:
       business_type:
         corporation: 法人

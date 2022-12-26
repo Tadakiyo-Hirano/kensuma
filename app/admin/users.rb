@@ -16,6 +16,7 @@ ActiveAdmin.register User do
   index do
     column :name
     column :email
+    column :is_prime_contractor
     column :role, &:role_i18n
 
     # 閲覧編集削除などのリンク表示

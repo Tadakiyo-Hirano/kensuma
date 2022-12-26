@@ -42,6 +42,7 @@ ja:
       #   name: 会社名
       #   email: 会社メール
         role: 権限
+        is_prime_contractor: 請負
       business:
         uuid: 事業所ID
         name: 事業所名
