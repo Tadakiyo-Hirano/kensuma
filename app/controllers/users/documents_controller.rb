@@ -51,7 +51,7 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd'
+      when 'doc_3rd', 'doc_17th'
         params.require(:document).permit.merge(
           content: {
             date_submitted: params.dig(:document, :content, :date_submitted)
