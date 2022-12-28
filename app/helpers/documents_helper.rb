@@ -244,6 +244,16 @@ module DocumentsHelper
       '▢その他（　　　　　　　　　　）'
     end
   end
+  
+  def questionnaire_business_type_yes(business_type)
+    status = Business.find(document_info.business_id).business_type_i18n
+    status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
+  end
+
+  def questionnaire_business_type_no(business_type)
+    status = Business.find(document_info.business_id).business_type_i18n
+    status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+  end
 
   # 作業員の免許情報
   def worker_license(worker)
