@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_05_031631) do
+ActiveRecord::Schema.define(version: 2022_12_20_055915) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -256,9 +256,8 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
 
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
-    t.string "solvent_name", null: false
-    t.json "content", null: false
-    t.string "carried_quantity"
+    t.string "solvent_name_one", null: false
+    t.string "carried_quantity_one", null: false
     t.string "using_location"
     t.string "storing_place"
     t.string "using_tool"
@@ -271,6 +270,25 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "solvent_classification_one", null: false
+    t.string "solvent_ingredients_one", null: false
+    t.string "solvent_name_two"
+    t.string "solvent_name_three"
+    t.string "solvent_name_four"
+    t.string "solvent_name_five"
+    t.string "solvent_classification_two"
+    t.string "solvent_classification_three"
+    t.string "solvent_classification_four"
+    t.string "solvent_classification_five"
+    t.string "solvent_ingredients_two"
+    t.string "solvent_ingredients_three"
+    t.string "solvent_ingredients_four"
+    t.string "solvent_ingredients_five"
+    t.string "carried_quantity_two"
+    t.string "carried_quantity_three"
+    t.string "carried_quantity_four"
+    t.string "carried_quantity_five"
+    t.date "date_submitted", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
@@ -295,6 +313,9 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.bigint "field_special_vehicleable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "sub_driver_worker_id"
+    t.string "sub_driver_name"
+    t.string "sub_driver_license"
     t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
   end
 
@@ -365,6 +386,12 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "extra_inspection_item1"
+    t.string "extra_inspection_item2"
+    t.string "extra_inspection_item3"
+    t.string "extra_inspection_item4"
+    t.string "extra_inspection_item5"
+    t.string "extra_inspection_item6"
     t.index ["business_id"], name: "index_machines_on_business_id"
   end
 
@@ -528,7 +555,6 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
   create_table "solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "name", null: false
-    t.string "maker", null: false
     t.string "classification", null: false
     t.string "ingredients", null: false
     t.bigint "business_id", null: false
@@ -604,9 +630,20 @@ ActiveRecord::Schema.define(version: 2022_11_05_031631) do
     t.integer "gender"
     t.integer "role", default: 1
     t.bigint "admin_user_id"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
     t.index ["admin_user_id"], name: "index_users_on_admin_user_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
