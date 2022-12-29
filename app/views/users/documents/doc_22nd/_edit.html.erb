@@ -1,18 +1,24 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 <!-- (22)参考様式第5号(作業間連絡調整書) -->
 <div id="doc_22_sheet">
   <div class="ritz grid-container" dir="ltr">
+    <%= form_with(model: @document, url: users_request_order_document_path, local: true, method: :patch) do |f| %>
     <table class="waffle" cellspacing="0" cellpadding="0">
       <tbody>
         <tr style="height: 24px">
           <td class="doc_22_s1"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
+          <td class="doc_22_s2"></td>
+          <td class="doc_22_s2"></td>
+          <td class="doc_22_s2"></td>
+          <td class="doc_22_s2"></td>
+          <td class="doc_22_s2"></td>
+          <td class="doc_22_s2"></td>
+          <td class="doc_22_s2"></td>
+          <td class="doc_22_s2"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -164,75 +170,39 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s1"></td>
-          <td class="doc_22_s2" colspan="79" rowspan="2">作 業 間 連 絡 調 整 書</td>
+          <td class="doc_22_s44" colspan="79" rowspan="2">作 業 間 連 絡 調 整 書</td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s1"></td>
-          <td class="doc_22_s1"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_22_s1"></td>
-          <td class="doc_22_s45" dir="ltr" colspan="40">※ 緑枠は入力項目です。必要あれば入力してください。</td>
-          <td class="doc_22_s44" dir="ltr"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
-          <td class="doc_22_s44"></td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s12" colspan="22" rowspan="2">作業打ち合せ・安全衛生指示書《作業間連絡調整》</td>
-          <td class="doc_22_s12" colspan="6" rowspan="2">統括安責者<br> （作業所長）</td>
+          <td class="doc_22_s0" colspan="22" rowspan="2">作業打ち合せ・安全衛生指示書《作業間連絡調整》</td>
+          <td class="doc_22_s0" colspan="6" rowspan="2">統括安責者<br> （作業所長）</td>
           <td class="doc_22_s3" colspan="6" rowspan="2">
             <%= document_site_info.general_safety_responsible_person_name %>
-          </td>
-          <!--「統括安全衛生責任者名」22-001-->
+          </td><!--「統括安全衛生責任者名」22-001-->
           <td class="doc_22_s0" colspan="4" rowspan="2">元方<br> 安全</td>
           <td class="doc_22_s3" colspan="5" rowspan="2">
             <%= document_site_info.health_and_safety_manager_name %>
-          </td>
-          <!--「元方安全衛生管理者名」22-002-->
-          <td class="doc_22_s12" colspan="4" rowspan="2">記録者</td>
-          <td class="doc_22_s46" colspan="5" rowspan="2"></td>
+          </td><!--「元方安全衛生管理者名」22-002-->
+          <td class="doc_22_s0" colspan="4" rowspan="2">記録者</td>
+          <td class="doc_22_s3" colspan="5" rowspan="2">
+            <%= f.collection_select(name = "document[content][recorder][]",
+                                    @workers, :uuid, :admission_worker_name,{ include_blank: "選択して下さい"},
+                                    { class: "form-control", style: "width: 100%; font-size: 10pt" })
+            %>
+          </td><!--「記録者名」22-003-->
           <td class="doc_22_s5" colspan="19" rowspan="2"></td>
-          <td class="doc_22_s12" colspan="4" rowspan="2">安全当番</td>
-          <td class="doc_22_s46" colspan="4" rowspan="2"></td>
+          <td class="doc_22_s0" colspan="4" rowspan="2">安全当番</td>
+          <td class="doc_22_s3" colspan="4" rowspan="2">
+            <%= f.collection_select(name = "document[content][safety_duty][]",
+                                    @workers, :uuid, :admission_worker_name,{ include_blank: "選択して下さい"},
+                                    { class: "form-control", style: "width: 100%; font-size: 10pt" })
+            %>
+          </td><!--「安全当番者名」22-004-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
@@ -242,19 +212,29 @@
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s11" colspan="5">打 合 日：</td>
-          <td class="doc_22_s4" colspan="8"></td>
+          <td class="doc_22_s7" colspan="8">
+            <%= f.date_field :content, name: "document[content][meeting_date][]",
+                             value: doc_content_date(@document.content&.[]("meeting_date")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「打合日（年月日）」22-005-->
           <td class="doc_22_s8">（</td>
           <td class="doc_22_s9"></td>
-          <td class="doc_22_s12" colspan="2">曜日）</td>
-          <td class="doc_22_s12" colspan="17">月間重点安全衛生実施事項</td>
-          <td class="doc_22_s12" colspan="18">週間重点安全衛生実施事項</td>
-          <td class="doc_22_s12" colspan="27" rowspan="2">確 認 点 検 欄</td>
+          <td class="doc_22_s0" colspan="2">曜日）</td>
+          <td class="doc_22_s0" colspan="17">月間重点安全衛生実施事項</td>
+          <td class="doc_22_s0" colspan="18">週間重点安全衛生実施事項</td>
+          <td class="doc_22_s0" colspan="27" rowspan="2">確 認 点 検 欄</td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s11" colspan="5">実作業日：</td>
-          <td class="doc_22_s4" colspan="8"></td>
+          <td class="doc_22_s10" colspan="8">
+            <%= f.date_field :content, name: "document[content][actual_work_day][]",
+                             value: doc_content_date(@document.content&.[]("actual_work_day")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--	「実作業日（年月日）」22-007-->
           <td class="doc_22_s8">（</td>
           <td class="doc_22_s9"></td>
           <td class="doc_22_s0" colspan="2">曜日）</td>
@@ -265,16 +245,16 @@
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s12" colspan="5" rowspan="2">協力業者<br>会社名</td>
-          <td class="doc_22_s12" colspan="2" rowspan="2">職種</td>
-          <td class="doc_22_s12" colspan="3" rowspan="2">作業員<br> 人 数</td>
+          <td class="doc_22_s0" colspan="2" rowspan="2">職種</td>
+          <td class="doc_22_s0" colspan="3" rowspan="2">作業員<br> 人 数</td>
           <td class="doc_22_s12" colspan="7" rowspan="2">危険作業の名称、及び各種免許・資格の名称（下記、資格番号でも可）</td>
-          <td class="doc_22_s12" colspan="17" rowspan="2">作 業 内 容</td>
-          <td class="doc_22_s12" colspan="15" rowspan="2">＜危険予測＞<br> 安全衛生・品質・環境指示事項</td>
-          <td class="doc_22_s12" colspan="3" rowspan="2">職長<br> 確認</td>
-          <td class="doc_22_s12" colspan="6">実施の確認</td>
-          <td class="doc_22_s12" colspan="15" rowspan="2">（計画と実施、施設・行動等に対する）<br> 是正指示・指導・処置</td>
-          <td class="doc_22_s12" colspan="3" rowspan="2">是 正<br> 確認日</td>
-          <td class="doc_22_s12" colspan="3" rowspan="2">確認者</td>
+          <td class="doc_22_s0" colspan="17" rowspan="2">作 業 内 容</td>
+          <td class="doc_22_s0" colspan="15" rowspan="2">＜危険予測＞<br> 安全衛生・品質・環境指示事項</td>
+          <td class="doc_22_s0" colspan="3" rowspan="2">職長<br> 確認</td>
+          <td class="doc_22_s0" colspan="6">実施の確認</td>
+          <td class="doc_22_s0" colspan="15" rowspan="2">（計画と実施、施設・行動等に対する）<br> 是正指示・指導・処置</td>
+          <td class="doc_22_s0" colspan="3" rowspan="2">是 正<br> 確認日</td>
+          <td class="doc_22_s0" colspan="3" rowspan="2">確認者</td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
@@ -286,17 +266,62 @@
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s13" colspan="5"></td>
-          <td class="doc_22_s14" colspan="2" style="color: #808080; text-decoration: none">例）主任</td>
+          <td class="doc_22_s14" colspan="2">
+            <%= f.text_field :content, name: "document[content][occupation_1st][]", placeholder: "例）型枠",
+                             value: @document.content&.[]("occupation_1st"),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「職種」22-010-->
           <td class="doc_22_s13" colspan="3"></td>
-          <td class="doc_22_s16" colspan="7" style="color: #808080; text-decoration: none">入力してください</td>
-          <td class="doc_22_s17" colspan="17" style="color: #808080; text-decoration: none">作業内容を入力してください</td>
-          <td class="doc_22_s17" colspan="15" style="color: #808080; text-decoration: none">危険予測を入力してください</td>
-          <td class="doc_22_s17" colspan="3" style="color: #808080; text-decoration: none">確認された職長名を選択してください</td>
-          <td class="doc_22_s15" colspan="3"><a target="_blank" href="#rangeid=1919843171">「良 否」22-016</a></td>
-          <td class="doc_22_s15" colspan="3"><a target="_blank" href="#rangeid=2029361022">「確認者名」22-017</a></td>
-          <td class="doc_22_s18" colspan="15"><a target="_blank" href="#rangeid=1061730411">「是正指示・指導・処置」22-018</a></td>
-          <td class="doc_22_s19" colspan="3"><a target="_blank" href="#rangeid=194178614">「是正確認日」22-019</a></td>
-          <td class="doc_22_s15" colspan="3"><a target="_blank" href="#rangeid=1037939057">「確認者名」22-020</a></td>
+          <td class="doc_22_s16" colspan="7">
+            <%= f.text_field :content, name: "document[content][required_qualification_1st][]", placeholder: "例）第一種資格",
+                             value: doc_content_date(@document.content&.[]("required_qualification_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「必要資格1」22-012-->
+          <td class="doc_22_s17" colspan="17">
+            <%= f.text_field :content, name: "document[content][work_content_1st][]", placeholder: "例）配管のメンテナンスをします",
+                             value: @document.content&.[]("work_content_1st"),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「作業内容1」22-013-->
+          <td class="doc_22_s17" colspan="15">
+            <%= f.text_field :content, name: "document[content][risk_prediction_1st][]", placeholder: "例）落下物注意",
+                             value: @document.content&.[]("risk_prediction_1st"),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「危険予測1」22-014-->
+          <td class="doc_22_s13" colspan="3">
+            <%= f.collection_select(name = "document[content][foreman confirmation_1st][]",
+                                    @workers, :uuid, :admission_worker_name,{ include_blank: "選択して下さい"},
+                                    { class: "form-control", style: "width: 100%; font-size: 10pt" })
+            %>
+          </td><!--「職長確認1」22-015-->
+          <td class="doc_22_s15" colspan="3"></td><!--「実施確認良否」22-016 ※うまく実装できなかったため未実装-->
+          <td class="doc_22_s15" colspan="3">
+            <%= f.collection_select(name = "document[content][correction_confirmation_person_1st][]",
+                                    @workers, :uuid, :admission_worker_name,{ include_blank: "選択して下さい"},
+                                    { class: "form-control", style: "width: 100%; font-size: 10pt" })
+            %>
+          </td><!--「是正確認者名1」22-017-->
+          <td class="doc_22_s18" colspan="15">
+            <%= f.text_field :content, name: "document[content][corrective_action_1st][]", placeholder: "例）〜書類の修正",
+                             value: doc_content_date(@document.content&.[]("corrective_action_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「是正指示・指導・処置」22-018-->
+          <td class="doc_22_s19" colspan="3">
+            <%= f.date_field :content, name: "document[content][corrective_action_confirmation_date_1st][]",
+                             value: doc_content_date(@document.content&.[]("corrective_action_confirmation_date_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「是正確認日1」22-019-->
+          <td class="doc_22_s15" colspan="3">
+            <%= f.collection_select(name = "document[content][corrective_action_reviewer_1st][]",
+                                    @workers, :uuid, :admission_worker_name,{ include_blank: "選択して下さい"},
+                                    { class: "form-control", style: "width: 100%; font-size: 10pt" })
+            %>
+          </td><!--「確認者名」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
@@ -304,9 +329,19 @@
           <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s21" colspan="2"></td>
           <td class="doc_22_s20" colspan="3"></td>
-          <td class="doc_22_s22" colspan="7"></td>
-          <td class="doc_22_s22" colspan="17"></td>
-          <td class="doc_22_s22" colspan="15"></td>
+          <td class="doc_22_s21" colspan="7">
+             <%= f.text_field :content, name: "document[content][required_qualification_2nd][]",
+                             value: doc_content_date(@document.content&.[]("required_qualification_2nd")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「必要資格2」22-012-->
+          <td class="doc_22_s21" colspan="17">
+            <%= f.text_field :content, name: "document[content][work_content_2nd][]",
+                             value: doc_content_date(@document.content&.[]("work_content_2nd")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「作業内容2」22-013-->
+          <td class="doc_22_s21" colspan="15"></td>
           <td class="doc_22_s21" colspan="3"></td>
           <td class="doc_22_s21" colspan="3"></td>
           <td class="doc_22_s21" colspan="3"></td>
@@ -320,9 +355,9 @@
           <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s21" colspan="2"></td>
           <td class="doc_22_s20" colspan="3"></td>
-          <td class="doc_22_s22" colspan="7"></td>
-          <td class="doc_22_s22" colspan="17"></td>
-          <td class="doc_22_s22" colspan="15"></td>
+          <td class="doc_22_s21" colspan="7"></td>
+          <td class="doc_22_s21" colspan="17"></td>
+          <td class="doc_22_s21" colspan="15"></td>
           <td class="doc_22_s21" colspan="3"></td>
           <td class="doc_22_s21" colspan="3"></td>
           <td class="doc_22_s21" colspan="3"></td>
@@ -334,14 +369,30 @@
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td>
-          <td class="doc_22_s23" colspan="2"></td>
+          <td class="doc_22_s21" colspan="2"></td>
+          <td class="doc_22_s20" colspan="3"></td>
+          <td class="doc_22_s21" colspan="7"></td>
+          <td class="doc_22_s21" colspan="17"></td>
+          <td class="doc_22_s21" colspan="15"></td>
+          <td class="doc_22_s21" colspan="3"></td>
+          <td class="doc_22_s21" colspan="3"></td>
+          <td class="doc_22_s21" colspan="3"></td>
+          <td class="doc_22_s22" colspan="15"></td>
+          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s1"></td>
+        </tr>
+        <tr style="height: 24px">
+          <td class="doc_22_s30"></td>
+          <td class="doc_22_s20" colspan="5"></td>
+          <td class="doc_22_s22" colspan="2"></td>
           <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
-          <td class="doc_22_s21" colspan="3"></td>
-          <td class="doc_22_s21" colspan="3"></td>
-          <td class="doc_22_s21" colspan="3"></td>
+          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s22" colspan="3"></td>
           <td class="doc_22_s22" colspan="15"></td>
           <td class="doc_22_s22" colspan="3"></td>
           <td class="doc_22_s22" colspan="3"></td>
@@ -349,9 +400,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -365,9 +416,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -381,9 +432,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -397,9 +448,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -413,9 +464,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -429,9 +480,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -445,9 +496,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -461,9 +512,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -477,9 +528,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -493,9 +544,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -509,25 +560,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
+          <td class="doc_22_s20" colspan="5"></td>
           <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
-          <td class="doc_22_s22" colspan="7"></td>
-          <td class="doc_22_s22" colspan="17"></td>
-          <td class="doc_22_s22" colspan="15"></td>
-          <td class="doc_22_s22" colspan="3"></td>
-          <td class="doc_22_s22" colspan="3"></td>
-          <td class="doc_22_s22" colspan="3"></td>
-          <td class="doc_22_s22" colspan="15"></td>
-          <td class="doc_22_s22" colspan="3"></td>
-          <td class="doc_22_s22" colspan="3"></td>
-          <td class="doc_22_s1"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_22_s30"></td>
-          <td class="doc_22_s22" colspan="5"></td>
-          <td class="doc_22_s22" colspan="2"></td>
-          <td class="doc_22_s22" colspan="3"></td>
+          <td class="doc_22_s20" colspan="3"></td>
           <td class="doc_22_s22" colspan="7"></td>
           <td class="doc_22_s22" colspan="17"></td>
           <td class="doc_22_s22" colspan="15"></td>
@@ -566,14 +601,44 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s25" colspan="20"></td>
-          <td class="doc_22_s18" colspan="17"></td>
+          <td class="doc_22_s25" colspan="20">
+            <%= f.text_field :content, name: "document[content][notifications_and_instructions_1st][]", placeholder: "例）危険予測はしっかりやりましょう",
+                             value: doc_content_date(@document.content&.[]("notifications_and_instructions_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「朝礼時、周知・指示事項及び混在作業・調整事項」22-021-->
+          <td class="doc_22_s18" colspan="17">
+            <%= f.text_field :content, name: "document[content][events_and_patrols_1st][]", placeholder: "例）12時パトロール実施",
+                             value: doc_content_date(@document.content&.[]("events_and_patrols_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「行事・パトロール・搬入・その他」22-022-->
           <td class="doc_22_s26" colspan="3">時刻：</td>
-          <td class="doc_22_s27" colspan="6"></td>
+          <td class="doc_22_s27" colspan="6">
+            <%= f.time_select :content, name: "document[content][patrol_record_time_1st][]",
+                             value: doc_content_date(@document.content&.[]("patrol_record_time_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「統責者・巡視記録（時刻）」22-023-->
           <td class="doc_22_s26" colspan="3">内容：</td>
-          <td class="doc_22_s17" colspan="14"></td>
-          <td class="doc_22_s17" colspan="13"></td>
-          <td class="doc_22_s17" colspan="3"></td>
+          <td class="doc_22_s17" colspan="14">
+            <%= f.text_field :content, name: "document[content][patrol_record_content_1st][]", placeholder: "例）問題なし",
+                             value: doc_content_date(@document.content&.[]("patrol_record_content_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「統責者・巡視記録（内容）」22-024-->
+          <td class="doc_22_s17" colspan="13">
+            <%= f.text_field :content, name: "document[content][corrective_action_report_1st][]", placeholder: "例）巡視範囲を広げる必要あり",
+                             value: doc_content_date(@document.content&.[]("corrective_action_report_1st")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「是正処理・報告」22-025-->
+          <td class="doc_22_s13" colspan="3">
+            <%= f.collection_select(name = "document[content][corrective_action_report_confirmer_1st][]",
+                                    @workers, :uuid, :admission_worker_name,{ include_blank: "選択して下さい"},
+                                    { class: "form-control", style: "width: 100%; font-size: 10pt" })
+            %>
+          </td><!--「確認者名」22-026-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
@@ -739,8 +804,7 @@
           <td class="doc_22_s31" colspan="14" rowspan="2">【統括安全衛生責任者代行任命書】</td>
           <td class="doc_22_s32" colspan="15" rowspan="2">
             <%= document_site_info.general_safety_agent_name %>
-          </td>
-          <!--「統括安全衛生責任者代行者名」22-027-->
+          </td><!--「統括安全衛生責任者代行者名」22-027-->
           <td class="doc_22_s33" colspan="2" rowspan="2">殿</td>
           <td class="doc_22_s1"></td>
         </tr>
@@ -862,8 +926,18 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1" colspan="4">委任期間：</td>
           <td class="doc_22_s35">自</td>
-          <td class="doc_22_s36" colspan="11"><a target="_blank" href="#rangeid=1489854362">「委任期間（自）年月日」22-028</a></td>
-          <td class="doc_22_s37" colspan="5"><a target="_blank" href="#rangeid=312880720">「委任期間（自）時間」22-029</a></td>
+          <td class="doc_22_s36" colspan="11">
+            <%= f.date_field :content, name: "document[content][delegation_date_from][]",
+                             value: doc_content_date(@document.content&.[]("delegation_date_from")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「委任期間（自）年月日」22-028-->
+          <td class="doc_22_s37" colspan="5">
+            <%= f.time_select :content, name: "document[content][delegation_time_from][]",
+                             value: doc_content_date(@document.content&.[]("delegation_time_from")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「委任期間（自）時間」22-029-->
           <td class="doc_22_s1" colspan="3">時から</td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -891,8 +965,18 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s35">至</td>
-          <td class="doc_22_s36" colspan="11"><a target="_blank" href="#rangeid=617688359">「委任期間（至）年月日」22-030</a></td>
-          <td class="doc_22_s37" colspan="5"><a target="_blank" href="#rangeid=467124058">「委任期間（至）時間」22-031</a></td>
+          <td class="doc_22_s36" colspan="11">
+            <%= f.date_field :content, name: "document[content][delegation_date_to][]",
+                             value: doc_content_date(@document.content&.[]("delegation_date_to")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「委任期間（至）年月日」22-030-->
+          <td class="doc_22_s37" colspan="5">
+            <%= f.time_select :content, name: "document[content][delegation_time_to][]",
+                             value: doc_content_date(@document.content&.[]("delegation_time_to")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「委任期間（至）時間」22-031-->
           <td class="doc_22_s1" colspan="3">時まで</td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -955,8 +1039,12 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
-          <td class="doc_22_s36" colspan="14"><a target="_blank" href="#rangeid=2073978062">「統括安全衛生責任者・署名年月日」22-032</a>
-          </td>
+          <td class="doc_22_s36" colspan="14">
+            <%= f.date_field :content, name: "document[content][officer_signature_date][]",
+                             value: doc_content_date(@document.content&.[]("officer_signature_date")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「統括安全衛生責任者・署名年月日」22-032-->
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -988,9 +1076,10 @@
           <td class="doc_22_s35" colspan="7">統括安全衛生責任者</td>
           <td class="doc_22_s40" colspan="16">
             <%= document_site_info.general_safety_responsible_person_name %>
-          </td>
-          <!--「統括安全衛生責任者名」22-033-->
-          <td class="doc_22_s41" colspan="2"><a target="_blank" href="#rangeid=1146939719">㊞22-034</a></td>
+          </td><!--「統括安全衛生責任者名」22-033-->
+          <td class="doc_22_s41" colspan="2">
+          <a target="_blank" href="#rangeid=1146939719">㊞22-034</a>
+          </td><!--㊞22-034-->
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -1035,8 +1124,12 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
-          <td class="doc_22_s43" colspan="14"><a target="_blank"
-              href="#rangeid=1717691778">「統括安全衛生責任者代行者・署名年月日」22-035</a></td>
+          <td class="doc_22_s43" colspan="14">
+            <%= f.date_field :content, name: "document[content][officer_substitute_signature_date][]",
+                             value: doc_content_date(@document.content&.[]("officer_substitute_signature_date")),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「統括安全衛生責任者代行者・署名年月日」22-035-->
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -1074,9 +1167,10 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s40" colspan="16">
             <%= document_site_info.general_safety_agent_name %>
-          </td>
-          <!--「統括安全衛生責任者代行者名」22-036-->
-          <td class="doc_22_s41" colspan="2"><a target="_blank" href="#rangeid=1146939719">㊞22-037</a></td>
+          </td><!--「統括安全衛生責任者代行者名」22-036-->
+          <td class="doc_22_s41" colspan="2">
+          <a target="_blank" href="#rangeid=1146939719">㊞22-037</a>
+          </td><!--㊞22-037-->
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -1209,5 +1303,12 @@
         </tr>
       </tbody>
     </table>
+    <div class="center">
+      <%= f.submit "更新", class: "btn btn-block btn-outline-secondary" %>
+    </div>
+    <div class="center">
+      <%= link_to "戻る", :back, class: "btn btn-block btn-outline-secondary" %>
+    </div>
+    <% end %>
   </div>
 </div>
