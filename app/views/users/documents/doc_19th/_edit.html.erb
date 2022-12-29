@@ -1,5 +1,6 @@
 <!-- (19)全建統一様式第6号(工事安全衛生計画書) -->
 <h1 align="center">編集中</h1>
+<%= render 'users/documents/doc_19th/error_messages_for_doc_19th.html.erb' %>
 <div id="doc_19_sheet">
   <div class="ritz grid-container" dir="ltr">
     <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
@@ -612,7 +613,7 @@
           <tr style="height: 24px">
             <td class="doc_19_s15" dir="ltr"></td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
-              <%= f.select name = 'content[construction_type_1st_period_month_1st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_1st')}%>月
+              <%= f.select name = 'content[construction_type_period_month_1st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_period_month_1st')}%>月
             </td>
             <td class="doc_19_s23" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
@@ -627,7 +628,8 @@
               <%= f.check_box name = 'content[construction_type_period_week_five_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_five_1st')) %></br>
             </td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
-              <%= f.select name = 'content[construction_type_1st_period_month_2st]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_2st')}%>月
+              <%= f.select name = 'content[construction_type_period_month_2nd]',(1..12).to_a, 
+              { include_blank: true, selected:@document.content&.[]('construction_type_period_month_2nd')}%>月
             </td>
             <td class="doc_19_s23" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>
@@ -642,7 +644,7 @@
               <%= f.check_box name = 'content[construction_type_period_week_five_2nd]', checked: box_checked?(@document.content&.[]('construction_type_period_week_five_2nd')) %></br>
             </td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
-              <%= f.select name = 'content[construction_type_1st_period_month_3rd]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_1st_period_month_3rd')} %>
+              <%= f.select name = 'content[construction_type_period_month_3rd]',(1..12).to_a, { include_blank: true, selected:@document.content&.[]('construction_type_period_month_3rd')}%>月
             </td>
             <td class="doc_19_s23" dir="ltr" colspan="4">
               <%= f.label :week_one, "1週" %>

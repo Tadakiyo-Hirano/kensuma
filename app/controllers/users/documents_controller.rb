@@ -3,7 +3,7 @@ module Users
     layout 'documents'
     before_action :set_documents # サイドバーに常時表示させるために必要
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
-    before_action :set_workers, only: [:show, :edit] # 2次下請以下の作業員を定義する
+    before_action :set_workers, only: [:show, :edit, :update] # 2次下請以下の作業員を定義する
 
     def index; end
 
@@ -28,15 +28,20 @@ module Users
     end
 
     def edit
-      merge_workers = @workers&.map {|sub_worker| {sub_worker&.name => sub_worker&.uuid}}
-      @workers_name_uuid = {}.merge(*merge_workers)
+      @error_msg_for_doc_19th == nil
     end
 
     def update
-      if @document.update(document_params(@document))
-        redirect_to users_request_order_document_url, success: "保存に成功しました"
+      @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
+      if @error_msg_for_doc_19th.blank?
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: "保存に成功しました"
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit 
+        end
       else
-        flash[:danger] = '失敗しました'
+        flash[:danger] = '保存に失敗しました'
         render action: :edit 
       end
     end
@@ -83,6 +88,8 @@ module Users
             end
           end
         end
+        merge_workers = @workers&.map {|sub_worker| {sub_worker&.name => sub_worker&.uuid}}
+        @workers_name_uuid = {}.merge(*merge_workers)
       end
     end
 
@@ -100,19 +107,19 @@ module Users
             :construction_type_1st_period_month_2st,
             :construction_type_1st_period_month_3rd,
             :carry_on_machine,
-            :construction_type_1st_period_month_1st,
+            :construction_type_period_month_1st,
             :construction_type_period_week_one_1st,
             :construction_type_period_week_two_1st,
             :construction_type_period_week_three_1st,
             :construction_type_period_week_four_1st,
             :construction_type_period_week_five_1st,
-            :construction_type_1st_period_month_2st,
+            :construction_type_period_month_2nd,
             :construction_type_period_week_one_2nd,
             :construction_type_period_week_two_2nd,
             :construction_type_period_week_three_2nd,
             :construction_type_period_week_four_2nd,
             :construction_type_period_week_five_2nd,
-            :construction_type_1st_period_month_3rd,
+            :construction_type_period_month_3rd,
             :construction_type_period_week_one_3rd,
             :construction_type_period_week_two_3rd,
             :construction_type_period_week_three_3rd,

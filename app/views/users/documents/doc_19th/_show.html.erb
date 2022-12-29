@@ -437,7 +437,7 @@
         <tr style="height: 24px">
           <td class="doc_19_s3"></td>
           <td class="doc_19_s4">
-            <font color="red">※ 緑枠は入力項目です。必要あれば入力してください。</a>
+            <font color="red">※ 緑枠は入力項目です。必要あれば入力してください。</font>
           </td>
           <td class="doc_19_s4"></td>
           <td class="doc_19_s4"></td>
@@ -605,7 +605,7 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_19_s15" dir="ltr"></td>
-          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_1st')%>月</td>
+          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_period_month_1st')%>月</td>
           <td class="doc_19_s23" dir="ltr" colspan="4">
             <%= '1週' if @document.content&.[]('construction_type_period_week_one_1st') == '1'%>
             <%= '2週' if @document.content&.[]('construction_type_period_week_two_1st') == '1'%>
@@ -613,7 +613,7 @@
             <%= '4週' if @document.content&.[]('construction_type_period_week_four_1st') == '1'%>
             <%= '5週' if @document.content&.[]('construction_type_period_week_five_1st') == '1'%>
           </td>
-          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_2st')%>月</td>
+          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_period_month_2nd')%>月</td>
           <td class="doc_19_s23" dir="ltr" colspan="4">
             <%= '1週' if @document.content&.[]('construction_type_period_week_one_2nd') == '1'%>
             <%= '2週' if @document.content&.[]('construction_type_period_week_two_2nd') == '1'%>
@@ -621,7 +621,7 @@
             <%= '4週' if @document.content&.[]('construction_type_period_week_four_2nd') == '1'%>
             <%= '5週' if @document.content&.[]('construction_type_period_week_five_2nd') == '1'%>
           </td>
-          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_1st_period_month_3rd')%>月</td>
+          <td class="doc_19_s16" dir="ltr" colspan="4"><%= @document.content&.[]('construction_type_period_month_3rd')%>月</td>
           <td class="doc_19_s23" dir="ltr" colspan="4">
             <%= '1週' if @document.content&.[]('construction_type_period_week_one_3rd') == '1'%>
             <%= '2週' if @document.content&.[]('construction_type_period_week_two_3rd') == '1'%>
@@ -637,7 +637,9 @@
           <td class="doc_19_s18" dir="ltr" colspan="8"><%= @document.content&.[]('construction_type_1st_period_1st')%></td>
           <td class="doc_19_s18" dir="ltr" colspan="8"><%=@document.content&.[]('construction_type_1st_period_2nd') %></td>
           <td class="doc_19_s18" dir="ltr" colspan="8"><%=@document.content&.[]('construction_type_1st_period_3rd')%></td>
-          <td class="doc_19_s18" dir="ltr" colspan="9" rowspan="11"><%=@document.content&.[]('daily_safety_and_health_activity')%></td>
+          <td class="doc_19_s18" dir="ltr" colspan="9" rowspan="11">
+            <%=safe_join(@document.content&.[]('daily_safety_and_health_activity').split("\n"),tag(:br)) %>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
