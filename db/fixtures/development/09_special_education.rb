@@ -107,7 +107,7 @@ SpecialEducation.seed(
   {
     id: 22,
     name: 'ローラー',
-  description: 'ローラーの運転の業務に係る特別教育'
+    description: 'ローラーの運転の業務に係る特別教育'
   },
   {
     id: 23,

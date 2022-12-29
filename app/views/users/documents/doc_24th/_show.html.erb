@@ -346,17 +346,17 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s6" dir="ltr" colspan="12">　1. に〇を付けた方は、労災保険の特別加入していますか。</td>
+          <td class="doc_24_s6" dir="ltr" colspan="12">　1. に〇を付けた方は、労災保険の特別加入していますか。【回答：全未実装】</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="5">1. している　※未実装※ </td>
-          <td class="doc_24_s31" dir="ltr" colspan="5">2. 未加入　※未実装※　</td>
+          <td class="doc_24_s27" dir="ltr" colspan="5">1. している</td>
+          <td class="doc_24_s31" dir="ltr" colspan="5">2. 未加入</td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは建設現場で働きはじめてどのくらいになりますか。</td>
+          <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは建設現場で働きはじめてどのくらいになりますか。【回答：全未実装】</td>
           <td class="doc_24_s30"></td>
           <td class="doc_24_s27" dir="ltr" colspan="3">1. 1年以内</td>
           <td class="doc_24_s27" dir="ltr" colspan="3">2. 1～3年</td>
@@ -367,7 +367,7 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは健康診断を受けましたか。</td>
+          <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは健康診断を受けましたか。【回答：全未実装】</td>
           <td class="doc_24_s30"></td>
           <td class="doc_24_s27" dir="ltr" colspan="5">1. 受けた</td>
           <td class="doc_24_s31" dir="ltr" colspan="5">2. 受けていない</td>
@@ -377,7 +377,7 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s6" dir="ltr" colspan="12">・あなたの最近の健康状態はどうですか。</td>
+          <td class="doc_24_s6" dir="ltr" colspan="12">・あなたの最近の健康状態はどうですか。【回答：全未実装】</td>
           <td class="doc_24_s30"></td>
           <td class="doc_24_s27" dir="ltr" colspan="2">1. よい</td>
           <td class="doc_24_s27" dir="ltr" colspan="4">2. まあまあである</td>
@@ -390,8 +390,8 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="5">1. はい</td>
-          <td class="doc_24_s31" dir="ltr" colspan="5">2. いいえ</td>
+          <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_special_education_yes(field_worker) %></td>
+          <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_special_education_no(field_worker) %></td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -528,13 +528,13 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s33" dir="ltr" colspan="4" rowspan="2">特別教育<br>（運転者・作業者）</td>
           <td class="doc_24_s39" dir="ltr" colspan="5">
-            <%= worker_special_education(field_worker).include?("酸素欠乏危険作業") ? "■酸素欠乏危険作業" : "▢酸素欠乏危険作業" %>
+            <%= worker_special_education_oxygen(field_worker) %>
           </td>
           <td class="doc_24_s39" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("車両系建設機械（基礎工事用）") ? "■3t未満の車両系建設機械" : "▢3t未満の車両系建設機械" %>
+            <%= worker_special_education(field_worker).include?("小型車両系建設機械（整地・運搬・積込み用及び掘削用）（3t未満）") ? "■3t未満の車両系建設機械" : "▢3t未満の車両系建設機械" %>
           </td>
           <td class="doc_24_s40" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("基礎工事用建設機械") ? "■3t未満の自走しない基礎工事用機械" : "▢3t未満の自走しない基礎工事用機械" %>
+            <%= worker_special_education(field_worker).include?("小型車両系建設機械（基礎工事用）（3t未満）") ? "■3t未満の自走しない基礎工事用機械" : "▢3t未満の自走しない基礎工事用機械" %>
           </td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -549,7 +549,7 @@
             <%= worker_special_education(field_worker).include?("車両系建設機械（コンクリート打設用）") ? "■コンクリート打設用車両系建設機械" : "▢コンクリート打設用車両系建設機械" %>
           </td>
           <td class="doc_24_s40" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("小型車両系建設機械") ? "■3t未満の解体用機械" : "▢3t未満の解体用機械" %>
+            <%= worker_special_education(field_worker).include?("小型車両系建設機械（解体用）（3t未満）") ? "■3t未満の解体用機械" : "▢3t未満の解体用機械" %>
           </td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -559,10 +559,10 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s43" dir="ltr" colspan="4" rowspan="6"></td> <!-- 「特別教育」24-028 -->
           <td class="doc_24_s39" dir="ltr" colspan="5">
-            <%= worker_special_education(field_worker).include?("不整地運搬車") ? "■不整地運搬車（1t未満）" : "▢不整地運搬車（1t未満）" %>
+            <%= worker_special_education(field_worker).include?("不整地運搬車（1t未満）") ? "■不整地運搬車（1t未満）" : "▢不整地運搬車（1t未満）" %>
           </td>
           <td class="doc_24_s39" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("高所作業車") ? "■10m未満の高所作業車" : "▢10m未満の高所作業車" %>
+            <%= worker_special_education(field_worker).include?("高所作業車(10m未満）") ? "■10m未満の高所作業車" : "▢10m未満の高所作業車" %>
           </td>
           <td class="doc_24_s40" dir="ltr" colspan="7">
             <%= worker_special_education(field_worker).include?("ボーリングマシン") ? "■ボーリングマシン" : "▢ボーリングマシン" %>
@@ -574,10 +574,10 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s39" dir="ltr" colspan="5">
-            <%= worker_special_education(field_worker).include?("フォークリフト") ? "■フォークリフト（1t未満）" : "▢フォークリフト（1t未満）" %>
+            <%= worker_special_education(field_worker).include?("フォークリフト（1t未満）") ? "■フォークリフト（1t未満）" : "▢フォークリフト（1t未満）" %>
           </td>
           <td class="doc_24_s39" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("ショベルローダー") ? "■ショベルローダー（1t未満）" : "▢ショベルローダー（1t未満）" %>
+            <%= worker_special_education(field_worker).include?("ショベルローダー（1t未満）") ? "■ショベルローダー（1t未満）" : "▢ショベルローダー（1t未満）" %>
           </td>
           <td class="doc_24_s40" dir="ltr" colspan="7">
             <%= worker_special_education(field_worker).include?("巻上げ機") ? "■巻上げ機械" : "▢巻上げ機械" %>
@@ -592,7 +592,7 @@
             <%= worker_special_education(field_worker).include?("建設用リフト") ? "■建設用リフト" : "▢建設用リフト" %>
           </td>
           <td class="doc_24_s39" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("玉掛け") ? "■1t未満の玉掛け" : "▢1t未満の玉掛け" %>
+            <%= worker_special_education(field_worker).include?("玉掛け（1t未満）") ? "■1t未満の玉掛け" : "▢1t未満の玉掛け" %>
           </td>
           <td class="doc_24_s40" dir="ltr" colspan="7">
             <%= worker_special_education(field_worker).include?("ゴンドラ") ? "■ゴンドラ" : "▢ゴンドラ" %>
@@ -607,10 +607,10 @@
             <%= worker_special_education(field_worker).include?("アーク溶接") ? "■アーク溶接等" : "▢アーク溶接等" %>
           </td>
           <td class="doc_24_s39" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("研削といし") ? "■研削といしの取替え等" : "▢研削といしの取替え等" %>
+            <%= worker_special_education(field_worker).include?("研削砥石") ? "■研削といしの取替え等" : "▢研削といしの取替え等" %>
           </td>
           <td class="doc_24_s40" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("電気取扱") ? "■電気取扱" : "▢電気取扱" %>
+            <%= worker_special_education_electrical(field_worker) %>
           </td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -625,7 +625,7 @@
             <%= worker_special_education(field_worker).include?("ロープ高所作業") ? "■ロープ高所作業" : "▢ロープ高所作業" %>
           </td>
           <td class="doc_24_s40" dir="ltr" colspan="7">
-            <%= worker_special_education(field_worker).include?("墜落制止用器具") ? "■フルハーネス型安全帯" : "▢フルハーネス型安全帯" %>
+            <%= worker_special_education(field_worker).include?("フルハーネス型の墜落制止用器具") ? "■フルハーネス型安全帯" : "▢フルハーネス型安全帯" %>
           </td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -736,8 +736,8 @@
           <td class="doc_24_s3" dir="ltr" colspan="11">・個人情報の取扱いについて、了承しました。</td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s49" dir="ltr" colspan="4" rowspan="2">回答者自筆サイン</td>
-          <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2">24-029</td>
-          <td class="doc_24_s51" dir="ltr" rowspan="2"><%= "※24-030未実装" %></</td> <!-- ㊞24-030 -->
+          <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2"><%= field_worker.content["name"] %></td> <!-- 24-029 -->
+          <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
