@@ -327,7 +327,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("アース線") ? "✔" : ''
+      tags.include?('アース線') ? '✔' : ''
     end
   end
 
@@ -335,7 +335,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("接地クランプ") ? "✔" : ''
+      tags.include?('接地クランプ') ? '✔' : ''
     end
   end
 
@@ -343,7 +343,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("キャップタイヤ") ? "✔" : ''
+      tags.include?('キャップタイヤ') ? '✔' : ''
     end
   end
 
@@ -351,7 +351,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("コネクタ") ? "✔" : ''
+      tags.include?('コネクタ') ? '✔' : ''
     end
   end
 
@@ -359,7 +359,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("接地端子の締結") ? "✔" : ''
+      tags.include?('接地端子の締結') ? '✔' : ''
     end
   end
 
@@ -367,7 +367,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("充電部の絶縁") ? "✔" : ''
+      tags.include?('充電部の絶縁') ? '✔' : ''
     end
   end
 
@@ -375,7 +375,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("自動電撃防止装置") ? "✔" : ''
+      tags.include?('自動電撃防止装置') ? '✔' : ''
     end
   end
 
@@ -383,7 +383,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("絶縁ホルダー") ? "✔" : ''
+      tags.include?('絶縁ホルダー') ? '✔' : ''
     end
   end
 
@@ -391,7 +391,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("溶接保護面") ? "✔" : ''
+      tags.include?('溶接保護面') ? '✔' : ''
     end
   end
 
@@ -399,7 +399,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("操作スイッチ") ? "✔" : ''
+      tags.include?('操作スイッチ') ? '✔' : ''
     end
   end
 
@@ -407,7 +407,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("絶縁抵抗測定値") ? "✔" : ''
+      tags.include?('絶縁抵抗測定値') ? '✔' : ''
     end
   end
 
@@ -415,7 +415,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("各種ブレーキの作動") ? "✔" : ''
+      tags.include?('各種ブレーキの作動') ? '✔' : ''
     end
   end
 
@@ -423,7 +423,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("手すり・囲い") ? "✔" : ''
+      tags.include?('手すり・囲い') ? '✔' : ''
     end
   end
 
@@ -431,7 +431,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("フックのはずれ止め") ? "✔" : ''
+      tags.include?('フックのはずれ止め') ? '✔' : ''
     end
   end
 
@@ -439,7 +439,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("ワイヤロープ･チェーン") ? "✔" : ''
+      tags.include?('ワイヤロープ･チェーン') ? '✔' : ''
     end
   end
 
@@ -447,7 +447,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("滑車") ? "✔" : ''
+      tags.include?('滑車') ? '✔' : ''
     end
   end
 
@@ -455,7 +455,7 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("回転部の囲い等") ? "✔" : ''
+      tags.include?('回転部の囲い等') ? '✔' : ''
     end
   end
 
@@ -463,8 +463,70 @@ module DocumentsHelper
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
       tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
-      tags.include?("危険表示") ? "✔" : ''
+      tags.include?('危険表示') ? '✔' : ''
     end
+  end
+
+  # 持込時の点検表　「追加項目①〜⑥」点検事項
+  def inspection_table_item1
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item1') }.first
+  end
+
+  def inspection_table_item2
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item2') }.first
+  end
+
+  def inspection_table_item3
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item3') }.first
+  end
+
+  def inspection_table_item4
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item4') }.first
+  end
+
+  def inspection_table_item5
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item5') }.first
+  end
+
+  def inspection_table_item6
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item6') }.first
+  end
+
+  # 持込時の点検表　「追加項目①〜⑥」番号（機械名）
+  def machine_extra_inspection_item1(machine, column)
+    extra_item1 = machine&.content&.[](column)
+    extra_item1 == inspection_table_item1 ? '✔' : ''
+  end
+
+  def machine_extra_inspection_item2(machine, column)
+    extra_item2 = machine&.content&.[](column)
+    extra_item2 == inspection_table_item2 ? '✔' : ''
+  end
+
+  def machine_extra_inspection_item3(machine, column)
+    extra_item3 = machine&.content&.[](column)
+    extra_item3 == inspection_table_item3 ? '✔' : ''
+  end
+
+  def machine_extra_inspection_item4(machine, column)
+    extra_item4 = machine&.content&.[](column)
+    extra_item4 == inspection_table_item4 ? '✔' : ''
+  end
+
+  def machine_extra_inspection_item5(machine, column)
+    extra_item5 = machine&.content&.[](column)
+    extra_item5 == inspection_table_item5 ? '✔' : ''
+  end
+
+  def machine_extra_inspection_item6(machine, column)
+    extra_item6 = machine&.content&.[](column)
+    extra_item6 == inspection_table_item6 ? '✔' : ''
   end
 
   # 持込機械の文字情報

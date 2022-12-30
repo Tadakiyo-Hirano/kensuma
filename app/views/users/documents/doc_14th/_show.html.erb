@@ -1010,35 +1010,35 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
               <td class="doc_14_s22" colspan="8" rowspan="3">絶縁抵抗測定値</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m1) %> <!-- 14-038 「絶縁抵抗測定値/1」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-038未実装※' %> <!-- 14-038 「絶縁抵抗測定値/1」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m2) %> <!-- 14-062 「絶縁抵抗測定値/2」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-062未実装※' %> <!-- 14-062 「絶縁抵抗測定値/2」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m3) %> <!-- 14-086 「絶縁抵抗測定値/3」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-086未実装※' %> <!-- 14-086 「絶縁抵抗測定値/3」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m4) %> <!-- 14-110 「絶縁抵抗測定値/4」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-110未実装※' %> <!-- 14-110 「絶縁抵抗測定値/4」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m5) %> <!-- 14-134 「絶縁抵抗測定値/5」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-134未実装※' %> <!-- 14-134 「絶縁抵抗測定値/5」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m6) %> <!-- 14-158 「絶縁抵抗測定値/6」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-158未実装※' %> <!-- 14-158 「絶縁抵抗測定値/6」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m7) %> <!-- 14-182 「絶縁抵抗測定値/7」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-182未実装※' %> <!-- 14-182 「絶縁抵抗測定値/7」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m8) %> <!-- 14-206 「絶縁抵抗測定値/8」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-206未実装※' %> <!-- 14-206 「絶縁抵抗測定値/8」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m9) %> <!-- 14-228 「絶縁抵抗測定値/9」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-230未実装※' %> <!-- 14-230 「絶縁抵抗測定値/9」 -->
               </td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">
-                <%= machine_tag_11th(m10) %> <!-- 14-254 「絶縁抵抗測定値/10」 -->
+              <td class="doc_14_s30" colspan="2" rowspan="3">
+                <%= '※14-254未実装※' %> <!-- 14-254 「絶縁抵抗測定値/10」 -->
               </td>
               <td class="doc_14_s18" dir="ltr" colspan="8" rowspan="2"> 20）その他</td>
             </tr>
@@ -1660,17 +1660,39 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目①）」14-022</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-046</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-070</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-094</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-118</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-142</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-166</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-190</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-214</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-238</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-262</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">
+                <%= inspection_table_item1 %> <!-- 14-022 「点検事項（追加項目①）」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m1, "extra_inspection_item1")%> <!-- 14-046 「追加項目①/1」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m2, "extra_inspection_item1")%> <!-- 14-070 「追加項目①/2」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m3, "extra_inspection_item1")%> <!-- 14-094 「追加項目①/3」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m4, "extra_inspection_item1")%> <!-- 14-118 「追加項目①/4」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m5, "extra_inspection_item1")%> <!-- 14-142 「追加項目①/5」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m6, "extra_inspection_item1")%> <!-- 14-166 「追加項目①/6」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m7, "extra_inspection_item1")%> <!-- 14-190 「追加項目①/7」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m8, "extra_inspection_item1")%> <!-- 14-214 「追加項目①/8」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m9, "extra_inspection_item1")%> <!-- 14-238 「追加項目①/9」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item1(m10, "extra_inspection_item1")%> <!-- 14-262 「追加項目①/10」-->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R76" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1723,17 +1745,39 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目②）」14-023</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-047</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-071</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-095</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-119</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-143</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-167</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-191</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-215</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-239</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-263</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">
+                <%= inspection_table_item2 %> <!-- 14-023 「点検事項（追加項目②）」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m1, "extra_inspection_item2")%> <!-- 14-046 「追加項目②/1」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m2, "extra_inspection_item2")%> <!-- 14-070 「追加項目②/2」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m3, "extra_inspection_item2")%> <!-- 14-094 「追加項目②/3」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m4, "extra_inspection_item2")%> <!-- 14-118 「追加項目②/4」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m5, "extra_inspection_item2")%> <!-- 14-142 「追加項目②/5」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m6, "extra_inspection_item2")%> <!-- 14-166 「追加項目②/6」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m7, "extra_inspection_item2")%> <!-- 14-190 「追加項目②/7」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m8, "extra_inspection_item2")%> <!-- 14-214 「追加項目②/8」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m9, "extra_inspection_item2")%> <!-- 14-238 「追加項目②/9」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item2(m10, "extra_inspection_item2")%> <!-- 14-262 「追加項目②/10」-->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R79" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1780,17 +1824,39 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目③）」14-024</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-048</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-072</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-096</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-120</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-144</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-168</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-192</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-216</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-240</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-264</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">
+                <%= inspection_table_item3 %> <!-- 14-024 「点検事項（追加項目③）」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m1, "extra_inspection_item3")%> <!-- 14-048 「追加項目③/1」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m2, "extra_inspection_item3")%> <!-- 14-072 「追加項目③/2」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m3, "extra_inspection_item3")%> <!-- 14-096 「追加項目③/3」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m4, "extra_inspection_item3")%> <!-- 14-120 「追加項目③/4」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m5, "extra_inspection_item3")%> <!-- 14-144 「追加項目③/5」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m6, "extra_inspection_item3")%> <!-- 14-168 「追加項目③/6」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m7, "extra_inspection_item3")%> <!-- 14-192 「追加項目③/7」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m8, "extra_inspection_item3")%> <!-- 14-216 「追加項目③/8」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m9, "extra_inspection_item3")%> <!-- 14-240 「追加項目③/9」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item3(m10, "extra_inspection_item3")%> <!-- 14-264 「追加項目③/10」-->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R82" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1843,17 +1909,38 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目④）」14-025</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-049</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-073</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-097</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-121</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-145</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-169</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-193</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-217</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-241</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-265</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">
+                <%= inspection_table_item4 %> <!-- 14-025 「点検事項（追加項目④）」-->
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m1, "extra_inspection_item4")%> <!-- 14-049 「追加項目④/1」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m2, "extra_inspection_item4")%> <!-- 14-073 「追加項目④/2」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m3, "extra_inspection_item4")%> <!-- 14-097 「追加項目④/3」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m4, "extra_inspection_item4")%> <!-- 14-121 「追加項目④/4」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m5, "extra_inspection_item4")%> <!-- 14-145 「追加項目④/5」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m6, "extra_inspection_item4")%> <!-- 14-169 「追加項目④/6」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m7, "extra_inspection_item4")%> <!-- 14-193 「追加項目④/7」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m8, "extra_inspection_item4")%> <!-- 14-217 「追加項目④/8」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m9, "extra_inspection_item4")%> <!-- 14-241 「追加項目④/9」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item4(m10, "extra_inspection_item4")%> <!-- 14-265 「追加項目④/10」-->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R85" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1887,17 +1974,39 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目⑤）」14-026</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-050</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-074</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-098</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-122</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-146</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-170</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-194</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-218</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-242</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-266</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">
+                <%= inspection_table_item5 %> <!-- 14-026 「点検事項（追加項目⑤）」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m1, "extra_inspection_item5")%> <!-- 14-050 「追加項目⑤/1」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m2, "extra_inspection_item5")%> <!-- 14-074 「追加項目⑤/2」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m3, "extra_inspection_item5")%> <!-- 14-098 「追加項目⑤/3」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m4, "extra_inspection_item5")%> <!-- 14-122 「追加項目⑤/4」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m5, "extra_inspection_item5")%> <!-- 14-146 「追加項目⑤/5」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m6, "extra_inspection_item5")%> <!-- 14-170 「追加項目⑤/6」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m7, "extra_inspection_item5")%> <!-- 14-194 「追加項目⑤/7」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m8, "extra_inspection_item5")%> <!-- 14-218 「追加項目⑤/8」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m9, "extra_inspection_item5")%> <!-- 14-242 「追加項目⑤/9」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item5(m10, "extra_inspection_item5")%> <!-- 14-266 「追加項目⑤/10」-->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R88" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -1929,17 +2038,39 @@
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s16"></td>
-              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">「点検事項（追加項目⑥）」14-027</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-051</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-075</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-099</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-123</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-147</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-171</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-195</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-219</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-243</td>
-              <td class="doc_14_s23_1" colspan="2" rowspan="3">14-267</td>
+              <td class="doc_14_s31" dir="ltr" colspan="8" rowspan="3">
+                <%= inspection_table_item6 %> <!-- 14-027 「点検事項（追加項目⑥）」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m1, "extra_inspection_item6")%> <!-- 14-051 「追加項目⑥/1」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m2, "extra_inspection_item6")%> <!-- 14-075 「追加項目⑥/2」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m3, "extra_inspection_item6")%> <!-- 14-099 「追加項目⑥/3」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m4, "extra_inspection_item6")%> <!-- 14-123 「追加項目⑥/4」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m5, "extra_inspection_item6")%> <!-- 14-147 「追加項目⑥/5」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m6, "extra_inspection_item6")%> <!-- 14-171 「追加項目⑥/6」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m7, "extra_inspection_item6")%> <!-- 14-194 「追加項目⑥/7」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m8, "extra_inspection_item6")%> <!-- 14-219 「追加項目⑥/8」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m9, "extra_inspection_item6")%> <!-- 14-243 「追加項目⑥/9」-->
+              </td>
+              <td class="doc_14_s23_1" colspan="2" rowspan="3">
+                <%= machine_extra_inspection_item6(m10, "extra_inspection_item6")%> <!-- 14-267 「追加項目⑥/10」-->
+              </td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R91" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
