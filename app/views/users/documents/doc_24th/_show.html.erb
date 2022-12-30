@@ -99,7 +99,6 @@
           <td class="doc_24_s1"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-          <%#= "※24-002未実装※" %>
           <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= document_info.content["prime_contractor_confirmation"] %></td> <!-- 「元請会社の確認欄」24-002 -->
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -295,7 +294,7 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s8" dir="ltr" colspan="3">所 属 会 社</td>
-          <td class="doc_24_s96" dir="ltr" colspan="20"><%= Business.find(document_info.business_id).name %><td> <!-- 「会社名」24-017 -->
+          <td class="doc_24_s96" dir="ltr" colspan="20"><%= Business.find(document_info.business_id).name %></td> <!-- 「会社名」24-017 -->
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -517,7 +516,7 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s41" dir="ltr" colspan="9">
-            <%= worker_skill_training(field_worker).include?("床ク") ? "■その他（床ク）" : "▢その他（　　　　　　　　　　）" %>
+            <%= worker_skill_training(field_worker).include?("床ク") ? "■その他（ 床ク ）" : "▢その他（　　　　　　　　　　）" %>
           </td>
           <td class="doc_24_s42" dir="ltr" colspan="10"></td>
           <td class="doc_24_s3"></td>
@@ -633,8 +632,8 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s41" dir="ltr" colspan="2"><%= worker_special_education_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
-          <td class="doc_24_s41" dir="ltr" colspan="16"></td>
+          <td class="doc_24_s41" dir="ltr" colspan="16"><%= worker_special_education_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
+          <td class="doc_24_s41" dir="ltr" colspan="2"></td>
           <td class="doc_24_s31"></td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -737,7 +736,7 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s49" dir="ltr" colspan="4" rowspan="2">回答者自筆サイン</td>
           <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2"><%= field_worker.content["name"] %></td> <!-- 24-029 -->
-          <td class="doc_24_s3"></td>
+          <td class="doc_24_s3" rowspan="2"></td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
