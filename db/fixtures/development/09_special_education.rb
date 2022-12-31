@@ -107,7 +107,7 @@ SpecialEducation.seed(
   {
     id: 22,
     name: 'ローラー',
-  description: 'ローラーの運転の業務に係る特別教育'
+    description: 'ローラーの運転の業務に係る特別教育'
   },
   {
     id: 23,
@@ -293,5 +293,10 @@ SpecialEducation.seed(
     id: 59,
     name: '墜落制止用器具',
     description: '墜落制止用器具を用いて行う作業に係る業務に係る特別教育'
+  },
+  {
+    id: 60,
+    name: 'フルハーネス型の墜落制止用器具',
+    description: 'フルハーネス型の墜落制止用器具を用いる作業の業務に係る特別教育'
   }
 )
