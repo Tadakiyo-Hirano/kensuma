@@ -36,7 +36,9 @@
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
-              <td class="doc_14_s5" dir="ltr" colspan="9" rowspan="2">「提出日（西暦）」14-001※document</td>
+              <td class="doc_14_s5" dir="ltr" colspan="9" rowspan="2">
+                <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 14-001 「提出日（西暦）」 -->
+              </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s4"></td>
@@ -2015,7 +2017,7 @@
               <td class="doc_14_s2"></td>
               <td class="doc_14_s22" colspan="11" rowspan="8">機械の特性、その他<br> その使用上注意すべき<br> 事項</td>
               <td class="doc_14_s35" dir="ltr" colspan="26" rowspan="8">
-                <%= '※14-017未実装※' %> <!-- 14-017 「機械の特性・使用上注意すべき事項」 ※document-->
+                <%= machine_doc_str(@document.content&.[]("precautions")) %> <!-- 14-017 「機械の特性・使用上注意すべき事項」 ※document-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -2159,10 +2161,10 @@
               <td class="doc_14_s2"></td>
               <td class="doc_14_s36" colspan="2" rowspan="5">担<br>当<br>者</td>
               <td class="doc_14_s28" dir="ltr" colspan="20" rowspan="5">
-                <%= '※14-018未実装※' %> <!-- 14-018 「元請会社の確認欄」 -->
+                <%= machine_doc_str(@document.content&.[]("prime_contractor_confirmation")) %> <!-- 14-018 「元請会社の確認欄」 ※document-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="5">
-                <%= '※14-019未実装※' %> <!-- 14-019 「元請会社の受付確認年月日」 -->
+                <%= doc_content_date(@document.content&.[]("reception_confirmation_date")) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
               </td>
               <td class="doc_14_s28" dir="ltr" colspan="8" rowspan="5">
                 ㊞ <!-- 14-020 印 -->

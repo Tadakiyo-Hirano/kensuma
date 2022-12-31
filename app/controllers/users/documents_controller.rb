@@ -57,6 +57,15 @@ module Users
             date_submitted: params.dig(:document, :content, :date_submitted)
           }
         )
+      when 'doc_14th'
+        params.require(:document).permit.merge(
+          content: {
+            date_submitted: params.dig(:document, :content, :date_submitted),
+            precautions: params.dig(:document, :content, :precautions),
+            prime_contractor_confirmation: params.dig(:document, :content, :prime_contractor_confirmation),
+            reception_confirmation_date: params.dig(:document, :content, :reception_confirmation_date)
+          }
+        )
       end
     end
   end

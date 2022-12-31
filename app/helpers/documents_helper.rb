@@ -588,6 +588,11 @@ module DocumentsHelper
     machine&.content&.[](column)
   end
 
+  # 持込機械の文字情報　（編集ページで入力、documentsに保存）
+  def machine_doc_str(doc_str)
+    doc_str.blank? ? '' : doc_str.first
+  end
+
   # 持込機械の日付情報
   def machine_date(machine, column)
     date = machine&.content&.[](column)
