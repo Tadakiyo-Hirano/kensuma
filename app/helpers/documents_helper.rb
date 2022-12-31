@@ -262,7 +262,7 @@ module DocumentsHelper
     end
   end
 
-  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「はい」のパターン）
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「はい」）
   def questionnaire_business_type_yes(worker)
     w_name = worker&.content&.[]('name')
     r_name = Business.find(document_info.business_id).representative_name
@@ -274,7 +274,7 @@ module DocumentsHelper
     end
   end
 
-  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「いいえ」のパターン）
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「いいえ」）
   def questionnaire_business_type_no(worker)
     w_name = worker&.content&.[]('name')
     r_name = Business.find(document_info.business_id).representative_name
