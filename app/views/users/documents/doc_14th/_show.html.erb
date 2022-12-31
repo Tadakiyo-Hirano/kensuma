@@ -292,7 +292,7 @@
               <td class="doc_14_s4" colspan="2" rowspan="4"></td>
               <td class="doc_14_s21" colspan="5" rowspan="4">一次会社名</td>
               <td class="doc_14_s15" dir="ltr" colspan="12" rowspan="4">
-                <%= primary_subcon_name(document_info) %> <!-- 14-004 「一次会社名」 -->
+                <%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 14-004 「一次会社名」 -->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
