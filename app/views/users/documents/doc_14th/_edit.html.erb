@@ -44,7 +44,7 @@
                 <td class="doc_14_s4"></td>
                 <td class="doc_14_s4"></td>
                 <td class="doc_14_s4"></td>
-                <td class="doc_14_s5" dir="ltr" colspan="9">
+                <td class="doc_14_s5" dir="ltr" colspan="9"> <!-- []の画像と重なると動作しない為高さ1行に修正(rowspan="2"削除) -->
                   <%= f.date_field :content, name: "document[content][date_submitted][]",
                                       value: doc_content_date(@document.content&.[]("date_submitted")),
                                       class: 'form-control form-control-sm'
@@ -2174,13 +2174,13 @@
                 </th>
                 <td class="doc_14_s2"></td>
                 <td class="doc_14_s36" colspan="2" rowspan="5">担<br>当<br>者</td>
-                <td class="doc_14_s28" dir="ltr" colspan="20" rowspan="5">
+                <td class="doc_14_s28_1" dir="ltr" colspan="20" rowspan="5">
                   <%= f.text_field :content, name: "document[content][prime_contractor_confirmation][]",
                                       value: @document.content&.[]("prime_contractor_confirmation"),
                                       class: 'form-control form-control-sm'
                   %>  <!-- 14-018 「元請会社の確認欄」 -->
                 </td>
-                <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="5">
+                <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="5">
                   <%= f.date_field :content, name: "document[content][reception_confirmation_date][]",
                                       value: doc_content_date(@document.content&.[]("reception_confirmation_date")),
                                       class: 'form-control form-control-sm'
