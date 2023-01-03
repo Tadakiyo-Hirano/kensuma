@@ -1,0 +1,2 @@
+class SafetyHealthEducation < ApplicationRecord
+end
