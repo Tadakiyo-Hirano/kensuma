@@ -94,7 +94,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s0" rowspan="41"></td>
-                <td class="doc_14_s4" colspan="7" rowspan="11"></td>
+                <td class="doc_14_s4_1" colspan="7" rowspan="11">※ 緑枠は入力項目です。必要あれば入力してください。</td>
                 <td class="doc_14_s8"></td>
                 <td class="doc_14_s8"></td>
                 <td class="doc_14_s8"></td>
@@ -2029,6 +2029,7 @@
                 <td class="doc_14_s22" colspan="11" rowspan="8">機械の特性、その他<br> その使用上注意すべき<br> 事項</td>
                 <td class="doc_14_s35" dir="ltr" colspan="26" rowspan="8">
                   <%= f.text_field :content, name: "document[content][precautions][]",
+                                placeholder: "・100Vの機械は3芯コードリール及び3Pコネクター (接地極付)を 準備しますので、接地極付コンセントを支給願います。",
                                       value: @document.content&.[]("precautions"),
                                       class: 'form-control form-control-sm'
                   %> <!-- 14-017 「機械の特性・使用上注意すべき事項」 -->
@@ -2176,6 +2177,7 @@
                 <td class="doc_14_s36" colspan="2" rowspan="5">担<br>当<br>者</td>
                 <td class="doc_14_s28_1" dir="ltr" colspan="20" rowspan="5">
                   <%= f.text_field :content, name: "document[content][prime_contractor_confirmation][]",
+                                placeholder: "㊞",
                                       value: @document.content&.[]("prime_contractor_confirmation"),
                                       class: 'form-control form-control-sm'
                   %>  <!-- 14-018 「元請会社の確認欄」 -->
