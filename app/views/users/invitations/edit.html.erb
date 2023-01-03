@@ -1,0 +1,59 @@
+<%= stylesheet_link_tag "users", :media => "all" %>
+<%= csrf_meta_tags %>
+
+<div class="register-box">
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <table>
+        <tr>
+          <td><%= image_tag "kensuma/03", size: "250x90", class:"brand-image" %></td>
+          <td class="logo-item"><span>&reg;</span></td>
+        </tr>
+      </table>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">
+        会社名と<%= t "devise.invitations.edit.header" %>
+      </p>
+
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.hidden_field :invitation_token, readonly: true %>
+
+        <div class="input-group mb-3">
+          <%= f.text_field :name, class: "form-control", required: true, placeholder: "会社名 又は 名前" %>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <%= f.password_field :password, required: true, class: "form-control", placeholder: "パスワード" %>
+
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "確認用パスワード"  %>
+
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="actions">
+            <%= f.submit t("devise.invitations.edit.submit_button"), class: "btn btn-primary btn-block" %>
+          </div>
+          <!-- /.col -->
+        </div>
+      <% end %>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>

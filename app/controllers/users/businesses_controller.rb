@@ -47,7 +47,7 @@ module Users
     def create
       @business = Business.new(business_params)
       if @business.save
-        redirect_to users_dash_boards_url
+        redirect_to users_orders_url
       else
         render :new
       end

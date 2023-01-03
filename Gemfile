@@ -33,10 +33,14 @@ gem 'rexml', '~> 3.2', '>= 3.2.4'
 gem 'bootsnap', '>= 1.9.3', require: false
 
 gem 'activeadmin'
+gem 'activeadmin_addons'
 gem 'devise'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'devise-i18n'
 gem 'rails-i18n', '~> 6.0'
+
+# 招待機能
+gem 'devise_invitable'
 
 gem 'dotenv-rails'
 
