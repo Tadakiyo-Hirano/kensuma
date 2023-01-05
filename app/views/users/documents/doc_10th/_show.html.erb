@@ -2,22 +2,22 @@
 <div class="container">
   <div class="title text-center"><h2>高齢者就労報告書</h2></div>
   <div class="submission_date text-right">
-    <p><span class="ml-3">「提出日（西暦）」10-001</span></p><!--「提出日(西暦)」10-001 -->
+    <p><span class="ml-3"><%= doc_content_date(@document.content&.[]("date_submitted")) %></span></p><!--「提出日(西暦)」10-001 -->
   </div>
   <div class="office_name">
-    <p>　事業所の名称<span class="ml-3">「事業所名(現場名)」10-002　</span></p><!--「事業所名(現場名)」10-002 -->
+    <p>　事業所の名称<span class="ml-3"><%= document_site_info.site_name %></span></p><!--「事業所名(現場名)」10-002 -->
   </div>
   <div class="chief_name">
-    <p>　所　長　名<span class="ml-3">元請会社の「現場代理人名」10-003　殿　</span></p><!-- 元請会社の「現場代理人名」10-003 -->
+    <p>　所　長　名<span class="ml-3"><%= document_site_info.site_agent_name %>　殿　</span></p><!-- 元請会社の「現場代理人名」10-003 -->
   </div>
   <div class="company_name">
-    <p>一次会社名 <span class="ml-3">「一次会社名」10-004</span></p><!--「一次会社名」10-004 -->
+    <p>一次会社名 <span class="ml-3"><%= document_site_info.business.name %></span></p><!--「一次会社名」10-004 -->
   </div>
   <div class="subcontractor">
-    <p>会社名( 11-005 )次<span class="ml-3">「会社名」10-006</span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
+    <p>会社名(<%= sc_hierarchy(document_info) %>)次<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
   </div>
   <div class="representative">
-    <p>代表者名<span class="ml-3">「代表者名」10-007</span></p><!--「代表者名」10-007 -->
+    <p>代表者名<span class="ml-3"><%= Business.find(document_info.business_id).representative_name %></span></p><!--「代表者名」10-007 -->
   </div>
   <div class="description">
     <p>
