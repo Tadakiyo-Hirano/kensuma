@@ -85,6 +85,9 @@ gem 'kaminari'
 gem 'dry-validation'
 gem 'reform'
 
+# wareki - ruby 和暦ライブラリ
+gem 'wareki'
+
 group :development, :test do
   # ERD生成
   gem 'rails-erd'

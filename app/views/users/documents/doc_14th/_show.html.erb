@@ -2164,7 +2164,7 @@
                 <%= machine_doc_str(@document.content&.[]("prime_contractor_confirmation")) %> <!-- 14-018 「元請会社の確認欄」 ※document-->
               </td>
               <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="5">
-                <%= doc_content_date(@document.content&.[]("reception_confirmation_date")) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
+                <%= machine_doc_date(@document.content&.[]("reception_confirmation_date")) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
               </td>
               <td class="doc_14_s28" dir="ltr" colspan="8" rowspan="5">
                 <!-- 14-020 ㊞ -->

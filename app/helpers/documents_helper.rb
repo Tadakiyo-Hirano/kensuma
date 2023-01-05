@@ -682,18 +682,23 @@ module DocumentsHelper
   # 持込機械の日付情報
   def machine_date(machine, column)
     date = machine&.content&.[](column)
-    date.blank? ? '年　月　日' : l(date.to_date, format: :long)
+    date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
+  end
+
+  # 持込機械の日付情報　（編集ページで入力、documentsに保存）
+  def machine_doc_date(doc_date)
+    doc_date.blank? ? '' : l(doc_date.first.to_date, format: :ja_kan)
   end
 
   # 現場機械情報の持込年月日
   def field_machine_carry_on_date(machine)
     date = machine&.carry_on_date
-    date.blank? ? '年　月　日' : l(date.to_date, format: :long)
+    date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 
   # 現場機械情報の搬出予定日
   def field_machine_carry_out_date(machine)
     date = machine&.carry_out_date
-    date.blank? ? '年　月　日' : l(date.to_date, format: :long)
+    date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 end
