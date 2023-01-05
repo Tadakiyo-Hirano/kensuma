@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_26_114222) do
+ActiveRecord::Schema.define(version: 2022_12_26_023521) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -637,6 +637,7 @@ ActiveRecord::Schema.define(version: 2022_12_26_114222) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.boolean "is_prime_contractor", default: false, null: false
     t.index ["admin_user_id"], name: "index_users_on_admin_user_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
