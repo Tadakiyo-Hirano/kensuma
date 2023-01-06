@@ -687,7 +687,7 @@ module DocumentsHelper
 
   # 持込機械の日付情報　（編集ページで入力、documentsに保存）
   def machine_doc_date(doc_date)
-    doc_date.blank? ? '' : l(doc_date.first.to_date, format: :ja_kan)
+    doc_date.blank? ? '年　月　日' : l(doc_date.first.to_date, format: :ja_kan)
   end
 
   # 現場機械情報の持込年月日
