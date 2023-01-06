@@ -357,6 +357,14 @@ module DocumentsHelper
     )
     "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
   end
+  
+  def too_old
+    str_date = self.admission_date_start.to_i
+    #birth_date = self.content["birth_day_on"].to_i
+    border_date = str_date.prev_year(65).to_i
+    
+    document_info.field_workers.where("content['birth_day_on'] <= ?", Time.parase(border_date))
+  end
 
   def field_solvent_working_process_y(working_process)
     working_process == 'y' ? tag.span('有', class: :circle) : '有'
