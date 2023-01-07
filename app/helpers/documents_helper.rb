@@ -360,7 +360,7 @@ module DocumentsHelper
   
   def too_old
     str_date = self.admission_date_start.to_i
-    ##birth_date = self.content["birth_day_on"].to_i
+    #birth_date = self.content["birth_day_on"].to_i
     border_date = str_date.prev_year(65).to_i
     
     document_info.field_workers.where("content['birth_day_on'] <= ?", Time.parase(border_date))
