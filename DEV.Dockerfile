@@ -1,17 +1,12 @@
 FROM ruby:3.0.3
 
-# install nodejs(LTS)
-# RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+# Node.jsをインストール
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
 
 # install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt update && apt install -y yarn
-
-# Node.jsをインストール
-# RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-#     apt-get install -y nodejs
 
 # その他ツールインストール
 RUN apt-get update && apt-get install -y yarn vim && \
