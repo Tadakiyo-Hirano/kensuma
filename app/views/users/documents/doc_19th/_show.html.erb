@@ -638,7 +638,9 @@
           <td class="doc_19_s18" dir="ltr" colspan="8"><%=@document.content&.[]('construction_type_1st_period_2nd') %></td>
           <td class="doc_19_s18" dir="ltr" colspan="8"><%=@document.content&.[]('construction_type_1st_period_3rd')%></td>
           <td class="doc_19_s18" dir="ltr" colspan="9" rowspan="11">
-            <%=safe_join(@document.content&.[]('daily_safety_and_health_activity').split("\n"),tag(:br)) %>
+            <%if @document.content&.[]('daily_safety_and_health_activity').present?%>
+              <%=safe_join(@document.content&.[]('daily_safety_and_health_activity').split("\n"),tag(:br)) %>
+            <%end%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>

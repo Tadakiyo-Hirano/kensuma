@@ -83,10 +83,6 @@ class Document < ApplicationRecord
     if document_params[:content][:main_material].length > 50
       error_msg_for_doc_19th.push('主な使用資材枠を50字以内にしてください')
     end
-    #主な使用保護具
-    if document_params[:content][:protective_equipment].length > 50
-      error_msg_for_doc_19th.push('主な使用保護具を50字以内にしてください')
-    end
     #使用保護具
     if document_params[:content][:protective_equipment].length > 50
       error_msg_for_doc_19th.push('使用保護具を50字以内にしてください')
@@ -245,10 +241,11 @@ class Document < ApplicationRecord
      #1つ目の工種の入力があるが工種別工事期間の入力がない場合
     if document_params[:content][:construction_type_1st].blank?
       #1つ目の工種の行が入力されていない場合
-      document_params[:content][:construction_type_1st_period_1st].present? ||
-      document_params[:content][:construction_type_1st_period_2nd].present? ||
-      document_params[:content][:construction_type_1st_period_3rd].present?
-      error_msg_for_doc_19th.push('1行目の工種期間が入力されているので工種を入力してください')
+      if document_params[:content][:construction_type_1st_period_1st].present? ||
+        document_params[:content][:construction_type_1st_period_2nd].present? ||
+        document_params[:content][:construction_type_1st_period_3rd].present?
+        error_msg_for_doc_19th.push('1行目の工種期間が入力されているので工種を入力してください')
+      end
     end
     #2つ目の工種の入力があるが工種別工事期間の入力がない場合
     if document_params[:content][:construction_type_2nd].present?
@@ -343,7 +340,7 @@ class Document < ApplicationRecord
       end
     end
     #1列目の月(週)が入力されているが２行目以降の期間が入力されていない
-    if document_params[:content][:construction_type_1st].present?
+    if document_params[:content][:construction_type_period_month_1st].present?
       if document_params[:content][:construction_type_1st_period_1st].blank? &&
         document_params[:content][:construction_type_2nd_period_1st].blank? &&
         document_params[:content][:construction_type_3rd_period_1st].blank? &&
@@ -353,7 +350,7 @@ class Document < ApplicationRecord
       end
     end
      #1列目の月(週)が入力されていないが２行目以降の期間が入力されている
-     if document_params[:content][:construction_type_period_month_1st].blank?
+    if document_params[:content][:construction_type_period_month_1st].blank?
       if document_params[:content][:construction_type_1st_period_1st].present? &&
         document_params[:content][:construction_type_2nd_period_1st].present? ||
         document_params[:content][:construction_type_3rd_period_1st].present? ||
@@ -412,8 +409,8 @@ class Document < ApplicationRecord
     end
     #1行目の作業以外の項目が入力されているが1行目の他項目に空欄がある場合
     if document_params[:content][:work_classification_1st].blank?
-      if document_params[:content][:predicted_disaster_1st].present? &&
-        document_params[:content][:risk_possibility_1st].present? &&
+      if document_params[:content][:predicted_disaster_1st].present? ||
+        document_params[:content][:risk_possibility_1st].present? ||
         document_params[:content][:risk_reduction_measures_1st].present?
         error_msg_for_doc_19th.push('1行目の作業を入力していください。')
       end
@@ -428,8 +425,8 @@ class Document < ApplicationRecord
     end
     #2行目の作業以外の項目が入力されているが2行目の他項目に空欄がある場合
     if document_params[:content][:work_classification_2nd].blank?
-      if document_params[:content][:predicted_disaster_3rd].present? &&
-        document_params[:content][:risk_possibility_3rd].present? &&
+      if document_params[:content][:predicted_disaster_3rd].present? ||
+        document_params[:content][:risk_possibility_3rd].present? ||
         document_params[:content][:risk_reduction_measures_3rd].present?
         error_msg_for_doc_19th.push('2行目の作業が入力してください')
       end
@@ -444,8 +441,8 @@ class Document < ApplicationRecord
     end
     #3行目の作業以外の項目が入力されているが3行目の他項目に空欄がある場合
     if document_params[:content][:work_classification_3rd].blank?
-      if document_params[:content][:predicted_disaster_6th].present? &&
-        document_params[:content][:risk_possibility_6th].present? &&
+      if document_params[:content][:predicted_disaster_6th].present? ||
+        document_params[:content][:risk_possibility_6th].present? ||
         document_params[:content][:risk_reduction_measures_6th].present?
         error_msg_for_doc_19th.push('3行目作業を入力してください。')
       end

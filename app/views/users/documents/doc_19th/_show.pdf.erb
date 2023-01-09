@@ -166,7 +166,7 @@
           <td class="doc_19_s3"></td>
           <td class="doc_19_s3"></td>
           <td class="doc_19_s8" dir="ltr" colspan="4" rowspan="2">会 社 名</td>
-          <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2"><%=document_subcon_info_for_19th.business.name%></td>
+          <td class="doc_19_s9" dir="ltr" colspan="10" rowspan="2"><%=document_preparation_company_name%></td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -485,7 +485,11 @@
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
           <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生方針</td>
-          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><%=@document.content&.[]('safety_and_health_construction_policy') %></td>
+          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
+            <%if @document.content&.[]('safety_and_health_construction_policy').present?%>
+              <%=safe_join(@document.content&.[]('safety_and_health_construction_policy').split("\n"),tag(:br)) %>
+            <%end%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -539,7 +543,11 @@
         <tr style="height: 24px">
           <td class="doc_19_s5" dir="ltr"></td>
           <td class="doc_19_s6" dir="ltr" colspan="7" rowspan="2">工事安全衛生目標</td>
-          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2"><%=@document.content&.[]('safety_and_health_construction_objective')%></td>
+          <td class="doc_19_s14" dir="ltr" colspan="33" rowspan="2">
+            <%if @document.content&.[]('safety_and_health_construction_policy').present?%>
+              <%=safe_join(@document.content&.[]('safety_and_health_construction_objective').split("\n"),tag(:br)) %>
+            <%end%>
+          </td>
           <td class="doc_19_s2"></td>
         </tr>
         <tr style="height: 24px">
@@ -646,7 +654,9 @@
             <%=@document.content&.[]('construction_type_1st_period_3rd')%>
           </td>
           <td class="doc_19_s18" dir="ltr" colspan="10" rowspan="11">
-            <%=@document.content&.[]('daily_safety_and_health_activity')%>
+            <%if @document.content&.[]('daily_safety_and_health_activity').present?%>
+              <%=safe_join(@document.content&.[]('daily_safety_and_health_activity').split("\n"),tag(:br)) %>
+            <%end%>
           </td>
           <td class="doc_19_s2"></td>
         </tr>

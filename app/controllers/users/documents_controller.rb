@@ -28,7 +28,7 @@ module Users
     end
 
     def edit
-      @error_msg_for_doc_19th == nil
+      @error_msg_for_doc_19th = nil
     end
 
     def update
