@@ -66,6 +66,11 @@ module Users
             reception_confirmation_date:   params.dig(:document, :content, :reception_confirmation_date)
           }
         )
+        # params.require(:document).permit(
+        #   content:[
+        #     :date_submitted, :precautions, :prime_contractor_confirmation, :reception_confirmation_date
+        #   ]
+        # )
       end
     end
   end
