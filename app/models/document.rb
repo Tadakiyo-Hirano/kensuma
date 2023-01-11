@@ -9,6 +9,9 @@ class Document < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  scope :first_subcon_documents_type, -> { where(document_type: [4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20,  21, 23]) }
+  scope :second_subcon_documents_type, -> { where(document_type: [5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
+
   enum document_type: {
     cover_document:             1,  # 表紙
     table_of_contents_document: 2,  # 目次
