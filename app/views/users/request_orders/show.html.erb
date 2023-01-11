@@ -189,7 +189,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <h5 class="first_request_orders">元請（自身の情報）</h5>
+        <h5 class="first_request_orders">
+          <%= sc_hierarchy(@request_order) %>（自身の情報）
+        </h5>
         <div class="card card-primary card-outline">
           <div class="card-body">
             <div class="row">
@@ -199,6 +201,11 @@
             <div class="col-md-8 mb-2">
               <%= Business.human_attribute_name(:name) %>：<%= @request_order.business.name %>
               <%= link_to "(書類一覧)", users_request_order_documents_path(@request_order) %>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <% if sc_hierarchy(@request_order) == '元請' %>
+                <%= render 'genecon_documents' %>
+              <% end %>
             </div>
             </div>
           </div>
@@ -226,7 +233,9 @@
     <div class="row">
       <div class="col-md-12">
         <% @sub_request_orders.each do |first_request_order| %>
-          <h5 class="first_request_orders">一次下請け</h5>
+          <h5 class="first_request_orders">
+            <%= sc_hierarchy(first_request_order) %>下請け
+          </h5>
           <div class="card card-secondary card-outline first-request-orders">
             <div class="card-body">
               <div class="row">
@@ -261,7 +270,9 @@
           </div>
           <div class="collapse navbar-collapse" id="navbarNav">
           <% first_request_order.children.each do |second_request_order| %>
-            <h5 class="second_request_orders">二次下請け</h5>
+            <h5 class="second_request_orders">
+              <%= sc_hierarchy(second_request_order) %>下請け
+            </h5>
             <div class="card card-secondary card-outline second_request_orders">
               <div class="card-body">
                 <div class="row">
@@ -278,7 +289,9 @@
               </div>
             </div>
             <% second_request_order.children.each do |third_request_order| %>
-              <h5 class="third_request_orders">三次下請け</h5>
+              <h5 class="third_request_orders">
+                <%= sc_hierarchy(third_request_order) %>下請け
+              </h5>
               <div class="card card-secondary card-outline third_request_orders">
                 <div class="card-body">
                   <div class="row">
@@ -295,7 +308,9 @@
                 </div>
               </div>
               <% third_request_order.children.each do |forth_request_order| %>
-                <h5 class="forth_request_orders">四次下請け</h5>
+                <h5 class="forth_request_orders">
+                  <%= sc_hierarchy(forth_request_order) %>下請け
+                </h5>
                 <div class="card card-secondary card-outline forth_request_orders">
                   <div class="card-body">
                     <div class="row">

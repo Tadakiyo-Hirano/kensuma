@@ -1,0 +1,28 @@
+<table class="table table-sm table-hover text-nowrap">
+	<thead>
+		<tr>
+			<th>No.</th>
+			<th>書類名</th>
+			<th>詳細</th>
+			<th>PDF</th>
+		</tr>
+	</thead>
+	<tbody>
+    <% @genecon_documents.each do |genecon_document| %>
+      <tr>
+        <td>
+          <%= genecon_document.document_type_before_type_cast %>
+        </td>
+        <td>
+          <%= genecon_document.document_type_i18n %>
+        </td>
+        <td>
+          <%= link_to '詳細', users_request_order_document_path(@request_order.uuid, genecon_document.uuid) %>
+        </td>
+        <td>
+          <%= link_to '詳細', users_request_order_document_path(@request_order.uuid, genecon_document.uuid) %>
+        </td>
+      </tr>
+    <% end %>
+	</tbody>
+</table>

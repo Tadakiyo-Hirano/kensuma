@@ -11,6 +11,7 @@ module Users
 
     def show
       @sub_request_orders = @request_order.children
+      @genecon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents
     end
 
     def edit
