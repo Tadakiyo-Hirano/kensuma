@@ -41,11 +41,11 @@
         </tr>
       </thead>
       <tbody class="t-content">
-        <% document_info.field_workers.too_old.each do |field_worker| %>
+        <% document_info.field_workers.where(id: over_65).each do |field_worker| %>
         <tr>
-          <td>65歳以上の「入場する作業員」10-008</td><!-- 65歳以上の「入場する作業員」10-008 -->
-          <td>「生_年月日」10-009</td><!--「生年月日」10-009 -->
-          <td>「年齢」10-010</td><!--「年齢」10-010 -->
+          <td><%= field_worker.content["name"] %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+          <td><%= field_worker.content["birth_day_on"] %></td><!--「生年月日」10-009 -->
+          <td><%= age_for_over_65(field_worker) %></td><!--「年齢」10-010 -->
           <td>「職種」10-011</td><!--「職種」10-011 -->
           <td>「高年齢就労者・作業内容」10-012</td><!--「高年齢就労者・作業内容」10-012 -->
         </tr>
