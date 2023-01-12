@@ -360,12 +360,11 @@ module DocumentsHelper
   
   def over_65
     target_ids = []
-
     document_info.field_workers.each do |field_worker|
       birth_date = field_worker.content["birth_day_on"].to_date
-      str_date = field_worker.admission_date_start.to_date
+      str_date = field_worker.admission_date_start.to_date #入場日
       border_date = str_date.prev_year(65) #入場日から65年前の日付
-      if border_date > birth_date 
+      if border_date >= birth_date 
         target_ids.push field_worker.id
       end
     end
@@ -374,13 +373,10 @@ module DocumentsHelper
 
   def age_for_over_65(worker)
     date_format = "%Y%m%d"
-    
     birth_date = FieldWorker.find(worker.id).content["birth_day_on"].to_date.strftime(date_format).to_i
     str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i
-    logger.debug("誕生日は#{birth_date}、起点日は#{str_date}")
     age = (str_date - birth_date) / 10000
     return age
-    logger.debug("生年月日は#{birth_date}")
   end
 
   def field_solvent_working_process_y(working_process)
