@@ -11,6 +11,7 @@ class Document < ApplicationRecord
 
   scope :first_subcon_documents_type, -> { where(document_type: [4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20,  21, 23]) }
   scope :second_subcon_documents_type, -> { where(document_type: [5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
+  scope :third_or_later_subcon_documents_type, -> { where(document_type: [8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
 
   enum document_type: {
     cover_document:             1,  # 表紙

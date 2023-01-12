@@ -203,12 +203,15 @@
               <%= link_to "(書類一覧)", users_request_order_documents_path(@request_order) %>
             </div>
             <div class="card-body table-responsive p-0">
-              <% if sc_hierarchy(@request_order) == '元請' %>
+              <% case sc_hierarchy(@request_order) %>
+              <% when '元請' %>
                 <%= render 'genecon_documents' %>
-              <% elsif sc_hierarchy(@request_order) == '一次' %>
+              <% when '一次' %>
                 <%= render 'first_subcon_documents' %>
-              <% elsif sc_hierarchy(@request_order) == '二次' %>
+              <% when '二次' %>
                 <%= render 'second_subcon_documents' %>
+              <% else %>
+                <%= render 'third_or_later_subcon_documents' %>
               <% end %>
             </div>
             </div>
