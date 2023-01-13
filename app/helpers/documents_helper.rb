@@ -372,11 +372,13 @@ module DocumentsHelper
   end
 
   def age_for_over_65(worker)
-    date_format = "%Y%m%d"
-    birth_date = FieldWorker.find(worker.id).content["birth_day_on"].to_date.strftime(date_format).to_i
-    str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i
-    age = (str_date - birth_date) / 10000
-    return age
+    if worker.present?
+      date_format = "%Y%m%d"
+      birth_date = FieldWorker.find(worker.id).content["birth_day_on"].to_date.strftime(date_format).to_i
+      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i
+      age = (str_date - birth_date) / 10000
+      return age
+    end
   end
 
   def field_solvent_working_process_y(working_process)

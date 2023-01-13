@@ -1,6 +1,4 @@
 <!-- (10)高年齢者作業申告書 -->
-<% j = 1 %>
-<% document_info.field_workers.where(id: over_65).each_slice(1).each_with_index do |(field_worker), i| %>
 <div class="container">
   <div class="title text-center"><h2>高齢者就労報告書</h2></div>
   <div class="submission_date text-right">
@@ -43,17 +41,18 @@
         </tr>
       </thead>
       <tbody class="t-content">
-        
+      <% j = 1 %>
+      <% document_info.field_workers.where(id: over_65).each_slice(1).each_with_index do |(field_worker), i| %>
         <tr>
           <td><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
           <td><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
           <td><%= age_for_over_65(field_worker) %></td><!--「年齢」10-010 -->
-          <td><%= @document.content&.[]("occupation_#{j}") %></td><!--「職種」10-011 -->
-          <td><%= @document.content&.[]("older_work_#{j}") %></td><!--「高年齢就労者・作業内容」10-012 -->
+          <td><%= @document.content&.[]("occupation_#{j.to_i.ordinalize}") %></td><!--「職種」10-011 -->
+          <td><%= @document.content&.[]("older_work_#{j.to_i.ordinalize}") %></td><!--「高年齢就労者・作業内容」10-012 -->
         </tr>
-        <% j += 1 %>
+      <% j += 1 %>
+      <% end %>
       </tbody>
     </table>
   </div>
 </div>
-<% end %>
