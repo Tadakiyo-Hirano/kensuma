@@ -39,4 +39,40 @@ class Document < ApplicationRecord
   def to_param
     uuid
   end
+
+  # エラーメッセージ(持込機械等(電動工具電気溶接機等)使用届)
+  def error_msg_for_doc_14th(document_params)
+    error_msg_for_doc_14th = []
+    # 提出日
+    if document_params[:content][:date_submitted].blank?
+      error_msg_for_doc_14th.push('提出日を入力してください')
+    end
+    # 持込年月日
+    if document_params[:content][:date_submitted].blank?
+      error_msg_for_doc_14th.push('提出日を入力してください')
+    end
+    # 搬出予定年月日
+    if document_params[:content][:date_submitted].blank?
+      error_msg_for_doc_14th.push('提出日を入力してください')
+    end
+      error_msg_for_doc_14th
+  end
 end
+
+# #エラーメッセージ(工事安全衛生計画書用)
+# def error_msg_for_doc_19th(document_params)
+#   error_msg_for_doc_19th = []
+#   #作成日
+#   if document_params[:content][:date_created].blank?
+#     error_msg_for_doc_19th.push('作成日を入力してください')
+#   end
+#   #工事安全衛生方針
+#   if document_params[:content][:safety_and_health_construction_policy].blank?
+#     error_msg_for_doc_19th.push('工事安全衛生方針を記入してください')
+#   elsif document_params[:content][:safety_and_health_construction_policy].length > 300
+#     error_msg_for_doc_19th.push('工事安全衛生方針を300字以内にしてください')
+#   else
+#     nil
+#   end
+#   error_msg_for_doc_19th
+# end
