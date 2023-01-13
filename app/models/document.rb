@@ -9,9 +9,14 @@ class Document < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  # 自身の書類一覧取得
   scope :first_subcon_documents_type, -> { where(document_type: [4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20,  21, 23]) }
   scope :second_subcon_documents_type, -> { where(document_type: [5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
   scope :third_or_later_subcon_documents_type, -> { where(document_type: [8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
+  # 元請け配下の一次下請け書類一覧取得
+  scope :genecon_lower_first_documents_type, -> { where(document_type: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20,  21, 23, 24]) }
+  # 一次下請け配下の二次下請け書類一覧取得
+  scope :first_subcon_lower_second_documents_type, -> { where(document_type: [5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
 
   enum document_type: {
     cover_document:             1,  # 表紙

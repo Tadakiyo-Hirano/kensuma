@@ -203,16 +203,7 @@
               <%= link_to "(書類一覧)", users_request_order_documents_path(@request_order) %>
             </div>
             <div class="card-body table-responsive p-0">
-              <% case sc_hierarchy(@request_order) %>
-              <% when '元請' %>
-                <%= render 'genecon_documents' %>
-              <% when '一次' %>
-                <%= render 'first_subcon_documents' %>
-              <% when '二次' %>
-                <%= render 'second_subcon_documents' %>
-              <% else %>
-                <%= render 'third_or_later_subcon_documents' %>
-              <% end %>
+              <%= render 'current_user_documents', request_order: @request_order %>
             </div>
             </div>
           </div>
@@ -272,6 +263,38 @@
                   <%= Business.human_attribute_name(:name) %>：<%= first_request_order.business.name %>
                   <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, first_request_order) %>
                 </div>
+
+                <table class="table table-sm table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>書類名</th>
+                      <th>詳細</th>
+                      <th>PDF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% genecon_lower_first_documents_type(first_request_order)&.each do |first_document| %>
+                      <tr>
+                        <td>
+                          <%= first_document.document_type_before_type_cast %>
+                        </td>
+                        <td>
+                          <%= first_document.document_type_i18n %>
+                        </td>
+                        <td>
+                          <%= link_to '詳細', users_request_order_sub_request_order_document_path(@request_order.uuid, first_request_order.uuid, first_document) %>
+                        </td>
+                        <td>
+                          <%= link_to '詳細', users_request_order_sub_request_order_document_path(@request_order.uuid, first_request_order.uuid, first_document, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                
+
+
               </div>
             </div>
           </div>

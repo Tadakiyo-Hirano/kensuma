@@ -449,4 +449,33 @@ module DocumentsHelper
       document_info.content.nil? ? nil : document_info
     end
   end
+
+  # 下請発注情報詳細
+
+  # 自身の書類一覧取得
+
+  def current_user_documents(request_order)
+  case sc_hierarchy(request_order)
+    when '元請'
+      @genecon_documents
+    when '一次'
+      @first_subcon_documents
+    when '二次'
+      @second_subcon_documents
+    else
+      @third_or_later_subcon_documents
+    end
+  end
+
+  # 自身の一つ下の階層の書類一覧取得
+  def genecon_lower_first_documents_type(request_order)
+    case request_order.parent_id
+    when 1
+      # 自身が元請けの場合の閲覧可能な一次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.genecon_lower_first_documents_type
+    when 2
+      # 自身が一次下請けの場合の閲覧可能な二次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.first_subcon_lower_second_documents_type
+    end
+  end
 end
