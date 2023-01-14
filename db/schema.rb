@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_20_055915) do
+ActiveRecord::Schema.define(version: 2023_01_01_063423) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -544,6 +544,13 @@ ActiveRecord::Schema.define(version: 2022_12_20_055915) do
     t.index ["order_id"], name: "index_request_orders_on_order_id"
   end
 
+  create_table "safety_health_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "short_name", null: false
@@ -630,6 +637,15 @@ ActiveRecord::Schema.define(version: 2022_12_20_055915) do
     t.integer "gender"
     t.integer "role", default: 1
     t.bigint "admin_user_id"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
+    t.boolean "is_prime_contractor", default: false, null: false
     t.index ["admin_user_id"], name: "index_users_on_admin_user_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

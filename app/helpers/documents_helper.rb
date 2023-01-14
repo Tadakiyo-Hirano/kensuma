@@ -248,6 +248,92 @@ module DocumentsHelper
     end
   end
 
+  # 新規入場者調査票用（資格-技能講習-作業主任者-その他枠）
+  def worker_skill_training_work_other(worker)
+    trainings = worker&.content&.[]('worker_skill_trainings')
+
+    unless trainings.nil?
+      trainings = trainings.map { |training| SkillTraining.find(training['skill_training_id']).short_name }
+      trainings.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_work =
+        %w[整地 基礎 解体 不整 高所 フォ ショ 小ク 床ク
+           ガス 玉掛 コ破 地山 石綿 有機 型枠 足場 ボ取 コ解 酸欠]
+      trainings.delete_if do |t_work|
+        no_work.include?(t_work)
+      end
+    end
+
+    trainings2 = trainings
+    if trainings2.present?
+      "■その他( #{trainings2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
+    end
+  end
+
+  # 新規入場者調査票用（資格-特別教育-酸素欠乏危険作業枠）
+  def worker_special_education_oxygen(worker)
+    text = ['酸素欠乏（1種）', '酸素欠乏（2種）']
+    (text & worker_special_education(worker).split).present? ? '■酸素欠乏危険作業' : '▢酸素欠乏危険作業'
+  end
+
+  # 新規入場者調査票用（資格-特別教育-電気取扱枠）
+  def worker_special_education_electrical(worker)
+    text = ['低圧電気取扱', '低圧電気取扱（開閉器の操作）', '高圧電気取扱', '特別高圧電気取扱']
+    (text & worker_special_education(worker).split).present? ? '■電気取扱' : '▢電気取扱'
+  end
+
+  # 新規入場者調査票用（資格-特別教育-その他枠）
+  def worker_special_education_other(worker)
+    educations = worker&.content&.[]('worker_special_educations')
+
+    unless educations.nil?
+      educations = educations.map { |education| SpecialEducation.find(education['special_education_id']).name }
+      educations.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_education =
+        %w[酸素欠乏（1種） 酸素欠乏（2種） 小型車両系建設機械（整地・運搬・積込み用及び掘削用）（3t未満）
+           小型車両系建設機械（基礎工事用）（3t未満） ローラー 車両系建設機械（コンクリート打設用）
+           小型車両系建設機械（解体用）（3t未満） 不整地運搬車（1t未満） 高所作業車(10m未満）
+           ボーリングマシン フォークリフト（1t未満） ショベルローダー（1t未満） 巻上げ機 建設用リフト
+           玉掛け（1t未満） ゴンドラ アーク溶接 研削砥石 低圧電気取扱 低圧電気取扱（開閉器の操作） 高圧電気取扱
+           特別高圧電気取扱 足場の組立て ロープ高所作業 フルハーネス型の墜落制止用器具]
+      educations.delete_if do |e_work|
+        no_education.include?(e_work)
+      end
+    end
+
+    educations2 = educations
+    if educations2.present?
+      "■その他( #{educations2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
+    end
+  end
+
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「はい」）
+  def questionnaire_business_type_yes(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name == r_name
+      status = Business.find(document_info.business_id).business_type_i18n
+      status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
+    else
+      '1. はい'
+    end
+  end
+
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「いいえ」）
+  def questionnaire_business_type_no(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name != r_name
+      tag.span('2. いいえ', class: :circle)
+    else
+      status = Business.find(document_info.business_id).business_type_i18n
+      status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+    end
+  end
+
   # 作業員の免許情報
   def worker_license(worker)
     licenses = worker&.content&.[]('worker_licenses')

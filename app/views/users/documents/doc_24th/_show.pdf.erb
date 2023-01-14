@@ -2,6 +2,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
+<% document_info.field_workers.each do |field_worker| %>
+<div class="page-break">
   <div class="ritz grid-container" dir="ltr">
   <table class="waffle" cellspacing="0" cellpadding="0">
     <tbody class ="doc_24_s52">
@@ -18,7 +20,7 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s0" dir="ltr" colspan="3">参考資料第４号</td>
+        <td class="doc_24_s0" dir="ltr" colspan="3">参考資料第４号</td> <!--■ -->
         <td class="doc_24_s1" dir="ltr"></td>
         <td class="doc_24_s1" dir="ltr"></td>
         <td class="doc_24_s2"></td>
@@ -61,7 +63,7 @@
         <td class="doc_24_s1"></td>
         <td class="doc_24_s3"></td>
         <td class="doc_24_s2" dir="ltr"></td>
-        <td class="doc_24_s4" dir="ltr" colspan="5" rowspan="2"><a target="_blank" href="#rangeid=2070272224">「各作業員の入場年月日・始期」24-001</a></td>
+        <td class="doc_24_s4" dir="ltr" colspan="5" rowspan="2"><%= field_worker.admission_date_start %></td> <!-- 「各作業員の入場年月日・始期」24-001 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -87,7 +89,7 @@
         <td class="doc_24_s1"></td>
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-        <td class="doc_24_s9" dir="ltr" colspan="6" rowspan="3"><a target="_blank" href="#rangeid=1710806225">「元請会社の確認欄」24-002</a></td>
+        <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= document_info.content&.[]('prime_contractor_confirmation') %></td> <!-- 「元請会社の確認欄」24-002 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -112,7 +114,7 @@
       <tr style="height: 19px">
         <td class="doc_24_s3"></td>
         <td class="doc_24_s1"></td>
-        <td class="doc_24_s10" dir="ltr" colspan="8" rowspan="2"><%= document_site_info.site_name %><!--「事業所名（現場名）」24-003 --></td>
+        <td class="doc_24_s10" dir="ltr" colspan="8" rowspan="2"><%= document_site_info.site_name %></td> <!--「事業所名（現場名）」24-003 -->
         <td class="doc_24_s3"></td>
         <td class="doc_24_s3"></td>
         <td class="doc_24_s3"></td>
@@ -150,22 +152,22 @@
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="2">ふりがな</td>
-        <td class="doc_24_s15" dir="ltr" colspan="6"><a target="_blank" href="#rangeid=801682496">「フリガナ」24-004</a></td>
+        <td class="doc_24_s15" dir="ltr" colspan="6"><%= field_worker.content["name_kana"] %></td> <!-- 「フリガナ」24-004 -->
         <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">生年月日</td>
-        <td class="doc_24_s16" dir="ltr" colspan="5" rowspan="3"><a target="_blank" href="#rangeid=2124435396">「生年月日 」24-006</a></td>
+        <td class="doc_24_s16" dir="ltr" colspan="5" rowspan="3"><%= field_worker.content["birth_day_on"] %></td> <!-- 「生年月日 」24-006 -->
         <td class="doc_24_s17" dir="ltr" rowspan="3">(</td>
-        <td class="doc_24_s18" dir="ltr" rowspan="3"><a target="_blank" href="#rangeid=1425775245">「年齢」24-007</a></td>
+        <td class="doc_24_s18" dir="ltr" rowspan="3"><%= worker_age(field_worker).delete("歳") %></td> <!-- 「年齢」24-007 -->
         <td class="doc_24_s19" dir="ltr" rowspan="3">)</td>
         <td class="doc_24_s8" dir="ltr" rowspan="3">歳</td>
         <td class="doc_24_s17" dir="ltr" colspan="2" rowspan="3">血液型</td>
-        <td class="doc_24_s18" dir="ltr" rowspan="3"><a target="_blank" href="#rangeid=1957899918">「血液型」24-008</a></td>
+        <td class="doc_24_s18" dir="ltr" rowspan="3"><%= worker_abo_blood_type(field_worker) %></td> <!-- 「血液型」24-008 -->
         <td class="doc_24_s8" dir="ltr" rowspan="3">型</td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="2">氏 名</td>
-        <td class="doc_24_s15" dir="ltr" colspan="6" rowspan="2"><a target="_blank" href="#rangeid=1893841216">「氏名」24-005</a></td>
+        <td class="doc_24_s15" dir="ltr" colspan="6" rowspan="2"><%= field_worker.content["name"] %></td> <!-- 「氏名」24-005 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -174,7 +176,7 @@
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">現住所</td>
-        <td class="doc_24_s20" dir="ltr" colspan="21" rowspan="2"><a target="_blank" href="#rangeid=1155290919">「住所」24-009</a></td>
+        <td class="doc_24_s20" dir="ltr" colspan="21" rowspan="2"><%= field_worker.content["my_address"] %></td> <!-- 「住所」24-009 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -183,7 +185,7 @@
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s21" dir="ltr" colspan="12">TEL</td>
-        <td class="doc_24_s9" dir="ltr" colspan="9"><a target="_blank" href="#rangeid=749952696">「電話番号」24-010</a></td>
+        <td class="doc_24_s9" dir="ltr" colspan="9"><%= field_worker.content["my_phone_number"] %></td> <!-- 「電話番号」24-010 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -204,10 +206,10 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s15" dir="ltr" colspan="7" rowspan="2"><a target="_blank" href="#rangeid=515377860">「緊急連絡先（氏名）」24-011</a></td>
-        <td class="doc_24_s23" dir="ltr" colspan="2" rowspan="2"><a target="_blank" href="#rangeid=1250531732">「緊急連絡先（続柄）」24-012</a></td>
-        <td class="doc_24_s24" dir="ltr" colspan="3" rowspan="2"><a target="_blank" href="#rangeid=376004719">「緊急連絡先（電話番号）」24-013</a></td>
-        <td class="doc_24_s9" dir="ltr" colspan="11" rowspan="2"><a target="_blank" href="#rangeid=972114594">「緊急連絡先（住所）」24-014</a></td>
+        <td class="doc_24_s99" dir="ltr" colspan="7" rowspan="2"><%= "※24-011未実装※" %></td> <!-- 「緊急連絡先（氏名）」24-011 -->
+        <td class="doc_24_s98" dir="ltr" colspan="2" rowspan="2"><%= "※24-012未実装※" %></td> <!-- 「緊急連絡先（続柄）」24-012 -->
+        <td class="doc_24_s9" dir="ltr" colspan="3" rowspan="2"><%= field_worker.content["family_phone_number"] %></td> <!-- 「緊急連絡先（電話番号）」24-013 -->
+        <td class="doc_24_s9" dir="ltr" colspan="11" rowspan="2"><%= field_worker.content["family_address"] %></td> <!-- 「緊急連絡先（住所）」24-014 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -225,15 +227,15 @@
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="3">事 業 者 名</td>
         <td class="doc_24_s17" dir="ltr" colspan="2">（一次）</td>
-        <td class="doc_24_s15" dir="ltr" colspan="7"><%= document_site_info.business.name %><!-- 一次会社名」24-015 --></td>
+        <td class="doc_24_s15" dir="ltr" colspan="7"><%= document_site_info.business.name %></td> <!-- 「一次会社名」24-015 -->
         <td class="doc_24_s17" dir="ltr" colspan="3">雇用年月日：</td>
-        <td class="doc_24_s9" dir="ltr" colspan="8"><a target="_blank" href="#rangeid=1858892675">「雇入年月日（年月日）」24-016</a></td>
+        <td class="doc_24_s9" dir="ltr" colspan="8"><%= field_worker.content["hiring_on"] %></td> <!-- 「雇入年月日（年月日）」24-016 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="3">所 属 会 社</td>
-        <td class="doc_24_s9" dir="ltr" colspan="20"><a target="_blank" href="#rangeid=1700570678">「会社名」24-017</a></td>
+        <td class="doc_24_s96" dir="ltr" colspan="20"><%= "※24-017未実装※" %></td> <!-- 「会社名」24-017 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -245,9 +247,9 @@
         <td class="doc_24_s26" dir="ltr"></td>
         <td class="doc_24_s26" dir="ltr"></td>
         <td class="doc_24_s27" dir="ltr" colspan="2">2. 未 だ</td>
-        <td class="doc_24_s28" dir="ltr" colspan="5"><a target="_blank" href="#rangeid=1440203359">⇐「雇用契約書（済or未)」24-018</a></td>
+        <td class="doc_24_s28" dir="ltr" colspan="5"><%= "※⇐24-018未実装※" %></td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
         <td class="doc_24_s17" dir="ltr" colspan="2">職 種：</td>
-        <td class="doc_24_s29" dir="ltr" colspan="7"><a target="_blank" href="#rangeid=802426094">「職種」24-019</a></td>
+        <td class="doc_24_s29" dir="ltr" colspan="7"><%= "※24-019未実装※" %></td> <!-- 「職種」24-019 -->
         <td class="doc_24_s8" dir="ltr">工</td>
         <td class="doc_24_s3"></td>
       </tr>
@@ -263,13 +265,17 @@
         <td class="doc_24_s7"></td>
         <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは一人親方・中小事業主ですか</td>
         <td class="doc_24_s30"></td>
-        <td class="doc_24_s27" dir="ltr" colspan="5">1. はい</td>
-        <td class="doc_24_s31" dir="ltr" colspan="5">2. いいえ</td>
+        <td class="doc_24_s27" dir="ltr" colspan="5">
+          <%= questionnaire_business_type_yes(field_worker) %>
+        </td>
+        <td class="doc_24_s31" dir="ltr" colspan="5">
+          <%= questionnaire_business_type_no(field_worker) %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">　1. に〇を付けた方は、労災保険の特別加入していますか。</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">　1. に〇を付けた方は、労災保険の特別加入していますか。【回答：全未実装】</td>
         <td class="doc_24_s30"></td>
         <td class="doc_24_s27" dir="ltr" colspan="5">1. している</td>
         <td class="doc_24_s31" dir="ltr" colspan="5">2. 未加入</td>
@@ -277,16 +283,16 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは建設現場で働きはじめてどのくらいになりますか。</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは建設現場で働きはじめてどのくらいになりますか。【回答：全未実装】</td>
         <td class="doc_24_s30"></td>
         <td class="doc_24_s27" dir="ltr" colspan="3">1. 1年以内</td>
-        <td class="doc_24_s27" dir="ltr" colspan="3">2. 1～3年</td>
+        <td class="doc_24_s27" dir="ltr" colspan="3">2. 1〜3年</td>
         <td class="doc_24_s31" dir="ltr" colspan="4">3. 3年以上</td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは健康診断を受けましたか。</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは健康診断を受けましたか。【回答：全未実装】</td>
         <td class="doc_24_s30"></td>
         <td class="doc_24_s27" dir="ltr" colspan="5">1. 受けた</td>
         <td class="doc_24_s31" dir="ltr" colspan="5">2. 受けていない</td>
@@ -294,7 +300,7 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたの最近の健康状態はどうですか。</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたの最近の健康状態はどうですか。【回答：全未実装】</td>
         <td class="doc_24_s30"></td>
         <td class="doc_24_s27" dir="ltr" colspan="2">1. よい</td>
         <td class="doc_24_s27" dir="ltr" colspan="4">2. まあまあである</td>
@@ -303,7 +309,7 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。【回答：全未実装】</td>
         <td class="doc_24_s30"></td>
         <td class="doc_24_s27" dir="ltr" colspan="5">1. はい</td>
         <td class="doc_24_s31" dir="ltr" colspan="5">2. いいえ</td>
@@ -320,118 +326,200 @@
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s33" dir="ltr" colspan="4" rowspan="2">技能講習<br>（作業主任者）</td>
-        <td class="doc_24_s34" dir="ltr" colspan="3">▢ガス溶接</td>
-        <td class="doc_24_s34" dir="ltr" colspan="5">▢玉掛け</td>
-        <td class="doc_24_s34" dir="ltr" colspan="5">▢コンクリート破砕器</td>
-        <td class="doc_24_s34" dir="ltr" colspan="3">▢地山の掘削</td>
-        <td class="doc_24_s35" dir="ltr" colspan="3">▢石綿</td>
+        <td class="doc_24_s34" dir="ltr" colspan="3">
+          <%= worker_skill_training(field_worker).include?("ガス") ? "■ガス溶接" : "▢ガス溶接" %>
+        </td>
+        <td class="doc_24_s34" dir="ltr" colspan="5">
+          <%= worker_skill_training(field_worker).include?("玉掛") ? "■玉掛け" : "▢玉掛け" %>
+        </td>
+        <td class="doc_24_s34" dir="ltr" colspan="5">
+          <%= worker_skill_training(field_worker).include?("コ破") ? "■コンクリート破砕器" : "▢コンクリート破砕器" %>
+        </td>
+        <td class="doc_24_s34" dir="ltr" colspan="3">
+          <%= worker_skill_training(field_worker).include?("地山") ? "■地山の掘削" : "▢地山の掘削" %>
+        </td>
+        <td class="doc_24_s35" dir="ltr" colspan="3">
+          <%= worker_skill_training(field_worker).include?("石綿") ? "■石綿" : "▢石綿" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s34" dir="ltr" colspan="3">▢有機溶剤</td>
-        <td class="doc_24_s34" dir="ltr" colspan="5">▢型枠支保工の組立て等</td>
-        <td class="doc_24_s34" dir="ltr" colspan="5">▢足場の組立て等</td>
-        <td class="doc_24_s34" dir="ltr" colspan="3">▢ボイラー取扱</td>
+        <td class="doc_24_s34" dir="ltr" colspan="3">
+        <%= worker_skill_training(field_worker).include?("有機") ? "■有機溶剤" : "▢有機溶剤" %>
+        </td>
+        <td class="doc_24_s34" dir="ltr" colspan="5">
+          <%= worker_skill_training(field_worker).include?("型枠") ? "■型枠支保工の組立て等" : "▢型枠支保工の組立て等" %>
+        </td>
+        <td class="doc_24_s34" dir="ltr" colspan="5">
+          <%= worker_skill_training(field_worker).include?("足場") ? "■足場の組立て等" : "▢足場の組立て等" %>
+        </td>
+        <td class="doc_24_s34" dir="ltr" colspan="3">
+          <%= worker_skill_training(field_worker).include?("ボ取") ? "■ボイラー取扱" : "▢ボイラー取扱" %>
+        </td>
         <td class="doc_24_s35" colspan="3"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s36" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=835419303">「技能講習」24-026</a></td>
-        <td class="doc_24_s37" dir="ltr" colspan="8">▢コンクリート造の工作物の解体等</td>
-        <td class="doc_24_s37" dir="ltr" colspan="5">▢酸素欠乏危険</td>
-        <td class="doc_24_s38" dir="ltr" colspan="6">▢その他（　　　　　　　　）</td>
+        <td class="doc_24_s36" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
+        <td class="doc_24_s37" dir="ltr" colspan="8">
+          <%= worker_skill_training(field_worker).include?("コ解") ? "■コンクリート造の工作物の解体等" : "▢コンクリート造の工作物の解体等" %>
+        </td>
+        <td class="doc_24_s37" dir="ltr" colspan="5">
+          <%= worker_skill_training(field_worker).include?("酸欠") ? "■酸素欠乏危険" : "▢酸素欠乏危険" %>
+        </td>
+        <td class="doc_24_s38" dir="ltr" colspan="6"><%= worker_skill_training_work_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s33" dir="ltr" colspan="4" rowspan="2">技能講習<br>（運転士）</td>
-        <td class="doc_24_s39" dir="ltr" colspan="9">▢１t以上５t未満の移動式クレーン</td>
-        <td class="doc_24_s40" dir="ltr" colspan="10">▢３t以上の車両系建設機械</td>
+        <td class="doc_24_s39" dir="ltr" colspan="9">
+          <%= worker_skill_training(field_worker).include?("小ク") ? "■1t以上5t未満の移動式クレーン" : "▢1t以上5t未満の移動式クレーン" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="10">
+          <%= worker_skill_training(field_worker).include?("整地") ? "■3t以上の車両系建設機械" : "▢3t以上の車両系建設機械" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s39" dir="ltr" colspan="9">▢３t以上の自走する基礎工事用機械</td>
-        <td class="doc_24_s40" dir="ltr" colspan="10">▢３t以上の解体用機械</td>
+        <td class="doc_24_s39" dir="ltr" colspan="9">
+          <%= worker_skill_training(field_worker).include?("基礎") ? "■3t以上の自走する基礎工事用機械" : "▢3t以上の自走する基礎工事用機械" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="10">
+          <%= worker_skill_training(field_worker).include?("解体") ? "■3t以上の解体用機械" : "▢3t以上の解体用機械" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="3"><a target="_blank" href="#rangeid=835419303">「技能講習」24-027</a></td>
-        <td class="doc_24_s39" dir="ltr" colspan="9">▢１t以上の不整地運搬車</td>
-        <td class="doc_24_s40" dir="ltr" colspan="10">▢10m以上の高所作業車</td>
+        <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="3"></td> <!-- 「技能講習」24-027 -->
+        <td class="doc_24_s39" dir="ltr" colspan="9">
+          <%= worker_skill_training(field_worker).include?("不整") ? "■1t以上の不整地運搬車" : "▢1t以上の不整地運搬車" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="10">
+          <%= worker_skill_training(field_worker).include?("高所") ? "■10m以上の高所作業車" : "▢10m以上の高所作業車" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s39" dir="ltr" colspan="9">▢１t以上のフォークリフト</td>
-        <td class="doc_24_s40" dir="ltr" colspan="10">▢１t以上のショベルローダー</td>
+        <td class="doc_24_s39" dir="ltr" colspan="9">
+          <%= worker_skill_training(field_worker).include?("フォ") ? "■1t以上のフォークリフト" : "▢1t以上のフォークリフト" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="10">
+          <%= worker_skill_training(field_worker).include?("ショ") ? "■1t以上のショベルローダー" : "▢1t以上のショベルローダー" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s41" dir="ltr" colspan="9">▢その他（　　　　　　　　　　）</td>
+        <td class="doc_24_s41" dir="ltr" colspan="9">
+          <%= worker_skill_training(field_worker).include?("床ク") ? "■その他（ 床ク ）" : "▢その他（　　　　　　　　　　）" %>
+        </td>
         <td class="doc_24_s42" dir="ltr" colspan="10"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s33" dir="ltr" colspan="4" rowspan="2">特別教育<br>（運転者・作業者）</td>
-        <td class="doc_24_s39" dir="ltr" colspan="5">▢酸素欠乏危険作業</td>
-        <td class="doc_24_s39" dir="ltr" colspan="7">▢３t未満の車両系建設機械</td>
-        <td class="doc_24_s40" dir="ltr" colspan="7">▢３ｔ未満の自走しない基礎工事用機械</td>
+        <td class="doc_24_s39" dir="ltr" colspan="5">
+          <%= worker_special_education_oxygen(field_worker) %>
+        </td>
+        <td class="doc_24_s39" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("小型車両系建設機械（整地・運搬・積込み用及び掘削用）（3t未満）") ? "■3t未満の車両系建設機械" : "▢3t未満の車両系建設機械" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("小型車両系建設機械（基礎工事用）（3t未満）") ? "■3t未満の自走しない基礎工事用機械" : "▢3t未満の自走しない基礎工事用機械" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s39" dir="ltr" colspan="5">▢ローラー</td>
-        <td class="doc_24_s39" dir="ltr" colspan="7">▢コンクリート打設用車両系建設機械</td>
-        <td class="doc_24_s40" dir="ltr" colspan="7">▢３ｔ未満の解体用機械</td>
+        <td class="doc_24_s39" dir="ltr" colspan="5">
+          <%= worker_special_education(field_worker).include?("ローラー") ? "■ローラー" : "▢ローラー" %>
+        </td>
+        <td class="doc_24_s39" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("車両系建設機械（コンクリート打設用）") ? "■コンクリート打設用車両系建設機械" : "▢コンクリート打設用車両系建設機械" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("小型車両系建設機械（解体用）（3t未満）") ? "■3t未満の解体用機械" : "▢3t未満の解体用機械" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s43" dir="ltr" colspan="4" rowspan="6"><a target="_blank" href="#rangeid=1977470932">「特別教育」24-028</a></td>
-        <td class="doc_24_s39" dir="ltr" colspan="5">▢不整地運搬車（1ｔ未満）</td>
-        <td class="doc_24_s39" dir="ltr" colspan="7">▢10m未満の高所作業車</td>
-        <td class="doc_24_s40" dir="ltr" colspan="7">▢ボーリングマシン</td>
+        <td class="doc_24_s43" dir="ltr" colspan="4" rowspan="6"></td> <!-- 「特別教育」24-028 -->
+        <td class="doc_24_s39" dir="ltr" colspan="5">
+          <%= worker_special_education(field_worker).include?("不整地運搬車（1t未満）") ? "■不整地運搬車（1t未満）" : "▢不整地運搬車（1t未満）" %>
+        </td>
+        <td class="doc_24_s39" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("高所作業車(10m未満）") ? "■10m未満の高所作業車" : "▢10m未満の高所作業車" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("ボーリングマシン") ? "■ボーリングマシン" : "▢ボーリングマシン" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s39" dir="ltr" colspan="5">▢フォークリフト（1ｔ未満）</td>
-        <td class="doc_24_s39" dir="ltr" colspan="7">▢ショベルローダー（１ｔ未満）</td>
-        <td class="doc_24_s40" dir="ltr" colspan="7">▢巻上げ機械</td>
+        <td class="doc_24_s39" dir="ltr" colspan="5">
+          <%= worker_special_education(field_worker).include?("フォークリフト（1t未満）") ? "■フォークリフト（1t未満）" : "▢フォークリフト（1t未満）" %>
+        </td>
+        <td class="doc_24_s39" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("ショベルローダー（1t未満）") ? "■ショベルローダー（1t未満）" : "▢ショベルローダー（1t未満）" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("巻上げ機") ? "■巻上げ機械" : "▢巻上げ機械" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s39" dir="ltr" colspan="5">▢建設用リフト</td>
-        <td class="doc_24_s39" dir="ltr" colspan="7">▢1t未満の玉掛け</td>
-        <td class="doc_24_s40" dir="ltr" colspan="7">▢ゴンゴラ</td>
+        <td class="doc_24_s39" dir="ltr" colspan="5">
+          <%= worker_special_education(field_worker).include?("建設用リフト") ? "■建設用リフト" : "▢建設用リフト" %>
+        </td>
+        <td class="doc_24_s39" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("玉掛け（1t未満）") ? "■1t未満の玉掛け" : "▢1t未満の玉掛け" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("ゴンドラ") ? "■ゴンドラ" : "▢ゴンドラ" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s39" dir="ltr" colspan="5">▢アーク溶接等</td>
-        <td class="doc_24_s39" dir="ltr" colspan="7">▢研削といしの取替え等</td>
-        <td class="doc_24_s40" dir="ltr" colspan="7">▢電気取扱</td>
+        <td class="doc_24_s39" dir="ltr" colspan="5">
+          <%= worker_special_education(field_worker).include?("アーク溶接") ? "■アーク溶接等" : "▢アーク溶接等" %>
+        </td>
+        <td class="doc_24_s39" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("研削砥石") ? "■研削といしの取替え等" : "▢研削といしの取替え等" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="7">
+          <%= worker_special_education_electrical(field_worker) %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s39" dir="ltr" colspan="5">▢足場の組立て等</td>
-        <td class="doc_24_s39" dir="ltr" colspan="7">▢ロープ高所作業</td>
-        <td class="doc_24_s40" dir="ltr" colspan="7">▢フルハーネス型安全帯</td>
+        <td class="doc_24_s39" dir="ltr" colspan="5">
+          <%= worker_special_education(field_worker).include?("足場の組立て") ? "■足場の組立て等" : "▢足場の組立て等" %>
+        </td>
+        <td class="doc_24_s39" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("ロープ高所作業") ? "■ロープ高所作業" : "▢ロープ高所作業" %>
+        </td>
+        <td class="doc_24_s40" dir="ltr" colspan="7">
+          <%= worker_special_education(field_worker).include?("フルハーネス型の墜落制止用器具") ? "■フルハーネス型安全帯" : "▢フルハーネス型安全帯" %>
+        </td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s41" dir="ltr" colspan="2">▢その他（</td>
-        <td class="doc_24_s41" dir="ltr" colspan="16"></td>
-        <td class="doc_24_s31" dir="ltr">）</td>
+          <td class="doc_24_s41" dir="ltr" colspan="16"><%= worker_special_education_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
+        <td class="doc_24_s41" dir="ltr" colspan="2"></td>
+        <td class="doc_24_s31" dir="ltr"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -515,8 +603,8 @@
         <td class="doc_24_s3" dir="ltr" colspan="11">・個人情報の取扱いについて、了承しました。</td>
         <td class="doc_24_s3"></td>
         <td class="doc_24_s49" dir="ltr" colspan="4" rowspan="2">回答者自筆サイン</td>
-        <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2">24-029</td>
-        <td class="doc_24_s51" dir="ltr" rowspan="2"><a target="_blank" href="#rangeid=1479934353">㊞24-030</a></td>
+        <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2"><%= field_worker.content["name"] %></td> <!-- 24-029 -->
+        <td class="doc_24_s3" rowspan="2"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -554,10 +642,13 @@
         <td class="doc_24_s1" colspan="9"></td>
         <td class="doc_24_s3"></td>
       </tr>
+      
     </tbody>
   </table>
 </div>
 </body>
+</div>
+<% end %>
 
 <style type="text/css">
 .ritz .waffle a {
@@ -565,6 +656,20 @@
 }
 
 .ritz .waffle .doc_24_s8 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 11pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_24_s97 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
@@ -605,7 +710,7 @@
 }
 
 .ritz .waffle .doc_24_s39 {
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -658,10 +763,6 @@
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: top;
@@ -672,7 +773,7 @@
 
 .ritz .waffle .doc_24_s27 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -687,10 +788,6 @@
   border-right: none;
   background-color: #ffffff;
   text-align: left;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: middle;
@@ -701,18 +798,12 @@
 
 .ritz .waffle .doc_24_s51 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'Arial';
   font-size: 7pt;
   vertical-align: middle;
   white-space: normal;
-  overflow: hidden;
-  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -720,7 +811,7 @@
 .ritz .waffle .doc_24_s38 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
@@ -732,12 +823,8 @@
 }
 
 .ritz .waffle .doc_24_s10 {
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
@@ -746,21 +833,15 @@
   padding: 0px 3px 0px 3px;
 }
 
-.ritz .waffle .doc_24_s24 {
+.ritz .waffle .doc_24_s98 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'Arial';
   font-size: 9pt;
   vertical-align: middle;
   white-space: normal;
-  overflow: hidden;
-  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -769,10 +850,6 @@
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: left;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: top;
@@ -797,12 +874,8 @@
 .ritz .waffle .doc_24_s23 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'Arial';
   font-size: 8pt;
   vertical-align: middle;
@@ -815,12 +888,8 @@
 
 .ritz .waffle .doc_24_s29 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
   vertical-align: middle;
@@ -831,12 +900,9 @@
 
 .ritz .waffle .doc_24_s20 {
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
+
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
   vertical-align: middle;
@@ -847,12 +913,9 @@
 
 .ritz .waffle .doc_24_s16 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
+
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: middle;
@@ -864,7 +927,7 @@
 .ritz .waffle .doc_24_s26 {
   border-left: none;
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -916,16 +979,10 @@
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 9pt;
   vertical-align: middle;
   white-space: normal;
-  overflow: hidden;
-  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -984,7 +1041,7 @@
 
 .ritz .waffle .doc_24_s35 {
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
@@ -998,7 +1055,7 @@
 .ritz .waffle .doc_24_s31 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -1026,12 +1083,21 @@
 .ritz .waffle .doc_24_s15 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
+  font-family: 'docs-Calibri', Arial;
+  font-size: 11pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_24_s99 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
   vertical-align: middle;
@@ -1056,7 +1122,7 @@
 .ritz .waffle .doc_24_s42 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -1069,14 +1135,10 @@
 
 .ritz .waffle .doc_24_s18 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'Arial';
-  font-size: 8pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: normal;
   overflow: hidden;
@@ -1087,7 +1149,7 @@
 
 .ritz .waffle .doc_24_s37 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
@@ -1112,12 +1174,8 @@
 
 .ritz .waffle .doc_24_s4 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
   vertical-align: middle;
@@ -1130,7 +1188,7 @@
 
 .ritz .waffle .doc_24_s50 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
   color: #000000;
   font-family: 'Arial';
@@ -1183,12 +1241,21 @@
 .ritz .waffle .doc_24_s9 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-skip: none;
-  text-decoration-skip-ink: none;
-  color: #1155cc;
+  font-family: 'Arial';
+  font-size: 11pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_24_s96 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: middle;
@@ -1211,7 +1278,7 @@
 
 .ritz .waffle .doc_24_s40 {
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -1249,7 +1316,7 @@
 
 .ritz .waffle .doc_24_s41 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -1263,7 +1330,7 @@
 .ritz .waffle .doc_24_s25 {
   border-right: none;
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -1288,7 +1355,7 @@
 }
 
 .ritz .waffle .doc_24_s34 {
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
@@ -1298,19 +1365,15 @@
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
+
 .ritz .waffle .doc_24_s52 {
   border: 0px solid #ffffff;
 }
-.ritz .waffle .doc_24_s53 {
-  border-left: 1px SOLID #000000;
-  background-color: #ffffff;
-  text-align: left;
-  color: #000000;
-  font-family: 'Arial';
-  font-size: 11pt;
-  vertical-align: middle;
-  white-space: nowrap;
-  direction: ltr;
-  padding: 0px 3px 0px 3px;
+
+.page-break {
+  page-break-after:always;
+  &:last-child {
+    page-break-after: avoid;
+  }
 }
 </style>
