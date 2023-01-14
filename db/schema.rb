@@ -753,11 +753,6 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
     t.index ["business_id"], name: "index_workers_on_business_id"
   end
 
-  add_foreign_key "articles", "users"
-  add_foreign_key "business_industries", "businesses"
-  add_foreign_key "business_industries", "industries"
-  add_foreign_key "business_occupations", "businesses"
-  add_foreign_key "business_occupations", "occupations"
   add_foreign_key "businesses", "users"
   add_foreign_key "car_voluntary_insurances", "car_insurance_companies", column: "company_voluntary_id"
   add_foreign_key "car_voluntary_insurances", "cars", column: "car_voluntary_id"

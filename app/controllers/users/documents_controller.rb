@@ -28,14 +28,22 @@ module Users
       end
     end
 
-    def edit; end
+    def edit
+      @error_msg_for_doc_14th = nil
+    end
 
     def update
-      if @document.update(document_params(@document))
-        redirect_to users_request_order_document_url, success: '保存に成功しました'
+      @error_msg_for_doc_14th = @document.error_msg_for_doc_14th(document_params(@document))
+      if @error_msg_for_doc_14th.blank?
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: "保存に成功しました"
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit 
+        end
       else
-        flash[:danger] = '更新に失敗しました'
-        render :edit
+        flash[:danger] = @error_msg_for_doc_14th.first
+        render action: :edit 
       end
     end
 

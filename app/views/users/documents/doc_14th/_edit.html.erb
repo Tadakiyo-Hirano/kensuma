@@ -46,7 +46,7 @@
                 <td class="doc_14_s4"></td>
                 <td class="doc_14_s5" dir="ltr" colspan="9"> <!-- []の画像と重なると動作しない為高さ1行に修正(rowspan="2"削除) -->
                   <%= f.date_field name = 'content[date_submitted]',
-                                  value: doc_content_date(@document.content&.[]('date_submitted')),
+                                  value: @document.content&.[]('date_submitted'),
                                   class: 'form-control form-control-sm'
                   %> <!-- 14-001 「提出日（西暦）」 -->
                 </td>
@@ -2184,7 +2184,7 @@
                 </td>
                 <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="5">
                   <%= f.date_field name = 'content[reception_confirmation_date]',
-                                      value: doc_content_date(@document.content&.[]('reception_confirmation_date')),
+                                      value: @document.content&.[]('reception_confirmation_date'),
                                       class: 'form-control form-control-sm'
                   %> <!-- 14-019 「元請会社の受付確認年月日」 -->
                 </td>
