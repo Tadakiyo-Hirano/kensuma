@@ -90,6 +90,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         resources :documents, only: %i[index show edit update], param: :uuid, controller: 'sub_request_orders/documents'
       end
       resources :documents, only: %i[index show edit update], param: :uuid
+      resources :documents, except: :index, module: :request_orders, param: :uuid do
+        get 'set_safety_officer_name', to: 'documents#set_safety_officer_name'
+      end
       resources :field_cars, except: %i[new show edit update], module: :request_orders, param: :uuid do
         collection do
           get 'edit_cars'

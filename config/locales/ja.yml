@@ -42,6 +42,8 @@ ja:
       default: "%Y/%m/%d"
       long: "%Y年%-m月%-d日"
       short: "%m/%d"
+      ja_y: "%Je%Jg" #和暦(年)表示
+      ja_ym: "%Je%Jg年%Js%Jl月" #和暦(年月)表示
     month_names:
     -
     - 1月

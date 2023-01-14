@@ -34,6 +34,54 @@ module DocumentsHelper
     end
   end
 
+  # 元請の確認欄
+  def document_info_for_19th_prime_contractor_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order.parent_id.nil?
+      Order.find(request_order.order_id).confirm_name
+    else
+      Order.find(request_order.parent.order_id).confirm_name
+    end
+  end
+
+  # 一次下請の情報 (工事安全衛生計画書用)
+  def document_subcon_info_for_19th
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    #元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    #下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+    #下請けが存在しない場合
+    else
+      nil
+    end
+  end
+
+  #会社の名前
+  def company_name(worker_id)
+    worker = Worker.find_by(uuid: worker_id)
+    Business.find_by(id: worker&.business_id)&.name
+  end
+
+  #書類作成会社の名前
+  def document_preparation_company_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+      Business.find_by(id:sub_request_order.business_id).name
+    #下請けが自身の書類確認するとき
+    else
+      Business.find_by(id:request_order.business_id).name
+    end
+  end
+
+  #作業員情報
+  def worker(worker_uuid)
+    Worker.find_by(uuid: worker_uuid)&.name
+  end
+
   # 専任･非専任
   FULL_TIME_CHECK = {
     'full_time'     => '専任',
@@ -363,4 +411,40 @@ module DocumentsHelper
       document_info.content.nil? ? nil : document_info
     end
   end
+
+  # (20)年間安全衛生計画書
+
+  # 和暦表示(date_select用)
+  def date_select_ja(src_html)
+    dst_html = src_html.gsub(/>\d{4}</) do |m|
+      year = m.match(/>(\d{4})</)[1].to_i
+      year_ja = case year
+                when 2018
+                  '平成30/令和元年'
+                else
+                  "令和#{year - 2018}"
+                end
+      ">#{year_ja}<"
+    end
+    dst_html.html_safe
+  end
+
+  # 和暦表示(年表示)
+  def doc_ja_y_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '年' : l(date.to_date, format: :ja_y)
+  end
+
+  # 和暦表示(年月表示)
+  def doc_ja_ym_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '年 月' : l(date.to_date, format: :ja_ym)
+  end
+
+  # 年月日表示
+  def doc_ymd_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '年 月 日' : l(date.to_date, format: :long)
+  end
+
 end

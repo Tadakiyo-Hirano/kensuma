@@ -74,7 +74,9 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s7"></td>
           <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
-          <td class="doc_20_s8" colspan="9" rowspan="2"></td>
+          <td class="doc_20_s49" colspan="9" rowspan="2">
+            <%= document_info_for_19th_prime_contractor_name %>
+          </td><!--「統括安全衛生責任者名」22-001-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -240,7 +242,7 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s9" colspan="3" rowspan="2">代表者名</td>
           <td class="doc_20_s10" colspan="9" rowspan="2"><%= Business.find(document_info.business_id).representative_name %></td><!--20-005「代表者名」-->
-          <td class="doc_20_s14" rowspan="2"></td>
+          <td class="doc_20_s14" rowspan="2">㊞</td><!--20-006「㊞」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -334,7 +336,9 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s3"></td>
           <td class="doc_20_s15" colspan="4"></td>
-          <td class="doc_20_s46" colspan="8" rowspan="2"></td>
+          <td class="doc_20_s46" colspan="8" rowspan="2">
+            <%= doc_ymd_date(@document, 'date_created') %>
+          </td><!--「書類作成日（西暦）20-007-->
           <td class="doc_20_s13" colspan="2" rowspan="2">作成</td>
           <td class="doc_20_s3"></td>
         </tr>
@@ -423,18 +427,20 @@
           <td class="doc_20_s18"></td>
           <td class="doc_20_s18"></td>
           <td class="doc_20_s18"></td>
-          <td class="doc_20_s19" colspan="7" rowspan="2"></td>
+          <td class="doc_20_s19" colspan="5" rowspan="2">
+            <%= doc_ja_y_date(@document,'term') %>
+          </td><!--「年度（和暦）」20-008-->
           <td class="doc_20_s20" colspan="2" rowspan="2">年度</td>
           <td class="doc_20_s20" rowspan="2">（</td>
-          <td class="doc_20_s21" colspan="4" rowspan="2"></td>
+          <td class="doc_20_s21" colspan="7" rowspan="2">
+            <%= doc_ja_ym_date(@document,'planning_period_beginning') %>
+          </td><!--「計画期間（始期）年月」20-009-->
           <td class="doc_20_s20" rowspan="2">～</td>
-          <td class="doc_20_s21" colspan="4" rowspan="2"></td>
+          <td class="doc_20_s21" colspan="7" rowspan="2">
+            <%= doc_ja_ym_date(@document,'planning_period_final_stage') %>
+          </td><!--「計画期間（終期）年月」20-010-->
           <td class="doc_20_s20" rowspan="2">）</td>
           <td class="doc_20_s22" colspan="6" rowspan="2">安全衛生計画書</td>
-          <td class="doc_20_s22"></td>
-          <td class="doc_20_s22"></td>
-          <td class="doc_20_s22"></td>
-          <td class="doc_20_s22"></td>
           <td class="doc_20_s22"></td>
           <td class="doc_20_s22"></td>
           <td class="doc_20_s22"></td>
@@ -449,10 +455,6 @@
           <td class="doc_20_s18"></td>
           <td class="doc_20_s18"></td>
           <td class="doc_20_s18"></td>
-          <td class="doc_20_s22"></td>
-          <td class="doc_20_s22"></td>
-          <td class="doc_20_s22"></td>
-          <td class="doc_20_s22"></td>
           <td class="doc_20_s22"></td>
           <td class="doc_20_s22"></td>
           <td class="doc_20_s22"></td>
@@ -507,7 +509,9 @@
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 方 針</td>
-          <td class="doc_20_s23" colspan="33" rowspan="2"></td>
+          <td class="doc_20_s23" colspan="33" rowspan="2">
+            <%= @document.content&.[]("health_and_safety_policy") %>
+          </td><!--「安全衛生方針」20-011-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -561,7 +565,9 @@
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 目 標</td>
-          <td class="doc_20_s23" colspan="33" rowspan="2"></td>
+          <td class="doc_20_s23" colspan="33" rowspan="2">
+            <%= @document.content&.[]("health_and_safety_goals") %>
+          </td><!--「安全衛生目標」20-012-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -619,7 +625,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s24"></td>
-          <td class="doc_20_s23" colspan="40" rowspan="2"></td>
+          <td class="doc_20_s23" colspan="40" rowspan="2">
+            <%= @document.content&.[]("health_and_safety_issues") %>
+          </td><!--「安全衛生上の課題及び特定した危険性又は有害性」20-013-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -695,15 +703,33 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s25"></td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s26" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s27" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s27" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s27" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s28" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s26" colspan="4" rowspan="3"></td>
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_priority_measures_1st") %>
+          </td><!--「安全衛生計画・重点施策_1」20-014-->
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_items_to_be_implemented_1st") %>
+          </td><!--「安全衛生計画・実施事項_1」20-015-->
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_management_goals_1st") %>
+          </td><!--「安全衛生計画・管理目標（管理点）_1」20-016-->
+          <td class="doc_20_s26" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_responsible_for_implementation_1st") %>
+          </td><!--「安全衛生計画・実施担当_1」20-017-->
+          <td class="doc_20_s27" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_april_june_1st") %>
+          </td><!--「実施スケジュールと評価スケジュール（4月～6月）_1」20-018-->
+          <td class="doc_20_s27" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_july_september_1st") %>
+          </td><!--「実施スケジュールと評価スケジュール（7月～9月）_1」20-019-->
+          <td class="doc_20_s27" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_october_december_1st") %>
+          </td><!--「実施スケジュールと評価スケジュール（10月～12月）_1」20-020-->
+          <td class="doc_20_s28" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_january_march_1st") %>
+          </td><!--「実施スケジュールと評価スケジュール（1月～3月）_1」20-021-->
+          <td class="doc_20_s26" colspan="4" rowspan="3">
+            <%= @document.content&.[]("schedules_points_to_note_1st") %>
+          </td><!--「安全衛生計画・実施上の留意点_1」20-023-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -712,64 +738,40 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s25"></td>
-          <td class="doc_20_s26" colspan="16"></td>
+          <td class="doc_20_s26" colspan="16">
+            <%= @document.content&.[]("schedules_remarks_1st") %>
+          </td><!--「実施スケジュールと評価スケジュール（備考欄）_1」20-022-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s31" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s31" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s31" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s32" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s30" colspan="4" rowspan="3"></td>
-          <td class="doc_20_s3"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_20_s29"></td>
-          <td class="doc_20_s3"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_20_s29"></td>
-          <td class="doc_20_s33" colspan="16"></td>
-          <td class="doc_20_s3"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s35" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s30" colspan="4" rowspan="3"></td>
-          <td class="doc_20_s3"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_20_s29"></td>
-          <td class="doc_20_s3"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="16"></td>
-          <td class="doc_20_s3"></td>
-        </tr>
-        <tr style="height: 24px">
-          <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s30" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s34" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s35" colspan="4" rowspan="2"></td>
-          <td class="doc_20_s30" colspan="4" rowspan="3"></td>
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_priority_measures_2nd") %>
+          </td><!--「安全衛生計画・重点施策_2」20-014-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_items_to_be_implemented_2nd") %>
+          </td><!--「安全衛生計画・実施事項_2」20-015-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_management_goals_2nd") %>
+          </td><!--「安全衛生計画・管理目標（管理点）_2」20-016-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_responsible_for_implementation_2nd") %>
+          </td><!--「安全衛生計画・実施担当_2」20-017-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_april_june_2nd") %>
+          </td><!--「実施スケジュールと評価スケジュール（4月～6月）_2」20-018-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_july_september_2nd") %>
+          </td><!--「実施スケジュールと評価スケジュール（7月～9月）_2」20-019-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_october_december_2nd") %>
+          </td><!--「実施スケジュールと評価スケジュール（10月～12月）_2」20-020-->
+          <td class="doc_20_s32" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_january_march_2nd") %>
+          </td><!--「実施スケジュールと評価スケジュール（1月～3月）_2」20-021-->
+          <td class="doc_20_s30" colspan="4" rowspan="3">
+            <%= @document.content&.[]("schedules_points_to_note_2nd") %>
+          </td><!--「安全衛生計画・実施上の留意点_2」20-023-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -778,7 +780,93 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
-          <td class="doc_20_s30" colspan="16"></td>
+          <td class="doc_20_s33" colspan="16">
+            <%= @document.content&.[]("schedules_remarks_2nd") %>
+          </td><!--「実施スケジュールと評価スケジュール（備考欄）_2」20-022-->
+          <td class="doc_20_s3"></td>
+        </tr>
+        <tr style="height: 24px">
+          <td class="doc_20_s29"></td>
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_priority_measures_3rd") %>
+          </td><!--「安全衛生計画・重点施策_3」20-014-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_items_to_be_implemented_3rd") %>
+          </td><!--「安全衛生計画・実施事項_3」20-015-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_management_goals_3rd") %>
+          </td><!--「安全衛生計画・管理目標（管理点）_3」20-016-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_responsible_for_implementation_3rd") %>
+          </td><!--「安全衛生計画・実施担当_3」20-017-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_april_june_3rd") %>
+          </td><!--「実施スケジュールと評価スケジュール（4月～6月）_3」20-018-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_july_september_3rd") %>
+          </td><!--「実施スケジュールと評価スケジュール（7月～9月）_3」20-019-->
+          <td class="doc_20_s31" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_october_december_3rd") %>
+          </td><!--「実施スケジュールと評価スケジュール（10月～12月）_3」20-020-->
+          <td class="doc_20_s32" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_january_march_3rd") %>
+          </td><!--「実施スケジュールと評価スケジュール（1月～3月）_3」20-021-->
+          <td class="doc_20_s30" colspan="4" rowspan="3">
+            <%= @document.content&.[]("schedules_points_to_note_3rd") %>
+          </td><!--「安全衛生計画・実施上の留意点_3」20-023-->
+          <td class="doc_20_s3"></td>
+        </tr>
+        <tr style="height: 24px">
+          <td class="doc_20_s29"></td>
+          <td class="doc_20_s3"></td>
+        </tr>
+        <tr style="height: 24px">
+          <td class="doc_20_s29"></td>
+          <td class="doc_20_s30" colspan="16">
+            <%= @document.content&.[]("schedules_remarks_3rd") %>
+          </td><!--「実施スケジュールと評価スケジュール（備考欄）_3」20-022-->
+          <td class="doc_20_s3"></td>
+        </tr>
+        <tr style="height: 24px">
+          <td class="doc_20_s29"></td>
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_priority_measures_4th") %>
+          </td><!--「安全衛生計画・重点施策_4」20-014-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_items_to_be_implemented_4th") %>
+          </td><!--「安全衛生計画・実施事項_4」20-015-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_management_goals_4th") %>
+          </td><!--「安全衛生計画・管理目標（管理点）_4」20-016-->
+          <td class="doc_20_s30" colspan="5" rowspan="3">
+            <%= @document.content&.[]("plan_responsible_for_implementation_4th") %>
+          </td><!--「安全衛生計画・実施担当_4」20-017-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_april_june_4th") %>
+          </td><!--「実施スケジュールと評価スケジュール（4月～6月）_4」20-018-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_july_september_4th") %>
+          </td><!--「実施スケジュールと評価スケジュール（7月～9月）_4」20-019-->
+          <td class="doc_20_s34" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_october_december_4th") %>
+          </td><!--「実施スケジュールと評価スケジュール（10月～12月）_4」20-020-->
+          <td class="doc_20_s35" colspan="4" rowspan="2">
+            <%= @document.content&.[]("schedules_january_march_4th") %>
+          </td><!--「実施スケジュールと評価スケジュール（1月～3月）_4」20-021-->
+          <td class="doc_20_s30" colspan="4" rowspan="3">
+            <%= @document.content&.[]("schedules_points_to_note_4th") %>
+          </td><!--「安全衛生計画・実施上の留意点_4」20-023-->
+          <td class="doc_20_s3"></td>
+        </tr>
+        <tr style="height: 24px">
+          <td class="doc_20_s29"></td>
+          <td class="doc_20_s3"></td>
+        </tr>
+        <tr style="height: 24px">
+          <td class="doc_20_s29"></td>
+          <td class="doc_20_s30" colspan="16">
+            <%= @document.content&.[]("schedules_remarks_4th") %>
+          </td><!--「実施スケジュールと評価スケジュール（備考欄）_4」20-022-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -840,42 +928,74 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s36"></td>
-          <td class="doc_20_s37" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s23" colspan="15"></td>
-          <td class="doc_20_s38" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s39" colspan="15"></td>
+          <td class="doc_20_s37" colspan="5" rowspan="3">
+            <%= @document.content&.[]("common_to_work_sitespriority_measures_1st") %>
+          </td><!--「作業所共通の重点対策_1」20-024-->
+          <td class="doc_20_s23" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_1st_1st") %>
+          </td><!--「作業所共通の実施事項_1_1」20-025-->
+          <td class="doc_20_s38" colspan="5" rowspan="3">
+            <%= @document.content&.[]("common_to_work_sitespriority_measures_2nd") %>
+          </td><!--「作業所共通の重点対策_2」20-024-->
+          <td class="doc_20_s39" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_2nd_1st") %>
+          </td><!--「作業所共通の実施事項_2_1」20-025-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s36"></td>
-          <td class="doc_20_s23" colspan="15"></td>
-          <td class="doc_20_s39" colspan="15"></td>
+          <td class="doc_20_s23" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_1st_2nd") %>
+          </td><!--「作業所共通の実施事項_1_2」20-026-->
+          <td class="doc_20_s39" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_2nd_2nd") %>
+          </td><!--「作業所共通の実施事項_2_2」20-026-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s36"></td>
-          <td class="doc_20_s23" colspan="15"></td>
-          <td class="doc_20_s39" colspan="15"></td>
+          <td class="doc_20_s23" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_1st_3rd") %>
+          </td><!--「作業所共通の実施事項_1_3」20-027-->
+          <td class="doc_20_s39" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_2nd_3rd") %>
+          </td><!--「作業所共通の実施事項_2_3」20-027-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s40"></td>
-          <td class="doc_20_s38" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s39" colspan="15"></td>
-          <td class="doc_20_s38" colspan="5" rowspan="3"></td>
-          <td class="doc_20_s39" colspan="15"></td>
+          <td class="doc_20_s38" colspan="5" rowspan="3">
+            <%= @document.content&.[]("common_to_work_sitespriority_measures_3rd") %>
+          </td><!--「作業所共通の重点対策_3」20-024-->
+          <td class="doc_20_s39" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_3rd_1st") %>
+          </td><!--「作業所共通の実施事項_3_1」20-025-->
+          <td class="doc_20_s38" colspan="5" rowspan="3">
+            <%= @document.content&.[]("common_to_work_sitespriority_measures_4th") %>
+          </td><!--「作業所共通の重点対策_4」20-024-->
+          <td class="doc_20_s39" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_4th_1st") %>
+          </td><!--「作業所共通の実施事項_4_1」20-025-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s40"></td>
-          <td class="doc_20_s39" colspan="15"></td>
-          <td class="doc_20_s41" colspan="15"></td>
+          <td class="doc_20_s39" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_3rd_2nd") %>
+          </td><!--「作業所共通の実施事項_3_2」20-026-->
+          <td class="doc_20_s41" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_4th_2nd") %>
+          </td><!--「作業所共通の実施事項_4_2」20-026-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s40"></td>
-          <td class="doc_20_s39" colspan="15"></td>
-          <td class="doc_20_s41" colspan="15"></td>
+          <td class="doc_20_s39" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_3rd_3rd") %>
+          </td><!--「作業所共通の実施事項_3_3」20-027-->
+          <td class="doc_20_s41" colspan="15">
+            <%= @document.content&.[]("common_items_to_be_implemented_4th_3rd") %>
+          </td><!--「作業所共通の実施事項_4_3」20-027-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -930,49 +1050,73 @@
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">４月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_april") %>
+          </td><!--「安全衛生行事・4月」20-028-->
           <td class="doc_20_s6" colspan="2">10月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_october") %>
+          </td><!--「安全衛生行事・10月」20-034-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">５月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_may") %>
+          </td><!--「安全衛生行事・5月」20-029-->
           <td class="doc_20_s6" colspan="2">11月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_november") %>
+          </td><!--「安全衛生行事・11月」20-035-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">６月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_jun") %>
+          </td><!--「安全衛生行事・6月」20-030-->
           <td class="doc_20_s6" colspan="2">12月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_december") %>
+          </td><!--「安全衛生行事・12月」20-036-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">７月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_july") %>
+          </td><!--「安全衛生行事・7月」20-031-->
           <td class="doc_20_s6" colspan="2">１月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_january") %>
+          </td><!--「安全衛生行事・1月」20-037-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">８月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_august") %>
+          </td><!--「安全衛生行事・8月」20-032-->
           <td class="doc_20_s6" colspan="2">２月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_february") %>
+          </td><!--「安全衛生行事・2月」20-038-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">９月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_september") %>
+          </td><!--「安全衛生行事・9月」20-033-->
           <td class="doc_20_s6" colspan="2">３月</td>
-          <td class="doc_20_s23" colspan="18"></td>
+          <td class="doc_20_s23" colspan="18">
+            <%= @document.content&.[]("events_march") %>
+          </td><!--「安全衛生行事・3月」20-039-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -1034,50 +1178,62 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全衛生担当役員</td>
-          <td class="doc_20_s23" colspan="13"></td>
-          <td class="doc_20_s23" colspan="13"></td>
+          <td class="doc_20_s23" colspan="13"></td><!--「安全衛生担当役員の役職名」20-040-->
+          <td class="doc_20_s23" colspan="13">
+            <%= @document.content&.[]('safety_officer_name') %>
+          </td><!--「安全衛生担当役員名」20-041-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">雇用管理責任者</td>
-          <td class="doc_20_s23" colspan="13"></td>
-          <td class="doc_20_s23" colspan="13"></td>
+          <td class="doc_20_s23" colspan="13"></td><!--「雇用管理責任者・役職名」20-042-->
+          <td class="doc_20_s23" colspan="13"></td><!--「雇用管理責任者名」20-043-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">総括安全衛生管理者</td>
-          <td class="doc_20_s23" colspan="13"></td>
-          <td class="doc_20_s23" colspan="13"></td>
+          <td class="doc_20_s23" colspan="13"></td><!--「総括安全衛生管理者の役職名」20-044-->
+          <td class="doc_20_s23" colspan="13">
+             <%= @document.content&.[]('general_manager_name') %>
+          </td><!--「総括安全衛生管理者名」20-045-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全管理者</td>
-          <td class="doc_20_s23" colspan="13"></td>
-          <td class="doc_20_s23" colspan="13"></td>
+          <td class="doc_20_s23" colspan="13"></td><!--「安全管理者の役員名」20-046-->
+          <td class="doc_20_s23" colspan="13">
+            <%= @document.content&.[]('safety_manager_name') %>
+          </td><!--「安全管理者名」20-047-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">衛生管理者</td>
-          <td class="doc_20_s23" colspan="13"></td>
-          <td class="doc_20_s23" colspan="13"></td>
+          <td class="doc_20_s23" colspan="13"></td><!--「衛生管理者の役職名」20-048-->
+          <td class="doc_20_s23" colspan="13">
+            <%= @document.content&.[]('hygiene_manager_name') %>
+          </td><!--「衛生管理者名」20-049-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全衛生推進者</td>
-          <td class="doc_20_s23" colspan="13"></td>
-          <td class="doc_20_s23" colspan="13"></td>
+          <td class="doc_20_s23" colspan="13"></td><!--「安全衛生推進の役職名」20-050-->
+          <td class="doc_20_s23" colspan="13">
+            <%= @document.content&.[]('health_and_safety_promoter_name') %>
+          </td><!--「安全衛生推進者名」20-051-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">工事担当責任者</td>
-          <td class="doc_20_s23" colspan="13"></td>
-          <td class="doc_20_s23" colspan="13"></td>
+          <td class="doc_20_s23" colspan="13"></td><!--「各会社の工事担当責任者の役職名」20-052-->
+          <td class="doc_20_s23" colspan="13">
+            <%= @document.content&.[]('construction_manager_name') %>
+          </td><!--「各会社の工事担当責任者」20-053-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -1145,7 +1301,9 @@
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="5" rowspan="2">特記事項</td>
-          <td class="doc_20_s45" colspan="35" rowspan="2"></td>
+          <td class="doc_20_s45" colspan="35" rowspan="2">
+            <%= @document.content&.[]('remarks') %>
+          </td><!--「特記事項」20-054-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
