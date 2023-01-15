@@ -18,16 +18,16 @@ module DocumentsHelper
   # 一次下請の情報
   def subcon_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order if request_order.parent_id == 1
+    request_order if request_order.depth == 1
   end
 
   def subcons_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.children if request_order.parent_id.nil?
+    request_order.children if request_order.depth == 0
   end
 
   def document_subcon_info
-    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).depth == 1
       subcon_info
     else
       @subcon
