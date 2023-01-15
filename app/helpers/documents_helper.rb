@@ -23,7 +23,7 @@ module DocumentsHelper
 
   def subcons_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.children if request_order.depth == 0
+    request_order.children if request_order.depth.zero?
   end
 
   def document_subcon_info
