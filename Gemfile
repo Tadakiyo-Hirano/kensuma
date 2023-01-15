@@ -92,6 +92,8 @@ gem 'reform'
 group :development, :test do
   # ERD生成
   gem 'rails-erd'
+  # wareki - ruby 和暦ライブラリ
+  gem 'wareki'
   # コードフォーマッター
   gem 'rubocop'
   gem 'rubocop-rspec'
