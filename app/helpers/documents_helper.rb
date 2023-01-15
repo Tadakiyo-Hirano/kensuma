@@ -679,14 +679,14 @@ module DocumentsHelper
     doc_str.blank? ? '' : doc_str
   end
 
-  # 持込機械の日付情報
+  # 持込機械の日付情報　14-021 「点検年月日」
   def machine_date(machine, column)
     date = machine&.content&.[](column)
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 
-  # 持込機械の日付情報　（編集ページで入力、documentsに保存）
-  def machine_doc_date(doc_date)
+  # 持込機械の日付情報　（編集ページで入力、documentsに保存）　content {"date_submitted": "2023-01-06"}
+  def machine_doc_date(doc_date) # 14-001 「提出日（西暦）」 14-019 「元請会社の受付確認年月日」
     unless doc_date.blank? # documentのcontentがない場合のエラー回避（編集ページ初回表示）
       doc_date.blank? ? '年　月　日' : l(doc_date.to_date, format: :ja_kan)
     else
@@ -694,7 +694,7 @@ module DocumentsHelper
     end
   end
 
-  # 現場機械情報の持込年月日
+  # 現場機械情報の持込年月日　下のメソッドとまとめられる？
   def field_machine_carry_on_date(machine)
     date = machine&.carry_on_date
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
