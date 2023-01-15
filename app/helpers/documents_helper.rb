@@ -47,37 +47,35 @@ module DocumentsHelper
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    #元請が下請の書類確認するとき
+    # 元請が下請の書類確認するとき
     if params[:sub_request_order_uuid] && request_order.parent_id.nil?
       RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-    #下請けが自身の書類確認するとき
+    # 下請けが自身の書類確認するとき
     elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
       request_order
-    #下請けが存在しない場合
-    else
-      nil
+      # 下請けが存在しない場合
     end
   end
 
-  #会社の名前
+  # 会社の名前
   def company_name(worker_id)
     worker = Worker.find_by(uuid: worker_id)
     Business.find_by(id: worker&.business_id)&.name
   end
 
-  #書類作成会社の名前
+  # 書類作成会社の名前
   def document_preparation_company_name
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     if params[:sub_request_order_uuid] && request_order.parent_id.nil?
       sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-      Business.find_by(id:sub_request_order.business_id).name
-    #下請けが自身の書類確認するとき
+      Business.find_by(id: sub_request_order.business_id).name
+    # 下請けが自身の書類確認するとき
     else
-      Business.find_by(id:request_order.business_id).name
+      Business.find_by(id: request_order.business_id).name
     end
   end
 
-  #作業員情報
+  # 作業員情報
   def worker(worker_uuid)
     Worker.find_by(uuid: worker_uuid)&.name
   end
@@ -532,5 +530,4 @@ module DocumentsHelper
     date = cont.content&.[](column)
     date.blank? ? '年 月 日' : l(date.to_date, format: :long)
   end
-
 end
