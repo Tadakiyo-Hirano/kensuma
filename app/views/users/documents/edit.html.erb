@@ -1,8 +1,13 @@
+<!-- edit画面での各書類の表示の場合分け -->
 <% provide(:title, "#{@document.document_type_i18n}") %>
 
-<%= render '/users/documents/shares/edit_link', document: @document %>
+<!-- %= render '/users/documents/shares/show_link', document: @document % -->
 
 <% case @document.document_type %>
+<% when 'cover_document' %>
+  <%= render 'users/documents/cover_documents/edit' %> <!-- (1)表紙 -->
+<% when 'table_of_contents_document' %>
+  <%= render 'users/documents/table_of_contents_documents/edit' %> <!-- (2)目次 -->
 <% when 'doc_3rd' %>
   <%= render 'users/documents/doc_3rd/edit' %> <!-- (3)施工体制台帳作成建設工事の通知 -->
 <% when 'doc_4th' %>

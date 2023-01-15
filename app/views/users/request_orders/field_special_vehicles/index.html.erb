@@ -9,11 +9,7 @@
           <%= link_to "現場情報一覧", users_request_orders_path(@request_order), class: "btn btn-md btn-default" %>
         </td>
         <td>
-          <%= link_to "入場作業員", users_request_order_field_workers_path(@request_order), class: "btn btn-md btn-success" %>
-          <%= link_to "車両", users_request_order_field_cars_path(@request_order), class: "btn btn-md btn-success" %>
-          <%= link_to "特殊車両", users_request_order_field_special_vehicles_path(@request_order), class: "btn btn-md btn-success" %>
-          <%= link_to "機械", "#", class: "btn btn-md btn-success" %>
-          <%= link_to "溶剤", "#", class: "btn btn-md btn-success" %>
+          <%= render '/users/documents/shares/show_request_order_link', request_order: @request_order %>
         </td>
       </tbody>
     </table>
@@ -59,7 +55,10 @@
                     <%= FieldSpecialVehicle.human_attribute_name(:driver_name) %><br>
                     <%= not_input_display(field_special_vehicle.driver_name) %>
                   </td>
-                  <td></td>
+                  <td>
+                    <%= FieldSpecialVehicle.human_attribute_name(:sub_driver_name) %><br>
+                    <%= not_input_display(field_special_vehicle.sub_driver_name) %>
+                  </td>
                   <td>
                     <%= link_to "削除", users_request_order_field_special_vehicle_path(@request_order, field_special_vehicle), method: :delete, data: { confirm: "#{field_special_vehicle.vehicle_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>                    
                   </td>

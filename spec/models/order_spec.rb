@@ -53,7 +53,7 @@ RSpec.describe Order, type: :model do
       context '数値14桁以上の場合' do
         before(:each) { subject.site_career_up_id = '0' * 15 }
 
-        it 'バリデーションが通ること' do
+        it 'バリデーションに落ちること' do
           expect(subject).to be_invalid
         end
       end

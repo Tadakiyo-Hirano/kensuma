@@ -4,6 +4,52 @@ module DocumentsHelper
     l(column, format: :long) unless column.nil?
   end
 
+  # document.contentの日付
+  def doc_content_date(date)
+    if action_name == 'edit'
+      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+    else
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
+    end
+  end
+
+  # (4)施工体制台帳
+
+  # 一次下請の情報
+  def subcon_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order if request_order.parent_id == 1
+  end
+
+  def subcons_info
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order.children if request_order.parent_id.nil?
+  end
+
+  def document_subcon_info
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+      subcon_info
+    else
+      @subcon
+    end
+  end
+
+  # 専任･非専任
+  FULL_TIME_CHECK = {
+    'full_time'     => '専任',
+    'non_dedicated' => '非専任'
+  }.freeze
+
+  def full_time_check(check)
+    status = FULL_TIME_CHECK[check]
+    status == '専任' ? tag.span(status, class: :circle) : '専任'
+  end
+
+  def non_dedicated_check(check)
+    status = FULL_TIME_CHECK[check]
+    status == '非専任' ? tag.span(status, class: :circle) : '非専任'
+  end
+
   # 会社の保険加入状況
   INSURANCE_TYPE = {
     'join'       => '加入',
@@ -26,40 +72,7 @@ module DocumentsHelper
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
 
-  # 専任･非専任
-  FULL_TIME_CHECK = {
-    'full_time'     => '専任',
-    'non_dedicated' => '非専任'
-  }.freeze
-
-  def full_time_check(check)
-    status = FULL_TIME_CHECK[check]
-    status == '専任' ? tag.span(status, class: :circle) : '専任'
-  end
-
-  def non_dedicated_check(check)
-    status = FULL_TIME_CHECK[check]
-    status == '非専任' ? tag.span(status, class: :circle) : '非専任'
-  end
-
-  # 一次下請の情報
-  def subcon_info
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order if request_order.parent_id == 1
-  end
-
-  def subcons_info
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.children if request_order.parent_id.nil?
-  end
-
-  def document_subcon_info
-    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
-      subcon_info
-    else
-      @subcon
-    end
-  end
+  # (8)作業員名簿
 
   # 元請の確認欄
   def document_info_for_prime_contractor_name
@@ -235,6 +248,92 @@ module DocumentsHelper
     end
   end
 
+  # 新規入場者調査票用（資格-技能講習-作業主任者-その他枠）
+  def worker_skill_training_work_other(worker)
+    trainings = worker&.content&.[]('worker_skill_trainings')
+
+    unless trainings.nil?
+      trainings = trainings.map { |training| SkillTraining.find(training['skill_training_id']).short_name }
+      trainings.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_work =
+        %w[整地 基礎 解体 不整 高所 フォ ショ 小ク 床ク
+           ガス 玉掛 コ破 地山 石綿 有機 型枠 足場 ボ取 コ解 酸欠]
+      trainings.delete_if do |t_work|
+        no_work.include?(t_work)
+      end
+    end
+
+    trainings2 = trainings
+    if trainings2.present?
+      "■その他( #{trainings2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
+    end
+  end
+
+  # 新規入場者調査票用（資格-特別教育-酸素欠乏危険作業枠）
+  def worker_special_education_oxygen(worker)
+    text = ['酸素欠乏（1種）', '酸素欠乏（2種）']
+    (text & worker_special_education(worker).split).present? ? '■酸素欠乏危険作業' : '▢酸素欠乏危険作業'
+  end
+
+  # 新規入場者調査票用（資格-特別教育-電気取扱枠）
+  def worker_special_education_electrical(worker)
+    text = ['低圧電気取扱', '低圧電気取扱（開閉器の操作）', '高圧電気取扱', '特別高圧電気取扱']
+    (text & worker_special_education(worker).split).present? ? '■電気取扱' : '▢電気取扱'
+  end
+
+  # 新規入場者調査票用（資格-特別教育-その他枠）
+  def worker_special_education_other(worker)
+    educations = worker&.content&.[]('worker_special_educations')
+
+    unless educations.nil?
+      educations = educations.map { |education| SpecialEducation.find(education['special_education_id']).name }
+      educations.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_education =
+        %w[酸素欠乏（1種） 酸素欠乏（2種） 小型車両系建設機械（整地・運搬・積込み用及び掘削用）（3t未満）
+           小型車両系建設機械（基礎工事用）（3t未満） ローラー 車両系建設機械（コンクリート打設用）
+           小型車両系建設機械（解体用）（3t未満） 不整地運搬車（1t未満） 高所作業車(10m未満）
+           ボーリングマシン フォークリフト（1t未満） ショベルローダー（1t未満） 巻上げ機 建設用リフト
+           玉掛け（1t未満） ゴンドラ アーク溶接 研削砥石 低圧電気取扱 低圧電気取扱（開閉器の操作） 高圧電気取扱
+           特別高圧電気取扱 足場の組立て ロープ高所作業 フルハーネス型の墜落制止用器具]
+      educations.delete_if do |e_work|
+        no_education.include?(e_work)
+      end
+    end
+
+    educations2 = educations
+    if educations2.present?
+      "■その他( #{educations2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
+    end
+  end
+
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「はい」）
+  def questionnaire_business_type_yes(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name == r_name
+      status = Business.find(document_info.business_id).business_type_i18n
+      status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
+    else
+      '1. はい'
+    end
+  end
+
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「いいえ」）
+  def questionnaire_business_type_no(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name != r_name
+      tag.span('2. いいえ', class: :circle)
+    else
+      status = Business.find(document_info.business_id).business_type_i18n
+      status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+    end
+  end
+
   # 作業員の免許情報
   def worker_license(worker)
     licenses = worker&.content&.[]('worker_licenses')
@@ -256,12 +355,147 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
 
+  # (12)工事・通勤用車両届
+
+  # 車両情報(工事･通勤)
   def car_usage_commute(usage)
     usage == '通勤用' ? tag.span('通勤', class: :circle) : '通勤'
   end
 
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
+  end
+
+  # (13)移動式クレーン/車両系建設機械等使用届
+
+  # 特殊車両情報(自社･リース)
+  def lease_type_own(type)
+    type == 'own' ? tag.span('自社', class: :circle) : '自社'
+  end
+
+  def lease_type_lease(type)
+    type == 'lease' ? tag.span('リース', class: :circle) : 'リース'
+  end
+
+  # 特殊車両情報(区分)
+  def vehicle_type_crane(type)
+    type == 'crane' ? tag.span('移動式クレーン', class: :circle) : tag.span('移動式クレーン', class: :line_through)
+  end
+
+  def vehicle_type_construction(type)
+    type == 'construction' ? tag.span('車両系建設機械', class: :circle) : tag.span('車両系建設機械', class: :line_through)
+  end
+
+  # (15)有機溶剤・特定化学物質等持込使用届
+
+  # 有機溶剤情報(使用期間)
+  # date は必ず jisx0301 で変換できる値
+  # def wareki(date)
+  #   wareki, mon, day = date.jisx0301.split('.')
+  #   gengou, year = wareki.partition(/\d+/).take(2)
+  #   gengou.sub!(
+  #     /[MTSHR]/,
+  #     'M' => '明治',
+  #     'T' => '大正',
+  #     'S' => '昭和',
+  #     'H' => '平成',
+  #     'R' => '令和'
+  #   )
+  #   "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
+  # end
+
+  def field_solvent_working_process_y(working_process)
+    working_process == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def field_solvent_working_process_n(working_process)
+    working_process == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
+  def field_solvent_sds_y(sds)
+    sds == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def field_solvent_sds_n(sds)
+    sds == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
+  # (16)火気使用届
+
+  # 現場火気情報(使用目的)
+  def fire_use_target(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_use_targets.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
+  end
+
+  # 現場火気情報(火気の種類)
+  def fire_type(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_types.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
+  end
+
+  # 現場火気情報(火気の管理方法)
+  def fire_management(name, num)
+    fires = document_info.field_fires
+    if fires.present?
+      fires.first.fire_managements.map(&:id).include?(num) ? tag.span(name, class: :fire_check) : name
+    else
+      name
+    end
+  end
+
+  # (17)下請負業者編成表
+
+  # 特定専門工事の有無(有･無)
+  def professional_construction_yes(type)
+    type == 'y' ? tag.span('有', class: :circle) : '有'
+  end
+
+  def professional_construction_no(type)
+    type == 'n' ? tag.span('無', class: :circle) : '無'
+  end
+
+  # 二次下請会社情報
+  def secondary_subcon_info(document_info, child_id)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.child_ids[child_id].nil?
+      nil
+    else
+      RequestOrder.find(document_info.child_ids[child_id])
+    end
+  end
+
+  # 三次下請以下の会社情報
+  def hierarchy_subcon_info(document_info, hierarchy, child_id) # hierarchyは階層の深さを指定する
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.find_all_by_generation(hierarchy).nil?
+      nil
+    elsif document_info.find_all_by_generation(hierarchy).ids[child_id]
+      RequestOrder.find(document_info.find_all_by_generation(hierarchy).ids[child_id])
+    end
+  end
+
+  # (13)移動式クレーン/車両系建設機械等使用届,(16)火気使用届,(17)下請負業者編成表
+
+  # 一次下請会社名の情報
+  def primary_subcon_info(document_info)
+    if document_info.instance_of?(Order)
+      nil
+    elsif document_info.ancestors.count > 1
+      RequestOrder.find(document_info.ancestor_ids[-2])
+    elsif document_info.ancestors.count == 1
+      document_info.content.nil? ? nil : document_info
+    end
   end
 
   # チェックボックスにチェックが入っているかを判別

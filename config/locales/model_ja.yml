@@ -9,6 +9,14 @@ ja:
       car_insurance_company: ⾃動⾞保険会社
       car_voluntary_insurance: 任意保険
       special_vehicle: 特殊車両情報
+      field_car: 現場車両情報
+      field_fire: 現場火気情報
+      fire_use_target: 火気使用目的
+      fire_type: 火気の種類
+      fire_management: 火気の管理方法
+      field_machine: 現場機械情報
+      field_solvent: 現場溶剤情報
+      field_special_vehicle: 現場特殊車両情報
       field_worker: 現場作業員情報
       order: 現場情報
       request_order: 下請発注情報
@@ -34,6 +42,7 @@ ja:
       #   name: 会社名
       #   email: 会社メール
         role: 権限
+        is_prime_contractor: 元請け
       business:
         uuid: 事業所ID
         name: 事業所名
@@ -57,8 +66,19 @@ ja:
         business_employment_insurance_join_status: 雇用保険(加入状況)
         business_employment_insurance_number: 雇用保険(番号)
         business_retirement_benefit_mutual_aid_status: 退職金共済制度(加入状況)
+        construction_license_status: 建設許可証(取得状況)
+        industry_ids: 業種（複数選択）
+        construction_license_permission_type_minister_governor: 建設許可証(種別)
+        construction_license_governor_permission_prefecture: 建設許可証(都道府県)
+        construction_license_permission_type_identification_general: 建設許可証(種別)
+        construction_license_number_double_digit: 建設許可証(番号)
+        construction_license_number_six_digits: 建設許可証(番号)
+        construction_license_number: 建設許可証(建設許可番号)
+        construction_license_updated_at: 建設許可証(更新日)
       business_occupation:
         occupation_id: 職種
+      business_industry:
+        industry_id: 業種
       car:
         usage: 使用目的
         owner_name: 車両所有者氏名
@@ -107,8 +127,61 @@ ja:
         waypoint_first: 経由地1
         waypoint_second: 経由地2
         arrival_point: 目的地(至)
+      field_fire:
+        use_place: 使用場所
+        other_use_target: 使用目的(その他)
+        usage_period_start: 使用期間(始期)
+        usage_period_end: 使用期間(終期)
+        usage_time_start: 使用時間(始時)
+        usage_time_end: 使用時間(終時)
+        other_fire_type: 火気の種類(その他)
+        precautions: 取扱上の注意
+        fire_origin_responsible: 火元責任者(後始末巡回者)
+        fire_use_responsible: 火気使用責任者
+      fire_use_target:
+        name: 使用目的
+      fire_type:
+        name: 火気の種類
+      fire_management:
+        name: 管理方法
+      field_machine:
+        machine_name: 機械名
+        carry_on_date: 持込年月日
+        carry_out_date: 搬出予定日
+        precautions: 機械等の特性・使用上注意すべき事項
+      field_solvent:
+        date_submitted: 提出日
+        solvent_name_one: 商品名1
+        solvent_name_two: 商品名2
+        solvent_name_three: 商品名3
+        solvent_name_four: 商品名4
+        solvent_name_five: 商品名5
+        carried_quantity_one: 搬入量1
+        carried_quantity_two: 搬入量2
+        carried_quantity_three: 搬入量3
+        carried_quantity_four: 搬入量4
+        carried_quantity_five: 搬入量5
+        solvent_classification_one: 種別1
+        solvent_classification_two: 種別2
+        solvent_classification_three: 種別3
+        solvent_classification_four: 種別4
+        solvent_classification_five: 種別5
+        solvent_ingredients_one: 含有成分1
+        solvent_ingredients_two: 含有成分2
+        solvent_ingredients_three: 含有成分3
+        solvent_ingredients_four: 含有成分4
+        solvent_ingredients_five: 含有成分5
+        using_location: 使用場所
+        storing_place: 保管場所
+        using_tool: 使用機械又は工具
+        usage_period_start: 使用期間(始期)
+        usage_period_end: 使用期間(終期)
+        working_process: 作業手順書の添付
+        sds: SDS(安全データシート)の添付
+        ventilation_control: 換気等対策
       field_special_vehicle:
-        driver_name: 運転者名
+        driver_name: 運転者名(正)
+        sub_driver_name: 運転者名(副)
         vehicle_name: 特殊車両名
         vehicle_type: 区分
         carry_on_company_name: 持込会社名
@@ -284,7 +357,6 @@ ja:
         name: 名称
       solvent:
         name: 商品名
-        maker: メーカー名
         classification: 種別
         ingredients: 含有成分
       machine:
@@ -295,6 +367,9 @@ ja:
         handler: 取扱者
         inspection_date: 点検年月日
         inspection_check: 点検事項
+        extra_inspection_item1: 追加の点検事項
+      tag:
+        name: 点検事項の名称
   attributes:
     created_at: 作成日
     updated_at: 更新日

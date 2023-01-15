@@ -14,7 +14,7 @@ module Users
 
     # 会社情報が登録してなければ会社情報登録画面へ
     def business_nil_access
-      redirect_to new_users_business_path, flash: { danger: '会社情報を登録して下さい' } if current_user.business.nil? && current_user.admin?
+      redirect_to new_users_business_path, flash: { danger: '会社情報を登録して下さい' } if current_user.business.nil?
     end
 
     def unread_news_count
@@ -91,6 +91,24 @@ module Users
       JSON.parse(
         special_vehicle.to_json(
           except: %i[uuid created_at updated_at] # 特殊車両情報
+        )
+      )
+    end
+
+    # 書類に反映させる機械情報
+    def machine_info(machine)
+      JSON.parse(
+        machine.to_json(
+          except: %i[uuid created_at updated_at] # 機械情報
+        )
+      )
+    end
+
+    # 書類に反映させる溶剤情報
+    def solvent_info(solvent)
+      JSON.parse(
+        solvent.to_json(
+          except: %i[uuid created_at updated_at] # 溶剤情報
         )
       )
     end
