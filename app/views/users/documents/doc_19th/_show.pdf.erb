@@ -347,7 +347,7 @@
           <td class="doc_19_s8" dir="ltr"></td>
           <td class="doc_19_s8" dir="ltr"></td>
           <td class="doc_19_s8" dir="ltr"></td>
-          <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><%= @document.content&.[]('date_created') %></td>
+          <td class="doc_19_s9" dir="ltr" colspan="8" rowspan="2"><%= wareki(@document.content&.[]('date_created'))  %></td>
           <td class="doc_19_s8" dir="ltr" colspan="2" rowspan="2">作成</td>
           <td class="doc_19_s2"></td>
         </tr>
@@ -2011,7 +2011,7 @@ color: inherit;
 
 .ritz .waffle .doc_19_s9 {
   border-top: 1px SOLID #ffffff;
-  border-right: 0.5px SOLID #ccffcc;
+  border-right: 0.5px SOLID #FFFFFF;
   border-left: 1px SOLID #ffffff;
   border-bottom: 1px SOLID #000000;
   text-align: center;
@@ -2181,7 +2181,7 @@ color: inherit;
 }
 
 .ritz .waffle .doc_19_s16 {
-  border-right: 0.5px SOLID #ccffcc;
+  border-right: 0.5px SOLID #FFFFFF;
   border-bottom: 1px SOLID #000000;
   text-align: center;
   -webkit-text-decoration-skip: none;

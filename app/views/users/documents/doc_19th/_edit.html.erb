@@ -1,6 +1,6 @@
 <!-- (19)全建統一様式第6号(工事安全衛生計画書) -->
 <h1 align="center">編集中</h1>
-<%= render 'users/documents/doc_19th/error_messages_for_doc_19th.html.erb' %>
+<%= render 'users/documents/doc_19th/error_messages_for_doc_19th' %>
 <div id="doc_19_sheet">
   <div class="ritz grid-container" dir="ltr">
     <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
@@ -76,7 +76,7 @@
             <td class="doc_19_s5"></td>
             <td class="doc_19_s6" dir="ltr" colspan="2" rowspan="2">元 請<br> 確認欄</td>
             <td class="doc_19_s7" dir="ltr" colspan="9" rowspan="2">
-              <%=document_info_for_19th_prime_contractor_name%>
+              <%=document_info_for_prime_contractor_name%>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -351,7 +351,7 @@
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s8" dir="ltr"></td>
             <td class="doc_19_s30" dir="ltr" colspan="8" rowspan="2">
-              <%= f.date_field name = 'content[date_created]', value:@document.content&.[]('date_created') %>
+              <%= f.date_field name = 'content[date_created]', value:@document.content&.[]('date_created')  %>
             </td>
             <td class="doc_19_s8" dir="ltr" colspan="2" rowspan="2">作成</td>
             <td class="doc_19_s2"></td>

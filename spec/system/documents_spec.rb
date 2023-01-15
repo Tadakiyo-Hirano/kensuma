@@ -10,7 +10,7 @@ RSpec.describe 'Documnents', type: :system do
   let(:order) { create(:order, business: business) }
   let(:request_order) { create(:request_order, business: business, order: order) }
   let(:request_order_first_sub) { create(:request_order, parent_id: 1, business: business_first_sub, order: order) }
-  let(:request_order_second_sub) { create(:request_order, parent_id: 2,business: business_second_sub, order: order) }
+  let(:request_order_second_sub) { create(:request_order, parent_id: 2, business: business_second_sub, order: order) }
   let(:worker) { create(:worker, business: business) }
   let(:worker_first_sub) { create(:worker, name: '1次下請けワーカ', business: business_first_sub) }
   let(:worker_second_sub) { create(:worker, name: '2次下請けワーカ', business: business_second_sub) }
@@ -90,6 +90,7 @@ RSpec.describe 'Documnents', type: :system do
 
     describe '工事安全衛生計画書' do
       subject { doc_19th }
+
       context '正常系' do
         it '工事安全衛生計画書の詳細画面へ遷移できること' do
           visit users_request_order_document_path(request_order, subject)
@@ -108,10 +109,10 @@ RSpec.describe 'Documnents', type: :system do
 
         it '正しく入力した際はshow画面に反映されること' do
           visit edit_users_request_order_document_path(request_order, subject)
-          fill_in 'document_content[date_created]', with: '2023-01-07'
+          fill_in 'document_content[date_created]', with: '令和5年1月7日'
           fill_in 'document_content[safety_and_health_construction_policy]', with: '当社及び作業所の安全衛生ルールを遵守。'
           fill_in 'document_content[safety_and_health_construction_objective]', with: '墜落危険作業では安全帯を使用 (使用率 100%) する。'
-          select(value = '1', from: 'document_content[construction_type_period_month_1st]') 
+          select '1', from: 'document_content[construction_type_period_month_1st]'
           check 'document_content[construction_type_period_week_one_1st]'
           fill_in 'document_content[construction_type_1st]', with: '足場組立て工事'
           fill_in 'document_content[construction_type_1st_period_1st]', with: '24/1/5 ↔︎ 24/1/19'
@@ -133,7 +134,7 @@ RSpec.describe 'Documnents', type: :system do
 
           tds = all('tbody tr')[38].all('td')
 
-          expect(page).to have_content '2023-01-07'
+          expect(page).to have_content '令和5年1月7日'
           expect(page).to have_content '当社及び作業所の安全衛生ルールを遵守。'
           expect(page).to have_content '墜落危険作業では安全帯を使用 (使用率 100%) する。'
           expect(page).to have_content '1月'
@@ -154,6 +155,29 @@ RSpec.describe 'Documnents', type: :system do
           expect(page).to have_content 'xx使用届'
           expect(tds[5]).to have_content '2'
           expect(tds[6]).to have_content '1'
+        end
+
+        it '下請けが工事安全衛生計画書の画面へ遷移し、表示されること' do
+          click_link 'ログアウト'
+          fill_in 'user[email]', with: user_first_sub.email
+          fill_in 'user[password]', with: user_first_sub.password
+          click_button 'ログイン'
+          document_pages = 24 # 書類の種類の数
+          document_pages.times do |page|
+            create(:document, request_order: request_order_first_sub, business: business_first_sub, document_type: page + 1)
+          end
+          document_uuid = business_first_sub.documents.find_by(document_type: 'doc_19th').uuid
+
+          visit users_request_order_document_path(request_order_first_sub, document_uuid)
+
+          expect(page).to have_content '工事安全衛生計画書'
+          expect(page).to have_content order.confirm_name
+          expect(page).to have_content order.site_name
+          expect(page).to have_content business_first_sub.name
+          expect(page).to have_content order.site_agent_name
+          expect(page).to have_content request_order_first_sub.safety_officer_name
+          expect(page).to have_content request_order_first_sub.construction_manager_name
+          expect(page).to have_content request_order_first_sub.foreman_name
         end
       end
 
@@ -197,12 +221,11 @@ RSpec.describe 'Documnents', type: :system do
           expect(page).to have_content '1つ目の予測される災害を50字以内にしてください'
           expect(page).to have_content '1つ目のリスク低減措置を200字以内にしてください'
           expect(page).to have_content '1つ目の職名を20字以内にしてください'
-
         end
 
-        it '組み合わせによる記載漏れのエラー表示' do
+        it '組み合わせによる記載漏れのエラー表示(元請け)' do
           visit edit_users_request_order_document_path(request_order, subject)
-          select(value = '1', from: 'document_content[construction_type_period_month_1st]')
+          select '1', from: 'document_content[construction_type_period_month_1st]'
           fill_in 'document_content[construction_type_1st]', with: '足場組立て工事'
           fill_in 'document_content[work_classification_1st]', with: '移動式クレーンの設置'
           check 'document_content[carry_on_machine]'
@@ -226,6 +249,29 @@ RSpec.describe 'Documnents', type: :system do
           expect(page).to have_content '1行4列目の使用届のチェックをしてください'
         end
 
+        it '組み合わせによる記載漏れのエラー表示(下請け)' do
+          click_link 'ログアウト'
+          fill_in 'user[email]', with: user_first_sub.email
+          fill_in 'user[password]', with: user_first_sub.password
+          click_button 'ログイン'
+          document_pages = 24 # 書類の種類の数
+          document_pages.times do |page|
+            create(:document, request_order: request_order_first_sub, business: business_first_sub, document_type: page + 1)
+          end
+          document_uuid = business_first_sub.documents.find_by(document_type: 'doc_19th').uuid
+
+          visit edit_users_request_order_document_path(request_order_first_sub, document_uuid)
+
+          select worker_second_sub.name, from: 'document_content[subcontractor_construction_workers_name_1st]'
+
+          click_button '更新する'
+          expect(page).to have_content '1行目の職名を入力してください。'
+
+          fill_in 'document_content[subcontractor_construction_workers_position_1st]', with: '職長兼オペレーター'
+          click_button '更新する'
+
+          expect(page).to have_content '1行目の氏名を入力してください。'
+        end
       end
     end
   end
