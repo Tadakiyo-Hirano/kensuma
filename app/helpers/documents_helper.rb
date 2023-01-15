@@ -6,7 +6,6 @@ module DocumentsHelper
 
   # document.contentの日付
   def doc_content_date(date)
-    debugger
     if action_name == 'edit'
       date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
     else
