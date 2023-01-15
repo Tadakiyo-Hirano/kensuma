@@ -31,5 +31,27 @@ FactoryBot.define do
       document_type { 8 }
       content { {} }
     end
+
+    # 工事安全衛生計画書
+    trait :doc_19th do
+      document_type { 19 }
+      content { {} }
+    end
+  end
+
+  factory :document_first_sub do
+    uuid { SecureRandom.uuid }
+    document_type { 1 }
+    created_on { '2022-03-08' }
+    submitted_on { '2022-03-08' }
+    content { }
+    business
+    request_order
+
+    # 工事安全衛生計画書
+    trait :doc_19th do
+      document_type { 19 }
+      content { {} }
+    end
   end
 end
