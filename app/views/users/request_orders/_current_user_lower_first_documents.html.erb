@@ -3,8 +3,7 @@
     <tr>
       <th>No.</th>
       <th>書類名</th>
-      <th>詳細</th>
-      <th>PDF</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -15,9 +14,6 @@
         </td>
         <td>
           <%= first_document.document_type_i18n %>
-        </td>
-        <td>
-          <%= link_to '詳細', users_request_order_sub_request_order_document_path(@request_order.uuid, first_request_order.uuid, first_document) %>
         </td>
         <td>
           <%= link_to 'PDF', users_request_order_sub_request_order_document_path(@request_order.uuid, first_request_order.uuid, first_document, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
