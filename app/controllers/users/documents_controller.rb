@@ -35,17 +35,28 @@ module Users
     end
 
     def update
-      @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
-      if @error_msg_for_doc_19th.blank?
+      case @document.document_type
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
+
+      when 'doc_19th'
+        @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
+        if @error_msg_for_doc_19th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
         else
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
-      else
-        flash[:danger] = '保存に失敗しました'
-        render action: :edit
       end
     end
 
@@ -109,7 +120,6 @@ module Users
     end
 
     def document_params(document)
-      debugger
       case document.document_type
       when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
         params.require(:document).permit(content: 
