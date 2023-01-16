@@ -15,8 +15,6 @@ module Users
       @first_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.first_subcon_documents_type
       @second_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.second_subcon_documents_type
       @third_or_later_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.third_or_later_subcon_documents_type
-      # @genecon_lower_first_documents_type = RequestOrder.find_by(uuid: @first_request_order.uuid).documents.third_or_later_subcon_documents_type
-      
     end
 
     def edit
