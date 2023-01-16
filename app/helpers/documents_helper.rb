@@ -654,7 +654,7 @@ module DocumentsHelper
 
   # 自身の書類一覧取得
   def current_user_documents(request_order)
-  case request_order.depth
+    case request_order.depth
     when 0
       @genecon_documents
     when 1
@@ -665,19 +665,19 @@ module DocumentsHelper
       @third_or_later_subcon_documents
     end
   end
-  
+
   # 自身の一つ下の階層の書類一覧取得
   def current_lower_first_documents_type(request_order)
     case request_order.depth
     when 1
-      # 自身が元請けの場合の閲覧可能な一次下請け書類一覧
+      # 自身が元請けの場合：閲覧可能な一次下請け書類一覧
       RequestOrder.find_by(uuid: request_order.uuid).documents.current_lower_first_documents_type
     when 2
-      # 自身が一次下請けの場合の閲覧可能な二次下請け書類一覧
+      # 自身が一次下請けの場合：閲覧可能な二次下請け書類一覧
       RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
     when 3, 4
-      # 自身が二次下請け以降の場合の閲覧可能な三次下請け以降の書類一覧(二次→三次、三次→四次)
-      RequestOrder.find_by(uuid: request_order.uuid).documents.other_lower_documents_type
+      # 自身が二次下請け以降の場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
     end
   end
 
@@ -685,11 +685,20 @@ module DocumentsHelper
   def current_lower_second_documents_type(request_order)
     case request_order.depth
     when 2
-      # 自身が元請けの場合の閲覧可能な二次下請け書類一覧
+      # 自身が元請けの場合：閲覧可能な二次下請け書類一覧
       RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
     when 3, 4
-      # 自身が一次下請けの場合の閲覧可能な三次下請け以降の書類一覧(二次→三次、三次→四次)
-      RequestOrder.find_by(uuid: request_order.uuid).documents.other_lower_documents_type
+      # 自身が一次下請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 自身の三つ下以降の階層の書類一覧取得
+  def current_lower_other_documents_type(request_order)
+    case request_order.depth
+    when 3, 4
+      # 自身が元請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
     end
   end
 end

@@ -286,7 +286,7 @@
                     <%= Business.human_attribute_name(:name) %>：<%= second_request_order.business.name %>
                     <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, second_request_order) %>
                   </div>
-                  <!-- 自身の一つ下の書類一覧 -->
+                  <!-- 自身の二つ下の書類一覧 -->
                   <%= render 'current_user_lower_second_documents', request_order: @request_order, second_request_order: second_request_order %>
                 </div>
               </div>
@@ -307,6 +307,8 @@
                       <%= Business.human_attribute_name(:name) %>：<%= third_request_order.business.name %>
                       <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, third_request_order) %>
                     </div>
+                    <!-- 自身の三つ下の書類一覧 -->
+                    <%= render 'current_user_lower_other_documents', request_order: @request_order, other_request_order: third_request_order %>
                   </div>
                 </div>
               </div>
@@ -326,6 +328,8 @@
                         <%= Business.human_attribute_name(:name) %>：<%= forth_request_order.business.name %>
                         <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, forth_request_order) %>
                       </div>
+                      <!-- 自身の四つ下の書類一覧 -->
+                      <%= render 'current_user_lower_other_documents', request_order: @request_order, other_request_order: forth_request_order %>
                     </div>
                   </div>
                 </div>
