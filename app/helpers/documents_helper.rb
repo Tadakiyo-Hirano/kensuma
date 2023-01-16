@@ -358,7 +358,7 @@ module DocumentsHelper
     "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
   end
   
-  def over_65
+  def over_65 #入場年月日をもとに65歳以上の作業員を絞り込み
     target_ids = []
     document_info.field_workers.each do |field_worker|
       birth_date = field_worker.content["birth_day_on"].to_date
@@ -368,16 +368,16 @@ module DocumentsHelper
         target_ids.push field_worker.id
       end
     end
-    return target_ids
+    target_ids
   end
 
-  def age_for_over_65(worker)
+  def age_for_admission_date_start(worker) #入場年月日を起点に年齢を算出
     if worker.present?
       date_format = "%Y%m%d"
-      birth_date = FieldWorker.find(worker.id).content["birth_day_on"].to_date.strftime(date_format).to_i
-      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i
+      birth_date = FieldWorker.find(worker.id).content["birth_day_on"].to_date.strftime(date_format).to_i #生年月日
+      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i #入場日
       age = (str_date - birth_date) / 10000
-      return age
+      age
     end
   end
 
