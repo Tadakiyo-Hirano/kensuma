@@ -1,5 +1,5 @@
 <!-- (4)全建統一様式第3号(施工体制台帳) -->
-<% if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1 %>
+<% if RequestOrder.find_by(uuid: params[:request_order_uuid]).depth == 1 %>
   <%= render "users/documents/doc_4th/form" %>
 <% else %>
   <% subcons_info.each do |subcon| @subcon = subcon %>
