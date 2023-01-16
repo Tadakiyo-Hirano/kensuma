@@ -8,7 +8,7 @@
     ".. .. .. .. .. .. .." 20px
     ".. .. c1 c1 c1 .. .."
     ".. .. .. .. .. .. .." 16px
-    ".. .. .. .. c2 c2 .."
+    ".. .. .. .. .. c2 .."
     ".. c3 c3 .. .. .. .."
     ".. .. .. .. .. .. .." 16px
     ".. c4 c4 .. .. .. .."
@@ -64,6 +64,12 @@ div span {
 }
 .t-content tr {
   height: 50px;
+}
+td.gray {
+  background-color: #e9ecef;
+}
+td.green {
+  background-color: #ccffcc;
 }
 .office_name p, .chief_name p {
   border-bottom:1px solid;
