@@ -998,7 +998,7 @@
                 <%= machine_str(m1, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m1) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m1&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m1, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1060,7 +1060,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m1) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m1&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1123,7 +1123,7 @@
                 <%= machine_str(m2, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m2) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m2&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m2, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1154,7 +1154,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m2) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m2&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1216,7 +1216,7 @@
                 <%= machine_str(m3, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m3) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m3&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m3, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1277,7 +1277,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m3) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m3&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1308,7 +1308,7 @@
                 <%= machine_str(m4, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m4) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m4&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m4, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1369,7 +1369,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m4) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m4&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1431,7 +1431,7 @@
                 <%= machine_str(m5, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m5) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m5&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m5, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1461,7 +1461,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m5) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m5&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1523,7 +1523,7 @@
                 <%= machine_str(m6, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m6) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m6&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m6, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1584,7 +1584,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m6) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m6&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1615,7 +1615,7 @@
                 <%= machine_str(m7, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m7) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m7&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m7, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1646,7 +1646,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m7) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m7&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1710,7 +1710,7 @@
                 <%= machine_str(m8, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m8) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m8&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m8, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1740,7 +1740,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m8) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m8&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1804,7 +1804,7 @@
                 <%= machine_str(m9, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m9) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m9&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m9, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1867,7 +1867,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m9) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m9&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -1898,7 +1898,7 @@
                 <%= machine_str(m10, "control_number") %> <!-- 14-011 「管理番号(提出会社が記載)」 -->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_on_date(m10) %> <!-- 14-013 「持込年月日」 ※field_machine-->
+                <%= wareki(m10&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m10, "inspector") %> <!-- 14-015 「点検者」 -->
@@ -1960,7 +1960,7 @@
                 <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
               </td>
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
-                <%= field_machine_carry_out_date(m10) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
+                <%= wareki(m10&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>

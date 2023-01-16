@@ -388,22 +388,7 @@ module DocumentsHelper
 
   # (15)有機溶剤・特定化学物質等持込使用届
 
-  # 有機溶剤情報(使用期間)
-  # date は必ず jisx0301 で変換できる値
-  # def wareki(date)
-  #   wareki, mon, day = date.jisx0301.split('.')
-  #   gengou, year = wareki.partition(/\d+/).take(2)
-  #   gengou.sub!(
-  #     /[MTSHR]/,
-  #     'M' => '明治',
-  #     'T' => '大正',
-  #     'S' => '昭和',
-  #     'H' => '平成',
-  #     'R' => '令和'
-  #   )
-  #   "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
-  # end
-
+  # 作業手順書の添付の有・無
   def field_solvent_working_process_y(working_process)
     working_process == 'y' ? tag.span('有', class: :circle) : '有'
   end
@@ -412,6 +397,7 @@ module DocumentsHelper
     working_process == 'n' ? tag.span('無', class: :circle) : '無'
   end
 
+  # SDSの添付の有・無
   def field_solvent_sds_y(sds)
     sds == 'y' ? tag.span('有', class: :circle) : '有'
   end
@@ -854,18 +840,6 @@ module DocumentsHelper
     end
   end
 
-  # 現場機械情報の持込年月日　下のメソッドとまとめられる？
-  def field_machine_carry_on_date(machine)
-    date = machine&.carry_on_date
-    date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
-  end
-
-  # 現場機械情報の搬出予定日
-  def field_machine_carry_out_date(machine)
-    date = machine&.carry_out_date
-    date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
-  end
-  
   private
 
   # リスクの可能性

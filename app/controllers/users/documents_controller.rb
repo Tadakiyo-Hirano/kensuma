@@ -50,21 +50,41 @@ module Users
     # end
 
     def edit
-      @error_msg_for_doc_14th = nil
+      case @document.document_type
+      when 'doc_14th'
+        @error_msg_for_doc_14th = nil
+      when 'doc_19th'
+        @error_msg_for_doc_19th = nil
+      end
     end
 
     def update
-      @error_msg_for_doc_14th = @document.error_msg_for_doc_14th(document_params(@document))
-      if @error_msg_for_doc_14th.blank?
-        if @document.update(document_params(@document))
-          redirect_to users_request_order_document_url, success: "保存に成功しました"
+      case @document.document_type
+      when 'doc_14th'
+        @error_msg_for_doc_14th = @document.error_msg_for_doc_14th(document_params(@document))
+        if @error_msg_for_doc_14th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: "保存に成功しました"
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit 
+          end
         else
-          flash[:danger] = '保存に失敗しました'
+          flash[:danger] = @error_msg_for_doc_14th.first
           render action: :edit 
         end
-      else
-        flash[:danger] = @error_msg_for_doc_14th.first
-        render action: :edit 
+      when 'doc_19th'
+        if @error_msg_for_doc_19th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+        end
       end
     end
 
