@@ -42,7 +42,6 @@ module Users
     def update
       case @document.document_type
       when 'doc_14th'
-        # binding.pry
         @error_msg_for_doc_14th = @document.error_msg_for_doc_xth(document_params(@document))
         if @error_msg_for_doc_14th.blank?
           if @document.update(document_params(@document))
@@ -140,11 +139,13 @@ module Users
         )
       when 'doc_14th'
         params.require(:document).permit(content:
-          [
-            :date_submitted,
-            :precautions,
-            :prime_contractor_confirmation,
-            :reception_confirmation_date
+        %i[ 
+            date_submitted
+            reception_number
+            precautions
+            prime_contractor_confirmation
+            reception_confirmation_date
+            inspection_date
           ]
         )
       when 'doc_19th'

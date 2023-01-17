@@ -143,16 +143,14 @@
               <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
             </th>
             <td class="doc_14_s12" colspan="6" rowspan="4">持込機械等</td>
-            <%# <td class="doc_14_s4" rowspan="5"></td> %>
-            <%# <td class="doc_14_s10" rowspan="5"></td> %>
             <td class="doc_14_s13" colspan="4" rowspan="4">使用届</td>
             <td class="doc_14_s6"></td>
             <td class="doc_14_s6"></td>
             <td class="doc_14_s6"></td>
             <td class="doc_14_s14" colspan="6" rowspan="3"></td>
             <td class="doc_14_s1" colspan="2" rowspan="3">点検</td>
-            <td class="doc_14_s15" dir="ltr" colspan="11" rowspan="3">
-              <%= machine_date(m1, 'inspection_date') %> <!-- 14-021 「点検年月日」 -->
+            <td class="doc_14_s15_1" dir="ltr" colspan="11" rowspan="3">
+              <%= machine_doc_date(@document.content&.[]('inspection_date')) %> <!-- 14-021 「点検年月日」 -->
             </td>
             <td class="doc_14_s4"></td>
             <td class="doc_14_s6"></td>
@@ -1066,7 +1064,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m1&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1160,7 +1158,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m2&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1283,7 +1281,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m3&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1375,7 +1373,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m4&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1467,7 +1465,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m5&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1590,7 +1588,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m6&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1652,7 +1650,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m7&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1746,7 +1744,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m8&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1873,7 +1871,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m9&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -1966,7 +1964,7 @@
             </th>
             <td class="doc_14_s2"></td>
             <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
-              <%= '※14-012未実装※' %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+              <%= machine_doc_str(@document.content&.[]('reception_number')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
             </td>
             <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
               <%= wareki(m10&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
@@ -2516,6 +2514,22 @@
   padding: 0px 3px 0px 3px;
 }
 
+.ritz .waffle .doc_14_s15_1 {
+  border-top: 1px SOLID #ffffff;
+  border-right: 1px SOLID #ccffcc;
+  border-left: 1px SOLID #ffffff;
+  border-bottom: 1px SOLID #000000;
+  background-color: #ccffcc;;
+  text-align: center;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
 .ritz .waffle .doc_14_s30 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
@@ -2536,6 +2550,22 @@
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
   background-color: #e9ecef;
+  text-align: center;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 8pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_14_s30_2 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ccffcc;
   text-align: center;
   color: #000000;
   font-family: 'Arial';

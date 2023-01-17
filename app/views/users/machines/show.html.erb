@@ -25,10 +25,6 @@
           <td><%= @machine.handler %></td>
         </tr>
         <tr>
-          <th><%= Machine.human_attribute_name(:inspection_date) %></th>
-          <td><%= @machine.inspection_date %></td>
-        </tr>
-        <tr>
           <th><%= Machine.human_attribute_name(:inspection_check) %></th>
           <% tag_arrays = Tag.where(id: Machine.find(@machine.id).tag_ids).pluck(:name) %>
           <td><%= tag_arrays.join(' / ') %></td>

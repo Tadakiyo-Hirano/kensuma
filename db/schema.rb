@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_01_063423) do
+ActiveRecord::Schema.define(version: 2023_01_17_061928) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -380,7 +380,6 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
     t.string "control_number", null: false
     t.string "inspector", null: false
     t.string "handler", null: false
-    t.date "inspection_date", null: false
     t.string "inspection_check"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false

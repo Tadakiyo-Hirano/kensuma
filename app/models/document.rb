@@ -43,12 +43,15 @@ class Document < ApplicationRecord
 
   # エラーメッセージ
   def error_msg_for_doc_xth(document_params)
-    # binding.pry
     if document_type == 'doc_14th' # 持込機械等(電動工具電気溶接機等)使用届用
       error_msg_for_doc_xth = []
       # 提出日
       if document_params[:content][:date_submitted].blank?
         error_msg_for_doc_xth.push('提出日を入力してください')
+      end
+      # 受付番号
+      if document_params[:content][:reception_number].blank?
+        error_msg_for_doc_xth.push('受付番号を入力してください')
       end
       # 機械の特性、その他　その使用上注意すべき事項
       if document_params[:content][:precautions].blank?
@@ -65,6 +68,10 @@ class Document < ApplicationRecord
       # 元請会社の受付確認年月日
       if document_params[:content][:reception_confirmation_date].blank?
         error_msg_for_doc_xth.push('元請会社の受付確認年月日を入力してください')
+      end
+      # 点検年月日
+      if document_params[:content][:inspection_date].blank?
+        error_msg_for_doc_xth.push('点検年月日を入力してください')
       end
         error_msg_for_doc_xth
     else document_type == 'doc_19th' # 工事安全衛生計画書用

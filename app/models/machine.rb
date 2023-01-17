@@ -10,7 +10,6 @@ class Machine < ApplicationRecord
   validates :control_number, presence: true
   validates :inspector, presence: true
   validates :handler, presence: true
-  validates :inspection_date, presence: true
 
   def to_param
     uuid
