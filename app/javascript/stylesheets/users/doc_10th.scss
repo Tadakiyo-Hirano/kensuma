@@ -7,6 +7,7 @@
   grid-template:
     ".. .. .. .. .. .. .." 20px
     ".. .. c1 c1 c1 .. .."
+    ".. c10 c10 c10 c10 c10 .." 
     ".. .. .. .. .. .. .." 16px
     ".. .. .. .. .. c2 .."
     ".. c3 c3 .. .. .. .."
@@ -24,6 +25,10 @@
 }
 .title {
   grid-area: c1;
+}
+.notice {
+  grid-area: c10;
+  color: #ff0000;
 }
 .submission_date {
   grid-area: c2;
