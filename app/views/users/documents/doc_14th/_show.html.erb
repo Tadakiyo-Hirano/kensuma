@@ -37,7 +37,7 @@
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
               <td class="doc_14_s5" dir="ltr" colspan="9" rowspan="2">
-                <%= machine_doc_date(@document.content&.[]('date_submitted')) %> <!-- 14-001 「提出日（西暦）」 -->
+                <%= wareki(@document.content&.[]('date_submitted')) %> <!-- 14-001 「提出日（西暦）」 -->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -143,7 +143,7 @@
                 <td class="doc_14_s14" colspan="6" rowspan="3"></td>
                 <td class="doc_14_s1" colspan="2" rowspan="3">点検</td>
                 <td class="doc_14_s15" dir="ltr" colspan="11" rowspan="3">
-                  <%= machine_doc_date(@document.content&.[]('inspection_date')) %> <!-- 14-021 「点検年月日」 -->
+                  <%= wareki(@document.content&.[]('inspection_date')) %> <!-- 14-021 「点検年月日」 -->
                 </td>
                 <td class="doc_14_s4"></td>
                 <td class="doc_14_s6"></td>
@@ -2162,7 +2162,7 @@
                 <%= machine_doc_str(@document.content&.[]('prime_contractor_confirmation')) %> <!-- 14-018 「元請会社の確認欄」 ※document-->
               </td>
               <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="5">
-                <%= machine_doc_date(@document.content&.[]('reception_confirmation_date')) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
+                <%= wareki(@document.content&.[]('reception_confirmation_date')) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
               </td>
               <td class="doc_14_s28" dir="ltr" colspan="8" rowspan="5">
                 <!-- 14-020 ㊞ -->
