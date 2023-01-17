@@ -9,7 +9,7 @@ module DocumentsHelper
     if action_name == 'edit'
       date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
     else
-      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.to_date&.strftime('%Y年%-m月%-d日')
     end
   end
 
@@ -18,16 +18,16 @@ module DocumentsHelper
   # 一次下請の情報
   def subcon_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order if request_order.parent_id == 1
+    request_order if request_order.depth == 1
   end
 
   def subcons_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.children if request_order.parent_id.nil?
+    request_order.children if request_order.depth.zero?
   end
 
   def document_subcon_info
-    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).depth == 1
       subcon_info
     else
       @subcon

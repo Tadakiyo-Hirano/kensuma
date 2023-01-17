@@ -1,4 +1,4 @@
- # rubocop:disable all
+# rubocop:disable all
 class Document < ApplicationRecord
   OPERATABLE_DOC_TYPE = %w[
     cover_document table_of_contents_document doc_3rd doc_4th doc_5th doc_6th doc_7th doc_8th doc_9th doc_10th
@@ -53,7 +53,6 @@ class Document < ApplicationRecord
     uuid
   end
 
- 
   # エラーメッセージ(工事安全衛生計画書用)
   def error_msg_for_doc_19th(document_params)
     error_msg_for_doc_19th = []
