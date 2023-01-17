@@ -10,16 +10,16 @@
 	<tbody>
     <% current_user_documents(request_order).each do |current_user_document| %>
       <tr>
-        <td>
+        <td class="<%= document_table_color(current_user_document) %>">
           <%= current_user_document.document_type_before_type_cast %>
         </td>
-        <td>
+        <td class="<%= document_table_color(current_user_document) %>">
           <%= current_user_document.document_type_i18n %>
         </td>
-        <td>
+        <td class="<%= document_table_color(current_user_document) %>">
           <%= link_to '詳細', users_request_order_document_path(@request_order.uuid, current_user_document.uuid) %>
         </td>
-        <td>
+        <td class="<%= document_table_color(current_user_document) %>">
           <%= link_to 'PDF', users_request_order_document_path(@request_order.uuid, current_user_document.uuid, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
         </td>
       </tr>

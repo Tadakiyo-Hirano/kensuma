@@ -701,4 +701,18 @@ module DocumentsHelper
       RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
     end
   end
+
+  # 書類一覧テーブルの色分け
+  def document_table_color(document)
+    case document.document_type_before_type_cast
+    when 3, 4, 5, 6, 7
+      'table-success'
+    when 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24
+      'table-warning'
+    when 17, 19, 20, 23
+      'table-primary'
+    when 18, 22
+      'bg-warning'
+    end
+  end
 end

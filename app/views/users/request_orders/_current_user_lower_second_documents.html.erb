@@ -9,13 +9,13 @@
   <tbody>
     <% current_lower_second_documents_type(second_request_order).each do |second_document| %>
       <tr>
-        <td>
+        <td class="<%= document_table_color(second_document) %>">
           <%= second_document.document_type_before_type_cast %>
         </td>
-        <td>
+        <td class="<%= document_table_color(second_document) %>">
           <%= second_document.document_type_i18n %>
         </td>
-        <td>
+        <td class="<%= document_table_color(second_document) %>">
           <%= link_to 'PDF', users_request_order_sub_request_order_document_path(@request_order.uuid, second_request_order.uuid, second_document, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
         </td>
       </tr>
