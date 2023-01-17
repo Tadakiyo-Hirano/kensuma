@@ -189,7 +189,11 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <h5 class="first_request_orders">元請（自身の情報）</h5>
+        <h5 class="first_request_orders">
+          <%= sc_hierarchy(@request_order) %>
+          <%= '下請け' if sc_hierarchy(@request_order) != '元請' %>
+          （自身の情報）
+        </h5>
         <div class="card card-primary card-outline">
           <div class="card-body">
             <div class="row">
@@ -199,6 +203,10 @@
             <div class="col-md-8 mb-2">
               <%= Business.human_attribute_name(:name) %>：<%= @request_order.business.name %>
               <%= link_to "(書類一覧)", users_request_order_documents_path(@request_order) %>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <!-- 自身の書類一覧 -->
+              <%= render 'current_user_documents', request_order: @request_order %>
             </div>
             </div>
           </div>
@@ -226,7 +234,9 @@
     <div class="row">
       <div class="col-md-12">
         <% @sub_request_orders.each do |first_request_order| %>
-          <h5 class="first_request_orders">一次下請け</h5>
+          <h5 class="first_request_orders">
+            <%= sc_hierarchy(first_request_order) %>下請け
+          </h5>
           <div class="card card-secondary card-outline first-request-orders">
             <div class="card-body">
               <div class="row">
@@ -256,12 +266,16 @@
                   <%= Business.human_attribute_name(:name) %>：<%= first_request_order.business.name %>
                   <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, first_request_order) %>
                 </div>
+                <!-- 自身の一つ下の書類一覧 -->
+                <%= render 'current_user_lower_first_documents', request_order: @request_order, first_request_order: first_request_order %>
               </div>
             </div>
           </div>
           <div class="collapse navbar-collapse" id="navbarNav">
           <% first_request_order.children.each do |second_request_order| %>
-            <h5 class="second_request_orders">二次下請け</h5>
+            <h5 class="second_request_orders">
+              <%= sc_hierarchy(second_request_order) %>下請け
+            </h5>
             <div class="card card-secondary card-outline second_request_orders">
               <div class="card-body">
                 <div class="row">
@@ -274,11 +288,15 @@
                     <%= Business.human_attribute_name(:name) %>：<%= second_request_order.business.name %>
                     <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, second_request_order) %>
                   </div>
+                  <!-- 自身の二つ下の書類一覧 -->
+                  <%= render 'current_user_lower_second_documents', request_order: @request_order, second_request_order: second_request_order %>
                 </div>
               </div>
             </div>
             <% second_request_order.children.each do |third_request_order| %>
-              <h5 class="third_request_orders">三次下請け</h5>
+              <h5 class="third_request_orders">
+                <%= sc_hierarchy(third_request_order) %>下請け
+              </h5>
               <div class="card card-secondary card-outline third_request_orders">
                 <div class="card-body">
                   <div class="row">
@@ -291,11 +309,15 @@
                       <%= Business.human_attribute_name(:name) %>：<%= third_request_order.business.name %>
                       <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, third_request_order) %>
                     </div>
+                    <!-- 自身の三つ下の書類一覧 -->
+                    <%= render 'current_user_lower_other_documents', request_order: @request_order, other_request_order: third_request_order %>
                   </div>
                 </div>
               </div>
               <% third_request_order.children.each do |forth_request_order| %>
-                <h5 class="forth_request_orders">四次下請け</h5>
+                <h5 class="forth_request_orders">
+                  <%= sc_hierarchy(forth_request_order) %>下請け
+                </h5>
                 <div class="card card-secondary card-outline forth_request_orders">
                   <div class="card-body">
                     <div class="row">
@@ -308,6 +330,8 @@
                         <%= Business.human_attribute_name(:name) %>：<%= forth_request_order.business.name %>
                         <%= link_to "(書類一覧)", users_request_order_sub_request_order_documents_path(@request_order, forth_request_order) %>
                       </div>
+                      <!-- 自身の四つ下の書類一覧 -->
+                      <%= render 'current_user_lower_other_documents', request_order: @request_order, other_request_order: forth_request_order %>
                     </div>
                   </div>
                 </div>
