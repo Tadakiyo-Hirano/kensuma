@@ -50,7 +50,7 @@ class Document < ApplicationRecord
         error_msg_for_doc_xth.push('提出日を入力してください')
       end
       # 受付番号
-      if document_params[:content][:reception_number].blank?
+      if document_params[:content][:reception_number1].blank?
         error_msg_for_doc_xth.push('受付番号を入力してください')
       end
       # 機械の特性、その他　その使用上注意すべき事項
