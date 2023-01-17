@@ -1,13 +1,13 @@
 <table class="table table-sm table-hover text-nowrap">
-	<thead>
-		<tr>
-			<th>No.</th>
-			<th>書類名</th>
-			<th></th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>書類名</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
     <% current_user_documents(request_order).each do |current_user_document| %>
       <tr>
         <td class="<%= document_table_color(current_user_document) %>">
