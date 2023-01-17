@@ -135,24 +135,24 @@
               <th id="833515888R5" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
-              <td class="doc_14_s12" colspan="6" rowspan="4">持込機械等</td>
-              <td class="doc_14_s13" colspan="4" rowspan="4">使用届</td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s14" colspan="6" rowspan="3"></td>
-              <td class="doc_14_s1" colspan="2" rowspan="3">点検</td>
-              <td class="doc_14_s15" dir="ltr" colspan="11" rowspan="3">
-                <%= machine_date(m1, 'inspection_date') %> <!-- 14-021 「点検年月日」 -->
-              </td>
-              <td class="doc_14_s4"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
-              <td class="doc_14_s6"></td>
+                <td class="doc_14_s12" colspan="6" rowspan="4">持込機械等</td>
+                <td class="doc_14_s13" colspan="4" rowspan="4">使用届</td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s14" colspan="6" rowspan="3"></td>
+                <td class="doc_14_s1" colspan="2" rowspan="3">点検</td>
+                <td class="doc_14_s15" dir="ltr" colspan="11" rowspan="3">
+                  <%= machine_date(m1, 'inspection_date') %> <!-- 14-021 「点検年月日」 -->
+                </td>
+                <td class="doc_14_s4"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6"></td>
             </tr>
             <tr style="height: 12px">
               <th id="833515888R6" style="height: 12px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -2212,9 +2212,6 @@
           </tbody>
         </table>
       </div>
-      <%# <div class="doc_14th_image">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABkCAYAAAA8AQ3AAAAFFElEQVR4Xu3XPy+kexjH4Z9kQyIhJKYYU/AK6DRK7wWVQkQkiskUOtTiBWkVOg0SfxITIjQG8RyzOVtxCs99cmdn95Jstth83Y/rmXxih4ovAgQIDIjA0IA8p8ckQIBAESwfAgIEBkZAsAbmVXlQAgQEy2eAAIGBERCsgXlVHpQAAcHyGSBAYGAEBGtgXpUHJUBAsHwGCBAYGAHBGphX5UEJEKgdrL29ver6+rr0/zw9PZWLi4svNU9OTmrf8HoIEPi9BRYXF6vHx8cvH7LRaJRms1mmpqZKq9Uqm5ub4RZ8+xvMzc1Vp6enZXp6uszMzJTR0dGfDzM+Pl6qqvr04B9h+/aN3/sVeToCBH4JbG1tVb1e70uQbrdb7u/vS//f+7/QXF5elre3t7KwsFCOjo5qdaHOqNrY2Ci7u7t1tt40AQJ/sUCn06na7XZfoFY/6ox+Hvw4XGf7F78qPzoBAv8K9P8rVqsfdUaC5XNHgEAtgcPDw2p5edlvWLX0jAgQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIH/QaD6+B5Ddb5PnVHVbrdLp9Ops63zjDYECPwhAvv7+9X6+nr/p6nVjzqjant7u+zs7NTZ/iHsfgwCBH4JHBwc9H9j+vT1+vparq6uSq/XK91ut9ze3pbj4+Py/v5e7u7uavXj26NGo1GNjY2VpaWl0v97ZGSktFqtMjw8XKrq83OvrKx8+4aPAgECgyEwMTFRPTw8fPmwH60ozWaz/Pjxo8zOzpbJyckyPz9f1tbWajeh1nB1dbU6OzsrNzc35fn5uZyfn5eXl5f/Eq51YzBel6ckQCBTQEwytd0iQCAkIFghPmMCBDIFBCtT2y0CBEICghXiMyZAIFNAsDK13SJAICQgWCE+YwIEMgUEK1PbLQIEQgKCFeIzJkAgU0CwMrXdIkAgJCBYIT5jAgQyBQQrU9stAgRCAoIV4jMmQCBTQLAytd0iQCAk8A8IBa+DqEh0OQAAAABJRU5ErkJggg==">
-      </div> %>
     </section>
   <% end %>
 </div>
