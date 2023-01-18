@@ -1070,7 +1070,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[0].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number1]',
                                         value: @document.content&.[]('reception_number1'),
@@ -1173,7 +1173,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[1].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number2]',
                                         value: @document.content&.[]('reception_number2'),
@@ -1305,7 +1305,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[2].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number3]',
                                         value: @document.content&.[]('reception_number3'),
@@ -1406,7 +1406,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[3].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number4]',
                                         value: @document.content&.[]('reception_number4'),
@@ -1507,7 +1507,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[4].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number5]',
                                         value: @document.content&.[]('reception_number5'),
@@ -1639,7 +1639,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[5].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number6]',
                                         value: @document.content&.[]('reception_number6'),
@@ -1710,7 +1710,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[6].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number7]',
                                         value: @document.content&.[]('reception_number7'),
@@ -1813,7 +1813,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[7].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number8]',
                                         value: @document.content&.[]('reception_number8'),
@@ -1949,7 +1949,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[8].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number9]',
                                         value: @document.content&.[]('reception_number9'),
@@ -2051,7 +2051,7 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+               <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[9].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number10]',
                                         value: @document.content&.[]('reception_number10'),

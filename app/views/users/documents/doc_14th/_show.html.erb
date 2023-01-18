@@ -24,7 +24,8 @@
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
-              <td class="doc_14_s4"></td>
+              <%# <td class="doc_14_s4"></td> %>
+              <td class="doc_14_s4"><%= document_info&.field_machines&.ids[9] %></td>
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
@@ -1057,7 +1058,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[0].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number1')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1157,7 +1158,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[1].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number2')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1286,7 +1287,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[2].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number3')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1384,7 +1385,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[3].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number4')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1482,7 +1483,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[4].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number5')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1611,7 +1612,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[5].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number6')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1679,7 +1680,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[6].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number7')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1779,7 +1780,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[7].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number8')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -1912,7 +1913,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[8].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number9')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
@@ -2011,7 +2012,7 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s2"></td>
-              <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+              <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[9].present? %> <!-- 元請会社（parent_idがnil）-->
                 <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                   <%= machine_doc_str(@document.content&.[]('reception_number10')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                 </td>
