@@ -149,7 +149,7 @@
                 <td class="doc_14_s12" colspan="6" rowspan="4">持込機械等</td>
                 <td class="doc_14_s13" colspan="4" rowspan="4">使用届</td>
                 <td class="doc_14_s6"></td>
-                <td class="doc_14_s6"></td>
+                <td class="doc_14_s6">@document parent_id<%= @document.request_order&.parent_id %></td>
                 <td class="doc_14_s6"></td>
                 <td class="doc_14_s14" colspan="6" rowspan="3"></td>
                 <td class="doc_14_s1" colspan="2" rowspan="3">点検</td>
@@ -1070,12 +1070,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number1]',
-                                      value: @document.content&.[]('reception_number1'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number1]',
+                                        value: @document.content&.[]('reception_number1'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number1')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m1&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1167,12 +1173,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number2]',
-                                      value: @document.content&.[]('reception_number2'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number2]',
+                                        value: @document.content&.[]('reception_number2'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number2')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m2&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1293,12 +1305,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number3]',
-                                      value: @document.content&.[]('reception_number3'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number3]',
+                                        value: @document.content&.[]('reception_number3'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number3')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m3&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1388,12 +1406,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number4]',
-                                      value: @document.content&.[]('reception_number4'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number4]',
+                                        value: @document.content&.[]('reception_number4'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number4')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m4&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1483,12 +1507,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number5]',
-                                      value: @document.content&.[]('reception_number5'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number5]',
+                                        value: @document.content&.[]('reception_number5'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number5')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m5&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1609,12 +1639,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number6]',
-                                      value: @document.content&.[]('reception_number6'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number6]',
+                                        value: @document.content&.[]('reception_number6'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number6')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m6&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1674,12 +1710,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number7]',
-                                      value: @document.content&.[]('reception_number7'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number7]',
+                                        value: @document.content&.[]('reception_number7'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number7')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m7&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1771,12 +1813,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number8]',
-                                      value: @document.content&.[]('reception_number8'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number8]',
+                                        value: @document.content&.[]('reception_number8'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number8')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m8&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1901,12 +1949,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number9]',
-                                      value: @document.content&.[]('reception_number9'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number9]',
+                                        value: @document.content&.[]('reception_number9'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number9')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m9&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>
@@ -1997,12 +2051,18 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s2"></td>
-                <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
-                  <%= f.text_field name = 'content[reception_number10]',
-                                      value: @document.content&.[]('reception_number10'),
-                                      class: 'form-control form-control-sm'
-                  %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
-                </td>
+                <% if @document.request_order.parent_id.nil? %> <!-- 元請会社（parent_idがnil）-->
+                  <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
+                    <%= f.text_field name = 'content[reception_number10]',
+                                        value: @document.content&.[]('reception_number10'),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% else %> <!-- 下請会社（parent_idが存在）-->
+                  <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
+                    <%= machine_doc_str(@document.content&.[]('reception_number10')) %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
+                  </td>
+                <% end %>
                 <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                   <%= wareki(m10&.carry_out_date) %> <!-- 14-014 「搬出予定年月日」 ※field_machine-->
                 </td>

@@ -43,6 +43,7 @@ class Document < ApplicationRecord
 
   # エラーメッセージ
   def error_msg_for_doc_xth(document_params)
+    # binding.pry
     if document_type == 'doc_14th' # 持込機械等(電動工具電気溶接機等)使用届用
       error_msg_for_doc_xth = []
       # 提出日
