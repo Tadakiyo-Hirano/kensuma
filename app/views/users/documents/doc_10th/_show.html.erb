@@ -1,7 +1,7 @@
 <!-- (10)高年齢者作業申告書 -->
 <div class="container">
   <div class="title text-center"><h2>高齢者就労報告書</h2></div>
-  <div class="1notice"><a>※ 緑枠は入力項目です。必要あれば入力してください。</a></div>
+  <div class="notice"><a>※ 緑枠は入力項目です。必要あれば入力してください。</a></div>
   <div class="submission_date text-center">
     <p><span class="ml-3"><%= @document.content&.[]("date_submitted") %></span></p><!--「提出日(西暦)」10-001 -->
   </div>
@@ -48,8 +48,8 @@
             <td class="gray"><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
             <td class="gray"><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
             <td class="gray"><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
-            <td class="green"><%= @document.content&.[]("occupation_#{j.ordinalize}") %></td><!--「職種」10-011 -->
-            <td class="green"><%= @document.content&.[]("work_notice_#{j.ordinalize}") %></td><!--「高年齢就労者・作業内容」10-012 -->
+            <td class="green"><%= field_worker.content&.[]("occupation") %></td><!--「職種」10-011 -->
+            <td class="green"><%= field_worker.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
           </tr>
         <% j += 1 %>
         <% end %>

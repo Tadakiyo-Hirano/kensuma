@@ -31,11 +31,33 @@ module Users
     def edit; end
 
     def update
-      if @document.update(document_params(@document))
-        redirect_to users_request_order_document_url, success: '保存に成功しました'
-      else
-        flash[:danger] = '更新に失敗しました'
-        render :edit
+      case @document.document_type
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
+      when 'doc_10th'
+        j = 1
+        focus_workers = document_info.field_workers.where(id: over_65)
+        update_workers = []
+        focus_workers.each do |focus_worker|
+          focus_worker.content = focus_worker.content
+          focus_worker.content["occupation"] = params[:document][:content]["occupation_#{j.ordinalize}".to_sym]
+          focus_worker.content["work_notice"] = params[:document][:content]["work_notice_#{j.ordinalize}".to_sym]
+          update_workers.push(focus_worker)
+          j += 1
+        end
+        FieldWorker.import update_workers, on_duplicate_key_update: [:content]
+        
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
       end
     end
 
@@ -48,77 +70,14 @@ module Users
     def set_document
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
     end
-
+    
     def document_params(document)
       case document.document_type
-      when 'doc_3rd'
+      when 'doc_3rd', 'doc_10th'
         params.require(:document).permit.merge(
           content: {
             date_submitted: params.dig(:document, :content, :date_submitted)
           }
-        )
-        
-        when 'doc_10th'
-        params.require(:document).permit(content: 
-          [
-            :date_submitted,
-            :occupation_1st,
-            :work_notice_1st,
-            :occupation_2nd,
-            :work_notice_2nd,
-            :occupation_3rd,
-            :work_notice_3rd,
-            :occupation_4th,
-            :work_notice_4th,
-            :occupation_5th,
-            :work_notice_5th,
-            :occupation_6th,
-            :work_notice_6th,
-            :occupation_7th,
-            :work_notice_7th,
-            :occupation_8th,
-            :work_notice_8th,
-            :occupation_9th,
-            :work_notice_9th,
-            :occupation_10th,
-            :work_notice_10th,
-            :occupation_11th,
-            :work_notice_11th,
-            :occupation_12th,
-            :work_notice_12th,
-            :occupation_13th,
-            :work_notice_13th,
-            :occupation_14th,
-            :work_notice_14th,
-            :occupation_15th,
-            :work_notice_15th,
-            :occupation_16th,
-            :work_notice_16th,
-            :occupation_17th,
-            :work_notice_17th,
-            :occupation_18th,
-            :work_notice_18th,
-            :occupation_19th,
-            :work_notice_19th,
-            :occupation_20th,
-            :work_notice_20th,
-            :occupation_21st,
-            :work_notice_21st,
-            :occupation_22nd,
-            :work_notice_22nd,
-            :occupation_23rd,
-            :work_notice_23rd,
-            :occupation_24th,
-            :work_notice_24th,
-            :occupation_25th,
-            :work_notice_25th,
-            :occupation_26th,
-            :work_notice_26th,
-            :occupation_27th,
-            :work_notice_27th,
-            :occupation_28th,
-            :work_notice_28th
-          ]
         )
       end
     end

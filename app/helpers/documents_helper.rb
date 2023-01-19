@@ -360,7 +360,7 @@ module DocumentsHelper
   
   def over_65 #入場年月日をもとに65歳以上の作業員を絞り込み
     target_ids = []
-    document_info.field_workers.each do |field_worker|
+    document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
       birth_date = field_worker.content["birth_day_on"].to_date
       str_date = field_worker.admission_date_start.to_date #入場日
       border_date = str_date.prev_year(65) #入場日から65年前の日付

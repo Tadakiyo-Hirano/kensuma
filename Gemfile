@@ -85,6 +85,8 @@ gem 'kaminari'
 gem 'dry-validation'
 gem 'reform'
 
+gem 'activerecord-import'
+
 group :development, :test do
   # ERD生成
   gem 'rails-erd'

@@ -53,8 +53,8 @@
                   <td><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
                   <td><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
                   <td><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
-                  <td><%= f.text_field name = "content[occupation_#{j.ordinalize}]", value:@document.content&.[]("occupation_#{j.ordinalize}"), :placeholder => '例)職種' %></td><!--「職種」10-011 -->
-                  <td><%= f.text_field name = "content[work_notice_#{j.ordinalize}]", value:@document.content&.[]("work_notice_#{j.ordinalize}"), :placeholder => '例)作業内容' %></td><!--「高年齢就労者・作業内容」10-012 -->
+                  <td><%= f.text_field name = "content[occupation_#{j.ordinalize}]", value: worker_str(field_worker, "occupation"), :placeholder => '例)職種' %></td><!--「職種」10-011 -->
+                  <td><%= f.text_field name = "content[work_notice_#{j.ordinalize}]", value:field_worker.content&.[]("work_notice"), :placeholder => '例)作業内容' %></td><!--「高年齢就労者・作業内容」10-012 -->
                 </tr>
                 <% j += 1 %>
                 <% end %>
