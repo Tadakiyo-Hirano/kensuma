@@ -16,6 +16,9 @@
           <%= second_document.document_type_i18n %>
         </td>
         <td class="<%= document_table_color(second_document) %>">
+          <%= link_to '詳細', users_request_order_sub_request_order_document_path(@request_order.uuid, second_request_order.uuid, second_document) %>
+        </td>
+        <td class="<%= document_table_color(second_document) %>">
           <%= link_to 'PDF', users_request_order_sub_request_order_document_path(@request_order.uuid, second_request_order.uuid, second_document, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
         </td>
       </tr>

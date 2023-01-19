@@ -269,7 +269,7 @@
                 <td class="doc_16_m006 d16_l_tb " dir="ltr" colspan="7" rowspan="2">（許可年月日）</td>
                 <td class="doc_16_m010 d16_l_tb " dir="ltr" colspan="2" rowspan="2"></td>
                 <td class="doc_16_m010 d16_l_tb " dir="ltr" colspan="12" rowspan="2">
-                  <%= f.date_field name = 'content[fire_permit_date]', value:@document.content&.[]('fire_permit_date')  %> <!-- 16-042 火気使用年月日 -->
+                  <%= f.date_field name = 'content[fire_permit_date]', value:@document.content&.[]('fire_permit_date') %> <!-- 16-042 火気使用年月日 -->
                 </td>
                 <td class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="7" rowspan="2"></td>
               </tr>
@@ -306,8 +306,7 @@
               <tr style="height: 29px">
                 <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="9" rowspan="4">許可条件</td>
                 <td class="doc_16_m009 d16_l_full" dir="ltr" colspan="28" rowspan="4">
-                  <%= f.text_area name = 'content[permit_criteria]',value:@document.content&.[]('permit_criteria') , size: "80x3", placeholder: "許可条件"%>
-                  <!-- 16-047 許可条件 -->
+                  <%= f.text_area name = 'content[permit_criteria]',value: @document.content&.[]('permit_criteria') , size: "80x3", placeholder: "許可条件"%> <!-- 16-047 許可条件 -->
                 </td>
               </tr>
               <tr style="height: 29px">
