@@ -9,7 +9,7 @@ module DocumentsHelper
     if action_name == 'edit'
       date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
     else
-      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.to_date&.strftime('%Y年%-m月%-d日')
     end
   end
 
@@ -18,16 +18,16 @@ module DocumentsHelper
   # 一次下請の情報
   def subcon_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order if request_order.parent_id == 1
+    request_order if request_order.depth == 1
   end
 
   def subcons_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.children if request_order.parent_id.nil?
+    request_order.children if request_order.depth.zero?
   end
 
   def document_subcon_info
-    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).depth == 1
       subcon_info
     else
       @subcon
@@ -872,5 +872,71 @@ module DocumentsHelper
       seriousness_comment = ''
     end
     [seriousness_point, seriousness_comment]
+  end
+
+  # 下請発注情報詳細
+
+  # 自身の書類一覧取得
+  def current_user_documents(request_order)
+    case request_order.depth
+    when 0
+      @genecon_documents
+    when 1
+      @first_subcon_documents
+    when 2
+      @second_subcon_documents
+    else
+      @third_or_later_subcon_documents
+    end
+  end
+
+  # 自身の一つ下の階層の書類一覧取得
+  def current_lower_first_documents_type(request_order)
+    case request_order.depth
+    when 1
+      # 自身が元請けの場合：閲覧可能な一次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.current_lower_first_documents_type
+    when 2
+      # 自身が一次下請けの場合：閲覧可能な二次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
+    when 3, 4
+      # 自身が二次下請け以降の場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 自身の二つ下の階層の書類一覧取得
+  def current_lower_second_documents_type(request_order)
+    case request_order.depth
+    when 2
+      # 自身が元請けの場合：閲覧可能な二次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
+    when 3, 4
+      # 自身が一次下請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 自身の三つ下以降の階層の書類一覧取得
+  def current_lower_other_documents_type(request_order)
+    case request_order.depth
+    when 3, 4
+      # 自身が元請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 書類一覧テーブルの色分け
+  def document_table_color(document)
+    case document.document_type_before_type_cast
+    when 3, 4, 5, 6, 7
+      'table-success'
+    when 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24
+      'table-warning'
+    when 17, 19, 20, 23
+      'table-primary'
+    when 18, 22
+      'bg-warning'
+    end
   end
 end

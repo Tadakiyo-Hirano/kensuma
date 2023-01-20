@@ -41,9 +41,15 @@ module Users
 
     def update
       case @document.document_type
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
       when 'doc_14th'
-        # binding.pry
-        @error_msg_for_doc_14th = @document.error_msg_for_doc_xth(document_params(@document))
+        @error_msg_for_doc_14th = @document.error_msg_for_doc_14th(document_params(@document))
         if @error_msg_for_doc_14th.blank?
           if @document.update(document_params(@document))
             redirect_to users_request_order_document_url, success: "保存に成功しました"
@@ -56,7 +62,7 @@ module Users
           render action: :edit 
         end
       when 'doc_19th'
-        @error_msg_for_doc_19th = @document.error_msg_for_doc_xth(document_params(@document))
+        @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
         if @error_msg_for_doc_19th.blank?
           if @document.update(document_params(@document))
             redirect_to users_request_order_document_url, success: '保存に成功しました'
@@ -132,11 +138,11 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_17th'
-        params.require(:document).permit.merge(
-          content: {
-            date_submitted: params.dig(:document, :content, :date_submitted)
-          }
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+        params.require(:document).permit(content: 
+          [
+            :date_submitted
+          ]
         )
       when 'doc_14th'
         params.require(:document).permit(content:

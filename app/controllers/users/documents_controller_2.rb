@@ -42,7 +42,6 @@ module Users
     def update
       case @document.document_type
       when 'doc_14th'
-        # binding.pry
         @error_msg_for_doc_14th = @document.error_msg_for_doc_xth(document_params(@document))
         if @error_msg_for_doc_14th.blank?
           if @document.update(document_params(@document))

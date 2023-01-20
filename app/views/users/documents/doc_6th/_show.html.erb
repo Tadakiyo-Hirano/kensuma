@@ -1,5 +1,5 @@
 <!-- (6)安全衛生管理に関する契約書(一次会社用) -->
-  <div id="doc_13" class="document-outer">
+  <div id="doc_6" class="document-outer">
     <div class="document-inner">
       <section class="doc_6_sheet">
         <div class="ritz grid-container" dir="ltr">
@@ -81,7 +81,10 @@
                 <td class="doc_6_s7"></td>
                 <td class="doc_6_s7"></td>
                 <td class="doc_6_s7"></td>
-                <td class="doc_6_s8" colspan="5">「提出日（西暦）」6-001</td>
+                <td class="doc_6_s8" colspan="5">
+                  <%= doc_content_date(@document.content&.[]("date_submitted")) %> 
+                <!-- 「提出日（西暦）」6-001 -->
+                </td>
                 <td class="doc_6_s7"></td>
               </tr>
               <tr class="doc_6_s18" style="height: 19px">
@@ -225,7 +228,7 @@
                 <td class="doc_6_s14">殿</td>
                 <td class="doc_6_s5"></td>
                 <td class="doc_6_s9" colspan="2" rowspan="2">会　社　名</td>
-                <td class="doc_6_s10" colspan="6" rowspan="2"><%= document_site_info.business.name %><!-- 「会社名」6-005 --></td>
+                <td class="doc_6_s10" colspan="6" rowspan="2"><%= document_info.content&.[]('subcon_name') %><!-- 「会社名」6-005 --></td>
                 <td class="doc_6_s7"></td>
               </tr>
               <tr class="doc_6_s18" style="height: 19px">
@@ -286,7 +289,7 @@
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s9" colspan="2" rowspan="2">住　　　所</td>
-                <td class="doc_6_s10" colspan="6" rowspan="2"><%= document_site_info.business.address %><!-- 「住所」6-006 --></td>
+                <td class="doc_6_s10" colspan="6" rowspan="2"><%= document_info.content&.[]('subcon_address') %><!-- 「住所」6-006 --></td>
                 <td class="doc_6_s7"></td>
               </tr>
               <tr class="doc_6_s18" style="height: 19px">
@@ -347,7 +350,7 @@
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s9" colspan="2" rowspan="2">代　表　者</td>
-                <td class="doc_6_s10" colspan="5" rowspan="2"><%= document_site_info.business.representative_name %><!--「代表者名」6-007 --></td>
+                <td class="doc_6_s10" colspan="5" rowspan="2"><%= document_info.content&.[]('subcon_representative_name') %><!--「代表者名」6-007 --></td>
                 <td class="doc_6_s15" rowspan="2">㊞6-008</td>
                 <td class="doc_6_s7"></td>
               </tr>
