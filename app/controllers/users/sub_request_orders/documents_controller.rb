@@ -1,20 +1,15 @@
 module Users::SubRequestOrders
   class DocumentsController < Users::Base
-    # before_action :set_document
+    before_action :set_documents, only: %i[index show edit update]
+    before_action :set_document, only: %i[show edit update]
+
     layout 'documents'
 
     def index
-      sub_request_order = validate_request_order!
-
-      @documents = sub_request_order.documents
       render 'users/documents/index'
     end
 
     def show
-      sub_request_order = validate_request_order!
-      @documents = sub_request_order.documents
-      @document = @documents.find_by!(uuid: params[:uuid])
-
       respond_to do |format|
         format.html
         format.pdf do
@@ -36,18 +31,10 @@ module Users::SubRequestOrders
     end
 
     def edit
-      sub_request_order = validate_request_order!
-      @documents = sub_request_order.documents
-      @document = @documents.find_by!(uuid: params[:uuid])
-
       render 'users/documents/edit'
     end
 
-    def update
-      sub_request_order = validate_request_order!
-      @documents = sub_request_order.documents
-      @document = @documents.find_by!(uuid: params[:uuid])
-      
+    def update   
       case @document.document_type
       when 'doc_16th'
         if @document.update(document_params(@document))
@@ -74,7 +61,7 @@ module Users::SubRequestOrders
     def document_params(document)
       case document.document_type
       when 'doc_16th'
-        params.require(:document).permit(content: 
+        params.require(:document).permit(approval_content: 
           [
             :fire_permit_number,
             :fire_permit_date,
@@ -86,8 +73,13 @@ module Users::SubRequestOrders
       end
     end
 
+    def set_documents
+      sub_request_order = validate_request_order!
+      @documents = sub_request_order.documents
+    end
+
     def set_document
-      # @document = RequestOrder.find_by(uuid: params[:sub_request_order_uuid]).documents.find_by(uuid: params[:uuid])
+      @document = @documents.find_by!(uuid: params[:uuid])
     end
   end
 end
