@@ -42,6 +42,7 @@ module Users
     def update
       case @document.document_type
       when 'doc_14th'
+        # binding.pry
         @error_msg_for_doc_14th = @document.error_msg_for_doc_xth(document_params(@document))
         if @error_msg_for_doc_14th.blank?
           if @document.update(document_params(@document))
@@ -141,7 +142,16 @@ module Users
         params.require(:document).permit(content:
         %i[ 
             date_submitted
-            reception_number
+            reception_number1
+            reception_number2
+            reception_number3
+            reception_number4
+            reception_number5
+            reception_number6
+            reception_number7
+            reception_number8
+            reception_number9
+            reception_number10
             precautions
             prime_contractor_confirmation
             reception_confirmation_date
