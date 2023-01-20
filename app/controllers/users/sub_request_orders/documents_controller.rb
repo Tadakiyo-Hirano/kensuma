@@ -34,15 +34,19 @@ module Users::SubRequestOrders
       render 'users/documents/edit'
     end
 
-    def update   
-      case @document.document_type
-      when 'doc_16th'
-        if @document.update(document_params(@document))
-          redirect_to users_request_order_sub_request_order_document_url, success: '保存に成功しました'
-        else
-          flash[:danger] = '更新に失敗しました'
-          render :edit
+    def update
+      if @document.request_order.order.business_id == current_business.id # 元請けのみが編集できる
+        case @document.document_type
+        when 'doc_16th'
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_sub_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '更新に失敗しました'
+            render :edit
+          end
         end
+      else
+        redirect_to root_url
       end
     end
 
@@ -61,15 +65,15 @@ module Users::SubRequestOrders
     def document_params(document)
       case document.document_type
       when 'doc_16th'
-        params.require(:document).permit(approval_content: 
-          [
-            :fire_permit_number,
-            :fire_permit_date,
-            :fire_prevention_manager,
-            :manager,
-            :permit_criteria
+        params.require(:document).permit(approval_content:
+          %i[
+            fire_permit_number
+            fire_permit_date
+            fire_prevention_manager
+            manager
+            permit_criteria
           ]
-        )
+                                        )
       end
     end
 
