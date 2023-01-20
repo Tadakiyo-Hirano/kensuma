@@ -15,7 +15,7 @@
     <p>一次会社名 <span class="ml-3"><%= document_site_info.business.name %></span></p><!--「一次会社名」10-004 -->
   </div>
   <div class="subcontractor">
-    <p>会社名(<%= sc_hierarchy(document_info) %>)次<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
+    <p>会社名(<%= sc_hierarchy(document_info) %>)<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
   </div>
   <div class="representative">
     <p>代表者名<span class="ml-3"><%= Business.find(document_info.business_id).representative_name %></span></p><!--「代表者名」10-007 -->
