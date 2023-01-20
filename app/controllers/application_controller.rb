@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
     when User
-      resource.business.nil? && resource.admin? ? new_users_business_url : users_orders_url
+      resource.business.nil? ? new_users_business_url : users_orders_url
     when Admin
       _system__dashboard_path
     when Manager
@@ -46,5 +46,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
+    devise_parameter_sanitizer.permit :invite, keys: added_attrs
+    devise_parameter_sanitizer.permit :accept_invitation, keys: added_attrs
   end
 end

@@ -98,8 +98,9 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s1"></td>
           <td class="doc_24_s7"></td>
+          <%# binding.pry %>
           <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-          <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= document_info.content["prime_contractor_confirmation"] %></td> <!-- 「元請会社の確認欄」24-002 -->
+          <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= document_info.content&.[]('prime_contractor_confirmation') %></td> <!-- 「元請会社の確認欄」24-002 -->
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -186,7 +187,7 @@
           <td class="doc_24_s19" dir="ltr" rowspan="3">)</td>
           <td class="doc_24_s8" dir="ltr" rowspan="3">歳</td>
           <td class="doc_24_s17" dir="ltr" colspan="2" rowspan="3">血液型</td>
-          <td class="doc_24_s18" dir="ltr" rowspan="3"><%= field_worker.content["abo_blood_type"] .upcase %></td> <!-- 「血液型」24-008 -->
+          <td class="doc_24_s18" dir="ltr" rowspan="3"><%= worker_abo_blood_type(field_worker) %></td> <!-- 「血液型」24-008 -->
           <td class="doc_24_s8" dir="ltr" rowspan="3">型</td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -334,10 +335,10 @@
           <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは一人親方・中小事業主ですか</td>
           <td class="doc_24_s30"></td>
           <td class="doc_24_s27" dir="ltr" colspan="5">
-            <%= questionnaire_business_type_yes(Business.find(document_info.business_id).business_type_i18n) %>
+            <%= questionnaire_business_type_yes(field_worker) %>
           </td>
           <td class="doc_24_s31" dir="ltr" colspan="5">
-            <%= questionnaire_business_type_no(Business.find(document_info.business_id).business_type_i18n) %>
+            <%= questionnaire_business_type_no(field_worker) %>
           </td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
@@ -387,7 +388,7 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。</td>
+          <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。【回答：全未実装】</td>
           <td class="doc_24_s30"></td>
           <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_special_education_yes(field_worker) %></td>
           <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_special_education_no(field_worker) %></td>

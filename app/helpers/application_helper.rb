@@ -17,8 +17,8 @@ module ApplicationHelper
         '三次'
       when 4
         '四次'
-      when 5
-        '五次'
+      else
+        '元請'
       end
     else
       '元請'
@@ -66,7 +66,7 @@ module ApplicationHelper
   end
 
   # 会社名の表示
-  def current_business
-    current_user.business || current_user.admin_user.business
+  def current_business_name
+    current_user.business.name || current_user.admin_user.business.name unless current_user.business.nil?
   end
 end
