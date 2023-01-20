@@ -60,7 +60,7 @@ module Users
       
       when 'doc_10th'
         j = 1
-        focus_workers = document_info.field_workers.where(id: over_65)
+        focus_workers = document_info.field_workers.where(id: over_sixty_five)
         update_workers = []
         focus_workers.each do |focus_worker|
           focus_worker.content = focus_worker.content

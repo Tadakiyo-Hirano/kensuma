@@ -48,7 +48,7 @@
               </thead>
               <tbody class="t-content">
                 <% j = 1 %>
-                <% document_info.field_workers.where(id: over_65).each do |field_worker| %>
+                <% document_info.field_workers.where(id: over_sixty_five).each do |field_worker| %>
                 <tr>
                   <td><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
                   <td><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
