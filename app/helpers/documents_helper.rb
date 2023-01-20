@@ -334,22 +334,35 @@ module DocumentsHelper
     end
   end
 
-  # 新規入場者調査票用（アンケート設問：事前教育に関する内容-「はい」のパターン）
-  def questionnaire_special_education_yes(worker)
-    worker_special_education(worker).present? ? tag.span('1. はい', class: :circle) : '1. はい'
-  end
-
-  # 新規入場者調査票用（アンケート設問：事前教育に関する内容-「いいえ」のパターン）
-  def questionnaire_special_education_no(worker)
-    worker_special_education(worker).blank? ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
-  end
-
   # 作業員の免許情報
   def worker_license(worker)
     licenses = worker&.content&.[]('worker_licenses')
     unless licenses.nil?
       licenses = licenses.map { |license| License.find(license['license_id']).name }
       licenses.to_s.gsub(/,|"|\[|\]/) { '' }
+    end
+  end
+  
+  def over_65 #入場年月日をもとに65歳以上の作業員を絞り込み
+    target_ids = []
+    document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
+      birth_date = field_worker.content["birth_day_on"].to_date
+      str_date = field_worker.admission_date_start.to_date #入場日
+      border_date = str_date.prev_year(65) #入場日から65年前の日付
+      if border_date >= birth_date 
+        target_ids.push field_worker.id
+      end
+    end
+    target_ids
+  end
+
+  def age_for_admission_date_start(worker) #入場年月日を起点に年齢を算出
+    if worker.present?
+      date_format = "%Y%m%d"
+      birth_date = FieldWorker.find(worker.id).content["birth_day_on"].to_date.strftime(date_format).to_i #生年月日
+      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i #入場日
+      age = (str_date - birth_date) / 10000
+      age
     end
   end
 
@@ -467,29 +480,6 @@ module DocumentsHelper
   # 特定専門工事の有無(有･無)
   def professional_construction_yes(type)
     type == 'y' ? tag.span('有', class: :circle) : '有'
-  end
-  
-  def over_65 #入場年月日をもとに65歳以上の作業員を絞り込み
-    target_ids = []
-    document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
-      birth_date = field_worker.content["birth_day_on"].to_date
-      str_date = field_worker.admission_date_start.to_date #入場日
-      border_date = str_date.prev_year(65) #入場日から65年前の日付
-      if border_date >= birth_date 
-        target_ids.push field_worker.id
-      end
-    end
-    target_ids
-  end
-
-  def age_for_admission_date_start(worker) #入場年月日を起点に年齢を算出
-    if worker.present?
-      date_format = "%Y%m%d"
-      birth_date = FieldWorker.find(worker.id).content["birth_day_on"].to_date.strftime(date_format).to_i #生年月日
-      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i #入場日
-      age = (str_date - birth_date) / 10000
-      age
-    end
   end
 
   def professional_construction_no(type)
