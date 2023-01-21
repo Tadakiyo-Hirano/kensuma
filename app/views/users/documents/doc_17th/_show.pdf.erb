@@ -258,13 +258,11 @@
           <td class="s3"></td>
           <td class="s8"></td>
           <td class="s9" dir="ltr" colspan="2" rowspan="13" style="writing-mode: tb-rl; display: flex;">
-            <% primary_subcon_info(document_info)&.construction_name.split("").each do |one_character| %>
-              <%= one_character %><br> <!-- 17-002 工事名(一次) -->
-            <% end %>
+            <%= primary_subcon_info(document_info)&.construction_name %> <!-- 17-002 工事名(一次) -->
           </td>
           <td class="s10" colspan="7" rowspan="2">会社名</td>
           <td class="s11" dir="ltr" colspan="7" rowspan="2">
-            <%= primary_subcon_info(document_info).content['subcon_name'] %> <!-- 17-003 会社名(一次) -->
+            <%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 17-003 会社名(一次) -->
           </td>
           <td class="s6"></td>
           <td class="s6"></td>
@@ -316,7 +314,7 @@
           <td class="s8"></td>
           <td class="s10" colspan="7" rowspan="2">代表者名</td>
           <td class="s11" dir="ltr" colspan="7" rowspan="2">
-            <%= primary_subcon_info(document_info).content['subcon_representative_name'] %> <!-- 17-004 代表者名(一次) -->
+            <%= primary_subcon_info(document_info)&.content&.[]("subcon_representative_name") %> <!-- 17-004 代表者名(一次) -->
           </td>
           <td class="s6"></td>
           <td class="s6"></td>
@@ -420,7 +418,7 @@
           <td class="s15" rowspan="3"></td>
           <td class="s10" colspan="7" rowspan="2">安全衛生責任者</td>
           <td class="s13" dir="ltr" colspan="7" rowspan="2">
-            <%= primary_subcon_info(document_info).safety_manager_name %> <!-- 17-006 安全衛生責任者名(一次) -->
+            <%= primary_subcon_info(document_info)&.safety_manager_name %> <!-- 17-006 安全衛生責任者名(一次) -->
           </td>
           <td class="s6"></td>
           <td class="s6"></td>
@@ -470,7 +468,7 @@
           <td class="s14"></td>
           <td class="s10" colspan="7" rowspan="2">主任技術者</td>
           <td class="s13" dir="ltr" colspan="7" rowspan="2">
-            <%= primary_subcon_info(document_info).lead_engineer_name %> <!-- 17-007 主任技術者名(一次) -->
+            <%= primary_subcon_info(document_info)&.lead_engineer_name %> <!-- 17-007 主任技術者名(一次) -->
           </td>
           <td class="s6"></td>
           <td class="s6"></td>
@@ -522,7 +520,7 @@
           <td class="s8"></td>
           <td class="s16" colspan="7" rowspan="2">専門技術者</td>
           <td class="s13" dir="ltr" colspan="7" rowspan="2">
-            <%= primary_subcon_info(document_info).professional_engineer_name %> <!-- 17-008 専門技術者名(一次) -->
+            <%= primary_subcon_info(document_info)&.professional_engineer_name %> <!-- 17-008 専門技術者名(一次) -->
           </td>
           <td class="s6"></td>
           <td class="s6"></td>
@@ -575,7 +573,7 @@
           <td class="s17" rowspan="2"></td>
           <td class="s10" colspan="6" rowspan="2">担当工事内容</td>
           <td class="s13" dir="ltr" colspan="7" rowspan="2">
-            <%= primary_subcon_info(document_info).professional_engineer_details %> <!-- 17-009 担当工事内容(一次) -->
+            <%= primary_subcon_info(document_info)&.professional_engineer_details %> <!-- 17-009 担当工事内容(一次) -->
           </td>
           <td class="s6"></td>
           <td class="s6"></td>
@@ -685,7 +683,7 @@
           <td class="s19"></td>
           <td class="s10" colspan="7" rowspan="2">登録基幹技能者</td>
           <td class="s11" dir="ltr" colspan="7" rowspan="2">
-            <%= primary_subcon_info(document_info).professional_engineer_details %> <!-- 17-011 登録基幹技能者(一次) -->
+            <%= primary_subcon_info(document_info)&.professional_engineer_details %> <!-- 17-011 登録基幹技能者(一次) -->
           </td>
           <td class="s6"></td>
           <td class="s6"></td>

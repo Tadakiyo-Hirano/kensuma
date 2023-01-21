@@ -1,4 +1,4 @@
- # rubocop:disable all
+# rubocop:disable all
 class Document < ApplicationRecord
   OPERATABLE_DOC_TYPE = %w[
     cover_document table_of_contents_document doc_3rd doc_4th doc_5th doc_6th doc_7th doc_8th doc_9th doc_10th
@@ -9,6 +9,18 @@ class Document < ApplicationRecord
   belongs_to :request_order
 
   before_create -> { self.uuid = SecureRandom.uuid }
+
+  # 自身の書類一覧取得(自身が元請の場合、一次の場合、二次の場合、三次以降の場合)
+  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24]) }
+  scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]) }
+  scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
+  scope :third_or_later_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
+  # 元請け配下の一次下請け書類一覧取得
+  scope :current_lower_first_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,  21, 22, 23, 24]) }
+  # 一次下請け配下の二次下請け書類一覧取得
+  scope :first_lower_second_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
+  # 二次下請け以降の配下の書類一覧取得(二次→三次、三次→四次)
+  scope :lower_other_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
 
   enum document_type: {
     cover_document:             1,  # 表紙
@@ -41,7 +53,6 @@ class Document < ApplicationRecord
     uuid
   end
 
- 
   # エラーメッセージ(工事安全衛生計画書用)
   def error_msg_for_doc_19th(document_params)
     error_msg_for_doc_19th = []

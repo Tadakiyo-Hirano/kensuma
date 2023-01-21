@@ -649,4 +649,70 @@ module DocumentsHelper
     end
     [seriousness_point, seriousness_comment]
   end
+
+  # 下請発注情報詳細
+
+  # 自身の書類一覧取得
+  def current_user_documents(request_order)
+    case request_order.depth
+    when 0
+      @genecon_documents
+    when 1
+      @first_subcon_documents
+    when 2
+      @second_subcon_documents
+    else
+      @third_or_later_subcon_documents
+    end
+  end
+
+  # 自身の一つ下の階層の書類一覧取得
+  def current_lower_first_documents_type(request_order)
+    case request_order.depth
+    when 1
+      # 自身が元請けの場合：閲覧可能な一次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.current_lower_first_documents_type
+    when 2
+      # 自身が一次下請けの場合：閲覧可能な二次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
+    when 3, 4
+      # 自身が二次下請け以降の場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 自身の二つ下の階層の書類一覧取得
+  def current_lower_second_documents_type(request_order)
+    case request_order.depth
+    when 2
+      # 自身が元請けの場合：閲覧可能な二次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
+    when 3, 4
+      # 自身が一次下請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 自身の三つ下以降の階層の書類一覧取得
+  def current_lower_other_documents_type(request_order)
+    case request_order.depth
+    when 3, 4
+      # 自身が元請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 書類一覧テーブルの色分け
+  def document_table_color(document)
+    case document.document_type_before_type_cast
+    when 3, 4, 5, 6, 7
+      'table-success'
+    when 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24
+      'table-warning'
+    when 17, 19, 20, 23
+      'table-primary'
+    when 18, 22
+      'bg-warning'
+    end
+  end
 end

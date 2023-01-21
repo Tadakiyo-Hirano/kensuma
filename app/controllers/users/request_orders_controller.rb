@@ -11,6 +11,10 @@ module Users
 
     def show
       @sub_request_orders = @request_order.children
+      @genecon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.genecon_documents_type
+      @first_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.first_subcon_documents_type
+      @second_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.second_subcon_documents_type
+      @third_or_later_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.third_or_later_subcon_documents_type
     end
 
     def edit
