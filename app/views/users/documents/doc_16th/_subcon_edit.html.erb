@@ -3,7 +3,7 @@
   <div class="card">  
     <div class="card-body">
       <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
-      <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+      <%= link_to '詳細画面へ', users_request_order_sub_request_order_document_path, class: "btn btn-md btn-block btn-default" %>
     </div>
   </div>
 
@@ -27,8 +27,8 @@
               </tr>
               <tr style="height: 29px">
                 <td class="doc_16_" dir="ltr" colspan="29"></td>
-                <td id="d16_size14" class="doc_16_m010" dir="ltr" colspan="8" rowspan="2">
-                  <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 16-001 提出日(西暦) -->
+                <td id="d16_size14" class="doc_16_m011" dir="ltr" colspan="8" rowspan="2">
+                  <%= wareki(@document.content&.[]("date_submitted")) %> <!-- 16-001 提出日(西暦) -->
                 </td>
               </tr>
               <tr style="height: 29px">
@@ -263,15 +263,14 @@
               <tr style="height: 29px">
                 <td class="doc_16_m006 d16_l_tb d16_l_left" dir="ltr" colspan="4" rowspan="2">許可 第</td>
                 <td class="doc_16_m010 d16_l_tb " dir="ltr" colspan="3" rowspan="2">
-                  <%= f.text_field name = 'content[fire_permit_number]',value:@document.content&.[]('fire_permit_number'), size: 3 %> <!-- 16-041 火気使用許可番号 -->
+                  <%= f.text_field name = 'approval_content[fire_permit_number]',value:@document.approval_content&.[]('fire_permit_number'), size: 3 %> <!-- 16-041 火気使用許可番号 -->
                 </td>
                 <td class="doc_16_m006 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2">号</td>
                 <td class="doc_16_m006 d16_l_tb " dir="ltr" colspan="7" rowspan="2">（許可年月日）</td>
-                <td class="doc_16_m010 d16_l_tb " dir="ltr" colspan="2" rowspan="2"></td>
-                <td class="doc_16_m010 d16_l_tb " dir="ltr" colspan="12" rowspan="2">
-                  <%= f.date_field name = 'content[fire_permit_date]', value:@document.content&.[]('fire_permit_date')  %> <!-- 16-042 火気使用年月日 -->
+                <td class="doc_16_m010 d16_l_tb " dir="ltr" colspan="19" rowspan="2">
+                  <%= f.date_field name = 'approval_content[fire_permit_date]', value:@document.approval_content&.[]('fire_permit_date') %> <!-- 16-042 火気使用年月日 -->
                 </td>
-                <td class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="7" rowspan="2"></td>
+                <td class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2"></td>
               </tr>
               <tr style="height: 29px">
               </tr>
@@ -279,9 +278,9 @@
                 <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="9" rowspan="4">火気使用許可</td>
                 <td class="doc_16_m006 d16_l_tb" dir="ltr" colspan="7" rowspan="2">防火管理者</td>
                 <td class="doc_16_m010 d16_l_tb" dir="ltr" colspan="19" rowspan="2">
-                  <%= f.select name = 'content[fire_prevention_manager]',
+                  <%= f.select name = 'approval_content[fire_prevention_manager]',
                     @current_business.workers.map {|worker|worker.name},
-                    { selected: @document.content&.[]('fire_prevention_manager'), include_blank: "選択して下さい" }
+                    { selected: @document.approval_content&.[]('fire_prevention_manager'), include_blank: "選択して下さい" }
                   %> <!-- 16-043 火気使用許可・防火管理者 -->
                 </td>
                 <td id="d16_size12" class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2">
@@ -293,9 +292,9 @@
               <tr style="height: 29px">
                 <td class="doc_16_m006 d16_l_tb" dir="ltr" colspan="7" rowspan="2">担当係員</td>
                 <td class="doc_16_m010 d16_l_tb" dir="ltr" colspan="19" rowspan="2">
-                  <%= f.select name = 'content[manager]',
+                  <%= f.select name = 'approval_content[manager]',
                     @current_business.workers.map {|worker|worker.name},
-                    { selected: @document.content&.[]('manager'), include_blank: "選択して下さい" }
+                    { selected: @document.approval_content&.[]('manager'), include_blank: "選択して下さい" }
                   %> <!-- 16-045 火気使用許可・担当係員 -->
                 </td>
                 <td id="d16_size12" class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2">
@@ -306,8 +305,7 @@
               <tr style="height: 29px">
                 <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="9" rowspan="4">許可条件</td>
                 <td class="doc_16_m009 d16_l_full" dir="ltr" colspan="28" rowspan="4">
-                  <%= f.text_area name = 'content[permit_criteria]',value:@document.content&.[]('permit_criteria') , size: "80x3", placeholder: "許可条件"%>
-                  <!-- 16-047 許可条件 -->
+                  <%= f.text_area name = 'approval_content[permit_criteria]',value: @document.approval_content&.[]('permit_criteria') , size: "80x3", placeholder: "許可条件"%> <!-- 16-047 許可条件 -->
                 </td>
               </tr>
               <tr style="height: 29px">
