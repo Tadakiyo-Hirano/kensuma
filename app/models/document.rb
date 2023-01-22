@@ -640,4 +640,3 @@ class Document < ApplicationRecord
   end
   # rubocop:enable all
 end
- 
