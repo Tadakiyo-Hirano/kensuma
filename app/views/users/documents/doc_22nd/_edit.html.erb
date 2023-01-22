@@ -210,10 +210,10 @@
 
           </td><!--「打合日（年月日）」22-005-->
           <td class="doc_22_s8">（</td>
-          <td class="doc_22_s9"></td>
-          <td class="doc_22_s0" colspan="2">曜日）</td>
-          <td class="doc_22_s0" colspan="17">月間重点安全衛生実施事項</td>
-          <td class="doc_22_s0" colspan="18">週間重点安全衛生実施事項</td>
+          <td class="doc_22_s9" colspan="2"></td>
+          <td class="doc_22_s0" colspan="3">曜日）</td>
+          <td class="doc_22_s0" colspan="14">月間重点安全衛生実施事項</td>
+          <td class="doc_22_s0" colspan="19">週間重点安全衛生実施事項</td>
           <td class="doc_22_s0" colspan="27" rowspan="2">確 認 点 検 欄</td>
           <td class="doc_22_s1"></td>
         </tr>
@@ -224,37 +224,37 @@
 
           </td><!--	「実作業日（年月日）」22-007-->
           <td class="doc_22_s8">（</td>
-          <td class="doc_22_s9"></td>
-          <td class="doc_22_s0" colspan="2">曜日）</td>
-          <td class="doc_22_s0" colspan="17"></td>
-          <td class="doc_22_s0" colspan="18"></td>
+          <td class="doc_22_s9" colspan="2"></td>
+          <td class="doc_22_s0" colspan="3">曜日）</td>
+          <td class="doc_22_s0" colspan="14"></td>
+          <td class="doc_22_s0" colspan="19"></td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s12" colspan="5" rowspan="2">協力業者<br>会社名</td>
-          <td class="doc_22_s0" colspan="2" rowspan="2">職種</td>
+          <td class="doc_22_s0" colspan="4" rowspan="2">職種</td>
           <td class="doc_22_s0" colspan="3" rowspan="2">作業員<br> 人 数</td>
           <td class="doc_22_s12" colspan="7" rowspan="2">危険作業の名称、及び各種免許・資格の名称（下記、資格番号でも可）</td>
-          <td class="doc_22_s0" colspan="17" rowspan="2">作 業 内 容</td>
-          <td class="doc_22_s0" colspan="15" rowspan="2">＜危険予測＞<br> 安全衛生・品質・環境指示事項</td>
-          <td class="doc_22_s0" colspan="3" rowspan="2">職長<br> 確認</td>
-          <td class="doc_22_s0" colspan="6">実施の確認</td>
-          <td class="doc_22_s0" colspan="15" rowspan="2">（計画と実施、施設・行動等に対する）<br> 是正指示・指導・処置</td>
-          <td class="doc_22_s0" colspan="3" rowspan="2">是 正<br> 確認日</td>
-          <td class="doc_22_s0" colspan="3" rowspan="2">確認者</td>
+          <td class="doc_22_s0" colspan="14" rowspan="2">作 業 内 容</td>
+          <td class="doc_22_s0" colspan="13" rowspan="2">＜危険予測＞<br> 安全衛生・品質・環境指示事項</td>
+          <td class="doc_22_s0" colspan="4" rowspan="2">職長<br> 確認</td>
+          <td class="doc_22_s0" colspan="8">実施の確認</td>
+          <td class="doc_22_s0" colspan="13" rowspan="2">（計画と実施、施設・行動等に対する）<br> 是正指示・指導・処置</td>
+          <td class="doc_22_s0" colspan="4" rowspan="2">是 正<br> 確認日</td>
+          <td class="doc_22_s0" colspan="4" rowspan="2">確認者</td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s0" colspan="3">良 否</td>
-          <td class="doc_22_s0" colspan="3">確認者</td>
+          <td class="doc_22_s0" colspan="4">良 否</td>
+          <td class="doc_22_s0" colspan="4">確認者</td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s13" colspan="5"></td>
-          <td class="doc_22_s14" colspan="2">
+          <td class="doc_22_s14" colspan="4">
             <%= f.text_field name = 'content[occupation_1st]', placeholder: "例）型枠",
                              value: @document.content&.[]('occupation_1st'),
                              class: "form-control form-control-sm"
@@ -267,290 +267,328 @@
                              class: "form-control form-control-sm"
             %>
           </td><!--「必要資格1」22-012-->
-          <td class="doc_22_s17" colspan="17">
+          <td class="doc_22_s17" colspan="14">
             <%= f.text_field name = 'content[work_content_1st]', placeholder: "例）配管のメンテナンスをします",
                              value: @document.content&.[]('work_content_1st'),
                              class: "form-control form-control-sm"
             %>
           </td><!--「作業内容1」22-013-->
-          <td class="doc_22_s17" colspan="15">
+          <td class="doc_22_s17" colspan="13">
             <%= f.text_field name = 'content[risk_prediction_1st]', placeholder: "例）落下物注意",
                              value: @document.content&.[]('risk_prediction_1st'),
                              class: "form-control form-control-sm"
             %>
           </td><!--「危険予測1」22-014-->
-          <td class="doc_22_s13" colspan="3">
-
+          <td class="doc_22_s17" colspan="4">
+            <%= f.select name = 'content[foreman_confirmation_1st]', @workers_name,
+                                { selected: @document.content&.[]('foreman_confirmation_1st'), include_blank: "選択して下さい" },
+                                { class: 'form-control form-control-sm'}
+            %>
           </td><!--「職長確認1」22-015-->
-          <td class="doc_22_s15" colspan="3"></td><!--「実施確認良否」22-016-->
-          <td class="doc_22_s15" colspan="3">
-
+          <td class="doc_22_s15" colspan="4">
+            <%= f.radio_button 'content[implementation_confirmation_1st]', true %>
+            <%= f.label 'content[implementation_confirmation_1st]', '〇', value: true %><br>
+            <%= f.radio_button 'content[implementation_confirmation_1st]', false %>
+            <%= f.label 'content[implementation_confirmation_1st]', '✕', value: false %>
+          </td><!--「実施確認良否」22-016-->
+          <td class="doc_22_s15" colspan="4">
+            <%= f.select name = 'content[implementation_confirmation_person_1st]', @workers_name,
+                                { selected: @document.content&.[]('implementation_confirmation_person_1st'), include_blank: "選択して下さい" },
+                                { class: 'form-control form-control-sm'}
+            %>
           </td><!--「是正確認者名1」22-017-->
-          <td class="doc_22_s18" colspan="15">
-
+          <td class="doc_22_s18" colspan="13">
+            <%= f.text_field name = 'content[corrective_action_1st]', placeholder: "例）立馬は水平に設置すること",
+                             value: @document.content&.[]('corrective_action_1st'),
+                             class: "form-control form-control-sm"
+            %>
           </td><!--「是正指示・指導・処置1」22-018-->
-          <td class="doc_22_s19" colspan="3">
-
+          <td class="doc_22_s19" colspan="4">
+            <%= f.date_field name = 'content[corrective_action_confirmation_date_1st]',
+                             value:@document.content&.[]('corrective_action_confirmation_date_1st') %>
           </td><!--「是正確認日1」22-019-->
-          <td class="doc_22_s15" colspan="3">
-
+          <td class="doc_22_s15" colspan="4">
+            <%= f.select name = 'content[corrective_action_reviewer_1st]', @workers_name,
+                                { selected: @document.content&.[]('corrective_action_reviewer_1st'), include_blank: "選択して下さい" },
+                                { class: 'form-control form-control-sm'}
+            %>
           </td><!--「確認者名1」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名2」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種2」22-010-->
+          <td class="doc_22_s21" colspan="4">
+            <%= f.text_field name = 'content[occupation_2nd]',
+                             value: @document.content&.[]('occupation_2nd'),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「職種2」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数2」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格2」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容2」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測2」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長2」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否2」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名2」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置2」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日2」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名2」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容2」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測2」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長2」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否2」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名2」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置2」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日2」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名2」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名3」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種3」22-010-->
+          <td class="doc_22_s21" colspan="4">
+            <%= f.text_field name = 'content[occupation_3rd]',
+                             value: @document.content&.[]('occupation_3rd'),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「職種3」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数3」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格3」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容3」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測3」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長3」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否3」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名3」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置3」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日3」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名3」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容3」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測3」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長3」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否3」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名3」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置3」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日3」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名3」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名4」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種4」22-010-->
+          <td class="doc_22_s21" colspan="4">
+            <%= f.text_field name = 'content[occupation_4th]',
+                             value: @document.content&.[]('occupation_4th'),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「職種4」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数4」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格4」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容4」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測4」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長4」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否4」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名4」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置4」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日4」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名4」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容4」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測4」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長4」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否4」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名4」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置4」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日4」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名4」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名5」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種5」22-010-->
+          <td class="doc_22_s21" colspan="4">
+            <%= f.text_field name = 'content[occupation_5th]',
+                             value: @document.content&.[]('occupation_5th'),
+                             class: "form-control form-control-sm"
+            %>
+          </td><!--「職種5」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数5」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格5」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容5」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測5」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長5」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否5」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名5」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置5」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日5」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名5」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容5」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測5」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長5」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否5」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名5」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置5」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日5」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名5」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名6」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種6」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種6」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数6」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格6」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容6」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測6」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長6」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否6」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名6」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置6」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日6」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名6」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容6」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測6」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長6」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否6」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名6」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置6」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日6」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名6」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名7」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種7」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種7」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数7」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格7」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容7」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測7」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長7」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否7」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名7」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置7」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日7」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名7」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容7」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測7」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長7」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否7」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名7」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置7」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日7」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名7」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名8」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種8」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種8」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数8」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格8」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容8」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測8」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長8」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否8」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名8」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置8」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日8」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名8」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容8」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測8」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長8」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否8」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名8」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置8」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日8」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名8」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名9」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種9」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種9」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数9」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格9」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容9」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測9」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長9」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否9」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名9」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置9」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日9」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名9」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容9」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測9」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長9」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否9」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名9」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置9」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日9」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名9」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名10」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種10」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種10」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数10」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格10」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容10」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測10」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長10」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否10」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名10」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置10」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日10」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名10」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容10」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測10」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長10」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否10」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名10」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置10」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日10」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名10」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名11」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種11」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種11」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数11」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格11」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容11」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測11」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長11」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否11」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名11」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置11」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日11」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名11」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容11」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測11」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長11」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否11」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名11」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置11」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日11」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名11」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名12」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種12」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種12」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数12」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格12」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容12」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測12」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長12」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否12」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名12」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置12」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日12」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名12」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容12」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測12」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長12」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否12」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名12」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置12」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日12」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名12」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名13」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種13」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種13」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数13」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格13」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容13」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測13」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長13」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否13」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名13」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置13」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日13」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名13」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容13」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測13」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長13」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否13」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名13」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置13」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日13」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名13」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名14」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種14」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種14」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数14」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格14」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容14」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測14」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長14」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否14」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名14」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置14」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日14」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名14」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容14」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測14」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長14」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否14」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名14」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置14」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日14」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名14」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名15」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種15」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種15」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数15」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格15」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容15」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測15」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長15」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否15」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名15」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置15」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日15」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名15」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容15」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測15」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長15」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否15」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名15」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置15」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日15」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名15」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s20" colspan="5"></td><!--「協力業者会社名16」22-009-->
-          <td class="doc_22_s21" colspan="2"></td><!--「職種16」22-010-->
+          <td class="doc_22_s21" colspan="4"></td><!--「職種16」22-010-->
           <td class="doc_22_s20" colspan="3"></td><!--「作業員人数16」22-011-->
           <td class="doc_22_s22" colspan="7"></td><!--「必要資格16」22-012-->
-          <td class="doc_22_s22" colspan="17"></td><!--「作業内容16」22-013-->
-          <td class="doc_22_s22" colspan="15"></td><!--「危険予測16」22-014-->
-          <td class="doc_22_s21" colspan="3"></td><!--「各会社の職長16」22-015-->
-          <td class="doc_22_s21" colspan="3"></td><!--「良 否16」22-016-->
-          <td class="doc_22_s21" colspan="3"></td><!--「確認者名16」22-017-->
-          <td class="doc_22_s22" colspan="15"></td><!--「是正指示・指導・処置16」22-018-->
-          <td class="doc_22_s22" colspan="3"></td><!--「是正確認日16」22-019-->
-          <td class="doc_22_s22" colspan="3"></td><!--「確認者名16」22-020-->
+          <td class="doc_22_s22" colspan="14"></td><!--「作業内容16」22-013-->
+          <td class="doc_22_s22" colspan="13"></td><!--「危険予測16」22-014-->
+          <td class="doc_22_s21" colspan="4"></td><!--「各会社の職長16」22-015-->
+          <td class="doc_22_s21" colspan="4"></td><!--「良 否16」22-016-->
+          <td class="doc_22_s21" colspan="4"></td><!--「確認者名16」22-017-->
+          <td class="doc_22_s22" colspan="13"></td><!--「是正指示・指導・処置16」22-018-->
+          <td class="doc_22_s22" colspan="4"></td><!--「是正確認日16」22-019-->
+          <td class="doc_22_s22" colspan="4"></td><!--「確認者名16」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s47" colspan="5"></td><!--「協力業者会社名17」22-009-->
-          <td class="doc_22_s24" colspan="2"></td><!--「職種17」22-010-->
+          <td class="doc_22_s24" colspan="4"></td><!--「職種17」22-010-->
           <td class="doc_22_s47" colspan="3"></td><!--「作業員人数17」22-011-->
           <td class="doc_22_s24" colspan="7"></td><!--「必要資格17」22-012-->
-          <td class="doc_22_s24" colspan="17"></td><!--「作業内容17」22-013-->
-          <td class="doc_22_s24" colspan="15"></td><!--「危険予測17」22-014-->
-          <td class="doc_22_s24" colspan="3"></td><!--「各会社の職長17」22-015-->
-          <td class="doc_22_s24" colspan="3"></td><!--「良 否17」22-016-->
-          <td class="doc_22_s24" colspan="3"></td><!--「確認者名17」22-017-->
-          <td class="doc_22_s24" colspan="15"></td><!--「是正指示・指導・処置17」22-018-->
-          <td class="doc_22_s24" colspan="3"></td><!--「是正確認日17」22-019-->
-          <td class="doc_22_s24" colspan="3"></td><!--「確認者名17」22-020-->
+          <td class="doc_22_s24" colspan="14"></td><!--「作業内容17」22-013-->
+          <td class="doc_22_s24" colspan="13"></td><!--「危険予測17」22-014-->
+          <td class="doc_22_s24" colspan="4"></td><!--「各会社の職長17」22-015-->
+          <td class="doc_22_s24" colspan="4"></td><!--「良 否17」22-016-->
+          <td class="doc_22_s24" colspan="4"></td><!--「確認者名17」22-017-->
+          <td class="doc_22_s24" colspan="13"></td><!--「是正指示・指導・処置17」22-018-->
+          <td class="doc_22_s24" colspan="4"></td><!--「是正確認日17」22-019-->
+          <td class="doc_22_s24" colspan="4"></td><!--「確認者名17」22-020-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
@@ -558,31 +596,49 @@
           <td class="doc_22_s0" colspan="20">朝礼時、周知・指示事項及び混在作業・調整事項</td>
           <td class="doc_22_s0" colspan="17">行事・パトロール・搬入・その他</td>
           <td class="doc_22_s0" colspan="26">統責者・巡視記録</td>
-          <td class="doc_22_s0" colspan="13">是正処理・報告</td>
-          <td class="doc_22_s0" colspan="3">確認者</td>
+          <td class="doc_22_s0" colspan="12">是正処理・報告</td>
+          <td class="doc_22_s0" colspan="4">確認者</td>
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
           <td class="doc_22_s25" colspan="20">
-
+            <%= f.text_field name = 'content[notifications_and_instructions_1st]', placeholder: "例）1．クレーン下の立入禁止",
+                             value: @document.content&.[]('notifications_and_instructions_1st'),
+                             class: "form-control form-control-sm"
+            %>
           </td><!--「朝礼時、周知・指示事項及び混在作業・調整事項」22-021-->
           <td class="doc_22_s18" colspan="17">
-
+            <%= f.text_field name = 'content[events_and_patrols_1st]', placeholder: "例）鉄筋搬入",
+                             value: @document.content&.[]('events_and_patrols_1st'),
+                             class: "form-control form-control-sm"
+            %>
           </td><!--「行事・パトロール・搬入・その他」22-022-->
           <td class="doc_22_s26" colspan="3">時刻：</td>
           <td class="doc_22_s27" colspan="6">
-
+            <%= raw sprintf(f.time_select('content[patrol_record_time_1st]',
+                              value: @document.content&.[]('patrol_record_time_1st'),
+                              class: "form-control  form-control-sm",time_separator: '%s'), '時 ') + '分'
+            %>
           </td><!--「統責者・巡視記録（時刻）」22-023-->
           <td class="doc_22_s26" colspan="3">内容：</td>
           <td class="doc_22_s17" colspan="14">
-
+            <%= f.text_field name = 'content[patrol_record_content_1st]',
+                             value: @document.content&.[]('patrol_record_content_1st'),
+                             class: "form-control form-control-sm"
+            %>
           </td><!--「統責者・巡視記録（内容）」22-024-->
-          <td class="doc_22_s17" colspan="13">
-
+          <td class="doc_22_s17" colspan="12">
+            <%= f.text_field name = 'content[corrective_action_report_1st]',
+                             value: @document.content&.[]('corrective_action_report_1st'),
+                             class: "form-control form-control-sm"
+            %>
           </td><!--「是正処理・報告」22-025-->
-          <td class="doc_22_s13" colspan="3">
-
+          <td class="doc_22_s17" colspan="4">
+            <%= f.select name = 'content[corrective_action_report_confirmer_1st]', @workers_name,
+                                { selected: @document.content&.[]('corrective_action_report_confirmer_1st'), include_blank: "選択して下さい" },
+                                { class: 'form-control form-control-sm'}
+            %>
           </td><!--「確認者名」22-026-->
           <td class="doc_22_s1"></td>
         </tr>
@@ -594,8 +650,8 @@
           <td class="doc_22_s27" colspan="6"></td><!--「統責者・巡視記録（時刻）2」22-023-->
           <td class="doc_22_s26" colspan="3">内容：</td>
           <td class="doc_22_s17" colspan="14"></td><!--「統責者・巡視記録（内容）2」22-024-->
-          <td class="doc_22_s17" colspan="13"></td><!--「是正処理・報告2」22-025-->
-          <td class="doc_22_s17" colspan="3"></td><!--「確認者名2」22-026-->
+          <td class="doc_22_s17" colspan="12"></td><!--「是正処理・報告2」22-025-->
+          <td class="doc_22_s17" colspan="4"></td><!--「確認者名2」22-026-->
           <td class="doc_22_s1"></td>
         </tr>
         <tr style="height: 24px">
@@ -875,7 +931,11 @@
 
           </td><!--「委任期間（自）年月日」22-028-->
           <td class="doc_22_s37" colspan="5">
-
+            <%= raw sprintf(f.time_select('content[delegation_time_from]',
+                              discard_minute: true,
+                              value: @document.content&.[]('delegation_time_from'),
+                              class: "form-control  form-control-sm"))
+            %>
           </td><!--「委任期間（自）時間」22-029-->
           <td class="doc_22_s1" colspan="3">時から</td>
           <td class="doc_22_s1"></td>
@@ -887,10 +947,11 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_22_s30"></td>
-          <td class="doc_22_s34" colspan="42" rowspan="3">① 地山の掘削 ② 土止め支保工 ③ 型枠支保工 ④ 足場の組立等 ⑤ 鉄骨の組立等 ⑥ コンフリートエ作物解体 ⑦
-            有機溶剤作業<br>
-            ⑧ 玉掛け ⑨ 車両系建設機械 ⑩ ショベルローダー、フォークリフト ⑪ 不整地運搬車 ⑫ 高所作業車 ⑬ 移動式クレーン ⑭ 床<br> 上操作式クレーン ⑮ コンクリート解体用ブレーカー ⑯
-            コンクリート打設用車両系建設機械 ⑰ アーク溶接等 ⑱ ガス溶接 ⑲ 研削・<br> といしの取替え等 ⑳ ウインチ操作 ㉑ 石綿</td>
+          <td class="doc_22_s34" colspan="42" rowspan="3">
+            １、地山の掘削　２、土止め支保工　３、型枠支保工　４、足場の組立等　５、鉄骨の組立等　６、コンフリートエ作物解体　７、有機溶剤作業　８、玉掛け　
+            ９、車両系建設機械　１０、ショベルローダー、フォークリフト　１１、不整地運搬車　１２、高所作業車　１３、移動式クレーン　１４、床 上操作式クレーン　
+            １５、コンクリート解体用ブレーカー　１６、コンクリート打設用車両系建設機械　１７、アーク溶接等　１８、ガス溶接　１９、 研削・といしの取替え等　２０、ウインチ操作　２１、石綿
+          </td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -908,7 +969,11 @@
 
           </td><!--「委任期間（至）年月日」22-030-->
           <td class="doc_22_s37" colspan="5">
-
+            <%= raw sprintf(f.time_select('content[delegation_time_to]',
+                              discard_minute: true,
+                              value: @document.content&.[]('delegation_time_to'),
+                              class: "form-control  form-control-sm"))
+            %>
           </td><!--「委任期間（至）時間」22-031-->
           <td class="doc_22_s1" colspan="3">時まで</td>
           <td class="doc_22_s1"></td>

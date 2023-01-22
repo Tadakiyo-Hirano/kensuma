@@ -79,7 +79,7 @@
             <td class="doc_20_s7"></td>
             <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
             <td class="doc_20_s8" colspan="9" rowspan="2">
-              <%= document_info_for_19th_prime_contractor_name %>
+              <%= document_info_for_prime_contractor_name %>
             </td><!--「統括安全衛生責任者名」22-001-->
             <td class="doc_20_s3"></td>
           </tr>
@@ -274,7 +274,6 @@
               <%= Business.find(document_info.business_id).representative_name %>
             </td><!--20-005「代表者名」-->
             <td class="doc_20_s14" rowspan="2">
-              ㊞
             </td><!--20-006「㊞」-->
             <td class="doc_20_s3"></td>
           </tr>
@@ -461,25 +460,20 @@
             <td class="doc_20_s18"></td>
             <td class="doc_20_s18"></td>
             <td class="doc_20_s18"></td>
-            <td class="doc_20_s18"></td>
-            <td class="doc_20_s19" colspan="7" rowspan="2">
+            <td class="doc_20_s19" colspan="6" rowspan="2">
               <%= doc_ja_y_date(@document,'term') %>
             </td><!--「年度（和暦）」20-008-->
             <td class="doc_20_s20" colspan="2" rowspan="2">年度</td>
             <td class="doc_20_s20" rowspan="2">（</td>
-            <td class="doc_20_s21" colspan="4" rowspan="2">
+            <td class="doc_20_s21" colspan="7" rowspan="2">
               <%= doc_ja_ym_date(@document,'planning_period_beginning') %>
             </td><!--「計画期間（始期）年月」20-009-->
             <td class="doc_20_s20" rowspan="2">～</td>
-            <td class="doc_20_s21" colspan="4" rowspan="2">
+            <td class="doc_20_s21" colspan="7" rowspan="2">
               <%= doc_ja_ym_date(@document,'planning_period_final_stage') %>
             </td><!--「計画期間（終期）年月」20-010-->
             <td class="doc_20_s20" rowspan="2">）</td>
             <td class="doc_20_s22" colspan="6" rowspan="2">安全衛生計画書</td>
-            <td class="doc_20_s22"></td>
-            <td class="doc_20_s22"></td>
-            <td class="doc_20_s22"></td>
-            <td class="doc_20_s22"></td>
             <td class="doc_20_s22"></td>
             <td class="doc_20_s22"></td>
             <td class="doc_20_s22"></td>
@@ -493,10 +487,6 @@
             <td class="doc_20_s18"></td>
             <td class="doc_20_s18"></td>
             <td class="doc_20_s18"></td>
-            <td class="doc_20_s18"></td>
-            <td class="doc_20_s22"></td>
-            <td class="doc_20_s22"></td>
-            <td class="doc_20_s22"></td>
             <td class="doc_20_s22"></td>
             <td class="doc_20_s22"></td>
             <td class="doc_20_s22"></td>
@@ -1221,44 +1211,64 @@
           <tr style="height: 24px">
             <td class="doc_20_s7"></td>
             <td class="doc_20_s42" colspan="14">安全衛生担当役員</td>
-            <td class="doc_20_s23" colspan="13">
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('safety_officer_post') %>
             </td><!--「安全衛生担当役員の役職名」20-040-->
-            <td class="doc_20_s23" colspan="13"></td><!--「安全衛生担当役員名」20-041-->
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('safety_officer_name') %>
+            </td><!--「安全衛生担当役員名」20-041-->
             <td class="doc_20_s3"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_20_s7"></td>
             <td class="doc_20_s42" colspan="14">雇用管理責任者</td>
-            <td class="doc_20_s23" colspan="13"></td><!--「雇用管理責任者・役職名」20-042-->
-            <td class="doc_20_s23" colspan="13"></td><!--「雇用管理責任者名」20-043-->
+            <td class="doc_20_s52" colspan="13">
+             <%= @document.content&.[]('employment_manager_post') %>
+            </td><!--「雇用管理責任者・役職名」20-042-->
+            <td class="doc_20_s52" colspan="13">
+            </td><!--「雇用管理責任者名」20-043-->
             <td class="doc_20_s3"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_20_s7"></td>
             <td class="doc_20_s42" colspan="14">総括安全衛生管理者</td>
-            <td class="doc_20_s23" colspan="13"></td><!--「総括安全衛生管理の役職名」20-044-->
-            <td class="doc_20_s23" colspan="13"></td><!--「総括安全衛生管理者名」20-045-->
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('general_manager_post') %>
+            </td><!--「総括安全衛生管理の役職名」20-044-->
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('general_manager_name') %>
+            </td><!--「総括安全衛生管理者名」20-045-->
             <td class="doc_20_s3"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_20_s7"></td>
             <td class="doc_20_s42" colspan="14">安全管理者</td>
-            <td class="doc_20_s23" colspan="13"></td><!--「安全管理者の役員名」20-046-->
-            <td class="doc_20_s23" colspan="13"></td><!--「安全管理者名」20-047-->
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('safety_manager_post') %>
+            </td><!--「安全管理者の役員名」20-046-->
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('safety_manager_name') %>
+            </td><!--「安全管理者名」20-047-->
             <td class="doc_20_s3"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_20_s7"></td>
             <td class="doc_20_s42" colspan="14">衛生管理者</td>
-            <td class="doc_20_s23" colspan="13"></td><!--「衛生管理者の役職名」20-048-->
-            <td class="doc_20_s23" colspan="13"></td><!--「衛生管理者名」20-049-->
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('hygiene_manager_post') %>
+            </td><!--「衛生管理者の役職名」20-048-->
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('hygiene_manager_name') %>
+            </td><!--「衛生管理者名」20-049-->
             <td class="doc_20_s3"></td>
           </tr>
           <tr style="height: 24px">
             <td class="doc_20_s7"></td>
             <td class="doc_20_s42" colspan="14">安全衛生推進者</td>
-            <td class="doc_20_s23" colspan="13"></td><!--「安全衛生推進の役職名」20-050-->
-            <td class="doc_20_s23" colspan="13">
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('health_and_safety_promoter_post') %>
+            </td><!--「安全衛生推進の役職名」20-050-->
+            <td class="doc_20_s52" colspan="13">
               <%= @document.content&.[]('health_and_safety_promoter_name') %>
             </td><!--「安全衛生推進者名」20-051-->
             <td class="doc_20_s3"></td>
@@ -1266,9 +1276,11 @@
           <tr style="height: 24px">
             <td class="doc_20_s7"></td>
             <td class="doc_20_s42" colspan="14">工事担当責任者</td>
-            <td class="doc_20_s23" colspan="13"></td><!--「各会社の工事担当責任者の役職名」20-052-->
-            <td class="doc_20_s23" colspan="13">
-
+            <td class="doc_20_s52" colspan="13">
+              <%= @document.content&.[]('construction_manager_post') %>
+            </td><!--「各会社の工事担当責任者の役職名」20-052-->
+            <td class="doc_20_s52" colspan="13">
+              <%= document_site_info.site_agent_name %>
             </td><!--「各会社の工事担当責任者」20-053-->
             <td class="doc_20_s3"></td>
           </tr>
@@ -1279,7 +1291,7 @@
             <td class="doc_20_s17" colspan="16" rowspan="3">・常時100人以上の労働者を使用するとき<br> ・常時50人以上の労働者を使用するとき<br>
               ・常時10人以上50人未満の労働者を使用するとき</td>
             <td class="doc_20_s17" colspan="2" rowspan="3">→<br> →<br> →</td>
-            <td class="doc_20_s42" colspan="14" rowspan="3">総括安全衛生管理者を選任<br> 安全管理者、衛生管理者、産業医を選任<br> 安全衛生推進者（又は衛生推進者）を選任
+            <td class="doc_20_s51" colspan="14" rowspan="3">総括安全衛生管理者を選任<br> 安全管理者、衛生管理者、産業医を選任<br> 安全衛生推進者（又は衛生推進者）を選任
             </td>
             <td class="doc_20_s3"></td>
           </tr>
@@ -1429,7 +1441,9 @@
   font-family: 'docs-Calibri';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1444,7 +1458,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1461,7 +1477,9 @@
   font-family: 'docs-Calibri';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1476,7 +1494,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1488,7 +1508,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1497,11 +1519,29 @@
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
-  text-align: left;
+  text-align: center;
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s51 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1514,7 +1554,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1530,7 +1572,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1546,7 +1590,9 @@
   color: #000000;
   font-size: 18pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1560,7 +1606,9 @@
   font-family: 'docs-Calibri';
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1577,7 +1625,9 @@
   font-family: 'docs-Calibri';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1593,7 +1643,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1625,7 +1677,9 @@
   font-family: 'docs-Calibri';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1656,7 +1710,9 @@
   color: #000000;
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1688,7 +1744,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: bottom;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1704,7 +1762,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1718,7 +1778,9 @@
   font-family: 'docs-Calibri';
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1734,7 +1796,9 @@
   font-family: 'docs-Calibri';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1748,7 +1812,9 @@
   font-family:"UUCPAT+CIDFont+F1";
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1762,7 +1828,9 @@
   font-family: 'docs-Calibri';
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1776,7 +1844,9 @@
   color: #000000;
   font-size: 8pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1791,9 +1861,11 @@
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
   color: #000000;
-  font-size: 12pt;
+  font-size: 18pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1806,7 +1878,9 @@
   font-family: 'docs-Calibri';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1822,7 +1896,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1837,7 +1913,26 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s52 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  text-align: center;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1853,7 +1948,9 @@
   color: #000000;
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1868,7 +1965,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1884,7 +1983,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1899,7 +2000,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: bottom;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1931,7 +2034,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1947,7 +2052,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1978,7 +2085,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -1994,7 +2103,9 @@
   font-family: 'docs-Calibri';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -2010,7 +2121,9 @@
   color: #000000;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -2026,7 +2139,9 @@
   color: #000000;
   font-size: 18pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -2073,7 +2188,9 @@
   color: #000000;
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -2086,7 +2203,9 @@
   color: #000000;
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -2101,7 +2220,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -2112,7 +2233,7 @@
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
   color: #000000;
-  font-size: 10pt;
+  font-size: 18pt;
   vertical-align: middle;
   white-space: normal;
   overflow: hidden;

@@ -34,14 +34,15 @@ module DocumentsHelper
     end
   end
 
-  # 元請の確認欄
-  def document_info_for_19th_prime_contractor_name
+  def document_info_for_prime_contractor_name
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if request_order.parent_id.nil?
-      Order.find(request_order.order_id).confirm_name
-    else
-      Order.find(request_order.parent.order_id).confirm_name
+    if request_order.parent_id.present?
+      loop do
+        request_order = request_order.parent
+        break if request_order.parent_id.nil?
+      end
     end
+    Order.find(request_order.order_id).confirm_name
   end
 
   # 一次下請の情報 (工事安全衛生計画書用)
@@ -498,6 +499,19 @@ module DocumentsHelper
 
   # (20)年間安全衛生計画書
 
+  # 代表者名の役職取得
+  def representative_name(business_id)
+    Business.find(business_id).representative_name
+  end
+
+  # 作業員の役職取得
+  def workers_post(worker_name)
+    field_workers = document_info.field_workers
+    if field_workers.present?
+      Worker.find_by(name: worker_name).job_title
+    end
+  end
+
   # 和暦表示(date_select用)
   def date_select_ja(src_html)
     dst_html = src_html.gsub(/>\d{4}</) do |m|
@@ -516,18 +530,18 @@ module DocumentsHelper
   # 和暦表示(年表示)
   def doc_ja_y_date(cont, column)
     date = cont.content&.[](column)
-    date.blank? ? '年' : l(date.to_date, format: :ja_y)
+    date.blank? ? '' : l(date.to_date, format: :ja_y)
   end
 
   # 和暦表示(年月表示)
   def doc_ja_ym_date(cont, column)
     date = cont.content&.[](column)
-    date.blank? ? '年 月' : l(date.to_date, format: :ja_ym)
+    date.blank? ? '' : l(date.to_date, format: :ja_ym)
   end
 
   # 年月日表示
   def doc_ymd_date(cont, column)
     date = cont.content&.[](column)
-    date.blank? ? '年 月 日' : l(date.to_date, format: :long)
+    date.blank? ? '' : l(date.to_date, format: :long)
   end
 end

@@ -29,17 +29,6 @@ module Users
       end
     end
 
-    def set_safety_officer_name
-      if params[:document][:content][:safety_officer_name].present?
-        @safety_officer_post = Worker.find_by(name: params[:document][:content][:safety_officer_name]).job_title
-      else
-        @safety_officer_post = ''
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
-
     def edit
       @error_msg_for_doc_20th = nil
     end
@@ -47,10 +36,12 @@ module Users
     def update
       case @document.document_type
       when 'doc_20th'
+        # date_selectのデータ取得形式に合わせるため年月を結合
         params[:document][:content][:term] = term_join
         params[:document][:content][:planning_period_beginning] = planning_period_beginning_join
         params[:document][:content][:planning_period_final_stage] = planning_period_final_stage_join
-        @error_msg_for_doc_20th = @document.error_msg_for_doc_20th(document_params(@document))
+        # 現場人数取得のバリデーションのため
+        @error_msg_for_doc_20th = @document.error_msg_for_doc_20th(document_params(@document), params[:request_order_uuid], params[:sub_request_order_uuid])
         if @error_msg_for_doc_20th.blank?
           if @document.update(document_params(@document))
             redirect_to users_request_order_document_url, success: '保存に成功しました'
@@ -78,6 +69,71 @@ module Users
       end
     end
 
+    def set_safety_officer_name
+      if params[:safety_officer_name].present?
+        @safety_officer_post = Worker.find_by(name: params[:safety_officer_name]).job_title
+      else
+        @safety_officer_post = ''
+      end
+      respond_to do |format|
+        format.js do
+          render 'users/documents/doc_20th/set_safety_officer_name'
+        end
+      end
+    end
+
+    def set_general_manager_name
+      if params[:general_manager_name].present?
+        @general_manager_post = Worker.find_by(name: params[:general_manager_name]).job_title
+      else
+        @general_manager_post = ''
+      end
+      respond_to do |format|
+        format.js do
+          render 'users/documents/doc_20th/set_general_manager_name'
+        end
+      end
+    end
+
+    def set_safety_manager_name
+      if params[:safety_manager_name].present?
+        @safety_manager_post = Worker.find_by(name: params[:safety_manager_name]).job_title
+      else
+        @safety_manager_post = ''
+      end
+      respond_to do |format|
+        format.js do
+          render 'users/documents/doc_20th/set_safety_manager_name'
+        end
+      end
+    end
+
+    def set_hygiene_manager_name
+      if params[:hygiene_manager_name].present?
+        @hygiene_manager_post = Worker.find_by(name: params[:hygiene_manager_name]).job_title
+      else
+        @hygiene_manager_post = ''
+      end
+      respond_to do |format|
+        format.js do
+          render 'users/documents/doc_20th/set_hygiene_manager_name'
+        end
+      end
+    end
+
+    def set_health_and_safety_promoter_name
+      if params[:health_and_safety_promoter_name].present?
+        @health_and_safety_promoter_post = Worker.find_by(name: params[:health_and_safety_promoter_name]).job_title
+      else
+        @health_and_safety_promoter_post = ''
+      end
+      respond_to do |format|
+        format.js do
+          render 'users/documents/doc_20th/set_health_and_safety_promoter_name'
+        end
+      end
+    end
+
     private
 
     def set_documents
@@ -94,31 +150,37 @@ module Users
       @workers_name = FieldWorker.where(field_workerable_id: @order.id).pluck(:admission_worker_name)
     end
 
-    # 年度パラメータを再セット
+    #年度パラメータを再セット
     def term_join
-      Date.new(
-        params[:document][:content][:term]['(1i)'].to_i,
-        params[:document][:content][:term]['(2i)'].to_i,
-        params[:document][:content][:term]['(3i)'].to_i
-      )
+      if params[:document][:content][:term]['(1i)'].present?
+        Date.new(
+          params[:document][:content][:term]['(1i)'].to_i,
+          params[:document][:content][:term]['(2i)'].to_i,
+          params[:document][:content][:term]['(3i)'].to_i
+        )
+      end
     end
 
-    # 始期パラメータを再セット
+    #始期パラメータを再セット
     def planning_period_beginning_join
-      Date.new(
-        params[:document][:content][:planning_period_beginning]['(1i)'].to_i,
-        params[:document][:content][:planning_period_beginning]['(2i)'].to_i,
-        params[:document][:content][:planning_period_beginning]['(3i)'].to_i
-      )
+      if params[:document][:content][:planning_period_beginning]['(1i)'].present? && params[:document][:content][:planning_period_beginning]['(2i)'].present?
+        Date.new(
+          params[:document][:content][:planning_period_beginning]['(1i)'].to_i,
+          params[:document][:content][:planning_period_beginning]['(2i)'].to_i,
+          params[:document][:content][:planning_period_beginning]['(3i)'].to_i
+        )
+      end
     end
 
-    # 終期パラメータを再セット
+    #終期パラメータを再セット
     def planning_period_final_stage_join
-      Date.new(
-        params[:document][:content][:planning_period_final_stage]['(1i)'].to_i,
-        params[:document][:content][:planning_period_final_stage]['(2i)'].to_i,
-        params[:document][:content][:planning_period_final_stage]['(3i)'].to_i
-      )
+      if params[:document][:content][:planning_period_final_stage]['(1i)'].present? && params[:document][:content][:planning_period_final_stage]['(2i)'].present?
+        Date.new(
+          params[:document][:content][:planning_period_final_stage]['(1i)'].to_i,
+          params[:document][:content][:planning_period_final_stage]['(2i)'].to_i,
+          params[:document][:content][:planning_period_final_stage]['(3i)'].to_i
+        )
+      end
     end
 
     def document_params(document)
@@ -350,12 +412,18 @@ module Users
             events_january
             events_february
             events_march
+            safety_officer_post
             safety_officer_name
+            employment_manager_post
+            general_manager_post
             general_manager_name
+            safety_manager_post
             safety_manager_name
+            hygiene_manager_post
             hygiene_manager_name
+            health_and_safety_promoter_post
             health_and_safety_promoter_name
-            construction_manager_name
+            construction_manager_post
             remarks
           ]
                                         )
@@ -366,6 +434,16 @@ module Users
             required_qualification_1st
             work_content_1st
             risk_prediction_1st
+            foreman_confirmation_1st
+            implementation_confirmation_1st
+            implementation_confirmation_person_1st
+            corrective_action_1st
+            corrective_action_confirmation_date_1st
+            corrective_action_reviewer_1st
+            occupation_2nd
+            occupation_3rd
+            occupation_4th
+            occupation_5th
           ]
                                         )
       end

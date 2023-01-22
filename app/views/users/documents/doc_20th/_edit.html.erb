@@ -9,6 +9,13 @@
     <%= form_with(model: @document, url: users_request_order_document_path, local: true, method: :patch) do |f| %>
     <table class="waffle" cellspacing="0" cellpadding="0">
       <tbody>
+        <% if params[:sub_request_order_uuid].present? %>
+          <% sub_request_order_uuid = params[:sub_request_order_uuid] %>
+          <%= f.hidden_field :sub_request_order_uuid, value: sub_request_order_uuid %>
+        <% else %>
+          <% request_order_uuid = params[:request_order_uuid] %>
+          <%= f.hidden_field :request_order_uuid, value: request_order_uuid %>
+        <% end %>
         <tr style="height: 24px">
           <td class="doc_20_s0"></td>
           <td class="doc_20_s1"></td>
@@ -81,7 +88,7 @@
           <td class="doc_20_s7"></td>
           <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
           <td class="doc_20_s49" colspan="9" rowspan="2">
-            <%= document_info_for_19th_prime_contractor_name %>
+            <%= document_info_for_prime_contractor_name %>
           </td><!-- 20-001「元請会社の確認欄」-->
           <td class="doc_20_s3"></td>
         </tr>
@@ -367,7 +374,9 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s15" colspan="4"></td>
             <td class="doc_20_s48" colspan="8" rowspan="2">
-              <%= f.date_field name = 'content[date_created]', value:@document.content&.[]('date_created') %>
+              <%= f.date_field name = 'content[date_created]',
+                               include_blank: true,
+                               value: @document.content&.[]('date_created') %>
             </td><!-- 20-007「書類作成日（西暦）」-->
           <td class="doc_20_s13" colspan="2" rowspan="2">作成</td>
           <td class="doc_20_s3"></td>
@@ -457,27 +466,30 @@
           <td class="doc_20_s18"></td>
           <td class="doc_20_s18"></td>
           <td class="doc_20_s19" colspan="5" rowspan="2">
-            <%= date_select_ja(f.date_select( 'content[term]',
+            <%= date_select_ja(f.date_select( 'content[term]', include_blank: true, start_year:Time.now.year-2,
                                discard_month: true, discard_day: true,
                                value: @document.content&.[]('term'),
+                               selected: @document.content&.[]('term').to_date,
                                class: "form-control form-control-sm"))
             %>
           </td><!-- 20-008「年度（和暦）」-->
           <td class="doc_20_s20" colspan="2" rowspan="2">年度</td>
           <td class="doc_20_s20" rowspan="2">（</td>
           <td class="doc_20_s21" colspan="7" rowspan="2">
-            <%= date_select_ja(raw sprintf(f.date_select('content[planning_period_beginning]',
-                              discard_day: true, use_month_numbers: true,
-                              value: @document.content&.[]('planning_period_beginning'),
-                              class: "form-control  form-control-sm", date_separator: '%s'), '年 ') + '月')
+            <%= date_select_ja(raw sprintf(f.date_select('content[planning_period_beginning]', include_blank: true, start_year:Time.now.year-2,
+                                          discard_day: true, use_month_numbers: true,
+                                          value: @document.content&.[]('planning_period_beginning'),
+                                          selected: @document.content&.[]('planning_period_beginning').to_date,
+                                          class: "form-control  form-control-sm", date_separator: '%s'), '年 ') + '月')
             %>
           </td><!-- 20-009「計画期間（始期）年月」-->
           <td class="doc_20_s20" rowspan="2">～</td>
             <td class="doc_20_s21" colspan="7" rowspan="2">
-            <%= date_select_ja(raw sprintf(f.date_select('content[planning_period_final_stage]',
-                             discard_day: true, use_month_numbers: true,
-                             value: @document.content&.[]('planning_period_final_stage'),
-                             class: "form-control form-control-sm", date_separator: '%s'), '年 ') + '月')
+            <%= date_select_ja(raw sprintf(f.date_select('content[planning_period_final_stage]', include_blank: true, start_year:Time.now.year-2,
+                                          discard_day: true, use_month_numbers: true,
+                                          value: @document.content&.[]('planning_period_final_stage'),
+                                          selected: @document.content&.[]('planning_period_final_stage').to_date,
+                                          class: "form-control form-control-sm", date_separator: '%s'), '年 ') + '月')
             %>
             </td><!-- 20-010「計画期間（終期）年月」※始期から12か月後・変更可未実装-->
           <td class="doc_20_s20" rowspan="2">）</td>
@@ -557,7 +569,7 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 方 針</td>
           <td class="doc_20_s23" colspan="33" rowspan="2">
-            <%= f.text_field name = 'content[health_and_safety_policy]', placeholder: "例）労働安全衛生関係法令及び当社の安全衛生管理規程を遵守する。",
+            <%= f.text_area name = 'content[health_and_safety_policy]', placeholder: "例）労働安全衛生関係法令及び当社の安全衛生管理規程を遵守する。",
                              value: @document.content&.[]('health_and_safety_policy'),
                              class: "form-control form-control-sm"
             %>
@@ -617,7 +629,7 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 目 標</td>
           <td class="doc_20_s23" colspan="33" rowspan="2">
-            <%= f.text_field name = 'content[health_and_safety_goals]', placeholder: "例）死亡災害・公衆災害をゼロとする。",
+            <%= f.text_area name = 'content[health_and_safety_goals]', placeholder: "例）死亡災害・公衆災害をゼロとする。",
                              value: @document.content&.[]('health_and_safety_goals'),
                              class: "form-control form-control-sm"
             %>
@@ -681,7 +693,7 @@
         <tr style="height: 24px">
           <td class="doc_20_s24"></td>
           <td class="doc_20_s23" colspan="40" rowspan="2">
-            <%= f.text_field name = 'content[health_and_safety_issues]', placeholder: "例）作業手順書によるリスクアセスメント及び低減対策の実施が十分でなかった。",
+            <%= f.text_area name = 'content[health_and_safety_issues]', placeholder: "例）作業手順書によるリスクアセスメント及び低減対策の実施が十分でなかった。",
                              value: @document.content&.[]('health_and_safety_issues'),
                              class: "form-control form-control-sm"
             %>
@@ -762,25 +774,25 @@
         <tr style="height: 24px">
           <td class="doc_20_s25"></td>
           <td class="doc_20_s26" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_priority_measures_1st]', placeholder: "例）安全衛生教育の計画的実施",
+            <%= f.text_area name = 'content[plan_priority_measures_1st]', placeholder: "例）安全衛生教育の計画的実施",
                              value: @document.content&.[]('plan_priority_measures_1st'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-014「重点施策1」-->
           <td class="doc_20_s26" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_items_to_be_implemented_1st]', placeholder: "例）送り出し教育の実施",
+            <%= f.text_area name = 'content[plan_items_to_be_implemented_1st]', placeholder: "例）送り出し教育の実施",
                              value: @document.content&.[]('plan_items_to_be_implemented_1st'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-015「重点事項1」-->
           <td class="doc_20_s26" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_management_goals_1st]', placeholder: "例）現場配置の全従業員・回数",
+            <%= f.text_area name = 'content[plan_management_goals_1st]', placeholder: "例）現場配置の全従業員・回数",
                              value: @document.content&.[]('plan_management_goals_1st'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-016「管理目標1」-->
           <td class="doc_20_s26" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_responsible_for_implementation_1st]', placeholder: "例）安全管理部長",
+            <%= f.text_area name = 'content[plan_responsible_for_implementation_1st]', placeholder: "例）安全管理部長",
                              value: @document.content&.[]('plan_responsible_for_implementation_1st'),
                              class: "form-control form-control-sm"
             %>
@@ -810,7 +822,7 @@
             %>
           </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）1」-->
           <td class="doc_20_s26" colspan="4" rowspan="3">
-            <%= f.text_field name = 'content[schedules_points_to_note_1st]', placeholder: "例）作業手順の遵守の指導詳細は、実施計画による",
+            <%= f.text_area name = 'content[schedules_points_to_note_1st]', placeholder: "例）作業手順の遵守の指導詳細は、実施計画による",
                              value: @document.content&.[]('schedules_points_to_note_1st'),
                              class: "form-control form-control-sm"
             %>
@@ -834,25 +846,25 @@
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_priority_measures_2nd]',
+            <%= f.text_area name = 'content[plan_priority_measures_2nd]',
                              value: @document.content&.[]('plan_priority_measures_2nd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-014「重点施策2」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_items_to_be_implemented_2nd]',
+            <%= f.text_area name = 'content[plan_items_to_be_implemented_2nd]',
                              value: @document.content&.[]('plan_items_to_be_implemented_2nd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-015「重点事項2」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_management_goals_2nd]',
+            <%= f.text_area name = 'content[plan_management_goals_2nd]',
                              value: @document.content&.[]('plan_management_goals_2nd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-016「管理目標2」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_responsible_for_implementation_2nd]',
+            <%= f.text_area name = 'content[plan_responsible_for_implementation_2nd]',
                              value: @document.content&.[]('plan_responsible_for_implementation_2nd'),
                              class: "form-control form-control-sm"
             %>
@@ -882,7 +894,7 @@
             %>
           </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）2」-->
           <td class="doc_20_s30" colspan="4" rowspan="3">
-            <%= f.text_field name = 'content[schedules_points_to_note_2nd]',
+            <%= f.text_area name = 'content[schedules_points_to_note_2nd]',
                              value: @document.content&.[]('schedules_points_to_note_2nd'),
                              class: "form-control form-control-sm"
             %>
@@ -906,25 +918,25 @@
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_priority_measures_3rd]',
+            <%= f.text_area name = 'content[plan_priority_measures_3rd]',
                              value: @document.content&.[]('plan_priority_measures_3rd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-014「重点施策3」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_items_to_be_implemented_3rd]',
+            <%= f.text_area name = 'content[plan_items_to_be_implemented_3rd]',
                              value: @document.content&.[]('plan_items_to_be_implemented_3rd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-015「重点事項3」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_management_goals_3rd]',
+            <%= f.text_area name = 'content[plan_management_goals_3rd]',
                              value: @document.content&.[]('plan_management_goals_3rd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-016「管理目標3」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_responsible_for_implementation_3rd]',
+            <%= f.text_area name = 'content[plan_responsible_for_implementation_3rd]',
                              value: @document.content&.[]('plan_responsible_for_implementation_3rd'),
                              class: "form-control form-control-sm"
             %>
@@ -954,7 +966,7 @@
             %>
           </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）3」-->
           <td class="doc_20_s30" colspan="4" rowspan="3">
-            <%= f.text_field name = 'content[schedules_points_to_note_3rd]',
+            <%= f.text_area name = 'content[schedules_points_to_note_3rd]',
                              value: @document.content&.[]('schedules_points_to_note_3rd'),
                              class: "form-control form-control-sm"
             %>
@@ -978,25 +990,25 @@
         <tr style="height: 24px">
           <td class="doc_20_s29"></td>
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_priority_measures_4th]',
+            <%= f.text_area name = 'content[plan_priority_measures_4th]',
                              value: @document.content&.[]('plan_priority_measures_4th'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-014「重点施策4」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_items_to_be_implemented_4th]',
+            <%= f.text_area name = 'content[plan_items_to_be_implemented_4th]',
                              value: @document.content&.[]('plan_items_to_be_implemented_4th'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-015「重点事項4」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_management_goals_4th]',
+            <%= f.text_area name = 'content[plan_management_goals_4th]',
                              value: @document.content&.[]('plan_management_goals_4th'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-016「管理目標4」-->
           <td class="doc_20_s30" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[plan_responsible_for_implementation_4th]',
+            <%= f.text_area name = 'content[plan_responsible_for_implementation_4th]',
                              value: @document.content&.[]('plan_responsible_for_implementation_4th'),
                              class: "form-control form-control-sm"
             %>
@@ -1026,7 +1038,7 @@
             %>
           </td><!-- 20-021「実施スケジュールと評価スケジュール（1月～3月）4」-->
           <td class="doc_20_s30" colspan="4" rowspan="3">
-            <%= f.text_field name = 'content[schedules_points_to_note_4th]',
+            <%= f.text_area name = 'content[schedules_points_to_note_4th]',
                              value: @document.content&.[]('schedules_points_to_note_4th'),
                              class: "form-control form-control-sm"
             %>
@@ -1107,7 +1119,7 @@
         <tr style="height: 24px">
           <td class="doc_20_s36"></td>
           <td class="doc_20_s37" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[common_to_work_sitespriority_measures_1st]', placeholder: "例）墜落災害防止措置の徹底",
+            <%= f.text_area name = 'content[common_to_work_sitespriority_measures_1st]', placeholder: "例）墜落災害防止措置の徹底",
                              value: @document.content&.[]('common_to_work_sitespriority_measures_1st'),
                              class: "form-control form-control-sm"
             %>
@@ -1119,7 +1131,7 @@
             %>
           </td><!-- 20-025「作業所共通の実施事項1_1」-->
           <td class="doc_20_s38" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[common_to_work_sitespriority_measures_2nd]', placeholder: "例）車両系建設機械災害防止措置の徹底",
+            <%= f.text_area name = 'content[common_to_work_sitespriority_measures_2nd]', placeholder: "例）車両系建設機械災害防止措置の徹底",
                              value: @document.content&.[]('common_to_work_sitespriority_measures_2nd'),
                              class: "form-control form-control-sm"
             %>
@@ -1135,13 +1147,13 @@
         <tr style="height: 24px">
           <td class="doc_20_s36"></td>
           <td class="doc_20_s23" colspan="15">
-            <%= f.text_field name = 'content[common_items_to_be_implemented_1st_2nd]',
+            <%= f.text_field name = 'content[common_items_to_be_implemented_1st_2nd]', placeholder: "例）・開口部の養生",
                              value: @document.content&.[]('common_items_to_be_implemented_1st_2nd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-026「作業所共通の実施事項1_2」-->
           <td class="doc_20_s39" colspan="15">
-            <%= f.text_field name = 'content[common_items_to_be_implemented_2nd_2nd]',
+            <%= f.text_field name = 'content[common_items_to_be_implemented_2nd_2nd]', placeholder: "例）旋回・走行範囲立入禁止、誘導による走行",
                              value: @document.content&.[]('common_items_to_be_implemented_2nd_2nd'),
                              class: "form-control form-control-sm"
             %>
@@ -1151,13 +1163,13 @@
         <tr style="height: 24px">
           <td class="doc_20_s36"></td>
           <td class="doc_20_s23" colspan="15">
-            <%= f.text_field name = 'content[common_items_to_be_implemented_1st_3rd]',
+            <%= f.text_field name = 'content[common_items_to_be_implemented_1st_3rd]', placeholder: "例）・安全帯の使用",
                              value: @document.content&.[]('common_items_to_be_implemented_1st_3rd'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-027「作業所共通の実施事項1_3」-->
           <td class="doc_20_s39" colspan="15">
-            <%= f.text_field name = 'content[common_items_to_be_implemented_2nd_3rd]',
+            <%= f.text_field name = 'content[common_items_to_be_implemented_2nd_3rd]', placeholder: "例）グーパー合図の徹底",
                              value: @document.content&.[]('common_items_to_be_implemented_2nd_3rd'),
                              class: "form-control form-control-sm"
             %>
@@ -1167,7 +1179,7 @@
         <tr style="height: 24px">
           <td class="doc_20_s40"></td>
           <td class="doc_20_s38" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[common_to_work_sitespriority_measures_3rd]', placeholder: "例）作業中の安全衛生管理活動の推進",
+            <%= f.text_area name = 'content[common_to_work_sitespriority_measures_3rd]', placeholder: "例）作業中の安全衛生管理活動の推進",
                              value: @document.content&.[]('common_to_work_sitespriority_measures_3rd'),
                              class: "form-control form-control-sm"
             %>
@@ -1179,7 +1191,7 @@
             %>
           </td><!-- 20-025「作業所共通の実施事項3_1」-->
           <td class="doc_20_s38" colspan="5" rowspan="3">
-            <%= f.text_field name = 'content[common_to_work_sitespriority_measures_4th]', placeholder: "例）移動式クレーン災害防止措置の徹底",
+            <%= f.text_area name = 'content[common_to_work_sitespriority_measures_4th]', placeholder: "例）移動式クレーン災害防止措置の徹底",
                              value: @document.content&.[]('common_to_work_sitespriority_measures_4th'),
                              class: "form-control form-control-sm"
             %>
@@ -1195,7 +1207,7 @@
         <tr style="height: 24px">
           <td class="doc_20_s40"></td>
           <td class="doc_20_s39" colspan="15">
-            <%= f.text_field name = 'content[common_items_to_be_implemented_3rd_2nd]',
+            <%= f.text_field name = 'content[common_items_to_be_implemented_3rd_2nd]', placeholder: "例）作業手順書の低減対策の遵守",
                              value: @document.content&.[]('common_items_to_be_implemented_3rd_2nd'),
                              class: "form-control form-control-sm"
             %>
@@ -1211,7 +1223,7 @@
         <tr style="height: 24px">
           <td class="doc_20_s40"></td>
           <td class="doc_20_s39" colspan="15">
-            <%= f.text_field name = 'content[common_items_to_be_implemented_3rd_3rd]',
+            <%= f.text_field name = 'content[common_items_to_be_implemented_3rd_3rd]', placeholder: "例）作業開始前、作業中に安全確認を行う",
                              value: @document.content&.[]('common_items_to_be_implemented_3rd_3rd'),
                              class: "form-control form-control-sm"
             %>
@@ -1277,14 +1289,14 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">４月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_april]', placeholder: "例）・社内安全協議会（／15日）",
+            <%= f.text_field name = 'content[events_april]', placeholder: "例）・社内安全協議会（/15日）",
                              value: @document.content&.[]('events_april'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-028「安全衛生行事・4月」-->
           <td class="doc_20_s6" colspan="2">10月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_october]',
+            <%= f.text_field name = 'content[events_october]', placeholder: "例）・全国労働衛生週間(/1〜/7)",
                              value: @document.content&.[]('events_october'),
                              class: "form-control form-control-sm"
             %>
@@ -1302,7 +1314,7 @@
           </td><!-- 20-030「安全衛生行事・5月」-->
           <td class="doc_20_s6" colspan="2">11月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_november]',
+            <%= f.text_field name = 'content[events_november]', placeholder: "例）・定期健康診断(/○)",
                              value: @document.content&.[]('events_november'),
                              class: "form-control form-control-sm"
             %>
@@ -1313,14 +1325,14 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">６月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_jun]',
+            <%= f.text_field name = 'content[events_jun]', placeholder: "例）・全国安全習慣準備期間(/1〜/30)",
                              value: @document.content&.[]('events_jun'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-031「安全衛生行事・6月」-->
           <td class="doc_20_s6" colspan="2">12月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_december]',
+            <%= f.text_field name = 'content[events_december]', placeholder: "例）・年末年始労働災害防止期間(12/1〜1/15)",
                              value: @document.content&.[]('events_december'),
                              class: "form-control form-control-sm"
             %>
@@ -1331,7 +1343,7 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">７月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_july]',
+            <%= f.text_field name = 'content[events_july]', placeholder: "例）・全国安全期間(/1〜/7)　・熱中症予防月間",
                              value: @document.content&.[]('events_july'),
                              class: "form-control form-control-sm"
             %>
@@ -1349,14 +1361,14 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">８月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_august]',
+            <%= f.text_field name = 'content[events_august]', placeholder: "例）・熱中症予防月間",
                              value: @document.content&.[]('events_august'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-033「安全衛生行事・8月」-->
           <td class="doc_20_s6" colspan="2">２月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_february]',
+            <%= f.text_field name = 'content[events_february]', placeholder: "例）・(元請)　〇〇建設（株）安全大会(/○)に参加",
                              value: @document.content&.[]('events_february'),
                              class: "form-control form-control-sm"
             %>
@@ -1367,14 +1379,14 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="2">９月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_september]',
+            <%= f.text_field name = 'content[events_september]', placeholder: "例）・全国労働衛生週間準備期間(/1〜/30)",
                              value: @document.content&.[]('events_september'),
                              class: "form-control form-control-sm"
             %>
           </td><!-- 20-034「安全衛生行事・9月」-->
           <td class="doc_20_s6" colspan="2">３月</td>
           <td class="doc_20_s23" colspan="18">
-            <%= f.text_field name = 'content[events_march]',
+            <%= f.text_field name = 'content[events_march]', placeholder: "例）・年度末労働災害防止強化月間(/1〜/31)",
                              value: @document.content&.[]('events_march'),
                              class: "form-control form-control-sm"
             %>
@@ -1440,13 +1452,13 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全衛生担当役員</td>
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[safety_officer_post]', id: :safety_officer_post,
                               value: @document.content&.[]('safety_officer_post'),
                               class: "form-control"
             %>
           </td><!--20-040「安全衛生担当役員の役職名」-->
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.select name = 'content[safety_officer_name]', @workers_name,
                                 { selected: @document.content&.[]('safety_officer_name'), include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchSafetyOfficerName($(this).val())" }
@@ -1457,25 +1469,29 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">雇用管理責任者</td>
-          <td class="doc_20_s23" colspan="13">
-          </td><!--20-042「雇用管理責任者・役職名」-->
-          <td class="doc_20_s23" colspan="13">
-          </td><!--20-043「雇用管理責任者名」-->
+          <td class="doc_20_s52" colspan="13">
+            <%= f.text_field name = 'content[employment_manager_post]',
+                              value: @document.content&.[]('employment_manager_post'),
+                              class: "form-control"
+            %>
+          </td><!--20-042「雇用管理責任者・役職名」※1/17時点で未実装のためペンディング-->
+          <td class="doc_20_s50" colspan="13">
+          </td><!--20-043「雇用管理責任者名」※1/17時点で未実装のためペンディング-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">総括安全衛生管理者</td>
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[general_manager_post]', id: :general_manager_post,
                               value: @document.content&.[]('general_manager_post'),
                               class: "form-control"
             %>
           </td><!--20-044「総括安全衛生管理の役職名」-->
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.select name = 'content[general_manager_name]', @workers_name,
                                 { selected: @document.content&.[]('general_manager_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm' }
+                                { class: 'form-control form-control-sm', :onchange => "catchGeneralManagerName($(this).val())" }
             %>
           </td><!--20-045「総括安全衛生管理者名」-->
           <td class="doc_20_s3"></td>
@@ -1483,16 +1499,16 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全管理者</td>
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[safety_manager_post]', id: :safety_manager_post,
                               value: @document.content&.[]('safety_manager_post'),
                               class: "form-control"
             %>
           </td><!--20-046「安全管理の役員名」-->
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.select name = 'content[safety_manager_name]', @workers_name,
                                 { selected: @document.content&.[]('safety_manager_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm' }
+                                { class: 'form-control form-control-sm', :onchange => "catchSafetyManagerName($(this).val())" }
             %>
           </td><!--20-047「安全管理者名」-->
           <td class="doc_20_s3"></td>
@@ -1500,16 +1516,16 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">衛生管理者</td>
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[hygiene_manager_post]', id: :hygiene_manager_post,
                               value: @document.content&.[]('hygiene_manager_post'),
                               class: "form-control"
             %>
           </td><!--20-048「衛生管理者の役職名」-->
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.select name = 'content[hygiene_manager_name]', @workers_name,
                                 { selected: @document.content&.[]('hygiene_manager_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm' }
+                                { class: 'form-control form-control-sm', :onchange => "catchHygieneManagerName($(this).val())" }
             %>
           </td><!--20-049「衛生管理者名」-->
           <td class="doc_20_s3"></td>
@@ -1517,16 +1533,16 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全衛生推進者</td>
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[health_and_safety_promoter_post]', id: :health_and_safety_promoter_post,
                               value: @document.content&.[]('health_and_safety_promoter_post'),
                               class: "form-control"
             %>
           </td><!--20-050「安全衛生推進の役職名」-->
-          <td class="doc_20_s23" colspan="13">
+          <td class="doc_20_s52" colspan="13">
             <%= f.select name = 'content[health_and_safety_promoter_name]', @workers_name,
                                 { selected: @document.content&.[]('health_and_safety_promoter_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm' }
+                                { class: 'form-control form-control-sm', :onchange => "catchHealthAndSafetyPromoterName($(this).val())" }
             %>
           </td><!--20-051「安全衛生推進者名」-->
           <td class="doc_20_s3"></td>
@@ -1534,10 +1550,15 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">工事担当責任者</td>
-          <td class="doc_20_s23" colspan="13">
-          </td><!--20-052「各会社の工事担当責任者の役職名」-->
-          <td class="doc_20_s23" colspan="13">
-          </td><!--20-053「各会社の工事担当責任者」※ construction_managerは要確認-->
+          <td class="doc_20_s52" colspan="13">
+            <%= f.text_field name = 'content[construction_manager_post]',
+                              value: workers_post(document_site_info.site_agent_name),
+                              class: "form-control"
+            %>
+          </td><!--20-052「各会社の工事担当責任者の役職名」※ 1/17時点では現場代理人をworkerから選択してなかったため値取得のみ未実装 -->
+          <td class="doc_20_s50" colspan="13">
+            <%= document_site_info.site_agent_name %>
+          </td><!--20-053「各会社の工事担当責任者」※ 現場の現場代理人名が該当する-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -1547,7 +1568,7 @@
           <td class="doc_20_s17" colspan="16" rowspan="3">・常時100人以上の労働者を使用するとき<br> ・常時50人以上の労働者を使用するとき<br>
             ・常時10人以上50人未満の労働者を使用するとき</td>
           <td class="doc_20_s17" colspan="2" rowspan="3">→<br> →<br> →</td>
-          <td class="doc_20_s42" colspan="14" rowspan="3">総括安全衛生管理者を選任<br> 安全管理者、衛生管理者、産業医を選任<br> 安全衛生推進者（又は衛生推進者）を選任
+          <td class="doc_20_s51" colspan="14" rowspan="3">総括安全衛生管理者を選任<br> 安全管理者、衛生管理者、産業医を選任<br> 安全衛生推進者（又は衛生推進者）を選任
           </td>
           <td class="doc_20_s3"></td>
         </tr>
@@ -1607,7 +1628,7 @@
           <td class="doc_20_s5"></td>
           <td class="doc_20_s6" colspan="5" rowspan="2">特記事項</td>
           <td class="doc_20_s45" colspan="35" rowspan="2">
-            <%= f.text_field name = 'content[remarks]',
+            <%= f.text_area name = 'content[remarks]',
                              value: @document.content&.[]('remarks'),
                              class: "form-control form-control-sm"
             %>
@@ -1687,6 +1708,55 @@
           }
         })
       }
+
+      function catchGeneralManagerName(val){
+        var general_manager_name = val;
+
+        $.ajax({
+          url: 'set_general_manager_name',
+          type: "GET",
+          data: {
+            general_manager_name: general_manager_name
+          }
+        })
+      }
+
+      function catchSafetyManagerName(val){
+        var safety_manager_name = val;
+
+        $.ajax({
+          url: 'set_safety_manager_name',
+          type: "GET",
+          data: {
+            safety_manager_name: safety_manager_name
+          }
+        })
+      }
+
+      function catchHygieneManagerName(val){
+        var hygiene_manager_name = val;
+
+        $.ajax({
+          url: 'set_hygiene_manager_name',
+          type: "GET",
+          data: {
+            hygiene_manager_name: hygiene_manager_name
+          }
+        })
+      }
+
+      function catchHealthAndSafetyPromoterName(val){
+        var health_and_safety_promoter_name = val;
+
+        $.ajax({
+          url: 'set_health_and_safety_promoter_name',
+          type: "GET",
+          data: {
+            health_and_safety_promoter_name: health_and_safety_promoter_name
+          }
+        })
+      }
+
     </script>
 
     <div class="center">
