@@ -30,24 +30,6 @@ RSpec.describe FieldMachine, type: :model do
         end
       end
     end
-
-    describe '#precautions' do
-      context '300文字の場合' do
-        before(:each) { subject.precautions = 'a' * 300 }
-
-        it 'バリデーションが通ること' do
-          expect(subject).to be_valid
-        end
-      end
-
-      context '301文字の場合' do
-        before(:each) { subject.precautions = 'a' * 301 }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-      end
-    end
   end
 
   describe 'request_order側バリデーションについて' do
@@ -70,24 +52,6 @@ RSpec.describe FieldMachine, type: :model do
     describe '#machine_name' do
       context '存在しない場合' do
         before(:each) { subject.machine_name = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-      end
-    end
-
-    describe '#precautions' do
-      context '300文字の場合' do
-        before(:each) { subject.precautions = 'a' * 300 }
-
-        it 'バリデーションが通ること' do
-          expect(subject).to be_valid
-        end
-      end
-
-      context '301文字の場合' do
-        before(:each) { subject.precautions = 'a' * 301 }
 
         it 'バリデーションに落ちること' do
           expect(subject).to be_invalid

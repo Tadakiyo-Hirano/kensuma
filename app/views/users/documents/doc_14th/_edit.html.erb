@@ -303,12 +303,12 @@
                   <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
                 </th>
                 <td class="doc_14_s20" colspan="5"></td>
-                <td class="doc_14_s15" dir="ltr" colspan="13" rowspan="4">
+                <td class="doc_14_s15_1" dir="ltr" colspan="13" rowspan="4">
                   <%= document_site_info.site_name %> <!-- 14-002 「事業所名（現場名）」 -->
                 </td>
                 <td class="doc_14_s4" colspan="2" rowspan="4"></td>
                 <td class="doc_14_s21" colspan="5" rowspan="4">一次会社名</td>
-                <td class="doc_14_s15" dir="ltr" colspan="12" rowspan="4">
+                <td class="doc_14_s15_1" dir="ltr" colspan="12" rowspan="4">
                   <%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 14-004 「一次会社名」 -->
                 </td>
                 <td class="doc_14_s6"></td>
@@ -419,7 +419,7 @@
                 <td class="doc_14_s21" colspan="2" rowspan="4">殿</td>
                 <td class="doc_14_s4" colspan="2" rowspan="4"></td>
                 <td class="doc_14_s0" colspan="5" rowspan="2">持込会社名</td>
-                <td class="doc_14_s15" dir="ltr" colspan="12" rowspan="4">
+                <td class="doc_14_s15_1" dir="ltr" colspan="12" rowspan="4">
                   <%= Business.find(document_info.business_id).name %> <!-- 14-006 「会社名」 -->
                 </td>
                 <td class="doc_14_s6"></td>
@@ -552,7 +552,7 @@
                 <td class="doc_14_s6"></td>
                 <td class="doc_14_s6"></td>
                 <td class="doc_14_s21" colspan="5" rowspan="4">代 表 者 名</td>
-                <td class="doc_14_s15" dir="ltr" colspan="10" rowspan="4">
+                <td class="doc_14_s15_1" dir="ltr" colspan="10" rowspan="4">
                   <%= document_info.content&.[]('subcon_representative_name') %> <!-- 14-007 「代表者名」 -->
                 </td>
                 <td class="doc_14_s27" dir="ltr" colspan="2" rowspan="4">
@@ -685,7 +685,7 @@
                 <td class="doc_14_s6"></td>
                 <td class="doc_14_s6"></td>
                 <td class="doc_14_s21" colspan="5" rowspan="4">電　　話</td>
-                <td class="doc_14_s15" dir="ltr" colspan="12" rowspan="4">
+                <td class="doc_14_s15_1" dir="ltr" colspan="12" rowspan="4">
                   <%= document_info.content&.[]('subcon_phone_number') %> <!-- 14-008 「電話番号」 -->
                 </td>
                 <td class="doc_14_s6"></td>
