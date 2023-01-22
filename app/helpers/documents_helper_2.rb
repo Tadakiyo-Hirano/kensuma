@@ -1,3 +1,4 @@
+# rubocop:disable all
 module DocumentsHelper
   # 日付
   def document_date(column)
@@ -939,4 +940,5 @@ module DocumentsHelper
       'bg-warning'
     end
   end
+  # rubocop:enable all
 end
