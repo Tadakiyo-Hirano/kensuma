@@ -60,7 +60,7 @@ module Users
 
     def submit
       if @request_order.parent_id.nil? && @request_order.children.all? { |r| r.status == 'approved' }
-        @request_order.approved!
+        @request_order.update_column(:status, 'approved')
         flash[:success] = '下請発注情報を承認しました'
       elsif @request_order.children.all? { |r| r.status == 'approved' }
         @request_order.submitted!
