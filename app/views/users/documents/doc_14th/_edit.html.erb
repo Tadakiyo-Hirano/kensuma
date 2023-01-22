@@ -1,5 +1,8 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- (14)参考様式第6号(持込機械等(電動工具電気溶接機等)使用届) -->
-<%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
+<%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true, class: "doc_14th-form-validation" do |f| %>
   <div id="doc_13" style="overflow: auto;">
     <div class="card">  
       <div class="card-body">
@@ -1073,8 +1076,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[0].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number1]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number1'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception1"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1176,8 +1181,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[1].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number2]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number2'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception2"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1308,8 +1315,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[2].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number3]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number3'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception3"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1409,8 +1418,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[3].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number4]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number4'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception4"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1510,8 +1521,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[4].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number5]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number5'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception5"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1642,8 +1655,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[5].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number6]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number6'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception6"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1713,8 +1728,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[6].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number7]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number7'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception7"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1816,8 +1833,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[7].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number8]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number8'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception8"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -1952,8 +1971,10 @@
                 <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[8].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number9]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number9'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception9"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -2054,8 +2075,10 @@
                <% if @document.request_order.parent_id.nil? && document_info&.field_machines&.ids[9].present? %> <!-- 元請会社（parent_idがnil）-->
                   <td class="doc_14_s30_2" dir="ltr" colspan="4" rowspan="2">
                     <%= f.text_field name = 'content[reception_number10]',
+                                  placeholder: "入力してください",
                                         value: @document.content&.[]('reception_number10'),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm ph-red',
+                                        id: "reception10"
                     %> <!-- 14-012 「受付番号(元請会社が記載)」 ※document-->
                   </td>
                 <% else %> <!-- 下請会社（parent_idが存在）-->
@@ -2329,6 +2352,89 @@
         </div>
       </section>
     <% end %>
+
+    <script>
+    $(function(){
+      $.each(function(key){
+        $.validator.addMethod(key, this);
+      });
+      $(".doc_14th-form-validation").validate({
+        rules: {
+          "document[content[reception_number1]]": {
+            required: true
+          },
+          "document[content[reception_number2]]": {
+            required: true
+          },
+           "document[content[reception_number3]]": {
+            required: true
+          },
+          "document[content[reception_number4]]": {
+            required: true
+          },
+           "document[content[reception_number5]]": {
+            required: true
+          },
+          "document[content[reception_number6]]": {
+            required: true
+          },
+           "document[content[reception_number7]]": {
+            required: true
+          },
+          "document[content[reception_number8]]": {
+            required: true
+          },
+           "document[content[reception_number9]]": {
+            required: true
+          },
+          "document[content[reception_number10]]": {
+            required: true
+          }
+        },
+        messages: {
+          "document[content[reception_number1]]": {
+            required: false
+          },
+          "document[content[reception_number2]]": {
+            required: false
+          },
+           "document[content[reception_number3]]": {
+            required: false
+          },
+          "document[content[reception_number4]]": {
+            required: false
+          },
+           "document[content[reception_number5]]": {
+            required: false
+          },
+          "document[content[reception_number6]]": {
+            required: false
+          },
+           "document[content[reception_number7]]": {
+            required: false
+          },
+          "document[content[reception_number8]]": {
+            required: false
+          },
+           "document[content[reception_number9]]": {
+            required: false
+          },
+          "document[content[reception_number10]]": {
+            required: false
+          }
+        },
+        errorClass: "input_form_error",
+        errorElement: false,
+      });
+      // 入力欄が空欄のときにバリデーションを実行
+      $(
+        "reception1", "reception2", "reception3", "receptio4", "reception5",
+        "reception6", "reception7", "reception8", "reception9","reception10"
+        ).blur(function () {
+        $(this).valid();
+      });
+    });
+  </script>
 
   </div>
 <% end %>

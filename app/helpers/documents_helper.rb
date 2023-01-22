@@ -827,10 +827,10 @@ module DocumentsHelper
 
   # 持込機械の日付情報（西暦）　（編集ページで入力、documentsに保存）
   def machine_doc_date(doc_date)
-    unless doc_date.blank? # documentのcontentがない場合のエラー回避（編集ページ初回表示）
-      doc_date.blank? ? '年　月　日' : l(doc_date.to_date, format: :long)
-    else
+    if doc_date.blank? # documentのcontentがない場合のエラー回避（編集ページ初回表示）
       '年　月　日'
+    else
+      doc_date.blank? ? '年　月　日' : l(doc_date.to_date, format: :long)
     end
   end
 

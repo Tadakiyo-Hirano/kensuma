@@ -61,10 +61,6 @@ class Document < ApplicationRecord
       if document_params[:content][:date_submitted].blank?
         error_msg_for_doc_14th.push('提出日を入力してください')
       end
-      # 受付番号
-      if document_params[:content][:reception_number1].blank?
-        error_msg_for_doc_14th.push('受付番号を入力してください')
-      end
       # 機械の特性、その他　その使用上注意すべき事項
       if document_params[:content][:precautions].blank?
         error_msg_for_doc_14th.push('機械の特性、その他　その使用上注意すべき事項を入力してください')
@@ -640,6 +636,8 @@ class Document < ApplicationRecord
        document_params[:content][:use_notification_name_for_others_6th].present?
       error_msg_for_doc_19th.push('6行4列目の作業計画をチェックをしてください')
     end
+    error_msg_for_doc_19th
   end
+  # rubocop:enable all
 end
  

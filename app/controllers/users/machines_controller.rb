@@ -15,7 +15,6 @@ module Users
         control_number:        'サンプル管理番号',
         inspector:             'サンプル管理者',
         handler:               'サンプル取扱者',
-        inspection_date:       Date.today
         # ============================================
       )
     end
