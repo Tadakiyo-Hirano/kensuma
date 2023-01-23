@@ -20,7 +20,7 @@
   <div class="sidebar">
     <!-- Sidebar business panel (optional) -->
     <div class="business-panel mt-3 d-flex">
-      <p>会社名：<%= current_business.name unless current_business.nil? %></p>
+      <p>会社名：<%= current_business_name %></p>
     </div>
 
   <!-- Sidebar -->
@@ -48,125 +48,129 @@
       </div>
     </div> %>
 
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-              with font-awesome or any other icon font library -->
-        <%# <li class="nav-item menu-open">
-          <a href="#" class="nav-link active">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Starter Pages
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link active">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Active Page</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Inactive Page</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_news_index_path, class:"nav-link" do %>
-            <%# <i class="nav-icon fas fa-th"></i>
-            <i class="nav-icon fas fa-newspaper"></i>
-            <p>
-              お知らせ
-              <span class="right badge badge-danger">New</span>
-            </p>
-          <% end %>
-        <%#</li>
-        <li class="nav-item">
-          <%= link_to 'https://forms.gle/HbWqbQpd33ZdQAoa7', class:"nav-link", target: :_blank, rel: "noopener noreferrer" do %>
-            <%#<i class="nav-icon fas fa-question"></i>
-            <p>お問い合わせ</p>
-          <% end %>
-        <%#</li>%>
+    <% unless controller_path == 'users/businesses' && action_name == 'new' %>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+          <%# <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Starter Pages
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Active Page</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Inactive Page</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_news_index_path, class:"nav-link" do %>
+              <%# <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-newspaper"></i>
+              <p>
+                お知らせ
+                <span class="right badge badge-danger">New</span>
+              </p>
+            <% end %>
+          <%#</li>
+          <li class="nav-item">
+            <%= link_to 'https://forms.gle/HbWqbQpd33ZdQAoa7', class:"nav-link", target: :_blank, rel: "noopener noreferrer" do %>
+              <%#<i class="nav-icon fas fa-question"></i>
+              <p>お問い合わせ</p>
+            <% end %>
+          <%#</li>%>
 
-        <!--スライドメニュー追記-->
-        <li class="nav-item">
-          <%= link_to users_orders_path, class:"nav-link" do %>
-            <%# <i class="nav-icon fas fa-th"></i> %>
-            <i class="nav-icon fas fa-users"></i>
-            <p>現場情報</p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_request_orders_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-file"></i>
-            <p>安全書類の記入依頼</p>
-          <% end %>
-        </li>
-        <p class="non-slide-link-menu text-danger">↓ 初回ログイン時入力必須</p>
-        <li class="nav-item">
-          <%= link_to users_business_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-building"></i>
-            <p>会社情報</p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to '#', class:"nav-link" do %>
-            <i class="nav-icon fas fa-building"></i>
-            <p>協力会社情報</p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to '#', class:"nav-link" do %>
-            <!--<i class="nav-icon fas fa-question"></i>-->
-            <p></p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_workers_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-user"></i>
-            <p>作業員情報</p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_cars_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-car"></i>
-            <p>車両情報</p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_machines_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>持込機械情報</p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_solvents_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-flask"></i>
-            <p>有機溶剤情報</p>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to users_special_vehicles_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-truck"></i>
-            <p>特殊車両情報</p>
-          <% end %>
-        </li>
-        <p></p>
-        <p></p>
-        <li class="nav-item">
-          <%= link_to users_general_users_path, class:"nav-link" do %>
-            <i class="nav-icon fas fa-user-circle"></i>
-            <p>ユーザー管理</p>
-          <% end %>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.sidebar-menu -->
+          <!--スライドメニュー追記-->
+          <li class="nav-item">
+            <%= link_to users_orders_path, class:"nav-link" do %>
+              <%# <i class="nav-icon fas fa-th"></i> %>
+              <i class="nav-icon fas fa-users"></i>
+              <p>現場情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_request_orders_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-file"></i>
+              <p>安全書類の記入依頼</p>
+            <% end %>
+          </li>
+          <p class="non-slide-link-menu text-danger">↓ 初回ログイン時入力必須</p>
+          <li class="nav-item">
+            <%= link_to users_business_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-building"></i>
+              <p>会社情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_subcon_users_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-building"></i>
+              <p>協力会社情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '#', class:"nav-link" do %>
+              <!--<i class="nav-icon fas fa-question"></i>-->
+              <p></p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_workers_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-user"></i>
+              <p>作業員情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_cars_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-car"></i>
+              <p>車両情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_machines_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>持込機械情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_solvents_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-flask"></i>
+              <p>有機溶剤情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_special_vehicles_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-truck"></i>
+              <p>特殊車両情報</p>
+            <% end %>
+          </li>
+          <p></p>
+          <p></p>
+          <li class="nav-item">
+            <%= link_to users_general_users_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-user-circle"></i>
+              <p>ユーザー管理</p>
+            <% end %>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    <% else %>
+      <p class="non-slide-link-menu text-danger">会社情報を登録してください</p>
+    <% end %>
   </div>
   <!-- /.sidebar -->
 </aside>

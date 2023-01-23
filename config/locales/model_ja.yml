@@ -42,6 +42,7 @@ ja:
       #   name: 会社名
       #   email: 会社メール
         role: 権限
+        is_prime_contractor: 元請け
       business:
         uuid: 事業所ID
         name: 事業所名
@@ -366,6 +367,9 @@ ja:
         handler: 取扱者
         inspection_date: 点検年月日
         inspection_check: 点検事項
+        extra_inspection_item1: 追加の点検事項
+      tag:
+        name: 点検事項の名称
   attributes:
     created_at: 作成日
     updated_at: 更新日
