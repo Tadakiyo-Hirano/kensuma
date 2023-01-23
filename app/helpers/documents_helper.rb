@@ -591,6 +591,8 @@ module DocumentsHelper
   def doc_ymd_date(cont, column)
     date = cont.content&.[](column)
     date.blank? ? '' : l(date.to_date, format: :long)
+  end
+
   # チェックボックスにチェックが入っているかを判別
   def box_checked?(checked_status)
     return true if checked_status == '1'
@@ -808,4 +810,5 @@ module DocumentsHelper
       'bg-warning'
     end
   end
+
 end

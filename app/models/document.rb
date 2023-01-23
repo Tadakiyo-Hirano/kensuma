@@ -49,6 +49,15 @@ class Document < ApplicationRecord
     doc_24th:                   24  # 参考資料第４号(新規入場者調査票)
   }
 
+  # 制限に関するグローバル変数(doc_20th)
+  $MONTH_LIMIT = 11
+  $CHARACTER_LIMIT300 = 300
+  $CHARACTER_LIMIT50 = 50
+  $CHARACTER_LIMIT30 = 30
+  $WORKER_NUMBER_LIMIT100 = 100
+  $WORKER_NUMBER_LIMIT50 = 50
+  $WORKER_NUMBER_LIMIT10 = 10
+
   def to_param
     uuid
   end
@@ -617,281 +626,204 @@ class Document < ApplicationRecord
     # 始期
     error_msg_for_doc_20th.push('始期を入力してください') if document_params[:content][:planning_period_beginning].blank?
     # 終期
-    $month_limit = 12
     if document_params[:content][:planning_period_final_stage].blank?
       error_msg_for_doc_20th.push('終期を入力してください')
     elsif (document_params[:content][:planning_period_beginning].present?) && (document_params[:content][:planning_period_final_stage].present?) && ((document_params[:content][:planning_period_final_stage].to_date) < ( document_params[:content][:planning_period_beginning].to_date ))
       error_msg_for_doc_20th.push('終期は始期より後日付を入力ください')
-    elsif (document_params[:content][:planning_period_beginning].present?) && (document_params[:content][:planning_period_final_stage].present?) && ((document_params[:content][:planning_period_final_stage].to_date) > ( document_params[:content][:planning_period_beginning].to_date + $month_limit.month ))
+    elsif (document_params[:content][:planning_period_beginning].present?) && (document_params[:content][:planning_period_final_stage].present?) && ((document_params[:content][:planning_period_final_stage].to_date) > ( document_params[:content][:planning_period_beginning].to_date + $MONTH_LIMIT.month ))
       error_msg_for_doc_20th.push('終期は始期から12ヶ月以内で入力してください')
     else
       nil
     end
     # 安全衛生方針
-    $character_limit = 300
     if document_params[:content][:health_and_safety_policy].blank?
       error_msg_for_doc_20th.push('安全衛生方針を入力してください')
-    elsif document_params[:content][:health_and_safety_policy].length > $character_limit
+    elsif document_params[:content][:health_and_safety_policy].length > $CHARACTER_LIMIT300
       error_msg_for_doc_20th.push('安全衛生方針を300字以内にしてください')
     end
     # 安全衛生目標
-    $character_limit = 300
     if document_params[:content][:health_and_safety_goals].blank?
       error_msg_for_doc_20th.push('安全衛生方針を入力してください')
-    elsif document_params[:content][:health_and_safety_goals].length > $character_limit
+    elsif document_params[:content][:health_and_safety_goals].length > $CHARACTER_LIMIT300
       error_msg_for_doc_20th.push('安全衛生方針を300字以内にしてください')
     end
     # 安全衛生上の課題及び特定した危険性又は有害性
-    $character_limit = 300
-    error_msg_for_doc_20th.push('安全衛生上の課題及び特定した危険性又は有害性を300字以内にしてください') if document_params[:content][:health_and_safety_issues].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生上の課題及び特定した危険性又は有害性を300字以内にしてください') if document_params[:content][:health_and_safety_issues].length > $CHARACTER_LIMIT300
     # 重点施策1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_1st].length > $CHARACTER_LIMIT50
     # 実施事項1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_1st].length > $CHARACTER_LIMIT50
     # 管理目標1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_1st].length > $CHARACTER_LIMIT50
     # 実施担当1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_1st].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（4月～6月）1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_april_june_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の実施スケジュール（4月～6月）を50字以内にしてください') if document_params[:content][:schedules_april_june_1st].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（7月～9月）1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_july_september_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の実施スケジュール（7月～9月）を50字以内にしてください') if document_params[:content][:schedules_july_september_1st].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（10月～12月）1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_october_december_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の実施スケジュール（10月～12月）を50字以内にしてください') if document_params[:content][:schedules_october_december_1st].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（1月～3月）1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_january_march_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の実施スケジュール（1月～3月）を50字以内にしてください') if document_params[:content][:schedules_january_march_1st].length > $CHARACTER_LIMIT50
     # 安全衛生計画・実施上の留意点1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_1st].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（備考欄）1
-    $character_limit = 50
-    error_msg_for_doc_20th.push('評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1行目の評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_1st].length > $CHARACTER_LIMIT50
     # 重点施策2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_2nd].length > $CHARACTER_LIMIT50
     # 実施事項2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_2nd].length > $CHARACTER_LIMIT50
     # 管理目標2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_2nd].length > $CHARACTER_LIMIT50
     # 実施担当2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_2nd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（4月～6月）2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_april_june_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の実施スケジュール（4月～6月）を50字以内にしてください') if document_params[:content][:schedules_april_june_2nd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（7月～9月）2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_july_september_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の実施スケジュール（7月～9月）を50字以内にしてください') if document_params[:content][:schedules_july_september_2nd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（10月～12月）2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_october_december_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の実施スケジュール（10月～12月）を50字以内にしてください') if document_params[:content][:schedules_october_december_2nd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（1月～3月）2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_january_march_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の実施スケジュール（1月～3月）を50字以内にしてください') if document_params[:content][:schedules_january_march_2nd].length > $CHARACTER_LIMIT50
     # 安全衛生計画・実施上の留意点2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_2nd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（備考欄）2
-    $character_limit = 50
-    error_msg_for_doc_20th.push('評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2行目の評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_2nd].length > $CHARACTER_LIMIT50
     # 重点施策3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_3rd].length > $CHARACTER_LIMIT50
     # 実施事項3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_3rd].length > $CHARACTER_LIMIT50
     # 管理目標3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_3rd].length > $CHARACTER_LIMIT50
     # 実施担当3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_3rd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（4月～6月）3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_april_june_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の実施スケジュール（4月～6月）を50字以内にしてください') if document_params[:content][:schedules_april_june_3rd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（7月～9月）3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_july_september_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の実施スケジュール（7月～9月）を50字以内にしてください') if document_params[:content][:schedules_july_september_3rd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（10月～12月）3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_october_december_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の実施スケジュール（10月～12月）を50字以内にしてください') if document_params[:content][:schedules_october_december_3rd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（1月～3月）3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_january_march_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の実施スケジュール（1月～3月）を50字以内にしてください') if document_params[:content][:schedules_january_march_3rd].length > $CHARACTER_LIMIT50
     # 安全衛生計画・実施上の留意点3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_3rd].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（備考欄）3
-    $character_limit = 50
-    error_msg_for_doc_20th.push('評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3行目の評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_3rd].length > $CHARACTER_LIMIT50
     # 重点施策4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の重点施策を50字以内にしてください') if document_params[:content][:plan_priority_measures_4th].length > $CHARACTER_LIMIT50
     # 実施事項4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の実施事項を50字以内にしてください') if document_params[:content][:plan_items_to_be_implemented_4th].length > $CHARACTER_LIMIT50
     # 管理目標4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_4th].length > $character_limit
-    # 実施担当4$character_limit = 50
-    error_msg_for_doc_20th.push('実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の管理目標を50字以内にしてください') if document_params[:content][:plan_management_goals_4th].length > $CHARACTER_LIMIT50
+    # 実施担当4
+    error_msg_for_doc_20th.push('4行目の実施担当を50字以内にしてください') if document_params[:content][:plan_responsible_for_implementation_4th].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（4月～6月）4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_april_june_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の実施スケジュール（4月～6月）を50字以内にしてください') if document_params[:content][:schedules_april_june_4th].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（7月～9月）4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_july_september_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の実施スケジュール（7月～9月）を50字以内にしてください') if document_params[:content][:schedules_july_september_4th].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（10月～12月）4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_october_december_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の実施スケジュール（10月～12月）を50字以内にしてください') if document_params[:content][:schedules_october_december_4th].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（1月～3月）4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施スケジュールを50字以内にしてください') if document_params[:content][:schedules_january_march_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の実施スケジュール（1月～3月）を50字以内にしてください') if document_params[:content][:schedules_january_march_4th].length > $CHARACTER_LIMIT50
     # 安全衛生計画・実施上の留意点4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の実施上の留意点を50字以内にしてください') if document_params[:content][:schedules_points_to_note_4th].length > $CHARACTER_LIMIT50
     # 実施スケジュールと評価スケジュール（備考欄）4
-    $character_limit = 50
-    error_msg_for_doc_20th.push('評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4行目の評価スケジュールを50字以内にしてください') if document_params[:content][:schedules_remarks_4th].length > $CHARACTER_LIMIT50
     # 作業所共通の重点対策1
-    $character_limit = 30
-    error_msg_for_doc_20th.push('重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1つ目の重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_1st].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項1_1
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_1st_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1つ目の実施事項（1つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_1st_1st].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項1_2
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_1st_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2つ目の実施事項（1つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_1st_2nd].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項1_3
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_1st_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3つ目の実施事項（1つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_1st_3rd].length > $CHARACTER_LIMIT30
     # 作業所共通の重点対策2
-    $character_limit = 30
-    error_msg_for_doc_20th.push('重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2つ目の重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_2nd].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項2_1
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_2nd_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1つ目の実施事項（2つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_2nd_1st].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項2_2
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_2nd_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2つ目の実施事項（2つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_2nd_2nd].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項2_3
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_2nd_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3つ目の実施事項（2つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_2nd_3rd].length > $CHARACTER_LIMIT30
     # 作業所共通の重点対策3
-    $character_limit = 30
-    error_msg_for_doc_20th.push('重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3つ目の重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_3rd].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項3_1
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_3rd_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1つ目の実施事項（3つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_3rd_1st].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項3_2
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_3rd_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2つ目の実施事項（3つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_3rd_2nd].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項3_3
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_3rd_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3つ目の実施事項（3つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_3rd_3rd].length > $CHARACTER_LIMIT30
     # 作業所共通の重点対策4
-    $character_limit = 30
-    error_msg_for_doc_20th.push('重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_4th].length > $character_limit
+    error_msg_for_doc_20th.push('4つ目の重点対策を30字以内にしてください') if document_params[:content][:common_to_work_sitespriority_measures_4th].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項4_1
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_4th_1st].length > $character_limit
+    error_msg_for_doc_20th.push('1つ目の実施事項（4つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_4th_1st].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項4_2
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_4th_2nd].length > $character_limit
+    error_msg_for_doc_20th.push('2つ目の実施事項（4つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_4th_2nd].length > $CHARACTER_LIMIT30
     # 作業所共通の実施事項4_3
-    $character_limit = 30
-    error_msg_for_doc_20th.push('実施事項を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_4th_3rd].length > $character_limit
+    error_msg_for_doc_20th.push('3つ目の実施事項（4つ目の重点対策）を30字以内にしてください') if document_params[:content][:common_items_to_be_implemented_4th_3rd].length > $CHARACTER_LIMIT30
     # 安全衛生行事・4月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(4月)を30字以内にしてください') if document_params[:content][:events_april].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(4月)を30字以内にしてください') if document_params[:content][:events_april].length > $CHARACTER_LIMIT30
     # 安全衛生行事・5月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(5月)を30字以内にしてください') if document_params[:content][:events_may].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(5月)を30字以内にしてください') if document_params[:content][:events_may].length > $CHARACTER_LIMIT30
     # 安全衛生行事・6月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(6月)を30字以内にしてください') if document_params[:content][:events_jun].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(6月)を30字以内にしてください') if document_params[:content][:events_jun].length > $CHARACTER_LIMIT30
     # 安全衛生行事・7月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(7月)を30字以内にしてください') if document_params[:content][:events_july].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(7月)を30字以内にしてください') if document_params[:content][:events_july].length > $CHARACTER_LIMIT30
     # 安全衛生行事・8月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(8月)を30字以内にしてください') if document_params[:content][:events_august].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(8月)を30字以内にしてください') if document_params[:content][:events_august].length > $CHARACTER_LIMIT30
     # 安全衛生行事・9月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(9月)を30字以内にしてください') if document_params[:content][:events_september].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(9月)を30字以内にしてください') if document_params[:content][:events_september].length > $CHARACTER_LIMIT30
     # 安全衛生行事・10月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(10月)を30字以内にしてください') if document_params[:content][:events_october].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(10月)を30字以内にしてください') if document_params[:content][:events_october].length > $CHARACTER_LIMIT30
     # 安全衛生行事・11月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(11月)を30字以内にしてください') if document_params[:content][:events_november].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(11月)を30字以内にしてください') if document_params[:content][:events_november].length > $CHARACTER_LIMIT30
     # 安全衛生行事・12月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(12月)を30字以内にしてください') if document_params[:content][:events_december].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(12月)を30字以内にしてください') if document_params[:content][:events_december].length > $CHARACTER_LIMIT30
     # 安全衛生行事・1月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(1月)を30字以内にしてください') if document_params[:content][:events_january].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(1月)を30字以内にしてください') if document_params[:content][:events_january].length > $CHARACTER_LIMIT30
     # 安全衛生行事・2月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(2月)を30字以内にしてください') if document_params[:content][:events_february].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(2月)を30字以内にしてください') if document_params[:content][:events_february].length > $CHARACTER_LIMIT30
     # 安全衛生行事・3月
-    $character_limit = 30
-    error_msg_for_doc_20th.push('安全衛生行事(3月)を30字以内にしてください') if document_params[:content][:events_march].length > $character_limit
+    error_msg_for_doc_20th.push('安全衛生行事(3月)を30字以内にしてください') if document_params[:content][:events_march].length > $CHARACTER_LIMIT30
     # 安全衛生担当役員名
     error_msg_for_doc_20th.push('安全衛生担当役員を選択してください') if document_params[:content][:safety_officer_name].blank?
     # 安全衛生担当役員名
     error_msg_for_doc_20th.push('安全衛生担当役員の役職を入力してください') if document_params[:content][:safety_officer_post].blank?
     # 総括安全衛生管理者名
-    $worker_number_limit = 100
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $worker_number_limit) && (document_params[:content][:general_manager_name].blank?)
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_name].blank?)
       error_msg_for_doc_20th.push('総括安全衛生管理者を選択してください')
     end
     # 安全管理者名
-    $worker_number_limit = 50
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $worker_number_limit) && (document_params[:content][:safety_manager_namee].blank?)
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_name].blank?)
       error_msg_for_doc_20th.push('安全管理者を選択してください')
     end
     # 衛生管理者名
-    $worker_number_limit = 50
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $worker_number_limit) && (document_params[:content][:hygiene_manager_name].blank?)
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_name].blank?)
       error_msg_for_doc_20th.push('衛生管理者を選択してください')
     end
     # 安全衛生推進者名
-    $worker_number_limit1 = 10
-    $worker_number_limit2 = 50
-    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $worker_number_limit1) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $worker_number_limit2)) && (document_params[:content][:health_and_safety_promoter_name].blank?)
+    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_name].blank?)
       error_msg_for_doc_20th.push('安全衛生推進者を選択してください')
     end
     # 特記事項
-    $character_limit = 300
-    error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $character_limit
+    $CHARACTER_LIMIT = 300
+    error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $CHARACTER_LIMIT
     error_msg_for_doc_20th
   end
 
   #現場作業員の人数の取得
   def number_of_field_workers(order)
-    request_order_id = RequestOrder.where(order_id: order.id)
-    if FieldWorker.where(field_workerable_id: request_order_id).nil?
-      number_of_prime_contractor = 0
-    else
-      number_of_prime_contractor = FieldWorker.where(field_workerable_id: request_order_id).count
-    end
-    if FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: request_order_id).nil?
-      number_of_primary_subcontractor = 0
-    else
-      number_of_primary_subcontractor = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: request_order_id).count
-    end
-    number_of_prime_contractor + number_of_primary_subcontractor
+    #元請の作業員の人数
+    prime_contractor = FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: order.id)
+    prime_contractor.nil? ? number_of_prime_contractor = 0 : number_of_prime_contractor = prime_contractor.size
+    #一次下請け以下の作業員の人数
+    request_order = RequestOrder.where(order_id: order.id)
+      array = []
+      request_order.each do |record|
+        array << record.id
+      end
+    number_of_primary_subcontractor = FieldWorker.where(field_workerable_type: RequestOrder).where("field_workerable_id IN (?)", array).size
+    return (number_of_prime_contractor + number_of_primary_subcontractor)
   end
 
   # 自身と、自身の階層下の現場情報(現場人数の取得がバリデーションで必要だったため)(doc_20th)
@@ -900,7 +832,7 @@ class Document < ApplicationRecord
     if sub_request_order_uuid
       RequestOrder.find_by(uuid: sub_request_order_uuid).order
     else
-      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order.order
+      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
     end
   end
   # rubocop:enable all

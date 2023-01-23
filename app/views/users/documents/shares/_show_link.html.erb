@@ -1,10 +1,9 @@
 <div class="card">
   <div class="card-body">
     <%# if controller.controller_path == 'users/documents' %>
-    <%if @document.document_type == 'doc_19th' && params[:sub_request_order_uuid]%>
+    <% if @document.document_type == 'doc_19th' && params[:sub_request_order_uuid]%>
     <%#doc_19th'で下請けに依頼した書類は元請は編集できない%>
-    <%else%>
-    <% if @document.document_type == 'doc_20th' && params[:sub_request_order_uuid] %>
+    <% elsif @document.document_type == 'doc_20th' && params[:sub_request_order_uuid] %>
     <%#doc_20th'で下請けに依頼した書類は元請は編集できない%>
     <% else %>
       <%= link_to '編集',

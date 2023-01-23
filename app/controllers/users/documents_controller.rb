@@ -59,6 +59,7 @@ module Users
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
+
       when 'doc_20th'
         # date_selectのデータ取得形式に合わせるため年月を結合
         params[:document][:content][:term] = term_join
@@ -67,6 +68,16 @@ module Users
         # 現場人数取得のバリデーションのため
         @error_msg_for_doc_20th = @document.error_msg_for_doc_20th(document_params(@document), params[:request_order_uuid], params[:sub_request_order_uuid])
         if @error_msg_for_doc_20th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+        end
       when 'doc_22nd'
         @error_msg_for_doc_22nd = @document.error_msg_for_doc_22nd(document_params(@document))
         if @error_msg_for_doc_22nd.blank?
@@ -194,6 +205,9 @@ module Users
           params[:document][:content][:planning_period_final_stage]['(2i)'].to_i,
           params[:document][:content][:planning_period_final_stage]['(3i)'].to_i
         )
+      end
+    end
+
     def set_workers
       case current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid]).document_type
       when 'doc_19th'
