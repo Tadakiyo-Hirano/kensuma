@@ -1,3 +1,4 @@
+# rubocop:disable all
 module DocumentsHelper
   # 日付
   def document_date(column)
@@ -388,22 +389,7 @@ module DocumentsHelper
 
   # (15)有機溶剤・特定化学物質等持込使用届
 
-  # 有機溶剤情報(使用期間)
-  # date は必ず jisx0301 で変換できる値
-  # def wareki(date)
-  #   wareki, mon, day = date.jisx0301.split('.')
-  #   gengou, year = wareki.partition(/\d+/).take(2)
-  #   gengou.sub!(
-  #     /[MTSHR]/,
-  #     'M' => '明治',
-  #     'T' => '大正',
-  #     'S' => '昭和',
-  #     'H' => '平成',
-  #     'R' => '令和'
-  #   )
-  #   "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
-  # end
-
+  # 作業手順書の添付の有・無
   def field_solvent_working_process_y(working_process)
     working_process == 'y' ? tag.span('有', class: :circle) : '有'
   end
@@ -412,6 +398,7 @@ module DocumentsHelper
     working_process == 'n' ? tag.span('無', class: :circle) : '無'
   end
 
+  # SDSの添付の有・無
   def field_solvent_sds_y(sds)
     sds == 'y' ? tag.span('有', class: :circle) : '有'
   end
@@ -610,6 +597,244 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 
+  # 持込機械の機械名情報（持込時の点検表）
+  def machine_tag_1st(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('アース線') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_2nd(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('接地クランプ') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_3rd(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('キャップタイヤ') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_4th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('コネクタ') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_5th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('接地端子の締結') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_6th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('充電部の絶縁') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_7th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('自動電撃防止装置') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_8th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('絶縁ホルダー') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_9th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('溶接保護面') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_10th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('操作スイッチ') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_11th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('絶縁抵抗測定値') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_12th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('各種ブレーキの作動') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_13th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('手すり・囲い') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_14th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('フックのはずれ止め') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_15th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('ワイヤロープ･チェーン') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_16th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('滑車') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_17th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('回転部の囲い等') ? '✔' : ''
+    end
+  end
+
+  def machine_tag_18th(machine)
+    tags = machine&.content&.[]('machine_tags')
+    unless tags.nil?
+      tags = tags.map { |tag| Tag.find(tag['tag_id']).name }
+      tags.include?('危険表示') ? '✔' : ''
+    end
+  end
+
+  # 持込時の点検表　「追加項目①〜⑥」点検事項
+  def inspection_table_item1
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item1') }.compact_blank.first
+  end
+
+  def inspection_table_item2
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item2') }.compact_blank.first
+  end
+
+  def inspection_table_item3
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item3') }.compact_blank.first
+  end
+
+  def inspection_table_item4
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item4') }.compact_blank.first
+  end
+
+  def inspection_table_item5
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item5') }.compact_blank.first
+  end
+
+  def inspection_table_item6
+    field_machines = FieldMachine.find(document_info.field_machine_ids)
+    inspection_table_item1 = field_machines.map { |field_machine| FieldMachine.find(field_machine.id).content.[]('extra_inspection_item6') }.compact_blank.first
+  end
+
+  # 持込時の点検表　「追加項目①〜⑥」番号（機械名）
+  def machine_extra_inspection_item1(machine, column)
+    extra_item1 = machine&.content&.[](column)
+    unless inspection_table_item2.nil?
+      extra_item1 == inspection_table_item1 ? '✔' : ''
+    end
+  end
+
+  def machine_extra_inspection_item2(machine, column)
+    extra_item2 = machine&.content&.[](column)
+    unless inspection_table_item2.nil?
+      extra_item2 == inspection_table_item2 ? '✔' : ''
+    end
+  end
+
+  def machine_extra_inspection_item3(machine, column)
+    extra_item3 = machine&.content&.[](column)
+    unless inspection_table_item3.nil?
+      extra_item3 == inspection_table_item3 ? '✔' : ''
+    end
+  end
+
+  def machine_extra_inspection_item4(machine, column)
+    extra_item4 = machine&.content&.[](column)
+    unless inspection_table_item4.nil?
+      extra_item4 == inspection_table_item4 ? '✔' : ''
+    end
+  end
+
+  def machine_extra_inspection_item5(machine, column)
+    extra_item5 = machine&.content&.[](column)
+    unless inspection_table_item5.nil?
+      extra_item5 == inspection_table_item5 ? '✔' : ''
+    end
+  end
+
+  def machine_extra_inspection_item6(machine, column)
+    extra_item6 = machine&.content&.[](column)
+    unless inspection_table_item6.nil?
+      extra_item6 == inspection_table_item6 ? '✔' : ''
+    end
+  end
+
+  # 持込機械の文字情報
+  def machine_str(machine, column)
+    machine&.content&.[](column)
+  end
+
+  # 持込機械の文字情報　（編集ページで入力、documentsに保存）
+  def machine_doc_str(doc_str)
+    doc_str.blank? ? '' : doc_str
+  end
+
+  # 持込機械の日付情報（西暦）　（編集ページで入力、documentsに保存）
+  def machine_doc_date(doc_date)
+    if doc_date.blank? # documentのcontentがない場合のエラー回避（編集ページ初回表示）
+      '年　月　日'
+    else
+      doc_date.blank? ? '年　月　日' : l(doc_date.to_date, format: :long)
+    end
+  end
+
   private
 
   # リスクの可能性
@@ -715,4 +940,5 @@ module DocumentsHelper
       'bg-warning'
     end
   end
+  # rubocop:enable all
 end

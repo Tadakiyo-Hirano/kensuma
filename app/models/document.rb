@@ -53,6 +53,38 @@ class Document < ApplicationRecord
     uuid
   end
 
+
+  def error_msg_for_doc_14th(document_params)
+    if document_type == 'doc_14th' # 持込機械等(電動工具電気溶接機等)使用届用
+      error_msg_for_doc_14th = []
+      # 提出日
+      if document_params[:content][:date_submitted].blank?
+        error_msg_for_doc_14th.push('提出日を入力してください')
+      end
+      # 機械の特性、その他　その使用上注意すべき事項
+      if document_params[:content][:precautions].blank?
+        error_msg_for_doc_14th.push('機械の特性、その他　その使用上注意すべき事項を入力してください')
+      elsif document_params[:content][:precautions].length > 300
+        error_msg_for_doc_14th.push('機械の特性、その他　その使用上注意すべき事項を300字以内にしてください')
+      else
+        nil
+      end
+      # 元請会社の確認欄
+      if document_params[:content][:prime_contractor_confirmation].blank?
+        error_msg_for_doc_14th.push('元請会社の確認者名を入力してください')
+      end
+      # 元請会社の受付確認年月日
+      if document_params[:content][:reception_confirmation_date].blank?
+        error_msg_for_doc_14th.push('元請会社の受付確認年月日を入力してください')
+      end
+      # 点検年月日
+      if document_params[:content][:inspection_date].blank?
+        error_msg_for_doc_14th.push('点検年月日を入力してください')
+      end
+        error_msg_for_doc_14th
+    end
+  end
+
   # エラーメッセージ(工事安全衛生計画書用)
   def error_msg_for_doc_19th(document_params)
     error_msg_for_doc_19th = []

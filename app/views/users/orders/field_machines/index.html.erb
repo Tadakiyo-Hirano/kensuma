@@ -49,7 +49,6 @@
                 <th><%= FieldMachine.human_attribute_name(:machine_name) %></th>
                 <th><%= FieldMachine.human_attribute_name(:carry_on_date) %></th>
                 <th><%= FieldMachine.human_attribute_name(:carry_out_date) %></th>
-                <th><%= FieldMachine.human_attribute_name(:precautions) %></th>
                 <th></th>
               </tr>
             </thead>
@@ -64,9 +63,6 @@
                   </td>
                   <td>
                     <%= not_input_display(field_machine.carry_out_date) %>
-                  </td>
-                  <td>
-                    <%= not_input_display(field_machine.precautions) %>
                   </td>
                   <td>
                     <%= link_to "削除", users_order_field_machine_path(@order, field_machine), method: :delete, data: { confirm: "#{field_machine.machine_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
