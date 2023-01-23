@@ -463,7 +463,7 @@
             <%= date_select_ja(f.date_select( 'content[term]', include_blank: true, start_year:Time.now.year-2,
                                discard_month: true, discard_day: true,
                                value: @document.content&.[]('term'),
-                               selected: @document.content&.[]('term').to_date,
+                               selected: @document.content&.[]('term')&.to_date,
                                class: "form-control form-control-sm"))
             %>
           </td><!-- 20-008「年度（和暦）」-->
@@ -473,7 +473,7 @@
             <%= date_select_ja(raw sprintf(f.date_select('content[planning_period_beginning]', include_blank: true, start_year:Time.now.year-2,
                                           discard_day: true, use_month_numbers: true,
                                           value: @document.content&.[]('planning_period_beginning'),
-                                          selected: @document.content&.[]('planning_period_beginning').to_date,
+                                          selected: @document.content&.[]('planning_period_beginning')&.to_date,
                                           class: "form-control  form-control-sm", date_separator: '%s'), '年 ') + '月')
             %>
           </td><!-- 20-009「計画期間（始期）年月」-->
@@ -482,7 +482,7 @@
             <%= date_select_ja(raw sprintf(f.date_select('content[planning_period_final_stage]', include_blank: true, start_year:Time.now.year-2,
                                           discard_day: true, use_month_numbers: true,
                                           value: @document.content&.[]('planning_period_final_stage'),
-                                          selected: @document.content&.[]('planning_period_final_stage').to_date,
+                                          selected: @document.content&.[]('planning_period_final_stage')&.to_date,
                                           class: "form-control form-control-sm", date_separator: '%s'), '年 ') + '月')
             %>
             </td><!-- 20-010「計画期間（終期）年月」※始期から12か月後・変更可未実装-->
@@ -1750,9 +1750,6 @@
 
     <div class="center">
       <%= f.submit "更新", class: "btn btn-block btn-outline-secondary" %>
-    </div>
-    <div class="center">
-      <%= link_to "戻る", :back, class: "btn btn-block btn-outline-secondary" %>
     </div>
     <% end %>
   </div>
