@@ -1,9 +1,11 @@
+# rubocop:disable all
 module Users
   class DocumentsController < Users::Base
     layout 'documents'
     before_action :set_documents # サイドバーに常時表示させるために必要
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
-    before_action :set_workers1, only: %i[edit update] # 2次下請以下の作業員を定義する
+    before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
+    before_action :set_workers1, only: %i[edit update] # 作業員の名前を取得する
 
     def index; end
 
@@ -30,19 +32,23 @@ module Users
     end
 
     def edit
+      @error_msg_for_doc_19th = nil
       @error_msg_for_doc_20th = nil
     end
 
     def update
       case @document.document_type
-      when 'doc_20th'
-        # date_selectのデータ取得形式に合わせるため年月を結合
-        params[:document][:content][:term] = term_join
-        params[:document][:content][:planning_period_beginning] = planning_period_beginning_join
-        params[:document][:content][:planning_period_final_stage] = planning_period_final_stage_join
-        # 現場人数取得のバリデーションのため
-        @error_msg_for_doc_20th = @document.error_msg_for_doc_20th(document_params(@document), params[:request_order_uuid], params[:sub_request_order_uuid])
-        if @error_msg_for_doc_20th.blank?
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
+
+      when 'doc_19th'
+        @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
+        if @error_msg_for_doc_19th.blank?
           if @document.update(document_params(@document))
             redirect_to users_request_order_document_url, success: '保存に成功しました'
           else
@@ -53,6 +59,14 @@ module Users
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
+      when 'doc_20th'
+        # date_selectのデータ取得形式に合わせるため年月を結合
+        params[:document][:content][:term] = term_join
+        params[:document][:content][:planning_period_beginning] = planning_period_beginning_join
+        params[:document][:content][:planning_period_final_stage] = planning_period_final_stage_join
+        # 現場人数取得のバリデーションのため
+        @error_msg_for_doc_20th = @document.error_msg_for_doc_20th(document_params(@document), params[:request_order_uuid], params[:sub_request_order_uuid])
+        if @error_msg_for_doc_20th.blank?
       when 'doc_22nd'
         @error_msg_for_doc_22nd = @document.error_msg_for_doc_22nd(document_params(@document))
         if @error_msg_for_doc_22nd.blank?
@@ -180,6 +194,52 @@ module Users
           params[:document][:content][:planning_period_final_stage]['(2i)'].to_i,
           params[:document][:content][:planning_period_final_stage]['(3i)'].to_i
         )
+    def set_workers
+      case current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid]).document_type
+      when 'doc_19th'
+        request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+        workers = []
+        # 元請が資料を確認、作成するとき
+        if request_order.parent_id.nil?
+          request_order.children.each do |first_request_order|
+            @second_workers = first_request_order.children.map { |second_request_order|
+              Business.find_by(id: second_request_order.business_id).workers
+            }.flatten!
+            workers.push(@second_workers).flatten!
+            first_request_order.children.each do |second_request_order|
+              @third_workers = second_request_order.children.map { |third_request_order|
+                Business.find_by(id: third_request_order.business_id).workers
+              }.flatten!
+              workers.push(@third_workers).flatten!
+              second_request_order.children.each do |third_request_order|
+                @forth_workers = third_request_order.children.map { |forth_request_order|
+                  Business.find_by(id: forth_request_order.business_id).workers
+                }.flatten!
+                workers.push(@forth_workers).flatten!
+              end
+            end
+          end
+        # 1次下請けが資料を確認、作成するとき
+        else
+          request_order.children.each do |second_request_order|
+            @second_workers = request_order.children.map { |second_request_order_sub|
+              Business.find_by(id: second_request_order_sub.business_id).workers
+            }.flatten!
+            workers.push(@second_workers).flatten!
+            second_request_order.children.each do |third_request_order|
+              @third_workers = second_request_order.children.map { |third_request_order_sub|
+                Business.find_by(id: third_request_order_sub.business_id).workers
+              }.flatten!
+              @forth_workers = third_request_order.children.map { |forth_request_order_sub|
+                Business.find_by(id: forth_request_order_sub.business_id).workers
+              }.flatten!
+              workers.push(@third_workers).flatten!
+              workers.push(@forth_workers).flatten!
+            end
+          end
+        end
+        merge_workers = workers&.map { |sub_worker| { sub_worker&.name => sub_worker&.uuid } }
+        @workers_name_uuid = {}.merge(*merge_workers)
       end
     end
 
@@ -187,6 +247,13 @@ module Users
       case document.document_type
       when 'doc_3rd', 'doc_17th'
         params.require(:document).permit(content: [:date_submitted])
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+        params.require(:document).permit(content:
+          [
+            :date_submitted
+          ]
+        )
+
       when 'doc_19th'
         params.require(:document).permit(content:
           %i[
@@ -449,4 +516,5 @@ module Users
       end
     end
   end
+  # rubocop:enable all
 end

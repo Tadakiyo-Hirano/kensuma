@@ -11,6 +11,10 @@ module Users
 
     def show
       @sub_request_orders = @request_order.children
+      @genecon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.genecon_documents_type
+      @first_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.first_subcon_documents_type
+      @second_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.second_subcon_documents_type
+      @third_or_later_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.third_or_later_subcon_documents_type
     end
 
     def edit
@@ -56,7 +60,7 @@ module Users
 
     def submit
       if @request_order.parent_id.nil? && @request_order.children.all? { |r| r.status == 'approved' }
-        @request_order.approved!
+        @request_order.update_column(:status, 'approved')
         flash[:success] = '下請発注情報を承認しました'
       elsif @request_order.children.all? { |r| r.status == 'approved' }
         @request_order.submitted!
@@ -123,20 +127,26 @@ module Users
         :registered_core_engineer_name
       ).merge(
         content: {
-          subcon_name:                                    current_business.name,                                             # 会社名
-          subcon_branch_name:                             current_business.branch_name,                                      # 支店･営業所名
-          subcon_address:                                 current_business.address,                                          # 会社住所
-          subcon_post_code:                               current_business.post_code,                                        # 会社郵便番号
-          subcon_phone_number:                            current_business.phone_number,                                     # 会社電話番号
-          subcon_carrier_up_id:                           current_business.carrier_up_id,                                    # 事業所ID(キャリアアップ)
-          subcon_representative_name:                     current_business.representative_name,                              # 代表者名
-          subcon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
-          subcon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
-          subcon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
-          subcon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
-          subcon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
-          subcon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
-          subcon_employment_insurance_number:             current_business.business_employment_insurance_number              # 雇用保険番号
+          subcon_name:                                                        current_business.name,                                             # 会社名
+          subcon_branch_name:                                                 current_business.branch_name,                                      # 支店･営業所名
+          subcon_address:                                                     current_business.address,                                          # 会社住所
+          subcon_post_code:                                                   current_business.post_code,                                        # 会社郵便番号
+          subcon_phone_number:                                                current_business.phone_number,                                     # 会社電話番号
+          subcon_carrier_up_id:                                               current_business.carrier_up_id,                                    # 事業所ID(キャリアアップ)
+          subcon_representative_name:                                         current_business.representative_name,                              # 代表者名
+          subcon_health_insurance_status:                                     current_business.business_health_insurance_status,                 # 健康保険加入状況
+          subcon_health_insurance_association:                                current_business.business_health_insurance_association,            # 健康保険会社
+          subcon_health_insurance_office_number:                              current_business.business_health_insurance_office_number,          # 健康保険番号
+          subcon_welfare_pension_insurance_join_status:                       current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
+          subcon_welfare_pension_insurance_office_number:                     current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
+          subcon_employment_insurance_join_status:                            current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
+          subcon_employment_insurance_number:                                 current_business.business_employment_insurance_number,             # 雇用保険番号
+          subcon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種
+          subcon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
+          subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
+          subcon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
+          subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
+          subcon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
         }
       )
     end

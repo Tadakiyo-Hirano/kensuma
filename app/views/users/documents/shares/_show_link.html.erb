@@ -1,6 +1,9 @@
 <div class="card">
   <div class="card-body">
     <%# if controller.controller_path == 'users/documents' %>
+    <%if @document.document_type == 'doc_19th' && params[:sub_request_order_uuid]%>
+    <%#doc_19th'で下請けに依頼した書類は元請は編集できない%>
+    <%else%>
     <% if @document.document_type == 'doc_20th' && params[:sub_request_order_uuid] %>
     <%#doc_20th'で下請けに依頼した書類は元請は編集できない%>
     <% else %>
@@ -20,9 +23,9 @@
         users_request_order_document_path(params[:request_order_uuid], document, format: :pdf) :
         users_request_order_sub_request_order_document_path(params[:request_order_uuid], params[:sub_request_order_uuid], document, format: :pdf)
       ),
-      target: :_blank,
-      rel: "noopener noreferrer",
-      class: "btn btn-md btn-block btn-default"
+    target: :_blank,
+    rel: "noopener noreferrer",
+    class: "btn btn-md btn-block btn-default"
     %>
   </div>
 </div>

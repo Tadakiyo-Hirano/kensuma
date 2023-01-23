@@ -17,8 +17,8 @@ module ApplicationHelper
         '三次'
       when 4
         '四次'
-      when 5
-        '五次'
+      else
+        '元請'
       end
     else
       '元請'

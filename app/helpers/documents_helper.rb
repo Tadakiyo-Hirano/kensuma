@@ -9,7 +9,7 @@ module DocumentsHelper
     if action_name == 'edit'
       date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
     else
-      date.nil? || date == [''] || date == '' ? '年　月　日' : date.first.to_date&.strftime('%Y年%-m月%-d日')
+      date.nil? || date == [''] || date == '' ? '年　月　日' : date.to_date&.strftime('%Y年%-m月%-d日')
     end
   end
 
@@ -18,16 +18,16 @@ module DocumentsHelper
   # 一次下請の情報
   def subcon_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order if request_order.parent_id == 1
+    request_order if request_order.depth == 1
   end
 
   def subcons_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.children if request_order.parent_id.nil?
+    request_order.children if request_order.depth.zero?
   end
 
   def document_subcon_info
-    if RequestOrder.find_by(uuid: params[:request_order_uuid]).parent_id == 1
+    if RequestOrder.find_by(uuid: params[:request_order_uuid]).depth == 1
       subcon_info
     else
       @subcon
@@ -120,6 +120,54 @@ module DocumentsHelper
   end
 
   # (8)作業員名簿
+
+  # 元請の確認欄
+  def document_info_for_prime_contractor_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order.parent_id.present?
+      loop do
+        request_order = request_order.parent
+        break if request_order.parent_id.nil?
+      end
+    end
+    Order.find(request_order.order_id).confirm_name
+  end
+
+  # 一次下請の情報 (工事安全衛生計画書用)
+  def document_subcon_info_for_19th
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    # 元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    # 下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+      # 下請けが存在しない場合
+    end
+  end
+
+  # 会社の名前
+  def company_name(worker_id)
+    worker = Worker.find_by(uuid: worker_id)
+    Business.find_by(id: worker&.business_id)&.name
+  end
+
+  # 書類作成会社の名前
+  def document_preparation_company_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+      Business.find_by(id: sub_request_order.business_id).name
+    # 下請けが自身の書類確認するとき
+    else
+      Business.find_by(id: request_order.business_id).name
+    end
+  end
+
+  # 作業員情報
+  def worker(worker_uuid)
+    Worker.find_by(uuid: worker_uuid)&.name
+  end
 
   # 作業員名簿の見出し番号
   def worker_index(number, index)
@@ -389,19 +437,19 @@ module DocumentsHelper
 
   # 有機溶剤情報(使用期間)
   # date は必ず jisx0301 で変換できる値
-  def wareki(date)
-    wareki, mon, day = date.jisx0301.split('.')
-    gengou, year = wareki.partition(/\d+/).take(2)
-    gengou.sub!(
-      /[MTSHR]/,
-      'M' => '明治',
-      'T' => '大正',
-      'S' => '昭和',
-      'H' => '平成',
-      'R' => '令和'
-    )
-    "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
-  end
+  # def wareki(date)
+  #   wareki, mon, day = date.jisx0301.split('.')
+  #   gengou, year = wareki.partition(/\d+/).take(2)
+  #   gengou.sub!(
+  #     /[MTSHR]/,
+  #     'M' => '明治',
+  #     'T' => '大正',
+  #     'S' => '昭和',
+  #     'H' => '平成',
+  #     'R' => '令和'
+  #   )
+  #   "#{gengou}#{year.to_i}年#{mon.to_i}月#{day.to_i}日"
+  # end
 
   def field_solvent_working_process_y(working_process)
     working_process == 'y' ? tag.span('有', class: :circle) : '有'
@@ -543,5 +591,221 @@ module DocumentsHelper
   def doc_ymd_date(cont, column)
     date = cont.content&.[](column)
     date.blank? ? '' : l(date.to_date, format: :long)
+  # チェックボックスにチェックが入っているかを判別
+  def box_checked?(checked_status)
+    return true if checked_status == '1'
+  end
+
+  def checked_box(checked_status)
+    if checked_status == '1'
+      '☑︎'
+    else
+      '▢'
+    end
+  end
+
+  # リスクの見積り
+  def risk_estimation_level(risk_possibility, risk_seriousness)
+    possibility_point, _possibility_comment = risk_possibility(risk_possibility)
+    seriousness_point, _seriousness_comment = risk_seriousness(risk_seriousness)
+
+    if risk_possibility.nil? || risk_seriousness.nil?
+      ''
+    else
+      (possibility_point + seriousness_point)
+    end
+  end
+
+  # 重大性
+  def risk_seriousness_level(risk_possibility, risk_seriousness)
+    possibility_point, _possibility_comment = risk_possibility(risk_possibility)
+    seriousness_point, _seriousness_comment = risk_seriousness(risk_seriousness)
+
+    if risk_possibility.nil? || risk_seriousness.nil?
+      ''
+    else
+      (possibility_point + seriousness_point - 1)
+    end
+  end
+
+  # リスクの見積りコメント
+  def risk_estimation_comment(risk_possibility)
+    _possibility_point, possibility_comment = risk_possibility(risk_possibility)
+    possibility_comment
+  end
+
+  # リスクの重大性コメント
+  def risk_seriousness_comment(risk_seriousness)
+    _seriousness_point, seriousness_comment = risk_seriousness(risk_seriousness)
+    seriousness_comment
+  end
+
+  # n次下請のn算出
+  def subcontractor_num(worker_uuid, second_workers, third_workers, _forth_workers)
+    second_workers_uuid = []
+    third_workers_uuid = []
+    forth_workers_uuid = []
+
+    second_workers&.each do |second_worker|
+      second_workers_uuid.push(second_worker.uuid)
+    end
+
+    third_workers&.each do |third_worker|
+      third_workers_uuid.push(third_worker.uuid)
+    end
+
+    if second_workers_uuid.include?(worker_uuid)
+      '2'
+    elsif third_workers_uuid.include?(worker_uuid)
+      '3'
+    elsif forth_workers_uuid.include?(worker_uuid)
+      '4'
+    else
+      ''
+    end
+  end
+
+  def safety_and_health_construction_policy_example
+    <<-"RUBY".strip_heredoc
+    例)当社及び作業所の安全衛生ルールを遵守。
+       特定した危険有害要因に対しての実施事項。
+       (除去・低減策)の実施。作業開始前、 作業中の安全状態の指差し確認。
+    RUBY
+  end
+
+  def safety_and_health_construction_objective_example
+    <<-"RUBY".strip_heredoc
+    例)墜落危険作業では安全帯を使用 (使用率 100%) する。
+       移動式クレーン災害ゼロの実現のため、移動式クレーンの旋回範囲への立入禁止、アウトリガーの張出し、適正な玉掛けを徹底する。
+       KY 活動における 「私たちはこうする」 を全員で遵守し、 不安全行動を排除する。
+    RUBY
+  end
+
+  def daily_safety_and_health_activity_example
+    <<-"RUBY".strip_heredoc
+    例)・安全ミーティング
+        ・KYK#{' '}
+        ・作業中の指揮・監督#{' '}
+        ・安全工程打合せ会#{' '}
+        ・終業時片付け#{' '}
+        ・作業終了報告#{' '}
+    RUBY
+  end
+
+  def risk_reduction_measures_example
+    <<-"RUBY".strip_heredoc
+    例)1 設置地盤に凸凹、傾斜等がある場合は、地盤を整地するか角材等により水平にする。
+         2 地耐力不足の場合は、地盤改良、敷き鉄板等で補強する。
+    RUBY
+  end
+
+  def wareki(date)
+    date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
+  end
+
+  private
+
+  # リスクの可能性
+  def risk_possibility(risk_possibility)
+    case risk_possibility
+    when 'low'
+      possibility_point = 1
+      possibility_comment = 'ほとんどない'
+    when 'middle'
+      possibility_point = 2
+      possibility_comment = '可能性がある'
+    when 'high'
+      possibility_point = 3
+      possibility_comment = '極めて高い'
+    else
+      possibility_point = 0
+      possibility_comment = ''
+    end
+    [possibility_point, possibility_comment]
+  end
+
+  # リスクの重大性
+  def risk_seriousness(risk_seriousness)
+    case risk_seriousness
+    when 'low'
+      seriousness_point = 1
+      seriousness_comment = '軽微'
+    when 'middle'
+      seriousness_point = 2
+      seriousness_comment = '重大'
+    when 'high'
+      seriousness_point = 3
+      seriousness_comment = '極めて重大'
+    else
+      seriousness_point = 0
+      seriousness_comment = ''
+    end
+    [seriousness_point, seriousness_comment]
+  end
+
+  # 下請発注情報詳細
+
+  # 自身の書類一覧取得
+  def current_user_documents(request_order)
+    case request_order.depth
+    when 0
+      @genecon_documents
+    when 1
+      @first_subcon_documents
+    when 2
+      @second_subcon_documents
+    else
+      @third_or_later_subcon_documents
+    end
+  end
+
+  # 自身の一つ下の階層の書類一覧取得
+  def current_lower_first_documents_type(request_order)
+    case request_order.depth
+    when 1
+      # 自身が元請けの場合：閲覧可能な一次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.current_lower_first_documents_type
+    when 2
+      # 自身が一次下請けの場合：閲覧可能な二次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
+    when 3, 4
+      # 自身が二次下請け以降の場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 自身の二つ下の階層の書類一覧取得
+  def current_lower_second_documents_type(request_order)
+    case request_order.depth
+    when 2
+      # 自身が元請けの場合：閲覧可能な二次下請け書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.first_lower_second_documents_type
+    when 3, 4
+      # 自身が一次下請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 自身の三つ下以降の階層の書類一覧取得
+  def current_lower_other_documents_type(request_order)
+    case request_order.depth
+    when 3, 4
+      # 自身が元請けの場合：閲覧可能な三次下請け以降の書類一覧
+      RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 書類一覧テーブルの色分け
+  def document_table_color(document)
+    case document.document_type_before_type_cast
+    when 3, 4, 5, 6, 7
+      'table-success'
+    when 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24
+      'table-warning'
+    when 17, 19, 20, 23
+      'table-primary'
+    when 18, 22
+      'bg-warning'
+    end
   end
 end

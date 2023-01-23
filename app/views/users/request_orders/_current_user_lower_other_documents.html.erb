@@ -1,0 +1,24 @@
+<table class="table table-sm table-hover text-nowrap">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>書類名</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_lower_other_documents_type(other_request_order).each do |other_document| %>
+      <tr>
+        <td class="<%= document_table_color(other_document) %>">
+          <%= other_document.document_type_before_type_cast %>
+        </td>
+        <td class="<%= document_table_color(other_document) %>">
+          <%= other_document.document_type_i18n %>
+        </td>
+        <td class="<%= document_table_color(other_document) %>">
+          <%= link_to 'PDF', users_request_order_sub_request_order_document_path(@request_order.uuid, other_request_order.uuid, other_document, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
