@@ -7,7 +7,7 @@ RSpec.xdescribe 'Machines', type: :system do # 「describe」を「xdescribe」�
   let(:machine) do
     create(:machine, name: '電動ドリル', standards_performance: 'sample_standards_performance',
     control_number: 'sample_control_number', inspector: 'sample_inspector', handler: 'sample_handler',
-    inspection_date: DateTime.now.yesterday, business: business, extra_inspection_item1: 'test', extra_inspection_item2: 'test')
+    business: business, extra_inspection_item1: 'test', extra_inspection_item2: 'test')
   end
 
   describe '機械関連' do
@@ -36,7 +36,6 @@ RSpec.xdescribe 'Machines', type: :system do # 「describe」を「xdescribe」�
         fill_in 'machine[control_number]', with: machine.control_number
         select 'サンプル取扱者', from: 'machine[handler]'
         select 'サンプル管理者', from: 'machine[inspector]'
-        fill_in 'machine[inspection_date]', with: machine.inspection_date
         fill_in 'machine[extra_inspection_item1]', with: machine.extra_inspection_item1
         fill_in 'machine[extra_inspection_item2]', with: machine.extra_inspection_item2
 

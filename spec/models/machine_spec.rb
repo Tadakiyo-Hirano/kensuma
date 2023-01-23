@@ -99,21 +99,4 @@ RSpec.describe Machine, type: :model do
       end
     end
   end
-
-  describe '#inspection_date' do
-    context '存在しない場合' do
-      before :each do
-        subject.inspection_date = nil
-      end
-
-      it 'バリデーションに落ちること' do
-        expect(subject).to be_invalid
-      end
-
-      it 'バリデーションエラーが正しいこと' do
-        subject.valid?
-        expect(subject.errors.full_messages).to include('点検年月日を入力してください')
-      end
-    end
-  end
 end

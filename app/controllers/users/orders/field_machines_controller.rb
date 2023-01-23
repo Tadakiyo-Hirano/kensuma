@@ -20,8 +20,8 @@ module Users::Orders
         flash[:success] = "#{params[:machine_ids].count}件追加しました。"
         redirect_to users_order_field_machines_url
       end
-    rescue ActiveRecord::RecordInvalid
-      flash[:danger] = '登録に失敗しました。再度登録してください。'
+    rescue ActiveRecord::RecordInvalid => e
+      flash[:danger] = e.record.errors.full_messages.to_sentence
       redirect_to users_order_field_machines_url
     end
 
@@ -59,7 +59,7 @@ module Users::Orders
     def field_machines_params
       params.require(:order).permit(
         field_machines: %i[
-          machine_name carry_on_date carry_out_date precautions
+          machine_name carry_on_date carry_out_date
         ]
       )[:field_machines]
     end
