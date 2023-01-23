@@ -3,9 +3,12 @@ class FieldMachine < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  before_validation(on: :create) do
+    errors[:base] << '現場機械情報は10件までしか登録できません' if field_machineable && field_machineable.field_machines.count >= 10
+  end
+
   validates :machine_name, presence: true
   validates :content, presence: true
-  validates :precautions, length: { maximum: 300 }
 
   def to_param
     uuid

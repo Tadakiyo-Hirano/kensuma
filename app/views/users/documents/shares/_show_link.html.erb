@@ -7,15 +7,16 @@
     <%#doc_20th'で下請けに依頼した書類は元請は編集できない%>
     <% else %>
       <%= link_to '編集',
-        (
-          controller.controller_path == 'users/documents' ?
-          edit_users_request_order_document_path(params[:request_order_uuid], document) :
-          edit_users_request_order_sub_request_order_document_path(params[:request_order_uuid], params[:sub_request_order_uuid], document)
-        ),
-        class: "btn btn-block btn-outline-dark"
-      %>
-    <% end %>
-    <%= link_to '書類一覧に戻る', users_request_order_documents_path, class: "btn btn-block btn-outline-secondary" %>
+          (
+            controller.controller_path == 'users/documents' ?
+            edit_users_request_order_document_path(params[:request_order_uuid], document) :
+            edit_users_request_order_sub_request_order_document_path(params[:request_order_uuid], params[:sub_request_order_uuid], document)
+          ),
+          class: "btn btn-block btn-success"
+        %>
+    <%# end %>
+    <%end%>
+    <%= link_to '書類一覧に戻る', users_request_order_path(params[:request_order_uuid]), class: "btn btn-block btn-outline-secondary" %>
     <%= link_to "PDF出力",
       (
         controller.controller_path == 'users/documents' ?

@@ -7,7 +7,6 @@ FactoryBot.define do
     sequence(:content) { |n| { "id": n + 1 } }
     carry_on_date { '2022-01-01' }
     carry_out_date { '2022-01-01' }
-    sequence(:precautions) { |n| "precautions#{n}" }
   end
 
   factory :request_order_field_machine, class: 'FieldMachine' do
@@ -18,6 +17,5 @@ FactoryBot.define do
     sequence(:content) { |n| { "id": n + 1 } }
     carry_on_date { '2022-01-01' }
     carry_out_date { '2022-01-01' }
-    sequence(:precautions) { |n| "precautions#{n}" }
   end
 end
