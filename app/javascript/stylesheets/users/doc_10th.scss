@@ -4,6 +4,7 @@
   margin: 0 auto;
   min-height: 100vh;
   display: grid;
+  align-items: center;
   grid-template:
     ".. .. .. .. .. .. .." 20px
     ".. .. c1 c1 c1 .. .."
@@ -33,6 +34,7 @@
 .submission_date {
   grid-area: c2;
   background-color: #ccffcc;
+  align-items: center;
 }
 .office_name {
   grid-area: c3;
@@ -78,5 +80,9 @@ td.green {
 }
 .office_name p, .chief_name p {
   border-bottom:1px solid;
+  margin: 0;
+}
+
+.submission_date p{
   margin: 0;
 }

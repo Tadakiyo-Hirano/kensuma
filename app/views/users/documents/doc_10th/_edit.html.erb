@@ -8,7 +8,7 @@
         <div class="container">
           <div class="title text-center"><h2>高齢者就労報告書</h2></div>
           <div class="submission_date text-center">
-            <p><span class="mt-3"><%= f.date_field name = 'content[date_submitted]', value:@document.content&.[]('date_submitted') %></span></p><!--「提出日(西暦)」10-001 -->
+            <p><span class="ml-3"><%= f.date_field name = 'content[date_submitted]', value:@document.content&.[]('date_submitted') %></span></p><!--「提出日(西暦)」10-001 -->
           </div>
           <div class="office_name">
             <p>　事業所の名称<span class="ml-3"><%= document_site_info.site_name %></span></p><!--「事業所名(現場名)」10-002 -->
@@ -20,7 +20,7 @@
             <p>一次会社名 <span class="ml-3"><%= document_site_info.business.name %></span></p><!--「一次会社名」10-004 -->
           </div>
           <div class="subcontractor">
-            <p>会社名(<%= sc_hierarchy(document_info) %>)<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
+            <p>会社名(<%= sc_hierarchy(document_info)[0,1] %>)次<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
           </div>
           <div class="representative">
             <p>代表者名<span class="ml-3"><%= Business.find(document_info.business_id).representative_name %></span></p><!--「代表者名」10-007 -->
@@ -50,11 +50,11 @@
                 <% j = 1 %>
                 <% document_info.field_workers.where(id: over_sixty_five).each do |field_worker| %>
                 <tr>
-                  <td><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
-                  <td><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
-                  <td><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
-                  <td><%= f.text_field name = "content[occupation_#{j.ordinalize}]", value: worker_str(field_worker, "occupation"), :placeholder => '例)職種' %></td><!--「職種」10-011 -->
-                  <td><%= f.text_field name = "content[work_notice_#{j.ordinalize}]", value:field_worker.content&.[]("work_notice"), :placeholder => '例)作業内容' %></td><!--「高年齢就労者・作業内容」10-012 -->
+                  <td class="gray"><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                  <td class="gray"><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                  <td class="gray"><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
+                  <td class="green"><%= f.text_field name = "content[occupation_#{j.ordinalize}]", value: worker_str(field_worker, "occupation"), :placeholder => '例)職種' %></td><!--「職種」10-011 -->
+                  <td class="green"><%= f.text_field name = "content[work_notice_#{j.ordinalize}]", value:field_worker.content&.[]("work_notice"), :placeholder => '例)作業内容' %></td><!--「高年齢就労者・作業内容」10-012 -->
                 </tr>
                 <% j += 1 %>
                 <% end %>
