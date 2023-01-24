@@ -20,7 +20,7 @@ module Users::SubRequestOrders
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_4th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
-          when 'doc_5th', 'doc_13th', 'doc_14th', 'doc_18th'
+          when 'doc_5th', 'doc_13rd', 'doc_14th', 'doc_18th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
           when 'doc_8th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 5 }, orientation: 'Landscape'

@@ -19,7 +19,7 @@ module Users
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_4th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
-          when 'doc_5th', 'doc_13th', 'doc_14th', 'doc_18th'
+          when 'doc_5th', 'doc_13rd', 'doc_14th', 'doc_18th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
           when 'doc_8th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
@@ -41,7 +41,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_13rd', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -140,8 +140,15 @@ module Users
       case document.document_type
       when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_16th', 'doc_17th'
         params.require(:document).permit(content: 
+          %i[
+            date_submitted
+          ]
+        )
+      when 'doc_13rd'
+        vehicle_ids = @document.request_order.field_special_vehicles.ids
+        params.require(:document).permit(content: 
           [
-            :date_submitted
+            date_submitted: [vehicle_ids.map{|vehicle_id|:"vehicle_#{vehicle_id}"}]
           ]
         )
       when 'doc_14th'
