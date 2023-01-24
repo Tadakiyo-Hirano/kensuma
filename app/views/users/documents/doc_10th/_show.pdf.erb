@@ -4,7 +4,7 @@
 
 <body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
   <% j = 0 %>
-  <% document_info.field_workers.where(id: over_sixty_five).each_slice(14).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14), i| %>
+  <% document_info.field_workers.where(id: age_border(65)).each_slice(14).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14), i| %>
   <div class="page-break">
   <div class="document-outer">
     <div id="tenth-document" class="document-inner">

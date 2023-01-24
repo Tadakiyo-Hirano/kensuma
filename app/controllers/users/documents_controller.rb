@@ -60,7 +60,12 @@ module Users
       
       when 'doc_10th'
         j = 1
-        focus_workers = document_info.field_workers.where(id: over_sixty_five)
+        case @document.document_type
+        when 'doc_10th'
+          focus_workers = document_info.field_workers.where(id: age_border(65))
+        when 'doc_11th'
+          focus_workers = document_info.field_workers.where(id: age_border(18))
+        end
         update_workers = []
         focus_workers.each do |focus_worker|
           focus_worker.content = focus_worker.content
