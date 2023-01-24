@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_01_063423) do
+ActiveRecord::Schema.define(version: 2023_01_19_081919) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
     t.json "content"
     t.bigint "business_id", null: false
     t.bigint "request_order_id", null: false
+    t.json "approval_content"
     t.index ["business_id"], name: "index_documents_on_business_id"
     t.index ["request_order_id"], name: "index_documents_on_request_order_id"
   end
@@ -246,7 +247,6 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
     t.json "content", null: false
     t.date "carry_on_date"
     t.date "carry_out_date"
-    t.text "precautions"
     t.string "field_machineable_type"
     t.bigint "field_machineable_id"
     t.datetime "created_at", precision: 6, null: false
@@ -381,7 +381,6 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
     t.string "control_number", null: false
     t.string "inspector", null: false
     t.string "handler", null: false
-    t.date "inspection_date", null: false
     t.string "inspection_check"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
