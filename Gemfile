@@ -88,6 +88,8 @@ gem 'kaminari'
 # form object
 gem 'dry-validation'
 gem 'reform'
+# 一括更新
+gem 'activerecord-import'
 
 group :development, :test do
   # ERD生成

@@ -3,7 +3,9 @@
 class ApplicationController < ActionController::Base
   add_flash_types :success, :info, :warning, :danger
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  include ApplicationHelper
+  include DocumentsHelper
+  
   rescue_from StandardError, with: :handle_server_error if Rails.env.production?
   rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found if Rails.env.production?
   rescue_from CanCan::AccessDenied do |_exception|

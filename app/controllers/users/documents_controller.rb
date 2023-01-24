@@ -31,19 +31,36 @@ module Users
     end
 
     def edit
-      @error_msg_for_doc_19th = nil
+      case @document.document_type
+      when 'doc_14th'
+        @error_msg_for_doc_14th = nil
+      when 'doc_19th'
+        @error_msg_for_doc_19th = nil
+      end
     end
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
           flash[:danger] = '更新に失敗しました'
           render :edit
         end
-
+      when 'doc_14th'
+        @error_msg_for_doc_14th = @document.error_msg_for_doc_14th(document_params(@document))
+        if @error_msg_for_doc_14th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: "保存に成功しました"
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          flash[:danger] = @error_msg_for_doc_14th.first
+          render action: :edit
+        end
       when 'doc_19th'
         @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
         if @error_msg_for_doc_19th.blank?
@@ -56,6 +73,33 @@ module Users
         else
           flash[:danger] = '保存に失敗しました'
           render action: :edit
+        end
+
+      when 'doc_10th', 'doc_11th' #現場作業員データも更新
+        j = 1
+        case @document.document_type
+        when 'doc_10th'
+          focus_workers = document_info.field_workers.where(id: age_border(65))
+        when 'doc_11th'
+          focus_workers = document_info.field_workers.where(id: age_border(18))
+        end
+        update_workers = []
+        focus_workers.each do |focus_worker|
+          focus_worker.content = focus_worker.content
+          focus_worker.content["occupation"] = params[:document][:content]["occupation_#{j.ordinalize}".to_sym]
+          focus_worker.content["work_notice"] = params[:document][:content]["work_notice_#{j.ordinalize}".to_sym]
+          update_workers.push(focus_worker)
+          j += 1
+        end
+        FieldWorker.import update_workers, on_duplicate_key_update: [:content]
+
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+          flash[:danger] = '更新に失敗しました'
+          render :edit
         end
       end
     end
@@ -121,13 +165,32 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
-        params.require(:document).permit(content: 
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
+        params.require(:document).permit(content:
           [
             :date_submitted
           ]
         )
-
+      when 'doc_14th'
+        params.require(:document).permit(content:
+        %i[
+            date_submitted
+            reception_number1
+            reception_number2
+            reception_number3
+            reception_number4
+            reception_number5
+            reception_number6
+            reception_number7
+            reception_number8
+            reception_number9
+            reception_number10
+            precautions
+            prime_contractor_confirmation
+            reception_confirmation_date
+            inspection_date
+          ]
+        )
       when 'doc_19th'
         params.require(:document).permit(content:
           %i[
