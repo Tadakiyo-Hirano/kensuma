@@ -875,7 +875,7 @@ module DocumentsHelper
     [seriousness_point, seriousness_comment]
   end
 
-  # 下請発注情報詳細
+  # 下請発注情報詳細画面
 
   # 自身の書類一覧取得
   def current_user_documents(request_order)
@@ -924,6 +924,18 @@ module DocumentsHelper
     when 3, 4
       # 自身が元請けの場合：閲覧可能な三次下請け以降の書類一覧
       RequestOrder.find_by(uuid: request_order.uuid).documents.lower_other_documents_type
+    end
+  end
+
+  # 元請けが下請け書類に記入が必要な場合の下請けshow画面へのリンク表示
+  def lower_show_link(request_order_uuid, hierarchy_request_order_uuid, hierarchy_document)
+    url = users_request_order_sub_request_order_document_path(request_order_uuid, hierarchy_request_order_uuid, hierarchy_document)
+
+    if @request_order.order.business_id == @current_business.id
+      case hierarchy_document.document_type
+      when 'doc_16th'
+        link_to '火気使用許可欄 記入', url
+      end
     end
   end
 
