@@ -16,6 +16,7 @@ module App
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.i18n.default_locale = :ja
+    config.i18n.fallbacks = %i[ja en]
     config.time_zone = 'Asia/Tokyo'
     config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
 

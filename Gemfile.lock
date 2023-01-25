@@ -64,6 +64,8 @@ GEM
     activerecord (6.1.4.4)
       activemodel (= 6.1.4.4)
       activesupport (= 6.1.4.4)
+    activerecord-import (1.4.1)
+      activerecord (>= 4.2)
     activestorage (6.1.4.4)
       actionpack (= 6.1.4.4)
       activejob (= 6.1.4.4)
@@ -508,6 +510,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   activeadmin_addons
+  activerecord-import
   aws-sdk-rails
   bootsnap (>= 1.9.3)
   byebug
