@@ -200,8 +200,8 @@
                 <td class="doc_13_s2"></td>
                 <td class="doc_13_s2"></td>
                 <td class="doc_13_s10" dir="ltr" colspan="8">
-                <%= f.date_field name = "content[date_submitted][vehicle_#{field_special_vehicle.id}]",
-                                    value: doc_content_date(@document.content&.[]("date_submitted")),
+                <%= f.date_field name = "content[date_submitted][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    value: doc_content_date(@document.content&.[]("date_submitted")["field_special_vehicle_#{field_special_vehicle.id}"]),
                                     class: 'form-control form-control-sm'
                 %> <!-- 13-001 提出日（西暦) -->
                 </td>

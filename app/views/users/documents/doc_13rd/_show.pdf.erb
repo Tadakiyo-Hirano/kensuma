@@ -193,7 +193,9 @@
             <td class="s2"></td>
             <td class="s2"></td>
             <td class="s2"></td>
-            <td class="s10" dir="ltr" colspan="8">「提出日（西暦）」13-001</td>
+            <td class="s10" dir="ltr" colspan="8">
+              <%= doc_content_date(@document.content&.[]("date_submitted")["field_special_vehicle_#{field_special_vehicle.id}"]) %> <!-- 提出日(西暦) 13-001 -->
+            </td>
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s5"></td>

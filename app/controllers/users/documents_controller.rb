@@ -145,10 +145,48 @@ module Users
           ]
         )
       when 'doc_13rd'
-        vehicle_ids = @document.request_order.field_special_vehicles.ids
+        field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
+        field_special_vehicle_keys = field_special_vehicle_ids.map{|field_special_vehicle_id|"field_special_vehicle_#{field_special_vehicle_id}"}
+
         params.require(:document).permit(content: 
           [
-            date_submitted: [vehicle_ids.map{|vehicle_id|:"vehicle_#{vehicle_id}"}]
+            date_submitted: field_special_vehicle_keys
+            a_safety_over_winding_prevention_a: field_special_vehicle_keys # Aクレーン部 安全装置 巻過防止装置 13-111
+            # Aクレーン部 安全装置 過負荷防止装置 13-112
+            # Aクレーン部 安全装置 フックのはずれ止め 13-113
+            # Aクレーン部 安全装置 起伏装置制御 13-114
+            # Aクレーン部 安全装置 旋回警報装置 13-115
+            # Aクレーン部 制御装置･作業装置 主巻･補巻 13-116
+            # Aクレーン部 制御装置･作業装置 起伏･旋回 13-117
+            # Aクレーン部 制御装置･作業装置 クラッチ 13-118
+            # Aクレーン部 制御装置･作業装置 ブレーキ･ロック 13-119
+            # Aクレーン部 制御装置･作業装置 ジブ 13-120
+            # Aクレーン部 制御装置･作業装置 滑車 13-121
+            # Aクレーン部 制御装置･作業装置 フック･バケット 13-122
+            # Aクレーン部 制御装置･作業装置 ワイヤロープ･チェーン 13-123
+            # Aクレーン部 制御装置･作業装置 玉掛用具 13-124
+            # Aクレーン部 その他 操作装置 13-125
+            # Aクレーン部 その他 性能表示 13-126
+            # Aクレーン部 その他 照明 13-127
+            # B車両部 走行部 ブレーキ 13-128
+            # B車両部 走行部 クラッチ 13-129
+            # B車両部 走行部 ハンドル 13-130
+            # B車両部 走行部 タイヤ 13-131
+            # B車両部 走行部 クローラ 13-132
+            # B車両部 安全装置等 警報装置 13-133
+            # B車両部 安全装置等 各種ミラー 13-134
+            # B車両部 安全装置等 方向指示器 13-135
+            # B車両部 安全装置等 前後照灯 13-136
+            # B車両部 安全装置等 左折プロテクター 13-137
+            # B車両部 安全装置等 アウトリガー 13-138
+            # B車両部 安全装置等 昇降装置 13-139
+            # B車両部 安全装置等 ベッセル 13-140
+            # B車両部 安全装置等 後方監視装置 13-141
+            # Cゴンドラ 突りょう 13-142
+            # Cゴンドラ 作業床 13-143
+            # Cゴンドラ 昇降装置 13-144
+            # Cゴンドラ 電気装置 13-145
+            # Cゴンドラ ワイヤ･ライフライン 13-146
           ]
         )
       when 'doc_14th'
