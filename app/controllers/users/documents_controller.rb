@@ -6,6 +6,7 @@ module Users
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
     before_action :set_workers1, only: %i[edit update] # 作業員の名前を取得する
+    before_action :set_workers, only: %i[show edit] # 下請け情報を取得する
 
     def index; end
 
@@ -33,6 +34,7 @@ module Users
 
     def edit
       @error_msg_for_doc_19th = nil
+      @error_msg_for_doc_20th = nil
     end
 
     def update
@@ -218,6 +220,18 @@ module Users
         )
       end
     end
+
+    #協力会社名と人数の取得
+    #def set_subcontractor
+      #request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+      #request_order_list = RequestOrder.where(order_id: request_order.id)
+      #subcontractor_array = []
+      #request_order_list.each do |record|
+          #subcontractor_array << record.business_id
+        #end
+      #@subcontractor_id1 = subcontractor_array[0] if subcontractor_array[0].present?
+      #@subcontractor_id2 = subcontractor_array[1] if subcontractor_array[1].present?
+    #end
 
     def set_workers
       case current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid]).document_type

@@ -580,6 +580,45 @@ module DocumentsHelper
     date.blank? ? '' : l(date.to_date, format: :long)
   end
 
+  # (22)作業間連絡調整書
+
+  #下請会社(協力会社)のbusiness_idの取得
+  def subcontractor_business_id(number)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
+    subcontractor_array = []
+    request_order_list.each do |record|
+      subcontractor_array << record.business_id
+    end
+    subcontractor_array.slice(number) if subcontractor_array[number].present?
+  end
+
+  #会社名の取得
+  def business_name(id)
+    Business.find(id).name if id.present?
+  end
+
+  #下請会社(協力会社)のidの取得
+  def subcontractor_id(number)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
+    subcontractor_array = []
+    request_order_list.each do |record|
+      subcontractor_array << record.id
+    end
+    subcontractor_array.slice(number) if subcontractor_array[number].present?
+  end
+
+  #入場作業員の取得
+  def number_of_field_workers_of_subcontractor(id)
+    number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).size
+    if number_of_workers == 0
+      return nil
+    else
+      return number_of_workers
+    end
+  end
+
   # チェックボックスにチェックが入っているかを判別
   def box_checked?(checked_status)
     return true if checked_status == '1'

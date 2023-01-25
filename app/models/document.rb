@@ -843,7 +843,7 @@ class Document < ApplicationRecord
     error_msg_for_doc_20th
   end
 
-  #現場作業員の人数の取得
+  #現場作業員の人数の取得(doc_20th)
   def number_of_field_workers(order)
     #元請の作業員の人数
     prime_contractor = FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: order.id)
