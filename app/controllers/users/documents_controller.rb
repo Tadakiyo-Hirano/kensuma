@@ -74,6 +74,33 @@ module Users
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
+      
+      when 'doc_10th'
+        j = 1
+        case @document.document_type
+        when 'doc_10th'
+          focus_workers = document_info.field_workers.where(id: age_border(65))
+        when 'doc_11th'
+          focus_workers = document_info.field_workers.where(id: age_border(18))
+        end
+        update_workers = []
+        focus_workers.each do |focus_worker|
+          focus_worker.content = focus_worker.content
+          focus_worker.content["occupation"] = params[:document][:content]["occupation_#{j.ordinalize}".to_sym]
+          focus_worker.content["work_notice"] = params[:document][:content]["work_notice_#{j.ordinalize}".to_sym]
+          update_workers.push(focus_worker)
+          j += 1
+        end
+        FieldWorker.import update_workers, on_duplicate_key_update: [:content]
+
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
       end
     end
 
@@ -138,7 +165,7 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_16th', 'doc_17th'
         params.require(:document).permit(content: 
           [
             :date_submitted
