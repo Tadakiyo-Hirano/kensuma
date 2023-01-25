@@ -1,5 +1,6 @@
 <!-- (24)参考資料第4号(新規入場者調査票) -->
 <%= form_with(model: @document, url: users_request_order_document_path, local: true, method: :patch) do |f| %>
+  <% j = 1 %>
   <% document_info.field_workers.each do |field_worker| %>
     <div class="ritz grid-container" dir="ltr">
       <table class="waffle" cellspacing="0" cellpadding="0">
@@ -100,7 +101,7 @@
             <td class="doc_24_s1"></td>
             <td class="doc_24_s7"></td>
             <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-            <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= f.text_field name = "content[prime_contractor_confirmation]", value: document_info.content&.[]('prime_contractor_confirmation'), :placeholder => '例)元請会社の確認者' %></td> <!-- 「元請会社の確認欄」24-002 -->
+            <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= f.text_field name = "content[prime_contractor_confirmation_#{j.ordinalize}]", value: worker_str(field_worker, "prime_contractor_confirmation"), :placeholder => '例)元請会社の確認者' %></td> <!-- 「元請会社の確認欄」24-002 -->
             <td class="doc_24_s3"></td>
             <td class="doc_24_s3"></td>
           </tr>
@@ -783,6 +784,7 @@
         </tbody>
       </table>
     </div>
+  <<% j += 1 %>
   <% end %>
   <div style="text-align: center">
     <%= f.submit %>

@@ -36,7 +36,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th', 'doc_24th'
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -56,6 +56,25 @@ module Users
         else
           flash[:danger] = '保存に失敗しました'
           render action: :edit
+        end
+      
+      when 'doc_24th'
+        j = 1
+        
+        focus_workers = document_info.field_workers
+        update_workers = []
+        focus_workers.each do |focus_worker|
+          focus_worker.content = focus_worker.content
+          focus_worker.content["prime_contractor_confirmation"] = params[:document][:content]["prime_contractor_confirmation_#{j.ordinalize}".to_sym]
+          update_workers.push(focus_worker)
+          j += 1
+        end
+        
+        if FieldWorker.import update_workers, on_duplicate_key_update: [:content]
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
         end
       end
     end
