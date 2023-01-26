@@ -76,8 +76,8 @@ module Users
         end
       when 'doc_21st'
         # date_selectのデータ取得形式に合わせるため年月を結合
-        params[:document][:content][:start_term] = start_term_join
-        params[:document][:content][:end_term] = end_term_join
+        params[:document][:content][:start_time] = start_time_join
+        params[:document][:content][:end_time] = end_time_join
         # 現場人数取得のバリデーションのため
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
@@ -148,27 +148,27 @@ module Users
     end
 
     # 始期パラメータを再セット
-    def start_term_join
-      if params[:document][:content][:start_term]['(4i)'].present? && params[:document][:content][:start_term]['(5i)'].present?
+    def start_time_join
+      if params[:document][:content][:start_time]['(4i)'].present? && params[:document][:content][:start_time]['(5i)'].present?
         Time.new(
-          params[:document][:content][:start_term]['(1i)'].to_i,
-          params[:document][:content][:start_term]['(2i)'].to_i,
-          params[:document][:content][:start_term]['(3i)'].to_i,
-          params[:document][:content][:start_term]['(4i)'].to_i,
-          params[:document][:content][:start_term]['(5i)'].to_i
+          params[:document][:content][:start_time]['(1i)'].to_i,
+          params[:document][:content][:start_time]['(2i)'].to_i,
+          params[:document][:content][:start_time]['(3i)'].to_i,
+          params[:document][:content][:start_time]['(4i)'].to_i,
+          params[:document][:content][:start_time]['(5i)'].to_i
         )
       end
     end
 
     # 終期パラメータを再セット
-    def end_term_join
-      if params[:document][:content][:end_term]['(4i)'].present? && params[:document][:content][:end_term]['(5i)'].present?
+    def end_time_join
+      if params[:document][:content][:end_time]['(4i)'].present? && params[:document][:content][:end_time]['(5i)'].present?
         Time.new(
-          params[:document][:content][:end_term]['(1i)'].to_i,
-          params[:document][:content][:end_term]['(2i)'].to_i,
-          params[:document][:content][:end_term]['(3i)'].to_i,
-          params[:document][:content][:end_term]['(4i)'].to_i,
-          params[:document][:content][:end_term]['(5i)'].to_i
+          params[:document][:content][:end_time]['(1i)'].to_i,
+          params[:document][:content][:end_time]['(2i)'].to_i,
+          params[:document][:content][:end_time]['(3i)'].to_i,
+          params[:document][:content][:end_time]['(4i)'].to_i,
+          params[:document][:content][:end_time]['(5i)'].to_i
         )
       end
     end

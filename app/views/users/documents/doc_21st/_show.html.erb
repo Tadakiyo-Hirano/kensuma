@@ -513,11 +513,11 @@
               </td>
               <td class="doc_21_m14"></td>
               <td class="doc_21_m17" dir="ltr" colspan="4">
-                <%= @document.content&.[]("start_term") %> <!--21-010 実施時間（始時間） -->
+                <%= @document.content&.[]("start_time")&.to_date %> <!--21-010 実施時間（始時間） -->
               </td>
               <td class="doc_21_m18" dir="ltr" colspan="2">～</td>
               <td class="doc_21_m17" dir="ltr" colspan="4">
-                <%= @document.content&.[]("end_term").to_date %> <!--21-011 実施時間（終時間） -->
+                <%= @document.content&.[]("end_time")&.to_date %> <!--21-011 実施時間（終時間） -->
               </td>
               <td class="doc_21_m14"></td>
               <td class="doc_21_m14" dir="ltr">（</td>
