@@ -74,6 +74,17 @@ module Users
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
+      when 'doc_21st'
+        # date_selectのデータ取得形式に合わせるため年月を結合
+        params[:document][:content][:start_term] = start_term_join
+        params[:document][:content][:end_term] = end_term_join
+        # 現場人数取得のバリデーションのため
+        if @document.update(document_params(@document))
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
       end
     end
 
@@ -133,6 +144,32 @@ module Users
         end
         merge_workers = workers&.map { |sub_worker| { sub_worker&.name => sub_worker&.uuid } }
         @workers_name_uuid = {}.merge(*merge_workers)
+      end
+    end
+
+    # 始期パラメータを再セット
+    def start_term_join
+      if params[:document][:content][:start_term]['(4i)'].present? && params[:document][:content][:start_term]['(5i)'].present?
+        Time.new(
+          params[:document][:content][:start_term]['(1i)'].to_i,
+          params[:document][:content][:start_term]['(2i)'].to_i,
+          params[:document][:content][:start_term]['(3i)'].to_i,
+          params[:document][:content][:start_term]['(4i)'].to_i,
+          params[:document][:content][:start_term]['(5i)'].to_i
+        )
+      end
+    end
+
+    # 終期パラメータを再セット
+    def end_term_join
+      if params[:document][:content][:end_term]['(4i)'].present? && params[:document][:content][:end_term]['(5i)'].present?
+        Time.new(
+          params[:document][:content][:end_term]['(1i)'].to_i,
+          params[:document][:content][:end_term]['(2i)'].to_i,
+          params[:document][:content][:end_term]['(3i)'].to_i,
+          params[:document][:content][:end_term]['(4i)'].to_i,
+          params[:document][:content][:end_term]['(5i)'].to_i
+        )
       end
     end
 
@@ -311,6 +348,24 @@ module Users
             risk_seriousness_8th
           ]
                                         )
+      when 'doc_21st'
+        params.require(:document).permit(content:
+          %i[
+            prime_contractor_confirmation
+            date_submitted
+            type_of_education
+            date_implemented
+            start_term
+            end_term
+            location
+            education_method
+            education_content
+            teachers_company
+            teacher_name
+            student_name
+            material
+          ]
+        )
       end
     end
   end

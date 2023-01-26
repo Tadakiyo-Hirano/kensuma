@@ -30,15 +30,17 @@
               <td class="doc_21_m0"></td>
               <td class="doc_21_m1"></td>
               <td class="doc_21_m33" dir="ltr" colspan="3">元 請</td>
-              <td class="doc_21_m32" dir="ltr" colspan="9" rowspan="2"><span
-                  style="text-decoration:underline;-webkit-text-decoration-skip:none;text-decoration-skip-ink:none;color:#1155cc;"><a
-                    target="_blank" href="#rangeid=1241118775">「元請会社の確認欄」21-001</a></span>]</td>
+              <td class="doc_21_m32" dir="ltr" colspan="9" rowspan="2">
+                <%= @document.content&.[]("prime_contractor_confirmation") %> <!-- 21-001 元請会社の確認欄 -->
+              </td>
             </tr>
             <tr style="height: 29px">
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
-              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0">
+                <font color="red">※ 緑枠は入力項目です。必要あれば入力してください。</font>
+              </td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
@@ -96,7 +98,8 @@
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
-              <td class="doc_21_m4" dir="ltr" colspan="12"><a target="_blank" href="#rangeid=190326484">「提出日（西暦）」21-002</a>
+              <td class="doc_21_m4" dir="ltr" colspan="12">
+                <%= @document.content&.[]("date_submitted") %> <!-- 21-002 提出日 -->
               </td>
             </tr>
             <tr style="height: 29px">
@@ -147,8 +150,9 @@
             </tr>
             <tr style="height: 29px">
               <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">作業所名</td>
-              <td class="doc_21_m7" dir="ltr" colspan="15" rowspan="2"><a target="_blank"
-                  href="#rangeid=1809808903">「事業所名（現場名）」21-003</a></td>
+              <td class="doc_21_m7" dir="ltr" colspan="15" rowspan="2">
+                <%= document_site_info.site_name %> <!-- 21-003 「事業所名（現場名）」-->
+              </td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
@@ -239,8 +243,9 @@
             </tr>
             <tr style="height: 29px">
               <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">作業所長</td>
-              <td class="doc_21_m8" dir="ltr" colspan="13" rowspan="2"><a target="_blank"
-                  href="#rangeid=970017223">「各会社の現場代理人名」21-004</a></td>
+              <td class="doc_21_m8" dir="ltr" colspan="13" rowspan="2">
+                <%= document_site_info.site_agent_name %> <!-- 21-004 「各会社の現場代理人名」-->
+              </td>
               <td class="doc_21_m9" dir="ltr" colspan="2" rowspan="2">殿</td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
@@ -311,8 +316,8 @@
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">会社名</td>
-              <td class="doc_21_m10" dir="ltr" colspan="14" rowspan="2"><a target="_blank"
-                  href="#rangeid=1158715211">「会社名」21-005</a>
+              <td class="doc_21_m10" dir="ltr" colspan="14" rowspan="2">
+                  <%= document_info.business.name %> <!-- 21-005 自社の会社名 -->
               </td>
             </tr>
             <tr style="height: 29px">
@@ -406,8 +411,9 @@
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0"></td>
               <td class="doc_21_m0" dir="ltr" colspan="5">現場代理人</td>
-              <td class="doc_21_m8" dir="ltr" colspan="12" rowspan="2"><a target="_blank"
-                  href="#rangeid=970017223">「各会社の現場代理人名」21-006</a></td>
+              <td class="doc_21_m8" dir="ltr" colspan="12" rowspan="2">
+                <%= document_info.site_agent_name %> <!-- 21-006 「各会社の現場代理人名」-->
+              </td>
               <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2"><a target="_blank"
                   href="#rangeid=88565281">㊞<br>21-007</a>
               </td>
@@ -502,83 +508,103 @@
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m29" dir="ltr" colspan="7">実 施 日 時</td>
-              <td class="doc_21_m7" dir="ltr" colspan="13"><a target="_blank" href="#rangeid=1778842844">「実施日付」21-009</a></td>
+              <td class="doc_21_m34" dir="ltr" colspan="13">
+                <%= @document.content&.[]("date_implemented") %> <!-- 21-009 実施日付 -->
+              </td>
               <td class="doc_21_m14"></td>
-              <td class="doc_21_m17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=979063930">「実施時間（始時間）」21-010</a>
+              <td class="doc_21_m17" dir="ltr" colspan="4">
+                <%= @document.content&.[]("start_term") %> <!--21-010 実施時間（始時間） -->
               </td>
               <td class="doc_21_m18" dir="ltr" colspan="2">～</td>
-              <td class="doc_21_m17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=256131863">「実施時間（終時間）」21-011</a>
+              <td class="doc_21_m17" dir="ltr" colspan="4">
+                <%= @document.content&.[]("end_term").to_date %> <!--21-011 実施時間（終時間） -->
               </td>
               <td class="doc_21_m14"></td>
               <td class="doc_21_m14" dir="ltr">（</td>
-              <td class="doc_21_m17" dir="ltr" colspan="4">「実施時間（時間）」21-012</td>
+              <td class="doc_21_m17" dir="ltr" colspan="4">「実施時間（時間）」21-012</td> <!-- 未実装 -->
               <td class="doc_21_m14" dir="ltr" colspan="3">時間）</td>
               <td class="doc_21_m19"></td>
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m29" dir="ltr" colspan="7">実 施 場 所</td>
-              <td class="doc_21_m20" dir="ltr" colspan="34"><a target="_blank" href="#rangeid=1941892092">「実施場所」21-013</a></td>
+              <td class="doc_21_m20" dir="ltr" colspan="34">
+                <%= @document.content&.[]("location") %> <!--21-013 実施場所 -->
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m29" dir="ltr" colspan="7">教 育 方 法</td>
-              <td class="doc_21_m20" dir="ltr" colspan="34"><a target="_blank" href="#rangeid=1039272956">「教育方法」21-014</a></td>
+              <td class="doc_21_m20" dir="ltr" colspan="34">
+                <%= @document.content&.[]("education_method") %> <!--21-014 教育方法 -->
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
-              <td class="doc_21_m21" dir="ltr" colspan="34"><a target="_blank" href="#rangeid=696626027">「教育内容」21-015</a></td>
+              <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
+                <%= @document.content&.[]("education_content") %> <!--21-015 教育内容 -->
+              </td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m22" colspan="34"></td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m22" colspan="34"></td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m22" colspan="34"></td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m23" colspan="34"></td>
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m29" dir="ltr" colspan="7">講　　　師</td>
-              <td class="doc_21_m20" dir="ltr" colspan="17"><a target="_blank" href="#rangeid=416383118">「会社名」21-016</a></td>
-              <td class="doc_21_m20" dir="ltr" colspan="17"><a target="_blank" href="#rangeid=6040054">「講師名」21-017</a></td>
+              <td class="doc_21_m20" dir="ltr" colspan="17">
+                <%= @document.content&.[]("teachers_company") %> <!--21-016 講師の会社名 -->
+              <td class="doc_21_m20" dir="ltr" colspan="17">
+                <%= @document.content&.[]("teacher_name") %> <!--21-017 講師名 -->
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m30" dir="ltr" colspan="7" rowspan="3">受講者氏名</td>
-              <td class="doc_21_m25" dir="ltr" colspan="17"><a target="_blank" href="#rangeid=1353851405">「受講者名」21-018</a></td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+                <%= @document.content&.[]("student_name") %> <!--21-018 受講者名　※each未実装 -->
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m31" dir="ltr" colspan="7">（受講者に氏名を自筆させること）</td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m29" colspan="7" rowspan="3"></td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
             </tr>
             <tr style="height: 44px">
-              <td class="doc_21_m27" dir="ltr" colspan="17">〃</td>
-              <td class="doc_21_m27" dir="ltr" colspan="17">〃</td>
+              <td class="doc_21_m27" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m27" dir="ltr" colspan="17">
+              </td>
             </tr>
             <tr style="height: 44px">
               <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
-              <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2"><a target="_blank"
-                  href="#rangeid=105862983">「資料」21-019</a>
+              <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
+                <%= @document.content&.[]("material") %> <!--21-019 資料 -->
               </td>
             </tr>
             <tr style="height: 44px">

@@ -594,6 +594,7 @@ module DocumentsHelper
   end
 
   def wareki(date)
+    # binding.pry
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 
