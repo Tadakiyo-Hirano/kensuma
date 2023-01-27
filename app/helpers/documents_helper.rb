@@ -594,11 +594,10 @@ module DocumentsHelper
   end
 
   def wareki(date)
-    # binding.pry
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 
-  # 持込機械の機械名情報（持込時の点検表）
+  # (14) 持込機械の機械名情報（持込時の点検表）
   def machine_tag_1st(machine)
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
@@ -834,6 +833,13 @@ module DocumentsHelper
     else
       doc_date.blank? ? '年　月　日' : l(doc_date.to_date, format: :long)
     end
+  end
+
+  # (21) 新規入場時等教育実施報告書
+
+  # 受講者氏名の文字情報　（編集ページで入力、documentsに保存）
+  def doc_21st_str(doc_str)
+    doc_str.blank? ? '' : doc_str
   end
 
   private

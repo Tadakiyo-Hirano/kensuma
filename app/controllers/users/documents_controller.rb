@@ -350,20 +350,20 @@ module Users
                                         )
       when 'doc_21st'
         params.require(:document).permit(content:
-          %i[
-            prime_contractor_confirmation
-            date_submitted
-            type_of_education
-            date_implemented
-            start_term
-            end_term
-            location
-            education_method
-            education_content
-            teachers_company
-            teacher_name
-            student_name
-            material
+          [
+            :prime_contractor_confirmation,
+            :date_submitted,
+            :type_of_education,
+            :date_implemented,
+            :start_time,
+            :end_time,
+            :location,
+            :education_method,
+            :education_content,
+            :teachers_company,
+            :teacher_name,
+            :material,
+            { student_name: [] }
           ]
         )
       end
