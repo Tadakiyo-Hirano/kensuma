@@ -588,7 +588,7 @@
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
                 <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
-                  <%= f.text_field name = "content[education_content]",
+                  <%= f.text_area name = "content[education_content]",
                     value: @document.content&.[]("education_content"),
                     class: 'form-control', placeholder: "例）1. 作業所の概要と規則について"
                   %> <!-- 21-015 教育内容 -->
@@ -644,10 +644,14 @@
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
                 <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
-                  <%= f.text_field name = "content[material]",
+                  <%= f.text_area name = "content[material]",
                     value: @document.content&.[]("material"),
                     class: 'form-control', placeholder: "入力してください"
                   %> <!-- 21-019 資料 -->
+                  <%# <%= f.text_area name = "content[education_content]",
+                    value: @document.content&.[]("education_content"),
+                    class: 'form-control', placeholder: "例）1. 作業所の概要と規則について"
+                  %> <!-- 21-015 教育内容 --> %>
                 </td>
               </tr>
               <tr style="height: 44px">

@@ -542,7 +542,7 @@
                 <tr style="height: 44px">
                   <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
                   <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
-                    <%= @document.content&.[]("education_content") %> <!--21-015 教育内容 -->
+                    <%= safe_join(@document.content&.[]('education_content').split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
                   </td>
                 </tr>
                 <tr style="height: 44px">
@@ -622,7 +622,7 @@
                 <tr style="height: 44px">
                   <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
                   <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
-                    <%= @document.content&.[]("material") %> <!--21-019 資料 -->
+                    <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
                   </td>
                 </tr>
                 <tr style="height: 44px">
@@ -1185,7 +1185,7 @@
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
                 <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
-                  <%= @document.content&.[]("education_content") %> <!--21-015 教育内容 -->
+                  <%= safe_join(@document.content&.[]('education_content').split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
                 </td>
               </tr>
               <tr style="height: 44px">
@@ -1251,7 +1251,7 @@
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
                 <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
-                  <%= @document.content&.[]("material") %> <!--21-019 資料 -->
+                  <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
                 </td>
               </tr>
               <tr style="height: 44px">
