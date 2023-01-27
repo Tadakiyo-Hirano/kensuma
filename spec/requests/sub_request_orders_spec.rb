@@ -14,7 +14,7 @@ RSpec.describe 'SubRequestOrders', type: :request do
   describe 'GET/new' do
     let!(:request_order) { create(:request_order, business: business, order: order, status: 'approved') }
 
-    before do
+    before(:each) do
       sign_in user
       get new_users_request_order_sub_request_order_path(request_order)
     end
@@ -27,7 +27,7 @@ RSpec.describe 'SubRequestOrders', type: :request do
   describe 'Post/create' do
     let!(:request_order) { create(:request_order, business: business, order: order, status: 'approved') }
 
-    before do
+    before(:each) do
       sign_in user
       post users_request_order_sub_request_orders_path(request_order)
     end

@@ -14,9 +14,10 @@ RSpec.describe 'Documents', type: :request do
 
   describe 'GET/edit' do
     subject { doc_19th }
+
     let!(:request_order) { create(:request_order, business: business, order: order, status: 'approved') }
 
-    before do
+    before(:each) do
       sign_in user
       get edit_users_request_order_document_path(request_order, subject)
     end
@@ -28,9 +29,10 @@ RSpec.describe 'Documents', type: :request do
 
   describe 'PATCH/update' do
     subject { doc_19th }
+
     let!(:request_order) { create(:request_order, business: business, order: order, status: 'approved') }
 
-    before do
+    before(:each) do
       sign_in user
       patch users_request_order_document_path(request_order, subject)
     end
