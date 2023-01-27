@@ -5,7 +5,6 @@ module Users
     before_action :set_documents # サイドバーに常時表示させるために必要
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
-    before_action :set_workers, only: %i[show edit update]
     before_action :edit_restriction_after_approved, only: %i[edit update]
 
     def index; end
