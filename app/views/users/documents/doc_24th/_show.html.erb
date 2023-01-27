@@ -99,7 +99,6 @@
           <td class="doc_24_s1"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-          <%# logger.debug("infoは#{document_info.content}") %>
           <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= field_worker.content&.[]("prime_contractor_confirmation") %></td> <!-- 「元請会社の確認欄」24-002 -->
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -178,7 +177,9 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s8" dir="ltr" colspan="2">ふりがな</td>
+          <td class="doc_24_s25 softmerge" colspan="2">
+            <div class="doc_24_softmerge-inner">ふりがな</div>
+          </td>
           <td class="doc_24_s15" dir="ltr" colspan="6"><%= field_worker.content["name_kana"] %></td> <!-- 「フリガナ」24-004 -->
           <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">生年月日</td>
           <td class="doc_24_s16" dir="ltr" colspan="5" rowspan="3"><%= field_worker.content["birth_day_on"] %></td> <!-- 「生年月日 」24-006 -->
@@ -303,13 +304,10 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s8" dir="ltr" colspan="3">雇用契約書</td>
-          <td class="doc_24_s25 softmerge" dir="ltr">
-            <div class="softmerge-inner" style="width:74px;left:-1px">1. 取り交わし済み</div>
-          </td>
-          <td class="doc_24_s26" dir="ltr"></td>
+          <td class="doc_24_s26" dir="ltr" colspan="4">1. 取り交わし済</td>
           <td class="doc_24_s26" dir="ltr"></td>
           <td class="doc_24_s27" dir="ltr" colspan="2">2. 未 だ</td>
-          <td class="doc_24_s28" dir="ltr" colspan="5"><%= "※⇐24-018未実装※" %></td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
+          <td class="doc_24_s28" dir="ltr" colspan="3"><%#= "※⇐24-018未実装※" %></td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
           <td class="doc_24_s17" dir="ltr" colspan="2">職 種：</td>
           <td class="doc_24_s29" dir="ltr" colspan="7"><%= "※24-019未実装※" %></td> <!-- 「職種」24-019 -->
           <td class="doc_24_s8" dir="ltr">工</td>
@@ -390,8 +388,8 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。【回答：全未実装】</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_special_education_yes(field_worker) %></td>
-          <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_special_education_no(field_worker) %></td>
+          <td class="doc_24_s27" dir="ltr" colspan="5">1. はい</td>
+          <td class="doc_24_s31" dir="ltr" colspan="5">2. いいえ</td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -452,14 +450,23 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s36" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
-          <td class="doc_24_s37" dir="ltr" colspan="8">
+          <td class="doc_24_s3" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
+          <td class="doc_24_s34" dir="ltr" colspan="8">
             <%= worker_skill_training(field_worker).include?("コ解") ? "■コンクリート造の工作物の解体等" : "▢コンクリート造の工作物の解体等" %>
           </td>
-          <td class="doc_24_s37" dir="ltr" colspan="5">
+          <td class="doc_24_s34" dir="ltr" colspan="5">
             <%= worker_skill_training(field_worker).include?("酸欠") ? "■酸素欠乏危険" : "▢酸素欠乏危険" %>
           </td>
-          <td class="doc_24_s38" dir="ltr" colspan="6"><%= worker_skill_training_work_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
+          <td class="doc_24_s38" dir="ltr" colspan="6" rowspan="2"><%= worker_skill_training_work_other(field_worker) %></td> <!-- ▢その他（　　　　　　　　） -->
+          <td class="doc_24_s3"></td>
+          <td class="doc_24_s3"></td>
+        </tr>
+        <tr style="height: 19px">
+          <td class="doc_24_s3"></td>
+          <td class="doc_24_s7"></td>
+          <td class="doc_24_s36" dir="ltr" colspan="4"></td>
+          <td class="doc_24_s37" dir="ltr" colspan="8"></td>
+          <td class="doc_24_s37" dir="ltr" colspan="6"></td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -491,7 +498,7 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="3"></td> <!-- 「技能講習」24-027 -->
+          <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="4"></td> <!-- 「技能講習」24-027 -->
           <td class="doc_24_s39" dir="ltr" colspan="9">
             <%= worker_skill_training(field_worker).include?("不整") ? "■1t以上の不整地運搬車" : "▢1t以上の不整地運搬車" %>
           </td>
@@ -516,10 +523,17 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s41" dir="ltr" colspan="9">
+          <td class="doc_24_s41" dir="ltr" colspan="9" rowspan="2">
             <%= worker_skill_training(field_worker).include?("床ク") ? "■その他（ 床ク ）" : "▢その他（　　　　　　　　　　）" %>
           </td>
-          <td class="doc_24_s42" dir="ltr" colspan="10"></td>
+          <td class="doc_24_s40" dir="ltr" colspan="10"></td>
+          <td class="doc_24_s3"></td>
+          <td class="doc_24_s3"></td>
+        </tr>
+        <tr style="height: 19px">
+          <td class="doc_24_s3"></td>
+          <td class="doc_24_s7"></td>
+          <td class="doc_24_s38" dir="ltr" colspan="10"></td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -557,7 +571,7 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s43" dir="ltr" colspan="4" rowspan="6"></td> <!-- 「特別教育」24-028 -->
+          <td class="doc_24_s43" dir="ltr" colspan="4" rowspan="7"></td> <!-- 「特別教育」24-028 -->
           <td class="doc_24_s39" dir="ltr" colspan="5">
             <%= worker_special_education(field_worker).include?("不整地運搬車（1t未満）") ? "■不整地運搬車（1t未満）" : "▢不整地運搬車（1t未満）" %>
           </td>
@@ -633,11 +647,20 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s41" dir="ltr" colspan="16"><%= worker_special_education_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
+          <td class="doc_24_s41" dir="ltr" colspan="16" rowspan="2"><%= worker_special_education_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
+          <td class="doc_24_s39" dir="ltr" colspan="2"></td>
+          <td class="doc_24_s40"></td>
+          <td class="doc_24_s3"></td>
+          <td class="doc_24_s3"></td>
+        </tr>
+        <tr style="height: 19px">
+          <td class="doc_24_s3"></td>
+          <td class="doc_24_s7"></td>
           <td class="doc_24_s41" dir="ltr" colspan="2"></td>
           <td class="doc_24_s31"></td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
+
         </tr>
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>

@@ -310,40 +310,6 @@ module DocumentsHelper
     end
   end
 
-  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「はい」）
-  def questionnaire_business_type_yes(worker)
-    w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
-    if w_name == r_name
-      status = Business.find(document_info.business_id).business_type_i18n
-      status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
-    else
-      '1. はい'
-    end
-  end
-
-  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「いいえ」）
-  def questionnaire_business_type_no(worker)
-    w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
-    if w_name != r_name
-      tag.span('2. いいえ', class: :circle)
-    else
-      status = Business.find(document_info.business_id).business_type_i18n
-      status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
-    end
-  end
-
-  # 新規入場者調査票用（アンケート設問：事前教育に関する内容-「はい」のパターン）
-  def questionnaire_special_education_yes(worker)
-    worker_special_education(worker).present? ? tag.span('1. はい', class: :circle) : '1. はい'
-  end
-
-  # 新規入場者調査票用（アンケート設問：事前教育に関する内容-「いいえ」のパターン）
-  def questionnaire_special_education_no(worker)
-    worker_special_education(worker).blank? ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
-  end
-
   # 作業員の免許情報
   def worker_license(worker)
     licenses = worker&.content&.[]('worker_licenses')
@@ -492,6 +458,32 @@ module DocumentsHelper
       nil
     elsif document_info.find_all_by_generation(hierarchy).ids[child_id]
       RequestOrder.find(document_info.find_all_by_generation(hierarchy).ids[child_id])
+    end
+  end
+
+  # (24)新規入場者調査票
+
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「はい」）
+  def questionnaire_business_type_yes(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name == r_name
+      status = Business.find(document_info.business_id).business_type_i18n
+      status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
+    else
+      '1. はい'
+    end
+  end
+
+  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「いいえ」）
+  def questionnaire_business_type_no(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name != r_name
+      tag.span('2. いいえ', class: :circle)
+    else
+      status = Business.find(document_info.business_id).business_type_i18n
+      status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
     end
   end
 

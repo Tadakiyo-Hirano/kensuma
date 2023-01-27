@@ -151,7 +151,9 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s8" dir="ltr" colspan="2">ふりがな</td>
+        <td class="doc_24_s25 softmerge" colspan="2">
+          <div class="doc_24_softmerge-inner">ふりがな</div>
+        </td>
         <td class="doc_24_s15" dir="ltr" colspan="6"><%= field_worker.content["name_kana"] %></td> <!-- 「フリガナ」24-004 -->
         <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">生年月日</td>
         <td class="doc_24_s16" dir="ltr" colspan="5" rowspan="3"><%= field_worker.content["birth_day_on"] %></td> <!-- 「生年月日 」24-006 -->
@@ -240,14 +242,11 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s8" dir="ltr" colspan="3">雇用契約書</td>
-        <td class="s25 softmerge" dir="ltr">
-          <div class="softmerge-inner" style="width:74px;left:-1px">1. 取り交わし済み</div>
-        </td>
-        <td class="doc_24_s26" dir="ltr"></td>
+        <td class="doc_24_s8" dir="ltr" colspan="3">雇用契約書</td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
+        <td class="doc_24_s26" dir="ltr" colspan="4">1. 取り交わし済</td>
         <td class="doc_24_s26" dir="ltr"></td>
         <td class="doc_24_s27" dir="ltr" colspan="2">2. 未 だ</td>
-        <td class="doc_24_s28" dir="ltr" colspan="5"><%= "※⇐24-018未実装※" %></td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
+        <td class="doc_24_s28" dir="ltr" colspan="3"><%#= "※⇐24-018未実装※" %></td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
         <td class="doc_24_s17" dir="ltr" colspan="2">職 種：</td>
         <td class="doc_24_s29" dir="ltr" colspan="7"><%= "※24-019未実装※" %></td> <!-- 「職種」24-019 -->
         <td class="doc_24_s8" dir="ltr">工</td>
@@ -362,14 +361,21 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s36" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
-        <td class="doc_24_s37" dir="ltr" colspan="8">
+        <td class="doc_24_s3" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
+        <td class="doc_24_s34" dir="ltr" colspan="8">
           <%= worker_skill_training(field_worker).include?("コ解") ? "■コンクリート造の工作物の解体等" : "▢コンクリート造の工作物の解体等" %>
         </td>
-        <td class="doc_24_s37" dir="ltr" colspan="5">
+        <td class="doc_24_s34" dir="ltr" colspan="5">
           <%= worker_skill_training(field_worker).include?("酸欠") ? "■酸素欠乏危険" : "▢酸素欠乏危険" %>
         </td>
-        <td class="doc_24_s38" dir="ltr" colspan="6"><%= worker_skill_training_work_other(field_worker) %></td> <!-- ▢その他（　　　　　　　　） -->
+        <td class="doc_24_s38" dir="ltr" colspan="6" rowspan="2"><%= worker_skill_training_work_other(field_worker) %></td> <!-- ▢その他（　　　　　　　　） -->
+        <td class="doc_24_s3"></td>
+      </tr>
+      <tr style="height: 19px">
+        <td class="doc_24_s7"></td>
+        <td class="doc_24_s36" dir="ltr" colspan="4"></td>
+        <td class="doc_24_s37" dir="ltr" colspan="8"></td>
+        <td class="doc_24_s37" dir="ltr" colspan="5"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -395,7 +401,7 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="3"></td> <!-- 「技能講習」24-027 -->
+        <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="4"></td> <!-- 「技能講習」24-027 -->
         <td class="doc_24_s39" dir="ltr" colspan="9">
           <%= worker_skill_training(field_worker).include?("不整") ? "■1t以上の不整地運搬車" : "▢1t以上の不整地運搬車" %>
         </td>
@@ -416,10 +422,16 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s41" dir="ltr" colspan="9">
+        <td class="doc_24_s41" dir="ltr" colspan="9" rowspan="2">
           <%= worker_skill_training(field_worker).include?("床ク") ? "■その他（ 床ク ）" : "▢その他（　　　　　　　　　　）" %>
         </td>
-        <td class="doc_24_s42" dir="ltr" colspan="10"></td>
+        <td class="doc_24_s40" dir="ltr" colspan="10"></td>
+        <td class="doc_24_s3"></td>
+      </tr>
+      <tr style="height: 19px">
+        <td class="doc_24_s7"></td>
+        <td class="doc_24_s36" dir="ltr" colspan="4"></td>
+        <td class="doc_24_s40" dir="ltr" colspan="6"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -652,6 +664,13 @@
 <% end %>
 
 <style type="text/css">
+table{
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 .ritz .waffle a {
   color: inherit;
 }
@@ -797,18 +816,6 @@
   padding: 0px 3px 0px 3px;
 }
 
-.ritz .waffle .doc_24_s51 {
-  border-bottom: 1px SOLID #000000;
-  background-color: #ffffff;
-  text-align: center;
-  font-family: 'Arial';
-  font-size: 7pt;
-  vertical-align: middle;
-  white-space: normal;
-  direction: ltr;
-  padding: 0px 3px 0px 3px;
-}
-
 .ritz .waffle .doc_24_s38 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
@@ -817,8 +824,7 @@
   color: #000000;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
-  vertical-align: middle;
-  white-space: nowrap;
+  vertical-align: top;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -840,7 +846,7 @@
   background-color: #ffffff;
   text-align: center;
   font-family: 'Arial';
-  font-size: 9pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: normal;
   direction: ltr;
@@ -868,21 +874,6 @@
   font-size: 24pt;
   vertical-align: middle;
   white-space: nowrap;
-  direction: ltr;
-  padding: 0px 3px 0px 3px;
-}
-
-.ritz .waffle .doc_24_s23 {
-  border-bottom: 1px SOLID #000000;
-  border-right: 1px SOLID #000000;
-  background-color: #ffffff;
-  text-align: center;
-  font-family: 'Arial';
-  font-size: 8pt;
-  vertical-align: middle;
-  white-space: normal;
-  overflow: hidden;
-  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -930,7 +921,7 @@
   text-align: left;
   color: #000000;
   font-family: 'Arial';
-  font-size: 10pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -979,7 +970,7 @@
   background-color: #ffffff;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
-  font-size: 9pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: normal;
   direction: ltr;
@@ -1313,40 +1304,41 @@
   padding: 0px 3px 0px 3px;
 }
 
-table{
-    width: 100%;
-    table-layout: fixed;
-    overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-
 .ritz .waffle .doc_24_s41 {
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
-    
-  /* widthやmax-widthで表示範囲の横幅を指定する */
-  max-width: 30px;
-  
-
-    
   font-size: 11pt;
   vertical-align: top;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_24_s66 {
+  border-right: 1px SOLID #ffffff;
+  border-bottom: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  text-decoration: underline;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #1155cc;
+  font-size: 8pt;
+  vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
 .ritz .waffle .doc_24_s25 {
-  border-right: none;
+  border-right: 1px SOLID #000000;
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
-  text-align: left;
+  text-align: center;
   color: #000000;
-  font-family: 'Arial';
-  font-size: 10pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -1382,6 +1374,12 @@ table{
   border: 0px solid #ffffff;
 }
 
+.circle {
+    border: 2px solid #000000;
+    border-radius: 25px;
+    padding: 4px;
+  }
+  
 .page-break {
   page-break-after:always;
   &:last-child {
