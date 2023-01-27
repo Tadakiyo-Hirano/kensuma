@@ -168,8 +168,8 @@ module Users
             a_control_unit:                field_special_vehicle_keys, # 13-125 (a)Aクレーン部 その他           操作装置
             a_performance_indication:      field_special_vehicle_keys, # 13-126 (a)Aクレーン部 その他           性能表示
             a_lighting:                    field_special_vehicle_keys, # 13-127 (a)Aクレーン部 その他           照明
+            b_brake:                       field_special_vehicle_keys, # 13-128 (a)B車両部　　 走行部　　       ブレーキ
             b_clutch:                      field_special_vehicle_keys, # 13-129 (a)B車両部　　 走行部　　       クラッチ
-            b_brake:                       field_special_vehicle_keys, # 13-129 (a)B車両部　　 走行部　　       ブレーキ
             b_handle:                      field_special_vehicle_keys, # 13-130 (a)B車両部　　 走行部　　       ハンドル
             b_tire:                        field_special_vehicle_keys, # 13-131 (a)B車両部　　 走行部　　       タイヤ
             b_crawler:                     field_special_vehicle_keys, # 13-132 (a)B車両部　　 走行部　　       クローラ
@@ -202,7 +202,7 @@ module Users
             e_boom_arm:                    field_special_vehicle_keys, # 13-159 (a)E作業装置　                 ブーム･アーム
             e_jib:                         field_special_vehicle_keys, # 13-160 (a)E作業装置　                 ジブ
             e_reader:                      field_special_vehicle_keys, # 13-161 (a)E作業装置　                 リーダ
-            e_hammer_auger__vibro:         field_special_vehicle_keys, # 13-162 (a)E作業装置　                 ハンマ･オーガ･バイブロ
+            e_hammer_auger_vibro:         field_special_vehicle_keys, # 13-162 (a)E作業装置　                 ハンマ･オーガ･バイブロ
             e_hydraulic_drive_unit:        field_special_vehicle_keys, # 13-163 (a)E作業装置　                 油圧駆動装置
             e_wire_rope_chain:             field_special_vehicle_keys, # 13-164 (a)E作業装置　                 ワイヤロープ･チェーン
             e_hanger:                      field_special_vehicle_keys, # 13-165 (a)E作業装置　                 吊り具等
