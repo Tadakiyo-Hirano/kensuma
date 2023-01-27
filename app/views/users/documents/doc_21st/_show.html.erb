@@ -515,15 +515,17 @@
                   </td>
                   <td class="doc_21_m14"></td>
                   <td class="doc_21_m17" dir="ltr" colspan="4">
-                    <%= @document.content&.[]("start_time")&.to_date %> <!--21-010 実施時間（始時間） -->
+                    <%= implementation_time(@document.content&.[]("start_time")) %> <!--21-010 実施時間（始時間） -->
                   </td>
                   <td class="doc_21_m18" dir="ltr" colspan="2">～</td>
                   <td class="doc_21_m17" dir="ltr" colspan="4">
-                    <%= @document.content&.[]("end_time")&.to_date %> <!--21-011 実施時間（終時間） -->
+                    <%= implementation_time(@document.content&.[]("end_time")) %> <!--21-011 実施時間（終時間） -->
                   </td>
                   <td class="doc_21_m14"></td>
                   <td class="doc_21_m14" dir="ltr">（</td>
-                  <td class="doc_21_m17" dir="ltr" colspan="4">「実施時間（時間）」21-012</td> <!-- 未実装 -->
+                  <td class="doc_21_m17" dir="ltr" colspan="4">
+                    <%= @document.content&.[]("implementation_time") %> <!-- 「実施時間（時間）」21-012 -->
+                  </td>
                   <td class="doc_21_m14" dir="ltr" colspan="3">時間）</td>
                   <td class="doc_21_m19"></td>
                 </tr>

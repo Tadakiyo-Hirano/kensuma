@@ -838,8 +838,8 @@ module DocumentsHelper
   # (21) 新規入場時等教育実施報告書
 
   # 受講者氏名の文字情報　（編集ページで入力、documentsに保存）
-  def doc_21st_str(doc_str)
-    doc_str.blank? ? '' : doc_str
+  def implementation_time(time)
+    time.blank? ? '時' : l(time.to_datetime, format: :hours_only)
   end
 
   private

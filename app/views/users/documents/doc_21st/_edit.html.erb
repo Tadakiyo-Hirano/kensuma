@@ -536,33 +536,34 @@
                 </td>
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m17" dir="ltr" colspan="4">
-                  「実施時間（始時間）」<br>
                   <%= f.time_select name = "content[start_time]",
                                   value: @document.content&.[]('start_time'),
+                               selected: @document.content&.[]('start_time')&.to_datetime,
                             minute_step: 15,
                                  prompt: true,
+                         discard_minute: true,
                             ignore_data: true
                   %> <!-- 21-010 実施時間（始時間）　※未実装（送信法修正必要） -->
                 </td>
                 <td class="doc_21_m18" dir="ltr" colspan="2">～</td>
                 <td class="doc_21_m17" dir="ltr" colspan="4">
-                  「実施時間（終時間）」<br>
                   <%= f.time_select name = "content[end_time]",
                                   value: @document.content&.[]('end_time'),
+                               selected: @document.content&.[]('end_time')&.to_datetime,
                             minute_step: 15,
                                  prompt: true,
+                         discard_minute: true,
                             ignore_data: true
                   %> <!-- 21-011 実施時間（終時間）　※未実装（送信法修正必要） -->
-                  <%# <%= date_select_ja(f.date_select( 'content[term]', include_blank: true, start_year:Time.now.year-2,
-                               discard_month: true, discard_day: true,
-                               value: @document.content&.[]('term'),
-                               selected: @document.content&.[]('term').to_date,
-                               class: "form-control form-control-sm"))
-                  %> %>
                 </td>
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m14" dir="ltr">（</td>
-                <td class="doc_21_m17" dir="ltr" colspan="4">「実施時間（時間）」21-012</td>
+                <td class="doc_21_m17" dir="ltr" colspan="4">
+                  <%= f.text_field name = "content[implementation_time]",
+                    value: @document.content&.[]("implementation_time"),
+                    class: 'form-control'
+                  %>
+                </td> <!-- 「実施時間（時間）」21-012 -->
                 <td class="doc_21_m14" dir="ltr" colspan="3">時間）</td>
                 <td class="doc_21_m19"></td>
               </tr>
@@ -589,7 +590,7 @@
                 <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
                   <%= f.text_field name = "content[education_content]",
                     value: @document.content&.[]("education_content"),
-                    class: 'form-control', placeholder: "教育内容を入力してください"
+                    class: 'form-control', placeholder: "例）1. 作業所の概要と規則について"
                   %> <!-- 21-015 教育内容 -->
                 </td>
               </tr>

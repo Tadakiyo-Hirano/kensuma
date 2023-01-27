@@ -149,26 +149,24 @@ module Users
 
     # 始期パラメータを再セット
     def start_time_join
-      if params[:document][:content][:start_time]['(4i)'].present? && params[:document][:content][:start_time]['(5i)'].present?
+      if params[:document][:content][:start_time]['(4i)'].present?
         Time.new(
           params[:document][:content][:start_time]['(1i)'].to_i,
           params[:document][:content][:start_time]['(2i)'].to_i,
           params[:document][:content][:start_time]['(3i)'].to_i,
-          params[:document][:content][:start_time]['(4i)'].to_i,
-          params[:document][:content][:start_time]['(5i)'].to_i
+          params[:document][:content][:start_time]['(4i)'].to_i
         )
       end
     end
 
     # 終期パラメータを再セット
     def end_time_join
-      if params[:document][:content][:end_time]['(4i)'].present? && params[:document][:content][:end_time]['(5i)'].present?
+      if params[:document][:content][:end_time]['(4i)'].present?
         Time.new(
           params[:document][:content][:end_time]['(1i)'].to_i,
           params[:document][:content][:end_time]['(2i)'].to_i,
           params[:document][:content][:end_time]['(3i)'].to_i,
-          params[:document][:content][:end_time]['(4i)'].to_i,
-          params[:document][:content][:end_time]['(5i)'].to_i
+          params[:document][:content][:end_time]['(4i)'].to_i
         )
       end
     end
@@ -358,6 +356,7 @@ module Users
             :start_time,
             :end_time,
             :location,
+            :implementation_time,
             :education_method,
             :education_content,
             :teachers_company,
