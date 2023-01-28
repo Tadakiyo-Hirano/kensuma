@@ -933,6 +933,8 @@ module DocumentsHelper
 
     if @request_order.order.business_id == @current_business.id
       case hierarchy_document.document_type
+      when 'doc_13rd'
+        link_to '点検事項 記入', url
       when 'doc_16th'
         link_to '火気使用許可欄 記入', url
       end
