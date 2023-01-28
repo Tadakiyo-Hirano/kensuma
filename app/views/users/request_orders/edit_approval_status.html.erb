@@ -1,6 +1,6 @@
-<% provide(:title, "発注依頼承認取り消し") %>
+<% provide(:title, "書類作成依頼承認取り消し") %>
 <% provide(:btn_text, "取り消し") %>
-<font color="red">※ 取り消す依頼を選んでください。</br>&emsp;元請を含め、選んだ下請けの依頼から上の階層の承認が取り消されます。</font>
+<font color="red">&emsp;※ 承認を取り消す依頼を選んでください。</br>&emsp;&emsp;元請(自身)を含め、選んだ下請けの依頼から上の階層の承認が取り消されます。</font>
 <div class="card">
   <div class="card-body">
     <%= form_with url: users_request_order_update_approval_status_path(@request_order), method: :post, local: true do |f| %>
