@@ -1,0 +1,573 @@
+{\rtf1\ansi\ansicpg932\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red183\green111\blue179;\red23\green23\blue23;\red202\green202\blue202;
+\red67\green192\blue160;\red89\green138\blue67;\red212\green214\blue154;\red140\green211\blue254;\red66\green179\blue255;
+\red70\green137\blue204;\red167\green197\blue152;\red194\green126\blue101;\red196\green83\blue86;\red205\green173\blue106;
+}
+{\*\expandedcolortbl;;\cssrgb\c77255\c52549\c75294;\cssrgb\c11765\c11765\c11765;\cssrgb\c83137\c83137\c83137;
+\cssrgb\c30588\c78824\c69020;\cssrgb\c41569\c60000\c33333;\cssrgb\c86275\c86275\c66667;\cssrgb\c61176\c86275\c99608;\cssrgb\c30980\c75686\c100000;
+\cssrgb\c33725\c61176\c83922;\cssrgb\c70980\c80784\c65882;\cssrgb\c80784\c56863\c47059;\cssrgb\c81961\c41176\c41176;\cssrgb\c84314\c72941\c49020;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 module\cf4 \strokec4  \cf5 \strokec5 DocumentsHelper\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   \cf6 \strokec6 # 1\uc0\u27425 \u19979 \u35531 \u20250 \u31038 \u21517 \u12398 \u34920 \u31034 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 primary_subcon_name\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 instance_of?\cf4 \strokec4 (\cf9 \strokec9 Order\cf4 \strokec4 )\cb1 \
+\cb3       \cf10 \strokec10 nil\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 elsif\cf4 \strokec4  \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 ancestors\cf4 \strokec4 .\cf7 \strokec7 count\cf4 \strokec4  > \cf11 \strokec11 1\cf4 \cb1 \strokec4 \
+\cb3       \cf5 \strokec5 RequestOrder\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 ancestor_ids\cf4 \strokec4 [-\cf11 \strokec11 2\cf4 \strokec4 ]).\cf7 \strokec7 content\cf4 \strokec4 [\cf12 \strokec12 'subcon_name'\cf4 \strokec4 ]\cb1 \
+\cb3     \cf2 \strokec2 elsif\cf4 \strokec4  \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 ancestors\cf4 \strokec4 .\cf7 \strokec7 count\cf4 \strokec4  == \cf11 \strokec11 1\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 content\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \strokec4  ? \cf10 \strokec10 nil\cf4 \strokec4  : \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 content\cf4 \strokec4 [\cf12 \strokec12 'subcon_name'\cf4 \strokec4 ]\cb1 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u26085 \u20184 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 document_date\cf4 \strokec4 (\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 column\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 ) \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 column\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20250 \u31038 \u12398 \u20445 \u38522 \u21152 \u20837 \u29366 \u27841 \cf4 \cb1 \strokec4 \
+\cb3   \cf9 \strokec9 INSURANCE_TYPE\cf4 \strokec4  = \{\cb1 \
+\cb3     \cf12 \strokec12 'join'\cf4 \strokec4        => \cf12 \strokec12 '\uc0\u21152 \u20837 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'not_join'\cf4 \strokec4    => \cf12 \strokec12 '\uc0\u26410 \u21152 \u20837 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'not_coverd'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u36969 \u29992 \u38500 \u22806 '\cf4 \cb1 \strokec4 \
+\cb3   \}.\cf7 \strokec7 freeze\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 insurance_join\cf4 \strokec4 (\cf8 \strokec8 insurance_type\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  = \cf5 \strokec5 INSURANCE_TYPE\cf4 \strokec4 [\cf8 \strokec8 insurance_type\cf4 \strokec4 ]\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  == \cf12 \strokec12 '\uc0\u21152 \u20837 '\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 status\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u21152 \u20837 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 insurance_not_join\cf4 \strokec4 (\cf8 \strokec8 insurance_type\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  = \cf5 \strokec5 INSURANCE_TYPE\cf4 \strokec4 [\cf8 \strokec8 insurance_type\cf4 \strokec4 ]\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  == \cf12 \strokec12 '\uc0\u26410 \u21152 \u20837 '\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 status\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u26410 \u21152 \u20837 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 insurance_not_coverd\cf4 \strokec4 (\cf8 \strokec8 insurance_type\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  = \cf5 \strokec5 INSURANCE_TYPE\cf4 \strokec4 [\cf8 \strokec8 insurance_type\cf4 \strokec4 ]\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  == \cf12 \strokec12 '\uc0\u36969 \u29992 \u38500 \u22806 '\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 status\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u36969 \u29992 \u38500 \u22806 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u23554 \u20219 \u65381 \u38750 \u23554 \u20219 \cf4 \cb1 \strokec4 \
+\cb3   \cf9 \strokec9 FULL_TIME_CHECK\cf4 \strokec4  = \{\cb1 \
+\cb3     \cf12 \strokec12 'full_time'\cf4 \strokec4      => \cf12 \strokec12 '\uc0\u23554 \u20219 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'non_dedicated'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u38750 \u23554 \u20219 '\cf4 \cb1 \strokec4 \
+\cb3   \}.\cf7 \strokec7 freeze\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 full_time_check\cf4 \strokec4 (\cf8 \strokec8 check\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  = \cf5 \strokec5 FULL_TIME_CHECK\cf4 \strokec4 [\cf8 \strokec8 check\cf4 \strokec4 ]\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  == \cf12 \strokec12 '\uc0\u23554 \u20219 '\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 status\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u23554 \u20219 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 non_dedicated_check\cf4 \strokec4 (\cf8 \strokec8 check\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  = \cf5 \strokec5 FULL_TIME_CHECK\cf4 \strokec4 [\cf8 \strokec8 check\cf4 \strokec4 ]\cb1 \
+\cb3     \cf8 \strokec8 status\cf4 \strokec4  == \cf12 \strokec12 '\uc0\u38750 \u23554 \u20219 '\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 status\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u38750 \u23554 \u20219 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u19968 \u27425 \u19979 \u35531 \u12398 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 subcon_info\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 request_order\cf4 \strokec4  = \cf5 \strokec5 RequestOrder\cf4 \strokec4 .\cf7 \strokec7 find_by\cf4 \strokec4 (\cf10 \strokec10 uuid:\cf4 \strokec4  \cf8 \strokec8 params\cf4 \strokec4 [\cf10 \strokec10 :request_order_uuid\cf4 \strokec4 ])\cb1 \
+\cb3     \cf8 \strokec8 request_order\cf4 \strokec4  \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 request_order\cf4 \strokec4 .\cf7 \strokec7 parent_id\cf4 \strokec4  == \cf11 \strokec11 1\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 subcons_info\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 request_order\cf4 \strokec4  = \cf5 \strokec5 RequestOrder\cf4 \strokec4 .\cf7 \strokec7 find_by\cf4 \strokec4 (\cf10 \strokec10 uuid:\cf4 \strokec4  \cf8 \strokec8 params\cf4 \strokec4 [\cf10 \strokec10 :request_order_uuid\cf4 \strokec4 ])\cb1 \
+\cb3     \cf8 \strokec8 request_order\cf4 \strokec4 .\cf7 \strokec7 children\cf4 \strokec4  \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 request_order\cf4 \strokec4 .\cf7 \strokec7 parent_id\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 document_subcon_info\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf5 \strokec5 RequestOrder\cf4 \strokec4 .\cf7 \strokec7 find_by\cf4 \strokec4 (\cf10 \strokec10 uuid:\cf4 \strokec4  \cf8 \strokec8 params\cf4 \strokec4 [\cf10 \strokec10 :request_order_uuid\cf4 \strokec4 ]).\cf7 \strokec7 parent_id\cf4 \strokec4  == \cf11 \strokec11 1\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 subcon_info\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 @subcon\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u21517 \u31807 \u12398 \u35211 \u20986 \u12375 \u30058 \u21495 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_index\cf4 \strokec4 (\cf8 \strokec8 number\cf4 \strokec4 , \cf8 \strokec8 index\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 number\cf4 \strokec4  + \cf8 \strokec8 index\cf4 \strokec4  * \cf11 \strokec11 10\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u25991 \u23383 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_str\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u26085 \u20184 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_date\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 &.\cf7 \strokec7 to_date\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u38651 \u35441 \u30058 \u21495 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_phone_number\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u24180 \u40802 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_age\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 birth_day\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'birth_day_on'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 birth_day\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf12 \strokec12 '\uc0\u27507 '\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 age\cf4 \strokec4  = (\cf8 \strokec8 worker\cf4 \strokec4 .\cf7 \strokec7 created_at\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 .\cf7 \strokec7 strftime\cf4 \strokec4 (\cf12 \strokec12 '%Y%m%d'\cf4 \strokec4 ).\cf7 \strokec7 to_i\cf4 \strokec4  - \cf8 \strokec8 birth_day\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 .\cf7 \strokec7 strftime\cf4 \strokec4 (\cf12 \strokec12 '%Y%m%d'\cf4 \strokec4 ).\cf7 \strokec7 to_i\cf4 \strokec4 ) / \cf11 \strokec11 10000\cf4 \cb1 \strokec4 \
+\cb3       \cf12 \strokec12 "\cf10 \strokec10 #\{\cf8 \strokec8 age\cf10 \strokec10 \}\cf12 \strokec12 \uc0\u27507 "\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u24314 \u35373 \u26989 \u36864 \u32887 \u37329 \u20849 \u28168 \u21046 \u24230 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_kentaikyo\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 kentaikyo\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_insurance'\cf4 \strokec4 )&.[](\cf12 \strokec12 'severance_pay_mutual_aid_type'\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 kentaikyo\cf4 \strokec4  == \cf12 \strokec12 'kentaikyo'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u20581 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :severance_pay_mutual_aid\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u20581 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_tyutaikyo\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tyutaikyo\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_insurance'\cf4 \strokec4 )&.[](\cf12 \strokec12 'severance_pay_mutual_aid_type'\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tyutaikyo\cf4 \strokec4  == \cf12 \strokec12 'tyutaikyo'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u20013 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :severance_pay_mutual_aid\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u20013 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_other\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 other\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_insurance'\cf4 \strokec4 )&.[](\cf12 \strokec12 'severance_pay_mutual_aid_type'\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 other\cf4 \strokec4  == \cf12 \strokec12 'other'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u20182 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :severance_pay_mutual_aid\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u20182 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_none\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 none\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_insurance'\cf4 \strokec4 )&.[](\cf12 \strokec12 'severance_pay_mutual_aid_type'\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 none\cf4 \strokec4  == \cf12 \strokec12 'none'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u28961 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :severance_pay_mutual_aid\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u28961 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u34880 \u22311 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 blood_pressure\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 min\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_medical'\cf4 \strokec4 )&.[](\cf12 \strokec12 'min_blood_pressure'\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 max\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_medical'\cf4 \strokec4 )&.[](\cf12 \strokec12 'max_blood_pressure'\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 min\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \strokec4  || \cf8 \strokec8 max\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \strokec4  ? \cf12 \strokec12 '~'\cf4 \strokec4  : \cf12 \strokec12 "\cf10 \strokec10 #\{\cf8 \strokec8 min\cf10 \strokec10 \}\cf12 \strokec12  ~ \cf10 \strokec10 #\{\cf8 \strokec8 max\cf10 \strokec10 \}\cf12 \strokec12 "\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u20581 \u24247 \u35386 \u26029 \u12398 \u26085 \u20184 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_medical_date\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_medical'\cf4 \strokec4 )&.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u34880 \u28082 \u22411 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf9 \strokec9 BLOOD_TYPE\cf4 \strokec4  = \{\cb1 \
+\cb3     \cf12 \strokec12 'a'\cf4 \strokec4   => \cf12 \strokec12 'A'\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'b'\cf4 \strokec4   => \cf12 \strokec12 'B'\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'ab'\cf4 \strokec4  => \cf12 \strokec12 'AB'\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'o'\cf4 \strokec4   => \cf12 \strokec12 'O'\cf4 \cb1 \strokec4 \
+\cb3   \}.\cf7 \strokec7 freeze\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_abo_blood_type\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 blood_type\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'abo_blood_type'\cf4 \strokec4 )\cb1 \
+\cb3     \cf5 \strokec5 BLOOD_TYPE\cf4 \strokec4 [\cf8 \strokec8 blood_type\cf4 \strokec4 ]\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u20445 \u38522 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf9 \strokec9 INSURANCE\cf4 \strokec4  = \{\cb1 \
+\cb3     \cf12 \strokec12 'health_insurance_association'\cf4 \strokec4            => \cf12 \strokec12 '\uc0\u20581 \u24247 \u20445 \u38522 \u32068 \u21512 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'japan_health_insurance_association'\cf4 \strokec4      => \cf12 \strokec12 '\uc0\u21332 \u20250 \u12369 \u12435 \u12413 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'construction_national_health_insurance'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u24314 \u35373 \u22269 \u20445 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'national_health_insurance'\cf4 \strokec4               => \cf12 \strokec12 '\uc0\u22269 \u27665 \u20581 \u24247 \u20445 \u38522 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'exemption'\cf4 \strokec4                               => \cf12 \strokec12 '\uc0\u36969 \u24540 \u38500 \u22806 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'welfare'\cf4 \strokec4                                 => \cf12 \strokec12 '\uc0\u21402 \u29983 \u24180 \u37329 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'national'\cf4 \strokec4                                => \cf12 \strokec12 '\uc0\u22269 \u27665 \u24180 \u37329 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'recipient'\cf4 \strokec4                               => \cf12 \strokec12 '\uc0\u21463 \u32102 \u32773 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'insured'\cf4 \strokec4                                 => \cf12 \strokec12 '\uc0\u34987 \u20445 \u38522 \u32773 '\cf4 \strokec4 ,\cb1 \
+\cb3     \cf12 \strokec12 'day'\cf4 \strokec4                                     => \cf12 \strokec12 '\uc0\u26085 \u38599 \u20445 \u38522 '\cf4 \cb1 \strokec4 \
+\cb3   \}.\cf7 \strokec7 freeze\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_insurance\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 insurance\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_insurance'\cf4 \strokec4 )&.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 insurance\cf4 \strokec4  \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 insurance\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3     \cf5 \strokec5 INSURANCE\cf4 \strokec4 [\cf8 \strokec8 insurance\cf4 \strokec4 ]\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u29305 \u21029 \u20581 \u24247 \u35386 \u26029 \u12398 \u31278 \u39006 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_special_med_exam\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 exams\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_medical'\cf4 \strokec4 )&.[](\cf12 \strokec12 'worker_exams'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 exams\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 exams\cf4 \strokec4  = \cf8 \strokec8 exams\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 exam\cf4 \strokec4 | \cf5 \strokec5 SpecialMedExam\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 exam\cf4 \strokec4 [\cf12 \strokec12 'special_med_exam_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 exams\cf4 \strokec4 .\cf7 \strokec7 to_s\cf4 \strokec4 .\cf7 \strokec7 gsub\cf4 \strokec4 (\cf13 \strokec13 /,|"|\cf14 \strokec14 \\[\cf13 \strokec13 |\cf14 \strokec14 \\]\cf13 \strokec13 /\cf4 \strokec4 ) \{ \cf12 \strokec12 ''\cf4 \strokec4  \}\cb1 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u29305 \u21029 \u25945 \u32946 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_special_education\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 educations\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_special_educations'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 educations\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 educations\cf4 \strokec4  = \cf8 \strokec8 educations\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 education\cf4 \strokec4 | \cf5 \strokec5 SpecialEducation\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 education\cf4 \strokec4 [\cf12 \strokec12 'special_education_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 educations\cf4 \strokec4 .\cf7 \strokec7 to_s\cf4 \strokec4 .\cf7 \strokec7 gsub\cf4 \strokec4 (\cf13 \strokec13 /,|"|\cf14 \strokec14 \\[\cf13 \strokec13 |\cf14 \strokec14 \\]\cf13 \strokec13 /\cf4 \strokec4 ) \{ \cf12 \strokec12 ''\cf4 \strokec4  \}\cb1 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u25216 \u33021 \u35611 \u32722 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_skill_training\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 trainings\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_skill_trainings'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 trainings\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 trainings\cf4 \strokec4  = \cf8 \strokec8 trainings\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 training\cf4 \strokec4 | \cf5 \strokec5 SkillTraining\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 training\cf4 \strokec4 [\cf12 \strokec12 'skill_training_id'\cf4 \strokec4 ]).\cf7 \strokec7 short_name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 trainings\cf4 \strokec4 .\cf7 \strokec7 to_s\cf4 \strokec4 .\cf7 \strokec7 gsub\cf4 \strokec4 (\cf13 \strokec13 /,|"|\cf14 \strokec14 \\[\cf13 \strokec13 |\cf14 \strokec14 \\]\cf13 \strokec13 /\cf4 \strokec4 ) \{ \cf12 \strokec12 ''\cf4 \strokec4  \}\cb1 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u20813 \u35377 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 worker_license\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 licenses\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'worker_licenses'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 licenses\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 licenses\cf4 \strokec4  = \cf8 \strokec8 licenses\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 license\cf4 \strokec4 | \cf5 \strokec5 License\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 license\cf4 \strokec4 [\cf12 \strokec12 'license_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 licenses\cf4 \strokec4 .\cf7 \strokec7 to_s\cf4 \strokec4 .\cf7 \strokec7 gsub\cf4 \strokec4 (\cf13 \strokec13 /,|"|\cf14 \strokec14 \\[\cf13 \strokec13 |\cf14 \strokec14 \\]\cf13 \strokec13 /\cf4 \strokec4 ) \{ \cf12 \strokec12 ''\cf4 \strokec4  \}\cb1 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u20837 \u22580 \u24180 \u26376 \u26085 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_worker_admission_date\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 admission_date_start\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 blank?\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u20316 \u26989 \u21729 \u12398 \u21463 \u20837 \u25945 \u32946 \u23455 \u26045 \u24180 \u26376 \u26085 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_worker_education_date\cf4 \strokec4 (\cf8 \strokec8 worker\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4  = \cf8 \strokec8 worker\cf4 \strokec4 &.\cf7 \strokec7 education_date\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 blank?\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u36554 \u20001 \u24773 \u22577 (\u24037 \u20107 \u65381 \u36890 \u21220 )\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 car_usage_commute\cf4 \strokec4 (\cf8 \strokec8 usage\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 usage\cf4 \strokec4  == \cf12 \strokec12 '\uc0\u36890 \u21220 \u29992 '\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u36890 \u21220 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u36890 \u21220 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 car_usage_const\cf4 \strokec4 (\cf8 \strokec8 usage\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 usage\cf4 \strokec4  == \cf12 \strokec12 '\uc0\u24037 \u20107 \u29992 '\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u24037 \u20107 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u24037 \u20107 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u29694 \u22580 \u28779 \u27671 \u24773 \u22577 (\u20351 \u29992 \u30446 \u30340 )\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 fire_use_target\cf4 \strokec4 (\cf8 \strokec8 name\cf4 \strokec4 , \cf8 \strokec8 num\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 fires\cf4 \strokec4  = \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_fires\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 fires\cf4 \strokec4 .\cf7 \strokec7 present?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 fires\cf4 \strokec4 .\cf7 \strokec7 first\cf4 \strokec4 .\cf7 \strokec7 fire_use_targets\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4 (&\cf10 \strokec10 :id\cf4 \strokec4 ).\cf7 \strokec7 include?\cf4 \strokec4 (\cf8 \strokec8 num\cf4 \strokec4 ) ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 name\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :fire_check\cf4 \strokec4 ) : \cf8 \strokec8 name\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 name\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u29694 \u22580 \u28779 \u27671 \u24773 \u22577 (\u28779 \u27671 \u12398 \u31278 \u39006 )\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 fire_type\cf4 \strokec4 (\cf8 \strokec8 name\cf4 \strokec4 , \cf8 \strokec8 num\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 fires\cf4 \strokec4  = \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_fires\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 fires\cf4 \strokec4 .\cf7 \strokec7 present?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 fires\cf4 \strokec4 .\cf7 \strokec7 first\cf4 \strokec4 .\cf7 \strokec7 fire_types\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4 (&\cf10 \strokec10 :id\cf4 \strokec4 ).\cf7 \strokec7 include?\cf4 \strokec4 (\cf8 \strokec8 num\cf4 \strokec4 ) ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 name\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :fire_check\cf4 \strokec4 ) : \cf8 \strokec8 name\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 name\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u29694 \u22580 \u28779 \u27671 \u24773 \u22577 (\u28779 \u27671 \u12398 \u31649 \u29702 \u26041 \u27861 )\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 fire_management\cf4 \strokec4 (\cf8 \strokec8 name\cf4 \strokec4 , \cf8 \strokec8 num\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 fires\cf4 \strokec4  = \cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_fires\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 fires\cf4 \strokec4 .\cf7 \strokec7 present?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 fires\cf4 \strokec4 .\cf7 \strokec7 first\cf4 \strokec4 .\cf7 \strokec7 fire_managements\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4 (&\cf10 \strokec10 :id\cf4 \strokec4 ).\cf7 \strokec7 include?\cf4 \strokec4 (\cf8 \strokec8 num\cf4 \strokec4 ) ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf8 \strokec8 name\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :fire_check\cf4 \strokec4 ) : \cf8 \strokec8 name\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 name\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u26377 \u27231 \u28342 \u21092 \u24773 \u22577 \u65288 \u20351 \u29992 \u26399 \u38291 \u65289 \cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 # \uc0\u25345 \u36796 \u27231 \u26800 \u12539 \u29694 \u22580 \u27231 \u26800 \u24773 \u22577 \u12398 \u26085 \u20184 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf6 \strokec6 # date \uc0\u12399 \u24517 \u12378  jisx0301 \u12391 \u22793 \u25563 \u12391 \u12365 \u12427 \u20516 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 wareki\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 blank?\cf4 \cb1 \strokec4 \
+\cb3       \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 wareki\cf4 \strokec4 , \cf8 \strokec8 mon\cf4 \strokec4 , \cf8 \strokec8 day\cf4 \strokec4  = \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 .\cf7 \strokec7 jisx0301\cf4 \strokec4 .\cf7 \strokec7 split\cf4 \strokec4 (\cf12 \strokec12 '.'\cf4 \strokec4 )\cb1 \
+\cb3       \cf8 \strokec8 gengou\cf4 \strokec4 , \cf8 \strokec8 year\cf4 \strokec4  = \cf8 \strokec8 wareki\cf4 \strokec4 .\cf7 \strokec7 partition\cf4 \strokec4 (\cf13 \strokec13 /\cf14 \strokec14 \\d\cf13 \strokec13 +/\cf4 \strokec4 ).\cf7 \strokec7 take\cf4 \strokec4 (\cf11 \strokec11 2\cf4 \strokec4 )\cb1 \
+\cb3       \cf8 \strokec8 gengou\cf4 \strokec4 .\cf7 \strokec7 sub!\cf4 \strokec4 (\cb1 \
+\cb3         \cf13 \strokec13 /[MTSHR]/\cf4 \strokec4 ,\cb1 \
+\cb3         \cf12 \strokec12 'M'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u26126 \u27835 '\cf4 \strokec4 ,\cb1 \
+\cb3         \cf12 \strokec12 'T'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u22823 \u27491 '\cf4 \strokec4 ,\cb1 \
+\cb3         \cf12 \strokec12 'S'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u26157 \u21644 '\cf4 \strokec4 ,\cb1 \
+\cb3         \cf12 \strokec12 'H'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u24179 \u25104 '\cf4 \strokec4 ,\cb1 \
+\cb3         \cf12 \strokec12 'R'\cf4 \strokec4  => \cf12 \strokec12 '\uc0\u20196 \u21644 '\cf4 \cb1 \strokec4 \
+\cb3       )\cb1 \
+\cb3       \cf12 \strokec12 "\cf10 \strokec10 #\{\cf8 \strokec8 gengou\cf10 \strokec10 \}#\{\cf8 \strokec8 year\cf4 \strokec4 .\cf7 \strokec7 to_i\cf10 \strokec10 \}\cf12 \strokec12 \uc0\u24180 \cf10 \strokec10 #\{\cf8 \strokec8 mon\cf4 \strokec4 .\cf7 \strokec7 to_i\cf10 \strokec10 \}\cf12 \strokec12 \uc0\u26376 \cf10 \strokec10 #\{\cf8 \strokec8 day\cf4 \strokec4 .\cf7 \strokec7 to_i\cf10 \strokec10 \}\cf12 \strokec12 \uc0\u26085 "\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_solvent_working_process_y\cf4 \strokec4 (\cf8 \strokec8 working_process\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 working_process\cf4 \strokec4  == \cf12 \strokec12 'y'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u26377 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u26377 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_solvent_working_process_n\cf4 \strokec4 (\cf8 \strokec8 working_process\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 working_process\cf4 \strokec4  == \cf12 \strokec12 'n'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u28961 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u28961 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_solvent_sds_y\cf4 \strokec4 (\cf8 \strokec8 sds\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 sds\cf4 \strokec4  == \cf12 \strokec12 'y'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u26377 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u26377 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_solvent_sds_n\cf4 \strokec4 (\cf8 \strokec8 sds\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 sds\cf4 \strokec4  == \cf12 \strokec12 'n'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u28961 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u28961 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u29305 \u27530 \u36554 \u20001 \u24773 \u22577 (\u33258 \u31038 \u65381 \u12522 \u12540 \u12473 )\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 lease_type_own\cf4 \strokec4 (\cf8 \strokec8 type\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 type\cf4 \strokec4  == \cf12 \strokec12 'own'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u33258 \u31038 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u33258 \u31038 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 lease_type_lease\cf4 \strokec4 (\cf8 \strokec8 type\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 type\cf4 \strokec4  == \cf12 \strokec12 'lease'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u12522 \u12540 \u12473 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf12 \strokec12 '\uc0\u12522 \u12540 \u12473 '\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u29305 \u27530 \u36554 \u20001 \u24773 \u22577 (\u21306 \u20998 )\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 vehicle_type_crane\cf4 \strokec4 (\cf8 \strokec8 type\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 type\cf4 \strokec4  == \cf12 \strokec12 'crane'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u31227 \u21205 \u24335 \u12463 \u12524 \u12540 \u12531 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u31227 \u21205 \u24335 \u12463 \u12524 \u12540 \u12531 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :line_through\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 vehicle_type_construction\cf4 \strokec4 (\cf8 \strokec8 type\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 type\cf4 \strokec4  == \cf12 \strokec12 'construction'\cf4 \strokec4  ? \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u36554 \u20001 \u31995 \u24314 \u35373 \u27231 \u26800 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :circle\cf4 \strokec4 ) : \cf8 \strokec8 tag\cf4 \strokec4 .\cf7 \strokec7 span\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u36554 \u20001 \u31995 \u24314 \u35373 \u27231 \u26800 '\cf4 \strokec4 , \cf10 \strokec10 class:\cf4 \strokec4  \cf10 \strokec10 :line_through\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # document.content\uc0\u12398 \u26085 \u20184 \u12487 \u12540 \u12479 \u34920 \u31034 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 doc_content_date\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 if\cf4 \strokec4  \cf8 \strokec8 action_name\cf4 \strokec4  == \cf12 \strokec12 'edit'\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \strokec4  ? \cf12 \strokec12 ''\cf4 \strokec4  : \cf8 \strokec8 date\cf4 \strokec4  \cf6 \strokec6 # nil\uc0\u12398 \u22580 \u21512 \u12398 strftime\u34920 \u31034 \u12456 \u12521 \u12540 \u22238 \u36991 \cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 else\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \strokec4  || \cf8 \strokec8 date\cf4 \strokec4  == [\cf12 \strokec12 ''\cf4 \strokec4 ] || \cf8 \strokec8 date\cf4 \strokec4  == \cf12 \strokec12 ''\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 first\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 &.\cf7 \strokec7 strftime\cf4 \strokec4 (\cf12 \strokec12 '%Y\uc0\u24180 %-m\u26376 %-d\u26085 '\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u25345 \u36796 \u27231 \u26800 \u12398 \u27231 \u26800 \u21517 \u24773 \u22577 \u65288 \u25345 \u36796 \u26178 \u12398 \u28857 \u26908 \u34920 \u65289 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_1st\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u12450 \u12540 \u12473 \u32218 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_2nd\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u25509 \u22320 \u12463 \u12521 \u12531 \u12503 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_3rd\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u12461 \u12515 \u12483 \u12503 \u12479 \u12452 \u12516 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_4th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u12467 \u12493 \u12463 \u12479 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_5th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u25509 \u22320 \u31471 \u23376 \u12398 \u32224 \u32080 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_6th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u20805 \u38651 \u37096 \u12398 \u32118 \u32257 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_7th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u33258 \u21205 \u38651 \u25731 \u38450 \u27490 \u35013 \u32622 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_8th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u32118 \u32257 \u12507 \u12523 \u12480 \u12540 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_9th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u28342 \u25509 \u20445 \u35703 \u38754 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_10th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u25805 \u20316 \u12473 \u12452 \u12483 \u12481 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_11th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u32118 \u32257 \u25269 \u25239 \u28204 \u23450 \u20516 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_12th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u21508 \u31278 \u12502 \u12524 \u12540 \u12461 \u12398 \u20316 \u21205 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_13th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u25163 \u12377 \u12426 \u12539 \u22258 \u12356 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_14th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u12501 \u12483 \u12463 \u12398 \u12399 \u12378 \u12428 \u27490 \u12417 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_15th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u12527 \u12452 \u12516 \u12525 \u12540 \u12503 \u65381 \u12481 \u12455 \u12540 \u12531 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_16th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u28369 \u36554 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_17th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u22238 \u36578 \u37096 \u12398 \u22258 \u12356 \u31561 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_tag_18th\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf12 \strokec12 'machine_tags'\cf4 \strokec4 )\cb1 \
+\cb3     \cf2 \strokec2 unless\cf4 \strokec4  \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 nil?\cf4 \cb1 \strokec4 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4  = \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 tag\cf4 \strokec4 | \cf5 \strokec5 Tag\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 tag\cf4 \strokec4 [\cf12 \strokec12 'tag_id'\cf4 \strokec4 ]).\cf7 \strokec7 name\cf4 \strokec4  \}\cb1 \
+\cb3       \cf8 \strokec8 tags\cf4 \strokec4 .\cf7 \strokec7 include?\cf4 \strokec4 (\cf12 \strokec12 '\uc0\u21361 \u38522 \u34920 \u31034 '\cf4 \strokec4 ) ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3     \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u25345 \u36796 \u26178 \u12398 \u28857 \u26908 \u34920 \u12288 \u12300 \u36861 \u21152 \u38917 \u30446 \u9312 \u12316 \u9317 \u12301 \u28857 \u26908 \u20107 \u38917 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 inspection_table_item1\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 field_machines\cf4 \strokec4  = \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_machine_ids\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 inspection_table_item1\cf4 \strokec4  = \cf8 \strokec8 field_machines\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 field_machine\cf4 \strokec4 | \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 field_machine\cf4 \strokec4 .\cf7 \strokec7 id\cf4 \strokec4 ).\cf7 \strokec7 content\cf4 \strokec4 .[](\cf12 \strokec12 'extra_inspection_item1'\cf4 \strokec4 ) \}.\cf7 \strokec7 first\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 inspection_table_item2\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 field_machines\cf4 \strokec4  = \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_machine_ids\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 inspection_table_item1\cf4 \strokec4  = \cf8 \strokec8 field_machines\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 field_machine\cf4 \strokec4 | \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 field_machine\cf4 \strokec4 .\cf7 \strokec7 id\cf4 \strokec4 ).\cf7 \strokec7 content\cf4 \strokec4 .[](\cf12 \strokec12 'extra_inspection_item2'\cf4 \strokec4 ) \}.\cf7 \strokec7 first\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 inspection_table_item3\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 field_machines\cf4 \strokec4  = \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_machine_ids\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 inspection_table_item1\cf4 \strokec4  = \cf8 \strokec8 field_machines\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 field_machine\cf4 \strokec4 | \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 field_machine\cf4 \strokec4 .\cf7 \strokec7 id\cf4 \strokec4 ).\cf7 \strokec7 content\cf4 \strokec4 .[](\cf12 \strokec12 'extra_inspection_item3'\cf4 \strokec4 ) \}.\cf7 \strokec7 first\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 inspection_table_item4\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 field_machines\cf4 \strokec4  = \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_machine_ids\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 inspection_table_item1\cf4 \strokec4  = \cf8 \strokec8 field_machines\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 field_machine\cf4 \strokec4 | \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 field_machine\cf4 \strokec4 .\cf7 \strokec7 id\cf4 \strokec4 ).\cf7 \strokec7 content\cf4 \strokec4 .[](\cf12 \strokec12 'extra_inspection_item4'\cf4 \strokec4 ) \}.\cf7 \strokec7 first\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 inspection_table_item5\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 field_machines\cf4 \strokec4  = \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_machine_ids\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 inspection_table_item1\cf4 \strokec4  = \cf8 \strokec8 field_machines\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 field_machine\cf4 \strokec4 | \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 field_machine\cf4 \strokec4 .\cf7 \strokec7 id\cf4 \strokec4 ).\cf7 \strokec7 content\cf4 \strokec4 .[](\cf12 \strokec12 'extra_inspection_item5'\cf4 \strokec4 ) \}.\cf7 \strokec7 first\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 inspection_table_item6\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 field_machines\cf4 \strokec4  = \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 document_info\cf4 \strokec4 .\cf7 \strokec7 field_machine_ids\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 inspection_table_item1\cf4 \strokec4  = \cf8 \strokec8 field_machines\cf4 \strokec4 .\cf7 \strokec7 map\cf4 \strokec4  \{ |\cf8 \strokec8 field_machine\cf4 \strokec4 | \cf5 \strokec5 FieldMachine\cf4 \strokec4 .\cf7 \strokec7 find\cf4 \strokec4 (\cf8 \strokec8 field_machine\cf4 \strokec4 .\cf7 \strokec7 id\cf4 \strokec4 ).\cf7 \strokec7 content\cf4 \strokec4 .[](\cf12 \strokec12 'extra_inspection_item6'\cf4 \strokec4 ) \}.\cf7 \strokec7 first\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u25345 \u36796 \u26178 \u12398 \u28857 \u26908 \u34920 \u12288 \u12300 \u36861 \u21152 \u38917 \u30446 \u9312 \u12316 \u9317 \u12301 \u30058 \u21495 \u65288 \u27231 \u26800 \u21517 \u65289 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_extra_inspection_item1\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item1\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item1\cf4 \strokec4  == \cf8 \strokec8 inspection_table_item1\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_extra_inspection_item2\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item2\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item2\cf4 \strokec4  == \cf8 \strokec8 inspection_table_item2\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_extra_inspection_item3\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item3\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item3\cf4 \strokec4  == \cf8 \strokec8 inspection_table_item3\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_extra_inspection_item4\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item4\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item4\cf4 \strokec4  == \cf8 \strokec8 inspection_table_item4\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_extra_inspection_item5\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item5\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item5\cf4 \strokec4  == \cf8 \strokec8 inspection_table_item5\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_extra_inspection_item6\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item6\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 extra_item6\cf4 \strokec4  == \cf8 \strokec8 inspection_table_item6\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u10004 '\cf4 \strokec4  : \cf12 \strokec12 ''\cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u25345 \u36796 \u27231 \u26800 \u12398 \u25991 \u23383 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_str\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u25345 \u36796 \u27231 \u26800 \u12398 \u26085 \u20184 \u24773 \u22577 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 machine_date\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 , \cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 content\cf4 \strokec4 &.[](\cf8 \strokec8 column\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 blank?\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u29694 \u22580 \u27231 \u26800 \u24773 \u22577 \u12398 \u25345 \u36796 \u24180 \u26376 \u26085 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_machine_carry_on_date\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 carry_on_date\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 blank?\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf6 \strokec6 # \uc0\u29694 \u22580 \u27231 \u26800 \u24773 \u22577 \u12398 \u25644 \u20986 \u20104 \u23450 \u26085 \cf4 \cb1 \strokec4 \
+\cb3   \cf2 \strokec2 def\cf4 \strokec4  \cf7 \strokec7 field_machine_carry_out_date\cf4 \strokec4 (\cf8 \strokec8 machine\cf4 \strokec4 )\cb1 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4  = \cf8 \strokec8 machine\cf4 \strokec4 &.\cf7 \strokec7 carry_out_date\cf4 \cb1 \strokec4 \
+\cb3     \cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 blank?\cf4 \strokec4  ? \cf12 \strokec12 '\uc0\u24180 \u12288 \u26376 \u12288 \u26085 '\cf4 \strokec4  : \cf7 \strokec7 l\cf4 \strokec4 (\cf8 \strokec8 date\cf4 \strokec4 .\cf7 \strokec7 to_date\cf4 \strokec4 , \cf10 \strokec10 format:\cf4 \strokec4  \cf10 \strokec10 :long\cf4 \strokec4 )\cb1 \
+\cb3   \cf2 \strokec2 end\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 end\cf4 \cb1 \strokec4 \
+\
+}

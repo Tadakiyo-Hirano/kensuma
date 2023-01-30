@@ -27,7 +27,6 @@
                 <th><%= FieldMachine.human_attribute_name(:machine_name) %></th>
                 <th><%= FieldMachine.human_attribute_name(:carry_on_date) %></th>
                 <th><%= FieldMachine.human_attribute_name(:carry_out_date) %></th>
-                <th><%= FieldMachine.human_attribute_name(:precautions) %></th>
               </tr>
             </thead>
             <tbody>
@@ -37,7 +36,6 @@
                     <td><%= field_machine.machine_name %></td>
                     <td><%= fm.date_field :carry_on_date, class: "form-control" %></td>
                     <td><%= fm.date_field :carry_out_date, class: "form-control" %></td>
-                    <td><%= fm.text_area :precautions, maxlength: 300, placeholder: "300文字以内", class: "form-control" %></td >
                   </tr>
                 <% end %>
               <% end %>

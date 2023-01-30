@@ -11,7 +11,7 @@ class Document < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   # 自身の書類一覧取得(自身が元請の場合、一次の場合、二次の場合、三次以降の場合)
-  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24]) }
+  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22, 23, 24]) }
   scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]) }
   scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
   scope :third_or_later_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
@@ -32,7 +32,7 @@ class Document < ApplicationRecord
     doc_7th:                    7,  # 安全衛生管理に関する契約書(再下請会社用)
     doc_8th:                    8,  # 作業員名簿
     doc_9th:                    9,  # 全建統一様式第１号-甲-別紙(外国人建設就労者建設現場入場届出書)
-    doc_10th:                   10, # 高年齢者作業申告書
+    doc_10th:                   10, # 高齢者就労報告書
     doc_11th:                   11, # 年少者就労報告書
     doc_12th:                   12, # 工事用・通勤用車両届
     doc_13th:                   13, # 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
@@ -51,6 +51,38 @@ class Document < ApplicationRecord
 
   def to_param
     uuid
+  end
+
+
+  def error_msg_for_doc_14th(document_params)
+    if document_type == 'doc_14th' # 持込機械等(電動工具電気溶接機等)使用届用
+      error_msg_for_doc_14th = []
+      # 提出日
+      if document_params[:content][:date_submitted].blank?
+        error_msg_for_doc_14th.push('提出日を入力してください')
+      end
+      # 機械の特性、その他　その使用上注意すべき事項
+      if document_params[:content][:precautions].blank?
+        error_msg_for_doc_14th.push('機械の特性、その他　その使用上注意すべき事項を入力してください')
+      elsif document_params[:content][:precautions].length > 300
+        error_msg_for_doc_14th.push('機械の特性、その他　その使用上注意すべき事項を300字以内にしてください')
+      else
+        nil
+      end
+      # 元請会社の確認欄
+      if document_params[:content][:prime_contractor_confirmation].blank?
+        error_msg_for_doc_14th.push('元請会社の確認者名を入力してください')
+      end
+      # 元請会社の受付確認年月日
+      if document_params[:content][:reception_confirmation_date].blank?
+        error_msg_for_doc_14th.push('元請会社の受付確認年月日を入力してください')
+      end
+      # 点検年月日
+      if document_params[:content][:inspection_date].blank?
+        error_msg_for_doc_14th.push('点検年月日を入力してください')
+      end
+        error_msg_for_doc_14th
+    end
   end
 
   # エラーメッセージ(工事安全衛生計画書用)

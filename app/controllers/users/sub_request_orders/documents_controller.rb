@@ -1,19 +1,15 @@
 module Users::SubRequestOrders
   class DocumentsController < Users::Base
+    before_action :set_documents, only: %i[index show edit update]
+    before_action :set_document, only: %i[show edit update]
+
     layout 'documents'
 
     def index
-      sub_request_order = validate_request_order!
-
-      @documents = sub_request_order.documents
       render 'users/documents/index'
     end
 
     def show
-      sub_request_order = validate_request_order!
-      @documents = sub_request_order.documents
-      @document = @documents.find_by!(uuid: params[:uuid])
-
       respond_to do |format|
         format.html
         format.pdf do
@@ -34,6 +30,26 @@ module Users::SubRequestOrders
       render 'users/documents/show'
     end
 
+    def edit
+      render 'users/documents/edit'
+    end
+
+    def update
+      if @document.request_order.order.business_id == current_business.id # 元請けのみが編集できる
+        case @document.document_type
+        when 'doc_16th'
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_sub_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '更新に失敗しました'
+            render :edit
+          end
+        end
+      else
+        redirect_to root_url
+      end
+    end
+
     private
 
     def validate_request_order!
@@ -44,6 +60,30 @@ module Users::SubRequestOrders
       end
 
       sub_request_order
+    end
+
+    def document_params(document)
+      case document.document_type
+      when 'doc_16th'
+        params.require(:document).permit(approval_content:
+          %i[
+            fire_permit_number
+            fire_permit_date
+            fire_prevention_manager
+            manager
+            permit_criteria
+          ]
+                                        )
+      end
+    end
+
+    def set_documents
+      sub_request_order = validate_request_order!
+      @documents = sub_request_order.documents
+    end
+
+    def set_document
+      @document = @documents.find_by!(uuid: params[:uuid])
     end
   end
 end

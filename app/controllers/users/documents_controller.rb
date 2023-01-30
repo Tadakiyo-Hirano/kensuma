@@ -5,6 +5,7 @@ module Users
     before_action :set_documents # サイドバーに常時表示させるために必要
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
+    before_action :edit_restriction_after_approved, only: %i[edit update]
 
     def index; end
 
@@ -55,11 +56,11 @@ module Users
             redirect_to users_request_order_document_url, success: "保存に成功しました"
           else
             flash[:danger] = '保存に失敗しました'
-            render action: :edit
+            render action: :edit 
           end
         else
           flash[:danger] = @error_msg_for_doc_14th.first
-          render action: :edit
+          render action: :edit 
         end
       when 'doc_19th'
         @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
@@ -163,6 +164,14 @@ module Users
       end
     end
 
+    def edit_restriction_after_approved
+      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+      if request_order.status == 'approved'
+        flash[:danger] = '承認されているため編集できません'
+        redirect_to users_request_order_document_url
+      end
+    end
+
     def document_params(document)
       case document.document_type
       when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
@@ -173,7 +182,7 @@ module Users
         )
       when 'doc_14th'
         params.require(:document).permit(content:
-        %i[
+        %i[ 
             date_submitted
             reception_number1
             reception_number2

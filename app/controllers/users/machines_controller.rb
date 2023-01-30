@@ -14,8 +14,7 @@ module Users
         standards_performance: 'サンプル規格・性能',
         control_number:        'サンプル管理番号',
         inspector:             'サンプル管理者',
-        handler:               'サンプル取扱者',
-        inspection_date:       Date.today
+        handler:               'サンプル取扱者'
         # ============================================
       )
     end
