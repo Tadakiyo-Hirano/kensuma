@@ -1879,7 +1879,7 @@
                 <td class="doc_13_s28" rowspan="3">点検日</td>
                 <td class="doc_13_s42" colspan="6">年 月 日</td>
                 <td class="doc_13_s28" rowspan="3">点検者</td>
-                <td class="doc_13_s24" dir="ltr" colspan="4" rowspan="3">
+                <td class="doc_13_s24" dir="ltr" colspan="4" rowspan="3" style="background-color: #ccffcc;">
                   <%= f.select name = "content[inspector][field_special_vehicle_#{field_special_vehicle.id}]",
                                 @current_business.workers.map {|worker|worker.name},
                                 { selected: @document.content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}"), include_blank: "選択して下さい" }
@@ -1893,9 +1893,9 @@
                 <td class="doc_13_s42" colspan="6">年 月 日</td>
                 <td class="doc_13_s28" rowspan="3">点検者</td>
                 <td class="doc_13_s24" dir="ltr" colspan="4" rowspan="3">
-                  <!-- 13-258 (b)点検者名 ※未実装※ -->
+                  <%= @document.approval_content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-258 (b)点検者名 -->
                 </td>
-                <td class="doc_13_s43" dir="ltr" rowspan="3">
+                <td class="doc_13_s43" dir="ltr" rowspan="3" style="background-color: #e9ecef;">
                   ㊞ <!-- 13-263 印 -->
                 </td>
                 <td class="doc_13_s4"></td>
@@ -1916,8 +1916,8 @@
                                       class: 'form-control form-control-sm'
                   %> <!-- 13-255 (a)点検年月日 -->
                 </td>
-                <td class="doc_13_s38" dir="ltr" colspan="6" rowspan="2">
-                  <!-- 13-257 (b)点検年月日 ※未実装※ -->
+                <td class="doc_13_s38" dir="ltr" colspan="6" rowspan="2" style="background-color: #e9ecef;">
+                  <%= wareki(@document.approval_content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-257 (b)点検年月日 -->
                 </td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s22" colspan="7">(41) 解体用つかみ機</td>
@@ -2237,17 +2237,25 @@
                 </th>
                 <td class="doc_13_s7"></td>
                 <td class="doc_13_s8" colspan="2" rowspan="3">担当者</td>
-                <td class="doc_13_s23" dir="ltr" colspan="11" rowspan="3">
-                  <!-- 13-037 元請確認欄・担当者 ※未実装※ -->
+                <td class="doc_13_s23" dir="ltr" colspan="11" rowspan="3" style="background-color: #e9ecef;">
+                  <%= @document.approval_content&.[]('prime_contractor_confirmation')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-037 元請確認欄･担当者 -->
                 </td>
-                <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3">
-                  <!-- 13-038 受付番号 ※未実装※ -->
+                <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3" style="background-color: #e9ecef;">
+                  <%= @document.approval_content&.[]('receipt_number')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-038 受付番号 -->
                 </td>
-                <td class="doc_13_s36" dir="ltr" colspan="7" rowspan="3">
-                  <!-- 13-039 受付確認年月日 ※未実装※ -->
+                <td class="doc_13_s36" dir="ltr" colspan="7" rowspan="3" style="background-color: #ccffcc;">
+                  <br>
+                  <%= f.date_field name = "content[reception_confirmation_date][field_special_vehicle_#{field_special_vehicle.id}]",
+                                      value: doc_content_date(@document.content&.[]('reception_confirmation_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                      class: 'form-control'
+                  %>　<!-- 13-039 受付確認年月日 -->
                 </td>
-                <td class="doc_13_s36" dir="ltr" colspan="5" rowspan="3">
-                  <!-- 13-040 受付確認者 ※未実装※ -->
+                <td class="doc_13_s36" dir="ltr" colspan="5" rowspan="3" style="background-color: #ccffcc;">
+                  <%= f.select name = "content[person_confirming_receipt][field_special_vehicle_#{field_special_vehicle.id}]",
+                                @current_business.workers.map {|worker|worker.name},
+                                { selected: @document.content&.[]('person_confirming_receipt')&.[]("field_special_vehicle_#{field_special_vehicle.id}"), include_blank: "選択して下さい" },
+                                class: 'form-control'
+                  %> <!-- 13-040 受付確認者 -->
                 </td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s4"></td>

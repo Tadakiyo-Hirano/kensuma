@@ -1740,7 +1740,7 @@
             <td class="s42" colspan="6">年 月 日</td>
             <td class="s28" rowspan="3">点検者</td>
             <td class="s24" dir="ltr" colspan="4" rowspan="3">
-              <!-- 13-258 (b)点検者名 ※未実装※ -->
+              <%= @document.approval_content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-258 (b)点検者名 -->
             </td>
             <td class="s43" dir="ltr" rowspan="3">
               印 <!-- 13-263 印 -->
@@ -1761,7 +1761,7 @@
               <%= wareki(@document.content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-255 (a)点検年月日 --> 
             </td>
             <td class="s38" dir="ltr" colspan="6" rowspan="2">
-              <!-- 13-257 (b)点検年月日 ※未実装※ -->
+              <%= wareki(@document.approval_content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-257 (b)点検年月日 -->
             </td>
             <td class="s4"></td>
             <td class="s22" colspan="7">(41) 解体用つかみ機</td>
@@ -2082,16 +2082,16 @@
             <td class="s7"></td>
             <td class="s8" colspan="2" rowspan="3">担当者</td>
             <td class="s23" dir="ltr" colspan="11" rowspan="3">
-              <!-- 13-037 元請確認欄・担当者 ※未実装※ -->
+              <%= @document.approval_content&.[]('prime_contractor_confirmation')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-037 元請確認欄･担当者 -->
             </td>
             <td class="s23" dir="ltr" colspan="12" rowspan="3">
-              <!-- 13-038 受付番号 ※未実装※ -->
+              <%= @document.approval_content&.[]('receipt_number')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-038 受付番号 -->
             </td>
             <td class="s36" dir="ltr" colspan="7" rowspan="3">
-              <!-- 13-039 受付確認年月日 ※未実装※ -->
+              <%= wareki(@document.content&.[]('reception_confirmation_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-039 受付確認年月日 -->
             </td>
             <td class="s36" dir="ltr" colspan="5" rowspan="3">
-              <!-- 13-040 受付確認者 ※未実装※ -->
+              <%= @document.content&.[]('person_confirming_receipt')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-040 受付確認者 -->
             </td>
             <td class="s4"></td>
             <td class="s4"></td>
@@ -2195,7 +2195,6 @@
   .ritz .waffle .s14 {
     border-right: 1px SOLID #ffffff;
     border-bottom: 1px SOLID #ccffcc;
-    background-color: #ccffcc;
     text-align: center;
     font-weight: bold;
     color: #000000;
@@ -2322,7 +2321,6 @@
   .ritz .waffle .s32 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: left;
     color: #000000;
     font-family: 'docs-Roboto', Arial;
@@ -2348,7 +2346,6 @@
 
   .ritz .waffle .s37 {
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2491,7 +2488,6 @@
   .ritz .waffle .s30 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2517,7 +2513,6 @@
 
   .ritz .waffle .s25 {
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2531,7 +2526,6 @@
   .ritz .waffle .s24 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2590,7 +2584,6 @@
     border-right: 1px SOLID #ccffcc;
     border-left: 1px SOLID #ccffcc;
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2617,7 +2610,6 @@
   .ritz .waffle .s41 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: left;
     color: #000000;
     font-family: 'Arial';
@@ -2647,7 +2639,6 @@
   .ritz .waffle .s23 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2661,7 +2652,6 @@
   .ritz .waffle .s38 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2690,7 +2680,6 @@
     border-right: 1px SOLID #ffffff;
     border-left: 1px SOLID #ccffcc;
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2706,7 +2695,6 @@
   .ritz .waffle .s43 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2736,7 +2724,6 @@
   .ritz .waffle .s10 {
     border-right: 1px SOLID #ffffff;
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2780,7 +2767,6 @@
     border-bottom: 1px SOLID 000000;
     border-right: 1px SOLID #ccffcc;
     border-left: 1px SOLID #ccffcc;
-    background-color: #ccffcc;
     text-align: left;
     color: #000000;
     font-family: 'Arial';
@@ -2849,7 +2835,6 @@
   .ritz .waffle .s36 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';

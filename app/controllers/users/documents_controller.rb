@@ -151,6 +151,8 @@ module Users
         params.require(:document).permit(content: 
           [
             date_submitted:                field_special_vehicle_keys, # 13-001 提出日(西暦)
+            reception_confirmation_date:   field_special_vehicle_keys, # 13-039 受付確認年月日
+            person_confirming_receipt:     field_special_vehicle_keys, # 13-040 受付確認者
             a_over_winding_prevention:     field_special_vehicle_keys, # 13-111 (a)Aクレーン部 安全装置         巻過防止装置
             a_overload_protector:          field_special_vehicle_keys, # 13-112 (a)Aクレーン部 安全装置         過負荷防止装置
             a_anti_slip_hook:              field_special_vehicle_keys, # 13-113 (a)Aクレーン部 安全装置         フックのはずれ
@@ -202,7 +204,7 @@ module Users
             e_boom_arm:                    field_special_vehicle_keys, # 13-159 (a)E作業装置　                 ブーム･アーム
             e_jib:                         field_special_vehicle_keys, # 13-160 (a)E作業装置　                 ジブ
             e_reader:                      field_special_vehicle_keys, # 13-161 (a)E作業装置　                 リーダ
-            e_hammer_auger_vibro:         field_special_vehicle_keys, # 13-162 (a)E作業装置　                 ハンマ･オーガ･バイブロ
+            e_hammer_auger_vibro:          field_special_vehicle_keys, # 13-162 (a)E作業装置　                 ハンマ･オーガ･バイブロ
             e_hydraulic_drive_unit:        field_special_vehicle_keys, # 13-163 (a)E作業装置　                 油圧駆動装置
             e_wire_rope_chain:             field_special_vehicle_keys, # 13-164 (a)E作業装置　                 ワイヤロープ･チェーン
             e_hanger:                      field_special_vehicle_keys, # 13-165 (a)E作業装置　                 吊り具等
