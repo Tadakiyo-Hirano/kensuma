@@ -36,6 +36,8 @@ module Users
         @error_msg_for_doc_14th = nil
       when 'doc_19th'
         @error_msg_for_doc_19th = nil
+      when 'doc_21st'
+        @error_msg_for_doc_21st = nil
       end
     end
 
@@ -58,7 +60,7 @@ module Users
             render action: :edit 
           end
         else
-          flash[:danger] = @error_msg_for_doc_14th.first
+          flash[:danger] = @error_msg_for_doc_14th.to_sentence
           render action: :edit 
         end
       when 'doc_19th'
@@ -75,15 +77,20 @@ module Users
           render action: :edit
         end
       when 'doc_21st'
-        # date_selectのデータ取得形式に合わせるため年月を結合
+        # date_selectのデータ取得形式に合わせるため結合
         params[:document][:content][:start_time] = start_time_join
         params[:document][:content][:end_time] = end_time_join
-        # 現場人数取得のバリデーションのため
-        if @document.update(document_params(@document))
-          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        @error_msg_for_doc_21st = @document.error_msg_for_doc_21st(document_params(@document))
+        if @error_msg_for_doc_21st.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
         else
-          flash[:danger] = '更新に失敗しました'
-          render :edit
+          flash[:danger] = @error_msg_for_doc_21st.to_sentence
+          render action: :edit
         end
       end
     end
@@ -362,6 +369,9 @@ module Users
             :teachers_company,
             :teacher_name,
             :material,
+            :newly_entrance,
+            :employer_in,
+            :work_change,
             { student_name: [] }
           ]
         )

@@ -416,8 +416,8 @@
                   <td class="doc_21_m8" dir="ltr" colspan="12" rowspan="2">
                     <%= document_info.site_agent_name %> <!-- 21-006 「各会社の現場代理人名」-->
                   </td>
-                  <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2"><a target="_blank"
-                      href="#rangeid=88565281">㊞<br>21-007</a>
+                  <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2">
+                    <a>㊞<br></a> <!-- 21-007 「社印」-->
                   </td>
                 </tr>
                 <tr style="height: 29px">
@@ -493,20 +493,24 @@
                   <td class="doc_21_m3" dir="ltr" colspan="34">摘 要</td>
                 </tr>
                 <tr style="height: 44px">
-                  <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td>
+                  <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td> <!-- ⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008 -->
                   <td class="doc_21_m15"></td>
-                  <td class="doc_21_m15" dir="ltr" colspan="5">新規入場時</td>
-                  <td class="doc_21_m15"></td>
-                  <td class="doc_21_m15" dir="ltr">・</td>
-                  <td class="doc_21_m15"></td>
-                  <td class="doc_21_m15"></td>
-                  <td class="doc_21_m15" dir="ltr" colspan="4">雇入時</td>
+                  <td class="doc_21_m15" dir="ltr" colspan="5">
+                    <%= newly_entrance_check(@document.content&.[]("newly_entrance")) %> <!-- 新規入場時 -->
+                  </td>
                   <td class="doc_21_m15"></td>
                   <td class="doc_21_m15" dir="ltr">・</td>
                   <td class="doc_21_m15"></td>
-                  <td class="doc_21_m15" dir="ltr" colspan="5">作業変更時</td>
-                  <td class="doc_21_m16" dir="ltr" colspan="12"><a target="_blank"
-                      href="#rangeid=229790909">⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008</a></td>
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr" colspan="4">
+                    <%= employer_in_check(@document.content&.[]("employer_in")) %></td> <!-- 雇入時 -->
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr">・</td>
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr" colspan="5">
+                    <%= work_change_check(@document.content&.[]("work_change")) %></td> <!-- 作業変更時 -->
+                  </td>
+                  <td class="doc_21_m16" dir="ltr" colspan="12"></td>
                 </tr>
                 <tr style="height: 44px">
                   <td class="doc_21_m29" dir="ltr" colspan="7">実 施 日 時</td>
@@ -542,7 +546,9 @@
                 <tr style="height: 44px">
                   <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
                   <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
-                    <%= safe_join(@document.content&.[]('education_content').split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
+                    <% if @document.content&.[]('education_content') %>
+                      <%= safe_join(@document.content&.[]('education_content').split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
+                    <% end %>
                   </td>
                 </tr>
                 <tr style="height: 44px">
@@ -622,7 +628,9 @@
                 <tr style="height: 44px">
                   <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
                   <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
-                    <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
+                    <% if @document.content&.[]('material') %>
+                      <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
+                    <% end %>
                   </td>
                 </tr>
                 <tr style="height: 44px">
@@ -1061,8 +1069,8 @@
                 <td class="doc_21_m8" dir="ltr" colspan="12" rowspan="2">
                   <%= document_info.site_agent_name %> <!-- 21-006 「各会社の現場代理人名」-->
                 </td>
-                <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2"><a target="_blank"
-                    href="#rangeid=88565281">㊞<br>21-007</a>
+                <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2">
+                  <a>㊞<br></a> <!-- 21-007 「社印」-->
                 </td>
               </tr>
               <tr style="height: 29px">
@@ -1138,7 +1146,7 @@
                 <td class="doc_21_m3" dir="ltr" colspan="34">摘 要</td>
               </tr>
               <tr style="height: 44px">
-                <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td>
+                <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td> <!-- ⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008 -->
                 <td class="doc_21_m15"></td>
                 <td class="doc_21_m15" dir="ltr" colspan="5">新規入場時</td>
                 <td class="doc_21_m15"></td>
@@ -1151,7 +1159,7 @@
                 <td class="doc_21_m15"></td>
                 <td class="doc_21_m15" dir="ltr" colspan="5">作業変更時</td>
                 <td class="doc_21_m16" dir="ltr" colspan="12"><a target="_blank"
-                    href="#rangeid=229790909">⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008</a></td>
+                    href="#rangeid=229790909"></a></td>
               </tr>
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7">実 施 日 時</td>
@@ -1168,7 +1176,9 @@
                 </td>
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m14" dir="ltr">（</td>
-                <td class="doc_21_m17" dir="ltr" colspan="4">「実施時間（時間）」21-012</td> <!-- 未実装 -->
+                <td class="doc_21_m17" dir="ltr" colspan="4">
+                  <%= @document.content&.[]("implementation_time") %> <!-- 「実施時間（時間）」21-012 -->
+                </td>
                 <td class="doc_21_m14" dir="ltr" colspan="3">時間）</td>
                 <td class="doc_21_m19"></td>
               </tr>
@@ -1185,7 +1195,9 @@
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
                 <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
-                  <%= safe_join(@document.content&.[]('education_content').split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
+                  <% if @document.content&.[]('education_content') %>
+                    <%= safe_join(@document.content&.[]('education_content')&.split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
+                  <% end %>
                 </td>
               </tr>
               <tr style="height: 44px">
@@ -1251,7 +1263,9 @@
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
                 <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
-                  <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
+                  <% if @document.content&.[]('material') %>
+                    <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
+                  <% end %>
                 </td>
               </tr>
               <tr style="height: 44px">
