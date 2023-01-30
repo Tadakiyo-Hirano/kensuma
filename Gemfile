@@ -88,8 +88,6 @@ gem 'kaminari'
 # form object
 gem 'dry-validation'
 gem 'reform'
-# 一括更新
-gem 'activerecord-import'
 
 # wareki - ruby 和暦ライブラリ
 gem 'wareki'
