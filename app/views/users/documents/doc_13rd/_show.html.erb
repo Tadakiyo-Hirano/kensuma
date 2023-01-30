@@ -193,7 +193,7 @@
               <td class="doc_13_s2"></td>
               <td class="doc_13_s2"></td>
               <td class="doc_13_s10" dir="ltr" colspan="8">
-                <%= doc_content_date(@document.content&.[]('date_submitted')["field_special_vehicle_#{field_special_vehicle.id}"]) %> <!-- 提出日(西暦) 13-001 -->
+                <%= doc_content_date(@document.content&.[]('date_submitted')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 提出日(西暦) 13-001 -->
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s4"></td>
@@ -516,10 +516,10 @@
               <td class="doc_13_s28" rowspan="5">安全装置</td>
               <td class="doc_13_s29" colspan="7">巻過防止装置</td>
               <td class="doc_13_s30" dir="ltr" colspan="2">
-                <%= checked_box(@document.content&.[]('a_over_winding_prevention')["field_special_vehicle_#{field_special_vehicle.id}"]) %> <!-- 13-111 (a)Aクレーン部 安全装置 巻過防止装置 -->
+                <%= checked_box(@document.content&.[]('a_over_winding_prevention')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-111 (a)Aクレーン部 安全装置 巻過防止装置 -->
               </td>
               <td class="doc_13_s30" dir="ltr" colspan="2">
-                <%= checked_box(@document.approval_content&.[]('a_over_winding_prevention')["field_special_vehicle_#{field_special_vehicle.id}"]) %> <!-- 13-183 (b)Aクレーン部 安全装置 巻過防止装置 -->
+                <%= checked_box(@document.approval_content&.[]('a_over_winding_prevention')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-183 (b)Aクレーン部 安全装置 巻過防止装置 -->
               </td>
               <td class="doc_13_s28" colspan="2" rowspan="10">Ｄ安全装置</td>
               <td class="doc_13_s28" rowspan="6">各種ロック</td>
