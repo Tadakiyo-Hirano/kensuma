@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <% document_info.field_special_vehicles.each do |field_special_vehicle| %>
+    <% document_info.field_special_vehicles.each do |field_special_vehicle| %>    
       <section class="doc_13_sheet">
         <div class="ritz grid-container" dir="ltr">
           <table class="waffle no-grid" style="width: 100%; zoom: 50%;">
@@ -345,7 +345,7 @@
                   <%= field_special_vehicle.owning_company_name %> <!-- 13-101 所有会社名 -->
                 </td>
                 <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3">
-                  <%= field_special_vehicle.owning_company_representative_name %>　<!-- 13-102 所有会社の代表者名 -->
+                  <%= field_special_vehicle.owning_company_name %>　<!-- 13-102 所有会社の代表者名 -->
                 </td>
                 <td class="doc_13_s24" dir="ltr" colspan="2" rowspan="3">
                   ㊞ <!-- 13-261 印 -->
@@ -455,7 +455,11 @@
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s20"></td>
-                <td class="doc_13_s21" colspan="14">移動式クレーン等</td>
+                <td class="doc_13_s21" colspan="10">移動式クレーン等</td>
+                <td class="doc_13_s21" colspan="4">
+                  <input type="checkbox" class=<%= "checkbox_all#{field_special_vehicle.id}" %>>
+                  全選択
+                </td>
                 <td class="doc_13_s21" colspan="14">車両系建設機械等</td>
                 <td class="doc_13_s5"></td>
                 <td class="doc_13_s22" colspan="7">(５) 建設用リフト</td>
@@ -526,7 +530,8 @@
                 <td class="doc_13_s29" colspan="7">巻過防止装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_over_winding_prevention][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_over_winding_prevention')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_over_winding_prevention')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-111 (a)Aクレーン部 安全装置 巻過防止装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -537,7 +542,8 @@
                 <td class="doc_13_s29" colspan="7">旋回</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_turning][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-147 (a)D安全装置 各種ロック 旋回  -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -585,7 +591,8 @@
                 <td class="doc_13_s29" colspan="7">過負荷防止装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_overload_protector][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_overload_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_overload_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-112 (a)Aクレーン部 安全装置 過負荷防止装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -594,7 +601,8 @@
                 <td class="doc_13_s29" colspan="7">バケット</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_bucket][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-148 (a)D安全装置 各種ロック バケット -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -635,7 +643,8 @@
                 <td class="doc_13_s29" colspan="7">フックのはずれ止め</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_anti_slip_hook][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_anti_slip_hook')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_anti_slip_hook')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-113 (a)Aクレーン部 安全装置 フックのはずれ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -644,7 +653,8 @@
                 <td class="doc_13_s29" colspan="7">ブーム・アーム</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_boom_arm][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-149 (a)D安全装置 各種ロック ブーム･アーム -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -689,7 +699,8 @@
                 <td class="doc_13_s29" colspan="7">起伏装置制御</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_control_of_hoisting_device][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_control_of_hoisting_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_control_of_hoisting_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-114 (a)Aクレーン部 安全装置 起伏装置制御 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -698,7 +709,8 @@
                 <td class="doc_13_s32" dir="ltr" colspan="7">「追加項目内容①」13-103</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_add_item_1][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_add_item_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_add_item_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -739,7 +751,8 @@
                 <td class="doc_13_s29" colspan="7">旋回警報装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_swivel_warning_device][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_swivel_warning_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_swivel_warning_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-115 (a)Aクレーン部 安全装置 旋回警報装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -748,7 +761,8 @@
                 <td class="doc_13_s32" dir="ltr" colspan="7">「追加項目内容②」13-104</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_add_item_2][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_add_item_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_add_item_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -807,7 +821,8 @@
                 <td class="doc_13_s29" colspan="7">主巻・補巻</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_main_supplemental][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_main_supplemental')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_main_supplemental')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-116 (a)Aクレーン部 制御装置･作業装置 主巻･補巻 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -816,7 +831,8 @@
                 <td class="doc_13_s32" dir="ltr" colspan="7">「追加項目内容③」13-105</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_add_item_3][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_add_item_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_add_item_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -838,7 +854,8 @@
                 <td class="doc_13_s29" colspan="7">起伏・旋回</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_up_down_turning][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_up_down_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_up_down_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-117 (a)Aクレーン部 制御装置･作業装置 起伏･旋回 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -847,7 +864,8 @@
                 <td class="doc_13_s29" colspan="8">警報装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_alarm_device][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-153 (a)D安全装置 警報装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -869,7 +887,8 @@
                 <td class="doc_13_s29" colspan="7">クラッチ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_clutch][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-118 (a)Aクレーン部 制御装置･作業装置 クラッチ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -878,7 +897,8 @@
                 <td class="doc_13_s29" colspan="8">アウトリガー</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_outrigger][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-154 (a)D安全装置 アウトリガー -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -936,7 +956,8 @@
                 <td class="doc_13_s29" colspan="7">ブレーキ・ロック</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_brake_lock][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-119 (a)Aクレーン部 制御装置･作業装置 ブレーキ･ロック -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -945,7 +966,8 @@
                 <td class="doc_13_s29" colspan="8">ヘッドガード</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_head_guard][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_head_guard')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_head_guard')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-155 (a)D安全装置 ヘッドガード -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -968,7 +990,8 @@
                 <td class="doc_13_s29" colspan="7">ジブ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_jib][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-120 (a)Aクレーン部 制御装置･作業装置 ジブ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -977,7 +1000,8 @@
                 <td class="doc_13_s29" colspan="8">照明</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[d_lighting][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('d_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('d_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-156 (a)D安全装置 照明 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -998,7 +1022,8 @@
                 <td class="doc_13_s29" colspan="7">滑車</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_pulley][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-121 (a)Aクレーン部 制御装置･作業装置 滑車 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1008,7 +1033,8 @@
                 <td class="doc_13_s29" colspan="8">操作装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_control_unit][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-157 (a)E作業装置 操作装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1038,7 +1064,8 @@
                 <td class="doc_13_s29" colspan="7">フック・バケット</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_hook_bucket][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_hook_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_hook_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-122 (a)Aクレーン部 制御装置･作業装置 フック･バケット -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1047,7 +1074,8 @@
                 <td class="doc_13_s29" colspan="8">バケット・ブレード</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_bucket_blade][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_bucket_blade')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_bucket_blade')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-158 (a)E作業装置 バケット･ブレード -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1068,7 +1096,8 @@
                 <td class="doc_13_s29" colspan="7">ワイヤロープ・チェーン</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_wire_rope_chain][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-123 (a)Aクレーン部 制御装置･作業装置 ワイヤロープ･チェーン -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1077,7 +1106,8 @@
                 <td class="doc_13_s29" colspan="8">ブーム・アーム</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_boom_arm][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-159 (a)E作業装置 ブーム･アーム -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1098,7 +1128,8 @@
                 <td class="doc_13_s29" colspan="7">玉掛用具</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_slinging_tool][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_slinging_tool')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_slinging_tool')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-124 (a)Aクレーン部 制御装置･作業装置 玉掛用具 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1107,7 +1138,8 @@
                 <td class="doc_13_s29" colspan="8">ジブ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_jib][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-160 (a)E作業装置 ジブ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1135,7 +1167,8 @@
                 <td class="doc_13_s29" colspan="7">操作装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_control_unit][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-125 (a)Aクレーン部 その他 操作装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1144,7 +1177,8 @@
                 <td class="doc_13_s29" colspan="8">リーダ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_reader][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_reader')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_reader')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-161 (a)E作業装置 リーダ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1165,7 +1199,8 @@
                 <td class="doc_13_s29" colspan="7">性能表示</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_performance_indication][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_performance_indication')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_performance_indication')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-126 (a)Aクレーン部 その他 性能表示 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1174,7 +1209,8 @@
                 <td class="doc_13_s29" colspan="8">ハンマ・オーガ・バイブロ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_hammer_auger_vibro][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_hammer_auger_vibro')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_hammer_auger_vibro')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-162 (a)E作業装置 ハンマ･オーガ･バイブロ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1195,7 +1231,8 @@
                 <td class="doc_13_s29" colspan="7">照明</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[a_lighting][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('a_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('a_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-127 (a)Aクレーン部 その他 照明 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1204,7 +1241,8 @@
                 <td class="doc_13_s29" colspan="8">油圧駆動装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_hydraulic_drive_unit][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_hydraulic_drive_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_hydraulic_drive_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-163 (a)E作業装置 油圧駆動装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1244,7 +1282,8 @@
                 <td class="doc_13_s29" colspan="7">ブレーキ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_brake][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-128 (a)B車両部 走行部 ブレーキ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1253,7 +1292,8 @@
                 <td class="doc_13_s29" colspan="8">ワイヤロープ・チェーン</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_wire_rope_chain][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-164 (a)E作業装置 ワイヤロープ･チェーン -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1274,7 +1314,8 @@
                 <td class="doc_13_s29" colspan="7">クラッチ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_clutch][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-129 (a)B車両部 走行部 クラッチ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1283,7 +1324,8 @@
                 <td class="doc_13_s29" colspan="8">吊り具等</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_hanger][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_hanger')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_hanger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-165 (a)E作業装置 吊り具等 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1304,7 +1346,8 @@
                 <td class="doc_13_s29" colspan="7">ハンドル</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_handle][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_handle')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_handle')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-130 (a)B車両部 走行部 ハンドル -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1313,7 +1356,8 @@
                 <td class="doc_13_s29" colspan="8">滑車</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[e_pulley][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('e_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('e_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-166 (a)E作業装置 滑車 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1343,7 +1387,8 @@
                 <td class="doc_13_s29" colspan="7">タイヤ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_tire][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_tire')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_tire')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-131 (a)B車両部 走行部 タイヤ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1353,7 +1398,8 @@
                 <td class="doc_13_s29" colspan="8">ブレーキ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[f_brake][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('f_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('f_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-167 (a)F走行部 ブレーキ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1373,7 +1419,8 @@
                 <td class="doc_13_s29" colspan="7">クローラ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_crawler][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-132 (a)B車両部 走行部 クローラ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1382,7 +1429,8 @@
                 <td class="doc_13_s29" colspan="8">駐車ブレーキ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[f_parking_brake][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('f_parking_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('f_parking_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-168 (a)F走行部 駐車ブレーキ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1409,7 +1457,8 @@
                 <td class="doc_13_s29" colspan="7">警報装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_alarm_device][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-133 (a)B車両部 安全装置等 警報装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1418,7 +1467,8 @@
                 <td class="doc_13_s29" colspan="8">ブレーキロック</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[f_brake_lock][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('f_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('f_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-169 (a)F走行部 ブレーキロック -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1436,7 +1486,8 @@
                 <td class="doc_13_s29" colspan="7">各種ミラー</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_various_mirrors][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_various_mirrors')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_various_mirrors')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-134 (a)B車両部 安全装置等 各種ミラー -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1445,7 +1496,8 @@
                 <td class="doc_13_s29" colspan="8">クラッチ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[f_clutch][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('f_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('f_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-170 (a)F走行部 クラッチ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1467,7 +1519,8 @@
                 <td class="doc_13_s29" colspan="7">方向指示器</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_direction_indicator][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_direction_indicator')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_direction_indicator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-135 (a)B車両部 安全装置等 方向指示器 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1476,7 +1529,8 @@
                 <td class="doc_13_s29" colspan="8">操縦装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[f_control_unit][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('f_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('f_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-171 (a)F走行部 操縦装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1497,7 +1551,8 @@
                 <td class="doc_13_s29" colspan="7">前後照灯</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_headlights][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_headlights')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_headlights')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-136 (a)B車両部 安全装置等 前後照灯 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1506,7 +1561,8 @@
                 <td class="doc_13_s29" colspan="8">タイヤ・鉄輪</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[f_tires_iron_wheel][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('f_tires_iron_wheel')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('f_tires_iron_wheel')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-172 (a)F走行部 タイヤ･鉄輪 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1533,7 +1589,8 @@
                 <td class="doc_13_s29" colspan="7">左折プロテクター</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_left_turn_protector][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_left_turn_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_left_turn_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-137 (a)B車両部 安全装置等 左折プロテクター -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1542,7 +1599,8 @@
                 <td class="doc_13_s29" colspan="8">クローラ</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[f_crawler][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('f_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('f_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-173 (a)F走行部 クローラ -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1563,7 +1621,8 @@
                 <td class="doc_13_s29" colspan="7">アウトリガー</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_outrigger][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-138 (a)B車両部 安全装置等 アウトリガー -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1573,7 +1632,8 @@
                 <td class="doc_13_s29" colspan="8">配電盤</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[g_switchboard][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('g_switchboard')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('g_switchboard')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-174 (a)G電気装置 配電盤 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1600,7 +1660,8 @@
                 <td class="doc_13_s29" colspan="7">昇降装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_elevator][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-139 (a)B車両部 安全装置等 昇降装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1609,7 +1670,8 @@
                 <td class="doc_13_s29" colspan="8">配線</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[g_wiring][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('g_wiring')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('g_wiring')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-175 (a)G電気装置 配線 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1630,7 +1692,8 @@
                 <td class="doc_13_s29" colspan="7">ベッセル</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_vessel][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_vessel')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_vessel')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-140 (a)B車両部 安全装置等 ベッセル -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1639,7 +1702,8 @@
                 <td class="doc_13_s29" colspan="8">絶縁</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[g_isolation][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('g_isolation')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('g_isolation')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-176 (a)G電気装置 絶縁 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1674,7 +1738,8 @@
                 <td class="doc_13_s29" colspan="7">後方監視装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[b_rearward_monitoring_devices][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('b_rearward_monitoring_devices')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('b_rearward_monitoring_devices')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-141 (a)B車両部 安全装置等 後方監視装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1683,7 +1748,8 @@
                 <td class="doc_13_s29" colspan="8">アース</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[g_earth][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('g_earth')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('g_earth')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-177 (a)G電気装置 アース -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1706,7 +1772,8 @@
                 <td class="doc_13_s29" colspan="7">突りょう</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[c_piercing][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('c_piercing')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('c_piercing')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-142 (a)Cゴンドラ 突りょう -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1715,7 +1782,8 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目④」13-106</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[h_add_item_4][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('h_add_item_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('h_add_item_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1740,7 +1808,8 @@
                 <td class="doc_13_s29" colspan="7">作業床</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[c_workbench][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('c_workbench')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('c_workbench')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-143 (a)Cゴンドラ 作業床 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1750,7 +1819,8 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑤」13-107</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[h_add_item_5][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('h_add_item_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('h_add_item_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1771,7 +1841,8 @@
                 <td class="doc_13_s29" colspan="7">昇降装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[c_elevator][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('c_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('c_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-144 (a)Cゴンドラ 昇降装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1780,7 +1851,8 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑥」13-108</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[h_add_item_6][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('h_add_item_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('h_add_item_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1805,7 +1877,8 @@
                 <td class="doc_13_s29" colspan="7">電気装置</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[c_electrical_equipment][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('c_electrical_equipment')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('c_electrical_equipment')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-145 (a)Cゴンドラ 電気装置 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1814,7 +1887,8 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑦」13-109</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[h_add_item_7][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('h_add_item_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('h_add_item_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1835,7 +1909,8 @@
                 <td class="doc_13_s29" colspan="7">ワイヤ・ライフライン</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[c_wire_lifeline][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('c_wire_lifeline')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('c_wire_lifeline')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-146 (a)Cゴンドラ ワイヤ･ライフライン -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1844,7 +1919,8 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑧」13-110</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
                   <%= f.check_box name = "content[h_add_item_8][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.content&.[]('h_add_item_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}"))
+                                    checked: box_checked?(@document.content&.[]('h_add_item_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                                    class: "checkbox_list#{field_special_vehicle.id}"
                   %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -2349,6 +2425,34 @@
           </div>
         </div>
       </section>
+
+      <script>
+      //全選択・解除のチェックボックス
+      let checkbox_all<%= field_special_vehicle.id %> = document.querySelector(".checkbox_all<%= field_special_vehicle.id %>");
+      //チェックボックスのリスト
+      let checkbox_list<%= field_special_vehicle.id %> = document.querySelectorAll(".checkbox_list<%= field_special_vehicle.id %>");
+      //全選択のチェックボックスイベント
+      checkbox_all<%= field_special_vehicle.id %>.addEventListener('change', change_all);
+      
+      function change_all() {
+        //チェックされているか
+        if (checkbox_all<%= field_special_vehicle.id %>.checked) {
+          //全て選択
+          for (let i in checkbox_list<%= field_special_vehicle.id %>) {
+            if (checkbox_list<%= field_special_vehicle.id %>.hasOwnProperty(i)) {
+              checkbox_list<%= field_special_vehicle.id %>[i].checked = true;
+            }
+          }
+        } else {
+          //全て解除
+          for (let i in checkbox_list<%= field_special_vehicle.id %>) {
+            if (checkbox_list<%= field_special_vehicle.id %>.hasOwnProperty(i)) {
+              checkbox_list<%= field_special_vehicle.id %>[i].checked = false;
+            }
+          }
+        }
+      };
+      </script>
     <% end %>
   </div>
 <% end %>

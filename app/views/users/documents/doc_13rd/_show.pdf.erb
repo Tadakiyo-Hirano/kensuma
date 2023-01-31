@@ -230,7 +230,7 @@
             <td class="s6"></td>
             <td class="s6"></td>
             <td class="s6"></td>
-            <td class="s14" colspan="9" rowspan="2">
+            <td class="s14" colspan="9" rowspan="2" style="border-bottom: 1px SOLID #ffffff;">
               <%= vehicle_type_crane(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
             </td>
             <td class="s15" colspan="2" rowspan="4">　等</td>
@@ -1546,7 +1546,7 @@
             <td class="s20"></td>
             <td class="s29" colspan="7">後方監視装置</td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-141 (a)B車両部 安全装置等 後方監視装置 -->
+              <%= checked_box(@document.content&.[]('b_rearward_monitoring_devices')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-141 (a)B車両部 安全装置等 後方監視装置 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_box(@document.approval_content&.[]('')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-213 (b)B車両部 安全装置等 後方監視装置 -->

@@ -76,9 +76,9 @@ module Users::SubRequestOrders
                                         )
       when 'doc_13rd'
         field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
-        field_special_vehicle_keys = field_special_vehicle_ids.map{|field_special_vehicle_id|"field_special_vehicle_#{field_special_vehicle_id}"}
+        field_special_vehicle_keys = field_special_vehicle_ids.map { |field_special_vehicle_id| "field_special_vehicle_#{field_special_vehicle_id}" }
 
-        params.require(:document).permit(approval_content: 
+        params.require(:document).permit(approval_content:
           [
             date_submitted:                field_special_vehicle_keys, # 13-001 提出日(西暦)
             prime_contractor_confirmation: field_special_vehicle_keys, # 13-037 元請確認欄･担当者
@@ -158,7 +158,7 @@ module Users::SubRequestOrders
             inspection_date:               field_special_vehicle_keys, # 13-255 (a)点検年月日
             inspector:                     field_special_vehicle_keys  # 13-256 (a)点検者
           ]
-        )
+                                        )
       end
     end
 
