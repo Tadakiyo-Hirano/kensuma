@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_30_094738) do
+ActiveRecord::Schema.define(version: 2023_01_31_010540) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -332,6 +332,7 @@ ActiveRecord::Schema.define(version: 2023_01_30_094738) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "occupation"
     t.integer "sendoff_education", default: 0, null: false
+    t.string "prime_contractor_confirmation"
     t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
   end
 

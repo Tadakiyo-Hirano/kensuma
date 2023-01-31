@@ -101,7 +101,7 @@
             <td class="doc_24_s1"></td>
             <td class="doc_24_s7"></td>
             <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-            <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= f.text_field name = "content[prime_contractor_confirmation_#{j.ordinalize}]", value: worker_str(field_worker, "prime_contractor_confirmation"), :placeholder => '例)元請会社の確認者' %></td> <!-- 「元請会社の確認欄」24-002 -->
+            <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= f.text_field name = "prime_contractor_confirmation_#{j.ordinalize}",value: field_worker.prime_contractor_confirmation, :placeholder => '例)元請会社の確認者' %></td> <!-- 「元請会社の確認欄」24-002 -->
             <td class="doc_24_s3"></td>
             <td class="doc_24_s3"></td>
           </tr>
@@ -257,8 +257,8 @@
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
-          <td class="doc_24_s99" dir="ltr" colspan="7" rowspan="2"><%= "※24-011未実装※" %></td> <!-- 「緊急連絡先（氏名）」24-011 -->
-          <td class="doc_24_s98" dir="ltr" colspan="2" rowspan="2"><%= "※24-012未実装※" %></td> <!-- 「緊急連絡先（続柄）」24-012 -->
+          <td class="doc_24_s99" dir="ltr" colspan="7" rowspan="2"><%= field_worker.content["family_name"] %></td> <!-- 「緊急連絡先（氏名）」24-011 -->
+          <td class="doc_24_s98" dir="ltr" colspan="2" rowspan="2"><%= field_worker.content["relationship"] %></td> <!-- 「緊急連絡先（続柄）」24-012 -->
           <td class="doc_24_s9" dir="ltr" colspan="3" rowspan="2"><%= field_worker.content["family_phone_number"] %></td> <!-- 「緊急連絡先（電話番号）」24-013 -->
           <td class="doc_24_s9" dir="ltr" colspan="11" rowspan="2"><%= field_worker.content["family_address"] %></td> <!-- 「緊急連絡先（住所）」24-014 -->
           <td class="doc_24_s3"></td>
@@ -306,12 +306,12 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s8" dir="ltr" colspan="3">雇用契約書</td>
-          <td class="doc_24_s26" dir="ltr" colspan="4">1. 取り交わし済</td>
+          <td class="doc_24_s26" dir="ltr" colspan="4"><%= employment_contract_yes(field_worker) %></td>
           <td class="doc_24_s26" dir="ltr"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="2">2. 未 だ</td>
-          <td class="doc_24_s28" dir="ltr" colspan="3"><%#= "※⇐24-018未実装※" %></td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
+          <td class="doc_24_s27" dir="ltr" colspan="2"><%= employment_contract_no(field_worker) %></td>
+          <td class="doc_24_s28" dir="ltr" colspan="3"></td>
           <td class="doc_24_s17" dir="ltr" colspan="2">職 種：</td>
-          <td class="doc_24_s29" dir="ltr" colspan="7"><%= "※24-019未実装※" %></td> <!-- 「職種」24-019 -->
+          <td class="doc_24_s29" dir="ltr" colspan="7"><%= field_worker.occupation %></td> <!-- 「職種」24-019 -->
           <td class="doc_24_s8" dir="ltr">工</td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -348,8 +348,8 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s6" dir="ltr" colspan="12">　1. に〇を付けた方は、労災保険の特別加入していますか。</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="5">1. している</td>
-          <td class="doc_24_s31" dir="ltr" colspan="5">2. 未加入</td>
+          <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_labor_insurance_yes(field_worker) %></td>
+          <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_labor_insurance_no(field_worker) %></td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -358,9 +358,9 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは建設現場で働きはじめてどのくらいになりますか。</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="3">1. 1年以内</td>
-          <td class="doc_24_s27" dir="ltr" colspan="3">2. 1～3年</td>
-          <td class="doc_24_s31" dir="ltr" colspan="4">3. 3年以上</td>
+          <td class="doc_24_s27" dir="ltr" colspan="3"><%= questionnaire_experience_term_short(field_worker) %></td>
+          <td class="doc_24_s27" dir="ltr" colspan="3"><%= questionnaire_experience_term_middle(field_worker) %></td>
+          <td class="doc_24_s31" dir="ltr" colspan="4"><%= questionnaire_experience_term_long(field_worker) %></td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -369,8 +369,8 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは健康診断を受けましたか。</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="5">1. 受けた</td>
-          <td class="doc_24_s31" dir="ltr" colspan="5">2. 受けていない</td>
+          <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_health_exam_yes(field_worker) %></td>
+          <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_health_exam_no(field_worker) %></td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -379,9 +379,9 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s6" dir="ltr" colspan="12">・あなたの最近の健康状態はどうですか。</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="2">1. よい</td>
-          <td class="doc_24_s27" dir="ltr" colspan="4">2. まあまあである</td>
-          <td class="doc_24_s31" dir="ltr" colspan="4">3. あまりよくない</td>
+          <td class="doc_24_s27" dir="ltr" colspan="2"><%= questionnaire_health_condition_good(field_worker) %></td>
+          <td class="doc_24_s27" dir="ltr" colspan="4"><%= questionnaire_health_condition_normal(field_worker) %></td>
+          <td class="doc_24_s31" dir="ltr" colspan="4"><%= questionnaire_health_condition_bad(field_worker) %></td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
@@ -390,8 +390,8 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。</td>
           <td class="doc_24_s30"></td>
-          <td class="doc_24_s27" dir="ltr" colspan="5">1. はい</td>
-          <td class="doc_24_s31" dir="ltr" colspan="5">2. いいえ</td>
+          <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_sendoff_education_yes(field_worker) %></td>
+          <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_sendoff_education_no(field_worker) %></td>
           <td class="doc_24_s32 softmerge" dir="ltr"></td>
           <td class="doc_24_s3"></td>
         </tr>
