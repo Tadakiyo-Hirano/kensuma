@@ -336,7 +336,7 @@
                 <%= field_special_vehicle.owning_company_name %> <!-- 13-101 所有会社名 -->
               </td>
               <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3">
-                <!-- 13-102 代表者名 ※未実装※ -->
+                <%= field_special_vehicle.owning_company_representative_name %>　<!-- 13-102 所有会社の代表者名 -->
               </td>
               <td class="doc_13_s24" dir="ltr" colspan="2" rowspan="3">
                 ㊞ <!-- 13-261 印 -->
@@ -973,7 +973,7 @@
                 <%= field_special_vehicle.use_company_name %> <!-- 使用会社名 -->
               </td>
               <td class="doc_13_s25" dir="ltr" colspan="15" rowspan="3">
-                <%= %> <!-- 13-011 使用会社の代表者名 -->
+                <%= field_special_vehicle.use_company_representative_name %> <!-- 13-011 使用会社の代表者名 -->
               </td>
               <td class="doc_13_s24" dir="ltr" colspan="2" rowspan="3">
                 ㊞ <!-- 印 13-260 -->

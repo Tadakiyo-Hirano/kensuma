@@ -186,7 +186,9 @@ ja:
         vehicle_type: 区分
         carry_on_company_name: 持込会社名
         owning_company_name: 所有会社名
+        owning_company_representative_name: 所有会社の代表者名
         use_company_name: 使用会社名
+        use_company_representative_name: 使用会社の代表者名
         carry_on_date: 持込年月日
         carry_out_date: 搬出予定年月日
         use_place: 使用場所
