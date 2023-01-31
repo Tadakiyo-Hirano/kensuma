@@ -4,6 +4,7 @@ module Users
     before_action :set_request_order, except: :index
     before_action :set_sub_request_order, only: %i[fix_request approve]
     before_action :exclude_prime_contractor, only: %i[edit update]
+    before_action :redirect_unless_prime_contractor, only: %i[update_approval_status edit_approval_status]
 
     def index
       @request_orders = current_business.request_orders
@@ -83,6 +84,27 @@ module Users
       redirect_to users_request_order_path(@request_order)
     end
 
+    def edit_approval_status; end
+
+    def update_approval_status
+      if params[:resecission_uuid].present?
+        request_order = RequestOrder.find_by(uuid: params[:resecission_uuid])
+        request_order.update_column(:status, 'requested')
+        if request_order.parent_id.present?
+          loop do
+            request_order = request_order.parent
+            request_order.update_column(:status, 'requested')
+            break if request_order.parent_id.nil?
+          end
+        end
+        flash[:success] = '承認取り消しに成功しました！'
+        redirect_to users_request_order_url(@request_order)
+      else
+        flash[:danger] = '承認を取り消すものを選んでください'
+        render :edit_approval_status
+      end
+    end
+
     private
 
     def set_request_order
@@ -96,6 +118,10 @@ module Users
     # 元請けは除外
     def exclude_prime_contractor
       redirect_to users_request_order_url if @request_order.parent_id.nil?
+    end
+
+    def redirect_unless_prime_contractor
+      redirect_to users_request_order_url unless @request_order.parent_id.nil?
     end
 
     def request_order_params

@@ -6,6 +6,7 @@ module Users
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
     before_action :set_workers1, only: %i[edit update] # 作業員の名前を取得する
+    before_action :edit_restriction_after_approved, only: %i[edit update]
 
     def index; end
 
@@ -291,6 +292,14 @@ module Users
         end
         merge_workers = workers&.map { |sub_worker| { sub_worker&.name => sub_worker&.uuid } }
         @workers_name_uuid = {}.merge(*merge_workers)
+      end
+    end
+
+    def edit_restriction_after_approved
+      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+      if request_order.status == 'approved'
+        flash[:danger] = '承認されているため編集できません'
+        redirect_to users_request_order_document_url
       end
     end
 
