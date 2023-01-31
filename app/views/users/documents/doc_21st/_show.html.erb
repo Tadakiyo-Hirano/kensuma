@@ -5,12 +5,12 @@
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <div class="document-outer">
-  <% if @document.content&.[]("student_name").present? %>
-    <% @document.content&.[]("student_name")&.each_slice(14)&.each_with_index do |(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14), i| %>
-      <div id="twelvefirst-document" class="document-inner">
-        <div class="twelvefirst-text-container">
-          <div class="ritz grid-container" dir="ltr">
-            <table class="waffle" cellspacing="0" cellpadding="0">
+  <div id="twelvefirst-document" class="document-inner">
+    <div class="twelvefirst-text-container">
+      <div class="ritz grid-container" dir="ltr">
+        <table class="waffle" cellspacing="0" cellpadding="0">
+          <% if @document.content&.[]("student_name").present? %>
+            <% @document.content&.[]("student_name")&.each_slice(14)&.each_with_index do |(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14), i| %>
               <tbody>
                 <tr style="height: 29px">
                   <td class="doc_21_m0" dir="ltr" colspan="12">（全建統一様式第７号）</td>
@@ -101,7 +101,7 @@
                   <td class="doc_21_m0"></td>
                   <td class="doc_21_m0"></td>
                   <td class="doc_21_m4" dir="ltr" colspan="12">
-                    <%= @document.content&.[]("date_submitted") %> <!-- 21-002 提出日 -->
+                    <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 21-002 提出日 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
@@ -515,7 +515,7 @@
                 <tr style="height: 44px">
                   <td class="doc_21_m29" dir="ltr" colspan="7">実 施 日 時</td>
                   <td class="doc_21_m34" dir="ltr" colspan="13">
-                    <%= @document.content&.[]("date_implemented") %> <!-- 21-009 実施日付 -->
+                    <%= wareki(@document.content&.[]("date_implemented")) %> <!-- 21-009 実施日付 -->
                   </td>
                   <td class="doc_21_m14"></td>
                   <td class="doc_21_m17" dir="ltr" colspan="4">
@@ -654,16 +654,8 @@
                   <td class="doc_21_m0"></td>
                 </tr>
               </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    <% end  %>
-  <% else %>
-    <div id="twelvefirst-document" class="document-inner">
-      <div class="twelvefirst-text-container">
-        <div class="ritz grid-container" dir="ltr">
-          <table class="waffle" cellspacing="0" cellpadding="0">
+            <% end  %>
+          <% else %>
             <tbody>
               <tr style="height: 29px">
                 <td class="doc_21_m0" dir="ltr" colspan="12">（全建統一様式第７号）</td>
@@ -692,35 +684,35 @@
               <tr style="height: 29px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0">
+                <td class="doc_21_m0">3</td>
+                <td class="doc_21_m0" dir="ltr" colspan="22">
                   <font color="red">※ 緑枠は入力項目です。必要あれば入力してください。</font>
                 </td>
+                <%# <td class="doc_21_m0">4</td>
+                <td class="doc_21_m0">5</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
+                <td class="doc_21_m0">10</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
+                <td class="doc_21_m0">15</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
+                <td class="doc_21_m0">20</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
+                <td class="doc_21_m0"></td>22 %>
+                <td class="doc_21_m0">25</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m1"></td>
+                <td class="doc_21_m1">28</td>
                 <td class="doc_21_m3" dir="ltr" colspan="3">確認欄</td>
               </tr>
               <tr style="height: 29px">
@@ -754,7 +746,7 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m4" dir="ltr" colspan="12">
-                  <%= @document.content&.[]("date_submitted") %> <!-- 21-002 提出日 -->
+                  <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 21-002 提出日 -->
                 </td>
               </tr>
               <tr style="height: 29px">
@@ -1146,33 +1138,37 @@
                 <td class="doc_21_m3" dir="ltr" colspan="34">摘 要</td>
               </tr>
               <tr style="height: 44px">
-                <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td> <!-- ⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008 -->
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr" colspan="5">新規入場時</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr">・</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr" colspan="4">雇入時</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr">・</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr" colspan="5">作業変更時</td>
-                <td class="doc_21_m16" dir="ltr" colspan="12"><a target="_blank"
-                    href="#rangeid=229790909"></a></td>
-              </tr>
+                  <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td> <!-- ⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008 -->
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr" colspan="5">
+                    <%= newly_entrance_check(@document.content&.[]("newly_entrance")) %> <!-- 新規入場時 -->
+                  </td>
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr">・</td>
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr" colspan="4">
+                    <%= employer_in_check(@document.content&.[]("employer_in")) %></td> <!-- 雇入時 -->
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr">・</td>
+                  <td class="doc_21_m15"></td>
+                  <td class="doc_21_m15" dir="ltr" colspan="5">
+                    <%= work_change_check(@document.content&.[]("work_change")) %></td> <!-- 作業変更時 -->
+                  </td>
+                  <td class="doc_21_m16" dir="ltr" colspan="12"></td>
+                </tr>
               <tr style="height: 44px">
                 <td class="doc_21_m29" dir="ltr" colspan="7">実 施 日 時</td>
                 <td class="doc_21_m34" dir="ltr" colspan="13">
-                  <%= @document.content&.[]("date_implemented") %> <!-- 21-009 実施日付 -->
+                  <%= wareki(@document.content&.[]("date_implemented")) %> <!-- 21-009 実施日付 -->
                 </td>
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m17" dir="ltr" colspan="4">
-                  <%= @document.content&.[]("start_time")&.to_date %> <!--21-010 実施時間（始時間） -->
+                  <%= implementation_time(@document.content&.[]("start_time")) %> <!--21-010 実施時間（始時間） -->
                 </td>
                 <td class="doc_21_m18" dir="ltr" colspan="2">～</td>
                 <td class="doc_21_m17" dir="ltr" colspan="4">
-                  <%= @document.content&.[]("end_time")&.to_date %> <!--21-011 実施時間（終時間） -->
+                  <%= implementation_time(@document.content&.[]("end_time")) %> <!--21-011 実施時間（終時間） -->
                 </td>
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m14" dir="ltr">（</td>
@@ -1289,9 +1285,9 @@
                 <td class="doc_21_m0"></td>
               </tr>
             </tbody>
-          </table>
-        </div>
+          <% end %>
+        </table>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>
