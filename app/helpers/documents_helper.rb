@@ -35,6 +35,53 @@ module DocumentsHelper
     end
   end
 
+  def document_info_for_prime_contractor_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order.parent_id.present?
+      loop do
+        request_order = request_order.parent
+        break if request_order.parent_id.nil?
+      end
+    end
+    Order.find(request_order.order_id).confirm_name
+  end
+
+  # 一次下請の情報 (工事安全衛生計画書用)
+  def document_subcon_info_for_19th
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    # 元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    # 下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+      # 下請けが存在しない場合
+    end
+  end
+
+  # 会社の名前
+  def company_name(worker_id)
+    worker = Worker.find_by(uuid: worker_id)
+    Business.find_by(id: worker&.business_id)&.name
+  end
+
+  # 書類作成会社の名前
+  def document_preparation_company_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+      Business.find_by(id: sub_request_order.business_id).name
+    # 下請けが自身の書類確認するとき
+    else
+      Business.find_by(id: request_order.business_id).name
+    end
+  end
+
+  # 作業員情報
+  def worker(worker_uuid)
+    Worker.find_by(uuid: worker_uuid)&.name
+  end
+
   # 専任･非専任
   FULL_TIME_CHECK = {
     'full_time'     => '専任',
@@ -546,6 +593,93 @@ module DocumentsHelper
       RequestOrder.find(document_info.ancestor_ids[-2])
     elsif document_info.ancestors.count == 1
       document_info.content.nil? ? nil : document_info
+    end
+  end
+
+  # (20)年間安全衛生計画書
+
+  # 代表者名の役職取得
+  def representative_name(business_id)
+    Business.find(business_id).representative_name
+  end
+
+  # 作業員の役職取得
+  def workers_post(worker_name)
+    field_workers = document_info.field_workers
+    if field_workers.present?
+      Worker.find_by(name: worker_name).job_title
+    end
+  end
+
+  # 和暦表示(date_select用)
+  def date_select_ja(src_html)
+    dst_html = src_html.gsub(/>\d{4}</) do |m|
+      year = m.match(/>(\d{4})</)[1].to_i
+      year_ja = case year
+                when 2018
+                  '平成30/令和元年'
+                else
+                  "令和#{year - 2018}"
+                end
+      ">#{year_ja}<"
+    end
+    dst_html.html_safe
+  end
+
+  # 和暦表示(年表示)
+  def doc_ja_y_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :ja_y)
+  end
+
+  # 和暦表示(年月表示)
+  def doc_ja_ym_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :ja_ym)
+  end
+
+  # 年月日表示
+  def doc_ymd_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :long)
+  end
+
+  # (22)作業間連絡調整書
+
+  #下請会社(協力会社)のbusiness_idの取得
+  def subcontractor_business_id(number)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
+    subcontractor_array = []
+    request_order_list.each do |record|
+      subcontractor_array << record.business_id
+    end
+    subcontractor_array.slice(number) if subcontractor_array[number].present?
+  end
+
+  #会社名の取得
+  def business_name(id)
+    Business.find(id).name if id.present?
+  end
+
+  #下請会社(協力会社)のidの取得
+  def subcontractor_id(number)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
+    subcontractor_array = []
+    request_order_list.each do |record|
+      subcontractor_array << record.id
+    end
+    subcontractor_array.slice(number) if subcontractor_array[number].present?
+  end
+
+  #入場作業員の取得
+  def number_of_field_workers_of_subcontractor(id)
+    number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).size
+    if number_of_workers == 0
+      return nil
+    else
+      return number_of_workers
     end
   end
 

@@ -235,9 +235,14 @@
                 <div class="row-header-wrapper" style="line-height: 19px"></div>
               </th>
               <td class="doc_18_s2"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
+              <td class="doc_18_s52" dir="ltr" colspan="23">※ 緑枠は入力項目です。必要あれば入力してください。</td>
+              <td class="doc_18_s2" dir="ltr"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
               <td class="doc_18_s6"></td>
               <td class="doc_18_s6"></td>
               <td class="doc_18_s6"></td>
@@ -265,26 +270,23 @@
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
-              <td class="doc_18_s6"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
+              <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -347,7 +349,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="8">発 注 者 名</td>
-              <td class="doc_18_s8" dir="ltr" colspan="15">18-001</td>
+              <td class="doc_18_s8" dir="ltr" colspan="15">
+                <%= document_site_info.order_name %>
+              </td><!--「発注者名」18-001-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -359,7 +363,9 @@
               <td class="doc_18_s6">自</td>
               <td class="doc_18_s9"></td>
               <td class="doc_18_s9"></td>
-              <td class="doc_18_s10" dir="ltr" colspan="14">18-003</td>
+              <td class="doc_18_s10" dir="ltr" colspan="14">
+                <%= document_site_info.start_date %>
+              </td><!--元請会社の「各会社の工期（自）」18-003-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -422,7 +428,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="8">工 事 名 称</td>
-              <td class="doc_18_s8" dir="ltr" colspan="15">18-002</td>
+              <td class="doc_18_s8" dir="ltr" colspan="15">
+                <%= document_site_info.construction_details %>
+              </td><!--元請会社の「各会社の工事名」18-002-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -433,7 +441,9 @@
               <td class="doc_18_s6">至</td>
               <td class="doc_18_s11"></td>
               <td class="doc_18_s12"></td>
-              <td class="doc_18_s10" dir="ltr" colspan="14">18-004</td>
+              <td class="doc_18_s10" dir="ltr" colspan="14">
+                <%= document_site_info.end_date %>
+              </td><!--元請会社の「各会社の工期（至）」18-004-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -607,7 +617,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="8">元 請 名</td>
-              <td class="doc_18_s8" dir="ltr" colspan="9">18-005</td>
+              <td class="doc_18_s8" dir="ltr" colspan="9">
+                <%= document_site_info.content&.[]("genecon_name") %>
+              </td><!--「元請会社名」18-005-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -647,7 +659,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="8">事業者ID</td>
-              <td class="doc_18_s8" dir="ltr" colspan="9">18-006</td>
+              <td class="doc_18_s8" dir="ltr" colspan="9">
+                <%= document_site_info.site_career_up_id %>
+              </td><!--「事業者ID」18-006-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -662,7 +676,7 @@
               <td class="doc_18_s15"></td>
               <td class="doc_18_s21"></td>
               <td class="doc_18_s7" colspan="6">事業者ＩＤ</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s14"></td>
               <td class="doc_18_s18"></td>
               <td class="doc_18_s7" colspan="6">事業者ＩＤ</td>
@@ -683,7 +697,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="8">監 督 員 名</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9">18-007</td>
+              <td class="doc_18_s22" dir="ltr" colspan="9">
+                <%= document_site_info.order_supervisor_name %>
+              </td><!--「元請会社の監督員名」18-007-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -719,7 +735,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s25" colspan="8">監理技術者・主任技術者名</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9">18-008</td>
+              <td class="doc_18_s22" dir="ltr" colspan="9">
+                <%= document_site_info.supervising_engineer_name %>
+              </td><!--「元請会社の監督技術者・主任技術者名」18-008-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -734,7 +752,7 @@
               <td class="doc_18_s23"></td>
               <td class="doc_18_s24"></td>
               <td class="doc_18_s7" colspan="6">建設業許可番号</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s14"></td>
               <td class="doc_18_s18"></td>
               <td class="doc_18_s7" colspan="6">建設業許可番号</td>
@@ -755,7 +773,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="8">監理技術者補佐名</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9">18-009</td>
+              <td class="doc_18_s22" dir="ltr" colspan="9">
+                <%= document_site_info.supervising_engineer_assistant_name %>
+              </td><!--「元請会社の監督技術者補佐名」18-009-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -770,7 +790,7 @@
               <td class="doc_18_s26"></td>
               <td class="doc_18_s27"></td>
               <td class="doc_18_s7" colspan="6">工 事 内 容</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s26"></td>
               <td class="doc_18_s27"></td>
               <td class="doc_18_s7" colspan="6">工 事 内 容</td>
@@ -791,7 +811,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s30" colspan="8">専門技術者名</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9">18-010</td>
+              <td class="doc_18_s22" dir="ltr" colspan="9">
+                <%= document_site_info.professional_engineer_name %>
+              </td><!--「各会社の専門技術者名」18-010-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -806,7 +828,7 @@
               <td class="doc_18_s2"></td>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s25" colspan="6">指定専門工事該当の有無</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s25" colspan="6">指定専門工事該当の有無</td>
@@ -828,7 +850,9 @@
               <td class="doc_18_s0"></td>
               <td class="doc_18_s1" style="border-top: none;"></td>
               <td class="doc_18_s7" colspan="7" style="border-top: 1px solid #000000;">担当工事内容</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9">18-011</td>
+              <td class="doc_18_s22" dir="ltr" colspan="9">
+                <%= document_site_info.professional_engineer_construction_details %>
+              </td><!--「各会社の専門技術者・担当工事内容」18-011-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -843,7 +867,7 @@
               <td class="doc_18_s2"></td>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="6">安全衛生責任者</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s14"></td>
               <td class="doc_18_s18"></td>
               <td class="doc_18_s7" colspan="6">安全衛生責任者</td>
@@ -879,7 +903,7 @@
               <td class="doc_18_s2"></td>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="6">主 任 技 術 者</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s14"></td>
               <td class="doc_18_s18"></td>
               <td class="doc_18_s7" colspan="6">主 任 技 術 者</td>
@@ -917,7 +941,7 @@
               <td class="doc_18_s0"></td>
               <td class="doc_18_s30" colspan="2">工</td>
               <td class="doc_18_s30" colspan="6">専 門 技 術 者</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s14"></td>
               <td class="doc_18_s18"></td>
               <td class="doc_18_s30" colspan="2">工</td>
@@ -973,7 +997,7 @@
               <td class="doc_18_s7" colspan="2">事</td>
               <td class="doc_18_s7"></td>
               <td class="doc_18_s1" colspan="5">担当工事内容</td>
-              <td class="doc_18_s22" dir="ltr" colspan="9"></td>
+              <td class="doc_18_s17" dir="ltr" colspan="9"></td>
               <td class="doc_18_s14"></td>
               <td class="doc_18_s18"></td>
               <td class="doc_18_s7" colspan="2">事</td>
@@ -1034,21 +1058,21 @@
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
             </tr>
             <tr class="doc_18_s51" style="height: 27px">
@@ -1075,7 +1099,9 @@
               <td class="doc_18_s9"></td>
               <td class="doc_18_s32"></td>
               <td class="doc_18_s0"></td>
-              <td class="doc_18_s39" dir="ltr" colspan="7">18-017</td>
+              <td class="doc_18_s39" dir="ltr" colspan="7">
+                <%= document_site_info.health_and_safety_manager_name %>
+              </td><!--「元方安全衛生管理者名」18-017-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s32"></td>
               <td class="doc_18_s2"></td>
@@ -1201,7 +1227,9 @@
                 <div class="row-header-wrapper" style="line-height: 27px"></div>
               </th>
               <td class="doc_18_s0"></td>
-              <td class="doc_18_s22" dir="ltr" colspan="9">18-014</td>
+              <td class="doc_18_s22" dir="ltr" colspan="9">
+                <%= document_site_info.general_safety_responsible_person_name %>
+              </td><!--「統括安全衛生責任者名」18-014-->
               <td class="doc_18_s32"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s6"></td>
@@ -1300,7 +1328,9 @@
               <td class="doc_18_s6"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s0"></td>
-              <td class="doc_18_s10" dir="ltr" colspan="7">18-018</td>
+              <td class="doc_18_s10" dir="ltr" colspan="7">
+                <%= document_site_info.secretary_name %>
+              </td><!--「書記名」18-018-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s32"></td>
               <td class="doc_18_s2"></td>
@@ -1327,7 +1357,9 @@
               </th>
               <td class="doc_18_s0"></td>
               <td class="doc_18_s7" colspan="8" rowspan="2">副 会 長</td>
-              <td class="doc_18_s8" dir="ltr" colspan="9">18-015</td>
+              <td class="doc_18_s8" dir="ltr" colspan="9">
+                <%= document_site_info.vice_president_company_name %>
+              </td><!--「副会長・会社名」18-015-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -1362,7 +1394,9 @@
                 <div class="row-header-wrapper" style="line-height: 27px"></div>
               </th>
               <td class="doc_18_s0"></td>
-              <td class="doc_18_s8" dir="ltr" colspan="9">18-016</td>
+              <td class="doc_18_s8" dir="ltr" colspan="9">
+                <%=document_site_info.vice_president_name %>
+              </td><!--「副会長名」18-016-->
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
               <td class="doc_18_s2"></td>
@@ -1647,28 +1681,28 @@
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
             </tr>
             <tr class="doc_18_s51" style="height: 27px">
@@ -2347,28 +2381,28 @@
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
             </tr>
             <tr class="doc_18_s51" style="height: 27px">
@@ -3047,28 +3081,28 @@
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
               <td class="doc_18_s30"></td>
               <td class="doc_18_s7" colspan="3">工 期</td>
               <td class="doc_18_s38"></td>
               <td class="doc_18_s36" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s36" dir="ltr">~</td>
-              <td class="doc_18_s10" dir="ltr" colspan="6">年　月　日</td>
+              <td class="doc_18_s37" dir="ltr" colspan="6">年　月　日</td>
               <td class="doc_18_s4"></td>
             </tr>
           </tbody>
