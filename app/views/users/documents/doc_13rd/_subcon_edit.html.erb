@@ -709,11 +709,11 @@
                 </td>
                 <td class="doc_13_s32" dir="ltr" colspan="7">「追加項目内容①」13-103</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('d_add_item_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
+                  <%= checked_box(@document.content&.[]('d_add_item_check_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[d_add_item_1][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('d_add_item_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[d_add_item_check_1][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('d_add_item_check_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-222 (b)D安全装置 各種ロック 追加項目1(13-103) -->
                 </td>
@@ -761,11 +761,11 @@
                 </td>
                 <td class="doc_13_s32" dir="ltr" colspan="7">「追加項目内容②」13-104</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('d_add_item_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
+                  <%= checked_box(@document.content&.[]('d_add_item_check_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[d_add_item_2][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('d_add_item_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[d_add_item_check_2][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('d_add_item_check_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-223 (b)D安全装置 各種ロック 追加項目2(13-104) -->
                 </td>
@@ -831,11 +831,11 @@
                 </td>
                 <td class="doc_13_s32" dir="ltr" colspan="7">「追加項目内容③」13-105</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('d_add_item_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
+                  <%= checked_box(@document.content&.[]('d_add_item_check_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[d_add_item_3][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('d_add_item_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[d_add_item_check_3][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('d_add_item_check_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-224 (b)D安全装置 各種ロック 追加項目3(13-105) -->
                 </td>
@@ -1782,11 +1782,11 @@
                 </td>
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目④」13-106</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('h_add_item_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
+                  <%= checked_box(@document.content&.[]('h_add_item_check_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[h_add_item_4][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[h_add_item_check_4][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_check_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-250 (b)Hその他 追加項目4(13-106) -->
                 </td>
@@ -1819,11 +1819,11 @@
                 <td class="doc_13_s28" colspan="2" rowspan="4">Ｈその他</td>
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑤」13-107</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('h_add_item_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
+                  <%= checked_box(@document.content&.[]('h_add_item_check_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[h_add_item_5][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[h_add_item_check_5][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_check_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-251 (b)Hその他 追加項目5(13-107) -->
                 </td>
@@ -1851,11 +1851,11 @@
                 </td>
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑥」13-108</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('h_add_item_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
+                  <%= checked_box(@document.content&.[]('h_add_item_check_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[h_add_item_6][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[h_add_item_check_6][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_check_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-252 (b)Hその他 追加項目6(13-108) -->
                 </td>
@@ -1887,11 +1887,11 @@
                 </td>
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑦」13-109</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('h_add_item_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
+                  <%= checked_box(@document.content&.[]('h_add_item_check_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[h_add_item_7][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[h_add_item_check_7][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_check_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-253 (b)Hその他 追加項目7(13-109) -->
                 </td>
@@ -1919,11 +1919,11 @@
                 </td>
                 <td class="doc_13_s41" dir="ltr" colspan="8">「追加項目⑧」13-110</td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= checked_box(@document.content&.[]('h_add_item_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
+                  <%= checked_box(@document.content&.[]('h_add_item_check_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
-                  <%= f.check_box name = "approval_content[h_add_item_8][field_special_vehicle_#{field_special_vehicle.id}]",
-                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
+                  <%= f.check_box name = "approval_content[h_add_item_check_8][field_special_vehicle_#{field_special_vehicle.id}]",
+                                    checked: box_checked?(@document.approval_content&.[]('h_add_item_check_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                     class: "checkbox_list_vehicle#{field_special_vehicle.id}"
                   %> <!-- 13-254 (b)Hその他 追加項目8(13-110) -->
                 </td>

@@ -153,6 +153,14 @@ module Users
             date_submitted:                field_special_vehicle_keys, # 13-001 提出日(西暦)
             reception_confirmation_date:   field_special_vehicle_keys, # 13-039 受付確認年月日
             person_confirming_receipt:     field_special_vehicle_keys, # 13-040 受付確認者
+            d_add_item_content_1:          field_special_vehicle_keys, # 13-103 追加項目内容1
+            d_add_item_content_2:          field_special_vehicle_keys, # 13-104 追加項目内容2
+            d_add_item_content_3:          field_special_vehicle_keys, # 13-105 追加項目内容3
+            d_add_item_content_4:          field_special_vehicle_keys, # 13-106 追加項目内容4
+            d_add_item_content_5:          field_special_vehicle_keys, # 13-107 追加項目内容5
+            d_add_item_content_6:          field_special_vehicle_keys, # 13-108 追加項目内容6
+            d_add_item_content_7:          field_special_vehicle_keys, # 13-109 追加項目内容7
+            d_add_item_content_8:          field_special_vehicle_keys, # 13-110 追加項目内容8
             a_over_winding_prevention:     field_special_vehicle_keys, # 13-111 (a)Aクレーン部 安全装置         巻過防止装置
             a_overload_protector:          field_special_vehicle_keys, # 13-112 (a)Aクレーン部 安全装置         過負荷防止装置
             a_anti_slip_hook:              field_special_vehicle_keys, # 13-113 (a)Aクレーン部 安全装置         フックのはずれ
@@ -192,9 +200,9 @@ module Users
             d_turning:                     field_special_vehicle_keys, # 13-147 (a)D安全装置　 各種ロック       旋回
             d_bucket:                      field_special_vehicle_keys, # 13-148 (a)D安全装置　 各種ロック       バケット
             d_boom_arm:                    field_special_vehicle_keys, # 13-149 (a)D安全装置　 各種ロック       ブーム･アーム
-            d_add_item_1:                  field_special_vehicle_keys, # 13-150 (a)D安全装置　 各種ロック       追加項目1(13-103)
-            d_add_item_2:                  field_special_vehicle_keys, # 13-151 (a)D安全装置　 各種ロック       追加項目2(13-104)
-            d_add_item_3:                  field_special_vehicle_keys, # 13-152 (a)D安全装置　 各種ロック       追加項目3(13-105)
+            d_add_item_check_1:            field_special_vehicle_keys, # 13-150 (a)D安全装置　 各種ロック       追加項目1(13-103)
+            d_add_item_check_2:            field_special_vehicle_keys, # 13-151 (a)D安全装置　 各種ロック       追加項目2(13-104)
+            d_add_item_check_3:            field_special_vehicle_keys, # 13-152 (a)D安全装置　 各種ロック       追加項目3(13-105)
             d_alarm_device:                field_special_vehicle_keys, # 13-153 (a)D安全装置　                 警報装置
             d_outrigger:                   field_special_vehicle_keys, # 13-154 (a)D安全装置　                 アウトリガー
             d_head_guard:                  field_special_vehicle_keys, # 13-155 (a)D安全装置　                 ヘッドガード
@@ -220,11 +228,11 @@ module Users
             g_wiring:                      field_special_vehicle_keys, # 13-175 (a)G電気装置　                 配線
             g_isolation:                   field_special_vehicle_keys, # 13-176 (a)G電気装置　                 絶縁
             g_earth:                       field_special_vehicle_keys, # 13-177 (a)G電気装置　                 アース
-            h_add_item_4:                  field_special_vehicle_keys, # 13-178 (a)Hその他　                   追加項目4(13-106)
-            h_add_item_5:                  field_special_vehicle_keys, # 13-179 (a)Hその他　                   追加項目5(13-107)
-            h_add_item_6:                  field_special_vehicle_keys, # 13-180 (a)Hその他　                   追加項目6(13-108)
-            h_add_item_7:                  field_special_vehicle_keys, # 13-181 (a)Hその他　                   追加項目7(13-109)
-            h_add_item_8:                  field_special_vehicle_keys, # 13-182 (a)Hその他　                   追加項目8(13-110)
+            h_add_item_check_4:            field_special_vehicle_keys, # 13-178 (a)Hその他　                   追加項目4(13-106)
+            h_add_item_check_5:            field_special_vehicle_keys, # 13-179 (a)Hその他　                   追加項目5(13-107)
+            h_add_item_check_6:            field_special_vehicle_keys, # 13-180 (a)Hその他　                   追加項目6(13-108)
+            h_add_item_check_7:            field_special_vehicle_keys, # 13-181 (a)Hその他　                   追加項目7(13-109)
+            h_add_item_check_8:            field_special_vehicle_keys, # 13-182 (a)Hその他　                   追加項目8(13-110)
             inspection_date:               field_special_vehicle_keys, # 13-255 (a)点検年月日
             inspector:                     field_special_vehicle_keys  # 13-256 (a)点検者
           ]
