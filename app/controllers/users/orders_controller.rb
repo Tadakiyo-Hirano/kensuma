@@ -38,7 +38,7 @@ module Users
           general_safety_agent_name:                  '統括安全衛生責任者代行者',
           supervisor_name:                            '現場監督員名',
           supervisor_apply:                           %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
-          site_agent_name:                            '現場代理人名',
+          site_agent_name:                            'テスト作業員1',
           site_agent_apply:                           %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
           supervising_engineer_name:                  '監督技術者･主任技術者名',
           supervising_engineer_check:                 0,
@@ -166,7 +166,7 @@ module Users
           genecon_welfare_pension_insurance_office_number:                     current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
           genecon_employment_insurance_join_status:                            current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
           genecon_employment_insurance_number:                                 current_business.business_employment_insurance_number,             # 雇用保険番号
-          genecon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種
+          # genecon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種　エラー回避の為コメントアウト
           genecon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
           genecon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
           genecon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)

@@ -1,23 +1,24 @@
-<!-- (10)高年齢者作業申告書 -->
+<!-- (10)高齢者就労報告書 -->
 <div class="container">
   <div class="title text-center"><h2>高齢者就労報告書</h2></div>
-  <div class="submission_date text-right">
-    <p><span class="ml-3">「提出日（西暦）」10-001</span></p><!--「提出日(西暦)」10-001 -->
+  <div class="notice"><a>※ 緑枠は入力項目です。必要あれば入力してください。</a></div>
+  <div class="submission_date text-center">
+    <p><span class="ml-3"><%= @document.content&.[]("date_submitted") %></span></p><!--「提出日(西暦)」10-001 -->
   </div>
   <div class="office_name">
-    <p>　事業所の名称<span class="ml-3">「事業所名(現場名)」10-002　</span></p><!--「事業所名(現場名)」10-002 -->
+    <p>　事業所の名称<span class="ml-3"><%= document_site_info.site_name %></span></p><!--「事業所名(現場名)」10-002 -->
   </div>
   <div class="chief_name">
-    <p>　所　長　名<span class="ml-3">元請会社の「現場代理人名」10-003　殿　</span></p><!-- 元請会社の「現場代理人名」10-003 -->
+    <p>　所　長　名<span class="ml-3"><%= document_site_info.site_agent_name %>　殿　</span></p><!-- 元請会社の「現場代理人名」10-003 -->
   </div>
   <div class="company_name">
-    <p>一次会社名 <span class="ml-3">「一次会社名」10-004</span></p><!--「一次会社名」10-004 -->
+    <p>一次会社名 <span class="ml-3"><%= document_site_info.business.name %></span></p><!--「一次会社名」10-004 -->
   </div>
   <div class="subcontractor">
-    <p>会社名( 11-005 )次<span class="ml-3">「会社名」10-006</span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
+    <p>会社名(<%= sc_hierarchy(document_info)[0,1] %>)次<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
   </div>
   <div class="representative">
-    <p>代表者名<span class="ml-3">「代表者名」10-007</span></p><!--「代表者名」10-007 -->
+    <p>代表者名<span class="ml-3"><%= Business.find(document_info.business_id).representative_name %></span></p><!--「代表者名」10-007 -->
   </div>
   <div class="description">
     <p>
@@ -41,104 +42,17 @@
         </tr>
       </thead>
       <tbody class="t-content">
-        <tr>
-          <td>65歳以上の「入場する作業員」10-008</td><!-- 65歳以上の「入場する作業員」10-008 -->
-          <td>「生年月日」10-009</td><!--「生年月日」10-009 -->
-          <td>「年齢」10-010</td><!--「年齢」10-010 -->
-          <td>「職種」10-011</td><!--「職種」10-011 -->
-          <td>「高年齢就労者・作業内容」10-012</td><!--「高年齢就労者・作業内容」10-012 -->
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <% j = 1 %>
+        <% document_info.field_workers.where(id: age_border(65)).each do |field_worker| %>
+          <tr>
+            <td class="gray"><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+            <td class="gray"><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
+            <td class="gray"><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
+            <td class="green"><%= field_worker.content&.[]("occupation") %></td><!--「職種」10-011 -->
+            <td class="green"><%= field_worker.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
+          </tr>
+        <% j += 1 %>
+        <% end %>
       </tbody>
     </table>
   </div>

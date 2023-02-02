@@ -1,0 +1,7 @@
+<% if RequestOrder.find_by(uuid: params[:sub_request_order_uuid]).nil? %>
+  <!-- 自身の書類編集画面 -->
+  <%= render "users/documents/doc_16th/current_edit" %>
+<% else %>
+  <!-- 自身の下の階層の書類編集画面 -->
+  <%= render "users/documents/doc_16th/subcon_edit" %>
+<% end %>
