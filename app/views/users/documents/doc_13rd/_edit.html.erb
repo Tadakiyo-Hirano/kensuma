@@ -6,3 +6,33 @@
   <!-- 自身の下の階層の書類編集画面 -->
   <%= render "users/documents/doc_13rd/subcon_edit" %>
 <% end %>
+
+<!-- マウスドラッグで横スクロール -->
+<script>
+  $.prototype.draggable = function() {
+    var t;
+    $(this).each(function(i,e) {
+      $(e).mousedown(function(e2) {
+        e2.preventDefault();
+        t = $(e);
+        $(e).data({
+          down: true,
+          x: e2.clientX,
+          y: e2.clientY,
+          left: $(e).scrollLeft(),
+          top: $(e).scrollTop()
+        });
+      });
+    });
+    $(document).mousemove(function(e) {
+      if($(t).data("down")) {
+        e.preventDefault();
+        $(t).scrollLeft($(t).data("x")+$(t).data("left")-e.clientX);
+        $(t).scrollTop($(t).data("y")+$(t).data("top")-e.clientY);
+      }
+    }).mouseup(function(e) {
+      $(t).data("down", false);
+    });
+  };
+  $(".hrizontal-scroll").draggable();
+</script>

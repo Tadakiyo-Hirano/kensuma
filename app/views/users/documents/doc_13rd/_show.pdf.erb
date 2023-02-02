@@ -3,9 +3,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <% document_info.field_special_vehicles.each do |field_special_vehicle| %>
-  <body class="page-break" style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
-    <div class="ritz grid-container" dir="ltr">
-      <table class="waffle no-grid" cellspacing="0" cellpadding="0">
+  <body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
+    <div class="page-break ritz grid-container" dir="ltr">
+      <table class="waffle no-grid" cellspacing="0" cellpadding="0" style='height: 10px'>
         <tbody>
           <tr style="height: 22px">
             <th id="1612125903R0" style="height: 22px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -49,7 +49,7 @@
             <td class="s3"></td>
             <td class="s3"></td>
             <td class="s3"></td>
-            <td class="s4" style="letter-spacing: 200px;">&emsp;</td> <!-- 中心調整 -->
+            <td class="s4" style="letter-spacing: 300px;">&emsp;</td> <!-- 中心調整 -->
             <td class="s4"></td>
             <td class="s5"></td>
             <td class="s5"></td>
@@ -675,13 +675,13 @@
               <%= checked_box(@document.approval_content&.[]('a_control_of_hoisting_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-186 (b)Aクレーン部 安全装置 起伏装置制御 -->
             </td>
             <td class="s32" dir="ltr" colspan="7">
-              <%= @document.content&.[]('d_add_item_content_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-103 追加項目内容1 -->
+              <%= @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-103 追加項目内容1 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('d_add_item_check_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
+              <%= checked_box(@document.content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('d_add_item_check_1')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-222 (b)D安全装置 各種ロック 追加項目1(13-103) -->
+              <%= checked_box(@document.approval_content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-222 (b)D安全装置 各種ロック 追加項目1(13-103) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(11) ずり積機</td>
@@ -723,13 +723,13 @@
               <%= checked_box(@document.approval_content&.[]('a_swivel_warning_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-187 (b)Aクレーン部 安全装置 旋回警報装置 -->
             </td>
             <td class="s32" dir="ltr" colspan="7">
-              <%= @document.content&.[]('d_add_item_content_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-104 追加項目内容2 -->
+              <%= @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-104 追加項目内容2 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('d_add_item_check_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
+              <%= checked_box(@document.content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('d_add_item_check_2')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-223 (b)D安全装置 各種ロック 追加項目2(13-104) -->
+              <%= checked_box(@document.approval_content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-223 (b)D安全装置 各種ロック 追加項目2(13-104) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(12) スクレーパー</td>
@@ -789,13 +789,13 @@
               <%= checked_box(@document.approval_content&.[]('a_main_supplemental')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-188 (b)Aクレーン部 制御装置･作業装置 主巻･補巻 -->
             </td>
             <td class="s32" dir="ltr" colspan="7">
-              <%= @document.content&.[]('d_add_item_content_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-105 追加項目内容3 -->
+              <%= @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-105 追加項目内容3 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('d_add_item_check_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
+              <%= checked_box(@document.content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('d_add_item_check_3')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-224 (b)D安全装置 各種ロック 追加項目3(13-105) -->
+              <%= checked_box(@document.approval_content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-224 (b)D安全装置 各種ロック 追加項目3(13-105) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(13) スクレープ・ドーザー</td>
@@ -1587,13 +1587,13 @@
               <%= checked_box(@document.approval_content&.[]('c_piercing')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-214 (b)Cゴンドラ 突りょう -->
             </td>
             <td class="s41" dir="ltr" colspan="8">
-              <%= @document.content&.[]('d_add_item_content_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-106 追加項目内容4 -->
+              <%= @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-106 追加項目内容4 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('h_add_item_check_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
+              <%= checked_box(@document.content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('h_add_item_check_4')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-250 (b)Hその他 追加項目4(13-106) -->
+              <%= checked_box(@document.approval_content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-250 (b)Hその他 追加項目4(13-106) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(35) ロードプレーナ</td>
@@ -1620,13 +1620,13 @@
             </td>
             <td class="s28" colspan="2" rowspan="4">Ｈその他</td>
             <td class="s41" dir="ltr" colspan="8">
-              <%= @document.content&.[]('d_add_item_content_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-107 追加項目内容5 -->
+              <%= @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-107 追加項目内容5 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('h_add_item_check_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
+              <%= checked_box(@document.content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('h_add_item_check_5')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-251 (b)Hその他 追加項目5(13-107) -->
+              <%= checked_box(@document.approval_content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-251 (b)Hその他 追加項目5(13-107) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(36) ロードカッター</td>
@@ -1648,13 +1648,13 @@
               <%= checked_box(@document.approval_content&.[]('c_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-216 (b)Cゴンドラ 昇降装置 -->
             </td>
             <td class="s41" dir="ltr" colspan="8">
-              <%= @document.content&.[]('d_add_item_content_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-108 追加項目内容6 -->
+              <%= @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-108 追加項目内容6 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('h_add_item_check_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
+              <%= checked_box(@document.content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('h_add_item_check_6')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-252 (b)Hその他 追加項目6(13-108) -->
+              <%= checked_box(@document.approval_content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-252 (b)Hその他 追加項目6(13-108) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(37) コンクリート吹付機</td>
@@ -1680,13 +1680,13 @@
               <%= checked_box(@document.approval_content&.[]('c_electrical_equipment')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-217 (b)Cゴンドラ 電気装置 -->
             </td>
             <td class="s41" dir="ltr" colspan="8">
-              <%= @document.content&.[]('d_add_item_content_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-109 追加項目内容7 -->
+              <%= @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-109 追加項目内容7 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('h_add_item_check_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
+              <%= checked_box(@document.content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('h_add_item_check_7')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-253 (b)Hその他 追加項目7(13-109) -->
+              <%= checked_box(@document.approval_content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-253 (b)Hその他 追加項目7(13-109) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(38) ボーリングマシーン</td>
@@ -1708,13 +1708,13 @@
               <%= checked_box(@document.approval_content&.[]('c_wire_lifeline')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-218 (b)Cゴンドラ ワイヤ･ライフライン -->
             </td>
             <td class="s41" dir="ltr" colspan="8">
-              <%= @document.content&.[]('d_add_item_content_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-110 追加項目内容8 -->
+              <%= @document.content&.[]('d_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-110 追加項目内容8 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.content&.[]('h_add_item_check_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
+              <%= checked_box(@document.content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_box(@document.approval_content&.[]('h_add_item_check_8')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-254 (b)Hその他 追加項目8(13-110) -->
+              <%= checked_box(@document.approval_content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-254 (b)Hその他 追加項目8(13-110) -->
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(39) ブレーカ</td>
