@@ -390,6 +390,38 @@ module DocumentsHelper
       licenses.to_s.gsub(/,|"|\[|\]/) { '' }
     end
   end
+  
+  def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
+    target_ids = []
+    document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
+      birth_date = field_worker.content['birth_day_on'].to_date
+      str_date = field_worker.admission_date_start.to_date # 入場日
+      case age
+      when 18
+        border_date = str_date.prev_year(18) # 入場日から18年前の日付
+        if border_date < birth_date
+          target_ids.push field_worker.id
+        end
+    
+      when 65
+        border_date = str_date.prev_year(65) # 入場日から65年前の日付
+        if border_date >= birth_date
+          target_ids.push field_worker.id
+        end
+      end
+    end
+    target_ids
+  end
+
+  def age_for_admission_date_start(worker) # 入場年月日を起点に年齢を算出
+    if worker.present?
+      date_format = '%Y%m%d'
+      birth_date = FieldWorker.find(worker.id).content['birth_day_on'].to_date.strftime(date_format).to_i # 生年月日
+      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i # 入場日
+      (str_date - birth_date) / 10000
+
+    end
+  end
 
   def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
     target_ids = []

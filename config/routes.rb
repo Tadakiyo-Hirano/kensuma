@@ -142,6 +142,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     post 'request_orders/:uuid/submit', to: 'request_orders#submit', as: :request_order_submit
     post 'request_orders/:uuid/sub_request_orders/:sub_request_uuid/fix_request', to: 'request_orders#fix_request', as: :request_order_fix_request
     post 'request_orders/:uuid/sub_request_orders/:sub_request_uuid/approve', to: 'request_orders#approve', as: :request_order_approve
+    get 'request_orders/:uuid/edit_approval_status', to: 'request_orders#edit_approval_status', as: :request_order_edit_approval_status
+    post 'request_orders/:uuid/update_approval_status', to: 'request_orders#update_approval_status', as: :request_order_update_approval_status
   end
   # =================================================================
 

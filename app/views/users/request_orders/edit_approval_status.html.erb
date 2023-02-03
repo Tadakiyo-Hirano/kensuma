@@ -1,0 +1,59 @@
+<% provide(:title, "書類作成依頼承認取り消し") %>
+<% provide(:btn_text, "取り消し") %>
+<font color="red">&emsp;※ 承認を取り消す依頼を選んでください。</br>&emsp;&emsp;元請(自身)を含め、選んだ下請けの依頼から上の階層の承認が取り消されます。</font>
+<div class="card">
+  <div class="card-body">
+    <%= form_with url: users_request_order_update_approval_status_path(@request_order), method: :post, local: true do |f| %>
+      <div class = 'step'>
+        <% if @request_order.status == 'approved'%>
+          <%= f.radio_button :resecission_uuid, @request_order.uuid %>
+        <% end %>
+        <b>元請(自身)</b>&emsp;
+        <%= @request_order.business.name %>
+        (ステータス：<%= I18n.t("enums.request_order.status.#{@request_order.status}") %>)
+      </div>
+      <% @request_order.children.each do |first_request_order| %>
+        <div class = 'step_first'>
+          <% if first_request_order.status == 'approved'%>
+            <%= f.radio_button :resecission_uuid, first_request_order.uuid %>
+          <% end %>
+          <b>一次下請け</b>&emsp;
+          <%= first_request_order.content&.[]('subcon_name') %>
+          (ステータス：<%= I18n.t("enums.request_order.status.#{first_request_order.status}") %>)
+        </div>
+        <% first_request_order.children.each do |second_request_order| %>
+          <div class = 'step_second'>
+            <% if second_request_order.status == 'approved'%>
+              <%= f.radio_button :resecission_uuid, second_request_order.uuid %>
+            <% end %>
+            <b>二次下請け</b>&emsp;
+            <%= second_request_order.content&.[]('subcon_name') %>
+            (ステータス：<%= I18n.t("enums.request_order.status.#{second_request_order.status}") %>)
+          </div>
+          <% second_request_order.children.each do |third_request_order| %>
+            <div class = 'step_third'>
+              <% if third_request_order.status == 'approved'%>
+                <%= f.radio_button :resecission_uuid, third_request_order.uuid %>
+              <% end %>
+              <b>三次下請け</b>&emsp;
+              <%= third_request_order.content&.[]('subcon_name') %>
+              (ステータス：<%= I18n.t("enums.request_order.status.#{third_request_order.status}") %>)
+            </div>
+            <% third_request_order.children.each do |forth_request_order| %>
+              <div class = 'step_forth'>
+                <% if forth_request_order.status == 'approved'%>
+                  <%= f.radio_button :resecission_uuid, forth_request_order.uuid %>
+                <%end%>
+                <b>四次下請け</b>&emsp;
+                <%= forth_request_order.content&.[]('subcon_name') %>
+                (ステータス：<%= I18n.t("enums.request_order.status.#{forth_request_order.status}") %>)
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %></br>
+      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary", data: { confirm: "承認を取り消して宜しいですか？" } %>
+      <%= link_to "戻る", users_request_order_path(@request_order), class: "btn btn-md btn-block btn-default" %>
+    <% end %>
+  </div>
+</div>
