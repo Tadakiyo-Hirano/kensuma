@@ -4,13 +4,13 @@ class WorkerMedical < ApplicationRecord
   has_many :special_med_exams, through: :worker_exams
   accepts_nested_attributes_for :worker_exams, allow_destroy: true,
     reject_if:     proc { |attributes| attributes['special_med_exam_id'].blank? }
-    
+
   enum health_condition: {
-    good: 0,
+    good:   0,
     normal: 1,
-    bad:     2
+    bad:    2
   }, _prefix: true
-  
+
   enum is_med_exam: { y: 0, n: 1 }, _prefix: true       # 労働保険特別加入の有無
 
   validates :med_exam_on, presence: true
