@@ -246,6 +246,10 @@ ja:
       lease_type:
         own: 自社
         lease: リース
+    field_worker:
+      sendoff_education: # 送り出し教育受講
+        educated: 受けた
+        not_educated: 受けていない
     news:
       status:
         draft: 下書き
@@ -278,6 +282,9 @@ ja:
       rh_blood_type:
         plus: ＋
         minus: −
+      employment_contract: # 雇用契約書の取り交わし状況
+        available: 取り交わし済
+        not_available: 未だ
     worker_insurance:
       health_insurance_type:
         health_insurance_association: 健康保険組合
@@ -298,6 +305,17 @@ ja:
         tyutaikyo: 中退共手帳
         other: その他
         none: 無し
+      has_labor_insurance: # 労働保険特別加入
+        join: 加入
+        not_join: 未加入
+    worker_medical:
+      health_condition: # 最近の健康状態
+        good: よい
+        normal: まあまあである
+        bad: あまりよくない
+      is_med_exam: # 健康診断の受診
+        y: 受けた
+        n: 受けていない
   errors:
     format: "%{attribute}%{message}"
     messages:
