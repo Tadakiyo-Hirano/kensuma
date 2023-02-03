@@ -681,7 +681,9 @@
               <%= checked_none_box(@document.content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-222 (b)D安全装置 各種ロック 追加項目1(13-103) -->
+              <% unless @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-222 (b)D安全装置 各種ロック 追加項目1(13-103) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(11) ずり積機</td>
@@ -729,7 +731,9 @@
               <%= checked_none_box(@document.content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-223 (b)D安全装置 各種ロック 追加項目2(13-104) -->
+              <% unless @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-223 (b)D安全装置 各種ロック 追加項目2(13-104) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(12) スクレーパー</td>
@@ -795,7 +799,9 @@
               <%= checked_none_box(@document.content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-224 (b)D安全装置 各種ロック 追加項目3(13-105) -->
+              <% unless @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-224 (b)D安全装置 各種ロック 追加項目3(13-105) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(13) スクレープ・ドーザー</td>
@@ -1593,7 +1599,9 @@
               <%= checked_none_box(@document.content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-250 (b)Hその他 追加項目4(13-106) -->
+              <% unless @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-250 (b)Hその他 追加項目4(13-106) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(35) ロードプレーナ</td>
@@ -1626,7 +1634,9 @@
               <%= checked_none_box(@document.content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-251 (b)Hその他 追加項目5(13-107) -->
+              <% unless @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-251 (b)Hその他 追加項目5(13-107) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(36) ロードカッター</td>
@@ -1654,7 +1664,9 @@
               <%= checked_none_box(@document.content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-252 (b)Hその他 追加項目6(13-108) -->
+              <% unless @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-252 (b)Hその他 追加項目6(13-108) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(37) コンクリート吹付機</td>
@@ -1686,7 +1698,9 @@
               <%= checked_none_box(@document.content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-253 (b)Hその他 追加項目7(13-109) -->
+              <% unless @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-253 (b)Hその他 追加項目7(13-109) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(38) ボーリングマシーン</td>
@@ -1714,7 +1728,9 @@
               <%= checked_none_box(@document.content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-254 (b)Hその他 追加項目8(13-110) -->
+              <% unless @document.content&.[]('h_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-254 (b)Hその他 追加項目8(13-110) -->
+              <% end %>
             </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(39) ブレーカ</td>

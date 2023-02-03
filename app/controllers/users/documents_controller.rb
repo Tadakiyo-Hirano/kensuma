@@ -21,7 +21,7 @@ module Users
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_4th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
-          when 'doc_5th', 'doc_13th', 'doc_14th', 'doc_18th', 'doc_22nd'
+          when 'doc_5th', 'doc_13rd', 'doc_14th', 'doc_18th', 'doc_22nd'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
           when 'doc_8th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
