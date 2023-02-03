@@ -498,6 +498,10 @@ module DocumentsHelper
     end
   end
 
+  def checked_none_box(checked_status)
+    '✓' if checked_status == '1'
+  end
+
   # リスクの見積り
   def risk_estimation_level(risk_possibility, risk_seriousness)
     possibility_point, _possibility_comment = risk_possibility(risk_possibility)
