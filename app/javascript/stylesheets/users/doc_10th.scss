@@ -7,8 +7,9 @@
   grid-template:
     ".. .. .. .. .. .. .." 20px
     ".. .. c1 c1 c1 .. .."
+    ".. c10 c10 c10 c10 c10 .." 
     ".. .. .. .. .. .. .." 16px
-    ".. .. .. .. c2 c2 .."
+    ".. .. .. .. .. c2 .."
     ".. c3 c3 .. .. .. .."
     ".. .. .. .. .. .. .." 16px
     ".. c4 c4 .. .. .. .."
@@ -25,23 +26,33 @@
 .title {
   grid-area: c1;
 }
+.notice {
+  grid-area: c10;
+  color: #ff0000;
+}
 .submission_date {
   grid-area: c2;
+  background-color: #ccffcc;
 }
 .office_name {
   grid-area: c3;
+  background-color: #e9ecef;
 }
 .chief_name {
   grid-area: c4;
+  background-color: #e9ecef;
 }
 .company_name {
   grid-area: c5;
+  background-color: #e9ecef;
 }
 .subcontractor {
   grid-area: c6;
+  background-color: #e9ecef;
 }
 .representative {
   grid-area: c7;
+  background-color: #e9ecef;
 }
 .description {
   grid-area: c8;
@@ -59,7 +70,17 @@ div span {
 .t-content tr {
   height: 50px;
 }
+td.gray {
+  background-color: #e9ecef;
+}
+td.green {
+  background-color: #ccffcc;
+}
 .office_name p, .chief_name p {
   border-bottom:1px solid;
+  margin: 0;
+}
+
+.submission_date p{
   margin: 0;
 }

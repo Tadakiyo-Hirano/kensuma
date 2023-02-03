@@ -1,0 +1,15 @@
+<% if @error_msg_for_doc_22nd.present? %>
+  <div id= "error_explantion">
+    <div class="row">
+      <div class="mx-auto">
+        <ul>
+          <% @error_msg_for_doc_22nd.each do |msg| %>
+            <font color="red">
+              <li><%= msg %></li>
+            </font>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
