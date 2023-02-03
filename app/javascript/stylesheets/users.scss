@@ -20,10 +20,3 @@ form.cmxform label.error, label.error {
 .line_through {
   text-decoration: line-through;
 }
-
-// 横スクロール
-.horizontal-scroll {
-  overflow-x: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}

@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div id="doc_13" class="hrizontal-scroll">
+  <div id="doc_13" style="overflow: auto;">
     <% document_info.field_special_vehicles.each do |field_special_vehicle| %>    
       <section class="doc_13_sheet">
         <div class="ritz grid-container" dir="ltr">
@@ -713,7 +713,7 @@
                 <td class="doc_13_s32" dir="ltr" colspan="7">
                   <%= f.text_field name = "content[d_add_item_content_1st][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目①"
+                                    style: "width: 100%;", placeholder: "追加項目① (20文字)", maxlength: "20"
                   %> <!-- 13-103 追加項目内容1 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -770,7 +770,7 @@
                 <td class="doc_13_s32" dir="ltr" colspan="7">
                   <%= f.text_field name = "content[d_add_item_content_2nd][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目②"
+                                    style: "width: 100%;", placeholder: "追加項目② (20文字)", maxlength: "20"
                   %> <!-- 13-104 追加項目内容2 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -845,7 +845,7 @@
                 <td class="doc_13_s32" dir="ltr" colspan="7">
                   <%= f.text_field name = "content[d_add_item_content_3rd][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目③"
+                                    style: "width: 100%;", placeholder: "追加項目③ (20文字)", maxlength: "20"
                   %> <!-- 13-105 追加項目内容3 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1801,7 +1801,7 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">
                   <%= f.text_field name = "content[h_add_item_content_4th][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目④"
+                                    style: "width: 100%;", placeholder: "追加項目④ (20文字)", maxlength: "20"
                   %> <!-- 13-106 追加項目内容4 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1843,7 +1843,7 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">
                   <%= f.text_field name = "content[h_add_item_content_5th][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目⑤"
+                                    style: "width: 100%;", placeholder: "追加項目⑤ (20文字)", maxlength: "20"
                   %> <!-- 13-107 追加項目内容5 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1880,7 +1880,7 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">
                   <%= f.text_field name = "content[h_add_item_content_6th][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目⑥"
+                                    style: "width: 100%;", placeholder: "追加項目⑥ (20文字)", maxlength: "20"
                   %> <!-- 13-108 追加項目内容6 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1921,7 +1921,7 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">
                   <%= f.text_field name = "content[h_add_item_content_7th][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目⑦"
+                                    style: "width: 100%;", placeholder: "追加項目⑦ (20文字)", maxlength: "20"
                   %> <!-- 13-109 追加項目内容7 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -1958,7 +1958,7 @@
                 <td class="doc_13_s41" dir="ltr" colspan="8">
                   <%= f.text_field name = "content[h_add_item_content_8th][field_special_vehicle_#{field_special_vehicle.id}]",
                                     value: @document.content&.[]('h_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}"),
-                                    style: "width: 100%;", placeholder: "追加項目⑧"
+                                    style: "width: 100%;", placeholder: "追加項目⑧ (20文字)", maxlength: "20"
                   %> <!-- 13-110 追加項目内容8 -->
                 </td>
                 <td class="doc_13_s30" dir="ltr" colspan="2">
@@ -2470,7 +2470,7 @@
         </div>
       </section>
 
-      <script>
+      <%= javascript_tag do %>
         //全選択・解除のチェックボックス
         let checkbox_all_crane<%= field_special_vehicle.id %> = document.querySelector(".checkbox_all_crane<%= field_special_vehicle.id %>");
         let checkbox_all_vehicle<%= field_special_vehicle.id %> = document.querySelector(".checkbox_all_vehicle<%= field_special_vehicle.id %>");
@@ -2517,7 +2517,7 @@
             }
           }
         };
-      </script>
+      <% end %>
     <% end %>
   </div>
 <% end %>

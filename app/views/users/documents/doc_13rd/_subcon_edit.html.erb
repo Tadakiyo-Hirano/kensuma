@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div id="doc_13" class="hrizontal-scroll">
+  <div id="doc_13" style="overflow: auto;">
     <% document_info.field_special_vehicles.each do |field_special_vehicle| %>
       <section class="doc_13_sheet">
         <div class="ritz grid-container" dir="ltr">
@@ -2441,7 +2441,7 @@
         </div>
       </section>
 
-      <script>
+      <%= javascript_tag do %>
         //全選択・解除のチェックボックス
         let checkbox_all_crane<%= field_special_vehicle.id %> = document.querySelector(".checkbox_all_crane<%= field_special_vehicle.id %>");
         let checkbox_all_vehicle<%= field_special_vehicle.id %> = document.querySelector(".checkbox_all_vehicle<%= field_special_vehicle.id %>");
@@ -2488,7 +2488,7 @@
             }
           }
         };
-      </script>
+      <% end %>
     <% end %>
   </div>
 <% end %>
