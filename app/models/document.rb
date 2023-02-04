@@ -54,6 +54,7 @@ class Document < ApplicationRecord
   $CHARACTER_LIMIT300 = 300
   $CHARACTER_LIMIT50 = 50
   $CHARACTER_LIMIT30 = 30
+  $CHARACTER_LIMIT20 = 20
   $WORKER_NUMBER_LIMIT100 = 100
   $WORKER_NUMBER_LIMIT50 = 50
   $WORKER_NUMBER_LIMIT10 = 10
@@ -838,8 +839,7 @@ class Document < ApplicationRecord
       error_msg_for_doc_20th.push('安全衛生推進者を選択してください')
     end
     # 特記事項
-    $CHARACTER_LIMIT = 300
-    error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $CHARACTER_LIMIT
+    error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $CHARACTER_LIMIT300
     error_msg_for_doc_20th
   end
 
@@ -867,5 +867,886 @@ class Document < ApplicationRecord
       request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
     end
   end
+
+  # エラーメッセージ(年間安全衛生計画書)
+  def error_msg_for_doc_22nd(document_params, request_order_uuid)
+    error_msg_for_doc_22nd = []
+    #記録者
+    error_msg_for_doc_22nd.push('記録者を選択してください') if document_params[:content][:recorder].blank?
+    #安全当番者
+    error_msg_for_doc_22nd.push('安全当番者を選択してください') if document_params[:content][:safety_duty_person].blank?
+    #打合日
+    error_msg_for_doc_22nd.push('打合日を入力してください') if document_params[:content][:meeting_date].blank?
+    #実作業日
+    error_msg_for_doc_22nd.push('実作業日を入力してください') if document_params[:content][:actual_work_date].blank?
+    #職種1
+    if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:occupation_1st].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:occupation_1st].present?)
+      error_msg_for_doc_22nd.push("1行目の職種は入力しないでください")
+    end
+    #必要資格1
+    error_msg_for_doc_22nd.push("1行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:required_qualification_1st].present?)
+    #作業内容1
+    if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:work_content_1st].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:work_content_1st].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:work_content_1st].present?)
+      error_msg_for_doc_22nd.push("1行目の作業内容は入力しないでください")
+    end
+    #危険予測1
+    if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:risk_prediction_1st].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:risk_prediction_1st].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:risk_prediction_1st].present?)
+      error_msg_for_doc_22nd.push("1行目の危険予測は入力しないでください")
+    end
+    #職長確認1
+    if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:foreman_confirmation_1st].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)1
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:implementation_confirmation_1st].blank?)
+    #実施の確認(良否)の確認者名1
+    if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:implementation_confirmation_person_1st].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:implementation_confirmation_person_1st].present?)
+      error_msg_for_doc_22nd.push("1行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置1
+    if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:corrective_action_1st].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:corrective_action_1st].present?)
+      error_msg_for_doc_22nd.push("1行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日1
+    error_msg_for_doc_22nd.push("1行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:corrective_action_confirmation_date_1st].present?)
+    #是正確認者1
+    error_msg_for_doc_22nd.push("1行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:corrective_action_reviewer_1st].present?)
+    #職種2
+    if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:occupation_2nd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:occupation_2nd].present?)
+      error_msg_for_doc_22nd.push("2行目の職種を入力しないでください")
+    end
+    #必要資格2
+    error_msg_for_doc_22nd.push("2行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:required_qualification_2nd].present?)
+    #作業内容2
+    if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:work_content_2nd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:work_content_2nd].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:work_content_2nd].present?)
+      error_msg_for_doc_22nd.push("2行目の作業内容は入力しないでください")
+    end
+    #危険予測2
+    if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:risk_prediction_2nd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:risk_prediction_2nd].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:risk_prediction_2nd].present?)
+      error_msg_for_doc_22nd.push("2行目の危険予測は入力しないでください")
+    end
+    #職長確認2
+    if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:foreman_confirmation_2nd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)2
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:implementation_confirmation_2nd].blank?)
+    #実施の確認(良否)の確認者名2
+    if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:implementation_confirmation_person_2nd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:implementation_confirmation_person_2nd].present?)
+      error_msg_for_doc_22nd.push("2行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置2
+    if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:corrective_action_2nd].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:corrective_action_2nd].present?)
+      error_msg_for_doc_22nd.push("2行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日2
+    error_msg_for_doc_22nd.push("2行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:corrective_action_confirmation_date_2nd].present?)
+    #是正確認者2
+    error_msg_for_doc_22nd.push("2行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:corrective_action_reviewer_2nd].present?)
+    #職種3
+    if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:occupation_3rd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:occupation_3rd].present?)
+      error_msg_for_doc_22nd.push("3行目の職種を入力しないでください")
+    end
+    #必要資格3
+    error_msg_for_doc_22nd.push("3行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:required_qualification_3rd].present?)
+    #作業内容3
+    if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:work_content_3rd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:work_content_3rd].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:work_content_3rd].present?)
+      error_msg_for_doc_22nd.push("3行目の作業内容は入力しないでください")
+    end
+    #危険予測3
+    if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:risk_prediction_3rd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:risk_prediction_3rd].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:risk_prediction_3rd].present?)
+      error_msg_for_doc_22nd.push("3行目の危険予測は入力しないでください")
+    end
+    #職長確認3
+    if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:foreman_confirmation_3rd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)3
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:implementation_confirmation_3rd].blank?)
+    #実施の確認(良否)の確認者名3
+    if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:implementation_confirmation_person_3rd].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:implementation_confirmation_person_3rd].present?)
+      error_msg_for_doc_22nd.push("3行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置3
+    if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:corrective_action_3rd].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:corrective_action_3rd].present?)
+      error_msg_for_doc_22nd.push("3行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日3
+    error_msg_for_doc_22nd.push("3行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:corrective_action_confirmation_date_3rd].present?)
+    #是正確認者3
+    error_msg_for_doc_22nd.push("3行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:corrective_action_reviewer_3rd].present?)
+    #職種4
+    if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:occupation_4th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:occupation_4th].present?)
+      error_msg_for_doc_22nd.push("4行目の職種を入力しないでください")
+    end
+    #必要資格4
+    error_msg_for_doc_22nd.push("4行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:required_qualification_4th].present?)
+    #作業内容4
+    if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:work_content_4th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:work_content_4th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:work_content_4th].present?)
+      error_msg_for_doc_22nd.push("4行目の作業内容は入力しないでください")
+    end
+    #危険予測4
+    if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:risk_prediction_4th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:risk_prediction_4th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:risk_prediction_4th].present?)
+      error_msg_for_doc_22nd.push("4行目の危険予測は入力しないでください")
+    end
+    #職長確認4
+    if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:foreman_confirmation_4th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)4
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:implementation_confirmation_4th].blank?)
+    #実施の確認(良否)の確認者名4
+    if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:implementation_confirmation_person_4th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:implementation_confirmation_person_4th].present?)
+      error_msg_for_doc_22nd.push("4行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置4
+    if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:corrective_action_4th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:corrective_action_4th].present?)
+      error_msg_for_doc_22nd.push("4行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日4
+    error_msg_for_doc_22nd.push("4行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:corrective_action_confirmation_date_4th].present?)
+    #是正確認者4
+    error_msg_for_doc_22nd.push("4行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:corrective_action_reviewer_4th].present?)
+    #職種5
+    if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:occupation_5th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:occupation_5th].present?)
+      error_msg_for_doc_22nd.push("5行目の職種を入力しないでください")
+    end
+    #必要資格5
+    error_msg_for_doc_22nd.push("5行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:required_qualification_5th].present?)
+    #作業内容5
+    if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:work_content_5th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:work_content_5th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:work_content_5th].present?)
+      error_msg_for_doc_22nd.push("5行目の作業内容は入力しないでください")
+    end
+    #危険予測5
+    if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:risk_prediction_5th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:risk_prediction_5th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:risk_prediction_5th].present?)
+      error_msg_for_doc_22nd.push("5行目の危険予測は入力しないでください")
+    end
+    #職長確認5
+    if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:foreman_confirmation_5th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)5
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:implementation_confirmation_5th].blank?)
+    #実施の確認(良否)の確認者名5
+    if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:implementation_confirmation_person_5th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:implementation_confirmation_person_5th].present?)
+      error_msg_for_doc_22nd.push("5行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置5
+    if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:corrective_action_5th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:corrective_action_5th].present?)
+      error_msg_for_doc_22nd.push("5行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日5
+    error_msg_for_doc_22nd.push("5行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:corrective_action_confirmation_date_5th].present?)
+    #是正確認者5
+    error_msg_for_doc_22nd.push("5行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:corrective_action_reviewer_5th].present?)
+    #職種6
+    if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:occupation_6th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:occupation_6th].present?)
+      error_msg_for_doc_22nd.push("6行目の職種を入力しないでください")
+    end
+    #必要資格6
+    error_msg_for_doc_22nd.push("6行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:required_qualification_6th].present?)
+    #作業内容6
+    if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:work_content_6th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:work_content_6th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:work_content_6th].present?)
+      error_msg_for_doc_22nd.push("6行目の作業内容は入力しないでください")
+    end
+    #危険予測6
+    if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:risk_prediction_6th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:risk_prediction_6th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:risk_prediction_6th].present?)
+      error_msg_for_doc_22nd.push("6行目の危険予測は入力しないでください")
+    end
+    #職長確認6
+    if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:foreman_confirmation_6th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)6
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:implementation_confirmation_6th].blank?)
+    #実施の確認(良否)の確認者名6
+    if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:implementation_confirmation_person_6th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:implementation_confirmation_person_6th].present?)
+      error_msg_for_doc_22nd.push("6行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置6
+    if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:corrective_action_6th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:corrective_action_6th].present?)
+      error_msg_for_doc_22nd.push("6行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日6
+    error_msg_for_doc_22nd.push("6行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:corrective_action_confirmation_date_6th].present?)
+    #是正確認者6
+    error_msg_for_doc_22nd.push("6行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:corrective_action_reviewer_6th].present?)
+    #職種7
+    if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:occupation_7th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:occupation_7th].present?)
+      error_msg_for_doc_22nd.push("7行目の職種を入力しないでください")
+    end
+    #必要資格7
+    error_msg_for_doc_22nd.push("7行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:required_qualification_7th].present?)
+    #作業内容7
+    if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:work_content_7th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:work_content_7th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:work_content_7th].present?)
+      error_msg_for_doc_22nd.push("7行目の作業内容は入力しないでください")
+    end
+    #危険予測7
+    if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:risk_prediction_7th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:risk_prediction_7th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:risk_prediction_7th].present?)
+      error_msg_for_doc_22nd.push("7行目の危険予測は入力しないでください")
+    end
+    #職長確認7
+    if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:foreman_confirmation_7th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)7
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:implementation_confirmation_7th].blank?)
+    #実施の確認(良否)の確認者名7
+    if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:implementation_confirmation_person_7th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:implementation_confirmation_person_7th].present?)
+      error_msg_for_doc_22nd.push("7行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置7
+    if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:corrective_action_7th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:corrective_action_7th].present?)
+      error_msg_for_doc_22nd.push("7行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日7
+    error_msg_for_doc_22nd.push("7行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:corrective_action_confirmation_date_7th].present?)
+    #是正確認者7
+    error_msg_for_doc_22nd.push("7行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:corrective_action_reviewer_7th].present?)
+    #職種8
+    if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:occupation_8th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:occupation_8th].present?)
+      error_msg_for_doc_22nd.push("8行目の職種を入力しないでください")
+    end
+    #必要資格8
+    error_msg_for_doc_22nd.push("8行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:required_qualification_8th].present?)
+    #作業内容8
+    if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:work_content_8th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:work_content_8th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:work_content_8th].present?)
+      error_msg_for_doc_22nd.push("8行目の作業内容は入力しないでください")
+    end
+    #危険予測8
+    if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:risk_prediction_8th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:risk_prediction_8th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:risk_prediction_8th].present?)
+      error_msg_for_doc_22nd.push("8行目の危険予測は入力しないでください")
+    end
+    #職長確認8
+    if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:foreman_confirmation_8th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)8
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:implementation_confirmation_8th].blank?)
+    #実施の確認(良否)の確認者名8
+    if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:implementation_confirmation_person_8th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:implementation_confirmation_person_8th].present?)
+      error_msg_for_doc_22nd.push("8行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置8
+    if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:corrective_action_8th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:corrective_action_8th].present?)
+      error_msg_for_doc_22nd.push("8行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日8
+    error_msg_for_doc_22nd.push("8行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:corrective_action_confirmation_date_8th].present?)
+    #是正確認者8
+    error_msg_for_doc_22nd.push("8行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:corrective_action_reviewer_8th].present?)
+    #職種9
+    if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:occupation_9th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:occupation_9th].present?)
+      error_msg_for_doc_22nd.push("9行目の職種を入力しないでください")
+    end
+    #必要資格9
+    error_msg_for_doc_22nd.push("9行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:required_qualification_9th].present?)
+    #作業内容9
+    if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:work_content_9th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:work_content_9th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:work_content_9th].present?)
+      error_msg_for_doc_22nd.push("9行目の作業内容は入力しないでください")
+    end
+    #危険予測9
+    if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:risk_prediction_9th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:risk_prediction_9th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:risk_prediction_9th].present?)
+      error_msg_for_doc_22nd.push("9行目の危険予測は入力しないでください")
+    end
+    #職長確認9
+    if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:foreman_confirmation_9th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)9
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:implementation_confirmation_9th].blank?)
+    #実施の確認(良否)の確認者名9
+    if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:implementation_confirmation_person_9th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:implementation_confirmation_person_9th].present?)
+      error_msg_for_doc_22nd.push("9行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置9
+    if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:corrective_action_9th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:corrective_action_9th].present?)
+      error_msg_for_doc_22nd.push("9行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日9
+    error_msg_for_doc_22nd.push("9行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:corrective_action_confirmation_date_9th].present?)
+    #是正確認者9
+    error_msg_for_doc_22nd.push("9行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:corrective_action_reviewer_9th].present?)
+    #職種10
+    if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:occupation_10th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:occupation_10th].present?)
+      error_msg_for_doc_22nd.push("10行目の職種を入力しないでください")
+    end
+    #必要資格10
+    error_msg_for_doc_22nd.push("10行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:required_qualification_10th].present?)
+    #作業内容10
+    if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:work_content_10th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:work_content_10th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:work_content_10th].present?)
+      error_msg_for_doc_22nd.push("10行目の作業内容は入力しないでください")
+    end
+    #危険予測10
+    if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:risk_prediction_10th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:risk_prediction_10th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:risk_prediction_10th].present?)
+      error_msg_for_doc_22nd.push("10行目の危険予測は入力しないでください")
+    end
+    #職長確認10
+    if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:foreman_confirmation_10th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)10
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:implementation_confirmation_10th].blank?)
+    #実施の確認(良否)の確認者名10
+    if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:implementation_confirmation_person_10th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:implementation_confirmation_person_10th].present?)
+      error_msg_for_doc_22nd.push("10行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置10
+    if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:corrective_action_10th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:corrective_action_10th].present?)
+      error_msg_for_doc_22nd.push("10行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日10
+    error_msg_for_doc_22nd.push("10行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:corrective_action_confirmation_date_10th].present?)
+    #是正確認者10
+    error_msg_for_doc_22nd.push("10行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:corrective_action_reviewer_10th].present?)
+    #職種11
+    if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:occupation_11th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:occupation_11th].present?)
+      error_msg_for_doc_22nd.push("11行目の職種を入力しないでください")
+    end
+    #必要資格11
+    error_msg_for_doc_22nd.push("11行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:required_qualification_11th].present?)
+    #作業内容11
+    if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:work_content_11th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:work_content_11th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:work_content_11th].present?)
+      error_msg_for_doc_22nd.push("11行目の作業内容は入力しないでください")
+    end
+    #危険予測11
+    if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:risk_prediction_11th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:risk_prediction_11th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:risk_prediction_11th].present?)
+      error_msg_for_doc_22nd.push("11行目の危険予測は入力しないでください")
+    end
+    #職長確認11
+    if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:foreman_confirmation_11th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)11
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:implementation_confirmation_11th].blank?)
+    #実施の確認(良否)の確認者名11
+    if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:implementation_confirmation_person_11th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:implementation_confirmation_person_11th].present?)
+      error_msg_for_doc_22nd.push("11行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置11
+    if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:corrective_action_11th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:corrective_action_11th].present?)
+      error_msg_for_doc_22nd.push("11行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日11
+    error_msg_for_doc_22nd.push("11行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:corrective_action_confirmation_date_11th].present?)
+    #是正確認者11
+    error_msg_for_doc_22nd.push("11行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:corrective_action_reviewer_11th].present?)
+    #職種12
+    if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:occupation_12th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:occupation_12th].present?)
+      error_msg_for_doc_22nd.push("12行目の職種を入力しないでください")
+    end
+    #必要資格12
+    error_msg_for_doc_22nd.push("12行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:required_qualification_12th].present?)
+    #作業内容12
+    if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:work_content_12th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:work_content_12th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:work_content_12th].present?)
+      error_msg_for_doc_22nd.push("12行目の作業内容は入力しないでください")
+    end
+    #危険予測12
+    if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:risk_prediction_12th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:risk_prediction_12th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:risk_prediction_12th].present?)
+      error_msg_for_doc_22nd.push("12行目の危険予測は入力しないでください")
+    end
+    #職長確認12
+    if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:foreman_confirmation_12th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)12
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:implementation_confirmation_12th].blank?)
+    #実施の確認(良否)の確認者名12
+    if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:implementation_confirmation_person_12th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:implementation_confirmation_person_12th].present?)
+      error_msg_for_doc_22nd.push("12行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置12
+    if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:corrective_action_12th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:corrective_action_12th].present?)
+      error_msg_for_doc_22nd.push("12行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日12
+    error_msg_for_doc_22nd.push("12行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:corrective_action_confirmation_date_12th].present?)
+    #是正確認者12
+    error_msg_for_doc_22nd.push("12行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:corrective_action_reviewer_12th].present?)
+    #職種13
+    if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:occupation_13th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:occupation_13th].present?)
+      error_msg_for_doc_22nd.push("13行目の職種を入力しないでください")
+    end
+    #必要資格13
+    error_msg_for_doc_22nd.push("13行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:required_qualification_13th].present?)
+    #作業内容13
+    if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:work_content_13th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:work_content_13th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:work_content_13th].present?)
+      error_msg_for_doc_22nd.push("13行目の作業内容は入力しないでください")
+    end
+    #危険予測13
+    if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:risk_prediction_13th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:risk_prediction_13th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:risk_prediction_13th].present?)
+      error_msg_for_doc_22nd.push("13行目の危険予測は入力しないでください")
+    end
+    #職長確認13
+    if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:foreman_confirmation_13th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)13
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:implementation_confirmation_13th].blank?)
+    #実施の確認(良否)の確認者名13
+    if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:implementation_confirmation_person_13th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:implementation_confirmation_person_13th].present?)
+      error_msg_for_doc_22nd.push("13行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置13
+    if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:corrective_action_13th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:corrective_action_13th].present?)
+      error_msg_for_doc_22nd.push("13行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日13
+    error_msg_for_doc_22nd.push("13行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:corrective_action_confirmation_date_13th].present?)
+    #是正確認者13
+    error_msg_for_doc_22nd.push("13行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:corrective_action_reviewer_13th].present?)
+    #職種14
+    if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:occupation_14th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:occupation_14th].present?)
+      error_msg_for_doc_22nd.push("14行目の職種を入力しないでください")
+    end
+    #必要資格14
+    error_msg_for_doc_22nd.push("14行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:required_qualification_14th].present?)
+    #作業内容14
+    if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:work_content_14th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:work_content_14th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:work_content_14th].present?)
+      error_msg_for_doc_22nd.push("14行目の作業内容は入力しないでください")
+    end
+    #危険予測14
+    if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:risk_prediction_14th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:risk_prediction_14th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:risk_prediction_14th].present?)
+      error_msg_for_doc_22nd.push("14行目の危険予測は入力しないでください")
+    end
+    #職長確認14
+    if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:foreman_confirmation_14th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)14
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:implementation_confirmation_14th].blank?)
+    #実施の確認(良否)の確認者名14
+    if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:implementation_confirmation_person_14th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:implementation_confirmation_person_14th].present?)
+      error_msg_for_doc_22nd.push("14行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置14
+    if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:corrective_action_14th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:corrective_action_14th].present?)
+      error_msg_for_doc_22nd.push("14行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日14
+    error_msg_for_doc_22nd.push("14行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:corrective_action_confirmation_date_14th].present?)
+    #是正確認者14
+    error_msg_for_doc_22nd.push("14行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:corrective_action_reviewer_14th].present?)
+    #職種15
+    if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:occupation_15th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:occupation_15th].present?)
+      error_msg_for_doc_22nd.push("15行目の職種を入力しないでください")
+    end
+    #必要資格15
+    error_msg_for_doc_22nd.push("15行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:required_qualification_15th].present?)
+    #作業内容15
+    if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:work_content_15th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:work_content_15th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:work_content_15th].present?)
+      error_msg_for_doc_22nd.push("15行目の作業内容は入力しないでください")
+    end
+    #危険予測15
+    if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:risk_prediction_15th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:risk_prediction_15th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:risk_prediction_15th].present?)
+      error_msg_for_doc_22nd.push("15行目の危険予測は入力しないでください")
+    end
+    #職長確認15
+    if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:foreman_confirmation_15th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)15
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:implementation_confirmation_15th].blank?)
+    #実施の確認(良否)の確認者名15
+    if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:implementation_confirmation_person_15th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:implementation_confirmation_person_15th].present?)
+      error_msg_for_doc_22nd.push("15行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置15
+    if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:corrective_action_15th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:corrective_action_15th].present?)
+      error_msg_for_doc_22nd.push("15行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日15
+    error_msg_for_doc_22nd.push("15行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:corrective_action_confirmation_date_15th].present?)
+    #是正確認者15
+    error_msg_for_doc_22nd.push("15行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:corrective_action_reviewer_15th].present?)
+    #職種16
+    if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:occupation_16th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:occupation_16th].present?)
+      error_msg_for_doc_22nd.push("16行目の職種を入力しないでください")
+    end
+    #必要資格16
+    error_msg_for_doc_22nd.push("16行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:required_qualification_16th].present?)
+    #作業内容16
+    if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:work_content_16th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:work_content_16th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:work_content_16th].present?)
+      error_msg_for_doc_22nd.push("16行目の作業内容は入力しないでください")
+    end
+    #危険予測16
+    if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:risk_prediction_16th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:risk_prediction_16th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:risk_prediction_16th].present?)
+      error_msg_for_doc_22nd.push("16行目の危険予測は入力しないでください")
+    end
+    #職長確認16
+    if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:foreman_confirmation_16th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)16
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:implementation_confirmation_16th].blank?)
+    #実施の確認(良否)の確認者名16
+    if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:implementation_confirmation_person_16th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:implementation_confirmation_person_16th].present?)
+      error_msg_for_doc_22nd.push("16行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置16
+    if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:corrective_action_16th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:corrective_action_16th].present?)
+      error_msg_for_doc_22nd.push("16行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日16
+    error_msg_for_doc_22nd.push("16行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:corrective_action_confirmation_date_16th].present?)
+    #是正確認者16
+    error_msg_for_doc_22nd.push("16行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:corrective_action_reviewer_16th].present?)
+    #職種17
+    if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:occupation_17th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の職種を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:occupation_17th].present?)
+      error_msg_for_doc_22nd.push("17行目の職種を入力しないでください")
+    end
+    #必要資格17
+    error_msg_for_doc_22nd.push("17行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:required_qualification_17th].present?)
+    #作業内容17
+    if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:work_content_17th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の作業内容を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:work_content_17th].size > $CHARACTER_LIMIT30)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の作業内容は30字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:work_content_17th].present?)
+      error_msg_for_doc_22nd.push("17行目の作業内容は入力しないでください")
+    end
+    #危険予測17
+    if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:risk_prediction_17th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の危険予測を入力してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:risk_prediction_17th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の危険予測は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:risk_prediction_17th].present?)
+      error_msg_for_doc_22nd.push("17行目の危険予測は入力しないでください")
+    end
+    #職長確認17
+    if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:foreman_confirmation_17th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の職長確認を選択してください")
+    end
+    #実施の確認(良否)17
+    error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の良否(実施の確認)を選択してください") if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:implementation_confirmation_17th].blank?)
+    #実施の確認(良否)の確認者名17
+    if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:implementation_confirmation_person_17th].blank?)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の確認者(実施の確認)を選択してください")
+    elsif ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:implementation_confirmation_person_17th].present?)
+      error_msg_for_doc_22nd.push("17行目の確認者(実施の確認)を選択しないでください")
+    end
+    #是正指示・指導・処置17
+    if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:corrective_action_17th].size > $CHARACTER_LIMIT20)
+      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の是正指示・指導・処置は20字以内にしてください")
+    elsif ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:corrective_action_17th].present?)
+      error_msg_for_doc_22nd.push("17行目の是正指示・指導・処置は入力しないでください")
+    end
+    #是正確認日17
+    error_msg_for_doc_22nd.push("17行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:corrective_action_confirmation_date_17th].present?)
+    #是正確認者17
+    error_msg_for_doc_22nd.push("17行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:corrective_action_reviewer_17th].present?)
+    #朝礼時、周知・指示事項及び混在作業・調整事項1
+    error_msg_for_doc_22nd.push('1行目の朝礼時、周知・指示事項及び混在作業・調整事項を30字以内にしてください') if document_params[:content][:notifications_and_instructions_1st].size > $CHARACTER_LIMIT30
+    #行事・パトロール・搬入・その他1
+    error_msg_for_doc_22nd.push('1行目の行事・パトロール・搬入・その他を20字以内にしてください') if document_params[:content][:events_and_patrols_1st].size > $CHARACTER_LIMIT20
+    #統責者・巡視記録（内容）1
+    error_msg_for_doc_22nd.push('1行目の内容(統責者・巡視記録)を20字以内にしてください') if document_params[:content][:patrol_record_content_1st].size > $CHARACTER_LIMIT20
+    #是正処理・報告1
+    error_msg_for_doc_22nd.push('1行目の是正処理・報告を20字以内にしてください') if document_params[:content][:corrective_action_report_1st].size > $CHARACTER_LIMIT20
+    #朝礼時、周知・指示事項及び混在作業・調整事項2
+    error_msg_for_doc_22nd.push('2行目の朝礼時、周知・指示事項及び混在作業・調整事項を30字以内にしてください') if document_params[:content][:notifications_and_instructions_2nd].size > $CHARACTER_LIMIT30
+    #行事・パトロール・搬入・その他2
+    error_msg_for_doc_22nd.push('2行目の行事・パトロール・搬入・その他を20字以内にしてください') if document_params[:content][:events_and_patrols_2nd].size > $CHARACTER_LIMIT20
+    #統責者・巡視記録（内容）2
+    error_msg_for_doc_22nd.push('2行目の内容(統責者・巡視記録)を20字以内にしてください') if document_params[:content][:patrol_record_content_2nd].size > $CHARACTER_LIMIT20
+    #是正処理・報告2
+    error_msg_for_doc_22nd.push('2行目の是正処理・報告を20字以内にしてください') if document_params[:content][:corrective_action_report_2nd].size > $CHARACTER_LIMIT20
+    #朝礼時、周知・指示事項及び混在作業・調整事項3
+    error_msg_for_doc_22nd.push('3行目の朝礼時、周知・指示事項及び混在作業・調整事項を30字以内にしてください') if document_params[:content][:notifications_and_instructions_3rd].size > $CHARACTER_LIMIT30
+    #行事・パトロール・搬入・その他3
+    error_msg_for_doc_22nd.push('3行目の行事・パトロール・搬入・その他を20字以内にしてください') if document_params[:content][:events_and_patrols_3rd].size > $CHARACTER_LIMIT20
+    #統責者・巡視記録（内容）3
+    error_msg_for_doc_22nd.push('3行目の内容(統責者・巡視記録)を20字以内にしてください') if document_params[:content][:patrol_record_content_3rd].size > $CHARACTER_LIMIT20
+    #是正処理・報告3
+    error_msg_for_doc_22nd.push('3行目の是正処理・報告を20字以内にしてください') if document_params[:content][:corrective_action_report_3rd].size > $CHARACTER_LIMIT20
+    #朝礼時、周知・指示事項及び混在作業・調整事項4
+    error_msg_for_doc_22nd.push('4行目の朝礼時、周知・指示事項及び混在作業・調整事項を30字以内にしてください') if document_params[:content][:notifications_and_instructions_4th].size > $CHARACTER_LIMIT30
+    #行事・パトロール・搬入・その他4
+    error_msg_for_doc_22nd.push('4行目の行事・パトロール・搬入・その他を20字以内にしてください') if document_params[:content][:events_and_patrols_4th].size > $CHARACTER_LIMIT20
+    #統責者・巡視記録（内容）4
+    error_msg_for_doc_22nd.push('4行目の内容(統責者・巡視記録)を20字以内にしてください') if document_params[:content][:patrol_record_content_4th].size > $CHARACTER_LIMIT20
+    #是正処理・報告4
+    error_msg_for_doc_22nd.push('4行目の是正処理・報告を20字以内にしてください') if document_params[:content][:corrective_action_report_4th].size > $CHARACTER_LIMIT20
+    #朝礼時、周知・指示事項及び混在作業・調整事項5
+    error_msg_for_doc_22nd.push('5行目の朝礼時、周知・指示事項及び混在作業・調整事項を30字以内にしてください') if document_params[:content][:notifications_and_instructions_5th].size > $CHARACTER_LIMIT30
+    #行事・パトロール・搬入・その他5
+    error_msg_for_doc_22nd.push('5行目の行事・パトロール・搬入・その他を20字以内にしてください') if document_params[:content][:events_and_patrols_5th].size > $CHARACTER_LIMIT20
+    #統責者・巡視記録（内容）5
+    error_msg_for_doc_22nd.push('5行目の内容(統責者・巡視記録)を20字以内にしてください') if document_params[:content][:patrol_record_content_5th].size > $CHARACTER_LIMIT20
+    #是正処理・報告5
+    error_msg_for_doc_22nd.push('5行目の是正処理・報告を20字以内にしてください') if document_params[:content][:corrective_action_report_5th].size > $CHARACTER_LIMIT20
+    #朝礼時、周知・指示事項及び混在作業・調整事項6
+    error_msg_for_doc_22nd.push('6行目の朝礼時、周知・指示事項及び混在作業・調整事項を30字以内にしてください') if document_params[:content][:notifications_and_instructions_6th].size > $CHARACTER_LIMIT30
+    #行事・パトロール・搬入・その他6
+    error_msg_for_doc_22nd.push('6行目の行事・パトロール・搬入・その他を20字以内にしてください') if document_params[:content][:events_and_patrols_6th].size > $CHARACTER_LIMIT20
+    #統責者・巡視記録（内容）6
+    error_msg_for_doc_22nd.push('6行目の内容(統責者・巡視記録)を20字以内にしてください') if document_params[:content][:patrol_record_content_6th].size > $CHARACTER_LIMIT20
+    #是正処理・報告6
+    error_msg_for_doc_22nd.push('6行目の是正処理・報告を20字以内にしてください') if document_params[:content][:corrective_action_report_6th].size > $CHARACTER_LIMIT20
+    #朝礼時、周知・指示事項及び混在作業・調整事項7
+    error_msg_for_doc_22nd.push('7行目の朝礼時、周知・指示事項及び混在作業・調整事項を30字以内にしてください') if document_params[:content][:notifications_and_instructions_7th].size > $CHARACTER_LIMIT30
+    #行事・パトロール・搬入・その他7
+    error_msg_for_doc_22nd.push('7行目の行事・パトロール・搬入・その他を20字以内にしてください') if document_params[:content][:events_and_patrols_7th].size > $CHARACTER_LIMIT20
+    #統責者・巡視記録（内容）7
+    error_msg_for_doc_22nd.push('7行目の内容(統責者・巡視記録)を20字以内にしてください') if document_params[:content][:patrol_record_content_7th].size > $CHARACTER_LIMIT20
+    #是正処理・報告7
+    error_msg_for_doc_22nd.push('7行目の是正処理・報告を20字以内にしてください') if document_params[:content][:corrective_action_report_7th].size > $CHARACTER_LIMIT20
+    #委任期間（自）年月日
+    error_msg_for_doc_22nd.push('委任期間(自)年月日を入力してください') if document_params[:content][:delegation_date_from].blank?
+    #委任期間（自）時間
+    error_msg_for_doc_22nd.push('委任期間(自)時間を入力してください') if document_params[:content][:delegation_time_from].blank?
+    #委任期間（至）年月日
+    error_msg_for_doc_22nd.push('委任期間(至)年月日を入力してください') if document_params[:content][:delegation_date_to].blank?
+    #委任期間（至）時間
+    error_msg_for_doc_22nd.push('委任期間(至)時間を入力してください') if document_params[:content][:delegation_time_to].blank?
+    #統括安全衛生責任者・署名年月日
+    error_msg_for_doc_22nd.push('統括安全衛生責任者・署名年月日を入力してください') if document_params[:content][:officer_signature_date].blank?
+    #統括安全衛生責任者代行者・署名年月日
+    error_msg_for_doc_22nd.push('統括安全衛生責任者代行者・署名年月日を入力してください') if document_params[:content][:officer_substitute_signature_date].blank?
+    error_msg_for_doc_22nd
+  end
+
+  #下請会社(協力会社)の配列の取得
+  def subcontractor_array(request_order_uuid)
+    request_order = RequestOrder.find_by(uuid: request_order_uuid)
+    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
+    subcontractor_array = []
+    request_order_list.each do |record|
+      subcontractor_array << record.business_id
+    end
+    return subcontractor_array
+  end
+
+  #会社名の取得
+  def business_name(business_id)
+    Business.find_by(id: business_id).name
+  end
+
   # rubocop:enable all
 end

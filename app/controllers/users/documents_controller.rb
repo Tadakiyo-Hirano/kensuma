@@ -5,7 +5,6 @@ module Users
     before_action :set_documents # サイドバーに常時表示させるために必要
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
-    before_action :set_workers1, only: %i[edit update] # 作業員の名前を取得する
     before_action :edit_restriction_after_approved, only: %i[edit update]
 
     def index; end
@@ -117,7 +116,17 @@ module Users
           render action: :edit
         end
       when 'doc_22nd'
-        @error_msg_for_doc_22nd = @document.error_msg_for_doc_22nd(document_params(@document))
+        # time_selectのデータ取得形式に合わせるため時分を結合
+        params[:document][:content][:delegation_time_from] = delegation_time_from_join
+        params[:document][:content][:delegation_time_to] = delegation_time_to_join
+        params[:document][:content][:patrol_record_time_1st] = patrol_record_time_1st_join
+        params[:document][:content][:patrol_record_time_2nd] = patrol_record_time_2nd_join
+        params[:document][:content][:patrol_record_time_3rd] = patrol_record_time_3rd_join
+        params[:document][:content][:patrol_record_time_4th] = patrol_record_time_4th_join
+        params[:document][:content][:patrol_record_time_5th] = patrol_record_time_5th_join
+        params[:document][:content][:patrol_record_time_6th] = patrol_record_time_6th_join
+        params[:document][:content][:patrol_record_time_7th] = patrol_record_time_7th_join
+        @error_msg_for_doc_22nd = @document.error_msg_for_doc_22nd(document_params(@document), params[:request_order_uuid])
         if @error_msg_for_doc_22nd.blank?
           if @document.update(document_params(@document))
             redirect_to users_request_order_document_url, success: '保存に成功しました'
@@ -132,6 +141,7 @@ module Users
       end
     end
 
+    #安全衛生役員の役職取得のため(doc_20th)
     def set_safety_officer_name
       if params[:safety_officer_name].present?
         @safety_officer_post = Worker.find_by(name: params[:safety_officer_name]).job_title
@@ -145,6 +155,7 @@ module Users
       end
     end
 
+    #総括安全衛生管理者の役職取得のため(doc_20th)
     def set_general_manager_name
       if params[:general_manager_name].present?
         @general_manager_post = Worker.find_by(name: params[:general_manager_name]).job_title
@@ -158,6 +169,7 @@ module Users
       end
     end
 
+    #安全管理者の役職取得のため(doc_20th)
     def set_safety_manager_name
       if params[:safety_manager_name].present?
         @safety_manager_post = Worker.find_by(name: params[:safety_manager_name]).job_title
@@ -171,6 +183,7 @@ module Users
       end
     end
 
+    #衛生管理者の役職取得のため(doc_20th)
     def set_hygiene_manager_name
       if params[:hygiene_manager_name].present?
         @hygiene_manager_post = Worker.find_by(name: params[:hygiene_manager_name]).job_title
@@ -184,6 +197,7 @@ module Users
       end
     end
 
+    #安全衛生推進者の役職取得のため(doc_20th)
     def set_health_and_safety_promoter_name
       if params[:health_and_safety_promoter_name].present?
         @health_and_safety_promoter_post = Worker.find_by(name: params[:health_and_safety_promoter_name]).job_title
@@ -207,13 +221,7 @@ module Users
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
     end
 
-    def set_workers1
-      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-      @order = Order.find(request_order.order_id)
-      @workers_name = FieldWorker.where(field_workerable_id: @order.id).pluck(:admission_worker_name)
-    end
-
-    #年度パラメータを再セット
+    #年度パラメータを再セット(doc_20th)
     def term_join
       if params[:document][:content][:term]['(1i)'].present?
         Date.new(
@@ -224,7 +232,7 @@ module Users
       end
     end
 
-    #始期パラメータを再セット
+    #始期パラメータを再セット(doc_20th)
     def planning_period_beginning_join
       if params[:document][:content][:planning_period_beginning]['(1i)'].present? && params[:document][:content][:planning_period_beginning]['(2i)'].present?
         Date.new(
@@ -235,13 +243,130 @@ module Users
       end
     end
 
-    #終期パラメータを再セット
+    #終期パラメータを再セット(doc_20th)
     def planning_period_final_stage_join
       if params[:document][:content][:planning_period_final_stage]['(1i)'].present? && params[:document][:content][:planning_period_final_stage]['(2i)'].present?
         Date.new(
           params[:document][:content][:planning_period_final_stage]['(1i)'].to_i,
           params[:document][:content][:planning_period_final_stage]['(2i)'].to_i,
           params[:document][:content][:planning_period_final_stage]['(3i)'].to_i
+        )
+      end
+    end
+
+    #委任期間(自)時間パラメータを再セット(doc_22nd)
+    def delegation_time_from_join
+      if params[:document][:content][:delegation_time_from]['(4i)'].present? && params[:document][:content][:delegation_time_from]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:delegation_time_from]['(1i)'].to_i,
+          params[:document][:content][:delegation_time_from]['(2i)'].to_i,
+          params[:document][:content][:delegation_time_from]['(3i)'].to_i,
+          params[:document][:content][:delegation_time_from]['(4i)'].to_i,
+          params[:document][:content][:delegation_time_from]['(5i)'].to_i
+        )
+      end
+    end
+
+     #委任期間(至)時間パラメータを再セット(doc_22nd)
+    def delegation_time_to_join
+      if params[:document][:content][:delegation_time_to]['(4i)'].present? && params[:document][:content][:delegation_time_to]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:delegation_time_to]['(1i)'].to_i,
+          params[:document][:content][:delegation_time_to]['(2i)'].to_i,
+          params[:document][:content][:delegation_time_to]['(3i)'].to_i,
+          params[:document][:content][:delegation_time_to]['(4i)'].to_i,
+          params[:document][:content][:delegation_time_to]['(5i)'].to_i
+        )
+      end
+    end
+
+    #統責者・巡視記録時刻1パラメータを再セット(doc_22nd)
+    def patrol_record_time_1st_join
+      if params[:document][:content][:patrol_record_time_1st]['(4i)'].present? && params[:document][:content][:patrol_record_time_1st]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:patrol_record_time_1st]['(1i)'].to_i,
+          params[:document][:content][:patrol_record_time_1st]['(2i)'].to_i,
+          params[:document][:content][:patrol_record_time_1st]['(3i)'].to_i,
+          params[:document][:content][:patrol_record_time_1st]['(4i)'].to_i,
+          params[:document][:content][:patrol_record_time_1st]['(5i)'].to_i
+        )
+      end
+    end
+
+    #統責者・巡視記録時刻2パラメータを再セット(doc_22nd)
+    def patrol_record_time_2nd_join
+      if params[:document][:content][:patrol_record_time_2nd]['(4i)'].present? && params[:document][:content][:patrol_record_time_2nd]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:patrol_record_time_2nd]['(1i)'].to_i,
+          params[:document][:content][:patrol_record_time_2nd]['(2i)'].to_i,
+          params[:document][:content][:patrol_record_time_2nd]['(3i)'].to_i,
+          params[:document][:content][:patrol_record_time_2nd]['(4i)'].to_i,
+          params[:document][:content][:patrol_record_time_2nd]['(5i)'].to_i
+        )
+      end
+    end
+
+    #統責者・巡視記録時刻3パラメータを再セット(doc_22nd)
+    def patrol_record_time_3rd_join
+      if params[:document][:content][:patrol_record_time_3rd]['(4i)'].present? && params[:document][:content][:patrol_record_time_3rd]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:patrol_record_time_3rd]['(1i)'].to_i,
+          params[:document][:content][:patrol_record_time_3rd]['(2i)'].to_i,
+          params[:document][:content][:patrol_record_time_3rd]['(3i)'].to_i,
+          params[:document][:content][:patrol_record_time_3rd]['(4i)'].to_i,
+          params[:document][:content][:patrol_record_time_3rd]['(5i)'].to_i
+        )
+      end
+    end
+
+    #統責者・巡視記録時刻4パラメータを再セット(doc_22nd)
+    def patrol_record_time_4th_join
+      if params[:document][:content][:patrol_record_time_4th]['(4i)'].present? && params[:document][:content][:patrol_record_time_4th]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:patrol_record_time_4th]['(1i)'].to_i,
+          params[:document][:content][:patrol_record_time_4th]['(2i)'].to_i,
+          params[:document][:content][:patrol_record_time_4th]['(3i)'].to_i,
+          params[:document][:content][:patrol_record_time_4th]['(4i)'].to_i,
+          params[:document][:content][:patrol_record_time_4th]['(5i)'].to_i
+        )
+      end
+    end
+
+    #統責者・巡視記録時刻5パラメータを再セット(doc_22nd)
+    def patrol_record_time_5th_join
+      if params[:document][:content][:patrol_record_time_5th]['(4i)'].present? && params[:document][:content][:patrol_record_time_5th]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:patrol_record_time_5th]['(1i)'].to_i,
+          params[:document][:content][:patrol_record_time_5th]['(2i)'].to_i,
+          params[:document][:content][:patrol_record_time_5th]['(3i)'].to_i,
+          params[:document][:content][:patrol_record_time_5th]['(4i)'].to_i,
+          params[:document][:content][:patrol_record_time_5th]['(5i)'].to_i
+        )
+      end
+    end
+
+    #統責者・巡視記録時刻６パラメータ6を再セット(doc_22nd)
+    def patrol_record_time_6th_join
+      if params[:document][:content][:patrol_record_time_6th]['(4i)'].present? && params[:document][:content][:patrol_record_time_6th]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:patrol_record_time_6th]['(1i)'].to_i,
+          params[:document][:content][:patrol_record_time_6th]['(2i)'].to_i,
+          params[:document][:content][:patrol_record_time_6th]['(3i)'].to_i,
+          params[:document][:content][:patrol_record_time_6th]['(4i)'].to_i,
+          params[:document][:content][:patrol_record_time_6th]['(5i)'].to_i
+        )
+      end
+    end
+
+    #統責者・巡視記録時刻７パラメータを再セット(doc_22nd)
+    def patrol_record_time_7th_join
+      if params[:document][:content][:patrol_record_time_7th]['(4i)'].present? && params[:document][:content][:patrol_record_time_7th]['(5i)'].present?
+        DateTime.new(
+          params[:document][:content][:patrol_record_time_7th]['(1i)'].to_i,
+          params[:document][:content][:patrol_record_time_7th]['(2i)'].to_i,
+          params[:document][:content][:patrol_record_time_7th]['(3i)'].to_i,
+          params[:document][:content][:patrol_record_time_7th]['(4i)'].to_i,
+          params[:document][:content][:patrol_record_time_7th]['(5i)'].to_i
         )
       end
     end
@@ -574,6 +699,10 @@ module Users
       when 'doc_22nd'
         params.require(:document).permit(content:
           %i[
+            recorder
+            safety_duty_person
+            meeting_date
+            actual_work_date
             occupation_1st
             required_qualification_1st
             work_content_1st
@@ -585,9 +714,213 @@ module Users
             corrective_action_confirmation_date_1st
             corrective_action_reviewer_1st
             occupation_2nd
+            required_qualification_2nd
+            work_content_2nd
+            risk_prediction_2nd
+            foreman_confirmation_2nd
+            implementation_confirmation_2nd
+            implementation_confirmation_person_2nd
+            corrective_action_2nd
+            corrective_action_confirmation_date_2nd
+            corrective_action_reviewer_2nd
             occupation_3rd
+            required_qualification_3rd
+            work_content_3rd
+            risk_prediction_3rd
+            foreman_confirmation_3rd
+            implementation_confirmation_3rd
+            implementation_confirmation_person_3rd
+            corrective_action_3rd
+            corrective_action_confirmation_date_3rd
+            corrective_action_reviewer_3rd
             occupation_4th
+            required_qualification_4th
+            work_content_4th
+            risk_prediction_4th
+            foreman_confirmation_4th
+            implementation_confirmation_4th
+            implementation_confirmation_person_4th
+            corrective_action_4th
+            corrective_action_confirmation_date_4th
+            corrective_action_reviewer_4th
             occupation_5th
+            required_qualification_5th
+            work_content_5th
+            risk_prediction_5th
+            foreman_confirmation_5th
+            implementation_confirmation_5th
+            implementation_confirmation_person_5th
+            corrective_action_5th
+            corrective_action_confirmation_date_5th
+            corrective_action_reviewer_5th
+            occupation_6th
+            required_qualification_6th
+            work_content_6th
+            risk_prediction_6th
+            foreman_confirmation_6th
+            implementation_confirmation_6th
+            implementation_confirmation_person_6th
+            corrective_action_6th
+            corrective_action_confirmation_date_6th
+            corrective_action_reviewer_6th
+            occupation_7th
+            required_qualification_7th
+            work_content_7th
+            risk_prediction_7th
+            foreman_confirmation_7th
+            implementation_confirmation_7th
+            implementation_confirmation_person_7th
+            corrective_action_7th
+            corrective_action_confirmation_date_7th
+            corrective_action_reviewer_7th
+            occupation_8th
+            required_qualification_8th
+            work_content_8th
+            risk_prediction_8th
+            foreman_confirmation_8th
+            implementation_confirmation_8th
+            implementation_confirmation_person_8th
+            corrective_action_8th
+            corrective_action_confirmation_date_8th
+            corrective_action_reviewer_8th
+            occupation_9th
+            required_qualification_9th
+            work_content_9th
+            risk_prediction_9th
+            foreman_confirmation_9th
+            implementation_confirmation_9th
+            implementation_confirmation_person_9th
+            corrective_action_9th
+            corrective_action_confirmation_date_9th
+            corrective_action_reviewer_9th
+            occupation_10th
+            required_qualification_10th
+            work_content_10th
+            risk_prediction_10th
+            foreman_confirmation_10th
+            implementation_confirmation_10th
+            implementation_confirmation_person_10th
+            corrective_action_10th
+            corrective_action_confirmation_date_10th
+            corrective_action_reviewer_10th
+            occupation_11th
+            required_qualification_11th
+            work_content_11th
+            risk_prediction_11th
+            foreman_confirmation_11th
+            implementation_confirmation_11th
+            implementation_confirmation_person_11th
+            corrective_action_11th
+            corrective_action_confirmation_date_11th
+            corrective_action_reviewer_11th
+            occupation_12th
+            required_qualification_12th
+            work_content_12th
+            risk_prediction_12th
+            foreman_confirmation_12th
+            implementation_confirmation_12th
+            implementation_confirmation_person_12th
+            corrective_action_12th
+            corrective_action_confirmation_date_12th
+            corrective_action_reviewer_12th
+            occupation_13th
+            required_qualification_13th
+            work_content_13th
+            risk_prediction_13th
+            foreman_confirmation_13th
+            implementation_confirmation_13th
+            implementation_confirmation_person_13th
+            corrective_action_13th
+            corrective_action_confirmation_date_13th
+            corrective_action_reviewer_13th
+            occupation_14th
+            required_qualification_14th
+            work_content_14th
+            risk_prediction_14th
+            foreman_confirmation_14th
+            implementation_confirmation_14th
+            implementation_confirmation_person_14th
+            corrective_action_14th
+            corrective_action_confirmation_date_14th
+            corrective_action_reviewer_14th
+            occupation_15th
+            required_qualification_15th
+            work_content_15th
+            risk_prediction_15th
+            foreman_confirmation_15th
+            implementation_confirmation_15th
+            implementation_confirmation_person_15th
+            corrective_action_15th
+            corrective_action_confirmation_date_15th
+            corrective_action_reviewer_15th
+            occupation_16th
+            required_qualification_16th
+            work_content_16th
+            risk_prediction_16th
+            foreman_confirmation_16th
+            implementation_confirmation_16th
+            implementation_confirmation_person_16th
+            corrective_action_16th
+            corrective_action_confirmation_date_16th
+            corrective_action_reviewer_16th
+            occupation_17th
+            required_qualification_17th
+            work_content_17th
+            risk_prediction_17th
+            foreman_confirmation_17th
+            implementation_confirmation_17th
+            implementation_confirmation_person_17th
+            corrective_action_17th
+            corrective_action_confirmation_date_17th
+            corrective_action_reviewer_17th
+            notifications_and_instructions_1st
+            events_and_patrols_1st
+            patrol_record_time_1st
+            patrol_record_content_1st
+            corrective_action_report_1st
+            corrective_action_report_confirmer_1st
+            notifications_and_instructions_2nd
+            events_and_patrols_2nd
+            patrol_record_time_2nd
+            patrol_record_content_2nd
+            corrective_action_report_2nd
+            corrective_action_report_confirmer_2nd
+            notifications_and_instructions_3rd
+            events_and_patrols_3rd
+            patrol_record_time_3rd
+            patrol_record_content_3rd
+            corrective_action_report_3rd
+            corrective_action_report_confirmer_3rd
+            notifications_and_instructions_4th
+            events_and_patrols_4th
+            patrol_record_time_4th
+            patrol_record_content_4th
+            corrective_action_report_4th
+            corrective_action_report_confirmer_4th
+            notifications_and_instructions_5th
+            events_and_patrols_5th
+            patrol_record_time_5th
+            patrol_record_content_5th
+            corrective_action_report_5th
+            corrective_action_report_confirmer_5th
+            notifications_and_instructions_6th
+            events_and_patrols_6th
+            patrol_record_time_6th
+            patrol_record_content_6th
+            corrective_action_report_6th
+            corrective_action_report_confirmer_6th
+            notifications_and_instructions_7th
+            events_and_patrols_7th
+            patrol_record_time_7th
+            patrol_record_content_7th
+            corrective_action_report_7th
+            corrective_action_report_confirmer_7th
+            delegation_date_from
+            delegation_time_from
+            delegation_date_to
+            delegation_time_to
+            officer_signature_date
+            officer_substitute_signature_date
           ]
                                         )
       end
