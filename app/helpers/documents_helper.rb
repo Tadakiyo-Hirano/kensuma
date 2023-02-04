@@ -372,7 +372,7 @@ module DocumentsHelper
         if border_date < birth_date
           target_ids.push field_worker.id
         end
-    
+
       when 65
         border_date = str_date.prev_year(65) # 入場日から65年前の日付
         if border_date >= birth_date
@@ -578,7 +578,7 @@ module DocumentsHelper
     subcontractor_array.slice(number) if subcontractor_array[number].present?
   end
 
-  #入場作業員の取得
+  #入場作業員の人数の取得
   def number_of_field_workers_of_subcontractor(id)
     number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).size
     if number_of_workers == 0
@@ -586,6 +586,46 @@ module DocumentsHelper
     else
       return number_of_workers
     end
+  end
+
+  #元請の入場作業員の取得
+  def name_of_field_workers_order
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: request_order.order_id).pluck(:admission_worker_name)
+  end
+
+  #元請・下請け以下の入場作業員の取得
+  def name_of_field_workers_request_order(id)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    field_workers_name_request_order = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).pluck(:admission_worker_name)
+  end
+
+  # document.contentの時間表示
+  def doc_content_time(time)
+    time.nil? ? "" : time # nilの場合のstrftime表示エラー回避
+  end
+
+  #月日表示
+  def doc_md_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :long2)
+  end
+
+  #時分表示
+  def doc_hm_time(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_datetime, format: :kan_hm)
+  end
+
+  #時表示(時は含めない)
+  def doc_h_time(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_datetime, format: :h)
+  end
+
+  #曜日表示
+  def day_of_week(date)
+    date.blank? ? '' : %w{日 月 火 水 木 金 土}[(date.to_date).wday]
   end
 
   # チェックボックスにチェックが入っているかを判別

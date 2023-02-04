@@ -478,7 +478,7 @@
             %>
           </td><!-- 20-009「計画期間（始期）年月」-->
           <td class="doc_20_s20" rowspan="2">～</td>
-            <td class="doc_20_s21" colspan="7" rowspan="2">
+          <td class="doc_20_s21" colspan="7" rowspan="2">
             <%= date_select_ja(raw sprintf(f.date_select('content[planning_period_final_stage]', include_blank: true, start_year:Time.now.year-2,
                                           discard_day: true, use_month_numbers: true,
                                           value: @document.content&.[]('planning_period_final_stage'),
@@ -1448,7 +1448,7 @@
             %>
           </td><!--20-040「安全衛生担当役員の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[safety_officer_name]', @workers_name,
+            <%= f.select name = 'content[safety_officer_name]', name_of_field_workers_order,
                                 { selected: @document.content&.[]('safety_officer_name'), include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchSafetyOfficerName($(this).val())" }
             %>
@@ -1478,7 +1478,7 @@
             %>
           </td><!--20-044「総括安全衛生管理の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[general_manager_name]', @workers_name,
+            <%= f.select name = 'content[general_manager_name]', name_of_field_workers_order,
                                 { selected: @document.content&.[]('general_manager_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchGeneralManagerName($(this).val())" }
             %>
@@ -1495,7 +1495,7 @@
             %>
           </td><!--20-046「安全管理の役員名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[safety_manager_name]', @workers_name,
+            <%= f.select name = 'content[safety_manager_name]', name_of_field_workers_order,
                                 { selected: @document.content&.[]('safety_manager_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchSafetyManagerName($(this).val())" }
             %>
@@ -1512,7 +1512,7 @@
             %>
           </td><!--20-048「衛生管理者の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[hygiene_manager_name]', @workers_name,
+            <%= f.select name = 'content[hygiene_manager_name]', name_of_field_workers_order,
                                 { selected: @document.content&.[]('hygiene_manager_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchHygieneManagerName($(this).val())" }
             %>
@@ -1529,7 +1529,7 @@
             %>
           </td><!--20-050「安全衛生推進の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[health_and_safety_promoter_name]', @workers_name,
+            <%= f.select name = 'content[health_and_safety_promoter_name]', name_of_field_workers_order,
                                 { selected: @document.content&.[]('health_and_safety_promoter_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchHealthAndSafetyPromoterName($(this).val())" }
             %>
