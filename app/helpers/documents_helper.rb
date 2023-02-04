@@ -701,13 +701,13 @@ module DocumentsHelper
   # 雇用契約書-「有り」
   def employment_contract_yes(worker)
     contract_status = worker&.content&.[]('employment_contract')
-    contract_status == 0 ? tag.span('1. 取り交わし済', class: :circle) : '1. 取り交わし済'
+    contract_status == 'available' ? tag.span('1. 取り交わし済', class: :circle) : '1. 取り交わし済'
   end
   
   # 雇用契約書-「無し」
   def employment_contract_no(worker)
     contract_status = worker&.content&.[]('employment_contract')
-    contract_status == 1 ? tag.span('2. 未だ', class: :circle) : '2. 未だ'
+    contract_status == 'not_available' ? tag.span('2. 未だ', class: :circle) : '2. 未だ'
   end
   
   # アンケート設問：（法人規模-「はい」）
@@ -715,8 +715,8 @@ module DocumentsHelper
     w_name = worker&.content&.[]('name')
     r_name = Business.find(document_info.business_id).representative_name
     if w_name == r_name
-      company_status = Business.find(document_info.business_id).business_type
-      company_status != 0 ? tag.span('1. はい', class: :circle) : '1. はい'
+      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
     else
       '1. はい'
     end
@@ -729,8 +729,8 @@ module DocumentsHelper
     if w_name != r_name
       tag.span('2. いいえ', class: :circle)
     else
-      company_status = Business.find(document_info.business_id).business_type
-      company_status == 0 ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
     end
   end
 
@@ -740,7 +740,7 @@ module DocumentsHelper
     insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
 
     if company_status != '法人'
-      insurance_status == 0 ? tag.span('1. はい', class: :circle) : '1. はい'
+      insurance_status == 'join' ? tag.span('1. はい', class: :circle) : '1. はい'
     else
       '1. はい'
     end
@@ -751,7 +751,7 @@ module DocumentsHelper
     insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
 
     if questionnaire_business_type_yes(worker) == tag.span('1. はい', class: :circle)
-      insurance_status != 0 ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+      insurance_status != "join" ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
     else
       '2. いいえ'
     end
@@ -789,31 +789,31 @@ module DocumentsHelper
   # アンケート設問：（健康診断-「はい」）
   def questionnaire_health_exam_yes(worker)
     health_exam_status = worker&.content&.[]('worker_medical')['is_med_exam']
-    health_exam_status == 0 ? tag.span('1. 受けた', class: :circle) : '1. 受けた'
+    health_exam_status == 'y' ? tag.span('1. 受けた', class: :circle) : '1. 受けた'
   end
   
   # アンケート設問：（健康診断-「いいえ」）
   def questionnaire_health_exam_no(worker)
     health_exam_status = worker&.content&.[]('worker_medical')['is_med_exam']
-    health_exam_status == 1 ? tag.span('2. 受けていない', class: :circle) : '2. 受けていない'
+    health_exam_status == 'n' ? tag.span('2. 受けていない', class: :circle) : '2. 受けていない'
   end
   
   # アンケート設問：（健康状態-「よい」）
   def questionnaire_health_condition_good(worker)
     health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
-    health_condition_status == 0 ? tag.span('1. よい', class: :circle) : '1. よい'
+    health_condition_status == 'good' ? tag.span('1. よい', class: :circle) : '1. よい'
   end
   
   # アンケート設問：（健康状態-「まあまあである」）
   def questionnaire_health_condition_normal(worker)
     health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
-    health_condition_status == 1 ? tag.span('2. まあまあである', class: :circle) : '2. まあまあである'
+    health_condition_status == 'normal' ? tag.span('2. まあまあである', class: :circle) : '2. まあまあである'
   end
   
   # アンケート設問：（健康状態-「あまりよくない」）
   def questionnaire_health_condition_bad(worker)
     health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
-    health_condition_status == 2 ? tag.span('3. あまりよくない', class: :circle) : '3. あまりよくない'
+    health_condition_status == 'bad' ? tag.span('3. あまりよくない', class: :circle) : '3. あまりよくない'
   end
   
   # アンケート設問：（送り出し教育-「はい」）
