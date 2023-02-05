@@ -138,6 +138,23 @@ module Users
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
+      when 'doc_24th'
+        j = 1
+        focus_workers = document_info.field_workers
+        update_workers = []
+        focus_workers.each do |focus_worker|
+          focus_worker.prime_contractor_confirmation = params[:document]["prime_contractor_confirmation_#{j.ordinalize}".to_sym]
+          focus_worker.occupation = params[:document]["occupation_#{j.ordinalize}".to_sym]
+          update_workers.push(focus_worker)
+          j += 1
+        end
+        
+        if FieldWorker.import update_workers, on_duplicate_key_update: [:prime_contractor_confirmation, :occupation]
+          redirect_to users_request_order_document_url, success: '保存に成功しました'
+        else
+          flash[:danger] = '更新に失敗しました'
+          render :edit
+        end
       end
     end
 

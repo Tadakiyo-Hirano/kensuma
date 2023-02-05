@@ -198,6 +198,9 @@ ja:
         admission_date_start: 入場年月日(始期)
         admission_date_end: 入場年月日(終期)
         education_date: 新規入場時教育年月日
+        occupation: 職種
+        sendoff_education: 送り出し教育の受講状況
+        prime_contractor_confirmation: 元請け確認者
       order:
         status: ステータス
         # 現場
@@ -294,6 +297,9 @@ ja:
         carrier_up_id: 技能者ID
         images: 免許
         business: 事業所
+        employment_contract: 雇用契約書の取り交わし状況
+        family_name: 家族名
+        relationship: 家族続柄
       license:
         name: 名称
         description: 説明
@@ -329,6 +335,7 @@ ja:
         employment_insurance_number: 被保険者番号の下4桁
         severance_pay_mutual_aid_type: 建設業退職金共済制度
         severance_pay_mutual_aid_name: 建設業退職金共済制度名前
+        has_labor_insurance: 労働保険特別加入
       news:
         title: タイトル
         content: 内容
@@ -349,6 +356,8 @@ ja:
         max_blood_pressure: 最高血圧 (mmHg)
         min_blood_pressure: 最低血圧 (mmHg)
         special_med_exam_on: 特別健康診断日
+        health_condition: 最近の健康状態
+        is_med_exam: 健康診断の受診状況
       worker_exam:
         special_med_exam_id: 特別健康診断
         got_on: 取得年月日

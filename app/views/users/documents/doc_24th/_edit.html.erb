@@ -1,108 +1,110 @@
 <!-- (24)参考資料第4号(新規入場者調査票) -->
-<% document_info.field_workers.each do |field_worker| %>
-  <div class="ritz grid-container" dir="ltr">
-    <table class="waffle" cellspacing="0" cellpadding="0">
-      <thead>
-        <tr>
-          <th class="row-header freezebar-origin-ltr"></th>
-          <th class="doc_24_s3" colspan="26"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="height: 19px">
-          <td class="doc_24_s3" dir="ltr" colspan="27"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3" dir="ltr" colspan="27"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s49" dir="ltr" colspan="2"></td>
-          <td class="doc_24_s3" dir="ltr" colspan="23"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s7"></td>
-          <td class="doc_24_s0" dir="ltr" colspan="2">参考資料第４号</td>
-          <td class="doc_24_s1" dir="ltr"></td>
-          <td class="doc_24_s1" dir="ltr"></td>
-          <td class="doc_24_s2"></td>
-          <td class="doc_24_s3" colspan="2"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s2"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s2" dir="ltr"></td>
-          <td class="doc_24_s4" dir="ltr" colspan="5" rowspan="2"><%= field_worker.admission_date_start %></td> <!-- 「各作業員の入場年月日・始期」24-001 -->
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s5" dir="ltr" colspan="8" rowspan="2">新規入場者調査票</td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s6" dir="ltr" colspan="3">新 規 入 場 日</td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s1"></td>
-          <td class="doc_24_s7"></td>
-          <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-          <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= field_worker.prime_contractor_confirmation %></td> <!-- 「元請会社の確認欄」24-002 -->
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-        </tr>
+<%= form_with(model: @document, url: users_request_order_document_path, local: true, method: :patch) do |f| %>
+  <% j = 1 %>
+  <% document_info.field_workers.each do |field_worker| %>
+    <div class="ritz grid-container" dir="ltr">
+      <table class="waffle" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="row-header freezebar-origin-ltr"></th>
+            <th class="doc_24_s3" colspan="26"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="height: 19px">
+            <td class="doc_24_s3" dir="ltr" colspan="27"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3" dir="ltr" colspan="27"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s49" dir="ltr" colspan="2"></td>
+            <td class="doc_24_s3" dir="ltr" colspan="22"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s7"></td>
+            <td class="doc_24_s0" dir="ltr" colspan="2">参考資料第４号</td>
+            <td class="doc_24_s1" dir="ltr"></td>
+            <td class="doc_24_s1" dir="ltr"></td>
+            <td class="doc_24_s2"></td>
+            <td class="doc_24_s3" colspan="2"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s2"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s2" dir="ltr"></td>
+            <td class="doc_24_s4" dir="ltr" colspan="5" rowspan="2"><%= field_worker.admission_date_start %></td> <!-- 「各作業員の入場年月日・始期」24-001 -->
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s5" dir="ltr" colspan="8" rowspan="2">新規入場者調査票</td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s6" dir="ltr" colspan="3">新 規 入 場 日</td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s1"></td>
+            <td class="doc_24_s7"></td>
+            <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
+            <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= f.text_field name = "prime_contractor_confirmation_#{j.ordinalize}",value: field_worker.prime_contractor_confirmation, :placeholder => '例)元請会社の確認者' %></td> <!-- 「元請会社の確認欄」24-002 -->
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+          </tr>
         <tr style="height: 19px">
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -309,7 +311,7 @@
           <td class="doc_24_s27" dir="ltr" colspan="2"><%= employment_contract_no(field_worker) %></td>
           <td class="doc_24_s28" dir="ltr" colspan="3"></td>
           <td class="doc_24_s17" dir="ltr" colspan="2">職 種：</td>
-          <td class="doc_24_s29" dir="ltr" colspan="7"><%= field_worker.occupation %> <!-- 「職種」24-019 -->
+          <td class="doc_24_s29" dir="ltr" colspan="7"><%= f.text_field name = "occupation_#{j.ordinalize}",value: field_worker.occupation, :placeholder => '例)職種' %></td> <!-- 「職種」24-019 -->
           <td class="doc_24_s8" dir="ltr">工</td>
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
@@ -451,10 +453,10 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s3" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
-          <td class="doc_24_s34" dir="ltr" colspan="8">
+          <td class="doc_24_s3" dir="ltr" colspan="8">
             <%= worker_skill_training(field_worker).include?("コ解") ? "■コンクリート造の工作物の解体等" : "▢コンクリート造の工作物の解体等" %>
           </td>
-          <td class="doc_24_s34" dir="ltr" colspan="5">
+          <td class="doc_24_s3" dir="ltr" colspan="5">
             <%= worker_skill_training(field_worker).include?("酸欠") ? "■酸素欠乏危険" : "▢酸素欠乏危険" %>
           </td>
           <td class="doc_24_s38" dir="ltr" colspan="6" rowspan="2"><%= worker_skill_training_work_other(field_worker) %></td> <!-- ▢その他（　　　　　　　　） -->
@@ -753,57 +755,62 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3" dir="ltr" colspan="11">・個人情報の取扱いについて、了承しました。</td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s49" dir="ltr" colspan="4" rowspan="2">回答者自筆サイン</td>
-          <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2"><%= field_worker.content["name"] %></td> <!-- 24-029 -->
-          <td class="doc_24_s3" rowspan="2"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-        </tr>
-        <tr style="height: 19px">
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s1" colspan="9"></td>
-          <td class="doc_24_s3"></td>
-          <td class="doc_24_s3"></td>
-        </tr>
-      </tbody>
-    </table>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3" dir="ltr" colspan="11">・個人情報の取扱いについて、了承しました。</td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s49" dir="ltr" colspan="4" rowspan="2">回答者自筆サイン</td>
+            <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2"><%= field_worker.content["name"] %></td> <!-- 24-029 -->
+            <td class="doc_24_s3" rowspan="2"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+          </tr>
+          <tr style="height: 19px">
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s1" colspan="9"></td>
+            <td class="doc_24_s3"></td>
+            <td class="doc_24_s3"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <<% j += 1 %>
+  <% end %>
+  <div style="text-align: center">
+    <%= f.submit %>
   </div>
 <% end %>
