@@ -23,6 +23,7 @@ class Worker < ApplicationRecord
 
   enum abo_blood_type: { a: 0, b: 1, ab: 2, o: 3 }
   enum rh_blood_type: { plus: 0, minus: 1 }
+  enum employment_contract: { available: 0, not_available: 1 }, _prefix: true       # 雇用契約書取り交わし状況
   # ↓内訳未定のためコメントアウト
   # enum job_type: {  }
 
@@ -44,6 +45,9 @@ class Worker < ApplicationRecord
   validates :hiring_on, presence: true
   validates :experience_term_before_hiring, presence: true
   validates :blank_term, presence: true
+  validates :employment_contract, presence: true
+  validates :family_name, presence: true
+  validates :relationship, presence: true
 
   def to_param
     uuid

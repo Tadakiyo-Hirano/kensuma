@@ -28,6 +28,7 @@
                 <th><%= FieldWorker.human_attribute_name(:admission_date_start) %></th>
                 <th><%= FieldWorker.human_attribute_name(:admission_date_end) %></th>
                 <th><%= FieldWorker.human_attribute_name(:education_date) %></th>
+                <th><%= FieldWorker.human_attribute_name(:sendoff_education) %></th>
               </tr>
             </thead>
             <tbody>
@@ -38,6 +39,7 @@
                   <td><%= fw.date_field :admission_date_start, class: "form-control" %></td>
                   <td><%= fw.date_field :admission_date_end, class: "form-control" %></td>
                   <td><%= fw.date_field :education_date, class: "form-control" %></td>
+                  <td><%= fw.select :sendoff_education, FieldWorker.sendoff_educations_i18n.invert, {include_blank: true}, {class: "form-control"} %></td>
                 </tr>
                 <% end %>
               <% end %>

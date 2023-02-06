@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_030912) do
+ActiveRecord::Schema.define(version: 2023_01_31_010540) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -332,6 +332,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "occupation"
+    t.integer "sendoff_education", default: 0, null: false
+    t.string "prime_contractor_confirmation"
     t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
   end
 
@@ -680,6 +683,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.bigint "worker_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "has_labor_insurance", default: 0
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
   end
 
@@ -703,6 +707,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.date "special_med_exam_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "health_condition", default: 0, null: false
+    t.integer "is_med_exam", default: 0, null: false
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
   end
 
@@ -752,6 +758,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "uuid", null: false
     t.string "job_title", null: false
+    t.integer "employment_contract", default: 0, null: false
+    t.string "family_name", null: false
+    t.string "relationship", null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
   end
 
