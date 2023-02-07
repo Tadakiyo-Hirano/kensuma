@@ -159,7 +159,7 @@
             <td class="s_5a_000"></td><!-- 40列目 -->
             <td class="s_5a_000"></td>
             <td class="s_5a_102" dir="ltr" colspan="13">
-              <%= '※5-001未実装※' %> <!-- 5-001 提出日(西暦) -->
+              <%= doc_content_date(@document.content&.[]('date_submitted')) %> <!-- 5-001 提出日(西暦) -->
             </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -1032,7 +1032,7 @@
           </tr>
           <tr><!-- 27行目 -->
             <td class="s_5a_305" dir="ltr" colspan="10" rowspan="4">
-              <%= '※5-019未実装※' %> <!-- 5-019 各会社の建設許可業種 -->
+              <%= Business.find(document_info.business_id).industry_ids %> <!-- 5-019 各会社の建設許可業種 -->
             </td>
             <td class="s_5a_306" dir="ltr" colspan="4" rowspan="4">工事業</td>
             <td class="s_5a_307" dir="ltr" colspan="4" rowspan="2">大臣</td>
@@ -3378,3 +3378,9 @@
     </div>
   </div>
 </div>
+<% logger.debug(Business.find(document_info.business_id).industry_ids) %>
+<%  
+for val in Business.find(document_info.business_id).industry_ids do
+  logger.debug(Industry.find(val -1 ).name)
+end
+ %>
