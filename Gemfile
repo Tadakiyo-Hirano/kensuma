@@ -95,6 +95,9 @@ gem 'wareki'
 # 一括更新
 gem 'activerecord-import'
 
+# 検索
+gem 'ransack'
+
 group :development, :test do
   # ERD生成
   gem 'rails-erd'

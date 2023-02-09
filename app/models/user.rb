@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :general_users, class_name: 'User', foreign_key: 'admin_user_id', dependent: :destroy
   belongs_to :admin_user, class_name: 'User', optional: true
 
+  has_many :group_users
+  has_many :groups, through: :group_users
+
   enum gender: { male: 0, female: 1, other: 2 }
   enum role: { admin: 0, general: 1 }
 

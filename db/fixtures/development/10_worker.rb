@@ -18,7 +18,9 @@
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      carrier_up_id:       sprintf('%14d', rand(99999999999999))
+      carrier_up_id:       sprintf('%14d', rand(99999999999999)),
+      family_name: "テスト",
+      relationship: "テスト"
     }
   )
 end
@@ -43,7 +45,9 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      carrier_up_id:       sprintf('%14d', rand(99999999999999))
+      carrier_up_id:       sprintf('%14d', rand(99999999999999)),
+      family_name: "テスト",
+      relationship: "テスト"
     }
   )
 end
@@ -68,7 +72,9 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      carrier_up_id:       sprintf('%14d', rand(99999999999999))
+      carrier_up_id:       sprintf('%14d', rand(99999999999999)),
+      family_name: "テスト",
+      relationship: "テスト"
     }
   )
 end
@@ -93,7 +99,9 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      carrier_up_id:       sprintf('%14d', rand(99999999999999))
+      carrier_up_id:       sprintf('%14d', rand(99999999999999)),
+      family_name: "テスト",
+      relationship: "テスト"
     }
   )
 end
@@ -118,7 +126,9 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      carrier_up_id:       sprintf('%14d', rand(99999999999999))
+      carrier_up_id:       sprintf('%14d', rand(99999999999999)),
+      family_name: "テスト",
+      relationship: "テスト"
     }
   )
 end

@@ -2,6 +2,14 @@
 
 <%= link_to "協力会社招待画面へ", new_user_invitation_path, class: "btn btn-lg btn-block btn-outline-primary" %>
 <br>
+<h1>ユーザー検索</h1>
+  <%= search_form_for @q, url: search_users_subcon_users_path do |f| %>
+    <%= f.label :email_cont, 'ユーザー名' %>
+    <%= f.search_field :email_cont %>
+    <br>
+    <%= f.submit '検索' %>
+  <% end %>
+
 <% if @subcon_users.present? %>
   <div class="card">
     <div class="card-body table-responsive p-0">

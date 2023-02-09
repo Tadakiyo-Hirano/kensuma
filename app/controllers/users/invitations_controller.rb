@@ -33,7 +33,7 @@ module Users
         end
       else
         respond_with_navigational(resource) { render :new, status: :unprocessable_entity }
-      end
+      # end
     end
 
     # def edit
@@ -49,6 +49,15 @@ module Users
 
       if invitation_accepted
         if resource.class.allow_insecure_sign_in_after_accept
+          
+          # new_team_assign = []
+          # new_team_assign << @user.id
+          # new_team_assign = new_team_assign.flatten
+          # user = User.where(id: resource.invited_by_id).update(subcons_id: new_team_assign)
+          user = User.find(resource.invited_by_id)
+          aaa = user.subcons_id << @user.id
+          bbb = aaa.unique.sort!
+          user.update(subcons_id: bbb)
           flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
           set_flash_message :notice, flash_message if is_flashing_format?
           resource.after_database_authentication

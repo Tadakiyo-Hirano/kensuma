@@ -2,8 +2,14 @@ module Users
   class SubconUsersController < Users::Base
     before_action :set_subcon_users, only: :index
     before_action :set_subcon_user, only: :destroy
+    before_action :set_q, only: [:index, :search]
 
-    def index; end
+    def index
+      @users = User.all
+    end
+
+    def show
+    end
 
     def destroy
       @subcon_user.destroy!
@@ -19,6 +25,14 @@ module Users
 
     def set_subcon_user
       @subcon_user = User.where(invited_by_id: current_user).find(params[:id])
+    end
+
+    def search
+      @results = @q.result
+    end
+  
+    def set_q
+      @q = User.ransack(params[:q])
     end
   end
 end

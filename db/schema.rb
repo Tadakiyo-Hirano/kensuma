@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_010540) do
+ActiveRecord::Schema.define(version: 2023_02_09_073132) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -350,6 +350,22 @@ ActiveRecord::Schema.define(version: 2023_01_31_010540) do
 
   create_table "fire_use_targets", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "group_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -780,6 +796,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_010540) do
   add_foreign_key "field_fire_fire_types", "fire_types"
   add_foreign_key "field_fire_fire_use_targets", "field_fires"
   add_foreign_key "field_fire_fire_use_targets", "fire_use_targets"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
   add_foreign_key "machine_tags", "machines"
   add_foreign_key "machine_tags", "tags"
   add_foreign_key "machines", "businesses"
