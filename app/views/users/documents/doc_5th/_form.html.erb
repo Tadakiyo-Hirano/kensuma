@@ -227,9 +227,7 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
-            <td class="s_5b_102" dir="ltr" colspan="20">再下請業者及び再下請契約関係について次の通り報告いたします。</td>
-            <td class="s_5b_000"></td>
-            <td class="s_5b_000"></td>
+            <td class="s_5b_102" dir="ltr" colspan="22">再下請業者及び再下請契約関係について次の通り報告いたします。</td>
             <td class="s_5b_000"></td>
             <td class="s_5b_000"></td>
             <td class="s_5b_000"></td>
@@ -911,19 +909,19 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">
-              <%= Industry.find(Business.find(@child.business_id).industry_ids.join("','")).name %> <!-- 5-112 各会社の建設許可業種 -->
+              <%= child_check(@child) == "FALSE" ? "" : Industry.find(Business.find(@child.business_id).industry_ids.join("','")).name %> <!-- 5-112 各会社の建設許可業種 -->
             </td>
             <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
             <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%= construction_license_permission_type_minister(@child) %></td>
             <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%= construction_license_permission_type_identification(@child) %></td>
-            <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= Business.find(@child.business_id).construction_license_number_double_digit %></td>
+            <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= @child&.content&.[]('construction_license_number_double_digit') %></td>
             <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
             <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">
-              <%= Business.find(@child.business_id).construction_license_number_six_digits %> <!-- 5-115 建設許可番号 -->
+              <%= @child&.content&.[]('construction_license_number_six_digits') %> <!-- 5-115 建設許可番号 -->
             </td>
             <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
             <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">
-              <%= Business.find(@child.business_id).construction_license_updated_at %> <!--5-116 建設許可証更新日(西暦) -->
+              <%= @child&.content&.[]('construction_license_updated_at') %> <!--5-116 建設許可証更新日(西暦) -->
             </td>
           </tr>
           <tr><!-- 24行目 -->
@@ -1059,19 +1057,19 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">
-              <%= Industry.find(Business.find(@child.business_id).industry_ids.join("','")).name %> <!-- 5-117 各会社の建設許可業種 -->
+              <%= child_check(@child) == "FALSE" ? "" : Industry.find(Business.find(@child.business_id).industry_ids.join("','")).name %> <!-- 5-117 各会社の建設許可業種 -->
             </td>
             <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
             <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%= construction_license_permission_type_minister(@child) %></td>
             <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%= construction_license_permission_type_identification(@child) %></td>
-            <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= Business.find(@child.business_id).construction_license_number_double_digit %></td>
+            <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= @child&.content&.[]('construction_license_number_double_digit') %></td>
             <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
             <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">
-              <%= Business.find(@child.business_id).construction_license_number_six_digits %> <!--5-120 建設許可番号 -->
+              <%= @child&.content&.[]('construction_license_number_six_digits') %> <!--5-120 建設許可番号 -->
             </td>
             <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
             <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">
-              <%= Business.find(@child.business_id).construction_license_updated_at %> <!-- 5-121 建設許可証更新日(西暦) -->
+              <%= @child&.content&.[]('construction_license_updated_at') %> <!-- 5-121 建設許可証更新日(西暦) -->
             </td>
           </tr>
           <tr><!-- 28行目 -->
@@ -3379,7 +3377,6 @@
   </div>
 </div>
 <% logger.debug(@child&.content) %>
-<% logger.debug(Business.find(@child.business_id).workers.all.name) %>
 <% logger.debug(@child&.content&.[]('subcon_name').present? ) %>
 <% logger.debug(@child&.content&.[]('subcon_construction_license_permission_type_identification_general')) %>
 <% logger.debug(@child&.content&.[]('subcon_construction_license_permission_type_identification_general')) %>

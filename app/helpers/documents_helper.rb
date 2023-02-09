@@ -119,13 +119,21 @@ module DocumentsHelper
     status = INSURANCE_TYPE[insurance_type]
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
-  
+
   # (5)再下請負通知書（変更届）
+  def child_check(child)
+    if child.present?
+      Industry.find_by(id: Business.find_by(id: child&.business_id)&.industry_ids&.join("','"))&.name
+    else
+      "FALSE"
+    end
+  end
+
   def c_license_permission_type_minister_or_governor(d_info)
     sub_judge = d_info&.content&.[]('subcon_name').nil?
     if sub_judge == "true"
       permission_type = Business.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n
-    else
+    elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_minister_governor').delete("許可")
     end
     return permission_type
@@ -145,7 +153,7 @@ module DocumentsHelper
     sub_judge = d_info&.content&.[]('subcon_name').nil?
     if sub_judge == "true"
       permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
-    else
+    elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
     end
     return permission_type
@@ -431,7 +439,7 @@ module DocumentsHelper
       licenses.to_s.gsub(/,|"|\[|\]/) { '' }
     end
   end
-  
+
   def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
     target_ids = []
     document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
@@ -443,7 +451,7 @@ module DocumentsHelper
         if border_date < birth_date
           target_ids.push field_worker.id
         end
-    
+
       when 65
         border_date = str_date.prev_year(65) # 入場日から65年前の日付
         if border_date >= birth_date
