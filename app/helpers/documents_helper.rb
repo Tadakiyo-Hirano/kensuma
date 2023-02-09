@@ -119,6 +119,47 @@ module DocumentsHelper
     status = INSURANCE_TYPE[insurance_type]
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
+  
+  # (5)再下請負通知書（変更届）
+  def c_license_permission_type_minister_or_governor(d_info)
+    sub_judge = d_info&.content&.[]('subcon_name').nil?
+    if sub_judge == "true"
+      permission_type = Business.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n
+    else
+      permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_minister_governor').delete("許可")
+    end
+    return permission_type
+  end
+
+  def construction_license_permission_type_minister(d_info)
+    permission_type = c_license_permission_type_minister_or_governor(d_info)
+    permission_type == "大臣" ? tag.span('大臣', class: :circle) : '大臣'
+  end
+
+  def construction_license_permission_type_governor(d_info)
+    permission_type = c_license_permission_type_minister_or_governor(d_info)
+    permission_type == "知事" ? tag.span('知事', class: :circle) : '知事'
+  end
+
+  def c_license_permission_type_identification_or_general(d_info)
+    sub_judge = d_info&.content&.[]('subcon_name').nil?
+    if sub_judge == "true"
+      permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
+    else
+      permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
+    end
+    return permission_type
+  end
+
+  def construction_license_permission_type_identification(d_info)
+    permission_type = c_license_permission_type_identification_or_general(d_info)
+    permission_type == "特定" ? tag.span('特定', class: :circle) : '特定'
+  end
+
+  def construction_license_permission_type_general(d_info)
+    permission_type = c_license_permission_type_identification_or_general(d_info)
+    permission_type == "一般" ? tag.span('一般', class: :circle) : '一般'
+  end
 
   # (8)作業員名簿
 
