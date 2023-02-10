@@ -119,7 +119,7 @@ module DocumentsHelper
     status = INSURANCE_TYPE[insurance_type]
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
-
+  
   # (5)再下請負通知書（変更届）
   def child_check(child)
     if child.present?
@@ -167,6 +167,12 @@ module DocumentsHelper
   def construction_license_permission_type_general(d_info)
     permission_type = c_license_permission_type_identification_or_general(d_info)
     permission_type == "一般" ? tag.span('一般', class: :circle) : '一般'
+  end
+  
+  def professional_engineer_skill_training(document)
+    s_id = document.content&.[]('professional_engineer_skill_training_id') 
+    s_id.blank? ? "" : SkillTraining.find(s_id).name
+    
   end
 
   # (8)作業員名簿
@@ -439,7 +445,7 @@ module DocumentsHelper
       licenses.to_s.gsub(/,|"|\[|\]/) { '' }
     end
   end
-
+  
   def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
     target_ids = []
     document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
@@ -451,7 +457,7 @@ module DocumentsHelper
         if border_date < birth_date
           target_ids.push field_worker.id
         end
-
+    
       when 65
         border_date = str_date.prev_year(65) # 入場日から65年前の日付
         if border_date >= birth_date

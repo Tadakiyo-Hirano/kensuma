@@ -1,4 +1,7 @@
 class RequestOrder < ApplicationRecord
+  #attr_accessor :professional_engineer_skill_training_id
+  attribute :professional_engineer_skill_training_id, :integer
+  
   belongs_to :order
   belongs_to :business
   has_many :documents, dependent: :destroy
@@ -8,7 +11,7 @@ class RequestOrder < ApplicationRecord
   has_many :field_solvents, as: :field_solventable, dependent: :destroy
   has_many :field_special_vehicles, as: :field_special_vehicleable, dependent: :destroy
   has_many :field_machines, as: :field_machineable, dependent: :destroy
-
+  
   enum status: { requested: 0, submitted: 1, fix_requested: 2, approved: 3 }
   enum professional_construction: { y: 0, n: 1 }
   enum lead_engineer_check: { full_time: 0, non_dedicated: 1 }
