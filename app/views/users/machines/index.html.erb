@@ -13,7 +13,6 @@
             <th><%= Machine.human_attribute_name(:control_number) %></th>
             <th><%= Machine.human_attribute_name(:inspector) %></th>
             <th><%= Machine.human_attribute_name(:handler) %></th>
-            <th><%= Machine.human_attribute_name(:inspection_date) %></th>
             <th colspan="2"></th>
           </tr>
         </thead>
@@ -25,7 +24,6 @@
               <td><%= machine.control_number %></td>
               <td><%= machine.inspector %></td>
               <td><%= machine.handler %></td>
-              <td><%= machine.inspection_date %></td>
               <td><%= link_to "編集", edit_users_machine_path(machine), class: "btn btn-success btn-md" %></td>
               <td><%= link_to "削除", users_machine_path(machine), method: :delete,
                               data: { confirm: "#{machine.name}の持込機械情報を削除します。本当によろしいですか？" }, class: "btn btn-danger btn-md" %>

@@ -7,14 +7,15 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: left;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -26,7 +27,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -35,11 +38,13 @@
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
-  color: #1155cc;
+  color: #000000;
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -51,7 +56,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -64,7 +71,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: bottom;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -73,12 +82,30 @@
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
+  text-align: center;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s51 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -88,11 +115,13 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: left;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -105,7 +134,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -118,7 +149,9 @@
   font-family: 'Arial';
   font-size: 18pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -132,7 +165,9 @@
   font-family: 'docs-Calibri', Arial;
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -145,7 +180,9 @@
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -154,11 +191,13 @@
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -168,12 +207,11 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'docs-Calibri', Arial;
-  font-size: 8pt;
+  font-size: 10pt;
   vertical-align: middle;
   white-space: normal;
   overflow: hidden;
@@ -191,7 +229,9 @@
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -200,7 +240,7 @@
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
@@ -216,11 +256,13 @@
   border-right: 1px DOTTED #000000;
   background-color: #ccffcc;
   text-align: center;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -230,10 +272,9 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
@@ -251,7 +292,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: bottom;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -260,11 +303,13 @@
   background-color: #ffffff;
   text-align: right;
   font-weight: bold;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -278,7 +323,9 @@
   font-family: 'docs-Calibri', Arial;
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -288,14 +335,33 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s49 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #e9ecef;
+  text-align: center;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: 'docs-Calibri', Arial;
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -309,7 +375,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -323,23 +391,26 @@
   font-family: 'docs-Calibri', Arial;
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
 .ritz .waffle .doc_20_s14 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #ffffff;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
   font-size: 8pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -347,14 +418,15 @@
 .ritz .waffle .doc_20_s19 {
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -367,7 +439,9 @@
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -380,7 +454,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -390,14 +466,51 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: left;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s52 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #ccffcc;
+  text-align: center;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s50 {
+  border-bottom: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
+  background-color: #e9ecef;
+  text-align: center;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -406,11 +519,13 @@
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -418,11 +533,13 @@
 .ritz .waffle .doc_20_s11 {
   background-color: #ffffff;
   text-align: left;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -435,7 +552,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -447,14 +566,16 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: bottom;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
 .ritz .waffle .doc_20_s12 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: center;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
@@ -472,11 +593,13 @@
 .ritz .waffle .doc_20_s16 {
   background-color: #ffffff;
   text-align: center;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -485,11 +608,13 @@
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: left;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -498,7 +623,7 @@
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
   font-size: 10pt;
   vertical-align: middle;
@@ -514,11 +639,13 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -530,7 +657,9 @@
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -543,7 +672,9 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -556,7 +687,9 @@
   font-family: 'Arial';
   font-size: 18pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -566,11 +699,10 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
-  font-family: 'Arial';
+  color: #000000;
+  font-family: 'docs-Calibri', Arial;
   font-size: 10pt;
   vertical-align: middle;
   white-space: normal;
@@ -585,12 +717,11 @@
   border-right: 1px DOTTED #000000;
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
-  font-family: 'Arial';
-  font-size: 8pt;
+  color: #000000;
+  font-family: 'docs-Calibri', Arial;
+  font-size: 10pt;
   vertical-align: middle;
   white-space: normal;
   overflow: hidden;
@@ -604,11 +735,13 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -618,16 +751,18 @@
   border-right: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
-  color: #0000ff;
+  color: #000000;
   font-family: 'Arial';
   font-size: 10pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
-.ritz .waffle .doc_20_s10 {
+.ritz .waffle .doc_20_s46 {
   border-bottom: 1px SOLID #000000;
   background-color: #ccffcc;
   text-align: center;
@@ -637,7 +772,59 @@
   font-family: 'Arial';
   font-size: 12pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s47 {
+  background-color: #ffffff;
+  text-align: left;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #FF0000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s10 {
+  border-bottom: 1px SOLID #000000;
+  background-color: #e9ecef;
+  text-align: center;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_20_s48 {
+  border-bottom: 1px SOLID #000000;
+  background-color: #ccffcc;
+  text-align: center;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 12pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -645,12 +832,11 @@
 .ritz .waffle .doc_20_s21 {
   background-color: #ccffcc;
   text-align: center;
-  text-decoration: underline;
   -webkit-text-decoration-skip: none;
   text-decoration-skip-ink: none;
-  color: #1155cc;
+  color: #000000;
   font-family: 'Arial';
-  font-size: 10pt;
+  font-size: 12pt;
   vertical-align: middle;
   white-space: normal;
   overflow: hidden;

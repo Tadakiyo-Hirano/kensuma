@@ -35,6 +35,18 @@
           <td></td>
         </tr>
         <tr>
+          <th><%= Worker.human_attribute_name(:family_name) %></th>
+          <td><%= @worker.family_name %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:relationship) %></th>
+          <td><%= @worker.relationship %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <th><%= Worker.human_attribute_name(:family_address) %></th>
           <td><%= @worker.family_address %></td>
           <td></td>
@@ -85,6 +97,12 @@
         <tr>
           <th><%= Worker.human_attribute_name(:blank_term) %></th>
           <td><%= @worker.blank_term %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:employment_contract) %></th>
+          <td><%= @worker.employment_contract_i18n %></td>
           <td></td>
           <td></td>
         </tr>
@@ -170,6 +188,16 @@
           <th colspan="4"><%= WorkerMedical.human_attribute_name(:id) %></th>
         </tr>
         <tr>
+          <th><%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
+          <td><%= @worker.worker_medical.is_med_exam_i18n %><td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= WorkerMedical.human_attribute_name(:health_condition) %></th>
+          <td><%= @worker.worker_medical.health_condition_i18n %><td>
+          <td></td>
+        </tr>
+        <tr>
           <th><%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
           <td><%= @worker.worker_medical.med_exam_on %><td>
           <td></td>
@@ -252,6 +280,12 @@
             <td></td>
           </tr>
         <% end %>
+        <tr>
+          <th><%= WorkerInsurance.human_attribute_name(:has_labor_insurance) %></th>
+          <td><%= @worker.worker_insurance.has_labor_insurance_i18n %></td>
+          <td></td>
+          <td></td>
+        </tr>
         <tr>
           <th><%= WorkerInsurance.human_attribute_name(:severance_pay_mutual_aid_type) %></th>
           <td><%= @worker.worker_insurance.severance_pay_mutual_aid_type_i18n %></td>

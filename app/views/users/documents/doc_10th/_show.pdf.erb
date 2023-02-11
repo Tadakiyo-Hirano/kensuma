@@ -1,11 +1,14 @@
-<!-- (10)高年齢者作業申告書 -->
+<!-- (10)高齢者就労報告書 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
+  <% j = 0 %>
+  <% document_info.field_workers.where(id: age_border(65)).each_slice(14).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14), i| %>
+  <div class="page-break">
   <div class="document-outer">
-    <div id="eleventh-document" class="document-inner">
-      <div class="eleventh-text-container">	
+    <div id="tenth-document" class="document-inner">
+      <div class="tenth-text-container">	
         <div class="ritz grid-container" dir="ltr">
           <table class="waffle no-grid td-no-border" cellspacing="0" cellpadding="0">
             <tbody>
@@ -79,7 +82,7 @@
                 <td class="t1" dir="ltr"></td>
                 <td class="t1" dir="ltr"></td>
                 <td class="t1" dir="ltr"></td>
-                <td class="t3" dir="ltr" colspan="5" rowspan="2">「提出日（西暦）」10-001</td>
+                <td class="t3" dir="ltr" colspan="5" rowspan="2"><%= @document.content&.[]("date_submitted") %></td><!--「提出日(西暦)」10-001 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -116,7 +119,7 @@
               </tr>
               <tr style="height: 19px">
                 <td class="t4" dir="ltr" colspan="2" rowspan="2">事業所の名称</td>
-                <td class="t5" dir="ltr" colspan="6" rowspan="2">「事業所名（現場名）」10-002</td>
+                <td class="t5" dir="ltr" colspan="6" rowspan="2"><%= document_site_info.site_name %></td><!--「事業所名(現場名)」10-002 -->
                 <td class="t0"></td>
                 <td class="t0"></td>
                 <td class="t0"></td>
@@ -159,7 +162,7 @@
               </tr>
               <tr style="height: 19px">
                 <td class="t6" dir="ltr" colspan="2" rowspan="2">所　長　名</td>
-                <td class="t7" dir="ltr" colspan="5" rowspan="2">元請会社の「現場代理人名」10-003</td>
+                <td class="t7" dir="ltr" colspan="5" rowspan="2"><%= document_site_info.site_agent_name %></td><!-- 元請会社の「現場代理人名」10-003 -->
                 <td class="t6" dir="ltr" rowspan="2">殿</td>
                 <td class="t0"></td><td class="t0"></td>
                 <td class="t0"></td><td class="t0"></td>
@@ -189,7 +192,7 @@
                 <td class="t0"></td>
                 <td class="t0"></td>
                 <td class="t8" dir="ltr" colspan="2" rowspan="2">一次会社名</td>
-                <td class="t9" dir="ltr" colspan="6" rowspan="2">「一次会社名」10-004</td>
+                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= document_site_info.business.name %></td><!--「一次会社名」10-004 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -228,7 +231,7 @@
                 <td class="t0"></td>
                 <td></td>
                 <td class="h11" dir="ltr"></td>
-                <td class="t9" dir="ltr" colspan="6" rowspan="2">「会社名」10-006</td>
+                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= Business.find(document_info.business_id).name %></td><!-- 「会社名」10-006 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -240,7 +243,7 @@
                 <td class="t0"></td>
                 <td class="t0"></td>
                 <td class="t0"></td>
-                <td class="h12" dir="ltr" colspan="2">会社名(　  )次</td>
+                <td class="h12" dir="ltr" colspan="2">会社名(<%= sc_hierarchy(document_info)[0,1] %>)次</td><!-- 「自社の施工体系(◯)次会社」11-005 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -272,7 +275,7 @@
                 <td class="t0"></td>
                 <td class="t0"></td>
                 <td class="t8" dir="ltr" colspan="2" rowspan="2">代表者名</td>
-                <td class="t9" dir="ltr" colspan="6" rowspan="2">「代表者名」10-007</td>
+                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= Business.find(document_info.business_id).representative_name %></td><!--「代表者名」10-007 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -435,102 +438,102 @@
                 <td class="h17" dir="ltr" colspan="5">作業内容</td>
               </tr>
               <tr style="height: 39px">
-                <td class="h18" dir="ltr" colspan="3">65歳以上の「入場する作業員」10-008</td>
-                <td class="h19" dir="ltr" colspan="4">「生年月日 」10-009</td>
-                <td class="h20" dir="ltr" colspan="2">「年齢」10-010</td>
-                <td class="h19" dir="ltr" colspan="3">「職種」10-011</td>
-                <td class="h20" dir="ltr" colspan="5">「高年齢就労者・作業員内容」10-012</td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w1, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w1, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w1) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w1&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w1&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w2, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w2, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w2) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w2&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w2&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w3, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w3, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w3) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w3&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w3&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w4, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w4, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w4) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w4&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w4&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w5, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w5, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w5) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w5&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w5&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w6, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w6, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w6) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w6&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w6&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w7, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w7, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w7) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w7&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w7&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w8, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w8, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w8) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w8&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w8&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w9, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w9, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w9) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w9&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w9&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w10, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w10, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w10) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w10&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w10&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w11, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w11, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w11) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w11&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w11&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w12, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w12, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w12) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w12&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w12&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w13, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w13, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w13) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w13&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w13&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
               <tr style="height: 39px">
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="4"></td>
-                <td class="h21" colspan="2"></td>
-                <td class="h21" colspan="3"></td>
-                <td class="h21" colspan="5"></td>
+                <td class="h18" dir="ltr" colspan="3"><%= worker_str(w14, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                <td class="h19" dir="ltr" colspan="4"><%= worker_str(w14, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                <td class="h20" dir="ltr" colspan="2"><%= age_for_admission_date_start(w14) %></td><!--「年齢」10-010 -->
+                <td class="h19" dir="ltr" colspan="3"><%= w14&.content&.[]("occupation") %></td><!--「職種」10-011 -->
+                <td class="h20" dir="ltr" colspan="5"><%= w14&.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
               </tr>
             </tbody>
           </table>
@@ -538,17 +541,20 @@
       </div>
     </div>
   </div>
+  </div>
+  <% j += 14 %>
+  <% end %>
 </body>
 
 <style>
-  #eleventh-document {
+  #tenth-document {
     overflow: hidden;
     position: relative;
     background-color: white;
     padding: 10px;
   }
 
-  .eleventh-text-container {
+  .tenth-text-container {
     white-space: pre-wrap;
   }
 
@@ -804,5 +810,11 @@
     white-space: nowrap;
     direction: ltr;
     padding: 0px 3px 0px 3px;
+  }
+  
+  .page-break {
+  page-break-after:always;
+  &:last-child {
+    page-break-after: avoid;
   }
 </style>
