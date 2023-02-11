@@ -45,17 +45,36 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
+
     <%= f.label :professional_engineer_name %> <!-- 専門技術者(氏名) -->
     <%= f.select :professional_engineer_name,
                   (@business_workers_name + [@request_order.professional_engineer_name]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
+
+    <%#= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(氏名) -->
+    <%#= f.select :content["professional_engineer_skill_training_id"],
+                  options_for_select(SkillTraining.all.map { |obj| [obj.name, obj.id] },
+                  "www"),
+                  #request_order.content['professional_engineer_skill_training_id'].to_i),
+                  { include_blank: true },
+                  { class: "single-select", style: "width: 100%" }
+    %><br><br>
+
+
+    <%#= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(氏名) -->
+    <%#= f.collection_select name = "content[professional_engineer_skill_training_id]",
+                  SkillTraining.all, :id, :name,
+                  { include_blank: true },
+                  { class: "single-select", style: "width: 100%" }
+    %><br><br>
+
     <%= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(氏名) -->
-    <%= f.collection_select :professional_engineer_skill_training_id,
+    <%= f.collection_select name = "content[professional_engineer_skill_training_id]",
                   SkillTraining.all, :id, :name,
                   #{ include_blank: true },
-                  { selected: request_order.content['professional_engineer_skill_training_id'].to_i },
+                  options = { include_blank: true, selected: request_order.content['professional_engineer_skill_training_id'].to_i },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :professional_engineer_details %> <!-- 専門技術者(担当工事内容) -->
@@ -156,7 +175,7 @@
     %><br><br>
   </div>
 </div><br>
-<% logger.debug(RequestOrder.find(2).content['professional_engineer_skill_training_id']) %>
+
 <script>
   // 入力フォームのバリデーション
   $(function(){

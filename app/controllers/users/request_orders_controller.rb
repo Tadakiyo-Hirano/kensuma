@@ -151,10 +151,11 @@ module Users
         :safety_manager_name,
         :safety_promoter_name,
         :foreman_name,
-        :registered_core_engineer_name
+        :registered_core_engineer_name,
+        content: %i[professional_engineer_skill_training_id]
       ).merge(
         content: {
-          professional_engineer_skill_training_id: params[:request_order][:professional_engineer_skill_training_id],
+          professional_engineer_skill_training_id:  params[:request_order][:content][:professional_engineer_skill_training_id],
           subcon_name:                                                        current_business.name,                                             # 会社名
           subcon_branch_name:                                                 current_business.branch_name,                                      # 支店･営業所名
           subcon_address:                                                     current_business.address,                                          # 会社住所
