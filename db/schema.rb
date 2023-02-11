@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
 
   create_table "businesses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
+    t.integer "business_type", null: false
     t.string "name", null: false
     t.string "name_kana", null: false
     t.string "branch_name", null: false
@@ -91,9 +92,17 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
     t.string "address", null: false
     t.string "post_code", null: false
     t.string "phone_number", null: false
-    t.string "carrier_up_id"
+    t.string "fax_number"
+    t.string "career_up_id"
+    t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.integer "business_type", null: false
+    t.json "occupation_ids"
+    t.json "industry_ids"
+    t.integer "specific_skilled_foreigners_exist"
+    t.integer "foreign_construction_workers_exist"
+    t.integer "foreign_technical_intern_trainees_exist"
+    t.string "employment_manager_name"
+    t.string "employment_manager_post"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -744,7 +753,7 @@ ActiveRecord::Schema.define(version: 2023_01_01_063423) do
     t.date "hiring_on", null: false
     t.integer "experience_term_before_hiring", null: false
     t.integer "blank_term", null: false
-    t.string "carrier_up_id"
+    t.string "career_up_id"
     t.json "images"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false

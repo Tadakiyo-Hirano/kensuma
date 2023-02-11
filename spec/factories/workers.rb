@@ -17,7 +17,7 @@ FactoryBot.define do
     hiring_on { '2022-01-28' }
     experience_term_before_hiring { 1 }
     blank_term { 1 }
-    carrier_up_id { '1' }
+    career_up_id { '1' }
     images { '' }
 
     after(:create) do |worker|

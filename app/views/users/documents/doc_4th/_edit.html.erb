@@ -21,7 +21,7 @@
             <tr>
               <td>(全建統一様式第3号)</td>
               <td class="text-right">
-                <%= f.date_field :content, name: "document[content][date_submitted][]",
+                <%= f.date_field :content, name: "document[content][date_submitted]",
                                     value: doc_content_date(@document.content&.[]("date_submitted"))                 
                 %> <!-- 3-001 提出日（西暦 -->
               </td>

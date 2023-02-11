@@ -15,7 +15,11 @@ module Users::SubRequestOrders
       @document = @documents.find_by!(uuid: params[:uuid])
 
       respond_to do |format|
-        format.html
+        format.html do
+          case @document.document_type
+          when 'doc_4th'
+            # @business = Business.find_by!(uuid: params[:uuid])
+        end
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
@@ -23,6 +27,7 @@ module Users::SubRequestOrders
                 'doc_16th', 'doc_17th', 'doc_19th', 'doc_20th', 'doc_21st', 'doc_22nd', 'doc_23rd', 'doc_24th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_4th'
+            @business = Business.find_by!(uuid: params[:uuid])
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
           when 'doc_5th', 'doc_13th', 'doc_14th', 'doc_18th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
