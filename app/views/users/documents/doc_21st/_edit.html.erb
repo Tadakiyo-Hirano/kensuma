@@ -627,7 +627,7 @@
                 <td class="doc_21_m30" dir="ltr" colspan="7" rowspan="3">受講者氏名</td>
                 <td class="doc_21_m25_1" dir="ltr" colspan="34" rowspan="7">
                   <%= f.select name = 'content[student_name]',
-                    (document_info.field_workers.where.not(education_date: nil).map{|worker|worker.admission_worker_name}),
+                    (document_info.field_workers.where.not(education_date: nil).map{|field_worker|field_worker.admission_worker_name}),
                     { include_hidden: false, selected: @document.content&.[]("student_name") },
                     { multiple: true, class: "multiple-select", style: "width: 100%" }
                   %> <!-- 21-018 受講者氏名 -->
