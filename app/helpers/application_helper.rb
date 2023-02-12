@@ -30,7 +30,7 @@ module ApplicationHelper
     text.nil? || text.blank? ? '未登録' : text
   end
 
-  # 自身と、自身の階層下の現場情報
+  # 自身と、自身の階層下の現場情報（元請情報）
   def document_site_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     if params[:sub_request_order_uuid]
@@ -40,7 +40,7 @@ module ApplicationHelper
     end
   end
 
-  # 自身と、自身の階層下の書類情報
+  # 自身と、自身の階層下の書類情報 →現場情報を含まない情報の取得時
   def document_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     if params[:sub_request_order_uuid]

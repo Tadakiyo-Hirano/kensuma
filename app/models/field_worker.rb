@@ -9,4 +9,8 @@ class FieldWorker < ApplicationRecord
   def to_param
     uuid
   end
+
+  def youth_field_workers?
+    Time.zone.now < self.birthday_on.since(18.years)
+  end
 end
