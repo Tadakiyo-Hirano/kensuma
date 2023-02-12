@@ -14,13 +14,13 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s3"></td>
-        <td class="doc_24_s49" dir="ltr" colspan="3"></td>
+        <td class="doc_24_s49" dir="ltr" colspan="4"></td>
         <td class="doc_24_s3" dir="ltr" colspan="18"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s0" dir="ltr" colspan="3">参考資料第４号</td> <!--■ -->
+        <td class="doc_24_s0" dir="ltr" colspan="4">参考資料第４号</td>
         <td class="doc_24_s1" dir="ltr"></td>
         <td class="doc_24_s1" dir="ltr"></td>
         <td class="doc_24_s2"></td>
@@ -89,11 +89,7 @@
         <td class="doc_24_s1"></td>
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">元　請<br>確認欄</td>
-<<<<<<< HEAD
-        <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= document_info.content["prime_contractor_confirmation"] %></td> <!-- 「元請会社の確認欄」24-002 -->
-=======
-        <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= document_info.content&.[]('prime_contractor_confirmation') %></td> <!-- 「元請会社の確認欄」24-002 -->
->>>>>>> main
+        <td class="doc_24_s97" dir="ltr" colspan="6" rowspan="3"><%= field_worker.prime_contractor_confirmation %></td> <!-- 「元請会社の確認欄」24-002 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -155,7 +151,9 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s8" dir="ltr" colspan="2">ふりがな</td>
+        <td class="doc_24_s25 softmerge" colspan="2">
+          <div class="doc_24_softmerge-inner">ふりがな</div>
+        </td>
         <td class="doc_24_s15" dir="ltr" colspan="6"><%= field_worker.content["name_kana"] %></td> <!-- 「フリガナ」24-004 -->
         <td class="doc_24_s8" dir="ltr" colspan="2" rowspan="3">生年月日</td>
         <td class="doc_24_s16" dir="ltr" colspan="5" rowspan="3"><%= field_worker.content["birth_day_on"] %></td> <!-- 「生年月日 」24-006 -->
@@ -210,8 +208,8 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s99" dir="ltr" colspan="7" rowspan="2"><%= "※24-011未実装※" %></td> <!-- 「緊急連絡先（氏名）」24-011 -->
-        <td class="doc_24_s98" dir="ltr" colspan="2" rowspan="2"><%= "※24-012未実装※" %></td> <!-- 「緊急連絡先（続柄）」24-012 -->
+        <td class="doc_24_s99" dir="ltr" colspan="7" rowspan="2"><%= field_worker.content["family_name"] %></td> <!-- 「緊急連絡先（氏名）」24-011 -->
+        <td class="doc_24_s98" dir="ltr" colspan="2" rowspan="2"><%= field_worker.content["relationship"] %></td> <!-- 「緊急連絡先（続柄）」24-012 -->
         <td class="doc_24_s9" dir="ltr" colspan="3" rowspan="2"><%= field_worker.content["family_phone_number"] %></td> <!-- 「緊急連絡先（電話番号）」24-013 -->
         <td class="doc_24_s9" dir="ltr" colspan="11" rowspan="2"><%= field_worker.content["family_address"] %></td> <!-- 「緊急連絡先（住所）」24-014 -->
         <td class="doc_24_s3"></td>
@@ -239,21 +237,18 @@
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
         <td class="doc_24_s8" dir="ltr" colspan="3">所 属 会 社</td>
-        <td class="doc_24_s96" dir="ltr" colspan="20"><%= "※24-017未実装※" %></td> <!-- 「会社名」24-017 -->
+        <td class="doc_24_s96" dir="ltr" colspan="20"><%= Business.find(document_info.business_id).name %></td> <!-- 「会社名」24-017 -->
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s8" dir="ltr" colspan="3">雇用契約書</td>
-        <td class="s25 softmerge" dir="ltr">
-          <div class="softmerge-inner" style="width:74px;left:-1px">1. 取り交わし済み</div>
-        </td>
+        <td class="doc_24_s8" dir="ltr" colspan="3">雇用契約書</td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
+        <td class="doc_24_s26" dir="ltr" colspan="4"><%= employment_contract_yes(field_worker) %></td>
         <td class="doc_24_s26" dir="ltr"></td>
-        <td class="doc_24_s26" dir="ltr"></td>
-        <td class="doc_24_s27" dir="ltr" colspan="2">2. 未 だ</td>
-        <td class="doc_24_s28" dir="ltr" colspan="5"><%= "※⇐24-018未実装※" %></td> <!-- ⇐「雇用契約書（済or未)」24-018 -->
+        <td class="doc_24_s27" dir="ltr" colspan="2"><%= employment_contract_no(field_worker) %></td>
+        <td class="doc_24_s28" dir="ltr" colspan="3"></td>
         <td class="doc_24_s17" dir="ltr" colspan="2">職 種：</td>
-        <td class="doc_24_s29" dir="ltr" colspan="7"><%= "※24-019未実装※" %></td> <!-- 「職種」24-019 -->
+        <td class="doc_24_s29" dir="ltr" colspan="7"><%= field_worker.occupation %></td> <!-- 「職種」24-019 -->
         <td class="doc_24_s8" dir="ltr">工</td>
         <td class="doc_24_s3"></td>
       </tr>
@@ -279,44 +274,44 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">　1. に〇を付けた方は、労災保険の特別加入していますか。【回答：全未実装】</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">　1. に〇を付けた方は、労災保険の特別加入していますか。</td>
         <td class="doc_24_s30"></td>
-        <td class="doc_24_s27" dir="ltr" colspan="5">1. している</td>
-        <td class="doc_24_s31" dir="ltr" colspan="5">2. 未加入</td>
+        <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_labor_insurance_yes(field_worker) %></td>
+        <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_labor_insurance_no(field_worker) %></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは建設現場で働きはじめてどのくらいになりますか。【回答：全未実装】</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは建設現場で働きはじめてどのくらいになりますか。</td>
         <td class="doc_24_s30"></td>
-        <td class="doc_24_s27" dir="ltr" colspan="3">1. 1年以内</td>
-        <td class="doc_24_s27" dir="ltr" colspan="3">2. 1〜3年</td>
-        <td class="doc_24_s31" dir="ltr" colspan="4">3. 3年以上</td>
+        <td class="doc_24_s27" dir="ltr" colspan="3"><%= questionnaire_experience_term_short(field_worker) %></td>
+        <td class="doc_24_s27" dir="ltr" colspan="3"><%= questionnaire_experience_term_middle(field_worker) %></td>
+        <td class="doc_24_s31" dir="ltr" colspan="4"><%= questionnaire_experience_term_long(field_worker) %></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは健康診断を受けましたか。【回答：全未実装】</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたは健康診断を受けましたか。</td>
         <td class="doc_24_s30"></td>
-        <td class="doc_24_s27" dir="ltr" colspan="5">1. 受けた</td>
-        <td class="doc_24_s31" dir="ltr" colspan="5">2. 受けていない</td>
+        <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_health_exam_yes(field_worker) %></td>
+        <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_health_exam_no(field_worker) %></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたの最近の健康状態はどうですか。【回答：全未実装】</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・あなたの最近の健康状態はどうですか。</td>
         <td class="doc_24_s30"></td>
-        <td class="doc_24_s27" dir="ltr" colspan="2">1. よい</td>
-        <td class="doc_24_s27" dir="ltr" colspan="4">2. まあまあである</td>
-        <td class="doc_24_s31" dir="ltr" colspan="4">3. あまりよくない</td>
+        <td class="doc_24_s27" dir="ltr" colspan="2"><%= questionnaire_health_condition_good(field_worker) %></td>
+        <td class="doc_24_s27" dir="ltr" colspan="4"><%= questionnaire_health_condition_normal(field_worker) %></td>
+        <td class="doc_24_s31" dir="ltr" colspan="4"><%= questionnaire_health_condition_bad(field_worker) %></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。【回答：全未実装】</td>
+        <td class="doc_24_s6" dir="ltr" colspan="12">・この現場へ来る前に事業主から送り出し教育を受けてきましたか。</td>
         <td class="doc_24_s30"></td>
-        <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_special_education_yes(field_worker) %></td>
-        <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_special_education_no(field_worker) %></td>
+        <td class="doc_24_s27" dir="ltr" colspan="5"><%= questionnaire_sendoff_education_yes(field_worker) %></td>
+        <td class="doc_24_s31" dir="ltr" colspan="5"><%= questionnaire_sendoff_education_no(field_worker) %></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -366,14 +361,21 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s36" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
-        <td class="doc_24_s37" dir="ltr" colspan="8">
+        <td class="doc_24_s3" dir="ltr" colspan="4"></td> <!-- 「技能講習」24-026 -->
+        <td class="doc_24_s34" dir="ltr" colspan="8">
           <%= worker_skill_training(field_worker).include?("コ解") ? "■コンクリート造の工作物の解体等" : "▢コンクリート造の工作物の解体等" %>
         </td>
-        <td class="doc_24_s37" dir="ltr" colspan="5">
+        <td class="doc_24_s34" dir="ltr" colspan="5">
           <%= worker_skill_training(field_worker).include?("酸欠") ? "■酸素欠乏危険" : "▢酸素欠乏危険" %>
         </td>
-        <td class="doc_24_s38" dir="ltr" colspan="6"><%= worker_skill_training_work_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
+        <td class="doc_24_s38" dir="ltr" colspan="6" rowspan="2"><%= worker_skill_training_work_other(field_worker) %></td> <!-- ▢その他（　　　　　　　　） -->
+        <td class="doc_24_s3"></td>
+      </tr>
+      <tr style="height: 19px">
+        <td class="doc_24_s7"></td>
+        <td class="doc_24_s36" dir="ltr" colspan="4"></td>
+        <td class="doc_24_s37" dir="ltr" colspan="8"></td>
+        <td class="doc_24_s37" dir="ltr" colspan="5"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -399,7 +401,7 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="3"></td> <!-- 「技能講習」24-027 -->
+        <td class="doc_24_s36" dir="ltr" colspan="4" rowspan="4"></td> <!-- 「技能講習」24-027 -->
         <td class="doc_24_s39" dir="ltr" colspan="9">
           <%= worker_skill_training(field_worker).include?("不整") ? "■1t以上の不整地運搬車" : "▢1t以上の不整地運搬車" %>
         </td>
@@ -420,10 +422,16 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s41" dir="ltr" colspan="9">
+        <td class="doc_24_s41" dir="ltr" colspan="9" rowspan="2">
           <%= worker_skill_training(field_worker).include?("床ク") ? "■その他（ 床ク ）" : "▢その他（　　　　　　　　　　）" %>
         </td>
-        <td class="doc_24_s42" dir="ltr" colspan="10"></td>
+        <td class="doc_24_s40" dir="ltr" colspan="10"></td>
+        <td class="doc_24_s3"></td>
+      </tr>
+      <tr style="height: 19px">
+        <td class="doc_24_s7"></td>
+        <td class="doc_24_s36" dir="ltr" colspan="4"></td>
+        <td class="doc_24_s40" dir="ltr" colspan="6"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -455,7 +463,7 @@
       </tr>
       <tr style="height: 19px">
         <td class="doc_24_s7"></td>
-        <td class="doc_24_s43" dir="ltr" colspan="4" rowspan="6"></td> <!-- 「特別教育」24-028 -->
+        <td class="doc_24_s43" dir="ltr" colspan="4" rowspan="7"></td> <!-- 「特別教育」24-028 -->
         <td class="doc_24_s39" dir="ltr" colspan="5">
           <%= worker_special_education(field_worker).include?("不整地運搬車（1t未満）") ? "■不整地運搬車（1t未満）" : "▢不整地運搬車（1t未満）" %>
         </td>
@@ -520,12 +528,14 @@
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
-        <td class="doc_24_s7"></td>
-          <td class="doc_24_s41" dir="ltr" colspan="16"><%= worker_special_education_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
-        <td class="doc_24_s41" dir="ltr" colspan="2"></td>
-        <td class="doc_24_s31" dir="ltr"></td>
-        <td class="doc_24_s3"></td>
+        <td class="doc_24_s7" rowspan="2"></td>
+        <td class="doc_24_s41" dir="ltr" colspan="18" rowspan="2">
+          <%= worker_special_education_other(field_worker) %> <!-- ▢その他（　　　　　　　　） -->
+        </td>
+        <td class="doc_24_s31" rowspan="2"></td>
+        <td class="doc_24_s3" rowspan="2"></td>
       </tr>
+      <tr style="height: 19px"></tr>
       <tr style="height: 19px">
         <td class="doc_24_s3"></td>
         <td class="doc_24_s3"></td>
@@ -608,7 +618,7 @@
         <td class="doc_24_s3"></td>
         <td class="doc_24_s49" dir="ltr" colspan="4" rowspan="2">回答者自筆サイン</td>
         <td class="doc_24_s50" dir="ltr" colspan="6" rowspan="2"><%= field_worker.content["name"] %></td> <!-- 24-029 -->
-        <td class="doc_24_s3" rowspan="2"></td>
+        <td class="doc_24_s3"></td>
         <td class="doc_24_s3"></td>
       </tr>
       <tr style="height: 19px">
@@ -646,11 +656,6 @@
         <td class="doc_24_s1" colspan="9"></td>
         <td class="doc_24_s3"></td>
       </tr>
-<<<<<<< HEAD
-      <tr style="height: 220px"></tr>
-=======
-      
->>>>>>> main
     </tbody>
   </table>
 </div>
@@ -659,6 +664,13 @@
 <% end %>
 
 <style type="text/css">
+table{
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 .ritz .waffle a {
   color: inherit;
 }
@@ -804,18 +816,6 @@
   padding: 0px 3px 0px 3px;
 }
 
-.ritz .waffle .doc_24_s51 {
-  border-bottom: 1px SOLID #000000;
-  background-color: #ffffff;
-  text-align: center;
-  font-family: 'Arial';
-  font-size: 7pt;
-  vertical-align: middle;
-  white-space: normal;
-  direction: ltr;
-  padding: 0px 3px 0px 3px;
-}
-
 .ritz .waffle .doc_24_s38 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
@@ -824,8 +824,7 @@
   color: #000000;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
-  vertical-align: middle;
-  white-space: nowrap;
+  vertical-align: top;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -847,7 +846,7 @@
   background-color: #ffffff;
   text-align: center;
   font-family: 'Arial';
-  font-size: 9pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: normal;
   direction: ltr;
@@ -879,21 +878,6 @@
   padding: 0px 3px 0px 3px;
 }
 
-.ritz .waffle .doc_24_s23 {
-  border-bottom: 1px SOLID #000000;
-  border-right: 1px SOLID #000000;
-  background-color: #ffffff;
-  text-align: center;
-  font-family: 'Arial';
-  font-size: 8pt;
-  vertical-align: middle;
-  white-space: normal;
-  overflow: hidden;
-  word-wrap: break-word;
-  direction: ltr;
-  padding: 0px 3px 0px 3px;
-}
-
 .ritz .waffle .doc_24_s29 {
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
@@ -911,9 +895,12 @@
   background-color: #ffffff;
   text-align: center;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
   
 =======
 
+>>>>>>> main
 >>>>>>> main
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
@@ -928,9 +915,12 @@
   background-color: #ffffff;
   text-align: center;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
   
 =======
 
+>>>>>>> main
 >>>>>>> main
   font-family: 'Arial';
   font-size: 11pt;
@@ -947,7 +937,7 @@
   text-align: left;
   color: #000000;
   font-family: 'Arial';
-  font-size: 10pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -996,7 +986,7 @@
   background-color: #ffffff;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
-  font-size: 9pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: normal;
   direction: ltr;
@@ -1338,19 +1328,33 @@
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: top;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_24_s66 {
+  border-right: 1px SOLID #ffffff;
+  border-bottom: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  text-decoration: underline;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #1155cc;
+  font-size: 8pt;
+  vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
 .ritz .waffle .doc_24_s25 {
-  border-right: none;
+  border-right: 1px SOLID #000000;
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
-  text-align: left;
+  text-align: center;
   color: #000000;
-  font-family: 'Arial';
-  font-size: 10pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -1387,12 +1391,24 @@
 }
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
 
+.circle {
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 1.5px;
+  }
+  
 .page-break {
   page-break-after:always;
   &:last-child {
     page-break-after: avoid;
   }
 }
+<<<<<<< HEAD
+=======
+>>>>>>> main
 >>>>>>> main
 </style>

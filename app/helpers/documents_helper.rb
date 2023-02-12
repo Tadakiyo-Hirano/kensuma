@@ -35,6 +35,53 @@ module DocumentsHelper
     end
   end
 
+  def document_info_for_prime_contractor_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order.parent_id.present?
+      loop do
+        request_order = request_order.parent
+        break if request_order.parent_id.nil?
+      end
+    end
+    Order.find(request_order.order_id).confirm_name
+  end
+
+  # 一次下請の情報 (工事安全衛生計画書用)
+  def document_subcon_info_for_19th
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    # 元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    # 下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+      # 下請けが存在しない場合
+    end
+  end
+
+  # 会社の名前
+  def company_name(worker_id)
+    worker = Worker.find_by(uuid: worker_id)
+    Business.find_by(id: worker&.business_id)&.name
+  end
+
+  # 書類作成会社の名前
+  def document_preparation_company_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+      Business.find_by(id: sub_request_order.business_id).name
+    # 下請けが自身の書類確認するとき
+    else
+      Business.find_by(id: request_order.business_id).name
+    end
+  end
+
+  # 作業員情報
+  def worker(worker_uuid)
+    Worker.find_by(uuid: worker_uuid)&.name
+  end
+
   # 専任･非専任
   FULL_TIME_CHECK = {
     'full_time'     => '専任',
@@ -249,92 +296,6 @@ module DocumentsHelper
     end
   end
 
-  # 新規入場者調査票用（資格-技能講習-作業主任者-その他枠）
-  def worker_skill_training_work_other(worker)
-    trainings = worker&.content&.[]('worker_skill_trainings')
-
-    unless trainings.nil?
-      trainings = trainings.map { |training| SkillTraining.find(training['skill_training_id']).short_name }
-      trainings.to_s.gsub(/,|"|\[|\]/) { '' }
-      no_work =
-        %w[整地 基礎 解体 不整 高所 フォ ショ 小ク 床ク
-           ガス 玉掛 コ破 地山 石綿 有機 型枠 足場 ボ取 コ解 酸欠]
-      trainings.delete_if do |t_work|
-        no_work.include?(t_work)
-      end
-    end
-
-    trainings2 = trainings
-    if trainings2.present?
-      "■その他( #{trainings2.join(' / ')} )"
-    else
-      '▢その他（　　　　　　　　　　）'
-    end
-  end
-
-  # 新規入場者調査票用（資格-特別教育-酸素欠乏危険作業枠）
-  def worker_special_education_oxygen(worker)
-    text = ['酸素欠乏（1種）', '酸素欠乏（2種）']
-    (text & worker_special_education(worker).split).present? ? '■酸素欠乏危険作業' : '▢酸素欠乏危険作業'
-  end
-
-  # 新規入場者調査票用（資格-特別教育-電気取扱枠）
-  def worker_special_education_electrical(worker)
-    text = ['低圧電気取扱', '低圧電気取扱（開閉器の操作）', '高圧電気取扱', '特別高圧電気取扱']
-    (text & worker_special_education(worker).split).present? ? '■電気取扱' : '▢電気取扱'
-  end
-
-  # 新規入場者調査票用（資格-特別教育-その他枠）
-  def worker_special_education_other(worker)
-    educations = worker&.content&.[]('worker_special_educations')
-
-    unless educations.nil?
-      educations = educations.map { |education| SpecialEducation.find(education['special_education_id']).name }
-      educations.to_s.gsub(/,|"|\[|\]/) { '' }
-      no_education =
-        %w[酸素欠乏（1種） 酸素欠乏（2種） 小型車両系建設機械（整地・運搬・積込み用及び掘削用）（3t未満）
-           小型車両系建設機械（基礎工事用）（3t未満） ローラー 車両系建設機械（コンクリート打設用）
-           小型車両系建設機械（解体用）（3t未満） 不整地運搬車（1t未満） 高所作業車(10m未満）
-           ボーリングマシン フォークリフト（1t未満） ショベルローダー（1t未満） 巻上げ機 建設用リフト
-           玉掛け（1t未満） ゴンドラ アーク溶接 研削砥石 低圧電気取扱 低圧電気取扱（開閉器の操作） 高圧電気取扱
-           特別高圧電気取扱 足場の組立て ロープ高所作業 フルハーネス型の墜落制止用器具]
-      educations.delete_if do |e_work|
-        no_education.include?(e_work)
-      end
-    end
-
-    educations2 = educations
-    if educations2.present?
-      "■その他( #{educations2.join(' / ')} )"
-    else
-      '▢その他（　　　　　　　　　　）'
-    end
-  end
-
-  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「はい」）
-  def questionnaire_business_type_yes(worker)
-    w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
-    if w_name == r_name
-      status = Business.find(document_info.business_id).business_type_i18n
-      status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
-    else
-      '1. はい'
-    end
-  end
-
-  # 新規入場者調査票用（アンケート設問：法人規模に関する内容-「いいえ」）
-  def questionnaire_business_type_no(worker)
-    w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
-    if w_name != r_name
-      tag.span('2. いいえ', class: :circle)
-    else
-      status = Business.find(document_info.business_id).business_type_i18n
-      status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
-    end
-  end
-
   # 作業員の免許情報
   def worker_license(worker)
     licenses = worker&.content&.[]('worker_licenses')
@@ -343,7 +304,7 @@ module DocumentsHelper
       licenses.to_s.gsub(/,|"|\[|\]/) { '' }
     end
   end
-
+  
   def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
     target_ids = []
     document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
@@ -364,16 +325,6 @@ module DocumentsHelper
       end
     end
     target_ids
-  end
-
-  def age_for_admission_date_start(worker) # 入場年月日を起点に年齢を算出
-    if worker.present?
-      date_format = '%Y%m%d'
-      birth_date = FieldWorker.find(worker.id).content['birth_day_on'].to_date.strftime(date_format).to_i # 生年月日
-      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i # 入場日
-      (str_date - birth_date) / 10000
-
-    end
   end
 
   # 作業員の入場年月日
@@ -397,6 +348,39 @@ module DocumentsHelper
 
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
+  end
+  
+  # (10)高齢者就労報告書/(11)年少者就労報告書
+  
+  def age_for_admission_date_start(worker) # 入場年月日を起点に年齢を算出
+    if worker.present?
+      date_format = '%Y%m%d'
+      birth_date = FieldWorker.find(worker.id).content['birth_day_on'].to_date.strftime(date_format).to_i # 生年月日
+      str_date = FieldWorker.find(worker.id).admission_date_start.strftime(date_format).to_i # 入場日
+      (str_date - birth_date) / 10000
+    end
+  end
+
+  def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
+    target_ids = []
+    document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
+      birth_date = field_worker.content['birth_day_on'].to_date
+      str_date = field_worker.admission_date_start.to_date # 入場日
+      case age
+      when 18
+        border_date = str_date.prev_year(18) # 入場日から18年前の日付
+        if border_date < birth_date
+          target_ids.push field_worker.id
+        end
+
+      when 65
+        border_date = str_date.prev_year(65) # 入場日から65年前の日付
+        if border_date >= birth_date
+          target_ids.push field_worker.id
+        end
+      end
+    end
+    target_ids
   end
 
   # (13)移動式クレーン/車両系建設機械等使用届
@@ -503,7 +487,7 @@ module DocumentsHelper
       RequestOrder.find(document_info.find_all_by_generation(hierarchy).ids[child_id])
     end
   end
-
+    
   # (13)移動式クレーン/車両系建設機械等使用届,(16)火気使用届,(17)下請負業者編成表
 
   # 一次下請会社名の情報
@@ -517,6 +501,133 @@ module DocumentsHelper
     end
   end
 
+  # (20)年間安全衛生計画書
+
+  # 代表者名の役職取得
+  def representative_name(business_id)
+    Business.find(business_id).representative_name
+  end
+
+  # 作業員の役職取得
+  def workers_post(worker_name)
+    field_workers = document_info.field_workers
+    if field_workers.present?
+      Worker.find_by(name: worker_name).job_title
+    end
+  end
+
+  # 和暦表示(date_select用)
+  def date_select_ja(src_html)
+    dst_html = src_html.gsub(/>\d{4}</) do |m|
+      year = m.match(/>(\d{4})</)[1].to_i
+      year_ja = case year
+                when 2018
+                  '平成30/令和元年'
+                else
+                  "令和#{year - 2018}"
+                end
+      ">#{year_ja}<"
+    end
+    dst_html.html_safe
+  end
+
+  # 和暦表示(年表示)
+  def doc_ja_y_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :ja_y)
+  end
+
+  # 和暦表示(年月表示)
+  def doc_ja_ym_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :ja_ym)
+  end
+
+  # 年月日表示
+  def doc_ymd_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :long)
+  end
+
+  # (22)作業間連絡調整書
+
+  #下請会社(協力会社)のbusiness_idの取得
+  def subcontractor_business_id(number)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
+    subcontractor_array = []
+    request_order_list.each do |record|
+      subcontractor_array << record.business_id
+    end
+    subcontractor_array.slice(number) if subcontractor_array[number].present?
+  end
+
+  #会社名の取得
+  def business_name(id)
+    Business.find(id).name if id.present?
+  end
+
+  #下請会社(協力会社)のidの取得
+  def subcontractor_id(number)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
+    subcontractor_array = []
+    request_order_list.each do |record|
+      subcontractor_array << record.id
+    end
+    subcontractor_array.slice(number) if subcontractor_array[number].present?
+  end
+
+  #入場作業員の人数の取得
+  def number_of_field_workers_of_subcontractor(id)
+    number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).size
+    if number_of_workers == 0
+      return nil
+    else
+      return number_of_workers
+    end
+  end
+
+  #元請の入場作業員の取得
+  def name_of_field_workers_order
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: request_order.order_id).pluck(:admission_worker_name)
+  end
+
+  #元請・下請け以下の入場作業員の取得
+  def name_of_field_workers_request_order(id)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    field_workers_name_request_order = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).pluck(:admission_worker_name)
+  end
+
+  # document.contentの時間表示
+  def doc_content_time(time)
+    time.nil? ? "" : time # nilの場合のstrftime表示エラー回避
+  end
+
+  #月日表示
+  def doc_md_date(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_date, format: :long2)
+  end
+
+  #時分表示
+  def doc_hm_time(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_datetime, format: :kan_hm)
+  end
+
+  #時表示(時は含めない)
+  def doc_h_time(cont, column)
+    date = cont.content&.[](column)
+    date.blank? ? '' : l(date.to_datetime, format: :h)
+  end
+
+  #曜日表示
+  def day_of_week(date)
+    date.blank? ? '' : %w{日 月 火 水 木 金 土}[(date.to_date).wday]
+  end
+
   # チェックボックスにチェックが入っているかを判別
   def box_checked?(checked_status)
     return true if checked_status == '1'
@@ -528,6 +639,10 @@ module DocumentsHelper
     else
       '▢'
     end
+  end
+
+  def checked_none_box(checked_status)
+    '✓' if checked_status == '1'
   end
 
   # リスクの見積り
@@ -623,6 +738,200 @@ module DocumentsHelper
     例)1 設置地盤に凸凹、傾斜等がある場合は、地盤を整地するか角材等により水平にする。
          2 地耐力不足の場合は、地盤改良、敷き鉄板等で補強する。
     RUBY
+  end
+
+  # (24)新規入場者調査票
+
+  # 雇用契約書-「有り」
+  def employment_contract_yes(worker)
+    contract_status = worker&.content&.[]('employment_contract')
+    contract_status == 'available' ? tag.span('1. 取り交わし済', class: :circle) : '1. 取り交わし済'
+  end
+  
+  # 雇用契約書-「無し」
+  def employment_contract_no(worker)
+    contract_status = worker&.content&.[]('employment_contract')
+    contract_status == 'not_available' ? tag.span('2. 未だ', class: :circle) : '2. 未だ'
+  end
+  
+  # アンケート設問：（法人規模-「はい」）
+  def questionnaire_business_type_yes(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name == r_name
+      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
+    else
+      '1. はい'
+    end
+  end
+
+  # アンケート設問：（法人規模-「いいえ」）
+  def questionnaire_business_type_no(worker)
+    w_name = worker&.content&.[]('name')
+    r_name = Business.find(document_info.business_id).representative_name
+    if w_name != r_name
+      tag.span('2. いいえ', class: :circle)
+    else
+      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+    end
+  end
+
+  # アンケート設問：（労災保険-「はい」）
+  def questionnaire_labor_insurance_yes(worker)
+    company_status = Business.find(document_info.business_id).business_type_i18n
+    insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
+
+    if company_status != '法人'
+      insurance_status == 'join' ? tag.span('1. はい', class: :circle) : '1. はい'
+    else
+      '1. はい'
+    end
+  end
+
+  # アンケート設問：（労災保険-「いいえ」）
+  def questionnaire_labor_insurance_no(worker)
+    insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
+
+    if questionnaire_business_type_yes(worker) == tag.span('1. はい', class: :circle)
+      insurance_status != "join" ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+    else
+      '2. いいえ'
+    end
+  end
+  
+  # アンケート設問：（就業年数-基準値）
+  def questionnaire_experience_term_calc(worker)
+    date_format = '%Y%m%d'
+    admission_date = worker.admission_date_start.strftime(date_format).to_i
+    hiring_date = worker.content['hiring_on'].to_date.strftime(date_format).to_i
+    hiring_on_term = (admission_date - hiring_date) / 10000
+    experience_term_before_hiring = worker.content['experience_term_before_hiring'].to_i
+    blank_term = worker.content['blank_term'].to_i
+    return hiring_on_term + experience_term_before_hiring - blank_term 
+  end
+  
+  # アンケート設問：（就業年数-「1年未満」）
+  def questionnaire_experience_term_short(worker)
+    experience_term = questionnaire_experience_term_calc(worker) 
+    experience_term < 1 ? tag.span('1. 1年以内', class: :circle) : '1. 1年以内'
+  end
+
+  # アンケート設問：（就業年数-「1年以上から3年未満」）
+  def questionnaire_experience_term_middle(worker)
+    experience_term = questionnaire_experience_term_calc(worker) 
+    experience_term >= 1 && experience_term < 3 ? tag.span('2. 1～3年', class: :circle) : '2. 1～3年'
+  end
+
+  # アンケート設問：（就業年数-「3年以上」）
+  def questionnaire_experience_term_long(worker)
+    experience_term = questionnaire_experience_term_calc(worker) 
+    experience_term >= 3 ? tag.span('3. 3年以上', class: :circle) : '3. 3年以上'
+  end
+  
+  # アンケート設問：（健康診断-「はい」）
+  def questionnaire_health_exam_yes(worker)
+    health_exam_status = worker&.content&.[]('worker_medical')['is_med_exam']
+    health_exam_status == 'y' ? tag.span('1. 受けた', class: :circle) : '1. 受けた'
+  end
+  
+  # アンケート設問：（健康診断-「いいえ」）
+  def questionnaire_health_exam_no(worker)
+    health_exam_status = worker&.content&.[]('worker_medical')['is_med_exam']
+    health_exam_status == 'n' ? tag.span('2. 受けていない', class: :circle) : '2. 受けていない'
+  end
+  
+  # アンケート設問：（健康状態-「よい」）
+  def questionnaire_health_condition_good(worker)
+    health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
+    health_condition_status == 'good' ? tag.span('1. よい', class: :circle) : '1. よい'
+  end
+  
+  # アンケート設問：（健康状態-「まあまあである」）
+  def questionnaire_health_condition_normal(worker)
+    health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
+    health_condition_status == 'normal' ? tag.span('2. まあまあである', class: :circle) : '2. まあまあである'
+  end
+  
+  # アンケート設問：（健康状態-「あまりよくない」）
+  def questionnaire_health_condition_bad(worker)
+    health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
+    health_condition_status == 'bad' ? tag.span('3. あまりよくない', class: :circle) : '3. あまりよくない'
+  end
+  
+  # アンケート設問：（送り出し教育-「はい」）
+  def questionnaire_sendoff_education_yes(worker)
+    sendoff_status = worker.sendoff_education
+    sendoff_status == 'educated' ? tag.span('1. はい', class: :circle) : '1. はい'
+  end
+  
+  # アンケート設問：（送り出し教育-「いいえ」）
+  def questionnaire_sendoff_education_no(worker)
+    sendoff_status = worker.sendoff_education
+    sendoff_status == 'not_educated' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
+  end
+  
+  # 資格-技能講習-作業主任者-その他枠
+  def worker_skill_training_work_other(worker)
+    trainings = worker&.content&.[]('worker_skill_trainings')
+
+    unless trainings.nil?
+      trainings = trainings.map { |training| SkillTraining.find(training['skill_training_id']).short_name }
+      trainings.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_work =
+        %w[整地 基礎 解体 不整 高所 フォ ショ 小ク 床ク
+           ガス 玉掛 コ破 地山 石綿 有機 型枠 足場 ボ取 コ解 酸欠]
+      trainings.delete_if do |t_work|
+        no_work.include?(t_work)
+      end
+    end
+
+    trainings2 = trainings
+    if trainings2.present?
+      "■その他( #{trainings2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
+    end
+  end
+
+  # 資格-特別教育-酸素欠乏危険作業枠
+  def worker_special_education_oxygen(worker)
+    text = ['酸素欠乏（1種）', '酸素欠乏（2種）']
+    (text & worker_special_education(worker).split).present? ? '■酸素欠乏危険作業' : '▢酸素欠乏危険作業'
+  end
+
+  # 資格-特別教育-電気取扱枠
+  def worker_special_education_electrical(worker)
+    text = ['低圧電気取扱', '低圧電気取扱（開閉器の操作）', '高圧電気取扱', '特別高圧電気取扱']
+    (text & worker_special_education(worker).split).present? ? '■電気取扱' : '▢電気取扱'
+  end
+
+  # 資格-特別教育-その他枠
+  def worker_special_education_other(worker)
+    educations = worker&.content&.[]('worker_special_educations')
+
+    unless educations.nil?
+      educations = educations.map { |education| SpecialEducation.find(education['special_education_id']).name }
+      educations.to_s.gsub(/,|"|\[|\]/) { '' }
+      no_education =
+        %w[酸素欠乏（1種） 酸素欠乏（2種） 小型車両系建設機械（整地・運搬・積込み用及び掘削用）（3t未満）
+           小型車両系建設機械（基礎工事用）（3t未満） ローラー 車両系建設機械（コンクリート打設用）
+           小型車両系建設機械（解体用）（3t未満） 不整地運搬車（1t未満） 高所作業車(10m未満）
+           ボーリングマシン フォークリフト（1t未満） ショベルローダー（1t未満） 巻上げ機 建設用リフト
+           玉掛け（1t未満） ゴンドラ アーク溶接 研削砥石 低圧電気取扱 低圧電気取扱（開閉器の操作） 高圧電気取扱
+           特別高圧電気取扱 足場の組立て ロープ高所作業 フルハーネス型の墜落制止用器具]
+      educations.delete_if do |e_work|
+        no_education.include?(e_work)
+      end
+    end
+
+    educations2 = educations
+    if educations2.present?
+      "■その他( #{educations2.join(' / ')} )"
+    else
+      '▢その他（　　　　　　　　　　）'
+    end
   end
 
   def wareki(date)
@@ -965,6 +1274,8 @@ module DocumentsHelper
 
     if @request_order.order.business_id == @current_business.id
       case hierarchy_document.document_type
+      when 'doc_13rd'
+        link_to '点検事項 記入', url
       when 'doc_16th'
         link_to '火気使用許可欄 記入', url
       end
