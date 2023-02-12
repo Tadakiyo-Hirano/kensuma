@@ -158,7 +158,7 @@ module Users
         content: {
           genecon_name:                                                        current_business.name,                                             # 会社名
           genecon_address:                                                     current_business.address,                                          # 会社住所
-          genecon_carrier_up_id:                                               current_business.career_up_id,                                    # 事業所ID(キャリアアップ)
+          genecon_career_up_id:                                                current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
           genecon_health_insurance_status:                                     current_business.business_health_insurance_status,                 # 健康保険加入状況
           genecon_health_insurance_association:                                current_business.business_health_insurance_association,            # 健康保険会社
           genecon_health_insurance_office_number:                              current_business.business_health_insurance_office_number,          # 健康保険番号

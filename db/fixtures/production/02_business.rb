@@ -11,7 +11,7 @@ User.where(role: 'admin').all.each do |user|
       address:                                          "東京都テスト区1-2-#{user.id}",
       post_code:                                        '0123456',
       phone_number:                                     '01234567898',
-      career_up_id:                                    'abc123',
+      career_up_id:                                     'abc123',
       business_type:                                    0,
       business_health_insurance_status:                 rand(0..2),                  # 健康保険(加入状況)
       business_health_insurance_association:            "テスト#{user.id}健康保険組合", # 健康保険(組合名)

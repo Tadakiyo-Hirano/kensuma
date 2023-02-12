@@ -30,7 +30,7 @@ module DocumentsHelper
   def document_subcon_info
     if RequestOrder.find_by(uuid: params[:request_order_uuid]).depth == 1
       subcon_info
-    else 
+    else
       @subcon
     end
   end

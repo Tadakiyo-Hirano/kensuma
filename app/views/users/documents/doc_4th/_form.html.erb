@@ -27,7 +27,7 @@
                 <%= document_site_info.content["genecon_name"] %> <!-- 4-002 元請会社名 -->
               </td>
               <td>
-                <%= document_site_info.content["genecon_carrier_up_id"] %> <!-- 4-003 元請会社の事業者ID(キャリアアップ) -->
+                <%= document_site_info.content["genecon_career_up_id"] %> <!-- 4-003 元請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
           </tbody>
@@ -438,7 +438,7 @@
             </tr>
             <tr>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_carrier_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
+                <%= document_subcon_info.content&.[]('subcon_career_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
             <tr>

@@ -69,22 +69,22 @@ RSpec.describe WorkerLicense, type: :model do
   end
 
   describe 'アソシエーションについて' do
-    context '紐つく作業員がいる場合' do
+    context '紐づく作業員がいる場合' do
       subject do
         worker_license.worker
       end
 
-      it '紐つく作業員を返すこと' do
+      it '紐づく作業員を返すこと' do
         expect(subject).to eq(worker)
       end
     end
 
-    context '紐つく免許マスタがある場合' do
+    context '紐づく免許マスタがある場合' do
       subject do
         worker_license.license
       end
 
-      it '紐つく免許マスタを返すこと' do
+      it '紐づく免許マスタを返すこと' do
         expect(subject).to eq(license)
       end
     end

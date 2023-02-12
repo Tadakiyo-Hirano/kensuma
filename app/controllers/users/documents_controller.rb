@@ -11,20 +11,14 @@ module Users
 
     def show
       respond_to do |format|
-        format.html do
-          case @document.document_type
-          when 'doc_4th'
-            # @business = Business.find_by!(uuid: params[:uuid])
-          end
-        end
+        format.html
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
-                'doc_3rd',  'doc_4th', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th', 'doc_15th', 'doc_16th',
-                'doc_17th', 'doc_19th', 'doc_21st', 'doc_22nd', 'doc_23rd', 'doc_24th'
+                'doc_3rd', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th', 'doc_15th', 'doc_16th',
+                'doc_17th', 'doc_19th', 'doc_21st', 'doc_23rd', 'doc_24th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_4th'
-            @business = Business.find_by!(uuid: params[:uuid])
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
           when 'doc_5th', 'doc_13rd', 'doc_14th', 'doc_18th', 'doc_22nd'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
@@ -44,7 +38,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -473,7 +467,15 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_17th'
+      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
+        params.require(:document).permit(content: 
+          %i[
+            date_submitted
+          ]
+        )
+      when 'doc_13rd'
+        field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
+        field_special_vehicle_keys = field_special_vehicle_ids.map{|field_special_vehicle_id|"field_special_vehicle_#{field_special_vehicle_id}"}
         params.require(:document).permit(content: 
           [
             date_submitted:                field_special_vehicle_keys, # 13-001 提出日(西暦)
