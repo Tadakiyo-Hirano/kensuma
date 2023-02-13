@@ -17,7 +17,7 @@ module Users
           address:                                                     'test',
           post_code:                                                   '0123456',
           phone_number:                                                '01234567898',
-          carrier_up_id:                                               'test',
+          career_up_id:                                                1,
           business_type:                                               0,
           business_health_insurance_status:                            0, # 健康保険(加入状況)
           business_health_insurance_association:                       'テスト健康保険組合', # 健康保険(組合名)
@@ -35,7 +35,8 @@ module Users
           construction_license_number_double_digit:                    29, # 建設許可証(番号)
           construction_license_number_six_digits:                      5000, # 建設許可証(番号)
           construction_license_number:                                 '国土交通大臣(特－29)第5000号', # 建設許可証(建設許可番号)
-          construction_license_updated_at:                             Date.today # 建設許可証(更新日)
+          construction_license_updated_at:                             Date.today, # 建設許可証(更新日)
+          industry_ids:                                                'test'
           # =============================================
         )
         @business.business_occupations.build
@@ -89,7 +90,7 @@ module Users
     def business_params
       params.require(:business).permit(
         :uuid, :name, :name_kana, :branch_name, :representative_name, :email, :address, :post_code,
-        :phone_number, :carrier_up_id, :business_type, { stamp_images: [] }, :user_id,
+        :phone_number, :career_up_id, :business_type, { stamp_images: [] }, :user_id,
         :business_health_insurance_status, :business_health_insurance_association,
         :business_health_insurance_office_number, :business_welfare_pension_insurance_join_status,
         :business_welfare_pension_insurance_office_number, :business_pension_insurance_join_status,

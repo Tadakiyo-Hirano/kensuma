@@ -74,8 +74,8 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :employment_contract, Worker.employment_contracts_i18n.invert, {include_blank: true}, {class: "form-control"} %><br>
 
-<%= f.label :carrier_up_id %>
-<%= f.text_field :carrier_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:carrier_up_id) %><br>
+<%= f.label :career_up_id %>
+<%= f.text_field :career_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:career_up_id) %><br>
 
 <div class="list-group">
   <!-- WorkerLicenseここから -->

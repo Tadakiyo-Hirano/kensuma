@@ -213,18 +213,18 @@ RSpec.describe Car, type: :model do
     let(:company) { create(:car_insurance_company) }
     let(:companies) { create_list(:car_insurance_company, 2) }
 
-    context '紐つく自賠責保険会社がある場合' do
+    context '紐づく自賠責保険会社がある場合' do
       subject { car.car_insurance_company = company }
 
-      it '紐つく自賠保険会社を返すこと' do
+      it '紐づく自賠保険会社を返すこと' do
         expect(subject).to eq(company)
       end
     end
 
-    context '紐つく任意保険会社がある場合' do
+    context '紐づく任意保険会社がある場合' do
       subject { car.company_voluntaries << companies }
 
-      it '紐つく任意保険会社を返すこと' do
+      it '紐づく任意保険会社を返すこと' do
         expect(subject).to eq(companies)
       end
     end
