@@ -477,7 +477,6 @@ module Users
       when 'doc_13rd'
         field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
         field_special_vehicle_keys = field_special_vehicle_ids.map{|field_special_vehicle_id|"field_special_vehicle_#{field_special_vehicle_id}"}
-
         params.require(:document).permit(content: 
           [
             date_submitted:                field_special_vehicle_keys, # 13-001 提出日(西暦)

@@ -20,7 +20,7 @@ FactoryBot.define do
     experience_term_before_hiring { 1 }
     employment_contract { 1 }
     blank_term { 1 }
-    carrier_up_id { '1' }
+    career_up_id { '1' }
     images { '' }
 
     after(:create) do |worker|

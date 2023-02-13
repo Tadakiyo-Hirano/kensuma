@@ -15,7 +15,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.date :hiring_on, null: false
       t.integer :experience_term_before_hiring, null: false
       t.integer :blank_term, null: false
-      t.string :carrier_up_id
+      t.string :career_up_id
       t.json :images
       t.references :business, foreign_key: true, null: false
 
