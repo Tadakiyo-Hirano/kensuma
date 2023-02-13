@@ -52,28 +52,9 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
-
-    <%#= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(氏名) -->
-    <%#= f.select :content["professional_engineer_skill_training_id"],
-                  options_for_select(SkillTraining.all.map { |obj| [obj.name, obj.id] },
-                  "www"),
-                  #request_order.content['professional_engineer_skill_training_id'].to_i),
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-
-
-    <%#= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(氏名) -->
-    <%#= f.collection_select name = "content[professional_engineer_skill_training_id]",
-                  SkillTraining.all, :id, :name,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-
-    <%= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(氏名) -->
+    <%= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(資格内容) -->
     <%= f.collection_select name = "content[professional_engineer_skill_training_id]",
                   SkillTraining.all, :id, :name,
-                  #{ include_blank: true },
                   options = { include_blank: true, selected: request_order.content['professional_engineer_skill_training_id'].to_i },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
@@ -118,6 +99,12 @@
     <%= f.select :lead_engineer_name,
                   (@business_workers_name + [@request_order.lead_engineer_name]).uniq,
                   { include_blank: true },
+                  { class: "single-select", style: "width: 100%" }
+    %><br><br>
+    <%= f.label :lead_engineer_skill_training_id %> <!-- 主任技術者(資格内容) -->
+    <%= f.collection_select name = "content[lead_engineer_skill_training_id]",
+                  SkillTraining.all, :id, :name,
+                  options = { include_blank: true, selected: request_order.content['lead_engineer_skill_training_id'].to_i },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :lead_engineer_check %> <!-- 主任技術者(専任or非専任) -->
@@ -172,6 +159,12 @@
                       (@business_workers_name + [@request_order.registered_core_engineer_name]).uniq,
                       { include_blank: true },
                       { class: "single-select", style: "width: 100%" }
+    %><br><br>
+    <%= f.label :registered_core_engineer_skill_training_id %> <!-- 登録基幹技能者(資格内容) -->
+    <%= f.collection_select name = "content[registered_core_engineer_skill_training_id]",
+                  SkillTraining.all, :id, :name,
+                  options = { include_blank: true, selected: request_order.content['registered_core_engineer_skill_training_id'].to_i },
+                  { class: "single-select", style: "width: 100%" }
     %><br><br>
   </div>
 </div><br>

@@ -129,7 +129,7 @@ module DocumentsHelper
     end
   end
 
-  def c_license_permission_type_minister_or_governor(d_info)
+  def c_license_permission_type_minister_or_governor(d_info) # 「大臣」か「知事」判定
     sub_judge = d_info&.content&.[]('subcon_name').nil?
     if sub_judge == "true"
       permission_type = Business.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n
@@ -139,17 +139,12 @@ module DocumentsHelper
     return permission_type
   end
 
-  def construction_license_permission_type_minister(d_info)
+  def construction_license_construction_certification(owner, d_info)
     permission_type = c_license_permission_type_minister_or_governor(d_info)
-    permission_type == "大臣" ? tag.span('大臣', class: :circle) : '大臣'
+    permission_type == owner ? tag.span(owner, class: :circle) : owner
   end
 
-  def construction_license_permission_type_governor(d_info)
-    permission_type = c_license_permission_type_minister_or_governor(d_info)
-    permission_type == "知事" ? tag.span('知事', class: :circle) : '知事'
-  end
-
-  def c_license_permission_type_identification_or_general(d_info)
+  def c_license_permission_type_identification_or_general(d_info) # 「特定」か「一般」判定
     sub_judge = d_info&.content&.[]('subcon_name').nil?
     if sub_judge == "true"
       permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
@@ -159,20 +154,14 @@ module DocumentsHelper
     return permission_type
   end
 
-  def construction_license_permission_type_identification(d_info)
+  def construction_license_construction_type(type, d_info)
     permission_type = c_license_permission_type_identification_or_general(d_info)
-    permission_type == "特定" ? tag.span('特定', class: :circle) : '特定'
-  end
-
-  def construction_license_permission_type_general(d_info)
-    permission_type = c_license_permission_type_identification_or_general(d_info)
-    permission_type == "一般" ? tag.span('一般', class: :circle) : '一般'
+    permission_type == type ? tag.span(type, class: :circle) : type
   end
   
-  def professional_engineer_skill_training(document)
-    s_id = document.content&.[]('professional_engineer_skill_training_id') 
+  def engineer_skill_training(engineer, document) # 対象者を判定した後、資格内容を返す
+    s_id = document.content&.[]("#{engineer}_engineer_skill_training_id") 
     s_id.blank? ? "" : SkillTraining.find(s_id).name
-    
   end
 
   # (8)作業員名簿

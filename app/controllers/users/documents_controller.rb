@@ -436,12 +436,6 @@ module Users
             :date_submitted
           ]
         )
-      when 'doc_5th'
-        params.require(:document).permit(content:
-        %i[
-            professional_engineer_skill_training_id
-          ]
-        )
       when 'doc_14th'
         params.require(:document).permit(content:
         %i[
