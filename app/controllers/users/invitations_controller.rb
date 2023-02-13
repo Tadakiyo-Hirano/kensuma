@@ -17,22 +17,20 @@ module Users
     # end
 
     def create
-      self.resource = invite_resource
-      resource_invited = resource.errors.empty?
+      user = User.find_by(email: params[:user][:email])
+      if user.present?
+        email = params[:user][:email]
 
-      yield resource if block_given?
+        user = User.find_by(email: email)
+        invited_user = { email: email }
 
-      if resource_invited
-        if is_flashing_format? && self.resource.invitation_sent_at
-          set_flash_message :notice, :send_instructions, email: self.resource.email
+        if user.present? && !user.invitation_accepted_at.nil?
+          # 既存ユーザーに対して招待メールを送信
+          User.invite!(invited_user, current_inviter)
         end
-        if self.method(:after_invite_path_for).arity == 1
-          respond_with resource, location: after_invite_path_for(current_inviter)
-        else
-          respond_with resource, location: users_subcon_users_path
-        end
+        redirect_to users_subcon_users_path, notice: "招待メール送信されました。"
       else
-        respond_with_navigational(resource) { render :new, status: :unprocessable_entity }
+        super
       end
     end
 
