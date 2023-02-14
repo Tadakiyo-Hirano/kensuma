@@ -121,6 +121,10 @@ module DocumentsHelper
   end
   
   # (5)再下請負通知書（変更届）
+  def skill_id_value(engineer)
+    @request_order.content.nil? ? "" : @request_order.content&.[]("#{engineer}_engineer_skill_training_id").to_i
+  end
+  
   def child_check(child)
     if child.present?
       Industry.find_by(id: Business.find_by(id: child&.business_id)&.industry_ids&.join("','"))&.name
@@ -145,8 +149,7 @@ module DocumentsHelper
   end
 
   def c_license_permission_type_identification_or_general(d_info) # 「特定」か「一般」判定
-    sub_judge = d_info&.content&.[]('subcon_name').nil?
-    if sub_judge == "true"
+    if d_info == document_info
       permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
     elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
@@ -160,7 +163,7 @@ module DocumentsHelper
   end
   
   def engineer_skill_training(engineer, document) # 対象者を判定した後、資格内容を返す
-    s_id = document.content&.[]("#{engineer}_engineer_skill_training_id") 
+    s_id = document&.content&.[]("#{engineer}_engineer_skill_training_id") 
     s_id.blank? ? "" : SkillTraining.find(s_id).name
   end
 

@@ -114,7 +114,7 @@
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:professional_engineer_skill_training_id) %></th> <!-- 専門技術者(資格内容) -->
-                  <td><%= SkillTraining.find_by(id: @request_order.content['professional_engineer_skill_training_id']).name %></td>
+                  <td><%= SkillTraining.find_by(id: @request_order.content['professional_engineer_skill_training_id'])&.name %></td>
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:professional_engineer_details) %></th> <!-- 専門技術者(担当工事内容) -->
@@ -146,7 +146,7 @@
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:lead_engineer_skill_training_id) %></th> <!-- 主任技術者(資格内容) -->
-                  <td><%= SkillTraining.find_by(id: @request_order.content['lead_engineer_skill_training_id']).name %></td>
+                  <td><%= SkillTraining.find_by(id: @request_order.content['lead_engineer_skill_training_id'])&.name %></td>
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:lead_engineer_check) %></th> <!-- 主任技術者(専任or非専任) -->
@@ -182,7 +182,7 @@
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:registered_core_engineer_skill_training_id) %></th> <!-- 登録基幹技能者(資格内容) -->
-                  <td><%= SkillTraining.find_by(id: @request_order.content['registered_core_engineer_skill_training_id']).name %></td>
+                  <td><%= SkillTraining.find_by(id: @request_order.content['registered_core_engineer_skill_training_id'])&.name %></td>
                 </tr>
               </tbody>
             </table>
