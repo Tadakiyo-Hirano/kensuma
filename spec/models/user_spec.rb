@@ -182,12 +182,12 @@ RSpec.describe User, type: :model do
       create_list(:article, 2)
     end
 
-    context '紐つく記事がある場合' do
+    context '紐づく記事がある場合' do
       subject do
         user.articles
       end
 
-      it '紐つく記事を返すこと' do
+      it '紐づく記事を返すこと' do
         expect(subject).to eq(articles)
       end
     end

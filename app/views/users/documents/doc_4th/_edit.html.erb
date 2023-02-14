@@ -1,4 +1,16 @@
-<div id="doc_4">
+<!-- (3)全建統一様式(第2号施⼯体制台帳作成建設⼯事の通知) -->
+<%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
+  <div class="document-outer">
+    <div class="card">  
+      <div class="card-body">
+        <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+        <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+      </div>
+    </div>
+
+
+
+    <div id="doc_4">
   <section class="sheet"><!-- 印刷内容 A3サイズ横向き -->
 
     <!-- 左側書類 -->
@@ -9,7 +21,9 @@
             <tr>
               <td>(全建統一様式第3号)</td>
               <td class="text-right">
-                <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 4-001 提出日(西暦) -->
+                <%= f.date_field :content, name: "document[content][date_submitted]",
+                                    value: doc_content_date(@document.content&.[]("date_submitted"))                 
+                %> <!-- 3-001 提出日（西暦 -->
               </td>
             </tr>
           </tbody>
@@ -52,14 +66,14 @@
         <table class="table table-sm table-bordered" width="100%">
           <tbody>
             <tr>
-              <td rowspan="5" width="10%">建設業の<br />許可</td>
+              <td rowspan="5" width=10%">建設業の<br />許可</td>
               <td colspan="2" width="25%">許 可 業 種</td>
               <td colspan="6" width="35%">許 可 番 号</td>
               <td width="30%">許可 （更新） 年月日</td>
             </tr>
             <tr>
               <td rowspan="2">
-                <%= current_business_name %> <!-- 4-006 元請会社の建設許可業種 -->
+                <%= '※4-006未実装※' %> <!-- 4-006 元請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="6%">工事業</td>
               <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-007 -->
@@ -177,12 +191,12 @@
             <tr>
               <td>下請契約</td>
               <td>
-                <span><%= document_subcon_info.content&.[]('subcon_name') %></span> <!-- 4-026 下請会社名 -->
-                <span><%= document_subcon_info.content&.[]('subcon_branch_name') %></span> <!-- 4-027 下請会社の支店･営業所名-->
+                <span><%= document_subcon_info&.content&.[]('subcon_name') %></span> <!-- 4-026 下請会社名 -->
+                <span><%= document_subcon_info&.content&.[]('subcon_branch_name') %></span> <!-- 4-027 下請会社の支店･営業所名-->
                 <!-- ※支店 又は 営業所がない場合は、“同上”と記載 -->
               </td>
               <td>
-                <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-028 下請会社の住所4-028 -->
+                <%= document_subcon_info&.content&.[]('subcon_address') %> <!-- 4-028 下請会社の住所4-028 -->
                 <!-- ※支店 又は 営業所がない場合は、“同上”と記載 -->
               </td>
             </tr>
@@ -372,18 +386,18 @@
             <tr>
               <td>下請契約</td>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-058 下請会社名 -->
+                <%= document_subcon_info&.content&.[]('subcon_name') %> <!-- 4-058 下請会社名 -->
               </td>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->
+                <%= document_subcon_info&.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->
                 <br />
-                <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-060 下請会社の健康保険番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-060 下請会社の健康保険番号 -->
               </td>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-061 下請会社の厚生年金保険番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-061 下請会社の厚生年金保険番号 -->
               </td>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-062 下請会社の雇用保険番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_employment_insurance_number') %> <!-- 4-062 下請会社の雇用保険番号 -->
               </td>
             </tr>
           </tbody>
@@ -429,59 +443,59 @@
             <tr>
               <td rowspan="2" width="10%">会 社 名</td>
               <td colspan="2" width="40%">
-                <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-101 下請会社名 -->
+                <%= document_subcon_info&.content&.[]('subcon_name') %> <!-- 4-101 下請会社名 -->
               </td>
               <td rowspan="2" width="15%">代表者名</td>
               <td rowspan="2" width="35%">
-                <%= document_subcon_info.content&.[]('subcon_representative_name') %> <!-- 4-103 下請会社の代表者名 -->
+                <%= document_subcon_info&.content&.[]('subcon_representative_name') %> <!-- 4-103 下請会社の代表者名 -->
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_career_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
+                <%= document_subcon_info&.content&.[]('subcon_career_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
             <tr>
               <td rowspan="2">住 所<Br />電話番号</td>
               <td width="5%">〒</td>
               <td width="35%">
-                <%= document_subcon_info.content&.[]('subcon_post_code') %> <!-- 4-104 下請会社の郵便番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_post_code') %> <!-- 4-104 下請会社の郵便番号 -->
               </td>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-105 下請会社の住所 -->
+                <%= document_subcon_info&.content&.[]('subcon_address') %> <!-- 4-105 下請会社の住所 -->
               </td>
             </tr>
             <tr>
               <td colspan="4">
-                <%= document_subcon_info.content&.[]('subcon_phone_number') %> <!-- 4-106 下請会社の電話番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_phone_number') %> <!-- 4-106 下請会社の電話番号 -->
               </td>
             </tr>
             <tr>
               <td rowspan="2">工事名称<br /> 及 び<br /> 工事内容</td>
               <td colspan="4">
-                <%= document_subcon_info.construction_name %> <!-- 4-107 各下請会社の工事名 -->
+                <%= document_subcon_info&.construction_name %> <!-- 4-107 各下請会社の工事名 -->
               </td>
             </tr>
             <tr>
               <td colspan="4">
-                <%= document_subcon_info.construction_details %> <!-- 4-108 各下請会社の工事内容 -->
+                <%= document_subcon_info&.construction_details %> <!-- 4-108 各下請会社の工事内容 -->
               </td>
             </tr>
             <tr>
               <td rowspan="2">工 期</td>
               <td>自</td>
               <td>
-                <%= document_date(document_subcon_info.start_date) %> <!-- 4-109 各下請会社の工期(自) -->
+                <%= document_date(document_subcon_info&.start_date) %> <!-- 4-109 各下請会社の工期(自) -->
               </td>
               <td rowspan="2">契 約 日</td>
               <td rowspan="2">
-                <%= document_date(document_subcon_info.contract_date) %> <!-- 4-111 各下請会社の契約日 -->
+                <%= document_date(document_subcon_info&.contract_date) %> <!-- 4-111 各下請会社の契約日 -->
               </td>
             </tr>
             <tr>
               <td>至</td>
               <td>
-                <%= document_date(document_subcon_info.start_date) %> <!-- 4-110 各下請会社の工期(至) -->
+                <%= document_date(document_subcon_info&.start_date) %> <!-- 4-110 各下請会社の工期(至) -->
               </td>
             </tr>
           </tbody>
@@ -551,32 +565,32 @@
             <tr>
               <td colspan="2" width="14%">現 場 代 理 人 名</td>
               <td colspan="2" width="35%">
-                <%= document_subcon_info.site_agent_name %> <!-- 4-122 各下請会社の現場代理人名 -->
+                <%= document_subcon_info&.site_agent_name %> <!-- 4-122 各下請会社の現場代理人名 -->
               </td>
               <td rowspan="7" width="1%"></td>
               <td colspan="2" width="15%">安全衛生責任者名</td>
               <td width="35%">
-                <%= document_subcon_info.safety_manager_name %> <!-- 4-127 各下請会社の安全衛生責任者名 -->
+                <%= document_subcon_info&.safety_manager_name %> <!-- 4-127 各下請会社の安全衛生責任者名 -->
               </td>
             </tr>
             <tr>
               <td width="4%"></td>
               <td width="11%">権限及び<br />意見申出方法</td>
               <td colspan="2">
-                <%= document_subcon_info.site_agent_apply %> <!-- 4-123 下請各会社の現場代理人名･権限及び意見の申出方法 -->
+                <%= document_subcon_info&.site_agent_apply %> <!-- 4-123 下請各会社の現場代理人名･権限及び意見の申出方法 -->
               </td>
               <td colspan="2">安全衛生推進者名</td>
               <td>
-                <%= document_subcon_info.safety_promoter_name %> <!-- 4-128 各下請会社の安全推進者名 -->
+                <%= document_subcon_info&.safety_promoter_name %> <!-- 4-128 各下請会社の安全推進者名 -->
               </td>
             </tr>
             <tr>
               <td colspan="2">※主 任 技 術 者</td>
               <td width="10%%">
-                <%= document_subcon_info.lead_engineer_check_i18n %> <!-- 4-124 各下請会社の主任技術者の(専任or非専任)-->
+                <%= document_subcon_info&.lead_engineer_check_i18n %> <!-- 4-124 各下請会社の主任技術者の(専任or非専任)-->
               </td>
               <td width="25%">
-                <%= document_subcon_info.lead_engineer_name %> <!-- 4-125 各下請会社の主任技術者名 -->
+                <%= document_subcon_info&.lead_engineer_name %> <!-- 4-125 各下請会社の主任技術者名 -->
               </td>
               <td colspan="2">雇用管理責任者名</td>
               <td>
@@ -591,7 +605,7 @@
               </td>
               <td colspan="2">※専 門 技 術 者 名</td>
               <td>
-                <%= document_subcon_info.professional_engineer_name %> <!-- 4-130 各下請会社の専門技術者名 -->
+                <%= document_subcon_info&.professional_engineer_name %> <!-- 4-130 各下請会社の専門技術者名 -->
               </td>
             </tr>
             <tr>
@@ -601,7 +615,7 @@
             <tr>
               <td colspan="2" rowspan="2">※登録基幹技能者<br />名・種類</td>
               <td colspan="2">
-                <%= document_subcon_info.registered_core_engineer_name %> <!-- 4-133 下請会社の登録基幹技能者名 -->
+                <%= document_subcon_info&.registered_core_engineer_name %> <!-- 4-133 下請会社の登録基幹技能者名 -->
               </td>
               <td rowspan="2"></td>
               <td>資 格 内 容</td>
@@ -615,7 +629,7 @@
               </td>
               <td>担当工事内容</td>
               <td>
-                <%= document_subcon_info.professional_engineer_details %> <!-- 4-132 各下請会社の専門技術者･担当工事内容 -->
+                <%= document_subcon_info&.professional_engineer_details %> <!-- 4-132 各下請会社の専門技術者･担当工事内容 -->
               </td>
             </tr>
           </tbody>
@@ -647,31 +661,31 @@
             </tr>
             <tr>
               <td>
-                <%= insurance_join(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(加入) 4-138 -->
+                <%= insurance_join(document_subcon_info&.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(加入) 4-138 -->
               </td>
               <td>
-                <%= insurance_not_join(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(未加入) 4-138 -->
+                <%= insurance_not_join(document_subcon_info&.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(未加入) 4-138 -->
               </td>
               <td>
-                <%= insurance_not_coverd(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(適用除外) 4-138 -->
+                <%= insurance_not_coverd(document_subcon_info&.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(適用除外) 4-138 -->
               </td>
               <td>
-                <%= insurance_join(document_subcon_info.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(加入) 4-139 -->
+                <%= insurance_join(document_subcon_info&.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(加入) 4-139 -->
               </td>
               <td>
-                <%= insurance_not_join(document_subcon_info.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(未加入) 4-139 -->
+                <%= insurance_not_join(document_subcon_info&.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(未加入) 4-139 -->
               </td>
               <td>
-                <%= insurance_not_coverd(document_subcon_info.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(適用除外) 4-139 -->
+                <%= insurance_not_coverd(document_subcon_info&.content&.[]('subcon_welfare_pension_insurance_join_status'))  %> <!-- 下請会社の年金保険(適用除外) 4-139 -->
               </td>
               <td>
-                <%= insurance_join(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(加入) 4-140 -->
+                <%= insurance_join(document_subcon_info&.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(加入) 4-140 -->
               </td>
               <td>
-                <%= insurance_not_join(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(未加入) 4-140 -->
+                <%= insurance_not_join(document_subcon_info&.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(未加入) 4-140 -->
               </td>
               <td>
-                <%= insurance_not_coverd(document_subcon_info.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(適用除外) 4-140 -->
+                <%= insurance_not_coverd(document_subcon_info&.content&.[]('subcon_employment_insurance_join_status'))  %> <!-- 下請会社の雇用保険(適用除外) 4-140 -->
               </td>
             </tr>
             <tr>
@@ -682,15 +696,15 @@
             </tr>
             <tr>
               <td colspan="3">
-                <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-141 下請会社の健康保険会社名 -->
+                <%= document_subcon_info&.content&.[]('subcon_health_insurance_association') %> <!-- 4-141 下請会社の健康保険会社名 -->
                 <br />
-                <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-142 下請会社の健康保険番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-142 下請会社の健康保険番号 -->
               </td>
               <td colspan="3">
-                <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-143 下請会社の厚生年金保険番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-143 下請会社の厚生年金保険番号 -->
               </td>
               <td colspan="3">
-                <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-144 下請会社の雇用保険番号 -->
+                <%= document_subcon_info&.content&.[]('subcon_employment_insurance_number') %> <!-- 4-144 下請会社の雇用保険番号 -->
               </td>
             </tr>
           </tbody>
@@ -788,7 +802,8 @@
     </div>
   </section>
 </div>
-
+</div>
+<%end%>
 <style>
   /* リスト初期化 */
   #doc_4 {

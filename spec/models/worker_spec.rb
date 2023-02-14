@@ -340,7 +340,7 @@ RSpec.describe Worker, type: :model do
       create(:worker_insurance, worker: worker)
     end
 
-    context '紐つく保険会社がある場合' do
+    context '紐づく保険会社がある場合' do
       subject do
         worker.worker_insurance
       end
@@ -349,7 +349,7 @@ RSpec.describe Worker, type: :model do
         worker_insurance.save!
       end
 
-      it '紐つく保険会社を返すこと' do
+      it '紐づく保険会社を返すこと' do
         expect(subject).to eq(worker_insurance)
       end
     end
