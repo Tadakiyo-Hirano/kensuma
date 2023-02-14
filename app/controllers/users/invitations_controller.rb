@@ -21,16 +21,32 @@ module Users
       if user.present?
         email = params[:user][:email]
 
-        user = User.find_by(email: email)
-        invited_user = { email: email }
+        # user = User.find_by(email: email)
+        # invited_user = { email: email }
 
-        if user.present? && !user.invitation_accepted_at.nil?
-          # 既存ユーザーに対して招待メールを送信
-          User.invite!(invited_user, current_inviter)
-        end
-        redirect_to users_subcon_users_path, notice: "招待メール送信されました。"
+        # if user.present? && !user.invitation_accepted_at.nil?
+        #   # 既存ユーザーに対して招待メールを送信
+        #   User.invite!(invited_user, current_inviter)
+        # end
+        redirect_to users_subcon_users_path, notice: "招待リクエストが#{email}へ送信されました。"
       else
-        super
+        self.resource = invite_resource
+        resource_invited = resource.errors.empty?
+
+        yield resource if block_given?
+
+        if resource_invited
+          if is_flashing_format? && self.resource.invitation_sent_at
+            set_flash_message :notice, :send_instructions, email: self.resource.email
+          end
+          if self.method(:after_invite_path_for).arity == 1
+            respond_with resource, location:  users_subcon_users_path
+          else
+            respond_with resource, location:  users_subcon_users_path
+          end
+        else
+          respond_with_navigational(resource) { render :new, status: :unprocessable_entity }
+        end
       end
     end
 
