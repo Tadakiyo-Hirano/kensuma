@@ -1,10 +1,10 @@
 <table class="table table-sm table-hover text-nowrap">
   <thead>
     <tr>
-      <th>No.</th>
+      <th width="5%">No.</th>
       <th>書類名</th>
-      <th></th>
-      <th></th>
+      <th width="10%"></th>
+      <th width="10%"></th>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +16,10 @@
         <td class="<%= document_table_color(current_user_document) %>">
           <%= current_user_document.document_type_i18n %>
         </td>
-        <td class="<%= document_table_color(current_user_document) %>">
+        <td class="<%= document_table_color(current_user_document) %> text-right">
           <%= link_to '詳細', users_request_order_document_path(@request_order.uuid, current_user_document.uuid) %>
         </td>
-        <td class="<%= document_table_color(current_user_document) %>">
+        <td class="<%= document_table_color(current_user_document) %> text-right">
           <%= link_to 'PDF', users_request_order_document_path(@request_order.uuid, current_user_document.uuid, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
         </td>
       </tr>

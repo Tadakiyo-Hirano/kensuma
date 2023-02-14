@@ -31,6 +31,11 @@
                       <%= fs.label :vehicle_name %><br>
                       <%= field_special_vehicle.vehicle_name %>
                     </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr style="border-bottom: 0px #fff;">
                     <td>
                       <%= fs.label :driver_name %><br>
                       <%= fs.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
@@ -39,9 +44,6 @@
                       <%= fs.label :sub_driver_name %><br>
                       <%= fs.select :sub_driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
                     </td>
-                    <td></td>
-                  </tr>
-                  <tr style="border-bottom: 0px #fff;">
                     <td>
                       <%= fs.label :vehicle_type %><br>
                       <%= fs.select :vehicle_type, FieldSpecialVehicle.vehicle_types_i18n.invert, { prompt: true }, { class: "form-control" } %>
@@ -55,6 +57,8 @@
                         <% end %>
                       </datalist>
                     </td>
+                  </tr>
+                  <tr style="border-bottom: 0px #fff;">
                     <td>
                       <%= fs.label :owning_company_name %>
                       <%= fs.text_field :owning_company_name, list: 'owning', class: "form-control" %>
@@ -65,11 +69,29 @@
                       </datalist>
                     </td>
                     <td>
+                      <%= fs.label :owning_company_representative_name %>
+                      <%= fs.text_field :owning_company_representative_name, list: 'owning_representative', class: "form-control" %>
+                      <datalist id="owning_representative">
+                        <% @owning_company_representatives.each do |owning_company_representative| %>
+                        <option><%= owning_company_representative %></option>
+                        <% end %>
+                      </datalist>
+                    </td>
+                    <td>
                       <%= fs.label :use_company_name %>
                       <%= fs.text_field :use_company_name, list: 'use', class: "form-control" %>
                       <datalist id="use">
                         <% @use_companies.each do |company| %>
                         <option><%= company %></option>
+                        <% end %>
+                      </datalist>
+                    </td>
+                    <td>
+                      <%= fs.label :use_company_representative_name %>
+                      <%= fs.text_field :use_company_representative_name, list: 'use_representative', class: "form-control" %>
+                      <datalist id="use_representative">
+                        <% @use_company_representatives.each do |use_company_representative| %>
+                        <option><%= use_company_representative %></option>
                         <% end %>
                       </datalist>
                     </td>

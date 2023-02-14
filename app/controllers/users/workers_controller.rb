@@ -25,7 +25,7 @@ module Users
           hiring_on:                     '2022-01-28',
           experience_term_before_hiring: 10,
           blank_term:                    3,
-          carrier_up_id:                 '1'
+          career_up_id:                  '1'
           # ============================================
         )
         @worker.worker_licenses.build(
@@ -170,17 +170,17 @@ module Users
         :country, :my_address, :my_phone_number, :family_address,
         :family_phone_number, :birth_day_on, :abo_blood_type,
         :rh_blood_type, :job_title, :job_type, :hiring_on, :experience_term_before_hiring,
-        :blank_term, :carrier_up_id,
+        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],
         worker_medical_attributes:            [
-          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on,
+          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
           { worker_exams_attributes: [:id, :got_on, :worker_medical_id, :special_med_exam_id, { images: [] }, :_destroy] }
         ],
         worker_insurance_attributes:          %i[
           id health_insurance_type health_insurance_name pension_insurance_type employment_insurance_type
-          employment_insurance_number severance_pay_mutual_aid_type severance_pay_mutual_aid_name
+          employment_insurance_number severance_pay_mutual_aid_type severance_pay_mutual_aid_name has_labor_insurance
         ]
       )
     end

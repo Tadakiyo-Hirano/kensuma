@@ -20,6 +20,14 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
 
+<%= f.label :family_name %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :family_name, class: "form-control", placeholder: Worker.human_attribute_name(:family_name) %><br>
+
+<%= f.label :relationship %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :relationship, class: "form-control", placeholder: Worker.human_attribute_name(:relationship) %><br>
+
 <%= f.label :family_address %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :family_address, class: "form-control", placeholder: Worker.human_attribute_name(:family_address) %><br>
@@ -62,8 +70,12 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.number_field :blank_term, class: "form-control", min: 0 %><br>
 
-<%= f.label :carrier_up_id %>
-<%= f.text_field :carrier_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:carrier_up_id) %><br>
+<%= f.label :employment_contract %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.select :employment_contract, Worker.employment_contracts_i18n.invert, {include_blank: true}, {class: "form-control"} %><br>
+
+<%= f.label :career_up_id %>
+<%= f.text_field :career_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:career_up_id) %><br>
 
 <div class="list-group">
   <!-- WorkerLicenseここから -->
@@ -114,6 +126,14 @@
   <!-- WorkerMedicalここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_medical do |worker_medical| %>
+      <div class="row mb-3">
+        <%= worker_medical.label :is_med_exam %>
+        <%= worker_medical.select :is_med_exam, WorkerMedical.is_med_exams_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+      </div>
+      <div class="row mb-3">
+        <%= worker_medical.label :is_med_exam %>
+        <%= worker_medical.select :health_condition, WorkerMedical.health_conditions_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+      </div>
       <div class="row mb-3">
         <%= worker_medical.label :med_exam_on %>
         <%= worker_medical.date_field :med_exam_on, class: "form-control" %>
@@ -184,6 +204,13 @@
         <%= worker_insurance.label :employment_insurance_number %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <%= worker_insurance.text_field :employment_insurance_number, class: "form-control" %>
+      </div>
+      
+      <div class="mt-3" id="has_labor_insurance">
+        <%= worker_insurance.label :has_labor_insurance %>
+        <%= worker_insurance.select :has_labor_insurance,
+                 WorkerInsurance.has_labor_insurances_i18n.keys.map { |k| [WorkerInsurance.has_labor_insurances_i18n[k], k] },
+                 { include_blank: true, prompt: "選択してください" }, { class: "form-control" } %>
       </div>
 
       <div class="mb-3">
@@ -272,6 +299,12 @@
         "worker[my_phone_number]": {
           required: true
         },
+        "worker[family_name]": {
+          required: true
+        },
+        "worker[relationship]": {
+          required: true
+        },
         "worker[family_address]": {
           required: true
         },
@@ -299,6 +332,9 @@
         "worker[blank_term]": {
           required: true
         },
+        "worker[employment_contract]": {
+          required: true
+        },
         "worker[worker_insurance_attributes][health_insurance_type]": {
           required: true
         },
@@ -320,6 +356,9 @@
         "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
           required: true
         },
+        "worker[worker_insurance_attributes][has_labor_insurance]": {
+          required: true
+        },
       },
       messages:{
         "worker[name]": {
@@ -337,8 +376,14 @@
         "worker[my_phone_number]": {
           required: "電話番号を入力してください。"
         },
+        "worker[family_name]": {
+          required: "家族の氏名を入力してください。"
+        },
+        "worker[relationship]": {
+          required: "家族の続柄を入力してください。"
+        },
         "worker[family_address]": {
-          required: "家族住所を入力してください。"
+          required: "家族の住所を入力してください。"
         },
         "worker[family_phone_number]": {
           required: "家族の電話番号を入力してください。"
@@ -364,6 +409,9 @@
         "worker[blank_term]": {
           required: "ブランク年数を入力してください。"
         },
+        "worker[employment_contract]": {
+          required: "雇用契約書を取り交わしたかどうかを選択してください。"
+        },
         "worker[worker_insurance_attributes][health_insurance_type]": {
           required: "健康保険のタイプを選択してください。"
         },
@@ -384,6 +432,9 @@
         },
         "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
           required: "建設業退職金共済制度名前を入力してください。"
+        },
+        "worker[worker_insurance_attributes][has_labor_insurance]": {
+          required: "労働特別保険に加入しているかどうかを選択してください。"
         },
       },
       errorClass: "input_form_error"

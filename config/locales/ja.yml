@@ -221,7 +221,7 @@ ja:
         doc_10th: 高齢者就労報告書
         doc_11th: 年少者就労報告書
         doc_12th: 参考様式第８号(工事用・通勤⽤⾞両届)
-        doc_13th: 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
+        doc_13rd: 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
         doc_14th: 参考様式第６号(持込機械等(電動工具電気溶接機等)使用届
         doc_15th: 全建統一様式第１１号(有機溶剤・特定化学物質等持込使用届)
         doc_16th: 参考様式第９号(火気使用届)
@@ -247,6 +247,10 @@ ja:
       lease_type:
         own: 自社
         lease: リース
+    field_worker:
+      sendoff_education: # 送り出し教育受講
+        educated: 受けた
+        not_educated: 受けていない
     news:
       status:
         draft: 下書き
@@ -279,6 +283,9 @@ ja:
       rh_blood_type:
         plus: ＋
         minus: −
+      employment_contract: # 雇用契約書の取り交わし状況
+        available: 取り交わし済
+        not_available: 未だ
     worker_insurance:
       health_insurance_type:
         health_insurance_association: 健康保険組合
@@ -299,6 +306,17 @@ ja:
         tyutaikyo: 中退共手帳
         other: その他
         none: 無し
+      has_labor_insurance: # 労働保険特別加入
+        join: 加入
+        not_join: 未加入
+    worker_medical:
+      health_condition: # 最近の健康状態
+        good: よい
+        normal: まあまあである
+        bad: あまりよくない
+      is_med_exam: # 健康診断の受診
+        y: 受けた
+        n: 受けていない
   errors:
     format: "%{attribute}%{message}"
     messages:
