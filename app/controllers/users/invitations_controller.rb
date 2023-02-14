@@ -18,17 +18,13 @@ module Users
 
     def create
       user = User.find_by(email: params[:user][:email])
-      if user.present?
+      if user.present? && user.invitation_accepted_at.present? || user.present? && user.invitation_token.nil? && user.invitation_accepted_at.nil?
+        # 既存ユーザーに対してはアカウント発行&招待処理は行わず、招待リクエストのお知らせメールのみ送信する
         email = params[:user][:email]
+        user = User.find_by(email: email)
 
-        # user = User.find_by(email: email)
-        # invited_user = { email: email }
-
-        # if user.present? && !user.invitation_accepted_at.nil?
-        #   # 既存ユーザーに対して招待メールを送信
-        #   User.invite!(invited_user, current_inviter)
-        # end
-        redirect_to users_subcon_users_path, notice: "招待リクエストが#{email}へ送信されました。"
+        ContactMailer.invitation_email(user).deliver_now
+        redirect_to users_subcon_users_path, notice: "招待リクエストが【#{user.business&.name}(#{email})様】へ送信されました。"
       else
         self.resource = invite_resource
         resource_invited = resource.errors.empty?
