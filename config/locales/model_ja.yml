@@ -80,8 +80,8 @@ ja:
         specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
         foreign_construction_workers_exist: 外国人建設就労者従事状況
         foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
-        employment_manager_name: 氏名
-        employment_manager_post: 役員名
+        employment_manager_name: 雇用管理責任者(氏名)
+        employment_manager_post: 雇用管理責任者(役職名)
       business_occupation:
         occupation_id: 職種
       business_industry:

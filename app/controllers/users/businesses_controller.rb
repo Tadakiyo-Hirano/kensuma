@@ -1,6 +1,7 @@
 module Users
   class BusinessesController < Users::Base
     before_action :set_business, except: %i[new create]
+    before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :business_present_access, only: %i[new create]
     skip_before_action :business_nil_access, only: %i[new create]
 
@@ -90,7 +91,7 @@ module Users
     def business_params
       params.require(:business).permit(
         :uuid, :name, :name_kana, :branch_name, :representative_name, :email, :address, :post_code,
-        :phone_number, :career_up_id, :business_type, { stamp_images: [] }, :user_id,
+        :phone_number, :fax_number, :career_up_id, :business_type, { stamp_images: [] }, :user_id,
         :business_health_insurance_status, :business_health_insurance_association,
         :business_health_insurance_office_number, :business_welfare_pension_insurance_join_status,
         :business_welfare_pension_insurance_office_number, :business_pension_insurance_join_status,
@@ -100,6 +101,8 @@ module Users
         :construction_license_governor_permission_prefecture, :construction_license_permission_type_identification_general,
         :construction_license_number_double_digit, :construction_license_number_six_digits,
         :construction_license_number, :construction_license_updated_at,
+        :specific_skilled_foreigners_exist, :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist,
+        :employment_manager_name,
         occupation_ids: [], industry_ids: []
       )
     end

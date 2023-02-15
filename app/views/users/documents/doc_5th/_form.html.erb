@@ -445,7 +445,7 @@
             <td class="s_5a_000"></td>
             <td class="s_5a_106" dir="ltr" colspan="3">ＦＡＸ</td>
             <td class="s_5a_108" dir="ltr" colspan="19">
-              <%= '※5-009未実装※' %> <!-- 5-009 各会社のFAX -->
+              <%= document_info.content&.[]('subcon_fax_number') %> <!-- 5-009 各会社のFAX -->
             </td>
             <td class="s_5a_000"></td>
             <td class="s_5c_00"></td>
@@ -586,7 +586,7 @@
             <td class="s_5a_108" dir="ltr" colspan="18" rowspan="2">
               <%= document_info.content&.[]('subcon_representative_name') %> <!-- 5-012 各会社の代表者名 -->
             </td>
-            <td class="s_5a_113" dir="ltr" colspan="2" rowspan="2">㊞5-013</td>
+            <td class="s_5a_113" dir="ltr" colspan="2" rowspan="2">㊞</td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -872,8 +872,8 @@
             <td class="s_5c_00"></td>
             <td class="s_5b_201" dir="ltr" colspan="6" rowspan="10">建設業の<br><br>許 可</td>
             <td class="s_5b_201" dir="ltr" colspan="15" rowspan="2">許 可 業 種</td>
-            <td class="s_5b_202" dir="ltr" colspan="4" rowspan="2">「大臣or知事」</td>
-            <td class="s_5b_203" dir="ltr" colspan="4" rowspan="2">「特定or一般」</td>
+            <td class="s_5b_202" dir="ltr" colspan="4" rowspan="2"></td>
+            <td class="s_5b_203" dir="ltr" colspan="4" rowspan="2"></td>
             <td class="s_5b_204" dir="ltr" colspan="10" rowspan="2">許 可 番 号</td>
             <td class="s_5b_201" dir="ltr" colspan="15" rowspan="2">許可 （更新） 年月日</td>
           </tr>
@@ -995,8 +995,8 @@
           <tr><!-- 25行目 -->
             <td class="s_5a_301" dir="ltr" colspan="6" rowspan="10">建設業の<br><br>許 可</td><!-- 1列目 -->
             <td class="s_5a_301" dir="ltr" colspan="14" rowspan="2">許 可 業 種</td>
-            <td class="s_5a_302" dir="ltr" colspan="4" rowspan="2">「大臣or知事」</td>
-            <td class="s_5a_303" dir="ltr" colspan="4" rowspan="2">「特定or一般」</td>
+            <td class="s_5a_302" dir="ltr" colspan="4" rowspan="2"></td>
+            <td class="s_5a_303" dir="ltr" colspan="4" rowspan="2"></td>
             <td class="s_5a_304" dir="ltr" colspan="11" rowspan="2">許 可 番 号</td>
             <td class="s_5a_301" dir="ltr" colspan="15" rowspan="2">許可 （更新） 年月日</td>
             <td class="s_5c_00"></td>
@@ -1355,7 +1355,7 @@
             <td class="s_5b_000"></td><!-- 70列目 -->
             <td class="s_5b_303" dir="ltr" colspan="10" rowspan="3">雇用管理責任者名</td>
             <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
-              <%= '※5-129未実装※' %> <!-- 5-129 各会社の雇用管理責任者名 -->
+              <%= @child&.employment_manager_name %> <!-- 5-129 各会社の雇用管理責任者名 -->
             </td>
           </tr>
           <tr><!-- 39行目 -->
@@ -1430,7 +1430,7 @@
             <td class="s_5a_000"></td>
             <td class="s_5a_403" dir="ltr" colspan="10" rowspan="3">雇用管理責任者名</td>
             <td class="s_5a_402" dir="ltr" colspan="16" rowspan="3">
-              <%#= document_info.employment_manager_name %> <!-- 5-038 各会社の雇用管理責任者名 -->
+              <%= document_info&.content&.[]('employment_manager_name') %> <!-- 5-038 各会社の雇用管理責任者名 -->
             </td><!-- 30列目 -->
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -1567,7 +1567,7 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_310" dir="ltr" colspan="17" rowspan="2">
-              <%= engineer_skill_training("registered_core", @child) %> %> <!-- 5-134 登録基幹技能者の必要資格 -->
+              <%= engineer_skill_training("registered_core", @child) %> <!-- 5-134 登録基幹技能者の必要資格 -->
             </td>
             <td class="s_5b_000"></td>
             <td class="s_5b_303" dir="ltr" colspan="7" rowspan="2">担当工事内容</td>
@@ -1688,11 +1688,14 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_401" dir="ltr" colspan="8" rowspan="4">一号特定技能<br>外国人の従事<br>の状況(有無)</td>
-            <td class="s_5b_402" dir="ltr" colspan="10" rowspan="2">「各会社の一号特定技能外国人の従事の状況(有無)」5-135</td>
+            <td class="s_5b_402" dir="ltr" colspan="10" rowspan="2"><%= @child&.specific_skilled_foreigners_exist_i18n %> <!-- 5-135 「各会社の一号特定技能外国人の従事の状況(有無)」 -->
+            </td>
             <td class="s_5b_401" dir="ltr" colspan="8" rowspan="4">外国人建設就<br>労者の従事の<br>状況(有無)</td>
-            <td class="s_5b_402" dir="ltr" colspan="10" rowspan="2">「各会社の外国人建設就労者の従事の状況(有無)」5-136</td>
+            <td class="s_5b_402" dir="ltr" colspan="10" rowspan="2"><%= @child&.foreign_construction_workers_exist_i18n %> <!-- 5-136 「各会社の外国人建設就労者の従事の状況(有無)」 -->
+            </td>
             <td class="s_5b_401" dir="ltr" colspan="8" rowspan="4">外国人技能実<br>習生の従事の<br>状況(有無)</td>
-            <td class="s_5b_402" dir="ltr" colspan="10" rowspan="2">「各会社の外国人技能実習生の従事の状況(有無)」5-137</td>
+            <td class="s_5b_402" dir="ltr" colspan="10" rowspan="2"><%= @child&.foreign_technical_intern_trainees_exist_i18n %> <!-- 5-137 「各会社の外国人技能実習生の従事の状況(有無)」 -->
+            </td>
           </tr>
           <tr><!-- 51行目 -->
             <td class="s_5a_404" dir="ltr" colspan="3" rowspan="3"></td><!-- 1列目 -->
@@ -2149,11 +2152,14 @@
           </tr>
           <tr><!-- 60行目 -->
             <td class="s_5a_601" dir="ltr" colspan="8" rowspan="4">一号特定技能<br>外国人の従事<br>の状況(有無)</td><!-- 1列目 -->
-            <td class="s_5a_602" dir="ltr" colspan="10" rowspan="2">「一号特定技能外国人の従事の状況(有無)」5-044</td>
+            <td class="s_5a_602" dir="ltr" colspan="10" rowspan="2"> <!-- 5-044 「一号特定技能外国人の従事の状況(有無)」 -->
+            </td>
             <td class="s_5a_601" dir="ltr" colspan="8" rowspan="4">外国人建設就<br>労者の従事の<br>状況(有無)</td>
-            <td class="s_5a_602" dir="ltr" colspan="10" rowspan="2">「外国人建設就労者の従事の状況(有無)」5-045</td><!-- 30列目 -->
+            <td class="s_5a_602" dir="ltr" colspan="10" rowspan="2"> <!-- 5-045 「外国人建設就労者の従事の状況(有無)」 -->
+            </td><!-- 30列目 -->
             <td class="s_5a_601" dir="ltr" colspan="8" rowspan="4">外国人技能実<br>習生の従事の<br>状況(有無)</td>
-            <td class="s_5a_602" dir="ltr" colspan="10" rowspan="2">「外国人技能実習生の従事の状況(有無)」5-046</td><!-- 30列目 -->
+            <td class="s_5a_602" dir="ltr" colspan="10" rowspan="2"> <!-- 5-046 「外国人技能実習生の従事の状況(有無)」 -->
+            </td><!-- 30列目 -->
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -2186,9 +2192,9 @@
             <td class="s_5c_00"></td>
           </tr>
           <tr><!-- 62行目 -->
-            <td class="s_5a_603" dir="ltr" colspan="10" rowspan="2">有　　無</td>
-            <td class="s_5a_603" dir="ltr" colspan="10" rowspan="2">有　　無</td>
-            <td class="s_5a_603" dir="ltr" colspan="10" rowspan="2">有　　無</td>
+            <td class="s_5a_603" dir="ltr" colspan="10" rowspan="2"><%= foreign_exist("specific_skilled_foreigners_exist", document_info) %></td>
+            <td class="s_5a_603" dir="ltr" colspan="10" rowspan="2"><%= foreign_exist("foreign_construction_workers_exist", document_info) %></td>
+            <td class="s_5a_603" dir="ltr" colspan="10" rowspan="2"><%= foreign_exist("foreign_technical_intern_trainees_exist", document_info) %></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
