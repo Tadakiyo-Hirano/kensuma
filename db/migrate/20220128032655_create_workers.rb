@@ -23,8 +23,15 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.integer :employment_contract, null: false, default: 0   # 雇用契約書 enum
       t.string :family_name,null: false                         # 緊急連絡先-氏名
       t.string :relationship,null: false                        # 緊急連絡先-続柄
-
-
+      t.string :email
+      t.integer :sex, null: false, default: 0
+      t.integer :status_of_residence, null: false, default: 0
+      t.date :maturity_date, null: false, default: 0
+      t.boolean :confirmed_check, null: false, default: false
+      t.string :responsible_director, null: false,
+      t.string :responsible_name , null: false,
+      t.integer :responsible_contact_address, null: false
+      t.string :responsible_name , null: false,
       t.timestamps
     end
   end
