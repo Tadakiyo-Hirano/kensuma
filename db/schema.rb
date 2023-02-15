@@ -768,6 +768,14 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.integer "employment_contract", default: 0, null: false
     t.string "family_name", null: false
     t.string "relationship", null: false
+    t.string "email"
+    t.integer "sex", default: 0, null: false
+    t.integer "status_of_residence", default: 0, null: false
+    t.date "maturity_date", null: false
+    t.boolean "confirmed_check", default: false, null: false
+    t.string "responsible_director", null: false
+    t.string "responsible_name", null: false
+    t.integer "responsible_contact_address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
