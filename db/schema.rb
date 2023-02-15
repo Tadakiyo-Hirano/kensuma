@@ -763,10 +763,10 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "career_up_id"
     t.json "images"
     t.bigint "business_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "uuid", null: false
     t.string "job_title", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "employment_contract", default: 0, null: false
     t.string "family_name", null: false
     t.string "relationship", null: false

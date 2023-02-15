@@ -20,6 +20,9 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.references :business, foreign_key: true, null: false
       t.string :uuid, null: false
       t.string :job_title, null: false
+      t.integer :employment_contract, null: false, default: 0   # 雇用契約書 enum
+      t.string :family_name,null: false                         # 緊急連絡先-氏名
+      t.string :relationship,null: false                        # 緊急連絡先-続柄
 
 
       t.timestamps
