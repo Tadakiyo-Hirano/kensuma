@@ -20,11 +20,23 @@ module Users
       user = User.find_by(email: params[:user][:email])
       if user.present? && user.invitation_accepted_at.present? || user.present? && user.invitation_token.nil? && user.invitation_accepted_at.nil?
         # 既存ユーザーに対してはアカウント発行&招待処理は行わず、招待リクエストのお知らせメールのみ送信する
-        email = params[:user][:email]
-        user = User.find_by(email: email)
+        invite_email = params[:user][:email]
+        invite_user = User.find_by(email: invite_email)
 
-        ContactMailer.invitation_email(user).deliver_now
-        redirect_to users_subcon_users_path, notice: "招待リクエストが【#{user.business&.name}(#{email})様】へ送信されました。"
+        # 自身のメールアドレス以外にメールを送信可能とする
+        unless invite_email == current_user.email
+          # invitation_sent_user_idsから配列を取得する
+          current_user_invitation_sent_user = current_user.invitation_sent_user_ids || []
+          # 配列に招待リクエストしたユーザーidを追加する
+          current_user_invitation_sent_user << invite_user.id
+          # 更新した配列をinvitation_sent_user_idsカラムに保存する
+          current_user.update(invitation_sent_user_ids: current_user_invitation_sent_user)
+
+          ContactMailer.invitation_email(invite_user).deliver_now
+          redirect_to users_subcon_users_url, notice: "招待リクエストが#{invite_user.id}【#{invite_user.business&.name}(#{invite_email})様】へ送信されました。"
+        else
+          redirect_to new_user_invitation_url, notice: "自分のアカウントは招待できません。"
+        end
       else
         self.resource = invite_resource
         resource_invited = resource.errors.empty?
@@ -36,9 +48,9 @@ module Users
             set_flash_message :notice, :send_instructions, email: self.resource.email
           end
           if self.method(:after_invite_path_for).arity == 1
-            respond_with resource, location:  users_subcon_users_path
+            respond_with resource, location:  users_subcon_users_url
           else
-            respond_with resource, location:  users_subcon_users_path
+            respond_with resource, location:  users_subcon_users_url
           end
         else
           respond_with_navigational(resource) { render :new, status: :unprocessable_entity }

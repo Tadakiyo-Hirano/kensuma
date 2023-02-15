@@ -648,6 +648,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "name"
     t.integer "age"
     t.integer "gender"
+    t.json "invited_user_ids"
+    t.json "invitation_sent_user_ids"
     t.integer "role", default: 1
     t.bigint "admin_user_id"
     t.string "invitation_token"
