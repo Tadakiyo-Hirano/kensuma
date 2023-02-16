@@ -1,6 +1,7 @@
 # rubocop:disable all
 module Users
   class DocumentsController < Users::Base
+    # ログインしている事業所自身の書類情報を表示する為に必要なコントローラ
     layout 'documents'
     before_action :set_documents # サイドバーに常時表示させるために必要
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
@@ -38,7 +39,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -563,6 +564,12 @@ module Users
             h_add_item_check_8th:          field_special_vehicle_keys, # 13-182 (a)Hその他　                   追加項目8(13-110)
             inspection_date:               field_special_vehicle_keys, # 13-255 (a)点検年月日
             inspector:                     field_special_vehicle_keys  # 13-256 (a)点検者
+          ]
+        )
+      when 'doc_9th'
+        params.require(:document).permit(
+          content: [
+            :date_submitted
           ]
         )
       when 'doc_14th'
