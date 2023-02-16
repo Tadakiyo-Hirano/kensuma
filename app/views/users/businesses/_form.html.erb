@@ -35,6 +35,9 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :phone_number, class: "form-control", placeholder: "Enter phone number" %>
 <br>
+<%= f.label :fax_number %>
+<%= f.text_field :fax_number, class: "form-control", placeholder: "Enter fax number" %>
+<br>
 <%= f.label :career_up_id %>
 <%= f.text_field :career_up_id, class: "form-control", placeholder: "Enter career_up_id" %>
 <br>
@@ -127,6 +130,19 @@
 <%= f.label :construction_license_updated_at %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :construction_license_updated_at, class: "form-control", placeholder: "建設許可証(更新日)" %>
+<br>
+<%= f.label :specific_skilled_foreigners_exist %>
+<%= f.select :specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :foreign_construction_workers_exist %>
+<%= f.select :foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :foreign_technical_intern_trainees_exist %>
+<%= f.select :foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<br>
+<%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
+<%= f.select :employment_manager_name, @business_workers_name, { include_blank: true }, {class: "form-control"} %>
+<br>
 <br>
 
 <%= f.hidden_field :user_id, value: current_user.id %>

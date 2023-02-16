@@ -119,6 +119,65 @@ module DocumentsHelper
     status = INSURANCE_TYPE[insurance_type]
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
+  
+  # (5)再下請負通知書（変更届）
+  def skill_id_value(engineer)
+    @request_order.content.nil? ? "" : @request_order.content&.[]("#{engineer}_engineer_skill_training_id").to_i
+  end
+  
+  def child_check(child)
+    if child.present?
+      Industry.find_by(id: Business.find_by(id: child&.business_id)&.industry_ids&.join("','"))&.name
+    else
+      "FALSE"
+    end
+  end
+
+  def c_license_permission_type_minister_or_governor(d_info) # 「大臣」か「知事」判定
+    if d_info == document_info
+      permission_type = Business.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
+    elsif @child.present?
+      permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_minister_governor').delete("許可")
+    end
+    return permission_type
+  end
+
+  def construction_license_construction_certification(owner, d_info)
+    permission_type = c_license_permission_type_minister_or_governor(d_info)
+    permission_type == owner ? tag.span(owner, class: :circle) : owner
+  end
+
+  def c_license_permission_type_identification_or_general(d_info) # 「特定」か「一般」判定
+    if d_info == document_info
+      permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
+    elsif @child.present?
+      permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
+    end
+    return permission_type
+  end
+
+  def construction_license_construction_type(type, d_info)
+    permission_type = c_license_permission_type_identification_or_general(d_info)
+    permission_type == type ? tag.span(type, class: :circle) : type
+  end
+  
+  def engineer_skill_training(engineer, document) # 対象者を判定した後、資格内容を返す
+    s_id = document&.content&.[]("#{engineer}_engineer_skill_training_id") 
+    s_id.blank? ? "" : SkillTraining.find(s_id).name
+  end
+  
+  def foreign_exist(foreign_type, d_info, yes_no) # 「有」か「無」判定
+  #logger.debug(d_info.conten)
+  
+    f_type = d_info&.content&.[]("subcon_#{foreign_type}")
+    if f_type == "available"
+      f_type = "有"
+    elsif f_type == "not_available"
+      f_type = "無"
+    end
+
+    f_type == yes_no ? tag.span(yes_no, class: :circle) : yes_no
+  end
 
   # (8)作業員名簿
 

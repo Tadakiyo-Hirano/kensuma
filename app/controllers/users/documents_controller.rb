@@ -39,7 +39,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_9th','doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -468,7 +468,7 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
         params.require(:document).permit(content: 
           %i[
             date_submitted
