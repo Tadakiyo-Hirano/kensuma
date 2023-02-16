@@ -6,15 +6,11 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable, invite_for: 24.hours
   # :confirmable
-
-  # 既に登録済みのユーザーに対して招待メールを送る際に、invitation_tokenが生成されないようにする。
-  # def self.invite!(attributes = {}, invited_by = nil)
-  #   if where(email: attributes[:email]).empty?
-  #     super
-  #   else
-  #     User.where(email: attributes[:email]).first
-  #   end
-  # end
+  
+  scope :invitation_sent_to, -> (user) {
+    where("JSON_CONTAINS(invitation_sent_user_ids, ?, '$')", user.id.to_s)
+  }
+  # 例: User.invitation_sent_to(current_user) で自身に招待(未承認)してきたUserを取得
 
   has_many :articles, dependent: :destroy
   has_many :news_users, dependent: :destroy

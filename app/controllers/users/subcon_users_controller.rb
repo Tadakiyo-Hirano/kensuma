@@ -1,9 +1,11 @@
 module Users
   class SubconUsersController < Users::Base
-    before_action :set_subcon_users, only: :index
+    before_action :approval_pending_user_ids, only: :index
     before_action :set_subcon_user, only: :destroy
 
-    def index; end
+    def index
+      @invitation_requests = User.invitation_sent_to(current_user)
+    end
 
     def destroy
       @subcon_user.destroy!
@@ -13,8 +15,8 @@ module Users
 
     private
 
-    def set_subcon_users
-      @subcon_users = User.where(invited_by_id: current_user)
+    def approval_pending_user_ids
+      @approval_pending_user_ids = current_user.invitation_sent_user_ids
     end
 
     def set_subcon_user

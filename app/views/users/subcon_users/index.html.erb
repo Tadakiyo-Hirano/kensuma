@@ -2,27 +2,60 @@
 
 <%= link_to "協力会社招待画面へ", new_user_invitation_path, class: "btn btn-lg btn-block btn-outline-primary" %>
 <br>
-<% if @subcon_users.present? %>
+
+<% if @invitation_requests.any? %>
   <div class="card">
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
         <thead>
           <tr align="center">
-            <th>登録状況</th>
+            <th colspan="4">協力会社への招待が届いています。</th>
+          </tr>
+          <tr align="center">
             <th><%= User.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:name) %></th>
             <th><%= User.human_attribute_name(:email) %></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <% @subcon_users.each do |subcon_user| %>
+          <% @invitation_requests.each do |invitation_request| %>
             <tr align="center">
-              <td>
-                <%= subcon_user.invitation_accepted? ? '✓' : '承認待ち' %>
-              </td>
-              <td><%= subcon_user.name %></td>
-              <td><%= subcon_user.email %></td>
-              <td><%= link_to "削除", users_subcon_user_path(subcon_user), method: :delete, data: { confirm: "「#{subcon_user.name}」を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+              <td><%= User.find(invitation_request.id).name %></td>
+              <td><%= User.find(invitation_request.id).business.name %></td>
+              <td><%= User.find(invitation_request.id).email %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<!-- 招待リクエスト送信中(未承認)のユーザー一覧 -->
+<% if @approval_pending_user_ids.present? %>
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr align="center">
+            <th colspan="4">招待リクエスト中</th>
+          </tr>
+          <tr align="center">
+            <th><%= User.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:name) %></th>
+            <th><%= User.human_attribute_name(:email) %></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @approval_pending_user_ids.each do |approval_pending_user_id| %>
+            <tr align="center">
+              <td><%= User.find(approval_pending_user_id).name %></td>
+              <td><%= User.find(approval_pending_user_id).business.name %></td>
+              <td><%= User.find(approval_pending_user_id).email %></td>
+              <td></td>
             </tr>
           <% end %>
         </tbody>
