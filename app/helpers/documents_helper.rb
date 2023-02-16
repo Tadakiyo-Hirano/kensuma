@@ -166,9 +166,17 @@ module DocumentsHelper
     s_id.blank? ? "" : SkillTraining.find(s_id).name
   end
   
-  def foreign_exist(foreign_type, d_info) # 「有」か「無」判定
-    permission_type = d_info&.content&.[]("#{foreign_type}")
-    permission_type == "available" ? tag.span("有", class: :circle) + "　無" : "有　" + tag.span("無", class: :circle)
+  def foreign_exist(foreign_type, d_info, yes_no) # 「有」か「無」判定
+  #logger.debug(d_info.conten)
+  
+    f_type = d_info&.content&.[]("subcon_#{foreign_type}")
+    if f_type == "available"
+      f_type = "有"
+    elsif f_type == "not_available"
+      f_type = "無"
+    end
+
+    f_type == yes_no ? tag.span(yes_no, class: :circle) : yes_no
   end
 
   # (8)作業員名簿
