@@ -26,6 +26,14 @@ module Users
           experience_term_before_hiring: 10,
           blank_term:                    3,
           career_up_id:                  '1'
+          email:                         
+          sex:                           1
+          status_of_residence:           1
+          maturity_date:                 '2000-01-28'
+          confirmed_check:               1
+          responsible_director:          
+          responsible_name:              
+          responsible_contact_address:   
           # ============================================
         )
         @worker.worker_licenses.build(
@@ -171,6 +179,8 @@ module Users
         :family_phone_number, :birth_day_on, :abo_blood_type,
         :rh_blood_type, :job_title, :job_type, :hiring_on, :experience_term_before_hiring,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship,
+        :email, :sex, :status_of_residence, :maturity_date, :confirmed_check, :responsible_director,
+        :responsible_name, :responsible_contact_address,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],

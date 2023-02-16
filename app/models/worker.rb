@@ -48,6 +48,14 @@ class Worker < ApplicationRecord
   validates :employment_contract, presence: true
   validates :family_name, presence: true
   validates :relationship, presence: true
+  validates :email
+  validates :sex, presene: true
+  validates :status_of_residence, presene: true
+  validates :maturity_date, presene: true
+  validates :confirmed_check, presene: true
+  validates :responsible_director, presene: true
+  validates :responsible_name, presene: true
+  validates :responsible_contact_address, presene: true
 
   def to_param
     uuid
