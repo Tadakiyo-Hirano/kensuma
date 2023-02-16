@@ -254,7 +254,7 @@ module DocumentsHelper
   def worker_age(worker)
     birth_day = worker&.content&.[]('birth_day_on')
     if birth_day.nil?
-      '歳'
+      ''
     else
       age = (worker.created_at.to_date.strftime('%Y%m%d').to_i - birth_day.to_date.strftime('%Y%m%d').to_i) / 10000
       "#{age}歳"
@@ -1353,6 +1353,14 @@ module DocumentsHelper
     when 18, 22
       'bg-warning'
     end
+  end
+
+  #doc_9
+  # 自身の一つ上階層の会社情報&現場情報取得
+  def get_myself_and_myparent_site
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    @parent_request_orber = RequestOrder.find(request_order.parent_id)
+    @parent_business = @parent_request_orber.business
   end
   # rubocop:enable all
 end
