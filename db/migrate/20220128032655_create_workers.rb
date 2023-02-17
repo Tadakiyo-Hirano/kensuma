@@ -31,6 +31,9 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.string :responsible_director, null: false
       t.string :responsible_name, null: false
       t.integer :responsible_contact_address, null: false
+      t.json :passport
+      t.json :residence_card
+      t.json :employment_conditions
 
       t.timestamps
     end

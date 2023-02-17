@@ -776,6 +776,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "responsible_director", null: false
     t.string "responsible_name", null: false
     t.integer "responsible_contact_address", null: false
+    t.json "passport"
+    t.json "residence_card"
+    t.json "employment_conditions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
