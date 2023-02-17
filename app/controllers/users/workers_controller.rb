@@ -180,7 +180,7 @@ module Users
         :rh_blood_type, :job_title, :job_type, :hiring_on, :experience_term_before_hiring,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship,
         :email, :sex, :status_of_residence, :maturity_date, :confirmed_check, :responsible_director,
-        :responsible_name, :responsible_contact_address,
+        :responsible_name, :responsible_contact_address, :passport, :residence_card, :employment_conditions,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],
