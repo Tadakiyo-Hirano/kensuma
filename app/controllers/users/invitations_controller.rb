@@ -20,6 +20,7 @@ module Users
       # 既存ユーザーに対してはアカウント発行&招待処理は行わず、招待リクエストのお知らせメールのみ送信する
       user = User.find_by(email: params[:user][:email])
       if user.present? && user.invitation_accepted_at.present? || user.present? && user.invitation_token.nil? && user.invitation_accepted_at.nil?
+        # 自信から招待を送ったユーザー
         invite_email = params[:user][:email]
         invite_user = User.find_by(email: invite_email)
 
@@ -39,11 +40,19 @@ module Users
         end
       else
         self.resource = invite_resource
-        resource_invited = resource.errors.empty?
+        # resource_invited = resource.errors.empty?
+        if resource.errors.empty?
 
-        yield resource if block_given?
+        # yield resource if block_given?
+        # user = User.find_by(email: params[:user][:email])
+        # invite_email = params[:user][:email]
+        # invite_user = User.find_by(email: invite_email)
+        current_user.invitation_sent_user_ids << resource.id
+          # 更新した配列をinvitation_sent_user_idsカラムに保存する
+        current_user.update(invitation_sent_user_ids: current_user.invitation_sent_user_ids)
+        # resource.update(name: "test")
 
-        if resource_invited
+        # if resource_invited
           if is_flashing_format? && self.resource.invitation_sent_at
             set_flash_message :notice, :send_instructions, email: self.resource.email
           end

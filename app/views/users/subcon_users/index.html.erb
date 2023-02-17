@@ -3,7 +3,7 @@
 <%= link_to "協力会社招待画面へ", new_user_invitation_path, class: "btn btn-lg btn-block btn-outline-primary" %>
 <br>
 
-<% if @invitation_requests.any? %>
+<% if @invitation_pending_to.any? %>
   <div class="card">
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
@@ -19,12 +19,44 @@
           </tr>
         </thead>
         <tbody>
-          <% @invitation_requests.each do |invitation_request| %>
+          <% @invitation_pending_to.each do |invitation_request| %>
             <tr align="center">
               <td><%= User.find(invitation_request.id).name %></td>
               <td><%= User.find(invitation_request.id).business.name %></td>
-              <td><%= User.find(invitation_request.id).email %></td>
-              <td></td>
+              <td><%= User.find(invitation_request. id).email %></td>
+              <td>
+                <%= link_to "承認", approval_users_subcon_user_path(invitation_request.business.uuid), method: :patch, local: true, class: "btn btn-sm btn-success" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<% if @invited_to.any? %>
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr align="center">
+            <th colspan="4">発注元協力会社一覧</th>
+          </tr>
+          <tr align="center">
+            <th><%= User.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:address) %></th>
+            <th><%= User.human_attribute_name(:email) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @invited_to.each do |invited| %>
+            <tr align="center">
+              <td><%= User.find(invited.id).name %></td>
+              <td><%= User.find(invited.id).business.name %></td>
+              <td><%= User.find(invited.id).business.address %></td>
+              <td><%= User.find(invited.id).email %></td>
             </tr>
           <% end %>
         </tbody>
@@ -34,7 +66,7 @@
 <% end %>
 
 <!-- 招待リクエスト送信中(未承認)のユーザー一覧 -->
-<% if @approval_pending_user_ids.present? %>
+<% if @invitation_pending_user_ids&.any? %>
   <div class="card">
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
@@ -50,12 +82,43 @@
           </tr>
         </thead>
         <tbody>
-          <% @approval_pending_user_ids.each do |approval_pending_user_id| %>
+          <% @invitation_pending_user_ids.each do |invitation_pending_user_id| %>
             <tr align="center">
-              <td><%= User.find(approval_pending_user_id).name %></td>
-              <td><%= User.find(approval_pending_user_id).business.name %></td>
-              <td><%= User.find(approval_pending_user_id).email %></td>
+              <td><%= User.find(invitation_pending_user_id).name %></td>
+              <td><%= User.find(invitation_pending_user_id).business&.name %></td>
+              <td><%= User.find(invitation_pending_user_id).email %></td>
               <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<!-- 協力会社(招待済)のユーザー一覧 -->
+<% if @invited_user_ids&.any? %>
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr align="center">
+            <th colspan="4">下請協力会社一覧</th>
+          </tr>
+          <tr align="center">
+            <th><%= User.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:address) %></th>
+            <th><%= User.human_attribute_name(:email) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @invited_user_ids.each do |invited_user_id| %>
+            <tr align="center">
+              <td><%= User.find(invited_user_id).name %></td>
+              <td><%= User.find(invited_user_id).business.name %></td>
+              <td><%= User.find(invited_user_id).business.address %></td>
+              <td><%= User.find(invited_user_id).email %></td>
             </tr>
           <% end %>
         </tbody>
