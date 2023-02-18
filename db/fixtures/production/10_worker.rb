@@ -21,7 +21,7 @@
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
       career_up_id:        sprintf('%14d', rand(99999999999999)),
-      sex:                 rand(1..2)
+      sex:                 rand(0..1)
     }
   )
 end
@@ -49,7 +49,7 @@ end
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
       career_up_id:        sprintf('%14d', rand(99999999999999)),
-      sex:                 rand(1..2)
+      sex:                 rand(0..1)
     }
   )
 end
@@ -77,7 +77,7 @@ end
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
       career_up_id:        sprintf('%14d', rand(99999999999999)),
-      sex:                 rand(1..2)
+      sex:                 rand(0..1)
     }
   )
 end
@@ -105,7 +105,7 @@ end
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
       career_up_id:        sprintf('%14d', rand(99999999999999)),
-      sex:                 rand(1..2)
+      sex:                 rand(0..1)
     }
   )
 end
@@ -133,7 +133,7 @@ end
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
       career_up_id:        sprintf('%14d', rand(99999999999999)),
-      sex:                 rand(1..2)
+      sex:                 rand(0..1)
     }
   )
 end
