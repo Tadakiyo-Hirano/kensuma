@@ -116,8 +116,8 @@
           <% @invited_user_ids.each do |invited_user_id| %>
             <tr align="center">
               <td><%= User.find(invited_user_id).name %></td>
-              <td><%= User.find(invited_user_id).business.name %></td>
-              <td><%= User.find(invited_user_id).business.address %></td>
+              <td><%= User.find(invited_user_id).business&.name %></td>
+              <td><%= User.find(invited_user_id).business&.address %></td>
               <td><%= User.find(invited_user_id).email %></td>
             </tr>
           <% end %>

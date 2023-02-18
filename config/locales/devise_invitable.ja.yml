@@ -19,7 +19,7 @@ ja:
       invitation_instructions:
         subject: '【建スマ】アカウント登録のご案内'
         hello: '%{email}様'
-        someone_invited_you: '建スマ(%{url})に招待されました。下記のリンクからアカウント登録をお願い致します。。'
+        someone_invited_you: '建スマ(%{url})に招待されました。下記のリンクからアカウント登録をお願い致します。'
         accept: 'アカウント登録をする'
         accept_until: 'この登録リンクは、%{due_date} まで有効です。'
         ignore: '登録を承認しない場合は、このメールを無視してください。上記のリンク先にアクセスしパスワードを設定するまでアカウトは作成されません。'

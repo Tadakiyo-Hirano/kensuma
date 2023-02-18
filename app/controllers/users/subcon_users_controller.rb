@@ -15,7 +15,7 @@ module Users
     def approval
       # 招待したユーザー(自身が招待を受けたユーザー)
       invited_user = Business.find_by(uuid: params[:id]).user
-      invited_user_pending_invitation = Business.find_by(uuid: params[:id]).user.invitation_sent_user_ids
+      invited_user_pending_invitation = invited_user.invitation_sent_user_ids
 
       # 招待承認(招待を受け入れ)後、招待したユーザー側の招待リクエスト中カラム(invitation_sent_user_ids)の配列から自信のユーザーidを削除する。
       invited_user_pending_invitation.delete(current_user.id)

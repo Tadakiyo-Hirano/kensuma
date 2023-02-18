@@ -43,14 +43,10 @@ module Users
         # resource_invited = resource.errors.empty?
         if resource.errors.empty?
 
-        # yield resource if block_given?
-        # user = User.find_by(email: params[:user][:email])
-        # invite_email = params[:user][:email]
-        # invite_user = User.find_by(email: invite_email)
+        # 配列に招待リクエストしたユーザーidを追加する
         current_user.invitation_sent_user_ids << resource.id
-          # 更新した配列をinvitation_sent_user_idsカラムに保存する
+        # 更新した配列をinvitation_sent_user_idsカラムに保存する
         current_user.update(invitation_sent_user_ids: current_user.invitation_sent_user_ids)
-        # resource.update(name: "test")
 
         # if resource_invited
           if is_flashing_format? && self.resource.invitation_sent_at
@@ -93,6 +89,26 @@ module Users
         resource.invitation_token = raw_invitation_token
         respond_with_navigational(resource) { render :edit, status: :unprocessable_entity }
       end
+      # user_id = update_resource_params[:id]
+      # user_id = request.path_parameters[:id]
+      # user = User.find(user_id)
+      # user.name = "テスト"
+      # user.save
+      user_id = resource.id
+      user = User.find(user_id)
+
+      # 招待したユーザー(自身が招待を受けたユーザー)
+      invited_user = User.find(user.invited_by_id)
+      invited_user_pending_invitation = invited_user.invitation_sent_user_ids
+
+      # 招待承認(招待を受け入れ)後、招待したユーザー側の招待リクエスト中カラム(invitation_sent_user_ids)の配列から自信のユーザーidを削除する。
+      invited_user_pending_invitation.delete(user.id)
+      invited_user.update(invitation_sent_user_ids: invited_user_pending_invitation)
+      
+      # 招待承認(招待を受け入れ)後、招待したユーザー側の招待済カラム(invited_user_ids)の配列に自信のユーザーidを追加する。
+      invited_user_invited_user = invited_user.invited_user_ids || []
+      invited_user_invited_user << user.id
+      invited_user.update(invited_user_ids: invited_user_invited_user)
     end
 
     # def destroy
