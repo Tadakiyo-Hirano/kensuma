@@ -286,6 +286,15 @@ ja:
       employment_contract: # 雇用契約書の取り交わし状況
         available: 取り交わし済
         not_available: 未だ
+      sex:
+        man: 男性
+        woman: 女性
+      status_of_residence:
+        specific_activity: 特定活動
+        specified_skill: 特定技能
+      confirmed_check:
+        checked: 有
+        unchecked: 無
     worker_insurance:
       health_insurance_type:
         health_insurance_association: 健康保険組合
