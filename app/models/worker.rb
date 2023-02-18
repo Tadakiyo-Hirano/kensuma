@@ -26,7 +26,7 @@ class Worker < ApplicationRecord
   enum employment_contract: { available: 0, not_available: 1 }, _prefix: true       # 雇用契約書取り交わし状況
   enum sex: { man: 0, woman: 1 }
   enum status_of_residence: { specific_activity: 0, specified_skill: 1 }
-  enum confirmed_check: { yes: 0, none: 1 }
+  enum confirmed_check: { checked: 0, unchecked: 1 }
   # ↓内訳未定のためコメントアウト
   # enum job_type: {  }
 
