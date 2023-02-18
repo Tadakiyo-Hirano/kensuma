@@ -27,7 +27,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.integer :sex, null: false, default: 0
       t.integer :status_of_residence, default: 0
       t.date :maturity_date
-      t.boolean :confirmed_check, null: false
+      t.boolean :confirmed_check
       t.date :confirmed_check_date
       t.string :responsible_director
       t.string :responsible_name
