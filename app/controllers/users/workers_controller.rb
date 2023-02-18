@@ -25,7 +25,7 @@ module Users
           hiring_on:                     '2022-01-28',
           experience_term_before_hiring: 10,
           blank_term:                    3,
-          career_up_id:                  '1',                       
+          career_up_id:                  '1',
           sex:                           1
           # ============================================
         )
