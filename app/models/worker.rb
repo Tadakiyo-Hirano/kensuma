@@ -25,8 +25,8 @@ class Worker < ApplicationRecord
   enum rh_blood_type: { plus: 0, minus: 1 }
   enum employment_contract: { available: 0, not_available: 1 }, _prefix: true       # 雇用契約書取り交わし状況
   enum sex: { man: 0, woman: 1 }
-  enum status_of_residence: { specific_activity: 0, specified_skill: 1 }
-  enum confirmed_check: { checked: 0, unchecked: 1 }
+  enum status_of_residence: { japanese: 0, specific_activity: 1, specified_skill: 2 }, _prefix: true #在留資格
+  enum confirmed_check: { japanese: 0, checked: 1, unchecked: 2 }, _prefix: true # キャリアアップシステム登録情報が最新であることの確認日		
   # ↓内訳未定のためコメントアウト
   # enum job_type: {  }
 
@@ -51,11 +51,10 @@ class Worker < ApplicationRecord
   validates :employment_contract, presence: true
   validates :family_name, presence: true
   validates :relationship, presence: true
-  validates :email
-  validates :sex, presene: true
-  # validates :status_of_residence
+  validates :sex, presence: true
+  validates :status_of_residence, presence: true
   # validates :maturity_date
-  # validates :confirmed_check
+  validates :confirmed_check, presence: true
   # validates :confirmed_check_date
   # validates :responsible_director
   # validates :responsible_name
