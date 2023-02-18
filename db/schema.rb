@@ -770,9 +770,9 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "relationship", null: false
     t.string "email"
     t.integer "sex", default: 0, null: false
-    t.integer "status_of_residence", default: 0
+    t.integer "status_of_residence", default: 0, null: false
     t.date "maturity_date"
-    t.boolean "confirmed_check"
+    t.integer "confirmed_check", default: 0, null: false
     t.date "confirmed_check_date"
     t.string "responsible_director"
     t.string "responsible_name"

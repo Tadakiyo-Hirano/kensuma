@@ -25,9 +25,9 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.string :relationship,null: false                        # 緊急連絡先-続柄
       t.string :email
       t.integer :sex, null: false, default: 0
-      t.integer :status_of_residence, default: 0
+      t.integer :status_of_residence, null: false, default: 0
       t.date :maturity_date
-      t.boolean :confirmed_check
+      t.integer :confirmed_check, null: false, default: 0
       t.date :confirmed_check_date
       t.string :responsible_director
       t.string :responsible_name
