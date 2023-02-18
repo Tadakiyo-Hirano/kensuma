@@ -25,15 +25,8 @@ module Users
           hiring_on:                     '2022-01-28',
           experience_term_before_hiring: 10,
           blank_term:                    3,
-          career_up_id:                  '1'
-          email:                         
+          career_up_id:                  '1',                       
           sex:                           1
-          status_of_residence:           1
-          maturity_date:                 '2000-01-28'
-          confirmed_check:               1
-          responsible_director:          
-          responsible_name:              
-          responsible_contact_address:   
           # ============================================
         )
         @worker.worker_licenses.build(
