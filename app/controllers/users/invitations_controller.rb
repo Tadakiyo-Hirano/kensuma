@@ -24,31 +24,34 @@ module Users
         invite_email = params[:user][:email]
         invite_user = User.find_by(email: invite_email)
 
-        # 自身のメールアドレス以外にメールを送信可能とする
+        # 自身のメールアドレスにはメールを送信しない
         unless invite_email == current_user.email
-          # invitation_sent_user_idsから配列を取得する
-          current_user_invitation_sent_user = current_user.invitation_sent_user_ids || []
-          # 配列に招待リクエストしたユーザーidを追加する
-          current_user_invitation_sent_user << invite_user.id
-          # 更新した配列をinvitation_sent_user_idsカラムに保存する
-          current_user.update(invitation_sent_user_ids: current_user_invitation_sent_user)
+          # すでに招待承認済のアカウントには招待しない
+          unless current_user.invited_user_ids.include?(invite_user.id)
+            # invitation_sent_user_idsから配列を取得
+            current_user_invitation_sent_user = current_user.invitation_sent_user_ids || []
+            # 配列に招待リクエストしたユーザーidを追加
+            current_user_invitation_sent_user << invite_user.id
+            # 更新した配列をinvitation_sent_user_idsカラムに保存
+            current_user.update(invitation_sent_user_ids: current_user_invitation_sent_user.uniq)
 
-          ContactMailer.invitation_email(invite_user).deliver_now
-          redirect_to users_subcon_users_url, notice: "招待リクエストが#{invite_user.id}【#{invite_user.business&.name}(#{invite_email})様】へ送信されました。"
+            ContactMailer.invitation_email(invite_user).deliver_now
+            redirect_to users_subcon_users_url, success: "招待リクエストが#{invite_user.id}【#{invite_user.business&.name}(#{invite_email})様】へ送信されました。"
+          end
+          redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待承認済のアカウントです"
         else
-          redirect_to new_user_invitation_url, notice: '自分のアカウントは招待できません。'
+          redirect_to new_user_invitation_url, danger: '自分のアカウントは招待できません'
         end
       else
+        # アカウント未登録者には"devise_invitable"gem機能から招待メールを送信する
         self.resource = invite_resource
-        # resource_invited = resource.errors.empty?
         if resource.errors.empty?
-
-        # 配列に招待リクエストしたユーザーidを追加する
+        
+        # 配列に招待リクエストしたユーザーidを追加
         current_user.invitation_sent_user_ids << resource.id
-        # 更新した配列をinvitation_sent_user_idsカラムに保存する
-        current_user.update(invitation_sent_user_ids: current_user.invitation_sent_user_ids)
+        # 更新した配列をinvitation_sent_user_idsカラムに保存
+        current_user.update(invitation_sent_user_ids: current_user.invitation_sent_user_ids.uniq)
 
-        # if resource_invited
           if is_flashing_format? && self.resource.invitation_sent_at
             set_flash_message :notice, :send_instructions, email: self.resource.email
           end
@@ -89,26 +92,6 @@ module Users
         resource.invitation_token = raw_invitation_token
         respond_with_navigational(resource) { render :edit, status: :unprocessable_entity }
       end
-      # user_id = update_resource_params[:id]
-      # user_id = request.path_parameters[:id]
-      # user = User.find(user_id)
-      # user.name = "テスト"
-      # user.save
-      user_id = resource.id
-      user = User.find(user_id)
-
-      # 招待したユーザー(自身が招待を受けたユーザー)
-      invited_user = User.find(user.invited_by_id)
-      invited_user_pending_invitation = invited_user.invitation_sent_user_ids
-
-      # 招待承認(招待を受け入れ)後、招待したユーザー側の招待リクエスト中カラム(invitation_sent_user_ids)の配列から自信のユーザーidを削除する。
-      invited_user_pending_invitation.delete(user.id)
-      invited_user.update(invitation_sent_user_ids: invited_user_pending_invitation)
-      
-      # 招待承認(招待を受け入れ)後、招待したユーザー側の招待済カラム(invited_user_ids)の配列に自信のユーザーidを追加する。
-      invited_user_invited_user = invited_user.invited_user_ids || []
-      invited_user_invited_user << user.id
-      invited_user.update(invited_user_ids: invited_user_invited_user)
     end
 
     # def destroy

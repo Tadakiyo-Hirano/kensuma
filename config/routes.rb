@@ -31,6 +31,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :subcon_users, only: %i[index] do
       member do
         patch 'approval'
+        delete 'destroy_invitation_pending'
       end
     end
     resources :dash_boards, only: [:index]

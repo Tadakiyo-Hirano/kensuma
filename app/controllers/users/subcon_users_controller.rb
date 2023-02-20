@@ -26,8 +26,22 @@ module Users
       invited_user_invited_user << current_user.id
       invited_user.update(invited_user_ids: invited_user_invited_user)
 
-      flash[:danger] = "テスト"
+      flash[:success] = "#{invited_user.business.name}様からの招待を承認しました"
       redirect_to users_subcon_users_url
     end
+
+    # 自身に届いている招待リクエストを破棄
+    def destroy_invitation_pending
+      # 招待したユーザー(自身が招待を受けたユーザー)
+      invited_user = Business.find_by(uuid: params[:id]).user
+      invited_user_pending_invitation = invited_user.invitation_sent_user_ids
+
+      invited_user_pending_invitation.delete(current_user.id)
+      invited_user.update(invitation_sent_user_ids: invited_user_pending_invitation)
+
+      flash[:success] = "テスト#{invited_user.business.name}"
+      redirect_to users_subcon_users_url
+    end
+
   end
 end
