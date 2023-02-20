@@ -1,4 +1,6 @@
 class RequestOrder < ApplicationRecord
+  attribute :professional_engineer_skill_training_id, :integer
+
   belongs_to :order
   belongs_to :business
   has_many :documents, dependent: :destroy
