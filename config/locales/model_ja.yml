@@ -318,8 +318,8 @@ ja:
         maturity_date: 在留期間満期日
         confirmed_check: CCUS登録情報が最新であることの確認
         responsible_director: 役職
-        responsible_name: 氏名
-        responsible_contact_address: 連絡先(TEL)
+        responsible_name: 責任者氏名
+        responsible_contact_address: 責任者連絡先(TEL)
         passport: パスポートの写し
         residence_card: 在留カードの写し
         employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
