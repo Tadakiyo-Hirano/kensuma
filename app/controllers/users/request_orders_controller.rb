@@ -160,9 +160,12 @@ module Users
                  ]
       ).merge(
         content: {
+          # このrubocop除外設定はのちに修正されます,Layout/LineLength一行の文字数140を超えている
+          # rubocop:disable Layout/LineLength
           professional_engineer_skill_training_id:                            params[:request_order][:content][:professional_engineer_skill_training_id],
           lead_engineer_skill_training_id:                                    params[:request_order][:content][:lead_engineer_skill_training_id],
           registered_core_engineer_skill_training_id:                         params[:request_order][:content][:registered_core_engineer_skill_training_id],
+          # rubocop:enable Layout/LineLength
           subcon_name:                                                        current_business.name,                                             # 会社名
           subcon_branch_name:                                                 current_business.branch_name,                                      # 支店･営業所名
           subcon_address:                                                     current_business.address,                                          # 会社住所
