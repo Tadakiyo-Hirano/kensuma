@@ -27,7 +27,7 @@ module Users
         # 自身のメールアドレスにはメールを送信しない
         unless invite_email == current_user.email
           # すでに招待承認済のアカウントには招待しない
-          unless current_user.invited_user_ids.include?(invite_user.id)
+          if !current_user.invited_user_ids&.include?(invite_user.id) && !current_user.invitation_sent_user_ids&.include?(invite_user.id)
             # invitation_sent_user_idsから配列を取得
             current_user_invitation_sent_user = current_user.invitation_sent_user_ids || []
             # 配列に招待リクエストしたユーザーidを追加
@@ -36,11 +36,15 @@ module Users
             current_user.update(invitation_sent_user_ids: current_user_invitation_sent_user.uniq)
 
             ContactMailer.invitation_email(invite_user).deliver_now
-            redirect_to users_subcon_users_url, success: "招待リクエストが#{invite_user.id}【#{invite_user.business&.name}(#{invite_email})様】へ送信されました。"
+            redirect_to users_subcon_users_url, success: "招待リクエストが【#{invite_user.business&.name}(#{invite_email})様】へ送信されました。"
+          elsif current_user.invited_user_ids.include?(invite_user.id) && !current_user.invitation_sent_user_ids.include?(invite_user.id) 
+            redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待承認済のアカウントです"
+          elsif !current_user.invited_user_ids.include?(invite_user.id) && current_user.invitation_sent_user_ids.include?(invite_user.id) 
+            redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待リクエスト中のアカウントです。"
           end
-          redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待承認済のアカウントです"
+          # redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待承認済のアカウントです"
         else
-          redirect_to new_user_invitation_url, danger: '自分のアカウントは招待できません'
+          redirect_to new_user_invitation_url, danger: '自分のアカウントは招待できません。'
         end
       else
         # アカウント未登録者には"devise_invitable"gem機能から招待メールを送信する

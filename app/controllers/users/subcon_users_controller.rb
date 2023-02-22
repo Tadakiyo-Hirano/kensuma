@@ -16,11 +16,11 @@ module Users
     def approval
       # 自身が招待を受けたユーザー(自身の上にあたるユーザー)
       invited_user = Business.find_by(uuid: params[:id]).user
-      invited_user_pending_invitation = invited_user.invitation_sent_user_ids
+      pending_invitation = invited_user.invitation_sent_user_ids
 
       # 自身が招待を受けたユーザーinvitation_sent_user_idsカラムの配列から自信のユーザーidを取り除く。
-      invited_user_pending_invitation.delete(current_user.id)
-      invited_user.update(invitation_sent_user_ids: invited_user_pending_invitation)
+      pending_invitation.delete(current_user.id)
+      invited_user.update(invitation_sent_user_ids: pending_invitation)
       
       # 自身が招待を受けたユーザーのinvited_user_idsカラムの配列に自信のユーザーidを追加する。
       invited_user.invited_user_ids || [] << current_user.id
@@ -34,11 +34,11 @@ module Users
     def destroy_invited_pending
       # 自身が招待を受けたユーザー(自身の上にあたるユーザー)
       invited_user = Business.find_by(uuid: params[:id]).user
-      invited_user_pending_invitation = invited_user.invitation_sent_user_ids
+      pending_invitation = invited_user.invitation_sent_user_ids
 
       # 自身が招待を受けたユーザーのinvitation_sent_user_idsカラムの配列から自身のユーザーidを取り除く。
-      invited_user_pending_invitation.delete(current_user.id)
-      invited_user.update(invitation_sent_user_ids: invited_user_pending_invitation)
+      pending_invitation.delete(current_user.id)
+      invited_user.update(invitation_sent_user_ids: pending_invitation)
 
       flash[:success] = "#{invited_user.business.name}様からの招待リクエストを破棄しました"
       redirect_to users_subcon_users_url
@@ -47,11 +47,13 @@ module Users
     # 自身が送った招待リクエストを破棄
     def destroy_invitation_pending
       # 自身が招待を送ったユーザー(自身の下請けにあたるユーザー)
-      invited_user_pending_invitation = User.find(params[:id]).id
-      current_user.invitation_sent_user_ids.delete(invited_user_pending_invitation)
-      # current_user.update(invitation_sent_user_ids: invitation_sent_user_ids)
+      invited_user = User.find(params[:id])
+      pending_invitation = current_user.invitation_sent_user_ids
 
-      flash[:success] = "#{User.find(params[:id]).email}様への招待リクエストをキャンセルしました"
+      pending_invitation.delete(invited_user.id)
+      current_user.update(invitation_sent_user_ids: pending_invitation)
+
+      flash[:danger] = "#{User.find(params[:id]).email}様への招待リクエストをキャンセルしました"
       redirect_to users_subcon_users_url
     end
 
