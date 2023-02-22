@@ -29,7 +29,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.date :maturity_date
       t.integer :confirmed_check, null: false, default: 0
       t.date :confirmed_check_date
-      t.string :responsible_director
+      t.json :responsible_director
       t.string :responsible_name
       t.integer :responsible_contact_address
       t.json :passport
