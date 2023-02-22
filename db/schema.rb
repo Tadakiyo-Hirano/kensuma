@@ -774,7 +774,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.date "maturity_date"
     t.integer "confirmed_check", default: 0, null: false
     t.date "confirmed_check_date"
-    t.string "responsible_director"
+    t.json "responsible_director"
     t.string "responsible_name"
     t.integer "responsible_contact_address"
     t.json "passport"
