@@ -6,7 +6,7 @@ module Users
     def index; end
 
     def new
-      @businesses = Business.where.not(id: current_business)
+      @businesses = current_user.invited_user_ids.map { |id| User.find(id).business }
     end
 
     def create

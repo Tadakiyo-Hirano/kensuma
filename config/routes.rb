@@ -33,6 +33,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         patch 'approval'
         delete 'destroy_invited_pending'
         delete 'destroy_invitation_pending'
+        delete 'destroy_invited'
       end
     end
     resources :dash_boards, only: [:index]

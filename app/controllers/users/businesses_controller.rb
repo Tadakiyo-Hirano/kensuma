@@ -35,7 +35,7 @@ module Users
           construction_license_number_double_digit:                    29, # 建設許可証(番号)
           construction_license_number_six_digits:                      5000, # 建設許可証(番号)
           construction_license_number:                                 '国土交通大臣(特－29)第5000号', # 建設許可証(建設許可番号)
-          construction_license_updated_at:                             Date.today, # 建設許可証(更新日)
+          construction_license_updated_at:                             Date.today # 建設許可証(更新日)
           # industry_ids:                                                'test'
           # =============================================
         )

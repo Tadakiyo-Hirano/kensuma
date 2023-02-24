@@ -25,36 +25,33 @@ module Users
         invite_user = User.find_by(email: invite_email)
 
         # 自身のメールアドレスにはメールを送信しない
-        unless invite_email == current_user.email
-          # すでに招待承認済のアカウントには招待しない
-          if !current_user.invited_user_ids&.include?(invite_user.id) && !current_user.invitation_sent_user_ids&.include?(invite_user.id)
-            # invitation_sent_user_idsから配列を取得
-            current_user_invitation_sent_user = current_user.invitation_sent_user_ids || []
-            # 配列に招待リクエストしたユーザーidを追加
-            current_user_invitation_sent_user << invite_user.id
-            # 更新した配列をinvitation_sent_user_idsカラムに保存
-            current_user.update(invitation_sent_user_ids: current_user_invitation_sent_user.uniq)
-
-            ContactMailer.invitation_email(invite_user).deliver_now
-            redirect_to users_subcon_users_url, success: "招待リクエストが【#{invite_user.business&.name}(#{invite_email})様】へ送信されました。"
-          elsif current_user.invited_user_ids.include?(invite_user.id) && !current_user.invitation_sent_user_ids.include?(invite_user.id) 
-            redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待承認済のアカウントです"
-          elsif !current_user.invited_user_ids.include?(invite_user.id) && current_user.invitation_sent_user_ids.include?(invite_user.id) 
-            redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待リクエスト中のアカウントです。"
-          end
-          # redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待承認済のアカウントです"
-        else
+        if invite_email == current_user.email
           redirect_to new_user_invitation_url, danger: '自分のアカウントは招待できません。'
+        elsif !current_user.invited_user_ids&.include?(invite_user.id) && !current_user.invitation_sent_user_ids&.include?(invite_user.id)
+          # すでに招待承認済のアカウントには招待しない
+          current_user_invitation_sent_user = current_user.invitation_sent_user_ids || []
+          # 配列に招待リクエストしたユーザーidを追加
+          current_user_invitation_sent_user << invite_user.id
+          # 更新した配列をinvitation_sent_user_idsカラムに保存
+          current_user.update(invitation_sent_user_ids: current_user_invitation_sent_user.uniq)
+
+          ContactMailer.invitation_email(invite_user, current_user).deliver_now
+          redirect_to users_subcon_users_url, success: "招待リクエストが#{invite_user.business&.name}(#{invite_email})様へ送信されました。"
+        # invitation_sent_user_idsから配列を取得
+        elsif current_user.invited_user_ids&.include?(invite_user.id) && !current_user.invitation_sent_user_ids&.include?(invite_user.id)
+          redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待承認済のアカウントです。"
+        elsif !current_user.invited_user_ids&.include?(invite_user.id) && current_user.invitation_sent_user_ids&.include?(invite_user.id)
+          redirect_to new_user_invitation_url, danger: "#{invite_email}はすでに招待リクエスト中のアカウントです。"
         end
       else
         # アカウント未登録者には"devise_invitable"gem機能から招待メールを送信する
         self.resource = invite_resource
         if resource.errors.empty?
-        
-        # 配列に招待リクエストしたユーザーidを追加
-        current_user.invitation_sent_user_ids << resource.id
-        # 更新した配列をinvitation_sent_user_idsカラムに保存
-        current_user.update(invitation_sent_user_ids: current_user.invitation_sent_user_ids.uniq)
+
+          # 配列に招待リクエストしたユーザーidを追加
+          current_user.invitation_sent_user_ids << resource.id
+          # 更新した配列をinvitation_sent_user_idsカラムに保存
+          current_user.update(invitation_sent_user_ids: current_user.invitation_sent_user_ids.uniq)
 
           if is_flashing_format? && self.resource.invitation_sent_at
             set_flash_message :notice, :send_instructions, email: self.resource.email

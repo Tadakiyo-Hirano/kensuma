@@ -15,15 +15,15 @@ class User < ApplicationRecord
       User.where(email: attributes[:email]).first
     end
   end
-  
+
   # 招待リクエスト中のユーザー(招待未承認)
-  scope :invitation_pending_to, -> (user) {
+  scope :invitation_pending_to, lambda { |user|
     where("JSON_CONTAINS(invitation_sent_user_ids, ?, '$')", user.id.to_s)
   }
   # 例: User.invitation_pending_to(current_user) 自身に招待(未承認)してきたUserを取得
 
   # 招待済のユーザー
-  scope :invited_to, -> (user) {
+  scope :invited_to, lambda { |user|
     where("JSON_CONTAINS(invited_user_ids, ?, '$')", user.id.to_s)
   }
   # 例: User.invited_to(current_user) 自身に招待(承認済)してきたUserを取得

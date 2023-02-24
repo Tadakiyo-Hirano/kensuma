@@ -1,6 +1,6 @@
 <% provide(:title, "下請け発注依頼登録") %>
 <% provide(:btn_text, "登録") %>
-
+<%= @aaa %>
 <div class="card">
   <div class="card-body">
     <%= form_with url: users_request_order_sub_request_orders_path(@request_order), method: :post, local: true do |f| %>

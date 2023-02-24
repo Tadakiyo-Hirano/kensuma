@@ -105,11 +105,11 @@
                 <td><%= User.find(invitation_pending_user_id).email %></td>
                 <td class="text-warning">承認待ち</td>
                 <td>
-                  <%= link_to "キャンセル", destroy_invitation_pending_users_subcon_user_path(User.find(invitation_pending_user_id)),
+                  <%= link_to "取り消す", destroy_invitation_pending_users_subcon_user_path(User.find(invitation_pending_user_id)),
                                           method: :delete,
                                           local: true,
                                           data: { confirm: "#{User.find(invitation_pending_user_id).email}様への招待リクエストを取り消します、本当によろしいですか？" },
-                                          class: "btn btn-sm btn-danger"
+                                          class: "btn btn-sm btn-warning"
                   %>
                 </td>
               </tr>
@@ -124,7 +124,14 @@
                 <td><%= User.find(invited_user_id).business&.address %></td>
                 <td><%= User.find(invited_user_id).email %></td>
                 <td class="text-success">✓</td>
-                <td></td>
+                <td>
+                  <%= link_to "登録解除", destroy_invited_users_subcon_user_path(User.find(invited_user_id).business.uuid),
+                                          method: :delete,
+                                          local: true,
+                                          data: { confirm: "#{User.find(invited_user_id).business.name}様の協力会社登録を解除します、本当によろしいですか？" },
+                                          class: "btn btn-sm btn-danger"
+                  %>
+                </td>
               </tr>
             <% end %>
           </tbody>
