@@ -80,8 +80,8 @@ ja:
         specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
         foreign_construction_workers_exist: 外国人建設就労者従事状況
         foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
-        employment_manager_name: 氏名
-        employment_manager_post: 役員名
+        employment_manager_name: 雇用管理責任者(氏名)
+        employment_manager_post: 雇用管理責任者(役職名)
       business_occupation:
         occupation_id: 職種
       business_industry:
@@ -272,6 +272,7 @@ ja:
         supervisor_name: 監督員(氏名)
         supervisor_apply: 監督員(権限及び意見の申出方法)
         professional_engineer_name: 専門技術者(氏名)
+        professional_engineer_skill_training_id: 専門技術者(資格内容)
         professional_engineer_details: 専門技術者(担当工事内容)
         professional_construction: 特定専門工事(有無)
         construction_manager_name: 工事担任責任者(氏名)
@@ -279,6 +280,7 @@ ja:
         site_agent_name: 現場代理人(氏名)
         site_agent_apply: 現場代理人(権限及び意見の申出方法)
         lead_engineer_name: 主任技術者(氏名)
+        lead_engineer_skill_training_id: 主任技術者(資格内容)
         lead_engineer_check: 主任技術者(専任or非専任)
         work_chief_name: 作業主任者(氏名)
         work_conductor_name: 作業指揮者名(氏名)
@@ -287,6 +289,7 @@ ja:
         safety_promoter_name: 安全推進者(氏名)
         foreman_name: 職長(氏名)
         registered_core_engineer_name: 登録基幹技能者(氏名)
+        registered_core_engineer_skill_training_id: 登録基幹技能者(資格内容)
       worker:
         name: 名前
         name_kana: 名前カナ
@@ -309,6 +312,17 @@ ja:
         employment_contract: 雇用契約書の取り交わし状況
         family_name: 家族名
         relationship: 家族続柄
+        email: メールアドレス
+        sex: 性別
+        status_of_residence: 在留資格
+        maturity_date: 在留期間満期日
+        confirmed_check: CCUS登録情報が最新であることの確認
+        responsible_director: 役職
+        responsible_name: 氏名
+        responsible_contact_address: 連絡先(TEL)
+        passport: パスポートの写し
+        residence_card: 在留カードの写し
+        employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
       license:
         name: 名称
         description: 説明

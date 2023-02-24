@@ -25,7 +25,8 @@ module Users
           hiring_on:                     '2022-01-28',
           experience_term_before_hiring: 10,
           blank_term:                    3,
-          career_up_id:                  '1'
+          career_up_id:                  '1',
+          sex:                           1
           # ============================================
         )
         @worker.worker_licenses.build(
@@ -171,6 +172,8 @@ module Users
         :family_phone_number, :birth_day_on, :abo_blood_type,
         :rh_blood_type, :job_title, :job_type, :hiring_on, :experience_term_before_hiring,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship,
+        :email, :sex, :status_of_residence, :maturity_date, :confirmed_check, :responsible_director,
+        :responsible_name, :responsible_contact_address, :passport, :residence_card, :employment_conditions,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],
