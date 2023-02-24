@@ -19,7 +19,10 @@ module Users
     def create
       # 既存ユーザーに対してはアカウント発行&招待処理は行わず、招待リクエストのお知らせメールのみ送信する
       user = User.find_by(email: params[:user][:email])
-      if user.present? && user.invitation_accepted_at.present? || user.present? && user.invitation_token.nil? && user.invitation_accepted_at.nil?
+      accepted = user&.invitation_accepted_at
+      token = user&.invitation_token
+
+      if user.present? && accepted.present? || user.present? && token.nil? && accepted.nil?
         # 自信から招待を送ったユーザー
         invite_email = params[:user][:email]
         invite_user = User.find_by(email: invite_email)
@@ -56,11 +59,8 @@ module Users
           if is_flashing_format? && self.resource.invitation_sent_at
             set_flash_message :notice, :send_instructions, email: self.resource.email
           end
-          if self.method(:after_invite_path_for).arity == 1
-            respond_with resource, location:  users_subcon_users_url
-          else
-            respond_with resource, location:  users_subcon_users_url
-          end
+          respond_with resource, location: users_subcon_users_url if self.method(:after_invite_path_for).arity == 1
+          respond_with resource, location: users_subcon_users_url unless self.method(:after_invite_path_for).arity == 1
         else
           respond_with_navigational(resource) { render :new, status: :unprocessable_entity }
         end
