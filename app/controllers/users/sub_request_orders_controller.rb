@@ -6,7 +6,7 @@ module Users
     def index; end
 
     def new
-      @businesses = current_user.invited_user_ids.map { |id| User.find(id).business }
+      @businesses = current_user.invited_user_ids&.map { |id| User.find(id).business }
     end
 
     def create

@@ -3,13 +3,16 @@
 <%= @aaa %>
 <div class="card">
   <div class="card-body">
-    <%= form_with url: users_request_order_sub_request_orders_path(@request_order), method: :post, local: true do |f| %>
-
-      <%= f.label "事業所名(複数選択可)" %>
-      <%= f.collection_select :business_ids, @businesses, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
-      <br><br>
-      <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
-      <%= link_to "戻る", users_request_order_path(@request_order), class: "btn btn-md btn-block btn-default" %>
+    <% if @businesses.present? %>
+      <%= form_with url: users_request_order_sub_request_orders_path(@request_order), method: :post, local: true do |f| %>
+        <%= f.label "事業所名(複数選択可)" %>
+        <%= f.collection_select :business_ids, @businesses, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+        <br><br>
+        <%= f.submit yield(:btn_text), class: "btn btn-md btn-block btn-primary" %>
+        <%= link_to "戻る", users_request_order_path(@request_order), class: "btn btn-md btn-block btn-default" %>
+      <% end %>
+    <% else %>
+      下請けの協力会社を招待してください。 <%= link_to '協力会社招待ページへ', new_user_invitation_path %>
     <% end %>
   </div>
 </div>
