@@ -350,235 +350,120 @@ RSpec.describe Worker, type: :model do
         end
       end
     end
-  
-    describe '#status_of_residence' do
-      context '外国人である場合' do
-        before :each do
-          subject.country = "ネパール"
-        end
-      
-        context '存在しない場合' do
-          before :each do
-            subject.status_of_residence = nil
-          end
-    
-          it 'バリデーションに落ちること' do
-            expect(subject).to be_invalid
-          end
-    
-          it 'バリデーションのエラーが正しいこと' do
-            subject.valid?
-            expect(subject.errors.full_messages).to include('在留資格を入力してください')
-          end
-        end
-      end
-    
-      context '日本人の場合' do
-        before :each do
-          subject.country = "日本"
-        end
-        context '存在しない場合' do
-          before :each do
-            subject.status_of_residence = nil
-          end
-  
-          it 'バリデーションがかかっていないこと' do
-            expect(subject).to be_valid
-          end
-        end
-      end
-    end
-  
-    describe '#maturity_date' do
-      context '外国人である場合' do
-        before :each do
-          subject.country = "ネパール"
-        end
-      
-        context '存在しない場合' do
-          before :each do
-            subject.maturity_date = nil
-          end
-    
-          it 'バリデーションに落ちること' do
-            expect(subject).to be_invalid
-          end
-    
-          it 'バリデーションのエラーが正しいこと' do
-            subject.valid?
-            expect(subject.errors.full_messages).to include('在留期間満期日を入力してください')
-          end
-        end
-      end
-    
-      context '日本人の場合' do
-        before :each do
-          subject.country = "日本"
-        end
-        context '存在しない場合' do
-          before :each do
-            subject.maturity_date = nil
-          end
-  
-          it 'バリデーションがかかっていないこと' do
-            expect(subject).to be_valid
-          end
-        end
-      end
-    end
-  
-    describe '#confirmed_check' do
-      context '外国人である場合' do
-        before :each do
-          subject.country = "ネパール"
-        end
-      
-        context '存在しない場合' do
-          before :each do
-            subject.confirmed_check = nil
-          end
-    
-          it 'バリデーションに落ちること' do
-            expect(subject).to be_invalid
-          end
-    
-          it 'バリデーションのエラーが正しいこと' do
-            subject.valid?
-            expect(subject.errors.full_messages).to include('CCUS登録情報が最新であることの確認を入力してください')
-          end
-        end
-      end
-    
-      context '日本人の場合' do
-        before :each do
-          subject.country = "日本"
-        end
-        context '存在しない場合' do
-          before :each do
-            subject.confirmed_check = nil
-          end
-  
-          it 'バリデーションがかかっていないこと' do
-            expect(subject).to be_valid
-          end
-        end
-      end
-    end
-  
-    describe '#responsible_director' do
-      context '外国人である場合' do
-        before :each do
-          subject.country = "ネパール"
-        end
-      
-        context '存在しない場合' do
-          before :each do
-            subject.responsible_director = nil
-          end
-    
-          it 'バリデーションに落ちること' do
-            expect(subject).to be_invalid
-          end
-    
-          it 'バリデーションのエラーが正しいこと' do
-            subject.valid?
-            expect(subject.errors.full_messages).to include('役職を入力してください')
-          end
-        end
-      end
-    
-      context '日本人の場合' do
-        before :each do
-          subject.country = "日本"
-        end
-        context '存在しない場合' do
-          before :each do
-            subject.responsible_director = nil
-          end
-  
-          it 'バリデーションがかかっていないこと' do
-            expect(subject).to be_valid
-          end
-        end
-      end
-    end
-  
-    describe '#responsible_name' do
-      context '外国人である場合' do
-        before :each do
-          subject.country = "ネパール"
-        end
-      
-        context '存在しない場合' do
-          before :each do
-            subject.responsible_name = nil
-          end
-    
-          it 'バリデーションに落ちること' do
-            expect(subject).to be_invalid
-          end
-    
-          it 'バリデーションのエラーが正しいこと' do
-            subject.valid?
-            expect(subject.errors.full_messages).to include('責任者氏名を入力してください')
-          end
-        end
-      end
-    
-      context '日本人の場合' do
-        before :each do
-          subject.country = "日本"
-        end
-        context '存在しない場合' do
-          before :each do
-            subject.responsible_name = nil
-          end
-  
-          it 'バリデーションがかかっていないこと' do
-            expect(subject).to be_valid
-          end
-        end
-      end
-    end
-  
-    describe '#responsible_contact_address' do
-      context '外国人である場合' do
-        before :each do
-          subject.country = "ネパール"
-        end
-      
-        context '存在しない場合' do
-          before :each do
-            subject.responsible_contact_address = nil
-          end
-    
-          it 'バリデーションに落ちること' do
-            expect(subject).to be_invalid
-          end
-    
-          it 'バリデーションのエラーが正しいこと' do
-            subject.valid?
-            expect(subject.errors.full_messages).to include('責任者連絡先(TEL)を入力してください')
-          end
-        end
-      end
-    
-      context '日本人の場合' do
-        before :each do
-          subject.country = "日本"
-        end
-        context '存在しない場合' do
-          before :each do
-            subject.responsible_contact_address = nil
-          end
-  
-          it 'バリデーションがかかっていないこと' do
-            expect(subject).to be_valid
-          end
-        end
-      end
-    end
   end
+    # describe '#status_of_residence' do
+      # context '外国人である場合' do
+        # before :each do
+          # subject.country = "ネパール"
+        # end
+      # 
+        # context '存在しない場合' do
+          # before :each do
+            # subject.status_of_residence = nil
+          # end
+    # 
+          # it 'バリデーションに落ちること' do
+            # expect(subject).to be_invalid
+          # end
+    # 
+          # it 'バリデーションのエラーが正しいこと' do
+            # subject.valid?
+            # expect(subject.errors.full_messages).to include('在留資格を入力してください')
+          # end
+        # end
+      # end
+    # 
+      # context '日本人の場合' do
+        # before :each do
+          # subject.country = "日本"
+        # end
+        # context '存在しない場合' do
+          # before :each do
+            # subject.status_of_residence = nil
+          # end
+  # 
+          # it 'バリデーションがかかっていないこと' do
+            # expect(subject).to be_valid
+          # end
+        # end
+      # end
+    # end
+  # 
+    # describe '#maturity_date' do
+      # context '外国人である場合' do
+        # before :each do
+          # subject.country = "ネパール"
+        # end
+      
+        # context '存在しない場合' do
+          # before :each do
+            # subject.maturity_date = nil
+          # end
+    # 
+          # it 'バリデーションに落ちること' do
+            # expect(subject).to be_invalid
+          # end
+    # 
+          # it 'バリデーションのエラーが正しいこと' do
+            # subject.valid?
+            # expect(subject.errors.full_messages).to include('在留期間満期日を入力してください')
+          # end
+        # end
+      # end
+    
+      # context '日本人の場合' do
+        # before :each do
+          # subject.country = "日本"
+        # end
+        # context '存在しない場合' do
+          # before :each do
+            # subject.maturity_date = nil
+          # end
+  # 
+          # it 'バリデーションがかかっていないこと' do
+            # expect(subject).to be_valid
+          # end
+        # end
+      # end
+    # end
+  
+    # describe '#confirmed_check' do
+      # context '外国人である場合' do
+        # before :each do
+          # subject.country = "ネパール"
+        # end
+      # 
+        # context '存在しない場合' do
+          # before :each do
+            # subject.confirmed_check = nil
+          # end
+    # 
+          # it 'バリデーションに落ちること' do
+            # expect(subject).to be_invalid
+          # end
+    # 
+          # it 'バリデーションのエラーが正しいこと' do
+            # subject.valid?
+            # expect(subject.errors.full_messages).to include('CCUS登録情報が最新であることの確認を入力してください')
+          # end
+        # end
+      # end
+    # 
+      # context '日本人の場合' do
+        # before :each do
+          # subject.country = "日本"
+        # end
+        # context '存在しない場合' do
+          # before :each do
+            # subject.confirmed_check = nil
+          # end
+  # 
+          # it 'バリデーションがかかっていないこと' do
+            # expect(subject).to be_valid
+          # end
+        # end
+      # end
+    # end
 
   describe '保険会社とのアソシエーションについて' do
     let :worker_insurance do

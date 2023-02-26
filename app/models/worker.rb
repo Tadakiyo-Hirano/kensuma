@@ -52,13 +52,11 @@ class Worker < ApplicationRecord
   validates :family_name, presence: true
   validates :relationship, presence: true
   validates :sex, presence: true
-  validates :status_of_residence, presence: true, if: :is_foreing?
-  validates :maturity_date, presence: true, if: :is_foreing?
-  validates :confirmed_check, presence: true, if: :is_foreing?
-  validates :confirmed_check_date, presence: true, if: :is_foreing?
-  validates :responsible_director, presence: true, if: :is_foreing?
-  validates :responsible_name, presence: true, if: :is_foreing?
-  validates :responsible_contact_address, presence: true, if: :is_foreing?
+  # validates :status_of_residence, presence: true, if: :is_foreing?
+  # validates :maturity_date, presence: true, if: :is_foreing?
+  # validates :confirmed_check, presence: true, if: :is_foreing?
+  # validates :confirmed_check_date, presence: true, if: :is_foreing?
+
 
   def to_param
     uuid
