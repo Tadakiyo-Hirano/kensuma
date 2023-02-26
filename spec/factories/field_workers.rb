@@ -6,6 +6,7 @@ FactoryBot.define do
     education_date { '2023-01-28' }
     sequence(:admission_worker_name) { |n| "admission_worker_name#{n}" }
     sequence(:content) { |n| { "id": n + 1 } }
+    sendoff_education { 0 }
   end
 
   factory :request_order_field_worker, class: 'FieldWorker' do
@@ -15,5 +16,6 @@ FactoryBot.define do
     education_date { '2023-01-28' }
     sequence(:admission_worker_name) { |n| "admission_worker_name#{n}" }
     sequence(:content) { |n| { "id": n + 1 } }
+    sendoff_education { 0 }
   end
 end

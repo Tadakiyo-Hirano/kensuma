@@ -1,0 +1,70 @@
+<!-- (10)高齢者就労報告書 -->
+<h1 align="center">編集中</h1>
+<%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
+  <div id="doc_10_sheet">
+    <div class="ritz grid-container" dir="ltr">
+      <table class="waffle" cellspacing="0" cellpadding="0">
+        <div class="container">
+          <div class="title text-center"><h2>高齢者就労報告書</h2></div>
+          <div class="submission_date text-center">
+            <p><span class="ml-3"><%= f.date_field name = 'content[date_submitted]', value:@document.content&.[]('date_submitted') %></span></p><!--「提出日(西暦)」10-001 -->
+          </div>
+          <div class="office_name">
+            <p>　事業所の名称<span class="ml-3"><%= document_site_info.site_name %></span></p><!--「事業所名(現場名)」10-002 -->
+          </div>
+          <div class="chief_name">
+            <p>　所　長　名<span class="ml-3"><%= document_site_info.site_agent_name %>　殿　</span></p><!-- 元請会社の「現場代理人名」10-003 -->
+          </div>
+          <div class="company_name">
+            <p>一次会社名 <span class="ml-3"><%= document_site_info.business.name %></span></p><!--「一次会社名」10-004 -->
+          </div>
+          <div class="subcontractor">
+            <p>会社名(<%= sc_hierarchy(document_info)[0,1] %>)次<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
+          </div>
+          <div class="representative">
+            <p>代表者名<span class="ml-3"><%= Business.find(document_info.business_id).representative_name %></span></p><!--「代表者名」10-007 -->
+          </div>
+          <div class="description">
+            <p>
+              　貴作業所の工事を施工するにあたり、下記の者は高齢者（６５歳以上）ですが、弊社の<br />
+              責任において就労させますのでご報告致します。<br />
+              　原則として危険有害業務には就かせませんが、やむをえず就労させる場合は、職長の<br />
+              直接指導により、労働基準法、労働安全衛生法及び貴社の規定を遵守して作業させます。
+            </p>
+          </div>
+
+          <div class="described_detail">
+            <p class="text-center">記</p>
+            <table class="table table-bordered">
+              <thead>
+                <tr class="table-title">
+                  <th style="width: 20%">氏名</th>
+                  <th style="width: 20%">生年月日</th>
+                  <th style="width: 10%">年齢(歳)</th>
+                  <th style="width: 20%">職種</th>
+                  <th style="width: 30%">作業内容</th>
+                </tr>
+              </thead>
+              <tbody class="t-content">
+                <% j = 1 %>
+                <% document_info.field_workers.where(id: age_border(65)).each do |field_worker| %>
+                <tr>
+                  <td class="gray"><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
+                  <td class="gray"><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
+                  <td class="gray"><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
+                  <td class="green"><%= f.text_field name = "content[occupation_#{j.ordinalize}]", value: worker_str(field_worker, "occupation"), :placeholder => '例)職種' %></td><!--「職種」10-011 -->
+                  <td class="green"><%= f.text_field name = "content[work_notice_#{j.ordinalize}]", value:field_worker.content&.[]("work_notice"), :placeholder => '例)作業内容' %></td><!--「高年齢就労者・作業内容」10-012 -->
+                </tr>
+                <% j += 1 %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </table>
+        <div style="text-align: center">
+          <%= f.submit %>
+        </div>
+    </div>
+  </div>
+<% end %>

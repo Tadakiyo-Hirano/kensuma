@@ -1,0 +1,319 @@
+<%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
+  <div class="card">  
+    <div class="card-body">
+      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+      <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+    </div>
+  </div>
+
+  <div class="document-outer" style="background-color: #fff; overflow: auto;">
+    <div class="document-inner">
+      <section class="doc_16_sheet">
+        <div class="ritz grid-container" dir="ltr">
+          <table class="waffle" cellspacing="0" cellpadding="0" style="width: 100%; zoom: 70%;">
+            <tbody>
+              <tr style="height: 29px">
+                <td class="doc_16_m001 d16_l_full" dir="ltr" colspan="11">（参考様式第９号）</td>
+                <td class="doc_16_" dir="ltr" colspan="15"></td>
+                <td class="doc_16_m001 d16_l_full" dir="ltr" colspan="3" rowspan="2">元 請<br>確認欄</td>
+                <td id="d16_size14" class="doc_16_m002 d16_l_full" dir="ltr" colspan="8" rowspan="2">
+                  <%= document_info_for_prime_contractor_name %> <!-- 16-001 元請会社の確認欄 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_" dir="ltr" colspan="29"></td>
+                <td id="d16_size14" class="doc_16_m010" dir="ltr" colspan="8" rowspan="2">
+                  <%= f.date_field name = 'content[date_submitted]', value:@document.content&.[]('date_submitted')  %> <!-- 16-001 提出日(西暦) -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_" dir="ltr" colspan="10"></td>
+                <td class="doc_16_m003" dir="ltr" colspan="16" rowspan="4">火　気　使　用　願</td>
+                <td class="doc_16_" dir="ltr" colspan="11"></td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">事業所の名称</td>
+                <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="13" rowspan="2">
+                  <%= document_site_info.site_name %> <!-- 16-003 事業所名(現場名) -->
+                </td>
+                <td class="doc_16_" colspan="2"></td>
+                <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">一次会社名</td>
+                <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="12" rowspan="2">
+                  <%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 16-005 一次会社名 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">所 長 名</td>
+                <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="11" rowspan="2">
+                  <%= document_info.site_agent_name%> <!-- 16-004 各会社の現場代理人名 -->
+                </td>
+                <td class="doc_16_m001 d16_l_bottom" dir="ltr" colspan="2" rowspan="2">殿</td>
+                <td class="doc_16_" dir="ltr" colspan="2"></td>
+                <td class="doc_16_m001" dir="ltr" colspan="5">使用会社名</td>
+                <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="12" rowspan="2">
+                  <%= document_info.business.name %> <!--16-007 会社名 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+                
+                <td class="doc_16_" dir="ltr" colspan="2"></td>
+                <td class="doc_16_m001" dir="ltr" colspan="1">（</td>
+                <td id="d16_size14" class="doc_16_m004" dir="ltr" colspan="2">
+                  <%= sc_hierarchy(document_info) %> <!-- 16-006 次 -->
+                </td>
+                <td class="doc_16_m001" dir="ltr" colspan="2">）</td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_" dir="ltr" colspan="20"></td>
+                <td class="doc_16_m001" dir="ltr" colspan="5" rowspan="2">現場代理人<br>(現場責任者)</td>
+                <td class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="10" rowspan="2">
+                  <%= document_info.site_agent_name %> <!-- 16-008 各会社の現場代理人名 -->
+                </td>
+                <td id="d16_size12" class="doc_16_m004 d16_l_bottom" dir="ltr" colspan="2" rowspan="2">
+                  ㊞ <!-- 16-009 印 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_" dir="ltr" colspan="3"></td>
+                <td class="doc_16_m005" dir="ltr" colspan="31">下記の要領で火気を使用したく許可願います。なお、火気使用の終了時には、必ず</td>
+                <td class="doc_16_" dir="ltr" colspan="3"></td>
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_" dir="ltr" colspan="3"></td>
+                <td class="doc_16_m005" dir="ltr" colspan="31">その旨報告致します。</td>
+                <td class="doc_16_" dir="ltr" colspan="3"></td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">使 用 場 所</td>
+                <td class="doc_16_m002 d16_l_full" dir="ltr" colspan="31" rowspan="2">
+                  <%= document_info.field_fires.map(&:use_place).first %> <!-- 16-010 使用場所 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">使 用 目 的</td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_use_target('溶接', 1) %> <!-- 16-011 溶接 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_use_target('溶断', 2) %> <!-- 16-012 溶断 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_use_target('圧接', 3) %> <!-- 16-013 圧接 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_use_target('防水', 4) %> <!-- 16-014 防水 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_use_target('乾燥', 5) %> <!-- 16-015 乾燥 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_use_target('採暖', 6) %> <!-- 16-016 採暖 -->
+                </td>
+                <td class="doc_16_" dir="ltr" colspan="4"></td>
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">使 用 期 間<br>使用時間（原則）</td>
+                <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="4" rowspan="2">
+                  <%= document_date(document_info.field_fires.map(&:usage_period_start).first) %> <!-- 16-020 使用期間(始期） -->
+                </td>
+                <td class="doc_16_m006" dir="ltr" colspan="1" rowspan="2">～</td>
+                <td id="d16_size12" class="doc_16_m002 d16_l_right" dir="ltr" colspan="4" rowspan="2">
+                  <%= document_date(document_info.field_fires.map(&:usage_period_end).first) %> <!-- 16-021 使用期間(終期） -->
+                </td>
+              </tr>
+              <tr style="height: 29px"></tr>
+              <tr style="height: 29px">
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">
+                  <%= fire_use_target('湯沸', 7) %> <!-- 16-017 湯沸 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">
+                  <%= fire_use_target('炊事', 8) %> <!-- 16-018 炊事 -->
+                </td>
+                <td id="d16_size12" class="doc_16_m006" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">
+                  <%= fire_use_target('その他', 9) %> <!-- 16-019 その他 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">（</td>
+                <td id="d16_size14" class="doc_16_m002" dir="ltr" colspan="8" rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">
+                  <%= document_info.field_fires.map(&:other_use_target).first %> <!-- 16-019 使用目的(その他) -->
+                </td>
+                <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="1"  rowspan="2" style="vertical-align: middle; border-bottom: 1px SOLID #000000;">）</td>
+                <td id="d16_size12" class="doc_16_m002 d16_l_bottom" dir="ltr" colspan="4" rowspan="2">
+                  <%= document_info.field_fires.map(&:usage_time_start).first&.strftime("%-H時%-M分") %> <!-- 16-022 使用時間(始期) -->
+                </td>
+                <td class="doc_16_m006 d16_l_bottom" dir="ltr" colspan="1" rowspan="2">～</td>
+                <td id="d16_size12" class="doc_16_m002 d16_l_bottom d16_l_right" dir="ltr" colspan="4" rowspan="2">
+                  <%= document_info.field_fires.map(&:usage_time_end).first&.strftime("%-H時%-M分") %> <!-- 16-023 使用時間(終期) -->
+                </td>
+              </tr>
+              <tr style="height: 29px"></tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火 気 の 種 類</td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_type('電気', 1) %> <!-- 16-024 電気 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_type('ガス', 2) %> <!-- 16-025 ガス -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_type('灯油', 3) %> <!-- 16-026 灯油 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_type('重油', 4) %> <!-- 16-027 重油 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_type('木炭', 5) %> <!-- 16-028 木炭 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_type('木炭', 6) %> <!-- 16-029 薪 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_type('その他', 7) %> <!-- 16-029 その他 -->（
+                </td>
+                <td id="d16_size12" class="doc_16_m002" dir="ltr" colspan="15" rowspan="2" style="vertical-align: middle;">
+                  <%= document_info.field_fires.map(&:other_fire_type).first %> <!-- 16-030 火気の種類(その他) -->
+                </td>
+                <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2" style="vertical-align: middle;">）</td>
+              </tr>
+              <tr style="height: 29px"></tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="4">管 理 方 法</td>
+                <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_management('消火器', 1) %> <!-- 16-031 消火器 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_management('防火用水', 2) %> <!-- 16-032 防火用水 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="3" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_management('消化砂', 3) %> <!-- 16-033 消化砂 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="4" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_management('防災シート', 4) %> <!-- 16-034 防災シート -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_management('受皿', 5) %> <!-- 16-035 受皿 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_management('標識', 6) %> <!-- 16-036 標識 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m007 d16_l_top" dir="ltr" colspan="2" rowspan="2" style="vertical-align: middle;">
+                  <%= fire_management('監視', 7) %> <!-- 16-037 監視 -->
+                </td>
+                <td class="doc_16_ d16_l_top d16_l_right" dir="ltr" colspan="12" rowspan="2" style="vertical-align: middle;"></td>
+              </tr>
+              <tr style="height: 29px"></tr>
+              <tr style="height: 29px">
+                <td id="d16_size14" class="doc_16_m006" dir="ltr" colspan="5" rowspan="2">取扱上の注意（</td>
+                <td id="d16_size14" class="doc_16_m002" dir="ltr" colspan="25" rowspan="2">
+                  <%= document_info.field_fires.map(&:precautions).first %> <!-- 16-038 取扱上の注意 -->
+                </td>
+                <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2">）</td>
+              </tr>
+              <tr style="height: 29px"> 
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火 元 責 任 者<br>（後始末巡回者）</td>
+                <td class="doc_16_m002 d16_l_full" dir="ltr" colspan="31" rowspan="2">
+                  <%= document_info.field_fires.map(&:fire_origin_responsible).first %> <!-- 16-039 火元責任者(後始末巡回者) -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火気使用責任者</td>
+                <td class="doc_16_m002 d16_l_full" dir="ltr" colspan="31" rowspan="2">
+                  <%= document_info.field_fires.map(&:fire_use_responsible).first %> <!-- 16-040 火気使用責任者 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006" dir="ltr" colspan="37">※使用目的、火気の種類、管理方法は該当事項をＯで囲んで下さい。</td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_tb d16_l_left" dir="ltr" colspan="4" rowspan="2">許可 第</td>
+                <td class="doc_16_m010 d16_l_tb" dir="ltr" colspan="3" rowspan="2">
+                  <%= @document.approval_content&.[]('fire_permit_number') %> <!-- 16-041 火気使用許可番号 -->
+                </td>
+                <td class="doc_16_m006 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2">号</td>
+                <td class="doc_16_m006 d16_l_tb " dir="ltr" colspan="7" rowspan="2">（許可年月日）</td>
+                <td class="doc_16_m010 d16_l_tb " dir="ltr" colspan="19" rowspan="2">
+                  <%= wareki(@document.approval_content&.[]('fire_permit_date')) %> <!-- 16-042 火気使用年月日 -->
+                </td>
+                <td class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2"></td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="9" rowspan="4">火気使用許可</td>
+                <td class="doc_16_m006 d16_l_tb" dir="ltr" colspan="7" rowspan="2">防火管理者</td>
+                <td class="doc_16_m010 d16_l_tb" dir="ltr" colspan="19" rowspan="2">
+                  <%= @document.approval_content&.[]('fire_prevention_manager') %> <!-- 16-043 火気使用許可・防火管理者 -->
+                </td>
+                <td id="d16_size12" class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2">
+                  ㊞ <!-- 16-044 印 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_tb" dir="ltr" colspan="7" rowspan="2">担当係員</td>
+                <td class="doc_16_m010 d16_l_tb" dir="ltr" colspan="19" rowspan="2">
+                  <%= @document.approval_content&.[]('manager') %> <!-- 16-045 火気使用許可・担当係員 -->
+                </td>
+                <td id="d16_size12" class="doc_16_m010 d16_l_tb d16_l_right" dir="ltr" colspan="2" rowspan="2">
+                  ㊞ <!-- 16-046 印 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              <tr style="height: 29px">
+                <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="9" rowspan="4">許可条件</td>
+                <td class="doc_16_m009 d16_l_full" dir="ltr" colspan="28" rowspan="4">
+                  <%= simple_format(h(@document.approval_content&.[]('permit_criteria'))) %> <!-- 16-047 許可条件 -->
+                </td>
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+              </tr>
+              <tr style="height: 29px">
+                <td class="doc_16_m006" dir="ltr" colspan="37">※毎日時間で管理する場合は、この書式を参考にして書式を作成して下さい。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+<% end %>

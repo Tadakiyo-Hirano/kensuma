@@ -1,3 +1,10 @@
+table.type24 {
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 .ritz .waffle a {
   color: inherit;
 }
@@ -19,7 +26,7 @@
 .ritz .waffle .doc_24_s97 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #ccffcc;
   text-align: center;
   color: #000000;
   font-family: 'Arial';
@@ -57,7 +64,7 @@
 }
 
 .ritz .waffle .doc_24_s39 {
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -120,7 +127,7 @@
 
 .ritz .waffle .doc_24_s27 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -143,34 +150,21 @@
   padding: 0px 3px 0px 3px;
 }
 
-.ritz .waffle .doc_24_s51 {
-  border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
-  text-align: center;
-  font-family: 'Arial';
-  font-size: 7pt;
-  vertical-align: middle;
-  white-space: normal;
-  direction: ltr;
-  padding: 0px 3px 0px 3px;
-}
-
 .ritz .waffle .doc_24_s38 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
-  vertical-align: middle;
-  white-space: nowrap;
+  vertical-align: top;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
 .ritz .waffle .doc_24_s10 {
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
   font-size: 12pt;
@@ -183,10 +177,10 @@
 .ritz .waffle .doc_24_s98 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'Arial';
-  font-size: 9pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: normal;
   direction: ltr;
@@ -218,24 +212,9 @@
   padding: 0px 3px 0px 3px;
 }
 
-.ritz .waffle .doc_24_s23 {
-  border-bottom: 1px SOLID #000000;
-  border-right: 1px SOLID #000000;
-  background-color: #ffffff;
-  text-align: center;
-  font-family: 'Arial';
-  font-size: 8pt;
-  vertical-align: middle;
-  white-space: normal;
-  overflow: hidden;
-  word-wrap: break-word;
-  direction: ltr;
-  padding: 0px 3px 0px 3px;
-}
-
 .ritz .waffle .doc_24_s29 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #ccffcc;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
@@ -247,7 +226,7 @@
 
 .ritz .waffle .doc_24_s20 {
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
@@ -259,7 +238,7 @@
 
 .ritz .waffle .doc_24_s16 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'Arial';
   font-size: 11pt;
@@ -272,11 +251,11 @@
 .ritz .waffle .doc_24_s26 {
   border-left: none;
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
-  font-size: 10pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -325,7 +304,7 @@
   background-color: #ffffff;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
-  font-size: 9pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: normal;
   direction: ltr;
@@ -386,7 +365,7 @@
 
 .ritz .waffle .doc_24_s35 {
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
@@ -400,7 +379,7 @@
 .ritz .waffle .doc_24_s31 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -428,7 +407,7 @@
 .ritz .waffle .doc_24_s15 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
@@ -441,7 +420,7 @@
 .ritz .waffle .doc_24_s99 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
@@ -480,7 +459,7 @@
 
 .ritz .waffle .doc_24_s18 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'Arial';
   font-size: 11pt;
@@ -494,7 +473,7 @@
 
 .ritz .waffle .doc_24_s37 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #ffffff;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
@@ -519,7 +498,7 @@
 
 .ritz .waffle .doc_24_s4 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'docs-Calibri', Arial;
   font-size: 11pt;
@@ -533,7 +512,7 @@
 
 .ritz .waffle .doc_24_s50 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   color: #000000;
   font-family: 'Arial';
@@ -586,7 +565,7 @@
 .ritz .waffle .doc_24_s9 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'Arial';
   font-size: 11pt;
@@ -599,7 +578,7 @@
 .ritz .waffle .doc_24_s96 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: center;
   font-family: 'Arial';
   font-size: 11pt;
@@ -623,7 +602,7 @@
 
 .ritz .waffle .doc_24_s40 {
   border-right: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -661,25 +640,39 @@
 
 .ritz .waffle .doc_24_s41 {
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: top;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_24_s66 {
+  border-right: 1px SOLID #ffffff;
+  border-bottom: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  text-decoration: underline;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #1155cc;
+  font-size: 8pt;
+  vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
 .ritz .waffle .doc_24_s25 {
-  border-right: none;
+  border-right: 1px SOLID #000000;
   border-bottom: 1px SOLID #000000;
-  background-color: #C0C0C0;
-  text-align: left;
+  background-color: #ffffff;
+  text-align: center;
   color: #000000;
-  font-family: 'Arial';
-  font-size: 10pt;
+  font-size: 11pt;
   vertical-align: middle;
   white-space: nowrap;
   direction: ltr;
@@ -700,7 +693,7 @@
 }
 
 .ritz .waffle .doc_24_s34 {
-  background-color: #C0C0C0;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'docs-Calibri', Arial;

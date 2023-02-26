@@ -92,6 +92,9 @@ gem 'reform'
 # wareki - ruby 和暦ライブラリ
 gem 'wareki'
 
+# 一括更新
+gem 'activerecord-import'
+
 group :development, :test do
   # ERD生成
   gem 'rails-erd'

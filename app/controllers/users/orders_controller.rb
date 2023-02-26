@@ -38,7 +38,7 @@ module Users
           general_safety_agent_name:                  '統括安全衛生責任者代行者',
           supervisor_name:                            '現場監督員名',
           supervisor_apply:                           %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
-          site_agent_name:                            '現場代理人名',
+          site_agent_name:                            'テスト作業員1',
           site_agent_apply:                           %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
           supervising_engineer_name:                  '監督技術者･主任技術者名',
           supervising_engineer_check:                 0,
@@ -158,7 +158,7 @@ module Users
         content: {
           genecon_name:                                                        current_business.name,                                             # 会社名
           genecon_address:                                                     current_business.address,                                          # 会社住所
-          genecon_carrier_up_id:                                               current_business.carrier_up_id,                                    # 事業所ID(キャリアアップ)
+          genecon_career_up_id:                                                current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
           genecon_health_insurance_status:                                     current_business.business_health_insurance_status,                 # 健康保険加入状況
           genecon_health_insurance_association:                                current_business.business_health_insurance_association,            # 健康保険会社
           genecon_health_insurance_office_number:                              current_business.business_health_insurance_office_number,          # 健康保険番号

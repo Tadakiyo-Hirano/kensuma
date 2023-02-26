@@ -28,7 +28,14 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       patch 'update_images'
     end
     resources :general_users
-    resources :subcon_users, only: %i[index destroy]
+    resources :subcon_users, only: %i[index] do
+      member do
+        patch 'approval'
+        delete 'destroy_invited_pending'
+        delete 'destroy_invitation_pending'
+        delete 'destroy_invited'
+      end
+    end
     resources :dash_boards, only: [:index]
     resources :articles, only: %i[index show]
     resources :news, only: %i[index show], param: :uuid
@@ -92,6 +99,13 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         resources :documents, only: %i[index show edit update], param: :uuid, controller: 'sub_request_orders/documents'
       end
       resources :documents, only: %i[index show edit update], param: :uuid
+      resources :documents, except: :index, param: :uuid do
+        get 'set_safety_officer_name', to: 'documents#set_safety_officer_name'
+        get 'set_general_manager_name', to: 'documents#set_general_manager_name'
+        get 'set_safety_manager_name', to: 'documents#set_safety_manager_name'
+        get 'set_hygiene_manager_name', to: 'documents#set_hygiene_manager_name'
+        get 'set_health_and_safety_promoter_name', to: 'documents#set_health_and_safety_promoter_name'
+      end
       resources :field_cars, except: %i[new show edit update], module: :request_orders, param: :uuid do
         collection do
           get 'edit_cars'
@@ -135,6 +149,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     post 'request_orders/:uuid/submit', to: 'request_orders#submit', as: :request_order_submit
     post 'request_orders/:uuid/sub_request_orders/:sub_request_uuid/fix_request', to: 'request_orders#fix_request', as: :request_order_fix_request
     post 'request_orders/:uuid/sub_request_orders/:sub_request_uuid/approve', to: 'request_orders#approve', as: :request_order_approve
+    get 'request_orders/:uuid/edit_approval_status', to: 'request_orders#edit_approval_status', as: :request_order_edit_approval_status
+    post 'request_orders/:uuid/update_approval_status', to: 'request_orders#update_approval_status', as: :request_order_update_approval_status
   end
   # =================================================================
 

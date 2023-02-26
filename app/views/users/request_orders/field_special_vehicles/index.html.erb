@@ -60,7 +60,7 @@
                     <%= not_input_display(field_special_vehicle.sub_driver_name) %>
                   </td>
                   <td>
-                    <%= link_to "削除", users_request_order_field_special_vehicle_path(@request_order, field_special_vehicle), method: :delete, data: { confirm: "#{field_special_vehicle.vehicle_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>                    
+                    <%= link_to "削除", users_request_order_field_special_vehicle_path(@request_order, field_special_vehicle), method: :delete, data: { confirm: "#{field_special_vehicle.vehicle_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
                   </td>
                 </tr>
                 <tr style="border: 0px #fff;">
@@ -72,14 +72,32 @@
                     <%= FieldSpecialVehicle.human_attribute_name(:carry_on_company_name) %><br>
                     <%= not_input_display(field_special_vehicle.carry_on_company_name) %>
                   </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr style="border: 0px #fff;">
+                  <td>
+                    <%= FieldSpecialVehicle.human_attribute_name(:use_company_name) %><br>
+                    <%= not_input_display(field_special_vehicle.use_company_name) %>
+                  </td>
+                  <td>
+                    <%= FieldSpecialVehicle.human_attribute_name(:use_company_representative_name) %><br>
+                    <%= not_input_display(field_special_vehicle.use_company_representative_name) %>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr style="border: 0px #fff;">
                   <td>
                     <%= FieldSpecialVehicle.human_attribute_name(:owning_company_name) %><br>
                     <%= not_input_display(field_special_vehicle.owning_company_name) %>
                   </td>
                   <td>
-                    <%= FieldSpecialVehicle.human_attribute_name(:use_company_name) %><br>
-                    <%= not_input_display(field_special_vehicle.use_company_name) %>
+                    <%= FieldSpecialVehicle.human_attribute_name(:owning_company_representative_name) %><br>
+                    <%= not_input_display(field_special_vehicle.owning_company_representative_name) %>
                   </td>
+                  <td></td>
+                  <td></td>
                 </tr>
                 <tr style="border: 0px #fff;">
                   <td>
@@ -99,15 +117,16 @@
                     <%= not_input_display(field_special_vehicle.lease_type_i18n) %>
                   </td>
                 </tr>
-                <td colspan="2">
-                  <%= FieldSpecialVehicle.human_attribute_name(:contact_prevention) %><br>
-                  <%= not_input_display(field_special_vehicle.contact_prevention) %>
-                </td>
-                <td colspan="2">
-                  <%= FieldSpecialVehicle.human_attribute_name(:precautions) %><br>
-                  <%= not_input_display(field_special_vehicle.precautions) %>
-                </td>
-              </tr>
+                <tr style="border-top: 0px #fff;">
+                  <td colspan="2">
+                    <%= FieldSpecialVehicle.human_attribute_name(:contact_prevention) %><br>
+                    <%= not_input_display(field_special_vehicle.contact_prevention) %>
+                  </td>
+                  <td colspan="2">
+                    <%= FieldSpecialVehicle.human_attribute_name(:precautions) %><br>
+                    <%= not_input_display(field_special_vehicle.precautions) %>
+                  </td>
+                </tr>
               <% end %>
             </tbody>
           </table>

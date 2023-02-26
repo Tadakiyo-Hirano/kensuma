@@ -5,6 +5,8 @@ FactoryBot.define do
     special_med_exam_on { '2021-12-24' }
     max_blood_pressure { 120 }
     min_blood_pressure { 70 }
+    health_condition { 0 }
+    is_med_exam { 0 }
 
     after(:create) do |worker_medical|
       create_list(:worker_exam, 1, worker_medical: worker_medical, special_med_exam: SpecialMedExam.create!(name: 'テスト特別健康診断の種類'))

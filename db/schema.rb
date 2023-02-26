@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_17_061928) do
+ActiveRecord::Schema.define(version: 2023_01_31_030912) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
 
   create_table "businesses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
+    t.integer "business_type", null: false
     t.string "name", null: false
     t.string "name_kana", null: false
     t.string "branch_name", null: false
@@ -91,9 +92,17 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.string "address", null: false
     t.string "post_code", null: false
     t.string "phone_number", null: false
-    t.string "carrier_up_id"
+    t.string "fax_number"
+    t.string "career_up_id"
+    t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.integer "business_type", null: false
+    t.json "occupation_ids"
+    t.json "industry_ids"
+    t.integer "specific_skilled_foreigners_exist"
+    t.integer "foreign_construction_workers_exist"
+    t.integer "foreign_technical_intern_trainees_exist"
+    t.string "employment_manager_name"
+    t.string "employment_manager_post"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -169,6 +178,7 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.json "content"
     t.bigint "business_id", null: false
     t.bigint "request_order_id", null: false
+    t.json "approval_content"
     t.index ["business_id"], name: "index_documents_on_business_id"
     t.index ["request_order_id"], name: "index_documents_on_request_order_id"
   end
@@ -315,6 +325,8 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.integer "sub_driver_worker_id"
     t.string "sub_driver_name"
     t.string "sub_driver_license"
+    t.string "use_company_representative_name"
+    t.string "owning_company_representative_name"
     t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
   end
 
@@ -329,6 +341,9 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "occupation"
+    t.integer "sendoff_education", default: 0, null: false
+    t.string "prime_contractor_confirmation"
     t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
   end
 
@@ -633,6 +648,8 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.string "name"
     t.integer "age"
     t.integer "gender"
+    t.json "invited_user_ids"
+    t.json "invitation_sent_user_ids"
     t.integer "role", default: 1
     t.bigint "admin_user_id"
     t.string "invitation_token"
@@ -677,6 +694,7 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.bigint "worker_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "has_labor_insurance", default: 0
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
   end
 
@@ -700,6 +718,8 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.date "special_med_exam_on"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "health_condition", default: 0, null: false
+    t.integer "is_med_exam", default: 0, null: false
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
   end
 
@@ -742,13 +762,28 @@ ActiveRecord::Schema.define(version: 2023_01_17_061928) do
     t.date "hiring_on", null: false
     t.integer "experience_term_before_hiring", null: false
     t.integer "blank_term", null: false
-    t.string "carrier_up_id"
+    t.string "career_up_id"
     t.json "images"
     t.bigint "business_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "uuid", null: false
     t.string "job_title", null: false
+    t.integer "employment_contract", default: 0, null: false
+    t.string "family_name", null: false
+    t.string "relationship", null: false
+    t.string "email"
+    t.integer "sex", default: 0, null: false
+    t.integer "status_of_residence", default: 0, null: false
+    t.date "maturity_date"
+    t.integer "confirmed_check", default: 0, null: false
+    t.date "confirmed_check_date"
+    t.json "responsible_director"
+    t.string "responsible_name"
+    t.integer "responsible_contact_address"
+    t.json "passport"
+    t.json "residence_card"
+    t.json "employment_conditions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
   end
 

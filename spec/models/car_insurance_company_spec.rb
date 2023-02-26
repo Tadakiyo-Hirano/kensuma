@@ -26,12 +26,12 @@ RSpec.describe CarInsuranceCompany, type: :model do
   end
 
   describe '車両情報とのアソシエーションについて' do
-    context '紐つく車両情報がある場合' do
+    context '紐づく車両情報がある場合' do
       subject do
         company.car_voluntaries << cars
       end
 
-      it '紐つく車両情報を返すこと' do
+      it '紐づく車両情報を返すこと' do
         expect(subject).to eq(cars)
       end
     end

@@ -44,37 +44,44 @@ ja:
         role: 権限
         is_prime_contractor: 元請け
       business:
-        uuid: 事業所ID
-        name: 事業所名
-        name_kana: 事業所名(カナ)
-        branch_name: 支店名、営業所名
+        uuid: 会社ID
+        business_type: 会社形態
+        name: 会社名
+        name_kana: 会社名(カナ)
+        branch_name: 支店名 又は 営業所名
         representative_name: 代表者名
-        email: 事業所メールアドレス
+        email: メールアドレス
         address: 住所
         post_code: 郵便番号
         phone_number: 電話番号
-        carrier_up_id: 事業者ID
-        stamp_images: 電子印
-        business_type: 会社形態
-        occupation_ids: 職種（複数選択）
-        business_health_insurance_status: 健康保険(加入状況)
-        business_health_insurance_association: 健康保険(組合名)
-        business_health_insurance_office_number: 健康保険(事業所整理記号及び事業所番号)
-        business_welfare_pension_insurance_join_status: 厚生年金保険(加入状況)
-        business_welfare_pension_insurance_office_number: 厚生年金保険(事業所整理記号)
-        business_pension_insurance_join_status: 年金保険(加入状況)
-        business_employment_insurance_join_status: 雇用保険(加入状況)
-        business_employment_insurance_number: 雇用保険(番号)
-        business_retirement_benefit_mutual_aid_status: 退職金共済制度(加入状況)
-        construction_license_status: 建設許可証(取得状況)
-        industry_ids: 業種（複数選択）
-        construction_license_permission_type_minister_governor: 建設許可証(種別)
-        construction_license_governor_permission_prefecture: 建設許可証(都道府県)
+        fax_number: FAX
+        career_up_id: 事業者ID(キャリアアップシステム)
+        career_up_card_copy: キャリアアップシステムカードの写し
+        stamp_images: 社印
+        occupation_ids: 職種
+        business_health_insurance_status: 健康保険
+        business_health_insurance_association: 組合名
+        business_health_insurance_office_number: 事業所整理記号及び事業所番号
+        business_welfare_pension_insurance_join_status: 厚生年金保険
+        business_welfare_pension_insurance_office_number: 事業所整理記号
+        business_pension_insurance_join_status: 年金保険(削除予定)
+        business_employment_insurance_join_status: 雇用保険
+        business_employment_insurance_number: 番号
+        business_retirement_benefit_mutual_aid_status: 退職金共済制度
+        construction_license_status: 建設許可証
+        industry_ids: 業種
+        construction_license_permission_type_minister_governor: 建設許可種別
+        construction_license_governor_permission_prefecture: 都道府県知事許可
         construction_license_permission_type_identification_general: 建設許可証(種別)
-        construction_license_number_double_digit: 建設許可証(番号)
+        construction_license_number_double_digit: 建設許可証(和暦年度)
         construction_license_number_six_digits: 建設許可証(番号)
-        construction_license_number: 建設許可証(建設許可番号)
-        construction_license_updated_at: 建設許可証(更新日)
+        construction_license_number: 建設許可番号
+        construction_license_updated_at: 更新日
+        specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
+        foreign_construction_workers_exist: 外国人建設就労者従事状況
+        foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
+        employment_manager_name: 雇用管理責任者(氏名)
+        employment_manager_post: 雇用管理責任者(役職名)
       business_occupation:
         occupation_id: 職種
       business_industry:
@@ -186,7 +193,9 @@ ja:
         vehicle_type: 区分
         carry_on_company_name: 持込会社名
         owning_company_name: 所有会社名
+        owning_company_representative_name: 所有会社の代表者名
         use_company_name: 使用会社名
+        use_company_representative_name: 使用会社の代表者名
         carry_on_date: 持込年月日
         carry_out_date: 搬出予定年月日
         use_place: 使用場所
@@ -198,6 +207,9 @@ ja:
         admission_date_start: 入場年月日(始期)
         admission_date_end: 入場年月日(終期)
         education_date: 新規入場時教育年月日
+        occupation: 職種
+        sendoff_education: 送り出し教育の受講状況
+        prime_contractor_confirmation: 元請け確認者
       order:
         status: ステータス
         # 現場
@@ -260,6 +272,7 @@ ja:
         supervisor_name: 監督員(氏名)
         supervisor_apply: 監督員(権限及び意見の申出方法)
         professional_engineer_name: 専門技術者(氏名)
+        professional_engineer_skill_training_id: 専門技術者(資格内容)
         professional_engineer_details: 専門技術者(担当工事内容)
         professional_construction: 特定専門工事(有無)
         construction_manager_name: 工事担任責任者(氏名)
@@ -267,6 +280,7 @@ ja:
         site_agent_name: 現場代理人(氏名)
         site_agent_apply: 現場代理人(権限及び意見の申出方法)
         lead_engineer_name: 主任技術者(氏名)
+        lead_engineer_skill_training_id: 主任技術者(資格内容)
         lead_engineer_check: 主任技術者(専任or非専任)
         work_chief_name: 作業主任者(氏名)
         work_conductor_name: 作業指揮者名(氏名)
@@ -275,6 +289,7 @@ ja:
         safety_promoter_name: 安全推進者(氏名)
         foreman_name: 職長(氏名)
         registered_core_engineer_name: 登録基幹技能者(氏名)
+        registered_core_engineer_skill_training_id: 登録基幹技能者(資格内容)
       worker:
         name: 名前
         name_kana: 名前カナ
@@ -291,9 +306,23 @@ ja:
         hiring_on: 雇入年月日
         experience_term_before_hiring: 雇入前経験年数
         blank_term: ブランク年数
-        carrier_up_id: 技能者ID
+        career_up_id: 技能者ID
         images: 免許
         business: 事業所
+        employment_contract: 雇用契約書の取り交わし状況
+        family_name: 家族名
+        relationship: 家族続柄
+        email: メールアドレス
+        sex: 性別
+        status_of_residence: 在留資格
+        maturity_date: 在留期間満期日
+        confirmed_check: CCUS登録情報が最新であることの確認
+        responsible_director: 役職
+        responsible_name: 氏名
+        responsible_contact_address: 連絡先(TEL)
+        passport: パスポートの写し
+        residence_card: 在留カードの写し
+        employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
       license:
         name: 名称
         description: 説明
@@ -329,6 +358,7 @@ ja:
         employment_insurance_number: 被保険者番号の下4桁
         severance_pay_mutual_aid_type: 建設業退職金共済制度
         severance_pay_mutual_aid_name: 建設業退職金共済制度名前
+        has_labor_insurance: 労働保険特別加入
       news:
         title: タイトル
         content: 内容
@@ -349,6 +379,8 @@ ja:
         max_blood_pressure: 最高血圧 (mmHg)
         min_blood_pressure: 最低血圧 (mmHg)
         special_med_exam_on: 特別健康診断日
+        health_condition: 最近の健康状態
+        is_med_exam: 健康診断の受診状況
       worker_exam:
         special_med_exam_id: 特別健康診断
         got_on: 取得年月日

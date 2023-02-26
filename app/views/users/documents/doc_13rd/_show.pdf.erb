@@ -3,9 +3,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <% document_info.field_special_vehicles.each do |field_special_vehicle| %>
-  <body class="page-break" style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
-    <div class="ritz grid-container" dir="ltr">
-      <table class="waffle no-grid" cellspacing="0" cellpadding="0">
+  <body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
+    <div class="page-break ritz grid-container" dir="ltr">
+      <table class="waffle no-grid" cellspacing="0" cellpadding="0" style='height: 10px'>
         <tbody>
           <tr style="height: 22px">
             <th id="1612125903R0" style="height: 22px; border: 1px SOLID #ffffff;" class="row-headers-background">
@@ -49,7 +49,7 @@
             <td class="s3"></td>
             <td class="s3"></td>
             <td class="s3"></td>
-            <td class="s4" style="letter-spacing: 200px;">&emsp;</td> <!-- 中心調整 -->
+            <td class="s4" style="letter-spacing: 300px;">&emsp;</td> <!-- 中心調整 -->
             <td class="s4"></td>
             <td class="s5"></td>
             <td class="s5"></td>
@@ -193,7 +193,9 @@
             <td class="s2"></td>
             <td class="s2"></td>
             <td class="s2"></td>
-            <td class="s10" dir="ltr" colspan="8">「提出日（西暦）」13-001</td>
+            <td class="s10" dir="ltr" colspan="8">
+              <%= doc_content_date(@document.content&.[]('date_submitted')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 提出日(西暦) 13-001 -->
+            </td>
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s5"></td>
@@ -227,11 +229,13 @@
             <td class="s6"></td>
             <td class="s6"></td>
             <td class="s6"></td>
+            <td class="s6" style="font-size: 90px;" rowspan="5">［</td>
             <td class="s6"></td>
-            <td class="s14" colspan="9" rowspan="2">
+            <td class="s14" colspan="9" rowspan="2" style="border-bottom: 1px SOLID #ffffff;">
               <%= vehicle_type_crane(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
             </td>
             <td class="s15" colspan="2" rowspan="4">　等</td>
+            <td class="s6" style="font-size: 90px;" rowspan="5">］</td>
             <td class="s0"></td>
             <td class="s15" colspan="4" rowspan="4">使用届</td>
             <td class="s3"></td>
@@ -255,8 +259,6 @@
             <td class="s11"></td>
             <td class="s11"></td>
             <td class="s16"></td>
-            <td class="s11"></td>
-            <td class="s11"></td>
             <td class="s11"></td>
             <td class="s11"></td>
             <td class="s11"></td>
@@ -295,9 +297,7 @@
             <td class="s6"></td>
             <td class="s6"></td>
             <td class="s4"></td>
-            <td class="s4"></td>
-            <td class="s4"></td>
-            <td class="s20"></td>
+            <td class="s4" style="border-right: 1px solid #000000;"></td>
             <td class="s21" colspan="14">所 有 会 社 名</td>
             <td class="s21" colspan="14">代 表 者 名</td>
             <td class="s5"></td>
@@ -328,14 +328,12 @@
             <td class="s6"></td>
             <td class="s6"></td>
             <td class="s4"></td>
-            <td class="s4"></td>
-            <td class="s4"></td>
-            <td class="s20"></td>
+            <td class="s4" style="border-right: 1px solid #000;"></td>
             <td class="s23" dir="ltr" colspan="14" rowspan="3">
               <%= field_special_vehicle.owning_company_name %> <!-- 13-101 所有会社名 -->
             </td>
             <td class="s23" dir="ltr" colspan="12" rowspan="3">
-              <!-- 13-102 代表者名 ※未実装※ -->
+              <%= field_special_vehicle.owning_company_representative_name %>　<!-- 13-102 所有会社の代表者名 -->
             </td>
             <td class="s24" dir="ltr" colspan="2" rowspan="3">
               印 <!-- 13-261 印 -->
@@ -373,8 +371,6 @@
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s4"></td>
-            <td class="s20"></td>
-            <td class="s5"></td>
             <td class="s22" colspan="7">(３) デリック</td>
           </tr>
           <tr style="height: 22px">
@@ -422,8 +418,6 @@
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s4"></td>
-            <td class="s20"></td>
-            <td class="s5"></td>
             <td class="s22" colspan="7">(４) エレベーター</td>
           </tr>
           <tr style="height: 22px">
@@ -515,13 +509,21 @@
             <td class="s28" colspan="2" rowspan="17">Ａクレーン部（上部旋回体）</td>
             <td class="s28" rowspan="5">安全装置</td>
             <td class="s29" colspan="7">巻過防止装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-111</td>
-            <td class="s30" dir="ltr" colspan="2">13-183</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_over_winding_prevention')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-111 (a)Aクレーン部 安全装置 巻過防止装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_over_winding_prevention')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-183 (b)Aクレーン部 安全装置 巻過防止装置 -->
+            </td>
             <td class="s28" colspan="2" rowspan="10">Ｄ安全装置</td>
             <td class="s28" rowspan="6">各種ロック</td>
             <td class="s29" colspan="7">旋回</td>
-            <td class="s30" dir="ltr" colspan="2">13-147</td>
-            <td class="s30" dir="ltr" colspan="2">13-219</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-147 (a)D安全装置 各種ロック 旋回 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('d_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-219 (b)D安全装置 各種ロック 旋回 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(８) ブル・ドーザー</td>
           </tr>
@@ -551,7 +553,7 @@
             <td class="s2"></td>
             <td class="s2"></td>
             <td class="s0" colspan="5" rowspan="2">代 表 者 名</td>
-            <td class="s25" dir="ltr" colspan="10" rowspan="2">
+            <td class="s25" dir="ltr" colspan="10" rowspan="2" style="border-right: none;">
               <%= document_info.content&.[]('subcon_representative_name') %> <!-- 13-008 持込会社の代表者名 -->
             </td>
             <td class="s31" dir="ltr" colspan="2" rowspan="2">
@@ -562,11 +564,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">過負荷防止装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-112</td>
-            <td class="s30" dir="ltr" colspan="2">13-184</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_overload_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-112 (a)Aクレーン部 安全装置 過負荷防止装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_overload_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-184 (b)Aクレーン部 安全装置 過負荷防止装置 -->
+            </td>
             <td class="s29" colspan="7">バケット</td>
-            <td class="s30" dir="ltr" colspan="2">13-148</td>
-            <td class="s30" dir="ltr" colspan="2">13-220</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-148 (a)D安全装置 各種ロック バケット -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('d_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-220 (b)D安全装置 各種ロック バケット -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(９) モーター・グレーダー</td>
           </tr>
@@ -600,11 +610,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">フックのはずれ止め</td>
-            <td class="s30" dir="ltr" colspan="2">13-113</td>
-            <td class="s30" dir="ltr" colspan="2">13-185</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_anti_slip_hook')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-113 (a)Aクレーン部 安全装置 フックのはずれ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_anti_slip_hook')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-185 (b)Aクレーン部 安全装置 フックのはずれ -->
+            </td>
             <td class="s29" colspan="7">ブーム・アーム</td>
-            <td class="s30" dir="ltr" colspan="2">13-149</td>
-            <td class="s30" dir="ltr" colspan="2">13-221</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-149 (a)D安全装置 各種ロック ブーム･アーム -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('d_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-221 (b)D安全装置 各種ロック ブーム･アーム -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(10) トラクターショベル</td>
           </tr>
@@ -642,11 +660,23 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">起伏装置制御</td>
-            <td class="s30" dir="ltr" colspan="2">13-114</td>
-            <td class="s30" dir="ltr" colspan="2">13-186</td>
-            <td class="s32" dir="ltr" colspan="7">「追加項目内容①」13-103</td>
-            <td class="s30" dir="ltr" colspan="2">13-150</td>
-            <td class="s30" dir="ltr" colspan="2">13-222</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_control_of_hoisting_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-114 (a)Aクレーン部 安全装置 起伏装置制御 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_control_of_hoisting_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-186 (b)Aクレーン部 安全装置 起伏装置制御 -->
+            </td>
+            <td class="s32" dir="ltr" colspan="7">
+              <%= @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-103 追加項目内容1 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-222 (b)D安全装置 各種ロック 追加項目1(13-103) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(11) ずり積機</td>
           </tr>
@@ -680,11 +710,23 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">旋回警報装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-115</td>
-            <td class="s30" dir="ltr" colspan="2">13-187</td>
-            <td class="s32" dir="ltr" colspan="7">「追加項目内容②」13-104</td>
-            <td class="s30" dir="ltr" colspan="2">13-151</td>
-            <td class="s30" dir="ltr" colspan="2">13-223</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_swivel_warning_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-115 (a)Aクレーン部 安全装置 旋回警報装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_swivel_warning_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-187 (b)Aクレーン部 安全装置 旋回警報装置 -->
+            </td>
+            <td class="s32" dir="ltr" colspan="7">
+              <%= @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-104 追加項目内容2 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-223 (b)D安全装置 各種ロック 追加項目2(13-104) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(12) スクレーパー</td>
           </tr>
@@ -736,11 +778,23 @@
             <td class="s20"></td>
             <td class="s28" rowspan="9">制御装置・作業装置</td>
             <td class="s29" colspan="7">主巻・補巻</td>
-            <td class="s30" dir="ltr" colspan="2">13-116</td>
-            <td class="s30" dir="ltr" colspan="2">13-188</td>
-            <td class="s32" dir="ltr" colspan="7">「追加項目内容③」13-105</td>
-            <td class="s30" dir="ltr" colspan="2">13-152</td>
-            <td class="s30" dir="ltr" colspan="2">13-224</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_main_supplemental')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-116 (a)Aクレーン部 制御装置･作業装置 主巻･補巻 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_main_supplemental')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-188 (b)Aクレーン部 制御装置･作業装置 主巻･補巻 -->
+            </td>
+            <td class="s32" dir="ltr" colspan="7">
+              <%= @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-105 追加項目内容3 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-224 (b)D安全装置 各種ロック 追加項目3(13-105) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(13) スクレープ・ドーザー</td>
           </tr>
@@ -755,11 +809,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">起伏・旋回</td>
-            <td class="s30" dir="ltr" colspan="2">13-117</td>
-            <td class="s30" dir="ltr" colspan="2">13-189</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_up_down_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-117 (a)Aクレーン部 制御装置･作業装置 起伏･旋回 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_up_down_turning')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-189 (b)Aクレーン部 制御装置･作業装置 起伏･旋回 -->
+            </td>
             <td class="s29" colspan="8">警報装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-153</td>
-            <td class="s30" dir="ltr" colspan="2">13-225</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-153 (a)D安全装置 警報装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('d_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-225 (b)D安全装置 警報装置 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(14) パワー・ショベル</td>
           </tr>
@@ -774,11 +836,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">クラッチ</td>
-            <td class="s30" dir="ltr" colspan="2">13-118</td>
-            <td class="s30" dir="ltr" colspan="2">13-190</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-118 (a)Aクレーン部 制御装置･作業装置 クラッチ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-190 (b)Aクレーン部 制御装置･作業装置 クラッチ -->
+            </td>
             <td class="s29" colspan="8">アウトリガー</td>
-            <td class="s30" dir="ltr" colspan="2">13-154</td>
-            <td class="s30" dir="ltr" colspan="2">13-226</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-154 (a)D安全装置 アウトリガー -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('d_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-226 (b)D安全装置 アウトリガー -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(15) ドラグ・ショベル</td>
           </tr>
@@ -829,11 +899,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">ブレーキ・ロック</td>
-            <td class="s30" dir="ltr" colspan="2">13-119</td>
-            <td class="s30" dir="ltr" colspan="2">13-191</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-119 (a)Aクレーン部 制御装置･作業装置 ブレーキ･ロック -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-191 (b)Aクレーン部 制御装置･作業装置 ブレーキ･ロック -->
+            </td>
             <td class="s29" colspan="8">ヘッドガード</td>
-            <td class="s30" dir="ltr" colspan="2">13-155</td>
-            <td class="s30" dir="ltr" colspan="2">13-227</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_head_guard')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-155 (a)D安全装置 ヘッドガード -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('d_head_guard')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-227 (b)D安全装置 ヘッドガード -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">　（油圧ショベル）</td>
           </tr>
@@ -849,11 +927,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">ジブ</td>
-            <td class="s30" dir="ltr" colspan="2">13-120</td>
-            <td class="s30" dir="ltr" colspan="2">13-192</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-120 (a)Aクレーン部 制御装置･作業装置 ジブ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-192 (b)Aクレーン部 制御装置･作業装置 ジブ -->
+            </td>
             <td class="s29" colspan="8">照明</td>
-            <td class="s30" dir="ltr" colspan="2">13-156</td>
-            <td class="s30" dir="ltr" colspan="2">13-228</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('d_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-156 (a)D安全装置 照明 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('d_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-228 (b)D安全装置 照明 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(16) ドラグライン</td>
           </tr>
@@ -867,12 +953,20 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">滑車</td>
-            <td class="s30" dir="ltr" colspan="2">13-121</td>
-            <td class="s30" dir="ltr" colspan="2">13-193</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-121 (a)Aクレーン部 制御装置･作業装置 滑車 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-193 (b)Aクレーン部 制御装置･作業装置 滑車 -->
+            </td>
             <td class="s28" colspan="2" rowspan="10">Ｅ作業装置</td>
             <td class="s29" colspan="8">操作装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-157</td>
-            <td class="s30" dir="ltr" colspan="2">13-229</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-157 (a)E作業装置 操作装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-229 (b)E作業装置 操作装置 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(17) クラムシェル</td>
           </tr>
@@ -885,7 +979,7 @@
               <%= field_special_vehicle.use_company_name %> <!-- 使用会社名 -->
             </td>
             <td class="s25" dir="ltr" colspan="15" rowspan="3">
-              <%= %> <!-- 13-011 使用会社の代表者名 -->
+              <%= field_special_vehicle.use_company_representative_name %> <!-- 13-011 使用会社の代表者名 -->
             </td>
             <td class="s24" dir="ltr" colspan="2" rowspan="3">
               印 <!-- 印 13-260 -->
@@ -895,11 +989,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">フック・バケット</td>
-            <td class="s30" dir="ltr" colspan="2">13-122</td>
-            <td class="s30" dir="ltr" colspan="2">13-194</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_hook_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-122 (a)Aクレーン部 制御装置･作業装置 フック･バケット -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_hook_bucket')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-194 (b)Aクレーン部 制御装置･作業装置 フック･バケット -->
+            </td>
             <td class="s29" colspan="8">バケット・ブレード</td>
-            <td class="s30" dir="ltr" colspan="2">13-158</td>
-            <td class="s30" dir="ltr" colspan="2">13-230</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_bucket_blade')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-158 (a)E作業装置 バケット･ブレード -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_bucket_blade')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-230 (b)E作業装置 バケット･ブレード -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(18) バケット掘削機</td>
           </tr>
@@ -913,11 +1015,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">ワイヤロープ・チェーン</td>
-            <td class="s30" dir="ltr" colspan="2">13-123</td>
-            <td class="s30" dir="ltr" colspan="2">13-195</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-123 (a)Aクレーン部 制御装置･作業装置 ワイヤロープ･チェーン -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-195 (b)Aクレーン部 制御装置･作業装置 ワイヤロープ･チェーン -->
+            </td>
             <td class="s29" colspan="8">ブーム・アーム</td>
-            <td class="s30" dir="ltr" colspan="2">13-159</td>
-            <td class="s30" dir="ltr" colspan="2">13-231</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-159 (a)E作業装置 ブーム･アーム -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_boom_arm')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-231 (b)E作業装置 ブーム･アーム -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(19) トレンチャー</td>
           </tr>
@@ -931,11 +1041,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">玉掛用具</td>
-            <td class="s30" dir="ltr" colspan="2">13-124</td>
-            <td class="s30" dir="ltr" colspan="2">13-196</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_slinging_tool')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-124 (a)Aクレーン部 制御装置･作業装置 玉掛用具 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_slinging_tool')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-196 (b)Aクレーン部 制御装置･作業装置 玉掛用具 -->
+            </td>
             <td class="s29" colspan="8">ジブ</td>
-            <td class="s30" dir="ltr" colspan="2">13-160</td>
-            <td class="s30" dir="ltr" colspan="2">13-232</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-160 (a)E作業装置 ジブ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_jib')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-232 (b)E作業装置 ジブ -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(20) コンクリート圧砕機</td>
           </tr>
@@ -956,11 +1074,19 @@
             <td class="s20"></td>
             <td class="s28" rowspan="3">その他</td>
             <td class="s29" colspan="7">操作装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-125</td>
-            <td class="s30" dir="ltr" colspan="2">13-197</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-125 (a)Aクレーン部 その他 操作装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-197 (b)Aクレーン部 その他 操作装置 -->
+            </td>
             <td class="s29" colspan="8">リーダ</td>
-            <td class="s30" dir="ltr" colspan="2">13-161</td>
-            <td class="s30" dir="ltr" colspan="2">13-233</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_reader')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-161 (a)E作業装置 リーダ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_reader')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-233 (b)E作業装置 リーダ -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(21) くい打機</td>
           </tr>
@@ -974,11 +1100,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">性能表示</td>
-            <td class="s30" dir="ltr" colspan="2">13-126</td>
-            <td class="s30" dir="ltr" colspan="2">13-198</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_performance_indication')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-126 (a)Aクレーン部 その他 性能表示 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_performance_indication')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-198 (b)Aクレーン部 その他 性能表示 -->
+            </td>
             <td class="s29" colspan="8">ハンマ・オーガ・バイブロ</td>
-            <td class="s30" dir="ltr" colspan="2">13-162</td>
-            <td class="s30" dir="ltr" colspan="2">13-234</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_hammer_auger_vibro')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-162 (a)E作業装置 ハンマ･オーガ･バイブロ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_hammer_auger_vibro')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-234 (b)E作業装置 ハンマ･オーガ･バイブロ -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(22) くい抜機</td>
           </tr>
@@ -992,11 +1126,19 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">照明</td>
-            <td class="s30" dir="ltr" colspan="2">13-127</td>
-            <td class="s30" dir="ltr" colspan="2">13-199</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('a_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-127 (a)Aクレーン部 その他 照明 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('a_lighting')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-199 (b)Aクレーン部 その他 照明 -->
+            </td>
             <td class="s29" colspan="8">油圧駆動装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-163</td>
-            <td class="s30" dir="ltr" colspan="2">13-235</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_hydraulic_drive_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-163 (a)E作業装置 油圧駆動装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_hydraulic_drive_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-235 (b)E作業装置 油圧駆動装置 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(23) アース・ドリル</td>
           </tr>
@@ -1029,11 +1171,19 @@
             <td class="s28" colspan="2" rowspan="14">Ｂ車両部（下部走行体）</td>
             <td class="s28" rowspan="5">走行部</td>
             <td class="s29" colspan="7">ブレーキ</td>
-            <td class="s30" dir="ltr" colspan="2">13-128</td>
-            <td class="s30" dir="ltr" colspan="2">13-200</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-128 (a)B車両部 走行部 ブレーキ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-200 (b)B車両部 走行部 ブレーキ -->
+            </td>
             <td class="s29" colspan="8">ワイヤロープ・チェーン</td>
-            <td class="s30" dir="ltr" colspan="2">13-164</td>
-            <td class="s30" dir="ltr" colspan="2">13-236</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-164 (a)E作業装置 ワイヤロープ･チェーン -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_wire_rope_chain')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-236 (b)E作業装置 ワイヤロープ･チェーン -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(24) リバース・サーキュレー</td>
           </tr>
@@ -1047,11 +1197,19 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">クラッチ</td>
-            <td class="s30" dir="ltr" colspan="2">13-129</td>
-            <td class="s30" dir="ltr" colspan="2">13-201</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-129 (a)B車両部 走行部 クラッチ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-201 (b)B車両部 走行部 クラッチ -->
+            </td>
             <td class="s29" colspan="8">吊り具等</td>
-            <td class="s30" dir="ltr" colspan="2">13-165</td>
-            <td class="s30" dir="ltr" colspan="2">13-237</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_hanger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-165 (a)E作業装置 吊り具等 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_hanger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-237 (b)E作業装置 吊り具等 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">ション・ドリル</td>
           </tr>
@@ -1065,11 +1223,19 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">ハンドル</td>
-            <td class="s30" dir="ltr" colspan="2">13-130</td>
-            <td class="s30" dir="ltr" colspan="2">13-202</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_handle')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-130 (a)B車両部 走行部 ハンドル -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_handle')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-202 (b)B車両部 走行部 ハンドル -->
+            </td>
             <td class="s29" colspan="8">滑車</td>
-            <td class="s30" dir="ltr" colspan="2">13-166</td>
-            <td class="s30" dir="ltr" colspan="2">13-238</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('e_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-166 (a)E作業装置 滑車 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('e_pulley')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-238 (b)E作業装置 滑車 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(25) せん孔機</td>
           </tr>
@@ -1092,12 +1258,20 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">タイヤ</td>
-            <td class="s30" dir="ltr" colspan="2">13-131</td>
-            <td class="s30" dir="ltr" colspan="2">13-203</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_tire')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-131 (a)B車両部 走行部 タイヤ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_tire')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-203 (b)B車両部 走行部 タイヤ -->
+            </td>
             <td class="s28" colspan="2" rowspan="7">Ｆ走行部</td>
             <td class="s29" colspan="8">ブレーキ</td>
-            <td class="s30" dir="ltr" colspan="2">13-167</td>
-            <td class="s30" dir="ltr" colspan="2">13-239</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('f_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-167 (a)F走行部 ブレーキ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('f_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-239 (b)F走行部 ブレーキ -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(26) アース・オーガー</td>
           </tr>
@@ -1110,11 +1284,19 @@
             <td class="s35" colspan="2" rowspan="4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">クローラ</td>
-            <td class="s30" dir="ltr" colspan="2">13-132</td>
-            <td class="s30" dir="ltr" colspan="2">13-204</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-132 (a)B車両部 走行部 クローラ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-204 (b)B車両部 走行部 クローラ -->
+            </td>
             <td class="s29" colspan="8">駐車ブレーキ</td>
-            <td class="s30" dir="ltr" colspan="2">13-168</td>
-            <td class="s30" dir="ltr" colspan="2">13-240</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('f_parking_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-168 (a)F走行部 駐車ブレーキ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('f_parking_brake')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-240 (b)F走行部 駐車ブレーキ -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(27) ペーパー・ドレーン・</td>
           </tr>
@@ -1134,11 +1316,19 @@
             <td class="s20"></td>
             <td class="s28" rowspan="9">安全装置等</td>
             <td class="s29" colspan="7">警報装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-133</td>
-            <td class="s30" dir="ltr" colspan="2">13-205</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-133 (a)B車両部 安全装置等 警報装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_alarm_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-205 (b)B車両部 安全装置等 警報装置 -->
+            </td>
             <td class="s29" colspan="8">ブレーキロック</td>
-            <td class="s30" dir="ltr" colspan="2">13-169</td>
-            <td class="s30" dir="ltr" colspan="2">13-241</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('f_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-169 (a)F走行部 ブレーキロック -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('f_brake_lock')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-241 (b)F走行部 ブレーキロック -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">　　マシン</td>
           </tr>
@@ -1149,11 +1339,19 @@
             <td class="s7"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">各種ミラー</td>
-            <td class="s30" dir="ltr" colspan="2">13-134</td>
-            <td class="s30" dir="ltr" colspan="2">13-206</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_various_mirrors')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-134 (a)B車両部 安全装置等 各種ミラー -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_various_mirrors')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-206 (b)B車両部 安全装置等 各種ミラー -->
+            </td>
             <td class="s29" colspan="8">クラッチ</td>
-            <td class="s30" dir="ltr" colspan="2">13-170</td>
-            <td class="s30" dir="ltr" colspan="2">13-242</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('f_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-170 (a)F走行部 クラッチ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('f_clutch')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-242 (b)F走行部 クラッチ -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(28) 地下連続壁施工機械</td>
           </tr>
@@ -1168,11 +1366,19 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">方向指示器</td>
-            <td class="s30" dir="ltr" colspan="2">13-135</td>
-            <td class="s30" dir="ltr" colspan="2">13-207</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_direction_indicator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-135 (a)B車両部 安全装置等 方向指示器 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_direction_indicator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-207 (b)B車両部 安全装置等 方向指示器 -->
+            </td>
             <td class="s29" colspan="8">操縦装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-171</td>
-            <td class="s30" dir="ltr" colspan="2">13-243</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('f_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-171 (a)F走行部 操縦装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('f_control_unit')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-243 (b)F走行部 操縦装置 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(29) ローラー</td>
           </tr>
@@ -1186,11 +1392,19 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">前後照灯</td>
-            <td class="s30" dir="ltr" colspan="2">13-136</td>
-            <td class="s30" dir="ltr" colspan="2">13-208</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_headlights')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-136 (a)B車両部 安全装置等 前後照灯 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_headlights')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-208 (b)B車両部 安全装置等 前後照灯 -->
+            </td>
             <td class="s29" colspan="8">タイヤ・鉄輪</td>
-            <td class="s30" dir="ltr" colspan="2">13-172</td>
-            <td class="s30" dir="ltr" colspan="2">13-244</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('f_tires_iron_wheel')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-172 (a)F走行部 タイヤ･鉄輪 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('f_tires_iron_wheel')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-244 (b)F走行部 タイヤ･鉄輪 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(30) クローラドリル</td>
           </tr>
@@ -1210,11 +1424,19 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">左折プロテクター</td>
-            <td class="s30" dir="ltr" colspan="2">13-137</td>
-            <td class="s30" dir="ltr" colspan="2">13-209</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_left_turn_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-137 (a)B車両部 安全装置等 左折プロテクター -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_left_turn_protector')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-209 (b)B車両部 安全装置等 左折プロテクター -->
+            </td>
             <td class="s29" colspan="8">クローラ</td>
-            <td class="s30" dir="ltr" colspan="2">13-173</td>
-            <td class="s30" dir="ltr" colspan="2">13-245</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('f_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-173 (a)F走行部 クローラ -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('f_crawler')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-245 (b)F走行部 クローラ -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(31) ドリルジャンボ</td>
           </tr>
@@ -1228,12 +1450,20 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">アウトリガー</td>
-            <td class="s30" dir="ltr" colspan="2">13-138</td>
-            <td class="s30" dir="ltr" colspan="2">13-210</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-138 (a)B車両部 安全装置等 アウトリガー -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_outrigger')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-210 (b)B車両部 安全装置等 アウトリガー -->
+            </td>
             <td class="s28" colspan="2" rowspan="5">Ｇ電気装置</td>
             <td class="s29" colspan="8">配電盤</td>
-            <td class="s30" dir="ltr" colspan="2">13-174</td>
-            <td class="s30" dir="ltr" colspan="2">13-246</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('g_switchboard')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-174 (a)G電気装置 配電盤 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('g_switchboard')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-246 (b)G電気装置 配電盤 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(32) ロードヘッダー</td>
           </tr>
@@ -1253,11 +1483,19 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">昇降装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-139</td>
-            <td class="s30" dir="ltr" colspan="2">13-211</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-139 (a)B車両部 安全装置等 昇降装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-211 (b)B車両部 安全装置等 昇降装置 -->
+            </td>
             <td class="s29" colspan="8">配線</td>
-            <td class="s30" dir="ltr" colspan="2">13-175</td>
-            <td class="s30" dir="ltr" colspan="2">13-247</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('g_wiring')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-175 (a)G電気装置 配線 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('g_wiring')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-247 (b)G電気装置 配線 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(33) アスファルトフイニッ</td>
           </tr>
@@ -1271,11 +1509,19 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">ベッセル</td>
-            <td class="s30" dir="ltr" colspan="2">13-140</td>
-            <td class="s30" dir="ltr" colspan="2">13-212</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_vessel')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-140 (a)B車両部 安全装置等 ベッセル -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('b_vessel')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-212 (b)B車両部 安全装置等 ベッセル -->
+            </td>
             <td class="s29" colspan="8">絶縁</td>
-            <td class="s30" dir="ltr" colspan="2">13-176</td>
-            <td class="s30" dir="ltr" colspan="2">13-248</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('g_isolation')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-176 (a)G電気装置 絶縁 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('g_isolation')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-248 (b)G電気装置 絶縁 -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">　　シャー</td>
           </tr>
@@ -1303,11 +1549,20 @@
             <td class="s35"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">後方監視装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-141</td>
-            <td class="s30" dir="ltr" colspan="2">13-213</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('b_rearward_monitoring_devices')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-141 (a)B車両部 安全装置等 後方監視装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-213 (b)B車両部 安全装置等 後方監視装置 -->
+            </td>
+            </td>
             <td class="s29" colspan="8">アース</td>
-            <td class="s30" dir="ltr" colspan="2">13-177</td>
-            <td class="s30" dir="ltr" colspan="2">13-249</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('g_earth')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-177 (a)G電気装置 アース -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('g_earth')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-249 (b)G電気装置 アース -->
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(34) スタビライザ</td>
           </tr>
@@ -1323,11 +1578,23 @@
             <td class="s28" colspan="2" rowspan="5">Ｃゴンドラ</td>
             <td class="s28" rowspan="5"></td>
             <td class="s29" colspan="7">突りょう</td>
-            <td class="s30" dir="ltr" colspan="2">13-142</td>
-            <td class="s30" dir="ltr" colspan="2">13-214</td>
-            <td class="s41" dir="ltr" colspan="8">「追加項目④」13-106</td>
-            <td class="s30" dir="ltr" colspan="2">13-178</td>
-            <td class="s30" dir="ltr" colspan="2">13-250</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('c_piercing')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-142 (a)Cゴンドラ 突りょう -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('c_piercing')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-214 (b)Cゴンドラ 突りょう -->
+            </td>
+            <td class="s41" dir="ltr" colspan="8">
+              <%= @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-106 追加項目内容4 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-250 (b)Hその他 追加項目4(13-106) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(35) ロードプレーナ</td>
           </tr>
@@ -1345,12 +1612,24 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">作業床</td>
-            <td class="s30" dir="ltr" colspan="2">13-143</td>
-            <td class="s30" dir="ltr" colspan="2">13-215</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('c_workbench')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-143 (a)Cゴンドラ 作業床 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('c_workbench')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-215 (b)Cゴンドラ 作業床 -->
+            </td>
             <td class="s28" colspan="2" rowspan="4">Ｈその他</td>
-            <td class="s41" dir="ltr" colspan="8">「追加項目⑤」13-107</td>
-            <td class="s30" dir="ltr" colspan="2">13-179</td>
-            <td class="s30" dir="ltr" colspan="2">13-251</td>
+            <td class="s41" dir="ltr" colspan="8">
+              <%= @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-107 追加項目内容5 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-251 (b)Hその他 追加項目5(13-107) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(36) ロードカッター</td>
           </tr>
@@ -1364,11 +1643,23 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">昇降装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-144</td>
-            <td class="s30" dir="ltr" colspan="2">13-216</td>
-            <td class="s41" dir="ltr" colspan="8">「追加項目⑥」13-108</td>
-            <td class="s30" dir="ltr" colspan="2">13-180</td>
-            <td class="s30" dir="ltr" colspan="2">13-252</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('c_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-144 (a)Cゴンドラ 昇降装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('c_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-216 (b)Cゴンドラ 昇降装置 -->
+            </td>
+            <td class="s41" dir="ltr" colspan="8">
+              <%= @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-108 追加項目内容6 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-252 (b)Hその他 追加項目6(13-108) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(37) コンクリート吹付機</td>
           </tr>
@@ -1386,11 +1677,23 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">電気装置</td>
-            <td class="s30" dir="ltr" colspan="2">13-145</td>
-            <td class="s30" dir="ltr" colspan="2">13-217</td>
-            <td class="s41" dir="ltr" colspan="8">「追加項目⑦」13-109</td>
-            <td class="s30" dir="ltr" colspan="2">13-181</td>
-            <td class="s30" dir="ltr" colspan="2">13-253</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('c_electrical_equipment')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-145 (a)Cゴンドラ 電気装置 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('c_electrical_equipment')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-217 (b)Cゴンドラ 電気装置 -->
+            </td>
+            <td class="s41" dir="ltr" colspan="8">
+              <%= @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-109 追加項目内容7 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-253 (b)Hその他 追加項目7(13-109) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(38) ボーリングマシーン</td>
           </tr>
@@ -1404,11 +1707,23 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s29" colspan="7">ワイヤ・ライフライン</td>
-            <td class="s30" dir="ltr" colspan="2">13-146</td>
-            <td class="s30" dir="ltr" colspan="2">13-218</td>
-            <td class="s41" dir="ltr" colspan="8">「追加項目⑧」13-110</td>
-            <td class="s30" dir="ltr" colspan="2">13-182</td>
-            <td class="s30" dir="ltr" colspan="2">13-254</td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('c_wire_lifeline')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-146 (a)Cゴンドラ ワイヤ･ライフライン -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.approval_content&.[]('c_wire_lifeline')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-218 (b)Cゴンドラ ワイヤ･ライフライン -->
+            </td>
+            <td class="s41" dir="ltr" colspan="8">
+              <%= @document.content&.[]('d_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-110 追加項目内容8 -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <%= checked_none_box(@document.content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
+            </td>
+            <td class="s30" dir="ltr" colspan="2">
+              <% unless @document.content&.[]('h_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-254 (b)Hその他 追加項目8(13-110) -->
+              <% end %>
+            </td>
             <td class="s5"></td>
             <td class="s22" colspan="7">(39) ブレーカ</td>
           </tr>
@@ -1439,7 +1754,7 @@
             <td class="s42" colspan="6">年 月 日</td>
             <td class="s28" rowspan="3">点検者</td>
             <td class="s24" dir="ltr" colspan="4" rowspan="3">
-              <!-- 13-256 (a)点検年月日 ※未実装※ -->
+              <%= @document.content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-256 (a)点検者 -->
             </td>
             <td class="s43" dir="ltr" rowspan="3">
               印 <!-- 13-262 印 -->
@@ -1449,7 +1764,7 @@
             <td class="s42" colspan="6">年 月 日</td>
             <td class="s28" rowspan="3">点検者</td>
             <td class="s24" dir="ltr" colspan="4" rowspan="3">
-              <!-- 13-258 (b)点検者名 ※未実装※ -->
+              <%= @document.approval_content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-258 (b)点検者名 -->
             </td>
             <td class="s43" dir="ltr" rowspan="3">
               印 <!-- 13-263 印 -->
@@ -1467,10 +1782,10 @@
             <td class="s4"></td>
             <td class="s20"></td>
             <td class="s38" dir="ltr" colspan="6" rowspan="2">
-              <!-- 13-255 (a)点検年月日 ※未実装※ --> 
+              <%= wareki(@document.content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-255 (a)点検年月日 --> 
             </td>
             <td class="s38" dir="ltr" colspan="6" rowspan="2">
-              <!-- 13-257 (b)点検年月日 ※未実装※ -->
+              <%= wareki(@document.approval_content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-257 (b)点検年月日 -->
             </td>
             <td class="s4"></td>
             <td class="s22" colspan="7">(41) 解体用つかみ機</td>
@@ -1791,16 +2106,16 @@
             <td class="s7"></td>
             <td class="s8" colspan="2" rowspan="3">担当者</td>
             <td class="s23" dir="ltr" colspan="11" rowspan="3">
-              <!-- 13-037 元請確認欄・担当者 ※未実装※ -->
+              <%= @document.approval_content&.[]('prime_contractor_confirmation')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-037 元請確認欄･担当者 -->
             </td>
             <td class="s23" dir="ltr" colspan="12" rowspan="3">
-              <!-- 13-038 受付番号 ※未実装※ -->
+              <%= @document.approval_content&.[]('receipt_number')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-038 受付番号 -->
             </td>
             <td class="s36" dir="ltr" colspan="7" rowspan="3">
-              <!-- 13-039 受付確認年月日 ※未実装※ -->
+              <%= wareki(@document.content&.[]('reception_confirmation_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-039 受付確認年月日 -->
             </td>
             <td class="s36" dir="ltr" colspan="5" rowspan="3">
-              <!-- 13-040 受付確認者 ※未実装※ -->
+              <%= @document.content&.[]('person_confirming_receipt')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-040 受付確認者 -->
             </td>
             <td class="s4"></td>
             <td class="s4"></td>
@@ -1890,7 +2205,7 @@
         </tbody>
       </table>
     </div>
-    <div class="doc_13th_image">
+    <div class="doc_13rd_image">
       <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABkCAYAAAA8AQ3AAAAFFElEQVR4Xu3XPy+kexjH4Z9kQyIhJKYYU/AK6DRK7wWVQkQkiskUOtTiBWkVOg0SfxITIjQG8RyzOVtxCs99cmdn95Jstth83Y/rmXxih4ovAgQIDIjA0IA8p8ckQIBAESwfAgIEBkZAsAbmVXlQAgQEy2eAAIGBERCsgXlVHpQAAcHyGSBAYGAEBGtgXpUHJUBAsHwGCBAYGAHBGphX5UEJEKgdrL29ver6+rr0/zw9PZWLi4svNU9OTmrf8HoIEPi9BRYXF6vHx8cvH7LRaJRms1mmpqZKq9Uqm5ub4RZ8+xvMzc1Vp6enZXp6uszMzJTR0dGfDzM+Pl6qqvr04B9h+/aN3/sVeToCBH4JbG1tVb1e70uQbrdb7u/vS//f+7/QXF5elre3t7KwsFCOjo5qdaHOqNrY2Ci7u7t1tt40AQJ/sUCn06na7XZfoFY/6ox+Hvw4XGf7F78qPzoBAv8K9P8rVqsfdUaC5XNHgEAtgcPDw2p5edlvWLX0jAgQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIGIgGBF9GwJEEgVEKxUbscIEIgICFZEz5YAgVQBwUrldowAgYiAYEX0bAkQSBUQrFRuxwgQiAgIVkTPlgCBVAHBSuV2jACBiIBgRfRsCRBIFRCsVG7HCBCICAhWRM+WAIFUAcFK5XaMAIH/QaD6+B5Ddb5PnVHVbrdLp9Ops63zjDYECPwhAvv7+9X6+nr/p6nVjzqjant7u+zs7NTZ/iHsfgwCBH4JHBwc9H9j+vT1+vparq6uSq/XK91ut9ze3pbj4+Py/v5e7u7uavXj26NGo1GNjY2VpaWl0v97ZGSktFqtMjw8XKrq83OvrKx8+4aPAgECgyEwMTFRPTw8fPmwH60ozWaz/Pjxo8zOzpbJyckyPz9f1tbWajeh1nB1dbU6OzsrNzc35fn5uZyfn5eXl5f/Eq51YzBel6ckQCBTQEwytd0iQCAkIFghPmMCBDIFBCtT2y0CBEICghXiMyZAIFNAsDK13SJAICQgWCE+YwIEMgUEK1PbLQIEQgKCFeIzJkAgU0CwMrXdIkAgJCBYIT5jAgQyBQQrU9stAgRCAoIV4jMmQCBTQLAytd0iQCAk8A8IBa+DqEh0OQAAAABJRU5ErkJggg=="> -->
     </div>
   </body>
@@ -1903,8 +2218,7 @@
 
   .ritz .waffle .s14 {
     border-right: 1px SOLID #ffffff;
-    border-bottom: 1px SOLID #ccffcc;
-    background-color: #ccffcc;
+    border-bottom: none;
     text-align: center;
     font-weight: bold;
     color: #000000;
@@ -2031,7 +2345,6 @@
   .ritz .waffle .s32 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: left;
     color: #000000;
     font-family: 'docs-Roboto', Arial;
@@ -2057,7 +2370,6 @@
 
   .ritz .waffle .s37 {
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2200,8 +2512,7 @@
   .ritz .waffle .s30 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
-    text-align: left;
+    text-align: center;
     color: #000000;
     font-family: 'Arial';
     font-size: 11pt;
@@ -2226,7 +2537,6 @@
 
   .ritz .waffle .s25 {
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2240,7 +2550,6 @@
   .ritz .waffle .s24 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2296,10 +2605,9 @@
   }
 
   .ritz .waffle .s26 {
-    border-right: 1px SOLID #ccffcc;
-    border-left: 1px SOLID #ccffcc;
+    border-right: none;
+    border-left: none;
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2326,7 +2634,6 @@
   .ritz .waffle .s41 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: left;
     color: #000000;
     font-family: 'Arial';
@@ -2356,7 +2663,6 @@
   .ritz .waffle .s23 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2370,7 +2676,6 @@
   .ritz .waffle .s38 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2397,9 +2702,8 @@
 
   .ritz .waffle .s31 {
     border-right: 1px SOLID #ffffff;
-    border-left: 1px SOLID #ccffcc;
+    border-left: none;
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2415,7 +2719,6 @@
   .ritz .waffle .s43 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2445,7 +2748,6 @@
   .ritz .waffle .s10 {
     border-right: 1px SOLID #ffffff;
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2487,9 +2789,8 @@
   .ritz .waffle .s27 {
     border-top: 1px SOLID #000000;
     border-bottom: 1px SOLID 000000;
-    border-right: 1px SOLID #ccffcc;
-    border-left: 1px SOLID #ccffcc;
-    background-color: #ccffcc;
+    border-right: none;
+    border-left: none;
     text-align: left;
     color: #000000;
     font-family: 'Arial';
@@ -2558,7 +2859,6 @@
   .ritz .waffle .s36 {
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
-    background-color: #ccffcc;
     text-align: center;
     color: #000000;
     font-family: 'Arial';
@@ -2584,7 +2884,7 @@
     padding: 0px 3px 0px 3px;
   }
 
-  .doc_13th_image {
+  .doc_13rd_image {
     position: relative;
     bottom: 1490px;
     left: 375

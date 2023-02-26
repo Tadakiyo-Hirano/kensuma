@@ -57,7 +57,8 @@ module Users::RequestOrders
     end
 
     def field_workers_params
-      params.require(:request_order).permit(field_workers: %i[admission_date_start admission_date_end education_date])[:field_workers]
+      params.require(:request_order).permit(field_workers: %i[admission_date_start admission_date_end education_date
+                                                              sendoff_education])[:field_workers]
     end
   end
 end

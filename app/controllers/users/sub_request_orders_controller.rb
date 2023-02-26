@@ -1,11 +1,14 @@
 module Users
   class SubRequestOrdersController < Users::Base
     before_action :set_request_order
+    before_action :order_restriction_after_approved, only: %i[new create]
 
     def index; end
 
     def new
-      @businesses = Business.where.not(id: current_business)
+      businesses = current_user.invited_user_ids&.map { |id| User.find(id).business }
+      @request_order.children.map { |child| businesses.delete(Business.find(child.business_id)) }.compact
+      @businesses = businesses
     end
 
     def create
@@ -33,6 +36,14 @@ module Users
     def create_documents!(request_order)
       Document::OPERATABLE_DOC_TYPE.each do |document_type|
         request_order.documents.create!(document_type: document_type, business_id: request_order.business_id)
+      end
+    end
+
+    def order_restriction_after_approved
+      request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+      if request_order.status == 'approved'
+        flash[:danger] = '承認されているため依頼できません'
+        redirect_to users_request_order_url(uuid: params[:request_order_uuid])
       end
     end
   end

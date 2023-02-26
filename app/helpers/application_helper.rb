@@ -30,7 +30,7 @@ module ApplicationHelper
     text.nil? || text.blank? ? '未登録' : text
   end
 
-  # 自身と、自身の階層下の現場情報
+  # 自身と、自身の階層下の現場情報（元請情報）
   def document_site_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     if params[:sub_request_order_uuid]
@@ -40,7 +40,7 @@ module ApplicationHelper
     end
   end
 
-  # 自身と、自身の階層下の書類情報
+  # 自身と、自身の階層下の書類情報 →現場情報を含まない情報の取得時
   def document_info
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     if params[:sub_request_order_uuid]
@@ -48,21 +48,6 @@ module ApplicationHelper
     else
       request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
     end
-  end
-
-  # 和暦表示
-  def date_select_ja(src_html)
-    dst_html = src_html.gsub(/>\d{4}</) do |m|
-      year = m.match(/>(\d{4})</)[1].to_i
-      year_ja = case year
-                when 2018
-                  '平成30/令和元年'
-                else
-                  "令和#{year - 2018}"
-                end
-      ">#{year_ja}<"
-    end
-    dst_html.html_safe
   end
 
   # 会社名の表示

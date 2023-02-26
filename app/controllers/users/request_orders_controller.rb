@@ -4,6 +4,7 @@ module Users
     before_action :set_request_order, except: :index
     before_action :set_sub_request_order, only: %i[fix_request approve]
     before_action :exclude_prime_contractor, only: %i[edit update]
+    before_action :redirect_unless_prime_contractor, only: %i[update_approval_status edit_approval_status]
 
     def index
       @request_orders = current_business.request_orders
@@ -83,6 +84,27 @@ module Users
       redirect_to users_request_order_path(@request_order)
     end
 
+    def edit_approval_status; end
+
+    def update_approval_status
+      if params[:resecission_uuid].present?
+        request_order = RequestOrder.find_by(uuid: params[:resecission_uuid])
+        request_order.update_column(:status, 'requested')
+        if request_order.parent_id.present?
+          loop do
+            request_order = request_order.parent
+            request_order.update_column(:status, 'requested')
+            break if request_order.parent_id.nil?
+          end
+        end
+        flash[:success] = '承認取り消しに成功しました！'
+        redirect_to users_request_order_url(@request_order)
+      else
+        flash[:danger] = '承認を取り消すものを選んでください'
+        render :edit_approval_status
+      end
+    end
+
     private
 
     def set_request_order
@@ -98,6 +120,10 @@ module Users
       redirect_to users_request_order_url if @request_order.parent_id.nil?
     end
 
+    def redirect_unless_prime_contractor
+      redirect_to users_request_order_url unless @request_order.parent_id.nil?
+    end
+
     def request_order_params
       params.require(:request_order).permit(
         :primary_subcontractor,
@@ -110,6 +136,7 @@ module Users
         :supervisor_name,
         :supervisor_apply,
         :professional_engineer_name,
+        :professional_engineer_skill_training_id,
         :professional_engineer_details,
         :professional_construction,
         :construction_manager_name,
@@ -124,15 +151,28 @@ module Users
         :safety_manager_name,
         :safety_promoter_name,
         :foreman_name,
-        :registered_core_engineer_name
+        :registered_core_engineer_name,
+        content:
+                 %i[
+                   professional_engineer_skill_training_id
+                   lead_engineer_skill_training_id
+                   registered_core_engineer_skill_training_id
+                 ]
       ).merge(
         content: {
+          # このrubocop除外設定はのちに修正されます,Layout/LineLength一行の文字数140を超えている
+          # rubocop:disable Layout/LineLength
+          professional_engineer_skill_training_id:                            params[:request_order][:content][:professional_engineer_skill_training_id],
+          lead_engineer_skill_training_id:                                    params[:request_order][:content][:lead_engineer_skill_training_id],
+          registered_core_engineer_skill_training_id:                         params[:request_order][:content][:registered_core_engineer_skill_training_id],
+          # rubocop:enable Layout/LineLength
           subcon_name:                                                        current_business.name,                                             # 会社名
           subcon_branch_name:                                                 current_business.branch_name,                                      # 支店･営業所名
           subcon_address:                                                     current_business.address,                                          # 会社住所
           subcon_post_code:                                                   current_business.post_code,                                        # 会社郵便番号
           subcon_phone_number:                                                current_business.phone_number,                                     # 会社電話番号
-          subcon_carrier_up_id:                                               current_business.carrier_up_id,                                    # 事業所ID(キャリアアップ)
+          subcon_fax_number:                                                  current_business.fax_number,                                       # 会社FAX番号
+          subcon_career_up_id:                                                current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
           subcon_representative_name:                                         current_business.representative_name,                              # 代表者名
           subcon_health_insurance_status:                                     current_business.business_health_insurance_status,                 # 健康保険加入状況
           subcon_health_insurance_association:                                current_business.business_health_insurance_association,            # 健康保険会社
@@ -146,6 +186,10 @@ module Users
           subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
           subcon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
           subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
+          subcon_employment_manager_name:                                     current_business.employment_manager_name,                                          # 雇用管理責任者名
+          subcon_specific_skilled_foreigners_exist:                           current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
+          subcon_foreign_construction_workers_exist:                          current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
+          subcon_foreign_technical_intern_trainees_exist:                     current_business.foreign_technical_intern_trainees_exist_i18n,                     # 外国人技能実習生の従事の状況(有無)
           subcon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
         }
       )
