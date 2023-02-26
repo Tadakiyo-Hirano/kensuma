@@ -51,10 +51,10 @@ class Worker < ApplicationRecord
   validates :employment_contract, presence: true
   validates :family_name, presence: true
   validates :relationship, presence: true
-  validates :sex, presence: true
-  validates :status_of_residence, presence: true
+  # validates :sex, presence: true
+  # validates :status_of_residence, presence: true
   # validates :maturity_date
-  validates :confirmed_check, presence: true
+  # validates :confirmed_check, presence: true
   # validates :confirmed_check_date
   # validates :responsible_director
   # validates :responsible_name
