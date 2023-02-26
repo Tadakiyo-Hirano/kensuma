@@ -81,6 +81,24 @@
 <%= f.label :career_up_id %>
 <%= f.text_field :career_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:career_up_id) %><br>
 
+<!-- 外国人労働者情報ここから -->
+<!-- 在留資格 -->
+<%= f.label :status_of_residence %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.collection_radio_buttons :status_of_residence, [['特定活動'], ['特定技能']], :last, :first %>
+
+<!-- 在留期間満期日 -->
+<%= f.label :maturity_date %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.date_field :maturity_date, class: "form-control", placeholder: Worker.human_attribute_name(:maturity_date) %><br>
+
+<!-- CCUS登録情報が最新であることの確認 -->
+<%= f.label :confirmed_check %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.collection_radio_buttons :confirmed_check, [['確認済'], ['未確認']], :last, :first %>
+
+<!-- 外国人労働者情報ここまで -->
+
 <div class="list-group">
   <!-- WorkerLicenseここから -->
   <div class="list-group-item">

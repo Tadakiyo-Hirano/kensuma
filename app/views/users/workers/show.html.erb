@@ -153,7 +153,7 @@
           </tr>
           <tr>
             <th class=".ml-2"><%= Worker.human_attribute_name(:responsible_director) %></th>
-            <td><%= @worker.responsible_director %></td>
+            <td><%= render json: @worker.responsible_director %></td>
             <td></td>
             <td></td>
           </tr>
