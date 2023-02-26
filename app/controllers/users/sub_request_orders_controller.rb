@@ -6,7 +6,9 @@ module Users
     def index; end
 
     def new
-      @businesses = Business.where.not(id: current_business)
+      businesses = current_user.invited_user_ids&.map { |id| User.find(id).business }
+      @request_order.children.map { |child| businesses.delete(Business.find(child.business_id)) }.compact
+      @businesses = businesses
     end
 
     def create

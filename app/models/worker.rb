@@ -52,17 +52,19 @@ class Worker < ApplicationRecord
   validates :family_name, presence: true
   validates :relationship, presence: true
   validates :sex, presence: true
-  # validates :status_of_residence, presence: true, if: :is_foreing?
-  # validates :maturity_date, presence: true, if: :is_foreing?
-  # validates :confirmed_check, presence: true, if: :is_foreing?
-  # validates :confirmed_check_date, presence: true, if: :is_foreing?
-
+  # validates :status_of_residence, presence: true
+  # validates :maturity_date
+  # validates :confirmed_check, presence: true
+  # validates :confirmed_check_date
+  # validates :responsible_director
+  # validates :responsible_name
+  # validates :responsible_contact_address
 
   def to_param
     uuid
   end
 
-  def is_foreing?
-    -> { country != "日本" }
-  end
+  # def is_foreing?
+    # -> { country != "日本" }
+  # end
 end
