@@ -63,8 +63,4 @@ class Worker < ApplicationRecord
   def to_param
     uuid
   end
-
-  # def is_foreing?
-    # -> { country != "日本" }
-  # end
 end
