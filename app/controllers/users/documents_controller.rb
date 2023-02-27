@@ -305,7 +305,7 @@ module Users
       end
     end
 
-     #委任期間(至)時間パラメータを再セット(doc_22nd)
+    #委任期間(至)時間パラメータを再セット(doc_22nd)
     def delegation_time_to_join
       if params[:document][:content][:delegation_time_to]['(4i)'].present? && params[:document][:content][:delegation_time_to]['(5i)'].present?
         DateTime.new(
