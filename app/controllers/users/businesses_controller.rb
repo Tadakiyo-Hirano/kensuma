@@ -1,7 +1,7 @@
 module Users
   class BusinessesController < Users::Base
     before_action :set_business, except: %i[new create]
-    before_action :set_business_workers_name, only: %i[new create edit update]
+    before_action :set_business_workers_name, only: %i[edit update]
     before_action :business_present_access, only: %i[new create]
     skip_before_action :business_nil_access, only: %i[new create]
 

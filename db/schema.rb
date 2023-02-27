@@ -648,6 +648,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "name"
     t.integer "age"
     t.integer "gender"
+    t.json "invited_user_ids"
+    t.json "invitation_sent_user_ids"
     t.integer "role", default: 1
     t.bigint "admin_user_id"
     t.string "invitation_token"
@@ -770,16 +772,15 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "relationship", null: false
     t.string "email"
     t.integer "sex", default: 0, null: false
-    t.integer "status_of_residence", default: 0, null: false
+    t.integer "status_of_residence"
     t.date "maturity_date"
-    t.integer "confirmed_check", default: 0, null: false
+    t.integer "confirmed_check"
     t.date "confirmed_check_date"
-    t.string "responsible_director"
-    t.string "responsible_name"
-    t.integer "responsible_contact_address"
-    t.json "passport"
-    t.json "residence_card"
-    t.json "employment_conditions"
+    t.string "passport_front"
+    t.string "passport_back"
+    t.string "residence_card_front"
+    t.string "residence_card_back"
+    t.string "employment_condition"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"

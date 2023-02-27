@@ -141,7 +141,7 @@
 <%= f.select :foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
 <br>
 <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
-<%= f.select :employment_manager_name, @business_workers_name, { include_blank: true }, {class: "form-control"} %>
+<%= f.text_field :employment_manager_name, class: "form-control", placeholder: "雇用管理責任者" %>
 <br>
 <br>
 
