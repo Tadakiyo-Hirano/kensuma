@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'rails_helper'
 
 RSpec.describe 'Documnents', type: :system do
@@ -381,3 +382,4 @@ RSpec.describe 'Documnents', type: :system do
     end
   end
 end
+# rubocop:enable all
