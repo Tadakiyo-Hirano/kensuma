@@ -39,7 +39,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -305,7 +305,7 @@ module Users
       end
     end
 
-     #委任期間(至)時間パラメータを再セット(doc_22nd)
+    #委任期間(至)時間パラメータを再セット(doc_22nd)
     def delegation_time_to_join
       if params[:document][:content][:delegation_time_to]['(4i)'].present? && params[:document][:content][:delegation_time_to]['(5i)'].present?
         DateTime.new(
@@ -472,6 +472,14 @@ module Users
         params.require(:document).permit(content: 
           %i[
             date_submitted
+          ]
+        )
+      when 'doc_8th'
+        field_worker_ids = @document.request_order.field_workers.map.with_index {|field_worker, i|i % 10 == 0 ? i : nil}.compact
+        field_worker_keys = field_worker_ids.map{|field_worker_id|"field_worker_#{field_worker_id}"}
+        params.require(:document).permit(content: 
+          [
+            date_submitted: field_worker_keys, # 13-001 提出日(西暦)
           ]
         )
       when 'doc_13rd'
