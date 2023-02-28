@@ -35,6 +35,7 @@ module Users
     def edit
       @error_msg_for_doc_19th = nil
       @error_msg_for_doc_20th = nil
+      @error_msg_for_doc_21st = nil
     end
 
     def update
@@ -139,6 +140,22 @@ module Users
         # 現場人数取得のバリデーションのため
         @error_msg_for_doc_20th = @document.error_msg_for_doc_20th(document_params(@document), params[:request_order_uuid], params[:sub_request_order_uuid])
         if @error_msg_for_doc_20th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+        end
+      when 'doc_21st'
+        # date_selectのデータ取得形式に合わせるため結合
+        params[:document][:content][:start_time] = start_time_join
+        params[:document][:content][:end_time] = end_time_join
+        @error_msg_for_doc_21st = @document.error_msg_for_doc_21st(document_params(@document))
+        if @error_msg_for_doc_21st.blank?
           if @document.update(document_params(@document))
             redirect_to users_request_order_document_url, success: '保存に成功しました'
           else
@@ -301,6 +318,30 @@ module Users
           params[:document][:content][:planning_period_final_stage]['(1i)'].to_i,
           params[:document][:content][:planning_period_final_stage]['(2i)'].to_i,
           params[:document][:content][:planning_period_final_stage]['(3i)'].to_i
+        )
+      end
+    end
+
+    # 始期パラメータを再セット(doc_21st)
+    def start_time_join
+      if params[:document][:content][:start_time]['(4i)'].present?
+        Time.new(
+          params[:document][:content][:start_time]['(1i)'].to_i,
+          params[:document][:content][:start_time]['(2i)'].to_i,
+          params[:document][:content][:start_time]['(3i)'].to_i,
+          params[:document][:content][:start_time]['(4i)'].to_i
+        )
+      end
+    end
+
+    # 終期パラメータを再セット(doc_21st)
+    def end_time_join
+      if params[:document][:content][:end_time]['(4i)'].present?
+        Time.new(
+          params[:document][:content][:end_time]['(1i)'].to_i,
+          params[:document][:content][:end_time]['(2i)'].to_i,
+          params[:document][:content][:end_time]['(3i)'].to_i,
+          params[:document][:content][:end_time]['(4i)'].to_i
         )
       end
     end
@@ -851,6 +892,28 @@ module Users
             remarks
           ]
                                         )
+      when 'doc_21st'
+        params.require(:document).permit(content:
+          [
+            :prime_contractor_confirmation,
+            :date_submitted,
+            :type_of_education,
+            :date_implemented,
+            :start_time,
+            :end_time,
+            :location,
+            :implementation_time,
+            :education_method,
+            :education_content,
+            :teachers_company,
+            :teacher_name,
+            :material,
+            :newly_entrance,
+            :employer_in,
+            :work_change,
+            { student_name: [] }
+          ]
+        )
       when 'doc_22nd'
         params.require(:document).permit(content:
           %i[
@@ -1077,7 +1140,7 @@ module Users
             officer_signature_date
             officer_substitute_signature_date
           ]
-                                        )
+        )
       end
     end
   end

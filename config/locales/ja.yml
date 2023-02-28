@@ -51,6 +51,7 @@ ja:
       short: "%m/%d"
       ja_y: "%Je%Jg" #和暦(年)表示
       ja_ym: "%Je%Jg年%Js%Jl月" #和暦(年月)表示
+      hours_only: "%-H時"
       ja_kan: "%Je%Jg年%Js%Jl月%Jd日" # 和暦表示
     month_names:
     -
@@ -434,6 +435,7 @@ ja:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
+      hours_only: "%-H時"
       kan_hm: "%-H時%-M分"
       h: "%-H"
     pm: 午後
