@@ -150,7 +150,7 @@ module Users
             render action: :edit
           end
         else
-          flash[:danger] = @error_msg_for_doc_21st.to_sentence
+          flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
       when 'doc_22nd'
