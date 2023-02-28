@@ -3,7 +3,6 @@ FactoryBot.define do
     field_solventable_type { 'Order' }
     association :field_solventable, factory: :order
     uuid { SecureRandom.uuid }
-    date_submitted { '2022-01-01' }
     sequence(:solvent_name_one) { |n| "solvent_name_one#{n}" }
     sequence(:solvent_name_two) { |n| "solvent_name_two#{n}" }
     sequence(:solvent_name_three) { |n| "solvent_name_three#{n}" }
@@ -38,7 +37,6 @@ FactoryBot.define do
     field_solventable_type { 'RequestOrder' }
     association :field_solventable, factory: :request_order
     uuid { SecureRandom.uuid }
-    date_submitted { '2022-01-01' }
     sequence(:solvent_name_one) { |n| "solvent_name_one#{n}" }
     sequence(:solvent_name_two) { |n| "solvent_name_two#{n}" }
     sequence(:solvent_name_three) { |n| "solvent_name_three#{n}" }

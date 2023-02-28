@@ -126,7 +126,7 @@ module Users::RequestOrders
 
     def field_solvent_params
       params.require(:field_solvent).permit(
-        :date_submitted, :solvent_name_one, :solvent_name_two, :solvent_name_three, :solvent_name_four, :solvent_name_five,
+        :solvent_name_one, :solvent_name_two, :solvent_name_three, :solvent_name_four, :solvent_name_five,
         :carried_quantity_one, :carried_quantity_two, :carried_quantity_three, :carried_quantity_four, :carried_quantity_five,
         :solvent_classification_one, :solvent_classification_two, :solvent_classification_three, :solvent_classification_four,
         :solvent_classification_five,
