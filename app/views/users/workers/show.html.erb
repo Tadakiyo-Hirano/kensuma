@@ -23,6 +23,12 @@
           <td></td>
         </tr>
         <tr>
+          <th><%= Worker.human_attribute_name(:sex) %></th>
+          <td><%= @worker.sex_i18n %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <th><%= Worker.human_attribute_name(:my_address) %></th>
           <td><%= @worker.my_address %></td>
           <td></td>
@@ -31,6 +37,12 @@
         <tr>
           <th><%= Worker.human_attribute_name(:my_phone_number) %></th>
           <td><%= @worker.my_phone_number %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:email) %></th>
+          <td><%= @worker.email %></td>
           <td></td>
           <td></td>
         </tr>

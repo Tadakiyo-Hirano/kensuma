@@ -59,6 +59,9 @@ docker-compose up
 # コンテナ停止
 docker-compose down
 
+　　# 挙動がおかしくなった時、一度docker-composeコマンドで作成したリソースを削除するコマンド
+　　docker-compose down --rmi all --volumes --remove-orphans
+
 # bundle install
 docker-compose run --rm app bundle install
 

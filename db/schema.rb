@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_030912) do
+ActiveRecord::Schema.define(version: 2023_02_26_124854) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -297,7 +297,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "carried_quantity_three"
     t.string "carried_quantity_four"
     t.string "carried_quantity_five"
-    t.date "date_submitted", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
@@ -648,6 +647,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "name"
     t.integer "age"
     t.integer "gender"
+    t.json "invited_user_ids"
+    t.json "invitation_sent_user_ids"
     t.integer "role", default: 1
     t.bigint "admin_user_id"
     t.string "invitation_token"
@@ -763,13 +764,24 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "career_up_id"
     t.json "images"
     t.bigint "business_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "uuid", null: false
     t.string "job_title", null: false
     t.integer "employment_contract", default: 0, null: false
     t.string "family_name", null: false
     t.string "relationship", null: false
+    t.string "email"
+    t.integer "sex", default: 0, null: false
+    t.integer "status_of_residence"
+    t.date "maturity_date"
+    t.integer "confirmed_check"
+    t.date "confirmed_check_date"
+    t.string "passport_front"
+    t.string "passport_back"
+    t.string "residence_card_front"
+    t.string "residence_card_back"
+    t.string "employment_condition"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
   end
 

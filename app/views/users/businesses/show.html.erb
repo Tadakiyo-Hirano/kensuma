@@ -5,10 +5,6 @@
     <table class="table table-hover text-nowrap">
       <tbody>
         <tr>
-          <th><%= Business.human_attribute_name(:uuid) %></th>
-          <td><%= @business.uuid %></td>
-        </tr>
-        <tr>
           <th><%= Business.human_attribute_name(:name) %></th>
           <td><%= @business.name %></td>
         </tr>
@@ -39,6 +35,10 @@
         <tr>
           <th><%= Business.human_attribute_name(:phone_number) %></th>
           <td><%= @business.phone_number %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:fax_number) %></th>
+          <td><%= @business.fax_number %></td>
         </tr>
         <tr>
           <th><%= Business.human_attribute_name(:career_up_id) %></th>
@@ -131,6 +131,22 @@
         <tr>
           <th><%= Business.human_attribute_name(:construction_license_updated_at) %></th>
           <td><%= @business.construction_license_updated_at %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:specific_skilled_foreigners_exist) %></th>
+          <td><%= @business.specific_skilled_foreigners_exist_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:foreign_construction_workers_exist) %></th>
+          <td><%= @business.foreign_construction_workers_exist_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:foreign_technical_intern_trainees_exist) %></th>
+          <td><%= @business.foreign_technical_intern_trainees_exist_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= Business.human_attribute_name(:employment_manager_name) %></th>
+          <td><%= @business.employment_manager_name %></td>
         </tr>
       </tbody>
     </table>

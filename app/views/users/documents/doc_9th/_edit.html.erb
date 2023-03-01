@@ -1,0 +1,704 @@
+<!-- (9)全建統一様式第1号-甲-別紙(外国人建設就労者建設現場入場届出書) -->
+<div class="document-outer">
+  <%= form_with(model: @document, url: (controller.controller_path == 'users/documents' ?
+    users_request_order_document_path :
+    users_request_order_sub_request_order_document_path),
+    local: true, method: :patch) do |f| %>
+    <% foreign_field_workers = document_info.field_workers.where.not("JSON_CONTAINS(content, ?, '$.country')", "\"日本\"") %>
+    <% get_myself_and_myparent_site %>
+    <% number_of_pages = 1%>
+    <% total_number_of_pages = foreign_field_workers.each_slice(3).size%>
+    <% parent_subcon_info = sc_hierarchy(@parent_request_orber)[0..2] %>
+    <% foreign_field_workers.each_slice(3).each_with_index do |(w1, w2, w3), i| %>
+      <div id="ninth-document" class="document-inner">
+        <div class="ninth-text-container">
+          <div class="ritz grid-container" dir="ltr">
+            <table class="waffle" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr style="height: 29px">
+                  <td class="doc_9_s0" dir="ltr" colspan="7">全建統一様式第 1 号-甲-別紙</td>
+                  <td class="doc_9_s1" dir="ltr"></td>
+                  <td class="doc_9_s1" dir="ltr"></td>
+                  <td class="doc_9_s1" dir="ltr"></td>
+                  <td class="doc_9_s1" dir="ltr"></td>
+                  <td class="doc_9_s1" dir="ltr"></td>
+                  <td class="doc_9_s1" dir="ltr"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2" colspan="2"><%= "#{number_of_pages}/#{total_number_of_pages}"%></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s3" dir="ltr" colspan="34">外国人建設就労者建設現場入場届出書</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s4" dir="ltr" colspan="9">
+                    <%= document_site_info.site_name %>作業所長 <!-- 9-001 「現場名」作業所長-->
+                  </td>
+                  <td class="doc_9_s5" dir="ltr"> 殿</td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s2" dir="ltr"></td>
+                  <td class="doc_9_s2" dir="ltr"></td>
+                  <td class="doc_9_s2" dir="ltr"></td>
+                  <td class="doc_9_s2" dir="ltr"></td>
+                  <td class="doc_9_s2" dir="ltr"></td>
+                  <td class="doc_9_s2" dir="ltr"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s6"></td>
+                  <td class="doc_9_s6"></td>
+                  <td class="doc_9_s6"></td>
+                  <td class="doc_9_s6"></td>
+                  <td class="doc_9_s6"></td>
+                  <td class="doc_9_s7" dir="ltr"></td>
+                  <td class="doc_9_s7" dir="ltr"></td>
+                  <td class="doc_9_s8" dir="ltr" colspan="9">
+                  <%= f.text_field name = "content[date_submitted]",
+                    value: @document.content&.[]("date_submitted"),
+                    class: 'form-control'
+                  %> <!-- 9-002 提出日 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <!-- 自身が元請&一次下請けの場合、表示不要の条件分岐 -->
+                  <% unless parent_subcon_info == "元請" %>
+                    <td class="doc_9_s2" dir="ltr" colspan="6">会社名(<%= parent_subcon_info %>)</td>
+                    <td class="doc_9_s9" dir="ltr" colspan="11">
+                      <%= @parent_business.name %> <!-- 9-003 会社名（直近上位である、自身より一つ上の会社名） -->
+                    </td>
+                  <% end %>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <!-- 自身が元請&一次下請けの場合、表示不要の条件分岐 -->
+                  <% unless parent_subcon_info == "元請" %>
+                    <td class="doc_9_s2" dir="ltr" colspan="6">代表者名</td>
+                    <td class="doc_9_s9" dir="ltr" colspan="11">
+                      <%= @parent_business.representative_name %> <!-- 9-004 代表者名（直近上位である、自身より一つ上の会社の代表名）-->
+                    </td>
+                  <% end %>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2" dir="ltr" colspan="6">会社名</td>
+                  <td class="doc_9_s9" dir="ltr" colspan="11">
+                    <%= document_info.business.name %> <!-- 9-005 会社名(自身の会社名) -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2" dir="ltr" colspan="6">代表者名</td>
+                  <td class="doc_9_s9" dir="ltr" colspan="11">
+                    <%= document_info.business.representative_name %> <!-- 9-006 代表者名(自身の会社の代表者名) -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2" dir="ltr" colspan="24">外国人建設就労者の建設現場について下記のとおり届出ます。</td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s1" dir="ltr" colspan="3">記</td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s5" dir="ltr" colspan="10">１　 建設工事に関する事項</td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                  <td class="doc_9_s5" dir="ltr"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">建設工事の名称</td>
+                  <td class="doc_9_s11" dir="ltr" colspan="27">
+                    <%= document_site_info.site_name %> <!-- 9-007 事業所名(元請けの現場名)-->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">施工場所</td>
+                  <td class="doc_9_s11" dir="ltr" colspan="27">
+                    <%= document_site_info.site_address %> <!-- 9-008 施工場所(元請けの現場の住所）-->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2" dir="ltr" colspan="25">２　 建設現場への入場を届け出る外国人建設就労者に関する事項</td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s5" dir="ltr" colspan="34">　※4名以上の入場を申請する場合、必要に応じて欄の追加や別紙とする等対応すること。</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s12" colspan="7"></td>
+                  <td class="doc_9_s12" dir="ltr" colspan="9">外国人建設就労者等 １</td>
+                  <td class="doc_9_s12" dir="ltr" colspan="9">外国人建設就労者等 ２</td>
+                  <td class="doc_9_s12" dir="ltr" colspan="9">外国人建設就労者等 ３</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">氏名</td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w1, "name") %> <!-- 9-009 入場する作業員名1-->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w2, "name") %> <!-- 9-009 入場する作業員名2-->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w3, "name") %> <!-- 9-009 入場する作業員名3-->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">生年月日</td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w1, "birth_day_on") %> <!-- 9-010 生年月日1-->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w2, "birth_day_on") %> <!-- 9-010 生年月日2-->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w3, "birth_day_on") %> <!-- 9-010 生年月日3-->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">性別</td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    男<%# <%= worker_str(w1, "") %> <!-- ※未実装・カラム無※9-011 性別1-->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    男<%# <%= worker_str(w2, "") %> <!-- ※未実装・カラム無※9-011 性別2-->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    男<%# <%= worker_str(w3, "") %> <!-- ※未実装・カラム無※9-011 性別3-->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">国籍</td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w1, "country") %> <!-- 9-012 国籍1 -->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w2, "country") %> <!-- 9-012 国籍2 -->
+                  </td>
+                  <td class="doc_9_s13" dir="ltr" colspan="9">
+                    <%= worker_str(w3, "country") %> <!-- 9-012 国籍3 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7" rowspan="2">従事させる業務</td>
+                  <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
+                    資材搬入及び組み立て<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-013 従事させる業務1 -->
+                  </td>
+                  <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
+                    資材搬入及び組み立て<%# <%= worker_str(w2, "") %> <!-- ※未実装・カラム無※9-013 従事させる業務2 -->
+                  </td>
+                  <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
+                    資材搬入及び組み立て<%# <%= worker_str(w3, "") %> <!-- ※未実装・カラム無※9-013 従事させる業務3 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">現場入場の期間</td>
+                  <td class="doc_9_s15" dir="ltr" colspan="4">
+                    令和５年 １２月 １１日<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期1 -->
+                  </td>
+                  <td class="doc_9_s16" dir="ltr">～</td>
+                  <td class="doc_9_s17" dir="ltr" colspan="4">
+                    令和６年 １２月 １１日<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期1 -->
+                  </td>
+                  <td class="doc_9_s15" dir="ltr" colspan="4">
+                    令和５年 １２月 １１日<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期2 -->
+                  </td>
+                  <td class="doc_9_s16" dir="ltr">～</td>
+                  <td class="doc_9_s17" dir="ltr" colspan="4">
+                    令和６年 １２月 １１日<%# <%= worker_str(w2, "")　%><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期2 -->
+                  </td>
+                  <td class="doc_9_s15" dir="ltr" colspan="4">
+                    令和５年 １２月 １１日<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期3 -->
+                  </td>
+                  <td class="doc_9_s16" dir="ltr">～</td>
+                  <td class="doc_9_s17" dir="ltr" colspan="4">
+                    令和６年 １２月 １１日<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期3 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7" rowspan="2">在留資格<br> ※いずれかをチェック</td>
+                  <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s21" dir="ltr" colspan="8">
+                    特定活動(外国人建設就労者)<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)1 -->
+                  </td>
+                  <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s21" dir="ltr" colspan="8">
+                    特定活動(外国人建設就労者)<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)2 -->
+                  </td>
+                  <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s21" dir="ltr" colspan="8">
+                    特定活動(外国人建設就労者)<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)3 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s25" dir="ltr" colspan="8">
+                    特定技能<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-017 特定技能1 -->
+                  </td>
+                  <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s25" dir="ltr" colspan="8">
+                    特定技能<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-017 特定技能2 -->
+                  </td>
+                  <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s25" dir="ltr" colspan="8">
+                    特定技能<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-017 特定技能3 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="7">在留期間満了日</td>
+                  <td class="doc_9_s11_2" dir="ltr" colspan="9">
+                    令和６年 １２月 １１日<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日1 -->
+                  </td>
+                  <td class="doc_9_s11_2" dir="ltr" colspan="9">
+                    令和６年 １２月 １１日<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日2 -->
+                  </td>
+                  <td class="doc_9_s11_2" dir="ltr" colspan="9">
+                    令和６年 １２月 １１日<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日3 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                <td class="doc_9_s26" dir="ltr" colspan="7" rowspan="2">CCUS登録情報が最新であることの確認<br> ※登録義務のある者のみ</td>
+                <td class="doc_9_s27" dir="ltr">▢</td><!-- ※未実装・カラム無※9-019 確認済1 -->
+                <td class="doc_9_s28" dir="ltr" colspan="8">確認済み</td>
+                <td class="doc_9_s27" dir="ltr">▢</td><!-- ※未実装・カラム無※9-019 確認済2 -->
+                <td class="doc_9_s28" dir="ltr" colspan="8">確認済み</td>
+                <td class="doc_9_s27" dir="ltr">▢</td><!-- ※未実装・カラム無※9-019 確認済3 -->
+                <td class="doc_9_s28" dir="ltr" colspan="8">確認済み</td>
+              </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
+                  <td class="doc_9_s31" dir="ltr" colspan="5">
+                    令和5年 ６月 １１日）<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-020 確認日1 -->
+                  </td>
+                  <td class="doc_9_s40" dir="ltr">）</td>
+                  <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
+                  <td class="doc_9_s31" dir="ltr" colspan="5">
+                    令和5年 ６月 １１日）<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-020 確認日2 -->
+                  </td>
+                  <td class="doc_9_s40" dir="ltr">）</td>
+                  <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
+                  <td class="doc_9_s31" dir="ltr" colspan="5">
+                    令和5年 ６月 １１日）<%# <%= worker_str(w3, "")　%><!-- ※未実装・カラム無※9-020 確認日3 -->
+                  </td>
+                  <td class="doc_9_s40" dir="ltr">）</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                  <td class="doc_9_s2"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s5" dir="ltr" colspan="25">３ 　受入企業・建設特定技能受入計画及び適正監理計画に関する事項</td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                  <td class="doc_9_s5"></td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="9">就労場所</td>
+                  <td class="doc_9_s11_2" dir="ltr" colspan="25">
+                    東京都サイト区1-2-1<%# <%= document_site_info.business.work_preace %><!-- ※未実装・カラム無※9-21 就労場所 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="9">従事させる業務の内容</td>
+                  <td class="doc_9_s11_2" dir="ltr" colspan="25">
+                    資材搬入及び組み立て<%# <%= document_site_info.business.working %><!-- ※未実装・カラム無※9-022 従事させる業務の内容 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="9">従事させる期間（計画期間）</td>
+                  <td class="doc_9_s15" dir="ltr" colspan="12">
+                    令和５年 １２月 １１日<%# <%= document_site_info.business.working_start_date %><!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期1 -->
+                  </td>
+                  <td class="doc_9_s16" dir="ltr" colspan="1">～</td>
+                  <td class="doc_9_s17" dir="ltr" colspan="12">
+                    令和６年 １２月 １１日<%# <%= document_site_info.business.working_end_date %><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期1 -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s10" dir="ltr" colspan="9">責任者（連絡窓口）</td>
+                  <td class="doc_9_s5" dir="ltr" colspan="2">役職</td>
+                  <td class="doc_9_s32" dir="ltr" colspan="6">
+                    部長<%# <%= document_site_info.business.foreign_worker_person_in_charge_director %> <!-- ※未実装・カラム無※9-024 責任者・役職 -->
+                  <td class="doc_9_s5" dir="ltr" colspan="2">氏名</td>
+                  <td class="doc_9_s32" dir="ltr" colspan="6">
+                    責任 徒労<%# <%= document_site_info.business.foreign_worker_person_in_charge_name %> <!-- ※未実装・カラム無※9-025 責任者・氏名 -->
+                  <td class="doc_9_s5" dir="ltr" colspan="2">連絡先</td>
+                  <td class="doc_9_s43" dir="ltr" colspan="7">
+                    1234-5678-9101<%# <%= document_site_info.business.foreign_worker_person_in_charge_tel %> <!-- ※未実装・カラム無※9-026 責任者・連絡先(TEL) -->
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s34" dir="ltr" colspan="34" rowspan="2">
+                    ※ 就労場所・従事させる業務の内容・従事させる期間については、建設特定技能受入計画及び適正監理計画の記載内容を正確に転記すること</td>
+                </tr>
+                <tr style="height: 29px">
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s38 softmerge" dir="ltr" colspan="34">
+                    <div class="softmerge-inner" style="width:48px;left:-1px">〇 添付書類</div>
+                  </td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s38" dir="ltr" colspan="34">　提出にあたっては下記に該当するものの写し各１部を添付すること</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s38" dir="ltr" colspan="34">　１　建設特定技能受入計画認定証又は適正監理計画認定証<br>　
+                    （複数ある場合にはすべて。建設特定技能受入計画認定証については別紙<br>
+                    　（建設特定技能受入計画に関する事項）も含む。）</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s38" dir="ltr" colspan="34">　２　パスポート（国籍、氏名等と在留許可のある部分）</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s38" dir="ltr" colspan="34">　３　在留カード</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s38" dir="ltr" colspan="34">　４　受入企業と外国人建設就労者等との間の雇用条件書</td>
+                </tr>
+                <tr style="height: 29px">
+                  <td class="doc_9_s39" dir="ltr" colspan="34">　５　建設キャリアアップシステムカード（登録義務のある者のみ）</td>
+                </tr>
+              </tbody>
+            </table>
+            <% number_of_pages += 1 %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="center">
+      <%= f.submit "更新", class: "btn btn-block btn-outline-secondary" %>
+    </div>
+  <% end %>
+</div>

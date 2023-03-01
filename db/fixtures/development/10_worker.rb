@@ -9,7 +9,7 @@
       country:             "日本",
       my_address:          "東京都サギョウ区1-2-#{n+1}",
       my_phone_number:     "0123456#{sprintf('%04d', rand(9999))}",
-      family_name:         "日本太郎",
+      family_name:         "連絡先氏名#{n+1}",
       relationship:        "父",
       family_address:      "千葉県サギョウ区1-2-#{n+1}",
       family_phone_number: "0123456#{sprintf('%04d', rand(9999))}",
@@ -20,7 +20,8 @@
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      career_up_id:        sprintf('%14d', rand(99999999999999))
+      career_up_id:        sprintf('%14d', rand(99999999999999)),
+      sex:                 rand(0..1)
     }
   )
 end
@@ -36,9 +37,9 @@ end
       country:             "日本",
       my_address:          "東京都サギョウ区1-2-#{n+22}",
       my_phone_number:     "0123456#{sprintf('%04d', rand(9999))}",
-      family_name:         "日本太郎",
-      relationship:        "父",
+      family_name:         "連絡先氏名#{n+22}",
       family_address:      "千葉県サギョウ区1-2-#{n+22}",
+      relationship:        "夫",
       family_phone_number: "0123456#{sprintf('%04d', rand(9999))}",
       birth_day_on:        rand(Date.parse('1950-01-01') .. Date.parse('2006-01-01')),
       abo_blood_type:      rand(0..3),
@@ -47,7 +48,8 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      career_up_id:        sprintf('%14d', rand(99999999999999))
+      career_up_id:        sprintf('%14d', rand(99999999999999)),
+      sex:                 rand(0..1)
     }
   )
 end
@@ -63,9 +65,9 @@ end
       country:             "日本",
       my_address:          "東京都サギョウ区1-2-#{n+43}",
       my_phone_number:     "0123456#{sprintf('%04d', rand(9999))}",
-      family_name:         "日本太郎",
-      relationship:        "父",
+      family_name:         "連絡先氏名#{n+43}",
       family_address:      "千葉県サギョウ区1-2-#{n+43}",
+      relationship:        "兄",
       family_phone_number: "0123456#{sprintf('%04d', rand(9999))}",
       birth_day_on:        rand(Date.parse('1950-01-01') .. Date.parse('2006-01-01')),
       abo_blood_type:      rand(0..3),
@@ -74,7 +76,8 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      career_up_id:        sprintf('%14d', rand(99999999999999))
+      career_up_id:        sprintf('%14d', rand(99999999999999)),
+      sex:                 rand(0..1)
     }
   )
 end
@@ -90,9 +93,9 @@ end
       country:             "日本",
       my_address:          "東京都サギョウ区1-2-#{n+64}",
       my_phone_number:     "0123456#{sprintf('%04d', rand(9999))}",
-      family_name:         "日本太郎",
-      relationship:        "父",
+      family_name:         "連絡先氏名#{n+64}",
       family_address:      "千葉県サギョウ区1-2-#{n+64}",
+      relationship:        "姉",
       family_phone_number: "0123456#{sprintf('%04d', rand(9999))}",
       birth_day_on:        rand(Date.parse('1950-01-01') .. Date.parse('2006-01-01')),
       abo_blood_type:      rand(0..3),
@@ -101,7 +104,8 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      career_up_id:        sprintf('%14d', rand(99999999999999))
+      career_up_id:        sprintf('%14d', rand(99999999999999)),
+      sex:                 rand(0..1)
     }
   )
 end
@@ -117,9 +121,9 @@ end
       country:             "日本",
       my_address:          "東京都サギョウ区1-2-#{n+85}",
       my_phone_number:     "0123456#{sprintf('%04d', rand(9999))}",
-      family_name:         "日本太郎",
-      relationship:        "父",
+      family_name:         "連絡先氏名#{n+85}",
       family_address:      "千葉県サギョウ区1-2-#{n+85}",
+      relationship:        "祖父",
       family_phone_number: "0123456#{sprintf('%04d', rand(9999))}",
       birth_day_on:        rand(Date.parse('1950-01-01') .. Date.parse('2006-01-01')),
       abo_blood_type:      rand(0..3),
@@ -128,7 +132,8 @@ end
       hiring_on:           rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:          rand(1..10),
-      career_up_id:        sprintf('%14d', rand(99999999999999))
+      career_up_id:        sprintf('%14d', rand(99999999999999)),
+      sex:                 rand(0..1)
     }
   )
 end
