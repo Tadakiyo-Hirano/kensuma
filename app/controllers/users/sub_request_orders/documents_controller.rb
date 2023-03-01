@@ -11,7 +11,14 @@ module Users::SubRequestOrders
 
     def show
       respond_to do |format|
-        format.html
+        format.html do
+          case @document.document_type
+          when 'doc_4th'
+            request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
+            @prime_contractor_business = Business.find(request_order.business_id)
+            @business = Business.find(@document.business_id)
+          end
+        end
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
