@@ -475,11 +475,12 @@ module Users
           ]
         )
       when 'doc_8th'
-        field_worker_ids = @document.request_order.field_workers.map.with_index {|field_worker, i|i % 10 == 0 ? i : nil}.compact
+        field_worker_ids = @document.request_order.field_workers.map.with_index {|field_worker, i|i % 10 == 0 ? i / 10 : nil}.compact
         field_worker_keys = field_worker_ids.map{|field_worker_id|"field_worker_#{field_worker_id}"}
         params.require(:document).permit(content: 
           [
             date_submitted: field_worker_keys, # 13-001 提出日(西暦)
+            date_created:   field_worker_keys  # 13-004 作成日(西暦)
           ]
         )
       when 'doc_13rd'

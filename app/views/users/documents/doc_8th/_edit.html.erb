@@ -326,11 +326,10 @@
                   <td class="doc_8th_s2"></td>
                   <td class="doc_8th_s2" colspan="3" rowspan="2">提 出 日</td>
                   <td class="doc_8th_s10" colspan="6" rowspan="2">
-                    <%= '※8-011未実装※' %> <!-- 8-011 提出日 -->
                     <%= f.date_field name = "content[date_submitted][field_worker_#{i}]",
                                         value: doc_content_date(@document.content&.[]('date_submitted')&.[]("field_worker_#{i}")),
                                         class: 'form-control form-control-sm'
-                    %> <!-- 13-001 提出日（西暦) -->
+                    %> <!-- 8-001 提出日(西暦) -->
                   </td>
                 </tr>
                 <tr style="height: 13px">
@@ -373,7 +372,10 @@
                   <td class="doc_8th_s2"></td>
                   <td class="doc_8th_s13" rowspan="2">（</td>
                   <td class="doc_8th_s14" colspan="7" rowspan="2">
-                    <%= '※8-004未実装※' %>	<!-- 8-004 書類作成日(西暦) -->
+                    <%= f.date_field name = "content[date_created][field_worker_#{i}]",
+                                        value: doc_content_date(@document.content&.[]('date_created')&.[]("field_worker_#{i}")),
+                                        class: 'form-control form-control-sm'
+                    %> <!-- 8-004 作成日(西暦) -->
                   </td>
                   <td class="doc_8th_s2" colspan="2" rowspan="2">作成</td>
                   <td class="doc_8th_s2" rowspan="2">）</td>

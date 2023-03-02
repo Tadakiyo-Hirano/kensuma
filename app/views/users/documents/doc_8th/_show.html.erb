@@ -1,6 +1,6 @@
 <!-- (8)全建統⼀様式第5号改(作業員名簿) -->
-<% document_info.field_workers.each_slice(10).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
-	<div id="doc_7" class="document-outer" style="overflow: auto;">
+<div id="doc_7" class="document-outer" style="overflow: auto;">
+	<% document_info.field_workers.each_slice(10).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
 		<div class="document-inner">
 			<section class="doc_8_sheet">
 				<div class="ritz grid-container" dir="ltr">
@@ -117,7 +117,7 @@
 								<td class="doc_8th_s7"></td>
 								<td class="doc_8th_s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
 								<td class="doc_8th_s8" colspan="8" rowspan="3">
-									<%= '※8-042未実装※' %> <!-- 8-042 元請会社の確認欄 -->
+									<%= document_info_for_prime_contractor_name %> <!-- 8-042 元請会社の確認欄 -->
 								</td>
 							</tr>
 							<tr style="height: 13px">
@@ -318,7 +318,7 @@
 								<td class="doc_8th_s2"></td>
 								<td class="doc_8th_s2" colspan="3" rowspan="2">提 出 日</td>
 								<td class="doc_8th_s10" colspan="6" rowspan="2">
-									<%= '※8-011未実装※' %> <!-- 8-011 提出日 -->
+									<%= doc_content_date(@document.content&.[]('date_submitted')&.[]("field_worker_#{i}")) %> <!-- 8-011 提出日(西暦) -->
 								</td>
 							</tr>
 							<tr style="height: 13px">
@@ -361,7 +361,7 @@
 								<td class="doc_8th_s2"></td>
 								<td class="doc_8th_s13" rowspan="2">（</td>
 								<td class="doc_8th_s14" colspan="7" rowspan="2">
-									<%= '※8-004未実装※' %>	<!-- 8-004 書類作成日(西暦) -->
+									<%= doc_content_date(@document.content&.[]('date_created')&.[]("field_worker_#{i}")) %>	<!-- 8-004 作成日(西暦) -->
 								</td>
 								<td class="doc_8th_s2" colspan="2" rowspan="2">作成</td>
 								<td class="doc_8th_s2" rowspan="2">）</td>
@@ -454,10 +454,10 @@
 								<td class="doc_8th_s2"></td>
 								<td class="doc_8th_s11" colspan="3" rowspan="2">事業者ID</td>
 								<td class="doc_8th_s19" colspan="9" rowspan="2">
-									一次会社の「事業者ID（キャリアアップ）」8-006
+									<%= primary_subcon_info(document_info).content&.[]('subcon_career_up_id') %> <!-- 8-006 一次会社の事業者ID(キャリアアップID) -->
 								</td>
 								<td class="doc_8th_s20" rowspan="2">
-									&#12958; <!-- 8-043 印 ※未実装※ -->
+									&#12958; <!-- 8-043 印 -->
 								</td>
 								<td class="doc_8th_s2"></td>
 								<td class="doc_8th_s21"></td>
@@ -466,7 +466,7 @@
 									<%= Business.find(document_info.business_id).career_up_id %> <!-- 8-010 自社の「事業者ID（キャリアアップ）」 -->
 								</td>
 								<td class="doc_8th_s20" rowspan="2">
-									&#12958; <!-- 8-044 印 ※未実装※ -->
+									&#12958; <!-- 8-044 印 -->
 								</td>
 							</tr>
 							<tr style="height: 13px">
@@ -1977,5 +1977,5 @@
 				</div>
 			</section>
 		</div>
-	</div>
-<% end %>
+	<% end %>
+</div>
