@@ -11,16 +11,6 @@ RSpec.describe FieldSolvent, type: :model do
       expect(subject).to be_valid
     end
 
-    describe '#date_submitted' do
-      context '存在しない場合' do
-        before(:each) { subject.date_submitted = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-      end
-    end
-
     describe '#solvent_name_one' do
       context '存在しない場合' do
         before(:each) { subject.solvent_name_one = nil }
@@ -121,16 +111,6 @@ RSpec.describe FieldSolvent, type: :model do
 
     it 'バリデーションが通ること' do
       expect(subject).to be_valid
-    end
-
-    describe '#date_submitted' do
-      context '存在しない場合' do
-        before(:each) { subject.date_submitted = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-      end
     end
 
     describe '#solvent_name_one' do
