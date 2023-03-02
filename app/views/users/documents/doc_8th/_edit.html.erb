@@ -6,9 +6,8 @@
       <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
     </div>
   </div>
-
-  <% document_info.field_workers.each_slice(10).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
-    <div id="doc_7" class="document-outer" style="overflow: auto;">
+  <div id="doc_7" class="document-outer" style="overflow: auto;">
+    <% document_info.field_workers.each_slice(10).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
       <div class="document-inner">
         <section class="doc_8_sheet">
           <div class="ritz grid-container" dir="ltr">
@@ -125,7 +124,7 @@
                   <td class="doc_8th_s7"></td>
                   <td class="doc_8th_s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
                   <td class="doc_8th_s8" colspan="8" rowspan="3">
-                    <%= '※8-042未実装※' %> <!-- 8-042 元請会社の確認欄 -->
+                    <%= document_info_for_prime_contractor_name %> <!-- 8-042 元請会社の確認欄 -->
                   </td>
                 </tr>
                 <tr style="height: 13px">
@@ -328,7 +327,8 @@
                   <td class="doc_8th_s10" colspan="6" rowspan="2">
                     <%= f.date_field name = "content[date_submitted][field_worker_#{i}]",
                                         value: doc_content_date(@document.content&.[]('date_submitted')&.[]("field_worker_#{i}")),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm',
+                                        required: true
                     %> <!-- 8-001 提出日(西暦) -->
                   </td>
                 </tr>
@@ -374,7 +374,8 @@
                   <td class="doc_8th_s14" colspan="7" rowspan="2">
                     <%= f.date_field name = "content[date_created][field_worker_#{i}]",
                                         value: doc_content_date(@document.content&.[]('date_created')&.[]("field_worker_#{i}")),
-                                        class: 'form-control form-control-sm'
+                                        class: 'form-control form-control-sm',
+                                        required: true
                     %> <!-- 8-004 作成日(西暦) -->
                   </td>
                   <td class="doc_8th_s2" colspan="2" rowspan="2">作成</td>
@@ -468,10 +469,10 @@
                   <td class="doc_8th_s2"></td>
                   <td class="doc_8th_s11" colspan="3" rowspan="2">事業者ID</td>
                   <td class="doc_8th_s19" colspan="9" rowspan="2">
-                    一次会社の「事業者ID（キャリアアップ）」8-006
+                    <%= primary_subcon_info(document_info).content&.[]('subcon_career_up_id') %> <!-- 8-006 一次会社の事業者ID(キャリアアップID) -->
                   </td>
                   <td class="doc_8th_s20" rowspan="2">
-                    &#12958; <!-- 8-043 印 ※未実装※ -->
+                    &#12958; <!-- 8-043 印 -->
                   </td>
                   <td class="doc_8th_s2"></td>
                   <td class="doc_8th_s21"></td>
@@ -480,7 +481,7 @@
                     <%= Business.find(document_info.business_id).career_up_id %> <!-- 8-010 自社の「事業者ID（キャリアアップ）」 -->
                   </td>
                   <td class="doc_8th_s20" rowspan="2">
-                    &#12958; <!-- 8-044 印 ※未実装※ -->
+                    &#12958; <!-- 8-044 印 -->
                   </td>
                 </tr>
                 <tr style="height: 13px">
@@ -670,7 +671,9 @@
                   <td class="doc_8th_s6" colspan="4" rowspan="3">血圧</td>
                   <td class="doc_8th_s6" colspan="4" rowspan="3">種類</td>
                   <td class="doc_8th_s36" colspan="1" rowspan="3">雇入・職長特別教育</td>
-                  <td class="doc_8th_s37" colspan="1" rowspan="3">技能講習</td>
+                  <td class="doc_8th_s37" colspan="1" rowspan="3" style="word-wrap: break-word;">
+                    技能<br>講習
+                  </td>
                   <td class="doc_8th_s38" colspan="4" rowspan="3">免許</td>
                   <td class="doc_8th_s6" colspan="4" rowspan="3">受入教育<br> 実施年月日</td>
                 </tr>
@@ -1991,6 +1994,6 @@
           </div>
         </section>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% end %>
