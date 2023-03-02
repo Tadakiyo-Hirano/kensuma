@@ -390,7 +390,7 @@ module DocumentsHelper
       licenses.to_s.gsub(/,|"|\[|\]/) { '' }
     end
   end
-  
+
   def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
     target_ids = []
     document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
@@ -402,7 +402,7 @@ module DocumentsHelper
         if border_date < birth_date
           target_ids.push field_worker.id
         end
-    
+
       when 65
         border_date = str_date.prev_year(65) # 入場日から65年前の日付
         if border_date >= birth_date
@@ -593,6 +593,54 @@ module DocumentsHelper
       RequestOrder.find(document_info.ancestor_ids[-2])
     elsif document_info.ancestors.count == 1
       document_info.content.nil? ? nil : document_info
+    end
+  end
+
+  # (18)工事作業所災害防止協議会兼施工体系図
+
+  def request_order_info(id)
+    RequestOrder.find(id) if id.present?
+  end
+
+  #三次下請け(1行目表示用)
+  def provisional_tertiary_subcon_info(tertiary_id, quaternary_id)
+    if tertiary_id.present?
+      request_order_info(tertiary_id)
+    else
+      request_order_info(request_order_info(quaternary_id)&.parent_id)
+    end
+  end
+
+  #二次下請け(1行目表示用)
+  def provisional_secondary_subcon_info(secondary_id,tertiary_id,quaternary_id)
+    if secondary_id.present?
+      request_order_info(secondary_id)
+    else
+      request_order_info(provisional_tertiary_subcon_info(tertiary_id, quaternary_id)&.parent_id)
+    end
+  end
+
+  #一次下請け(1行目表示用)
+  def provisional_primary_subcon_info(primary_id,secondary_id,tertiary_id,quaternary_id)
+    if primary_id.present?
+      request_order_info(primary_id)
+    else
+      request_order_info(provisional_secondary_subcon_info(secondary_id,tertiary_id,quaternary_id)&.parent_id)
+    end
+  end
+
+  #建設許可証番号
+  def construction_license_number(id)
+    if request_order_info(id)&.content&.[]("subcon_construction_license_permission_type_minister_governor").present? \
+      && request_order_info(id)&.content&.[]("subcon_construction_license_permission_type_identification_general").present? \
+        && request_order_info(id)&.content&.[]("subcon_construction_construction_license_number_double_digit").present? \
+          && request_order_info(id)&.content&.[]("subcon_construction_license_number_six_digits").present?
+      return "#{request_order_info(id)&.content&.[]("subcon_construction_license_permission_type_minister_governor").sub('大臣許可', '国土交通大臣')}".sub('知事許可', '知事') \
+            + "(#{request_order_info(id)&.content&.[]("subcon_construction_license_permission_type_identification_general").sub('一般', '般').sub('特定', '特')}
+              ー#{request_order_info(id)&.content&.[]("subcon_construction_construction_license_number_double_digit")})" \
+                + "第#{request_order_info(id)&.content&.[]("subcon_construction_license_number_six_digits")}号"
+    else
+      nil
     end
   end
 
