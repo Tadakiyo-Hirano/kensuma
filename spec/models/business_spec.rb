@@ -20,7 +20,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('事業所IDを入力してください')
+          expect(subject.errors.full_messages).to include('会社IDを入力してください')
         end
       end
     end
@@ -35,7 +35,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('事業所名を入力してください')
+          expect(subject.errors.full_messages).to include('会社名を入力してください')
         end
       end
     end
@@ -50,7 +50,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('事業所名(カナ)はカタカナで入力して下さい。')
+          expect(subject.errors.full_messages).to include('会社名(カナ)はカタカナで入力して下さい。')
         end
 
         %i[
@@ -66,7 +66,7 @@ RSpec.describe Business, type: :model do
 
             it 'バリデーションのエラーが正しいこと' do
               subject.valid?
-              expect(subject.errors.full_messages).to include('事業所名(カナ)はカタカナで入力して下さい。')
+              expect(subject.errors.full_messages).to include('会社名(カナ)はカタカナで入力して下さい。')
             end
           end
         end
@@ -83,7 +83,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('支店名、営業所名を入力してください')
+          expect(subject.errors.full_messages).to include('支店名 又は 営業所名を入力してください')
         end
       end
     end
@@ -113,7 +113,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('事業所メールアドレスを入力してください')
+          expect(subject.errors.full_messages).to include('メールアドレスを入力してください')
         end
       end
 
@@ -132,7 +132,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('事業所メールアドレスは不正な値です')
+            expect(subject.errors.full_messages).to include('メールアドレスは不正な値です')
           end
         end
       end
@@ -248,7 +248,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('健康保険(加入状況)を入力してください')
+          expect(subject.errors.full_messages).to include('健康保険を入力してください')
         end
       end
     end
@@ -263,7 +263,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('健康保険(組合名)は20文字以内で入力してください')
+          expect(subject.errors.full_messages).to include('組合名は20文字以内で入力してください')
         end
       end
     end
@@ -282,7 +282,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('健康保険(事業所整理記号及び事業所番号)は数字6桁または8桁で入力してください')
+            expect(subject.errors.full_messages).to include('事業所整理記号及び事業所番号は数字6桁または8桁で入力してください')
           end
         end
       end
@@ -298,7 +298,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('厚生年金保険(加入状況)を入力してください')
+          expect(subject.errors.full_messages).to include('厚生年金保険を入力してください')
         end
       end
     end
@@ -317,7 +317,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('厚生年金保険(事業所整理記号)は数字14桁で入力してください')
+            expect(subject.errors.full_messages).to include('事業所整理記号は数字14桁で入力してください')
           end
         end
       end
@@ -333,7 +333,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('年金保険(加入状況)を入力してください')
+          expect(subject.errors.full_messages).to include('年金保険(削除予定)を入力してください')
         end
       end
     end
@@ -348,7 +348,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('雇用保険(加入状況)を入力してください')
+          expect(subject.errors.full_messages).to include('雇用保険を入力してください')
         end
       end
     end
@@ -367,7 +367,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('雇用保険(番号)は数字11桁で入力してください')
+            expect(subject.errors.full_messages).to include('番号は数字11桁で入力してください')
           end
         end
       end
@@ -383,7 +383,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('退職金共済制度(加入状況)を入力してください')
+          expect(subject.errors.full_messages).to include('退職金共済制度を入力してください')
         end
       end
     end
@@ -398,7 +398,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('建設許可証(取得状況)を入力してください')
+          expect(subject.errors.full_messages).to include('建設許可証を入力してください')
         end
       end
     end
@@ -413,7 +413,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('建設許可証(種別)を入力してください')
+          expect(subject.errors.full_messages).to include('建設許可種別を入力してください')
         end
       end
     end
@@ -428,7 +428,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('建設許可証(都道府県)を入力してください')
+          expect(subject.errors.full_messages).to include('都道府県知事許可を入力してください')
         end
       end
     end
@@ -462,7 +462,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('建設許可証(番号)は数字2桁で入力してください')
+            expect(subject.errors.full_messages).to include('建設許可証(和暦年度)は数字2桁で入力してください')
           end
         end
       end
@@ -497,7 +497,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('建設許可証(建設許可番号)を入力してください')
+          expect(subject.errors.full_messages).to include('建設許可番号を入力してください')
         end
       end
     end
@@ -512,7 +512,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('建設許可証(更新日)を入力してください')
+          expect(subject.errors.full_messages).to include('更新日を入力してください')
         end
       end
     end
@@ -522,10 +522,10 @@ RSpec.describe Business, type: :model do
     let(:business) { create(:business, cars: cars) }
     let(:cars) { create_list(:car, 2) }
 
-    context '紐つく車両情報がある場合' do
+    context '紐づく車両情報がある場合' do
       subject { business.cars }
 
-      it '紐つく車両情報を返すこと' do
+      it '紐づく車両情報を返すこと' do
         expect(subject).to eq(cars)
       end
     end
@@ -535,10 +535,10 @@ RSpec.describe Business, type: :model do
     let(:business) { create(:business, orders: orders) }
     let(:orders) { create_list(:order, 2) }
 
-    context '紐つく現場情報がある場合' do
+    context '紐づく現場情報がある場合' do
       subject { business.orders }
 
-      it '紐つく現場情報を返すこと' do
+      it '紐づく現場情報を返すこと' do
         expect(subject).to eq(orders)
       end
     end
@@ -547,10 +547,10 @@ RSpec.describe Business, type: :model do
   describe '下請発注情報とのアソシエーションについて' do
     let(:request_orders) { create_list(:request_order, 2, business: business) }
 
-    context '紐つく下請発注情報がある場合' do
+    context '紐づく下請発注情報がある場合' do
       subject { business.request_orders }
 
-      it '紐つく下請発注情報を返すこと' do
+      it '紐づく下請発注情報を返すこと' do
         expect(subject).to eq(request_orders)
       end
     end
@@ -559,10 +559,10 @@ RSpec.describe Business, type: :model do
   describe '書類とのアソシエーションについて' do
     let(:documents) { create_list(:document, 3, business: business) }
 
-    context '紐つく書類がある場合' do
+    context '紐づく書類がある場合' do
       subject { business.documents }
 
-      it '紐つく書類を返すこと' do
+      it '紐づく書類を返すこと' do
         expect(subject).to eq(documents)
       end
     end

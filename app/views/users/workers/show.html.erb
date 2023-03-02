@@ -23,6 +23,12 @@
           <td></td>
         </tr>
         <tr>
+          <th><%= Worker.human_attribute_name(:sex) %></th>
+          <td><%= @worker.sex_i18n %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <th><%= Worker.human_attribute_name(:my_address) %></th>
           <td><%= @worker.my_address %></td>
           <td></td>
@@ -31,6 +37,24 @@
         <tr>
           <th><%= Worker.human_attribute_name(:my_phone_number) %></th>
           <td><%= @worker.my_phone_number %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:email) %></th>
+          <td><%= @worker.email %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:family_name) %></th>
+          <td><%= @worker.family_name %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:relationship) %></th>
+          <td><%= @worker.relationship %></td>
           <td></td>
           <td></td>
         </tr>
@@ -89,8 +113,14 @@
           <td></td>
         </tr>
         <tr>
-          <th><%= Worker.human_attribute_name(:carrier_up_id) %></th>
-          <td><%= @worker.carrier_up_id %></td>
+          <th><%= Worker.human_attribute_name(:employment_contract) %></th>
+          <td><%= @worker.employment_contract_i18n %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:career_up_id) %></th>
+          <td><%= @worker.career_up_id %></td>
           <td></td>
           <td></td>
         </tr>
@@ -168,6 +198,16 @@
         <!-- worker_medicalここから -->
         <tr bgcolor="#dee2e6">
           <th colspan="4"><%= WorkerMedical.human_attribute_name(:id) %></th>
+        </tr>
+        <tr>
+          <th><%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
+          <td><%= @worker.worker_medical.is_med_exam_i18n %><td>
+          <td></td>
+        </tr>
+        <tr>
+          <th><%= WorkerMedical.human_attribute_name(:health_condition) %></th>
+          <td><%= @worker.worker_medical.health_condition_i18n %><td>
+          <td></td>
         </tr>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
@@ -252,6 +292,12 @@
             <td></td>
           </tr>
         <% end %>
+        <tr>
+          <th><%= WorkerInsurance.human_attribute_name(:has_labor_insurance) %></th>
+          <td><%= @worker.worker_insurance.has_labor_insurance_i18n %></td>
+          <td></td>
+          <td></td>
+        </tr>
         <tr>
           <th><%= WorkerInsurance.human_attribute_name(:severance_pay_mutual_aid_type) %></th>
           <td><%= @worker.worker_insurance.severance_pay_mutual_aid_type_i18n %></td>

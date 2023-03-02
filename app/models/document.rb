@@ -2,7 +2,7 @@
 class Document < ApplicationRecord
   OPERATABLE_DOC_TYPE = %w[
     cover_document table_of_contents_document doc_3rd doc_4th doc_5th doc_6th doc_7th doc_8th doc_9th doc_10th
-    doc_11th doc_12th doc_13th doc_14th doc_15th doc_16th doc_17th doc_18th doc_19th doc_20th
+    doc_11th doc_12th doc_13rd doc_14th doc_15th doc_16th doc_17th doc_18th doc_19th doc_20th
     doc_21st doc_22nd doc_23rd doc_24th
   ].freeze
   belongs_to :business
@@ -35,7 +35,7 @@ class Document < ApplicationRecord
     doc_10th:                   10, # 高齢者就労報告書
     doc_11th:                   11, # 年少者就労報告書
     doc_12th:                   12, # 工事用・通勤用車両届
-    doc_13th:                   13, # 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
+    doc_13rd:                   13, # 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
     doc_14th:                   14, # 参考様式第６号(持込機械等(電動工具電気溶接機等)使用届
     doc_15th:                   15, # 全建統一様式第１１号(有機溶剤・特定化学物質等持込使用届)
     doc_16th:                   16, # 参考様式第９号(火気使用届)
@@ -63,9 +63,9 @@ class Document < ApplicationRecord
     uuid
   end
 
-
+  # エラーメッセージ(持込機械等(電動工具電気溶接機等)使用届用)
   def error_msg_for_doc_14th(document_params)
-    if document_type == 'doc_14th' # 持込機械等(電動工具電気溶接機等)使用届用
+    if document_type == 'doc_14th'
       error_msg_for_doc_14th = []
       # 提出日
       if document_params[:content][:date_submitted].blank?
@@ -92,6 +92,18 @@ class Document < ApplicationRecord
         error_msg_for_doc_14th.push('点検年月日を入力してください')
       end
         error_msg_for_doc_14th
+    end
+  end
+
+  # エラーメッセージ(有機溶剤・特定化学物質等持込使用届)
+  def error_msg_for_doc_15th(document_params)
+    if document_type == 'doc_15th'
+      error_msg_for_doc_15th = []
+      # 提出日
+      if document_params[:content][:date_submitted].blank?
+        error_msg_for_doc_15th.push('提出日を入力してください')
+      end
+      error_msg_for_doc_15th
     end
   end
 
@@ -865,6 +877,88 @@ class Document < ApplicationRecord
       RequestOrder.find_by(uuid: sub_request_order_uuid).order
     else
       request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
+    end
+  end
+
+  # エラーメッセージ(持込機械等(電動工具電気溶接機等)使用届用)
+  def error_msg_for_doc_21st(document_params)
+    if document_type == 'doc_21st'
+      error_msg_for_doc_21st = []
+      # 確認者
+      if document_params[:content][:prime_contractor_confirmation].blank?
+        error_msg_for_doc_21st.push('確認者を入力してください')
+      end
+      # 提出日
+      if document_params[:content][:date_submitted].blank?
+        error_msg_for_doc_21st.push('提出日を入力してください')
+      end
+      # 教育の種類
+      if (document_params[:content][:newly_entrance] == "0" ) &&
+         ( document_params[:content][:employer_in] == "0" ) &&
+         ( document_params[:content][:work_change] == "0" )
+        error_msg_for_doc_21st.push('どれか一つをチェックしてください')
+      end
+      # 実施日付
+      if document_params[:content][:date_implemented].blank?
+        error_msg_for_doc_21st.push('実施日付を入力してください')
+      end
+      # 始時間
+      if document_params[:content][:start_time].blank?
+        error_msg_for_doc_21st.push('始時間を入力してください')
+      end
+      # 終時間
+      if document_params[:content][:end_time].blank?
+        error_msg_for_doc_21st.push('終時間を入力してください')
+      end
+      # 時間
+      if document_params[:content][:implementation_time].blank?
+        error_msg_for_doc_21st.push('時間を入力してください')
+      end
+      # 実施場所
+      if document_params[:content][:location].blank?
+        error_msg_for_doc_21st.push('実施場所を入力してください')
+      elsif document_params[:content][:location].length > 50
+        error_msg_for_doc_21st.push('実施場所を50字以内にしてください')
+      else
+        nil
+      end
+      # 教育方法
+      if document_params[:content][:location].blank?
+        error_msg_for_doc_21st.push('教育方法を入力してください')
+      elsif document_params[:content][:location].length > 50
+        error_msg_for_doc_21st.push('教育方法を50字以内にしてください')
+      else
+        nil
+      end
+      # 教育内容
+      if document_params[:content][:education_content].blank?
+        error_msg_for_doc_21st.push('教育内容を入力してください')
+      elsif document_params[:content][:education_content].length > 500
+        error_msg_for_doc_21st.push('教育内容を500字以内にしてください')
+      else
+        nil
+      end
+      # 講師の会社名
+      if document_params[:content][:teachers_company].blank?
+        error_msg_for_doc_21st.push('講師の会社名を入力してください')
+      end
+      # 講師名
+      if document_params[:content][:teacher_name].blank?
+        error_msg_for_doc_21st.push('講師名を入力してください')
+      end
+      # 受講者氏名
+      if document_params[:content][:student_name].blank?
+        error_msg_for_doc_21st.push('受講者氏名を入力してください')
+      end
+      # 資料
+      if document_params[:content][:material].blank?
+        error_msg_for_doc_21st.push('資料を入力してください')
+      elsif document_params[:content][:material].length > 100
+        error_msg_for_doc_21st.push('資料を100字以内にしてください')
+      else
+        nil
+      end
+        error_msg_for_doc_21st
     end
   end
 

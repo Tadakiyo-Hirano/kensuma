@@ -9,7 +9,7 @@
             <tr>
               <td>(全建統一様式第3号)</td>
               <td class="text-right">
-                <%= '※4-001未実装※' %> <!-- 4-001 提出日(西暦) -->
+                <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 4-001 提出日(西暦) -->
               </td>
             </tr>
           </tbody>
@@ -27,7 +27,7 @@
                 <%= document_site_info.content["genecon_name"] %> <!-- 4-002 元請会社名 -->
               </td>
               <td>
-                <%= document_site_info.content["genecon_carrier_up_id"] %> <!-- 4-003 元請会社の事業者ID(キャリアアップ) -->
+                <%= document_site_info.content["genecon_career_up_id"] %> <!-- 4-003 元請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
           </tbody>
@@ -59,7 +59,7 @@
             </tr>
             <tr>
               <td rowspan="2">
-                <%= '※4-006未実装※' %> <!-- 4-006 元請会社の建設許可業種 -->
+                <%= current_business_name %> <!-- 4-006 元請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="6%">工事業</td>
               <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-007 -->
@@ -438,7 +438,7 @@
             </tr>
             <tr>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_carrier_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
+                <%= document_subcon_info.content&.[]('subcon_career_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
             <tr>

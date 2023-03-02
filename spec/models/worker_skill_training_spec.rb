@@ -69,22 +69,22 @@ RSpec.describe WorkerSkillTraining, type: :model do
   end
 
   describe 'アソシエーションについて' do
-    context '紐つく作業員がいる場合' do
+    context '紐づく作業員がいる場合' do
       subject do
         worker_skill_training.worker
       end
 
-      it '紐つく作業員を返すこと' do
+      it '紐づく作業員を返すこと' do
         expect(subject).to eq(worker)
       end
     end
 
-    context '紐つく技能講習マスタがある場合' do
+    context '紐づく技能講習マスタがある場合' do
       subject do
         worker_skill_training.skill_training
       end
 
-      it '紐つく技能講習マスタを返すこと' do
+      it '紐づく技能講習マスタを返すこと' do
         expect(subject).to eq(skill_training)
       end
     end

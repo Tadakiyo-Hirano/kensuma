@@ -34,7 +34,9 @@ module Users::Orders
     def edit_special_vehicles
       @carry_on_companies = @field_special_vehicles.distinct.pluck(:carry_on_company_name)
       @owning_companies = @field_special_vehicles.distinct.pluck(:owning_company_name)
+      @owning_company_representatives = @field_special_vehicles.distinct.pluck(:owning_company_representative_name)
       @use_companies = @field_special_vehicles.distinct.pluck(:use_company_name)
+      @use_company_representatives = @field_special_vehicles.distinct.pluck(:use_company_representative_name)
     end
 
     def update_special_vehicles
@@ -73,8 +75,9 @@ module Users::Orders
         field_special_vehicles: %i[
           driver_worker_id driver_name driver_licence
           sub_driver_worker_id sub_driver_name sub_driver_licence
-          vehicle_name vehicle_type carry_on_company_name owning_company_name
-          use_company_name carry_on_date carry_out_date use_place lease_type contact_prevention precautions
+          vehicle_name vehicle_type carry_on_company_name owning_company_name owning_company_representative_name
+          use_company_name use_company_representative_name carry_on_date carry_out_date
+          use_place lease_type contact_prevention precautions
         ]
       )[:field_special_vehicles]
     end
