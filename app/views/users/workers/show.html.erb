@@ -145,30 +145,6 @@
             <td></td>
             <td></td>
           </tr>
-          <tr>
-            <th>責任者</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th class=".ml-2"><%= Worker.human_attribute_name(:responsible_director) %></th>
-            <td><%= render json: @worker.responsible_director %></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th class=".ml-2"><%= Worker.human_attribute_name(:responsible_name) %></th>
-            <td><%= @worker.responsible_name %></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th class=".ml-2"><%= Worker.human_attribute_name(:responsible_contact_address) %></th>
-            <td><%= @worker.responsible_contact_address %></td>
-            <td></td>
-            <td></td>
-          </tr>
         <% end %>
         
         <!-- worker_liceseここから -->

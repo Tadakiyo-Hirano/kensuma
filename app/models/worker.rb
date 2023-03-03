@@ -22,8 +22,8 @@ class Worker < ApplicationRecord
   accepts_nested_attributes_for :worker_medical, allow_destroy: true
 
   enum abo_blood_type: { a: 0, b: 1, ab: 2, o: 3 }
-  enum rh_blood_type: { plus: 0, minus: 1 }
-  enum employment_contract: { available: 0, not_available: 1 }, _prefix: true       # 雇用契約書取り交わし状況
+  enum rh_blood_type: { plus: 0, minus: 1, rh_null: 3 }
+  enum employment_contract: { available: 0, not_available: 1, not_applicable: 2 }, _prefix: true       # 雇用契約書取り交わし状況
   enum sex: { man: 0, woman: 1 }
   enum status_of_residence: { japanese: 0, specific_activity: 1, specified_skill: 2 }, _prefix: true # 在留資格
   enum confirmed_check: { japanese: 0, checked: 1, unchecked: 2 }, _prefix: true # キャリアアップシステム登録情報が最新であることの確認日
@@ -32,7 +32,7 @@ class Worker < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
-  VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
+  VALID_PHONE_NUMBER_REGEX = /\A\d{11,12}\z/
   validates :name, presence: true
   validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー]+\z/u, message: 'はカタカナで入力してください' }
   validates :country, presence: true
