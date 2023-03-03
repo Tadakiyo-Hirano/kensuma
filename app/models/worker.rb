@@ -32,7 +32,7 @@ class Worker < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
-  VALID_PHONE_NUMBER_REGEX = /\A\d{11,12}\z/
+  VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
   validates :name, presence: true
   validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー]+\z/u, message: 'はカタカナで入力してください' }
   validates :country, presence: true

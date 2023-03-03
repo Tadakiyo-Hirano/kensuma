@@ -77,10 +77,10 @@ module Users
       else
         @worker = current_business.workers.new(
           # 本番環境用デフォルト値 ==========================
-          country:                       '日本',
-          abo_blood_type:                :a,
-          rh_blood_type:                 :plus,
-          sex:                           :man
+          country:        '日本',
+          abo_blood_type: :a,
+          rh_blood_type:  :plus,
+          sex:            :man
           # ============================================
         )
         @worker.worker_licenses.build
@@ -88,8 +88,8 @@ module Users
         @worker.worker_special_educations.build
         worker_medical = @worker.build_worker_medical(
           # 本番環境用デフォルト値 ==========================
-          is_med_exam:         :y,
-          health_condition:    :good
+          is_med_exam:      :y,
+          health_condition: :good
           # ============================================
         )
         worker_medical.worker_exams.build
