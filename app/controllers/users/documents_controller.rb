@@ -106,6 +106,19 @@ module Users
           flash[:danger] = @error_msg_for_doc_14th.first
           render action: :edit
         end
+      when 'doc_15th'
+        @error_msg_for_doc_15th = @document.error_msg_for_doc_15th(document_params(@document))
+        if @error_msg_for_doc_15th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: "保存に成功しました"
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          flash[:danger] = @error_msg_for_doc_15th.first
+          render action: :edit
+        end
       when 'doc_19th'
         @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
         if @error_msg_for_doc_19th.blank?
@@ -346,7 +359,7 @@ module Users
       end
     end
 
-     #委任期間(至)時間パラメータを再セット(doc_22nd)
+    #委任期間(至)時間パラメータを再セット(doc_22nd)
     def delegation_time_to_join
       if params[:document][:content][:delegation_time_to]['(4i)'].present? && params[:document][:content][:delegation_time_to]['(5i)'].present?
         DateTime.new(
@@ -631,6 +644,12 @@ module Users
             prime_contractor_confirmation
             reception_confirmation_date
             inspection_date
+          ]
+        )
+      when 'doc_15th'
+        params.require(:document).permit(
+          content: [
+            :date_submitted
           ]
         )
       when 'doc_19th'

@@ -52,9 +52,10 @@ module Users
         if resource.errors.empty?
 
           # 配列に招待リクエストしたユーザーidを追加
-          current_user.invitation_sent_user_ids << resource.id
+          current_user_invitation_sent_user = current_user.invitation_sent_user_ids || []
+          current_user_invitation_sent_user << resource.id
           # 更新した配列をinvitation_sent_user_idsカラムに保存
-          current_user.update(invitation_sent_user_ids: current_user.invitation_sent_user_ids.uniq)
+          current_user.update(invitation_sent_user_ids: current_user_invitation_sent_user.uniq)
 
           if is_flashing_format? && self.resource.invitation_sent_at
             set_flash_message :notice, :send_instructions, email: self.resource.email

@@ -95,6 +95,18 @@ class Document < ApplicationRecord
     end
   end
 
+  # エラーメッセージ(有機溶剤・特定化学物質等持込使用届)
+  def error_msg_for_doc_15th(document_params)
+    if document_type == 'doc_15th'
+      error_msg_for_doc_15th = []
+      # 提出日
+      if document_params[:content][:date_submitted].blank?
+        error_msg_for_doc_15th.push('提出日を入力してください')
+      end
+      error_msg_for_doc_15th
+    end
+  end
+
   # エラーメッセージ(工事安全衛生計画書用)
   def error_msg_for_doc_19th(document_params)
     error_msg_for_doc_19th = []

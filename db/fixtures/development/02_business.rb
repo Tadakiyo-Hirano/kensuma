@@ -1,7 +1,6 @@
 User.where(role: 'admin').all.each do |user|
   Business.seed(:id,
     {
-      id:                                               user.id,
       user_id:                                          user.id,
       name:                                             "テスト建設#{user.id}",
       name_kana:                                        "テストケンセツ#{user.id}",
