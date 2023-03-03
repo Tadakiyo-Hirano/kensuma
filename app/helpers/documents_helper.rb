@@ -997,7 +997,7 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 
-  # 持込機械の機械名情報（持込時の点検表）
+  # (14) 持込機械の機械名情報（持込時の点検表）
   def machine_tag_1st(machine)
     tags = machine&.content&.[]('machine_tags')
     unless tags.nil?
@@ -1233,6 +1233,28 @@ module DocumentsHelper
     else
       doc_date.blank? ? '年　月　日' : l(doc_date.to_date, format: :long)
     end
+  end
+
+  # (21) 新規入場時等教育実施報告書
+
+  # 受講者氏名の時間情報　（編集ページで入力、documentsに保存）
+  def implementation_time(time)
+    time.blank? ? '時' : l(time.to_datetime, format: :hours_only)
+  end
+
+  # 教育の種類の新規入場時
+  def newly_entrance_check(newly_entrance)
+    newly_entrance == '1' ? tag.span('新規入場時', class: :circle) : '新規入場時'
+  end
+
+  # 教育の種類の雇入時
+  def employer_in_check(employer_in)
+    employer_in == '1' ? tag.span('雇入時', class: :circle) : '雇入時'
+  end
+
+  # 教育の種類の作業変更時
+  def work_change_check(work_change)
+    work_change == '1' ? tag.span('作業変更時', class: :circle) : '作業変更時'
   end
 
   private

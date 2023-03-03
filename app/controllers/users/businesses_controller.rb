@@ -9,7 +9,6 @@ module Users
       if Rails.env.development?
         @business = Business.new(
           # テスト用デフォルト値 ==========================
-          uuid:                                                        '1',
           name:                                                        'test企業',
           name_kana:                                                   'テストキギョウ',
           branch_name:                                                 'test支店',

@@ -4,12 +4,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-<body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
-    <div class="twelvefirst-document-pdf">
+<% if @document.content&.[]("student_name") %>
+  <% @document.content&.[]("student_name")&.each_slice(14)&.each_with_index do |(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14), i| %>
+    <body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
+      <div class="twelvefirst-document-pdf page-break">
         <div class="ritz grid-container" dir="ltr">
           <table class="waffle no-grid td-no-border" cellspacing="0" cellpadding="0">
             <tbody>
-              <tr style="height: 29px">
+              <tr style="height: 26px"> <!-- pdf出力用に29 → 26に調整 -->
                 <td class="doc_21_m0" dir="ltr" colspan="12">（全建統一様式第７号）</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -29,43 +31,24 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m1"></td>
                 <td class="doc_21_m33" dir="ltr" colspan="3">元 請</td>
-                <td class="doc_21_m32" dir="ltr" colspan="9" rowspan="2"><span
-                    style="text-decoration:underline;-webkit-text-decoration-skip:none;text-decoration-skip-ink:none;color:#1155cc;"><a
-                      target="_blank" href="#rangeid=1241118775">「元請会社の確認欄」21-001</a></span>]</td>
+                <td class="doc_21_m32" dir="ltr" colspan="9" rowspan="2">
+                  <%= @document.content&.[]("prime_contractor_confirmation") %> <!-- 21-001 元請会社の確認欄 -->
+                </td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
-                <td class="doc_21_m0"></td>
+                <td class="doc_21_m0_1" dir="ltr" colspan="22">
+                  ※ 緑枠は入力項目です。必要あれば入力してください。
+                </td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m1"></td>
                 <td class="doc_21_m3" dir="ltr" colspan="3">確認欄</td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -95,13 +78,14 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
-                <td class="doc_21_m4" dir="ltr" colspan="12"><a target="_blank" href="#rangeid=190326484">「提出日（西暦）」21-002</a>
+                <td class="doc_21_m4" dir="ltr" colspan="12">
+                  <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 21-002 提出日 -->
                 </td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m5" dir="ltr" colspan="41">新規入場時等教育実施報告書</td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -144,10 +128,11 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">作業所名</td>
-                <td class="doc_21_m7" dir="ltr" colspan="15" rowspan="2"><a target="_blank"
-                    href="#rangeid=1809808903">「事業所名（現場名）」21-003</a></td>
+                <td class="doc_21_m7" dir="ltr" colspan="15" rowspan="2">
+                  <%= document_site_info.site_name %> <!-- 21-003 「事業所名（現場名）」-->
+                </td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -170,7 +155,7 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -193,7 +178,7 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m6"></td>
                 <td class="doc_21_m6"></td>
                 <td class="doc_21_m6"></td>
@@ -236,10 +221,11 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">作業所長</td>
-                <td class="doc_21_m8" dir="ltr" colspan="13" rowspan="2"><a target="_blank"
-                    href="#rangeid=970017223">「各会社の現場代理人名」21-004</a></td>
+                <td class="doc_21_m8" dir="ltr" colspan="13" rowspan="2">
+                  <%= document_site_info.site_agent_name %> <!-- 21-004 「各会社の現場代理人名」-->
+                </td>
                 <td class="doc_21_m9" dir="ltr" colspan="2" rowspan="2">殿</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -263,7 +249,7 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -286,7 +272,7 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -310,11 +296,11 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">会社名</td>
-                <td class="doc_21_m10" dir="ltr" colspan="14" rowspan="2"><a target="_blank"
-                    href="#rangeid=1158715211">「会社名」21-005</a>
+                <td class="doc_21_m10" dir="ltr" colspan="14" rowspan="2">
+                    <%= document_info.business.name %> <!-- 21-005 自社の会社名 -->
                 </td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -338,7 +324,7 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -381,7 +367,7 @@
                 <td class="doc_21_m12" dir="ltr"></td>
                 <td class="doc_21_m0"></td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -405,13 +391,14 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0" dir="ltr" colspan="5">現場代理人</td>
-                <td class="doc_21_m8" dir="ltr" colspan="12" rowspan="2"><a target="_blank"
-                    href="#rangeid=970017223">「各会社の現場代理人名」21-006</a></td>
-                <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2"><a target="_blank"
-                    href="#rangeid=88565281">㊞<br>21-007</a>
+                <td class="doc_21_m8" dir="ltr" colspan="12" rowspan="2">
+                  <%= document_info.site_agent_name %> <!-- 21-006 「各会社の現場代理人名」-->
+                </td>
+                <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2">
+                  <a>㊞<br></a> <!-- 21-007 「社印」-->
                 </td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -436,7 +423,7 @@
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0" dir="ltr" colspan="5">(現場責任者)</td>
               </tr>
-              <tr style="height: 29px">
+              <tr style="height: 26px">
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m14"></td>
@@ -479,115 +466,154 @@
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m14"></td>
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px"> <!-- pdf出力用に44 → 40に調整 -->
                 <td class="doc_21_m29" dir="ltr" colspan="7">項　　　目</td>
                 <td class="doc_21_m3" dir="ltr" colspan="34">摘 要</td>
               </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td>
+              <tr style="height: 40px">
+                <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td> <!-- ⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008 -->
                 <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr" colspan="5">新規入場時</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr">・</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr" colspan="4">雇入時</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr">・</td>
-                <td class="doc_21_m15"></td>
-                <td class="doc_21_m15" dir="ltr" colspan="5">作業変更時</td>
-                <td class="doc_21_m16" dir="ltr" colspan="12"><a target="_blank"
-                    href="#rangeid=229790909">⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008</a></td>
+                <td class="doc_21_m15_1" dir="ltr" colspan="5">
+                  <%= newly_entrance_check(@document.content&.[]("newly_entrance")) %> <!-- 新規入場時 -->
+                </td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr">・</td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr" colspan="4">
+                  <%= employer_in_check(@document.content&.[]("employer_in")) %></td> <!-- 雇入時 -->
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr">・</td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr" colspan="5">
+                  <%= work_change_check(@document.content&.[]("work_change")) %></td> <!-- 作業変更時 -->
+                </td>
+                <td class="doc_21_m16" dir="ltr" colspan="12"></td>
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
                 <td class="doc_21_m29" dir="ltr" colspan="7">実 施 日 時</td>
-                <td class="doc_21_m7" dir="ltr" colspan="13"><a target="_blank" href="#rangeid=1778842844">「実施日付」21-009</a>
+                <td class="doc_21_m34" dir="ltr" colspan="13">
+                  <%= wareki(@document.content&.[]("date_implemented")) %> <!-- 21-009 実施日付 -->
                 </td>
                 <td class="doc_21_m14"></td>
-                <td class="doc_21_m17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=979063930">「実施時間（始時間）」21-010</a>
+                <td class="doc_21_m17" dir="ltr" colspan="4">
+                  <%= implementation_time(@document.content&.[]("start_time")) %> <!--21-010 実施時間（始時間） -->
                 </td>
                 <td class="doc_21_m18" dir="ltr" colspan="2">～</td>
-                <td class="doc_21_m17" dir="ltr" colspan="4"><a target="_blank" href="#rangeid=256131863">「実施時間（終時間）」21-011</a>
+                <td class="doc_21_m17" dir="ltr" colspan="4">
+                  <%= implementation_time(@document.content&.[]("end_time")) %> <!--21-011 実施時間（終時間） -->
                 </td>
                 <td class="doc_21_m14"></td>
                 <td class="doc_21_m14" dir="ltr">（</td>
-                <td class="doc_21_m17" dir="ltr" colspan="4">「実施時間（時間）」21-012</td>
+                <td class="doc_21_m17" dir="ltr" colspan="4">
+                  <%= @document.content&.[]("implementation_time") %> <!-- 「実施時間（時間）」21-012 -->
+                </td>
                 <td class="doc_21_m14" dir="ltr" colspan="3">時間）</td>
                 <td class="doc_21_m19"></td>
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
                 <td class="doc_21_m29" dir="ltr" colspan="7">実 施 場 所</td>
-                <td class="doc_21_m20" dir="ltr" colspan="34"><a target="_blank" href="#rangeid=1941892092">「実施場所」21-013</a>
-                </td>
+                <td class="doc_21_m20" dir="ltr" colspan="34">
+                  <%= @document.content&.[]("location") %> <!--21-013 実施場所 -->
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
                 <td class="doc_21_m29" dir="ltr" colspan="7">教 育 方 法</td>
-                <td class="doc_21_m20" dir="ltr" colspan="34"><a target="_blank" href="#rangeid=1039272956">「教育方法」21-014</a>
-                </td>
+                <td class="doc_21_m20" dir="ltr" colspan="34">
+                  <%= @document.content&.[]("education_method") %> <!--21-014 教育方法 -->
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
                 <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
-                <td class="doc_21_m21" dir="ltr" colspan="34"><a target="_blank" href="#rangeid=696626027">「教育内容」21-015</a>
+                <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
+                  <% if @document.content&.[]('education_content') %>
+                    <%= safe_join(@document.content&.[]('education_content').split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
+                  <% end %>
                 </td>
               </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m22" colspan="34"></td>
+              <tr style="height: 40px">
               </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m22" colspan="34"></td>
+              <tr style="height: 40px">
               </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m22" colspan="34"></td>
+              <tr style="height: 40px">
               </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m23" colspan="34"></td>
+              <tr style="height: 40px">
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
                 <td class="doc_21_m29" dir="ltr" colspan="7">講　　　師</td>
-                <td class="doc_21_m20" dir="ltr" colspan="17"><a target="_blank" href="#rangeid=416383118">「会社名」21-016</a></td>
-                <td class="doc_21_m20" dir="ltr" colspan="17"><a target="_blank" href="#rangeid=6040054">「講師名」21-017</a></td>
+                <td class="doc_21_m20" dir="ltr" colspan="17">
+                  <%= @document.content&.[]("teachers_company") %> <!--21-016 講師の会社名 -->
+                <td class="doc_21_m20" dir="ltr" colspan="17">
+                  <%= @document.content&.[]("teacher_name") %> <!--21-017 講師名 -->
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
                 <td class="doc_21_m30" dir="ltr" colspan="7" rowspan="3">受講者氏名</td>
-                <td class="doc_21_m25" dir="ltr" colspan="17"><a target="_blank" href="#rangeid=1353851405">「受講者名」21-018</a>
+                <td class="doc_21_m25" dir="ltr" colspan="17">
+                  <%= s1 %> <!--21-018 受講者名 -->
+                <td class="doc_21_m25_1" dir="ltr" colspan="17">
+                  <%= s8 %> <!--21-018 受講者名 -->
                 </td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
               </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <tr style="height: 40px">
+                <td class="doc_21_m25" dir="ltr" colspan="17">
+                  <%= s2 %> <!--21-018 受講者名 -->
+                </td>
+                <td class="doc_21_m25_1" dir="ltr" colspan="17">
+                  <%= s9 %> <!--21-018 受講者名 -->
+                </td>
               </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
+              <tr style="height: 40px">
+                <td class="doc_21_m25" dir="ltr" colspan="17">
+                  <%= s3 %> <!--21-018 受講者名 -->
+                </td>
+                <td class="doc_21_m25_1" dir="ltr" colspan="17">
+                  <%= s10 %> <!--21-018 受講者名 -->
+                </td>
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
                 <td class="doc_21_m31" dir="ltr" colspan="7">（受講者に氏名を自筆させること）</td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m29" colspan="7" rowspan="3"></td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-                <td class="doc_21_m25" dir="ltr" colspan="17">〃</td>
-              </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m27" dir="ltr" colspan="17">〃</td>
-                <td class="doc_21_m27" dir="ltr" colspan="17">〃</td>
-              </tr>
-              <tr style="height: 44px">
-                <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
-                <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2"><a target="_blank"
-                    href="#rangeid=105862983">「資料」21-019</a>
+                <td class="doc_21_m25" dir="ltr" colspan="17">
+                  <%= s4 %> <!--21-018 受講者名 -->
+                </td>
+                <td class="doc_21_m25_1" dir="ltr" colspan="17">
+                  <%= s11 %> <!--21-018 受講者名 -->
                 </td>
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
+                <td class="doc_21_m29" colspan="7" rowspan="3">
+                </td>
+                <td class="doc_21_m25" dir="ltr" colspan="17">
+                  <%= s5 %> <!--21-018 受講者名 -->
+                </td>
+                <td class="doc_21_m25_1" dir="ltr" colspan="17">
+                  <%= s12 %> <!--21-018 受講者名 -->
+                </td>
               </tr>
-              <tr style="height: 44px">
+              <tr style="height: 40px">
+                <td class="doc_21_m25" dir="ltr" colspan="17">
+                  <%= s6 %> <!--21-018 受講者名 -->
+                </td>
+                <td class="doc_21_m25_1" dir="ltr" colspan="17">
+                  <%= s13 %> <!--21-018 受講者名 -->
+                </td>
+              </tr>
+              <tr style="height: 40px">
+                <td class="doc_21_m27" dir="ltr" colspan="17">
+                  <%= s7 %> <!--21-018 受講者名 -->
+                </td>
+                <td class="doc_21_m27_1" dir="ltr" colspan="17">
+                  <%= s14 %> <!--21-018 受講者名 -->
+                </td>
+              </tr>
+              <tr style="height: 40px">
+                <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
+                <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
+                  <% if @document.content&.[]('material') %>
+                    <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
+                  <% end %>
+                </td>
+              </tr>
+              <tr style="height: 40px">
+              </tr>
+              <tr style="height: 40px">
                 <td class="doc_21_m28" dir="ltr" colspan="26">(注) 新規入場者調査票が作成される場合は本様式の提出は不要</td>
                 <td class="doc_21_m0"></td>
                 <td class="doc_21_m0"></td>
@@ -608,14 +634,634 @@
             </tbody>
           </table>
         </div>
+      </div>
+    </body>
+  <% end %>
+<% else %> <!-- 受講者氏名(student_name)が無い時 -->
+  <body style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
+    <div class="twelvefirst-document-pdf page-break">
+      <div class="ritz grid-container" dir="ltr">
+        <table class="waffle no-grid td-no-border" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr style="height: 26px"> <!-- pdf出力用に29 → 26に調整 -->
+              <td class="doc_21_m0" dir="ltr" colspan="12">（全建統一様式第７号）</td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m1"></td>
+              <td class="doc_21_m33" dir="ltr" colspan="3">元 請</td>
+              <td class="doc_21_m32" dir="ltr" colspan="9" rowspan="2">
+                <%= @document.content&.[]("prime_contractor_confirmation") %> <!-- 21-001 元請会社の確認欄 -->
+              </td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0_1" dir="ltr" colspan="22">
+                ※ 緑枠は入力項目です。必要あれば入力してください。
+              </td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m1"></td>
+              <td class="doc_21_m3" dir="ltr" colspan="3">確認欄</td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m4" dir="ltr" colspan="12">
+                <%= doc_content_date(@document.content&.[]("date_submitted")) %> <!-- 21-002 提出日 -->
+              </td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m5" dir="ltr" colspan="41">新規入場時等教育実施報告書</td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">作業所名</td>
+              <td class="doc_21_m7" dir="ltr" colspan="15" rowspan="2">
+                <%= document_site_info.site_name %> <!-- 21-003 「事業所名（現場名）」-->
+              </td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m6"></td>
+              <td class="doc_21_m6"></td>
+              <td class="doc_21_m6"></td>
+              <td class="doc_21_m6"></td>
+              <td class="doc_21_m6"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">作業所長</td>
+              <td class="doc_21_m8" dir="ltr" colspan="13" rowspan="2">
+                <%= document_site_info.site_agent_name %> <!-- 21-004 「各会社の現場代理人名」-->
+              </td>
+              <td class="doc_21_m9" dir="ltr" colspan="2" rowspan="2">殿</td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m6" dir="ltr" colspan="5" rowspan="2">会社名</td>
+              <td class="doc_21_m10" dir="ltr" colspan="14" rowspan="2">
+                  <%= document_info.business.name %> <!-- 21-005 自社の会社名 -->
+              </td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0" dir="ltr"></td>
+              <td class="doc_21_m0" dir="ltr"></td>
+              <td class="doc_21_m0" dir="ltr"></td>
+              <td class="doc_21_m0" dir="ltr"></td>
+              <td class="doc_21_m0" dir="ltr"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m11"></td>
+              <td class="doc_21_m12" dir="ltr"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0" dir="ltr" colspan="5">現場代理人</td>
+              <td class="doc_21_m8" dir="ltr" colspan="12" rowspan="2">
+                <%= document_info.site_agent_name %> <!-- 21-006 「各会社の現場代理人名」-->
+              </td>
+              <td class="doc_21_m13" dir="ltr" colspan="2" rowspan="2">
+                <a>㊞<br></a> <!-- 21-007 「社印」-->
+              </td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0" dir="ltr" colspan="5">(現場責任者)</td>
+            </tr>
+            <tr style="height: 26px">
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14"></td>
+            </tr>
+            <tr style="height: 40px"> <!-- pdf出力用に44 → 40に調整 -->
+              <td class="doc_21_m29" dir="ltr" colspan="7">項　　　目</td>
+              <td class="doc_21_m3" dir="ltr" colspan="34">摘 要</td>
+            </tr>
+            <tr style="height: 40px">
+                <td class="doc_21_m29" dir="ltr" colspan="7">教育の種類</td> <!-- ⇐「（新規入場時・雇入時・作業変更時）三択で〇を付ける」21-008 -->
+                <td class="doc_21_m15"></td>
+                <td class="doc_21_m15_1" dir="ltr" colspan="5">
+                  <%= newly_entrance_check(@document.content&.[]("newly_entrance")) %> <!-- 新規入場時 -->
+                </td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr">・</td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr" colspan="4">
+                  <%= employer_in_check(@document.content&.[]("employer_in")) %></td> <!-- 雇入時 -->
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr">・</td>
+                <td class="doc_21_m15_1"></td>
+                <td class="doc_21_m15_1" dir="ltr" colspan="5">
+                  <%= work_change_check(@document.content&.[]("work_change")) %></td> <!-- 作業変更時 -->
+                </td>
+                <td class="doc_21_m16" dir="ltr" colspan="12"></td>
+              </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m29" dir="ltr" colspan="7">実 施 日 時</td>
+              <td class="doc_21_m34" dir="ltr" colspan="13">
+                <%= wareki(@document.content&.[]("date_implemented")) %> <!-- 21-009 実施日付 -->
+              </td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m17" dir="ltr" colspan="4">
+                <%= implementation_time(@document.content&.[]("start_time")) %> <!--21-010 実施時間（始時間） -->
+              </td>
+              <td class="doc_21_m18" dir="ltr" colspan="2">～</td>
+              <td class="doc_21_m17" dir="ltr" colspan="4">
+                <%= implementation_time(@document.content&.[]("end_time")) %> <!--21-011 実施時間（終時間） -->
+              </td>
+              <td class="doc_21_m14"></td>
+              <td class="doc_21_m14" dir="ltr">（</td>
+              <td class="doc_21_m17" dir="ltr" colspan="4">
+                <%= @document.content&.[]("implementation_time") %> <!-- 「実施時間（時間）」21-012 -->
+              </td>
+              <td class="doc_21_m14" dir="ltr" colspan="3">時間）</td>
+              <td class="doc_21_m19"></td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m29" dir="ltr" colspan="7">実 施 場 所</td>
+              <td class="doc_21_m20" dir="ltr" colspan="34">
+                <%= @document.content&.[]("location") %> <!--21-013 実施場所 -->
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m29" dir="ltr" colspan="7">教 育 方 法</td>
+              <td class="doc_21_m20" dir="ltr" colspan="34">
+                <%= @document.content&.[]("education_method") %> <!--21-014 教育方法 -->
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="5">教 育 内 容</td>
+              <td class="doc_21_m21" dir="ltr" colspan="34" rowspan="5">
+                <% if @document.content&.[]('education_content') %>
+                  <%= safe_join(@document.content&.[]('education_content')&.split("\n"),tag(:br)) %> <!--21-015 教育内容 -->
+                <% end %>
+              </td>
+            </tr>
+            <tr style="height: 40px">
+            </tr>
+            <tr style="height: 40px">
+            </tr>
+            <tr style="height: 40px">
+            </tr>
+            <tr style="height: 40px">
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m29" dir="ltr" colspan="7">講　　　師</td>
+              <td class="doc_21_m20" dir="ltr" colspan="17">
+                <%= @document.content&.[]("teachers_company") %> <!--21-016 講師の会社名 -->
+              <td class="doc_21_m20" dir="ltr" colspan="17">
+                <%= @document.content&.[]("teacher_name") %> <!--21-017 講師名 -->
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m30" dir="ltr" colspan="7" rowspan="3">受講者氏名</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              <td class="doc_21_m25_1" dir="ltr" colspan="17">
+              </td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25_1" dir="ltr" colspan="17">
+              </td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25_1" dir="ltr" colspan="17">
+              </td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m31" dir="ltr" colspan="7">（受講者に氏名を自筆させること）</td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25_1" dir="ltr" colspan="17">
+              </td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m29" colspan="7" rowspan="3">
+              </td>
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25_1" dir="ltr" colspan="17">
+              </td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m25" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m25_1" dir="ltr" colspan="17">
+              </td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m27" dir="ltr" colspan="17">
+              </td>
+              <td class="doc_21_m27_1" dir="ltr" colspan="17">
+              </td>
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m29" dir="ltr" colspan="7" rowspan="2">資　　　料</td>
+              <td class="doc_21_m20" dir="ltr" colspan="34" rowspan="2">
+                <% if @document.content&.[]('material') %>
+                  <%= safe_join(@document.content&.[]('material').split("\n"),tag(:br)) %> <!--21-019 資料 -->
+                <% end %>
+              </td>
+            </tr>
+            <tr style="height: 40px">
+            </tr>
+            <tr style="height: 40px">
+              <td class="doc_21_m28" dir="ltr" colspan="26">(注) 新規入場者調査票が作成される場合は本様式の提出は不要</td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+              <td class="doc_21_m0"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-</body>
+  </body>
+<% end %>
 
 <style>
+  /* pdf出力用に62 → 58に調整 */
   .twelvefirst-document-pdf {
     margin: 0em;
     display: block;
-    width: 62em;
+    width: 58em;
   }
 
   .td-no-border td {
@@ -628,12 +1274,11 @@
 
   .ritz .waffle .doc_21_m10 {
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
+    background-color: #e9ecef;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -657,10 +1302,9 @@
     border-right: 1px SOLID #000000;
     background-color: #ccffcc;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -670,12 +1314,11 @@
 
   .ritz .waffle .doc_21_m7 {
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
+    background-color: #e9ecef;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -700,11 +1343,10 @@
     border-bottom: 1px SOLID #000000;
     background-color: #ccffcc;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
-    font-size: 9pt;
+    color: #000000;
+    font-size: 14pt;
     vertical-align: middle;
     white-space: normal;
     overflow: hidden;
@@ -742,7 +1384,6 @@
     border-right: 1px SOLID #000000;
     background-color: #ffffff;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
     color: #1155cc;
@@ -769,13 +1410,13 @@
   }
 
   .ritz .waffle .doc_21_m8 {
+    border-right: 0px SOLID #e9ecef;
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
+    background-color: #e9ecef;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: normal;
@@ -786,14 +1427,14 @@
   }
 
   .ritz .waffle .doc_21_m20 {
+    border-top: 1px SOLID #000000;
     border-bottom: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
     background-color: #ccffcc;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -802,7 +1443,22 @@
   }
 
   .ritz .waffle .doc_21_m15 {
+    border-right: 0px SOLID #ccffcc;
     border-bottom: 1px SOLID #000000;
+    background-color: #ccffcc;
+    text-align: center;
+    color: #000000;
+    font-size: 14pt;
+    vertical-align: middle;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 0px 3px 0px 3px;
+  }
+
+  .ritz .waffle .doc_21_m15_1 {
+    border-right: 0px SOLID #ccffcc;
+    border-bottom: 1px SOLID #000000;
+    border-left: 0px SOLID #ccffcc;
     background-color: #ccffcc;
     text-align: center;
     color: #000000;
@@ -866,11 +1522,27 @@
   }
 
   .ritz .waffle .doc_21_m25 {
+    border-top: 1px DASHED #000000;
     border-bottom: 1px DASHED #000000;
     border-right: 1px DASHED #000000;
     background-color: #ccffcc;
     text-align: center;
-    color: #1155cc;
+    color: #000000;
+    font-size: 14pt;
+    vertical-align: middle;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 0px 3px 0px 3px;
+  }
+
+  .ritz .waffle .doc_21_m25_1 {
+    border-top: 1px DASHED #000000;
+    border-bottom: 1px DASHED #000000;
+    border-right: 1px SOLID #000000;
+    border-left: 1px DASHED #000000;
+    background-color: #ccffcc;
+    text-align: center;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -938,10 +1610,9 @@
     border-top: 1px SOLID #000000;
     background-color: #ccffcc;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -966,7 +1637,6 @@
     border-bottom: 1px DASHED #000000;
     background-color: #ccffcc;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
     color: #1155cc;
@@ -981,10 +1651,9 @@
   .ritz .waffle .doc_21_m4 {
     background-color: #ccffcc;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -1004,11 +1673,27 @@
   }
 
   .ritz .waffle .doc_21_m27 {
+    border-top: 1px DASHED #000000;
     border-bottom: 1px SOLID #000000;
     border-right: 1px DASHED #000000;
     background-color: #ccffcc;
     text-align: center;
-    color: #1155cc;
+    color: #000000;
+    font-size: 14pt;
+    vertical-align: middle;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 0px 3px 0px 3px;
+  }
+
+  .ritz .waffle .doc_21_m27_1 {
+    border-top: 1px DASHED #000000;
+    border-left: 1px DASHED #000000;
+    border-bottom: 1px DASHED #000000;
+    border-right: 1px SOLID #000000;
+    background-color: #ccffcc;
+    text-align: center;
+    color: #000000;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -1031,12 +1716,12 @@
 
   .ritz .waffle .doc_21_m13 {
     border-bottom: 1px SOLID #000000;
-    background-color: #ccffcc;
+    border-left: 0px SOLID #e9ecef;
+    background-color: #e9ecef;
     text-align: center;
-    text-decoration: underline;
     -webkit-text-decoration-skip: none;
     text-decoration-skip-ink: none;
-    color: #1155cc;
+    color: #000000;
     font-size: 10pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -1048,6 +1733,17 @@
     background-color: #ffffff;
     text-align: center;
     color: #000000;
+    font-size: 14pt;
+    vertical-align: middle;
+    white-space: nowrap;
+    direction: ltr;
+    padding: 0px 3px 0px 3px;
+  }
+
+  .ritz .waffle .doc_21_m0_1 {
+    background-color: #ffffff;
+    text-align: left;
+    color: red;
     font-size: 14pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -1091,6 +1787,34 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
+
+  .ritz .waffle .doc_21_m34 {
+  border-bottom: 1px SOLID #000000;
+  background-color: #ccffcc;
+  text-align: center;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip-ink: none;
+  color: #000000;
+  font-family: 'docs-Calibri', Arial;
+  font-size: 14pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+  .circle {
+    border: 2px solid #000000;
+    border-radius: 15px;
+    padding: 1.5px;
+}
+
+.page-break {
+  page-break-after:always;
+  &:last-child {
+    page-break-after: avoid;
+  }
+}
 
     /* 「㊞」「〜」文字化け防止 */
   @font-face {
