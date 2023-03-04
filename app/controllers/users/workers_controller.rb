@@ -15,6 +15,8 @@ module Users
           country:                       '日本',
           my_address:                    '東京都港区1-1',
           my_phone_number:               '01234567898',
+          family_name:                   'フェルナンデス',
+          relationship:                  '父親',
           family_address:                '埼玉県三郷市1-1',
           family_phone_number:           '09876543210',
           birth_day_on:                  '2000-01-28',

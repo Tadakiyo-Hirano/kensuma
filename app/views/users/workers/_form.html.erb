@@ -185,7 +185,7 @@
   <!-- WorkerInsuranceここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_insurance do |worker_insurance| %>
-      <div class="mt-3 mb-3">
+      <div class="mt-3 mb-3" id="health_insurance_type">
         <%= worker_insurance.label :health_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last) %><br>
@@ -198,13 +198,13 @@
         <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= worker_insurance.collection_radio_buttons(:pension_insurance_type, WorkerInsurance.pension_insurance_types_i18n, :first, :last) %><br>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3" id="employment_insurance_type">
         <%= worker_insurance.label :employment_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last) %><br>
@@ -241,29 +241,47 @@
 
 <script>
   // 健康保険の名前の表示・非表示
-  $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]').change(function() {
-    const value = $(this).val();
+  const health_insurance_type = document.getElementById('health_insurance_type')
+  const health_insurance_name = document.getElementById('health_insurance_name')
+  function getRadioHealthInsuranceName(object) {
+    const value = $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]:checked').val();
     if (value === 'health_insurance_association' || value === 'construction_national_health_insurance'){
       health_insurance_name.classList.remove('hidden');
     } else {
       health_insurance_name.classList.add('hidden');
-    };
-  })
+    }
+  };
+  getRadioHealthInsuranceName(health_insurance_type); //ページの読み込み時に判定
+
+  $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]').change(function() {
+    if ($(this).val() === 'health_insurance_association' || $(this).val() === 'construction_national_health_insurance'){
+      health_insurance_name.classList.remove('hidden');
+    } else {
+      health_insurance_name.classList.add('hidden');
+    }
+  });
+    
 
   // 被保険者番号の下4桁の表示・非表示
   const employment_insurance_type = document.getElementById('employment_insurance_type');
   const employment_insurance_number = document.getElementById('employment_insurance_number');
-  function getSelectedEmploymentInsuranceType(object){
-    const index = object.selectedIndex;
-    const value = object.options[index].value;
-    if (value === 'insured'){
+  function getSelectedEmploymentInsuranceType(object) {
+    const value = $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]:checked').val();
+    if (value === 'insured') {
       employment_insurance_number.classList.remove('hidden');
     } else {
       employment_insurance_number.classList.add('hidden');
-    };
+    }
   };
   getSelectedEmploymentInsuranceType(employment_insurance_type); //ページの読み込み時に判定
 
+  $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]').change(function() {
+    if ($(this).val() === 'insured') {
+      employment_insurance_number.classList.remove('hidden');
+    } else {
+      employment_insurance_number.classList.add('hidden');
+    }
+  });
 
   // mutual_aid_type mutual_aid_number
   const mutual_aid_type = document.getElementById('mutual_aid_type');
