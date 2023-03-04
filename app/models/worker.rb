@@ -44,7 +44,6 @@ class Worker < ApplicationRecord
   validates :abo_blood_type, presence: true
   validates :rh_blood_type, presence: true
   validates :job_title, presence: true
-  validates :job_type, presence: true
   validates :hiring_on, presence: true
   validates :experience_term_before_hiring, presence: true
   validates :blank_term, presence: true

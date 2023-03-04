@@ -757,7 +757,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "birth_day_on", null: false
     t.integer "abo_blood_type", default: 0, null: false
     t.integer "rh_blood_type", default: 0, null: false
-    t.integer "job_type", default: 0, null: false
     t.date "hiring_on", null: false
     t.integer "experience_term_before_hiring", null: false
     t.integer "blank_term", null: false
