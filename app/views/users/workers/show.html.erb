@@ -124,6 +124,29 @@
           <td></td>
           <td></td>
         </tr>
+
+        <!-- 外国人労働者用表示 -->
+        <% unless @worker.country == "日本" %>
+          <tr>
+            <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
+            <td><%= @worker.status_of_residence_i18n %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th><%= Worker.human_attribute_name(:maturity_date) %></th>
+            <td><%= wareki(@worker.maturity_date) %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th><%= Worker.human_attribute_name(:confirmed_check) %></th>
+            <td><%= @worker.status_of_residence_i18n %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
+        
         <!-- worker_liceseここから -->
         <tr bgcolor="#dee2e6">
           <th></th>
