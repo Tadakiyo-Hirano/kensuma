@@ -538,6 +538,7 @@ module Users
           ]
         )
       when 'doc_8th'
+        # 作業員名簿10人区切りの為、view側のフォームのnameを1頁目(field_worker_0)、2頁目(field_worker_10)と指定
         field_worker_ids = @document.request_order.field_workers.map.with_index {|field_worker, i|i % 10 == 0 ? i / 10 : nil}.compact
         field_worker_keys = field_worker_ids.map{|field_worker_id|"field_worker_#{field_worker_id}"}
         params.require(:document).permit(content: 
