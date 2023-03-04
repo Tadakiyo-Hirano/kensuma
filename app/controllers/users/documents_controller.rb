@@ -15,8 +15,10 @@ module Users
         format.html do
           case @document.document_type
           when 'doc_8th'
-            redirect_to users_request_order_path(params[:request_order_uuid]) unless @document.request_order.field_workers.present?
-            flash[:danger] = '作業員名簿を閲覧するには入場作業員を登録してください'
+            if @document.request_order.field_workers.empty?
+              flash[:danger] = '作業員名簿を閲覧するには入場作業員を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
           end
         end
 
