@@ -14,7 +14,6 @@ FactoryBot.define do
     birth_day_on { '2000-01-28' }
     abo_blood_type { 0 }
     rh_blood_type { 0 }
-    job_type { 0 }
     job_title { '主任' }
     hiring_on { '2022-01-28' }
     experience_term_before_hiring { 1 }

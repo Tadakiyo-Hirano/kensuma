@@ -27,8 +27,7 @@ class Worker < ApplicationRecord
   enum sex: { man: 0, woman: 1 }
   enum status_of_residence: { specific_activity: 0, specified_skill: 1 }, _prefix: true # 在留資格
   enum confirmed_check: { checked: 1, unchecked: 0 }, _prefix: true # キャリアアップシステム登録情報が最新であることの確認日
-  # ↓内訳未定のためコメントアウト
-  # enum job_type: {  }
+
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
