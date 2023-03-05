@@ -22,7 +22,7 @@ class Worker < ApplicationRecord
   accepts_nested_attributes_for :worker_medical, allow_destroy: true
 
   enum abo_blood_type: { a: 0, b: 1, ab: 2, o: 3 }
-  enum rh_blood_type: { plus: 0, minus: 1, rh_null: 3 }
+  enum rh_blood_type: { plus: 0, minus: 1, rh_null: 2 }
   enum employment_contract: { available: 0, not_available: 1, not_applicable: 2 }, _prefix: true       # 雇用契約書取り交わし状況
   enum sex: { man: 0, woman: 1 }
   enum status_of_residence: { specific_activity: 0, specified_skill: 1 }, _prefix: true # 在留資格
