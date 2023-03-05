@@ -28,7 +28,6 @@ class Worker < ApplicationRecord
   enum status_of_residence: { specific_activity: 0, specified_skill: 1 }, _prefix: true # 在留資格
   enum confirmed_check: { checked: 1, unchecked: 0 }, _prefix: true # キャリアアップシステム登録情報が最新であることの確認日
 
-
   before_create -> { self.uuid = SecureRandom.uuid }
 
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
