@@ -12,7 +12,7 @@ module Users
           name:                                                        'test企業',
           name_kana:                                                   'テストキギョウ',
           branch_name:                                                 'test支店',
-          branch_address:                                              'test支店住所'
+          branch_address:                                              'test支店住所',
           representative_name:                                         'test代表',
           email:                                                       'test@email.com',
           address:                                                     'test',

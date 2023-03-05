@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "name", null: false
     t.string "name_kana", null: false
     t.string "branch_name", null: false
+    t.string "branch_address", null: false
     t.string "representative_name", null: false
     t.string "email", null: false
     t.string "address", null: false
