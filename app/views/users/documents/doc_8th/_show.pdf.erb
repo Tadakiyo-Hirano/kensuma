@@ -3,7 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <% document_info.field_workers.each_slice(10).each_with_index do |(w1, w2, w3, w4, w5, w6, w7, w8, w9, w10), i| %>
-	<div class="ritz grid-container page-break" " dir="ltr" style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
+	<div class="ritz grid-container page-break" dir="ltr" style="font-family: Noto Sans JP, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;">
 		<table class="waffle no-grid" cellspacing="0" cellpadding="0">
 			<thead></thead>
 			<tbody>
@@ -117,7 +117,7 @@
 					<td class="s7"></td>
 					<td class="s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
 					<td class="s8" colspan="8" rowspan="3">
-						<%= '※8-042未実装※' %> <!-- 8-042 元請会社の確認欄 -->
+						<%= document_info_for_prime_contractor_name %> <!-- 8-042 元請会社の確認欄 -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -318,7 +318,7 @@
 					<td class="s2"></td>
 					<td class="s2" colspan="3" rowspan="2">提 出 日</td>
 					<td class="s10" colspan="6" rowspan="2">
-						<%= '※8-011未実装※' %> <!-- 8-011 提出日 -->
+						<%= doc_content_date(@document.content&.[]('date_submitted')&.[]("field_worker_#{i}")) %> <!-- 8-011 提出日(西暦) -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -361,7 +361,7 @@
 					<td class="s2"></td>
 					<td class="s13" rowspan="2">（</td>
 					<td class="s14" colspan="7" rowspan="2">
-						<%= '※8-004未実装※' %>	<!-- 8-004 書類作成日(西暦) -->
+						<%= doc_content_date(@document.content&.[]('date_created')&.[]("field_worker_#{i}")) %>	<!-- 8-004 書類作成日(西暦) -->
 					</td>
 					<td class="s2" colspan="2" rowspan="2">作成</td>
 					<td class="s2" rowspan="2">）</td>
@@ -454,10 +454,10 @@
 					<td class="s2"></td>
 					<td class="s11" colspan="3" rowspan="2">事業者ID</td>
 					<td class="s19" colspan="9" rowspan="2">
-						一次会社の「事業者ID（キャリアアップ）」8-006
+						<%= primary_subcon_info(document_info).content&.[]('subcon_career_up_id') %> <!-- 8-006 一次会社の事業者ID(キャリアアップID) -->
 					</td>
 					<td class="s20" rowspan="2">
-						印 <!-- 8-043 印 ※未実装※ -->
+						印 <!-- 8-043 印 -->
 					</td>
 					<td class="s2"></td>
 					<td class="s21"></td>
@@ -466,7 +466,7 @@
 						<%= Business.find(document_info.business_id).career_up_id %> <!-- 8-010 自社の「事業者ID（キャリアアップ）」 -->
 					</td>
 					<td class="s20" rowspan="2">
-						印 <!-- 8-044 印 ※未実装※ -->
+						印 <!-- 8-044 印 -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -656,7 +656,7 @@
 					<td class="s6" colspan="4" rowspan="3">血圧</td>
 					<td class="s6" colspan="4" rowspan="3">種類</td>
 					<td class="s36" colspan="1" rowspan="3">雇入・職長特別教育</td>
-					<td class="s37" colspan="1" rowspan="3">技能講習</td>
+					<td class="s37" colspan="1" rowspan="3" >技能講習</td>
 					<td class="s38" colspan="4" rowspan="3">免許</td>
 					<td class="s6" colspan="4" rowspan="3">受入教育<br> 実施年月日</td>
 				</tr>
@@ -719,7 +719,7 @@
 					<td class="s58_1" colspan="4" rowspan="3">
 						<%= field_worker_admission_date(w1) %> <!-- 8-039 入場年月日･始期(1) -->
 					</td>
-					<td class="s60" colspan="2" rowspan="3">
+					<td class="s60" colspan="2" rowspan="3"　>
 						<%= worker_kentaikyo(w1) %>・<%= worker_tyutaikyo(w1) %> <!-- 8-041 退職金共済手帳(建･中) (1) -->
 					</td>
 				</tr>
@@ -1986,7 +1986,6 @@
 	.ritz .waffle .s8 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2000,7 +1999,6 @@
 	.ritz .waffle .s42 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2018,7 +2016,6 @@
 	.ritz .waffle .s38 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -2031,7 +2028,6 @@
 	.ritz .waffle .s63 {
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: right;
 		color: #000000;
 		font-size: 9pt;
@@ -2043,7 +2039,6 @@
 	
 	.ritz .waffle .s10 {
 		border-right: 1px SOLID #ffffff;
-		background-color: #ccffcc;
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2057,7 +2052,6 @@
 	.ritz .waffle .s24 {
 		border-left: none;
 		border-right: none;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2070,7 +2064,6 @@
 	.ritz .waffle .s48 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2086,7 +2079,6 @@
 	}
 	
 	.ritz .waffle .s2 {
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 12pt;
@@ -2100,7 +2092,6 @@
 		border-right	: 1px SOLID #000000;
 		border-left	: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 12pt;
@@ -2113,7 +2104,6 @@
 	.ritz .waffle .s52 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2132,7 +2122,6 @@
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 11pt;
@@ -2145,7 +2134,6 @@
 	.ritz .waffle .s26 {
 		border-left: none;
 		border-right: none;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 10pt;
@@ -2157,7 +2145,6 @@
 	
 	.ritz .waffle .s53 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2175,7 +2162,6 @@
 	.ritz .waffle .s51 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2193,7 +2179,6 @@
 	.ritz .waffle .s9 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: center;
 		font-weight: bold;
 		color: #000000;
@@ -2207,7 +2192,6 @@
 	.ritz .waffle .s13 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: right;
 		color: #000000;
 		font-size: 12pt;
@@ -2221,7 +2205,6 @@
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
 		border-left: none;
-		background-color: #ffffff;
 		text-align: right;
 		color: #000000;
 		font-size: 9pt;
@@ -2235,7 +2218,6 @@
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 10pt;
@@ -2248,7 +2230,6 @@
 	.ritz .waffle .s14 {
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
-		background-color: #ccffcc;
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2263,7 +2244,6 @@
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2276,7 +2256,6 @@
 	.ritz .waffle .s55 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #1155cc;
 		font-size: 11pt;
@@ -2292,7 +2271,6 @@
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
 		border-right: none;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 9pt;
@@ -2305,7 +2283,6 @@
 	.ritz .waffle .s44 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2323,7 +2300,6 @@
 	.ritz .waffle .s56 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -2338,7 +2314,6 @@
 	.ritz .waffle .s56_1 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 6pt;
@@ -2353,7 +2328,6 @@
 	.ritz .waffle .s28 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2366,7 +2340,6 @@
 	.ritz .waffle .s59 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -2381,7 +2354,6 @@
 	.ritz .waffle .s59_1 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 8pt;
@@ -2394,7 +2366,6 @@
 	}
 	
 	.ritz .waffle .s16 {
-		background-color: #ccffcc;
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2410,7 +2381,6 @@
 	.ritz .waffle .s35 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2425,7 +2395,6 @@
 	.ritz .waffle .s45 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2441,7 +2410,6 @@
 	}
 	
 	.ritz .waffle .s17 {
-		background-color: #ccffcc;
 		border-bottom: 1px SOLID #000000;
 		text-align: left;
 		-webkit-text-decoration-skip: none;
@@ -2456,7 +2424,6 @@
 	.ritz .waffle .s43 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2476,7 +2443,6 @@
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #000000;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2490,7 +2456,6 @@
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 12pt;
@@ -2504,7 +2469,7 @@
 	
 	.ritz .waffle .s12 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #ccffcc;
+		border-right: 1px SOLID #ffffff;
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2518,7 +2483,6 @@
 	.ritz .waffle .s54 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2536,7 +2500,6 @@
 	.ritz .waffle .s32 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 12pt;
@@ -2550,7 +2513,6 @@
 	
 	.ritz .waffle .s25 {
 		border-left: none;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2563,7 +2525,6 @@
 	.ritz .waffle .s21 {
 		border-left: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2576,7 +2537,6 @@
 	.ritz .waffle .s37 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px DASHED #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -2588,7 +2548,6 @@
 	
 	.ritz .waffle .s4 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: left;
 		color: #1155cc;
 		font-size: 12pt;
@@ -2602,7 +2561,6 @@
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2615,7 +2573,6 @@
 	.ritz .waffle .s41 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		font-size: 11pt;
 		vertical-align: middle;
@@ -2629,7 +2586,6 @@
 	.ritz .waffle .s50 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ead1dc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2648,7 +2604,6 @@
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 10pt;
@@ -2660,7 +2615,6 @@
 	
 	.ritz .waffle .s27 {
 		border-left: none;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 10pt;
@@ -2673,7 +2627,6 @@
 	.ritz .waffle .s39 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2685,8 +2638,7 @@
 	
 	.ritz .waffle .s60 {
 		border-right: 1px SOLID #000000;
-		border-bottom: 1px SOLID #ccffcc;
-		background-color: #ccffcc;
+		border-bottom: 0px SOLID #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -2703,7 +2655,6 @@
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 12pt;
@@ -2715,7 +2666,6 @@
 	
 	.ritz .waffle .s15 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2729,7 +2679,6 @@
 	.ritz .waffle .s19 {
 		border-left: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2742,7 +2691,6 @@
 	
 	.ritz .waffle .s64 {
 		border-bottom: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 9pt;
@@ -2755,7 +2703,6 @@
 	.ritz .waffle .s6 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 12pt;
@@ -2768,7 +2715,6 @@
 	.ritz .waffle .s34 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 8pt;
@@ -2782,14 +2728,9 @@
 	
 	.ritz .waffle .s20 {
 		border-right: 1px SOLID #ffffff;
-		border-left: 1px SOLID #ccffcc;
+		border-left: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
-		text-decoration: underline;
-		-webkit-text-decoration-skip: none;
-		text-decoration-skip-ink: none;
-		color: #1155cc;
 		font-size: 8pt;
 		vertical-align: middle;
 		white-space: normal;
@@ -2802,7 +2743,6 @@
 	.ritz .waffle .s47 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2820,7 +2760,6 @@
 	.ritz .waffle .s33 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 12pt;
@@ -2833,7 +2772,6 @@
 	.ritz .waffle .s36 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px DASHED #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 8pt;
@@ -2849,7 +2787,6 @@
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #0000ff;
 		font-size: 11pt;
@@ -2864,7 +2801,6 @@
 	.ritz .waffle .s57 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -2879,7 +2815,6 @@
 	.ritz .waffle .s57_1 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 5pt;
@@ -2894,7 +2829,6 @@
 	.ritz .waffle .s46 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2913,7 +2847,6 @@
 		border-top: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
-		background-color: #ffffff;
 		text-align: center;
 		color: #000000;
 		font-size: 12pt;
@@ -2928,7 +2861,6 @@
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
 		border-left: none;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 9pt;
@@ -2941,7 +2873,6 @@
 	.ritz .waffle .s61 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ead1dc;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -2956,7 +2887,6 @@
 	.ritz .waffle .s49 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		text-decoration: underline;
 		-webkit-text-decoration-skip: none;
@@ -2973,7 +2903,6 @@
 	
 	.ritz .waffle .s62 {
 		border: 1px SOLID #ffffff;
-		background-color: #ffffff;
 		text-align: left;
 		color: #000000;
 		font-size: 9pt;
@@ -2986,7 +2915,6 @@
 	.ritz .waffle .s58 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 11pt;
@@ -3001,7 +2929,6 @@
 	.ritz .waffle .s58_1 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #ccffcc;
 		text-align: center;
 		color: #000000;
 		font-size: 8pt;
@@ -3023,4 +2950,3 @@
 		page-break-after: always;
 	}
 </style>
-	
