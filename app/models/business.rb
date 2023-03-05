@@ -15,6 +15,8 @@ class Business < ApplicationRecord
   accepts_nested_attributes_for :business_occupations, allow_destroy: true
   accepts_nested_attributes_for :business_industries, allow_destroy: true
 
+  before_create -> { self.uuid = SecureRandom.uuid }
+
   enum business_type: { corporation: 0, freelance: 1, Individual_five_over: 2, Individual_five_less: 3 }
   enum business_health_insurance_status: { join: 0, not_join: 1, not_coverd: 2 }, _prefix: true               # 健康保険(加入状況)
   enum business_welfare_pension_insurance_join_status: { join: 0, not_join: 1, not_coverd: 2 }, _prefix: true # 厚生年金保険(加入状況)
@@ -30,7 +32,6 @@ class Business < ApplicationRecord
   enum foreign_technical_intern_trainees_exist: { available: 0, not_available: 1 }, _prefix: true             # 人技能実習生の従事の状況
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :uuid, presence: true
   validates :name, presence: true
   validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー]+\z/u, message: 'はカタカナで入力して下さい。' }
   validates :branch_name, presence: true
@@ -57,8 +58,6 @@ class Business < ApplicationRecord
   validates :construction_license_number_six_digits, format: { with: /\A\d{1,6}\z/, message: 'は数字6桁以下で入力してください' }, presence: true
   validates :construction_license_number, presence: true
   validates :construction_license_updated_at, presence: true
-
-  before_create -> { self.uuid = SecureRandom.uuid }
 
   mount_uploaders :stamp_images, StampImagesUploader
 end
