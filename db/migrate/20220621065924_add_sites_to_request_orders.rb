@@ -12,7 +12,7 @@ class AddSitesToRequestOrders < ActiveRecord::Migration[6.1]
     add_column :request_orders, :professional_engineer_name,                  :string  # 専門技術者(氏名)
     add_column :request_orders, :professional_engineer_qualification,         :string  # 専門技術者(資格内容)
     add_column :request_orders, :professional_engineer_details,               :string  # 専門技術者(担当工事内容)
-    add_column :request_orders, :professional_engineer_qualification,         :string  # 専門技術者(必要資格)
+    add_column :request_orders, :professional_engineer_required_qualification,:string  # 専門技術者(必要資格)
     add_column :request_orders, :professional_construction,                   :integer # 特定専門工事(有無)
     add_column :request_orders, :construction_manager_name,                   :string  # 工事担任責任者(氏名)
     add_column :request_orders, :construction_manager_position_name,          :string  # 工事担任責任者(役職名)
