@@ -36,7 +36,7 @@
                   確認欄
                 </td>
                 <td class="s5" dir="ltr" colspan="8" rowspan="2">
-                  <%= '※12-001未実装※' %> <!-- 12-001 元請会社の確認欄 -->
+                  <%= document_info_for_prime_contractor_name %> <!-- 12-001 元請会社の確認欄 -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -286,7 +286,7 @@
                 <td class="s8"></td>
                 <td class="s9" colspan="5" rowspan="2">一次会社名</td>
                 <td class="s16" dir="ltr" colspan="12" rowspan="2">
-                  <%= '※12-006未実装※' %> <!-- 12-006 一次会社名 -->
+                  <%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 12-006 一次会社名 -->
                 </td>
               </tr>
               <tr style="height: 25px">
