@@ -7,7 +7,7 @@ module Users
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
     before_action :edit_restriction_after_approved, only: %i[edit update]
-    before_action :get_subcon_info, only: :show
+    before_action :get_subcon_info, only: :show # doc_18thの配置を決定させるためのロジック
 
     def index; end
 
@@ -200,7 +200,7 @@ module Users
           update_workers.push(focus_worker)
           j += 1
         end
-        
+
         if FieldWorker.import update_workers, on_duplicate_key_update: [:prime_contractor_confirmation, :occupation]
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -521,13 +521,13 @@ module Users
       end
     end
 
+    # doc_18thの配置を決定させるためのロジック
     def get_subcon_info
       edge_position = 1
       current_order_id = RequestOrder.find_by(uuid: params[:request_order_uuid]).order_id #現場IDの取得
       prime_contractor_id = RequestOrder.find_by(order_id: current_order_id, parent_id: nil).id #元請IDの取得
       if RequestOrder.where(order_id: current_order_id, parent_id: prime_contractor_id).present? #一次下請けが存在するか確認(開始)
         primary_element = 0
-        #instance_variable_set("@primary_subcon_id_#{edge_position}", primary_subcon_list(current_order_id,prime_contractor_id).slice(primary_element))
         primary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: prime_contractor_id).order(id: "ASC") #一次下請けの配列作成(開始)
         primary_subcon_list = []
         primary_subcon_list_base.each do |record|
@@ -536,6 +536,7 @@ module Users
         primary_subcon_list_size = primary_subcon_list.size
         while instance_variable_set("@primary_subcon_id_#{edge_position}", primary_subcon_list.slice(primary_element)).present? #一次下請けの繰り返し処理(開始)
           instance_variable_set("@primary_subcon_id_#{edge_position}", primary_subcon_list.slice(primary_element))
+          #binding.pry
           if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_#{edge_position}")).present? #二次下請けが存在するか確認(開始)
             secondary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_#{edge_position}")).order(id: "ASC") #二次下請けの配列作成(開始)
             secondary_subcon_list = []
@@ -546,6 +547,7 @@ module Users
             secondary_element = 0
             while instance_variable_set("@secondary_subcon_id_#{edge_position}", secondary_subcon_list.slice(secondary_element)).present? #二次下請けの繰り返し処理(開始)
               instance_variable_set("@secondary_subcon_id_#{edge_position}", secondary_subcon_list.slice(secondary_element))
+              #binding.pry
               if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_#{edge_position}")).present? #三次下請けが存在するか確認(開始)
                 tertiary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_#{edge_position}")).order(id: "ASC") #三次下請けの配列作成(開始)
                 tertiary_subcon_list = []
@@ -580,27 +582,35 @@ module Users
                   tertiary_element += 1
                 end #三次下請けの繰り返し処理(終了)
               end #三次下請けが存在するか確認(終了)
+              #binding.pry
               if (secondary_element + 1) == secondary_subcon_list_size
+                if not (edge_position%4 == 0)
+                  edge_position = (edge_position.div(4)+1)*4
+                end
+                #binding.pry
                 break
               end
               edge_position += 1
               secondary_element += 1
             end #二次下請けの繰り返し処理(終了)
+          else
+            edge_position = (edge_position.div(4)+1)*4
           end #二次下請けが存在するか確認(終了)
           if (primary_element + 1) == primary_subcon_list_size
             break
           end
           edge_position += 1
           primary_element += 1
+          #binding.pry
         end #一次下請けの繰り返し処理(終了)
       end #一次下請けが存在するか確認(終了)
-      @total_pages = edge_position.div(4)
+      @total_pages = (edge_position-1).div(4)
     end
 
     def document_params(document)
       case document.document_type
       when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
-        params.require(:document).permit(content: 
+        params.require(:document).permit(content:
           %i[
             date_submitted
           ]
@@ -608,7 +618,7 @@ module Users
       when 'doc_13rd'
         field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
         field_special_vehicle_keys = field_special_vehicle_ids.map{|field_special_vehicle_id|"field_special_vehicle_#{field_special_vehicle_id}"}
-        params.require(:document).permit(content: 
+        params.require(:document).permit(content:
           [
             date_submitted:                field_special_vehicle_keys, # 13-001 提出日(西暦)
             reception_confirmation_date:   field_special_vehicle_keys, # 13-039 受付確認年月日

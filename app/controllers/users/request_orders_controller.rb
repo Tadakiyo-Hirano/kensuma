@@ -186,6 +186,7 @@ module Users
           subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
           subcon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
           subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
+          subcon_construction_license_number:                                 current_business.construction_license_number,                                      # 建設業許可番号(合成)
           subcon_employment_manager_name:                                     current_business.employment_manager_name,                                          # 雇用管理責任者名
           subcon_specific_skilled_foreigners_exist:                           current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
           subcon_foreign_construction_workers_exist:                          current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
