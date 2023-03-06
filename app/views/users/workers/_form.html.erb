@@ -60,12 +60,6 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
 <%= f.collection_radio_buttons(:rh_blood_type, Worker.rh_blood_types_i18n, :first, :last) %><br>
 
-<!-- 下記職種はenum未設計の為ひとまずintegerの数字が表示されるようにしています -->
-<%= f.label :job_type %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.number_field :job_type, class: "form-control" %><br>
-<!-- -->
-
 <!-- 下記役職はひとまずテキスト入力にしています -->
 <%= f.label :job_title %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
@@ -341,9 +335,6 @@
         "worker[abo_blood_type]": {
           required: true
         },
-        "worker[job_type]": {
-          required: true
-        },
         "worker[job_title]": {
           required: true
         },
@@ -420,9 +411,6 @@
         },
         "worker[abo_blood_type]": {
           required: "血液型(ABO)を入力してください。"
-        },
-        "worker[job_type]": {
-          required: "職種を入力してください。"
         },
         "worker[job_title]": {
           required: "役職を入力してください。"

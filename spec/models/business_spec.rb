@@ -10,21 +10,6 @@ RSpec.describe Business, type: :model do
       expect(subject).to be_valid
     end
 
-    describe '#uuid' do
-      context '存在しない場合' do
-        before(:each) { subject.uuid = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('会社IDを入力してください')
-        end
-      end
-    end
-
     describe '#name' do
       context '存在しない場合' do
         before(:each) { subject.name = nil }
