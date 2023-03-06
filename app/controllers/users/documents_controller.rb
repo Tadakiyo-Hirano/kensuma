@@ -49,7 +49,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_12th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -531,7 +531,7 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th','doc_16th', 'doc_17th'
         params.require(:document).permit(content: 
           %i[
             date_submitted
@@ -545,6 +545,14 @@ module Users
           [
             date_submitted: field_worker_keys, # 13-001 提出日(西暦)
             date_created:   field_worker_keys  # 13-004 作成日(西暦)
+          ]
+        )
+      when 'doc_12th' 
+        field_car_ids = @document.request_order.field_cars.ids
+        field_car_keys = field_car_ids.map{|field_car_id|"field_car_#{field_car_id}"}
+        params.require(:document).permit(content: 
+          [
+            date_submitted: field_car_keys, # 12-002 提出日(西暦)
           ]
         )
       when 'doc_13rd'

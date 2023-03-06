@@ -134,7 +134,7 @@
                 <td class="s8"></td>
                 <td class="s9"></td>
                 <td class="s11" dir="ltr" colspan="8">
-                  <%= '※12-002未実装※' %> <!-- 12-002 提出日 -->
+                  <%= doc_content_date(@document.content&.[]('date_submitted')&.[]("field_car_#{field_car.id}")) %> <!-- 12-002 提出日 -->
                 </td>
               </tr>
               <tr style="height: 25px">
