@@ -13,7 +13,16 @@ module Users
 
     def show
       respond_to do |format|
-        format.html
+        format.html do
+          case @document.document_type
+          when 'doc_8th'
+            if @document.request_order.field_workers.empty?
+              flash[:danger] = '作業員名簿を閲覧するには入場作業員を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
+          end
+        end
+
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
@@ -41,7 +50,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -613,6 +622,16 @@ module Users
         params.require(:document).permit(content:
           %i[
             date_submitted
+          ]
+        )
+      when 'doc_8th'
+        # 作業員名簿10人区切りの為、view側のフォームのnameを1頁目(field_worker_0)、2頁目(field_worker_10)と指定
+        field_worker_ids = @document.request_order.field_workers.map.with_index {|field_worker, i|i % 10 == 0 ? i / 10 : nil}.compact
+        field_worker_keys = field_worker_ids.map{|field_worker_id|"field_worker_#{field_worker_id}"}
+        params.require(:document).permit(content: 
+          [
+            date_submitted: field_worker_keys, # 13-001 提出日(西暦)
+            date_created:   field_worker_keys  # 13-004 作成日(西暦)
           ]
         )
       when 'doc_13rd'

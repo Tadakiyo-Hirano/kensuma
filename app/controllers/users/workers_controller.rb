@@ -15,18 +15,19 @@ module Users
           country:                       '日本',
           my_address:                    '東京都港区1-1',
           my_phone_number:               '01234567898',
+          family_name:                   'フェルナンデス',
+          relationship:                  '父親',
           family_address:                '埼玉県三郷市1-1',
           family_phone_number:           '09876543210',
           birth_day_on:                  '2000-01-28',
-          abo_blood_type:                0,
-          rh_blood_type:                 0,
-          job_type:                      0,
+          abo_blood_type:                :a,
+          rh_blood_type:                 :plus,
           job_title:                     '主任',
           hiring_on:                     '2022-01-28',
           experience_term_before_hiring: 10,
           blank_term:                    3,
           career_up_id:                  '1',
-          sex:                           1
+          sex:                           :man
           # ============================================
         )
         @worker.worker_licenses.build(
@@ -49,6 +50,8 @@ module Users
         )
         worker_medical = @worker.build_worker_medical(
           # テスト用デフォルト値 ==========================
+          is_med_exam:         :y,
+          health_condition:    :good,
           med_exam_on:         '2022-03-01',
           max_blood_pressure:  120,
           min_blood_pressure:  70,
@@ -73,13 +76,32 @@ module Users
           # ============================================
         )
       else
-        @worker = current_business.workers.new
+        @worker = current_business.workers.new(
+          # 本番環境用デフォルト値 ==========================
+          country:        '日本',
+          abo_blood_type: :a,
+          rh_blood_type:  :plus,
+          sex:            :man
+          # ============================================
+        )
         @worker.worker_licenses.build
         @worker.worker_skill_trainings.build
         @worker.worker_special_educations.build
-        worker_medical = @worker.build_worker_medical
+        worker_medical = @worker.build_worker_medical(
+          # 本番環境用デフォルト値 ==========================
+          is_med_exam:      :y,
+          health_condition: :good
+          # ============================================
+        )
         worker_medical.worker_exams.build
-        @worker.build_worker_insurance
+        @worker.build_worker_insurance(
+          # 本番環境用デフォルト値 ==========================
+          health_insurance_type:         :health_insurance_association,
+          pension_insurance_type:        :welfare,
+          employment_insurance_type:     :insured,
+          severance_pay_mutual_aid_type: :kentaikyo
+          # ============================================
+        )
       end
     end
 
@@ -170,10 +192,8 @@ module Users
       params.require(:worker).permit(:name, :name_kana,
         :country, :my_address, :my_phone_number, :family_address,
         :family_phone_number, :birth_day_on, :abo_blood_type,
-        :rh_blood_type, :job_title, :job_type, :hiring_on, :experience_term_before_hiring,
-        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship,
-        :email, :sex, :status_of_residence, :maturity_date, :confirmed_check, :responsible_director,
-        :responsible_name, :responsible_contact_address, :passport, :residence_card, :employment_conditions,
+        :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring,
+        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],
