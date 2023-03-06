@@ -293,9 +293,11 @@ ja:
       rh_blood_type:
         plus: ＋
         minus: −
+        rh_null: "null"
       employment_contract: # 雇用契約書の取り交わし状況
-        available: 取り交わし済
-        not_available: 未だ
+        available: 済
+        not_available: 未
+        not_applicable: 対象外
       sex:
         man: 男性
         woman: 女性

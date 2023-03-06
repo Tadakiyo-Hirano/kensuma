@@ -11,7 +11,6 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.date :birth_day_on, null: false
       t.integer :abo_blood_type, null: false, default: 0
       t.integer :rh_blood_type, null: false, default: 0
-      t.integer :job_type, null: false, default: 0
       t.date :hiring_on, null: false
       t.integer :experience_term_before_hiring, null: false
       t.integer :blank_term, null: false
