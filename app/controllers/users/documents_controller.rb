@@ -16,7 +16,12 @@ module Users
           case @document.document_type
           when 'doc_8th'
             if @document.request_order.field_workers.empty?
-              flash[:danger] = '作業員名簿を閲覧するには入場作業員を登録してください'
+              flash[:danger] = '作業員名簿を閲覧するには入場作業員情報を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
+          when 'doc_12th'
+            if @document.request_order.field_cars.empty?
+              flash[:danger] = '工事用・通勤⽤⾞両届を閲覧するには車両情報を登録してください'
               redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
             end
           end
