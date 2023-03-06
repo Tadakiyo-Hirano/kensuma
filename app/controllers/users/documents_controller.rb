@@ -7,7 +7,7 @@ module Users
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
     before_action :edit_restriction_after_approved, only: %i[edit update]
-    before_action :get_subcon_info, only: :show # doc_18thの配置を決定させるためのロジック
+    before_action :get_subcon_info_18th, only: :show # doc_18thの配置を決定させるためのロジック
 
     def index; end
 
@@ -531,7 +531,7 @@ module Users
     end
 
     # doc_18thの配置を決定させるためのロジック
-    def get_subcon_info
+    def get_subcon_info_18th
       edge_position = 1
       current_order_id = RequestOrder.find_by(uuid: params[:request_order_uuid]).order_id #現場IDの取得
       prime_contractor_id = RequestOrder.find_by(order_id: current_order_id, parent_id: nil).id #元請IDの取得
@@ -543,32 +543,32 @@ module Users
           primary_subcon_list << record.id
         end #一次下請けの配列作成(終了)
         primary_subcon_list_size = primary_subcon_list.size
-        while instance_variable_set("@primary_subcon_id_#{edge_position}", primary_subcon_list.slice(primary_element)).present? #一次下請けの繰り返し処理(開始)
-          instance_variable_set("@primary_subcon_id_#{edge_position}", primary_subcon_list.slice(primary_element))
+        while instance_variable_set("@primary_subcon_id_18th_#{edge_position}", primary_subcon_list.slice(primary_element)).present? #一次下請けの繰り返し処理(開始)
+          instance_variable_set("@primary_subcon_id_18th_#{edge_position}", primary_subcon_list.slice(primary_element))
           #binding.pry
-          if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_#{edge_position}")).present? #二次下請けが存在するか確認(開始)
-            secondary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_#{edge_position}")).order(id: "ASC") #二次下請けの配列作成(開始)
+          if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_18th_#{edge_position}")).present? #二次下請けが存在するか確認(開始)
+            secondary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_18th_#{edge_position}")).order(id: "ASC") #二次下請けの配列作成(開始)
             secondary_subcon_list = []
             secondary_subcon_list_base.each do |record|
               secondary_subcon_list << record.id
             end #二次下請けの配列作成(終了)
             secondary_subcon_list_size = secondary_subcon_list.size
             secondary_element = 0
-            while instance_variable_set("@secondary_subcon_id_#{edge_position}", secondary_subcon_list.slice(secondary_element)).present? #二次下請けの繰り返し処理(開始)
-              instance_variable_set("@secondary_subcon_id_#{edge_position}", secondary_subcon_list.slice(secondary_element))
+            while instance_variable_set("@secondary_subcon_id_18th_#{edge_position}", secondary_subcon_list.slice(secondary_element)).present? #二次下請けの繰り返し処理(開始)
+              instance_variable_set("@secondary_subcon_id_18th_#{edge_position}", secondary_subcon_list.slice(secondary_element))
               #binding.pry
-              if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_#{edge_position}")).present? #三次下請けが存在するか確認(開始)
-                tertiary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_#{edge_position}")).order(id: "ASC") #三次下請けの配列作成(開始)
+              if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_18th_#{edge_position}")).present? #三次下請けが存在するか確認(開始)
+                tertiary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_18th_#{edge_position}")).order(id: "ASC") #三次下請けの配列作成(開始)
                 tertiary_subcon_list = []
                 tertiary_subcon_list_base.each do |record|
                   tertiary_subcon_list << record.id
                 end #三次下請けの配列作成(終了)
                 tertiary_subcon_list_size = tertiary_subcon_list.size
                 tertiary_element = 0
-                while instance_variable_set("@tertiary_subcon_id_#{edge_position}", tertiary_subcon_list.slice(tertiary_element)).present? #三次下請けの繰り返し処理(開始)
-                  instance_variable_set("@tertiary_subcon_id_#{edge_position}", tertiary_subcon_list.slice(tertiary_element))
-                  if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_#{edge_position}")).present? #四次下請けが存在性するか確認(開始)
-                    quaternary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_#{edge_position}")).order(id: "ASC") #四次下請けの配列作成(開始)
+                while instance_variable_set("@tertiary_subcon_id_18th_#{edge_position}", tertiary_subcon_list.slice(tertiary_element)).present? #三次下請けの繰り返し処理(開始)
+                  instance_variable_set("@tertiary_subcon_id_18th_#{edge_position}", tertiary_subcon_list.slice(tertiary_element))
+                  if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_18th_#{edge_position}")).present? #四次下請けが存在性するか確認(開始)
+                    quaternary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_18th_#{edge_position}")).order(id: "ASC") #四次下請けの配列作成(開始)
                     quaternary_subcon_list = []
                     quaternary_subcon_list_base.each do |record|
                       quaternary_subcon_list << record.id
@@ -576,7 +576,7 @@ module Users
                     quaternary_subcon_list_size = quaternary_subcon_list.size
                     quaternary_element = 0
                     while quaternary_element < quaternary_subcon_list_size #四次下請けの要素の数だけ処理(開始)
-                      instance_variable_set("@quaternary_subcon_id_#{edge_position}", quaternary_subcon_list.slice(quaternary_element))
+                      instance_variable_set("@quaternary_subcon_id_18th_#{edge_position}", quaternary_subcon_list.slice(quaternary_element))
                       if (quaternary_element + 1) == quaternary_subcon_list_size #四次下請けの数が到達したらブレイク
                         break
                       end
@@ -628,7 +628,7 @@ module Users
         # 作業員名簿10人区切りの為、view側のフォームのnameを1頁目(field_worker_0)、2頁目(field_worker_10)と指定
         field_worker_ids = @document.request_order.field_workers.map.with_index {|field_worker, i|i % 10 == 0 ? i / 10 : nil}.compact
         field_worker_keys = field_worker_ids.map{|field_worker_id|"field_worker_#{field_worker_id}"}
-        params.require(:document).permit(content: 
+        params.require(:document).permit(content:
           [
             date_submitted: field_worker_keys, # 13-001 提出日(西暦)
             date_created:   field_worker_keys  # 13-004 作成日(西暦)
