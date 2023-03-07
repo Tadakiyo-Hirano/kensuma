@@ -119,12 +119,12 @@ module DocumentsHelper
     status = INSURANCE_TYPE[insurance_type]
     status == '適用除外' ? tag.span(status, class: :circle) : '適用除外'
   end
-  
+
   # (5)再下請負通知書（変更届）
   def skill_id_value(engineer)
     @request_order.content.nil? ? "" : @request_order.content&.[]("#{engineer}_engineer_skill_training_id").to_i
   end
-  
+
   def child_check(child)
     if child.present?
       Industry.find_by(id: Business.find_by(id: child&.business_id)&.industry_ids&.join("','"))&.name
@@ -160,15 +160,15 @@ module DocumentsHelper
     permission_type = c_license_permission_type_identification_or_general(d_info)
     permission_type == type ? tag.span(type, class: :circle) : type
   end
-  
+
   def engineer_skill_training(engineer, document) # 対象者を判定した後、資格内容を返す
-    s_id = document&.content&.[]("#{engineer}_engineer_skill_training_id") 
+    s_id = document&.content&.[]("#{engineer}_engineer_skill_training_id")
     s_id.blank? ? "" : SkillTraining.find(s_id).name
   end
-  
+
   def foreign_exist(foreign_type, d_info, yes_no) # 「有」か「無」判定
   #logger.debug(d_info.conten)
-  
+
     f_type = d_info&.content&.[]("subcon_#{foreign_type}")
     if f_type == "available"
       f_type = "有"
@@ -363,7 +363,7 @@ module DocumentsHelper
       licenses.to_s.gsub(/,|"|\[|\]/) { '' }
     end
   end
-  
+
   def age_border(age) # 入場年月日をもとに（65歳以上か18歳未満の）作業員を絞り込み
     target_ids = []
     document_info.field_workers.where.not(admission_date_start: nil).each do |field_worker|
@@ -375,7 +375,7 @@ module DocumentsHelper
         if border_date < birth_date
           target_ids.push field_worker.id
         end
-    
+
       when 65
         border_date = str_date.prev_year(65) # 入場日から65年前の日付
         if border_date >= birth_date
@@ -408,9 +408,9 @@ module DocumentsHelper
   def car_usage_const(usage)
     usage == '工事用' ? tag.span('工事', class: :circle) : '工事'
   end
-  
+
   # (10)高齢者就労報告書/(11)年少者就労報告書
-  
+
   def age_for_admission_date_start(worker) # 入場年月日を起点に年齢を算出
     if worker.present?
       date_format = '%Y%m%d'
@@ -546,7 +546,7 @@ module DocumentsHelper
       RequestOrder.find(document_info.find_all_by_generation(hierarchy).ids[child_id])
     end
   end
-    
+
   # (13)移動式クレーン/車両系建設機械等使用届,(16)火気使用届,(17)下請負業者編成表
 
   # 一次下請会社名の情報
@@ -557,6 +557,40 @@ module DocumentsHelper
       RequestOrder.find(document_info.ancestor_ids[-2])
     elsif document_info.ancestors.count == 1
       document_info.content.nil? ? nil : document_info
+    end
+  end
+
+  # (18)工事作業所災害防止協議会兼施工体系図
+
+  # RequestOrderの情報を取得する
+  def request_order_info(id)
+    RequestOrder.find(id) if id.present?
+  end
+
+  # 三次下請け(1行目表示用)
+  def provisional_tertiary_subcon_info(tertiary_id, quaternary_id)
+    if tertiary_id.present?
+      request_order_info(tertiary_id)
+    else
+      request_order_info(request_order_info(quaternary_id)&.parent_id)
+    end
+  end
+
+  # 二次下請け(1行目表示用)
+  def provisional_secondary_subcon_info(secondary_id,tertiary_id,quaternary_id)
+    if secondary_id.present?
+      request_order_info(secondary_id)
+    else
+      request_order_info(provisional_tertiary_subcon_info(tertiary_id, quaternary_id)&.parent_id)
+    end
+  end
+
+  # 一次下請け(1行目表示用)
+  def provisional_primary_subcon_info(primary_id,secondary_id,tertiary_id,quaternary_id)
+    if primary_id.present?
+      request_order_info(primary_id)
+    else
+      request_order_info(provisional_secondary_subcon_info(secondary_id,tertiary_id,quaternary_id)&.parent_id)
     end
   end
 
@@ -806,13 +840,13 @@ module DocumentsHelper
     contract_status = worker&.content&.[]('employment_contract')
     contract_status == 'available' ? tag.span('1. 取り交わし済', class: :circle) : '1. 取り交わし済'
   end
-  
+
   # 雇用契約書-「無し」
   def employment_contract_no(worker)
     contract_status = worker&.content&.[]('employment_contract')
     contract_status == 'not_available' ? tag.span('2. 未だ', class: :circle) : '2. 未だ'
   end
-  
+
   # アンケート設問：（法人規模-「はい」）
   def questionnaire_business_type_yes(worker)
     w_name = worker&.content&.[]('name')
@@ -859,7 +893,7 @@ module DocumentsHelper
       '2. いいえ'
     end
   end
-  
+
   # アンケート設問：（就業年数-基準値）
   def questionnaire_experience_term_calc(worker)
     date_format = '%Y%m%d'
@@ -868,69 +902,69 @@ module DocumentsHelper
     hiring_on_term = (admission_date - hiring_date) / 10000
     experience_term_before_hiring = worker.content['experience_term_before_hiring'].to_i
     blank_term = worker.content['blank_term'].to_i
-    return hiring_on_term + experience_term_before_hiring - blank_term 
+    return hiring_on_term + experience_term_before_hiring - blank_term
   end
-  
+
   # アンケート設問：（就業年数-「1年未満」）
   def questionnaire_experience_term_short(worker)
-    experience_term = questionnaire_experience_term_calc(worker) 
+    experience_term = questionnaire_experience_term_calc(worker)
     experience_term < 1 ? tag.span('1. 1年以内', class: :circle) : '1. 1年以内'
   end
 
   # アンケート設問：（就業年数-「1年以上から3年未満」）
   def questionnaire_experience_term_middle(worker)
-    experience_term = questionnaire_experience_term_calc(worker) 
+    experience_term = questionnaire_experience_term_calc(worker)
     experience_term >= 1 && experience_term < 3 ? tag.span('2. 1～3年', class: :circle) : '2. 1～3年'
   end
 
   # アンケート設問：（就業年数-「3年以上」）
   def questionnaire_experience_term_long(worker)
-    experience_term = questionnaire_experience_term_calc(worker) 
+    experience_term = questionnaire_experience_term_calc(worker)
     experience_term >= 3 ? tag.span('3. 3年以上', class: :circle) : '3. 3年以上'
   end
-  
+
   # アンケート設問：（健康診断-「はい」）
   def questionnaire_health_exam_yes(worker)
     health_exam_status = worker&.content&.[]('worker_medical')['is_med_exam']
     health_exam_status == 'y' ? tag.span('1. 受けた', class: :circle) : '1. 受けた'
   end
-  
+
   # アンケート設問：（健康診断-「いいえ」）
   def questionnaire_health_exam_no(worker)
     health_exam_status = worker&.content&.[]('worker_medical')['is_med_exam']
     health_exam_status == 'n' ? tag.span('2. 受けていない', class: :circle) : '2. 受けていない'
   end
-  
+
   # アンケート設問：（健康状態-「よい」）
   def questionnaire_health_condition_good(worker)
     health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
     health_condition_status == 'good' ? tag.span('1. よい', class: :circle) : '1. よい'
   end
-  
+
   # アンケート設問：（健康状態-「まあまあである」）
   def questionnaire_health_condition_normal(worker)
     health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
     health_condition_status == 'normal' ? tag.span('2. まあまあである', class: :circle) : '2. まあまあである'
   end
-  
+
   # アンケート設問：（健康状態-「あまりよくない」）
   def questionnaire_health_condition_bad(worker)
     health_condition_status = worker&.content&.[]('worker_medical')['health_condition']
     health_condition_status == 'bad' ? tag.span('3. あまりよくない', class: :circle) : '3. あまりよくない'
   end
-  
+
   # アンケート設問：（送り出し教育-「はい」）
   def questionnaire_sendoff_education_yes(worker)
     sendoff_status = worker.sendoff_education
     sendoff_status == 'educated' ? tag.span('1. はい', class: :circle) : '1. はい'
   end
-  
+
   # アンケート設問：（送り出し教育-「いいえ」）
   def questionnaire_sendoff_education_no(worker)
     sendoff_status = worker.sendoff_education
     sendoff_status == 'not_educated' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
   end
-  
+
   # 資格-技能講習-作業主任者-その他枠
   def worker_skill_training_work_other(worker)
     trainings = worker&.content&.[]('worker_skill_trainings')
