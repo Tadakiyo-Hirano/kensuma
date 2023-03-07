@@ -552,7 +552,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "site_agent_apply"
     t.string "lead_engineer_name"
     t.integer "lead_engineer_check"
-    t.integer "lead_engineer_qualification"
+    t.string "lead_engineer_qualification"
     t.string "work_chief_name"
     t.string "work_conductor_name"
     t.string "safety_officer_name"
