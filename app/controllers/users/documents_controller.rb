@@ -290,7 +290,8 @@ module Users
         end
       end
     end
-    
+
+
     private
 
     def set_documents
