@@ -18,7 +18,12 @@ module Users
             request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
             @prime_contractor_business = Business.find(request_order.business_id)
             @business = Business.find(@document.business_id)
-          end
+          when 'doc_8th'
+            if @document.request_order.field_workers.empty?
+              flash[:danger] = '作業員名簿を閲覧するには入場作業員を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
+          
         end
         format.pdf do
           case @document.document_type
