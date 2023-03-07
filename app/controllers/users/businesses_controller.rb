@@ -90,7 +90,7 @@ module Users
 
     def business_params
       params.require(:business).permit(
-        :uuid, :name, :name_kana, :branch_name,:branch_address, :representative_name, :email, :address, :post_code,
+        :uuid, :name, :name_kana, :branch_name, :branch_address, :representative_name, :email, :address, :post_code,
         :phone_number, :fax_number, :career_up_id, :business_type, { stamp_images: [] }, :user_id,
         :business_health_insurance_status, :business_health_insurance_association,
         :business_health_insurance_office_number, :business_welfare_pension_insurance_join_status,
