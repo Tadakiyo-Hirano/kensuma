@@ -9,7 +9,7 @@ class Car < ApplicationRecord
 
   enum usage: { "工事用": 0, "通勤用": 1 }
 
-  VALID_VEHICLE_NUMBER_REGEX = /\A[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]{1,4}[-a-zA-Z0-9]{1,3}[\u3040-\u309f-A-Z]{1}[0-9]{1,4}\z/
+  VALID_VEHICLE_NUMBER_REGEX = /\A[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]{1,4}[a-zA-Z0-9]{1,3}[\u3040-\u309f-A-Z]{1}[0-9]{1,4}\z/
   validates :usage, presence: true
   validates :owner_name, presence: true
   validates :vehicle_name, presence: true

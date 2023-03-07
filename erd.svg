@@ -520,7 +520,7 @@
 <text text-anchor="start" x="1531" y="-924" font-family="Arial" font-size="10.00">lead_engineer_name </text>
 <text text-anchor="start" x="1624" y="-924" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
 <text text-anchor="start" x="1531" y="-911" font-family="Arial" font-size="10.00">lead_engineer_qualification </text>
-<text text-anchor="start" x="1652" y="-911" font-family="Arial Italic" font-size="10.00" fill="#999999">integer</text>
+<text text-anchor="start" x="1652" y="-911" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
 <text text-anchor="start" x="1531" y="-898" font-family="Arial" font-size="10.00">order_id </text>
 <text text-anchor="start" x="1569" y="-898" font-family="Arial Italic" font-size="10.00" fill="#999999">integer (8) ∗ FK</text>
 <text text-anchor="start" x="1531" y="-885" font-family="Arial" font-size="10.00">parent_id </text>
