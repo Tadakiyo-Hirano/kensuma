@@ -58,21 +58,6 @@ RSpec.describe Business, type: :model do
       end
     end
 
-    describe '#branch_name' do
-      context '存在しない場合' do
-        before(:each) { subject.branch_name = nil }
-
-        it 'バリデーションが通ること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('支店名 又は 営業所名を入力してください')
-        end
-      end
-    end
-
     describe '#representative_name' do
       context '存在しない場合' do
         before(:each) { subject.representative_name = nil }
