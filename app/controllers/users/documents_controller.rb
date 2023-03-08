@@ -624,7 +624,7 @@ module Users
     def document_params(document)
       case document.document_type
       when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
-        params.require(:document).permit(content: 
+        params.require(:document).permit(content:
           %i[
             date_submitted
           ]
