@@ -20,6 +20,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.integer :specific_skilled_foreigners_exist
       t.integer :foreign_construction_workers_exist
       t.integer :foreign_technical_intern_trainees_exist
+      t.integer :construction_license_status, null: false, comment: "建設許可証(取得状況) enum"
       t.string :employment_manager_name
       t.string :employment_manager_post
       t.references :user, foreign_key: true, null: false

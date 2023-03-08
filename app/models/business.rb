@@ -22,9 +22,6 @@ class Business < ApplicationRecord
   enum business_employment_insurance_join_status: { join: 0, not_join: 1, not_coverd: 2 }, _prefix: true      # 雇用保険(加入状況)
   enum business_retirement_benefit_mutual_aid_status: { available: 0, not_available: 1 }, _prefix: true       # 退職金共済制度(加入状況)
   enum construction_license_status: { available: 0, not_available: 1 }, _prefix: true                         # 建設許可証(許可状況)
-  enum construction_license_permission_type_minister_governor: { minister_permission: 0, governor_permission: 1 } # 建設許可証(許可種別)
-  enum construction_license_governor_permission_prefecture: { hokkaido: 0, aomori: 1, iwate: 2, miyagi: 3, akita: 4, yamagata: 5, fukushima: 6, ibaraki: 7, tochigi: 8, gunma: 9, saitama: 10, chiba: 11, tokyo: 12, kanagawa: 13, niigata: 14, toyama: 15, ishikawa: 16, fukui: 17, yamanashi: 18, nagano: 19, gifu: 20, shizuoka: 21, aichi: 22, mie: 23, shiga: 24, kyoto: 25, osaka: 26, hyogo: 27, nara: 28, wakayama: 29, tottori: 30, shimane: 31, okayama: 32, hiroshima: 33, yamaguchi: 34, tokushima: 35, kagawa: 36, ehime: 37, kochi: 38, fukuoka: 39, saga: 40, nagasaki: 41, kumamoto: 42, oita: 43, miyazaki: 44, kagoshima: 45, okinawa: 46 } # 建設許可証(都道府県)
-  enum construction_license_permission_type_identification_general: { identification: 0, general: 1 } # 建設許可証(許可種別)
   enum specific_skilled_foreigners_exist: { available: 0, not_available: 1 }, _prefix: true                   # 一号特定技能外国人の従事の状況
   enum foreign_construction_workers_exist: { available: 0, not_available: 1 }, _prefix: true                  # 外国人建設就労者の従事の状況
   enum foreign_technical_intern_trainees_exist: { available: 0, not_available: 1 }, _prefix: true             # 人技能実習生の従事の状況
@@ -50,13 +47,6 @@ class Business < ApplicationRecord
   validates :business_employment_insurance_number, length: { is: 11, message: 'は数字11桁で入力してください' }, allow_blank: true # 雇用保険(番号)
   validates :business_retirement_benefit_mutual_aid_status, presence: true # 退職金共済制度(加入状況)
   validates :construction_license_status, presence: true
-  validates :construction_license_permission_type_minister_governor, presence: true
-  validates :construction_license_governor_permission_prefecture, presence: true
-  validates :construction_license_permission_type_identification_general, presence: true
-  validates :construction_license_number_double_digit, format: { with: /\A\d{2}\z/, message: 'は数字2桁で入力してください' }, presence: true
-  validates :construction_license_number_six_digits, format: { with: /\A\d{1,6}\z/, message: 'は数字6桁以下で入力してください' }, presence: true
-  validates :construction_license_number, presence: true
-  validates :construction_license_updated_at, presence: true
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
