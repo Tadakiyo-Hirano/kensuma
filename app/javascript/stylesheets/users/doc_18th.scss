@@ -1,7 +1,7 @@
 .ritz .waffle .doc_18_s21 {
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
-  text-align: left;
+  text-align: center;
   color: #000000;
   font-family: 'Arial';
   font-size: 11pt;
@@ -26,7 +26,7 @@
 
 .ritz .waffle .doc_18_s19 {
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: center;
   color: #000000;
   font-family: 'Arial';
@@ -110,7 +110,7 @@
 
 .ritz .waffle .doc_18_s36 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: center;
   color: #000000;
   font-family: 'Arial';
@@ -178,7 +178,7 @@
 .ritz .waffle .doc_18_s17 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: center;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
@@ -233,7 +233,7 @@
 
 .ritz .waffle .doc_18_s45 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -316,7 +316,7 @@
 .ritz .waffle .doc_18_s37 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: center;
   color: #000000;
   font-family: 'Arial';
@@ -387,16 +387,16 @@
 
 .ritz .waffle .doc_18_s16 {
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
-  text-align: left;
+  background-color: #e9ecef;
+  align-items: center;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
+  writing-mode: vertical-lr;
   font-size: 14pt;
   vertical-align: middle;
   white-space: normal;
   overflow: hidden;
   word-wrap: break-word;
-  direction: ltr;
   padding: 0px 3px 0px 3px;
 }
 
@@ -415,7 +415,7 @@
 
 .ritz .waffle .doc_18_s35 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: center;
   color: #000000;
   font-family: 'Arial';
@@ -459,7 +459,7 @@
 .ritz .waffle .doc_18_s46 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: left;
   color: #000000;
   font-family: 'Arial';
@@ -498,13 +498,15 @@
 .ritz .waffle .doc_18_s20 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
-  background-color: #ccffcc;
-  text-align: left;
+  background-color: #e9ecef;
+  text-align: center;
   color: #000000;
   font-family: 'docs-Calibri', Arial;
   font-size: 14pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -540,7 +542,7 @@
 
 .ritz .waffle .doc_18_s38 {
   border-bottom: 1px SOLID #000000;
-  background-color: #ccffcc;
+  background-color: #e9ecef;
   text-align: right;
   color: #000000;
   font-family: 'Arial';
