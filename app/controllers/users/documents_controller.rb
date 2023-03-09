@@ -18,7 +18,12 @@ module Users
           case @document.document_type
           when 'doc_8th'
             if @document.request_order.field_workers.empty?
-              flash[:danger] = '作業員名簿を閲覧するには入場作業員を登録してください'
+              flash[:danger] = '作業員名簿を閲覧するには入場作業員情報を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
+          when 'doc_12th'
+            if @document.request_order.field_cars.empty?
+              flash[:danger] = '工事用・通勤⽤⾞両届を閲覧するには車両情報を登録してください'
               redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
             end
           end
@@ -51,7 +56,7 @@ module Users
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_12th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -703,6 +708,14 @@ module Users
           [
             date_submitted: field_worker_keys, # 13-001 提出日(西暦)
             date_created:   field_worker_keys  # 13-004 作成日(西暦)
+          ]
+        )
+      when 'doc_12th' 
+        field_car_ids = @document.request_order.field_cars.ids
+        field_car_keys = field_car_ids.map{|field_car_id|"field_car_#{field_car_id}"}
+        params.require(:document).permit(content: 
+          [
+            date_submitted: field_car_keys, # 12-002 提出日(西暦)
           ]
         )
       when 'doc_13rd'
