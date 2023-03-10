@@ -2,14 +2,14 @@ module Users
   class SubconUsersController < Users::Base
     def index
       # 自身が招待を受けたユーザーのid(自身の上にあたるユーザー) ※招待保留中
-      @invitation_pending_to = User.invitation_pending_to(current_user)
+      @invitation_pending_to = User.invitation_pending_to(current_user) || []
       # 自身が招待を受けたユーザーのid(自身の上にあたるユーザー) ※招待済
-      @invited_to = User.invited_to(current_user)
+      @invited_to = User.invited_to(current_user) || []
 
       # 自身が招待したユーザーid(自身の下請にあたるユーザー) ※招待保留中
-      @invitation_pending_user_ids = current_user.invitation_sent_user_ids
+      @invitation_pending_user_ids = current_user.invitation_sent_user_ids || []
       # 自身が招待したユーザーid(自身の下請にあたるユーザー) ※招待済
-      @invited_user_ids = current_user.invited_user_ids
+      @invited_user_ids = current_user.invited_user_ids || []
     end
 
     # 自身に届いた招待を承認する

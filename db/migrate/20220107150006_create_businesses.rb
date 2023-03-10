@@ -5,7 +5,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.integer :business_type, null: false
       t.string :name, null: false
       t.string :name_kana, null: false
-      t.string :branch_name, null: false
+      t.string :branch_name
       t.string :representative_name, null: false
       t.string :email, null: false
       t.string :address, null: false
