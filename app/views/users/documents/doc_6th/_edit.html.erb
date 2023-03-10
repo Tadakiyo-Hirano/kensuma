@@ -90,7 +90,7 @@
                 <td class="doc_6_s7"></td>
                 <td class="doc_6_s7"></td>
                 <td class="doc_6_s8" colspan="5">
-                  <%= f.date_field :name, name: "document[content][date_submitted]",
+                  <%= f.date_field name = 'content[date_submitted]',
                                       value: doc_content_date(@document.content&.[]("date_submitted")),
                                       class: 'form-control form-contr"ol-sm'
                   %>
