@@ -192,19 +192,17 @@ module Users
       @worker = current_business.workers.find_by(uuid: params[:uuid])
     end
 
-    # 健康保険が健康保険組合もしくは建設国保であれば保険名をnilにする
+    # 健康保険が健康保険組合もしくは建設国保でなければ保険名をnilにする
     def health_insurance_name_nil(health_insurance_type, worker)
       unless health_insurance_type == :health_insurance_association || health_insurance_type == :construction_national_health_insurance
         worker.update(health_insurance_name: nil)
-        byebug
       end
     end
 
-    # 雇用保険が被保険者であれば被保険者番号の下4桁をnilにする
+    # 雇用保険が被保険者であ無ければ被保険者番号の下4桁をnilにする
     def employment_insurance_number_nil(employment_insurance_type, worker)
       unless employment_insurance_type == :insured
         worker.update(employment_insurance_number: nil)
-        byebug
       end
     end
 

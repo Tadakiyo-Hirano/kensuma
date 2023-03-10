@@ -38,13 +38,14 @@ class WorkerInsurance < ApplicationRecord
   validates :severance_pay_mutual_aid_type, presence: true
 
   private
-    # 健康保険が健康保険組合もしくは建設国保であればtrue
-    def insurance_name_valid?
-      health_insurance_type == "health_insurance_association" || health_insurance_type == "construction_national_health_insurance"
-    end
 
-    # 雇用保険が被保険者であればtrue
-    def employment_insurance_number_valid?
-      employment_insurance_type == "insured"
-    end
+  # 健康保険が健康保険組合もしくは建設国保であればtrue
+  def insurance_name_valid?
+    %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type)
+  end
+
+  # 雇用保険が被保険者であればtrue
+  def employment_insurance_number_valid?
+    employment_insurance_type == 'insured'
+  end
 end
