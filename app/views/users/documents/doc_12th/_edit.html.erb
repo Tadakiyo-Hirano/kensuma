@@ -1,0 +1,777 @@
+<!-- (12)参考様式第8号(工事用・通勤⽤⾞両届) -->
+<%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
+  <div class="card">  
+    <div class="card-body">
+      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+      <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+    </div>
+  </div>
+
+  <% document_info.field_cars.each do |field_car| %>
+    <div class="document-outer">
+      <div id="eighth-document" class="document-inner">
+        <div class="eighth-text-container">
+          <div class="ritz grid-container" dir="ltr">
+            <table class="waffle no-grid td-no-border" cellspacing="0" cellpadding="0">
+              <thead></thead>
+              <tbody>
+                <tr style="height: 25px">
+                  <td class="doc_12_s0" colspan="6">参考様式第８号</td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s3"></td>
+                  <td class="doc_12_s4" colspan="3" rowspan="2">
+                    元 請<br />
+                    確認欄
+                  </td>
+                  <td class="doc_12_s5" dir="ltr" colspan="8" rowspan="2">
+                    <%= document_info_for_prime_contractor_name %> <!-- 12-001 元請会社の確認欄 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s3"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s9"></td>
+                  <td class="doc_12_s10"></td>
+                  <td class="doc_12_s10"></td>
+                  <td class="doc_12_s10"></td>
+                  <td class="doc_12_s10"></td>
+                  <td class="doc_12_s10"></td>
+                  <td class="doc_12_s10"></td>
+                  <td class="doc_12_s10"></td>
+                  <td class="doc_12_s10"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s9"></td>
+                  <td class="doc_12_s11" dir="ltr" colspan="8">
+                    <%= f.date_field name = "content[date_submitted][field_car_#{field_car.id}]",
+                                        value: @document.content&.[]('date_submitted')&.[]("field_car_#{field_car.id}"),
+                                        class: "form-control form-control-sm"
+                    %> <!-- 12-002 提出日 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s12" colspan="5" rowspan="4">
+                    <%= car_usage_const(field_car.content["usage"]) %> <!-- 13-003 車両情報(工事･通勤) -->
+                    <br>
+                    <%= car_usage_commute(field_car.content["usage"]) %>
+                  </td>
+                  <td class="doc_12_s12" colspan="7" rowspan="4">用 車 両 届</td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s14" colspan="5" rowspan="2"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s12" colspan="5"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s1"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s13"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                  <td class="doc_12_s15"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s9" colspan="4" rowspan="2">事業所の名称</td>
+                  <td class="doc_12_s16" dir="ltr" colspan="13" rowspan="2">
+                    <%= document_site_info.site_name %> <!-- 12-004 事業所名 -->
+                  </td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s9" colspan="5" rowspan="2">一次会社名</td>
+                  <td class="doc_12_s16" dir="ltr" colspan="12" rowspan="2">
+                    <%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 12-006 一次会社名 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s9" colspan="4" rowspan="2">所　長　名</td>
+                  <td class="doc_12_s17" dir="ltr" colspan="11" rowspan="2">
+                    <%= document_site_info.site_agent_name %> <!-- 12-005 現場代理人(氏名) -->
+                  </td>
+                  <td class="doc_12_s31" colspan="2" rowspan="2">殿</td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s9" colspan="5">使用会社名</td>
+                  <td class="doc_12_s16" dir="ltr" colspan="12" rowspan="2">
+                    <%= Business.find(document_info.business_id).name %> <!-- 12-008 自社の会社名 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s9">（</td>
+                  <td class="doc_12_s18" dir="ltr" colspan="3">
+                    「<%= sc_hierarchy(document_info) %>」 <!-- 12-007 次 -->
+                  </td>
+                  <td class="doc_12_s9">）</td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s9" colspan="5">現場代理人</td>
+                  <td class="doc_12_s17" dir="ltr" colspan="10" rowspan="2">
+                    <%= document_info.site_agent_name %> <!-- 12-009 各会社の現場代理人名 -->
+                  </td>
+                  <td class="doc_12_s19" dir="ltr" colspan="2" rowspan="2">
+                    <%#= %>印 <!-- 12-010 社印 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s7"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s8"></td>
+                  <td class="doc_12_s9" colspan="5">（現場責任者）</td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s20"></td>
+                  <td class="doc_12_s20"></td>
+                  <td class="doc_12_s20"></td>
+                  <td class="doc_12_s20"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s21" colspan="9"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s22" colspan="4">下記の通り</td>
+                  <td class="doc_12_s22" colspan="6">
+                    （<%= car_usage_const(field_car.content["usage"]) %>・<%= car_usage_commute(field_car.content["usage"]) %>）用 <!-- 12-011 工事･通勤用選択 -->
+                  </td>
+                  <td class="doc_12_s22" colspan="12">
+                    車両を運行しますので、お届けいたします。
+                  </td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s2"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s24"></td>
+                  <td class="doc_12_s24"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                  <td class="doc_12_s23"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="6" rowspan="2">使用期間</td>
+                  <td class="doc_12_s17" dir="ltr" colspan="14" rowspan="2">
+                    <%= document_date(field_car.usage_period_start) %> <!-- 12-012 使用期間(始期) -->
+                  </td>
+                  <td class="doc_12_s30" colspan="2" rowspan="2">〜</td>
+                  <td class="doc_12_s25" dir="ltr" colspan="14" rowspan="2">
+                    <%= document_date(field_car.usage_period_end) %> <!-- 12-013 使用期間(終期) -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="6" rowspan="2">所有者氏名</td>
+                  <td class="doc_12_s25" dir="ltr" colspan="13" rowspan="2">
+                    <%= field_car.content["owner_name"] %> <!-- 12-014 車両所有者 -->
+                  </td>
+                  <td class="doc_12_s26" colspan="5">安全運転</td>
+                  <td class="doc_12_s25" colspan="12" rowspan="2">
+                    <%= field_car.content["safety_manager"] %> <!-- 12-015 安全運転管理者 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s29" colspan="5">管理者氏名</td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s29" rowspan="4">車 両</td>
+                  <td class="doc_12_s4" colspan="5" rowspan="2">型式</td>
+                  <td class="doc_12_s25" colspan="13" rowspan="2">
+                    <%= field_car.content["vehicle_model"] %> <!-- 12-016 車両型式 -->
+                  </td>
+                  <td class="doc_12_s29" colspan="5" rowspan="2">車両番号</td>
+                  <td class="doc_12_s25" colspan="12" rowspan="2">
+                    <%= field_car.content["vehicle_number"] %> <!-- 12-017 車両番号 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="5" rowspan="2">車検期間</td>
+                  <td class="doc_12_s17" colspan="14" rowspan="2">
+                    <%= document_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-018 車検期間(始期) -->
+                  </td>
+                  <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
+                  <td class="doc_12_s25" colspan="14" rowspan="2">
+                    <%= document_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-019 車検期間(終期) -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s29" rowspan="6">運 転 者</td>
+                  <td class="doc_12_s4" colspan="5" rowspan="2">氏名</td>
+                  <td class="doc_12_s25" colspan="13" rowspan="2">
+                    <%= field_car.driver_name %> <!-- 12-020 運転者(氏名) -->
+                  </td>
+                  <td class="doc_12_s29" colspan="5" rowspan="2">生年月日</td>
+                  <td class="doc_12_s25" colspan="12" rowspan="2">
+                    <%= document_date(field_car.driver_birth_day_on) %> <!-- 12-021 運転者生年月日 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="5" rowspan="2">住所</td>
+                  <td class="doc_12_s25" colspan="30" rowspan="2">
+                    <%= field_car.driver_address %> <!-- 12-022 運転者住所 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="5" rowspan="2">免許の種類</td>
+                  <td class="doc_12_s25" colspan="13" rowspan="2">
+                    <%#= @document.content["vehicle_operator_driving_license_type"] %> 12-023
+                  </td>
+                  <td class="doc_12_s29" colspan="5" rowspan="2">免許番号</td>
+                  <td class="doc_12_s25" colspan="12" rowspan="2">
+                    <%#= @document.content["vehicle_operator_driving_license_number"] %> 12-024
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s29" rowspan="4">自賠責</td>
+                  <td class="doc_12_s4" colspan="5" rowspan="2">保険会社名</td>
+                  <td class="doc_12_s25" colspan="13" rowspan="2">
+                    <%= field_car.content["car_insurance_company"] %> <!-- 12-025 自賠責保険会社名 -->
+                  </td>
+                  <td class="doc_12_s29" colspan="5" rowspan="2">証券番号</td>
+                  <td class="doc_12_s25" colspan="12" rowspan="2">
+                    <%= field_car.content["liability_securities_number"] %> <!-- 12-026 自賠責保険会証券番号 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="5" rowspan="2">保険期間</td>
+                  <td class="doc_12_s17" colspan="14" rowspan="2">
+                    <%= document_date(field_car.content["liability_insurance_start_on"].to_date) %> <!-- 12-027 自賠責保険期間(始期) -->
+                  </td>
+                  <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
+                  <td class="doc_12_s25" colspan="14" rowspan="2">
+                    <%= document_date(field_car.content["liability_insurance_end_on"].to_date) %> <!-- 12-028 自賠責保険期間(終期) -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s29" rowspan="6">任意保険</td>
+                  <td class="doc_12_s4" colspan="5" rowspan="2">保険会社名</td>
+                  <td class="doc_12_s25" colspan="13" rowspan="2">
+                    <%= field_car.content["voluntary_insurance_company"] %> <!-- 12-029 任意保険会社名 -->
+                  </td>
+                  <td class="doc_12_s29" colspan="5" rowspan="2">証券番号</td>
+                  <td class="doc_12_s25" colspan="12" rowspan="2">
+                    <%= field_car.content["car_voluntary_insurances"][0]["voluntary_securities_number"] %> <!-- 12-030 任意保険証券番号 -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="5" rowspan="2">対 人</td>
+                  <td class="doc_12_s17" colspan="10" rowspan="2">
+                    <%= field_car.content["car_voluntary_insurances"][0]["personal_insurance"] %> <!-- 12-031 任意保険の対人 -->
+                  </td>
+                  <td class="doc_12_s29" colspan="3" rowspan="2">万円</td>
+                  <td class="doc_12_s29" colspan="5" rowspan="2">対 物</td>
+                  <td class="doc_12_s17" colspan="9" rowspan="2">
+                    <%= field_car.content["car_voluntary_insurances"][0]["objective_insurance"] %> <!-- 12-032 任意保険の対物 -->
+                  </td>
+                  <td class="doc_12_s29" colspan="3" rowspan="2">万円</td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="5" rowspan="2">保険期間</td>
+                  <td class="doc_12_s17" colspan="14" rowspan="2">
+                    <%= document_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_start_on"].to_date) %> <!-- 12-033 任意保険期間(始期) -->
+                  </td>
+                  <td class="doc_12_s27" colspan="2" rowspan="2">〜</td>
+                  <td class="doc_12_s25" colspan="14" rowspan="2">
+                    <%= document_date(field_car.content["car_voluntary_insurances"][0]["voluntary_insurance_end_on"].to_date) %> <!-- 12-034 任意保険期間(終期) -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s4" colspan="6" rowspan="2">運行経路</td>
+                  <td class="doc_12_s30" colspan="2" rowspan="2">自</td>
+                  <td class="doc_12_s17" colspan="5" rowspan="2">
+                    <%= field_car.starting_point %> <!-- 12-035 運行経路(自) -->
+                  </td>
+                  <td class="doc_12_s30" colspan="3" rowspan="2">経由</td>
+                  <td class="doc_12_s17" colspan="5" rowspan="2">
+                    <%= field_car.waypoint_first %> <!-- 12-036 運行経路(経由地1) -->
+                  </td>
+                  <td class="doc_12_s30" colspan="3" rowspan="2">経由</td>
+                  <td class="doc_12_s17" colspan="5" rowspan="2">
+                    <%= field_car.waypoint_second %> <!-- 12-037 運行経路(経由地2) -->
+                  </td>
+                  <td class="doc_12_s30" colspan="2" rowspan="2">至</td>
+                  <td class="doc_12_s25" colspan="5" rowspan="2">
+                    <%= field_car.arrival_point %> <!-- 12-038 運行経路(至) -->
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                  <td class="doc_12_s6"></td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s28" colspan="2">（注）</td>
+                  <td class="doc_12_s22" colspan="34">
+                    １．この届出書は車両１台ごとに提出すること。
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+
+                  <td class="doc_12_s22"></td>
+                  <td class="doc_12_s22"></td>
+                  <td class="doc_12_s22" colspan="34">
+                    ２．この届出書に「任意保険」の証書（写）を添付し提出すること。
+                  </td>
+                </tr>
+                <tr style="height: 25px">
+                  <td class="doc_12_s22"></td>
+                  <td class="doc_12_s22"></td>
+                  <td class="doc_12_s22" colspan="34">
+                    ３．運転者が変わった場合はその都度届け出ること。
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
