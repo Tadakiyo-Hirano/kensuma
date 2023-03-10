@@ -538,9 +538,9 @@ module Users
 
     # doc_17thの配置を決定させるためのロジック
     def get_subcon_info_17th
-      edge_position = 1
+      edge_position = 1 #端の配置となる番号を変数として取得
       current_order_id = RequestOrder.find_by(uuid: params[:request_order_uuid]).order_id #現場IDの取得
-      @primary_subcon_id_17th = RequestOrder.find_by(business_id: Business.find_by(representative_name: current_user.name).id).id
+      @primary_subcon_id_17th = RequestOrder.find_by(uuid: params[:request_order_uuid]).id #一次下請けのidの取得
       if RequestOrder.where(order_id: current_order_id, parent_id: @primary_subcon_id_17th).present? #二次下請けが存在するか確認(開始)
         secondary_element = 0
         secondary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: @primary_subcon_id_17th).order(id: "ASC") #二次下請けの配列作成(開始)
@@ -710,10 +710,10 @@ module Users
             date_created:   field_worker_keys  # 13-004 作成日(西暦)
           ]
         )
-      when 'doc_12th' 
+      when 'doc_12th'
         field_car_ids = @document.request_order.field_cars.ids
         field_car_keys = field_car_ids.map{|field_car_id|"field_car_#{field_car_id}"}
-        params.require(:document).permit(content: 
+        params.require(:document).permit(content:
           [
             date_submitted: field_car_keys, # 12-002 提出日(西暦)
           ]
