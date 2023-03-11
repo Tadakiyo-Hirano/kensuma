@@ -30,6 +30,9 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
 
+<%= f.label :email %>
+<%= f.text_field :email, class: "form-control", placeholder: Worker.human_attribute_name(:email) %><br>
+
 <%= f.label :family_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :family_name, class: "form-control", placeholder: Worker.human_attribute_name(:family_name) %><br>
@@ -239,7 +242,7 @@
   const health_insurance_name = document.getElementById('health_insurance_name')
   function getRadioHealthInsuranceName(object) {
     const value = $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]:checked').val();
-    if (value === 'health_insurance_association' || value === 'construction_national_health_insurance'){
+    if (value == 'health_insurance_association' || value == 'construction_national_health_insurance'){
       health_insurance_name.classList.remove('hidden');
     } else {
       health_insurance_name.classList.add('hidden');
@@ -248,7 +251,7 @@
   getRadioHealthInsuranceName(health_insurance_type); //ページの読み込み時に判定
 
   $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]').change(function() {
-    if ($(this).val() === 'health_insurance_association' || $(this).val() === 'construction_national_health_insurance'){
+    if ($(this).val() == 'health_insurance_association' || $(this).val() == 'construction_national_health_insurance'){
       health_insurance_name.classList.remove('hidden');
     } else {
       health_insurance_name.classList.add('hidden');
