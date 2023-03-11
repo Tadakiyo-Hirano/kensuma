@@ -15,6 +15,10 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
+          when 'doc_4th'
+            request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
+            @prime_contractor_business = Business.find(request_order.business_id)
+            @business = Business.find(@document.business_id)
           when 'doc_8th'
             if @document.request_order.field_workers.empty?
               flash[:danger] = '作業員名簿を閲覧するには入場作業員情報を登録してください'
@@ -27,7 +31,6 @@ module Users
             end
           end
         end
-
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
@@ -293,6 +296,7 @@ module Users
         end
       end
     end
+
 
     private
 
