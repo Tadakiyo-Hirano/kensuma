@@ -46,7 +46,7 @@ RSpec.describe WorkerInsurance, type: :model do
         end
 
         it 'バリデーションのエラーが正しいこと' do
-          subject.invalid?
+          subject.valid?
           expect(subject.errors.full_messages).to include('健康保険の名前を入力してください')
         end
       end
@@ -130,7 +130,7 @@ RSpec.describe WorkerInsurance, type: :model do
         end
       end
 
-      context '被保険者の場合' do
+      context '被保険者以外の場合' do
         before :each do
           %i[
             12345
@@ -140,12 +140,12 @@ RSpec.describe WorkerInsurance, type: :model do
           end
         end
 
-        it 'バリデーションにとおること' do
+        it 'バリデーションにとおること(日雇保険)' do
           subject.employment_insurance_type = :day
           expect(subject).to be_valid
         end
 
-        it 'バリデーションにとおること' do
+        it 'バリデーションにとおること(適応除外)' do
           subject.employment_insurance_type = :exemption
           expect(subject).to be_valid
         end

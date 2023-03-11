@@ -194,7 +194,7 @@ module Users
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名をnilにする
     def health_insurance_name_nil(health_insurance_type, worker)
-      unless health_insurance_type == :health_insurance_association || health_insurance_type == :construction_national_health_insurance
+      unless %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type)
         worker.update(health_insurance_name: nil)
       end
     end
