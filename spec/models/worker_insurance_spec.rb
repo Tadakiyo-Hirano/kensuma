@@ -45,7 +45,14 @@ RSpec.describe WorkerInsurance, type: :model do
           expect(subject).to be_invalid
         end
 
-        it 'バリデーションのエラーが正しいこと' do
+        it 'バリデーションのエラーが正しいこと(健康保険組合)' do
+          subject.health_insurance_type = :health_insurance_association
+          subject.valid?
+          expect(subject.errors.full_messages).to include('健康保険の名前を入力してください')
+        end
+
+        it 'バリデーションのエラーが正しいこと(建設国保)' do
+          subject.health_insurance_type = :construction_national_health_insurance
           subject.valid?
           expect(subject.errors.full_messages).to include('健康保険の名前を入力してください')
         end
