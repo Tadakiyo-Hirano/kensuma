@@ -108,7 +108,7 @@
 <text text-anchor="start" x="991" y="-2319" font-family="Arial" font-size="10.00">address </text>
 <text text-anchor="start" x="1029" y="-2319" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
 <text text-anchor="start" x="991" y="-2306" font-family="Arial" font-size="10.00">branch_name </text>
-<text text-anchor="start" x="1053" y="-2306" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="1053" y="-2306" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
 <text text-anchor="start" x="991" y="-2293" font-family="Arial" font-size="10.00">business_employment_insurance_join_status </text>
 <text text-anchor="start" x="1192" y="-2293" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
 <text text-anchor="start" x="991" y="-2280" font-family="Arial" font-size="10.00">business_employment_insurance_number </text>
@@ -640,77 +640,79 @@
 <!-- m_Worker -->
 <g id="node42" class="node">
 <title>m_Worker</title>
-<path fill="none" stroke="black" d="M2455.5,-1183C2455.5,-1183 2620.5,-1183 2620.5,-1183 2626.5,-1183 2632.5,-1189 2632.5,-1195 2632.5,-1195 2632.5,-1643 2632.5,-1643 2632.5,-1649 2626.5,-1655 2620.5,-1655 2620.5,-1655 2455.5,-1655 2455.5,-1655 2449.5,-1655 2443.5,-1649 2443.5,-1643 2443.5,-1643 2443.5,-1195 2443.5,-1195 2443.5,-1189 2449.5,-1183 2455.5,-1183"/>
-<text text-anchor="start" x="2516.5" y="-1642.2" font-family="Arial Bold" font-size="11.00">Worker</text>
-<polyline fill="none" stroke="black" points="2443.5,-1635 2632.5,-1635 "/>
-<text text-anchor="start" x="2451" y="-1622" font-family="Arial" font-size="10.00">abo_blood_type </text>
-<text text-anchor="start" x="2523" y="-1622" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
-<text text-anchor="start" x="2451" y="-1609" font-family="Arial" font-size="10.00">birth_day_on </text>
-<text text-anchor="start" x="2510" y="-1609" font-family="Arial Italic" font-size="10.00" fill="#999999">date ∗</text>
-<text text-anchor="start" x="2451" y="-1596" font-family="Arial" font-size="10.00">blank_term </text>
-<text text-anchor="start" x="2503" y="-1596" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
-<text text-anchor="start" x="2451" y="-1583" font-family="Arial" font-size="10.00">business_id </text>
-<text text-anchor="start" x="2506" y="-1583" font-family="Arial Italic" font-size="10.00" fill="#999999">integer (8) ∗ FK</text>
-<text text-anchor="start" x="2451" y="-1570" font-family="Arial" font-size="10.00">career_up_id </text>
-<text text-anchor="start" x="2510" y="-1570" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
-<text text-anchor="start" x="2451" y="-1557" font-family="Arial" font-size="10.00">confirmed_check </text>
-<text text-anchor="start" x="2529" y="-1557" font-family="Arial Italic" font-size="10.00" fill="#999999">integer</text>
-<text text-anchor="start" x="2451" y="-1544" font-family="Arial" font-size="10.00">confirmed_check_date </text>
-<text text-anchor="start" x="2553" y="-1544" font-family="Arial Italic" font-size="10.00" fill="#999999">date</text>
-<text text-anchor="start" x="2451" y="-1531" font-family="Arial" font-size="10.00">country </text>
-<text text-anchor="start" x="2487" y="-1531" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1518" font-family="Arial" font-size="10.00">created_at </text>
-<text text-anchor="start" x="2500" y="-1518" font-family="Arial Italic" font-size="10.00" fill="#999999">datetime (6,0) ∗</text>
-<text text-anchor="start" x="2451" y="-1505" font-family="Arial" font-size="10.00">email </text>
-<text text-anchor="start" x="2478" y="-1505" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
-<text text-anchor="start" x="2451" y="-1492" font-family="Arial" font-size="10.00">employment_condition </text>
-<text text-anchor="start" x="2552" y="-1492" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
-<text text-anchor="start" x="2451" y="-1479" font-family="Arial" font-size="10.00">employment_contract </text>
-<text text-anchor="start" x="2548" y="-1479" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
-<text text-anchor="start" x="2451" y="-1466" font-family="Arial" font-size="10.00">experience_term_before_hiring </text>
-<text text-anchor="start" x="2587" y="-1466" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
-<text text-anchor="start" x="2451" y="-1453" font-family="Arial" font-size="10.00">family_address </text>
-<text text-anchor="start" x="2521" y="-1453" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1440" font-family="Arial" font-size="10.00">family_name </text>
-<text text-anchor="start" x="2510" y="-1440" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1427" font-family="Arial" font-size="10.00">family_phone_number </text>
-<text text-anchor="start" x="2550" y="-1427" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1414" font-family="Arial" font-size="10.00">hiring_on </text>
-<text text-anchor="start" x="2494" y="-1414" font-family="Arial Italic" font-size="10.00" fill="#999999">date ∗</text>
-<text text-anchor="start" x="2451" y="-1401" font-family="Arial" font-size="10.00">images </text>
-<text text-anchor="start" x="2486" y="-1401" font-family="Arial Italic" font-size="10.00" fill="#999999">json</text>
-<text text-anchor="start" x="2451" y="-1388" font-family="Arial" font-size="10.00">job_title </text>
-<text text-anchor="start" x="2488" y="-1388" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1375" font-family="Arial" font-size="10.00">maturity_date </text>
-<text text-anchor="start" x="2514" y="-1375" font-family="Arial Italic" font-size="10.00" fill="#999999">date</text>
-<text text-anchor="start" x="2451" y="-1362" font-family="Arial" font-size="10.00">my_address </text>
-<text text-anchor="start" x="2508" y="-1362" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1349" font-family="Arial" font-size="10.00">my_phone_number </text>
-<text text-anchor="start" x="2537" y="-1349" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1336" font-family="Arial" font-size="10.00">name </text>
-<text text-anchor="start" x="2479" y="-1336" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1323" font-family="Arial" font-size="10.00">name_kana </text>
-<text text-anchor="start" x="2505" y="-1323" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1310" font-family="Arial" font-size="10.00">passport_back </text>
-<text text-anchor="start" x="2518" y="-1310" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
-<text text-anchor="start" x="2451" y="-1297" font-family="Arial" font-size="10.00">passport_front </text>
-<text text-anchor="start" x="2517" y="-1297" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
-<text text-anchor="start" x="2451" y="-1284" font-family="Arial" font-size="10.00">relationship </text>
-<text text-anchor="start" x="2504" y="-1284" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
-<text text-anchor="start" x="2451" y="-1271" font-family="Arial" font-size="10.00">residence_card_back </text>
-<text text-anchor="start" x="2547" y="-1271" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
-<text text-anchor="start" x="2451" y="-1258" font-family="Arial" font-size="10.00">residence_card_front </text>
-<text text-anchor="start" x="2545" y="-1258" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
-<text text-anchor="start" x="2451" y="-1245" font-family="Arial" font-size="10.00">rh_blood_type </text>
-<text text-anchor="start" x="2515" y="-1245" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
-<text text-anchor="start" x="2451" y="-1232" font-family="Arial" font-size="10.00">sex </text>
-<text text-anchor="start" x="2470" y="-1232" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
-<text text-anchor="start" x="2451" y="-1219" font-family="Arial" font-size="10.00">status_of_residence </text>
-<text text-anchor="start" x="2542" y="-1219" font-family="Arial Italic" font-size="10.00" fill="#999999">integer</text>
-<text text-anchor="start" x="2451" y="-1206" font-family="Arial" font-size="10.00">updated_at </text>
-<text text-anchor="start" x="2503" y="-1206" font-family="Arial Italic" font-size="10.00" fill="#999999">datetime (6,0) ∗</text>
-<text text-anchor="start" x="2451" y="-1193" font-family="Arial" font-size="10.00">uuid </text>
-<text text-anchor="start" x="2473" y="-1193" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<path fill="none" stroke="black" d="M2455.5,-1176.5C2455.5,-1176.5 2620.5,-1176.5 2620.5,-1176.5 2626.5,-1176.5 2632.5,-1182.5 2632.5,-1188.5 2632.5,-1188.5 2632.5,-1649.5 2632.5,-1649.5 2632.5,-1655.5 2626.5,-1661.5 2620.5,-1661.5 2620.5,-1661.5 2455.5,-1661.5 2455.5,-1661.5 2449.5,-1661.5 2443.5,-1655.5 2443.5,-1649.5 2443.5,-1649.5 2443.5,-1188.5 2443.5,-1188.5 2443.5,-1182.5 2449.5,-1176.5 2455.5,-1176.5"/>
+<text text-anchor="start" x="2516.5" y="-1648.7" font-family="Arial Bold" font-size="11.00">Worker</text>
+<polyline fill="none" stroke="black" points="2443.5,-1641.5 2632.5,-1641.5 "/>
+<text text-anchor="start" x="2451" y="-1628" font-family="Arial" font-size="10.00">abo_blood_type </text>
+<text text-anchor="start" x="2523" y="-1628" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
+<text text-anchor="start" x="2451" y="-1615" font-family="Arial" font-size="10.00">birth_day_on </text>
+<text text-anchor="start" x="2510" y="-1615" font-family="Arial Italic" font-size="10.00" fill="#999999">date ∗</text>
+<text text-anchor="start" x="2451" y="-1602" font-family="Arial" font-size="10.00">blank_term </text>
+<text text-anchor="start" x="2503" y="-1602" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
+<text text-anchor="start" x="2451" y="-1589" font-family="Arial" font-size="10.00">business_id </text>
+<text text-anchor="start" x="2506" y="-1589" font-family="Arial Italic" font-size="10.00" fill="#999999">integer (8) ∗ FK</text>
+<text text-anchor="start" x="2451" y="-1576" font-family="Arial" font-size="10.00">career_up_id </text>
+<text text-anchor="start" x="2510" y="-1576" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2451" y="-1563" font-family="Arial" font-size="10.00">confirmed_check </text>
+<text text-anchor="start" x="2529" y="-1563" font-family="Arial Italic" font-size="10.00" fill="#999999">integer</text>
+<text text-anchor="start" x="2451" y="-1550" font-family="Arial" font-size="10.00">confirmed_check_date </text>
+<text text-anchor="start" x="2553" y="-1550" font-family="Arial Italic" font-size="10.00" fill="#999999">date</text>
+<text text-anchor="start" x="2451" y="-1537" font-family="Arial" font-size="10.00">country </text>
+<text text-anchor="start" x="2487" y="-1537" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1524" font-family="Arial" font-size="10.00">created_at </text>
+<text text-anchor="start" x="2500" y="-1524" font-family="Arial Italic" font-size="10.00" fill="#999999">datetime (6,0) ∗</text>
+<text text-anchor="start" x="2451" y="-1511" font-family="Arial" font-size="10.00">email </text>
+<text text-anchor="start" x="2478" y="-1511" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2451" y="-1498" font-family="Arial" font-size="10.00">employment_condition </text>
+<text text-anchor="start" x="2552" y="-1498" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2451" y="-1485" font-family="Arial" font-size="10.00">employment_contract </text>
+<text text-anchor="start" x="2548" y="-1485" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
+<text text-anchor="start" x="2451" y="-1472" font-family="Arial" font-size="10.00">experience_term_before_hiring </text>
+<text text-anchor="start" x="2587" y="-1472" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
+<text text-anchor="start" x="2451" y="-1459" font-family="Arial" font-size="10.00">family_address </text>
+<text text-anchor="start" x="2521" y="-1459" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1446" font-family="Arial" font-size="10.00">family_name </text>
+<text text-anchor="start" x="2510" y="-1446" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1433" font-family="Arial" font-size="10.00">family_phone_number </text>
+<text text-anchor="start" x="2550" y="-1433" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1420" font-family="Arial" font-size="10.00">hiring_on </text>
+<text text-anchor="start" x="2494" y="-1420" font-family="Arial Italic" font-size="10.00" fill="#999999">date ∗</text>
+<text text-anchor="start" x="2451" y="-1407" font-family="Arial" font-size="10.00">images </text>
+<text text-anchor="start" x="2486" y="-1407" font-family="Arial Italic" font-size="10.00" fill="#999999">json</text>
+<text text-anchor="start" x="2451" y="-1394" font-family="Arial" font-size="10.00">job_title </text>
+<text text-anchor="start" x="2488" y="-1394" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1381" font-family="Arial" font-size="10.00">maturity_date </text>
+<text text-anchor="start" x="2514" y="-1381" font-family="Arial Italic" font-size="10.00" fill="#999999">date</text>
+<text text-anchor="start" x="2451" y="-1368" font-family="Arial" font-size="10.00">my_address </text>
+<text text-anchor="start" x="2508" y="-1368" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1355" font-family="Arial" font-size="10.00">my_phone_number </text>
+<text text-anchor="start" x="2537" y="-1355" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1342" font-family="Arial" font-size="10.00">name </text>
+<text text-anchor="start" x="2479" y="-1342" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1329" font-family="Arial" font-size="10.00">name_kana </text>
+<text text-anchor="start" x="2505" y="-1329" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1316" font-family="Arial" font-size="10.00">passport_back </text>
+<text text-anchor="start" x="2518" y="-1316" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2451" y="-1303" font-family="Arial" font-size="10.00">passport_front </text>
+<text text-anchor="start" x="2517" y="-1303" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2451" y="-1290" font-family="Arial" font-size="10.00">post_code </text>
+<text text-anchor="start" x="2500" y="-1290" font-family="Arial Italic" font-size="10.00" fill="#999999">integer</text>
+<text text-anchor="start" x="2451" y="-1277" font-family="Arial" font-size="10.00">relationship </text>
+<text text-anchor="start" x="2504" y="-1277" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="2451" y="-1264" font-family="Arial" font-size="10.00">residence_card_back </text>
+<text text-anchor="start" x="2547" y="-1264" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2451" y="-1251" font-family="Arial" font-size="10.00">residence_card_front </text>
+<text text-anchor="start" x="2545" y="-1251" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2451" y="-1238" font-family="Arial" font-size="10.00">rh_blood_type </text>
+<text text-anchor="start" x="2515" y="-1238" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
+<text text-anchor="start" x="2451" y="-1225" font-family="Arial" font-size="10.00">sex </text>
+<text text-anchor="start" x="2470" y="-1225" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
+<text text-anchor="start" x="2451" y="-1212" font-family="Arial" font-size="10.00">status_of_residence </text>
+<text text-anchor="start" x="2542" y="-1212" font-family="Arial Italic" font-size="10.00" fill="#999999">integer</text>
+<text text-anchor="start" x="2451" y="-1199" font-family="Arial" font-size="10.00">updated_at </text>
+<text text-anchor="start" x="2503" y="-1199" font-family="Arial Italic" font-size="10.00" fill="#999999">datetime (6,0) ∗</text>
+<text text-anchor="start" x="2451" y="-1186" font-family="Arial" font-size="10.00">uuid </text>
+<text text-anchor="start" x="2473" y="-1186" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
 </g>
 <!-- m_Business&#45;&gt;m_Worker -->
 <g id="edge11" class="edge">
@@ -1861,9 +1863,9 @@
 <!-- m_Worker&#45;&gt;m_WorkerMedical -->
 <g id="edge53" class="edge">
 <title>m_Worker&#45;&gt;m_WorkerMedical</title>
-<path fill="none" stroke="black" d="M2582.37,-1177.64C2600.02,-1082.08 2619.07,-978.84 2631.69,-910.53"/>
-<ellipse fill="none" stroke="black" cx="2581.9" cy="-1180.23" rx="2.4" ry="2.4"/>
-<ellipse fill="black" stroke="black" cx="2632.15" cy="-908.04" rx="2.4" ry="2.4"/>
+<path fill="none" stroke="black" d="M2583.53,-1171.4C2600.86,-1077.52 2619.38,-977.18 2631.72,-910.35"/>
+<ellipse fill="none" stroke="black" cx="2583.07" cy="-1173.9" rx="2.4" ry="2.4"/>
+<ellipse fill="black" stroke="black" cx="2632.16" cy="-907.96" rx="2.4" ry="2.4"/>
 </g>
 <!-- m_Worker&#45;&gt;m_WorkerSkillTraining -->
 <g id="edge51" class="edge">
