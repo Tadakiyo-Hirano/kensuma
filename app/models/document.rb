@@ -688,9 +688,9 @@ class Document < ApplicationRecord
     end
     # 安全衛生目標
     if document_params[:content][:health_and_safety_goals].blank?
-      error_msg_for_doc_20th.push('安全衛生方針を入力してください')
+      error_msg_for_doc_20th.push('安全衛生目標を入力してください')
     elsif document_params[:content][:health_and_safety_goals].length > $CHARACTER_LIMIT300
-      error_msg_for_doc_20th.push('安全衛生方針を300字以内にしてください')
+      error_msg_for_doc_20th.push('安全衛生目標を300字以内にしてください')
     end
     # 安全衛生上の課題及び特定した危険性又は有害性
     error_msg_for_doc_20th.push('安全衛生上の課題及び特定した危険性又は有害性を300字以内にしてください') if document_params[:content][:health_and_safety_issues].length > $CHARACTER_LIMIT300
@@ -832,23 +832,39 @@ class Document < ApplicationRecord
     error_msg_for_doc_20th.push('安全衛生行事(3月)を30字以内にしてください') if document_params[:content][:events_march].length > $CHARACTER_LIMIT30
     # 安全衛生担当役員名
     error_msg_for_doc_20th.push('安全衛生担当役員を選択してください') if document_params[:content][:safety_officer_name].blank?
-    # 安全衛生担当役員名
+    # 安全衛生担当役員役職
     error_msg_for_doc_20th.push('安全衛生担当役員の役職を入力してください') if document_params[:content][:safety_officer_post].blank?
     # 総括安全衛生管理者名
     if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_name].blank?)
       error_msg_for_doc_20th.push('総括安全衛生管理者を選択してください')
     end
+    # 総括安全衛生管理者の役職
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_post].blank?)
+      error_msg_for_doc_20th.push('総括安全衛生管理者の役職を入力してください')
+    end
     # 安全管理者名
     if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_name].blank?)
       error_msg_for_doc_20th.push('安全管理者を選択してください')
+    end
+    # 安全管理者の役職
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_post].blank?)
+      error_msg_for_doc_20th.push('安全管理者の役職を入力してください')
     end
     # 衛生管理者名
     if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_name].blank?)
       error_msg_for_doc_20th.push('衛生管理者を選択してください')
     end
+    # 衛生管理者名の役職
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_post].blank?)
+      error_msg_for_doc_20th.push('衛生管理者の役職を入力してください')
+    end
     # 安全衛生推進者名
     if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_name].blank?)
       error_msg_for_doc_20th.push('安全衛生推進者を選択してください')
+    end
+    # 安全衛生推進者の役職
+    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_post].blank?)
+      error_msg_for_doc_20th.push('安全衛生推進者の役職を入力してください')
     end
     # 特記事項
     error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $CHARACTER_LIMIT300
