@@ -2,9 +2,11 @@ module Users
   class SubconUsersController < Users::Base
     def index
       # 自身が招待を受けたユーザーのid(自身の上にあたるユーザー) ※招待保留中
-      @invitation_pending_to = User.invitation_pending_to(current_user) || []
+      @invitation_pending_to = User.all.map { |up_user|
+        up_user if (up_user.invitation_sent_user_ids || []).include?(current_user.id)
+      }.compact
       # 自身が招待を受けたユーザーのid(自身の上にあたるユーザー) ※招待済
-      @invited_to = User.invited_to(current_user) || []
+      @invited_to = User.all.map { |up_user| up_user if (up_user.invited_user_ids || []).include?(current_user.id) }.compact
 
       # 自身が招待したユーザーid(自身の下請にあたるユーザー) ※招待保留中
       @invitation_pending_user_ids = current_user.invitation_sent_user_ids || []
