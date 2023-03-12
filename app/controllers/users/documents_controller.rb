@@ -7,7 +7,8 @@ module Users
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
     before_action :edit_restriction_after_approved, only: %i[edit update]
-    before_action :get_subcon_info_18th, only: :show # doc_18thの配置を決定させるためのロジック
+    before_action :get_subcon_info_17th, only: %i[show edit] #doc_17thの配置を決定させるためのロジック
+    before_action :get_subcon_info_18th, only: :show #doc_18thの配置を決定させるためのロジック
 
     def index; end
 
@@ -15,6 +16,10 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
+          when 'doc_4th'
+            request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
+            @prime_contractor_business = Business.find(request_order.business_id)
+            @business = Business.find(@document.business_id)
           when 'doc_8th'
             if @document.request_order.field_workers.empty?
               flash[:danger] = '作業員名簿を閲覧するには入場作業員情報を登録してください'
@@ -27,7 +32,6 @@ module Users
             end
           end
         end
-
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
@@ -307,6 +311,7 @@ module Users
       end
     end
 
+
     private
 
     def set_documents
@@ -548,6 +553,75 @@ module Users
       end
     end
 
+    # doc_17thの配置を決定させるためのロジック
+    def get_subcon_info_17th
+      edge_position = 1 #端の配置となる番号を変数として取得
+      current_order_id = RequestOrder.find_by(uuid: params[:request_order_uuid]).order_id #現場IDの取得
+      @primary_subcon_id_17th = RequestOrder.find_by(uuid: params[:request_order_uuid]).id #一次下請けのidの取得
+      if RequestOrder.where(order_id: current_order_id, parent_id: @primary_subcon_id_17th).present? #二次下請けが存在するか確認(開始)
+        secondary_element = 0
+        secondary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: @primary_subcon_id_17th).order(id: "ASC") #二次下請けの配列作成(開始)
+        secondary_subcon_list = []
+        secondary_subcon_list_base.each do |record|
+          secondary_subcon_list << record.id
+        end #二次下請けの配列作成(終了)
+        secondary_subcon_list_size = secondary_subcon_list.size
+        while instance_variable_set("@secondary_subcon_id_17th_#{edge_position}", secondary_subcon_list.slice(secondary_element)).present? #二次下請けの繰り返し処理(開始)
+          instance_variable_set("@secondary_subcon_id_17th_#{edge_position}", secondary_subcon_list.slice(secondary_element))
+          if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_17th_#{edge_position}")).present? #三次下請けが存在するか確認(開始)
+            tertiary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_17th_#{edge_position}")).order(id: "ASC") #三次下請けの配列作成(開始)
+            tertiary_subcon_list = []
+            tertiary_subcon_list_base.each do |record|
+              tertiary_subcon_list << record.id
+            end #三次下請けの配列作成(終了)
+            tertiary_subcon_list_size = tertiary_subcon_list.size
+            tertiary_element = 0
+            while instance_variable_set("@tertiary_subcon_id_17th_#{edge_position}", tertiary_subcon_list.slice(tertiary_element)).present? #三次下請けの繰り返し処理(開始)
+              instance_variable_set("@tertiary_subcon_id_17th_#{edge_position}", tertiary_subcon_list.slice(tertiary_element))
+              if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_17th_#{edge_position}")).present? #四次下請けが存在するか確認(開始)
+                quaternary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_17th_#{edge_position}")).order(id: "ASC") #四次下請けの配列作成(開始)
+                quaternary_subcon_list = []
+                quaternary_subcon_list_base.each do |record|
+                  quaternary_subcon_list << record.id
+                end #四次下請けの配列作成(終了)
+                quaternary_subcon_list_size = quaternary_subcon_list.size
+                quaternary_element = 0
+                while quaternary_element < quaternary_subcon_list_size #四次下請けの要素の数だけ処理(開始)
+                  instance_variable_set("@quaternary_subcon_id_17th_#{edge_position}", quaternary_subcon_list.slice(quaternary_element))
+                  if (quaternary_element + 1) == quaternary_subcon_list_size #四次下請けの数が到達したらブレイク
+                    break
+                  end
+                  edge_position += 1
+                  quaternary_element += 1
+                end #四次下請けの要素の数だけ処理(終了)
+              end #四次下請けが存在するか確認(開始)
+              if (tertiary_element + 1) == tertiary_subcon_list_size #三次下請けの数が到達したらブレイク
+                if not (edge_position%3 == 0) #三次下請けブレイク時にedge_positionが3の倍数でない場合は強制的に次の3の倍数にする
+                  if not (secondary_element + 1) == secondary_subcon_list_size
+                    edge_position = (edge_position.div(3)+1)*3
+                  end
+                end
+                break
+              end
+              edge_position += 1
+              tertiary_element += 1
+            end #三次下請けの繰り返し処理(終了)
+          else #三次下請けが存在しない場合
+            if not (secondary_element + 1) == secondary_subcon_list_size #最後に配置した一次下請けに二次下請けが存在しない場合は倍数計算しないようにする
+              edge_position = (edge_position.div(3)+1)*3
+            end
+          end #三次下請けが存在するか確認(終了)
+          if (secondary_element + 1) == secondary_subcon_list_size #二次下請けの数が到達したらブレイク
+            break
+          end
+          edge_position += 1
+          secondary_element += 1
+        end #二次下請けの繰り返し処理(終了)
+      end #二次下請けが存在するか確認(終了)
+      @total_pages_17th = (edge_position-1).div(3)
+      #binding.pry
+    end
+
     # doc_18thの配置を決定させるためのロジック
     def get_subcon_info_18th
       edge_position = 1
@@ -609,29 +683,30 @@ module Users
                   tertiary_element += 1
                 end #三次下請けの繰り返し処理(終了)
               end #三次下請けが存在するか確認(終了)
-              #binding.pry
               if (secondary_element + 1) == secondary_subcon_list_size
                 if not (edge_position%4 == 0)
-                  edge_position = (edge_position.div(4)+1)*4
+                  if not (primary_element + 1) == primary_subcon_list_size
+                    edge_position = (edge_position.div(4)+1)*4
+                  end
                 end
-                #binding.pry
                 break
               end
               edge_position += 1
               secondary_element += 1
             end #二次下請けの繰り返し処理(終了)
-          else
-            edge_position = (edge_position.div(4)+1)*4
+          else #二次下請けが存在しない場合
+            if not (primary_element + 1) == primary_subcon_list_size
+              edge_position = (edge_position.div(4)+1)*4
+            end
           end #二次下請けが存在するか確認(終了)
           if (primary_element + 1) == primary_subcon_list_size
             break
           end
           edge_position += 1
           primary_element += 1
-          #binding.pry
         end #一次下請けの繰り返し処理(終了)
       end #一次下請けが存在するか確認(終了)
-      @total_pages = (edge_position-1).div(4)
+      @total_pages_18th = (edge_position-1).div(4)
     end
 
     def document_params(document)
@@ -652,10 +727,10 @@ module Users
             date_created:   field_worker_keys  # 13-004 作成日(西暦)
           ]
         )
-      when 'doc_12th' 
+      when 'doc_12th'
         field_car_ids = @document.request_order.field_cars.ids
         field_car_keys = field_car_ids.map{|field_car_id|"field_car_#{field_car_id}"}
-        params.require(:document).permit(content: 
+        params.require(:document).permit(content:
           [
             date_submitted: field_car_keys, # 12-002 提出日(西暦)
           ]

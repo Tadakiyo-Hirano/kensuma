@@ -108,17 +108,17 @@
               <p>安全書類の記入依頼</p>
             <% end %>
           </li>
+          <li class="nav-item">
+            <%= link_to users_subcon_users_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-building"></i>
+              <p>協力会社情報</p>
+            <% end %>
+          </li>
           <p class="non-slide-link-menu text-danger">↓ 初回ログイン時入力必須</p>
           <li class="nav-item">
             <%= link_to users_business_path, class:"nav-link" do %>
               <i class="nav-icon fas fa-building"></i>
               <p>会社情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_subcon_users_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-building"></i>
-              <p>協力会社情報</p>
             <% end %>
           </li>
           <li class="nav-item">
@@ -140,6 +140,12 @@
             <% end %>
           </li>
           <li class="nav-item">
+            <%= link_to users_special_vehicles_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-truck"></i>
+              <p>特殊車両情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
             <%= link_to users_machines_path, class:"nav-link" do %>
               <i class="nav-icon fas fa-cogs"></i>
               <p>持込機械情報</p>
@@ -149,12 +155,6 @@
             <%= link_to users_solvents_path, class:"nav-link" do %>
               <i class="nav-icon fas fa-flask"></i>
               <p>有機溶剤情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_special_vehicles_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-truck"></i>
-              <p>特殊車両情報</p>
             <% end %>
           </li>
           <p></p>
