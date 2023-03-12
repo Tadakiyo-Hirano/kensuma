@@ -642,6 +642,21 @@ module DocumentsHelper
     date.blank? ? '' : l(date.to_date, format: :long)
   end
 
+  #現場作業員の人数の取得
+  def number_of_field_workers(order)
+    #元請の作業員の人数
+    prime_contractor = FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: order.id)
+    prime_contractor.nil? ? number_of_prime_contractor = 0 : number_of_prime_contractor = prime_contractor.size
+    #一次下請け以下の作業員の人数
+    request_order = RequestOrder.where(order_id: order.id)
+      array = []
+      request_order.each do |record|
+        array << record.id
+      end
+    number_of_primary_subcontractor = FieldWorker.where(field_workerable_type: RequestOrder).where("field_workerable_id IN (?)", array).size
+    return (number_of_prime_contractor + number_of_primary_subcontractor)
+  end
+
   # (22)作業間連絡調整書
 
   #下請会社(協力会社)のbusiness_idの取得

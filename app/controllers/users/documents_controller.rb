@@ -166,6 +166,8 @@ module Users
             render action: :edit
           end
         else
+          @document = Document.new(document_params(@document))
+          @document.document_type = 'doc_20th'
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
@@ -205,6 +207,8 @@ module Users
             render action: :edit
           end
         else
+          @document = Document.new(document_params(@document))
+          @document.document_type = 'doc_22nd'
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
