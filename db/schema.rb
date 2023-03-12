@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "name", null: false
     t.string "name_kana", null: false
     t.string "branch_name", null: false
-    t.string "branch_address"
     t.string "representative_name", null: false
     t.string "email", null: false
     t.string "address", null: false
@@ -102,7 +101,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
     t.integer "foreign_technical_intern_trainees_exist"
-    t.string "foreigners_employment_manager"
     t.string "employment_manager_name"
     t.string "employment_manager_post"
     t.bigint "user_id", null: false
@@ -494,13 +492,9 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "site_agent_apply", null: false
     t.string "supervising_engineer_name", null: false
     t.integer "supervising_engineer_check", null: false
-    t.string "supervising_engineer_qualification"
     t.string "supervising_engineer_assistant_name"
-    t.string "supervising_engineer_assistant_qualification"
     t.string "professional_engineer_name"
-    t.string "professional_engineer_qualification"
     t.string "professional_engineer_construction_details"
-    t.string "professional_engineer_required_qualification"
     t.string "safety_officer_name", null: false
     t.string "safety_officer_position_name", null: false
     t.string "general_safety_manager_name"
@@ -542,9 +536,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "supervisor_name"
     t.string "supervisor_apply"
     t.string "professional_engineer_name"
-    t.string "professional_engineer_qualification"
     t.string "professional_engineer_details"
-    t.string "professional_engineer_required_qualification"
     t.integer "professional_construction"
     t.string "construction_manager_name"
     t.string "construction_manager_position_name"
@@ -552,7 +544,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "site_agent_apply"
     t.string "lead_engineer_name"
     t.integer "lead_engineer_check"
-    t.string "lead_engineer_qualification"
     t.string "work_chief_name"
     t.string "work_conductor_name"
     t.string "safety_officer_name"
@@ -560,7 +551,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "safety_promoter_name"
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
-    t.string "registered_core_engineer_qualification"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
@@ -701,9 +691,9 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"
     t.bigint "worker_id", null: false
-    t.integer "has_labor_insurance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "has_labor_insurance", default: 0
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
   end
 
@@ -725,10 +715,10 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "max_blood_pressure", null: false
     t.integer "min_blood_pressure", null: false
     t.date "special_med_exam_on"
-    t.integer "health_condition", default: 0, null: false
-    t.integer "is_med_exam", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "health_condition", default: 0, null: false
+    t.integer "is_med_exam", default: 0, null: false
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
   end
 
@@ -767,6 +757,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "birth_day_on", null: false
     t.integer "abo_blood_type", default: 0, null: false
     t.integer "rh_blood_type", default: 0, null: false
+    t.integer "job_type", default: 0, null: false
     t.date "hiring_on", null: false
     t.integer "experience_term_before_hiring", null: false
     t.integer "blank_term", null: false
@@ -789,7 +780,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "residence_card_front"
     t.string "residence_card_back"
     t.string "employment_condition"
-    t.integer "post_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
