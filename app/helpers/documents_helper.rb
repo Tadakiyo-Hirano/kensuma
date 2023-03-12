@@ -833,6 +833,32 @@ module DocumentsHelper
     RUBY
   end
 
+  # (23)全建統一様式第８号(安全ミーティング報告書)
+
+  # リスクの見積り点数
+  def risk_estimation_point(risk_possibility)
+    possibility_point, _possibility_comment = risk_possibility(risk_possibility)
+    possibility_point == 0 ? "" : possibility_point  
+  end
+
+  # リスクの重大性点数
+  def risk_seriousness_point(risk_seriousness)
+    seriousness_point, _seriousness_comment = risk_seriousness(risk_seriousness)
+    seriousness_point == 0 ? "" : seriousness_point
+  end
+
+  # 丸囲み文字
+  def make_circle_enclosure_number(number)
+    number.blank? ? tag.span('&nbsp;'.html_safe, class: :circle_hankaku_space) : tag.span(number, class: :circle_hankaku_number)
+  end
+
+  # 角囲み文字
+  def make_square_enclosure_number(number)
+    number.blank? ? tag.span('&nbsp;'.html_safe , class: :square_hankaku_space) : tag.span(number, class: :square_hankaku_number)
+  end
+  
+
+
   # (24)新規入場者調査票
 
   # 雇用契約書-「有り」

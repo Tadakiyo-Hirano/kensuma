@@ -16,6 +16,10 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
+          when 'doc_4th'
+            request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
+            @prime_contractor_business = Business.find(request_order.business_id)
+            @business = Business.find(@document.business_id)
           when 'doc_8th'
             if @document.request_order.field_workers.empty?
               flash[:danger] = '作業員名簿を閲覧するには入場作業員情報を登録してください'
@@ -28,7 +32,6 @@ module Users
             end
           end
         end
-
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
@@ -205,6 +208,19 @@ module Users
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
+      when 'doc_23rd'
+        @error_msg_for_doc_23rd = @document.error_msg_for_doc_23rd(document_params(@document))
+        if @error_msg_for_doc_23rd.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+        end
       when 'doc_24th'
         j = 1
         focus_workers = document_info.field_workers
@@ -294,6 +310,7 @@ module Users
         end
       end
     end
+
 
     private
 
@@ -1329,6 +1346,177 @@ module Users
             delegation_time_to
             officer_signature_date
             officer_substitute_signature_date
+          ]
+                                        )
+      when 'doc_23rd'
+        params.require(:document).permit(content:
+          %i[
+            meeting_date
+            date_entered_1st
+            date_entered_2nd
+            date_entered_3rd
+            work_month_1st
+            work_month_2nd
+            work_month_3rd
+            work_month_4th
+            work_month_5th
+            work_month_6th
+            work_day_1st
+            work_day_2nd
+            work_day_3rd
+            work_day_4th
+            work_day_5th
+            work_day_6th
+            work_place_1st
+            work_place_2nd
+            work_place_3rd
+            work_place_4th
+            work_place_5th
+            work_place_6th
+            work_content_1st
+            work_content_2nd
+            work_content_3rd
+            work_content_4th
+            work_content_5th
+            work_content_6th
+            work_method_1st
+            work_method_2nd
+            work_method_3rd
+            work_method_4th
+            work_method_5th
+            work_method_6th
+            work_personnel_schedule_1st
+            work_personnel_schedule_2nd
+            work_personnel_schedule_3rd
+            work_personnel_schedule_4th
+            work_personnel_schedule_5th
+            work_personnel_schedule_6th
+            work_personnel_implementation_1st
+            work_personnel_implementation_2nd
+            work_personnel_implementation_3rd
+            work_personnel_implementation_4th
+            work_personnel_implementation_5th
+            work_personnel_implementation_6th
+            slinger
+            signaling_person
+            coordination_items_from_prime_contractor_1st
+            coordination_items_from_prime_contractor_2nd
+            coordination_items_from_prime_contractor_3rd
+            cheduled_work_hazard_1st
+            cheduled_work_hazard_2nd
+            cheduled_work_hazard_3rd
+            cheduled_work_hazard_4th
+            cheduled_work_hazard_5th
+            cheduled_work_hazard_severity_1st
+            cheduled_work_hazard_severity_2nd
+            cheduled_work_hazard_severity_3rd
+            cheduled_work_hazard_severity_4th
+            cheduled_work_hazard_severity_5th
+            cheduled_work_hazard_possibility_1st
+            cheduled_work_hazard_possibility_2nd
+            cheduled_work_hazard_possibility_3rd
+            cheduled_work_hazard_possibility_4th
+            cheduled_work_hazard_possibility_5th
+            cheduled_work_hazard_evaluation_points_1st
+            cheduled_work_hazard_evaluation_points_2nd
+            cheduled_work_hazard_evaluation_points_3rd
+            cheduled_work_hazard_evaluation_points_4th
+            cheduled_work_hazard_evaluation_points_5th
+            cheduled_work_hazard_evaluation_1st
+            cheduled_work_hazard_evaluation_2nd
+            cheduled_work_hazard_evaluation_3rd
+            cheduled_work_hazard_evaluation_4th
+            cheduled_work_hazard_evaluation_5th
+            risk_mitigation_measures_1st
+            risk_mitigation_measures_2nd
+            risk_mitigation_measures_3rd
+            risk_mitigation_measures_4th
+            risk_mitigation_measures_5th
+            risk_reduction_measures_severity_1st
+            risk_reduction_measures_severity_2nd
+            risk_reduction_measures_severity_3rd
+            risk_reduction_measures_severity_4th
+            risk_reduction_measures_severity_5th
+            risk_reduction_measures_possibility_1st
+            risk_reduction_measures_possibility_2nd
+            risk_reduction_measures_possibility_3rd
+            risk_reduction_measures_possibility_4th
+            risk_reduction_measures_possibility_5th
+            risk_reduction_measures_evaluation_points_1st
+            risk_reduction_measures_evaluation_points_2nd
+            risk_reduction_measures_evaluation_points_3rd
+            risk_reduction_measures_evaluation_points_4th
+            risk_reduction_measures_evaluation_points_5th
+            risk_reduction_measures_evaluation_1st
+            risk_reduction_measures_evaluation_2nd
+            risk_reduction_measures_evaluation_3rd
+            risk_reduction_measures_evaluation_4th
+            risk_reduction_measures_evaluation_5th
+            execution_confirmation_1st
+            execution_confirmation_2nd
+            execution_confirmation_3rd
+            execution_confirmation_4th
+            execution_confirmation_5th
+            foreman_confirmation
+            elderly_people
+            minors_special_instructions
+            foreman_confirmation_elderly_people_minors_special_instructions_content
+            working_floor
+            handrail
+            aisle
+            covering_opening
+            no_entry_measures
+            other
+            other_content
+            foreman_confirmation_confirmation_of_work_place
+            tesuri
+            nakasan
+            habaki
+            foreman_confirmation_abnormal_inspection_of_scaffolding_before_work
+            foreman_confirmation_repair_when_there_is_an_abnormality
+            lack_of_sleep
+            expression
+            eyeball
+            hangover
+            disease
+            foreman_confirmation_confirmation_poor_physical_condition
+            hazard_prediction_number_severity_1st
+            hazard_prediction_number_severity_2nd
+            hazard_prediction_number_severity_3rd
+            hazard_prediction_number_severity_4th
+            hazard_prediction_number_severity_5th
+            hazard_prediction_number_severity_6th
+            hazard_prediction_number_severity_7th
+            hazard_prediction_number_severity_8th
+            hazard_prediction_number_severity_9th
+            hazard_prediction_number_severity_10th
+            hazard_prediction_number_severity_11th
+            hazard_prediction_number_severity_12th
+            hazard_prediction_number_possibility_1st
+            hazard_prediction_number_possibility_2nd
+            hazard_prediction_number_possibility_3rd
+            hazard_prediction_number_possibility_4th
+            hazard_prediction_number_possibility_5th
+            hazard_prediction_number_possibility_6th
+            hazard_prediction_number_possibility_7th
+            hazard_prediction_number_possibility_8th
+            hazard_prediction_number_possibility_9th
+            hazard_prediction_number_possibility_10th
+            hazard_prediction_number_possibility_11th
+            hazard_prediction_number_possibility_12th
+            sign_1st
+            sign_2nd
+            sign_3rd
+            sign_4th
+            sign_5th
+            sign_6th
+            sign_7th
+            sign_8th
+            sign_9th
+            sign_10th
+            sign_11th
+            sign_12th
+            name
           ]
         )
       end

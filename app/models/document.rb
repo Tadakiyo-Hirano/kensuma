@@ -1826,6 +1826,108 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd
   end
 
+  # エラーメッセージ(doc23・安全ミーティング報告書)
+  def error_msg_for_doc_23rd(document_params)
+    error_msg_for_doc_23rd = []
+    if document_params[:content][:work_place_1st].length > 20
+      error_msg_for_doc_23rd.push('1つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_2nd].length > 20
+      error_msg_for_doc_23rd.push('2つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_3rd].length > 20
+      error_msg_for_doc_23rd.push('3つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_4th].length > 20
+      error_msg_for_doc_23rd.push('4つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_5th].length > 20
+      error_msg_for_doc_23rd.push('5つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_content_1st].length > 30
+      error_msg_for_doc_23rd.push('1つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_2nd].length > 30
+      error_msg_for_doc_23rd.push('2つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_3rd].length > 30
+      error_msg_for_doc_23rd.push('3つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_4th].length > 30
+      error_msg_for_doc_23rd.push('4つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_5th].length > 30
+      error_msg_for_doc_23rd.push('5つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_method_1st].length > 50
+      error_msg_for_doc_23rd.push('1つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_2nd].length > 50
+      error_msg_for_doc_23rd.push('2つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_3rd].length > 50
+      error_msg_for_doc_23rd.push('3つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_4th].length > 50
+      error_msg_for_doc_23rd.push('4つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_5th].length > 50
+      error_msg_for_doc_23rd.push('5つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:coordination_items_from_prime_contractor_1st].length > 50
+      error_msg_for_doc_23rd.push('1つ目の元請からの連絡調整項目を50文字以内にしてください')
+    end
+    if document_params[:content][:coordination_items_from_prime_contractor_2nd].length > 50
+      error_msg_for_doc_23rd.push('2つ目の元請からの連絡調整項目を50文字以内にしてください')
+    end
+    if document_params[:content][:coordination_items_from_prime_contractor_3rd].length > 50
+      error_msg_for_doc_23rd.push('3つ目の元請からの連絡調整項目を50文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_1st].length > 30
+      error_msg_for_doc_23rd.push('1つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_2nd].length > 30
+      error_msg_for_doc_23rd.push('2つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_3rd].length > 30
+      error_msg_for_doc_23rd.push('3つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_4th].length > 30
+      error_msg_for_doc_23rd.push('4つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_5th].length > 30
+      error_msg_for_doc_23rd.push('5つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_1st].length > 30
+      error_msg_for_doc_23rd.push('1つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_2nd].length > 30
+      error_msg_for_doc_23rd.push('2つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_3rd].length > 30
+      error_msg_for_doc_23rd.push('3つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_4th].length > 30
+      error_msg_for_doc_23rd.push('4つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_5th].length > 30
+      error_msg_for_doc_23rd.push('5つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:foreman_confirmation_elderly_people_minors_special_instructions_content].length > 30
+      error_msg_for_doc_23rd.push('高齢者、年少者・特別指示内容を30文字以内にしてください')
+    end
+    if document_params[:content][:other_content].length > 10
+      error_msg_for_doc_23rd.push('その他を10文字以内にしてください')
+    end
+    if document_params[:content][:meeting_date].blank?
+      error_msg_for_doc_23rd.push('打合せ日を入力してください')
+    end
+    if document_params[:content][:name].blank?
+      error_msg_for_doc_23rd.push('氏名を入力してください')
+    end
+    error_msg_for_doc_23rd
+  end
+
   #下請会社(協力会社)の配列の取得
   def subcontractor_array(request_order_uuid)
     request_order = RequestOrder.find_by(uuid: request_order_uuid)
