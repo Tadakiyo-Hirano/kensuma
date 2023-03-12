@@ -569,7 +569,7 @@
           <td class="doc_23_s4"></td>
           <td class="doc_23_s15" dir="ltr" colspan="4" rowspan="4">作業に必要な資格及び配置</td>
           <td class="doc_23_s5" dir="ltr" colspan="4" rowspan="2">作業主任者</td>
-          <td class="doc_23_s16" dir="ltr" colspan="5" rowspan="2"><%= document_info.work_chief_name %><!--「各会社の作業主任者名」23-019 --></td>
+          <td class="doc_23_s16" dir="ltr" colspan="5" rowspan="2"><%= document_subcon_info_for_23rd&.work_chief_name %><!--「各会社の作業主任者名」23-019 --></td>
           <td class="doc_23_s5" dir="ltr" colspan="3" rowspan="2">玉掛者</td>
           <td class="doc_23_s16" dir="ltr" colspan="6" rowspan="2">
             <%= @document.content&.[]('slinger') %>
@@ -587,7 +587,7 @@
         <tr style="height: 17px">
           <td class="doc_23_s4"></td>
           <td class="doc_23_s5" dir="ltr" colspan="4" rowspan="2">作業指揮者</td>
-          <td class="doc_23_s16" dir="ltr" colspan="5" rowspan="2"><%= document_info.work_conductor_name %><!--「各会社の作業指揮者名」23-020 --></td>
+          <td class="doc_23_s16" dir="ltr" colspan="5" rowspan="2"><%= document_subcon_info_for_23rd&.work_conductor_name %><!--「各会社の作業指揮者名」23-020 --></td>
           <td class="doc_23_s5" dir="ltr" colspan="3" rowspan="2">合図者</td>
           <td class="doc_23_s16" dir="ltr" colspan="6" rowspan="2">
             <%= @document.content&.[]('signaling_person') %>
