@@ -7,7 +7,8 @@ module Users
     before_action :set_document, except: :index # オブジェクトが1つも無い場合、indexで呼び出さないようにする
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
     before_action :edit_restriction_after_approved, only: %i[edit update]
-    before_action :get_subcon_info_18th, only: :show # doc_18thの配置を決定させるためのロジック
+    before_action :get_subcon_info_17th, only: %i[show edit] #doc_17thの配置を決定させるためのロジック
+    before_action :get_subcon_info_18th, only: :show #doc_18thの配置を決定させるためのロジック
 
     def index; end
 
@@ -15,6 +16,10 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
+          when 'doc_4th'
+            request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
+            @prime_contractor_business = Business.find(request_order.business_id)
+            @business = Business.find(@document.business_id)
           when 'doc_8th'
             if @document.request_order.field_workers.empty?
               flash[:danger] = '作業員名簿を閲覧するには入場作業員情報を登録してください'
@@ -27,7 +32,6 @@ module Users
             end
           end
         end
-
         format.pdf do
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
@@ -204,6 +208,19 @@ module Users
           flash[:danger] = '保存に失敗しました'
           render action: :edit
         end
+      when 'doc_23rd'
+        @error_msg_for_doc_23rd = @document.error_msg_for_doc_23rd(document_params(@document))
+        if @error_msg_for_doc_23rd.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+        end
       when 'doc_24th'
         j = 1
         focus_workers = document_info.field_workers
@@ -293,6 +310,7 @@ module Users
         end
       end
     end
+
 
     private
 
@@ -535,6 +553,75 @@ module Users
       end
     end
 
+    # doc_17thの配置を決定させるためのロジック
+    def get_subcon_info_17th
+      edge_position = 1 #端の配置となる番号を変数として取得
+      current_order_id = RequestOrder.find_by(uuid: params[:request_order_uuid]).order_id #現場IDの取得
+      @primary_subcon_id_17th = RequestOrder.find_by(uuid: params[:request_order_uuid]).id #一次下請けのidの取得
+      if RequestOrder.where(order_id: current_order_id, parent_id: @primary_subcon_id_17th).present? #二次下請けが存在するか確認(開始)
+        secondary_element = 0
+        secondary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: @primary_subcon_id_17th).order(id: "ASC") #二次下請けの配列作成(開始)
+        secondary_subcon_list = []
+        secondary_subcon_list_base.each do |record|
+          secondary_subcon_list << record.id
+        end #二次下請けの配列作成(終了)
+        secondary_subcon_list_size = secondary_subcon_list.size
+        while instance_variable_set("@secondary_subcon_id_17th_#{edge_position}", secondary_subcon_list.slice(secondary_element)).present? #二次下請けの繰り返し処理(開始)
+          instance_variable_set("@secondary_subcon_id_17th_#{edge_position}", secondary_subcon_list.slice(secondary_element))
+          if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_17th_#{edge_position}")).present? #三次下請けが存在するか確認(開始)
+            tertiary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_17th_#{edge_position}")).order(id: "ASC") #三次下請けの配列作成(開始)
+            tertiary_subcon_list = []
+            tertiary_subcon_list_base.each do |record|
+              tertiary_subcon_list << record.id
+            end #三次下請けの配列作成(終了)
+            tertiary_subcon_list_size = tertiary_subcon_list.size
+            tertiary_element = 0
+            while instance_variable_set("@tertiary_subcon_id_17th_#{edge_position}", tertiary_subcon_list.slice(tertiary_element)).present? #三次下請けの繰り返し処理(開始)
+              instance_variable_set("@tertiary_subcon_id_17th_#{edge_position}", tertiary_subcon_list.slice(tertiary_element))
+              if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_17th_#{edge_position}")).present? #四次下請けが存在するか確認(開始)
+                quaternary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@tertiary_subcon_id_17th_#{edge_position}")).order(id: "ASC") #四次下請けの配列作成(開始)
+                quaternary_subcon_list = []
+                quaternary_subcon_list_base.each do |record|
+                  quaternary_subcon_list << record.id
+                end #四次下請けの配列作成(終了)
+                quaternary_subcon_list_size = quaternary_subcon_list.size
+                quaternary_element = 0
+                while quaternary_element < quaternary_subcon_list_size #四次下請けの要素の数だけ処理(開始)
+                  instance_variable_set("@quaternary_subcon_id_17th_#{edge_position}", quaternary_subcon_list.slice(quaternary_element))
+                  if (quaternary_element + 1) == quaternary_subcon_list_size #四次下請けの数が到達したらブレイク
+                    break
+                  end
+                  edge_position += 1
+                  quaternary_element += 1
+                end #四次下請けの要素の数だけ処理(終了)
+              end #四次下請けが存在するか確認(開始)
+              if (tertiary_element + 1) == tertiary_subcon_list_size #三次下請けの数が到達したらブレイク
+                if not (edge_position%3 == 0) #三次下請けブレイク時にedge_positionが3の倍数でない場合は強制的に次の3の倍数にする
+                  if not (secondary_element + 1) == secondary_subcon_list_size
+                    edge_position = (edge_position.div(3)+1)*3
+                  end
+                end
+                break
+              end
+              edge_position += 1
+              tertiary_element += 1
+            end #三次下請けの繰り返し処理(終了)
+          else #三次下請けが存在しない場合
+            if not (secondary_element + 1) == secondary_subcon_list_size #最後に配置した一次下請けに二次下請けが存在しない場合は倍数計算しないようにする
+              edge_position = (edge_position.div(3)+1)*3
+            end
+          end #三次下請けが存在するか確認(終了)
+          if (secondary_element + 1) == secondary_subcon_list_size #二次下請けの数が到達したらブレイク
+            break
+          end
+          edge_position += 1
+          secondary_element += 1
+        end #二次下請けの繰り返し処理(終了)
+      end #二次下請けが存在するか確認(終了)
+      @total_pages_17th = (edge_position-1).div(3)
+      #binding.pry
+    end
+
     # doc_18thの配置を決定させるためのロジック
     def get_subcon_info_18th
       edge_position = 1
@@ -596,29 +683,30 @@ module Users
                   tertiary_element += 1
                 end #三次下請けの繰り返し処理(終了)
               end #三次下請けが存在するか確認(終了)
-              #binding.pry
               if (secondary_element + 1) == secondary_subcon_list_size
                 if not (edge_position%4 == 0)
-                  edge_position = (edge_position.div(4)+1)*4
+                  if not (primary_element + 1) == primary_subcon_list_size
+                    edge_position = (edge_position.div(4)+1)*4
+                  end
                 end
-                #binding.pry
                 break
               end
               edge_position += 1
               secondary_element += 1
             end #二次下請けの繰り返し処理(終了)
-          else
-            edge_position = (edge_position.div(4)+1)*4
+          else #二次下請けが存在しない場合
+            if not (primary_element + 1) == primary_subcon_list_size
+              edge_position = (edge_position.div(4)+1)*4
+            end
           end #二次下請けが存在するか確認(終了)
           if (primary_element + 1) == primary_subcon_list_size
             break
           end
           edge_position += 1
           primary_element += 1
-          #binding.pry
         end #一次下請けの繰り返し処理(終了)
       end #一次下請けが存在するか確認(終了)
-      @total_pages = (edge_position-1).div(4)
+      @total_pages_18th = (edge_position-1).div(4)
     end
 
     def document_params(document)
@@ -639,10 +727,10 @@ module Users
             date_created:   field_worker_keys  # 13-004 作成日(西暦)
           ]
         )
-      when 'doc_12th' 
+      when 'doc_12th'
         field_car_ids = @document.request_order.field_cars.ids
         field_car_keys = field_car_ids.map{|field_car_id|"field_car_#{field_car_id}"}
-        params.require(:document).permit(content: 
+        params.require(:document).permit(content:
           [
             date_submitted: field_car_keys, # 12-002 提出日(西暦)
           ]
@@ -1258,6 +1346,177 @@ module Users
             delegation_time_to
             officer_signature_date
             officer_substitute_signature_date
+          ]
+                                        )
+      when 'doc_23rd'
+        params.require(:document).permit(content:
+          %i[
+            meeting_date
+            date_entered_1st
+            date_entered_2nd
+            date_entered_3rd
+            work_month_1st
+            work_month_2nd
+            work_month_3rd
+            work_month_4th
+            work_month_5th
+            work_month_6th
+            work_day_1st
+            work_day_2nd
+            work_day_3rd
+            work_day_4th
+            work_day_5th
+            work_day_6th
+            work_place_1st
+            work_place_2nd
+            work_place_3rd
+            work_place_4th
+            work_place_5th
+            work_place_6th
+            work_content_1st
+            work_content_2nd
+            work_content_3rd
+            work_content_4th
+            work_content_5th
+            work_content_6th
+            work_method_1st
+            work_method_2nd
+            work_method_3rd
+            work_method_4th
+            work_method_5th
+            work_method_6th
+            work_personnel_schedule_1st
+            work_personnel_schedule_2nd
+            work_personnel_schedule_3rd
+            work_personnel_schedule_4th
+            work_personnel_schedule_5th
+            work_personnel_schedule_6th
+            work_personnel_implementation_1st
+            work_personnel_implementation_2nd
+            work_personnel_implementation_3rd
+            work_personnel_implementation_4th
+            work_personnel_implementation_5th
+            work_personnel_implementation_6th
+            slinger
+            signaling_person
+            coordination_items_from_prime_contractor_1st
+            coordination_items_from_prime_contractor_2nd
+            coordination_items_from_prime_contractor_3rd
+            cheduled_work_hazard_1st
+            cheduled_work_hazard_2nd
+            cheduled_work_hazard_3rd
+            cheduled_work_hazard_4th
+            cheduled_work_hazard_5th
+            cheduled_work_hazard_severity_1st
+            cheduled_work_hazard_severity_2nd
+            cheduled_work_hazard_severity_3rd
+            cheduled_work_hazard_severity_4th
+            cheduled_work_hazard_severity_5th
+            cheduled_work_hazard_possibility_1st
+            cheduled_work_hazard_possibility_2nd
+            cheduled_work_hazard_possibility_3rd
+            cheduled_work_hazard_possibility_4th
+            cheduled_work_hazard_possibility_5th
+            cheduled_work_hazard_evaluation_points_1st
+            cheduled_work_hazard_evaluation_points_2nd
+            cheduled_work_hazard_evaluation_points_3rd
+            cheduled_work_hazard_evaluation_points_4th
+            cheduled_work_hazard_evaluation_points_5th
+            cheduled_work_hazard_evaluation_1st
+            cheduled_work_hazard_evaluation_2nd
+            cheduled_work_hazard_evaluation_3rd
+            cheduled_work_hazard_evaluation_4th
+            cheduled_work_hazard_evaluation_5th
+            risk_mitigation_measures_1st
+            risk_mitigation_measures_2nd
+            risk_mitigation_measures_3rd
+            risk_mitigation_measures_4th
+            risk_mitigation_measures_5th
+            risk_reduction_measures_severity_1st
+            risk_reduction_measures_severity_2nd
+            risk_reduction_measures_severity_3rd
+            risk_reduction_measures_severity_4th
+            risk_reduction_measures_severity_5th
+            risk_reduction_measures_possibility_1st
+            risk_reduction_measures_possibility_2nd
+            risk_reduction_measures_possibility_3rd
+            risk_reduction_measures_possibility_4th
+            risk_reduction_measures_possibility_5th
+            risk_reduction_measures_evaluation_points_1st
+            risk_reduction_measures_evaluation_points_2nd
+            risk_reduction_measures_evaluation_points_3rd
+            risk_reduction_measures_evaluation_points_4th
+            risk_reduction_measures_evaluation_points_5th
+            risk_reduction_measures_evaluation_1st
+            risk_reduction_measures_evaluation_2nd
+            risk_reduction_measures_evaluation_3rd
+            risk_reduction_measures_evaluation_4th
+            risk_reduction_measures_evaluation_5th
+            execution_confirmation_1st
+            execution_confirmation_2nd
+            execution_confirmation_3rd
+            execution_confirmation_4th
+            execution_confirmation_5th
+            foreman_confirmation
+            elderly_people
+            minors_special_instructions
+            foreman_confirmation_elderly_people_minors_special_instructions_content
+            working_floor
+            handrail
+            aisle
+            covering_opening
+            no_entry_measures
+            other
+            other_content
+            foreman_confirmation_confirmation_of_work_place
+            tesuri
+            nakasan
+            habaki
+            foreman_confirmation_abnormal_inspection_of_scaffolding_before_work
+            foreman_confirmation_repair_when_there_is_an_abnormality
+            lack_of_sleep
+            expression
+            eyeball
+            hangover
+            disease
+            foreman_confirmation_confirmation_poor_physical_condition
+            hazard_prediction_number_severity_1st
+            hazard_prediction_number_severity_2nd
+            hazard_prediction_number_severity_3rd
+            hazard_prediction_number_severity_4th
+            hazard_prediction_number_severity_5th
+            hazard_prediction_number_severity_6th
+            hazard_prediction_number_severity_7th
+            hazard_prediction_number_severity_8th
+            hazard_prediction_number_severity_9th
+            hazard_prediction_number_severity_10th
+            hazard_prediction_number_severity_11th
+            hazard_prediction_number_severity_12th
+            hazard_prediction_number_possibility_1st
+            hazard_prediction_number_possibility_2nd
+            hazard_prediction_number_possibility_3rd
+            hazard_prediction_number_possibility_4th
+            hazard_prediction_number_possibility_5th
+            hazard_prediction_number_possibility_6th
+            hazard_prediction_number_possibility_7th
+            hazard_prediction_number_possibility_8th
+            hazard_prediction_number_possibility_9th
+            hazard_prediction_number_possibility_10th
+            hazard_prediction_number_possibility_11th
+            hazard_prediction_number_possibility_12th
+            sign_1st
+            sign_2nd
+            sign_3rd
+            sign_4th
+            sign_5th
+            sign_6th
+            sign_7th
+            sign_8th
+            sign_9th
+            sign_10th
+            sign_11th
+            sign_12th
+            name
           ]
         )
       end

@@ -17,6 +17,28 @@ form.cmxform label.error, label.error {
   padding: 4px;
 }
 
+.circle_hankaku_space {
+    border: 2px solid #000000;
+    border-radius: 25px;
+    padding: 4px 10px 4px 10px;
+}
+
+.circle_hankaku_number {
+  border: 2px solid #000000;
+  border-radius: 25px;
+  padding: 4px 8px 4px 8px;
+}
+
+.square_hankaku_number {
+  border: 1px solid #000000;
+    padding: 1px 4px;
+}
+
+.square_hankaku_space {
+  border: 1px solid #000000;
+    padding: 1px 6px;
+}
+
 .line_through {
   text-decoration: line-through;
 }
