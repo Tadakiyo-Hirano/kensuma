@@ -701,9 +701,9 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"
     t.bigint "worker_id", null: false
+    t.integer "has_labor_insurance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "has_labor_insurance", default: 0
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
   end
 
@@ -725,10 +725,10 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "max_blood_pressure", null: false
     t.integer "min_blood_pressure", null: false
     t.date "special_med_exam_on"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "health_condition", default: 0, null: false
     t.integer "is_med_exam", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
   end
 
@@ -789,6 +789,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "residence_card_front"
     t.string "residence_card_back"
     t.string "employment_condition"
+    t.integer "post_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
