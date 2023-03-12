@@ -108,6 +108,8 @@ module Users
     def create
       @worker = current_business.workers.build(worker_params)
       if @worker.save
+        health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
+        employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
         flash[:success] = '作業員情報を作成しました'
         redirect_to users_worker_path(@worker)
       else
@@ -125,6 +127,8 @@ module Users
 
     def update
       if @worker.update(worker_params)
+        health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
+        employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
         flash[:success] = '更新しました'
         redirect_to users_worker_path(@worker)
       else
@@ -186,6 +190,20 @@ module Users
 
     def set_worker
       @worker = current_business.workers.find_by(uuid: params[:uuid])
+    end
+
+    # 健康保険が健康保険組合もしくは建設国保でなければ保険名をnilにする
+    def health_insurance_name_nil(health_insurance_type, worker)
+      unless %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type)
+        worker.update(health_insurance_name: nil)
+      end
+    end
+
+    # 雇用保険が被保険者であ無ければ被保険者番号の下4桁をnilにする
+    def employment_insurance_number_nil(employment_insurance_type, worker)
+      unless employment_insurance_type == :insured
+        worker.update(employment_insurance_number: nil)
+      end
     end
 
     def worker_params

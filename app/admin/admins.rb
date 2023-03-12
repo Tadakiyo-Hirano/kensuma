@@ -1,4 +1,5 @@
 ActiveAdmin.register Admin do
+  actions :all, except: %i[new destroy]
   permit_params :email, :password, :password_confirmation
 
   index do
