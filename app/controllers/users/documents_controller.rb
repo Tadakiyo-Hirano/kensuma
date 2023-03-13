@@ -15,14 +15,29 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
-          when 'doc_8th', 'doc_23rd'
+          when 'doc_8th', 'doc_9th', 'doc_23rd'
             if @document.request_order.field_workers.empty?
-              flash[:danger] = '作業員名簿・安全ミーティング報告書を閲覧するには入場作業員情報を登録してください'
+              flash[:danger] = '作業員関連の書類を閲覧するには入場作業員情報を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
+          when 'doc_14th'
+            if @document.request_order.field_machines.empty?
+              flash[:danger] = '持込機械等(電動工具電気溶接機等)使用届の書類を閲覧するには機械情報を登録してください'
               redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
             end
           when 'doc_12th'
             if @document.request_order.field_cars.empty?
-              flash[:danger] = '工事用・通勤⽤⾞両届を閲覧するには車両情報を登録してください'
+              flash[:danger] = '工事用・通勤⽤⾞両届の書類を閲覧するには車両情報を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
+          when 'doc_13th'
+            if @document.request_order.field_special_vehicles.empty?
+              flash[:danger] = '移動式クレーン／車両系建設機械等使用届の書類を閲覧するには特殊車両情報を登録してください'
+              redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
+            end
+          when 'doc_15th'
+            if @document.request_order.field_solvents.empty?
+              flash[:danger] = '有機溶剤・特定化学物質等持込使用届の書類を閲覧するには溶剤情報を登録してください'
               redirect_to users_request_order_path(params[:request_order_uuid]) if params[:request_order_uuid].present?
             end
           end
@@ -36,7 +51,7 @@ module Users
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_4th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
-          when 'doc_5th', 'doc_13rd', 'doc_14th', 'doc_18th', 'doc_22nd'
+          when 'doc_5th', 'doc_13th', 'doc_14th', 'doc_18th', 'doc_22nd'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
           when 'doc_8th'
             render pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 0 }, orientation: 'Landscape'
@@ -88,7 +103,7 @@ module Users
           flash[:danger] = '更新に失敗しました'
           render :edit
         end
-      when 'doc_13rd'
+      when 'doc_13th'
         # 追加項目欄が未記入の場合、checkboxを外す
         field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
         field_special_vehicle_ids.map{ |field_special_vehicle_id|
@@ -647,7 +662,7 @@ module Users
             date_submitted: field_car_keys, # 12-002 提出日(西暦)
           ]
         )
-      when 'doc_13rd'
+      when 'doc_13th'
         field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
         field_special_vehicle_keys = field_special_vehicle_ids.map{|field_special_vehicle_id|"field_special_vehicle_#{field_special_vehicle_id}"}
         params.require(:document).permit(content:
