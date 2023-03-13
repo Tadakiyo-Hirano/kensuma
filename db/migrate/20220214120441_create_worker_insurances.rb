@@ -9,6 +9,8 @@ class CreateWorkerInsurances < ActiveRecord::Migration[6.1]
       t.integer :severance_pay_mutual_aid_type, null: false
       t.string :severance_pay_mutual_aid_name
       t.references :worker, foreign_key: true, null: false
+      t.integer :has_labor_insurance, default: 0                # 労働保険特別加入 enum
+
 
       t.timestamps
     end

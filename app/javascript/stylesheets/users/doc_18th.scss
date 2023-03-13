@@ -6,7 +6,27 @@
   font-family: 'Arial';
   font-size: 11pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_18_s53 {
+  border-top: 1px SOLID #000000;
+  border-right: none;
+  border-bottom: 1px SOLID #000000;
+  border-left: none;
+  background-color: #ffffff;
+  text-align: center;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 11pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -19,7 +39,9 @@
   font-family: 'Arial';
   font-size: 14pt;
   vertical-align: middle;
-  white-space: nowrap;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
   direction: ltr;
   padding: 0px 3px 0px 3px;
 }
@@ -178,6 +200,21 @@
 .ritz .waffle .doc_18_s17 {
   border-bottom: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
+  background-color: #e9ecef;
+  text-align: center;
+  color: #000000;
+  font-family: 'docs-Calibri', Arial;
+  font-size: 14pt;
+  vertical-align: middle;
+  white-space: normal;
+  overflow: hidden;
+  word-wrap: break-word;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_18_s54 {
+  border-bottom: 1px SOLID #000000;
   background-color: #e9ecef;
   text-align: center;
   color: #000000;

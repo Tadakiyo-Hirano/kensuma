@@ -108,7 +108,7 @@
 <text text-anchor="start" x="991" y="-2319" font-family="Arial" font-size="10.00">address </text>
 <text text-anchor="start" x="1029" y="-2319" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
 <text text-anchor="start" x="991" y="-2306" font-family="Arial" font-size="10.00">branch_name </text>
-<text text-anchor="start" x="1053" y="-2306" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="1053" y="-2306" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
 <text text-anchor="start" x="991" y="-2293" font-family="Arial" font-size="10.00">business_employment_insurance_join_status </text>
 <text text-anchor="start" x="1192" y="-2293" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
 <text text-anchor="start" x="991" y="-2280" font-family="Arial" font-size="10.00">business_employment_insurance_number </text>
@@ -1804,7 +1804,7 @@
 <text text-anchor="start" x="2178" y="-846" font-family="Arial" font-size="10.00">has_labor_insurance </text>
 <text text-anchor="start" x="2271" y="-846" font-family="Arial Italic" font-size="10.00" fill="#999999">integer</text>
 <text text-anchor="start" x="2178" y="-833" font-family="Arial" font-size="10.00">health_insurance_name </text>
-<text text-anchor="start" x="2284" y="-833" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+<text text-anchor="start" x="2284" y="-833" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
 <text text-anchor="start" x="2178" y="-820" font-family="Arial" font-size="10.00">health_insurance_type </text>
 <text text-anchor="start" x="2279" y="-820" font-family="Arial Italic" font-size="10.00" fill="#999999">integer ∗</text>
 <text text-anchor="start" x="2178" y="-807" font-family="Arial" font-size="10.00">pension_insurance_type </text>

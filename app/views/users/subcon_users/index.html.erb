@@ -29,14 +29,14 @@
           <tbody>
             <% @invitation_pending_to.each do |invitation_request| %>
               <tr align="center">
-                <td><%= User.find(invitation_request.id).business.name %></td>
-                <td><%= User.find(invitation_request.id).business&.address %></td>
-                <td><%= User.find(invitation_request. id).email %></td>
+                <td><%= invitation_request.business.name %></td>
+                <td><%= invitation_request.business&.address %></td>
+                <td><%= invitation_request.email %></td>
                 <td>
                   <%= link_to "承認する", approval_users_subcon_user_path(invitation_request.business.uuid),
                                           method: :patch,
                                           local: true,
-                                          data: { confirm: "#{User.find(invitation_request.id).business.name}様からの招待リクエストを承認します、よろしいですか？" },
+                                          data: { confirm: "#{invitation_request.business.name}様からの招待リクエストを承認します、よろしいですか？" },
                                           class: "btn btn-sm btn-success"
                   %>
                 </td>
@@ -44,7 +44,7 @@
                   <%= link_to "承認しない", destroy_invited_pending_users_subcon_user_path(invitation_request.business.uuid),
                                           method: :delete,
                                           local: true,
-                                          data: { confirm: "#{User.find(invitation_request.id).business.name}様からの招待リクエストを取り消します、本当によろしいですか？" },
+                                          data: { confirm: "#{invitation_request.business.name}様からの招待リクエストを取り消します、本当によろしいですか？" },
                                           class: "btn btn-sm btn-danger"
                   %>
                 </td>
@@ -55,9 +55,9 @@
           <% if @invited_to.any? %>
             <% @invited_to.each do |invited| %>
               <tr align="center">
-                <td><%= User.find(invited.id).business&.name %></td>
-                <td><%= User.find(invited.id).business&.address %></td>
-                <td><%= User.find(invited.id).email %></td>
+                <td><%= invited.business&.name %></td>
+                <td><%= invited.business&.address %></td>
+                <td><%= invited.email %></td>
                 <td></td>
                 <td></td>
               </tr>

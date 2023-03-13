@@ -642,6 +642,21 @@ module DocumentsHelper
     date.blank? ? '' : l(date.to_date, format: :long)
   end
 
+  #現場作業員の人数の取得
+  def number_of_field_workers(order)
+    #元請の作業員の人数
+    prime_contractor = FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: order.id)
+    prime_contractor.nil? ? number_of_prime_contractor = 0 : number_of_prime_contractor = prime_contractor.size
+    #一次下請け以下の作業員の人数
+    request_order = RequestOrder.where(order_id: order.id)
+      array = []
+      request_order.each do |record|
+        array << record.id
+      end
+    number_of_primary_subcontractor = FieldWorker.where(field_workerable_type: RequestOrder).where("field_workerable_id IN (?)", array).size
+    return (number_of_prime_contractor + number_of_primary_subcontractor)
+  end
+
   # (22)作業間連絡調整書
 
   #下請会社(協力会社)のbusiness_idの取得
@@ -832,6 +847,45 @@ module DocumentsHelper
          2 地耐力不足の場合は、地盤改良、敷き鉄板等で補強する。
     RUBY
   end
+
+  # (23)全建統一様式第８号(安全ミーティング報告書)
+
+  # 一次下請の情報 (安全ミーティング報告書)
+  def document_subcon_info_for_23rd
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    # 元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    # 下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+      # 下請けが存在しない場合
+    end
+  end
+
+  # リスクの見積り点数
+  def risk_estimation_point(risk_possibility)
+    possibility_point, _possibility_comment = risk_possibility(risk_possibility)
+    possibility_point == 0 ? "" : possibility_point  
+  end
+
+  # リスクの重大性点数
+  def risk_seriousness_point(risk_seriousness)
+    seriousness_point, _seriousness_comment = risk_seriousness(risk_seriousness)
+    seriousness_point == 0 ? "" : seriousness_point
+  end
+
+  # 丸囲み文字
+  def make_circle_enclosure_number(number)
+    number.blank? ? tag.span('&nbsp;'.html_safe, class: :circle_hankaku_space) : tag.span(number, class: :circle_hankaku_number)
+  end
+
+  # 角囲み文字
+  def make_square_enclosure_number(number)
+    number.blank? ? tag.span('&nbsp;'.html_safe , class: :square_hankaku_space) : tag.span(number, class: :square_hankaku_number)
+  end
+  
+
 
   # (24)新規入場者調査票
 

@@ -59,21 +59,21 @@
             </tr>
             <tr>
               <td rowspan="2">
-                <%= current_business_name %> <!-- 4-006 元請会社の建設許可業種 -->
+                <%= @prime_contractor_business.industry_ids %> <!-- 4-006 元請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="6%">工事業</td>
               <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-007 -->
               <td width="4%">特定</td><!-- 「特定or一般」⇩　4-008 -->
               <td rowspan="2">
-                <%= '※4-063未実装※' %> <!-- 4-063元請会社の建設許可番号･前半 -->
+                <%= @prime_contractor_business.construction_license_number_double_digit %> <!-- 4-063元請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2" width="3%">第</td>
               <td rowspan="2">
-                <%= '※4-009未実装※' %> <!-- 4-009 元請会社の建設許可番号･後半 -->
+                <%= @prime_contractor_business.construction_license_number_six_digits %> <!-- 4-009 元請会社の建設許可番号･後半 -->
               </td>
               <td rowspan="2" width="3%">号</td>
               <td rowspan="2">
-                <%= '※4-010未実装※' %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
+                <%= @prime_contractor_business.construction_license_updated_at %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
               </td>
             </tr>
             <tr>
@@ -177,12 +177,12 @@
             <tr>
               <td>下請契約</td>
               <td>
-                <span><%= document_subcon_info.content&.[]('subcon_name') %></span> <!-- 4-026 下請会社名 -->
-                <span><%= document_subcon_info.content&.[]('subcon_branch_name') %></span> <!-- 4-027 下請会社の支店･営業所名-->
+                <span><%= document_subcon_info.content&.[]('subcon_name') %></span> <!-- 4-026 元請会社名 -->
+                <span><%= document_subcon_info.content&.[]('subcon_branch_name') %></span> <!-- 4-027 元請会社の支店･営業所名-->
                 <!-- ※支店 又は 営業所がない場合は、“同上”と記載 -->
               </td>
               <td>
-                <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-028 下請会社の住所4-028 -->
+                <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-028 元請会社の住所4-028 -->
                 <!-- ※支店 又は 営業所がない場合は、“同上”と記載 -->
               </td>
             </tr>
@@ -243,7 +243,7 @@
               </td>
               <td colspan="2" width="8%">資格内容</td>
               <td>
-                <%= '※4-038未実装※' %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
+                <%= document_site_info.supervising_engineer_qualification %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
               </td>
             </tr>
             <tr>
@@ -253,7 +253,7 @@
               </td>
               <td colspan="2" width="8%">資格内容</td>
               <td>
-                <%= '※4-040未実装※' %> <!-- 4-040 監督技術者補佐の必要資格 -->
+                <%= document_site_info.supervising_engineer_assistant_qualification %> <!-- 4-040 監督技術者補佐の必要資格 -->
               </td>
             </tr>
             <tr>
@@ -270,12 +270,12 @@
               <td rowspan="2" width="2%"></td>
               <td width="8%">資格内容</td>
               <td colspan="2">
-                <%= '※4-042未実装※' %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
+                <%= document_site_info.professional_engineer_qualification %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
               </td>
               <td rowspan="2" width="2%"></td>
               <td>資格内容</td>
               <td>
-                <%= '※4-045未実装※' %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
+                <%= document_site_info.professional_engineer_qualification %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
               </td>
             </tr>
             <tr>
@@ -429,31 +429,31 @@
             <tr>
               <td rowspan="2" width="10%">会 社 名</td>
               <td colspan="2" width="40%">
-                <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-101 下請会社名 -->
+                <%= @business.name %> <!-- 4-101 下請会社名 -->
               </td>
               <td rowspan="2" width="15%">代表者名</td>
               <td rowspan="2" width="35%">
-                <%= document_subcon_info.content&.[]('subcon_representative_name') %> <!-- 4-103 下請会社の代表者名 -->
+                <%= @business.representative_name %> <!-- 4-103 下請会社の代表者名 -->
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_career_up_id') %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
+                <%= @business.career_up_id %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
             <tr>
               <td rowspan="2">住 所<Br />電話番号</td>
               <td width="5%">〒</td>
               <td width="35%">
-                <%= document_subcon_info.content&.[]('subcon_post_code') %> <!-- 4-104 下請会社の郵便番号 -->
+                <%= @business.post_code %> <!-- 4-104 下請会社の郵便番号 -->
               </td>
               <td colspan="2">
-                <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-105 下請会社の住所 -->
+                <%= @business.address %> <!-- 4-105 下請会社の住所 -->
               </td>
             </tr>
             <tr>
               <td colspan="4">
-                <%= document_subcon_info.content&.[]('subcon_phone_number') %> <!-- 4-106 下請会社の電話番号 -->
+                <%= @business.phone_number %> <!-- 4-106 下請会社の電話番号 -->
               </td>
             </tr>
             <tr>
@@ -498,21 +498,21 @@
             </tr>
             <tr>
               <td rowspan="2" width="20%">
-                <%= '※4-112未実装※' %> <!-- 4-112 下請会社の建設許可業種 -->
+                <%= @business.industry_ids %> <!-- 4-112 下請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="10%">工事業</td>
               <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-113 -->
               <td width="4%">特定</td><!-- 「特定or一般」⇩　4-114 -->
               <td rowspan="2">
-                <%= '※4-145未実装※' %> <!-- 4-145 下請会社の建設許可番号･前半 -->
+                <%= @business.construction_license_number_double_digit %> <!-- 4-145 下請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2" width="3%">第</td>
               <td rowspan="2">
-                <%= '※4-145未実装※' %> <!-- 4-115 下請会社の建設許可番号 -->
+                <%= @business.construction_license_number_six_digits %> <!-- 4-115 下請会社の建設許可番号 -->
               </td>
               <td rowspan="2" width="3%">号</td>
               <td rowspan="2">
-                <%= '※4-116未実装※' %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
+                <%= @business.construction_license_updated_at %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
               </td>
             </tr>
             <tr>
@@ -647,7 +647,7 @@
             </tr>
             <tr>
               <td>
-                <%= insurance_join(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(加入) 4-138 -->
+                <%= @business.business_health_insurance_status %> <!-- 下請会社の健康保険(加入) 4-138 -->
               </td>
               <td>
                 <%= insurance_not_join(document_subcon_info.content&.[]('subcon_health_insurance_status'))  %> <!-- 下請会社の健康保険(未加入) 4-138 -->
@@ -682,15 +682,15 @@
             </tr>
             <tr>
               <td colspan="3">
-                <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-141 下請会社の健康保険会社名 -->
+                <%= @business.business_health_insurance_association %> <!-- 4-141 下請会社の健康保険会社名 -->
                 <br />
-                <%= document_subcon_info.content&.[]('subcon_health_insurance_office_number') %> <!-- 4-142 下請会社の健康保険番号 -->
+                <%= @business.business_health_insurance_office_number %> <!-- 4-142 下請会社の健康保険番号 -->
               </td>
               <td colspan="3">
-                <%= document_subcon_info.content&.[]('subcon_welfare_pension_insurance_office_number') %> <!-- 4-143 下請会社の厚生年金保険番号 -->
+                <%= @business.business_welfare_pension_insurance_office_number %> <!-- 4-143 下請会社の厚生年金保険番号 -->
               </td>
               <td colspan="3">
-                <%= document_subcon_info.content&.[]('subcon_employment_insurance_number') %> <!-- 4-144 下請会社の雇用保険番号 -->
+                <%= @business.business_employment_insurance_number %> <!-- 4-144 下請会社の雇用保険番号 -->
               </td>
             </tr>
           </tbody>

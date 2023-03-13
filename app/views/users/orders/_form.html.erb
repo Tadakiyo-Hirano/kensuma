@@ -185,6 +185,15 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
+    
+    <%= f.label :supervising_engineer_qualification %> <!-- 監督技術者･主任技術者(資格内容) -->
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.select :supervising_engineer_qualification,
+                  (@business_workers_name + [@order.supervising_engineer_qualification]).uniq,
+                  { include_blank: true },
+                  { class: "single-select", style: "width: 100%" }
+    %><br><br>
+    
     <%= f.label :supervising_engineer_check %> <!-- 監督技術者・主任技術者(専任or非専任) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :supervising_engineer_check, Order.supervising_engineer_checks_i18n.invert, { prompt: true }, { class: "form-control" } %>
@@ -192,6 +201,13 @@
     <%= f.label :supervising_engineer_assistant_name %> <!-- 監督技術者補佐(氏名) -->
     <%= f.select :supervising_engineer_assistant_name,
                   (@business_workers_name + [@order.supervising_engineer_assistant_name]).uniq,
+                  { include_blank: true },
+                  { class: "single-select", style: "width: 100%" }
+    %><br><br>
+  
+    <%= f.label :supervising_engineer_assistant_qualification %> <!-- 監督技術者補佐(資格内容) -->
+    <%= f.select :supervising_engineer_assistant_qualification,
+                  (@business_workers_name + [@order.supervising_engineer_assistant_qualification]).uniq,
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
@@ -203,6 +219,10 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
+    
+    <%= f.label :professional_engineer_qualification %> <!-- 専門技術者(資格内容) -->
+    <%= f.text_field :professional_engineer_qualification, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_qualification) %>
+    
     <%= f.label :professional_engineer_construction_details %> <!-- 専門技術者(担当工事内容) -->
     <%= f.text_field :professional_engineer_construction_details, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_construction_details) %>
     <br>
