@@ -3,6 +3,7 @@ class CreateWorkerInsurances < ActiveRecord::Migration[6.1]
     create_table :worker_insurances do |t|
       t.integer :health_insurance_type, null: false
       t.string :health_insurance_name
+      t.json :health_insurance_image
       t.integer :pension_insurance_type, null: false
       t.integer :employment_insurance_type, null: false
       t.string :employment_insurance_number
@@ -10,7 +11,6 @@ class CreateWorkerInsurances < ActiveRecord::Migration[6.1]
       t.string :severance_pay_mutual_aid_name
       t.references :worker, foreign_key: true, null: false
       t.integer :has_labor_insurance, default: 0                # 労働保険特別加入 enum
-
 
       t.timestamps
     end

@@ -708,7 +708,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   end
 
   create_table "worker_licenses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "license_id", null: false
@@ -733,7 +732,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   end
 
   create_table "worker_skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "skill_training_id", null: false
@@ -745,7 +743,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   end
 
   create_table "worker_special_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "special_education_id", null: false
@@ -790,6 +787,9 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "residence_card_back"
     t.string "employment_condition"
     t.integer "post_code"
+    t.string "driver_licence"
+    t.integer "driver_licence_number"
+    t.string "seal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"

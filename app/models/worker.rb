@@ -18,6 +18,11 @@ class Worker < ApplicationRecord
   accepts_nested_attributes_for :worker_special_educations, allow_destroy: true,
     reject_if:     proc { |attributes| attributes['special_education_id'].blank? }
 
+  has_many :worker_safety_health_education, dependent: :destroy
+  has_many :safety_health_education, through: :worker_safety_health_education
+  accepts_nested_attributes_for :worker_safety_health_education, allow_destroy: true,
+    reject_if:     proc { |attributes| attributes['safety_health_education_id'].blank? }
+
   has_one :worker_medical, dependent: :destroy
   accepts_nested_attributes_for :worker_medical, allow_destroy: true
 
