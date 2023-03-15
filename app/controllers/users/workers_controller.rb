@@ -12,7 +12,7 @@ module Users
           # テスト用デフォルト値 ==========================
           name:                          'サンプル作業員',
           name_kana:                     'サンプルサギョウイン',
-          country:                       '日本',
+          country:                       'JP',
           my_address:                    '東京都港区1-1',
           my_phone_number:               '01234567898',
           family_name:                   'フェルナンデス',
@@ -78,7 +78,7 @@ module Users
       else
         @worker = current_business.workers.new(
           # 本番環境用デフォルト値 ==========================
-          country:        '日本',
+          country:        'JP',
           abo_blood_type: :a,
           rh_blood_type:  :plus,
           sex:            :man
