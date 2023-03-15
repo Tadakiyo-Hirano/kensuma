@@ -524,7 +524,7 @@ DEPENDENCIES
   carrierwave (~> 2.0)
   closure_tree
   cocoon
-  country_select
+  country_select (~> 8.0)
   database_cleaner
   devise
   devise-bootstrap-views (~> 1.0)
