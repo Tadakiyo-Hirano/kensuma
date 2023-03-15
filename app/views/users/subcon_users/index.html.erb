@@ -1,31 +1,141 @@
 <% provide(:title,  "協力会社一覧") %>
 
-<%= link_to "協力会社招待画面へ", new_user_invitation_path, class: "btn btn-lg btn-block btn-outline-primary" %>
+<%= link_to "協力会社を招待する", new_user_invitation_path, class: "btn btn-lg btn-block btn-outline-primary" %>
 <br>
-<% if @subcon_users.present? %>
+
+<!-- 招待されているユーザー一覧 -->
+<% if @invitation_pending_to.any? || @invited_to.any? %>
   <div class="card">
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
         <thead>
+          <% if @invitation_pending_to.any? %>
+            <tr align="center">
+              <th colspan="5" class="text-success">協力会社への招待が届いています。</th>
+            </tr>
+          <% end %>
           <tr align="center">
-            <th>登録状況</th>
-            <th><%= User.human_attribute_name(:name) %></th>
+            <th colspan="5">発注元会社一覧</th>
+          </tr>
+          <tr align="center">
+            <th><%= Business.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:address) %></th>
             <th><%= User.human_attribute_name(:email) %></th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <% @subcon_users.each do |subcon_user| %>
+        <% if @invitation_pending_to.any? %>
+          <tbody>
+            <% @invitation_pending_to.each do |invitation_request| %>
+              <tr align="center">
+                <td><%= invitation_request.business.name %></td>
+                <td><%= invitation_request.business&.address %></td>
+                <td><%= invitation_request.email %></td>
+                <td>
+                  <%= link_to "承認する", approval_users_subcon_user_path(invitation_request.business.uuid),
+                                          method: :patch,
+                                          local: true,
+                                          data: { confirm: "#{invitation_request.business.name}様からの招待リクエストを承認します、よろしいですか？" },
+                                          class: "btn btn-sm btn-success"
+                  %>
+                </td>
+                <td>
+                  <%= link_to "承認しない", destroy_invited_pending_users_subcon_user_path(invitation_request.business.uuid),
+                                          method: :delete,
+                                          local: true,
+                                          data: { confirm: "#{invitation_request.business.name}様からの招待リクエストを取り消します、本当によろしいですか？" },
+                                          class: "btn btn-sm btn-danger"
+                  %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+
+          <% if @invited_to.any? %>
+            <% @invited_to.each do |invited| %>
+              <tr align="center">
+                <td><%= invited.business&.name %></td>
+                <td><%= invited.business&.address %></td>
+                <td><%= invited.email %></td>
+                <td></td>
+                <td></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>
+
+<!-- 下請け協力会社一覧 -->
+<% if @invitation_pending_user_ids&.any? || @invited_user_ids&.any? %>
+  <div class="card">
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <% if @invitation_pending_user_ids&.any? %>
             <tr align="center">
-              <td>
-                <%= subcon_user.invitation_accepted? ? '✓' : '承認待ち' %>
-              </td>
-              <td><%= subcon_user.name %></td>
-              <td><%= subcon_user.email %></td>
-              <td><%= link_to "削除", users_subcon_user_path(subcon_user), method: :delete, data: { confirm: "「#{subcon_user.name}」を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
+              <th colspan="5" class="text-warning">
+                招待承認待ちが<%= @invitation_pending_user_ids.count %>件あります。
+              </th>
             </tr>
           <% end %>
-        </tbody>
+          
+          <tr align="center">
+            <th colspan="5">下請会社一覧</th>
+          </tr>
+          <tr align="center">
+            <th><%= Business.human_attribute_name(:name) %></th>
+            <th><%= Business.human_attribute_name(:address) %></th>
+            <th><%= User.human_attribute_name(:email) %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <!-- 招待リクエスト送信中 -->
+        <% if @invitation_pending_user_ids&.any? %>
+          <tbody>
+            <% @invitation_pending_user_ids.each do |invitation_pending_user_id| %>
+              <tr align="center">
+                <td><%= User.find(invitation_pending_user_id).business&.name %></td>
+                <td><%= User.find(invitation_pending_user_id).business&.address %></td>
+                <td><%= User.find(invitation_pending_user_id).email %></td>
+                <td class="text-warning">承認待ち</td>
+                <td>
+                  <%= link_to "取り消す", destroy_invitation_pending_users_subcon_user_path(User.find(invitation_pending_user_id)),
+                                          method: :delete,
+                                          local: true,
+                                          data: { confirm: "#{User.find(invitation_pending_user_id).email}様への招待リクエストを取り消します、本当によろしいですか？" },
+                                          class: "btn btn-sm btn-warning"
+                  %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          
+          <!-- 招待済 -->
+          <% if @invited_user_ids&.any? %>
+            <% @invited_user_ids.each do |invited_user_id| %>
+              <tr align="center">
+                <td><%= User.find(invited_user_id).business&.name %></td>
+                <td><%= User.find(invited_user_id).business&.address %></td>
+                <td><%= User.find(invited_user_id).email %></td>
+                <td class="text-success">✓</td>
+                <td>
+                  <%= link_to "登録解除", destroy_invited_users_subcon_user_path(User.find(invited_user_id).business.uuid),
+                                          method: :delete,
+                                          local: true,
+                                          data: { confirm: "#{User.find(invited_user_id).business.name}様の協力会社登録を解除します、本当によろしいですか？" },
+                                          class: "btn btn-sm btn-danger"
+                  %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
       </table>
     </div>
   </div>

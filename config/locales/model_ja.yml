@@ -301,7 +301,6 @@ ja:
         birth_day_on: 生年月日
         abo_blood_type: 血液型(ABO)
         rh_blood_type: 血液型(Rh)
-        job_type: 職種
         job_title: 役職
         hiring_on: 雇入年月日
         experience_term_before_hiring: 雇入前経験年数
@@ -314,15 +313,12 @@ ja:
         relationship: 家族続柄
         email: メールアドレス
         sex: 性別
-        status_of_residence: 在留資格
-        maturity_date: 在留期間満期日
-        confirmed_check: CCUS登録情報が最新であることの確認
-        responsible_director: 役職
-        responsible_name: 氏名
-        responsible_contact_address: 連絡先(TEL)
-        passport: パスポートの写し
-        residence_card: 在留カードの写し
-        employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
+        # status_of_residence: 在留資格
+        # maturity_date: 在留期間満期日
+        # confirmed_check: CCUS登録情報が最新であることの確認
+        # passport: パスポートの写し
+        # residence_card: 在留カードの写し
+        # employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
       license:
         name: 名称
         description: 説明

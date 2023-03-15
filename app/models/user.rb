@@ -7,6 +7,15 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable, invite_for: 24.hours
   # :confirmable
 
+  # 既に登録済みのユーザーに対して招待メールを送る際に、invitation_tokenが生成されないようにする。
+  def self.invite!(attributes = {}, invited_by = nil)
+    if where(email: attributes[:email]).empty?
+      super
+    else
+      User.where(email: attributes[:email]).first
+    end
+  end
+
   has_many :articles, dependent: :destroy
   has_many :news_users, dependent: :destroy
   has_many :news, through: :news_users

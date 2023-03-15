@@ -1,7 +1,6 @@
 User.where(role: 'admin').all.each do |user|
   Business.seed(:id,
     {
-      id:                                               user.id,
       user_id:                                          user.id,
       name:                                             "テスト建設#{user.id}",
       name_kana:                                        "テストケンセツ#{user.id}",
@@ -29,7 +28,7 @@ User.where(role: 'admin').all.each do |user|
       construction_license_number_double_digit:                    29,               # 建設許可証(番号)
       construction_license_number_six_digits:                      5000,           # 建設許可証(番号)
       construction_license_number:                                 '国土交通大臣(特－29)第5000号', # 建設許可証(建設許可番号)
-      construction_license_updated_at:                             Date.today                    # 建設許可証(更新日)
+      construction_license_updated_at:                             Date.today                   # 建設許可証(更新日)
     }
   )
 end

@@ -132,7 +132,7 @@
               <td class="s_15_00"></td>
               <td class="s_15_00"></td>
               <td class="s_15_2" dir="ltr" colspan="8" rowspan="2">
-                <%= document_date(field_solvent.date_submitted) %><!-- 15-002 「提出日(西暦)」 -->
+                <%= doc_content_date(@document.content&.[]("date_submitted")) %><!-- 15-002 「提出日(西暦)」 -->
               </td>
             </tr>
             <tr><!-- 5行目 -->

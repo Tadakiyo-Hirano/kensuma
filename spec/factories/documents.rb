@@ -37,6 +37,12 @@ FactoryBot.define do
       document_type { 19 }
       content { {} }
     end
+
+    # 新規入場時等教育実施報告書
+    trait :doc_21st do
+      document_type { 21 }
+      content { {} }
+    end
   end
 
   factory :document_first_sub do
@@ -51,6 +57,12 @@ FactoryBot.define do
     # 工事安全衛生計画書
     trait :doc_19th do
       document_type { 19 }
+      content { {} }
+    end
+
+    # 新規入場時等教育実施報告書
+    trait :doc_21st do
+      document_type { 21 }
       content { {} }
     end
   end

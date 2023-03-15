@@ -6,6 +6,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.string :name_kana, null: false
       t.string :branch_name, null: false
+      t.string :branch_address
       t.string :representative_name, null: false
       t.string :email, null: false
       t.string :address, null: false
@@ -21,6 +22,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.integer :specific_skilled_foreigners_exist
       t.integer :foreign_construction_workers_exist
       t.integer :foreign_technical_intern_trainees_exist
+      t.string :foreigners_employment_manager                 #雇用管理責任者(氏名)
       t.string :employment_manager_name
       t.string :employment_manager_post
       t.references :user, foreign_key: true, null: false

@@ -1,7 +1,7 @@
 module Users
   class BusinessesController < Users::Base
     before_action :set_business, except: %i[new create]
-    before_action :set_business_workers_name, only: %i[new create edit update]
+    before_action :set_business_workers_name, only: %i[edit update]
     before_action :business_present_access, only: %i[new create]
     skip_before_action :business_nil_access, only: %i[new create]
 
@@ -9,10 +9,10 @@ module Users
       if Rails.env.development?
         @business = Business.new(
           # テスト用デフォルト値 ==========================
-          uuid:                                                        '1',
           name:                                                        'test企業',
           name_kana:                                                   'テストキギョウ',
           branch_name:                                                 'test支店',
+          branch_address:                                              'test支店住所',
           representative_name:                                         'test代表',
           email:                                                       'test@email.com',
           address:                                                     'test',
@@ -96,7 +96,7 @@ module Users
 
     def business_params
       params.require(:business).permit(
-        :uuid, :name, :name_kana, :branch_name, :representative_name, :email, :address, :post_code,
+        :uuid, :name, :name_kana, :branch_name, :branch_address, :representative_name, :email, :address, :post_code,
         :phone_number, :fax_number, :career_up_id, :business_type, { stamp_images: [] }, :user_id,
         :business_health_insurance_status, :business_health_insurance_association,
         :business_health_insurance_office_number, :business_welfare_pension_insurance_join_status,
