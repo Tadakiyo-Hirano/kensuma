@@ -338,12 +338,20 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "admission_date_start"
     t.date "admission_date_end"
     t.date "education_date"
+    t.string "occupation"
+    t.integer "sendoff_education"
+    t.bigint "occupation_id"
+    t.string "job_description"
+    t.string "foreign_work_place"
+    t.date "foreign_date_start"
+    t.date "foreign_date_end"
+    t.string "foreign_job"
+    t.string "foreign_job_description"
+    t.binary "proper_management_license"
     t.string "field_workerable_type"
     t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "occupation"
-    t.integer "sendoff_education", default: 0, null: false
     t.string "prime_contractor_confirmation"
     t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
   end
