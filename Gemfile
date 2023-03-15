@@ -92,6 +92,9 @@ gem 'reform'
 # wareki - ruby 和暦ライブラリ
 gem 'wareki'
 
+# 国選択(sort_alphabeticalはメモリを多く使用するので、必要なければ「country_select_without_sort_alphabetical」のオプションをつける)
+gem 'country_select', require: 'country_select_without_sort_alphabetical'
+
 # 一括更新
 gem 'activerecord-import'
 
