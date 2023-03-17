@@ -358,6 +358,8 @@ ja:
         severance_pay_mutual_aid_type: 建設業退職金共済手帳
         severance_pay_mutual_aid_name: 建設業退職金共済制度名
         has_labor_insurance: 労働保険特別加入
+      worker_safety_health_education:
+       image: 証明画像
       news:
         title: タイトル
         content: 内容
