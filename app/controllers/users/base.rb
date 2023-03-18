@@ -66,8 +66,8 @@ module Users
           )
         )
 
-        country = { country: I18n.t("countries.#{worker.country}") }
-        json.merge(country)
+      country = { country: I18n.t("countries.#{worker.country}") }
+      json.merge(country)
     end
 
     # 書類に反映させる車両情報
