@@ -5,7 +5,8 @@ module Users
 
     def index
       @orders = current_business.orders
-      @received_orders = @current_business.request_orders.reject {|request_order|request_order.order.business_id == @current_business.id}
+      @received_orders = @current_business.request_orders.reject {|request_order|request_order.order.business_id == @current_business.id}.sort.reverse
+      
     end
 
     def show; end
