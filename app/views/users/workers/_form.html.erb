@@ -8,13 +8,19 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :name_kana, class: "form-control", placeholder: Worker.human_attribute_name(:name_kana) %><br>
 
+<%# 国籍 %>
 <%= f.label :country %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :country, class: "form-control", placeholder: Worker.human_attribute_name(:country) %><br>
+<%= f.select :country,
+                  { "日本" => "日本", "手入力" => "" },
+                  { include_blank: true },
+                  { class: "single-select", style: "width: 100%" }
+%><br>
 
+<%# 性別 %>
 <%= f.label :sex %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :sex, class: "form-control", placeholder: Worker.human_attribute_name(:country) %><br>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:sex, Worker.sexes_i18n, :first, :last) %><br>
 
 <%= f.label :my_address %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -23,6 +29,9 @@
 <%= f.label :my_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
+
+<%= f.label :email %>
+<%= f.text_field :email, class: "form-control", placeholder: Worker.human_attribute_name(:email) %><br>
 
 <%= f.label :family_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -44,18 +53,15 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :birth_day_on, class: "form-control", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
 
+<%# 血液型（ABO） %>
 <%= f.label :abo_blood_type %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :abo_blood_type, Worker.abo_blood_types_i18n.invert, {}, {class: "form-control"} %><br>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:abo_blood_type, Worker.abo_blood_types_i18n, :first, :last) %><br>
 
+<%# 血液型（RH） %>
 <%= f.label :rh_blood_type %>
-<%= f.select :rh_blood_type, Worker.rh_blood_types_i18n.invert, {include_blank: true}, {class: "form-control"} %><br>
-
-<!-- 下記職種はenum未設計の為ひとまずintegerの数字が表示されるようにしています -->
-<%= f.label :job_type %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.number_field :job_type, class: "form-control" %><br>
-<!-- -->
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:rh_blood_type, Worker.rh_blood_types_i18n, :first, :last) %><br>
 
 <!-- 下記役職はひとまずテキスト入力にしています -->
 <%= f.label :job_title %>
@@ -74,9 +80,10 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.number_field :blank_term, class: "form-control", min: 0 %><br>
 
+<%# 契約条件の確認 %>
 <%= f.label :employment_contract %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :employment_contract, Worker.employment_contracts_i18n.invert, {include_blank: true}, {class: "form-control"} %><br>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:employment_contract, Worker.employment_contracts_i18n, :first, :last) %><br>
 
 <%= f.label :career_up_id %>
 <%= f.text_field :career_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:career_up_id) %><br>
@@ -130,13 +137,17 @@
   <!-- WorkerMedicalここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_medical do |worker_medical| %>
-      <div class="row mb-3">
+      <%# 健康診断の受診 %>
+      <div class="mb-3">
         <%= worker_medical.label :is_med_exam %>
-        <%= worker_medical.select :is_med_exam, WorkerMedical.is_med_exams_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last) %>
       </div>
-      <div class="row mb-3">
-        <%= worker_medical.label :is_med_exam %>
-        <%= worker_medical.select :health_condition, WorkerMedical.health_conditions_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+      <%# 最近の健康状態 %>
+      <div class="mb-3">
+        <%= worker_medical.label :health_condition %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_medical.collection_radio_buttons(:health_condition, WorkerMedical.health_conditions_i18n, :first, :last) %><br>
       </div>
       <div class="row mb-3">
         <%= worker_medical.label :med_exam_on %>
@@ -171,12 +182,10 @@
   <!-- WorkerInsuranceここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_insurance do |worker_insurance| %>
-      <div class="mt-3 mb-3">
+      <div class="mt-3 mb-3" id="health_insurance_type">
         <%= worker_insurance.label :health_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.select :health_insurance_type,
-                 WorkerInsurance.health_insurance_types_i18n.keys.map { |k| [WorkerInsurance.health_insurance_types_i18n[k], k] },
-                 { include_blank: true }, { class: "form-control",  id: "health_insurance_type", onchange: "getSelectedHealthInsuranceType(this)" } %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last) %><br>
       </div>
 
       <!-- health_insurance_typeがhealth_insurance_associationまたはconstruction_national_health_insuranceで入力可能 -->
@@ -186,21 +195,16 @@
         <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.select :pension_insurance_type,
-                 WorkerInsurance.pension_insurance_types_i18n.keys.map { |k| [WorkerInsurance.pension_insurance_types_i18n[k], k] },
-                 { include_blank: true, prompt: "選択してください" }, { class: "form-control" } %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_insurance.collection_radio_buttons(:pension_insurance_type, WorkerInsurance.pension_insurance_types_i18n, :first, :last) %><br>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3" id="employment_insurance_type">
         <%= worker_insurance.label :employment_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.select :employment_insurance_type,
-                 WorkerInsurance.employment_insurance_types_i18n.keys.map { |k| [WorkerInsurance.employment_insurance_types_i18n[k], k] },
-                 { include_blank: true, prompt: "選択してください" },
-                 { class: "form-control", id: "employment_insurance_type", onchange: "getSelectedEmploymentInsuranceType(this)" } %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last) %><br>
       </div>
 
       <!-- employment_insurance_numberが被保険者(0)で入力可能 -->
@@ -211,24 +215,20 @@
       </div>
       
       <div class="mt-3" id="has_labor_insurance">
-        <%= worker_insurance.label :has_labor_insurance %>
-        <%= worker_insurance.select :has_labor_insurance,
-                 WorkerInsurance.has_labor_insurances_i18n.keys.map { |k| [WorkerInsurance.has_labor_insurances_i18n[k], k] },
-                 { include_blank: true, prompt: "選択してください" }, { class: "form-control" } %>
+        <%= worker_insurance.label :has_labor_insurance %><br>
+        <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last) %><br>
       </div>
 
       <div class="mb-3">
         <%= worker_insurance.label :severance_pay_mutual_aid_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.select :severance_pay_mutual_aid_type,
-                 WorkerInsurance.severance_pay_mutual_aid_types_i18n.keys.map { |k| [WorkerInsurance.severance_pay_mutual_aid_types_i18n[k], k] },
-                 { include_blank: true, prompt: "選択してください" }, { class: "form-control", id: "mutual_aid_type", onchange: "getSelectedMutualAidType(this)" } %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last) %><br>
       </div>
 
       <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
       <div class="mb-3 hidden" id="mutual_aid_number">
         <%= worker_insurance.label :severance_pay_mutual_aid_name %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
       </div>
     <% end %>
@@ -238,33 +238,47 @@
 
 <script>
   // 健康保険の名前の表示・非表示
-  const health_insurance_type = document.getElementById('health_insurance_type');
-  const health_insurance_name = document.getElementById('health_insurance_name');
-  function getSelectedHealthInsuranceType(object){
-    const index = object.selectedIndex;
-    const value = object.options[index].value;
-    if (value === 'health_insurance_association' || value === 'construction_national_health_insurance'){
+  const health_insurance_type = document.getElementById('health_insurance_type')
+  const health_insurance_name = document.getElementById('health_insurance_name')
+  function getRadioHealthInsuranceName(object) {
+    const value = $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]:checked').val();
+    if (value == 'health_insurance_association' || value == 'construction_national_health_insurance'){
       health_insurance_name.classList.remove('hidden');
     } else {
       health_insurance_name.classList.add('hidden');
-    };
+    }
   };
-  getSelectedHealthInsuranceType(health_insurance_type); //ページの読み込み時に判定
+  getRadioHealthInsuranceName(health_insurance_type); //ページの読み込み時に判定
+
+  $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]').change(function() {
+    if ($(this).val() == 'health_insurance_association' || $(this).val() == 'construction_national_health_insurance'){
+      health_insurance_name.classList.remove('hidden');
+    } else {
+      health_insurance_name.classList.add('hidden');
+    }
+  });
+    
 
   // 被保険者番号の下4桁の表示・非表示
   const employment_insurance_type = document.getElementById('employment_insurance_type');
   const employment_insurance_number = document.getElementById('employment_insurance_number');
-  function getSelectedEmploymentInsuranceType(object){
-    const index = object.selectedIndex;
-    const value = object.options[index].value;
-    if (value === 'insured'){
+  function getSelectedEmploymentInsuranceType(object) {
+    const value = $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]:checked').val();
+    if (value === 'insured') {
       employment_insurance_number.classList.remove('hidden');
     } else {
       employment_insurance_number.classList.add('hidden');
-    };
+    }
   };
   getSelectedEmploymentInsuranceType(employment_insurance_type); //ページの読み込み時に判定
 
+  $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]').change(function() {
+    if ($(this).val() === 'insured') {
+      employment_insurance_number.classList.remove('hidden');
+    } else {
+      employment_insurance_number.classList.add('hidden');
+    }
+  });
 
   // mutual_aid_type mutual_aid_number
   const mutual_aid_type = document.getElementById('mutual_aid_type');
@@ -297,6 +311,9 @@
         "worker[country]": {
           required: true
         },
+        "worker[sex]": {
+          required: true
+        },
         "worker[my_address]": {
           required: true
         },
@@ -319,9 +336,6 @@
           required: true
         },
         "worker[abo_blood_type]": {
-          required: true
-        },
-        "worker[job_type]": {
           required: true
         },
         "worker[job_title]": {
@@ -374,6 +388,9 @@
         "worker[country]": {
           required: "国籍を入力してください。"
         },
+        "worker[sex]": {
+          required: "性別を入力してください。"
+        }
         "worker[my_address]": {
           required: "住所を入力してください。"
         },
@@ -397,9 +414,6 @@
         },
         "worker[abo_blood_type]": {
           required: "血液型(ABO)を入力してください。"
-        },
-        "worker[job_type]": {
-          required: "職種を入力してください。"
         },
         "worker[job_title]": {
           required: "役職を入力してください。"

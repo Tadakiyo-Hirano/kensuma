@@ -1977,21 +1977,21 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
-          <td class="doc_22_s1" colspan="4">委任期間：<br><span class="p-1 mb-2 rounded bg-danger text-white">必須</span></td>
-          <td class="doc_22_s35">自</td>
-          <td class="doc_22_s36" colspan="11">
+          <td class="doc_22_s35" colspan="4">委任期間：<br><span class="p-1 mb-2 rounded bg-danger text-white">必須</span></td>
+          <td class="doc_22_s35" colspan="2">自</td>
+          <td class="doc_22_s36" colspan="10">
             <%= f.date_field name = 'content[delegation_date_from]',
                               include_blank: true,
                               value: @document.content&.[]('delegation_date_from') %>
           </td><!--「委任期間（自）年月日」22-028-->
-          <td class="doc_22_s37" colspan="5">
+          <td class="doc_22_s37" colspan="4">
             <%= raw sprintf(f.time_select('content[delegation_time_from]', discard_minute: true,
                               value: @document.content&.[]('delegation_time_from'),
                               selected: @document.content&.[]('delegation_time_from')&.to_datetime,
                               class: "form-control  form-control-sm"))
             %>
           </td><!--「委任期間（自）時間」22-029-->
-          <td class="doc_22_s1" colspan="3">時から</td>
+          <td class="doc_22_s35" colspan="4">時から</td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -2018,20 +2018,20 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
-          <td class="doc_22_s35">至</td>
-          <td class="doc_22_s36" colspan="11">
+          <td class="doc_22_s35" colspan="2">至</td>
+          <td class="doc_22_s36" colspan="10">
             <%= f.date_field name = 'content[delegation_date_to]',
                               include_blank: true,
                               value: @document.content&.[]('delegation_date_to') %>
           </td><!--「委任期間（至）年月日」22-030-->
-          <td class="doc_22_s37" colspan="5">
+          <td class="doc_22_s37" colspan="4">
             <%= raw sprintf(f.time_select('content[delegation_time_to]', discard_minute: true,
                               value: @document.content&.[]('delegation_time_to'),
                               selected: @document.content&.[]('delegation_time_to')&.to_datetime,
                               class: "form-control  form-control-sm"))
             %>
           </td><!--「委任期間（至）時間」22-031-->
-          <td class="doc_22_s1" colspan="3">時まで</td>
+          <td class="doc_22_s35" colspan="4">時まで</td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -2094,10 +2094,10 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s36" colspan="14">
-            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>　
             <%= f.date_field name = 'content[officer_signature_date]',
                               include_blank: true,
-                              value: @document.content&.[]('officer_signature_date') %>
+                              value: @document.content&.[]('officer_signature_date') %>　
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
           </td><!--「統括安全衛生責任者・署名年月日」22-032-->
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
@@ -2172,10 +2172,10 @@
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>
           <td class="doc_22_s43" colspan="14">
-            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>　
             <%= f.date_field name = 'content[officer_substitute_signature_date]',
                               include_blank: true,
-                              value: @document.content&.[]('officer_substitute_signature_date') %>
+                              value: @document.content&.[]('officer_substitute_signature_date') %>　
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
           </td><!--「統括安全衛生責任者代行者・署名年月日」22-035-->
           <td class="doc_22_s1"></td>
           <td class="doc_22_s1"></td>

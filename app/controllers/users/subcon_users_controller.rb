@@ -2,21 +2,23 @@ module Users
   class SubconUsersController < Users::Base
     def index
       # 自身が招待を受けたユーザーのid(自身の上にあたるユーザー) ※招待保留中
-      @invitation_pending_to = User.invitation_pending_to(current_user)
+      @invitation_pending_to = User.all.map { |up_user|
+        up_user if (up_user.invitation_sent_user_ids || []).include?(current_user.id)
+      }.compact
       # 自身が招待を受けたユーザーのid(自身の上にあたるユーザー) ※招待済
-      @invited_to = User.invited_to(current_user)
+      @invited_to = User.all.map { |up_user| up_user if (up_user.invited_user_ids || []).include?(current_user.id) }.compact
 
       # 自身が招待したユーザーid(自身の下請にあたるユーザー) ※招待保留中
-      @invitation_pending_user_ids = current_user.invitation_sent_user_ids
+      @invitation_pending_user_ids = current_user.invitation_sent_user_ids || []
       # 自身が招待したユーザーid(自身の下請にあたるユーザー) ※招待済
-      @invited_user_ids = current_user.invited_user_ids
+      @invited_user_ids = current_user.invited_user_ids || []
     end
 
     # 自身に届いた招待を承認する
     def approval
       # 自身が招待を受けたユーザー(自身の上にあたるユーザー)
       invited_user = Business.find_by(uuid: params[:id]).user
-      pending_invitation = invited_user.invitation_sent_user_ids
+      pending_invitation = invited_user.invitation_sent_user_ids || []
 
       # 自身が招待を受けたユーザーinvitation_sent_user_idsカラムの配列から自信のユーザーidを取り除く。
       pending_invitation.delete(current_user.id)
@@ -35,7 +37,7 @@ module Users
     def destroy_invited_pending
       # 自身が招待を受けたユーザー(自身の上にあたるユーザー)
       invited_user = Business.find_by(uuid: params[:id]).user
-      pending_invitation = invited_user.invitation_sent_user_ids
+      pending_invitation = invited_user.invitation_sent_user_ids || []
 
       # 自身が招待を受けたユーザーのinvitation_sent_user_idsカラムの配列から自身のユーザーidを取り除く。
       pending_invitation.delete(current_user.id)
@@ -49,7 +51,7 @@ module Users
     def destroy_invitation_pending
       # 自身が招待を送ったユーザー(自身の下請けにあたるユーザー)
       invited_user = User.find(params[:id])
-      pending_invitation = current_user.invitation_sent_user_ids
+      pending_invitation = current_user.invitation_sent_user_ids || []
 
       pending_invitation.delete(invited_user.id)
       current_user.update(invitation_sent_user_ids: pending_invitation)
@@ -61,7 +63,7 @@ module Users
     # 自身の下請け協力会社を解除
     def destroy_invited
       invited_user = Business.find_by(uuid: params[:id]).user
-      invitation = current_user.invited_user_ids
+      invitation = current_user.invited_user_ids || []
 
       invitation.delete(invited_user.id)
       current_user.update(invited_user_ids: invitation)

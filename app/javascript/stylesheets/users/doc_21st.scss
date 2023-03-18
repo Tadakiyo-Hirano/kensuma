@@ -393,7 +393,7 @@
 
 .ritz .waffle .doc_21_m33 {
   border-top: 1px SOLID #000000;
-  border-left: 1px SOLID #000000;
+  border-right: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: center;
   color: #000000;
@@ -406,6 +406,21 @@
 }
 
 .ritz .waffle .doc_21_m33_1 {
+  border-top: 1px SOLID #000000;
+  border-left: 1px SOLID #000000;
+  // border-bottom: 1px SOLID #000000;
+  background-color: #ffffff;
+  text-align: center;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 14pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_21_m33_2 {
   border-top: 1px SOLID #000000;
   border-right: 1px SOLID #000000;
   border-bottom: 1px SOLID #000000;
