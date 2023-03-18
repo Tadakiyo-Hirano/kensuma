@@ -75,8 +75,12 @@ ja:
         foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
         employment_manager_name: 雇用管理責任者(氏名)
         employment_manager_post: 雇用管理責任者(役職名)
+      occupation:
+        name: 職種名
       business_occupation:
         occupation_id: 職種
+      industry:
+        name: 業種名
       business_industry:
         industry_id: 業種
         construction_license_permission_type_minister_governor: 建設許可種別

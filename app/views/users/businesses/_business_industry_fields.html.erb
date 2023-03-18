@@ -1,0 +1,45 @@
+<div class="nested-fields">
+  <div class="row">
+    <div class="col-md-2">
+      <%= f.label :industry_id %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.collection_select :industry_id, Industry.all, :id, :name, { prompt: '業種を選択してください' }, { class: "form-control" } %><br>
+    </div>
+    <div class="col-md-1">
+      <%= f.label :construction_license_permission_type_minister_governor %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <!-- %= f.radio_button :construction_license_permission_type_minister_governor, class: "form-control" % -->
+      <%= f.select :construction_license_permission_type_minister_governor, BusinessIndustry.construction_license_permission_type_minister_governors_i18n.invert, {include_blank: false}, {class: "form-control"} %>
+    </div>
+    <div class="col-md-1">
+      <%= f.label :construction_license_governor_permission_prefecture %>
+      <%= f.select :construction_license_governor_permission_prefecture, BusinessIndustry.construction_license_governor_permission_prefectures_i18n.invert, {include_blank: false}, {class: "form-control"} %>
+    </div>
+    <div class="col-md-1">
+      <%= f.label :construction_license_permission_type_identification_general %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.select :construction_license_permission_type_identification_general, BusinessIndustry.construction_license_permission_type_identification_generals_i18n.invert, {include_blank: false}, {class: "form-control"} %>
+    </div>
+    <div class="col-md-2">
+      <%= f.label :construction_license_number_double_digit %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :construction_license_number_double_digit, class: "form-control", placeholder: "2桁の番号" %>
+    </div>
+    <div class="col-md-2">
+      <%= f.label :construction_license_number_six_digits %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :construction_license_number_six_digits, class: "form-control", placeholder: "6桁以下の番号" %>
+    </div>
+    <div class="col-md-1">
+      <%= f.label :construction_license_number %>
+    </div>
+    <div class="col-md-1">
+      <%= f.label :construction_license_updated_at %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :construction_license_updated_at, class: "form-control", placeholder: BusinessIndustry.human_attribute_name(:construction_license_updated_at) %><br>
+    </div>
+    <div class="col-md-1" style="margin-top: 30px;">
+      <%= link_to_remove_association "×", f, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>

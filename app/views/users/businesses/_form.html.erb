@@ -94,38 +94,22 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :construction_license_status, Business.construction_license_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
 <br>
-<%= f.label :industry_ids %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :industry_ids, Industry.all, :id, :name, { selected: f.object.industries.ids }, { class: "pref multiple-select", multiple: true, style: "width: 100%" } %>
-<br>
-<br>
-<%= f.label :construction_license_permission_type_minister_governor %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_permission_type_minister_governor, Business.construction_license_permission_type_minister_governors_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_governor_permission_prefecture %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_governor_permission_prefecture, Business.construction_license_governor_permission_prefectures_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_permission_type_identification_general %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_permission_type_identification_general, Business.construction_license_permission_type_identification_generals_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_number_double_digit %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number_double_digit, class: "form-control", placeholder: "2桁の番号" %>
-<br>
-<%= f.label :construction_license_number_six_digits %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number_six_digits, class: "form-control", placeholder: "6桁以下の番号" %>
-<br>
-<%= f.label :construction_license_number %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number, class: "form-control", placeholder: "建設許可証(建設許可番号)" %>
-<br>
-<%= f.label :construction_license_updated_at %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :construction_license_updated_at, class: "form-control", placeholder: "建設許可証(更新日)" %>
+<div class="list-group">
+  <!-- BusinessIndustryここから -->
+  <div class="list-group-item">
+    <%= f.fields_for :business_industries do |b_industry| %>
+      <%= render "business_industry_fields", f: b_industry %>
+    <% end %>
+    <div id="license-insertion-point"></div>
+    <%= link_to_add_association "＋フォーム追加", f, :business_industries,
+      data: {
+        association_insertion_node: '#license-insertion-point',
+        association_insertion_method: 'append'
+      }
+    %>
+  </div>
+  <!-- BusinessIndustryここまで -->
+</div>
 <br>
 <%= f.label :specific_skilled_foreigners_exist %>
 <%= f.select :specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>

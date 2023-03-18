@@ -100,38 +100,32 @@
           <th><%= Business.human_attribute_name(:construction_license_status) %></th>
           <td><%= @business.construction_license_status_i18n %></td>
         </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:industry_ids) %></th>
-          <td><%= @business.industries.pluck(:name).join(', ') %></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:construction_license_permission_type_minister_governor) %></th>
-          <td><%= @business.construction_license_permission_type_minister_governor_i18n %></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:construction_license_governor_permission_prefecture) %></th>
-          <td><%= @business.construction_license_governor_permission_prefecture_i18n %></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:construction_license_permission_type_identification_general) %></th>
-          <td><%= @business.construction_license_permission_type_identification_general_i18n %></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:construction_license_number_double_digit) %></th>
-          <td><%= @business.construction_license_number_double_digit %></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:construction_license_number_six_digits) %></th>
-          <td><%= @business.construction_license_number_six_digits %></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:construction_license_number) %></th>
-          <td><%= @business.construction_license_number %></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:construction_license_updated_at) %></th>
-          <td><%= @business.construction_license_updated_at %></td>
-        </tr>
+        <!-- business_industryここから（建設許可証「有」の場合のみ下記表示 -->
+        <% if @business.construction_license_status_available? %>
+          <tr bgcolor="#dee2e6">
+            <th><%= Industry.human_attribute_name(:name) %></th>
+            <th><%= BusinessIndustry.human_attribute_name(:construction_license_permission_type_minister_governor) %></th>
+            <th><%= BusinessIndustry.human_attribute_name(:construction_license_governor_permission_prefecture) %></th>
+            <th><%= BusinessIndustry.human_attribute_name(:construction_license_permission_type_identification_general) %></th>
+            <th><%= BusinessIndustry.human_attribute_name(:construction_license_number_double_digit) %></th>
+            <th><%= BusinessIndustry.human_attribute_name(:construction_license_number_six_digits) %></th>
+            <th><%= BusinessIndustry.human_attribute_name(:construction_license_number) %></th>
+            <th><%= BusinessIndustry.human_attribute_name(:construction_license_updated_at) %></th>
+          </tr>
+          <% @business.business_industries.each do |business_industry| %>
+            <tr>
+              <td><%= business_industry.industry.name %></td>
+              <td><%= business_industry.construction_license_permission_type_minister_governor_i18n %></td>
+              <td><%= business_industry.construction_license_governor_permission_prefecture_i18n %></td>
+              <td><%= business_industry.construction_license_permission_type_identification_general_i18n %></td>
+              <td><%= business_industry.construction_license_number_double_digit %></td>
+              <td><%= business_industry.construction_license_number_six_digits %></td>
+              <td><%= business_industry.construction_license_number %></td>
+              <td><%= business_industry.construction_license_updated_at %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <!-- business_industryここまで -->
         <tr>
           <th><%= Business.human_attribute_name(:specific_skilled_foreigners_exist) %></th>
           <td><%= @business.specific_skilled_foreigners_exist_i18n %></td>
