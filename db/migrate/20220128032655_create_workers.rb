@@ -37,7 +37,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.string :driver_licence
       t.integer :driver_licence_number
       t.string :seal
-      t.string :employee_card
+      t.json :employee_card
 
       t.timestamps
     end

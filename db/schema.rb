@@ -802,7 +802,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "driver_licence"
     t.integer "driver_licence_number"
     t.string "seal"
-    t.string "employee_card"
+    t.json "employee_card"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
