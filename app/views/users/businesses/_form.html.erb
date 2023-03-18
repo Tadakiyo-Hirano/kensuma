@@ -38,8 +38,8 @@
 <%= f.text_field :career_up_id, class: "form-control", placeholder: "Enter career_up_id" %>
 <br>
 <%= f.label :business_type %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_type, Business.business_types.keys.map { |k| [I18n.t("enums.business.business_type.#{k}"), k]}, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last) %><br>
 <br>
 <%= f.label :occupation_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -59,8 +59,8 @@
 
 <br>
 <%= f.label :business_health_insurance_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_health_insurance_status, Business.business_health_insurance_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_health_insurance_status, Business.business_health_insurance_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_health_insurance_association %>
 <%= f.text_field :business_health_insurance_association, class: "form-control", placeholder: "Enter business_health_insurance_association" %>
@@ -69,8 +69,8 @@
 <%= f.text_field :business_health_insurance_office_number, class: "form-control", placeholder: "Enter business_health_insurance_office_number" %>
 <br>
 <%= f.label :business_welfare_pension_insurance_join_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_welfare_pension_insurance_office_number %>
 <%= f.text_field :business_welfare_pension_insurance_office_number, class: "form-control", placeholder: "Enter business_welfare_pension_insurance_office_number" %>
@@ -80,19 +80,19 @@
 <%= f.select :business_pension_insurance_join_status, Business.business_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
 <br>
 <%= f.label :business_employment_insurance_join_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_employment_insurance_number %>
 <%= f.text_field :business_employment_insurance_number, class: "form-control", placeholder: "Enter business_employment_insurance_number" %>
 <br>
 <%= f.label :business_retirement_benefit_mutual_aid_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :construction_license_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_status, Business.construction_license_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
 <br>
 <div class="list-group">
   <!-- BusinessIndustryここから -->
@@ -111,14 +111,14 @@
   <!-- BusinessIndustryここまで -->
 </div>
 <br>
-<%= f.label :specific_skilled_foreigners_exist %>
-<%= f.select :specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<%= f.label :specific_skilled_foreigners_exist %><br>
+<%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last) %><br>
 <br>
-<%= f.label :foreign_construction_workers_exist %>
-<%= f.select :foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<%= f.label :foreign_construction_workers_exist %><br>
+<%= f.collection_radio_buttons(:foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n, :first, :last) %><br>
 <br>
-<%= f.label :foreign_technical_intern_trainees_exist %>
-<%= f.select :foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<%= f.label :foreign_technical_intern_trainees_exist %><br>
+<%= f.collection_radio_buttons(:foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n, :first, :last) %><br>
 <br>
 <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
 <%= f.text_field :employment_manager_name, class: "form-control", placeholder: "雇用管理責任者" %>
