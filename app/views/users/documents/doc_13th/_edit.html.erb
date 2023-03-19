@@ -1,8 +1,8 @@
 <!-- (13)全建統一様式第9号([移動式クレーン／車両系建設機械等]使用届) -->
 <% if RequestOrder.find_by(uuid: params[:sub_request_order_uuid]).nil? %>
   <!-- 自身の書類編集画面 -->
-  <%= render "users/documents/doc_13rd/current_edit" %>
+  <%= render "users/documents/doc_13th/current_edit" %>
 <% else %>
   <!-- 自身の下の階層の書類編集画面 -->
-  <%= render "users/documents/doc_13rd/subcon_edit" %>
+  <%= render "users/documents/doc_13th/subcon_edit" %>
 <% end %>
