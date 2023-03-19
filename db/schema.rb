@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.json "stamp_images"
     t.json "occupation_ids"
     t.json "industry_ids"
+    t.json "tem_industry_ids"
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
     t.integer "foreign_technical_intern_trainees_exist"
@@ -340,10 +341,18 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "education_date"
     t.string "field_workerable_type"
     t.bigint "field_workerable_id"
+    t.integer "occupation_id"
+    t.integer "industry_id"
+    t.integer "sendoff_education", default: 0, null: false
+    t.string "job_description"
+    t.string "foreign_work_place"
+    t.date "foreign_date_start"
+    t.date "foreign_date_end"
+    t.string "foreign_job"
+    t.string "foreign_job_description"
+    t.binary "proper_management_license"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "occupation"
-    t.integer "sendoff_education", default: 0, null: false
     t.string "prime_contractor_confirmation"
     t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
   end
@@ -457,8 +466,11 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
 
   create_table "occupations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.string "short_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "industry_id"
+    t.index ["industry_id"], name: "index_occupations_on_industry_id"
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -818,6 +830,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   add_foreign_key "machines", "businesses"
   add_foreign_key "news_users", "news"
   add_foreign_key "news_users", "users"
+  add_foreign_key "occupations", "industries"
   add_foreign_key "orders", "businesses"
   add_foreign_key "request_orders", "businesses"
   add_foreign_key "request_orders", "orders"
