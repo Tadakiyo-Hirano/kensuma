@@ -154,6 +154,12 @@
   </div>
   <div class="card-footer">
     <%= link_to "編集", edit_users_business_path, class: "btn btn-md btn-block btn-success" %>
-    <%= link_to "戻る", users_dash_boards_path, class: "btn btn-md btn-block btn-default" %>
+    <button id="page_go_back" class="btn btn-md btn-block btn-default">戻る</button>
   </div>
+
+  <script>
+    document.getElementById('page_go_back').addEventListener('click', () => {
+    history.back();
+    });
+  </script>
 </div>

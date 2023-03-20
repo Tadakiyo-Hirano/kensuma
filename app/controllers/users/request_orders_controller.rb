@@ -138,6 +138,7 @@ module Users
         :professional_engineer_name,
         :professional_engineer_skill_training_id,
         :professional_engineer_details,
+        :professional_engineer_qualification,
         :professional_construction,
         :construction_manager_name,
         :construction_manager_position_name,
