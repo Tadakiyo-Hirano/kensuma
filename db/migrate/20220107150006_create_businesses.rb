@@ -18,6 +18,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.json :stamp_images
       t.json :occupation_ids
       t.json :industry_ids
+      t.json :tem_industry_ids
       t.integer :specific_skilled_foreigners_exist
       t.integer :foreign_construction_workers_exist
       t.integer :foreign_technical_intern_trainees_exist
