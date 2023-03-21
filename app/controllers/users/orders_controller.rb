@@ -161,7 +161,15 @@ module Users
         :health_and_safety_promoter_position_name,
         :confirm_name,
         :accept_confirm_date,
-        :subcontractor_name
+        :subcontractor_name,
+        :occupation_id,
+        :job_description,
+        :foreign_work_place,
+        :foreign_date_start,
+        :foreign_date_end,
+        :foreign_job,
+        :foreign_job_description,
+        :proper_management_license
       ).merge(
         content: {
           genecon_name:                                                        current_business.name,                                             # 会社名

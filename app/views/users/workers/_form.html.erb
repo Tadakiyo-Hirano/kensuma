@@ -11,11 +11,8 @@
 <%# 国籍 %>
 <%= f.label :country %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :country,
-                  { "日本" => "日本", "手入力" => "" },
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-%><br>
+<%= f.country_select :country, { priority_countries: ["JP"] }, { class: "form-control" } %>
+<br>
 
 <%# 性別 %>
 <%= f.label :sex %>

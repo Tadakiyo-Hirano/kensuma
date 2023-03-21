@@ -49,6 +49,10 @@
           <td><%= @business.business_type_i18n %></td>
         </tr>
         <tr>
+          <th><%= Business.human_attribute_name(:industry_ids) %></th>
+          <td><%= Industry.where(id: @business.tem_industry_ids).pluck(:name).join(', ') %></td>
+        </tr>
+        <tr>
           <th><%= Business.human_attribute_name(:occupation_ids) %></th>
           <td><%= @business.occupations.pluck(:name).join(', ') %></td>
         </tr>

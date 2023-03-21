@@ -68,9 +68,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   if ENV['APP_ENV'] == 'prod' || ENV['APP_ENV'] == 'stg'
-    config.action_mailer.default_url_options = { host: (ENV['RAILS_APP_HOST']).to_s, port: 443 }
+    config.action_mailer.default_url_options = { host: (ENV['RAILS_APP_HOST']).to_s }
   else
-    config.action_mailer.default_url_options = { host: "#{ENV['HEROKU_APP_NAME']}.herokuapp.com", port: 443 }
+    config.action_mailer.default_url_options = { host: "#{ENV['HEROKU_APP_NAME']}.herokuapp.com" }
   end
   config.action_mailer.delivery_method = :ses
 
