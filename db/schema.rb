@@ -698,11 +698,11 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.json "health_insurance_image"
     t.integer "pension_insurance_type", null: false
     t.integer "employment_insurance_type", null: false
+    t.integer "has_labor_insurance", default: 0
     t.string "employment_insurance_number"
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"
     t.bigint "worker_id", null: false
-    t.integer "has_labor_insurance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
@@ -780,7 +780,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.integer "experience_term_before_hiring", null: false
     t.integer "blank_term", null: false
     t.string "career_up_id"
-    t.json "images"
+    t.json "career_up_image"
     t.bigint "business_id", null: false
     t.string "uuid", null: false
     t.string "job_title", null: false
