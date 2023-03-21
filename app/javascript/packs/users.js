@@ -46,6 +46,7 @@ document.addEventListener("turbolinks:load", () => {
 });
 
 // 強制リロード
+history.pushState(null, null, location.href);
 window.addEventListener('pageshow', function (event) {
   if (event.persisted) {
     window.location.reload();
