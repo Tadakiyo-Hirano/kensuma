@@ -339,11 +339,9 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "admission_date_start"
     t.date "admission_date_end"
     t.date "education_date"
-    t.string "field_workerable_type"
-    t.bigint "field_workerable_id"
-    t.integer "occupation_id"
-    t.integer "industry_id"
-    t.integer "sendoff_education", default: 0, null: false
+    t.string "occupation"
+    t.integer "sendoff_education"
+    t.bigint "occupation_id"
     t.string "job_description"
     t.string "foreign_work_place"
     t.date "foreign_date_start"
@@ -351,6 +349,8 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "foreign_job"
     t.string "foreign_job_description"
     t.binary "proper_management_license"
+    t.string "field_workerable_type"
+    t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "prime_contractor_confirmation"
@@ -573,6 +573,9 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
     t.string "registered_core_engineer_qualification"
+    t.integer "professional_engineer_skill_training"
+    t.integer "lead_engineer_skill_training"
+    t.integer "registered_core_engineer_skill_training"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
