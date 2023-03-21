@@ -6,10 +6,6 @@ module Users
     before_action :exclude_prime_contractor, only: %i[edit update]
     before_action :redirect_unless_prime_contractor, only: %i[update_approval_status edit_approval_status]
 
-    def index
-      @request_orders = current_business.request_orders
-    end
-
     def show
       @sub_request_orders = @request_order.children
       @genecon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.genecon_documents_type

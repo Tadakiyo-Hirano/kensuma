@@ -15,7 +15,7 @@
             <th></th>
             <th>作成日</th>
             <th><%= Order.human_attribute_name(:status) %></th>
-            <th><%= Order.human_attribute_name(:order_name) %></th>
+            <th><%= Order.human_attribute_name(:site_agent_name) %></th>
             <th><%= Order.human_attribute_name(:site_name) %></th>
             <th>工期</th>
           </tr>
@@ -30,7 +30,7 @@
             </td>
             <td><%= wareki(order.created_at) %></td>
             <td><%= order.status_i18n %></td>
-            <td><%= order.order_name %></td>
+            <td><%= order.site_agent_name %></td>
             <td><%= order.site_name %></td>
             <td>
               <%= wareki(order.start_date) %> 〜 <%= wareki(order.end_date) %>
@@ -55,9 +55,9 @@
           <tr align="center">
             <th></th>
             <th>受注日</th>
-            <th><%= Order.human_attribute_name(:order_name) %></th>
-            <th><%= Order.human_attribute_name(:site_name) %></th>
             <th>元請<%= Business.human_attribute_name(:name) %></th>
+            <th><%= Order.human_attribute_name(:site_agent_name) %></th>
+            <th><%= Order.human_attribute_name(:site_name) %></th>
             <th>工期</th>
           </tr>
         </thead>
@@ -70,8 +70,8 @@
               <% end %>
             </td>
             <td><%= wareki(received_order.created_at) %></td>
-            <td><%= received_order.order.order_name %></td>
             <td><%= received_order.order.site_name %></td>
+            <td><%= received_order.order.site_agent_name %></td>
             <td><%= received_order.order.business.name %></td>
             <td>
               <%= wareki(received_order.order.start_date) %> 〜 <%= wareki(received_order.order.end_date) %>
