@@ -29,5 +29,8 @@ class AddSitesToRequestOrders < ActiveRecord::Migration[6.1]
     add_column :request_orders, :foreman_name,                                :string  # 職長(氏名)
     add_column :request_orders, :registered_core_engineer_name,               :string  # 登録基幹技能者(氏名)
     add_column :request_orders, :registered_core_engineer_qualification,      :string  # 登録基幹技能者(資格内容)
+    add_column :request_orders, :professional_engineer_skill_training,        :integer # 専門技術者(資格内容)
+    add_column :request_orders, :lead_engineer_skill_training,                :integer # 主任技術者(資格内容)
+    add_column :request_orders, :registered_core_engineer_skill_training,     :integer # 登録基幹技能者(資格内容)
   end
 end

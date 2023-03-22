@@ -70,6 +70,12 @@ module Users
 
     def show; end
 
+    # ajax
+    def occupation_select
+      @occupations = Occupation.where(industry_id: params[:industry_ids]).pluck(:short_name, :id)
+      render partial: 'occupation-select', locals: { occupations: @occupations }
+    end
+
     def update_images
       # 残りstamp_imageを定義
       remain_stamp_images = @business.stamp_images
@@ -103,7 +109,7 @@ module Users
         :construction_license_governor_permission_prefecture, :construction_license_permission_type_identification_general,
         :construction_license_number_double_digit, :construction_license_number_six_digits,
         :construction_license_number, :construction_license_updated_at, :_destroy],
-        occupation_ids: []
+        occupation_ids: [], tem_industry_ids: []
       )
     end
   end

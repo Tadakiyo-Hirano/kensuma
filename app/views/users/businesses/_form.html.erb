@@ -1,3 +1,10 @@
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <!-- validateプラグインの読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
 <%= render 'shared/error_massages', object: f.object %>
 
 <%= f.label :name %>
@@ -41,10 +48,14 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
 <%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last) %><br>
 <br>
+<%= f.label :industry_ids %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.collection_select :tem_industry_ids, Industry.all, :id, :name, { selected: @business.tem_industry_ids }, { class: 'form-control select2', id: 'parent-select', multiple: true, style: "width: 100%" } %>
+<br>
+<br>
 <%= f.label :occupation_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :occupation_ids, Occupation.all, :id, :name, { selected: f.object.occupations.ids }, { class: "pref multiple-select", multiple: true, style: "width: 100%" } %>
-<br>
+<%= f.collection_select :occupation_ids, Occupation.all, :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
 <br>
 <% if business.stamp_images.present? %>
   <% business.stamp_images.each_with_index do |image, index| %>
@@ -53,10 +64,9 @@
   <% end %>
   <br>
 <% end %>
-
+<br>
 <%= f.label :stamp_images %>
 <%= f.file_field :stamp_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
-
 <br>
 <%= f.label :business_health_insurance_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
@@ -232,6 +242,12 @@
         "business[industry_ids][]": {
           required: true
         },
+        "business[tem_industry_ids][]": {
+          required: true
+        },
+        "business[occupation_ids][]": {
+          required: true
+        },
         "business[construction_license_permission_type_minister_governor]": {
           required: true
         },
@@ -306,6 +322,12 @@
         "business[industry_ids][]": {
           required: "業種を選択してください。"
         },
+        "business[tem_industry_ids][]": {
+          required: "業種を選択してください。"
+        },
+        "business[occupation_ids][]": {
+          required: "職種を選択してください。"
+        },
         "business[construction_license_permission_type_minister_governor]": {
           required: "どちらかを選択してください。"
         },
@@ -331,5 +353,62 @@
     $(".business-form-validation").change(function () {
       $(this).valid();
     });
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    var isInitialized = false;
+    function initializeSelect2() { // 要素が表示されるまで待つ
+      $('#parent-select, #child-select').select2({
+        width: 'resolve',
+        theme: 'classic',
+        multiple: 'multiple',
+        allowClear: true
+      });  
+        $('#parent-select').on('change', function() { // 親セレクトボックスに変更があれば
+          var category_id = $(this).val();
+          var child_select = $('#child-select');
+          var selectedValues = [];
+          $('#child-select option:selected').each(function() { // 既定の子セレクトボックスの選択内容を一時保存
+            selectedValues.push($(this).val());
+          });
+          
+          if(category_id){
+            $.ajax({
+              url: '/users/business/occupation_select',
+              type: 'GET',
+              dataType: 'html', // HTML形式で返される
+              data: {industry_ids: category_id},
+              success: function(data) {
+                var options = '<option value=""></option>'; // 初期化
+                $('<div>').html(data).find('option').each(function() {
+                  var child = $(this);
+                  var selected = '';
+                  if (selectedValues.indexOf(child.val().toString()) >= 0) { // 既定の入力が内容あれば選択中状態に
+                    selected = 'selected';
+                  }
+                  options += '<option value="' + child.val() + '"' + selected + '>' + child.text() + '</option>';
+                });
+                $('#child-select').html(options);
+                child_select.select2({
+                  width: 'resolve',
+                  theme: 'classic',
+                  multiple: 'multiple',
+                  allowClear: true
+                });
+              }
+            });
+          }
+        });
+      isInitialized = true;
+    }
+      
+    var checkExist = setInterval(function() {
+      if ($('#parent-select, #child-select').length && !isInitialized) {
+        clearInterval(checkExist);
+        initializeSelect2();
+      }
+    }, 100); // 100 ミリ秒ごとにチェックする
   });
 </script>
