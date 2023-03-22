@@ -91,11 +91,12 @@
 <%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :construction_license_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
-<br>
-<div class="list-group">
-  <!-- BusinessIndustryここから -->
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<div id="available-form">
+  <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
+</div>
+<!-- BusinessIndustryここから -->
+<div id="hidden-form" class="list-group">
   <div class="list-group-item">
     <%= f.fields_for :business_industries do |b_industry| %>
       <%= render "business_industry_fields", f: b_industry %>
@@ -108,8 +109,8 @@
       }
     %>
   </div>
-  <!-- BusinessIndustryここまで -->
 </div>
+<!-- BusinessIndustryここまで -->
 <br>
 <%= f.label :specific_skilled_foreigners_exist %><br>
 <%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last) %><br>
@@ -126,6 +127,52 @@
 <br>
 
 <%= f.hidden_field :user_id, value: current_user.id %>
+
+<script>
+//建設許可証の有無によってフォームの表示・非表示の切り替え
+  const available_form = document.getElementById('available-form')
+  const list_group = document.getElementById('hidden-form')
+  function getRadioHealthInsuranceName(object) {
+    const value = $('input[name="business[construction_license_status]"]:checked').val();
+    if (value == 'available'){
+      list_group.classList.remove('hidden');
+    } else {
+      list_group.classList.add('hidden');
+    }
+  };
+  getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
+
+  $('input[name="business[construction_license_status]"]').change(function() {
+    if ($(this).val() == 'available') {
+      list_group.classList.remove('hidden');
+    } else {
+      list_group.classList.add('hidden');
+    }
+  });
+
+
+// フォームを29個まで制限かける（実装途中）
+  // $(function() {
+  //   var max_fields = 29;
+  //   var current_fields = $('form .nested-fields').length;
+
+  //   $('#new_sample').on('cocoon:after-insert', function() {
+  //     current_fields++;
+
+  //     if (current_fields >= max_fields) {
+  //       $('form .links').hide();
+  //     }
+  //   });
+
+  //   $('#new_sample').on('cocoon:after-remove', function() {
+  //     current_fields--;
+
+  //     if (current_fields < max_fields) {
+  //       $('form .links').show();
+  //     }
+  //   });
+  // });
+</script>
 
 <script>
   $(function(){

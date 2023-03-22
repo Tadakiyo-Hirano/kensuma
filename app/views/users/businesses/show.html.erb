@@ -105,7 +105,6 @@
           <tr bgcolor="#dee2e6">
             <th><%= Industry.human_attribute_name(:name) %></th>
             <th><%= BusinessIndustry.human_attribute_name(:construction_license_permission_type_minister_governor) %></th>
-            <th><%= BusinessIndustry.human_attribute_name(:construction_license_governor_permission_prefecture) %></th>
             <th><%= BusinessIndustry.human_attribute_name(:construction_license_permission_type_identification_general) %></th>
             <th><%= BusinessIndustry.human_attribute_name(:construction_license_number_double_digit) %></th>
             <th><%= BusinessIndustry.human_attribute_name(:construction_license_number_six_digits) %></th>
@@ -115,8 +114,13 @@
           <% @business.business_industries.each do |business_industry| %>
             <tr>
               <td><%= business_industry.industry.name %></td>
-              <td><%= business_industry.construction_license_permission_type_minister_governor_i18n %></td>
-              <td><%= business_industry.construction_license_governor_permission_prefecture_i18n %></td>
+              <td>
+                <% if business_industry.construction_license_permission_type_minister_governor_minister_permission? %>
+                  <%= business_industry.construction_license_permission_type_minister_governor_i18n %>
+                <% elsif business_industry.construction_license_permission_type_minister_governor_governor_permission? %>
+                  <%= business_industry.construction_license_governor_permission_prefecture_i18n %>知事免許
+                <% end %>
+              </td>
               <td><%= business_industry.construction_license_permission_type_identification_general_i18n %></td>
               <td><%= business_industry.construction_license_number_double_digit %></td>
               <td><%= business_industry.construction_license_number_six_digits %></td>
