@@ -306,7 +306,7 @@ ja:
         experience_term_before_hiring: 雇入前経験年数
         blank_term: ブランク年数
         career_up_id: 技能者ID(キャリアアップシステム)
-        images: 免許
+        career_up_image: 建設キャリアアップシステムカードの写し
         business: 事業所
         employment_contract: 雇用契約書の取り交わし状況
         family_name: 氏名
@@ -331,7 +331,7 @@ ja:
       worker_license:
         license_id: 技能検定
         worker_id: 作業員
-        images: 技能講習の証明画像
+        images: 技能検定の写し
       skill_training:
         name: 名称
         short_name: 略称
@@ -339,25 +339,25 @@ ja:
       worker_skill_training:
         skill_training_id: 技能講習
         worker_id: 作業員
-        images: 証明画像
+        images: 技能講習修了証明書の写し
       special_education:
         name: 名称
         description: 説明
       worker_special_education:
         special_education_id: 特別教育
         worker_id: 作業員
-        images: 証明画像
+        images: 特別教育修了証明書の写し
       worker_insurance:
         id: 保険情報
         health_insurance_type: 健康保険
-        health_insurance_name: 健康保険の名前
+        health_insurance_name: 保険名
         health_insurance_image: 健康保険証の写し
         pension_insurance_type: 年金保険
-        employment_insurance_type: 雇用保険のタイプ
+        employment_insurance_type: 雇用保険
         employment_insurance_number: 被保険者番号の下4桁
+        has_labor_insurance: 労働保険特別加入
         severance_pay_mutual_aid_type: 建設業退職金共済手帳
         severance_pay_mutual_aid_name: 建設業退職金共済制度名
-        has_labor_insurance: 労働保険特別加入
       worker_safety_health_education:
        image: 証明画像
       news:

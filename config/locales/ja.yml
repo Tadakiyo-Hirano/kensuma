@@ -291,9 +291,9 @@ ja:
         ab: AB型
         o: O型
       rh_blood_type:
-        plus: ＋
-        minus: −
-        rh_null: "null"
+        plus: RH+
+        minus: RH-
+        rh_null: "RH null"
       employment_contract: # 雇用契約書の取り交わし状況
         available: 済
         not_available: 未
