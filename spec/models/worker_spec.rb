@@ -27,7 +27,7 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('名前を入力してください')
+          expect(subject.errors.full_messages).to include('氏名を入力してください')
         end
       end
     end
@@ -44,12 +44,13 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('名前カナを入力してください')
+          expect(subject.errors.full_messages).to include('フリガナを入力してください')
         end
 
         %i[
           てすとわーかー
           TestWorker
+          !"#$%&'=~|"
         ].each do |name_kana|
           context '不正なname_kanaの場合' do
             before :each do
@@ -62,7 +63,7 @@ RSpec.describe Worker, type: :model do
 
             it 'バリデーションのエラーが正しいこと' do
               subject.valid?
-              expect(subject.errors.full_messages).to include('名前カナはカタカナで入力してください')
+              expect(subject.errors.full_messages).to include('フリガナはカタカナで入力してください')
             end
           end
         end
@@ -82,6 +83,55 @@ RSpec.describe Worker, type: :model do
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
           expect(subject.errors.full_messages).to include('国籍を入力してください')
+        end
+      end
+    end
+
+    describe '#email' do
+      context 'メールアドレスの形式が「example@email.com」ではない時' do
+        before :each do
+          subject.email = 'abcde'
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('メールアドレスはexample@email.comのような形式で入力してください')
+        end
+      end
+    end
+
+    describe '#post_code' do
+      context '存在しない場合' do
+        before :each do
+          subject.post_code = nil
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('郵便番号を入力してください')
+        end
+      end
+
+      context '7桁ではない場合' do
+        before :each do
+          subject.post_code = 858
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('郵便番号は7桁で入力してください')
         end
       end
     end
@@ -154,7 +204,7 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('家族住所を入力してください')
+          expect(subject.errors.full_messages).to include('住所を入力してください')
         end
       end
     end
@@ -171,7 +221,7 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('家族電話番号を入力してください')
+          expect(subject.errors.full_messages).to include('電話番号を入力してください')
         end
 
         %i[
@@ -191,7 +241,7 @@ RSpec.describe Worker, type: :model do
 
             it 'バリデーションのエラーが正しいこと' do
               subject.valid?
-              expect(subject.errors.full_messages).to include('家族電話番号はハイフン無しの10桁または11桁で入力してください')
+              expect(subject.errors.full_messages).to include('電話番号はハイフン無しの10桁または11桁で入力してください')
             end
           end
         end
@@ -330,6 +380,23 @@ RSpec.describe Worker, type: :model do
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
           expect(subject.errors.full_messages).to include('性別を入力してください')
+        end
+      end
+    end
+
+    describe '#employment_contract' do
+      context '存在しない場合' do
+        before :each do
+          subject.employment_contract = nil
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('雇用契約書の取り交わし状況を入力してください')
         end
       end
     end

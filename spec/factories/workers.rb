@@ -3,8 +3,10 @@ FactoryBot.define do
     association :business
     uuid { SecureRandom.uuid }
     name { 'TestWorker' }
-    name_kana { 'テストワーカー' }
+    name_kana { 'テスト・ワーカー' }
     country { '日本' }
+    email { 'example@email.com' }
+    post_code { '1112222' }
     my_address { '東京都' }
     my_phone_number { '09012345678' }
     family_name { '日本 太郎' }
@@ -20,7 +22,7 @@ FactoryBot.define do
     employment_contract { 1 }
     blank_term { 1 }
     career_up_id { '1' }
-    images { '' }
+    sex { 0 }
 
     after(:create) do |worker|
       create_list(:worker_license, 1, worker: worker, license: License.create!(name: 'テストライセンス', license_type: 0))
