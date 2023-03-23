@@ -4,15 +4,14 @@
 <div class="list-group-item">
   <div style="font-size: 22px; font-weight: bold;"><%= f.label :order %></div>
   <div class="list-group-item">
-    <%= f.label :site_career_up_id %> <!-- 現場ID(キャリアアップ) -->
+    <%= f.label :site_career_up_id %> <!-- 現場ID(キャリアアップシステム) -->
     <%= f.text_field :site_career_up_id, class: "form-control", placeholder: "#{Order.human_attribute_name(:site_career_up_id)} 数字14桁", minlength: 14, maxlength: 14 %>
     <br>
-    <%= f.label :site_name %> <!-- 事業所名(現場名) -->
+    <%= f.label :site_name %> <!-- 現場名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :site_name, class: "form-control", placeholder: Order.human_attribute_name(:site_name), maxlength: 100 %>
     <br>
-    <%= f.label :site_address %> <!-- 施工場所(住所) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.label :site_address %> <!-- 施工場所住所 -->
     <%= f.text_field :site_address, class: "form-control", placeholder: Order.human_attribute_name(:site_address), maxlength: 50 %>
     <br>
   </div>
@@ -21,250 +20,236 @@
 
 <!-- 発注者 -->
 <div class="list-group-item">
-  <div style="font-size: 22px; font-weight: bold;"><%= f.label :orderer %></div>
+  <div style="font-size: 22px; font-weight: bold;"><%= f.label :orderer %></div> <!-- 発注者 -->
   <div class="list-group-item">
-    <%= f.label :order_name %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span> <!-- 発注者(会社名or氏名) -->
-    <%= f.text_field :order_name, class: "form-control", placeholder: Order.human_attribute_name(:order_name) %>
-    <br>
-    <%= f.label :order_post_code %> <!-- 郵便番号 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :order_post_code, class: "form-control", placeholder: Order.human_attribute_name(:hyphen_is_unnecessary) %>
-    <br>
-    <%= f.label :order_address %> <!-- 住所 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :order_address, class: "form-control", placeholder: Order.human_attribute_name(:order_address) %>
-    <br>
+    <div style="font-weight: bold;"><%= f.label :orderer %></div> <!-- 発注者 -->
+    <div class="list-group-item">
+      <%= f.label :order_name %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span> <!-- 氏名 -->
+      <%= f.text_field :order_name, class: "form-control", placeholder: Order.human_attribute_name(:order_name) %>
+      <br>
+      <%= f.label :order_post_code %> <!-- 郵便番号 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :order_post_code, class: "form-control", placeholder: Order.human_attribute_name(:hyphen_is_unnecessary) %>
+      <br>
+      <%= f.label :order_address %> <!-- 住所 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :order_address, class: "form-control", placeholder: Order.human_attribute_name(:order_address) %>
+      <br>
+    </div>
   </div>
   <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :supervisor %></div>
+    <div style="font-weight: bold;"><%= f.label :supervisor %></div><!-- 監督員 -->
     <div class="list-group-item">
-      <%= f.label :order_supervisor_name %> <!-- 監督員(氏名) -->
+      <%= f.label :order_supervisor_name %> <!-- 氏名 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.text_field :order_supervisor_name, class: "form-control form-control-sm", placeholder: Order.human_attribute_name(:order_supervisor_name) %>
-      <br>
-      <%= f.label :order_supervisor_company %> <!-- 監督員(所属会社) -->
+      <%= f.select :order_supervisor_name, @business_workers_name.uniq,
+                    { include_blank: true },
+                    { class: "form-select form-select-sm", style: "width: 100%" }
+      %><br>
+      <%= f.label :order_supervisor_company %> <!-- 所属会社名 -->
       <%= f.text_field :order_supervisor_company, class: "form-control", placeholder: Order.human_attribute_name(:order_supervisor_company) %>
       <br>
-      <%= f.label :order_supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
+      <%= f.label :order_supervisor_apply %> <!-- 権限及び意見の申出方法 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :order_supervisor_apply,
-                    (@current_business.orders.map { |order|order.order_supervisor_apply }).uniq,
-                    { include_blank: true },
-                    { class: "single-select", style: "width: 100%" }
-      %><br><br>
+      <%= f.text_field :order_supervisor_apply, class: "form-control", placeholder: Order.human_attribute_name(:order_supervisor_apply) %>
     </div>
   </div>
   <br>
 
 <!-- 元請会社 -->
 <div class="list-group-item">
-  <div style="font-size: 22px; font-weight: bold;"><%= f.label :prime_contractor %></div>
+  <div style="font-size: 22px; font-weight: bold;"><%= f.label :prime_contractor %></div> <!-- 元請会社 -->
   <div class="list-group-item">
-    <%= f.label :construction_name %> <!-- 工事名 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :construction_name, class: "form-control", placeholder: Order.human_attribute_name(:construction_name) %>
-    <br>
-    <%= f.label :construction_details %> <!-- 工事内容 -->
-    <%= f.text_field :construction_details, class: "form-control", placeholder: Order.human_attribute_name(:construction_details) %>
-    <br>
-    <%= f.label :start_date %> <!-- 工期(自) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.date_field :start_date, class: "form-control" %>
-    <br>
-    <%= f.label :end_date %> <!-- 工期(至) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.date_field :end_date, class: "form-control" %>
-    <br>
-    <%= f.label :contract_date %> <!-- 契約日 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.date_field :contract_date, class: "form-control" %>
-    <br>
+    <div style="font-weight: bold;"><%= f.label :order_infomation %></div> <!-- 現場情報 -->
+    <div class="list-group-item">
+      <%= f.label :construction_name %> <!-- 工事名 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :construction_name, class: "form-control", placeholder: Order.human_attribute_name(:construction_name) %>
+      <br>
+      <%= f.label :construction_details %> <!-- 工事内容 -->
+      <%= f.text_field :construction_details, class: "form-control", placeholder: Order.human_attribute_name(:construction_details) %>
+      <br>
+      <%= f.label :start_date %> <!-- 工期(自) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :start_date, class: "form-control" %>
+      <br>
+      <%= f.label :end_date %> <!-- 工期(至) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :end_date, class: "form-control" %>
+      <br>
+      <%= f.label :contract_date %> <!-- 契約日 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :contract_date, class: "form-control" %>
+      <br>
+    </div>
   </div>
   <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :site_agent %></div>
+    <div style="font-weight: bold;"><%= f.label :site_agent %></div> <!-- 現場代理人 -->
     <div class="list-group-item">
-      <%= f.label :site_agent_name %> <!-- 現場代理人(氏名) -->
+      <%= f.label :site_agent_name %> <!-- 氏名 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.select :site_agent_name, @business_workers_name.uniq,
                     { include_blank: true },
-                    { class: "form-control form-control-sm", style: "width: 100%" }
+                    { class: "form-select form-select-sm", style: "width: 100%" }
       %><br>
-      <%= f.label :site_agent_apply %> <!-- 現場代理人(権限及び意見の申出方法) -->
+      <%= f.label :site_agent_apply %> <!-- 権限及び意見の申出方法 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :site_agent_apply,
-                        (@current_business.orders.map { |order|order.site_agent_apply }).uniq,
-                        { include_blank: true },
-                        { class: "single-select", style: "width: 100%" }
-      %><br><br>
+      <%= f.text_field :site_agent_apply, class: "form-control", placeholder: Order.human_attribute_name(:site_agent_apply) %>
     </div>
   </div>
   <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :supervisor %></div>
+    <div style="font-weight: bold;"><%= f.label :supervisor %></div> <!-- 監督員 -->
     <div class="list-group-item">
-      <%= f.label :supervisor_name %> <!-- 監督員(氏名) -->
+      <%= f.label :supervisor_name %> <!-- 氏名 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :supervisor_name,
-                    (@business_workers_name + [@order.supervisor_name]).uniq,
+      <%= f.select :supervisor_name, @business_workers_name.uniq,
                     { include_blank: true },
-                    { class: "form-control form-control-sm", style: "width: 100%" }
+                    { class: "form-select form-select-sm", style: "width: 100%" }
       %><br>
-      <%= f.label :supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
+      <%= f.label :supervisor_apply %> <!-- 権限及び意見の申出方法 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :supervisor_apply,
-                        (@current_business.orders.map { |order|order.supervisor_apply }).uniq,
-                        { include_blank: true },
-                        { class: "single-select", style: "width: 100%" }
-      %><br><br>
+      <%= f.text_field :supervisor_apply, class: "form-control", placeholder: Order.human_attribute_name(:supervisor_apply) %>
     </div>
   </div>
   <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :professional_engineer %></div>
+    <div style="font-weight: bold;"><%= f.label :professional_engineer %></div> <!-- 専門技術者 -->
     <div class="list-group-item">
-      <%= f.label :professional_engineer_name_1st %> <!-- 専門技術者(氏名)1 -->
-      <%= f.select :professional_engineer_name_1st,
-                    (@business_workers_name + [@order.professional_engineer_name]).uniq,
+      <%= f.label :professional_engineer_name_1st %> <!-- 氏名1 -->
+      <%= f.select :professional_engineer_name_1st, @business_workers_name.uniq,
                     { include_blank: true },
-                    { class: "form-control form-control-sm", style: "width: 100%" }
-      %><br>
-      <%= f.label :professional_engineer_qualification_1st %> <!-- 専門技術者(資格内容)1 -->
-      <%= f.text_field :professional_engineer_qualification_1st, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_qualification_1st) %>
+                    { class: "form-select form-select-sm", style: "width: 100%" }
+      %>
       <br>
-      <%= f.label :professional_engineer_construction_details_1st %> <!-- 専門技術者(担当工事内容)1 -->
+      <!--<%= f.label :professional_engineer_qualification_1st %>--> <!-- 資格内容1 -->
+      <!--<%= f.text_field :professional_engineer_qualification_1st, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_qualification_1st) %>
+      <br>-->
+      <%= f.label :professional_engineer_construction_details_1st %> <!-- 担当工事内容1 -->
       <%= f.text_field :professional_engineer_construction_details_1st, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_construction_details_1st) %>
       <br>
     </div>
   </div>
     <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :professional_engineer %></div>
+    <div style="font-weight: bold;"><%= f.label :professional_engineer %></div> <!-- 専門技術者 -->
     <div class="list-group-item">
-      <%= f.label :professional_engineer_name_2nd %> <!-- 専門技術者(氏名)2 -->
-      <%= f.select :professional_engineer_name_2nd,
-                    (@business_workers_name + [@order.professional_engineer_name]).uniq,
+      <%= f.label :professional_engineer_name_2nd %> <!-- 氏名2 -->
+      <%= f.select :professional_engineer_name_2nd, @business_workers_name.uniq,
                     { include_blank: true },
-                    { class: "form-control form-control-sm", style: "width: 100%" }
-      %><br>
-      <%= f.label :professional_engineer_qualification_2nd %> <!-- 専門技術者(資格内容)2 -->
-      <%= f.text_field :professional_engineer_qualification_2nd, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_qualification_2nd) %>
+                    { class: "form-select form-select-sm", style: "width: 100%" }
+      %>
       <br>
-      <%= f.label :professional_engineer_construction_details_2nd %> <!-- 専門技術者(担当工事内容)2 -->
+      <!--<%= f.label :professional_engineer_qualification_2nd %>--> <!-- 資格内容2 -->
+      <!--<%= f.text_field :professional_engineer_qualification_2nd, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_qualification_2nd) %>
+      <br>-->
+      <%= f.label :professional_engineer_construction_details_2nd %> <!-- 担当工事内容2 -->
       <%= f.text_field :professional_engineer_construction_details_2nd, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_construction_details_2nd) %>
       <br>
     </div>
   </div>
   <div class="list-group-item">
-    <%= f.label :general_safety_responsible_person_name %> <!-- 統括安全衛生責任者(氏名) -->
+    <%= f.label :general_safety_responsible_person_name %> <!-- 統括安全衛生責任者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :general_safety_responsible_person_name,
-                  (@business_workers_name + [@order.general_safety_responsible_person_name]).uniq,
+    <%= f.select :general_safety_responsible_person_name, @business_workers_name.uniq,
                   { include_blank: true },
-                  { class: "form-control form-control-sm", style: "width: 100%" }
+                  { class: "form-select form-select-sm", style: "width: 100%" }
     %>
     <br>
   </div>
   <div class="list-group-item">
-    <%= f.label :general_safety_agent_name %> <!-- 統括安全衛生責任者代行者(氏名) -->
+    <%= f.label :general_safety_agent_name %> <!-- 統括安全衛生責任者代行者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :general_safety_agent_name,
-                  (@business_workers_name + [@order.general_safety_agent_name]).uniq,
+    <%= f.select :general_safety_agent_name, @business_workers_name.uniq,
                   { include_blank: true },
-                  { class: "form-control form-control-sm", style: "width: 100%" }
+                  { class: "form-select form-select-sm", style: "width: 100%" }
     %><br>
   </div>
   <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :supervising_engineer %></div>
+    <div style="font-weight: bold;"><%= f.label :supervising_engineer %></div> <!-- 監督技術者･主任技術者 -->
     <div class="list-group-item">
-      <%= f.label :supervising_engineer_name %> <!-- 監督技術者･主任技術者(氏名) -->
+      <%= f.label :supervising_engineer_name %> <!-- 氏名 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :supervising_engineer_name,
-                    (@business_workers_name + [@order.supervising_engineer_name]).uniq,
+      <%= f.select :supervising_engineer_name, @business_workers_name.uniq,
                     { include_blank: true },
-                    { class: "form-control form-control-sm", style: "width: 100%" }
+                    { class: "form-select form-select-sm", style: "width: 100%" }
       %><br>
-      <%= f.label :supervising_engineer_check %> <!-- 監督技術者・主任技術者(専任or非専任) -->
+      <%= f.label :supervising_engineer_check %> <!-- 専任・非専任 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :supervising_engineer_check, Order.supervising_engineer_checks_i18n.invert, { prompt: true }, { class: "form-control" } %>
+      <div class="list-group-item">
+        <%= f.collection_radio_buttons(:supervising_engineer_check, Order.supervising_engineer_checks_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% end %>
+      </div>
       <br>
-      <%= f.label :supervising_engineer_qualification %> <!-- 監督技術者･主任技術者(資格内容) -->
-      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :supervising_engineer_qualification,
-                    (@business_workers_name + [@order.supervising_engineer_qualification]).uniq,
-                    { include_blank: true },
-                    { class: "single-select", style: "width: 100%" }
+      <%= f.label :supervising_engineer_qualification %> <!-- 資格内容 -->
+      <%= f.collection_select :supervising_engineer_qualification,
+                              SkillTraining.all, :id, :name,
+                              options = { include_blank: true},
+                              { class: "single-select", style: "width: 100%" }
       %><br><br>
     </div>
   </div>
   <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :supervising_engineer_assistant %></div>
+    <div style="font-weight: bold;"><%= f.label :supervising_engineer_assistant %></div> <!-- 監督技術者補佐 -->
     <div class="list-group-item">
-      <%= f.label :supervising_engineer_assistant_name %> <!-- 監督技術者補佐(氏名) -->
-      <%= f.select :supervising_engineer_assistant_name,
-                    (@business_workers_name + [@order.supervising_engineer_assistant_name]).uniq,
+      <%= f.label :supervising_engineer_assistant_name %> <!-- 氏名 -->
+      <%= f.select :supervising_engineer_assistant_name, @business_workers_name.uniq,
                     { include_blank: true },
-                    { class: "form-control form-control-sm", style: "width: 100%" }
+                    { class: "form-select form-select-sm", style: "width: 100%" }
       %><br>
       <%= f.label :supervising_engineer_assistant_qualification %> <!-- 監督技術者補佐(資格内容) -->
-      <%= f.select :supervising_engineer_assistant_qualification,
-                    (@business_workers_name + [@order.supervising_engineer_assistant_qualification]).uniq,
-                    { include_blank: true },
-                    { class: "single-select", style: "width: 100%" }
+      <%= f.collection_select :supervising_engineer_assistant_qualification,
+                              SkillTraining.all, :id, :name,
+                              options = { include_blank: true},
+                              { class: "single-select", style: "width: 100%" }
       %><br><br>
     </div>
   </div>
   <div class="list-group-item">
-    <div style="font-weight: bold;"><%= f.label :vice_president %></div>
+    <div style="font-weight: bold;"><%= f.label :vice_president %></div> <!-- 副会長 -->
     <div class="list-group-item">
-      <%= f.label :vice_president_name %> <!-- 副会長(氏名) -->
+      <%= f.label :vice_president_name %> <!-- 氏名 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :vice_president_name,
-                    (@business_workers_name + [@order.vice_president_name]).uniq,
+      <%= f.select :vice_president_name, @business_workers_name.uniq,
                     { include_blank: false },
-                    { class: "form-control form-control-sm", style: "width: 100%" }
+                    { class: "form-select form-select-sm", style: "width: 100%" }
       %><br>
-      <%= f.label :vice_president_company_name %> <!-- 副会長(会社名) -->
-      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.text_field :vice_president_company_name, class: "form-control", placeholder: Order.human_attribute_name(:vice_president_company_name) %>
-      <br>
     </div>
   </div>
   <div class="list-group-item">
-    <%= f.label :secretary_name %> <!-- 書記(氏名) -->
+    <%= f.label :secretary_name %> <!-- 書記名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :secretary_name,
-                  (@business_workers_name + [@order.secretary_name]).uniq,
+    <%= f.select :secretary_name, @business_workers_name.uniq,
                   { include_blank: false },
-                  { class: "form-control form-control-sm", style: "width: 100%" }
+                  { class: "form-select form-select-sm", style: "width: 100%" }
     %><br>
   </div>
   <div class="list-group-item">
-    <%= f.label :health_and_safety_manager_name %> <!-- 元方安全衛生管理者(氏名) -->
+    <%= f.label :health_and_safety_manager_name %> <!-- 元方安全衛生管理者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :health_and_safety_manager_name,
-                 (@business_workers_name + [@order.health_and_safety_manager_name]).uniq,
+    <%= f.select :health_and_safety_manager_name, @business_workers_name.uniq,
                  { include_blank: false },
-                 { class: "form-control form-control-sm", style: "width: 100%" }
+                 { class: "form-select form-select-sm", style: "width: 100%" }
     %><br>
   </div>
   <div class="list-group-item">
-    <%= f.label :submission_destination %> <!-- 提出先及び担当者(部署･氏名) -->
+    <%= f.label :submission_destination %> <!-- 提出先及び担当者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :submission_destination,
-                  (@business_workers_name + [@order.submission_destination]).uniq,
+    <%= f.select :submission_destination, @business_workers_name.uniq,
                   {},
-                  { class: "form-control form-control-sm", style: "width: 100%" }
+                  { class: "form-select form-select-sm", style: "width: 100%" }
     %><br>
   </div>
   <div class="list-group-item">
-    <%= f.label :construction_license_status %>
+    <%= f.label :construction_license_status %> <!-- 工場に必要な建設許可証 -->
   </div>
 </div>
 <br>
 
 <% if controller.action_name == 'edit' %>
   <div class="list-group-item">
-    <%= f.label :status %>
+    <%= f.label :status %> <!-- ステータス -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :status, Order.statuses_i18n.invert, {}, { class: "form-control" } %>
+    <%= f.select :status, Order.statuses_i18n.invert, {}, { class: "form-select" } %>
   </div>
 <% end %>
 <br>

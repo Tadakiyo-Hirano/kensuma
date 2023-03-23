@@ -307,7 +307,8 @@ ja:
         lead_engineer: 主任技術者
         lead_engineer_name: 氏名 #主任技術者(氏名)
         lead_engineer_check: 専任・非専任 #主任技術者(専任or非専任)
-        lead_engineer_skill_training_id: 資格内容 #主任技術者(資格内容)
+        lead_engineer_qualification: 資格内容
+        #lead_engineer_skill_training_id: 資格内容 #主任技術者(資格内容)
         work_chief_name: 作業主任者名 #作業主任者(氏名)
         work_conductor_name: 作業指揮者名 #作業指揮者名(氏名)
         safety_officer_name: 安全衛生担当者名 #安全衛生担当責任者(氏名)
@@ -316,7 +317,8 @@ ja:
         foreman_name: 職長名 #職長(氏名)
         registered_core_engineer: 登録基幹技能者
         registered_core_engineer_name: 氏名 #登録基幹技能者(氏名)
-        registered_core_engineer_skill_training_id: 資格内容 #登録基幹技能者(資格内容)
+        registered_core_engineer_qualification: 資格内容
+        #registered_core_engineer_skill_training_id: 資格内容 #登録基幹技能者(資格内容)
         construction_license_status: 工事に必要な建設許可証
       worker:
         name: 名前
