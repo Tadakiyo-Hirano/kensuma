@@ -170,16 +170,16 @@ module Users
         :proper_management_license
       ).merge(
         content: {
-          genecon_name:                                                        current_business.name,                                             # 会社名
-          genecon_address:                                                     current_business.address,                                          # 会社住所
-          genecon_career_up_id:                                                current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
-          genecon_health_insurance_status:                                     current_business.business_health_insurance_status,                 # 健康保険加入状況
-          genecon_health_insurance_association:                                current_business.business_health_insurance_association,            # 健康保険会社
-          genecon_health_insurance_office_number:                              current_business.business_health_insurance_office_number,          # 健康保険番号
-          genecon_welfare_pension_insurance_join_status:                       current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
-          genecon_welfare_pension_insurance_office_number:                     current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
-          genecon_employment_insurance_join_status:                            current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
-          genecon_employment_insurance_number:                                 current_business.business_employment_insurance_number,             # 雇用保険番号
+          genecon_name:                                    current_business.name,                                             # 会社名
+          genecon_address:                                 current_business.address,                                          # 会社住所
+          genecon_career_up_id:                            current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
+          genecon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
+          genecon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
+          genecon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
+          genecon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
+          genecon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
+          genecon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
+          genecon_employment_insurance_number:             current_business.business_employment_insurance_number # 雇用保険番号
           # genecon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種　エラー回避の為コメントアウト
           # genecon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
           # genecon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)

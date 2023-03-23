@@ -13,5 +13,4 @@ class BusinessIndustry < ApplicationRecord
   validates :construction_license_number_six_digits, format: { with: /\A\d{1,6}\z/, message: 'は数字6桁以下で入力してください' }, presence: true
   validates :construction_license_number, presence: true
   validates :construction_license_updated_at, presence: true
-
 end
