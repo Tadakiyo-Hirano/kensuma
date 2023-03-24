@@ -1,6 +1,6 @@
 <% provide(:title, "現場情報一覧(元請)") %>
 
-<%= link_to "現場情報作成", new_users_order_path, class: "btn btn-lg btn-block btn-outline-primary" %>
+<%= link_to "現場情報作成", new_users_order_path, class: "btn btn-lg btn-block btn-primary" if current_user.is_prime_contractor == true %>
 <br>
 <% if @orders.present? %>
   <div class="card">
@@ -22,5 +22,14 @@
         </tbody>
       </table>
     </div>
+  </div>
+<% end %>
+
+<% if current_user.is_prime_contractor == false %>
+  <div>
+    <p>
+      現場情報作成機能は有料版をご利用ください。
+      <%= link_to '(お問い合わせはこちら)', 'https://forms.gle/HbWqbQpd33ZdQAoa7', target: "_blank" %>
+    </p>
   </div>
 <% end %>

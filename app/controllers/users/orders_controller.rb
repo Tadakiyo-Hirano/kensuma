@@ -1,5 +1,6 @@
 module Users
   class OrdersController < Users::Base
+    before_action :prime_contractor_access, except: :index
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_order, except: %i[index new create]
 
@@ -109,6 +110,10 @@ module Users
 
     def set_order
       @order = current_business.orders.find_by(site_uu_id: params[:site_uu_id])
+    end
+
+    def prime_contractor_access
+      redirect_to users_orders_path, flash: { danger: '現場情報作成機能は有料サービスとなります' } if current_user.is_prime_contractor == false
     end
 
     def order_params
