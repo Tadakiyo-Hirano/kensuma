@@ -13,6 +13,7 @@
         </td>
       </tr>
     </table>
+    <%# <span class="brand-text font-weight-light">建スマ</span> %>
   <% end %>
 
 	<!-- Sidebar -->
@@ -22,18 +23,90 @@
       <p>会社名：<%= current_business_name %></p>
     </div>
 
-    <!-- Sidebar -->
+  <!-- Sidebar -->
+  <%#<div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <%#= image_tag "user2-160x160.jpg", class:"img-circle elevation-2" %>
+      <%#</div>
+      <div class="info">
+        <%= link_to current_user.name, users_profile_path, class:"d-block" %>
+        <%#= link_to "ログアウト", destroy_user_session_path, class:"d-block mt-3", method: :delete %>
+      <%#</div>
+    </div>%>
+
+    <!-- SidebarSearch Form -->
+    <%# <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div> %>
+
     <% unless controller_path == 'users/businesses' && action_name == 'new' %>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+          <%# <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Starter Pages
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Active Page</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Inactive Page</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_news_index_path, class:"nav-link" do %>
+              <%# <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-newspaper"></i>
+              <p>
+                お知らせ
+                <span class="right badge badge-danger">New</span>
+              </p>
+            <% end %>
+          <%#</li>
+          <li class="nav-item">
+            <%= link_to 'https://forms.gle/HbWqbQpd33ZdQAoa7', class:"nav-link", target: :_blank, rel: "noopener noreferrer" do %>
+              <%#<i class="nav-icon fas fa-question"></i>
+              <p>お問い合わせ</p>
+            <% end %>
+          <%#</li>%>
 
           <!--スライドメニュー追記-->
           <p class="non-slide-link-menu"><%= paying_display %></p>
           <li class="nav-item">
             <%= link_to users_orders_path, class:"nav-link" do %>
+              <%# <i class="nav-icon fas fa-th"></i> %>
               <i class="nav-icon fas fa-users"></i>
               <p>現場情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to users_request_orders_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-file"></i>
+              <p>安全書類の記入依頼</p>
             <% end %>
           </li>
           <li class="nav-item">
@@ -49,6 +122,12 @@
               <p>会社情報</p>
             <% end %>
           </li>
+          <!--<li class="nav-item">
+            <%= link_to '#', class:"nav-link" do %>
+              <i class="nav-icon fas fa-question"></i>
+              <p></p>
+            <% end %>
+          </li>-->
           <li class="nav-item">
             <%= link_to users_workers_path, class:"nav-link" do %>
               <i class="nav-icon fas fa-user"></i>
@@ -81,6 +160,12 @@
           </li>
           <p></p>
           <p></p>
+          <!--<li class="nav-item">
+            <%= link_to users_general_users_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-user-circle"></i>
+              <p>ユーザー管理</p>
+            <% end %>
+          </li>-->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
