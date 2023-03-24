@@ -45,6 +45,15 @@ document.addEventListener("turbolinks:load", () => {
   })
 });
 
+// 強制リロード
+history.pushState(null, null, location.href);
+window.addEventListener('pageshow', function (event) {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
+
+
 import 'select2';                       // globally assign select2 fn to $ element
 import 'select2/dist/css/select2.css';  // optional if you have css loader
 
