@@ -31,6 +31,12 @@
           <!--スライドメニュー追記-->
           <p class="non-slide-link-menu"><%= paying_display %></p>
           <li class="nav-item">
+            <%= link_to users_orders_path, class:"nav-link" do %>
+              <i class="nav-icon fas fa-users"></i>
+              <p>現場情報</p>
+            <% end %>
+          </li>
+          <li class="nav-item">
             <%= link_to users_subcon_users_path, class:"nav-link" do %>
               <i class="nav-icon fas fa-building"></i>
               <p>協力会社情報</p>
