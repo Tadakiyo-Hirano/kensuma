@@ -195,8 +195,10 @@ module Users
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 半角スペースがある場合、全角スペースに変換
-      converted_params[:name] = worker_params[:name].gsub(/[\s　]+/, '　')
-      converted_params[:name_kana] = worker_params[:name_kana].gsub(/[\s　]+/, '　')
+      converted_params[:name] = worker_params[:name].gsub(/[\s　]+/, ' ')
+      converted_params[:name_kana] = worker_params[:name_kana].gsub(/[\s　]+/, ' ')
+      converted_params[:my_phone_number] = worker_params[:my_phone_number].gsub(/[-ー]/, "")
+      converted_params[:family_phone_number] = worker_params[:family_phone_number].gsub(/[-ー]/, "")
       converted_params
     end
 
