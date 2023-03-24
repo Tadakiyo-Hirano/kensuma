@@ -23,12 +23,13 @@ FactoryBot.define do
     blank_term { 1 }
     career_up_id { '1' }
     sex { 0 }
-
+    driver_licence_number { nil }
     after(:create) do |worker|
       create_list(:worker_license, 1, worker: worker, license: License.create!(name: 'テストライセンス', license_type: 0))
       create_list(:worker_skill_training, 1, worker: worker, skill_training: SkillTraining.create!(name: 'テスト技能講習', short_name: 'テス技'))
       create_list(:worker_special_education, 1, worker: worker, special_education: SpecialEducation.create!(name: 'テスト特別教育'))
       create_list(:worker_insurance, 1, worker: worker)
+      create_list(:worker_safety_health_education, 1, worker: worker, safety_health_education: SafetyHealthEducation.create!(name: 'テスト健康診断'))
     end
   end
 end

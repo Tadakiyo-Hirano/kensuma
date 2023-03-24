@@ -39,7 +39,7 @@ class Worker < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_POST_CODE_REGEX = /\A\d{7}\z/
   validates :name, presence: true
-  validates :name_kana, presence: true, format: { with: /\A[\ァ-ヶー－\・\p{Zs}]+\z/, message: 'はカタカナで入力してください' }
+  validates :name_kana, presence: true, format: { with: /\A[ァ-ヶー－\・\p{Zs}]+\z/, message: 'はカタカナで入力してください' }
   validates :country, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }
   validates :post_code, presence: true, format: { with: VALID_POST_CODE_REGEX, message: 'は7桁で入力してください' }
@@ -58,6 +58,7 @@ class Worker < ApplicationRecord
   validates :family_name, presence: true
   validates :relationship, presence: true
   validates :sex, presence: true
+  validates :driver_licence_number, presence: true, format: { with: /\A\d{12}\z/, message: 'は12桁で入力してください' }, if: :driver_licence_present?
   # validates :status_of_residence, presence: true
   # validates :maturity_date
   # validates :confirmed_check, presence: true
@@ -68,5 +69,9 @@ class Worker < ApplicationRecord
 
   def to_param
     uuid
+  end
+
+  def driver_licence_present?
+    driver_licence.present?
   end
 end
