@@ -208,8 +208,16 @@ ja:
         admission_date_end: 入場年月日(終期)
         education_date: 新規入場時教育年月日
         occupation: 職種
-        sendoff_education: 送り出し教育の受講状況
+        sendoff_education: 送出し教育の受講状況
         prime_contractor_confirmation: 元請け確認者
+        occupation_id: 職種
+        job_description: 作業内容
+        foreign_work_place: 就労場所
+        foreign_date_start: 計画期間(始期)
+        foreign_date_end: 計画期間(終期)
+        foreign_job: 従事業務
+        foreign_job_description: 従事業務内容
+        proper_management_licenses: 建設特定技能受入計画認定証
       order:
         status: ステータス
         # 現場

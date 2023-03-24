@@ -90,6 +90,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         collection do
           get 'edit_workers'
           patch 'update_workers'
+          delete 'destroy_image'
         end
       end
     end
@@ -143,6 +144,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         collection do
           get 'edit_workers'
           patch 'update_workers'
+          delete 'destroy_image'
         end
       end
     end

@@ -347,7 +347,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "foreign_date_end"
     t.string "foreign_job"
     t.string "foreign_job_description"
-    t.binary "proper_management_license"
+    t.json "proper_management_licenses"
     t.string "field_workerable_type"
     t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false
