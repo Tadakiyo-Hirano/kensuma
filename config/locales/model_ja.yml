@@ -70,6 +70,19 @@ ja:
         business_retirement_benefit_mutual_aid_status: 退職金共済制度
         construction_license_status: 建設許可証
         industry_ids: 業種
+        specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
+        foreign_construction_workers_exist: 外国人建設就労者従事状況
+        foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
+        employment_manager_name: 雇用管理責任者(氏名)
+        employment_manager_post: 雇用管理責任者(役職名)
+      occupation:
+        name: 職種名
+      business_occupation:
+        occupation_id: 職種
+      industry:
+        name: 業種名
+      business_industry:
+        industry_id: 業種
         construction_license_permission_type_minister_governor: 建設許可種別
         construction_license_governor_permission_prefecture: 都道府県知事許可
         construction_license_permission_type_identification_general: 建設許可証(種別)
@@ -77,15 +90,6 @@ ja:
         construction_license_number_six_digits: 建設許可証(番号)
         construction_license_number: 建設許可番号
         construction_license_updated_at: 更新日
-        specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
-        foreign_construction_workers_exist: 外国人建設就労者従事状況
-        foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
-        employment_manager_name: 雇用管理責任者(氏名)
-        employment_manager_post: 雇用管理責任者(役職名)
-      business_occupation:
-        occupation_id: 職種
-      business_industry:
-        industry_id: 業種
       car:
         usage: 使用目的
         owner_name: 車両所有者氏名
