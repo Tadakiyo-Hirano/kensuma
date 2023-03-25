@@ -53,6 +53,11 @@ window.addEventListener('pageshow', function (event) {
   }
 });
 
+// ブラウザバック禁止
+window.addEventListener('popstate', (e) => {
+  history.go(1);
+});
+
 
 import 'select2';                       // globally assign select2 fn to $ element
 import 'select2/dist/css/select2.css';  // optional if you have css loader
