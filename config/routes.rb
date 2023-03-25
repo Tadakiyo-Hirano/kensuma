@@ -151,6 +151,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     post 'request_orders/:uuid/sub_request_orders/:sub_request_uuid/approve', to: 'request_orders#approve', as: :request_order_approve
     get 'request_orders/:uuid/edit_approval_status', to: 'request_orders#edit_approval_status', as: :request_order_edit_approval_status
     post 'request_orders/:uuid/update_approval_status', to: 'request_orders#update_approval_status', as: :request_order_update_approval_status
+
+    get '/supervising_engineer_assistant_skill_training_options', to: 'orders#supervising_engineer_assistant_skill_training_options'
   end
   # =================================================================
 

@@ -30,12 +30,6 @@ module Users
           end_date:                                     Date.today.next_month,
           contract_date:                                Date.today.prev_month,
           submission_destination:                       '提出部･提出先名',
-          general_safety_responsible_person_name:       '統括安全衛生責任者名',
-          vice_president_name:                          '副会長名',
-          vice_president_company_name:                  '副会長会社',
-          secretary_name:                               '書記名',
-          health_and_safety_manager_name:               '元方安全衛生管理者名',
-          general_safety_agent_name:                    '統括安全衛生責任者代行者',
           supervisor_name:                              '現場監督員名',
           supervisor_apply:                             %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
           site_agent_name:                              'テスト作業員1',
@@ -45,22 +39,28 @@ module Users
           supervising_engineer_check:                   0,
           supervising_engineer_assistant_name:          '監督技術者補佐名',
           supervising_engineer_assistant_qualification: '監督技術者補佐(資格内容)',
-          professional_engineer_name:                   '専門技術者名',
-          professional_engineer_qualification:          '専門技術者(資格内容)',
-          professional_engineer_construction_details:   '専門技術者(担当工事内容)',
-          safety_officer_name:                          '安全衛生担当役名',
-          safety_officer_position_name:                 '安全衛生担当役員(役職名)',
-          general_safety_manager_name:                  '総括安全衛生管理者名',
-          general_safety_manager_position_name:         '総括安全衛生管理(役職名)',
-          safety_manager_name:                          '安全管理者名',
-          safety_manager_position_name:                 '安全管理者(役職名)',
-          health_manager_name:                          '衛生管理者名',
-          health_manager_position_name:                 '衛生管理者(役職名)',
-          health_and_safety_promoter_name:              '安全衛生推進者名',
-          health_and_safety_promoter_position_name:     '安全衛生推進者(役職名)',
-          confirm_name:                                 '確認欄(氏名)',
-          accept_confirm_date:                          Date.yesterday,
-          subcontractor_name:                           '下請会社'
+          # general_safety_responsible_person_name:       '統括安全衛生責任者名',
+          # vice_president_name:                          '副会長名',
+          # vice_president_company_name:                  '副会長会社',
+          # secretary_name:                               '書記名',
+          # health_and_safety_manager_name:               '元方安全衛生管理者名',
+          # general_safety_agent_name:                    '統括安全衛生責任者代行者',
+          # professional_engineer_name:                   '専門技術者名',
+          # professional_engineer_qualification:          '専門技術者(資格内容)',
+          # professional_engineer_construction_details:   '専門技術者(担当工事内容)',
+          # safety_officer_name:                          '安全衛生担当役名',
+          # safety_officer_position_name:                 '安全衛生担当役員(役職名)',
+          # general_safety_manager_name:                  '総括安全衛生管理者名',
+          # general_safety_manager_position_name:         '総括安全衛生管理(役職名)',
+          # safety_manager_name:                          '安全管理者名',
+          # safety_manager_position_name:                 '安全管理者(役職名)',
+          # health_manager_name:                          '衛生管理者名',
+          # health_manager_position_name:                 '衛生管理者(役職名)',
+          # health_and_safety_promoter_name:              '安全衛生推進者名',
+          # health_and_safety_promoter_position_name:     '安全衛生推進者(役職名)',
+          # confirm_name:                                 '確認欄(氏名)',
+          # accept_confirm_date:                          Date.yesterday,
+          # subcontractor_name:                           '下請会社'
           # =============================================
         )
       else
@@ -105,6 +105,14 @@ module Users
       redirect_to users_orders_url
     end
 
+    # 監督技術者補佐
+    def supervising_engineer_assistant_skill_training_options
+      supervising_engineer_assistant_name = params[:supervising_engineer_assistant_name]
+      worker = Worker.find_by(name: supervising_engineer_assistant_name)
+      options = WorkerSkillTraining.where(worker_id: worker.id).pluck(:name, :id)
+      render json: options_for_select(options)
+    end
+
     private
 
     def set_order
@@ -113,7 +121,6 @@ module Users
 
     def order_params
       params.require(:order).permit(
-        :status,
         :site_career_up_id,
         :site_name,
         :site_address,
@@ -127,39 +134,43 @@ module Users
         :construction_details,
         :start_date, :end_date,
         :contract_date,
-        :submission_destination,
-        :general_safety_responsible_person_name,
-        :vice_president_name,
-        :vice_president_name,
-        :vice_president_company_name,
-        :secretary_name,
-        :health_and_safety_manager_name,
-        :general_safety_agent_name,
-        :supervisor_name,
-        :supervisor_apply,
         :site_agent_name,
         :site_agent_apply,
+        :supervisor_name,
+        :supervisor_apply,
+        :professional_engineer_name_1st,
+        :professional_engineer_construction_details_1st,
+        :professional_engineer_qualification_1st,
+        :professional_engineer_name_2nd,
+        :professional_engineer_construction_details_2nd,
+        :professional_engineer_qualification_2nd,
+        :general_safety_agent_name,
         :supervising_engineer_name,
         :supervising_engineer_check,
         :supervising_engineer_qualification,
         :supervising_engineer_assistant_name,
         :supervising_engineer_assistant_qualification,
-        :professional_engineer_name,
-        :professional_engineer_qualification,
-        :professional_engineer_construction_details,
-        :safety_officer_name,
-        :safety_officer_position_name,
-        :general_safety_manager_name,
-        :general_safety_manager_position_name,
-        :safety_manager_name,
-        :safety_manager_position_name,
-        :health_manager_name,
-        :health_manager_position_name,
-        :health_and_safety_promoter_name,
-        :health_and_safety_promoter_position_name,
-        :confirm_name,
-        :accept_confirm_date,
-        :subcontractor_name
+        :submission_destination,
+        :construction_license_status,
+        :status
+        # :general_safety_responsible_person_name,
+        # :vice_president_name,
+        # :vice_president_company_name,
+        # :secretary_name,
+        # :health_and_safety_manager_name,
+        # :safety_officer_name,
+        # :safety_officer_position_name,
+        # :general_safety_manager_name,
+        # :general_safety_manager_position_name,
+        # :safety_manager_name,
+        # :safety_manager_position_name,
+        # :health_manager_name,
+        # :health_manager_position_name,
+        # :health_and_safety_promoter_name,
+        # :health_and_safety_promoter_position_name,
+        # :confirm_name,
+        # :accept_confirm_date,
+        # :subcontractor_name
       ).merge(
         content: {
           genecon_name:                                                        current_business.name,                                             # 会社名

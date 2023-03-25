@@ -22,7 +22,7 @@ module Users
       # テスト用デフォルト値 ==========================
       if Rails.env.development? && @request_order.construction_name.nil?
         @request_order.tap do |r|
-          r.construction_name =                  'テスト工事名'
+          # r.construction_name =                  'テスト工事名'
           r.construction_details =               'テスト工事内容'
           r.start_date =                         '2022-02-01'
           r.end_date =                           '2022-02-28'
@@ -33,7 +33,7 @@ module Users
           r.professional_engineer_details =      'テスト担当工事内容'
           r.professional_construction =          0
           r.construction_manager_name =          'テスト工事担当責任者名'
-          r.construction_manager_position_name = 'テスト工事担当責任者役職名'
+          # r.construction_manager_position_name = 'テスト工事担当責任者役職名'
           r.site_agent_name =                    'テスト現場代理人名'
           r.site_agent_apply =                   'テスト現場申出方法'
           r.lead_engineer_name =                 'テスト主任技術者名'
@@ -126,26 +126,27 @@ module Users
 
     def request_order_params
       params.require(:request_order).permit(
-        :primary_subcontractor,
-        :sub_company,
+        # :primary_subcontractor,
+        # :sub_company,
         :construction_name,
         :construction_details,
         :start_date,
         :end_date,
         :contract_date,
+        :site_agent_name,
+        :site_agent_apply,
         :supervisor_name,
         :supervisor_apply,
         :professional_engineer_name,
-        :professional_engineer_skill_training_id,
+        # :professional_engineer_skill_training_id,
         :professional_engineer_details,
         :professional_engineer_qualification,
         :professional_construction,
         :construction_manager_name,
-        :construction_manager_position_name,
-        :site_agent_name,
-        :site_agent_apply,
+        # :construction_manager_position_name,
         :lead_engineer_name,
         :lead_engineer_check,
+        :lead_engineer_qualification,
         :work_chief_name,
         :work_conductor_name,
         :safety_officer_name,
@@ -153,19 +154,20 @@ module Users
         :safety_promoter_name,
         :foreman_name,
         :registered_core_engineer_name,
-        content:
-                 %i[
-                   professional_engineer_skill_training_id
-                   lead_engineer_skill_training_id
-                   registered_core_engineer_skill_training_id
-                 ]
+        :registered_core_engineer_qualification
+        # content:
+        #          %i[
+        #            professional_engineer_skill_training_id
+        #            lead_engineer_skill_training_id
+        #            registered_core_engineer_skill_training_id
+        #          ]
       ).merge(
         content: {
           # このrubocop除外設定はのちに修正されます,Layout/LineLength一行の文字数140を超えている
           # rubocop:disable Layout/LineLength
-          professional_engineer_skill_training_id:                            params[:request_order][:content][:professional_engineer_skill_training_id],
-          lead_engineer_skill_training_id:                                    params[:request_order][:content][:lead_engineer_skill_training_id],
-          registered_core_engineer_skill_training_id:                         params[:request_order][:content][:registered_core_engineer_skill_training_id],
+          # professional_engineer_skill_training_id:                            params[:request_order][:content][:professional_engineer_skill_training_id],
+          # lead_engineer_skill_training_id:                                    params[:request_order][:content][:lead_engineer_skill_training_id],
+          # registered_core_engineer_skill_training_id:                         params[:request_order][:content][:registered_core_engineer_skill_training_id],
           # rubocop:enable Layout/LineLength
           subcon_name:                                                        current_business.name,                                             # 会社名
           subcon_branch_name:                                                 current_business.branch_name,                                      # 支店･営業所名
