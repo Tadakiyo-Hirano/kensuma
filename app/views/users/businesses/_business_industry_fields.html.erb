@@ -41,6 +41,7 @@
 </div>
 
 <script>
+//建設許可種別の内容（大臣・知事）によって、都道府県知事許可フォームの有効・無効切り替え
   $(document).on('change', 'input[name^="business[business_industries_attributes]"][name$="[construction_license_permission_type_minister_governor]"]', function() {
     var index = $(this).attr('name').match(/\d+/)[0];
     // 「大臣許可」が選択されたら、テキストボックスを有効化する

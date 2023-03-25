@@ -105,6 +105,7 @@
 <div id="available-form">
   <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
 </div>
+
 <!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
 <div id="hidden-form" class="list-group">
   <div class="list-group-item">
@@ -127,6 +128,7 @@
   </div>
 </div>
 <!-- BusinessIndustryここまで -->
+
 <br>
 <%= f.label :specific_skilled_foreigners_exist %><br>
 <%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last) %><br>
@@ -146,45 +148,25 @@
 
 <script>
 //建設許可証の有無によってフォームの表示・非表示の切り替え
-  // const available_form = document.getElementById('available-form')
-  // const list_group = document.getElementById('hidden-form')
-  // function getRadioHealthInsuranceName(object) {
-  //   const value = $('input[name="business[construction_license_status]"]:checked').val();
-  //   if (value == 'available'){
-  //     list_group.classList.remove('hidden');
-  //   } else {
-  //     list_group.classList.add('hidden');
-  //   }
-  // };
-  // getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
-
-  // $('input[name="business[construction_license_status]"]').change(function() {
-  //   if ($(this).val() == 'available') {
-  //     list_group.classList.remove('hidden');
-  //   } else {
-  //     list_group.classList.add('hidden');
-  //   }
-  // });
-$(document).on('turbolinks:load', function() {
-  var availableForm = $('#available-form');
-  var hiddenForm = $('#hidden-form');
-
-  function toggleFormVisibility() {
-    if (availableForm.find(':checked').val() === 'available') {
-      hiddenForm.show();
-      if (hiddenForm.find('.nested-fields').length === 0) {
-        hiddenForm.find('.add_nested_fields').click();
-      }
+  const available_form = document.getElementById('available-form')
+  const list_group = document.getElementById('hidden-form')
+  function getRadioHealthInsuranceName(object) {
+    const value = $('input[name="business[construction_license_status]"]:checked').val();
+    if (value == 'available'){
+      list_group.classList.remove('hidden');
     } else {
-      hiddenForm.hide();
+      list_group.classList.add('hidden');
     }
-  }
+  };
+  getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
 
-  availableForm.on('change', 'input[type="radio"]', toggleFormVisibility);
-
-  toggleFormVisibility();
-});
-
+  $('input[name="business[construction_license_status]"]').change(function() {
+    if ($(this).val() == 'available') {
+      list_group.classList.remove('hidden');
+    } else {
+      list_group.classList.add('hidden');
+    }
+  });
 
 // フォームを29個まで制限かける（実装途中）
   // $(function() {
