@@ -105,11 +105,17 @@
 <div id="available-form">
   <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
 </div>
-<!-- BusinessIndustryここから -->
+<!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
 <div id="hidden-form" class="list-group">
   <div class="list-group-item">
-    <%= f.fields_for :business_industries do |b_industry| %>
-      <%= render "business_industry_fields", f: b_industry %>
+    <% if f.object.business_industries.size == 0 %>
+      <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
+    <% else %>
+      <%= f.fields_for :business_industries do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
     <% end %>
     <div id="license-insertion-point"></div>
     <%= link_to_add_association "＋フォーム追加", f, :business_industries,
@@ -140,25 +146,44 @@
 
 <script>
 //建設許可証の有無によってフォームの表示・非表示の切り替え
-  const available_form = document.getElementById('available-form')
-  const list_group = document.getElementById('hidden-form')
-  function getRadioHealthInsuranceName(object) {
-    const value = $('input[name="business[construction_license_status]"]:checked').val();
-    if (value == 'available'){
-      list_group.classList.remove('hidden');
-    } else {
-      list_group.classList.add('hidden');
-    }
-  };
-  getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
+  // const available_form = document.getElementById('available-form')
+  // const list_group = document.getElementById('hidden-form')
+  // function getRadioHealthInsuranceName(object) {
+  //   const value = $('input[name="business[construction_license_status]"]:checked').val();
+  //   if (value == 'available'){
+  //     list_group.classList.remove('hidden');
+  //   } else {
+  //     list_group.classList.add('hidden');
+  //   }
+  // };
+  // getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
 
-  $('input[name="business[construction_license_status]"]').change(function() {
-    if ($(this).val() == 'available') {
-      list_group.classList.remove('hidden');
+  // $('input[name="business[construction_license_status]"]').change(function() {
+  //   if ($(this).val() == 'available') {
+  //     list_group.classList.remove('hidden');
+  //   } else {
+  //     list_group.classList.add('hidden');
+  //   }
+  // });
+$(document).on('turbolinks:load', function() {
+  var availableForm = $('#available-form');
+  var hiddenForm = $('#hidden-form');
+
+  function toggleFormVisibility() {
+    if (availableForm.find(':checked').val() === 'available') {
+      hiddenForm.show();
+      if (hiddenForm.find('.nested-fields').length === 0) {
+        hiddenForm.find('.add_nested_fields').click();
+      }
     } else {
-      list_group.classList.add('hidden');
+      hiddenForm.hide();
     }
-  });
+  }
+
+  availableForm.on('change', 'input[type="radio"]', toggleFormVisibility);
+
+  toggleFormVisibility();
+});
 
 
 // フォームを29個まで制限かける（実装途中）
