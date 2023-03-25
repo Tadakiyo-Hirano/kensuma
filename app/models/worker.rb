@@ -39,7 +39,7 @@ class Worker < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_POST_CODE_REGEX = /\A\d{7}\z/
   validates :name, presence: true
-  validates :name_kana, presence: true, format: { with: /\A[ァ-ヶー－\・\p{Zs}]+\z/, message: 'はカタカナで入力してください' }
+  validates :name_kana, presence: true, format: { with: /\A[ァ-ヶー－・\p{Zs}]+\z/, message: 'はカタカナで入力してください' }
   validates :country, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }
   validates :post_code, presence: true, format: { with: VALID_POST_CODE_REGEX, message: 'は7桁で入力してください' }
