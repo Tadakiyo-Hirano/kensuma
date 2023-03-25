@@ -55,7 +55,18 @@ window.addEventListener('pageshow', function (event) {
 
 // ブラウザバック禁止
 window.addEventListener('popstate', (e) => {
-  history.go(1);
+  let isBackAllowed = false;
+  if (!isBackAllowed) {
+    history.pushState(null, null, location.href);
+    history.go(1);
+    alert('ブラウザバックは使えません。');
+  } else {
+    isBackAllowed = false;
+  }
+});
+
+window.addEventListener('beforeunload', function(event) {
+  isBackAllowed = true;
 });
 
 
