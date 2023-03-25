@@ -92,6 +92,9 @@ gem 'reform'
 # wareki - ruby 和暦ライブラリ
 gem 'wareki'
 
+# 国選択
+gem 'country_select', '~> 8.0'
+
 # 一括更新
 gem 'activerecord-import'
 

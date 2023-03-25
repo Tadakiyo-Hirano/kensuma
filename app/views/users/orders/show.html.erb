@@ -5,12 +5,9 @@
     <table class="table table-hover text-nowrap">
       <tbody>
         <tr>
-          <td>
+          <td colspan="2">
             <%= link_to "現場情報一覧", users_orders_path, class: "btn btn-md btn-default" %>
             <%= link_to "現場情報修正", edit_users_order_path(@order), class: "btn btn-md btn-md btn-success" %>
-          </td>
-          <td>
-            <%= render '/users/documents/shares/show_order_link', order: @order %>
           </td>
         </tr>
 

@@ -850,6 +850,19 @@ module DocumentsHelper
 
   # (23)全建統一様式第８号(安全ミーティング報告書)
 
+  # 一次下請の情報 (安全ミーティング報告書)
+  def document_subcon_info_for_23rd
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    # 元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    # 下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+      # 下請けが存在しない場合
+    end
+  end
+
   # リスクの見積り点数
   def risk_estimation_point(risk_possibility)
     possibility_point, _possibility_comment = risk_possibility(risk_possibility)
@@ -938,8 +951,8 @@ module DocumentsHelper
   # アンケート設問：（就業年数-基準値）
   def questionnaire_experience_term_calc(worker)
     date_format = '%Y%m%d'
-    admission_date = worker.admission_date_start.strftime(date_format).to_i
-    hiring_date = worker.content['hiring_on'].to_date.strftime(date_format).to_i
+    admission_date = worker.admission_date_start&.strftime(date_format).to_i
+    hiring_date = worker.content['hiring_on'].to_date&.strftime(date_format).to_i
     hiring_on_term = (admission_date - hiring_date) / 10000
     experience_term_before_hiring = worker.content['experience_term_before_hiring'].to_i
     blank_term = worker.content['blank_term'].to_i
@@ -1430,7 +1443,7 @@ module DocumentsHelper
 
     if @request_order.order.business_id == @current_business.id
       case hierarchy_document.document_type
-      when 'doc_13rd'
+      when 'doc_13th'
         link_to '点検事項 記入', url
       when 'doc_16th'
         link_to '火気使用許可欄 記入', url

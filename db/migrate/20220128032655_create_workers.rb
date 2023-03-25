@@ -33,6 +33,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.string :residence_card_front
       t.string :residence_card_back
       t.string :employment_condition
+      t.integer :post_code
 
       t.timestamps
     end

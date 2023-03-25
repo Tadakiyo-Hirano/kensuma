@@ -33,12 +33,7 @@
                 %>
               </div>
                 <div class="col-md-4 mb-2">
-                <%= link_to "下請発注情報一覧", users_request_orders_path, class: "btn btn-block btn-default" %>
-              </div>
-              <div class="row">
-                <div class="col-md-12 mb-2">
-                  <%= link_to "一覧画面へ", users_request_orders_path, class: "btn btn-md btn-block btn-default" %>
-                </div>
+                <%= link_to "現場情報一覧", users_orders_path, class: "btn btn-block btn-default" %>
               </div>
               <% if @request_order.parent.nil? %>
                 <div class="row">

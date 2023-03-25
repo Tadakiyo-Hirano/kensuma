@@ -64,6 +64,13 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   end
 
   create_table "business_industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(種別) enum"
+    t.integer "construction_license_governor_permission_prefecture", comment: "建設許可証(都道府県) enum"
+    t.integer "construction_license_permission_type_identification_general", comment: "建設許可証(種別) enum"
+    t.string "construction_license_number_double_digit", comment: "建設許可証(番号)"
+    t.string "construction_license_number_six_digits", comment: "建設許可証(番号)"
+    t.string "construction_license_number", comment: "建設許可証(建設許可番号)"
+    t.date "construction_license_updated_at", comment: "建設許可証(更新日)"
     t.bigint "business_id", null: false
     t.bigint "industry_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -99,9 +106,11 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.json "stamp_images"
     t.json "occupation_ids"
     t.json "industry_ids"
+    t.json "tem_industry_ids"
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
     t.integer "foreign_technical_intern_trainees_exist"
+    t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
     t.string "employment_manager_name"
     t.string "employment_manager_post"
@@ -117,14 +126,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "business_employment_insurance_join_status", null: false
     t.string "business_employment_insurance_number"
     t.integer "business_retirement_benefit_mutual_aid_status", null: false
-    t.integer "construction_license_status", null: false
-    t.integer "construction_license_permission_type_minister_governor"
-    t.integer "construction_license_governor_permission_prefecture"
-    t.integer "construction_license_permission_type_identification_general"
-    t.string "construction_license_number_double_digit"
-    t.string "construction_license_number_six_digits"
-    t.string "construction_license_number"
-    t.date "construction_license_updated_at"
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
@@ -338,12 +339,20 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "admission_date_start"
     t.date "admission_date_end"
     t.date "education_date"
+    t.string "occupation"
+    t.integer "sendoff_education"
+    t.bigint "occupation_id"
+    t.string "job_description"
+    t.string "foreign_work_place"
+    t.date "foreign_date_start"
+    t.date "foreign_date_end"
+    t.string "foreign_job"
+    t.string "foreign_job_description"
+    t.binary "proper_management_license"
     t.string "field_workerable_type"
     t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "occupation"
-    t.integer "sendoff_education", default: 0, null: false
     t.string "prime_contractor_confirmation"
     t.index ["field_workerable_type", "field_workerable_id"], name: "index_field_workers_on_field_workerable"
   end
@@ -457,8 +466,11 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
 
   create_table "occupations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
+    t.string "short_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "industry_id"
+    t.index ["industry_id"], name: "index_occupations_on_industry_id"
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -642,7 +654,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "gender"
     t.json "invited_user_ids"
     t.json "invitation_sent_user_ids"
-    t.integer "role", default: 1
+    t.integer "role", default: 0
     t.bigint "admin_user_id"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
@@ -684,9 +696,9 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"
     t.bigint "worker_id", null: false
+    t.integer "has_labor_insurance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "has_labor_insurance", default: 0
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
   end
 
@@ -708,10 +720,10 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "max_blood_pressure", null: false
     t.integer "min_blood_pressure", null: false
     t.date "special_med_exam_on"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "health_condition", default: 0, null: false
     t.integer "is_med_exam", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
   end
 
@@ -772,6 +784,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "residence_card_front"
     t.string "residence_card_back"
     t.string "employment_condition"
+    t.integer "post_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
@@ -800,6 +813,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   add_foreign_key "machines", "businesses"
   add_foreign_key "news_users", "news"
   add_foreign_key "news_users", "users"
+  add_foreign_key "occupations", "industries"
   add_foreign_key "orders", "businesses"
   add_foreign_key "request_orders", "businesses"
   add_foreign_key "request_orders", "orders"

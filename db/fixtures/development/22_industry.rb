@@ -1,7 +1,7 @@
 Industry.seed(
   {
     id: 1,
-    name: '土木一式工事',
+    name: '土木一式工事業',
   },
   {
     id: 2,
@@ -114,5 +114,9 @@ Industry.seed(
   {
     id: 29,
     name: '解体工事業',
+  },
+  {
+    id: 30,
+    name: 'ガードマン',
   }
 )

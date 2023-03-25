@@ -1,3 +1,4 @@
+# rubocop:disable all
 module Users
   class BusinessesController < Users::Base
     before_action :set_business, except: %i[new create]
@@ -70,6 +71,12 @@ module Users
 
     def show; end
 
+    # ajax
+    def occupation_select
+      @occupations = Occupation.where(industry_id: params[:industry_ids]).pluck(:short_name, :id)
+      render partial: 'occupation-select', locals: { occupations: @occupations }
+    end
+
     def update_images
       # 残りstamp_imageを定義
       remain_stamp_images = @business.stamp_images
@@ -104,14 +111,15 @@ module Users
         :business_welfare_pension_insurance_office_number, :business_pension_insurance_join_status,
         :business_employment_insurance_join_status, :business_employment_insurance_number,
         :business_retirement_benefit_mutual_aid_status,
-        :construction_license_status, :construction_license_permission_type_minister_governor,
-        :construction_license_governor_permission_prefecture, :construction_license_permission_type_identification_general,
-        :construction_license_number_double_digit, :construction_license_number_six_digits,
-        :construction_license_number, :construction_license_updated_at,
-        :specific_skilled_foreigners_exist, :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist,
-        :employment_manager_name,
-        occupation_ids: [], industry_ids: []
+        :construction_license_status, :specific_skilled_foreigners_exist,
+        :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist, :employment_manager_name,
+        business_industries_attributes: %i[id industry_id construction_license_permission_type_minister_governor
+                                           construction_license_governor_permission_prefecture construction_license_permission_type_identification_general
+                                           construction_license_number_double_digit construction_license_number_six_digits
+                                           construction_license_number construction_license_updated_at _destroy],
+        occupation_ids: [], tem_industry_ids: []
       )
     end
   end
 end
+# rubocop:enable all

@@ -45,6 +45,31 @@ document.addEventListener("turbolinks:load", () => {
   })
 });
 
+// 強制リロード
+history.pushState(null, null, location.href);
+window.addEventListener('pageshow', function (event) {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
+
+// ブラウザバック禁止
+window.addEventListener('popstate', (e) => {
+  let isBackAllowed = false;
+  if (!isBackAllowed) {
+    history.pushState(null, null, location.href);
+    history.go(1);
+    alert('ブラウザバックは使えません。');
+  } else {
+    isBackAllowed = false;
+  }
+});
+
+window.addEventListener('beforeunload', function(event) {
+  isBackAllowed = true;
+});
+
+
 import 'select2';                       // globally assign select2 fn to $ element
 import 'select2/dist/css/select2.css';  // optional if you have css loader
 

@@ -20,11 +20,6 @@ RSpec.describe 'RequestOrders', type: :system do
   #   end
 
   #   context '下請発注情報' do
-  #     it '下請発注情報一覧画面へ遷移できること' do
-  #       visit users_request_orders_path
-  #       expect(page).to have_content '下請発注情報一覧'
-  #     end
-
   #     it '詳細画面へ遷移すること' do
   #       visit users_request_order_path(request_order)
   #       expect(page).to have_content '下請発注情報詳細'

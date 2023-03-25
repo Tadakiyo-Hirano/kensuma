@@ -27,7 +27,7 @@ module Users::SubRequestOrders
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A4'
           when 'doc_4th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { bottom: 2 }, orientation: 'Landscape'
-          when 'doc_5th', 'doc_13rd', 'doc_14th', 'doc_18th'
+          when 'doc_5th', 'doc_13th', 'doc_14th', 'doc_18th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', orientation: 'Landscape'
           when 'doc_8th'
             return render template: 'users/documents/show', pdf: '書類', layout: 'pdf', encording: 'UTF-8', page_size: 'A3', margin: { top: 5 }, orientation: 'Landscape'
@@ -44,7 +44,7 @@ module Users::SubRequestOrders
     def update
       if @document.request_order.order.business_id == current_business.id # 元請けのみが編集できる
         case @document.document_type
-        when 'doc_13rd', 'doc_16th'
+        when 'doc_13th', 'doc_16th'
           if @document.update(document_params(@document))
             redirect_to users_request_order_sub_request_order_document_url, success: '保存に成功しました'
           else
@@ -81,7 +81,7 @@ module Users::SubRequestOrders
             permit_criteria
           ]
                                         )
-      when 'doc_13rd'
+      when 'doc_13th'
         field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
         field_special_vehicle_keys = field_special_vehicle_ids.map { |field_special_vehicle_id| "field_special_vehicle_#{field_special_vehicle_id}" }
 

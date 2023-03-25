@@ -6,10 +6,6 @@ module Users
     before_action :exclude_prime_contractor, only: %i[edit update]
     before_action :redirect_unless_prime_contractor, only: %i[update_approval_status edit_approval_status]
 
-    def index
-      @request_orders = current_business.request_orders
-    end
-
     def show
       @sub_request_orders = @request_order.children
       @genecon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.genecon_documents_type
@@ -185,16 +181,16 @@ module Users
           subcon_employment_insurance_join_status:                            current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
           subcon_employment_insurance_number:                                 current_business.business_employment_insurance_number,             # 雇用保険番号
           # subcon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種
-          subcon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
-          subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
-          subcon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
-          subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
-          subcon_construction_license_number:                                 current_business.construction_license_number,                                      # 建設業許可番号(合成)
-          subcon_employment_manager_name:                                     current_business.employment_manager_name,                                          # 雇用管理責任者名
-          subcon_specific_skilled_foreigners_exist:                           current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
-          subcon_foreign_construction_workers_exist:                          current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
-          subcon_foreign_technical_intern_trainees_exist:                     current_business.foreign_technical_intern_trainees_exist_i18n,                     # 外国人技能実習生の従事の状況(有無)
-          subcon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
+          # subcon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
+          # subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
+          # subcon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
+          # subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
+          # subcon_construction_license_number:                                 current_business.construction_license_number,                                      # 建設業許可番号(合成)
+          subcon_employment_manager_name:                 current_business.employment_manager_name,                                          # 雇用管理責任者名
+          subcon_specific_skilled_foreigners_exist:       current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
+          subcon_foreign_construction_workers_exist:      current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
+          subcon_foreign_technical_intern_trainees_exist: current_business.foreign_technical_intern_trainees_exist_i18n # 外国人技能実習生の従事の状況(有無)
+          # subcon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
         }
       )
     end
