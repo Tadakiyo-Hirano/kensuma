@@ -35,7 +35,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.string :employment_condition # 受入企業と外国人建設就労者等との間の雇用条件書の写し
       t.integer :post_code # 郵便番号
       t.string :driver_licence # 自動車運転免許
-      t.integer :driver_licence_number # 免許証番号
+      t.string :driver_licence_number # 免許証番号
       t.string :seal # 認印
       t.json :employee_card # 従業員証
 

@@ -800,7 +800,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "employment_condition"
     t.integer "post_code"
     t.string "driver_licence"
-    t.integer "driver_licence_number"
+    t.string "driver_licence_number"
     t.string "seal"
     t.json "employee_card"
     t.datetime "created_at", precision: 6, null: false
