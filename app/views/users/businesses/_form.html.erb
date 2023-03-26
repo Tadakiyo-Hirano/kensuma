@@ -105,11 +105,18 @@
 <div id="available-form">
   <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
 </div>
-<!-- BusinessIndustryここから -->
+
+<!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
 <div id="hidden-form" class="list-group">
   <div class="list-group-item">
-    <%= f.fields_for :business_industries do |b_industry| %>
-      <%= render "business_industry_fields", f: b_industry %>
+    <% if f.object.business_industries.size == 0 %>
+      <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
+    <% else %>
+      <%= f.fields_for :business_industries do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
     <% end %>
     <div id="license-insertion-point"></div>
     <%= link_to_add_association "＋フォーム追加", f, :business_industries,
@@ -121,6 +128,7 @@
   </div>
 </div>
 <!-- BusinessIndustryここまで -->
+
 <br>
 <%= f.label :specific_skilled_foreigners_exist %><br>
 <%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last) %><br>
@@ -159,7 +167,6 @@
       list_group.classList.add('hidden');
     }
   });
-
 
 // フォームを29個まで制限かける（実装途中）
   // $(function() {
