@@ -8,7 +8,7 @@
       password_confirmation: 'password',
       role: 'admin',
       confirmed_at: Time.now,
-      is_prime_contractor: 0,
+      is_prime_contractor: true,
       invited_user_ids: (6..10).to_a.shuffle.take(4)
     }
   )
@@ -24,7 +24,7 @@ end
       password_confirmation: 'password',
       role: 'admin',
       confirmed_at: Time.now,
-      is_prime_contractor: 1,
+      is_prime_contractor: false,
       invited_user_ids: (11..15).to_a.shuffle.take(4)
     }
   )
@@ -40,7 +40,7 @@ end
       password_confirmation: 'password',
       role: 'admin',
       confirmed_at: Time.now,
-      is_prime_contractor: 1,
+      is_prime_contractor: false,
       invited_user_ids: (16..20).to_a.shuffle.take(4)
     }
   )
@@ -56,7 +56,7 @@ end
       password_confirmation: 'password',
       role: 'admin',
       confirmed_at: Time.now,
-      is_prime_contractor: 1,
+      is_prime_contractor: false,
       invited_user_ids: (21..25).to_a.shuffle.take(4)
     }
   )
@@ -72,7 +72,7 @@ end
       password_confirmation: 'password',
       role: 'admin',
       confirmed_at: Time.now,
-      is_prime_contractor: 1
+      is_prime_contractor: false
     }
   )
 end
