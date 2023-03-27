@@ -73,7 +73,7 @@ module Users
     end
 
     def create
-      @order = current_business.orders.build(order_params)
+      @order = current_business.orders.build(order_params_with_converted)
       request_order = @order.request_orders.build(business: current_business)
 
       24.times do |n|
@@ -95,7 +95,7 @@ module Users
     def edit; end
 
     def update
-      if @order.update(order_params)
+      if @order.update(order_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_order_url
       else
@@ -113,6 +113,14 @@ module Users
 
     def set_order
       @order = current_business.orders.find_by(site_uu_id: params[:site_uu_id])
+    end
+
+    def order_params_with_converted
+      converted_params = order_params.dup
+      # ハイフンを除外
+      converted_params[:order_post_code] = order_params[:order_post_code].gsub(/[-ー]/, '')
+
+      converted_params
     end
 
     def prime_contractor_access
