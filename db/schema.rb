@@ -64,6 +64,13 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   end
 
   create_table "business_industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(種別) enum"
+    t.integer "construction_license_governor_permission_prefecture", comment: "建設許可証(都道府県) enum"
+    t.integer "construction_license_permission_type_identification_general", comment: "建設許可証(種別) enum"
+    t.string "construction_license_number_double_digit", comment: "建設許可証(番号)"
+    t.string "construction_license_number_six_digits", comment: "建設許可証(番号)"
+    t.string "construction_license_number", comment: "建設許可証(建設許可番号)"
+    t.date "construction_license_updated_at", comment: "建設許可証(更新日)"
     t.bigint "business_id", null: false
     t.bigint "industry_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -103,6 +110,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
     t.integer "foreign_technical_intern_trainees_exist"
+    t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
     t.string "employment_manager_name"
     t.string "employment_manager_post"
@@ -118,14 +126,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.integer "business_employment_insurance_join_status", null: false
     t.string "business_employment_insurance_number"
     t.integer "business_retirement_benefit_mutual_aid_status", null: false
-    t.integer "construction_license_status", null: false
-    t.integer "construction_license_permission_type_minister_governor"
-    t.integer "construction_license_governor_permission_prefecture"
-    t.integer "construction_license_permission_type_identification_general"
-    t.string "construction_license_number_double_digit"
-    t.string "construction_license_number_six_digits"
-    t.string "construction_license_number"
-    t.date "construction_license_updated_at"
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 

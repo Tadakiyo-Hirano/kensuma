@@ -414,6 +414,16 @@ ja:
       construction_license_status: # 建設許可証(取得状況)
         available: 有
         not_available: 無
+      specific_skilled_foreigners_exist: # 一号特定技能外国人の従事の状況
+        available: 有
+        not_available: 無
+      foreign_construction_workers_exist: # 外国人建設就労者の従事の状況
+        available: 有
+        not_available: 無
+      foreign_technical_intern_trainees_exist: # 人技能実習生の従事の状況
+        available: 有
+        not_available: 無
+    business_industry:
       construction_license_permission_type_minister_governor: # 建設許可証(種別)
         minister_permission: 大臣許可
         governor_permission: 知事許可
@@ -468,15 +478,6 @@ ja:
         miyazaki: 宮崎県
         kagoshima: 鹿児島県
         okinawa: 沖縄県
-      specific_skilled_foreigners_exist: # 一号特定技能外国人の従事の状況
-        available: 有
-        not_available: 無
-      foreign_construction_workers_exist: # 外国人建設就労者の従事の状況
-        available: 有
-        not_available: 無
-      foreign_technical_intern_trainees_exist: # 人技能実習生の従事の状況
-        available: 有
-        not_available: 無
     document:
       document_type:
         cover_document: 表紙

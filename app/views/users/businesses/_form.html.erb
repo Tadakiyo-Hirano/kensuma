@@ -45,8 +45,8 @@
 <%= f.text_field :career_up_id, class: "form-control", placeholder: "Enter career_up_id" %>
 <br>
 <%= f.label :business_type %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_type, Business.business_types.keys.map { |k| [I18n.t("enums.business.business_type.#{k}"), k]}, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last) %><br>
 <br>
 <%= f.label :industry_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -69,8 +69,8 @@
 <%= f.file_field :stamp_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
 <br>
 <%= f.label :business_health_insurance_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_health_insurance_status, Business.business_health_insurance_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_health_insurance_status, Business.business_health_insurance_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_health_insurance_association %>
 <%= f.text_field :business_health_insurance_association, class: "form-control", placeholder: "Enter business_health_insurance_association" %>
@@ -79,8 +79,8 @@
 <%= f.text_field :business_health_insurance_office_number, class: "form-control", placeholder: "Enter business_health_insurance_office_number" %>
 <br>
 <%= f.label :business_welfare_pension_insurance_join_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_welfare_pension_insurance_office_number %>
 <%= f.text_field :business_welfare_pension_insurance_office_number, class: "form-control", placeholder: "Enter business_welfare_pension_insurance_office_number" %>
@@ -90,61 +90,54 @@
 <%= f.select :business_pension_insurance_join_status, Business.business_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
 <br>
 <%= f.label :business_employment_insurance_join_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_employment_insurance_number %>
 <%= f.text_field :business_employment_insurance_number, class: "form-control", placeholder: "Enter business_employment_insurance_number" %>
 <br>
 <%= f.label :business_retirement_benefit_mutual_aid_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :construction_license_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_status, Business.construction_license_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<div id="available-form">
+  <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
+</div>
+
+<!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
+<div id="hidden-form" class="list-group">
+  <div class="list-group-item">
+    <% if f.object.business_industries.size == 0 %>
+      <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
+    <% else %>
+      <%= f.fields_for :business_industries do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
+    <% end %>
+    <div id="license-insertion-point"></div>
+    <%= link_to_add_association "＋フォーム追加", f, :business_industries,
+      data: {
+        association_insertion_node: '#license-insertion-point',
+        association_insertion_method: 'append'
+      }
+    %>
+  </div>
+</div>
+<!-- BusinessIndustryここまで -->
+
 <br>
-<%= f.label :industry_ids %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :industry_ids, Industry.all, :id, :name, { selected: f.object.industries.ids }, { class: "pref multiple-select", multiple: true, style: "width: 100%" } %>
+<%= f.label :specific_skilled_foreigners_exist %><br>
+<%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last) %><br>
 <br>
+<%= f.label :foreign_construction_workers_exist %><br>
+<%= f.collection_radio_buttons(:foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n, :first, :last) %><br>
 <br>
-<%= f.label :construction_license_permission_type_minister_governor %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_permission_type_minister_governor, Business.construction_license_permission_type_minister_governors_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_governor_permission_prefecture %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_governor_permission_prefecture, Business.construction_license_governor_permission_prefectures_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_permission_type_identification_general %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_permission_type_identification_general, Business.construction_license_permission_type_identification_generals_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_number_double_digit %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number_double_digit, class: "form-control", placeholder: "2桁の番号" %>
-<br>
-<%= f.label :construction_license_number_six_digits %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number_six_digits, class: "form-control", placeholder: "6桁以下の番号" %>
-<br>
-<%= f.label :construction_license_number %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number, class: "form-control", placeholder: "建設許可証(建設許可番号)" %>
-<br>
-<%= f.label :construction_license_updated_at %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :construction_license_updated_at, class: "form-control", placeholder: "建設許可証(更新日)" %>
-<br>
-<%= f.label :specific_skilled_foreigners_exist %>
-<%= f.select :specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :foreign_construction_workers_exist %>
-<%= f.select :foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :foreign_technical_intern_trainees_exist %>
-<%= f.select :foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<%= f.label :foreign_technical_intern_trainees_exist %><br>
+<%= f.collection_radio_buttons(:foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n, :first, :last) %><br>
 <br>
 <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
 <%= f.text_field :employment_manager_name, class: "form-control", placeholder: "雇用管理責任者" %>
@@ -152,6 +145,51 @@
 <br>
 
 <%= f.hidden_field :user_id, value: current_user.id %>
+
+<script>
+//建設許可証の有無によってフォームの表示・非表示の切り替え
+  const available_form = document.getElementById('available-form')
+  const list_group = document.getElementById('hidden-form')
+  function getRadioHealthInsuranceName(object) {
+    const value = $('input[name="business[construction_license_status]"]:checked').val();
+    if (value == 'available'){
+      list_group.classList.remove('hidden');
+    } else {
+      list_group.classList.add('hidden');
+    }
+  };
+  getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
+
+  $('input[name="business[construction_license_status]"]').change(function() {
+    if ($(this).val() == 'available') {
+      list_group.classList.remove('hidden');
+    } else {
+      list_group.classList.add('hidden');
+    }
+  });
+
+// フォームを29個まで制限かける（実装途中）
+  // $(function() {
+  //   var max_fields = 29;
+  //   var current_fields = $('form .nested-fields').length;
+
+  //   $('#new_sample').on('cocoon:after-insert', function() {
+  //     current_fields++;
+
+  //     if (current_fields >= max_fields) {
+  //       $('form .links').hide();
+  //     }
+  //   });
+
+  //   $('#new_sample').on('cocoon:after-remove', function() {
+  //     current_fields--;
+
+  //     if (current_fields < max_fields) {
+  //       $('form .links').show();
+  //     }
+  //   });
+  // });
+</script>
 
 <script>
   $(function(){
