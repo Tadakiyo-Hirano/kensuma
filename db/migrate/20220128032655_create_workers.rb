@@ -18,7 +18,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.json :career_up_image # 建設キャリアアップシステムカードの写し
       t.references :business, foreign_key: true, null: false
       t.string :uuid, null: false
-      t.string :job_title, null: false # 役職
+      t.json :job_title, null: false # 役職
       t.integer :employment_contract, null: false, default: 0 # 雇用契約書 enum
       t.string :family_name,null: false # [緊急連絡先]氏名
       t.string :relationship,null: false # [緊急連絡先]続柄
