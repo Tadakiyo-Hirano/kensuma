@@ -18,7 +18,8 @@
         </tr>
         <tr>
           <th><%= Worker.human_attribute_name(:country) %></th>
-          <td><%= @worker.country %></td>
+          <td><%= I18n.t("countries.#{@worker.country}") %>
+          </td>
           <td></td>
           <td></td>
         </tr>
@@ -120,7 +121,7 @@
         </tr>
 
         <!-- 外国人労働者用表示 -->
-        <% unless @worker.country == "日本" %>
+        <% unless @worker.country == "JP" %>
           <tr>
             <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
             <td><%= @worker.status_of_residence_i18n %></td>

@@ -1,10 +1,14 @@
 module Users
   class OrdersController < Users::Base
+    before_action :prime_contractor_access, except: :index
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_order, except: %i[index new create]
 
     def index
       @orders = current_business.orders
+      @received_orders = @current_business.request_orders.reject { |request_order|
+        request_order.order.business_id == @current_business.id
+      }.sort.reverse
     end
 
     def show; end
@@ -69,7 +73,7 @@ module Users
     end
 
     def create
-      @order = current_business.orders.build(order_params)
+      @order = current_business.orders.build(order_params_with_converted)
       request_order = @order.request_orders.build(business: current_business)
 
       24.times do |n|
@@ -91,7 +95,7 @@ module Users
     def edit; end
 
     def update
-      if @order.update(order_params)
+      if @order.update(order_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_order_url
       else
@@ -109,6 +113,18 @@ module Users
 
     def set_order
       @order = current_business.orders.find_by(site_uu_id: params[:site_uu_id])
+    end
+
+    def order_params_with_converted
+      converted_params = order_params.dup
+      # ハイフンを除外
+      converted_params[:order_post_code] = order_params[:order_post_code].gsub(/[-ー]/, '')
+
+      converted_params
+    end
+
+    def prime_contractor_access
+      redirect_to users_orders_path, flash: { danger: '現場情報作成機能は有料サービスとなります' } if current_user.is_prime_contractor == false
     end
 
     def order_params
@@ -159,25 +175,33 @@ module Users
         :health_and_safety_promoter_position_name,
         :confirm_name,
         :accept_confirm_date,
-        :subcontractor_name
+        :subcontractor_name,
+        :occupation_id,
+        :job_description,
+        :foreign_work_place,
+        :foreign_date_start,
+        :foreign_date_end,
+        :foreign_job,
+        :foreign_job_description,
+        :proper_management_license
       ).merge(
         content: {
-          genecon_name:                                                        current_business.name,                                             # 会社名
-          genecon_address:                                                     current_business.address,                                          # 会社住所
-          genecon_career_up_id:                                                current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
-          genecon_health_insurance_status:                                     current_business.business_health_insurance_status,                 # 健康保険加入状況
-          genecon_health_insurance_association:                                current_business.business_health_insurance_association,            # 健康保険会社
-          genecon_health_insurance_office_number:                              current_business.business_health_insurance_office_number,          # 健康保険番号
-          genecon_welfare_pension_insurance_join_status:                       current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
-          genecon_welfare_pension_insurance_office_number:                     current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
-          genecon_employment_insurance_join_status:                            current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
-          genecon_employment_insurance_number:                                 current_business.business_employment_insurance_number,             # 雇用保険番号
+          genecon_name:                                    current_business.name,                                             # 会社名
+          genecon_address:                                 current_business.address,                                          # 会社住所
+          genecon_career_up_id:                            current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
+          genecon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
+          genecon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
+          genecon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
+          genecon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
+          genecon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
+          genecon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
+          genecon_employment_insurance_number:             current_business.business_employment_insurance_number # 雇用保険番号
           # genecon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種　エラー回避の為コメントアウト
-          genecon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
-          genecon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
-          genecon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
-          genecon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
-          genecon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
+          # genecon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
+          # genecon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
+          # genecon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
+          # genecon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
+          # genecon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
         }
       )
     end

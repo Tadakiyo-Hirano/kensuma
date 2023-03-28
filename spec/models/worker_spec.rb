@@ -358,7 +358,7 @@ RSpec.describe Worker, type: :model do
   #
   # context '日本人の場合' do
   # before :each do
-  # subject.country = "日本"
+  # subject.country = "JP"
   # end
   # context '存在しない場合' do
   # before :each do
@@ -396,7 +396,7 @@ RSpec.describe Worker, type: :model do
 
   # context '日本人の場合' do
   # before :each do
-  # subject.country = "日本"
+  # subject.country = "JP"
   # end
   # context '存在しない場合' do
   # before :each do
@@ -434,7 +434,7 @@ RSpec.describe Worker, type: :model do
   #
   # context '日本人の場合' do
   # before :each do
-  # subject.country = "日本"
+  # subject.country = "JP"
   # end
   # context '存在しない場合' do
   # before :each do

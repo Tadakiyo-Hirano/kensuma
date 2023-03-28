@@ -9,7 +9,7 @@ class FieldWorker < ApplicationRecord
   
   validates :admission_worker_name, presence: true
   validates :content, presence: true
-  
+
   def to_param
     uuid
   end

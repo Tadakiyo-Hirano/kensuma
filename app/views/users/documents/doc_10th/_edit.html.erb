@@ -1,6 +1,13 @@
 <!-- (10)高齢者就労報告書 -->
 <h1 align="center">編集中</h1>
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
+  <div class="card">  
+    <div class="card-body">
+      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+      <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+    </div>
+  </div>
+
   <div id="doc_10_sheet">
     <div class="ritz grid-container" dir="ltr">
       <table class="waffle" cellspacing="0" cellpadding="0">
@@ -62,9 +69,6 @@
           </div>
         </div>
       </table>
-        <div style="text-align: center">
-          <%= f.submit %>
-        </div>
     </div>
   </div>
 <% end %>

@@ -5,8 +5,8 @@
     <table class="table text-nowrap">
       <tbody>
         <td>
-          <%= link_to "下請発注情報詳細", users_request_order_path(@request_order), class: "btn btn-md btn-default" %>
-          <%= link_to "下請発注情報一覧", users_request_orders_path(@request_order), class: "btn btn-md btn-default" %>
+          <%= link_to "発注詳細", users_request_order_path(@request_order), class: "btn btn-md btn-default" %>
+          <%= link_to "現場情報一覧", users_orders_path(@request_order), class: "btn btn-md btn-default" %>
         </td>
         <td>
           <%= render '/users/documents/shares/show_request_order_link', request_order: @request_order %>

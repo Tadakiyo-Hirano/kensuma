@@ -44,6 +44,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :solvents, param: :uuid
     resource :business, except: %i[index destroy] do
       patch 'update_images'
+      get 'occupation_select'
     end
     resources :workers, param: :uuid
     resources :workers, except: %i[index create new show edit update destroy] do
@@ -95,7 +96,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       end
     end
     # get 'orders/:order_site_uu_id/field_solvents/:uuid/set_solvent_name_one', to: 'users/orders/field_solvents#edit_set_solvent_name_one', as: :set_solvent_name_one_users_order_field_solvents
-    resources :request_orders, only: %i[index show edit update], param: :uuid do
+    resources :request_orders, only: %i[show edit update], param: :uuid do
       resources :sub_request_orders, except: %i[edit destroy show], param: :uuid do
         resources :documents, only: %i[index show edit update], param: :uuid, controller: 'sub_request_orders/documents'
       end

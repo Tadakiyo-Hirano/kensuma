@@ -12,7 +12,7 @@ module Users
           # テスト用デフォルト値 ==========================
           name:                          'サンプル作業員',
           name_kana:                     'サンプルサギョウイン',
-          country:                       '日本',
+          country:                       'JP',
           my_address:                    '東京都港区1-1',
           my_phone_number:               '01234567898',
           family_name:                   'フェルナンデス',
@@ -78,7 +78,7 @@ module Users
       else
         @worker = current_business.workers.new(
           # 本番環境用デフォルト値 ==========================
-          country:        '日本',
+          country:        'JP',
           abo_blood_type: :a,
           rh_blood_type:  :plus,
           sex:            :man
@@ -106,7 +106,7 @@ module Users
     end
 
     def create
-      @worker = current_business.workers.build(worker_params)
+      @worker = current_business.workers.build(worker_params_with_converted)
       if @worker.save
         health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
         employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
@@ -126,7 +126,7 @@ module Users
     end
 
     def update
-      if @worker.update(worker_params)
+      if @worker.update(worker_params_with_converted)
         health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
         employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
         flash[:success] = '更新しました'
@@ -190,6 +190,23 @@ module Users
 
     def set_worker
       @worker = current_business.workers.find_by(uuid: params[:uuid])
+    end
+
+    def worker_params_with_converted
+      converted_params = worker_params.dup
+      # 半角スペースがある場合、全角スペースに変換
+      %i[name name_kana].each do |key|
+        next unless converted_params[key]
+
+        converted_params[key] = converted_params[key].to_s.gsub(/[\s　]+/, ' ')
+      end
+      # ハイフンを除外
+      %i[my_phone_number family_phone_number].each do |key|
+        next unless converted_params[key]
+
+        converted_params[key] = converted_params[key].to_s.gsub(/[-ー]/, '')
+      end
+      converted_params
     end
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名をnilにする

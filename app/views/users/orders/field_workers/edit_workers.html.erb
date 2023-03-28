@@ -21,6 +21,8 @@
     <%= form_with model: @order, url: update_workers_users_order_field_workers_path, method: :patch, local: true do |f| %>
       <div class="card">
         <div class="card-body table-responsive p-0">
+          <#table border="2" style="border-collapse: collapse; border-color: red">
+  
           <table class="table text-nowrap">
             <% @field_workers.each_with_index do |field_worker, i| %>
               <%= f.fields_for "field_workers[]", field_worker do |fw| %>
@@ -99,7 +101,33 @@
                     <% end %>
                   <% end %>
                 </tr>
-                <% end %>
+                  <tr>
+                    <td><%= field_worker.admission_worker_name %></td>
+                    <td><%= fw.date_field :admission_date_start, class: "form-control" %></td>
+                    <td><%= fw.date_field :admission_date_end, class: "form-control" %></td>
+                    <td><%= fw.date_field :education_date, class: "form-control" %></td>
+                    <td><%= fw.select :sendoff_education, FieldWorker.sendoff_educations_i18n.invert, {include_blank: true}, {class: "form-control"} %></td>
+                    <td><%= fw.select :occupation_id, FieldWorker.sendoff_educations_i18n.invert, {include_blank: true}, {class: "form-control"} %></td>
+                    <td><%= fw.text_field :job_description, class: "form-control" %></td>
+                  </tr>
+                <tr align="center">
+                  <th></th>
+                  <th><%= FieldWorker.human_attribute_name(:foreign_work_place) %></th>
+                  <th><%= FieldWorker.human_attribute_name(:foreign_date_start) %></th>
+                  <th><%= FieldWorker.human_attribute_name(:foreign_date_end) %></th>
+                  <th><%= FieldWorker.human_attribute_name(:foreign_job) %></th>
+                  <th><%= FieldWorker.human_attribute_name(:foreign_job_description) %></th>
+                  <th><%= FieldWorker.human_attribute_name(:proper_management_license) %></th>
+                </tr>
+                  <tr>
+                    <td></td>
+                    <td><%= fw.text_field :foreign_work_place, class: "form-control" %></td>
+                    <td><%= fw.date_field :foreign_date_start, class: "form-control" %></td>
+                    <td><%= fw.date_field :foreign_date_end, class: "form-control" %></td>
+                    <td><%= fw.text_field :foreign_job, class: "form-control" %></td>
+                    <td><%= fw.text_field :foreign_job_description, class: "form-control" %></td>
+                    <td><%= fw.file_field :proper_management_license, accept: 'image/jpg, image/jpeg, image/png', class: "form-control" %></td>
+                  </tr>
               <% end %>
             <% end %>
           </table>
