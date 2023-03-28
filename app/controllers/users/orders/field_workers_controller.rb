@@ -34,14 +34,30 @@ module Users::Orders
     def edit_workers; end
 
     def update_workers
-      worker_params = params[:order][:field_workers]
-      worker_params.each do |key, worker_params|
-        worker = FieldWorker.find(key)
-        display_required_field?(worker)
-        worker.update(field_worker_params(worker_params))
+      workers_params = params[:order][:field_workers]
+      @errors = {}
+      updated_field_workers = []
+      workers_params.each do |id, worker_params|
+        worker = FieldWorker.find(id)
+        if age_check?(worker_params, worker) && worker_params[:job_description].blank?
+          @errors[id] = "作業内容を入力してください"
+        else
+          if worker.update(field_worker_params(worker_params))
+            updated_field_workers << worker
+          else
+            @errors[id] = "更新に失敗しました"
+          end
+        end
       end
-      flash[:success] = '作業員情報を更新しました'
-      redirect_to users_order_field_workers_url
+
+      if @errors.present?
+        target_workers = FieldWorker.where(id: @errors.keys.map(&:to_i)).pluck(:admission_worker_name).join(", ")
+        flash.now[:error] = flash_message("#{target_workers}の作業内容欄は必須です")
+        render :edit_workers, locals: { error_ids: @errors, field_workers: workers_params }
+      else
+        flash[:success] = '作業員情報を更新しました'
+        redirect_to users_order_field_workers_url
+      end
     end
     
     def destroy_image
@@ -72,16 +88,26 @@ module Users::Orders
       params.permit(:admission_date_start, :admission_date_end, :education_date,
                     :sendoff_education, :occupation_id, :job_description,
                     :foreign_work_place, :foreign_date_start, :foreign_date_end,
-                    :foreign_job, :foreign_job_description, { proper_management_licenses: [] }).merge(required_fields: @required_fields)
+                    :foreign_job, :foreign_job_description, { proper_management_licenses: [] })
     end
     
-    
-    def field_workers_params_old
-      params.require(:order).permit(:order_site_uu_id, field_workers_attributes: [:id, :admission_date_start, :admission_date_end, :education_date,
-                                                    :sendoff_education, :occupation_id, :job_description,
-                                                    :foreign_work_place, :foreign_date_start, :foreign_date_end,
-                                                    :foreign_job, :foreign_job_description, { proper_management_licenses: [] }])##[:field_workers]
+    def age_check?(params, worker)
+      country = worker.content['country']
+      birthday = Date.parse(worker.content['birth_day_on'])
+      str_date = Date.parse(params[:admission_date_start])
+      age = (str_date - birthday).to_i / 365
+      if country == "日本"
+        if birthday.present? && (age < 18 || age >= 65)
+          return true
+        else
+          return false
+        end
+      end
+      return false
     end
     
+    def flash_message(message)
+      "<div class=\"alert alert-danger\">#{ERB::Util.html_escape(message)}</div>".html_safe
+    end
   end
 end
