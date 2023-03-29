@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "career_up_id"
     t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.json "occupation_ids"
     t.json "industry_ids"
     t.json "tem_industry_ids"
     t.integer "specific_skilled_foreigners_exist"

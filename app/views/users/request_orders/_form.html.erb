@@ -52,10 +52,10 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :professional_engineer_skill_training_id %> <!-- 専門技術者(資格内容) -->
-    <%= f.collection_select name = "content[professional_engineer_skill_training_id]",
+    <%= f.label :professional_engineer_skill_training %> <!-- 専門技術者(資格内容) -->
+    <%= f.collection_select name = "professional_engineer_skill_training",
                   SkillTraining.all, :id, :name,
-                  options = { include_blank: true, selected: skill_id_value("professional") },
+                  options = { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :professional_engineer_details %> <!-- 専門技術者(担当工事内容) -->
@@ -101,10 +101,10 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :lead_engineer_skill_training_id %> <!-- 主任技術者(資格内容) -->
-    <%= f.collection_select name = "content[lead_engineer_skill_training_id]",
+    <%= f.label :lead_engineer_skill_training %> <!-- 主任技術者(資格内容) -->
+    <%= f.collection_select name = "lead_engineer_skill_training",
                   SkillTraining.all, :id, :name,
-                  options = { include_blank: true, selected: skill_id_value("lead") },
+                  options = { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
     <%= f.label :lead_engineer_check %> <!-- 主任技術者(専任or非専任) -->
@@ -160,10 +160,10 @@
                       { include_blank: true },
                       { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :registered_core_engineer_skill_training_id %> <!-- 登録基幹技能者(資格内容) -->
-    <%= f.collection_select name = "content[registered_core_engineer_skill_training_id]",
+    <%= f.label :registered_core_engineer_skill_training %> <!-- 登録基幹技能者(資格内容) -->
+    <%= f.collection_select name = "registered_core_engineer_skill_training",
                   SkillTraining.all, :id, :name,
-                  options = { include_blank: true, selected: skill_id_value("registered_core") },
+                  options = { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
   </div>

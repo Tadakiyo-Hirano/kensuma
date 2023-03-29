@@ -135,7 +135,7 @@ module DocumentsHelper
 
   def c_license_permission_type_minister_or_governor(d_info) # 「大臣」か「知事」判定
     if d_info == document_info
-      permission_type = Business.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
+      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
     elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_minister_governor').delete("許可")
     end
@@ -149,7 +149,7 @@ module DocumentsHelper
 
   def c_license_permission_type_identification_or_general(d_info) # 「特定」か「一般」判定
     if d_info == document_info
-      permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
+      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
     elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
     end
@@ -179,6 +179,14 @@ module DocumentsHelper
     f_type == yes_no ? tag.span(yes_no, class: :circle) : yes_no
   end
 
+  def occupation_default(list)
+    if params[:action] == "edit" && @business.tem_industry_ids.present?
+      Occupation.where(industry_id: @business.tem_industry_ids.map(&:to_i).reject(&:zero?))
+    else
+      Occupation.all
+    end
+  end
+  
   # (8)作業員名簿
 
   # 元請の確認欄
@@ -885,7 +893,6 @@ module DocumentsHelper
     number.blank? ? tag.span('&nbsp;'.html_safe , class: :square_hankaku_space) : tag.span(number, class: :square_hankaku_number)
   end
   
-
 
   # (24)新規入場者調査票
 
