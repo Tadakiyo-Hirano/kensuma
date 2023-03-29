@@ -15,10 +15,10 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.integer :experience_term_before_hiring, null: false # 雇入前経験年数
       t.integer :blank_term, null: false # ブランク年数
       t.string :career_up_id # 技能者ID(キャリアアップシステム)
-      t.json :career_up_image # 建設キャリアアップシステムカードの写し
+      t.json :career_up_images # 建設キャリアアップシステムカードの写し
       t.references :business, foreign_key: true, null: false
       t.string :uuid, null: false
-      t.json :job_title, null: false # 役職
+      t.json :job_titles, null: false # 役職
       t.integer :employment_contract, null: false, default: 0 # 雇用契約書 enum
       t.string :family_name,null: false # [緊急連絡先]氏名
       t.string :relationship,null: false # [緊急連絡先]続柄
@@ -37,7 +37,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.string :driver_licence # 自動車運転免許
       t.string :driver_licence_number # 免許証番号
       t.string :seal # 認印
-      t.json :employee_card # 従業員証
+      t.json :employee_cards # 従業員証
 
       t.timestamps
     end
