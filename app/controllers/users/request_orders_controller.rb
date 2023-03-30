@@ -47,8 +47,6 @@ module Users
     end
 
     def update
-      #binding.pry
-      #logger.debug(current_business.professional_engineer_skill_training_id)
       if @request_order.update(request_order_params)
         flash[:success] = '更新しました'
         redirect_to users_request_order_url
