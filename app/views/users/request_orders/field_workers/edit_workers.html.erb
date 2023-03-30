@@ -110,3 +110,55 @@
     <% end %>
   </div>
 </section>
+
+<script>
+  $(document).ready(function() {
+    var fieldNames = {
+      'admission_date_start': '<%= t('activerecord.attributes.field_worker.admission_date_start') %>',
+      'admission_date_end': '<%= t('activerecord.attributes.field_worker.admission_date_end') %>',
+      'education_date': '<%= t('activerecord.attributes.field_worker.education_date') %>',
+      'sendoff_education': '<%= t('activerecord.attributes.field_worker.sendoff_education') %>',
+      'occupation_id': '<%= t('activerecord.attributes.field_worker.occupation_id') %>',
+      'foreign_work_place': '<%= t('activerecord.attributes.field_worker.foreign_work_place') %>',
+      'foreign_date_start': '<%= t('activerecord.attributes.field_worker.foreign_date_start') %>',
+      'foreign_date_end': '<%= t('activerecord.attributes.field_worker.foreign_date_end') %>',
+      'foreign_job': '<%= t('activerecord.attributes.field_worker.foreign_job') %>',
+      'foreign_job_description': '<%= t('activerecord.attributes.field_worker.foreign_job_description') %>'
+    };
+
+    $('form').submit(function(event) {
+      var formIsValid = true;
+      $('input[required], select[required], textarea[required]').each(function() {
+        if ($.trim($(this).val()).length === 0) {
+          formIsValid = false;
+          var fieldName = fieldNames[$(this).attr('id')];
+          $(this).addClass('field_with_errors');
+          if ($(this).is('select')) {
+            $(this).parent().append('<span class="error-message">' + fieldName + 'を選択してください。</span>');
+          } else {
+            $(this).parent().append('<span class="error-message">' + fieldName + 'を入力してください。</span>');
+          }
+        }
+      });
+      if (!formIsValid) {
+        event.preventDefault();
+      }
+    });
+
+    $('input[required], select[required], textarea[required]').on('input change', function() {
+      var fieldName = fieldNames[$(this).attr('id')];
+      if ($.trim($(this).val()).length === 0) {
+        $(this).addClass('field_with_errors');
+        $(this).parent().find('.error-message').remove();
+        if ($(this).is('select')) {
+          $(this).parent().append('<span class="error-message">' + fieldName + 'を選択してください。</span>');
+        } else {
+          $(this).parent().append('<span class="error-message">' + fieldName + 'を入力してください。</span>');
+        }
+      } else {
+        $(this).removeClass('field_with_errors');
+        $(this).parent().find('.error-message').remove();
+      }
+    });
+  });
+</script>

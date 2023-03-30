@@ -132,7 +132,7 @@ module Users
         :supervisor_name,
         :supervisor_apply,
         :professional_engineer_name,
-        :professional_engineer_skill_training,
+        :professional_engineer_qualification,
         :professional_engineer_details,
         :professional_construction,
         :construction_manager_name,
@@ -141,7 +141,7 @@ module Users
         :site_agent_apply,
         :lead_engineer_name,
         :lead_engineer_check,
-        :lead_engineer_skill_training,
+        :lead_engineer_qualification,
         :work_chief_name,
         :work_conductor_name,
         :safety_officer_name,
@@ -149,7 +149,7 @@ module Users
         :safety_promoter_name,
         :foreman_name,
         :registered_core_engineer_name,
-        :registered_core_engineer_skill_training
+        :registered_core_engineer_qualification
       ).merge(
         content: {
           # このrubocop除外設定はのちに修正されます,Layout/LineLength一行の文字数140を超えている

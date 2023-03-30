@@ -52,8 +52,8 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :professional_engineer_skill_training %> <!-- 専門技術者(資格内容) -->
-    <%= f.collection_select name = "professional_engineer_skill_training",
+    <%= f.label :professional_engineer_qualification %> <!-- 専門技術者(資格内容) -->
+    <%= f.collection_select name = "professional_engineer_qualification",
                   SkillTraining.all, :id, :name,
                   options = { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
@@ -101,8 +101,8 @@
                   { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :lead_engineer_skill_training %> <!-- 主任技術者(資格内容) -->
-    <%= f.collection_select name = "lead_engineer_skill_training",
+    <%= f.label :lead_engineer_qualification %> <!-- 主任技術者(資格内容) -->
+    <%= f.collection_select name = "lead_engineer_qualification",
                   SkillTraining.all, :id, :name,
                   options = { include_blank: true },
                   { class: "single-select", style: "width: 100%" }
@@ -160,8 +160,8 @@
                       { include_blank: true },
                       { class: "single-select", style: "width: 100%" }
     %><br><br>
-    <%= f.label :registered_core_engineer_skill_training %> <!-- 登録基幹技能者(資格内容) -->
-    <%= f.collection_select name = "registered_core_engineer_skill_training",
+    <%= f.label :registered_core_engineer_qualification %> <!-- 登録基幹技能者(資格内容) -->
+    <%= f.collection_select name = "registered_core_engineer_qualification",
                   SkillTraining.all, :id, :name,
                   options = { include_blank: true },
                   { class: "single-select", style: "width: 100%" }

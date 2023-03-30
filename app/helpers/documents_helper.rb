@@ -121,8 +121,8 @@ module DocumentsHelper
   end
 
   # (5)再下請負通知書（変更届）
-  def skill_id_value(engineer)
-    @request_order.content.nil? ? "" : @request_order.content&.[]("#{engineer}_engineer_skill_training_id").to_i
+  def skill_info(license, model)
+    SkillTraining.find_by(id: model&.send(license))&.name
   end
 
   def child_check(child)
