@@ -398,6 +398,25 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date, format: :long)
   end
 
+  # 作業員の記号
+  def field_worker_symbol(worker)
+    id = worker&.content&.[]('id')
+    birth_day_on = worker&.content&.[]('birth_day_on')
+
+    site_agent = "現" if id == document_info.content&.[]('subcon_site_agent_name_id') # (現)現場代理人
+    work_chief = "作" if id == document_info.content&.[]('subcon_work_chief_name_id') # (作)作業主任者
+    if birth_day_on .present?
+      under_18 = "未" if ((Date.today - birth_day_on .to_date) / 365.25).to_i < 18 # (未)18歳未満の作業員
+    end
+    sex = "女" if worker&.content&.[]('sex') == "woman" # 女
+    lead_engineer = "主" if id == document_info.content&.[]('subcon_lead_engineer_name_id') # (主)主任技術者
+    foreman = "職" if id == document_info.content&.[]('subcon_foreman_name_id') # (主)主任技術者
+    safety_manager = "安" if id == document_info.content&.[]('subcon_safety_manager_name_id') # (安)安全衛生責任者
+
+    worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager
+    worker_symbols.size > 1 ? worker_symbols.join(' ') : worker_symbols
+  end
+
   # (12)工事・通勤用車両届
 
   # 車両情報(工事･通勤)

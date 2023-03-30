@@ -33,6 +33,7 @@ module Users
     # 自社(事業所)の作業員名を取得
     def set_business_workers_name
       @business_workers_name = current_business.workers.pluck(:name)
+      @business_workers_name_id = current_business.workers
     end
 
     # 書類に反映させる作業員情報
