@@ -162,7 +162,7 @@ RSpec.describe Order, type: :model do
           it 'バリデーションに落ちること' do
             expect(subject).to be_invalid
             subject.valid?
-            expect(subject.errors.full_messages).to include('郵便番号は不正な値です')
+            expect(subject.errors.full_messages).to include('郵便番号(発注者)は不正な値です')
           end
         end
       end
