@@ -499,17 +499,19 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "supervisor_apply", null: false
     t.string "professional_engineer_name_1st"
     t.string "professional_engineer_qualification_1st"
-    t.string "professional_engineer_construction_details_1st"
+    t.string "professional_engineer_details_1st"
     t.string "professional_engineer_name_2nd"
     t.string "professional_engineer_qualification_2nd"
-    t.string "professional_engineer_construction_details_2nd"
+    t.string "professional_engineer_details_2nd"
     t.string "supervising_engineer_name", null: false
     t.integer "supervising_engineer_check", null: false
     t.string "supervising_engineer_qualification"
     t.string "supervising_engineer_assistant_name"
     t.string "supervising_engineer_assistant_qualification"
+    t.string "general_safety_responsible_person_name"
+    t.string "general_safety_agent_name"
     t.string "submission_destination", null: false
-    t.string "construction_license_status"
+    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
@@ -530,6 +532,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_id"
     t.string "uuid", null: false
+    t.string "occupation"
     t.string "construction_name"
     t.string "construction_details"
     t.date "start_date"
@@ -544,6 +547,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "professional_engineer_qualification"
     t.integer "professional_construction"
     t.string "construction_manager_name"
+    t.string "construction_manager_position_name"
     t.string "lead_engineer_name"
     t.integer "lead_engineer_check"
     t.string "lead_engineer_qualification"
@@ -555,7 +559,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
     t.string "registered_core_engineer_qualification"
-    t.string "construction_license_status"
+    t.string "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"

@@ -38,7 +38,7 @@ class Order < ApplicationRecord
   validates :supervising_engineer_check,                 presence: true                          # 監督技術者・主任技術者(専任or非専任)
   validates :submission_destination,                     presence: true                          # 提出先及び担当者(部署･氏名)
 
-  # validates :professional_engineer_construction_details,                 length: { maximum: 40 } # 専門技術者(担当工事内容)
+  # validates :professional_engineer_details,                              length: { maximum: 40 } # 専門技術者(担当工事内容)
   # validates :general_safety_responsible_person_name,     presence: true                          # 統括安全衛生責任者(氏名)
   # validates :general_safety_agent_name,                  presence: true                          # 統括安全衛生責任者代行者(氏名)
 

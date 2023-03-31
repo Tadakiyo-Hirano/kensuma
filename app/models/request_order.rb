@@ -15,6 +15,7 @@ class RequestOrder < ApplicationRecord
   enum professional_construction: { y: 0, n: 1 }
   enum lead_engineer_check: { full_time: 0, non_dedicated: 1 }
 
+  validates :occupation,                         presence: true, on: :update                            # 職種
   validates :construction_name,                  presence: true, length: { maximum: 100 }, on: :update  # 工事名
   validates :construction_details,               length: { maximum: 100 }, on: :update                  # 工事内容
   validates :start_date,                         presence: true, on: :update                            # 工期(自)

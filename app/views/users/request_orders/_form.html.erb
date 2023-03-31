@@ -6,12 +6,19 @@
     <div class="list-group-item">
       <div style="font-weight: bold;"><%= f.label :request_order_infomation %></div> <!-- 現場情報 -->
       <div class="list-group-item">
+        <%= f.label :occupation %> <!-- 職種 -->
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= f.select :occupation, @business_occupations.uniq,
+                      { include_blank: true },
+                      { class: "form-select form-select-sm", style: "width: 100%" }
+        %>
+        <br>
         <%= f.label :construction_name %> <!-- 工事名 -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.text_field :construction_name, class: "form-control", placeholder: RequestOrder.human_attribute_name(:construction_name) %>
+        <%= f.text_field :construction_name, class: "form-control" %>
         <br>
         <%= f.label :construction_details %> <!-- 工事内容 -->
-        <%= f.text_field :construction_details, class: "form-control", placeholder: RequestOrder.human_attribute_name(:construction_details) %>
+        <%= f.text_field :construction_details, class: "form-control" %>
         <br>
         <%= f.label :start_date %> <!-- 工期(自) -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -37,7 +44,7 @@
         %><br>
         <%= f.label :site_agent_apply %> <!-- 権限及び意見の申出方法(現場代理人) -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.text_field :site_agent_apply, class: "form-control", placeholder: Order.human_attribute_name(:site_agent_apply) %>
+        <%= f.text_field :site_agent_apply, class: "form-control" %>
         <br>
       </div>
     </div>
@@ -52,7 +59,7 @@
         %><br>
         <%= f.label :supervisor_apply %> <!-- 権限及び意見の申出方法(監督員) -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.text_field :supervisor_apply, class: "form-control", placeholder: Order.human_attribute_name(:supervisor_apply) %>
+        <%= f.text_field :supervisor_apply, class: "form-control" %>
         <br>
       </div>
     </div>
@@ -62,17 +69,15 @@
         <%= f.label :professional_engineer_name %> <!-- 氏名(専門技術者) -->
         <%= f.select :professional_engineer_name, @business_workers_name.uniq,
                       { include_blank: true },
-                      { class: "form-select form-select-sm", style: "width: 100%" }
+                      { id: "professional_engineer_name", class: "form-select form-select-sm", style: "width: 100%" }
         %><br>
         <%= f.label :professional_engineer_details %> <!-- 担当工事内容(専門技術者) -->
-        <%= f.text_field :professional_engineer_details, class: "form-control", placeholder: RequestOrder.human_attribute_name(:professional_engineer_details) %>
+        <%= f.text_field :professional_engineer_details, class: "form-control" %>
         <br>
         <%= f.label :professional_engineer_qualification %> <!-- 資格内容(専門技術者) -->
-        <%= f.select :professional_engineer_qualification,
-                    ([@request_order.professional_engineer_qualification] + SkillTraining.pluck(:name)), { id: :name },
-                    { include_blank: true, class: "single-select", style: "width: 100%" }
-        %><br><br>
-      </div>
+        <%= f.select :professional_engineer_qualification, options_for_select(@request_order.professional_engineer_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], include_blank: true), {},
+                    { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id' } %>
+      </div><br>
     </div>
     <div class="list-group-item">
       <div style="font-weight: bold;"><%= f.label :professional_construction %></div> <!-- 有・無(特定専門工事) -->
@@ -91,6 +96,7 @@
                       { include_blank: true },
                       { class: "form-select form-select-sm", style: "width: 100%" }
         %><br>
+        <% f.hidden_field :construction_manager_position_name, value: @request_order.construction_manager_position_name %>
       </div>
     </div>
     <div class="list-group-item">
@@ -100,20 +106,24 @@
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <%= f.select :lead_engineer_name, @business_workers_name.uniq,
                       { include_blank: true },
-                      { class: "form-select form-select-sm", style: "width: 100%" }
+                      { id: "lead_engineer_name", class: "form-select form-select-sm", style: "width: 100%" }
         %><br>
-        <%= f.label :lead_engineer_check %> <!-- 専任・非専任(主任技術者)) -->
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <div>
+          <%= f.label :lead_engineer_check %><!--専任・非専任(主任技術者)-->
+          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <div class="error-message"></div>
+        </div>
+        <br>
         <div class="list-group-item">
           <%= f.collection_radio_buttons(:lead_engineer_check, RequestOrder.lead_engineer_checks_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
             <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
           <% end %>
         </div><br>
         <%= f.label :lead_engineer_qualification %> <!-- 資格内容(主任技術者)) -->
-        <%= f.select :lead_engineer_qualification,
-                    ([@request_order.lead_engineer_qualification] + SkillTraining.pluck(:name)), { id: :name },
-                    { include_blank: true, class: "single-select", style: "width: 100%" }
-        %><br><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= f.select :lead_engineer_qualification, options_for_select(@request_order.lead_engineer_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @request_order.lead_engineer_qualification, include_blank: true), {},
+            { class: "form-select form-select-sm", style: "width: 100%", id: 'lead_engineer_qualification_id' }
+        %><br>
       </div>
     </div>
     <div class="list-group-item">
@@ -130,8 +140,7 @@
       <%= f.select :work_conductor_name, @business_workers_name.uniq,
                     { include_blank: true },
                     { class: "form-select form-select-sm", style: "width: 100%" }
-      %>
-      <br>
+      %><br>
     </div>
     <div class="list-group-item">
       <%= f.label :safety_officer_name %> <!-- 安全衛生担当責任者名 -->
@@ -171,24 +180,86 @@
         <%= f.label :registered_core_engineer_name %> <!-- 氏名(登録基幹技能者) -->
         <%= f.select :registered_core_engineer_name, @business_workers_name.uniq,
                           { include_blank: true },
-                          { class: "form-select form-select-sm", style: "width: 100%" }
+                          { id: "registered_core_engineer_name", class: "form-select form-select-sm", style: "width: 100%" }
         %><br>
         <%= f.label :registered_core_engineer_qualification %> <!-- 資格内容(登録基幹技能者) -->
-        <%= f.collection_select :registered_core_engineer_qualification,
-                              License.all, :id, :name,
-                              options = { include_blank: true},
-                              { class: "single-select", style: "width: 100%" }
-        %><br><br>
+        <%= f.select :registered_core_engineer_qualification, options_for_select(@request_order.registered_core_engineer_qualification.to_s.split(',')&.map{ |id| [License.find(id).name, id] }, include_blank: true), {},
+                      { class: "form-select form-select-sm", style: "width: 100%", id: 'registered_core_engineer_qualification_id' }
+        %><br>
       </div>
     </div>
     <div class="list-group-item">
-      <%= f.label :construction_license_status %>
+      <%= f.label :construction_license %>
+      <%= f.select :construction_license, @business_construction_licenses,
+              { include_blank: true },
+              { class: "form-select form-select-sm", style: "width: 100%" }
+      %>
     </div>
   </div>
 </div>
 <br>
 
 <script>
+//資格内容(専門技術者)の取得
+  $(function() {
+    // 専門技術者名が変更されたら、対応するWorkerSkillTrainingのレコードを取得して、セレクトボックスを作成する
+    $('#professional_engineer_name').on('change', function() {
+      var assistantName = $(this).val();
+      $.ajax({
+        url: '/users/professional_engineer_skill_training_options',
+        data: { professional_engineer_name: assistantName },
+        success: function(options) {
+          var selectOptionsHtml = '<option value=""></option>';
+          for (var i = 0; i < options.length; i++) {
+          selectOptionsHtml += '<option value="' + options[i].id + '">' + options[i].name + '</option>';
+          }
+          var selectBoxHtml = '<select id="worker_skill_training_id" name="order[worker_skill_training_id]">' + selectOptionsHtml + '</select>';
+          $('#professional_engineer_qualification_id').html(selectBoxHtml);
+        }
+      });
+    });
+  });
+
+  //資格内容(主任技術者)の取得
+  $(function() {
+    // 主任技術者名が変更されたら、対応するWorkerSkillTrainingのレコードを取得して、セレクトボックスを作成する
+    $('#lead_engineer_name').on('change', function() {
+      var assistantName = $(this).val();
+      $.ajax({
+        url: '/users/lead_engineer_skill_training_options',
+        data: { lead_engineer_name: assistantName },
+        success: function(options) {
+          var selectOptionsHtml = '<option value=""></option>';
+          for (var i = 0; i < options.length; i++) {
+          selectOptionsHtml += '<option value="' + options[i].id + '">' + options[i].name + '</option>';
+          }
+          var selectBoxHtml = '<select id="worker_skill_training_id" name="order[worker_skill_training_id]">' + selectOptionsHtml + '</select>';
+          $('#lead_engineer_qualification_id').html(selectBoxHtml);
+        }
+      });
+    });
+  });
+
+  //資格内容(登録基幹技能者)の取得
+  $(function() {
+    // 登録基幹技能者名が変更されたら、対応するWorkerSkillTrainingのレコードを取得して、セレクトボックスを作成する
+    $('#registered_core_engineer_name').on('change', function() {
+      var assistantName = $(this).val();
+      $.ajax({
+        url: '/users/registered_core_engineer_license_options',
+        data: { registered_core_engineer_name: assistantName },
+        success: function(options) {
+          var selectOptionsHtml = '<option value=""></option>';
+          for (var i = 0; i < options.length; i++) {
+          selectOptionsHtml += '<option value="' + options[i].id + '">' + options[i].name + '</option>';
+          }
+          var selectBoxHtml = '<select id="worker_license_id" name="order[worker_license_id]">' + selectOptionsHtml + '</select>';
+          $('#registered_core_engineer_qualification_id').html(selectBoxHtml);
+        }
+      });
+    });
+  });
+
   // 入力フォームのバリデーション
   $(function(){
     $.each(function(key){
@@ -196,12 +267,15 @@
     });
     $(".order-form-validation").validate({
       rules: {
+        "request_order[occupation]": {
+          required: true
+        },
         "request_order[construction_name]": {
           required: true,
           maxlength: 100
         },
         "request_order[construction_details]": {
-          required: true
+          maxlength: 100
         },
         "request_order[start_date]": {
           required: true
@@ -212,25 +286,33 @@
         "request_order[contract_date]": {
           required: true
         },
-        "request_order[supervisor_name]": {
-          required: true
-        },
-        "request_order[supervisor_apply]": {
-          required: true
-        },
-        "request_order[construction_manager_name]": {
-          required: true
-        },
         "request_order[site_agent_name]": {
           required: true
         },
         "request_order[site_agent_apply]": {
+          required: true,
+          maxlength: 40
+        },
+        "request_order[supervisor_name]": {
+          required: true
+        },
+        "request_order[supervisor_apply]": {
+          required: true,
+          maxlength: 40
+        },
+        "request_order[professional_engineer_details]": {
+          maxlength: 40
+        },
+        "request_order[construction_manager_name]": {
           required: true
         },
         "request_order[lead_engineer_name]": {
           required: true
         },
         "request_order[lead_engineer_check]": {
+          required: true
+        },
+        "request_order[lead_engineer_qualification]": {
           required: true
         },
         "request_order[work_chief_name]": {
@@ -253,12 +335,15 @@
         },
       },
       messages: {
+        "request_order[occupation]": {
+          required: "職種を入力してください。"
+        },
         "request_order[construction_name]": {
-          required: "工事名を入力してください。"
-          maxlength: "工事名を100文字以内にしてください。"
+          required: "工事名を入力してください。",
+          maxlength: "工事名は100字以内で入力してください。"
         },
         "request_order[construction_details]": {
-          required: "工事内容を入力してください。"
+          maxlength: "工事内容は100字以内で入力してください。"
         },
         "request_order[start_date]": {
           required: "工期(自)を入力してください。"
@@ -269,29 +354,34 @@
         "request_order[contract_date]": {
           required: "契約日を入力してください。"
         },
-        "request_order[supervisor_name]": {
-          required: "監督員名を入力してください。"
-        },
-        "request_order[supervisor_apply]": {
-          required: "権限及び意見の申出方法を入力してください。"
-        },
-        "request_order[construction_manager_name]": {
-          required: "工事担任責任者名を入力してください。"
-        },
-        // "request_order[construction_manager_position_name]": {
-        //   required: "工事担任責任者の役職名を入力してください。"
-        // },
         "request_order[site_agent_name]": {
           required: "現場代理人名を入力してください。"
         },
         "request_order[site_agent_apply]": {
-          required: "権限及び意見の申出方法を入力してください。"
+          required: "権限及び意見の申出方法を入力してください。",
+          maxlength: "権限及び意見の申出方法は40字以内で入力してください。"
+        },
+        "request_order[supervisor_name]": {
+          required: "監督員名を入力してください。"
+        },
+        "request_order[supervisor_apply]": {
+          required: "権限及び意見の申出方法を入力してください。",
+          maxlength: "権限及び意見の申出方法は40字以内で入力してください。"
+        },
+        "request_order[professional_engineer_details]": {
+          maxlength: "担当工事内容は40字以内で入力してください。"
+        },
+        "request_order[construction_manager_name]": {
+          required: "工事担任責任者名を入力してください。"
         },
         "request_order[lead_engineer_name]": {
           required: "主任技術者名を入力してください。"
         },
         "request_order[lead_engineer_check]": {
           required: "専任or非専任を選択してください。"
+        },
+        "request_order[lead_engineer_qualification]": {
+          required: "資格内容を選択してください。"
         },
         "request_order[work_chief_name]": {
           required: "作業主任者名を入力してください。"
@@ -311,6 +401,13 @@
         "request_order[foreman_name]": {
           required: "職長名を入力してください。"
         },
+      },
+      errorPlacement: function(error, element) {
+        if (element.attr("name") == "request_order[lead_engineer_check][]") {
+          error.appendTo(".error-message");
+        } else {
+          error.insertAfter(element);
+        }
       },
       errorClass: "input_form_error"
     });

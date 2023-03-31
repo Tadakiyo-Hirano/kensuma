@@ -7,6 +7,8 @@ FactoryBot.define do
     start_date { '2022-01-01' }
     end_date { '2022-01-01' }
     contract_date { '2022-01-01' }
+    sequence(:site_agent_name) { |n| "site_agent_name#{n}" }
+    sequence(:site_agent_apply) { |n| "site_agent_apply#{n}" }
     sequence(:supervisor_name) { |n| "supervisor_name#{n}" }
     sequence(:supervisor_apply) { |n| "supervisor_apply#{n}" }
     sequence(:professional_engineer_name) { |n| "professional_engineer_name#{n}" }
@@ -14,8 +16,6 @@ FactoryBot.define do
     professional_construction { 0 }
     sequence(:construction_manager_name) { |n| "construction_manager_name#{n}" }
     sequence(:construction_manager_position_name) { |n| "construction_manager_position_name#{n}" }
-    sequence(:site_agent_name) { |n| "site_agent_name#{n}" }
-    sequence(:site_agent_apply) { |n| "site_agent_apply#{n}" }
     sequence(:lead_engineer_name) { |n| "lead_engineer_name#{n}" }
     lead_engineer_check { 0 }
     sequence(:work_chief_name) { |n| "work_chief_name#{n}" }

@@ -247,12 +247,14 @@ ja:
         professional_engineer: 専門技術者
         professional_engineer_name_1st: 氏名
         professional_engineer_qualification_1st: 資格内容
-        professional_engineer_construction_details_1st: 担当工事内容
+        professional_engineer_details_1st: 担当工事内容
         professional_engineer_name_2nd: 氏名
         professional_engineer_qualification_2nd: 資格内容
-        professional_engineer_construction_details_2nd: 担当工事内容
-        # general_safety_responsible_person_name: 統括安全衛生責任者名
-        # general_safety_agent_name: 統括安全衛生責任者代行者名
+        professional_engineer_details_2nd: 担当工事内容
+        general_safety_responsible_person_name: 統括安全衛生責任者名
+        general_safety_responsible_person_name_note: ※常時100人以上の労働者を使用する場合、入力して下さい。
+        general_safety_agent_name: 統括安全衛生責任者代行者名
+        general_safety_agent_name_note: ※常時100人以上の労働者を使用する場合、入力して下さい。
         supervising_engineer: 監督技術者･主任技術者
         supervising_engineer_name: 氏名
         supervising_engineer_check: 専任・非専任
@@ -266,7 +268,7 @@ ja:
         # secretary_name: 書記名
         # health_and_safety_manager_name: 元方安全衛生管理者名
         submission_destination: 提出先及び担当者名
-        construction_license_status: 工事に必要な建設許可証
+        construction_license: 工事に必要な建設許可証
         status: ステータス
       request_order:
         request_order_infomation: 現場情報
@@ -274,6 +276,7 @@ ja:
         business_id: 事業所
         status: ステータス
         # 下請会社
+        occupation: 職種
         construction_name: 工事名
         construction_details: 工事内容
         start_date: 工期(自)
@@ -307,7 +310,7 @@ ja:
         registered_core_engineer: 登録基幹技能者
         registered_core_engineer_name: 氏名
         registered_core_engineer_qualification: 資格内容
-        construction_license_status: 工事に必要な建設許可証
+        construction_license: 工事に必要な建設許可証
       worker:
         name: 名前
         name_kana: 名前カナ

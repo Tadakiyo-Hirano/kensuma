@@ -2,6 +2,7 @@ module Users
   class OrdersController < Users::Base
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_order, except: %i[index new create]
+    before_action :set_business_construction_licenses, only: %i[new create edit update]
 
     def index
       @orders = current_business.orders
@@ -32,16 +33,16 @@ module Users
           start_date:                                   Date.today,
           end_date:                                     Date.today.next_month,
           contract_date:                                Date.today.prev_month,
-          submission_destination:                       '提出部･提出先名',
-          supervisor_name:                              '現場監督員名',
+          submission_destination:                       'テスト作業員1',
+          supervisor_name:                              'テスト作業員1',
           supervisor_apply:                             %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
           site_agent_name:                              'テスト作業員1',
           site_agent_apply:                             %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
-          supervising_engineer_name:                    '監督技術者･主任技術者名',
-          supervising_engineer_qualification:           '監督技術者･主任技術者(資格内容)',
+          supervising_engineer_name:                    'テスト作業員1',
+          # supervising_engineer_qualification:           '監督技術者･主任技術者(資格内容)',
           supervising_engineer_check:                   0,
-          supervising_engineer_assistant_name:          '監督技術者補佐名',
-          supervising_engineer_assistant_qualification: '監督技術者補佐(資格内容)',
+          supervising_engineer_assistant_name:          'テスト作業員1',
+          # supervising_engineer_assistant_qualification: '監督技術者補佐(資格内容)',
           # general_safety_responsible_person_name:       '統括安全衛生責任者名',
           # vice_president_name:                          '副会長名',
           # vice_president_company_name:                  '副会長会社',
@@ -50,7 +51,7 @@ module Users
           # general_safety_agent_name:                    '統括安全衛生責任者代行者',
           # professional_engineer_name:                   '専門技術者名',
           # professional_engineer_qualification:          '専門技術者(資格内容)',
-          # professional_engineer_construction_details:   '専門技術者(担当工事内容)',
+          # professional_engineer_details:                '専門技術者(担当工事内容)',
           # safety_officer_name:                          '安全衛生担当役名',
           # safety_officer_position_name:                 '安全衛生担当役員(役職名)',
           # general_safety_manager_name:                  '総括安全衛生管理者名',
@@ -108,12 +109,36 @@ module Users
       redirect_to users_orders_url
     end
 
+    # 専門技術者1
+    def professional_engineer_1st_skill_training_options
+      professional_engineer_name_1st = params[:professional_engineer_name_1st]
+      worker = Worker.find_by(name: professional_engineer_name_1st)
+      options = worker.skill_trainings
+      render json: options
+    end
+
+    # 専門技術者2
+    def professional_engineer_2nd_skill_training_options
+      professional_engineer_name_2nd = params[:professional_engineer_name_2nd]
+      worker = Worker.find_by(name: professional_engineer_name_2nd)
+      options = worker.skill_trainings
+      render json: options
+    end
+
+    # 監督技術者・主任技術者
+    def supervising_engineer_skill_training_options
+      supervising_engineer_name = params[:supervising_engineer_name]
+      worker = Worker.find_by(name: supervising_engineer_name)
+      options = worker.skill_trainings
+      render json: options
+    end
+
     # 監督技術者補佐
     def supervising_engineer_assistant_skill_training_options
       supervising_engineer_assistant_name = params[:supervising_engineer_assistant_name]
       worker = Worker.find_by(name: supervising_engineer_assistant_name)
-      options = WorkerSkillTraining.where(worker_id: worker.id).pluck(:name, :id)
-      render json: options_for_select(options)
+      options = worker.skill_trainings
+      render json: options
     end
 
     private
@@ -142,11 +167,12 @@ module Users
         :supervisor_name,
         :supervisor_apply,
         :professional_engineer_name_1st,
-        :professional_engineer_construction_details_1st,
+        :professional_engineer_details_1st,
         :professional_engineer_qualification_1st,
         :professional_engineer_name_2nd,
-        :professional_engineer_construction_details_2nd,
+        :professional_engineer_details_2nd,
         :professional_engineer_qualification_2nd,
+        :general_safety_responsible_person_name,
         :general_safety_agent_name,
         :supervising_engineer_name,
         :supervising_engineer_check,
@@ -154,9 +180,8 @@ module Users
         :supervising_engineer_assistant_name,
         :supervising_engineer_assistant_qualification,
         :submission_destination,
-        :construction_license_status,
-        :status
-        # :general_safety_responsible_person_name,
+        :status,
+        construction_license: []
         # :vice_president_name,
         # :vice_president_company_name,
         # :secretary_name,

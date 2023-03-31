@@ -2,6 +2,8 @@ class AddSitesToRequestOrders < ActiveRecord::Migration[6.1]
   def change
 
     ## 下請会社
+
+    add_column :request_orders, :occupation,                                  :string   # 職種
     add_column :request_orders, :construction_name,                           :string   # 工事名
     add_column :request_orders, :construction_details,                        :string   # 工事内容
     add_column :request_orders, :start_date,                                  :date     # 工期(自)
@@ -21,6 +23,7 @@ class AddSitesToRequestOrders < ActiveRecord::Migration[6.1]
     add_column :request_orders, :professional_construction,                   :integer  # 特定専門工事(有無)
 
     add_column :request_orders, :construction_manager_name,                   :string   # 工事担任責任者(氏名)
+    add_column :request_orders, :construction_manager_position_name,          :string   # 工事担任責任者(役職名)
 
     add_column :request_orders, :lead_engineer_name,                          :string   # 主任技術者(氏名)
     add_column :request_orders, :lead_engineer_check,                         :integer  # 主任技術者(専任or非専任)
@@ -34,8 +37,8 @@ class AddSitesToRequestOrders < ActiveRecord::Migration[6.1]
     add_column :request_orders, :foreman_name,                                :string   # 職長(氏名)
     add_column :request_orders, :registered_core_engineer_name,               :string   # 登録基幹技能者(氏名)
     add_column :request_orders, :registered_core_engineer_qualification,      :string   # 登録基幹技能者(資格内容)
-    add_column :request_orders, :construction_license_status,                 :string   # 工事に必要な建設許可証
+    add_column :request_orders, :construction_license,                        :string   # 工事に必要な建設許可証
     # add_column :request_orders, :professional_engineer_required_qualification,:string  # 専門技術者(必要資格)
-    # add_column :request_orders, :construction_manager_position_name,          :string   # 工事担任責任者(役職名)
+
   end
 end
