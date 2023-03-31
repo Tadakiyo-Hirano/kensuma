@@ -71,5 +71,4 @@ module ApplicationHelper
   def order_lead_engineer_check_no(type)
     type == '非専任' ? tag.span('非専任', class: :circle) : '非専任'
   end
-
 end

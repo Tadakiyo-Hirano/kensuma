@@ -156,7 +156,8 @@ module Users
     end
 
     def set_construction_manager_position_name
-      params[:request_order][:construction_manager_position_name] = Worker.find_by(name: request_order_params[:construction_manager_name])&.job_title
+      params[:request_order][:construction_manager_position_name] =
+        Worker.find_by(name: request_order_params[:construction_manager_name])&.job_title
     end
 
     def request_order_params
@@ -191,25 +192,25 @@ module Users
         :construction_license
       ).merge(
         content: {
-          subcon_name:                                                        current_business.name,                                             # 会社名
-          subcon_branch_name:                                                 current_business.branch_name,                                      # 支店･営業所名
-          subcon_address:                                                     current_business.address,                                          # 会社住所
-          subcon_post_code:                                                   current_business.post_code,                                        # 会社郵便番号
-          subcon_phone_number:                                                current_business.phone_number,                                     # 会社電話番号
-          subcon_fax_number:                                                  current_business.fax_number,                                       # 会社FAX番号
-          subcon_career_up_id:                                                current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
-          subcon_representative_name:                                         current_business.representative_name,                              # 代表者名
-          subcon_health_insurance_status:                                     current_business.business_health_insurance_status,                 # 健康保険加入状況
-          subcon_health_insurance_association:                                current_business.business_health_insurance_association,            # 健康保険会社
-          subcon_health_insurance_office_number:                              current_business.business_health_insurance_office_number,          # 健康保険番号
-          subcon_welfare_pension_insurance_join_status:                       current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
-          subcon_welfare_pension_insurance_office_number:                     current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
-          subcon_employment_insurance_join_status:                            current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
-          subcon_employment_insurance_number:                                 current_business.business_employment_insurance_number,             # 雇用保険番号
-          subcon_employment_manager_name:                                     current_business.employment_manager_name,                                          # 雇用管理責任者名
-          subcon_specific_skilled_foreigners_exist:                           current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
-          subcon_foreign_construction_workers_exist:                          current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
-          subcon_foreign_technical_intern_trainees_exist:                     current_business.foreign_technical_intern_trainees_exist_i18n # 外国人技能実習生の従事の状況(有無)
+          subcon_name:                                    current_business.name,                                             # 会社名
+          subcon_branch_name:                             current_business.branch_name,                                      # 支店･営業所名
+          subcon_address:                                 current_business.address,                                          # 会社住所
+          subcon_post_code:                               current_business.post_code,                                        # 会社郵便番号
+          subcon_phone_number:                            current_business.phone_number,                                     # 会社電話番号
+          subcon_fax_number:                              current_business.fax_number,                                       # 会社FAX番号
+          subcon_career_up_id:                            current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
+          subcon_representative_name:                     current_business.representative_name,                              # 代表者名
+          subcon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
+          subcon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
+          subcon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
+          subcon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
+          subcon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
+          subcon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
+          subcon_employment_insurance_number:             current_business.business_employment_insurance_number,             # 雇用保険番号
+          subcon_employment_manager_name:                 current_business.employment_manager_name,                                          # 雇用管理責任者名
+          subcon_specific_skilled_foreigners_exist:       current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
+          subcon_foreign_construction_workers_exist:      current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
+          subcon_foreign_technical_intern_trainees_exist: current_business.foreign_technical_intern_trainees_exist_i18n # 外国人技能実習生の従事の状況(有無)
         }
       )
     end

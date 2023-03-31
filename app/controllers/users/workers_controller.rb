@@ -193,7 +193,7 @@ module Users
       @worker = current_business.workers.find_by(uuid: params[:uuid])
     end
 
-    #半角カタカナを全角カタカナに変換する
+    # 半角カタカナを全角カタカナに変換する
     def convert_to_full_width
       if params[:worker][:name_kana].present?
         params[:worker][:name_kana] = params[:worker][:name_kana].gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
