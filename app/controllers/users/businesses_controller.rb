@@ -40,7 +40,7 @@ module Users
     end
 
     def create
-      @business = Business.new(business_params)
+      @business = Business.new(business_params_with_converted)
       if @business.save
         redirect_to users_orders_url
       else
@@ -53,7 +53,7 @@ module Users
     end
 
     def update
-      if @business.update(business_params)
+      if @business.update(business_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_business_url
       else
@@ -85,6 +85,20 @@ module Users
 
     def set_business
       @business = current_user.business || current_user.admin_user.business
+    end
+
+    def business_params_with_converted
+      converted_params = business_params.dup
+      # 半角スペースがある場合、全角スペースに変換
+      converted_params[:representative_name] = business_params[:representative_name].gsub(/[\s　]+/, ' ')
+      # ハイフンを除外
+      %i[post_code phone_number fax_number business_health_insurance_office_number business_welfare_pension_insurance_office_number
+         business_employment_insurance_number].each do |key|
+        next unless converted_params[key]
+
+        converted_params[key] = converted_params[key].to_s.gsub(/[-ー]/, '')
+      end
+      converted_params
     end
 
     def business_params

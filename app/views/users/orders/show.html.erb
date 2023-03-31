@@ -7,7 +7,8 @@
         <tr>
           <td colspan="2">
             <%= link_to "現場情報一覧", users_orders_path, class: "btn btn-md btn-default" %>
-            <%= link_to "現場情報修正", edit_users_order_path(@order), class: "btn btn-md btn-md btn-success" %>
+            <%= link_to "現場情報修正", edit_users_order_path(@order), class: "btn btn-md btn-md btn-success mr-3" %>
+            <%= link_to "下請情報詳細", users_request_order_path(@order.request_orders.first.uuid), class: "btn btn-md btn-md btn-primary" %>
           </td>
         </tr>
         <tr>
