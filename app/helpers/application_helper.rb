@@ -5,6 +5,14 @@ module ApplicationHelper
     "#{params[:controller].gsub(/\//, '-')}-#{params[:action]}"
   end
 
+  def paying_display
+    if current_user.is_prime_contractor == true
+      content_tag :span, 'Premium(有料)', class: 'badge badge-warning'
+    else
+      content_tag :span, 'Free(無料)', class: 'badge badge-primary'
+    end
+  end
+
   # 下請け階層表示
   def sc_hierarchy(request_order)
     if request_order.instance_of?(RequestOrder)

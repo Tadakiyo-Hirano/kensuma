@@ -31,15 +31,7 @@ module Users
           business_employment_insurance_join_status:                   0, # 雇用保険(加入状況)
           business_employment_insurance_number:                        '01234567890', # 雇用保険(番号)
           business_retirement_benefit_mutual_aid_status:               0, # 退職金共済制度(加入状況)
-          construction_license_status:                                 0, # 建設許可証(取得状況)
-          construction_license_permission_type_minister_governor:      0, # 建設許可証(種別)
-          construction_license_governor_permission_prefecture:         0, # 建設許可証(都道府県)
-          construction_license_permission_type_identification_general: 0, # 建設許可証(種別)
-          construction_license_number_double_digit:                    29, # 建設許可証(番号)
-          construction_license_number_six_digits:                      5000, # 建設許可証(番号)
-          construction_license_number:                                 '国土交通大臣(特－29)第5000号', # 建設許可証(建設許可番号)
-          construction_license_updated_at:                             Date.today, # 建設許可証(更新日)
-          industry_ids:                                                1
+          construction_license_status:                                 0 # 建設許可証(取得状況)
           # =============================================
         )
         @business.business_occupations.build
@@ -49,6 +41,7 @@ module Users
     end
 
     def create
+      @business = Business.new(business_params_with_converted)
       if @business.save
         redirect_to users_orders_url
       else
@@ -61,7 +54,7 @@ module Users
     end
 
     def update
-      if @business.update(business_params)
+      if @business.update(business_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_business_url
       else
@@ -100,6 +93,20 @@ module Users
       if params[:business][:name_kana].present?
         params[:business][:name_kana] = params[:business][:name_kana].gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
       end
+    end
+
+    def business_params_with_converted
+      converted_params = business_params.dup
+      # 半角スペースがある場合、全角スペースに変換
+      converted_params[:representative_name] = business_params[:representative_name].gsub(/[\s　]+/, ' ')
+      # ハイフンを除外
+      %i[post_code phone_number fax_number business_health_insurance_office_number business_welfare_pension_insurance_office_number
+         business_employment_insurance_number].each do |key|
+        next unless converted_params[key]
+
+        converted_params[key] = converted_params[key].to_s.gsub(/[-ー]/, '')
+      end
+      converted_params
     end
 
     def business_params
