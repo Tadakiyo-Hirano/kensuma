@@ -805,6 +805,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "residence_card_back"
     t.string "employment_condition"
     t.integer "post_code"
+    t.json "safety_sanitary_education_ids"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
