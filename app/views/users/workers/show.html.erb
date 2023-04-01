@@ -344,17 +344,19 @@
         </tr>
         <!-- 資格情報ここまで -->
 
-        <!-- 外国人建設就労者情報ここから -->
-        <tr bgcolor="#dee2e6">
-          <th colspan="4">外国人建設就労者情報</th>
-        </tr>
-        <tr>
-          <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
-          <td><%= @worker.status_of_residence_i18n %></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <!-- 外国人建設就労者情報ここまで -->
+        <% if @worker.status_of_residence.present? %>
+          <!-- 外国人建設就労者情報ここから -->
+          <tr bgcolor="#dee2e6">
+            <th colspan="4">外国人建設就労者情報</th>
+          </tr>
+          <tr>
+            <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
+            <td><%= @worker.status_of_residence_i18n %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <!-- 外国人建設就労者情報ここまで -->
+        <% end %>
       </tbody>
     </table>
   </div>
