@@ -43,7 +43,7 @@ module Users
     end
 
     def create
-      @car = current_business.cars.build(car_params)
+      @car = current_business.cars.build(car_params_with_converted)
       if @car.save
         redirect_to users_car_url(@car)
       else
@@ -54,7 +54,7 @@ module Users
     def edit; end
 
     def update
-      if @car.update(car_params)
+      if @car.update(car_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_car_url
       else
@@ -82,6 +82,14 @@ module Users
 
     def set_car
       @car = current_business.cars.find_by(uuid: params[:uuid])
+    end
+
+    def car_params_with_converted
+      converted_params = car_params.dup
+      # ハイフンを除外
+      converted_params[:vehicle_number] = car_params[:vehicle_number].gsub(/[-ー]/, '')
+
+      converted_params
     end
 
     def car_params

@@ -25,7 +25,7 @@
 
 <%= f.label :my_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
+<%= f.telephone_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
 
 <%= f.label :email %>
 <%= f.text_field :email, class: "form-control", placeholder: Worker.human_attribute_name(:email) %><br>
@@ -44,7 +44,7 @@
 
 <%= f.label :family_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :family_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:family_phone_number) %><br>
+<%= f.telephone_field :family_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:family_phone_number) %><br>
 
 <%= f.label :birth_day_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
