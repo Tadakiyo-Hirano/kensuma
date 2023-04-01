@@ -26,7 +26,7 @@ SafetyHealthEducation.seed(
   },
   {
     id: 6,
-    name: '険有害業務・再発防止教育',
+    name: '危険有害業務・再発防止教育',
     description: '現場において部下を直接指揮・監督する安全衛生責任者教育の教育'
   },
   {
