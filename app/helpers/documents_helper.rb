@@ -404,6 +404,7 @@ module DocumentsHelper
       id = worker&.content&.[]('id')
       birth_day_on = worker&.content&.[]('birth_day_on')
       safety_health_education = worker&.content&.[]('safety_sanitary_education_ids').to_json
+      foreigner = worker&.content&.[]('status_of_residence')
 
       site_agent = "現" if id == document_info.content&.[]('subcon_site_agent_name_id') # (現)現場代理人
       work_chief = "作" if id == document_info.content&.[]('subcon_work_chief_name_id') # (作)作業主任者
@@ -416,8 +417,11 @@ module DocumentsHelper
       safety_manager = "安" if id == document_info.content&.[]('subcon_safety_manager_name_id') # (安)安全衛生責任者
       ability_improving_education = "歳" if safety_health_education.include?("19") # (歳)能力向上教育
       danger_harmful_business = "再" if safety_health_education.include?("6") # (再)危険有害業務・再発防止教育
+      foreign_trainee = "習" if foreigner == "specific_activity" # (習)外国人技能実習生
+      foreign_worker = "就" if foreigner == "permanent_resident" # (就)外国人建設就労者
+      skill_worker = "1特" if foreigner == "specified_skill" # (1特)1号特定技能外国人
 
-      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, ability_improving_education, danger_harmful_business
+      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, ability_improving_education, danger_harmful_business, foreign_trainee, foreign_worker, skill_worker
       worker_symbols.size > 1 ? worker_symbols.join(' ') : worker_symbols
     end
   end

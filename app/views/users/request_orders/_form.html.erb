@@ -81,11 +81,6 @@
     <br>
     <%= f.label :site_agent_name %> <!-- 現場代理人(氏名) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%#= f.collection_select :site_agent_name,
-                  @business_workers_name_id, :name, :name,
-                  {id: nil, include_blank: true},
-                  { class: "single-select", style: "width: 100%" }
-    %>
     <%= f.select :site_agent_name,
             @business_workers_name_id.map(&:name) << @request_order.site_agent_name,
             { id: nil, include_blank: true },
@@ -101,11 +96,6 @@
     %><br><br>
     <%= f.label :lead_engineer_name %> <!-- 主任技術者(氏名) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%#= f.select :lead_engineer_name,
-                  (@business_workers_name + [@request_order.lead_engineer_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %>
     <%= f.select :lead_engineer_name,
             @business_workers_name_id.map(&:name) << @request_order.lead_engineer_name,
             { id: nil, include_blank: true },
@@ -123,11 +113,6 @@
     <br>
     <%= f.label :work_chief_name %> <!-- 作業主任者(氏名) -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%#= f.select :work_chief_name,
-                  (@business_workers_name + [@request_order.work_chief_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %>
     <%= f.select :work_chief_name,
             @business_workers_name_id.map(&:name) << @request_order.work_chief_name,
             { id: nil, include_blank: true },

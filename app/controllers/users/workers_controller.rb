@@ -220,6 +220,7 @@ module Users
         :family_phone_number, :birth_day_on, :abo_blood_type,
         :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, { safety_sanitary_education_ids: [] },
+        :status_of_residence,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],

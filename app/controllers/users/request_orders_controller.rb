@@ -186,11 +186,11 @@ module Users
           subcon_foreign_construction_workers_exist:      current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
           subcon_foreign_technical_intern_trainees_exist: current_business.foreign_technical_intern_trainees_exist_i18n, # 外国人技能実習生の従事の状況(有無)
           # subcon_construction_license_updated_at:                             current_business.construction_license_updated_at,                                   # 建設許可証(更新日)
-          subcon_site_agent_name_id: @business_workers_name_id.find_by(name: params[:request_order][:site_agent_name])&.id, # 記号 (現)現場代理人に使用
-          subcon_work_chief_name_id: @business_workers_name_id.find_by(name: params[:request_order][:work_chief_name])&.id, # 記号 (作)作業主任者に使用
-          subcon_lead_engineer_name_id: @business_workers_name_id.find_by(name: params[:request_order][:lead_engineer_name])&.id, # 記号 (主)主任技術者に使用
-          subcon_foreman_name_id: @business_workers_name_id.find_by(name: params[:request_order][:foreman_name])&.id, # 記号 (職)職長に使用
-          subcon_safety_manager_name_id: @business_workers_name_id.find_by(name: params[:request_order][:safety_manager_name])&.id, # 記号 (安)安全衛生責任者に使用
+          subcon_site_agent_name_id:                      @business_workers_name_id.find_by(name: params[:request_order][:site_agent_name])&.id, # 記号 (現)現場代理人に使用
+          subcon_work_chief_name_id:                      @business_workers_name_id.find_by(name: params[:request_order][:work_chief_name])&.id, # 記号 (作)作業主任者に使用
+          subcon_lead_engineer_name_id:                   @business_workers_name_id.find_by(name: params[:request_order][:lead_engineer_name])&.id, # 記号 (主)主任技術者に使用
+          subcon_foreman_name_id:                         @business_workers_name_id.find_by(name: params[:request_order][:foreman_name])&.id, # 記号 (職)職長に使用
+          subcon_safety_manager_name_id:                  @business_workers_name_id.find_by(name: params[:request_order][:safety_manager_name])&.id # 記号 (安)安全衛生責任者に使用
         }
       )
     end

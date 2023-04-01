@@ -232,12 +232,28 @@
   </div><br>
   <!-- WorkerInsuranceここまで -->
 
+  <!-- 資格情報 -->
   <div class="list-group">
     <div class="list-group-item">
       <div class="mt-3 mb-3" id="health_insurance_type">
           <%= f.label "安全衛生教育(複数選択可)" %>
-          <%= f.collection_select :safety_sanitary_education_ids, SafetyHealthEducation.all, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %><br>
+          <%= f.collection_select :safety_sanitary_education_ids, SafetyHealthEducation.all, :id, :name, { include_hidden: false }, { multiple: true, class: "multiple-select", style: "width: 100%" } %><br>
         </div>
+    </div>
+  </div><br>
+
+  <!-- 外国人建設就労者情報 -->
+  <h5>外国人就労者の方</h5>
+  <div class="list-group">
+    <div class="list-group-item">
+      <div class="mt-3 mb-3" id="health_insurance_type">
+        <%= f.label "在留資格" %>
+        <%= f.collection_radio_buttons(:status_of_residence, Worker.status_of_residences_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div><br>
