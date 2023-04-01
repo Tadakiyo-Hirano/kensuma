@@ -75,8 +75,8 @@
             <td class="doc_19_s0"></td>
             <td class="doc_19_s5"></td>
             <td class="doc_19_s6" dir="ltr" colspan="2" rowspan="2">元 請<br> 確認欄</td>
-            <td class="doc_19_s7" dir="ltr" colspan="9" rowspan="2">
-              <%=document_info_for_prime_contractor_name%>
+            <td class="doc_19_s51" dir="ltr" colspan="9" rowspan="2">
+              <%= f.text_field name = 'content[prime_contractor_confirmation]',value:@document.content&.[]('prime_contractor_confirmation') %>
             </td>
             <td class="doc_19_s2"></td>
           </tr>
@@ -628,7 +628,7 @@
               <%= f.check_box name = 'content[construction_type_period_week_five_1st]', checked: box_checked?(@document.content&.[]('construction_type_period_week_five_1st')) %></br>
             </td>
             <td class="doc_19_s16" dir="ltr" colspan="4">
-              <%= f.select name = 'content[construction_type_period_month_2nd]',(1..12).to_a, 
+              <%= f.select name = 'content[construction_type_period_month_2nd]',(1..12).to_a,
               { include_blank: true, selected:@document.content&.[]('construction_type_period_month_2nd')}%>月
             </td>
             <td class="doc_19_s23" dir="ltr" colspan="4">
@@ -832,7 +832,7 @@
               :placeholder => '例)移動式クレーンの設置 ', size: "40x1" %>
             </td>
             <td class="doc_19_s32" dir="ltr" colspan="9" rowspan="2">
-              <%= f.text_area name = 'content[predicted_disaster_1st]',value:@document.content&.[]('predicted_disaster_1st'), 
+              <%= f.text_area name = 'content[predicted_disaster_1st]',value:@document.content&.[]('predicted_disaster_1st'),
               :placeholder => '例)クレーンの設置場所の地盤状態が悪く、クレーンが転倒する。', size: "40x4" %>
             </td>
             <td class="doc_19_s35" dir="ltr" colspan="4" rowspan="2">
