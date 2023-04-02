@@ -563,8 +563,9 @@ ja:
         man: 男性
         woman: 女性
       status_of_residence:
-        specific_activity: 特定活動
-        specified_skill: 特定技能
+        permanent_resident: 定住者
+        specified_skill: 特定技能(外国人技能実習生)
+        specific_activity: 特定活動(外国人建設就労者)
       confirmed_check:
         checked: 有
         unchecked: 無
