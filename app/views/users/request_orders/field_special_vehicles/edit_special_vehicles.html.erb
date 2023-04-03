@@ -27,11 +27,12 @@
               <% @field_special_vehicles.each do |field_special_vehicle| %>
                 <%= f.fields_for "field_special_vehicles[]", field_special_vehicle do |fs| %>
                   <tr style="border-bottom: 0px #fff;">
-                    <td> 
+                    <td colspan="2"> 
                       <%= fs.label :vehicle_name %><br>
-                      <%= field_special_vehicle.vehicle_name %>
+                      <%#= fs.select :vehicle_name do %>
+                        <%= select_tag 'dummy_select', options_for_select([field_special_vehicle.vehicle_name, field_special_vehicle.content["maker"], field_special_vehicle.content["standards_performance"], field_special_vehicle.content["year_manufactured"], field_special_vehicle.content["control_number"]]), { class: "form-control" } %>
+                      <%# end %>
                     </td>
-                    <td></td>
                     <td></td>
                     <td></td>
                   </tr>

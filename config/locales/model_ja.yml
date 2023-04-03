@@ -58,6 +58,7 @@ ja:
         career_up_id: 事業者ID(キャリアアップシステム)
         career_up_card_copy: キャリアアップシステムカードの写し
         stamp_images: 社印
+        tem_industry_ids: 業種
         occupation_ids: 職種
         business_health_insurance_status: 健康保険
         business_health_insurance_association: 組合名
@@ -198,7 +199,7 @@ ja:
       field_special_vehicle:
         driver_name: 運転者名(正)
         sub_driver_name: 運転者名(副)
-        vehicle_name: 特殊車両名
+        vehicle_name: 使用する車両
         vehicle_type: 区分
         carry_on_company_name: 持込会社名
         owning_company_name: 所有会社名
