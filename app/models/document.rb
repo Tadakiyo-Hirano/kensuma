@@ -2,7 +2,7 @@
 class Document < ApplicationRecord
   OPERATABLE_DOC_TYPE = %w[
     cover_document table_of_contents_document doc_3rd doc_4th doc_5th doc_6th doc_7th doc_8th doc_9th doc_10th
-    doc_11th doc_12th doc_13rd doc_14th doc_15th doc_16th doc_17th doc_18th doc_19th doc_20th
+    doc_11th doc_12th doc_13th doc_14th doc_15th doc_16th doc_17th doc_18th doc_19th doc_20th
     doc_21st doc_22nd doc_23rd doc_24th
   ].freeze
   belongs_to :business
@@ -11,9 +11,9 @@ class Document < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   # 自身の書類一覧取得(自身が元請の場合、一次の場合、二次の場合、三次以降の場合)
-  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22, 23, 24]) }
-  scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]) }
-  scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
+  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 7, 18, 19, 20, 22, 23]) }
+  scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]) }
+  scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
   scope :third_or_later_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
   # 元請け配下の一次下請け書類一覧取得
   scope :current_lower_first_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,  21, 22, 23, 24]) }
@@ -35,7 +35,7 @@ class Document < ApplicationRecord
     doc_10th:                   10, # 高齢者就労報告書
     doc_11th:                   11, # 年少者就労報告書
     doc_12th:                   12, # 工事用・通勤用車両届
-    doc_13rd:                   13, # 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
+    doc_13th:                   13, # 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
     doc_14th:                   14, # 参考様式第６号(持込機械等(電動工具電気溶接機等)使用届
     doc_15th:                   15, # 全建統一様式第１１号(有機溶剤・特定化学物質等持込使用届)
     doc_16th:                   16, # 参考様式第９号(火気使用届)

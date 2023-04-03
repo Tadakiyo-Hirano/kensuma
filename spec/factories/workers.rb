@@ -3,8 +3,8 @@ FactoryBot.define do
     association :business
     uuid { SecureRandom.uuid }
     name { 'TestWorker' }
-    name_kana { 'テスト ワーカー' }
-    country { '日本' }
+    name_kana { 'テストワーカー' }
+    country { 'JP' }
     email { 'example@email.com' }
     post_code { 1234567 }
     my_address { '東京都' }

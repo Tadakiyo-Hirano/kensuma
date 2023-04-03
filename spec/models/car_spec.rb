@@ -35,7 +35,7 @@ RSpec.describe Car, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('車両所有者氏名を入力してください')
+          expect(subject.errors.full_messages).to include('車両所有者名を入力してください')
         end
       end
     end
@@ -80,7 +80,7 @@ RSpec.describe Car, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('車両番号を入力してください')
+          expect(subject.errors.full_messages).to include('車両番号(ナンバープレート)を入力してください')
         end
       end
 
@@ -127,7 +127,7 @@ RSpec.describe Car, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('車両番号は地域名,分類番号,平仮名等,一連指定番号で入力してください(例：品川500あ1234)')
+            expect(subject.errors.full_messages).to include('車両番号(ナンバープレート)は地域名,分類番号,平仮名等,一連指定番号で入力してください(例：品川500あ1234)')
           end
         end
       end
@@ -143,7 +143,7 @@ RSpec.describe Car, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('車検初めを入力してください')
+          expect(subject.errors.full_messages).to include('始期を入力してください')
         end
       end
     end
@@ -158,7 +158,7 @@ RSpec.describe Car, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('車検終わりを入力してください')
+          expect(subject.errors.full_messages).to include('終期を入力してください')
         end
       end
     end
@@ -173,7 +173,7 @@ RSpec.describe Car, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('自賠責証券番号を入力してください')
+          expect(subject.errors.full_messages).to include('証券番号を入力してください')
         end
       end
     end
@@ -188,7 +188,7 @@ RSpec.describe Car, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('自賠責保険初めを入力してください')
+          expect(subject.errors.full_messages).to include('始期を入力してください')
         end
       end
     end
@@ -203,7 +203,7 @@ RSpec.describe Car, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('自賠責保険終わりを入力してください')
+          expect(subject.errors.full_messages).to include('終期を入力してください')
         end
       end
     end

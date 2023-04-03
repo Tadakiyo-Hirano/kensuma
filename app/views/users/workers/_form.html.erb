@@ -11,16 +11,34 @@
 <%# 国籍 %>
 <%= f.label :country %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :country,
-                  { "日本" => "日本", "手入力" => "" },
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-%><br>
+<%= f.country_select :country, { priority_countries: ["JP"] }, { class: "form-control", id: "country-select" } %>
+<br>
+
+<!-- 外国人建設就労者情報 -->
+<div class="list-group" id="status-of-residence-field" style="display: none;">
+  <h5>外国人就労者の方</h5>
+  <div class="list-group-item">
+    <div class="mt-3 mb-3">
+      <%= f.label :status_of_residence, class: "required" %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.collection_radio_buttons(:status_of_residence, Worker.status_of_residences_i18n, :first, :last, class: "radio") do |b| %>
+        <div class="radio">
+          <%= b.label { b.radio_button + b.text } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div><br>
 
 <%# 性別 %>
 <%= f.label :sex %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:sex, Worker.sexes_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:sex, Worker.sexes_i18n, :first, :last, class: "radio") do |b| %>
+  <div class="radio">
+    <%= b.label { b.radio_button + b.text } %>
+  </div>
+<% end %>
+<br>
 
 <%= f.label :my_address %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -28,7 +46,7 @@
 
 <%= f.label :my_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
+<%= f.telephone_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
 
 <%= f.label :email %>
 <%= f.text_field :email, class: "form-control", placeholder: Worker.human_attribute_name(:email) %><br>
@@ -47,7 +65,7 @@
 
 <%= f.label :family_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :family_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:family_phone_number) %><br>
+<%= f.telephone_field :family_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:family_phone_number) %><br>
 
 <%= f.label :birth_day_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -56,12 +74,20 @@
 <%# 血液型（ABO） %>
 <%= f.label :abo_blood_type %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:abo_blood_type, Worker.abo_blood_types_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:abo_blood_type, Worker.abo_blood_types_i18n, :first, :last, class: "radio") do |b| %>
+  <div class="radio">
+    <%= b.label { b.radio_button + b.text } %>
+  </div>
+<% end %><br>
 
 <%# 血液型（RH） %>
 <%= f.label :rh_blood_type %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:rh_blood_type, Worker.rh_blood_types_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:rh_blood_type, Worker.rh_blood_types_i18n, :first, :last, class: "radio") do |b| %>
+  <div class="radio">
+    <%= b.label { b.radio_button + b.text } %>
+  </div>
+<% end %><br>
 
 <!-- 下記役職はひとまずテキスト入力にしています -->
 <%= f.label :job_title %>
@@ -83,7 +109,11 @@
 <%# 契約条件の確認 %>
 <%= f.label :employment_contract %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:employment_contract, Worker.employment_contracts_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:employment_contract, Worker.employment_contracts_i18n, :first, :last, class: "radio") do |b| %>
+  <div class="radio">
+    <%= b.label { b.radio_button + b.text } %>
+  </div>
+<% end %><br>
 
 <%= f.label :career_up_id %>
 <%= f.text_field :career_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:career_up_id) %><br>
@@ -141,13 +171,21 @@
       <div class="mb-3">
         <%= worker_medical.label :is_med_exam %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last) %>
+        <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
       </div>
       <%# 最近の健康状態 %>
       <div class="mb-3">
         <%= worker_medical.label :health_condition %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_medical.collection_radio_buttons(:health_condition, WorkerMedical.health_conditions_i18n, :first, :last) %><br>
+        <%= worker_medical.collection_radio_buttons(:health_condition, WorkerMedical.health_conditions_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
       </div>
       <div class="row mb-3">
         <%= worker_medical.label :med_exam_on %>
@@ -185,7 +223,11 @@
       <div class="mt-3 mb-3" id="health_insurance_type">
         <%= worker_insurance.label :health_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last) %><br>
+        <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %><br>
       </div>
 
       <!-- health_insurance_typeがhealth_insurance_associationまたはconstruction_national_health_insuranceで入力可能 -->
@@ -198,13 +240,21 @@
       <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:pension_insurance_type, WorkerInsurance.pension_insurance_types_i18n, :first, :last) %><br>
+        <%= worker_insurance.collection_radio_buttons(:pension_insurance_type, WorkerInsurance.pension_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %><br>
       </div>
 
       <div class="mb-3" id="employment_insurance_type">
         <%= worker_insurance.label :employment_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last) %><br>
+        <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %><br>
       </div>
 
       <!-- employment_insurance_numberが被保険者(0)で入力可能 -->
@@ -216,13 +266,21 @@
       
       <div class="mt-3" id="has_labor_insurance">
         <%= worker_insurance.label :has_labor_insurance %><br>
-        <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last) %><br>
+        <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %><br>
       </div>
 
       <div class="mb-3">
         <%= worker_insurance.label :severance_pay_mutual_aid_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last) %><br>
+        <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
       </div>
 
       <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
@@ -232,9 +290,58 @@
         <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
       </div>
     <% end %>
-  </div>
+  </div><br>
   <!-- WorkerInsuranceここまで -->
-</div>
+
+  <!-- 資格情報 -->
+  <div class="list-group">
+    <div class="list-group-item">
+      <div class="mt-3 mb-3">
+          <%= f.label "安全衛生教育(複数選択可)" %>
+          <%= f.collection_select :safety_sanitary_education_ids, SafetyHealthEducation.all, :id, :name, { include_hidden: false }, { multiple: true, class: "multiple-select", style: "width: 100%" } %><br>
+        </div>
+    </div>
+  </div>
+</div><br>
+
+<script>
+  // 国籍が日本以外の選択時に外国人就労者情報のフォームを表示させる
+  $(document).ready(function() {
+    // 国の選択肢が変更されたときに呼び出される関数を定義する
+    function checkCountrySelection() {
+      var selectedCountry = $('#country-select').val();
+      // 国がJP以外の場合には、居住状況フィールドを表示する
+      if (selectedCountry !== 'JP') {
+        $('#status-of-residence-field').show();
+        // 居住状況フィールドを必須にする
+        $('input[name="worker[status_of_residence]"]').prop('required', true);
+      } else {
+        // 国がJPの場合には、居住状況フィールドを非表示にする
+        $('#status-of-residence-field').hide();
+        // 居住状況フィールドを必須ではなくする
+        $('input[name="worker[status_of_residence]"]').prop('required', false);
+        // ラジオボタンの選択を外す
+        $('input[name="worker[status_of_residence]"]').prop('checked', false);
+      }
+    }
+
+    // フォームの初期状態で居住状況フィールドを非表示にする
+    $('#status-of-residence-field').hide();
+
+    // 国の選択肢が変更されたときにcheckCountrySelectionを呼び出す
+    $('#country-select').change(checkCountrySelection);
+
+    // フォームが送信されたときにラジオボタンの選択を外す
+    $('form').submit(function() {
+      if ($('#country-select').val() === 'JP') {
+        $('input[name="worker[status_of_residence]"]').prop('checked', false);
+      }
+    });
+
+    // ページの読み込み時にcheckCountrySelectionを呼び出す
+    checkCountrySelection();
+  });
+</script>
 
 <script>
   // 健康保険の名前の表示・非表示

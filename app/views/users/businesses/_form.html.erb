@@ -1,3 +1,10 @@
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <!-- validateプラグインの読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
 <%= render 'shared/error_massages', object: f.object %>
 
 <%= f.label :name %>
@@ -29,22 +36,26 @@
 <br>
 <%= f.label :phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :phone_number, class: "form-control", placeholder: "Enter phone number" %>
+<%= f.telephone_field :phone_number, class: "form-control", placeholder: "Enter phone number" %>
 <br>
 <%= f.label :fax_number %>
-<%= f.text_field :fax_number, class: "form-control", placeholder: "Enter fax number" %>
+<%= f.telephone_field :fax_number, class: "form-control", placeholder: "Enter fax number" %>
 <br>
 <%= f.label :career_up_id %>
 <%= f.text_field :career_up_id, class: "form-control", placeholder: "Enter career_up_id" %>
 <br>
 <%= f.label :business_type %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last) %><br>
+<br>
+<%= f.label :industry_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_type, Business.business_types.keys.map { |k| [I18n.t("enums.business.business_type.#{k}"), k]}, {include_blank: true}, {class: "form-control"} %>
+<%= f.collection_select :tem_industry_ids, Industry.all, :id, :name, { selected: @business.tem_industry_ids }, { class: 'form-control select2', id: 'parent-select', multiple: true, style: "width: 100%" } %>
+<br>
 <br>
 <%= f.label :occupation_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :occupation_ids, Occupation.all, :id, :name, { selected: f.object.occupations.ids }, { class: "pref multiple-select", multiple: true, style: "width: 100%" } %>
-<br>
+<%= f.collection_select :occupation_ids, occupation_default(@business), :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
 <br>
 <% if business.stamp_images.present? %>
   <% business.stamp_images.each_with_index do |image, index| %>
@@ -53,14 +64,13 @@
   <% end %>
   <br>
 <% end %>
-
+<br>
 <%= f.label :stamp_images %>
 <%= f.file_field :stamp_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
-
 <br>
 <%= f.label :business_health_insurance_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_health_insurance_status, Business.business_health_insurance_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_health_insurance_status, Business.business_health_insurance_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_health_insurance_association %>
 <%= f.text_field :business_health_insurance_association, class: "form-control", placeholder: "Enter business_health_insurance_association" %>
@@ -69,8 +79,8 @@
 <%= f.text_field :business_health_insurance_office_number, class: "form-control", placeholder: "Enter business_health_insurance_office_number" %>
 <br>
 <%= f.label :business_welfare_pension_insurance_join_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_welfare_pension_insurance_office_number %>
 <%= f.text_field :business_welfare_pension_insurance_office_number, class: "form-control", placeholder: "Enter business_welfare_pension_insurance_office_number" %>
@@ -80,61 +90,55 @@
 <%= f.select :business_pension_insurance_join_status, Business.business_pension_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
 <br>
 <%= f.label :business_employment_insurance_join_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :business_employment_insurance_number %>
 <%= f.text_field :business_employment_insurance_number, class: "form-control", placeholder: "Enter business_employment_insurance_number" %>
 <br>
 <%= f.label :business_retirement_benefit_mutual_aid_status %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last) %><br>
 <br>
 <%= f.label :construction_license_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_status, Business.construction_license_statuses_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<div id="available-form">
+  <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
+  <div id="error" class="text-red">【エラー】：残っているフォームを削除してからチェックを変更してください。</div>
+</div>
+
+<!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
+<div id="hidden-form" class="list-group">
+  <div class="list-group-item">
+    <% if f.object.business_industries.size == 0 %>
+      <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
+    <% else %>
+      <%= f.fields_for :business_industries do |b_industry| %>
+        <%= render "business_industry_fields", f: b_industry %>
+      <% end %>
+    <% end %>
+    <div id="license-insertion-point"></div>
+    <%= link_to_add_association "＋フォーム追加", f, :business_industries, id: "form-link",
+      data: {
+        association_insertion_node: '#license-insertion-point',
+        association_insertion_method: 'append'
+      }
+    %>
+  </div>
+</div>
+<!-- BusinessIndustryここまで -->
+
 <br>
-<%= f.label :industry_ids %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :industry_ids, Industry.all, :id, :name, { selected: f.object.industries.ids }, { class: "pref multiple-select", multiple: true, style: "width: 100%" } %>
+<%= f.label :specific_skilled_foreigners_exist %><br>
+<%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last) %><br>
 <br>
+<%= f.label :foreign_construction_workers_exist %><br>
+<%= f.collection_radio_buttons(:foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n, :first, :last) %><br>
 <br>
-<%= f.label :construction_license_permission_type_minister_governor %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_permission_type_minister_governor, Business.construction_license_permission_type_minister_governors_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_governor_permission_prefecture %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_governor_permission_prefecture, Business.construction_license_governor_permission_prefectures_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_permission_type_identification_general %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :construction_license_permission_type_identification_general, Business.construction_license_permission_type_identification_generals_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :construction_license_number_double_digit %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number_double_digit, class: "form-control", placeholder: "2桁の番号" %>
-<br>
-<%= f.label :construction_license_number_six_digits %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number_six_digits, class: "form-control", placeholder: "6桁以下の番号" %>
-<br>
-<%= f.label :construction_license_number %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :construction_license_number, class: "form-control", placeholder: "建設許可証(建設許可番号)" %>
-<br>
-<%= f.label :construction_license_updated_at %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :construction_license_updated_at, class: "form-control", placeholder: "建設許可証(更新日)" %>
-<br>
-<%= f.label :specific_skilled_foreigners_exist %>
-<%= f.select :specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :foreign_construction_workers_exist %>
-<%= f.select :foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
-<br>
-<%= f.label :foreign_technical_intern_trainees_exist %>
-<%= f.select :foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n.invert, {include_blank: true}, {class: "form-control"} %>
+<%= f.label :foreign_technical_intern_trainees_exist %><br>
+<%= f.collection_radio_buttons(:foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n, :first, :last) %><br>
 <br>
 <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
 <%= f.text_field :employment_manager_name, class: "form-control", placeholder: "雇用管理責任者" %>
@@ -144,6 +148,62 @@
 <%= f.hidden_field :user_id, value: current_user.id %>
 
 <script>
+//建設許可証の有無によってフォームの表示・非表示の切り替え
+  const available_form = document.getElementById('available-form')
+  const list_group = document.getElementById('hidden-form')
+  const error = document.getElementById('error')
+  function getRadioHealthInsuranceName(object) {
+    const value = $('input[name="business[construction_license_status]"]:checked').val();
+    if (value == 'available'){
+      list_group.classList.remove('hidden');
+      //建設許可証「有」をチェック時は、エラー文を非表示
+      
+      error.classList.add('hidden');
+    } else {
+      list_group.classList.add('hidden');
+      //建設許可証「無」をチェック、かつフォームが残っている場合は、エラー文を表示し残フォーム削除を促す（nilが送信されてしまう為）
+      if ($("#nest-field").length) {
+        error.classList.remove('hidden');
+      }
+    }
+  };
+  getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
+
+  $('input[name="business[construction_license_status]"]').change(function() {
+    if ($(this).val() == 'available') {
+      list_group.classList.remove('hidden');
+      error.classList.add('hidden');
+    } else {
+      list_group.classList.add('hidden');
+      if ($("#nest-field").length) {
+        error.classList.remove('hidden');
+      }
+    }
+  });
+
+// 建設許可証のフォーム追加を29個までで制限かける（実装途中）
+  // $(document).on('turbolinks:load', function() {
+  //   var maxForms = 4;
+  //   var formsCount = $('#nest-field').length;
+  //   updateAddButtonState(formsCount);
+
+  //   $('#hidden-form').on('cocoon:after-insert', function(e, insertedItem) {
+  //     formsCount = $('#nest-field').length;
+  //     updateAddButtonState(formsCount);
+  //   });
+
+  //   function updateAddButtonState(count) {
+  //     if (count >= maxForms) {
+  //       $('#form-link').addClass('disabled').off('click');
+  //     } else {
+  //       $('#form-link').removeClass('disabled').on('click', function() {
+  //         return true;
+  //       });
+  //     }
+  //   }
+  // });
+  
+//各フォームのバリデーション
   $(function(){
     $.each(function(key){
       $.validator.addMethod(key, this);
@@ -177,7 +237,10 @@
         "business[business_type]": {
           required: true
         },
-        "business[occupation_ids][]": {
+        "business[tem_industry_ids][]": {
+          required: true
+        },
+        "business_industries[occupation_ids][]": {
           required: true
         },
         "business[business_health_insurance_status]": {
@@ -198,28 +261,34 @@
         "business[construction_license_status]": {
           required: true
         },
-        "business[industry_ids][]": {
+        "business[industry_id][]": {
           required: true
         },
-        "business[construction_license_permission_type_minister_governor]": {
+        "business[tem_industry_ids][]": {
           required: true
         },
-        "business[construction_license_governor_permission_prefecture]": {
+        "business[occupation_ids][]": {
           required: true
         },
-        "business[construction_license_permission_type_identification_general]": {
+        "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
           required: true
         },
-        "business[construction_license_number_double_digit]": {
+        "business[business_industries_attributes][construction_license_governor_permission_prefecture]": {
           required: true
         },
-        "business[construction_license_number_six_digits]": {
+        "business[business_industries_attributes][construction_license_permission_type_identification_general]": {
           required: true
         },
-        "business[construction_license_number]": {
+        "business[business_industries_attributes][construction_license_number_double_digit]": {
           required: true
         },
-        "business[construction_license_updated_at]": {
+        "business[business_industries_attributes][construction_license_number_six_digits]": {
+          required: true
+        },
+        "business[business_industries_attributes][construction_license_number]": {
+          required: true
+        },
+        "business[business_industries_attributes][construction_license_updated_at]": {
           required: true
         }
       },
@@ -272,25 +341,31 @@
         "business[construction_license_status]": {
           required: "どちらかを選択してください。"
         },
-        "business[industry_ids][]": {
+        "business[industry_id][]": {
           required: "業種を選択してください。"
         },
-        "business[construction_license_permission_type_minister_governor]": {
+        "business[tem_industry_ids][]": {
+          required: "業種を選択してください。"
+        },
+        "business[occupation_ids][]": {
+          required: "職種を選択してください。"
+        },
+        "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
           required: "どちらかを選択してください。"
         },
-        "business[construction_license_governor_permission_prefecture]": {
+        "business[business_industries_attributes][construction_license_governor_permission_prefecture]": {
           required: "どれか一つを選択してください。"
         },
-        "business[construction_license_permission_type_identification_general]": {
+        "business[business_industries_attributes][construction_license_permission_type_identification_general]": {
           required: "どちらかを選択してください。"
         },
-        "business[construction_license_number_double_digit]": {
+        "business[business_industries_attributes][construction_license_number_double_digit]": {
           required: "2桁の番号を入力してください。"
         },
-        "business[construction_license_number_six_digits]": {
+        "business[business_industries_attributes][construction_license_number_six_digits]": {
           required: "6桁以下の番号を入力してください。"
         },
-        "business[construction_license_updated_at]": {
+        "business[business_industries_attributes][construction_license_updated_at]": {
           required: "日付を選択してください。"
         }
       },
@@ -300,5 +375,62 @@
     $(".business-form-validation").change(function () {
       $(this).valid();
     });
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    var isInitialized = false;
+    function initializeSelect2() { // 要素が表示されるまで待つ
+      $('#parent-select, #child-select').select2({
+        width: 'resolve',
+        theme: 'classic',
+        multiple: 'multiple',
+        allowClear: true
+      });  
+        $('#parent-select').on('change', function() { // 親セレクトボックスに変更があれば
+          var category_id = $(this).val();
+          var child_select = $('#child-select');
+          var selectedValues = [];
+          $('#child-select option:selected').each(function() { // 既定の子セレクトボックスの選択内容を一時保存
+            selectedValues.push($(this).val());
+          });
+          
+          if(category_id){
+            $.ajax({
+              url: '/users/business/occupation_select',
+              type: 'GET',
+              dataType: 'html', // HTML形式で返される
+              data: {industry_ids: category_id},
+              success: function(data) {
+                var options = '<option value=""></option>'; // 初期化
+                $('<div>').html(data).find('option').each(function() {
+                  var child = $(this);
+                  var selected = '';
+                  if (selectedValues.indexOf(child.val().toString()) >= 0) { // 既定の入力が内容あれば選択中状態に
+                    selected = 'selected';
+                  }
+                  options += '<option value="' + child.val() + '"' + selected + '>' + child.text() + '</option>';
+                });
+                $('#child-select').html(options);
+                child_select.select2({
+                  width: 'resolve',
+                  theme: 'classic',
+                  multiple: 'multiple',
+                  allowClear: true
+                });
+              }
+            });
+          }
+        });
+      isInitialized = true;
+    }
+      
+    var checkExist = setInterval(function() {
+      if ($('#parent-select, #child-select').length && !isInitialized) {
+        clearInterval(checkExist);
+        initializeSelect2();
+      }
+    }, 100); // 100 ミリ秒ごとにチェックする
   });
 </script>

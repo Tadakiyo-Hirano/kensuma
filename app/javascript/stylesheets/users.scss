@@ -71,3 +71,21 @@ form.cmxform label.error, label.error {
   font-size: 120%;
   margin : 20px ;
 }
+
+.text_ind_1 {
+  text-indent: 1em;
+}
+
+.text_ind_2 {
+  text-indent: 2em;
+}
+
+// ラジオボタン縦並び
+
+.radio label {
+  display: block;
+}
+
+.radio input[type="radio"] {
+  margin-right: 5px;
+}

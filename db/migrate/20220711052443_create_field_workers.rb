@@ -7,8 +7,18 @@ class CreateFieldWorkers < ActiveRecord::Migration[6.1]
       t.date :admission_date_start
       t.date :admission_date_end
       t.date :education_date
+      t.string :occupation
+      t.integer :sendoff_education
+      t.bigint :occupation_id
+      t.string :job_description
+      t.string :foreign_work_place
+      t.date :foreign_date_start
+      t.date :foreign_date_end
+      t.string :foreign_job
+      t.string :foreign_job_description
+      t.json :proper_management_licenses
+      
       t.references :field_workerable, polymorphic: true
-
       t.timestamps
     end
   end
