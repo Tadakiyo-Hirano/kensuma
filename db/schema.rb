@@ -783,7 +783,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.json "career_up_images"
     t.bigint "business_id", null: false
     t.string "uuid", null: false
-    t.json "job_titles", null: false
+    t.string "job_title", null: false
     t.integer "employment_contract", default: 0, null: false
     t.string "family_name", null: false
     t.string "relationship", null: false
@@ -798,7 +798,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "residence_card_front"
     t.string "residence_card_back"
     t.string "employment_condition"
-    t.integer "post_code"
+    t.string "post_code"
     t.string "driver_licence"
     t.string "driver_licence_number"
     t.string "seal"

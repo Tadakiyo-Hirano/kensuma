@@ -16,13 +16,13 @@
       birth_day_on:                  rand(Date.parse('1950-01-01') .. Date.parse('2006-01-01')),
       abo_blood_type:                rand(0..3),
       rh_blood_type:                 rand(0..1),
-      job_title:                      "主任#{n+1}",
+      job_title:                     "主任#{n+1}",
       hiring_on:                     rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:                    rand(1..10),
       career_up_id:                  sprintf('%14d', rand(99999999999999)),
       sex:                           rand(0..1),
-      post_code:                     1234567,
+      post_code:                     "123-4567",
       driver_licence:                '普通',
       driver_licence_number:         sprintf('%12d', rand(999999999999))
     }
@@ -47,13 +47,13 @@ end
       birth_day_on:                  rand(Date.parse('1950-01-01') .. Date.parse('2006-01-01')),
       abo_blood_type:                rand(0..3),
       rh_blood_type:                 rand(0..1),
-      job_title:                      "係員#{n+22}",
+      job_title:                     "係員#{n+22}",
       hiring_on:                     rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:                    rand(1..10),
       career_up_id:                  sprintf('%14d', rand(99999999999999)),
       sex:                           rand(0..1),
-      post_code:                     1234567,
+      post_code:                     "123-4567",
       driver_licence:                '普通',
       driver_licence_number:         sprintf('%12d', rand(999999999999))
     }
@@ -84,7 +84,7 @@ end
       blank_term:                    rand(1..10),
       career_up_id:                  sprintf('%14d', rand(99999999999999)),
       sex:                           rand(0..1),
-      post_code:                     1234567,
+      post_code:                     "123-4567",
       driver_licence:                '普通',
       driver_licence_number:         sprintf('%12d', rand(999999999999))
     }
@@ -115,7 +115,7 @@ end
       blank_term:                    rand(1..10),
       career_up_id:                  sprintf('%14d', rand(99999999999999)),
       sex:                           rand(0..1),
-      post_code:                     1234567,
+      post_code:                     "123-4567",
       driver_licence:                '普通',
       driver_licence_number:         sprintf('%12d', rand(999999999999))
     }
@@ -140,13 +140,13 @@ end
       birth_day_on:                  rand(Date.parse('1950-01-01') .. Date.parse('2006-01-01')),
       abo_blood_type:                rand(0..3),
       rh_blood_type:                 rand(0..1),
-      job_title:                      "係員#{n+85}",
+      job_title:                     "係員#{n+85}",
       hiring_on:                     rand(Date.current.years_ago(10) .. Date.current.prev_month),
       experience_term_before_hiring: rand(1..10),
       blank_term:                    rand(1..10),
       career_up_id:                  sprintf('%14d', rand(99999999999999)),
       sex:                           rand(0..1),
-      post_code:                     1234567,
+      post_code:                     "123-4567",
       driver_licence:                '普通',
       driver_licence_number:         sprintf('%12d', rand(999999999999))
     }

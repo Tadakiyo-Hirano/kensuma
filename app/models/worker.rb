@@ -38,8 +38,10 @@ class Worker < ApplicationRecord
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_POST_CODE_REGEX = /\A\d{7}\z/
+  before_validation :remove_hyphen_to_post_code
+  before_validation :full_width_to_half_width([post_code])
   validates :name, presence: true
-  validates :name_kana, presence: true, format: { with: /\A[ァ-ヶー－・\p{Zs}]+\z/, message: 'はカタカナで入力してください' }
+  validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー\s\p{blank}]+\z/u, message: 'はカタカナで入力してください' }
   validates :country, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }
   validates :post_code, presence: true, format: { with: VALID_POST_CODE_REGEX, message: 'は7桁で入力してください' }
@@ -74,4 +76,32 @@ class Worker < ApplicationRecord
   def driver_licence_present?
     driver_licence.present?
   end
+
+  # JSON型のカラムからJSONオブジェクトを取得する
+  def set_json_data(colum, key, value)
+    self.colum ||= {}
+    self.colum[key] = value
+  end
+  
+  # JSON型のカラムからJSONオブジェクトを取得する
+  def get_json_data(colum, key)
+    self.colum.try(:[], key)
+  end
+  
+  # JSON型のカラムから指定したキーに対応する値を削除する
+  def delete_json_data(colum, key)
+    self.colum.try(:slice!, key)
+  end
+
+  private
+    def remove_hyphen_to_post_code
+      # ハイフンを除外する
+      self.post_code = post_code.to_s.gsub(/[-ー]/, '') if post_code.present?
+    end
+
+    def full_width_to_half_width(colum_names)
+      colum_names.each do |colum_name|
+        self.colum.name = colum_name.tr('Ａ-Ｚａ-ｚ０-９', 'A-Za-z0-9')
+      end
+    end
 end

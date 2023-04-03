@@ -70,6 +70,39 @@ RSpec.describe Worker, type: :model do
       end
     end
 
+    describe '#email' do
+      context '存在しない場合' do
+        before :each do
+          subject.email = nil
+        end
+
+        it 'バリデーションに通ること' do
+          expect(subject).to be_valid
+        end
+      end
+
+      %i[
+        abc
+        a@bc
+        ab.c
+      ].each do |email|
+        context '正しい形式ではない場合' do
+          before :each do
+            subject.email = email
+          end
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('メールアドレスはexample@email.comのような形式で入力してください')
+          end
+        end
+      end
+    end
+
     describe '#country' do
       context '存在しない場合' do
         before :each do
@@ -87,24 +120,27 @@ RSpec.describe Worker, type: :model do
       end
     end
 
-    describe '#email' do
-      context 'メールアドレスの形式が「example@email.com」ではない時' do
-        before :each do
-          subject.email = 'abcde'
-        end
+    describe '#post_code' do
+      %i[
+        123ー4567
+        123-4567
+      ].each do |post_code|
+        context 'ハイフンありの7桁の場合' do
+          before :each do
+            subject.post_code = post_code
+          end
 
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
 
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('メールアドレスはexample@email.comのような形式で入力してください')
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('郵便番号は7桁で入力してください')
+          end
         end
       end
-    end
 
-    describe '#post_code' do
       context '存在しない場合' do
         before :each do
           subject.post_code = nil
@@ -122,7 +158,7 @@ RSpec.describe Worker, type: :model do
 
       context '7桁ではない場合' do
         before :each do
-          subject.post_code = 858
+          subject.post_code = 123456
         end
 
         it 'バリデーションに落ちること' do

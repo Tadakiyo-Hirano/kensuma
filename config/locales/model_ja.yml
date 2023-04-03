@@ -306,7 +306,7 @@ ja:
         experience_term_before_hiring: 雇入前経験年数
         blank_term: ブランク年数
         career_up_id: 技能者ID(キャリアアップシステム)
-        career_up_image: 建設キャリアアップシステムカードの写し
+        career_up_images: 建設キャリアアップシステムカードの写し
         business: 事業所
         employment_contract: 雇用契約書の取り交わし状況
         family_name: 氏名
@@ -314,7 +314,7 @@ ja:
         email: メールアドレス
         sex: 性別
         post_code: 郵便番号
-        employee_card: 従業員証
+        employee_cards: 従業員証
         driver_licence: 自動車運転免許証
         driver_licence_number: 免許証番号
         seal: 認印
@@ -359,7 +359,8 @@ ja:
         severance_pay_mutual_aid_type: 建設業退職金共済手帳
         severance_pay_mutual_aid_name: 建設業退職金共済制度名
       worker_safety_health_education:
-       image: 証明画像
+       safety_health_education_id: 安全衛生教育
+       images: 証明画像
       news:
         title: タイトル
         content: 内容
