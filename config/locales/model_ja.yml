@@ -217,8 +217,16 @@ ja:
         admission_date_end: 入場年月日(終期)
         education_date: 新規入場時教育年月日
         occupation: 職種
-        sendoff_education: 送り出し教育の受講状況
+        sendoff_education: 送出し教育の受講状況
         prime_contractor_confirmation: 元請け確認者
+        occupation_id: 職種
+        job_description: 作業内容
+        foreign_work_place: 就労場所
+        foreign_date_start: 計画期間(始期)
+        foreign_date_end: 計画期間(終期)
+        foreign_job: 従事業務
+        foreign_job_description: 従事業務内容
+        proper_management_licenses: 建設特定技能受入計画認定証
       order:
         status: ステータス
         # 現場
@@ -281,7 +289,7 @@ ja:
         supervisor_name: 監督員(氏名)
         supervisor_apply: 監督員(権限及び意見の申出方法)
         professional_engineer_name: 専門技術者(氏名)
-        professional_engineer_skill_training_id: 専門技術者(資格内容)
+        professional_engineer_qualification: 専門技術者(資格内容)
         professional_engineer_details: 専門技術者(担当工事内容)
         professional_construction: 特定専門工事(有無)
         construction_manager_name: 工事担任責任者(氏名)
@@ -289,7 +297,7 @@ ja:
         site_agent_name: 現場代理人(氏名)
         site_agent_apply: 現場代理人(権限及び意見の申出方法)
         lead_engineer_name: 主任技術者(氏名)
-        lead_engineer_skill_training_id: 主任技術者(資格内容)
+        lead_engineer_qualification: 主任技術者(資格内容)
         lead_engineer_check: 主任技術者(専任or非専任)
         work_chief_name: 作業主任者(氏名)
         work_conductor_name: 作業指揮者名(氏名)
@@ -298,7 +306,7 @@ ja:
         safety_promoter_name: 安全推進者(氏名)
         foreman_name: 職長(氏名)
         registered_core_engineer_name: 登録基幹技能者(氏名)
-        registered_core_engineer_skill_training_id: 登録基幹技能者(資格内容)
+        registered_core_engineer_qualification: 登録基幹技能者(資格内容)
       worker:
         name: 名前
         name_kana: 名前カナ

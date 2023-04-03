@@ -16,7 +16,7 @@ class CreateFieldWorkers < ActiveRecord::Migration[6.1]
       t.date :foreign_date_end
       t.string :foreign_job
       t.string :foreign_job_description
-      t.binary :proper_management_license
+      t.json :proper_management_licenses
       
       t.references :field_workerable, polymorphic: true
       t.timestamps

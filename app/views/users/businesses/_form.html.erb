@@ -55,7 +55,7 @@
 <br>
 <%= f.label :occupation_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :occupation_ids, Occupation.all, :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
+<%= f.collection_select :occupation_ids, occupation_default(@business), :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
 <br>
 <% if business.stamp_images.present? %>
   <% business.stamp_images.each_with_index do |image, index| %>
@@ -237,7 +237,10 @@
         "business[business_type]": {
           required: true
         },
-        "business[occupation_ids][]": {
+        "business[tem_industry_ids][]": {
+          required: true
+        },
+        "business_industries[occupation_ids][]": {
           required: true
         },
         "business[business_health_insurance_status]": {

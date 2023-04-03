@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "career_up_id"
     t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.json "occupation_ids"
     t.json "industry_ids"
     t.json "tem_industry_ids"
     t.integer "specific_skilled_foreigners_exist"
@@ -348,7 +347,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "foreign_date_end"
     t.string "foreign_job"
     t.string "foreign_job_description"
-    t.binary "proper_management_license"
+    t.json "proper_management_licenses"
     t.string "field_workerable_type"
     t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false

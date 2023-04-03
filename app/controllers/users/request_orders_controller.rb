@@ -132,7 +132,7 @@ module Users
         :supervisor_name,
         :supervisor_apply,
         :professional_engineer_name,
-        :professional_engineer_skill_training_id,
+        :professional_engineer_qualification,
         :professional_engineer_details,
         :professional_construction,
         :construction_manager_name,
@@ -141,6 +141,7 @@ module Users
         :site_agent_apply,
         :lead_engineer_name,
         :lead_engineer_check,
+        :lead_engineer_qualification,
         :work_chief_name,
         :work_conductor_name,
         :safety_officer_name,
@@ -148,18 +149,10 @@ module Users
         :safety_promoter_name,
         :foreman_name,
         :registered_core_engineer_name,
-        content:
-                 %i[
-                   professional_engineer_skill_training_id
-                   lead_engineer_skill_training_id
-                   registered_core_engineer_skill_training_id
-                 ]
+        :registered_core_engineer_qualification
       ).merge(
         content: {
           # このrubocop除外設定はのちに修正されます,Layout/LineLength一行の文字数140を超えている
-          professional_engineer_skill_training_id:        params[:request_order][:content][:professional_engineer_skill_training_id],
-          lead_engineer_skill_training_id:                params[:request_order][:content][:lead_engineer_skill_training_id],
-          registered_core_engineer_skill_training_id:     params[:request_order][:content][:registered_core_engineer_skill_training_id],
           subcon_name:                                    current_business.name, # 会社名
           subcon_branch_name:                             current_business.branch_name,                                      # 支店･営業所名
           subcon_address:                                 current_business.address,                                          # 会社住所
@@ -179,7 +172,7 @@ module Users
           # subcon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
           # subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
           # subcon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
-          # subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
+          # subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(6桁)
           # subcon_construction_license_number:                                 current_business.construction_license_number,                                      # 建設業許可番号(合成)
           subcon_employment_manager_name:                 current_business.employment_manager_name,                                          # 雇用管理責任者名
           subcon_specific_skilled_foreigners_exist:       current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
