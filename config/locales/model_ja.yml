@@ -274,7 +274,7 @@ ja:
         # health_and_safety_manager_name: 元方安全衛生管理者名
         submission_destination: 提出先及び担当者名
         construction_license: 工事に必要な建設許可証
-        status: ステータス
+        # status: ステータス
       request_order:
         request_order_infomation: 現場情報
         subcontractor: 下請会社

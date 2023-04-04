@@ -1,7 +1,7 @@
 class CreateOrders < ActiveRecord::Migration[6.1]
   def change
     create_table :orders do |t|
-      t.integer :status, null: false, default: 0
+      # t.integer :status, null: false, default: 0
       t.string :site_uu_id, null: false
       t.string :site_name, null: false
       t.string :order_name, null: false

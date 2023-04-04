@@ -8,10 +8,10 @@ class Order < ApplicationRecord
   has_many :field_special_vehicles, as: :field_special_vehicleable, dependent: :destroy
   has_many :field_machines, as: :field_machineable, dependent: :destroy
 
-  enum status: { created: 0, completed: 1 }
+  # enum status: { created: 0, completed: 1 }
   enum supervising_engineer_check: { full_time: 0, non_dedicated: 1 }
 
-  validates :status, presence: true
+  # validates :status, presence: true
 
   # 現場
   validates :site_career_up_id, numericality: { only_integer: true }, length: { minimum: 14, maximum: 14 }, allow_blank: true

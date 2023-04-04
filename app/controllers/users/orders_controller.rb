@@ -193,8 +193,8 @@ module Users
         :supervising_engineer_assistant_name,
         :supervising_engineer_assistant_qualification,
         :submission_destination,
-        :status,
         construction_license: []
+        # :status,
         # :vice_president_name,
         # :vice_president_company_name,
         # :secretary_name,

@@ -10,17 +10,17 @@ RSpec.describe Order, type: :model do
       expect(subject).to be_valid
     end
 
-    describe '#status' do
-      context '存在しない場合' do
-        before(:each) { subject.status = nil }
+    # describe '#status' do
+    #   context '存在しない場合' do
+    #     before(:each) { subject.status = nil }
 
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-          subject.valid?
-          expect(subject.errors.full_messages).to include('ステータスを入力してください')
-        end
-      end
-    end
+    #     it 'バリデーションに落ちること' do
+    #       expect(subject).to be_invalid
+    #       subject.valid?
+    #       expect(subject.errors.full_messages).to include('ステータスを入力してください')
+    #     end
+    #   end
+    # end
 
     describe '#site_uu_id' do
       context '存在しない場合' do

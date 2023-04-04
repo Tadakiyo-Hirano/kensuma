@@ -586,9 +586,9 @@ ja:
         non_dedicated: 非専任
     request_order:
       status:
-        requested: リクエスト済
-        submitted: 提出済
-        fix_requested: 修正依頼済
+        requested: 作成中
+        submitted: 提出済(未承認)
+        fix_requested: 差し戻し
         approved: 承認済
       professional_construction:
         y: 有

@@ -117,7 +117,7 @@
 					<td class="s7"></td>
 					<td class="s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
 					<td class="s8" colspan="8" rowspan="3">
-						<%= document_info_for_prime_contractor_name %> <!-- 8-042 元請会社の確認欄 -->
+						<%= @document.content&.[]('prime_contractor_confirmation')%> <!-- 8-042 元請会社の確認欄 -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -524,7 +524,7 @@
 					<td class="s22"></td>
 					<td class="s22"></td>
 					<td class="s22"></td>
-					<td class="s22"></td>	
+					<td class="s22"></td>
 					<td class="s22"></td>
 					<td class="s22"></td>
 					<td class="s22"></td>
@@ -1014,7 +1014,7 @@
 						<%= worker_date(w4, "birth_day_on") %> <!-- 8-018 生年月日(4) -->
 					</td>
 					<td class="s56" colspan="9" rowspan="3">
-						<%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->	
+						<%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w4, "my_phone_number") %> <!-- 8-023 電話番号(4) -->
@@ -1455,7 +1455,7 @@
 						<%= worker_medical_date(w8, "med_exam_on") %> <!-- 8-025 健康診断日(8) -->
 					</td>
 					<td class="s59" rowspan="6">
-						<%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->						
+						<%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w8, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(8) -->
@@ -1982,7 +1982,7 @@
 	.ritz .waffle a {
 		color: inherit;
 	}
-	
+
 	.ritz .waffle .s8 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -1995,7 +1995,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s42 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2012,7 +2012,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s38 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2024,7 +2024,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s63 {
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2036,7 +2036,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s10 {
 		border-right: 1px SOLID #ffffff;
 		text-align: left;
@@ -2048,7 +2048,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s24 {
 		border-left: none;
 		border-right: none;
@@ -2060,7 +2060,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s48 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2077,7 +2077,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s2 {
 		text-align: center;
 		color: #000000;
@@ -2100,7 +2100,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s52 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2117,7 +2117,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s11 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2130,7 +2130,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s26 {
 		border-left: none;
 		border-right: none;
@@ -2142,7 +2142,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s53 {
 		border-bottom: 1px SOLID #000000;
 		text-align: center;
@@ -2158,7 +2158,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s51 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2175,7 +2175,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s9 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2188,7 +2188,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s13 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2200,7 +2200,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s65 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2213,7 +2213,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s30 {
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #ffffff;
@@ -2226,7 +2226,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s14 {
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2239,7 +2239,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s29 {
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #ffffff;
@@ -2252,7 +2252,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s55 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2266,7 +2266,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s23 {
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2279,7 +2279,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s44 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2296,7 +2296,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s56 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2324,7 +2324,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s28 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
@@ -2336,7 +2336,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s59 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2364,7 +2364,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s16 {
 		text-align: center;
 		-webkit-text-decoration-skip: none;
@@ -2377,7 +2377,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s35 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2391,7 +2391,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s45 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2408,7 +2408,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s17 {
 		border-bottom: 1px SOLID #000000;
 		text-align: left;
@@ -2420,7 +2420,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s43 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2437,7 +2437,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s22 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2451,7 +2451,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s31 {
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2466,7 +2466,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s12 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #ffffff;
@@ -2479,7 +2479,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s54 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2496,7 +2496,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s32 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2510,7 +2510,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s25 {
 		border-left: none;
 		text-align: left;
@@ -2521,7 +2521,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s21 {
 		border-left: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2533,7 +2533,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s37 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px DASHED #000000;
@@ -2545,7 +2545,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s4 {
 		border-bottom: 1px SOLID #000000;
 		text-align: left;
@@ -2556,7 +2556,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s7 {
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2569,7 +2569,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s41 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2582,7 +2582,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s50 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2599,7 +2599,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s18 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2612,7 +2612,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s27 {
 		border-left: none;
 		text-align: left;
@@ -2623,7 +2623,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s39 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2635,7 +2635,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s60 {
 		border-right: 1px SOLID #000000;
 		border-bottom: 0px SOLID #ffffff;
@@ -2649,7 +2649,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s2 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2663,7 +2663,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s15 {
 		border-bottom: 1px SOLID #000000;
 		text-align: left;
@@ -2675,7 +2675,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s19 {
 		border-left: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
@@ -2688,7 +2688,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s64 {
 		border-bottom: 1px SOLID #ffffff;
 		text-align: center;
@@ -2699,7 +2699,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s6 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2711,7 +2711,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s34 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2725,7 +2725,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s20 {
 		border-right: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2739,7 +2739,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s47 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2756,7 +2756,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s33 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2768,7 +2768,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s36 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px DASHED #000000;
@@ -2782,7 +2782,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s40 {
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2797,7 +2797,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s57 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2825,7 +2825,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s46 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2842,7 +2842,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s1 {
 		border-top: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2855,7 +2855,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s66 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2869,7 +2869,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s61 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2883,7 +2883,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s49 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2900,7 +2900,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s62 {
 		border: 1px SOLID #ffffff;
 		text-align: left;
@@ -2911,7 +2911,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s58 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
