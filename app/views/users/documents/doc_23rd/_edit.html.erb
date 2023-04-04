@@ -1,7 +1,7 @@
 <!-- (23)全建統一様式第8号(安全ミーティング報告書) -->
 <div class="ritz grid-container" dir="ltr">
   <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
-    <div class="card">  
+    <div class="card">
       <div class="card-body">
         <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
         <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -216,9 +216,15 @@
           <td class="doc_23_s4"></td>
           <td class="doc_23_s5" dir="ltr" colspan="5" rowspan="2">施 工 会 社 名</td>
           <td class="doc_23_s6_" dir="ltr" colspan="11" rowspan="2"><%= document_info.content&.[]('subcon_name') %><!--「会社名」23-002--></td>
-          <td class="doc_23_s7" dir="ltr" colspan="3" rowspan="3"><%= document_info_for_prime_contractor_name %><!--「元請会社の確認欄」23-005 --></td>
-          <td class="doc_23_s7" dir="ltr" colspan="3" rowspan="3"><%= document_info_for_prime_contractor_name %><!--「元請会社の確認欄」23-007 --></td>
-          <td class="doc_23_s7" dir="ltr" colspan="4" rowspan="3"><%= document_info_for_prime_contractor_name %><!--「元請会社の確認欄」23-009 --></td>
+          <td class="doc_23_s7" dir="ltr" colspan="3" rowspan="3">
+            <%= f.text_field name = 'content[prime_contractor_confirmation_general_safety_responsible_person]',value: @document.content&.[]('prime_contractor_confirmation_general_safety_responsible_person') %>
+          </td><!--「元請会社の確認欄」23-005 統括安全衛生責任者 -->
+          <td class="doc_23_s7" dir="ltr" colspan="3" rowspan="3">
+            <%= f.text_field name = 'content[prime_contractor_confirmation_health_and_safety_manager]',value: @document.content&.[]('prime_contractor_confirmation_health_and_safety_manager') %>
+          </td><!--「元請会社の確認欄」23-007　元方安全衛生管理者 -->
+          <td class="doc_23_s7" dir="ltr" colspan="4" rowspan="3">
+            <%= f.text_field name = 'content[prime_contractor_confirmation_site_agent]',value: @document.content&.[]('prime_contractor_confirmation_site_agent') %>
+          </td><!--「元請会社の確認欄」23-009　現場代理人 -->
           <td class="doc_23_s1"></td>
         </tr>
         <tr style="height: 19px">
@@ -276,23 +282,23 @@
           <td class="doc_23_s3"></td>
           <td class="doc_23_s0"></td>
           <td class="doc_23_s9" dir="ltr" colspan="3">
-            <%= f.date_field :name, name: "document[content][date_entered_1st]",
-              value: doc_content_date(@document.content&.[]("date_entered_1st")),
+            <%= f.date_field :name, name: "document[content][date_entered_general_safety_responsible_person]",
+              value: doc_content_date(@document.content&.[]("date_entered_general_safety_responsible_person")),
               class: 'form-control form-contr"ol-sm'
             %>
-            <!--「記入日」23-006 --></td>
+            <!--「記入日」23-006 統括安全衛生責任者--></td>
           <td class="doc_23_s9" dir="ltr" colspan="3">
-            <%= f.date_field :name, name: "document[content][date_entered_2nd]",
-              value: doc_content_date(@document.content&.[]("date_entered_2nd")),
+            <%= f.date_field :name, name: "document[content][date_entered_health_and_safety_manager]",
+              value: doc_content_date(@document.content&.[]("date_entered_health_and_safety_manager")),
               class: 'form-control form-contr"ol-sm'
             %>
-            <!--「記入日」23-008 --></td>
+            <!--「記入日」23-008 元方安全衛生管理者--></td>
           <td class="doc_23_s9" dir="ltr" colspan="4">
-            <%= f.date_field :name, name: "document[content][date_entered_3rd]",
-              value: doc_content_date(@document.content&.[]("date_entered_3rd")),
+            <%= f.date_field :name, name: "document[content][date_entered_site_agent]",
+              value: doc_content_date(@document.content&.[]("date_entered_site_agent")),
               class: 'form-control form-contr"ol-sm'
             %>
-            <!--「記入日」23-010 --></td>
+            <!--「記入日」23-010 現場代理人--></td>
           <td class="doc_23_s1"></td>
         </tr>
         <tr style="height: 19px">
@@ -507,7 +513,7 @@
           <td class="doc_23_s16" dir="ltr" colspan="5" rowspan="2"><%= document_subcon_info_for_23rd&.work_chief_name %><!--「各会社の作業主任者名」23-019 --></td>
           <td class="doc_23_s5" dir="ltr" colspan="3" rowspan="2">玉掛者</td>
           <td class="doc_23_s16" dir="ltr" colspan="6" rowspan="2">
-            <%= f.select name = 'content[slinger]', name_of_field_workers_order,
+            <%= f.select name = 'content[slinger]', name_of_workers,
               { selected: @document.content&.[]('slinger'), include_blank: "選択して下さい" },
               { class: 'form-control form-control-sm' }
             %><!--「玉掛者名」23-021 --></td>
@@ -527,7 +533,7 @@
           <td class="doc_23_s16" dir="ltr" colspan="5" rowspan="2"><%= document_subcon_info_for_23rd&.work_conductor_name %><!--「各会社の作業指揮者名」23-020 --></td>
           <td class="doc_23_s5" dir="ltr" colspan="3" rowspan="2">合図者</td>
           <td class="doc_23_s16" dir="ltr" colspan="6" rowspan="2">
-            <%= f.select name = 'content[signaling_person]', name_of_field_workers_order,
+            <%= f.select name = 'content[signaling_person]', name_of_workers,
               { selected: @document.content&.[]('signaling_person'), include_blank: "選択して下さい" },
               { class: 'form-control form-control-sm' }
             %><!--「合図者名」23-022 --></td>
@@ -703,7 +709,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="10" rowspan="2">
             <%= f.text_area name = 'content[cheduled_work_hazard_1st]',value: @document.content&.[]('cheduled_work_hazard_1st'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「予定作業の危険・項目」23-032 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -739,7 +745,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="8" rowspan="2">
             <%= f.text_area name = 'content[risk_mitigation_measures_1st]',value: @document.content&.[]('risk_mitigation_measures_1st'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「リスク低減措置・項目」23-037 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -788,7 +794,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="10" rowspan="2">
             <%= f.text_area name = 'content[cheduled_work_hazard_2nd]',value: @document.content&.[]('cheduled_work_hazard_2nd'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「予定作業の危険・項目」23-032 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -824,7 +830,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="8" rowspan="2">
             <%= f.text_area name = 'content[risk_mitigation_measures_2nd]',value: @document.content&.[]('risk_mitigation_measures_2nd'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「リスク低減措置・項目」23-037 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -874,7 +880,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="10" rowspan="2">
             <%= f.text_area name = 'content[cheduled_work_hazard_3rd]',value: @document.content&.[]('cheduled_work_hazard_3rd'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「予定作業の危険・項目」23-032 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -910,7 +916,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="8" rowspan="2">
             <%= f.text_area name = 'content[risk_mitigation_measures_3rd]',value: @document.content&.[]('risk_mitigation_measures_3rd'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「リスク低減措置・項目」23-037 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -959,7 +965,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="10" rowspan="2">
             <%= f.text_area name = 'content[cheduled_work_hazard_4th]',value: @document.content&.[]('cheduled_work_hazard_4th'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「予定作業の危険・項目」23-032 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -995,7 +1001,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="8" rowspan="2">
             <%= f.text_area name = 'content[risk_mitigation_measures_4th]',value: @document.content&.[]('risk_mitigation_measures_4th'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「リスク低減措置・項目」23-037 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -1044,7 +1050,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="10" rowspan="2">
             <%= f.text_area name = 'content[cheduled_work_hazard_5th]',value: @document.content&.[]('cheduled_work_hazard_5th'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「予定作業の危険・項目」23-032 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -1080,7 +1086,7 @@
           <td class="doc_23_s21" dir="ltr" colspan="8" rowspan="2">
             <%= f.text_area name = 'content[risk_mitigation_measures_5th]',value: @document.content&.[]('risk_mitigation_measures_5th'), size: "18x2",
               placeholder: '30文字以内で入力してください'
-            %>  
+            %>
             <!--「リスク低減措置・項目」23-037 -->
           </td>
           <td class="doc_23_s27_edit" dir="ltr" colspan="4" rowspan="2">
@@ -1312,7 +1318,7 @@
               <%= f.label :hazard_prediction_number_severity_1st, "3.極めて重大", {value: :high, style: "display: inline-block;"}%>
             </td>
             <td class="doc_23_s44" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_1st]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_1st]', name_of_workers,
                 { selected: @document.content&.[]('sign_1st'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1329,7 +1335,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_2nd]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_2nd]', name_of_workers,
                 { selected: @document.content&.[]('sign_2nd'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1346,7 +1352,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_3rd]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_3rd]', name_of_workers,
                 { selected: @document.content&.[]('sign_3rd'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1363,7 +1369,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_4th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_4th]', name_of_workers,
                 { selected: @document.content&.[]('sign_4th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1380,7 +1386,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_5th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_5th]', name_of_workers,
                 { selected: @document.content&.[]('sign_5th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1397,7 +1403,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_6th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_6th]', name_of_workers,
                 { selected: @document.content&.[]('sign_6th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1504,7 +1510,7 @@
                 <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_7th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_7th]', name_of_workers,
                 { selected: @document.content&.[]('sign_7th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1521,7 +1527,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_8th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_8th]', name_of_workers,
                 { selected: @document.content&.[]('sign_8th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1538,7 +1544,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_9th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_9th]', name_of_workers,
                 { selected: @document.content&.[]('sign_9th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1555,7 +1561,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_10th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_10th]', name_of_workers,
                 { selected: @document.content&.[]('sign_10th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1572,7 +1578,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_11th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_11th]', name_of_workers,
                 { selected: @document.content&.[]('sign_11th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1589,7 +1595,7 @@
               <!--「危険予測番号」23-052 -->
             </td>
             <td class="doc_23_s22" dir="ltr" colspan="3" rowspan="4">
-              <%= f.select name = 'content[sign_12th]', name_of_field_workers_order, 
+              <%= f.select name = 'content[sign_12th]', name_of_workers,
                 { selected: @document.content&.[]('sign_12th'), include_blank: "選択して下さい" },
                 { class: 'form-control form-control-sm' }
               %><!--「安全ミーティング出席者サイン」23-054 -->
@@ -1955,7 +1961,7 @@
           <td class="doc_23_s1"></td>
           <td class="doc_23_s1"></td>
           <td class="doc_23_s8" dir="ltr" colspan="14" rowspan="2">
-            <%= f.select name = 'content[name]', name_of_field_workers_order, 
+            <%= f.select name = 'content[name]', name_of_workers,
               { selected: @document.content&.[]('name'), include_blank: "選択して下さい" },
               { class: 'form-control form-control-sm' }
             %>
@@ -2034,7 +2040,7 @@
     }else if(check_radio_form[1].checked) {
       radio_form_box.style.visibility = "hidden";
       for(var i=0; check_selected.length > i; i++){
-        check_selected[i].checked = false;  
+        check_selected[i].checked = false;
       }
     }
   }
@@ -2049,5 +2055,5 @@
       txt_form_box.style.visibility = "hidden";
       check_written[0].value = '';
     }
-  }        
+  }
 </script>

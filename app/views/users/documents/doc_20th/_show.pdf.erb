@@ -79,8 +79,8 @@
             <td class="doc_20_s7"></td>
             <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
             <td class="doc_20_s8" colspan="9" rowspan="2">
-              <%= document_info_for_prime_contractor_name %>
-            </td><!--「統括安全衛生責任者名」22-001-->
+              <%= @document.content&.[]('prime_contractor_confirmation')%>
+            </td><!--「元請会社の確認欄」20-001-->
             <td class="doc_20_s3"></td>
           </tr>
           <tr style="height: 24px">

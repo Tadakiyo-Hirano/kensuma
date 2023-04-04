@@ -101,7 +101,7 @@ RSpec.describe 'Documnents', type: :system do
         it '工事安全衛生計画書の詳細画面へ遷移できること' do
           visit users_request_order_document_path(request_order, subject)
           expect(page).to have_content '工事安全衛生計画書'
-          expect(page).to have_content order.confirm_name
+          # expect(page).to have_content order.confirm_name
           expect(page).to have_content order.site_name
           expect(page).to have_content business.name
           expect(page).to have_content order.site_agent_name
@@ -177,7 +177,7 @@ RSpec.describe 'Documnents', type: :system do
           visit users_request_order_document_path(request_order_first_sub, document_uuid)
 
           expect(page).to have_content '工事安全衛生計画書'
-          expect(page).to have_content order.confirm_name
+          # expect(page).to have_content order.confirm_name
           expect(page).to have_content order.site_name
           expect(page).to have_content business_first_sub.name
           expect(page).to have_content order.site_agent_name
