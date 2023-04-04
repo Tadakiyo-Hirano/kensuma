@@ -158,8 +158,8 @@ Occupation.seed(
   {
     id: 27,
     industry_id: 9,
-    name: '給排水工事業',
-    short_name: '給排水',
+    name: '衛生配管工事業',
+    short_name: '衛生配管',
   },
   {
     id: 28,

@@ -21,10 +21,8 @@
     <%= form_with model: @order, url: update_workers_users_order_field_workers_path, method: :patch, local: true do |f| %>
       <div class="card">
         <div class="card-body table-responsive p-0">
-          <#table border="2" style="border-collapse: collapse; border-color: red">
-  
           <table class="table text-nowrap">
-            <% @field_workers.each do |field_worker| %>
+            <% @field_workers.each_with_index do |field_worker, i| %>
               <%= f.fields_for "field_workers[]", field_worker do |fw| %>
                 <tr align="center">
                   <th><%= FieldWorker.human_attribute_name(:admission_worker_name) %></th>
@@ -37,13 +35,46 @@
                 </tr>
                   <tr>
                     <td><%= field_worker.admission_worker_name %></td>
-                    <td><%= fw.date_field :admission_date_start, class: "form-control" %></td>
-                    <td><%= fw.date_field :admission_date_end, class: "form-control" %></td>
-                    <td><%= fw.date_field :education_date, class: "form-control" %></td>
-                    <td><%= fw.select :sendoff_education, FieldWorker.sendoff_educations_i18n.invert, {include_blank: true}, {class: "form-control"} %></td>
-                    <td><%= fw.select :occupation_id, FieldWorker.sendoff_educations_i18n.invert, {include_blank: true}, {class: "form-control"} %></td>
-                    <td><%= fw.text_field :job_description, class: "form-control" %></td>
+                    <td><%= fw.date_field :admission_date_start, 
+                                            value: params[:order]&.dig(:field_workers, field_worker.id.to_s, :admission_date_start),
+                                            id: "admission_date_start", class: "form-control", required: true %>
+                    </td>
+                    <td><%= fw.date_field :admission_date_end,
+                                            value: params[:order]&.dig(:field_workers, field_worker.id.to_s, :admission_date_end),
+                                            id: "admission_date_end", class: "form-control", required: true %>
+                    </td>
+                    <td><%= fw.date_field :education_date,
+                                            value: params[:order]&.dig(:field_workers, field_worker.id.to_s, :education_date),
+                                            id: "education_date", class: "form-control", required: true %>
+                    </td>
+                    <td><%= fw.select :sendoff_education, FieldWorker.sendoff_educations_i18n.invert, 
+                                        { selected: selected_value(field_worker.id, "sendoff_education", params[:action], params[:controller]), include_blank: true},
+                                        { id: "sendoff_education", class: "form-control", required: true} %>
+                    </td>
+                    <td><%= fw.collection_select :occupation_id, 
+                                                  @current_business.occupations, :id, :name,
+                                                  { selected: selected_value(field_worker.id, "occupation_id", params[:action], params[:controller]), include_blank: true },
+                                                  { id: "occupation_id", class: "form-control", required: true } %>
+                    </td>
+                    <% if defined?(error_ids) %> <!--エラーによる再描写かどうか -->
+                      <% if error_ids.keys.include?(field_worker.id.to_s) %>
+                        <td>
+                          <div class="field_with_errors">
+                            <%= fw.text_field :job_description, value: selected_value(field_worker.id, "job_description", params[:action], params[:controller]), class: "form-control" %>
+                          </div>
+                        </td>
+                      <% else %>
+                        <td>
+                          <div class="field">
+                            <%= fw.text_field :job_description, class: "form-control" %>
+                          </div>
+                        </td>
+                      <% end %>
+                    <% else %>
+                      <td><%= fw.text_field :job_description, class: "form-control" %></td>
+                    <% end %>
                   </tr>
+                <% if field_worker.content['country'] != "日本" %>
                 <tr align="center">
                   <th></th>
                   <th><%= FieldWorker.human_attribute_name(:foreign_work_place) %></th>
@@ -51,17 +82,24 @@
                   <th><%= FieldWorker.human_attribute_name(:foreign_date_end) %></th>
                   <th><%= FieldWorker.human_attribute_name(:foreign_job) %></th>
                   <th><%= FieldWorker.human_attribute_name(:foreign_job_description) %></th>
-                  <th><%= FieldWorker.human_attribute_name(:proper_management_license) %></th>
+                  <th><%= FieldWorker.human_attribute_name(:proper_management_licenses) %></th>
                 </tr>
-                  <tr>
-                    <td></td>
-                    <td><%= fw.text_field :foreign_work_place, class: "form-control" %></td>
-                    <td><%= fw.date_field :foreign_date_start, class: "form-control" %></td>
-                    <td><%= fw.date_field :foreign_date_end, class: "form-control" %></td>
-                    <td><%= fw.text_field :foreign_job, class: "form-control" %></td>
-                    <td><%= fw.text_field :foreign_job_description, class: "form-control" %></td>
-                    <td><%= fw.file_field :proper_management_license, accept: 'image/jpg, image/jpeg, image/png', class: "form-control" %></td>
-                  </tr>
+                <tr>
+                  <td></td>
+                  <td><%= fw.text_field :foreign_work_place, id: "foreign_work_place", class: "form-control", required: true %></td>
+                  <td><%= fw.date_field :foreign_date_start, id: "foreign_date_start", class: "form-control", required: true %></td>
+                  <td><%= fw.date_field :foreign_date_end, id: "foreign_date_end", class: "form-control", required: true %></td>
+                  <td><%= fw.text_field :foreign_job, id: "foreign_job", class: "form-control", required: true %></td>
+                  <td><%= fw.text_field :foreign_job_description, id: "foreign_job_description", class: "form-control", required: true %></td>
+                  <td><%= fw.file_field :proper_management_licenses, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %></td>
+                  <% if field_worker.proper_management_licenses.present? %>
+                    <% field_worker.proper_management_licenses.each_with_index do |image, index| %>
+                      <td><%= image_tag(image.url) %></td>
+                      <td><%= link_to "削除", destroy_image_users_order_field_workers_path(id: field_worker.id, index: index), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" } %></td>
+                    <% end %>
+                  <% end %>
+                </tr>
+                <% end %>
               <% end %>
             <% end %>
           </table>
@@ -72,3 +110,55 @@
     <% end %>
   </div>
 </section>
+
+<script>
+  $(document).ready(function() {
+    var fieldNames = {
+      'admission_date_start': '<%= t('activerecord.attributes.field_worker.admission_date_start') %>',
+      'admission_date_end': '<%= t('activerecord.attributes.field_worker.admission_date_end') %>',
+      'education_date': '<%= t('activerecord.attributes.field_worker.education_date') %>',
+      'sendoff_education': '<%= t('activerecord.attributes.field_worker.sendoff_education') %>',
+      'occupation_id': '<%= t('activerecord.attributes.field_worker.occupation_id') %>',
+      'foreign_work_place': '<%= t('activerecord.attributes.field_worker.foreign_work_place') %>',
+      'foreign_date_start': '<%= t('activerecord.attributes.field_worker.foreign_date_start') %>',
+      'foreign_date_end': '<%= t('activerecord.attributes.field_worker.foreign_date_end') %>',
+      'foreign_job': '<%= t('activerecord.attributes.field_worker.foreign_job') %>',
+      'foreign_job_description': '<%= t('activerecord.attributes.field_worker.foreign_job_description') %>'
+    };
+
+    $('form').submit(function(event) {
+      var formIsValid = true;
+      $('input[required], select[required], textarea[required]').each(function() {
+        if ($.trim($(this).val()).length === 0) {
+          formIsValid = false;
+          var fieldName = fieldNames[$(this).attr('id')];
+          $(this).addClass('field_with_errors');
+          if ($(this).is('select')) {
+            $(this).parent().append('<span class="error-message">' + fieldName + 'を選択してください。</span>');
+          } else {
+            $(this).parent().append('<span class="error-message">' + fieldName + 'を入力してください。</span>');
+          }
+        }
+      });
+      if (!formIsValid) {
+        event.preventDefault();
+      }
+    });
+
+    $('input[required], select[required], textarea[required]').on('input change', function() {
+      var fieldName = fieldNames[$(this).attr('id')];
+      if ($.trim($(this).val()).length === 0) {
+        $(this).addClass('field_with_errors');
+        $(this).parent().find('.error-message').remove();
+        if ($(this).is('select')) {
+          $(this).parent().append('<span class="error-message">' + fieldName + 'を選択してください。</span>');
+        } else {
+          $(this).parent().append('<span class="error-message">' + fieldName + 'を入力してください。</span>');
+        }
+      } else {
+        $(this).removeClass('field_with_errors');
+        $(this).parent().find('.error-message').remove();
+      }
+    });
+  });
+</script>

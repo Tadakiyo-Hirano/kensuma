@@ -121,8 +121,8 @@ module DocumentsHelper
   end
 
   # (5)再下請負通知書（変更届）
-  def skill_id_value(engineer)
-    @request_order.content.nil? ? "" : @request_order.content&.[]("#{engineer}_engineer_skill_training_id").to_i
+  def skill_info(license, model)
+    SkillTraining.find_by(id: model&.send(license))&.name
   end
 
   def child_check(child)
@@ -135,7 +135,7 @@ module DocumentsHelper
 
   def c_license_permission_type_minister_or_governor(d_info) # 「大臣」か「知事」判定
     if d_info == document_info
-      permission_type = Business.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
+      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
     elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_minister_governor').delete("許可")
     end
@@ -149,7 +149,7 @@ module DocumentsHelper
 
   def c_license_permission_type_identification_or_general(d_info) # 「特定」か「一般」判定
     if d_info == document_info
-      permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
+      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
     elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
     end
@@ -179,6 +179,14 @@ module DocumentsHelper
     f_type == yes_no ? tag.span(yes_no, class: :circle) : yes_no
   end
 
+  def occupation_default(list)
+    if params[:action] == "edit" && @business.tem_industry_ids.present?
+      Occupation.where(industry_id: @business.tem_industry_ids.map(&:to_i).reject(&:zero?))
+    else
+      Occupation.all
+    end
+  end
+  
   # (8)作業員名簿
 
   # 元請の確認欄
@@ -396,6 +404,34 @@ module DocumentsHelper
   def field_worker_education_date(worker)
     date = worker&.education_date
     date.blank? ? '年　月　日' : l(date, format: :long)
+  end
+
+  # 作業員の記号
+  def field_worker_symbol(worker)
+    if worker.present?
+      id = worker&.content&.[]('id')
+      birth_day_on = worker&.content&.[]('birth_day_on')
+      safety_health_education = worker&.content&.[]('safety_sanitary_education_ids').to_json
+      foreigner = worker&.content&.[]('status_of_residence')
+
+      site_agent = "現" if id == document_info.content&.[]('subcon_site_agent_name_id') # (現)現場代理人
+      work_chief = "作" if id == document_info.content&.[]('subcon_work_chief_name_id') # (作)作業主任者
+      if birth_day_on .present?
+        under_18 = "未" if ((Date.today - birth_day_on.to_date) / 365.25).to_i < 18 # (未)18歳未満の作業員
+      end
+      sex = "女" if worker&.content&.[]('sex') == "woman" # 女
+      lead_engineer = "主" if id == document_info.content&.[]('subcon_lead_engineer_name_id') # (主)主任技術者
+      foreman = "職" if id == document_info.content&.[]('subcon_foreman_name_id') # (主)主任技術者
+      safety_manager = "安" if id == document_info.content&.[]('subcon_safety_manager_name_id') # (安)安全衛生責任者
+      ability_improving_education = "歳" if safety_health_education.include?("19") # (歳)能力向上教育
+      danger_harmful_business = "再" if safety_health_education.include?("6") # (再)危険有害業務・再発防止教育
+      foreign_trainee = "習" if foreigner == "specific_activity" # (習)外国人技能実習生
+      foreign_worker = "就" if foreigner == "permanent_resident" # (就)外国人建設就労者
+      skill_worker = "1特" if foreigner == "specified_skill" # (1特)1号特定技能外国人
+
+      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, ability_improving_education, danger_harmful_business, foreign_trainee, foreign_worker, skill_worker
+      worker_symbols.size > 1 ? worker_symbols.join(' ') : worker_symbols
+    end
   end
 
   # (12)工事・通勤用車両届
@@ -884,7 +920,6 @@ module DocumentsHelper
   def make_square_enclosure_number(number)
     number.blank? ? tag.span('&nbsp;'.html_safe , class: :square_hankaku_space) : tag.span(number, class: :square_hankaku_number)
   end
-
 
 
   # (24)新規入場者調査票
