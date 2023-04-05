@@ -912,9 +912,9 @@
               <%= child_check(@child) == "FALSE" ? "" : Industry.find(Business.find(@child.business_id).industry_ids.join("','")).name.delete("工事業") %> <!-- 5-112 各会社の建設許可業種 -->
             </td>
             <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
-            <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification("大臣", @child) %></td>
-            <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type("特定", @child) %></td>
-            <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= @child&.content&.[]('subcon_construction_construction_license_number_double_digit') %></td>
+            <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("大臣", @child) %></td>
+            <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("特定", @child) %></td>
+            <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%#= @child&.content&.[]('subcon_construction_construction_license_number_double_digit') %></td>
             <td class="s_5b_216" dir="ltr" colspan="2" rowspan="4">第</td>
             <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">
               <%= @child&.content&.[]('subcon_construction_license_number_six_digits') %> <!-- 5-115 建設許可番号 -->
@@ -1011,8 +1011,8 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
-            <td class="s_5b_208" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification("知事", @child) %></td>
-            <td class="s_5b_210" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type("一般", @child) %></td>
+            <td class="s_5b_208" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("知事", @child) %></td>
+            <td class="s_5b_210" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("一般", @child) %></td>
           </tr>
           <tr><!-- 26行目 -->
             <td class="s_5c_00"></td>
@@ -1414,7 +1414,7 @@
             <td class="s_5b_304" dir="ltr" colspan="3" rowspan="3"></td>
             <td class="s_5b_305" dir="ltr" colspan="7" rowspan="3">資 格 内 容</td>
             <td class="s_5b_302" dir="ltr" colspan="17" rowspan="3">
-              <%= engineer_skill_training("lead", @child) %> <!--  5-126 主任技術者の必要資格 -->
+              <%= skill_info("lead_engineer_qualification", @child) %> <!--  5-126 主任技術者の必要資格 -->
             </td>
             <td class="s_5b_000"></td>
             <td class="s_5b_301" dir="ltr" colspan="10" rowspan="3">※専 門 技 術 者 名</td>
@@ -1505,7 +1505,7 @@
             <td class="s_5b_304" dir="ltr" colspan="3" rowspan="5"></td>
             <td class="s_5b_303" dir="ltr" colspan="7" rowspan="3">資 格 内 容</td>
             <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
-              <%= engineer_skill_training("professional", @child) %> <!-- 5-131 専門技術者の必要資格 -->
+              <%= skill_info("professional_engineer_qualification", @child) %> <!-- 5-131 専門技術者の必要資格 -->
             </td><!-- 30列目 -->
           </tr>
           <tr><!-- 45行目 -->
@@ -1567,7 +1567,7 @@
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5b_310" dir="ltr" colspan="17" rowspan="2">
-              <%= engineer_skill_training("registered_core", @child) %> <!-- 5-134 登録基幹技能者の必要資格 -->
+              <%= skill_info("registered_core_engineer_qualification", @child) %> <!-- 5-134 登録基幹技能者の必要資格 -->
             </td>
             <td class="s_5b_000"></td>
             <td class="s_5b_303" dir="ltr" colspan="7" rowspan="2">担当工事内容</td>
@@ -1589,7 +1589,7 @@
             <td class="s_5a_404" dir="ltr" colspan="3" rowspan="6"></td>
             <td class="s_5a_403" dir="ltr" colspan="7" rowspan="3">資 格 内 容</td>
             <td class="s_5a_402" dir="ltr" colspan="16" rowspan="3">
-              <%= engineer_skill_training("professional", document_info) %> <!-- 5-040 専門技術者の必要資格 -->
+              <%= skill_info("professional_engineer_qualification", document_info) %> <!-- 5-040 専門技術者の必要資格 -->
             </td><!-- 30列目 -->
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -1711,7 +1711,7 @@
             <td class="s_5a_404" dir="ltr" colspan="3" rowspan="3"></td><!-- 1列目 -->
             <td class="s_5a_403" dir="ltr" colspan="7" rowspan="3">資 格 内 容</td>
             <td class="s_5a_402" dir="ltr" colspan="17" rowspan="3">
-              <%= engineer_skill_training("lead", document_info) %> <!-- 5-035 主任技術者の必要資格 -->
+              <%= skill_info("lead_engineer_qualification", document_info) %> <!-- 5-035 主任技術者の必要資格 -->
             </td>
             <td class="s_5a_000"></td>
             <td class="s_5a_403" dir="ltr" colspan="7" rowspan="3">担当工事内容</td>
@@ -1976,7 +1976,7 @@
           </tr>
           <tr><!-- 57行目 -->
             <td class="s_5a_503" dir="ltr" colspan="17" rowspan="2">
-              <%= engineer_skill_training("registered_core", document_info) %> <!-- 5-043 登録基幹技能者の必要資格 -->
+              <%= skill_info("registered_core_engineer_qualification", document_info) %> <!-- 5-043 登録基幹技能者の必要資格 -->
             </td>
             <td class="s_5a_000"></td>
             <td class="s_5a_000"></td>

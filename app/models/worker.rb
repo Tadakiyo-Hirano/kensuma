@@ -32,7 +32,7 @@ class Worker < ApplicationRecord
 
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
   validates :name, presence: true
-  validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー\s\p{blank}]+\z/u, message: 'はカタカナで入力してください' }
+  validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー・]+\z/u, message: 'はカタカナで入力してください' }
   validates :country, presence: true
   validates :my_address, presence: true
   validates :my_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: 'はハイフン無しの10桁または11桁で入力してください' }

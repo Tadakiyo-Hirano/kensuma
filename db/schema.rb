@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "career_up_id"
     t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.json "occupation_ids"
     t.json "industry_ids"
     t.json "tem_industry_ids"
     t.integer "specific_skilled_foreigners_exist"
@@ -348,7 +347,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.date "foreign_date_end"
     t.string "foreign_job"
     t.string "foreign_job_description"
-    t.binary "proper_management_license"
+    t.json "proper_management_licenses"
     t.string "field_workerable_type"
     t.bigint "field_workerable_id"
     t.datetime "created_at", precision: 6, null: false
@@ -474,7 +473,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
     t.string "site_uu_id", null: false
     t.string "site_name", null: false
     t.string "order_name", null: false
@@ -489,43 +487,29 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "order_supervisor_company"
     t.string "order_supervisor_apply", null: false
     t.string "construction_name", null: false
-    t.string "construction_details", null: false
+    t.string "construction_details"
     t.date "start_date"
     t.date "end_date"
     t.date "contract_date"
-    t.string "submission_destination", null: false
-    t.string "general_safety_responsible_person_name", null: false
-    t.string "vice_president_name", null: false
-    t.string "vice_president_company_name", null: false
-    t.string "secretary_name", null: false
-    t.string "health_and_safety_manager_name", null: false
-    t.string "general_safety_agent_name", null: false
-    t.string "supervisor_name", null: false
-    t.string "supervisor_apply", null: false
     t.string "site_agent_name", null: false
     t.string "site_agent_apply", null: false
+    t.string "supervisor_name", null: false
+    t.string "supervisor_apply", null: false
+    t.string "professional_engineer_name_1st"
+    t.string "professional_engineer_qualification_1st"
+    t.string "professional_engineer_details_1st"
+    t.string "professional_engineer_name_2nd"
+    t.string "professional_engineer_qualification_2nd"
+    t.string "professional_engineer_details_2nd"
     t.string "supervising_engineer_name", null: false
     t.integer "supervising_engineer_check", null: false
     t.string "supervising_engineer_qualification"
     t.string "supervising_engineer_assistant_name"
     t.string "supervising_engineer_assistant_qualification"
-    t.string "professional_engineer_name"
-    t.string "professional_engineer_qualification"
-    t.string "professional_engineer_construction_details"
-    t.string "professional_engineer_required_qualification"
-    t.string "safety_officer_name", null: false
-    t.string "safety_officer_position_name", null: false
-    t.string "general_safety_manager_name"
-    t.string "general_safety_manager_position_name"
-    t.string "safety_manager_name"
-    t.string "safety_manager_position_name"
-    t.string "health_manager_name"
-    t.string "health_manager_position_name"
-    t.string "health_and_safety_promoter_name"
-    t.string "health_and_safety_promoter_position_name"
-    t.string "confirm_name", null: false
-    t.date "accept_confirm_date"
-    t.string "subcontractor_name", null: false
+    t.string "general_safety_responsible_person_name"
+    t.string "general_safety_agent_name"
+    t.string "submission_destination", null: false
+    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
@@ -546,22 +530,22 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_id"
     t.string "uuid", null: false
+    t.string "occupation"
     t.string "construction_name"
     t.string "construction_details"
     t.date "start_date"
     t.date "end_date"
     t.date "contract_date"
+    t.string "site_agent_name"
+    t.string "site_agent_apply"
     t.string "supervisor_name"
     t.string "supervisor_apply"
     t.string "professional_engineer_name"
-    t.string "professional_engineer_qualification"
     t.string "professional_engineer_details"
-    t.string "professional_engineer_required_qualification"
+    t.string "professional_engineer_qualification"
     t.integer "professional_construction"
     t.string "construction_manager_name"
     t.string "construction_manager_position_name"
-    t.string "site_agent_name"
-    t.string "site_agent_apply"
     t.string "lead_engineer_name"
     t.integer "lead_engineer_check"
     t.string "lead_engineer_qualification"
@@ -573,9 +557,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
     t.string "registered_core_engineer_qualification"
-    t.integer "professional_engineer_skill_training"
-    t.integer "lead_engineer_skill_training"
-    t.integer "registered_core_engineer_skill_training"
+    t.string "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"

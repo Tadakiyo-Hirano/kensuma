@@ -5,6 +5,9 @@ module Users
     before_action :set_sub_request_order, only: %i[fix_request approve]
     before_action :exclude_prime_contractor, only: %i[edit update]
     before_action :redirect_unless_prime_contractor, only: %i[update_approval_status edit_approval_status]
+    before_action :set_business_occupations, only: %i[edit update]
+    before_action :set_business_construction_licenses, only: %i[edit update]
+    before_action :set_construction_manager_position_name, only: %i[update]
 
     def show
       @sub_request_orders = @request_order.children
@@ -29,7 +32,7 @@ module Users
           r.professional_engineer_details =      'テスト担当工事内容'
           r.professional_construction =          0
           r.construction_manager_name =          'テスト工事担当責任者名'
-          r.construction_manager_position_name = 'テスト工事担当責任者役職名'
+          # r.construction_manager_position_name = 'テスト工事担当責任者役職名'
           r.site_agent_name =                    'テスト現場代理人名'
           r.site_agent_apply =                   'テスト現場申出方法'
           r.lead_engineer_name =                 'テスト主任技術者名'
@@ -101,6 +104,38 @@ module Users
       end
     end
 
+    # 専門技術者
+    def professional_engineer_skill_training_options
+      professional_engineer_name = params[:professional_engineer_name]
+      worker = Worker.find_by(name: professional_engineer_name)
+      options = worker.skill_trainings
+      render json: options
+    end
+
+    def professional_engineer_qualification
+      if params[:request_order][:professional_qualification_id_input].present?
+        @request_order.professional_qualification = params[:request_order][:professional_qualification_id_input]
+      end
+      @request_order.update(request_order_params)
+      redirect_to @request_order
+    end
+
+    # 主任技術者
+    def lead_engineer_skill_training_options
+      lead_engineer_name = params[:lead_engineer_name]
+      worker = Worker.find_by(name: lead_engineer_name)
+      options = worker.skill_trainings
+      render json: options
+    end
+
+    # 登録基幹技能者
+    def registered_core_engineer_license_options
+      registered_core_engineer_name = params[:registered_core_engineer_name]
+      worker = Worker.find_by(name: registered_core_engineer_name)
+      options = worker.licenses
+      render json: options
+    end
+
     private
 
     def set_request_order
@@ -120,27 +155,32 @@ module Users
       redirect_to users_request_order_url unless @request_order.parent_id.nil?
     end
 
+    def set_construction_manager_position_name
+      params[:request_order][:construction_manager_position_name] =
+        Worker.find_by(name: request_order_params[:construction_manager_name])&.job_title
+    end
+
     def request_order_params
       params.require(:request_order).permit(
-        :primary_subcontractor,
-        :sub_company,
+        :occupation,
         :construction_name,
         :construction_details,
         :start_date,
         :end_date,
         :contract_date,
+        :site_agent_name,
+        :site_agent_apply,
         :supervisor_name,
         :supervisor_apply,
         :professional_engineer_name,
-        :professional_engineer_skill_training_id,
         :professional_engineer_details,
+        :professional_engineer_qualification,
         :professional_construction,
         :construction_manager_name,
         :construction_manager_position_name,
-        :site_agent_name,
-        :site_agent_apply,
         :lead_engineer_name,
         :lead_engineer_check,
+        :lead_engineer_qualification,
         :work_chief_name,
         :work_conductor_name,
         :safety_officer_name,
@@ -148,19 +188,11 @@ module Users
         :safety_promoter_name,
         :foreman_name,
         :registered_core_engineer_name,
-        content:
-                 %i[
-                   professional_engineer_skill_training_id
-                   lead_engineer_skill_training_id
-                   registered_core_engineer_skill_training_id
-                 ]
+        :registered_core_engineer_qualification,
+        :construction_license
       ).merge(
         content: {
-          # このrubocop除外設定はのちに修正されます,Layout/LineLength一行の文字数140を超えている
-          professional_engineer_skill_training_id:        params[:request_order][:content][:professional_engineer_skill_training_id],
-          lead_engineer_skill_training_id:                params[:request_order][:content][:lead_engineer_skill_training_id],
-          registered_core_engineer_skill_training_id:     params[:request_order][:content][:registered_core_engineer_skill_training_id],
-          subcon_name:                                    current_business.name, # 会社名
+          subcon_name:                                    current_business.name,                                             # 会社名
           subcon_branch_name:                             current_business.branch_name,                                      # 支店･営業所名
           subcon_address:                                 current_business.address,                                          # 会社住所
           subcon_post_code:                               current_business.post_code,                                        # 会社郵便番号
@@ -179,7 +211,7 @@ module Users
           # subcon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
           # subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
           # subcon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
-          # subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
+          # subcon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(6桁)
           # subcon_construction_license_number:                                 current_business.construction_license_number,                                      # 建設業許可番号(合成)
           subcon_employment_manager_name:                 current_business.employment_manager_name,                                          # 雇用管理責任者名
           subcon_specific_skilled_foreigners_exist:       current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)

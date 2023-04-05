@@ -14,7 +14,6 @@
           <tr align="center">
             <th></th>
             <th>作成日</th>
-            <th><%= Order.human_attribute_name(:status) %></th>
             <th><%= Order.human_attribute_name(:site_agent_name) %></th>
             <th><%= Order.human_attribute_name(:site_name) %></th>
             <th>工期</th>
@@ -27,7 +26,6 @@
               <%= link_to "下請書類確認", users_request_order_path(uuid: request_order_uuid(order)), class: "btn btn-sm btn-success" %>
             </td>
             <td><%= wareki(order.created_at) %></td>
-            <td><%= order.status_i18n %></td>
             <td><%= order.site_agent_name %></td>
             <td><%= link_to order.site_name, users_order_path(order) %></td>
             <td>

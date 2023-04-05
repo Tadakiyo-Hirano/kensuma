@@ -1,0 +1,2 @@
+class ProperManagementLicensesUploader < Base
+end

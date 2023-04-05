@@ -11,201 +11,190 @@
             <%= link_to "下請情報詳細", users_request_order_path(@order.request_orders.first.uuid), class: "btn btn-md btn-md btn-primary" %>
           </td>
         </tr>
+
         <tr>
-          <th><%= Order.human_attribute_name(:status) %></th>
-          <td><%= @order.status_i18n %></td>
-        </tr>
-        <tr bgcolor="#dee2e6">
-          <th>現場情報</th>
-          <th></th>
+          <th style='font-size:22px'><%= Order.human_attribute_name(:order) %></th> <!--現場-->
+          <td></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:site_uu_id) %></th>
-          <td><%= @order.site_uu_id %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:site_career_up_id) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:site_career_up_id) %></th> <!-- 現場ID(キャリアアップシステム) -->
           <td><%= @order.site_career_up_id %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:site_name) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:site_name) %></th> <!-- 現場名 -->
           <td><%= @order.site_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:site_address) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:site_address) %></th> <!-- 施工場所住所 -->
           <td><%= @order.site_address %></td>
         </tr>
-        <tr bgcolor="#dee2e6">
-          <th>発注者情報</th>
-          <th></th>
+        <tr>
+          <th style='font-size:22px'><%= Order.human_attribute_name(:orderer) %></th> <!--発注者-->
+          <td></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:order_name) %></th>
+          <th><%= Order.human_attribute_name(:orderer) %></th> <!--発注者-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:order_name) %></th> <!-- 発注者(氏名) -->
           <td><%= @order.order_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:order_post_code) %></th>
-          <td><%= @order.order_post_code %></td>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:order_post_code) %></th> <!-- 発注者(郵便番号) -->
+          <td><%= @order.order_post_code[0,3] + '-' + @order.order_post_code[3,4] %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:order_address) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:order_address) %></th> <!-- 発注者(住所) -->
           <td><%= @order.order_address %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:order_supervisor_name) %></th>
+          <th><%= Order.human_attribute_name(:supervisor) %></th> <!--監督員-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:order_supervisor_name) %></th> <!-- 監督員(氏名) -->
           <td><%= @order.order_supervisor_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:order_supervisor_company) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:order_supervisor_company) %></th> <!-- 監督員(所属会社名) -->
           <td><%= @order.order_supervisor_company %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:order_supervisor_apply) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:order_supervisor_apply) %></th> <!-- 監督員(権限及び意見の申出方法) -->
           <td><%= @order.order_supervisor_apply %></td>
         </tr>
-        <tr bgcolor="#dee2e6">
-          <th>元請情報</th>
-          <th></th>
+        <tr>
+          <th style='font-size:22px'><%= Order.human_attribute_name(:prime_contractor) %></th> <!--元請会社-->
+          <td></td>
         </tr>
         <tr>
-          <th>元請け会社</th>
-          <td><%= @order.business.name %></td>
+          <th><%= Order.human_attribute_name(:order_infomation) %></th> <!--現場情報-->
+          <td></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:construction_name) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:construction_name) %></th> <!-- 工事名 -->
           <td><%= @order.construction_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:construction_details) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:construction_details) %></th> <!-- 工事内容 -->
           <td><%= @order.construction_details %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:start_date) %></th>
-          <td><%= @order.start_date %></td>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:start_date) %></th> <!-- 工期(自) -->
+          <td><%= l(@order.start_date, format: :ja_kan) %>(<%= l(@order.start_date, format: :long) %>)</td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:end_date) %></th>
-          <td><%= @order.end_date %></td>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:end_date) %></th> <!-- 工期(至) -->
+          <td><%= l(@order.end_date, format: :ja_kan) %>(<%= l(@order.end_date, format: :long) %>)</td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:contract_date) %></th>
-          <td><%= @order.contract_date %></td>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:contract_date) %></th> <!-- 契約日 -->
+          <td><%= l(@order.contract_date, format: :ja_kan) %>(<%= l(@order.contract_date, format: :long) %>)</td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:submission_destination) %></th>
-          <td><%= @order.submission_destination %></td>
+          <th><%= Order.human_attribute_name(:site_agent) %></th> <!--現場代理人-->
+          <td></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:general_safety_responsible_person_name) %></th>
-          <td><%= @order.general_safety_responsible_person_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:vice_president_name) %></th>
-          <td><%= @order.vice_president_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:vice_president_company_name) %></th>
-          <td><%= @order.vice_president_company_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:secretary_name) %></th>
-          <td><%= @order.secretary_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:health_and_safety_manager_name) %></th>
-          <td><%= @order.health_and_safety_manager_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:general_safety_agent_name) %></th>
-          <td><%= @order.general_safety_agent_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:supervisor_name) %></th>
-          <td><%= @order.supervisor_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:supervisor_apply) %></th>
-          <td><%= @order.supervisor_apply %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:site_agent_name) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:site_agent_name) %></th> <!-- 現場代理人(氏名) -->
           <td><%= @order.site_agent_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:site_agent_apply) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:site_agent_apply) %></th> <!-- 現場代理人(権限及び意見の申出方法) -->
           <td><%= @order.site_agent_apply %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:supervising_engineer_name) %></th>
+          <th><%= Order.human_attribute_name(:supervisor) %></th> <!--監督員-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:supervisor_name) %></th> <!-- 監督員(氏名) -->
+          <td><%= @order.supervisor_name %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:supervisor_apply) %></th> <!-- 監督員(権限及び意見の申出方法) -->
+          <td><%= @order.supervisor_apply %></td>
+        </tr>
+        <tr>
+          <th><%= Order.human_attribute_name(:professional_engineer) %></th> <!--専門技術者-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:professional_engineer_name_1st) %></th> <!-- 専門技術者1(氏名) -->
+          <td><%= @order.professional_engineer_name_1st %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:professional_engineer_qualification_1st) %></th> <!-- 専門技術者1(資格内容) -->
+          <td><%= SkillTraining.find(@order.professional_engineer_qualification_1st).name if @order.professional_engineer_qualification_1st.present? %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:professional_engineer_details_1st) %></th> <!-- 専門技術者1(担当工事内容) -->
+          <td><%= @order.professional_engineer_details_1st %></td>
+        </tr>
+        <tr>
+          <th><%= Order.human_attribute_name(:professional_engineer) %></th> <!--専門技術者-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:professional_engineer_name_2nd) %></th> <!-- 専門技術者2(氏名) -->
+          <td><%= @order.professional_engineer_name_2nd %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:professional_engineer_qualification_2nd) %></th> <!-- 専門技術者2(資格内容) -->
+          <td><%= SkillTraining.find(@order.professional_engineer_qualification_2nd).name if @order.professional_engineer_qualification_2nd.present? %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:professional_engineer_details_2nd) %></th> <!-- 専門技術者2(担当工事内容) -->
+          <td><%= @order.professional_engineer_details_2nd %></td>
+        </tr>
+        <tr>
+          <th><%= Order.human_attribute_name(:supervising_engineer) %></th> <!--監督技術者・主任技術者-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:supervising_engineer_name) %></th> <!-- 監督技術者･主任技術者(氏名) -->
           <td><%= @order.supervising_engineer_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:supervising_engineer_check) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:supervising_engineer_check) %></th> <!-- 監督技術者･主任技術者(専任・非専任) -->
           <td><%= @order.supervising_engineer_check_i18n %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:supervising_engineer_assistant_name) %></th>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:supervising_engineer_qualification) %></th> <!-- 監督技術者･主任技術者(資格内容) -->
+          <td><%= SkillTraining.find(@order.supervising_engineer_qualification).name if @order.supervising_engineer_qualification.present? %></td>
+        </tr>
+        <tr>
+          <th><%= Order.human_attribute_name(:supervising_engineer_assistant) %></th> <!--監督技術者補佐-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:supervising_engineer_assistant_name) %></th> <!-- 監督技術者補佐(氏名) -->
           <td><%= @order.supervising_engineer_assistant_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:professional_engineer_name) %></th>
-          <td><%= @order.professional_engineer_name %></td>
+          <th>&emsp;&emsp;<%= Order.human_attribute_name(:supervising_engineer_assistant_qualification) %></th> <!-- 監督技術者補佐(資格内容) -->
+          <td><%= SkillTraining.find(@order.supervising_engineer_assistant_qualification).name if @order.supervising_engineer_assistant_qualification.present? %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:professional_engineer_construction_details) %></th>
-          <td><%= @order.professional_engineer_construction_details %></td>
+          <th><%= Order.human_attribute_name(:general_safety_responsible_person_name) %></th> <!--統括安全衛生責任者名-->
+          <td><%= @order.general_safety_responsible_person_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:safety_officer_name) %></th>
-          <td><%= @order.safety_officer_name %></td>
+          <th><%= Order.human_attribute_name(:general_safety_agent_name) %></th> <!--統括安全衛生責任者代行者名-->
+          <td><%= @order.general_safety_agent_name %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:safety_officer_position_name) %></th>
-          <td><%= @order.safety_officer_position_name %></td>
+          <th><%= Order.human_attribute_name(:submission_destination) %></th> <!-- 提出先及び担当者名 -->
+          <td><%= @order.submission_destination %></td>
         </tr>
         <tr>
-          <th><%= Order.human_attribute_name(:general_safety_manager_name) %></th>
-          <td><%= @order.general_safety_manager_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:general_safety_manager_position_name) %></th>
-          <td><%= @order.general_safety_manager_position_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:safety_manager_name) %></th>
-          <td><%= @order.safety_manager_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:safety_manager_position_name) %></th>
-          <td><%= @order.safety_manager_position_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:health_manager_name) %></th>
-          <td><%= @order.health_manager_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:health_manager_position_name) %></th>
-          <td><%= @order.health_manager_position_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:health_and_safety_promoter_name) %></th>
-          <td><%= @order.health_and_safety_promoter_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:health_and_safety_promoter_position_name) %></th>
-          <td><%= @order.health_and_safety_promoter_position_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:confirm_name) %></th>
-          <td><%= @order.confirm_name %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:accept_confirm_date) %></th>
-          <td><%= @order.accept_confirm_date %></td>
-        </tr>
-        <tr>
-          <th><%= Order.human_attribute_name(:subcontractor_name) %></th>
-          <td><%= @order.subcontractor_name %></td>
+          <th><%= Order.human_attribute_name(:construction_license) %></th> <!-- 工場に必要な建設許可証 -->
+          <td>
+            <% @order.construction_license.each_with_index do |license, index| %>
+              <%= license %><%= ',' unless index == @order.construction_license.size - 1 %>
+            <% end %>
+          </td>
         </tr>
       </tbody>
     </table>
