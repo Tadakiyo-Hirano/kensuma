@@ -38,24 +38,25 @@ class Worker < ApplicationRecord
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_POST_CODE_REGEX = /\A\d{7}\z/
-  before_validation :remove_hyphen_to_post_code
-  before_validation :full_width_to_half_width([post_code])
+  VALID_UNDER_THREE_DIGITS_REGEX = /\A\d{1,2}\z/
+  PHONE_NUMBER_MS = 'はハイフン無しの10桁または11桁で入力してください'.freeze
+  UNDER_THREE_DIGITS_MS = 'は3桁以上は入力できません'.freeze
   validates :name, presence: true
   validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー\s\p{blank}]+\z/u, message: 'はカタカナで入力してください' }
   validates :country, presence: true
-  validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }
+  validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }, allow_nil: true
   validates :post_code, presence: true, format: { with: VALID_POST_CODE_REGEX, message: 'は7桁で入力してください' }
   validates :my_address, presence: true
-  validates :my_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: 'はハイフン無しの10桁または11桁で入力してください' }
+  validates :my_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
   validates :family_address, presence: true
-  validates :family_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: 'はハイフン無しの10桁または11桁で入力してください' }
+  validates :family_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
   validates :birth_day_on, presence: true
   validates :abo_blood_type, presence: true
   validates :rh_blood_type, presence: true
   validates :job_title, presence: true
   validates :hiring_on, presence: true
-  validates :experience_term_before_hiring, presence: true
-  validates :blank_term, presence: true
+  validates :experience_term_before_hiring, presence: true, format: { with: VALID_UNDER_THREE_DIGITS_REGEX, message: UNDER_THREE_DIGITS_MS }
+  validates :blank_term, presence: true, format: { with: VALID_UNDER_THREE_DIGITS_REGEX, message: UNDER_THREE_DIGITS_MS }
   validates :employment_contract, presence: true
   validates :family_name, presence: true
   validates :relationship, presence: true
@@ -76,32 +77,4 @@ class Worker < ApplicationRecord
   def driver_licence_present?
     driver_licence.present?
   end
-
-  # JSON型のカラムからJSONオブジェクトを取得する
-  def set_json_data(colum, key, value)
-    self.colum ||= {}
-    self.colum[key] = value
-  end
-  
-  # JSON型のカラムからJSONオブジェクトを取得する
-  def get_json_data(colum, key)
-    self.colum.try(:[], key)
-  end
-  
-  # JSON型のカラムから指定したキーに対応する値を削除する
-  def delete_json_data(colum, key)
-    self.colum.try(:slice!, key)
-  end
-
-  private
-    def remove_hyphen_to_post_code
-      # ハイフンを除外する
-      self.post_code = post_code.to_s.gsub(/[-ー]/, '') if post_code.present?
-    end
-
-    def full_width_to_half_width(colum_names)
-      colum_names.each do |colum_name|
-        self.colum.name = colum_name.tr('Ａ-Ｚａ-ｚ０-９', 'A-Za-z0-9')
-      end
-    end
 end

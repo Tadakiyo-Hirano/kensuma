@@ -121,6 +121,16 @@ RSpec.describe Worker, type: :model do
     end
 
     describe '#post_code' do
+      context '全角7桁の場合' do
+        before :each do
+          subject.post_code = '１２３４５６７'
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+
       %i[
         123ー4567
         123-4567
@@ -335,23 +345,6 @@ RSpec.describe Worker, type: :model do
       end
     end
 
-    describe '#job_title' do
-      context '存在しない場合' do
-        before :each do
-          subject.job_title = nil
-        end
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('役職を入力してください')
-        end
-      end
-    end
-
     describe '#hiring_on' do
       context '存在しない場合' do
         before :each do
@@ -384,6 +377,21 @@ RSpec.describe Worker, type: :model do
           expect(subject.errors.full_messages).to include('雇入前経験年数を入力してください')
         end
       end
+
+      context '三桁以上の場合' do
+        before :each do
+          subject.experience_term_before_hiring = 123
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('雇入前経験年数は3桁以上は入力できません')
+        end
+      end
     end
 
     describe '#blank_term' do
@@ -399,6 +407,21 @@ RSpec.describe Worker, type: :model do
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
           expect(subject.errors.full_messages).to include('ブランク年数を入力してください')
+        end
+      end
+
+      context '三桁以上の場合' do
+        before :each do
+          subject.blank_term = 123
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('ブランク年数は3桁以上は入力できません')
         end
       end
     end
@@ -453,9 +476,9 @@ RSpec.describe Worker, type: :model do
           expect(subject.errors.full_messages).to include('免許証番号を入力してください')
         end
 
-        context 'driver_licence_numberが7桁でない場合' do
+        context 'driver_licence_numberが12桁でない場合' do
           before :each do
-            subject.driver_licence_number = 123456
+            subject.driver_licence_number = 12345678901
           end
 
           it 'バリデーションに落ちること' do
