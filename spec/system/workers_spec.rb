@@ -50,7 +50,7 @@ RSpec.describe 'Workers', type: :system do
   #           # Worker
   #           fill_in 'worker[name]', with: 'TestWorker'
   #           fill_in 'worker[name_kana]', with: 'テストワーカー'
-  #           fill_in 'worker[country]', with: '日本'
+  #           fill_in 'worker[country]', with: 'JP'
   #           fill_in 'worker[my_address]', with: '東京都'
   #           fill_in 'worker[my_phone_number]', with: '09012345678'
   #           fill_in 'worker[family_address]', with: '東京都'

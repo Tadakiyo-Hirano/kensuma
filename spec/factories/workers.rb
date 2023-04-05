@@ -4,7 +4,7 @@ FactoryBot.define do
     uuid { SecureRandom.uuid }
     name { 'TestWorker' }
     name_kana { 'テストワーカー' }
-    country { '日本' }
+    country { 'JP' }
     my_address { '東京都' }
     my_phone_number { '09012345678' }
     family_name { '日本 太郎' }

@@ -48,7 +48,7 @@ module Users
     end
 
     def general_user_params
-      params.require(:user).permit(:name, :email, :age, :gender, :role, :password)
+      params.require(:user).permit(:name, :email, :age, :gender, :password).merge(role: 1)
     end
   end
 end

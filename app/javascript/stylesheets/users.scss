@@ -17,6 +17,28 @@ form.cmxform label.error, label.error {
   padding: 4px;
 }
 
+.circle_hankaku_space {
+    border: 2px solid #000000;
+    border-radius: 25px;
+    padding: 4px 10px 4px 10px;
+}
+
+.circle_hankaku_number {
+  border: 2px solid #000000;
+  border-radius: 25px;
+  padding: 4px 8px 4px 8px;
+}
+
+.square_hankaku_number {
+  border: 1px solid #000000;
+    padding: 1px 4px;
+}
+
+.square_hankaku_space {
+  border: 1px solid #000000;
+    padding: 1px 6px;
+}
+
 .line_through {
   text-decoration: line-through;
 }
@@ -48,4 +70,22 @@ form.cmxform label.error, label.error {
   text-indent: 80px;
   font-size: 120%;
   margin : 20px ;
+}
+
+.text_ind_1 {
+  text-indent: 1em;
+}
+
+.text_ind_2 {
+  text-indent: 2em;
+}
+
+// ラジオボタン縦並び
+
+.radio label {
+  display: block;
+}
+
+.radio input[type="radio"] {
+  margin-right: 5px;
 }

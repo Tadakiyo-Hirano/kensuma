@@ -1,5 +1,12 @@
 <!-- (24)参考資料第4号(新規入場者調査票) -->
 <%= form_with(model: @document, url: users_request_order_document_path, local: true, method: :patch) do |f| %>
+  <div class="card">  
+    <div class="card-body">
+      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+      <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+    </div>
+  </div>
+
   <% j = 1 %>
   <% document_info.field_workers.each do |field_worker| %>
     <div class="ritz grid-container" dir="ltr">
@@ -808,9 +815,6 @@
         </tbody>
       </table>
     </div>
-  <<% j += 1 %>
+    <% j += 1 %>
   <% end %>
-  <div style="text-align: center">
-    <%= f.submit %>
-  </div>
 <% end %>

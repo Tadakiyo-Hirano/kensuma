@@ -5,6 +5,14 @@ module ApplicationHelper
     "#{params[:controller].gsub(/\//, '-')}-#{params[:action]}"
   end
 
+  def paying_display
+    if current_user.is_prime_contractor == true
+      content_tag :span, 'Premium(有料)', class: 'badge badge-warning'
+    else
+      content_tag :span, 'Free(無料)', class: 'badge badge-primary'
+    end
+  end
+
   # 下請け階層表示
   def sc_hierarchy(request_order)
     if request_order.instance_of?(RequestOrder)
@@ -53,5 +61,14 @@ module ApplicationHelper
   # 会社名の表示
   def current_business_name
     current_user.business.name || current_user.admin_user.business.name unless current_user.business.nil?
+  end
+
+  # 主任技術者(専任･非専任) (現場情報)
+  def order_lead_engineer_check_yes(type)
+    type == '専任' ? tag.span('専任', class: :circle) : '専任'
+  end
+
+  def order_lead_engineer_check_no(type)
+    type == '非専任' ? tag.span('非専任', class: :circle) : '非専任'
   end
 end

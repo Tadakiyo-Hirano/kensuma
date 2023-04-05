@@ -2,20 +2,21 @@
 
 <%= f.label :usage %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :usage, Car.usages.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<%= f.select :usage, Car.usages.keys.to_a, { prompt: true }, { class: "form-select" } %>
 <br>
 <%= f.label :owner_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :owner_name, class: "form-control", placeholder: Car.human_attribute_name(:owner_name) %>
-<br>
+<%= f.select :owner_name, (@current_business.workers.map { |workers|workers.name }).uniq, { include_blank: true },{ class: "single-select", style: "width: 100%" } %>
+<br><br>
 <%= f.label :safety_manager %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :safety_manager, class: "form-control", placeholder: Car.human_attribute_name(:safety_manager) %>
-<br>
+<%= f.select :safety_manager, (@current_business.workers.map { |workers|workers.name }).uniq, { include_blank: true },{ class: "single-select", style: "width: 100%" } %>
+<br><br>
 <%= f.label :vehicle_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :vehicle_name, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_name) %>
-<br>
+<%= f.select :vehicle_name, (@current_business.cars.map { |cars|cars.vehicle_model }).uniq, { include_blank: true },{ class: "single-select", style: "width: 100%" }
+%>
+<br><br>
 <%= f.label :vehicle_model %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :vehicle_model, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_model) %>
@@ -24,52 +25,82 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :vehicle_number, class: "form-control", placeholder: "#{Car.human_attribute_name(:vehicle_number)} 例: 品川500あ1234" %>
 <br>
-<%= f.label :vehicle_inspection_start_on %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :vehicle_inspection_start_on, class: "form-control" %>
-<br>
-<%= f.label :vehicle_inspection_end_on %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :vehicle_inspection_end_on, class: "form-control" %>
+
+<div class="list-group">
+  <%= f.label :vehicle_inspection_period %>
+  <div class="list-group-item">
+    <%= f.label :vehicle_inspection_start_on %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.date_field :vehicle_inspection_start_on, class: "form-control" %>
+    <br>
+    <%= f.label :vehicle_inspection_end_on %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.date_field :vehicle_inspection_end_on, class: "form-control" %>
+    <br>
+  </div>
+</div>
 <br>
 <!-- 自賠責保険ここから -->
-<%= f.label :car_insurance_company_id %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :car_insurance_company_id, CarInsuranceCompany.all, :id, :name, { prompt: true }, { required: true, class: "form-control" } %>
-<br>
-<%= f.label :liability_securities_number %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :liability_securities_number, class: "form-control", placeholder: Car.human_attribute_name(:liability_securities_number) %>
-<br>
-<%= f.label :liability_insurance_start_on %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :liability_insurance_start_on, class: "form-control" %>
-<br>
-<%= f.label :liability_insurance_end_on %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :liability_insurance_end_on, class: "form-control" %>
+<div class="list-group">
+  <%= f.label :liability_insurance %>
+  <div class="list-group-item">
+    <%= f.label :car_insurance_company_id %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.collection_select :car_insurance_company_id, CarInsuranceCompany.all, :id, :name, { prompt: true }, { required: true, class: "form-select" } %>
+    <br>
+    <%= f.label :liability_securities_number %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.text_field :liability_securities_number, class: "form-control", placeholder: Car.human_attribute_name(:liability_securities_number) %>
+    <br>
+    <div class="list-group">
+      <%= f.label :liability_insurance_period %>
+      <div class="list-group-item">
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= f.date_field :liability_insurance_start_on, class: "form-control" %>
+        <br>
+        <%= f.label :liability_insurance_end_on %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= f.date_field :liability_insurance_end_on, class: "form-control" %>
+        <br>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
 <!-- 自賠責保険ここまで -->
 <br>
 <!-- 任意保険ここから -->
-<%= f.fields_for :car_voluntary_insurances do |voluntary| %>
-  <%= voluntary.label :company_voluntary_id %>
-  <%= voluntary.collection_select :company_voluntary_id, CarInsuranceCompany.all, :id, :name, { prompt: true }, { class: "form-control" } %>
-  <br>
-  <%= voluntary.label :personal_insurance %>
-  <%= voluntary.select :personal_insurance, CarVoluntaryInsurance.personal_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
-  <br>
-  <%= voluntary.label :objective_insurance %>
-  <%= voluntary.select :objective_insurance, CarVoluntaryInsurance.objective_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
-  <br>
-  <%= voluntary.label :voluntary_securities_number %>
-  <%= voluntary.text_field :voluntary_securities_number, class: "form-control", placeholder: Car.human_attribute_name(:voluntary_securities_number) %>
-  <br>
-  <%= voluntary.label :voluntary_insurance_start_on %>
-  <%= voluntary.date_field :voluntary_insurance_start_on, class: "form-control" %>
-  <br>
-  <%= voluntary.label :voluntary_insurance_end_on %>
-  <%= voluntary.date_field :voluntary_insurance_end_on, class: "form-control" %>
-<% end %>
+<div class="list-group">
+  <%= f.fields_for :car_voluntary_insurances do |voluntary| %>
+    <%= voluntary.label :voluntary_insurance %>
+    <div class="list-group-item">
+      <%= voluntary.label :company_voluntary_id %>
+      <%= voluntary.collection_select :company_voluntary_id, CarInsuranceCompany.all, :id, :name, { prompt: true }, { class: "form-select" } %>
+      <br>
+      <%= voluntary.label :voluntary_securities_number %>
+      <%= voluntary.text_field :voluntary_securities_number, class: "form-control", placeholder: Car.human_attribute_name(:voluntary_securities_number) %>
+      <br>
+      <%= voluntary.label :personal_insurance %>
+      <%= voluntary.select :personal_insurance, CarVoluntaryInsurance.personal_insurances.keys.to_a, { prompt: true }, { class: "form-select" } %>
+      <br>
+      <%= voluntary.label :objective_insurance %>
+      <%= voluntary.select :objective_insurance, CarVoluntaryInsurance.objective_insurances.keys.to_a, { prompt: true }, { class: "form-select" } %>
+      <br>
+      <div class="list-group">
+        <%= voluntary.label :voluntary_insurance_period %>
+        <div class="list-group-item">
+        <%= voluntary.label :voluntary_insurance_start_on %>
+        <%= voluntary.date_field :voluntary_insurance_start_on, class: "form-control" %>
+        <br>
+        <%= voluntary.label :voluntary_insurance_end_on %>
+        <%= voluntary.date_field :voluntary_insurance_end_on, class: "form-control" %>
+        <br>
+        </div>
+        <br>
+      </div>
+    </div>
+  <% end %>
+</div>
 <br>
 <!-- 任意保険ここまで -->
 <% if car.images.present? %>
@@ -137,7 +168,7 @@
           required: "使用目的を選択してください。"
         },
         "car[owner_name]": {
-          required: "車両所有者氏名を入力してください。"
+          required: "車両所有者名を入力してください。"
         },
         "car[safety_manager]": {
           required: "安全運転管理者を入力してください。"
@@ -149,7 +180,7 @@
           required: "車両型式を入力してください。"
         },
         "car[vehicle_number]": {
-          required: "車両番号を入力してください。例: 品川500あ1234"
+          required: "車両番号(ナンバープレート)を入力してください。例: 品川500あ1234"
         },
         "car[vehicle_inspection_start_on]": {
           required: "年月日を入力または選択してください。"

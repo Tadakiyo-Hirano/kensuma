@@ -16,11 +16,12 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.string :career_up_id
       t.json :career_up_card_copy
       t.json :stamp_images
-      t.json :occupation_ids
       t.json :industry_ids
-      t.integer :specific_skilled_foreigners_exist, default: 1, null: false
-      t.integer :foreign_construction_workers_exist, default: 1, null: false
-      t.integer :foreign_technical_intern_trainees_exist, default: 1, null: false
+      t.json :tem_industry_ids
+      t.integer :specific_skilled_foreigners_exist
+      t.integer :foreign_construction_workers_exist
+      t.integer :foreign_technical_intern_trainees_exist
+      t.integer :construction_license_status, null: false, comment: "建設許可証(取得状況) enum"
       t.string :foreigners_employment_manager                 #雇用管理責任者(氏名)
       t.string :employment_manager_name
       t.string :employment_manager_post

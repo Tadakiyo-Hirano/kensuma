@@ -25,14 +25,14 @@ class Worker < ApplicationRecord
   enum rh_blood_type: { plus: 0, minus: 1, rh_null: 2 }
   enum employment_contract: { available: 0, not_available: 1, not_applicable: 2 }, _prefix: true       # 雇用契約書取り交わし状況
   enum sex: { man: 0, woman: 1 }
-  enum status_of_residence: { specific_activity: 0, specified_skill: 1 }, _prefix: true # 在留資格
+  enum status_of_residence: { permanent_resident: 0, specified_skill: 1, specific_activity: 2 }, _prefix: true # 在留資格
   enum confirmed_check: { checked: 1, unchecked: 0 }, _prefix: true # キャリアアップシステム登録情報が最新であることの確認日
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
   validates :name, presence: true
-  validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー]+\z/u, message: 'はカタカナで入力してください' }
+  validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー・]+\z/u, message: 'はカタカナで入力してください' }
   validates :country, presence: true
   validates :my_address, presence: true
   validates :my_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: 'はハイフン無しの10桁または11桁で入力してください' }

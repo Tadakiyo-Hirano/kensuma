@@ -18,7 +18,8 @@
         </tr>
         <tr>
           <th><%= Worker.human_attribute_name(:country) %></th>
-          <td><%= @worker.country %></td>
+          <td><%= I18n.t("countries.#{@worker.country}") %>
+          </td>
           <td></td>
           <td></td>
         </tr>
@@ -120,7 +121,7 @@
         </tr>
 
         <!-- 外国人労働者用表示 -->
-        <% unless @worker.country == "日本" %>
+        <% unless @worker.country == "JP" %>
           <tr>
             <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
             <td><%= @worker.status_of_residence_i18n %></td>
@@ -330,6 +331,32 @@
           </tr>
         <% end %>
         <!-- worker_insuranceここまで -->
+
+        <!-- 資格情報ここから -->
+        <tr bgcolor="#dee2e6">
+          <th colspan="4">資格情報</th>
+        </tr>
+        <tr>
+          <th><%= Worker.human_attribute_name(:safety_sanitary_education_ids) %></th>
+          <td><%= SafetyHealthEducation.where(id: @worker.safety_sanitary_education_ids).pluck(:name).join(', ') %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <!-- 資格情報ここまで -->
+
+        <% if @worker.status_of_residence.present? %>
+          <!-- 外国人建設就労者情報ここから -->
+          <tr bgcolor="#dee2e6">
+            <th colspan="4">外国人建設就労者情報</th>
+          </tr>
+          <tr>
+            <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
+            <td><%= @worker.status_of_residence_i18n %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <!-- 外国人建設就労者情報ここまで -->
+        <% end %>
       </tbody>
     </table>
   </div>

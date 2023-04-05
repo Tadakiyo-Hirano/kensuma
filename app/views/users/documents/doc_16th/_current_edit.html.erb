@@ -1,5 +1,5 @@
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
-  <div class="card">  
+  <div class="card">
     <div class="card-body">
       <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
       <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -17,7 +17,7 @@
                 <td class="doc_16_" dir="ltr" colspan="15"></td>
                 <td class="doc_16_m001 d16_l_full" dir="ltr" colspan="3" rowspan="2">元 請<br>確認欄</td>
                 <td id="d16_size14" class="doc_16_m002 d16_l_full" dir="ltr" colspan="8" rowspan="2">
-                  <%= document_info_for_prime_contractor_name %> <!-- 16-001 元請会社の確認欄 -->
+                  <%= @document.approval_content&.[]('prime_contractor_confirmation')%> <!-- 16-001 元請会社の確認欄 -->
                 </td>
               </tr>
               <tr style="height: 29px">
@@ -73,7 +73,7 @@
                 </td>
               </tr>
               <tr style="height: 29px">
-                
+
                 <td class="doc_16_" dir="ltr" colspan="2"></td>
                 <td class="doc_16_m001" dir="ltr" colspan="1">（</td>
                 <td id="d16_size14" class="doc_16_m004" dir="ltr" colspan="2">
@@ -236,7 +236,7 @@
                 </td>
                 <td id="d16_size14" class="doc_16_m006 d16_l_right" dir="ltr" colspan="1" rowspan="2">）</td>
               </tr>
-              <tr style="height: 29px"> 
+              <tr style="height: 29px">
               </tr>
               <tr style="height: 29px">
                 <td class="doc_16_m006 d16_l_full" dir="ltr" colspan="6" rowspan="2">火 元 責 任 者<br>（後始末巡回者）</td>
