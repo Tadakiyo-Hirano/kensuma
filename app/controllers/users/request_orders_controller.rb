@@ -168,6 +168,7 @@ module Users
           subcon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
           subcon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
           subcon_employment_insurance_number:             current_business.business_employment_insurance_number,             # 雇用保険番号
+          subcon_retirement_benefit_mutual_aid_status:    current_business.business_retirement_benefit_mutual_aid_status,    # 退職金共済制度(加入状況)
           # subcon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種
           # subcon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
           # subcon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
@@ -179,10 +180,10 @@ module Users
           subcon_foreign_construction_workers_exist:      current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
           subcon_foreign_technical_intern_trainees_exist: current_business.foreign_technical_intern_trainees_exist_i18n, # 外国人技能実習生の従事の状況(有無)
           # subcon_construction_license_updated_at:                             current_business.construction_license_updated_at,                                   # 建設許可証(更新日)
-          subcon_site_agent_name_id:                      @business_workers_name_id.find_by(name: params[:request_order][:site_agent_name])&.id, # 記号 (現)現場代理人に使用
-          subcon_work_chief_name_id:                      @business_workers_name_id.find_by(name: params[:request_order][:work_chief_name])&.id, # 記号 (作)作業主任者に使用
+          subcon_site_agent_name_id:                      @business_workers_name_id.find_by(name: params[:request_order][:site_agent_name])&.id,    # 記号 (現)現場代理人に使用
+          subcon_work_chief_name_id:                      @business_workers_name_id.find_by(name: params[:request_order][:work_chief_name])&.id,    # 記号 (作)作業主任者に使用
           subcon_lead_engineer_name_id:                   @business_workers_name_id.find_by(name: params[:request_order][:lead_engineer_name])&.id, # 記号 (主)主任技術者に使用
-          subcon_foreman_name_id:                         @business_workers_name_id.find_by(name: params[:request_order][:foreman_name])&.id, # 記号 (職)職長に使用
+          subcon_foreman_name_id:                         @business_workers_name_id.find_by(name: params[:request_order][:foreman_name])&.id,       # 記号 (職)職長に使用
           subcon_safety_manager_name_id:                  @business_workers_name_id.find_by(name: params[:request_order][:safety_manager_name])&.id # 記号 (安)安全衛生責任者に使用
         }
       )

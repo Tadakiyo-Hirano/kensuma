@@ -330,7 +330,6 @@ ja:
         relationship: 家族続柄
         email: メールアドレス
         sex: 性別
-        safety_sanitary_education_ids: 安全衛生教育
         status_of_residence: 在留資格
         # maturity_date: 在留期間満期日
         # confirmed_check: CCUS登録情報が最新であることの確認
