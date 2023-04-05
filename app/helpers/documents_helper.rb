@@ -35,16 +35,16 @@ module DocumentsHelper
     end
   end
 
-  def document_info_for_prime_contractor_name
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if request_order.parent_id.present?
-      loop do
-        request_order = request_order.parent
-        break if request_order.parent_id.nil?
-      end
-    end
-    Order.find(request_order.order_id).confirm_name
-  end
+  # def document_info_for_prime_contractor_name
+  #   request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+  #   if request_order.parent_id.present?
+  #     loop do
+  #       request_order = request_order.parent
+  #       break if request_order.parent_id.nil?
+  #     end
+  #   end
+  #   Order.find(request_order.order_id).confirm_name
+  # end
 
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
@@ -121,8 +121,8 @@ module DocumentsHelper
   end
 
   # (5)再下請負通知書（変更届）
-  def skill_id_value(engineer)
-    @request_order.content.nil? ? "" : @request_order.content&.[]("#{engineer}_engineer_skill_training_id").to_i
+  def skill_info(license, model)
+    SkillTraining.find_by(id: model&.send(license))&.name
   end
 
   def child_check(child)
@@ -135,7 +135,7 @@ module DocumentsHelper
 
   def c_license_permission_type_minister_or_governor(d_info) # 「大臣」か「知事」判定
     if d_info == document_info
-      permission_type = Business.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
+      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
     elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_minister_governor').delete("許可")
     end
@@ -149,7 +149,7 @@ module DocumentsHelper
 
   def c_license_permission_type_identification_or_general(d_info) # 「特定」か「一般」判定
     if d_info == document_info
-      permission_type = Business.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
+      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
     elsif @child.present?
       permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
     end
@@ -179,19 +179,27 @@ module DocumentsHelper
     f_type == yes_no ? tag.span(yes_no, class: :circle) : yes_no
   end
 
+  def occupation_default(list)
+    if params[:action] == "edit" && @business.tem_industry_ids.present?
+      Occupation.where(industry_id: @business.tem_industry_ids.map(&:to_i).reject(&:zero?))
+    else
+      Occupation.all
+    end
+  end
+  
   # (8)作業員名簿
 
   # 元請の確認欄
-  def document_info_for_prime_contractor_name
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if request_order.parent_id.present?
-      loop do
-        request_order = request_order.parent
-        break if request_order.parent_id.nil?
-      end
-    end
-    Order.find(request_order.order_id).confirm_name
-  end
+  # def document_info_for_prime_contractor_name
+  #   request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+  #   if request_order.parent_id.present?
+  #     loop do
+  #       request_order = request_order.parent
+  #       break if request_order.parent_id.nil?
+  #     end
+  #   end
+  #   Order.find(request_order.order_id).confirm_name
+  # end
 
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
@@ -396,6 +404,34 @@ module DocumentsHelper
   def field_worker_education_date(worker)
     date = worker&.education_date
     date.blank? ? '年　月　日' : l(date, format: :long)
+  end
+
+  # 作業員の記号
+  def field_worker_symbol(worker)
+    if worker.present?
+      id = worker&.content&.[]('id')
+      birth_day_on = worker&.content&.[]('birth_day_on')
+      safety_health_education = worker&.content&.[]('safety_sanitary_education_ids').to_json
+      foreigner = worker&.content&.[]('status_of_residence')
+
+      site_agent = "現" if id == document_info.content&.[]('subcon_site_agent_name_id') # (現)現場代理人
+      work_chief = "作" if id == document_info.content&.[]('subcon_work_chief_name_id') # (作)作業主任者
+      if birth_day_on .present?
+        under_18 = "未" if ((Date.today - birth_day_on.to_date) / 365.25).to_i < 18 # (未)18歳未満の作業員
+      end
+      sex = "女" if worker&.content&.[]('sex') == "woman" # 女
+      lead_engineer = "主" if id == document_info.content&.[]('subcon_lead_engineer_name_id') # (主)主任技術者
+      foreman = "職" if id == document_info.content&.[]('subcon_foreman_name_id') # (主)主任技術者
+      safety_manager = "安" if id == document_info.content&.[]('subcon_safety_manager_name_id') # (安)安全衛生責任者
+      ability_improving_education = "歳" if safety_health_education.include?("19") # (歳)能力向上教育
+      danger_harmful_business = "再" if safety_health_education.include?("6") # (再)危険有害業務・再発防止教育
+      foreign_trainee = "習" if foreigner == "specific_activity" # (習)外国人技能実習生
+      foreign_worker = "就" if foreigner == "permanent_resident" # (就)外国人建設就労者
+      skill_worker = "1特" if foreigner == "specified_skill" # (1特)1号特定技能外国人
+
+      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, ability_improving_education, danger_harmful_business, foreign_trainee, foreign_worker, skill_worker
+      worker_symbols.size > 1 ? worker_symbols.join(' ') : worker_symbols
+    end
   end
 
   # (12)工事・通勤用車両届
@@ -642,6 +678,21 @@ module DocumentsHelper
     date.blank? ? '' : l(date.to_date, format: :long)
   end
 
+  #現場作業員の人数の取得
+  def number_of_field_workers(order)
+    #元請の作業員の人数
+    prime_contractor = FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: order.id)
+    prime_contractor.nil? ? number_of_prime_contractor = 0 : number_of_prime_contractor = prime_contractor.size
+    #一次下請け以下の作業員の人数
+    request_order = RequestOrder.where(order_id: order.id)
+      array = []
+      request_order.each do |record|
+        array << record.id
+      end
+    number_of_primary_subcontractor = FieldWorker.where(field_workerable_type: RequestOrder).where("field_workerable_id IN (?)", array).size
+    return (number_of_prime_contractor + number_of_primary_subcontractor)
+  end
+
   # (22)作業間連絡調整書
 
   #下請会社(協力会社)のbusiness_idの取得
@@ -681,10 +732,10 @@ module DocumentsHelper
     end
   end
 
-  #元請の入場作業員の取得
-  def name_of_field_workers_order
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: request_order.order_id).pluck(:admission_worker_name)
+  #自社の作業員の名前を取得
+  def name_of_workers
+    current_business = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    Worker.where(business_id: current_business.business_id).pluck(:name)
   end
 
   #元請・下請け以下の入場作業員の取得
@@ -833,6 +884,44 @@ module DocumentsHelper
     RUBY
   end
 
+  # (23)全建統一様式第８号(安全ミーティング報告書)
+
+  # 一次下請の情報 (安全ミーティング報告書)
+  def document_subcon_info_for_23rd
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    # 元請が下請の書類確認するとき
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+      RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
+    # 下請けが自身の書類確認するとき
+    elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
+      request_order
+      # 下請けが存在しない場合
+    end
+  end
+
+  # リスクの見積り点数
+  def risk_estimation_point(risk_possibility)
+    possibility_point, _possibility_comment = risk_possibility(risk_possibility)
+    possibility_point == 0 ? "" : possibility_point
+  end
+
+  # リスクの重大性点数
+  def risk_seriousness_point(risk_seriousness)
+    seriousness_point, _seriousness_comment = risk_seriousness(risk_seriousness)
+    seriousness_point == 0 ? "" : seriousness_point
+  end
+
+  # 丸囲み文字
+  def make_circle_enclosure_number(number)
+    number.blank? ? tag.span('&nbsp;'.html_safe, class: :circle_hankaku_space) : tag.span(number, class: :circle_hankaku_number)
+  end
+
+  # 角囲み文字
+  def make_square_enclosure_number(number)
+    number.blank? ? tag.span('&nbsp;'.html_safe , class: :square_hankaku_space) : tag.span(number, class: :square_hankaku_number)
+  end
+
+
   # (24)新規入場者調査票
 
   # 雇用契約書-「有り」
@@ -897,8 +986,8 @@ module DocumentsHelper
   # アンケート設問：（就業年数-基準値）
   def questionnaire_experience_term_calc(worker)
     date_format = '%Y%m%d'
-    admission_date = worker.admission_date_start.strftime(date_format).to_i
-    hiring_date = worker.content['hiring_on'].to_date.strftime(date_format).to_i
+    admission_date = worker.admission_date_start&.strftime(date_format).to_i
+    hiring_date = worker.content['hiring_on'].to_date&.strftime(date_format).to_i
     hiring_on_term = (admission_date - hiring_date) / 10000
     experience_term_before_hiring = worker.content['experience_term_before_hiring'].to_i
     blank_term = worker.content['blank_term'].to_i
@@ -1389,7 +1478,7 @@ module DocumentsHelper
 
     if @request_order.order.business_id == @current_business.id
       case hierarchy_document.document_type
-      when 'doc_13rd'
+      when 'doc_13th'
         link_to '点検事項 記入', url
       when 'doc_16th'
         link_to '火気使用許可欄 記入', url

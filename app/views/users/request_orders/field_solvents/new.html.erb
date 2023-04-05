@@ -145,6 +145,7 @@
       <br>
 
       <script>
+        const numString = ["one", "two", "three", "four", "five"]
         $(function(){
           $.each(function(key){
             $.validator.addMethod(key, this);
@@ -201,11 +202,17 @@
               "field_solvent[carried_quantity_one]": {
                 required: "搬入量1を入力してください。"
               },
-              "field_solvent[solvent_classification_one]": {
-                required: "種別1を入力してください。"
+              "field_solvent[carried_quantity_two]": {
+                required: "搬入量2を入力してください。"
               },
-              "field_solvent[solvent_ingredients_one]": {
-                required: "含有成分1を入力してください。"
+              "field_solvent[carried_quantity_three]": {
+                required: "搬入量3を入力してください。"
+              },
+              "field_solvent[carried_quantity_four]": {
+                required: "搬入量4を入力してください。"
+              },
+              "field_solvent[carried_quantity_five]": {
+                required: "搬入量5を入力してください。"
               },
               "field_solvent[using_location]": {
                 required: "使用場所を入力してください。"
@@ -236,6 +243,13 @@
           });
           // 入力欄を変更したときにバリデーションを実行
           $(".field_solvent-form-validation").change(function () {
+            for(i = 0; i < 5; i++){
+              if ($(`select[name="field_solvent[solvent_name_${numString[i]}]"]`).val() == '') {
+                $(`input[name="field_solvent[carried_quantity_${numString[i]}]"]`).rules('remove', 'required');
+              } else {
+                $(`input[name="field_solvent[carried_quantity_${numString[i]}]"]`).rules('add', 'required');
+              }
+            }
             $(this).valid();
           });
         });

@@ -123,9 +123,9 @@
                   <td class="doc_8th_s2"></td>
                   <td class="doc_8th_s7"></td>
                   <td class="doc_8th_s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
-                  <td class="doc_8th_s8" colspan="8" rowspan="3">
-                    <%= document_info_for_prime_contractor_name %> <!-- 8-042 元請会社の確認欄 -->
-                  </td>
+                  <td class="doc_8th_s67" colspan="8" rowspan="3">
+                    <%= f.text_field name = 'content[prime_contractor_confirmation]',value: @document.content&.[]('prime_contractor_confirmation') %>
+                  </td><!-- 8-042 元請会社の確認欄 -->
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R2" style="height: 13px;" class="row-headers-background"></th>
@@ -539,7 +539,7 @@
                   <td class="doc_8th_s22"></td>
                   <td class="doc_8th_s22"></td>
                   <td class="doc_8th_s22"></td>
-                  <td class="doc_8th_s22"></td>	
+                  <td class="doc_8th_s22"></td>
                   <td class="doc_8th_s22"></td>
                   <td class="doc_8th_s22"></td>
                   <td class="doc_8th_s22"></td>
@@ -1030,7 +1030,7 @@
                     <%= worker_date(w4, "birth_day_on") %> <!-- 8-018 生年月日(4) -->
                   </td>
                   <td class="doc_8th_s56" colspan="9" rowspan="3">
-                    <%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->	
+                    <%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->
                   </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_phone_number(w4, "my_phone_number") %> <!-- 8-023 電話番号(4) -->
@@ -1471,7 +1471,7 @@
                     <%= worker_medical_date(w8, "med_exam_on") %> <!-- 8-025 健康診断日(8) -->
                   </td>
                   <td class="doc_8th_s59" rowspan="6">
-                    <%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->						
+                    <%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->
                   </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_medical_date(w8, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(8) -->

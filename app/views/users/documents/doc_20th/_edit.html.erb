@@ -81,8 +81,8 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s7"></td>
           <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
-          <td class="doc_20_s49" colspan="9" rowspan="2">
-            <%= document_info_for_prime_contractor_name %>
+          <td class="doc_20_s52" colspan="9" rowspan="2">
+            <%= f.text_field name = 'content[prime_contractor_confirmation]',value: @document.content&.[]('prime_contractor_confirmation') %>
           </td><!-- 20-001「元請会社の確認欄」-->
           <td class="doc_20_s3"></td>
         </tr>
@@ -371,6 +371,7 @@
               <%= f.date_field name = 'content[date_created]',
                                include_blank: true,
                                value: @document.content&.[]('date_created') %>
+              <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
             </td><!-- 20-007「書類作成日（西暦）」-->
           <td class="doc_20_s13" colspan="2" rowspan="2">作成</td>
           <td class="doc_20_s3"></td>
@@ -466,6 +467,7 @@
                                selected: @document.content&.[]('term')&.to_date,
                                class: "form-control form-control-sm"))
             %>
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
           </td><!-- 20-008「年度（和暦）」-->
           <td class="doc_20_s20" colspan="2" rowspan="2">年度</td>
           <td class="doc_20_s20" rowspan="2">（</td>
@@ -476,6 +478,7 @@
                                           selected: @document.content&.[]('planning_period_beginning')&.to_date,
                                           class: "form-control  form-control-sm", date_separator: '%s'), '年 ') + '月')
             %>
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
           </td><!-- 20-009「計画期間（始期）年月」-->
           <td class="doc_20_s20" rowspan="2">～</td>
           <td class="doc_20_s21" colspan="7" rowspan="2">
@@ -485,6 +488,7 @@
                                           selected: @document.content&.[]('planning_period_final_stage')&.to_date,
                                           class: "form-control form-control-sm", date_separator: '%s'), '年 ') + '月')
             %>
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
             </td><!-- 20-010「計画期間（終期）年月」※始期から12か月後・変更可未実装-->
           <td class="doc_20_s20" rowspan="2">）</td>
           <td class="doc_20_s22" colspan="6" rowspan="2">安全衛生計画書</td>
@@ -556,7 +560,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
-          <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 方 針</td>
+          <td class="doc_20_s6" colspan="7" rowspan="2">
+            安 全 衛 生 方 針  <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          </td>
           <td class="doc_20_s23" colspan="33" rowspan="2">
             <%= f.text_area name = 'content[health_and_safety_policy]', placeholder: "例）労働安全衛生関係法令及び当社の安全衛生管理規程を遵守する。",
                              value: @document.content&.[]('health_and_safety_policy'),
@@ -616,7 +622,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s5"></td>
-          <td class="doc_20_s6" colspan="7" rowspan="2">安 全 衛 生 目 標</td>
+          <td class="doc_20_s6" colspan="7" rowspan="2">
+            安 全 衛 生 目 標  <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          </td>
           <td class="doc_20_s23" colspan="33" rowspan="2">
             <%= f.text_area name = 'content[health_and_safety_goals]', placeholder: "例）死亡災害・公衆災害をゼロとする。",
                              value: @document.content&.[]('health_and_safety_goals'),
@@ -1440,7 +1448,9 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
-          <td class="doc_20_s42" colspan="14">安全衛生担当役員</td>
+          <td class="doc_20_s42" colspan="14">
+            安全衛生担当役員  <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          </td>
           <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[safety_officer_post]', id: :safety_officer_post,
                               value: @document.content&.[]('safety_officer_post'),
@@ -1448,7 +1458,7 @@
             %>
           </td><!--20-040「安全衛生担当役員の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[safety_officer_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[safety_officer_name]', name_of_workers,
                                 { selected: @document.content&.[]('safety_officer_name'), include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchSafetyOfficerName($(this).val())" }
             %>
@@ -1470,7 +1480,12 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
-          <td class="doc_20_s42" colspan="14">総括安全衛生管理者</td>
+          <td class="doc_20_s42" colspan="14">
+            総括安全衛生管理者
+          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT100) %>
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <% end %>
+          </td>
           <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[general_manager_post]', id: :general_manager_post,
                               value: @document.content&.[]('general_manager_post'),
@@ -1478,7 +1493,7 @@
             %>
           </td><!--20-044「総括安全衛生管理の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[general_manager_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[general_manager_name]', name_of_workers,
                                 { selected: @document.content&.[]('general_manager_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchGeneralManagerName($(this).val())" }
             %>
@@ -1487,7 +1502,12 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
-          <td class="doc_20_s42" colspan="14">安全管理者</td>
+          <td class="doc_20_s42" colspan="14">
+            安全管理者
+          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT50) %>
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <% end %>
+          </td>
           <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[safety_manager_post]', id: :safety_manager_post,
                               value: @document.content&.[]('safety_manager_post'),
@@ -1495,7 +1515,7 @@
             %>
           </td><!--20-046「安全管理の役員名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[safety_manager_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[safety_manager_name]', name_of_workers,
                                 { selected: @document.content&.[]('safety_manager_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchSafetyManagerName($(this).val())" }
             %>
@@ -1504,7 +1524,12 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
-          <td class="doc_20_s42" colspan="14">衛生管理者</td>
+          <td class="doc_20_s42" colspan="14">
+            衛生管理者
+          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT50) %>
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <% end %>
+          </td>
           <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[hygiene_manager_post]', id: :hygiene_manager_post,
                               value: @document.content&.[]('hygiene_manager_post'),
@@ -1512,7 +1537,7 @@
             %>
           </td><!--20-048「衛生管理者の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[hygiene_manager_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[hygiene_manager_name]', name_of_workers,
                                 { selected: @document.content&.[]('hygiene_manager_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchHygieneManagerName($(this).val())" }
             %>
@@ -1521,7 +1546,12 @@
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
-          <td class="doc_20_s42" colspan="14">安全衛生推進者</td>
+          <td class="doc_20_s42" colspan="14">
+            安全衛生推進者
+          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT10) && (number_of_field_workers(document_site_info) < $WORKER_NUMBER_LIMIT50) %>
+            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <% end %>
+          </td>
           <td class="doc_20_s52" colspan="13">
             <%= f.text_field name = 'content[health_and_safety_promoter_post]', id: :health_and_safety_promoter_post,
                               value: @document.content&.[]('health_and_safety_promoter_post'),
@@ -1529,7 +1559,7 @@
             %>
           </td><!--20-050「安全衛生推進の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[health_and_safety_promoter_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[health_and_safety_promoter_name]', name_of_workers,
                                 { selected: @document.content&.[]('health_and_safety_promoter_name'),include_blank: "選択して下さい" },
                                 { class: 'form-control form-control-sm', :onchange => "catchHealthAndSafetyPromoterName($(this).val())" }
             %>
@@ -1750,6 +1780,9 @@
 
     <div class="center">
       <%= f.submit "更新", class: "btn btn-block btn-outline-secondary" %>
+    </div>
+    <div class="center">
+      <%= link_to "戻る", :back, class: "btn btn-block btn-outline-secondary" %>
     </div>
     <% end %>
   </div>

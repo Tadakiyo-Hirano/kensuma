@@ -2,7 +2,7 @@
 class Document < ApplicationRecord
   OPERATABLE_DOC_TYPE = %w[
     cover_document table_of_contents_document doc_3rd doc_4th doc_5th doc_6th doc_7th doc_8th doc_9th doc_10th
-    doc_11th doc_12th doc_13rd doc_14th doc_15th doc_16th doc_17th doc_18th doc_19th doc_20th
+    doc_11th doc_12th doc_13th doc_14th doc_15th doc_16th doc_17th doc_18th doc_19th doc_20th
     doc_21st doc_22nd doc_23rd doc_24th
   ].freeze
   belongs_to :business
@@ -11,9 +11,9 @@ class Document < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   # 自身の書類一覧取得(自身が元請の場合、一次の場合、二次の場合、三次以降の場合)
-  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22, 23, 24]) }
-  scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]) }
-  scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
+  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 7, 18, 19, 20, 22, 23]) }
+  scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]) }
+  scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
   scope :third_or_later_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]) }
   # 元請け配下の一次下請け書類一覧取得
   scope :current_lower_first_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,  21, 22, 23, 24]) }
@@ -35,7 +35,7 @@ class Document < ApplicationRecord
     doc_10th:                   10, # 高齢者就労報告書
     doc_11th:                   11, # 年少者就労報告書
     doc_12th:                   12, # 工事用・通勤用車両届
-    doc_13rd:                   13, # 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
+    doc_13th:                   13, # 全建統一様式第９号([移動式クレーン／車両系建設機械等]使用届)
     doc_14th:                   14, # 参考様式第６号(持込機械等(電動工具電気溶接機等)使用届
     doc_15th:                   15, # 全建統一様式第１１号(有機溶剤・特定化学物質等持込使用届)
     doc_16th:                   16, # 参考様式第９号(火気使用届)
@@ -688,9 +688,9 @@ class Document < ApplicationRecord
     end
     # 安全衛生目標
     if document_params[:content][:health_and_safety_goals].blank?
-      error_msg_for_doc_20th.push('安全衛生方針を入力してください')
+      error_msg_for_doc_20th.push('安全衛生目標を入力してください')
     elsif document_params[:content][:health_and_safety_goals].length > $CHARACTER_LIMIT300
-      error_msg_for_doc_20th.push('安全衛生方針を300字以内にしてください')
+      error_msg_for_doc_20th.push('安全衛生目標を300字以内にしてください')
     end
     # 安全衛生上の課題及び特定した危険性又は有害性
     error_msg_for_doc_20th.push('安全衛生上の課題及び特定した危険性又は有害性を300字以内にしてください') if document_params[:content][:health_and_safety_issues].length > $CHARACTER_LIMIT300
@@ -832,23 +832,39 @@ class Document < ApplicationRecord
     error_msg_for_doc_20th.push('安全衛生行事(3月)を30字以内にしてください') if document_params[:content][:events_march].length > $CHARACTER_LIMIT30
     # 安全衛生担当役員名
     error_msg_for_doc_20th.push('安全衛生担当役員を選択してください') if document_params[:content][:safety_officer_name].blank?
-    # 安全衛生担当役員名
+    # 安全衛生担当役員役職
     error_msg_for_doc_20th.push('安全衛生担当役員の役職を入力してください') if document_params[:content][:safety_officer_post].blank?
     # 総括安全衛生管理者名
     if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_name].blank?)
       error_msg_for_doc_20th.push('総括安全衛生管理者を選択してください')
     end
+    # 総括安全衛生管理者の役職
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_post].blank?)
+      error_msg_for_doc_20th.push('総括安全衛生管理者の役職を入力してください')
+    end
     # 安全管理者名
     if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_name].blank?)
       error_msg_for_doc_20th.push('安全管理者を選択してください')
+    end
+    # 安全管理者の役職
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_post].blank?)
+      error_msg_for_doc_20th.push('安全管理者の役職を入力してください')
     end
     # 衛生管理者名
     if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_name].blank?)
       error_msg_for_doc_20th.push('衛生管理者を選択してください')
     end
+    # 衛生管理者名の役職
+    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_post].blank?)
+      error_msg_for_doc_20th.push('衛生管理者の役職を入力してください')
+    end
     # 安全衛生推進者名
     if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_name].blank?)
       error_msg_for_doc_20th.push('安全衛生推進者を選択してください')
+    end
+    # 安全衛生推進者の役職
+    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_post].blank?)
+      error_msg_for_doc_20th.push('安全衛生推進者の役職を入力してください')
     end
     # 特記事項
     error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $CHARACTER_LIMIT300
@@ -1824,6 +1840,108 @@ class Document < ApplicationRecord
     #統括安全衛生責任者代行者・署名年月日
     error_msg_for_doc_22nd.push('統括安全衛生責任者代行者・署名年月日を入力してください') if document_params[:content][:officer_substitute_signature_date].blank?
     error_msg_for_doc_22nd
+  end
+
+  # エラーメッセージ(doc23・安全ミーティング報告書)
+  def error_msg_for_doc_23rd(document_params)
+    error_msg_for_doc_23rd = []
+    if document_params[:content][:work_place_1st].length > 20
+      error_msg_for_doc_23rd.push('1つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_2nd].length > 20
+      error_msg_for_doc_23rd.push('2つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_3rd].length > 20
+      error_msg_for_doc_23rd.push('3つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_4th].length > 20
+      error_msg_for_doc_23rd.push('4つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_place_5th].length > 20
+      error_msg_for_doc_23rd.push('5つ目の作業場所を20文字以内にしてください')
+    end
+    if document_params[:content][:work_content_1st].length > 30
+      error_msg_for_doc_23rd.push('1つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_2nd].length > 30
+      error_msg_for_doc_23rd.push('2つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_3rd].length > 30
+      error_msg_for_doc_23rd.push('3つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_4th].length > 30
+      error_msg_for_doc_23rd.push('4つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_content_5th].length > 30
+      error_msg_for_doc_23rd.push('5つ目の作業内容を30文字以内にしてください')
+    end
+    if document_params[:content][:work_method_1st].length > 50
+      error_msg_for_doc_23rd.push('1つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_2nd].length > 50
+      error_msg_for_doc_23rd.push('2つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_3rd].length > 50
+      error_msg_for_doc_23rd.push('3つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_4th].length > 50
+      error_msg_for_doc_23rd.push('4つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:work_method_5th].length > 50
+      error_msg_for_doc_23rd.push('5つ目の作業方法を50文字以内にしてください')
+    end
+    if document_params[:content][:coordination_items_from_prime_contractor_1st].length > 50
+      error_msg_for_doc_23rd.push('1つ目の元請からの連絡調整項目を50文字以内にしてください')
+    end
+    if document_params[:content][:coordination_items_from_prime_contractor_2nd].length > 50
+      error_msg_for_doc_23rd.push('2つ目の元請からの連絡調整項目を50文字以内にしてください')
+    end
+    if document_params[:content][:coordination_items_from_prime_contractor_3rd].length > 50
+      error_msg_for_doc_23rd.push('3つ目の元請からの連絡調整項目を50文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_1st].length > 30
+      error_msg_for_doc_23rd.push('1つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_2nd].length > 30
+      error_msg_for_doc_23rd.push('2つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_3rd].length > 30
+      error_msg_for_doc_23rd.push('3つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_4th].length > 30
+      error_msg_for_doc_23rd.push('4つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:cheduled_work_hazard_5th].length > 30
+      error_msg_for_doc_23rd.push('5つ目の予定作業の危険を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_1st].length > 30
+      error_msg_for_doc_23rd.push('1つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_2nd].length > 30
+      error_msg_for_doc_23rd.push('2つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_3rd].length > 30
+      error_msg_for_doc_23rd.push('3つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_4th].length > 30
+      error_msg_for_doc_23rd.push('4つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:risk_mitigation_measures_5th].length > 30
+      error_msg_for_doc_23rd.push('5つ目のリスク低減措置を30文字以内にしてください')
+    end
+    if document_params[:content][:foreman_confirmation_elderly_people_minors_special_instructions_content].length > 30
+      error_msg_for_doc_23rd.push('高齢者、年少者・特別指示内容を30文字以内にしてください')
+    end
+    if document_params[:content][:other_content].length > 10
+      error_msg_for_doc_23rd.push('その他を10文字以内にしてください')
+    end
+    if document_params[:content][:meeting_date].blank?
+      error_msg_for_doc_23rd.push('打合せ日を入力してください')
+    end
+    if document_params[:content][:name].blank?
+      error_msg_for_doc_23rd.push('氏名を入力してください')
+    end
+    error_msg_for_doc_23rd
   end
 
   #下請会社(協力会社)の配列の取得

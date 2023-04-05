@@ -33,37 +33,52 @@ module Users
     # 自社(事業所)の作業員名を取得
     def set_business_workers_name
       @business_workers_name = current_business.workers.pluck(:name)
+      @business_workers_name_id = current_business.workers
+    end
+
+    # 自社(事業所)の職種を取得
+    def set_business_occupations
+      @business_occupations = current_business.business_occupations.includes(:occupation).map { |bo| bo.occupation.short_name }
+    end
+
+    # 自社(事業所)の建設許可証番号を取得
+    def set_business_construction_licenses
+      @business_construction_licenses = current_business.business_industries.pluck(:construction_license_number)
     end
 
     # 書類に反映させる作業員情報
     def worker_info(worker)
-      JSON.parse(
-        worker.to_json(
-          except:  %i[uuid images created_at updated_at], # 作業員情報
-          include: {
-            worker_medical:            {
-              except:  %i[id worker_id created_at updated_at], # 作業員の健康情報
-              include: {
-                worker_exams: {
-                  except: %i[id worker_medical_id images created_at updated_at] # 中間テーブル(特別健康診断種類マスタ))
+      json =
+        JSON.parse(
+          worker.to_json(
+            except:  %i[uuid images created_at updated_at], # 作業員情報
+            include: {
+              worker_medical:            {
+                except:  %i[id worker_id created_at updated_at], # 作業員の健康情報
+                include: {
+                  worker_exams: {
+                    except: %i[id worker_medical_id images created_at updated_at] # 中間テーブル(特別健康診断種類マスタ))
+                  }
                 }
+              },
+              worker_insurance:          {
+                except: %i[id worker_id created_at updated_at] # 保険情報
+              },
+              worker_skill_trainings:    {
+                only: [:skill_training_id] # 中間テーブル(技能講習マスタ)
+              },
+              worker_special_educations: {
+                only: [:special_education_id] # 中間テーブル(特別教育マスタ)
+              },
+              worker_licenses:           {
+                only: [:license_id] # 中間テーブル(免許マスタ)
               }
-            },
-            worker_insurance:          {
-              except: %i[id worker_id created_at updated_at] # 保険情報
-            },
-            worker_skill_trainings:    {
-              only: [:skill_training_id] # 中間テーブル(技能講習マスタ)
-            },
-            worker_special_educations: {
-              only: [:special_education_id] # 中間テーブル(特別教育マスタ)
-            },
-            worker_licenses:           {
-              only: [:license_id] # 中間テーブル(免許マスタ)
             }
-          }
+          )
         )
-      )
+
+      country = { country: I18n.t("countries.#{worker.country}") }
+      json.merge(country)
     end
 
     # 書類に反映させる車両情報

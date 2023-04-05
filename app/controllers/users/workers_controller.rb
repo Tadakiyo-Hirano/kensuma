@@ -1,6 +1,7 @@
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
+    before_action :convert_to_full_width, only: %i[create update]
 
     def index
       @workers = current_business.workers
@@ -12,7 +13,7 @@ module Users
           # テスト用デフォルト値 ==========================
           name:                          'サンプル作業員',
           name_kana:                     'サンプルサギョウイン',
-          country:                       '日本',
+          country:                       'JP',
           my_address:                    '東京都港区1-1',
           my_phone_number:               '01234567898',
           family_name:                   'フェルナンデス',
@@ -78,7 +79,7 @@ module Users
       else
         @worker = current_business.workers.new(
           # 本番環境用デフォルト値 ==========================
-          country:        '日本',
+          country:        'JP',
           abo_blood_type: :a,
           rh_blood_type:  :plus,
           sex:            :man
@@ -106,8 +107,10 @@ module Users
     end
 
     def create
-      @worker = current_business.workers.build(worker_params)
+      @worker = current_business.workers.build(worker_params_with_converted)
       if @worker.save
+        health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
+        employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
         flash[:success] = '作業員情報を作成しました'
         redirect_to users_worker_path(@worker)
       else
@@ -124,7 +127,9 @@ module Users
     end
 
     def update
-      if @worker.update(worker_params)
+      if @worker.update(worker_params_with_converted)
+        health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
+        employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
         flash[:success] = '更新しました'
         redirect_to users_worker_path(@worker)
       else
@@ -188,12 +193,51 @@ module Users
       @worker = current_business.workers.find_by(uuid: params[:uuid])
     end
 
+    # 半角カタカナを全角カタカナに変換する
+    def convert_to_full_width
+      if params[:worker][:name_kana].present?
+        params[:worker][:name_kana] = params[:worker][:name_kana].gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
+      end
+    end
+
+    def worker_params_with_converted
+      converted_params = worker_params.dup
+      # 半角スペースがある場合、全角スペースに変換
+      %i[name name_kana].each do |key|
+        next unless converted_params[key]
+
+        converted_params[key] = converted_params[key].to_s.gsub(/[\s　]+/, ' ')
+      end
+      # ハイフンを除外
+      %i[my_phone_number family_phone_number].each do |key|
+        next unless converted_params[key]
+
+        converted_params[key] = converted_params[key].to_s.gsub(/[-ー]/, '')
+      end
+      converted_params
+    end
+
+    # 健康保険が健康保険組合もしくは建設国保でなければ保険名をnilにする
+    def health_insurance_name_nil(health_insurance_type, worker)
+      unless %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type)
+        worker.update(health_insurance_name: nil)
+      end
+    end
+
+    # 雇用保険が被保険者であ無ければ被保険者番号の下4桁をnilにする
+    def employment_insurance_number_nil(employment_insurance_type, worker)
+      unless employment_insurance_type == :insured
+        worker.update(employment_insurance_number: nil)
+      end
+    end
+
     def worker_params
       params.require(:worker).permit(:name, :name_kana,
         :country, :my_address, :my_phone_number, :family_address,
         :family_phone_number, :birth_day_on, :abo_blood_type,
         :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring,
-        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex,
+        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, { safety_sanitary_education_ids: [] },
+        :status_of_residence,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],

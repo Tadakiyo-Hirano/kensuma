@@ -36,7 +36,7 @@
                   確認欄
                 </td>
                 <td class="s5" dir="ltr" colspan="8" rowspan="2">
-                  <%= document_info_for_prime_contractor_name %> <!-- 12-001 元請会社の確認欄 -->
+                  <%= @document.content&.[]('prime_contractor_confirmation')%> <!-- 12-001 元請会社の確認欄 -->
                 </td>
               </tr>
               <tr style="height: 25px">
@@ -788,7 +788,7 @@
     background-color: #ffffff;
     text-align: center;
     color: #000000;
-    
+
     font-size: 11pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -799,7 +799,7 @@
     background-color: #ffffff;
     text-align: left;
     color: #000000;
-    
+
     font-size: 12pt;
     vertical-align: middle;
     white-space: nowrap;
@@ -811,7 +811,7 @@
     text-align: center;
     font-weight: bold;
     color: #000000;
-    
+
     font-size: 16pt;
     vertical-align: middle;
     white-space: nowrap;

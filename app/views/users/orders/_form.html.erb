@@ -1,300 +1,328 @@
 <%= render 'shared/error_massages', object: f.object %>
 
-<% if controller.action_name == 'edit' %>
-  <%= f.label :status %>
-  <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-  <%= f.select :status, Order.statuses_i18n.invert, {}, { class: "form-control" } %>
-<% end %>
+<!-- 現場 -->
+<div class="list-group-item">
+  <div style="font-size: 22px; font-weight: bold;"><%= f.label :order %></div>
+  <div class="list-group-item">
+    <%= f.label :site_career_up_id %> <!-- 現場ID(キャリアアップシステム) -->
+    <%= f.text_field :site_career_up_id, class: "form-control", minlength: 14, maxlength: 14 %>
+    <br>
+    <%= f.label :site_name %> <!-- 現場名 -->
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.text_field :site_name, class: "form-control", maxlength: 100 %>
+    <br>
+    <%= f.label :site_address %> <!-- 施工場所住所 -->
+    <%= f.text_field :site_address, class: "form-control", maxlength: 50 %>
+    <br>
+  </div>
+</div>
 <br>
 
-<!-- 現場 -->
-<div class="list-group">
+<!-- 発注者 -->
+<div class="list-group-item">
+  <div style="font-size: 22px; font-weight: bold;"><%= f.label :orderer %></div> <!-- 発注者 -->
   <div class="list-group-item">
-    <%= f.label :site_career_up_id %> <!-- 現場ID(キャリアアップ) -->
-    <%= f.text_field :site_career_up_id, class: "form-control", placeholder: "#{Order.human_attribute_name(:site_career_up_id)} 数字14桁", minlength: 14, maxlength: 14 %>
-    <br>
-    <%= f.label :site_name %> <!-- 事業所名(現場名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :site_name, class: "form-control", placeholder: Order.human_attribute_name(:site_name), maxlength: 100 %>
-    <br>
-    <%= f.label :site_address %> <!-- 施工場所(住所) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :site_address, class: "form-control", placeholder: Order.human_attribute_name(:site_address), maxlength: 50 %>
-    <br>
-  </div>
-</div><br>
-
-<!-- 発注 -->
-<div class="list-group">
-  <div class="list-group-item">
-    <%= f.label :order_name %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span> <!-- 発注者(会社名or氏名) -->
-    <%= f.text_field :order_name, class: "form-control", placeholder: Order.human_attribute_name(:order_name) %>
-    <br>
-    <%= f.label :order_post_code %> <!-- 郵便番号 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :order_post_code, class: "form-control", placeholder: Order.human_attribute_name(:hyphen_is_unnecessary) %>
-    <br>
-    <%= f.label :order_address %> <!-- 住所 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :order_address, class: "form-control", placeholder: Order.human_attribute_name(:order_address) %>
-    <br>
+    <div style="font-weight: bold;"><%= f.label :orderer %></div> <!-- 発注者 -->
+    <div class="list-group-item">
+      <%= f.label :order_name %>
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span> <!-- 氏名 -->
+      <%= f.text_field :order_name, class: "form-control" %>
+      <br>
+      <%= f.label :order_post_code %> <!-- 郵便番号 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :order_post_code, class: "form-control" %>
+      <br>
+      <%= f.label :order_address %> <!-- 住所 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :order_address, class: "form-control" %>
+      <br>
+    </div>
   </div>
   <div class="list-group-item">
-    <%= f.label :order_supervisor_name %> <!-- 監督員(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :order_supervisor_name, class: "form-control", placeholder: Order.human_attribute_name(:order_supervisor_name) %>
-    <br>
-    <%= f.label :order_supervisor_company %> <!-- 監督員(所属会社) -->
-    <%= f.text_field :order_supervisor_company, class: "form-control", placeholder: Order.human_attribute_name(:order_supervisor_company) %>
-    <br>
-    <%= f.label :order_supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :order_supervisor_apply,
-                  (@current_business.orders.map { |order|order.order_supervisor_apply }).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
+    <div style="font-weight: bold;"><%= f.label :supervisor %></div><!-- 監督員 -->
+    <div class="list-group-item">
+      <%= f.label :order_supervisor_name %> <!-- 氏名 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :order_supervisor_name, class: "form-control" %>
+      <br>
+      <%= f.label :order_supervisor_company %> <!-- 所属会社名 -->
+      <%= f.text_field :order_supervisor_company, class: "form-control" %>
+      <br>
+      <%= f.label :order_supervisor_apply %> <!-- 権限及び意見の申出方法 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :order_supervisor_apply, class: "form-control" %>
+    </div>
   </div>
-</div><br>
+  <br>
 
 <!-- 元請会社 -->
-<div class="list-group">
+<div class="list-group-item">
+  <div style="font-size: 22px; font-weight: bold;"><%= f.label :prime_contractor %></div> <!-- 元請会社 -->
   <div class="list-group-item">
-    <%= f.label :construction_name %> <!-- 工事名 -->
+    <div style="font-weight: bold;"><%= f.label :order_infomation %></div> <!-- 現場情報 -->
+    <div class="list-group-item">
+      <%= f.label :construction_name %> <!-- 工事名 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :construction_name, class: "form-control" %>
+      <br>
+      <%= f.label :construction_details %> <!-- 工事内容 -->
+      <%= f.text_field :construction_details, class: "form-control" %>
+      <br>
+      <%= f.label :start_date %> <!-- 工期(自) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :start_date, class: "form-control" %>
+      <br>
+      <%= f.label :end_date %> <!-- 工期(至) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :end_date, class: "form-control" %>
+      <br>
+      <%= f.label :contract_date %> <!-- 契約日 -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :contract_date, class: "form-control" %>
+      <br>
+    </div>
+  </div>
+  <div class="list-group-item">
+    <div style="font-weight: bold;"><%= f.label :site_agent %></div> <!-- 現場代理人 -->
+    <div class="list-group-item">
+      <%= f.label :site_agent_name %><!-- 現場代理人(氏名) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.select :site_agent_name, @business_workers_name.uniq,
+                    { include_blank: true },
+                    { class: "form-select form-select-sm", style: "width: 100%" }
+      %><br>
+      <%= f.label :site_agent_apply %> <!-- 現場代理人(権限及び意見の申出方法) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :site_agent_apply, class: "form-control" %>
+      <br>
+    </div>
+  </div>
+  <div class="list-group-item">
+    <div style="font-weight: bold;"><%= f.label :supervisor %></div> <!-- 監督員 -->
+    <div class="list-group-item">
+      <%= f.label :supervisor_name %> <!-- 監督員(氏名) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.select :supervisor_name, @business_workers_name.uniq,
+                    { include_blank: true },
+                    { class: "form-select form-select-sm", style: "width: 100%" }
+      %><br>
+      <%= f.label :supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.text_field :supervisor_apply, class: "form-control" %>
+      <br>
+    </div>
+  </div>
+  <div class="list-group-item">
+    <div style="font-weight: bold;"><%= f.label :professional_engineer %></div> <!-- 専門技術者 -->
+    <div class="list-group-item">
+      <%= f.label :professional_engineer_name_1st %> <!-- 専門技術者1(氏名) -->
+      <%= f.select :professional_engineer_name_1st, @business_workers_name.uniq,
+                    { include_blank: true },
+                    { id: "professional_engineer_name_1st", class: "form-select form-select-sm", style: "width: 100%" }
+      %>
+      <br>
+      <%= f.label :professional_engineer_qualification_1st %> <!-- 専門技術者1(資格内容) -->
+      <%= f.select :professional_engineer_qualification_1st, options_for_select(@order.professional_engineer_qualification_1st.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.professional_engineer_qualification_1st, include_blank: true), {},
+                    { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_1st' }
+      %>
+      <br><br>
+      <%= f.label :professional_engineer_details_1st %> <!-- 専門技術者1(担当工事内容) -->
+      <%= f.text_field :professional_engineer_details_1st, class: "form-control" %>
+      <br>
+    </div>
+  </div>
+    <div class="list-group-item">
+    <div style="font-weight: bold;"><%= f.label :professional_engineer %></div> <!-- 専門技術者 -->
+    <div class="list-group-item">
+      <%= f.label :professional_engineer_name_2nd %> <!-- 専門技術者2(氏名) -->
+      <%= f.select :professional_engineer_name_2nd, @business_workers_name.uniq,
+                    { include_blank: true },
+                    { id: "professional_engineer_name_2nd", class: "form-select form-select-sm", style: "width: 100%" }
+      %>
+      <br>
+      <%= f.label :professional_engineer_qualification_2nd %> <!-- 専門技術者2(資格内容) -->
+      <%= f.select :professional_engineer_qualification_2nd, options_for_select(@order.professional_engineer_qualification_2nd.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.professional_engineer_qualification_2nd, include_blank: true), {},
+                    { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_2nd' }
+                   %>
+      <br><br>
+      <%= f.label :professional_engineer_details_2nd %> <!-- 専門技術者2(担当工事内容) -->
+      <%= f.text_field :professional_engineer_details_2nd, class: "form-control" %>
+      <br>
+    </div>
+  </div>
+  <div class="list-group-item">
+    <div style="font-weight: bold;"><%= f.label :supervising_engineer %></div> <!-- 監督技術者･主任技術者 -->
+    <div class="list-group-item">
+      <%= f.label :supervising_engineer_name %> <!-- 監督技術者･主任技術者(氏名) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.select :supervising_engineer_name, @business_workers_name.uniq,
+                    { include_blank: true },
+                    { id: "supervising_engineer_name", class: "form-select form-select-sm", style: "width: 100%" }
+      %><br>
+      <%= f.label :supervising_engineer_check %> <!-- 監督技術者･主任技術者(専任・非専任) -->
+      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <div class="list-group-item">
+        <%= f.collection_radio_buttons(:supervising_engineer_check, Order.supervising_engineer_checks_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% end %>
+      </div>
+      <br>
+      <%= f.label :supervising_engineer_qualification %> <!-- 監督技術者･主任技術者(資格内容) -->
+      <%= f.select :supervising_engineer_qualification, options_for_select(@order.supervising_engineer_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.supervising_engineer_qualification, include_blank: true), {},
+                    { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_qualification_id' }
+                   %>
+      <br>
+    </div>
+  </div>
+  <div class="list-group-item">
+    <div style="font-weight: bold;"><%= f.label :supervising_engineer_assistant %></div> <!-- 監督技術者補佐 -->
+    <div class="list-group-item">
+      <%= f.label :supervising_engineer_assistant_name %> <!-- 監督技術者補佐(氏名) -->
+      <%= f.select :supervising_engineer_assistant_name, @business_workers_name.uniq,
+                    { include_blank: true },
+                    { id: "supervising_engineer_assistant_name", class: "form-select form-select-sm", style: "width: 100%" }
+      %><br>
+      <%= f.label :supervising_engineer_assistant_qualification %><br> <!-- 監督技術者補佐(資格内容) -->
+      <%= f.select :supervising_engineer_assistant_qualification, options_for_select(@order.supervising_engineer_assistant_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.supervising_engineer_assistant_qualification, include_blank: true), {},
+                    { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_assistant_qualification_id' }
+                   %>
+    </div>
+  </div>
+  <div class="list-group-item">
+    <%= f.label :general_safety_responsible_person_name %> <!-- 統括安全衛生責任者名 -->
+    &emsp;<%= Order.human_attribute_name(:general_safety_responsible_person_name_note) %>
+    <%= f.select :general_safety_responsible_person_name, @business_workers_name.uniq,
+                  { include_blank: true },
+                  { class: "form-select form-select-sm", style: "width: 100%" }
+    %><br>
+  </div>
+  <div class="list-group-item">
+    <%= f.label :general_safety_agent_name %> <!-- 統括安全衛生責任者代行者名 -->
+    &emsp;<%= Order.human_attribute_name(:general_safety_agent_name_note) %>
+    <%= f.select :general_safety_agent_name, @business_workers_name.uniq,
+                  { include_blank: true },
+                  { class: "form-select form-select-sm", style: "width: 100%" }
+    %><br>
+  </div>
+  <div class="list-group-item">
+    <%= f.label :submission_destination %> <!-- 提出先及び担当者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :construction_name, class: "form-control", placeholder: Order.human_attribute_name(:construction_name) %>
-    <br>
-    <%= f.label :construction_details %> <!-- 工事内容 -->
-    <%= f.text_field :construction_details, class: "form-control", placeholder: Order.human_attribute_name(:construction_details) %>
-    <br>
-    <div class="row">
-      <div class="col-md-3">
-        <%= f.label :start_date %> <!-- 工期(自) -->
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.date_field :start_date, class: "form-control" %>
-      </div>
-      <div class="col-md-3">
-        <%= f.label :end_date %> <!-- 工期(至) -->
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.date_field :end_date, class: "form-control" %>
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="col-md-3">
-        <%= f.label :contract_date %> <!-- 契約日 -->
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.date_field :contract_date, class: "form-control" %>
-      </div>
-    </div><br>
-    <%= f.label :submission_destination %> <!-- 提出先及び担当者(部署･氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :submission_destination,
-                  (@business_workers_name + [@order.submission_destination]).uniq,
+    <%= f.select :submission_destination, @business_workers_name.uniq,
                   {},
-                  { class: "single-select", style: "width: 100%" }
-    %>
-    <br><br>
+                  { class: "form-select form-select-sm", style: "width: 100%" }
+    %><br>
   </div>
   <div class="list-group-item">
-    <%= f.label :general_safety_responsible_person_name %> <!-- 統括安全衛生責任者(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :general_safety_responsible_person_name,
-                  (@business_workers_name + [@order.general_safety_responsible_person_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %>
-    <br><br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :vice_president_name %> <!-- 副会長(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :vice_president_name,
-                  (@business_workers_name + [@order.vice_president_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %>
-    <br><br>
-    <%= f.label :vice_president_company_name %> <!-- 副会長(会社名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :vice_president_company_name, class: "form-control", placeholder: Order.human_attribute_name(:vice_president_company_name) %>
-    <br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :secretary_name %> <!-- 書記(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :secretary_name,
-                  (@business_workers_name + [@order.secretary_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %>
-    <br><br>
-    <%= f.label :health_and_safety_manager_name %> <!-- 元方安全衛生管理者(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :health_and_safety_manager_name,
-                  (@business_workers_name + [@order.health_and_safety_manager_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %>
-    <br><br>
-    <%= f.label :general_safety_agent_name %> <!-- 統括安全衛生責任者代行者(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :general_safety_agent_name,
-                  (@business_workers_name + [@order.general_safety_agent_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :supervisor_name %> <!-- 監督員(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :supervisor_name,
-                  (@business_workers_name + [@order.supervisor_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :supervisor_apply,
-                      (@current_business.orders.map { |order|order.supervisor_apply }).uniq,
-                      { include_blank: true },
-                      { class: "single-select", style: "width: 100%" }
-    %><br><br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :site_agent_name %> <!-- 現場代理人(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :site_agent_name,
-                  (@business_workers_name + [@order.site_agent_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :site_agent_apply %> <!-- 現場代理人(権限及び意見の申出方法) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :site_agent_apply,
-                      (@current_business.orders.map { |order|order.site_agent_apply }).uniq,
-                      { include_blank: true },
-                      { class: "single-select", style: "width: 100%" }
-    %><br><br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :supervising_engineer_name %> <!-- 監督技術者･主任技術者(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :supervising_engineer_name,
-                  (@business_workers_name + [@order.supervising_engineer_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :supervising_engineer_check %> <!-- 監督技術者・主任技術者(専任or非専任) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :supervising_engineer_check, Order.supervising_engineer_checks_i18n.invert, { prompt: true }, { class: "form-control" } %>
-    <br>
-    <%= f.label :supervising_engineer_assistant_name %> <!-- 監督技術者補佐(氏名) -->
-    <%= f.select :supervising_engineer_assistant_name,
-                  (@business_workers_name + [@order.supervising_engineer_assistant_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :professional_engineer_name %> <!-- 専門技術者(氏名) -->
-    <%= f.select :professional_engineer_name,
-                  (@business_workers_name + [@order.professional_engineer_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :professional_engineer_construction_details %> <!-- 専門技術者(担当工事内容) -->
-    <%= f.text_field :professional_engineer_construction_details, class: "form-control", placeholder: Order.human_attribute_name(:professional_engineer_construction_details) %>
-    <br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :safety_officer_name %> <!-- 安全衛生担当役員(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :safety_officer_name,
-                  (@business_workers_name + [@order.safety_officer_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :safety_officer_position_name %> <!-- 安全衛生担当役員(役職名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :safety_officer_position_name, class: "form-control", placeholder: Order.human_attribute_name(:safety_officer_position_name) %>
-    <br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :general_safety_manager_name %> <!-- 総括安全衛生管理(氏名) -->
-    <%= f.select :general_safety_manager_name,
-                  (@business_workers_name + [@order.general_safety_manager_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :general_safety_manager_position_name %> <!-- 総括安全衛生管理(役職名) -->
-    <%= f.text_field :general_safety_manager_position_name, class: "form-control", placeholder: Order.human_attribute_name(:general_safety_manager_position_name) %>
-    <br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :safety_manager_name %> <!-- 安全管理者(氏名) -->
-    <%= f.select :safety_manager_name,
-                  (@business_workers_name + [@order.safety_manager_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :safety_manager_position_name %> <!-- 安全管理者(役職名) -->
-    <%= f.text_field :safety_manager_position_name, class: "form-control", placeholder: Order.human_attribute_name(:safety_manager_position_name) %>
-    <br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :health_manager_name %> <!-- 衛生管理者(氏名) -->
-    <%= f.select :health_manager_name,
-                  (@business_workers_name + [@order.health_manager_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :health_manager_position_name %> <!-- 衛生管理者(役職名) -->
-    <%= f.text_field :health_manager_position_name, class: "form-control", placeholder: Order.human_attribute_name(:health_manager_position_name) %>
-    <br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :health_and_safety_promoter_name %> <!-- 安全衛生推進者(氏名) -->
-    <%= f.select :health_and_safety_promoter_name,
-                  (@business_workers_name + [@order.health_and_safety_promoter_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <%= f.label :health_and_safety_promoter_position_name %> <!-- 安全衛生推進者(役職名) -->
-    <%= f.text_field :health_and_safety_promoter_position_name, class: "form-control", placeholder: Order.human_attribute_name(:health_and_safety_promoter_position_name) %>
-    <br>
-  </div>
-  <div class="list-group-item">
-    <%= f.label :confirm_name %> <!-- 確認欄(氏名) -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :confirm_name,
-                  (@business_workers_name + [@order.confirm_name]).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
-    <div class="row">
-      <div class="col-md-3">
-        <%= f.label :accept_confirm_date %> <!-- 受付確認(年月日) -->
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.date_field :accept_confirm_date, class: "form-control" %>
+    <%= f.label :construction_license %> <!-- 工場に必要な建設許可証 -->
+    <div class="error-message"></div>
+    <div class="list-group-item">
+      <div class="form-check">
+        <% @business_construction_licenses.each do |license| %>
+          <div class="form-check">
+            <%= f.check_box :construction_license, { multiple: true, checked: (@order.construction_license.present? && @order.construction_license.include?(license)) }, license, nil %>
+            <%= f.label license %>
+          </div>
+        <% end %>
       </div>
-    </div><br>
-    <%= f.label :subcontractor_name %> <!-- 下請会社名 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :subcontractor_name,
-                  (@current_business.orders.map { |order|order.subcontractor_name }).uniq,
-                  { include_blank: true },
-                  { class: "single-select", style: "width: 100%" }
-    %><br><br>
+    </div>
   </div>
-</div><br>
+</div>
+<br>
+
+<% if controller.action_name == 'edit' %>
+  <div class="list-group-item">
+    <%= f.label :status %> <!-- ステータス -->
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.select :status, Order.statuses_i18n.invert, {}, { class: "form-select" } %>
+  </div>
+<% end %>
 
 <script>
+//資格内容(専門技術者1)の取得
+  $(function() {
+    // 監理技術者1が変更されたら、対応するWorkerSkillTrainingのレコードを取得して、セレクトボックスを作成する
+    $('#professional_engineer_name_1st').on('change', function() {
+      var assistantName = $(this).val();
+      $.ajax({
+        url: '/users/professional_engineer_1st_skill_training_options',
+        data: { professional_engineer_name_1st: assistantName },
+        success: function(options) {
+          var selectOptionsHtml = '<option value=""></option>';
+          for (var i = 0; i < options.length; i++) {
+          selectOptionsHtml += '<option value="' + options[i].id + '">' + options[i].name + '</option>';
+          }
+          var selectBoxHtml = '<select id="worker_skill_training_id" name="order[worker_skill_training_id]">' + selectOptionsHtml + '</select>';
+          $('#professional_engineer_qualification_id_1st').html(selectBoxHtml);
+        }
+      });
+    });
+  });
+
+  //資格内容(専門技術者2)の取得
+  $(function() {
+    // 専門技術者名2が変更されたら、対応するWorkerSkillTrainingのレコードを取得して、セレクトボックスを作成する
+    $('#professional_engineer_name_2nd').on('change', function() {
+      var assistantName = $(this).val();
+      $.ajax({
+        url: '/users/professional_engineer_2nd_skill_training_options',
+        data: { professional_engineer_name_2nd: assistantName },
+        success: function(options) {
+          var selectOptionsHtml = '<option value=""></option>';
+          for (var i = 0; i < options.length; i++) {
+          selectOptionsHtml += '<option value="' + options[i].id + '">' + options[i].name + '</option>';
+          }
+          var selectBoxHtml = '<select id="worker_skill_training_id" name="order[worker_skill_training_id]">' + selectOptionsHtml + '</select>';
+          $('#professional_engineer_qualification_id_2nd').html(selectBoxHtml);
+        }
+      });
+    });
+  });
+
+  //資格内容(監督技術者・主任技術者)の取得
+  $(function() {
+    // 監督技術者・主任技術者名が変更されたら、対応するWorkerSkillTrainingのレコードを取得して、セレクトボックスを作成する
+    $('#supervising_engineer_name').on('change', function() {
+      var assistantName = $(this).val();
+      $.ajax({
+        url: '/users/supervising_engineer_skill_training_options',
+        data: { supervising_engineer_name: assistantName },
+        success: function(options) {
+          var selectOptionsHtml = '<option value=""></option>';
+          for (var i = 0; i < options.length; i++) {
+          selectOptionsHtml += '<option value="' + options[i].id + '">' + options[i].name + '</option>';
+          }
+          var selectBoxHtml = '<select id="worker_skill_training_id" name="order[worker_skill_training_id]">' + selectOptionsHtml + '</select>';
+          $('#supervising_engineer_qualification_id').html(selectBoxHtml);
+        }
+      });
+    });
+  });
+
+  //資格内容(監督技術者補佐)の取得
+  $(function() {
+    // 監理技術者補佐名が変更されたら、対応するWorkerSkillTrainingのレコードを取得して、セレクトボックスを作成する
+    $('#supervising_engineer_assistant_name').on('change', function() {
+      var assistantName = $(this).val();
+      $.ajax({
+        url: '/users/supervising_engineer_assistant_skill_training_options',
+        data: { supervising_engineer_assistant_name: assistantName },
+        success: function(options) {
+          var selectOptionsHtml = '<option value=""></option>';
+          for (var i = 0; i < options.length; i++) {
+          selectOptionsHtml += '<option value="' + options[i].id + '">' + options[i].name + '</option>';
+          }
+          var selectBoxHtml = '<select id="worker_skill_training_id" name="order[worker_skill_training_id]">' + selectOptionsHtml + '</select>';
+          $('#supervising_engineer_assistant_qualification_id').html(selectBoxHtml);
+        }
+      });
+    });
+  });
+
   // 入力フォームのバリデーション
   $(function(){
     let methods = {
       postcode: function(value, element){
-        return this.optional(element) || /^\d{7}$/i.test(value); 
+        return this.optional(element) || /^\d{7}$/i.test(value);
       }
     }
     $.each(methods, function(key){
@@ -303,10 +331,11 @@
     $(".order-form-validation").validate({
       rules: {
         "order[site_name]": {
-          required: true
+          required: true,
+          maxlength: 100
         },
         "order[site_address]": {
-          required: true
+          maxlength: 50
         },
         "order[order_name]": {
           required: true
@@ -322,7 +351,8 @@
           required: true
         },
         "order[order_supervisor_apply]": {
-          required: true
+          required: true,
+          maxlength: 40
         },
         "order[construction_name]": {
           required: true
@@ -336,38 +366,24 @@
         "order[contract_date]": {
           required: true
         },
-        "order[submission_destination]": {
+        "order[site_agent_name]": {
           required: true
         },
-        "order[general_safety_responsible_person_name]": {
-          required: true
-        },
-        "order[vice_president_name]": {
-          required: true
-        },
-        "order[vice_president_company_name]": {
-          required: true
-        },
-        "order[secretary_name]": {
-          required: true
-        },
-        "order[health_and_safety_manager_name]": {
-          required: true
-        },
-        "order[general_safety_agent_name]": {
+        "order[site_agent_apply]": {
           required: true
         },
         "order[supervisor_name]": {
           required: true
         },
         "order[supervisor_apply]": {
-          required: true
+          required: true,
+          maxlength: 40
         },
-        "order[site_agent_name]": {
-          required: true
+        "order[professional_engineer_details_1st]": {
+          maxlength: 40
         },
-        "order[site_agent_apply]": {
-          required: true
+        "order[professional_engineer_details_2nd]": {
+          maxlength: 40
         },
         "order[supervising_engineer_name]": {
           required: true
@@ -375,47 +391,73 @@
         "order[supervising_engineer_check]": {
           required: true
         },
-        "order[safety_officer_name]": {
+        "order[submission_destination]": {
           required: true
         },
-        "order[safety_officer_position_name]": {
-          required: true
+        'order[construction_license][]': {
+          maxlength: 2
         },
-        "order[confirm_name]": {
-          required: true
-        },
-        "order[accept_confirm_date]": {
-          required: true
-        },
-        "order[subcontractor_name]": {
-          required: true
-        }
+        // "order[general_safety_responsible_person_name]": {
+        //   required: true
+        // },
+        // "order[vice_president_name]": {
+        //   required: true
+        // },
+        // "order[vice_president_company_name]": {
+        //   required: true
+        // },
+        // "order[secretary_name]": {
+        //   required: true
+        // },
+        // "order[health_and_safety_manager_name]": {
+        //   required: true
+        // },
+        // "order[general_safety_agent_name]": {
+        //   required: true
+        // },
+        // "order[safety_officer_name]": {
+        //   required: true
+        // },
+        // "order[safety_officer_position_name]": {
+        //   required: true
+        // },
+        // "order[confirm_name]": {
+        //   required: true
+        // },
+        // "order[accept_confirm_date]": {
+        //   required: true
+        // },
+        // "order[subcontractor_name]": {
+        //   required: true
+        // }
       },
       messages: {
         "order[site_career_up_id]": {
           minlength: '数字のみ{0}桁で入力して下さい。'
         },
         "order[site_name]": {
-          required: "現場名を入力してください。"
+          required: "現場名を入力してください。",
+          maxlength: "現場名は100字以内で入力してください。"
         },
         "order[site_address]": {
-          required: "施工場所の住所を入力してください。"
+          maxlength: "施工場所の住所は50字以内で入力してください。"
         },
         "order[order_name]": {
-          required: "発注者名を入力してください。"
+          required: "発注者の氏名を入力してください。"
         },
         "order[order_post_code]": {
           required: "半角数字7桁を入力してください。【例: 1000011】",
           postcode: "半角数字7桁を入力してください。【例: 1000022】"
         },
         "order[order_address]": {
-          required: "発注者住所を入力してください。"
+          required: "発注者の住所を入力してください。"
         },
         "order[order_supervisor_name]": {
-          required: "監督員名を入力してください。"
+          required: "監督員の氏名を入力してください。"
         },
         "order[order_supervisor_apply]": {
-          required: "権限及び意見の申出方法を入力してください。"
+          required: "監督員の権限及び意見の申出方法を入力してください。",
+          maxlength: "監督員の権限及び意見の申出方法は40字以内で入力してください。"
         },
         "order[construction_name]": {
           required: "工事名を入力してください。"
@@ -429,60 +471,77 @@
         "order[contract_date]": {
           required: "契約日を入力してください。"
         },
-        "order[submission_destination]": {
-          required: "提出先及び担当者を入力してください。"
-        },
-        "order[general_safety_responsible_person_name]": {
-          required: "統括安全衛生責任者名を入力してください。"
-        },
-        "order[vice_president_name]": {
-          required: "副会長名を入力してください。"
-        },
-        "order[vice_president_company_name]": {
-          required: "会社名を入力してください。"
-        },
-        "order[secretary_name]": {
-          required: "書記名を入力してください。"
-        },
-        "order[health_and_safety_manager_name]": {
-          required: "元方安全衛生管理者名を入力してください。"
-        },
-        "order[general_safety_agent_name]": {
-          required: "統括安全衛生責任者代行者名を入力してください。"
-        },
-        "order[supervisor_name]": {
-          required: "監督員名を入力してください。"
-        },
-        "order[supervisor_apply]": {
-          required: "権限及び意見の申出方法を入力してください。"
-        },
         "order[site_agent_name]": {
-          required: "現場代理人名を入力してください。"
+          required: "現場代理人の氏名を入力してください。"
         },
         "order[site_agent_apply]": {
-          required: "権限及び意見の申出方法を入力してください。"
+          required: "現場代理人の権限及び意見の申出方法を入力してください。"
+        },
+        "order[supervisor_name]": {
+          required: "監督員の氏名を入力してください。"
+        },
+        "order[supervisor_apply]": {
+          required: "監督員の権限及び意見の申出方法を入力してください。",
+          maxlength: "監督員の権限及び意見の申出方法は40字以内で入力してください。"
+        },
+        "order[professional_engineer_details_1st]": {
+          maxlength: "担当工事内容は40字以内で入力してください。"
+        },
+        "order[professional_engineer_details_2nd]": {
+          maxlength: "担当工事内容は40字以内で入力してください。"
         },
         "order[supervising_engineer_name]": {
-          required: "監督技術者･主任技術者名を入力してください。"
+          required: "監督技術者･主任技術者の氏名を入力してください。"
         },
         "order[supervising_engineer_check]": {
           required: "専任又は非専任を選択してください。"
         },
-        "order[safety_officer_name]": {
-          required: "安全衛生担当役員名を入力してください。"
+        "order[submission_destination]": {
+          required: "提出先及び担当者を入力してください。"
         },
-        "order[safety_officer_position_name]": {
-          required: "役職名を入力してください。"
+        'order[construction_license][]': {
+          maxlength: "チェックボックスは最大2つまでしか選択できません。"
         },
-        "order[confirm_name]": {
-          required: "確認欄を入力してください。"
-        },
-        "order[accept_confirm_date]": {
-          required: "受付確認日を入力してください。"
-        },
-        "order[subcontractor_name]": {
-          required: "下請会社名を入力してください。"
-        },
+        // "order[general_safety_responsible_person_name]": {
+        //   required: "統括安全衛生責任者名を入力してください。"
+        // },
+        // "order[vice_president_name]": {
+        //   required: "副会長名を入力してください。"
+        // },
+        // "order[secretary_name]": {
+        //   required: "書記名を入力してください。"
+        // },
+        // "order[health_and_safety_manager_name]": {
+        //   required: "元方安全衛生管理者名を入力してください。"
+        // },
+        // "order[general_safety_agent_name]": {
+        //   required: "統括安全衛生責任者代行者名を入力してください。"
+        // },
+        // "order[vice_president_company_name]": {
+        //   required: "会社名を入力してください。"
+        // },
+        // "order[safety_officer_name]": {
+        //   required: "安全衛生担当役員名を入力してください。"
+        // },
+        // "order[safety_officer_position_name]": {
+        //   required: "役職名を入力してください。"
+        // },
+        // "order[confirm_name]": {
+        //   required: "確認欄を入力してください。"
+        // },
+        // "order[accept_confirm_date]": {
+        //   required: "受付確認日を入力してください。"
+        // },
+        // "order[subcontractor_name]": {
+        //   required: "下請会社名を入力してください。"
+        // },
+      },
+      errorPlacement: function(error, element) {
+        if (element.attr("name") == "order[construction_license][]") {
+          error.appendTo(".error-message");
+        } else {
+          error.insertAfter(element);
+        }
       },
       errorClass: "input_form_error"
     });

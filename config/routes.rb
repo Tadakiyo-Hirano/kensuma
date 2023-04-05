@@ -44,6 +44,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :solvents, param: :uuid
     resource :business, except: %i[index destroy] do
       patch 'update_images'
+      get 'occupation_select'
     end
     resources :workers, param: :uuid
     resources :workers, except: %i[index create new show edit update destroy] do
@@ -90,11 +91,12 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         collection do
           get 'edit_workers'
           patch 'update_workers'
+          delete 'destroy_image'
         end
       end
     end
     # get 'orders/:order_site_uu_id/field_solvents/:uuid/set_solvent_name_one', to: 'users/orders/field_solvents#edit_set_solvent_name_one', as: :set_solvent_name_one_users_order_field_solvents
-    resources :request_orders, only: %i[index show edit update], param: :uuid do
+    resources :request_orders, only: %i[show edit update], param: :uuid do
       resources :sub_request_orders, except: %i[edit destroy show], param: :uuid do
         resources :documents, only: %i[index show edit update], param: :uuid, controller: 'sub_request_orders/documents'
       end
@@ -143,6 +145,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         collection do
           get 'edit_workers'
           patch 'update_workers'
+          delete 'destroy_image'
         end
       end
     end
@@ -151,6 +154,15 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     post 'request_orders/:uuid/sub_request_orders/:sub_request_uuid/approve', to: 'request_orders#approve', as: :request_order_approve
     get 'request_orders/:uuid/edit_approval_status', to: 'request_orders#edit_approval_status', as: :request_order_edit_approval_status
     post 'request_orders/:uuid/update_approval_status', to: 'request_orders#update_approval_status', as: :request_order_update_approval_status
+
+    get '/professional_engineer_1st_skill_training_options', to: 'orders#professional_engineer_1st_skill_training_options'
+    get '/professional_engineer_2nd_skill_training_options', to: 'orders#professional_engineer_2nd_skill_training_options'
+    get '/supervising_engineer_skill_training_options', to: 'orders#supervising_engineer_skill_training_options'
+    get '/supervising_engineer_assistant_skill_training_options', to: 'orders#supervising_engineer_assistant_skill_training_options'
+
+    get '/professional_engineer_skill_training_options', to: 'request_orders#professional_engineer_skill_training_options'
+    get '/lead_engineer_skill_training_options', to: 'request_orders#lead_engineer_skill_training_options'
+    get '/registered_core_engineer_license_options', to: 'request_orders#registered_core_engineer_license_options'
   end
   # =================================================================
 
