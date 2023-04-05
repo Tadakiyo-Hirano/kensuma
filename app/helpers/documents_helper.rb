@@ -98,6 +98,22 @@ module DocumentsHelper
     status == '非専任' ? tag.span(status, class: :circle) : '非専任'
   end
 
+  # 外国人従事の状況
+  ENGAGED_TYPE = {
+    '有'             => '有',
+    '無'             => '無'
+  }.freeze
+  
+  def engaged_yes(engaged_type)
+    status = ENGAGED_TYPE[engaged_type]
+    status == '有' ? tag.span(status, class: :circle) : '有'
+  end
+  
+  def engaged_no(engaged_type)
+    status = ENGAGED_TYPE[engaged_type]
+    status == '無' ? tag.span(status, class: :circle) : '無'
+  end
+  
   # 会社の保険加入状況
   INSURANCE_TYPE = {
     'join'       => '加入',

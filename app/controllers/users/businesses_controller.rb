@@ -102,7 +102,7 @@ module Users
         :construction_license_number_double_digit, :construction_license_number_six_digits,
         :construction_license_number, :construction_license_updated_at,
         :specific_skilled_foreigners_exist, :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist,
-        :employment_manager_name,
+        :employment_manager_name,:foreigners_employment_manager,
         occupation_ids: [], industry_ids: []
       )
     end

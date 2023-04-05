@@ -32,6 +32,7 @@ module Users
           end
         end
         format.pdf do
+          @business = Business.find(@document.business_id)
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
                 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th', 'doc_15th', 'doc_16th',
@@ -54,6 +55,7 @@ module Users
       @error_msg_for_doc_19th = nil
       @error_msg_for_doc_20th = nil
       @error_msg_for_doc_21st = nil
+      @business = Business.find(@document.business_id)
     end
 
     def update

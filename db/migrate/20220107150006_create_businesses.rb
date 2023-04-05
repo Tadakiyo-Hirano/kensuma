@@ -18,9 +18,9 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.json :stamp_images
       t.json :occupation_ids
       t.json :industry_ids
-      t.integer :specific_skilled_foreigners_exist
-      t.integer :foreign_construction_workers_exist
-      t.integer :foreign_technical_intern_trainees_exist
+      t.integer :specific_skilled_foreigners_exist, default: 1, null: false
+      t.integer :foreign_construction_workers_exist, default: 1, null: false
+      t.integer :foreign_technical_intern_trainees_exist, default: 1, null: false
       t.string :foreigners_employment_manager                 #雇用管理責任者(氏名)
       t.string :employment_manager_name
       t.string :employment_manager_post

@@ -257,7 +257,7 @@
               </td>
               <td colspan="2" width="8%">資格内容</td>
               <td>
-                <%= '※4-038未実装※' %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
+                <%= document_site_info.supervising_engineer_qualification %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
               </td>
             </tr>
             <tr>
@@ -267,7 +267,7 @@
               </td>
               <td colspan="2" width="8%">資格内容</td>
               <td>
-                <%= '※4-040未実装※' %> <!-- 4-040 監督技術者補佐の必要資格 -->
+                <%= document_site_info.supervising_engineer_assistant_qualification %> <!-- 4-040 監督技術者補佐の必要資格 -->
               </td>
             </tr>
             <tr>
@@ -284,12 +284,12 @@
               <td rowspan="2" width="2%"></td>
               <td width="8%">資格内容</td>
               <td colspan="2">
-                <%= '※4-042未実装※' %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
+                <%= document_site_info.professional_engineer_qualification %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
               </td>
               <td rowspan="2" width="2%"></td>
               <td>資格内容</td>
               <td>
-                <%= '※4-045未実装※' %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
+                <%= document_site_info.professional_engineer_qualification %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
               </td>
             </tr>
             <tr>
@@ -310,11 +310,20 @@
           <tbody>
             <tr>
               <td width="20%">一号特定技能<br />外国人の従事<br />の状況(有無)</td>
-              <td>有　　無</td> <!-- 4-047 一特定技能外国人の従事の状況(有無) -->
+              <td>
+                <%= engaged_yes(document_site_info.content&.[]('genecon_specific_skilled_foreigners_exist'))  %>
+                <%= engaged_no(document_site_info.content&.[]('genecon_specific_skilled_foreigners_exist'))  %>
+              </td> <!-- 4-047 一特定技能外国人の従事の状況(有無) -->
               <td width="20%">外国人建設就<br />労者の従事の<br />状況(有無)</td>
-              <td>有　　無</td> <!-- 4-048 外国人建設就労者の従事の状況(有無) -->
+              <td>
+                <%= engaged_yes(document_site_info.content&.[]('genecon_foreign_construction_workers_exist'))  %>
+                <%= engaged_no(document_site_info.content&.[]('genecon_foreign_construction_workers_exist'))  %>
+              </td> <!-- 4-048 外国人建設就労者の従事の状況(有無) -->
               <td width="20%">外国人技能実<br />習生の従事の<br />状況(有無)</td>
-              <td>有　　無</td> <!-- 4-049 外国人技能実習生の従事の状況(有無) -->
+              <td>
+                <%= engaged_yes(document_site_info.content&.[]('genecon_foreign_technical_intern_trainees_exist'))  %>
+                <%= engaged_no(document_site_info.content&.[]('genecon_foreign_technical_intern_trainees_exist'))  %>
+              </td> <!-- 4-049 外国人技能実習生の従事の状況(有無) -->
             </tr>
           </tbody>
         </table>
@@ -594,14 +603,14 @@
               </td>
               <td colspan="2">雇用管理責任者名</td>
               <td>
-                <%= '※4-129未実装※' %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
+                <%= @business.employment_manager_name %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
               </td>
             </tr>
             <tr>
               <td width="1%"></td>
               <td width="14%">資 格 内 容</td>
               <td colspan="2">
-                <%= '※4-126未実装※' %> <!-- 4-126 主任技術者の必要資格 -->
+                <%= SkillTraining.find(document_subcon_info.content['lead_engineer_skill_training_id'])&.name %> <!-- 4-126 主任技術者の必要資格 -->
               </td>
               <td colspan="2">※専 門 技 術 者 名</td>
               <td>
@@ -620,12 +629,12 @@
               <td rowspan="2"></td>
               <td>資 格 内 容</td>
               <td>
-                <%= '※4-131未実装※' %> <!-- 4-131 専門技術者の必要資格 -->
+                <%= SkillTraining.find(document_subcon_info.content['professional_engineer_skill_training_id'])&.name %><!-- 4-131 専門技術者の必要資格 --> 
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <%= '※4-134未実装※' %> <!-- 4-134 下請会社の登録基幹技能者の必要資格 -->
+                <%= SkillTraining.find(document_subcon_info.content['registered_core_engineer_skill_training_id'])&.name %><!-- 4-134 下請会社の登録基幹技能者の必要資格 -->
               </td>
               <td>担当工事内容</td>
               <td>
@@ -640,11 +649,20 @@
         <tbody>
           <tr>
             <td width="20%">一号特定技能<br />外国人の従事<br />の状況(有無)</td>
-            <td>有　　無</td><!-- 「一号特定技能外国人の従事の状況(有無)」4-135 -->
+            <td>
+              <%= engaged_yes(document_subcon_info.content&.[]('subcon_specific_skilled_foreigners_exist'))  %>
+              <%= engaged_no(document_subcon_info.content&.[]('subcon_specific_skilled_foreigners_exist'))  %>
+            </td><!-- 「一号特定技能外国人の従事の状況(有無)」4-135 -->
             <td width="20%">外国人建設就<br />労者の従事の<br />状況(有無)</td>
-            <td>有　　無</td><!-- 「外国人建設就労者の従事の状況(有無)」4-136 -->
+            <td>
+              <%= engaged_yes(document_subcon_info.content&.[]('subcon_foreign_construction_workers_exist'))  %>
+              <%= engaged_no(document_subcon_info.content&.[]('subcon_foreign_construction_workers_exist'))  %>
+            </td><!-- 「外国人建設就労者の従事の状況(有無)」4-136 -->
             <td width="20%">外国人技能実<br />習生の従事の<br />状況(有無)</td>
-            <td>有　　無</td><!-- 「外国人技能実習生の従事の状況(有無)」4-137 -->
+            <td>
+              <%= engaged_yes(document_subcon_info.content&.[]('subcon_foreign_technical_intern_trainees_exist'))  %>
+              <%= engaged_no(document_subcon_info.content&.[]('subcon_foreign_technical_intern_trainees_exist'))  %>
+            </td><!-- 「外国人技能実習生の従事の状況(有無)」4-137 -->
           </tr>
         </tbody>
       </table>
