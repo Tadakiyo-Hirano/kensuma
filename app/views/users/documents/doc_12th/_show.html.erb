@@ -32,8 +32,8 @@
                   元 請<br />
                   確認欄
                 </td>
-                <td class="doc_12_s5" dir="ltr" colspan="8" rowspan="2">
-                  <%= document_info_for_prime_contractor_name %> <!-- 12-001 元請会社の確認欄 -->
+                <td class="doc_12_s32" dir="ltr" colspan="8" rowspan="2">
+                  <%= @document.content&.[]('prime_contractor_confirmation')%> <!-- 12-001 元請会社の確認欄 -->
                 </td>
               </tr>
               <tr style="height: 25px">

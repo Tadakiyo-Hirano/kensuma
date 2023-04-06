@@ -8,7 +8,7 @@ module Users
     before_action :set_workers, only: %i[show edit update] # 2次下請以下の作業員を定義する
     before_action :edit_restriction_after_approved, only: %i[edit update]
     before_action :get_subcon_info_17th, only: %i[show edit] #doc_17thの配置を決定させるためのロジック
-    before_action :get_subcon_info_18th, only: :show #doc_18thの配置を決定させるためのロジック
+    before_action :get_subcon_info_18th, only: %i[show edit] #doc_18thの配置を決定させるためのロジック
 
     def index; end
 
@@ -738,6 +738,7 @@ module Users
         field_worker_keys = field_worker_ids.map{|field_worker_id|"field_worker_#{field_worker_id}"}
         params.require(:document).permit(content:
           [
+            :prime_contractor_confirmation,
             date_submitted: field_worker_keys, # 13-001 提出日(西暦)
             date_created:   field_worker_keys  # 13-004 作成日(西暦)
           ]
@@ -747,6 +748,7 @@ module Users
         field_car_keys = field_car_ids.map{|field_car_id|"field_car_#{field_car_id}"}
         params.require(:document).permit(content:
           [
+            :prime_contractor_confirmation,
             date_submitted: field_car_keys, # 12-002 提出日(西暦)
           ]
         )
@@ -1024,6 +1026,7 @@ module Users
       when 'doc_20th'
         params.require(:document).permit(content:
           %i[
+            prime_contractor_confirmation
             date_created
             term
             planning_period_beginning
@@ -1366,10 +1369,13 @@ module Users
       when 'doc_23rd'
         params.require(:document).permit(content:
           %i[
+            prime_contractor_confirmation_general_safety_responsible_person
+            prime_contractor_confirmation_health_and_safety_manager
+            prime_contractor_confirmation_site_agent
             meeting_date
-            date_entered_1st
-            date_entered_2nd
-            date_entered_3rd
+            date_entered_general_safety_responsible_person
+            date_entered_health_and_safety_manager
+            date_entered_site_agent
             work_month_1st
             work_month_2nd
             work_month_3rd
