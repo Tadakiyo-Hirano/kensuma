@@ -24,8 +24,8 @@ class WorkerInsurance < ApplicationRecord
   enum severance_pay_mutual_aid_type: {
     kentaikyo: 0,
     tyutaikyo: 1,
-    other:     2,
-    none:      3
+    none:      2,
+    other:     3
   }, _prefix: true
 
   enum has_labor_insurance: { join: 0, not_join: 1 }, _prefix: true       # 労働保険特別加入の有無
@@ -34,8 +34,9 @@ class WorkerInsurance < ApplicationRecord
   validates :health_insurance_name, presence: true, if: :insurance_name_valid?
   validates :pension_insurance_type, presence: true
   validates :employment_insurance_type, presence: true
-  validates :employment_insurance_number, length: { is: 4 }, if: :employment_insurance_number_valid?
+  validates :employment_insurance_number, length: { is: 11 }, if: :employment_insurance_number_valid?
   validates :severance_pay_mutual_aid_type, presence: true
+  validates :severance_pay_mutual_aid_name, presence: true, if: :severance_pay_mutual_aid_name_valid?
 
   private
 
@@ -47,5 +48,9 @@ class WorkerInsurance < ApplicationRecord
   # 雇用保険が被保険者であればtrue
   def employment_insurance_number_valid?
     employment_insurance_type == 'insured'
+  end
+
+  def severance_pay_mutual_aid_name_valid?
+    severance_pay_mutual_aid_type == 'other'
   end
 end

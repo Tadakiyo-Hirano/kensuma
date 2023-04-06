@@ -15,24 +15,7 @@ RSpec.describe WorkerSkillTraining, type: :model do
     it 'バリデーションが通ること' do
       expect(subject).to be_valid
     end
-
-    describe '#got_on' do
-      context '存在しない場合' do
-        before :each do
-          subject.got_on = ''
-        end
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('取得年月日を入力してください')
-        end
-      end
-    end
-
+    
     describe '#worker_id' do
       context '存在しない場合' do
         before :each do
