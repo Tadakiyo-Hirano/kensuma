@@ -371,12 +371,13 @@ ja:
         health_insurance_image: 健康保険証の写し
         pension_insurance_type: 年金保険
         employment_insurance_type: 雇用保険
-        employment_insurance_number: 被保険者番号の下4桁
+        employment_insurance_number: 被保険者番号
         has_labor_insurance: 労働保険特別加入
         severance_pay_mutual_aid_type: 建設業退職金共済手帳
-        severance_pay_mutual_aid_name: 建設業退職金共済制度名
+        severance_pay_mutual_aid_name: その他（建設業退職金共済手帳）
       worker_safety_health_education:
        safety_health_education_id: 安全衛生教育
+       worker_id: 作業員
        images: 証明画像
       news:
         title: タイトル
