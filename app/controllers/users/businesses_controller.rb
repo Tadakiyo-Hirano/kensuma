@@ -65,7 +65,7 @@ module Users
 
     # ajax
     def occupation_select
-      @occupations = Occupation.where(industry_id: params[:industry_ids]).pluck(:short_name, :id)
+      @occupations = Occupation.where(industry_id: params[:industry_id]).pluck(:short_name, :id)
       render partial: 'occupation-select', locals: { occupations: @occupations }
     end
 
@@ -116,7 +116,7 @@ module Users
                                            construction_license_governor_permission_prefecture construction_license_permission_type_identification_general
                                            construction_license_number_double_digit construction_license_number_six_digits
                                            construction_license_number construction_license_updated_at _destroy],
-        occupation_ids: [], tem_industry_ids: []
+        tem_industry_ids: []
       )
     end
   end

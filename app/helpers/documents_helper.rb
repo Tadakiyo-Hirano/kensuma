@@ -127,7 +127,7 @@ module DocumentsHelper
 
   def child_check(child)
     if child.present?
-      Industry.find_by(id: Business.find_by(id: child&.business_id)&.industry_ids&.join("','"))&.name
+      Industry.joins(businesses: :business_industries).find_by(business_industries: {business_id: child&.business_id})&.name
     else
       "FALSE"
     end

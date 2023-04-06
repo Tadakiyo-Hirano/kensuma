@@ -58,7 +58,6 @@ ja:
         career_up_id: 事業者ID(キャリアアップシステム)
         career_up_card_copy: キャリアアップシステムカードの写し
         stamp_images: 社印
-        occupation_ids: 職種
         business_health_insurance_status: 健康保険
         business_health_insurance_association: 組合名
         business_health_insurance_office_number: 事業所整理記号及び事業所番号
@@ -69,7 +68,7 @@ ja:
         business_employment_insurance_number: 番号
         business_retirement_benefit_mutual_aid_status: 退職金共済制度
         construction_license_status: 建設許可証
-        industry_ids: 業種
+        tem_industry_ids: 業種
         specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
         foreign_construction_workers_exist: 外国人建設就労者従事状況
         foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況

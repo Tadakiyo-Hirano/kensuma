@@ -104,7 +104,7 @@
           <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:industry_ids) %></th>
+          <th><%= BusinessIndustry.human_attribute_name(:industry_id) %></th>
           <td><%= Industry.where(id: @business.tem_industry_ids).pluck(:name).join(', ') %></td>
           <td></td>
           <td></td>
@@ -113,7 +113,7 @@
           <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:occupation_ids) %></th>
+          <th><%= BusinessOccupation.human_attribute_name(:occupation_id) %></th>
           <td><%= @business.occupations.pluck(:name).join(', ') %></td>
           <td></td>
           <td></td>
