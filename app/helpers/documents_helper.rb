@@ -290,6 +290,15 @@ module DocumentsHelper
     none == 'none' ? tag.span('無', class: :severance_pay_mutual_aid) : '無'
   end
 
+  # 退職金共済制度
+  def construction_industry(business)
+    business&.content&.[]('subcon_retirement_benefit_mutual_aid_status') == 'construction_industry' ? '有' : '無' # 建設業退職金共済制度の有無
+  end
+
+  def smaller_companies(business)
+    business&.content&.[]('subcon_retirement_benefit_mutual_aid_status') == 'smaller_companies' ? '有' : '無' # 中小企業退職金共済制度
+  end
+
   # 作業員の血圧情報
   def blood_pressure(worker)
     min = worker&.content&.[]('worker_medical')&.[]('min_blood_pressure')
@@ -411,7 +420,7 @@ module DocumentsHelper
     if worker.present?
       id = worker&.content&.[]('id')
       birth_day_on = worker&.content&.[]('birth_day_on')
-      safety_health_education = worker&.content&.[]('safety_sanitary_education_ids').to_json
+      # safety_health_education = worker&.content&.[]('safety_sanitary_education_ids').to_json
       foreigner = worker&.content&.[]('status_of_residence')
 
       site_agent = "現" if id == document_info.content&.[]('subcon_site_agent_name_id') # (現)現場代理人
@@ -423,15 +432,20 @@ module DocumentsHelper
       lead_engineer = "主" if id == document_info.content&.[]('subcon_lead_engineer_name_id') # (主)主任技術者
       foreman = "職" if id == document_info.content&.[]('subcon_foreman_name_id') # (主)主任技術者
       safety_manager = "安" if id == document_info.content&.[]('subcon_safety_manager_name_id') # (安)安全衛生責任者
-      ability_improving_education = "歳" if safety_health_education.include?("19") # (歳)能力向上教育
-      danger_harmful_business = "再" if safety_health_education.include?("6") # (再)危険有害業務・再発防止教育
-      foreign_trainee = "習" if foreigner == "specific_activity" # (習)外国人技能実習生
-      foreign_worker = "就" if foreigner == "permanent_resident" # (就)外国人建設就労者
-      skill_worker = "1特" if foreigner == "specified_skill" # (1特)1号特定技能外国人
+      # ability_improving_education = "歳" if safety_health_education.include?("19") # (歳)能力向上教育
+      # danger_harmful_business = "再" if safety_health_education.include?("6") # (再)危険有害業務・再発防止教育
+      skill_practice = "習" if foreigner == "skill_practice" # (習)外国人技能実習生
+      construction_employment = "就" if foreigner == "construction_employment" # (就)外国人建設就労者
+      specified_skill = "1特" if foreigner == "specified_skill" # (1特)1号特定技能外国人
 
-      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, ability_improving_education, danger_harmful_business, foreign_trainee, foreign_worker, skill_worker
+      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, skill_practice, construction_employment, specified_skill
       worker_symbols.size > 1 ? worker_symbols.join(' ') : worker_symbols
     end
+  end
+
+  # 作業員の職種
+  def worker_occupation(worker)
+    worker&.occupation_id.nil? ? nil : Occupation.find(worker.occupation_id).short_name
   end
 
   # (12)工事・通勤用車両届
