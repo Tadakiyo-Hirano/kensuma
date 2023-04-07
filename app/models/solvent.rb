@@ -4,6 +4,7 @@ class Solvent < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   validates :name, presence: true
+  validates :maker, presence: true
   validates :classification, presence: true
   validates :ingredients, presence: true
 
