@@ -36,7 +36,7 @@ class Worker < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A^$|[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_POST_CODE_REGEX = /\A\d{7}\z/
   VALID_UNDER_THREE_DIGITS_REGEX = /\A\d{1,2}\z/
   PHONE_NUMBER_MS = 'はハイフン無しの10桁または11桁で入力してください'.freeze
