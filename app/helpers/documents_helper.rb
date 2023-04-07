@@ -186,7 +186,7 @@ module DocumentsHelper
       Occupation.all
     end
   end
-  
+
   # (8)作業員名簿
 
   # 元請の確認欄
@@ -721,7 +721,7 @@ module DocumentsHelper
   end
 
   #会社名の取得
-  def business_name(id)
+  def subcontractor_name(id)
     Business.find(id).name if id.present?
   end
 
@@ -734,6 +734,11 @@ module DocumentsHelper
       subcontractor_array << record.id
     end
     subcontractor_array.slice(number) if subcontractor_array[number].present?
+  end
+
+  #下請会社(協力会社)の職種名の取得
+  def subcontractor_occupation(id)
+    RequestOrder.find_by(business_id: id).occupation if id.present?
   end
 
   #入場作業員の人数の取得

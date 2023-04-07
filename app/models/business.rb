@@ -47,6 +47,16 @@ class Business < ApplicationRecord
   validates :business_employment_insurance_number, length: { is: 11, message: 'は数字11桁で入力してください' }, allow_blank: true # 雇用保険(番号)
   validates :business_retirement_benefit_mutual_aid_status, presence: true # 退職金共済制度(加入状況)
   validates :construction_license_status, presence: true
+  before_validation :convert_to_full_width_katakana # 会社名(カナ)に対して半角で入力しても全角に変換する
 
   mount_uploaders :stamp_images, StampImagesUploader
+
+  private
+
+  # 半角カタカナを全角カタカナに変換する
+  def convert_to_full_width_katakana
+    if name_kana.present?
+      self.name_kana = name_kana.gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
+    end
+  end
 end
