@@ -59,5 +59,4 @@ class Business < ApplicationRecord
       self.name_kana = name_kana.gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
     end
   end
-
 end
