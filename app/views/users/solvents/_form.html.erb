@@ -4,6 +4,10 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :name, class: "form-control", placeholder: Solvent.human_attribute_name(:name) %>
 <br>
+<%= f.label :maker %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :maker, class: "form-control", placeholder: Solvent.human_attribute_name(:maker) %>
+<br>
 <%= f.label :classification %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :classification, class: "form-control", placeholder: Solvent.human_attribute_name(:classification) %>
@@ -23,6 +27,9 @@
         "solvent[name]": {
           required: true
         },
+        "solvent[maker]": {
+          required: true
+        },
         "solvent[classification]": {
           required: true
         },
@@ -34,6 +41,9 @@
       messages:{
         "solvent[name]": {
           required: "商品名を入力してください。"
+        },
+        "solvent[maker]": {
+          required: "メーカー名を入力してください。"
         },
         "solvent[classification]": {
           required: "種別を入力してください。"
