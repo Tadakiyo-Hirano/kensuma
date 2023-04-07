@@ -279,7 +279,7 @@ ja:
         # vice_president_name: 氏名
         # vice_president_company_name: 会社名
         # secretary_name: 書記名
-        # health_and_safety_manager_name: 元方安全衛生管理者名
+        health_and_safety_manager_name: 元方安全衛生管理者名
         submission_destination: 提出先及び担当者名
         construction_license: 工事に必要な建設許可証
         # status: ステータス

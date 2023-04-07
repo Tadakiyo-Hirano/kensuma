@@ -447,15 +447,15 @@ RSpec.describe Order, type: :model do
     #   end
     # end
 
-    # describe '#health_and_safety_manager_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.health_and_safety_manager_name = nil }
+    describe '#health_and_safety_manager_name' do
+      context '存在しない場合' do
+        before(:each) { subject.health_and_safety_manager_name = nil }
 
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+    end
 
     # 認証
     # describe '#confirm_name' do

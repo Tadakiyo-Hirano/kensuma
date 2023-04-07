@@ -189,7 +189,7 @@ module Users
         :foreman_name,
         :registered_core_engineer_name,
         :registered_core_engineer_qualification,
-        :construction_license
+        construction_license: []
       ).merge(
         content: {
           subcon_name:                                    current_business.name,                                             # 会社名
