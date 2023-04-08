@@ -43,11 +43,11 @@ module Users::RequestOrders
       field_special_vehicles_params.each do |id, item|
         unless item[:driver_worker_id].blank?
           item[:driver_name] = Worker.find(item[:driver_worker_id]).name
-          item[:driver_license] = Worker.find(item[:driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
+          #item[:driver_license] = Worker.find(item[:driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
         end
         unless item[:sub_driver_worker_id].blank?
           item[:sub_driver_name] = Worker.find(item[:sub_driver_worker_id]).name
-          item[:sub_driver_license] = Worker.find(item[:sub_driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
+          #item[:sub_driver_license] = Worker.find(item[:sub_driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
         end
         field_special_vehicle = FieldSpecialVehicle.find(id)
         field_special_vehicle.update(item)
@@ -73,8 +73,8 @@ module Users::RequestOrders
     def field_special_vehicles_params
       params.require(:request_order).permit(
         field_special_vehicles: %i[
-          driver_worker_id driver_name driver_licence
-          sub_driver_worker_id sub_driver_name sub_driver_licence
+          driver_worker_id driver_name driver_license
+          sub_driver_worker_id sub_driver_name sub_driver_license
           vehicle_name vehicle_type carry_on_company_name owning_company_name owning_company_representative_name
           use_company_name use_company_representative_name carry_on_date carry_out_date
           use_place lease_type contact_prevention precautions

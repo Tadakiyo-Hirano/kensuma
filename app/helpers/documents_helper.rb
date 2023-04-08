@@ -1393,6 +1393,12 @@ module DocumentsHelper
   end
 
   # 下請発注情報詳細画面
+  
+  # 現場情報-特殊車両-資格内容
+  def target_license(vehicle_info)
+    worker = Worker.find_by(id: vehicle_info.driver_worker_id)
+    License.where(id: worker.worker_licenses.pluck(:license_id)).pluck(:name, :id)
+  end
 
   # 自身の書類一覧取得
   def current_user_documents(request_order)

@@ -101,10 +101,11 @@ end
 3.times do |n|
   SpecialVehicle.seed(:id,
     {
-      id:                        n+13,
-      business_id:               5,
-      name:                      "ポールトレーラ",
-      maker:                     "いすゞ",
+      id:                       n+13,
+      business_id:              5,
+      name:                     'ポールトレーラ',
+      maker:                    'いすゞ',
+      owning_company_name:      'テスト建設',
       standards_performance:    '幅2.5M',
       year_manufactured:        Date.today.ago(3.years),
       control_number:           SecureRandom.hex(5),

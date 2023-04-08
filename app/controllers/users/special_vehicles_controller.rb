@@ -13,6 +13,7 @@ module Users
         # テスト用デフォルト値 ==========================
         name:                    'コンテナ用セミトレーラ1',
         maker:                   '三菱',
+        owning_company_name:     'テスト建設',
         standards_performance:   '幅2.5M',
         year_manufactured:       Date.today.ago(3.years),
         control_number:          '52e22363d7',

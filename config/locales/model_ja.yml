@@ -198,7 +198,9 @@ ja:
         ventilation_control: 換気等対策
       field_special_vehicle:
         driver_name: 運転者名(正)
+        driver_license: 運転者(正)資格
         sub_driver_name: 運転者名(副)
+        sub_driver_license: 運転者(副)資格
         vehicle_name: 使用する車両
         vehicle_type: 区分
         carry_on_company_name: 持込会社名

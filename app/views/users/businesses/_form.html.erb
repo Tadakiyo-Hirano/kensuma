@@ -48,14 +48,30 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
 <%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last) %><br>
 <br>
-<%= f.label :industry_ids %>
+
+<%= f.label :tem_industry_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :tem_industry_ids, Industry.all, :id, :name, { selected: @business.tem_industry_ids }, { class: 'form-control select2', id: 'parent-select', multiple: true, style: "width: 100%" } %>
+<%= f.collection_select :tem_industry_ids, Industry.all, :id, :name, { prompt: true, selected: @business.tem_industry_ids }, { include_blank: true, class: 'form-control select2', id: 'parent-select', multiple: true, required: true, style: "width: 100%" } %>
+<% if params[:action] == "update" && params[:tem_industry_ids].nil? %>
+  <div class="error">
+    <%= "業種を選択してください" %>
+  </div>
+<% end %>
+<% logger.debug("error is #{@business.errors[:tem_industry_ids].any?}&#{params[:tem_industry_ids].nil?}") %>
+
+
 <br>
 <br>
-<%= f.label :occupation_ids %>
+
+
+<%= f.label :occupation_ids, class: f.object.errors[:occupation_ids].present? ? 'label-danger' : '' %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.collection_select :occupation_ids, occupation_default(@business), :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
+<%= f.collection_select :occupation_ids, occupation_default(@business), :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, required: true, style: "width: 100%" } %>
+<% if f.object.errors[:occupation_ids].present? %>
+  <div class="field_with_errors">
+    <span class="help-block"><%= f.object.errors[:occupation_ids].join(", ") %></span>
+  </div>
+<% end %>
 <br>
 <% if business.stamp_images.present? %>
   <% business.stamp_images.each_with_index do |image, index| %>
@@ -192,7 +208,7 @@
 </script>
 
 <script>
-  $(function(){
+  $(document).ready(function(){
     $.each(function(key){
       $.validator.addMethod(key, this);
     });
