@@ -268,7 +268,25 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "solvent_name_one", null: false
+    t.string "solvent_name_two"
+    t.string "solvent_name_three"
+    t.string "solvent_name_four"
+    t.string "solvent_name_five"
     t.string "carried_quantity_one", null: false
+    t.string "carried_quantity_two"
+    t.string "carried_quantity_three"
+    t.string "carried_quantity_four"
+    t.string "carried_quantity_five"
+    t.string "solvent_classification_one", null: false
+    t.string "solvent_classification_two"
+    t.string "solvent_classification_three"
+    t.string "solvent_classification_four"
+    t.string "solvent_classification_five"
+    t.string "solvent_ingredients_one", null: false
+    t.string "solvent_ingredients_two"
+    t.string "solvent_ingredients_three"
+    t.string "solvent_ingredients_four"
+    t.string "solvent_ingredients_five"
     t.string "using_location"
     t.string "storing_place"
     t.string "using_tool"
@@ -281,24 +299,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "solvent_classification_one", null: false
-    t.string "solvent_ingredients_one", null: false
-    t.string "solvent_name_two"
-    t.string "solvent_name_three"
-    t.string "solvent_name_four"
-    t.string "solvent_name_five"
-    t.string "solvent_classification_two"
-    t.string "solvent_classification_three"
-    t.string "solvent_classification_four"
-    t.string "solvent_classification_five"
-    t.string "solvent_ingredients_two"
-    t.string "solvent_ingredients_three"
-    t.string "solvent_ingredients_four"
-    t.string "solvent_ingredients_five"
-    t.string "carried_quantity_two"
-    t.string "carried_quantity_three"
-    t.string "carried_quantity_four"
-    t.string "carried_quantity_five"
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
