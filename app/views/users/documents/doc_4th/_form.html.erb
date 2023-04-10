@@ -59,21 +59,21 @@
             </tr>
             <tr>
               <td rowspan="2">
-                <%= @prime_contractor_business.industry_ids %> <!-- 4-006 元請会社の建設許可業種 -->
+                <%= @prime_contractor_business.tem_industry_ids %> <!-- 4-006 元請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="6%">工事業</td>
               <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-007 -->
               <td width="4%">特定</td><!-- 「特定or一般」⇩　4-008 -->
               <td rowspan="2">
-                <%= @prime_contractor_business.construction_license_number_double_digit %> <!-- 4-063元請会社の建設許可番号･前半 -->
+                <%# <%= @prime_contractor_business.construction_license_number_double_digit %> <!-- 4-063元請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2" width="3%">第</td>
               <td rowspan="2">
-                <%= @prime_contractor_business.construction_license_number_six_digits %> <!-- 4-009 元請会社の建設許可番号･後半 -->
+                <%# <%= @prime_contractor_business.construction_license_number_six_digits %> <!-- 4-009 元請会社の建設許可番号･後半 -->
               </td>
               <td rowspan="2" width="3%">号</td>
               <td rowspan="2">
-                <%= @prime_contractor_business.construction_license_updated_at %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
+                <%# <%= @prime_contractor_business.construction_license_updated_at %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
               </td>
             </tr>
             <tr>
@@ -259,33 +259,33 @@
             <tr>
               <td colspan="2">専 門<br /> 技術者名</td>
               <td colspan="2">
-                <%= document_site_info.professional_engineer_name %> <!-- 4-041 元請会社の専門技術者名 -->
+                <%= document_site_info.professional_engineer_name_1st %> <!-- 4-041 元請会社の専門技術者名 -->
               </td>
               <td colspan="2">専門<br />技術者名</td>
               <td>
-                <%= document_site_info.professional_engineer_name %> <!-- 4-044 元請会社の専門技術者名 -->
+                <%= document_site_info.professional_engineer_name_2nd %> <!-- 4-044 元請会社の専門技術者名 -->
               </td>
             </tr>
             <tr>
               <td rowspan="2" width="2%"></td>
               <td width="8%">資格内容</td>
               <td colspan="2">
-                <%= document_site_info.professional_engineer_qualification %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
+                <%= document_site_info.professional_engineer_qualification_1st %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
               </td>
               <td rowspan="2" width="2%"></td>
               <td>資格内容</td>
               <td>
-                <%= document_site_info.professional_engineer_qualification %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
+                <%= document_site_info.professional_engineer_qualification_2nd %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
               </td>
             </tr>
             <tr>
               <td>担   当<br />工事内容</td>
               <td colspan="2">
-                <%= document_site_info.professional_engineer_construction_details %> <!-- 4-043 元請会社の専門技術者･担当工事内容 -->
+                <%= document_site_info.professional_engineer_details_1st %> <!-- 4-043 元請会社の専門技術者･担当工事内容 -->
               </td>
               <td>担   当<br />工事内容</td>
               <td>
-                <%= document_site_info.professional_engineer_construction_details %> <!-- 4-046 元請会社の専門技術者･担当工事内容 -->
+                <%= document_site_info.professional_engineer_details_2nd %> <!-- 4-046 元請会社の専門技術者･担当工事内容 -->
               </td>
             </tr>
           </tbody>
@@ -507,21 +507,21 @@
             </tr>
             <tr>
               <td rowspan="2" width="20%">
-                <%= @business.industry_ids %> <!-- 4-112 下請会社の建設許可業種 -->
+                <%= document_subcon_info.construction_license %> <!-- 4-112 下請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="10%">工事業</td>
               <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-113 -->
               <td width="4%">特定</td><!-- 「特定or一般」⇩　4-114 -->
               <td rowspan="2">
-                <%= @business.construction_license_number_double_digit %> <!-- 4-145 下請会社の建設許可番号･前半 -->
+                <%# <%= @business.construction_license_number_double_digit %> <!-- 4-145 下請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2" width="3%">第</td>
               <td rowspan="2">
-                <%= @business.construction_license_number_six_digits %> <!-- 4-115 下請会社の建設許可番号 -->
+                <%# <%= @business.construction_license_number_six_digits %> <!-- 4-115 下請会社の建設許可番号 -->
               </td>
               <td rowspan="2" width="3%">号</td>
               <td rowspan="2">
-                <%= @business.construction_license_updated_at %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
+                <%# <%= @business.construction_license_updated_at %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
               </td>
             </tr>
             <tr>
@@ -596,7 +596,7 @@
               <td width="1%"></td>
               <td width="14%">資 格 内 容</td>
               <td colspan="2">
-                <%= SkillTraining.find(document_subcon_info.content['lead_engineer_skill_training_id'])&.name %> <!-- 4-126 主任技術者の必要資格 -->
+                <%= SkillTraining.find(document_subcon_info.lead_engineer_qualification)&.name %> <!-- 4-126 主任技術者の必要資格 -->
               </td>
               <td colspan="2">※専 門 技 術 者 名</td>
               <td>
@@ -615,12 +615,14 @@
               <td rowspan="2"></td>
               <td>資 格 内 容</td>
               <td>
-                <%= SkillTraining.find(document_subcon_info.content['professional_engineer_skill_training_id'])&.name %> <!-- 4-131 専門技術者の必要資格 -->
+                <%= document_subcon_info.professional_engineer_qualification %> <!-- 4-131 専門技術者の必要資格 -->
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <%= SkillTraining.find(document_subcon_info.content['registered_core_engineer_skill_training_id'])&.name %> <!-- 4-134 下請会社の登録基幹技能者の必要資格 -->
+                
+                
+                <%= document_subcon_info.registered_core_engineer_qualification %> <!-- 4-134 下請会社の登録基幹技能者の必要資格 -->
               </td>
               <td>担当工事内容</td>
               <td>

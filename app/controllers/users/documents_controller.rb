@@ -16,6 +16,10 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
+          when 'doc_4th'
+            request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
+            @prime_contractor_business = Business.find(request_order.business_id)
+            @business = Business.find(@document.business_id)
           when 'doc_8th', 'doc_9th', 'doc_23rd'
             if @document.request_order.field_workers.empty?
               flash[:danger] = '作業員関連の書類を閲覧するには入場作業員情報を登録してください'
