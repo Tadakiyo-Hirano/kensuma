@@ -155,6 +155,21 @@ module Users
           flash[:danger] = @error_msg_for_doc_15th.first
           render action: :edit
         end
+      when 'doc_18th'
+        @error_msg_for_doc_18th = @document.error_msg_for_doc_18th(document_params(@document))
+        if @error_msg_for_doc_18th.blank?
+          if @document.update(document_params(@document))
+            redirect_to users_request_order_document_url, success: '保存に成功しました'
+          else
+            flash[:danger] = '保存に失敗しました'
+            render action: :edit
+          end
+        else
+          @document = Document.new(document_params(@document))
+          @document.document_type = 'doc_18th'
+          flash[:danger] = '保存に失敗しました'
+          render action: :edit
+        end
       when 'doc_19th'
         @error_msg_for_doc_19th = @document.error_msg_for_doc_19th(document_params(@document))
         if @error_msg_for_doc_19th.blank?
@@ -402,7 +417,7 @@ module Users
 
     #委任期間(自)時間パラメータを再セット(doc_22nd)
     def delegation_time_from_join
-      if params[:document][:content][:delegation_time_from]['(4i)'].present? && params[:document][:content][:delegation_time_from]['(5i)'].present?
+      if params[:document][:content][:delegation_time_from]['(4i)'].present?
         DateTime.new(
           params[:document][:content][:delegation_time_from]['(1i)'].to_i,
           params[:document][:content][:delegation_time_from]['(2i)'].to_i,
@@ -415,7 +430,7 @@ module Users
 
     #委任期間(至)時間パラメータを再セット(doc_22nd)
     def delegation_time_to_join
-      if params[:document][:content][:delegation_time_to]['(4i)'].present? && params[:document][:content][:delegation_time_to]['(5i)'].present?
+      if params[:document][:content][:delegation_time_to]['(4i)'].present?
         DateTime.new(
           params[:document][:content][:delegation_time_to]['(1i)'].to_i,
           params[:document][:content][:delegation_time_to]['(2i)'].to_i,
@@ -640,7 +655,6 @@ module Users
         end #二次下請けの繰り返し処理(終了)
       end #二次下請けが存在するか確認(終了)
       @total_pages_17th = (edge_position-1).div(3)
-      #binding.pry
     end
 
     # doc_18thの配置を決定させるためのロジック
@@ -658,7 +672,6 @@ module Users
         primary_subcon_list_size = primary_subcon_list.size
         while instance_variable_set("@primary_subcon_id_18th_#{edge_position}", primary_subcon_list.slice(primary_element)).present? #一次下請けの繰り返し処理(開始)
           instance_variable_set("@primary_subcon_id_18th_#{edge_position}", primary_subcon_list.slice(primary_element))
-          #binding.pry
           if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_18th_#{edge_position}")).present? #二次下請けが存在するか確認(開始)
             secondary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@primary_subcon_id_18th_#{edge_position}")).order(id: "ASC") #二次下請けの配列作成(開始)
             secondary_subcon_list = []
@@ -669,7 +682,6 @@ module Users
             secondary_element = 0
             while instance_variable_set("@secondary_subcon_id_18th_#{edge_position}", secondary_subcon_list.slice(secondary_element)).present? #二次下請けの繰り返し処理(開始)
               instance_variable_set("@secondary_subcon_id_18th_#{edge_position}", secondary_subcon_list.slice(secondary_element))
-              #binding.pry
               if RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_18th_#{edge_position}")).present? #三次下請けが存在するか確認(開始)
                 tertiary_subcon_list_base = RequestOrder.where(order_id: current_order_id, parent_id: instance_variable_get("@secondary_subcon_id_18th_#{edge_position}")).order(id: "ASC") #三次下請けの配列作成(開始)
                 tertiary_subcon_list = []
@@ -880,6 +892,14 @@ module Users
         params.require(:document).permit(
           content: [
             :date_submitted
+          ]
+        )
+      when 'doc_18th'
+        params.require(:document).permit(content:
+          %i[
+            vice_president_name
+            vice_president_company_name
+            secretary_name
           ]
         )
       when 'doc_19th'
@@ -1152,7 +1172,6 @@ module Users
             safety_duty_person
             meeting_date
             actual_work_date
-            occupation_1st
             required_qualification_1st
             work_content_1st
             risk_prediction_1st
@@ -1162,7 +1181,6 @@ module Users
             corrective_action_1st
             corrective_action_confirmation_date_1st
             corrective_action_reviewer_1st
-            occupation_2nd
             required_qualification_2nd
             work_content_2nd
             risk_prediction_2nd
@@ -1172,7 +1190,6 @@ module Users
             corrective_action_2nd
             corrective_action_confirmation_date_2nd
             corrective_action_reviewer_2nd
-            occupation_3rd
             required_qualification_3rd
             work_content_3rd
             risk_prediction_3rd
@@ -1182,7 +1199,6 @@ module Users
             corrective_action_3rd
             corrective_action_confirmation_date_3rd
             corrective_action_reviewer_3rd
-            occupation_4th
             required_qualification_4th
             work_content_4th
             risk_prediction_4th
@@ -1192,7 +1208,6 @@ module Users
             corrective_action_4th
             corrective_action_confirmation_date_4th
             corrective_action_reviewer_4th
-            occupation_5th
             required_qualification_5th
             work_content_5th
             risk_prediction_5th
@@ -1202,7 +1217,6 @@ module Users
             corrective_action_5th
             corrective_action_confirmation_date_5th
             corrective_action_reviewer_5th
-            occupation_6th
             required_qualification_6th
             work_content_6th
             risk_prediction_6th
@@ -1212,7 +1226,6 @@ module Users
             corrective_action_6th
             corrective_action_confirmation_date_6th
             corrective_action_reviewer_6th
-            occupation_7th
             required_qualification_7th
             work_content_7th
             risk_prediction_7th
@@ -1222,7 +1235,6 @@ module Users
             corrective_action_7th
             corrective_action_confirmation_date_7th
             corrective_action_reviewer_7th
-            occupation_8th
             required_qualification_8th
             work_content_8th
             risk_prediction_8th
@@ -1232,7 +1244,6 @@ module Users
             corrective_action_8th
             corrective_action_confirmation_date_8th
             corrective_action_reviewer_8th
-            occupation_9th
             required_qualification_9th
             work_content_9th
             risk_prediction_9th
@@ -1242,7 +1253,6 @@ module Users
             corrective_action_9th
             corrective_action_confirmation_date_9th
             corrective_action_reviewer_9th
-            occupation_10th
             required_qualification_10th
             work_content_10th
             risk_prediction_10th
@@ -1252,7 +1262,6 @@ module Users
             corrective_action_10th
             corrective_action_confirmation_date_10th
             corrective_action_reviewer_10th
-            occupation_11th
             required_qualification_11th
             work_content_11th
             risk_prediction_11th
@@ -1262,7 +1271,6 @@ module Users
             corrective_action_11th
             corrective_action_confirmation_date_11th
             corrective_action_reviewer_11th
-            occupation_12th
             required_qualification_12th
             work_content_12th
             risk_prediction_12th
@@ -1272,7 +1280,6 @@ module Users
             corrective_action_12th
             corrective_action_confirmation_date_12th
             corrective_action_reviewer_12th
-            occupation_13th
             required_qualification_13th
             work_content_13th
             risk_prediction_13th
@@ -1282,7 +1289,6 @@ module Users
             corrective_action_13th
             corrective_action_confirmation_date_13th
             corrective_action_reviewer_13th
-            occupation_14th
             required_qualification_14th
             work_content_14th
             risk_prediction_14th
@@ -1292,7 +1298,6 @@ module Users
             corrective_action_14th
             corrective_action_confirmation_date_14th
             corrective_action_reviewer_14th
-            occupation_15th
             required_qualification_15th
             work_content_15th
             risk_prediction_15th
@@ -1302,7 +1307,6 @@ module Users
             corrective_action_15th
             corrective_action_confirmation_date_15th
             corrective_action_reviewer_15th
-            occupation_16th
             required_qualification_16th
             work_content_16th
             risk_prediction_16th
@@ -1312,7 +1316,6 @@ module Users
             corrective_action_16th
             corrective_action_confirmation_date_16th
             corrective_action_reviewer_16th
-            occupation_17th
             required_qualification_17th
             work_content_17th
             risk_prediction_17th

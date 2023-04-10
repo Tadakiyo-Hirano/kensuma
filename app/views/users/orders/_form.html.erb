@@ -205,6 +205,14 @@
     %><br>
   </div>
   <div class="list-group-item">
+    <%= f.label :health_and_safety_manager_name %> <!-- 元方安全衛生管理者名 -->
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= f.select :health_and_safety_manager_name, @business_workers_name.uniq,
+                  { include_blank: true },
+                  { class: "form-select form-select-sm", style: "width: 100%" }
+    %><br>
+  </div>
+  <div class="list-group-item">
     <%= f.label :submission_destination %> <!-- 提出先及び担当者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.select :submission_destination, @business_workers_name.uniq,
@@ -217,10 +225,11 @@
     <div class="error-message"></div>
     <div class="list-group-item">
       <div class="form-check">
-        <% @business_construction_licenses.each do |license| %>
+        <% @business_construction_licenses.each do |id, license| %>
+          <% industry = BusinessIndustry.find(id) %>
           <div class="form-check">
-            <%= f.check_box :construction_license, { multiple: true, checked: (@order.construction_license.present? && @order.construction_license.include?(license)) }, license, nil %>
-            <%= f.label license %>
+            <%= f.check_box :construction_license, { multiple: true, checked: (@order.construction_license.present? && @order.construction_license.include?(id.to_s)) }, id, nil %>
+            <%= f.label industry.construction_license_number %>
           </div>
         <% end %>
       </div>
@@ -228,14 +237,6 @@
   </div>
 </div>
 <br>
-
-<% if controller.action_name == 'edit' %>
-  <div class="list-group-item">
-    <%= f.label :status %> <!-- ステータス -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.select :status, Order.statuses_i18n.invert, {}, { class: "form-select" } %>
-  </div>
-<% end %>
 
 <script>
 //資格内容(専門技術者1)の取得
@@ -391,6 +392,9 @@
         "order[supervising_engineer_check]": {
           required: true
         },
+        "order[health_and_safety_manager_name]": {
+          required: true
+        },
         "order[submission_destination]": {
           required: true
         },
@@ -407,9 +411,6 @@
         //   required: true
         // },
         // "order[secretary_name]": {
-        //   required: true
-        // },
-        // "order[health_and_safety_manager_name]": {
         //   required: true
         // },
         // "order[general_safety_agent_name]": {
@@ -496,6 +497,9 @@
         "order[supervising_engineer_check]": {
           required: "専任又は非専任を選択してください。"
         },
+        "order[health_and_safety_manager_name]": {
+          required: "元方安全衛生管理者名を入力してください。"
+        },
         "order[submission_destination]": {
           required: "提出先及び担当者を入力してください。"
         },
@@ -510,9 +514,6 @@
         // },
         // "order[secretary_name]": {
         //   required: "書記名を入力してください。"
-        // },
-        // "order[health_and_safety_manager_name]": {
-        //   required: "元方安全衛生管理者名を入力してください。"
         // },
         // "order[general_safety_agent_name]": {
         //   required: "統括安全衛生責任者代行者名を入力してください。"
