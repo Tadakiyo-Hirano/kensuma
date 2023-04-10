@@ -4,6 +4,7 @@ module Users
 
     def index
       @workers = current_business.workers
+
     end
 
     def new
@@ -13,6 +14,7 @@ module Users
           name:                          'サンプル作業員',
           name_kana:                     'サンプルサギョウイン',
           country:                       'JP',
+          email:                         "test_#{Worker.last.id + 1}@email.com",
           my_address:                    '東京都港区1-1',
           my_phone_number:               '01234567898',
           family_name:                   'フェルナンデス',
@@ -26,26 +28,30 @@ module Users
           hiring_on:                     '2022-01-28',
           experience_term_before_hiring: 10,
           blank_term:                    3,
-          career_up_id:                  '1',
-          sex:                           :man
+          driver_licence:                '普通',
+          career_up_id:                  sprintf('%14d', rand(99999999999999)),
+          sex:                           :man,
+          post_code:                     1234567
           # ============================================
         )
         @worker.worker_licenses.build(
           # テスト用デフォルト値 ==========================
-          got_on:     '2022-01-01',
           license_id: 1
           # ============================================
         )
         @worker.worker_skill_trainings.build(
           # テスト用デフォルト値 ==========================
-          got_on:            '2022-02-01',
           skill_training_id: 2
           # ============================================
         )
         @worker.worker_special_educations.build(
           # テスト用デフォルト値 ==========================
-          got_on:               '2022-03-01',
           special_education_id: 3
+          # ============================================
+        )
+        @worker.worker_safety_health_educations.build(
+          # テスト用デフォルト値 ==========================
+          safety_health_education_id: 1
           # ============================================
         )
         worker_medical = @worker.build_worker_medical(
@@ -70,7 +76,7 @@ module Users
           health_insurance_name:         'サンプル健康保険',
           pension_insurance_type:        :welfare,
           employment_insurance_type:     :insured,
-          employment_insurance_number:   '0000',
+          employment_insurance_number:   '12345678901',
           severance_pay_mutual_aid_type: :kentaikyo,
           severance_pay_mutual_aid_name: 'テスト共済制度'
           # ============================================
@@ -108,30 +114,31 @@ module Users
     def create
       @worker = current_business.workers.build(worker_params_with_converted)
       if @worker.save
-        health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
-        employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
         flash[:success] = '作業員情報を作成しました'
         redirect_to users_worker_path(@worker)
       else
+        worker_add_hyhpen(@worker)
         render :new
       end
     end
 
-    def show; end
+    def show
+      worker_add_hyhpen(@worker)
+    end
 
     def edit
       @worker.worker_licenses.build if @worker.licenses.blank?
       @worker.worker_skill_trainings.build if @worker.skill_trainings.blank?
       @worker.worker_special_educations.build if @worker.special_educations.blank?
+      worker_add_hyhpen(@worker)
     end
 
     def update
       if @worker.update(worker_params_with_converted)
-        health_insurance_name_nil(@worker.worker_insurance.health_insurance_type, @worker.worker_insurance)
-        employment_insurance_number_nil(@worker.worker_insurance.employment_insurance_type, @worker.worker_insurance)
         flash[:success] = '更新しました'
         redirect_to users_worker_path(@worker)
       else
+        worker_add_hyhpen(@worker)
         render :edit
       end
     end
@@ -140,6 +147,15 @@ module Users
       @worker.destroy!
       flash[:danger] = "#{@worker.name}を削除しました"
       redirect_to users_workers_url
+    end
+    
+    def update_worker_json_images
+      worker = Worker.find(params[:worker_id])
+      remaining_images = worker.(params[:colum])
+      remaining_images.delete_at(params[:index].to_i).try(:remove!)
+      worker.update!(images: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
     end
 
     def update_workerlicense_images
@@ -186,6 +202,17 @@ module Users
       redirect_to edit_users_worker_url(worker)
     end
 
+    def update_worker_safety_health_education_images
+      worker = Worker.find(params[:worker_id])
+      worker_safety_health_education = WorkerSafetyHealthEducation.find(params[:safety_health_education_id])
+      remaining_images = worker_safety_health_education.images
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker_safety_health_education.update!(images: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
     private
 
     def set_worker
@@ -194,46 +221,84 @@ module Users
 
     def worker_params_with_converted
       converted_params = worker_params.dup
-      # 半角スペースがある場合、全角スペースに変換
+      # 全角スペースを半角スペースに変換
       %i[name name_kana].each do |key|
-        next unless converted_params[key]
-
+        next unless converted_params[key].present?
         converted_params[key] = converted_params[key].to_s.gsub(/[\s　]+/, ' ')
       end
-      # ハイフンを除外
-      %i[my_phone_number family_phone_number].each do |key|
-        next unless converted_params[key]
 
-        converted_params[key] = converted_params[key].to_s.gsub(/[-ー]/, '')
+      # ハイフンを除去する
+      %i[my_phone_number family_phone_number post_code career_up_id driver_licence_number].each do |key|
+        next unless converted_params[key].present?
+        converted_params[key] = reject_hyphen(converted_params[key])
+      end
+
+      # スペースを除去する
+      %i[career_up_id].each do |key|
+        next unless converted_params[key].present?
+        converted_params[key] = reject_space(converted_params[key])
+      end
+
+      # 全角数字を半角に変換
+      %i[
+        my_phone_number
+        family_phone_number
+        post_code
+        career_up_id
+        driver_licence_number
+        blank_term
+        experience_term_before_hiring
+      ].each do |key|
+        next unless converted_params[key].present?
+        converted_params[key] = full_width_to_half_width(converted_params[key])
+      end
+
+      # 保険名及び被保険者番号が必須でない場合パラメータを空文字にする
+      %i[health_insurance_name employment_insurance_number].each do |key|
+        next unless converted_params[key].present?
+        converted_params[key] = health_insurance_name_nil(converted_params[health_insurance_type])
+        converted_params[key] = health_insurance_name_nil(converted_params[employment_insurance_type])
       end
       converted_params
     end
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名をnilにする
-    def health_insurance_name_nil(health_insurance_type, worker)
-      unless %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type)
-        worker.update(health_insurance_name: nil)
+    def health_insurance_name_nil(key, health_insurance_type)
+      if 'health_insurance_name' == key
+        unless %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type) 
+          ''
+        end
       end
     end
 
-    # 雇用保険が被保険者であ無ければ被保険者番号の下4桁をnilにする
-    def employment_insurance_number_nil(employment_insurance_type, worker)
-      unless employment_insurance_type == :insured
-        worker.update(employment_insurance_number: nil)
+    # 雇用保険が被保険者であ無ければ被保険者番号をnilにする
+    def employment_insurance_number_nil(key, employment_insurance_type)
+      if 'employment_insurance_number' == key
+        unless employment_insurance_type == :insured
+          ''
+        end
       end
+    end
+
+    # 単数作業員情報のハイフン差し込み
+    def worker_add_hyhpen(worker)
+      @my_phone_number = phone_number_add_hyphen(worker.my_phone_number)
+      @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
+      @post_code = add_hyphen([3], worker.post_code)
+      @career_up_id = add_hyphen([4,4,4], worker.career_up_id)
     end
 
     def worker_params
       params.require(:worker).permit(:name, :name_kana,
-        :country, :my_address, :my_phone_number, :family_address,
-        :family_phone_number, :birth_day_on, :abo_blood_type,
-        :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring,
-        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, { safety_sanitary_education_ids: [] },
-        :status_of_residence,
-        worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
-        worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
-        worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],
-        worker_medical_attributes:            [
+        :country, :my_address, :my_phone_number, :family_address, :post_code, { career_up_images: [] },
+        :family_phone_number, :birth_day_on, :abo_blood_type, {employee_cards: []}, :driver_licence,
+        :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring, :driver_licence_number,
+        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, :seal, :status_of_residence,
+        worker_licenses_attributes:                 [:id, :license_id, { images: [] }, :_destroy],
+        worker_safety_health_educations_attributes: [:id, :safety_health_education_id, { images: [] }, :_destroy],
+        worker_skill_trainings_attributes:          [:id, :skill_training_id, { images: [] }, :_destroy],
+        worker_special_educations_attributes:       [:id, :special_education_id, { images: [] }, :_destroy],
+        worker_medical_attributes:                  [
           :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
           { worker_exams_attributes: [:id, :got_on, :worker_medical_id, :special_med_exam_id, { images: [] }, :_destroy] }
         ],

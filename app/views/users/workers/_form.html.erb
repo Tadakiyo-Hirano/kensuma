@@ -1,12 +1,14 @@
 <%= render 'shared/error_massages', object: f.object %>
 
+<%# 氏名 %>
 <%= f.label :name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :name, class: "form-control", placeholder: Worker.human_attribute_name(:name) %><br>
+<%= f.text_field :name, class: "form-control", placeholder: example_name %><br>
 
+<%# フリガナ %>
 <%= f.label :name_kana %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :name_kana, class: "form-control", placeholder: Worker.human_attribute_name(:name_kana) %><br>
+<%= f.text_field :name_kana, class: "form-control", placeholder: example_name_kana %><br>
 
 <%# 国籍 %>
 <%= f.label :country %>
@@ -40,33 +42,45 @@
 <% end %>
 <br>
 
+<%# 郵便番号 %>
+<%= f.label :post_code %>
+<%= f.text_field :post_code, value: @post_code, class: "form-control", placeholder: annotation_hyphen %><br>
+
+<%# 住所 %>
 <%= f.label :my_address %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :my_address, class: "form-control", placeholder: Worker.human_attribute_name(:my_address) %><br>
 
+<%# 電話番号 %>
 <%= f.label :my_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.telephone_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
+<%= f.telephone_field :my_phone_number, value: @my_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
+<%# メールアドレス %>
 <%= f.label :email %>
-<%= f.text_field :email, class: "form-control", placeholder: Worker.human_attribute_name(:email) %><br>
+<%= f.text_field :email, class: "form-control", placeholder: example_email %><br>
 
+<%# 緊急連絡先：氏名 %>
 <%= f.label :family_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :family_name, class: "form-control", placeholder: Worker.human_attribute_name(:family_name) %><br>
 
+<%# 緊急連絡先：続柄 %>
 <%= f.label :relationship %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :relationship, class: "form-control", placeholder: Worker.human_attribute_name(:relationship) %><br>
 
+<%# 緊急連絡先：住所 %>
 <%= f.label :family_address %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :family_address, class: "form-control", placeholder: Worker.human_attribute_name(:family_address) %><br>
 
+<%# 緊急連絡先：電話番号 %>
 <%= f.label :family_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.telephone_field :family_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:family_phone_number) %><br>
+<%= f.telephone_field :family_phone_number, value: @family_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
+<%# 生年月日 %>
 <%= f.label :birth_day_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :birth_day_on, class: "form-control", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
@@ -89,22 +103,25 @@
   </div>
 <% end %><br>
 
-<!-- 下記役職はひとまずテキスト入力にしています -->
+<%# 役職 %>
 <%= f.label :job_title %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
 <%= f.text_field :job_title, class: "form-control", placeholder: Worker.human_attribute_name(:job_title) %><br>
 
+<%# 雇入年月日 %>
 <%= f.label :hiring_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :hiring_on, class: "form-control", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
 
+<%# 雇入前経験年数 %>
 <%= f.label :experience_term_before_hiring %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.number_field :experience_term_before_hiring, class: "form-control", min: 0 %><br>
+<%= f.text_field :experience_term_before_hiring, class: "form-control" %><br>
 
+<%# ブランク年数 %>
 <%= f.label :blank_term %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.number_field :blank_term, class: "form-control", min: 0 %><br>
+<%= f.text_field :blank_term, class: "form-control" %><br>
 
 <%# 契約条件の確認 %>
 <%= f.label :employment_contract %>
@@ -115,8 +132,20 @@
   </div>
 <% end %><br>
 
+<%# 技能者ID(キャリアアップシステム) %>
 <%= f.label :career_up_id %>
-<%= f.text_field :career_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:career_up_id) %><br>
+<%= f.text_field :career_up_id, value: @career_up_id, class: "form-control", placeholder: annotation_hyphen %><br>
+
+<%# キャリアアップシステムカードの写し %>
+<%= f.label :career_up_images %>
+<%= f.file_field :career_up_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+<% if @worker.career_up_images.present? %>
+  <% @worker.career_up_images.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_worker_update_workerskilltraining_images_path(@worker, index: index, worker_skill_training_id: f.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+<% end %>
+<br>
 
 <div class="list-group">
   <!-- WorkerLicenseここから -->
@@ -164,6 +193,21 @@
   </div>
   <!-- WorkerSpecialEducationここまで -->
 
+  <%# worker_safety_health_educationここから %>
+  <div class="list-group-item">
+    <%= f.fields_for :worker_safety_health_educations do |w_safety_health_education| %>
+      <%= render "worker_safety_health_education_fields", f: w_safety_health_education %>
+    <% end %>
+    <div id="safety-health-education-insertion-point"></div>
+    <%= link_to_add_association "＋フォーム追加", f, :worker_licenses,
+      data: {
+        association_insertion_node: '#safety-health-education-insertion-point',
+        association_insertion_method: 'append'
+      }
+    %>
+  </div>
+  <%# worker_safety_health_educationここまで %>
+
   <!-- WorkerMedicalここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_medical do |worker_medical| %>
@@ -187,6 +231,7 @@
           </div>
         <% end %>
       </div>
+
       <div class="row mb-3">
         <%= worker_medical.label :med_exam_on %>
         <%= worker_medical.date_field :med_exam_on, class: "form-control" %>
@@ -236,6 +281,9 @@
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
       </div>
+
+      <%# 健康保険証の写し %>
+      <%= worker_insurance.label :health_insurance_image %>
 
       <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
@@ -292,16 +340,6 @@
     <% end %>
   </div><br>
   <!-- WorkerInsuranceここまで -->
-
-  <!-- 資格情報 -->
-  <div class="list-group">
-    <div class="list-group-item">
-      <div class="mt-3 mb-3">
-          <%= f.label "安全衛生教育(複数選択可)" %>
-          <%= f.collection_select :safety_sanitary_education_ids, SafetyHealthEducation.all, :id, :name, { include_hidden: false }, { multiple: true, class: "multiple-select", style: "width: 100%" } %><br>
-        </div>
-    </div>
-  </div>
 </div><br>
 
 <script>
