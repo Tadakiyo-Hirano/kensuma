@@ -34,7 +34,6 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.string :residence_card_back
       t.string :employment_condition
       t.integer :post_code
-      t.json :safety_sanitary_education_ids # 安全衛生教育
 
       t.timestamps
     end

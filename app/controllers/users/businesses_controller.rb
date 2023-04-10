@@ -4,7 +4,6 @@ module Users
     before_action :set_business, except: %i[new create]
     before_action :set_business_workers_name, only: %i[edit update]
     before_action :business_present_access, only: %i[new create]
-    before_action :convert_to_full_width, only: %i[create update]
     skip_before_action :business_nil_access, only: %i[new create]
 
     def new
@@ -86,13 +85,6 @@ module Users
 
     def set_business
       @business = current_user.business || current_user.admin_user.business
-    end
-
-    #半角カタカナを全角カタカナに変換する
-    def convert_to_full_width
-      if params[:business][:name_kana].present?
-        params[:business][:name_kana] = params[:business][:name_kana].gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
-      end
     end
 
     def business_params_with_converted

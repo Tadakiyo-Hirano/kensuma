@@ -36,6 +36,7 @@ class Order < ApplicationRecord
   validates :supervisor_apply,                           presence: true, length: { maximum: 40 } # 監督員(権限及び意見の申出方法)
   validates :supervising_engineer_name,                  presence: true                          # 監督技術者･主任技術者(氏名)
   validates :supervising_engineer_check,                 presence: true                          # 監督技術者・主任技術者(専任or非専任)
+  validates :health_and_safety_manager_name,             presence: true                          # 元方安全衛生管理者(氏名)
   validates :submission_destination,                     presence: true                          # 提出先及び担当者(部署･氏名)
 
   # validates :professional_engineer_details,                              length: { maximum: 40 } # 専門技術者(担当工事内容)

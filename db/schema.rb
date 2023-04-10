@@ -508,6 +508,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "supervising_engineer_assistant_qualification"
     t.string "general_safety_responsible_person_name"
     t.string "general_safety_agent_name"
+    t.string "health_and_safety_manager_name", null: false
     t.string "submission_destination", null: false
     t.json "construction_license"
     t.json "content"
@@ -557,7 +558,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
     t.string "registered_core_engineer_qualification"
-    t.string "construction_license"
+    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
@@ -787,7 +788,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "residence_card_back"
     t.string "employment_condition"
     t.integer "post_code"
-    t.json "safety_sanitary_education_ids"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
