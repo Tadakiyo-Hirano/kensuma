@@ -16,14 +16,14 @@ FactoryBot.define do
     birth_day_on { '2000-01-28' }
     abo_blood_type { 0 }
     rh_blood_type { 0 }
-    job_title { '主任' }
     hiring_on { '2022-01-28' }
     experience_term_before_hiring { 1 }
     employment_contract { 1 }
     blank_term { 1 }
-    career_up_id { '1' }
+    career_up_id { '12345678901234' }
     sex { 0 }
-    driver_licence_number { nil }
+    driver_licence { '普通' }
+    driver_licence_number { '123456789012' }
     after(:create) do |worker|
       create_list(:worker_license, 1, worker: worker, license: License.create!(name: 'テストライセンス', license_type: 0))
       create_list(:worker_skill_training, 1, worker: worker, skill_training: SkillTraining.create!(name: 'テスト技能講習', short_name: 'テス技'))
