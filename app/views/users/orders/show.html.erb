@@ -185,14 +185,18 @@
           <td><%= @order.general_safety_agent_name %></td>
         </tr>
         <tr>
+          <th><%= Order.human_attribute_name(:health_and_safety_manager_name) %></th> <!--元方安全衛生管理者名-->
+          <td><%= @order.health_and_safety_manager_name %></td>
+        </tr>
+        <tr>
           <th><%= Order.human_attribute_name(:submission_destination) %></th> <!-- 提出先及び担当者名 -->
           <td><%= @order.submission_destination %></td>
         </tr>
         <tr>
           <th><%= Order.human_attribute_name(:construction_license) %></th> <!-- 工場に必要な建設許可証 -->
           <td>
-            <% @order.construction_license.each_with_index do |license, index| %>
-              <%= license %><%= ',' unless index == @order.construction_license.size - 1 %>
+            <% @order.construction_license.each_with_index do |id, index| %>
+              <%= BusinessIndustry.find(id).construction_license_number %><%= ',' unless index == @order.construction_license.size - 1 %>
             <% end %>
           </td>
         </tr>

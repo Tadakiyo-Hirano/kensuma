@@ -14,7 +14,7 @@
 <%= f.country_select :country, { priority_countries: ["JP"] }, { class: "form-control", id: "country-select" } %>
 <br>
 
-<!-- 外国人建設就労者情報 -->
+<%# 外国人建設就労者情報 %>
 <div class="list-group" id="status-of-residence-field" style="display: none;">
   <h5>外国人就労者の方</h5>
   <div class="list-group-item">
@@ -27,8 +27,8 @@
         </div>
       <% end %>
     </div>
-  </div>
-</div><br>
+  </div><br>
+</div>
 
 <%# 性別 %>
 <%= f.label :sex %>
@@ -292,17 +292,7 @@
     <% end %>
   </div><br>
   <!-- WorkerInsuranceここまで -->
-
-  <!-- 資格情報 -->
-  <div class="list-group">
-    <div class="list-group-item">
-      <div class="mt-3 mb-3">
-          <%= f.label "安全衛生教育(複数選択可)" %>
-          <%= f.collection_select :safety_sanitary_education_ids, SafetyHealthEducation.all, :id, :name, { include_hidden: false }, { multiple: true, class: "multiple-select", style: "width: 100%" } %><br>
-        </div>
-    </div>
-  </div>
-</div><br>
+</div>
 
 <script>
   // 国籍が日本以外の選択時に外国人就労者情報のフォームを表示させる

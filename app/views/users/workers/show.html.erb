@@ -332,18 +332,6 @@
         <% end %>
         <!-- worker_insuranceここまで -->
 
-        <!-- 資格情報ここから -->
-        <tr bgcolor="#dee2e6">
-          <th colspan="4">資格情報</th>
-        </tr>
-        <tr>
-          <th><%= Worker.human_attribute_name(:safety_sanitary_education_ids) %></th>
-          <td><%= SafetyHealthEducation.where(id: @worker.safety_sanitary_education_ids).pluck(:name).join(', ') %></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <!-- 資格情報ここまで -->
-
         <% if @worker.status_of_residence.present? %>
           <!-- 外国人建設就労者情報ここから -->
           <tr bgcolor="#dee2e6">

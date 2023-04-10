@@ -25,11 +25,11 @@ FactoryBot.define do
     sequence(:supervising_engineer_assistant_name) { |n| "supervising_engineer_assistant_name#{n}" }
     sequence(:general_safety_responsible_person_name) { |n| "general_safety_responsible_person_name#{n}" }
     sequence(:general_safety_agent_name) { |n| "general_safety_agent_name#{n}" }
+    sequence(:health_and_safety_manager_name) { |n| "health_and_safety_manager_name#{n}" }
     sequence(:submission_destination) { |n| "submission_destination#{n}" }
     # sequence(:vice_president_name) { |n| "vice_president_name#{n}" }
     # sequence(:vice_president_company_name) { |n| "vice_president_company_name#{n}" }
     # sequence(:secretary_name) { |n| "secretary_name#{n}" }
-    # sequence(:health_and_safety_manager_name) { |n| "health_and_safety_manager_name#{n}" }
     # sequence(:professional_engineer_name) { |n| "professional_engineer_name#{n}" }
     # sequence(:professional_engineer_construction_details) { |n| "details#{n}" }
     # sequence(:safety_officer_name) { |n| "safety_officer_name#{n}" }
