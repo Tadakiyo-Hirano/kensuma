@@ -4,7 +4,6 @@ module Users
 
     def index
       @workers = current_business.workers
-
     end
 
     def new
