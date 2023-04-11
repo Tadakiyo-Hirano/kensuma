@@ -68,11 +68,11 @@ RSpec.describe Worker, type: :model do
             subject.name_kana = blank
           end
 
-          it "バリデーションに落ちること(\#{blank})" do
+          it "バリデーションに落ちること(#{blank})" do
             expect(subject).to be_invalid
           end
 
-          it "バリデーションのエラーが正しいこと(\#{blank})" do
+          it "バリデーションのエラーが正しいこと(#{blank})" do
             subject.valid?
             expect(subject.errors.full_messages).to include('フリガナを入力してください')
           end
@@ -108,7 +108,7 @@ RSpec.describe Worker, type: :model do
           before :each do
             subject.email = blank
           end
-          it "バリデーションに通ること(#{blank})" do
+          it "バリデーションに通ること" do
             expect(subject).to be_valid
           end
         end
@@ -392,7 +392,7 @@ RSpec.describe Worker, type: :model do
 
     describe '#experience_term_before_hiring' do
       context 'nil、''の場合' do
-        
+
         before :each do
           subject.experience_term_before_hiring = nil
         end
