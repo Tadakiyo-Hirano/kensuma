@@ -11,80 +11,26 @@ module Users::RequestOrders
       else
         @field_solvent = @request_order.field_solvents.new
       end
-    end
 
-    def set_solvent_name_one
-      if params[:solvent_name_one].present?
-        solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_one = solvent.find_by(name: params[:solvent_name_one]).classification
-        @solvent_ingredients_one = solvent.find_by(name: params[:solvent_name_one]).ingredients
-      else
-        @solvent_classification_one = ''
-        @solvent_ingredients_one = ''
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
-
-    def set_solvent_name_two
-      if params[:solvent_name_two].present?
-        solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_two = solvent.find_by(name: params[:solvent_name_two]).classification
-        @solvent_ingredients_two = solvent.find_by(name: params[:solvent_name_two]).ingredients
-      else
-        @solvent_classification_two = ''
-        @solvent_ingredients_two = ''
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
-
-    def set_solvent_name_three
-      if params[:solvent_name_three].present?
-        solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_three = solvent.find_by(name: params[:solvent_name_three]).classification
-        @solvent_ingredients_three = solvent.find_by(name: params[:solvent_name_three]).ingredients
-      else
-        @solvent_classification_three = ''
-        @solvent_ingredients_three = ''
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
-
-    def set_solvent_name_four
-      if params[:solvent_name_four].present?
-        solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_four = solvent.find_by(name: params[:solvent_name_four]).classification
-        @solvent_ingredients_four = solvent.find_by(name: params[:solvent_name_four]).ingredients
-      else
-        @solvent_classification_four = ''
-        @solvent_ingredients_four = ''
-      end
-      respond_to do |format|
-        format.js
-      end
-    end
-
-    def set_solvent_name_five
-      if params[:solvent_name_five].present?
-        solvent = Solvent.where(business_id: @request_order.business_id)
-        @solvent_classification_five = solvent.find_by(name: params[:solvent_name_five]).classification
-        @solvent_ingredients_five = solvent.find_by(name: params[:solvent_name_five]).ingredients
-      else
-        @solvent_classification_five = ''
-        @solvent_ingredients_five = ''
-      end
-      respond_to do |format|
-        format.js
-      end
+      @field_solvent.working_process = 1
+      @field_solvent.sds = 1
     end
 
     def create
       @field_solvent = @request_order.field_solvents.build(field_solvent_params)
+
+      # 溶剤1〜5の種別,含有成分を自動登録させる
+      @field_solvent.solvent_classification_one,
+      @field_solvent.solvent_ingredients_one = get_solvent_properties(params[:field_solvent][:solvent_name_one])
+      @field_solvent.solvent_classification_two,
+      @field_solvent.solvent_ingredients_two = get_solvent_properties(params[:field_solvent][:solvent_name_two])
+      @field_solvent.solvent_classification_three,
+      @field_solvent.solvent_ingredients_three = get_solvent_properties(params[:field_solvent][:solvent_name_three])
+      @field_solvent.solvent_classification_four,
+      @field_solvent.solvent_ingredients_four = get_solvent_properties(params[:field_solvent][:solvent_name_four])
+      @field_solvent.solvent_classification_five,
+      @field_solvent.solvent_ingredients_five = get_solvent_properties(params[:field_solvent][:solvent_name_five])
+
       if @field_solvent.save
         flash[:success] = '溶剤情報を登録しました。'
         redirect_to users_request_order_field_solvent_url(@request_order, @field_solvent)
@@ -102,6 +48,18 @@ module Users::RequestOrders
     def edit; end
 
     def update
+      # 溶剤1〜5の種別,含有成分を自動更新させる
+      @field_solvent.solvent_classification_one,
+      @field_solvent.solvent_ingredients_one = get_solvent_properties(params[:field_solvent][:solvent_name_one])
+      @field_solvent.solvent_classification_two,
+      @field_solvent.solvent_ingredients_two = get_solvent_properties(params[:field_solvent][:solvent_name_two])
+      @field_solvent.solvent_classification_three,
+      @field_solvent.solvent_ingredients_three = get_solvent_properties(params[:field_solvent][:solvent_name_three])
+      @field_solvent.solvent_classification_four,
+      @field_solvent.solvent_ingredients_four = get_solvent_properties(params[:field_solvent][:solvent_name_four])
+      @field_solvent.solvent_classification_five,
+      @field_solvent.solvent_ingredients_five = get_solvent_properties(params[:field_solvent][:solvent_name_five])
+
       if @field_solvent.update(field_solvent_params)
         flash[:success] = '溶剤情報を更新しました'
         redirect_to users_request_order_field_solvent_url(@request_order, @field_solvent)
@@ -122,6 +80,16 @@ module Users::RequestOrders
 
     def set_field_solvents
       @field_solvents = @request_order.field_solvents
+    end
+
+    # 溶剤1〜5の種別,含有成分を自動登録・更新させる
+    def get_solvent_properties(solvent_name)
+      solvent = Solvent.find_by(name: solvent_name)
+      if solvent.present?
+        classification = solvent.classification
+        ingredients = solvent.ingredients
+        [classification, ingredients]
+      end
     end
 
     def field_solvent_params

@@ -15,8 +15,6 @@ class FieldSolvent < ApplicationRecord
   validates :using_location, length: { maximum: 100 }
   validates :storing_place, length: { maximum: 100 }
   validates :using_tool, length: { maximum: 40 }
-  validates :solvent_classification_one, presence: true
-  validates :solvent_ingredients_one, presence: true
 
   def to_param
     uuid

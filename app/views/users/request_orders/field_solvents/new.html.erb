@@ -7,6 +7,7 @@
 
       <%= render 'shared/error_massages', object: f.object %>
 
+      <!-- 溶剤1 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_one %>
@@ -17,18 +18,10 @@
           <%= f.label :carried_quantity_one %>
           <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
           <%= f.text_field :carried_quantity_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_one) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_classification_one %>
-          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.text_field :solvent_classification_one, id: :solvent_classification_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_one) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_ingredients_one %>
-          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.text_field :solvent_ingredients_one, id: :solvent_ingredients_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_one) %>
         </div>
       </div><br>
+
+      <!-- 溶剤2 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_two %>
@@ -37,16 +30,10 @@
         <div class="col-md-3">
           <%= f.label :carried_quantity_two %>
           <%= f.text_field :carried_quantity_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_two) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_classification_two %>
-          <%= f.text_field :solvent_classification_two, id: :solvent_classification_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_two) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_ingredients_two %>
-          <%= f.text_field :solvent_ingredients_two, id: :solvent_ingredients_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_two) %>
         </div>
       </div><br>
+
+      <!-- 溶剤3 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_three %>
@@ -55,16 +42,10 @@
         <div class="col-md-3">
           <%= f.label :carried_quantity_three %>
           <%= f.text_field :carried_quantity_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_three) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_classification_three %>
-          <%= f.text_field :solvent_classification_three, id: :solvent_classification_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_three) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_ingredients_three %>
-          <%= f.text_field :solvent_ingredients_three, id: :solvent_ingredients_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_three) %>
         </div>
       </div><br>
+
+      <!-- 溶剤4 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_four %>
@@ -73,16 +54,10 @@
         <div class="col-md-3">
           <%= f.label :carried_quantity_four %>
           <%= f.text_field :carried_quantity_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_four) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_classification_four %>
-          <%= f.text_field :solvent_classification_four, id: :solvent_classification_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_four) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_ingredients_four %>
-          <%= f.text_field :solvent_ingredients_four, id: :solvent_ingredients_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_four) %>
         </div>
       </div><br>
+
+      <!-- 溶剤5 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_five %>
@@ -91,51 +66,71 @@
         <div class="col-md-3">
           <%= f.label :carried_quantity_five %>
           <%= f.text_field :carried_quantity_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_five) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_classification_five %>
-          <%= f.text_field :solvent_classification_five, id: :solvent_classification_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_classification_five) %>
-        </div><br>
-        <div class="col-md-3">
-          <%= f.label :solvent_ingredients_five %>
-          <%= f.text_field :solvent_ingredients_five, id: :solvent_ingredients_five, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:solvent_ingredients_five) %>
         </div>
       </div><br>
       <br>
+
+      <!-- 使用場所 -->
       <%= f.label :using_location %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :using_location, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:using_location), maxlength: 100 %>
       <br>
+
+      <!-- 保管場所 -->
       <%= f.label :storing_place %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :storing_place, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:storing_place), maxlength: 100 %>
       <br>
+
+      <!-- 使用機械又は工具 -->
       <%= f.label :using_tool %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :using_tool, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:using_tool), maxlength: 40 %>
       <br>
+
+      <!-- 使用期間(始期) -->
       <%= f.label :usage_period_start %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <br>
       <%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
       <br><br>
+
+      <!-- 使用期間(終期) -->
       <%= f.label :usage_period_end %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <br>
       <%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
       <br><br>
-      <%= f.label :working_process %>
+
+      <!-- 作業手順書の添付 -->
+      <%= f.label :working_process, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :working_process, FieldSolvent.working_processes_i18n.invert,{include_blank: true}, {class: "form-control"} %>
-      <br>
-      <%= f.label :sds %>
+      <%= f.collection_radio_buttons(:working_process, FieldSolvent.working_processes_i18n, :first, :last, class: "radio") do |b| %>
+        <div class="radio">
+          <%= b.label { b.radio_button + b.text } %>
+        </div>
+      <% end %><br>
+
+      <!-- SDS(安全データシート)の添付 -->
+      <%= f.label :sds, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :sds, FieldSolvent.sds_i18n.invert,{include_blank: true}, {class: "form-control"} %>
-      <br>
+      <%= f.collection_radio_buttons(:sds, FieldSolvent.sds_i18n, :first, :last, class: "radio") do |b| %>
+        <div class="radio">
+          <%= b.label { b.radio_button + b.text } %>
+        </div>
+      <% end %><br>
+
+      <!-- SDS(安全シート)の写し -->
+
+      <!-- 換気等対策 -->
       <%= f.label :ventilation_control %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :ventilation_control, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:ventilation_control) %>
       <br>
+
+      <!-- 有機溶剤・特定化学物質等の換気等対策・別紙 -->
+
+      <!-- 有機溶剤・特定化学物質等の作業手順書 -->
 
       <script>
         const numString = ["one", "two", "three", "four", "five"]
@@ -309,3 +304,4 @@
     <% end %>
   </div>
 </div>
+<%= Solvent.where(business_id: @request_order.business_id).to_json %>
