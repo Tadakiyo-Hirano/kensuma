@@ -28,7 +28,7 @@ module Users
           experience_term_before_hiring: 10,
           blank_term:                    3,
           driver_licence:                '普通',
-          career_up_id:                  sprintf('%14d', rand(99999999999999)),
+          career_up_id:                  '%14d' % rand(99999999999999),
           sex:                           :man,
           post_code:                     1234567
           # ============================================
@@ -147,15 +147,6 @@ module Users
       flash[:danger] = "#{@worker.name}を削除しました"
       redirect_to users_workers_url
     end
-    
-    def update_worker_json_images
-      worker = Worker.find(params[:worker_id])
-      remaining_images = worker.(params[:colum])
-      remaining_images.delete_at(params[:index].to_i).try(:remove!)
-      worker.update!(images: remaining_images)
-      flash[:danger] = '証明画像を削除しました'
-      redirect_to edit_users_worker_url(worker)
-    end
 
     def update_workerlicense_images
       worker = current_business.workers.find(params[:worker_id])
@@ -202,8 +193,8 @@ module Users
     end
 
     def update_worker_safety_health_education_images
-      worker = Worker.find(params[:worker_id])
-      worker_safety_health_education = WorkerSafetyHealthEducation.find(params[:safety_health_education_id])
+      worker = current_business.workers.find(params[:worker_id])
+      worker_safety_health_education = worker.worker_safety_health_educations.find(params[:safety_health_education_id])
       remaining_images = worker_safety_health_education.images
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
@@ -214,27 +205,26 @@ module Users
 
     private
 
-    def set_worker
-      @worker = current_business.workers.find_by(uuid: params[:uuid])
-    end
-
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 全角スペースを半角スペースに変換
       %i[name name_kana].each do |key|
         next unless converted_params[key].present?
-        converted_params[key] = converted_params[key].to_s.gsub(/[\s　]+/, ' ')
+
+        converted_params[key] = space_full_width_to_half_width(converted_params[key])
       end
 
       # ハイフンを除去する
       %i[my_phone_number family_phone_number post_code career_up_id driver_licence_number].each do |key|
         next unless converted_params[key].present?
+
         converted_params[key] = reject_hyphen(converted_params[key])
       end
 
       # スペースを除去する
       %i[career_up_id].each do |key|
         next unless converted_params[key].present?
+
         converted_params[key] = reject_space(converted_params[key])
       end
 
@@ -249,33 +239,32 @@ module Users
         experience_term_before_hiring
       ].each do |key|
         next unless converted_params[key].present?
+
         converted_params[key] = full_width_to_half_width(converted_params[key])
       end
 
       # 保険名及び被保険者番号が必須でない場合パラメータを空文字にする
       %i[health_insurance_name employment_insurance_number].each do |key|
         next unless converted_params[key].present?
+
         converted_params[key] = health_insurance_name_nil(converted_params[health_insurance_type])
         converted_params[key] = health_insurance_name_nil(converted_params[employment_insurance_type])
       end
       converted_params
     end
 
-    # 健康保険が健康保険組合もしくは建設国保でなければ保険名をnilにする
+    # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
     def health_insurance_name_nil(key, health_insurance_type)
-      if 'health_insurance_name' == key
-        unless %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type) 
-          ''
-        end
+      health_insurance_name_precenses = %w[health_insurance_association construction_national_health_insurance]
+      if key == 'health_insurance_name' && health_insurance_name_precenses.exclude?(health_insurance_type)
+        ''
       end
     end
 
-    # 雇用保険が被保険者であ無ければ被保険者番号をnilにする
+    # 雇用保険が被保険者で無ければ被保険者番号を空文字にする
     def employment_insurance_number_nil(key, employment_insurance_type)
-      if 'employment_insurance_number' == key
-        unless employment_insurance_type == :insured
-          ''
-        end
+      if key == 'employment_insurance_number' && employment_insurance_type != :insured
+        ''
       end
     end
 
@@ -284,13 +273,13 @@ module Users
       @my_phone_number = phone_number_add_hyphen(worker.my_phone_number)
       @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
       @post_code = add_hyphen([3], worker.post_code)
-      @career_up_id = add_hyphen([4,4,4], worker.career_up_id)
+      @career_up_id = add_hyphen([4, 4, 4], worker.career_up_id)
     end
 
     def worker_params
       params.require(:worker).permit(:name, :name_kana,
         :country, :my_address, :my_phone_number, :family_address, :post_code, { career_up_images: [] },
-        :family_phone_number, :birth_day_on, :abo_blood_type, {employee_cards: []}, :driver_licence,
+        :family_phone_number, :birth_day_on, :abo_blood_type, { employee_cards: [] }, :driver_licence,
         :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring, :driver_licence_number,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, :seal, :status_of_residence,
         worker_licenses_attributes:                 [:id, :license_id, { images: [] }, :_destroy],
@@ -301,9 +290,16 @@ module Users
           :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
           { worker_exams_attributes: [:id, :got_on, :worker_medical_id, :special_med_exam_id, { images: [] }, :_destroy] }
         ],
-        worker_insurance_attributes:          %i[
-          id health_insurance_type health_insurance_name pension_insurance_type employment_insurance_type
-          employment_insurance_number severance_pay_mutual_aid_type severance_pay_mutual_aid_name has_labor_insurance
+        worker_insurance_attributes:                %i[
+          id
+          health_insurance_type
+          health_insurance_name
+          pension_insurance_type
+          employment_insurance_type
+          employment_insurance_number
+          severance_pay_mutual_aid_type
+          severance_pay_mutual_aid_name
+          has_labor_insurance
         ]
       )
     end

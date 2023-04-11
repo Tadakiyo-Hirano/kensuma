@@ -38,12 +38,12 @@ class Worker < ApplicationRecord
   VALID_PHONE_NUMBER_REGEX = /\A^$|\A\z|\A\d{10,11}\z/
   VALID_EMAIL_REGEX = /\A^$|\A\z|\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_UNDER_THREE_DIGITS_REGEX = /\A^$|\A\z|\A\d{1,2}\z/
-  FORMAT_D_LICENCE = { with: /\A^$|\A\z|\A\d{12}\z/, message: 'は12桁の数字で入力してください' }
+  FORMAT_D_LICENCE = { with: /\A^$|\A\z|\A\d{12}\z/, message: 'は12桁の数字で入力してください' }.freeze
   PHONE_NUMBER_MS = 'は10桁または11桁の数字で入力してください'.freeze
   UNDER_THREE_DIGITS_MS = 'は3桁以上は入力できません'.freeze
   validates :career_up_id, format: { with: /\A^$|\A\z|\A\d{14}\z/, message: 'は14桁の数字で入力してください' }, allow_nil: true
   validates :name, presence: true
-  validates :name_kana, presence: true, format: { with: /\A^$|\A[\ァ-ヴ][\ァ-ヴー－ 　]+[ 　][\ァ-ヴー－]+\z/, message: 'はカタカナで入力してください' }
+  validates :name_kana, presence: true, format: { with: /\A^$|\A[ァ-ヴ][ァ-ヴー ]+\ [ァ-ヴー]+\z/, message: 'はカタカナで入力してください' }
   validates :country, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }, allow_nil: true
   validates :post_code, format: { with: /\A^$|\A\z|\A\d{7}\z/, message: 'は7桁の数字で入力してください' }, allow_nil: true
@@ -62,7 +62,7 @@ class Worker < ApplicationRecord
   validates :relationship, presence: true
   validates :sex, presence: true
   validates :driver_licence_number, presence: true, if: :driver_licence_present?
-  validates :driver_licence_number , format: FORMAT_D_LICENCE, allow_nil: true, if: :driver_licence_present?
+  validates :driver_licence_number, format: FORMAT_D_LICENCE, allow_nil: true, if: :driver_licence_present?
   # validates :status_of_residence, presence: true
   # validates :maturity_date
   # validates :confirmed_check, presence: true
@@ -73,6 +73,10 @@ class Worker < ApplicationRecord
 
   def to_param
     uuid
+  end
+
+  def set_worker
+    @worker = current_business.workers.find_by(uuid: params[:uuid])
   end
 
   def driver_licence_present?

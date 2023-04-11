@@ -65,42 +65,43 @@ module ApplicationHelper
 
   # プレースホルダー（氏名）
   def example_name
-    return '例 建築　太郎'
+    '例 建築　太郎'
   end
 
   # プレースホルダー（フリガナ）
   def example_name_kana
-    return '例 ケンチク　タロウ'
+    '例 ケンチク　タロウ'
   end
 
   # プレースホルダー（メールアドレス）
   def example_email
-    return '例 example@email.com'
+    '例 example@email.com'
   end
 
   # プレースホルダー（ハイフン入力の注釈）
   def annotation_hyphen
-    return 'ハイフンありでも、なしでも入力出来ます'
+    'ハイフンありでも、なしでも入力出来ます'
   end
 
   # 任意の複数箇所にハイフン差し込み
   def add_hyphen(array_delimiter, colum_name)
     unless colum_name.include?('-') && colum_name.blank?
       delimiter_sum = 0
-      array_delimiter.each_with_index  do |delimiter, number_of_hyphens|
-        delimiter_sum += array_delimiter[number_of_hyphens - 1] if number_of_hyphens > 0
-        colum_name.insert(delimiter + delimiter_sum + number_of_hyphens, "-")
+      array_delimiter.each_with_index do |delimiter, number_of_hyphens|
+        delimiter_sum += array_delimiter[number_of_hyphens - 1] if number_of_hyphens.positive?
+        colum_name.insert(delimiter + delimiter_sum + number_of_hyphens, '-')
       end
     end
-    return colum_name
+    colum_name
   end
 
   # 電話番号のハイフン差し込み
   def phone_number_add_hyphen(phone_number)
-    if phone_number.length == 10
-      add_hyphen([4,2], phone_number)
-    elsif phone_number.length == 11
-      add_hyphen([3,4], phone_number)
+    case phone_number
+    when 10
+      add_hyphen([4, 2], phone_number)
+    when 11
+      add_hyphen([3, 4], phone_number)
     end
   end
 end
