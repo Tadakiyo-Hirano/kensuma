@@ -652,6 +652,17 @@ module DocumentsHelper
 
   # (20)年間安全衛生計画書
 
+  # 下請現場情報のidの取得
+  def request_order_id
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).id
+  end
+
+  # 下請現場情報の現場代理人の取得
+  def request_order_site_agent_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order.site_agent_name
+  end
+
   # 代表者名の役職取得
   def representative_name(business_id)
     Business.find(business_id).representative_name
@@ -659,10 +670,7 @@ module DocumentsHelper
 
   # 作業員の役職取得
   def workers_post(worker_name)
-    field_workers = document_info.field_workers
-    if field_workers.present?
-      Worker.find_by(name: worker_name).job_title
-    end
+    Worker.find_by(name: worker_name)&.job_title
   end
 
   # 和暦表示(date_select用)
