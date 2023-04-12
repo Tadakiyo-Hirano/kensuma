@@ -189,11 +189,19 @@
       </div>
     </div>
     <div class="list-group-item">
-      <%= f.label :construction_license %>
-      <%= f.select :construction_license, @business_construction_licenses,
-              { include_blank: true },
-              { class: "form-select form-select-sm", style: "width: 100%" }
-      %>
+    <%= f.label :construction_license %> <!-- 工場に必要な建設許可証 -->
+    <div class="error-message"></div>
+      <div class="list-group-item">
+        <div class="form-check">
+          <% @business_construction_licenses.each do |id, license| %>
+            <% industry = BusinessIndustry.find(id) %>
+            <div class="form-check">
+              <%= f.check_box :construction_license, { multiple: true, checked: (@request_order.construction_license.present? && @request_order.construction_license&.include?(id.to_s)) }, id, nil %>
+              <%= f.label industry.construction_license_number %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -333,6 +341,9 @@
         "request_order[foreman_name]": {
           required: true
         },
+        'request_order[construction_license][]': {
+          maxlength: 2
+        },
       },
       messages: {
         "request_order[occupation]": {
@@ -401,9 +412,12 @@
         "request_order[foreman_name]": {
           required: "職長名を入力してください。"
         },
+        'request_order[construction_license][]': {
+          maxlength: "チェックボックスは最大2つまでしか選択できません。"
+        },
       },
       errorPlacement: function(error, element) {
-        if (element.attr("name") == "request_order[lead_engineer_check][]") {
+        if (element.attr("name") == "request_order[construction_license][]") {
           error.appendTo(".error-message");
         } else {
           error.insertAfter(element);

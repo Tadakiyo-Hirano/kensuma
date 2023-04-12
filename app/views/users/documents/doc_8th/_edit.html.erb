@@ -697,8 +697,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w1, "name_kana") %> <!-- 8-012 フリガナ(1) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w1) %> <!-- 8-015 職種(1) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w1) %> <!-- 8-016 記号(1) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w1, "hiring_on") %> <!-- 8-017 雇用年月日(1) -->
                   </td>
@@ -723,7 +727,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w1, "health_insurance_type") %> <!-- 8-031 健康保険(1) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(1) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w1) %> <!-- 8-036 特別教育(1) -->
                   </td>
@@ -753,7 +759,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w1, "pension_insurance_type") %> <!-- 8-032 年金保険(1) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(1) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
@@ -805,8 +813,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w2, "name_kana")%> <!-- 8-012 フリガナ(2) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w2) %> <!-- 8-015 職種(2) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w2) %> <!-- 8-016 記号(2) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w2, "hiring_on") %> <!-- 8-017 雇用年月日(2) -->
                   </td>
@@ -831,7 +843,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w2, "health_insurance_type") %> <!-- 8-031 健康保険(2) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(2) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w2) %> <!-- 8-036 特別教育(2) -->
                   </td>
@@ -861,7 +875,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(2) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
@@ -913,8 +929,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w3, "name_kana") %> <!-- 8-012 フリガナ(3) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w3) %> <!-- 8-015 職種(3) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w3) %> <!-- 8-016 記号(3) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w3, "hiring_on") %> <!-- 8-017 雇用年月日(3) -->
                   </td>
@@ -939,7 +959,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w3, "health_insurance_type") %> <!-- 8-031 健康保険(3) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(3) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w3) %> <!-- 8-036 特別教育(3) -->
                   </td>
@@ -969,7 +991,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w3, "pension_insurance_type") %> <!-- 8-032 年金保険(3) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(3) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R35" style="height: 13px;" class="row-headers-background"></th>
@@ -1021,8 +1045,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w4, "name_kana")%> <!-- 8-012 フリガナ(4) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w4) %> <!-- 8-015 職種(4) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w4) %> <!-- 8-016 記号(4) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w4, "hiring_on") %> <!-- 8-017 雇用年月日(4) -->
                   </td>
@@ -1047,7 +1075,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w4, "health_insurance_type") %> <!-- 8-031 健康保険(4) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(4) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w4) %> <!-- 8-036 特別教育(4) -->
                   </td>
@@ -1077,7 +1107,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w4, "pension_insurance_type") %> <!-- 8-032 年金保険(4) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(4) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R41" style="height: 13px;" class="row-headers-background"></th>
@@ -1129,8 +1161,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w5, "name_kana") %> <!-- 8-012 フリガナ(5) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w5) %> <!-- 8-015 職種(5) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w5) %> <!-- 8-016 記号(5) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w5, "hiring_on") %> <!-- 8-017 雇用年月日(5) -->
                   </td>
@@ -1155,7 +1191,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w5, "health_insurance_type") %> <!-- 8-031 健康保険(5) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(5) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w5) %> <!-- 8-036 特別教育(5) -->
                   </td>
@@ -1185,7 +1223,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w5, "pension_insurance_type") %> <!-- 8-032 年金保険(5) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(5) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R47" style="height: 13px;" class="row-headers-background"></th>
@@ -1237,8 +1277,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w6, "name_kana") %> <!-- 8-012 フリガナ(6) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w6) %> <!-- 8-015 職種(6) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w6) %> <!-- 8-016 記号(6) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w6, "hiring_on") %> <!-- 8-017 雇用年月日(6) -->
                   </td>
@@ -1263,7 +1307,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w6, "health_insurance_type") %> <!-- 8-031 健康保険(6) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(6) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w6) %> <!-- 8-036 特別教育(6) -->
                   </td>
@@ -1293,7 +1339,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w6, "pension_insurance_type") %> <!-- 8-032 年金保険(6) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(6) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R53" style="height: 13px;" class="row-headers-background"></th>
@@ -1345,8 +1393,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w7, "name_kana") %> <!-- 8-012 フリガナ(7) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w7) %> <!-- 8-015 職種(7) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w7) %> <!-- 8-016 記号(7) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w7, "hiring_on") %> <!-- 8-017 雇用年月日(7) -->
                   </td>
@@ -1371,7 +1423,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w7, "health_insurance_type") %> <!-- 8-031 健康保険(7) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(7) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w7) %> <!-- 8-036 特別教育(7) -->
                   </td>
@@ -1401,7 +1455,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w7, "pension_insurance_type") %> <!-- 8-032 年金保険(7) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(7) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R59" style="height: 13px;" class="row-headers-background"></th>
@@ -1453,8 +1509,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w8, "name_kana") %> <!-- 8-012 フリガナ(8) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w8) %> <!-- 8-015 職種(8) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w8) %> <!-- 8-016 記号(8) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w8, "hiring_on") %> <!-- 8-017 雇用年月日(8) -->
                   </td>
@@ -1479,7 +1539,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w8, "health_insurance_type") %> <!-- 8-031 健康保険(8) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(8) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w8) %> <!-- 8-036 特別教育(8) -->
                   </td>
@@ -1509,7 +1571,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w8, "pension_insurance_type") %> <!-- 8-032 年金保険(8) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(8) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R65" style="height: 13px;" class="row-headers-background"></th>
@@ -1561,8 +1625,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w9, "name_kana") %> <!-- 8-012 フリガナ(9) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w9) %> <!-- 8-015 職種(9) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w9) %> <!-- 8-016 記号(9) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w9, "hiring_on") %> <!-- 8-017 雇用年月日(9) -->
                   </td>
@@ -1587,7 +1655,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w9, "health_insurance_type") %> <!-- 8-031 健康保険(9) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(9) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w9) %> <!-- 8-036 特別教育(9) -->
                   </td>
@@ -1617,7 +1687,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w9, "pension_insurance_type") %> <!-- 8-032 年金保険(9) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(9) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R71" style="height: 13px;" class="row-headers-background"></th>
@@ -1669,8 +1741,12 @@
                   <td class="doc_8th_s56" colspan="6" rowspan="2">
                     <%= worker_str(w10, "name_kana") %> <!-- 8-012 フリガナ(10) -->
                   </td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
-                  <td class="doc_8th_s57" colspan="2" rowspan="6"></td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= worker_occupation(w10) %> <!-- 8-015 職種(10) -->
+                  </td>
+                  <td class="doc_8th_s57" colspan="2" rowspan="6">
+                    <%= field_worker_symbol(w10) %> <!-- 8-016 記号(10) -->
+                  </td>
                   <td class="doc_8th_s58" colspan="4" rowspan="3">
                     <%= worker_date(w10, "hiring_on") %> <!-- 8-017 雇用年月日(10) -->
                   </td>
@@ -1695,7 +1771,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w10, "health_insurance_type") %> <!-- 8-031 健康保険(10) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(10) -->
+                  </td>
                   <td class="doc_8th_s57_1" colspan="1" rowspan="6">
                     <%= worker_special_education(w10) %> <!-- 8-036 特別教育(10) -->
                   </td>
@@ -1725,7 +1803,9 @@
                   <td class="doc_8th_s56_1" colspan="4" rowspan="2">
                     <%= worker_insurance(w10, "pension_insurance_type") %> <!-- 8-032 年金保険(10) -->
                   </td>
-                  <td class="doc_8th_s56" colspan="4" rowspan="2"></td>
+                  <td class="doc_8th_s56" colspan="4" rowspan="2">
+                    <%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(10) -->
+                  </td>
                 </tr>
                 <tr style="height: 13px">
                   <th id="758879504R77" style="height: 13px;" class="row-headers-background"></th>

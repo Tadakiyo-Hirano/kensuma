@@ -275,14 +275,9 @@ ja:
         supervising_engineer_assistant: 監督技術者補佐
         supervising_engineer_assistant_name: 氏名
         supervising_engineer_assistant_qualification: 資格内容
-        # vice_president: 副会長
-        # vice_president_name: 氏名
-        # vice_president_company_name: 会社名
-        # secretary_name: 書記名
-        # health_and_safety_manager_name: 元方安全衛生管理者名
+        health_and_safety_manager_name: 元方安全衛生管理者名
         submission_destination: 提出先及び担当者名
         construction_license: 工事に必要な建設許可証
-        # status: ステータス
       request_order:
         request_order_infomation: 現場情報
         subcontractor: 下請会社
@@ -347,7 +342,6 @@ ja:
         relationship: 家族続柄
         email: メールアドレス
         sex: 性別
-        safety_sanitary_education_ids: 安全衛生教育
         status_of_residence: 在留資格
         # maturity_date: 在留期間満期日
         # confirmed_check: CCUS登録情報が最新であることの確認
@@ -401,6 +395,9 @@ ja:
         document_type: 書類項目
         created_on: 書類作成日
         submitted_on: 書類提出日
+        secretary_name: 書記名
+        vice_president_name: 副会長名
+        vice_president_company_name: 副会長会社名
       cover_document:
         business_name: 事業所名
         submitted_on: 書類提出日

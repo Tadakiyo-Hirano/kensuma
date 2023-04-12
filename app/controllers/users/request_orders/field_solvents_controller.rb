@@ -98,7 +98,7 @@ module Users::RequestOrders
         :solvent_classification_one, :solvent_classification_two, :solvent_classification_three, :solvent_classification_four,
         :solvent_classification_five,
         :solvent_ingredients_one, :solvent_ingredients_two, :solvent_ingredients_three, :solvent_ingredients_four,
-        :solvent_ingredients_five,
+        :solvent_ingredients_five, :date_submitted,
         :using_location, :storing_place, :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
       )
     end

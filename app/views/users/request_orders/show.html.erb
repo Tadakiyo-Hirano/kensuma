@@ -210,7 +210,13 @@
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:construction_license) %></th> <!-- 工場に必要な建設許可証 -->
-                  <td><%= @request_order.construction_license %></td>
+                  <td>
+                    <% if @request_order.construction_license.present? %>
+                      <% @request_order.construction_license.each_with_index do |id, index| %>
+                        <%= BusinessIndustry.find(id).construction_license_number %><%= ',' unless index == @request_order.construction_license.size - 1 %>
+                      <% end %>
+                    <% end %>
+                  </td>
                 </tr>
               </tbody>
             </table>

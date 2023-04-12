@@ -460,7 +460,8 @@ ja:
         not_join: 未加入
         not_coverd: 対象外
       business_retirement_benefit_mutual_aid_status: # 退職金共済制度(加入状況)
-        available: 有
+        construction_industry: 建設業退職金共済制度
+        smaller_companies: 中小企業退職金共済制度
         not_available: 無
       construction_license_status: # 建設許可証(取得状況)
         available: 有
@@ -615,8 +616,9 @@ ja:
         woman: 女性
       status_of_residence:
         permanent_resident: 定住者
-        specified_skill: 特定技能(外国人技能実習生)
-        specific_activity: 特定活動(外国人建設就労者)
+        skill_practice: 外国人技能実習生
+        construction_employment: 外国人建設就労者
+        specified_skill: 特定技能
       confirmed_check:
         checked: 有
         unchecked: 無
