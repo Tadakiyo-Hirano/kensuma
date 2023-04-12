@@ -10,10 +10,9 @@ module Users::RequestOrders
         redirect_to users_request_order_field_solvent_path(@request_order, @request_order.field_solvents.first)
       else
         @field_solvent = @request_order.field_solvents.new
+        @field_solvent.working_process = 1
+        @field_solvent.sds = 1
       end
-
-      @field_solvent.working_process = 1
-      @field_solvent.sds = 1
     end
 
     def create

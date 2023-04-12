@@ -8,7 +8,7 @@ module DocumentsHelper
   # document.contentの日付
   def doc_content_date(date)
     if action_name == 'edit'
-      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+      date.nil? ? '' : date.to_date&.strftime('%Y年%-m月%-d日') # nilの場合のstrftime表示エラー回避
     else
       date.nil? || date == [''] || date == '' ? '年　月　日' : date.to_date&.strftime('%Y年%-m月%-d日')
     end
@@ -1479,9 +1479,11 @@ module DocumentsHelper
     if @request_order.order.business_id == @current_business.id
       case hierarchy_document.document_type
       when 'doc_13th'
-        link_to '点検事項 記入', url
+        link_to '確認・点検事項 記入', url
+      when 'doc_15th'
+        link_to '確認事項 記入', url
       when 'doc_16th'
-        link_to '火気使用許可欄 記入', url
+        link_to '確認・火気使用許可事項 記入', url
       end
     end
   end
