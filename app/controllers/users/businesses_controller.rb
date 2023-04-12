@@ -116,7 +116,7 @@ module Users
                                            construction_license_governor_permission_prefecture construction_license_permission_type_identification_general
                                            construction_license_number_double_digit construction_license_number_six_digits
                                            construction_license_number construction_license_updated_at _destroy],
-        tem_industry_ids: []
+        occupation_ids: [], tem_industry_ids: []
       )
     end
   end

@@ -58,6 +58,7 @@ ja:
         career_up_id: 事業者ID(キャリアアップシステム)
         career_up_card_copy: キャリアアップシステムカードの写し
         stamp_images: 社印
+        occupation_ids: 職種
         business_health_insurance_status: 健康保険
         business_health_insurance_association: 組合名
         business_health_insurance_office_number: 事業所整理記号及び事業所番号
