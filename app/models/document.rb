@@ -16,11 +16,11 @@ class Document < ApplicationRecord
   scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]).order(Arel.sql("FIELD(document_type, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24, 18, 22)")) }
   scope :third_or_later_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]).order(Arel.sql("FIELD(document_type, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24, 18, 22)")) }
   # 元請け配下の一次下請け書類一覧取得
-  scope :current_lower_first_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]).order(Arel.sql("FIELD(document_type, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 23, 24, 18, 22)")) }
+  scope :current_lower_first_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 23, 24]) }
   # 一次下請け配下の二次下請け書類一覧取得
-  scope :first_lower_second_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]).order(Arel.sql("FIELD(document_type, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24, 18, 22)")) }
+  scope :first_lower_second_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
   # 二次下請け以降の配下の書類一覧取得(二次→三次、三次→四次)
-  scope :lower_other_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]).order(Arel.sql("FIELD(document_type, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24, 18, 22)")) }
+  scope :lower_other_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
 
   enum document_type: {
     cover_document:             1,  # 表紙
