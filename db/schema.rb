@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_26_124854) do
+ActiveRecord::Schema.define(version: 2023_01_31_030912) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -64,10 +64,10 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
   end
 
   create_table "business_industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(種別) enum"
+    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(許可種別) enum"
     t.integer "construction_license_governor_permission_prefecture", comment: "建設許可証(都道府県) enum"
     t.integer "construction_license_permission_type_identification_general", comment: "建設許可証(種別) enum"
-    t.string "construction_license_number_double_digit", comment: "建設許可証(番号)"
+    t.string "construction_license_number_double_digit", comment: "建設許可証(和暦年度)"
     t.string "construction_license_number_six_digits", comment: "建設許可証(番号)"
     t.string "construction_license_number", comment: "建設許可証(建設許可番号)"
     t.date "construction_license_updated_at", comment: "建設許可証(更新日)"
@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "career_up_id"
     t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.json "industry_ids"
     t.json "tem_industry_ids"
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
@@ -299,6 +298,7 @@ ActiveRecord::Schema.define(version: 2023_02_26_124854) do
     t.string "carried_quantity_three"
     t.string "carried_quantity_four"
     t.string "carried_quantity_five"
+    t.date "date_submitted", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 

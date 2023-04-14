@@ -207,6 +207,7 @@ module Users
           subcon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
           subcon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
           subcon_employment_insurance_number:             current_business.business_employment_insurance_number,             # 雇用保険番号
+          # contentではなく、カラムで格納する為下記6行不要？（影響確認中）
           # subcon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 職種
           # subcon_construction_license_permission_type_minister_governor:      current_business.business_industries.map { |bi| bi.construction_license_permission_type_minister_governor_i18n },      # 建設業許可種別(大臣,知事)
           # subcon_construction_license_permission_type_identification_general: current_business.business_industries.map { |bi| bi.construction_license_permission_type_identification_general_i18n }, # 建設業許可種別(特定,一般)

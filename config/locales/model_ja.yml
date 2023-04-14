@@ -5,6 +5,8 @@ ja:
       admin: 管理者
       comment: コメント
       business: 事業部
+      business_industry: 中間テーブル（業種）
+      business_occupation: 中間テーブル（職種）
       car: 車両情報
       car_insurance_company: ⾃動⾞保険会社
       car_voluntary_insurance: 任意保険
