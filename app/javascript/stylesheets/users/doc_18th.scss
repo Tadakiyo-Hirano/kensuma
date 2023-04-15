@@ -244,6 +244,19 @@
 
 .ritz .waffle .doc_18_s27 {
   border-bottom: 1px DASHED #000000;
+  background-color: #ffffff;
+  text-align: left;
+  color: #000000;
+  font-family: 'Arial';
+  font-size: 14pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
+.ritz .waffle .doc_18_s56 {
+  border-bottom: 1px DASHED #000000;
   border-right: 1px SOLID #000000;
   background-color: #ffffff;
   text-align: left;
@@ -692,6 +705,18 @@
   padding: 0px 3px 0px 3px;
 }
 
+.ritz .waffle .doc_18_s57 {
+  background-color: #ffffff;
+  text-align: center;
+  color: #FF0000;
+  font-family: 'Arial';
+  font-size: 14pt;
+  vertical-align: middle;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 0px 3px 0px 3px;
+}
+
 .ritz .waffle .doc_18_s11 {
   border-bottom: 1px SOLID #000000;
   background-color: #ffffff;
@@ -770,4 +795,13 @@
   width: 420mm;
   height: 297mm;
   size: A3 landscape;
+}
+
+select {
+  &:invalid {
+    color: grey
+  }
+  option[value=""] {
+    display: none;
+  }
 }
