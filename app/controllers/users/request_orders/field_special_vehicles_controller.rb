@@ -40,55 +40,52 @@ module Users::RequestOrders
     def update_special_vehicles
       error = 0
       field_special_vehicles_params.each do |id, item|
-        
         item[:driver_licenses] = params[:request_order][:field_special_vehicles][id][:driver_licenses]
         item[:sub_driver_licenses] = params[:request_order][:field_special_vehicles][id][:sub_driver_licenses]
-      
-        [:driver_licenses, :sub_driver_licenses].each do |key|
+
+        %i[driver_licenses sub_driver_licenses].each do |key|
           if item[key].reject(&:blank?).empty?
             error += 1
           end
         end
-        
+
         unless item[:driver_worker_id].blank?
           item[:driver_name] = Worker.find(item[:driver_worker_id]).name
-          #item[:driver_license] = Worker.find(item[:driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
+          # item[:driver_license] = Worker.find(item[:driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
         end
         unless item[:sub_driver_worker_id].blank?
           item[:sub_driver_name] = Worker.find(item[:sub_driver_worker_id]).name
-          #item[:sub_driver_license] = Worker.find(item[:sub_driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
+          # item[:sub_driver_license] = Worker.find(item[:sub_driver_worker_id]).worker_licenses.map { |worker_license| License.find(worker_license.license_id).name }.to_s.gsub(/,|"|\[|\]/) { '' }
         end
         field_special_vehicle = FieldSpecialVehicle.find(id)
         field_special_vehicle.update(item)
       end
-      
-      if error > 0
-          flash.now[:error] = flash_message("運転資格を選択してください")
-          render :edit_special_vehicles
+
+      if error.positive?
+        flash.now[:error] = flash_message('運転資格を選択してください')
+        render :edit_special_vehicles
       else
         flash[:success] = '特殊車両情報を更新しました'
         redirect_to users_request_order_field_special_vehicles_url
       end
     end
-    
+
     # ajax
     def dr_license_select
-      
       worker = Worker.find_by(id: params[:worker_id])
       if worker.present?
-        skill_tr_table = worker.skill_trainings.where(driving_related: 1)
-        sp_education_table = worker.special_educations.where(driving_related: 1)
-        dr_license_table = ["大型免許", "中型免許", "中型免許(8t)に限る", "準中型免許",
-                            "普通免許", "大型特殊免許", "大型二輪免許", "普通二輪免許",
-                            "小型特殊免許", "原付免許", "牽引自動車第一種運転免許"]
-        tem_table = skill_tr_table + sp_education_table
-        tem_table = tem_table.pluck(:name) + dr_license_table
-        render partial: 'dr-license-select', locals: { dr_licenses: tem_table }
+        skill_tr_table = worker.skill_trainings.where(driving_related: 1).pluck(:name)
+        sp_education_table = worker.special_educations.where(driving_related: 1).pluck(:name)
+        dr_license_table = ['大型免許', '中型免許', '中型免許(8t)に限る', '準中型免許',
+                            '普通免許', '大型特殊免許', '大型二輪免許', '普通二輪免許',
+                            '小型特殊免許', '原付免許', '牽引自動車第一種運転免許']
+        tem_table = skill_tr_table + sp_education_table + dr_license_table
       else
         tem_table = License.all.pluck(:name)
-        render partial: 'dr-license-select', locals: { dr_licenses: tem_table }
       end
+      render partial: 'dr-license-select', locals: { dr_licenses: tem_table }
     end
+
 
     private
 
@@ -115,7 +112,7 @@ module Users::RequestOrders
         ], driver_licenses: []
       )[:field_special_vehicles]
     end
-    
+
     def flash_message(message)
       "<div class=\"alert alert-danger\">#{ERB::Util.html_escape(message)}</div>".html_safe
     end
