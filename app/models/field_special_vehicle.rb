@@ -5,6 +5,7 @@ class FieldSpecialVehicle < ApplicationRecord
 
   enum lease_type: { own: 0, lease: 1 }
   
+  validates :vehicle_name, presence: true
   validates :content, presence: true
   validates :use_place, length: { maximum: 100 }
   validates :contact_prevention, length: { maximum: 40 }
