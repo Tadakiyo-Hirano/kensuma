@@ -60,7 +60,7 @@ RSpec.describe SpecialVehicle, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('会社名を入力してください')
+          expect(subject.errors.full_messages).to include('所有会社名を入力してください')
         end
       end
     end
@@ -111,7 +111,7 @@ RSpec.describe SpecialVehicle, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('自主検査有効期限(正規・年次)を入力してください')
+          expect(subject.errors.full_messages).to include('年次を入力してください')
         end
       end
     end
@@ -128,7 +128,7 @@ RSpec.describe SpecialVehicle, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('自主検査有効期限(正規・月次)を入力してください')
+          expect(subject.errors.full_messages).to include('月次を入力してください')
         end
       end
     end
@@ -179,7 +179,7 @@ RSpec.describe SpecialVehicle, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('登録車両を選択してください')
+          expect(subject.errors.full_messages).to include('登録する車両を入力してください')
         end
       end
     end
