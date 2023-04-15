@@ -4,7 +4,7 @@ class FieldSpecialVehicle < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   enum lease_type: { own: 0, lease: 1 }
-  
+
   validates :vehicle_name, presence: true
   validates :content, presence: true
   validates :use_place, length: { maximum: 100 }

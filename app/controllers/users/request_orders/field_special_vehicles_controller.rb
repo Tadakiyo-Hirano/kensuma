@@ -86,7 +86,6 @@ module Users::RequestOrders
       render partial: 'dr-license-select', locals: { dr_licenses: tem_table }
     end
 
-
     private
 
     def set_request_order

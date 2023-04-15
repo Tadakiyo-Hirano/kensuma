@@ -47,7 +47,7 @@ RSpec.describe SpecialVehicle, type: :model do
         end
       end
     end
-    
+
     describe '#owning_company_name' do
       context '存在しない場合' do
         before :each do
@@ -166,7 +166,7 @@ RSpec.describe SpecialVehicle, type: :model do
         end
       end
     end
-    
+
     describe '#vehicle_type' do
       context '存在しない場合' do
         before :each do

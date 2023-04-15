@@ -57,7 +57,7 @@ module Users
       flash[:danger] = "#{@special_vehicle.name}を削除しました"
       redirect_to users_special_vehicles_url
     end
-    
+
     def destroy_image
       special_vehicle = SpecialVehicle.find(params[:id])
       column = params[:column]

@@ -5,9 +5,9 @@ class SpecialVehicle < ApplicationRecord
 
   mount_uploaders :periodic_self_inspections, PeriodicSelfInspectionsUploader
   mount_uploaders :in_house_inspections, InHouseInspectionsUploader
-  
+
   enum vehicle_type: { crane: 0, construction: 1 }
-  
+
   validates :name, presence: true
   validates :maker, presence: true
   validates :owning_company_name, presence: true
