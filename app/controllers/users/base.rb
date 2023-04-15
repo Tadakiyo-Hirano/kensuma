@@ -33,6 +33,17 @@ module Users
     # 自社(事業所)の作業員名を取得
     def set_business_workers_name
       @business_workers_name = current_business.workers.pluck(:name)
+      @business_workers_name_id = current_business.workers
+    end
+
+    # 自社(事業所)の職種を取得
+    def set_business_occupations
+      @business_occupations = current_business.business_occupations.includes(:occupation).map { |bo| bo.occupation.short_name }
+    end
+
+    # 自社(事業所)の建設許可証番号を取得
+    def set_business_construction_licenses
+      @business_construction_licenses = Hash[current_business.business_industries.pluck(:id, :construction_license_number)]
     end
 
     # 書類に反映させる作業員情報

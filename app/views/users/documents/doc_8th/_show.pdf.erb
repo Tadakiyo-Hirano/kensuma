@@ -117,7 +117,7 @@
 					<td class="s7"></td>
 					<td class="s6" colspan="3" rowspan="3">元 請<br> 確認欄</td>
 					<td class="s8" colspan="8" rowspan="3">
-						<%= document_info_for_prime_contractor_name %> <!-- 8-042 元請会社の確認欄 -->
+						<%= @document.content&.[]('prime_contractor_confirmation')%> <!-- 8-042 元請会社の確認欄 -->
 					</td>
 				</tr>
 				<tr style="height: 13px">
@@ -524,7 +524,7 @@
 					<td class="s22"></td>
 					<td class="s22"></td>
 					<td class="s22"></td>
-					<td class="s22"></td>	
+					<td class="s22"></td>
 					<td class="s22"></td>
 					<td class="s22"></td>
 					<td class="s22"></td>
@@ -680,8 +680,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w1, "name_kana") %> <!-- 8-012 フリガナ(1) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w1) %> <!-- 8-015 職種(1) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w1) %> <!-- 8-016 記号(1) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w1, "hiring_on") %> <!-- 8-017 雇用年月日(1) -->
 					</td>
@@ -706,7 +710,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w1, "health_insurance_type") %> <!-- 8-031 健康保険(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(1) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w1) %> <!-- 8-036 特別教育(1) -->
 					</td>
@@ -736,7 +742,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w1, "pension_insurance_type") %> <!-- 8-032 年金保険(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(1) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
@@ -789,8 +797,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w2, "name_kana")%> <!-- 8-012 フリガナ(2) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w2) %> <!-- 8-015 職種(2) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w2) %> <!-- 8-016 記号(2) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w2, "hiring_on") %> <!-- 8-017 雇用年月日(2) -->
 					</td>
@@ -815,7 +827,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "health_insurance_type") %> <!-- 8-031 健康保険(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(2) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w2) %> <!-- 8-036 特別教育(2) -->
 					</td>
@@ -845,7 +859,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(2) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R29" style="height: 13px;" class="row-headers-background"></th>
@@ -897,8 +913,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w3, "name_kana") %> <!-- 8-012 フリガナ(3) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w3) %> <!-- 8-015 職種(3) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w3) %> <!-- 8-016 記号(3) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w3, "hiring_on") %> <!-- 8-017 雇用年月日(3) -->
 					</td>
@@ -923,7 +943,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w3, "health_insurance_type") %> <!-- 8-031 健康保険(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(3) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w3) %> <!-- 8-036 特別教育(3) -->
 					</td>
@@ -953,7 +975,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w3, "pension_insurance_type") %> <!-- 8-032 年金保険(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(3) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R35" style="height: 13px;" class="row-headers-background"></th>
@@ -1005,8 +1029,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w4, "name_kana")%> <!-- 8-012 フリガナ(4) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w4) %> <!-- 8-015 職種(4) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w4) %> <!-- 8-016 記号(4) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w4, "hiring_on") %> <!-- 8-017 雇用年月日(4) -->
 					</td>
@@ -1014,7 +1042,7 @@
 						<%= worker_date(w4, "birth_day_on") %> <!-- 8-018 生年月日(4) -->
 					</td>
 					<td class="s56" colspan="9" rowspan="3">
-						<%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->	
+						<%= worker_str(w4, "my_address") %> <!-- 8-021 住所(4) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w4, "my_phone_number") %> <!-- 8-023 電話番号(4) -->
@@ -1031,7 +1059,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w4, "health_insurance_type") %> <!-- 8-031 健康保険(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(4) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w4) %> <!-- 8-036 特別教育(4) -->
 					</td>
@@ -1061,7 +1091,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w4, "pension_insurance_type") %> <!-- 8-032 年金保険(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(4) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R41" style="height: 13px;" class="row-headers-background"></th>
@@ -1113,8 +1145,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w5, "name_kana") %> <!-- 8-012 フリガナ(5) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w5) %> <!-- 8-015 職種(5) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w5) %> <!-- 8-016 記号(5) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w5, "hiring_on") %> <!-- 8-017 雇用年月日(5) -->
 					</td>
@@ -1139,7 +1175,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w5, "health_insurance_type") %> <!-- 8-031 健康保険(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(5) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w5) %> <!-- 8-036 特別教育(5) -->
 					</td>
@@ -1169,7 +1207,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w5, "pension_insurance_type") %> <!-- 8-032 年金保険(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(5) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R47" style="height: 13px;" class="row-headers-background"></th>
@@ -1221,8 +1261,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w6, "name_kana") %> <!-- 8-012 フリガナ(6) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w6) %> <!-- 8-015 職種(6) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w6) %> <!-- 8-016 記号(6) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w6, "hiring_on") %> <!-- 8-017 雇用年月日(6) -->
 					</td>
@@ -1247,7 +1291,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w6, "health_insurance_type") %> <!-- 8-031 健康保険(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(6) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w6) %> <!-- 8-036 特別教育(6) -->
 					</td>
@@ -1277,7 +1323,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w6, "pension_insurance_type") %> <!-- 8-032 年金保険(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(6) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R53" style="height: 13px;" class="row-headers-background"></th>
@@ -1329,8 +1377,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w7, "name_kana") %> <!-- 8-012 フリガナ(7) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w7) %> <!-- 8-015 職種(7) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w7) %> <!-- 8-016 記号(7) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w7, "hiring_on") %> <!-- 8-017 雇用年月日(7) -->
 					</td>
@@ -1355,7 +1407,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w7, "health_insurance_type") %> <!-- 8-031 健康保険(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(7) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w7) %> <!-- 8-036 特別教育(7) -->
 					</td>
@@ -1385,7 +1439,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w7, "pension_insurance_type") %> <!-- 8-032 年金保険(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(7) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R59" style="height: 13px;" class="row-headers-background"></th>
@@ -1437,8 +1493,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w8, "name_kana") %> <!-- 8-012 フリガナ(8) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w8) %> <!-- 8-015 職種(8) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w8) %> <!-- 8-016 記号(8) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w8, "hiring_on") %> <!-- 8-017 雇用年月日(8) -->
 					</td>
@@ -1455,7 +1515,7 @@
 						<%= worker_medical_date(w8, "med_exam_on") %> <!-- 8-025 健康診断日(8) -->
 					</td>
 					<td class="s59" rowspan="6">
-						<%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->						
+						<%= worker_abo_blood_type(w8) %> <!-- 8-028 血液型(8) -->
 					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_medical_date(w8, "special_med_exam_on") %> <!-- 8-029 特殊健康診断日(8) -->
@@ -1463,7 +1523,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w8, "health_insurance_type") %> <!-- 8-031 健康保険(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(8) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w8) %> <!-- 8-036 特別教育(8) -->
 					</td>
@@ -1493,7 +1555,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w8, "pension_insurance_type") %> <!-- 8-032 年金保険(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(8) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R65" style="height: 13px;" class="row-headers-background"></th>
@@ -1545,8 +1609,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w9, "name_kana") %> <!-- 8-012 フリガナ(9) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w9) %> <!-- 8-015 職種(9) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w9) %> <!-- 8-016 記号(9) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w9, "hiring_on") %> <!-- 8-017 雇用年月日(9) -->
 					</td>
@@ -1571,7 +1639,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w9, "health_insurance_type") %> <!-- 8-031 健康保険(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(9) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w9) %> <!-- 8-036 特別教育(9) -->
 					</td>
@@ -1601,7 +1671,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w9, "pension_insurance_type") %> <!-- 8-032 年金保険(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(9) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R71" style="height: 13px;" class="row-headers-background"></th>
@@ -1653,8 +1725,12 @@
 					<td class="s56" colspan="6" rowspan="2">
 						<%= worker_str(w10, "name_kana") %> <!-- 8-012 フリガナ(10) -->
 					</td>
-					<td class="s57" colspan="2" rowspan="6"></td>
-					<td class="s57" colspan="2" rowspan="6"></td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= worker_occupation(w10) %> <!-- 8-015 職種(10) -->
+					</td>
+					<td class="s57" colspan="2" rowspan="6">
+						<%= field_worker_symbol(w10) %> <!-- 8-016 記号(10) -->
+					</td>
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_date(w10, "hiring_on") %> <!-- 8-017 雇用年月日(10) -->
 					</td>
@@ -1679,7 +1755,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w10, "health_insurance_type") %> <!-- 8-031 健康保険(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(10) -->
+					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
 						<%= worker_special_education(w10) %> <!-- 8-036 特別教育(10) -->
 					</td>
@@ -1709,7 +1787,9 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w10, "pension_insurance_type") %> <!-- 8-032 年金保険(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2"></td>
+					<td class="s56" colspan="4" rowspan="2">
+						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(10) -->
+					</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R77" style="height: 13px;" class="row-headers-background"></th>
@@ -1982,7 +2062,7 @@
 	.ritz .waffle a {
 		color: inherit;
 	}
-	
+
 	.ritz .waffle .s8 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -1995,7 +2075,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s42 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2012,7 +2092,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s38 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2024,7 +2104,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s63 {
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2036,7 +2116,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s10 {
 		border-right: 1px SOLID #ffffff;
 		text-align: left;
@@ -2048,7 +2128,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s24 {
 		border-left: none;
 		border-right: none;
@@ -2060,7 +2140,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s48 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2077,7 +2157,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s2 {
 		text-align: center;
 		color: #000000;
@@ -2100,7 +2180,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s52 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2117,7 +2197,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s11 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2130,7 +2210,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s26 {
 		border-left: none;
 		border-right: none;
@@ -2142,7 +2222,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s53 {
 		border-bottom: 1px SOLID #000000;
 		text-align: center;
@@ -2158,7 +2238,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s51 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2175,7 +2255,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s9 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2188,7 +2268,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s13 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2200,7 +2280,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s65 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2213,7 +2293,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s30 {
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #ffffff;
@@ -2226,7 +2306,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s14 {
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2239,7 +2319,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s29 {
 		border-right: 1px SOLID #ffffff;
 		border-top: 1px SOLID #ffffff;
@@ -2252,7 +2332,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s55 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2266,7 +2346,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s23 {
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2279,7 +2359,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s44 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2296,7 +2376,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s56 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2324,7 +2404,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s28 {
 		border-right: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
@@ -2336,7 +2416,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s59 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2364,7 +2444,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s16 {
 		text-align: center;
 		-webkit-text-decoration-skip: none;
@@ -2377,7 +2457,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s35 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2391,7 +2471,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s45 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2408,7 +2488,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s17 {
 		border-bottom: 1px SOLID #000000;
 		text-align: left;
@@ -2420,7 +2500,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s43 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2437,7 +2517,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s22 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2451,7 +2531,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s31 {
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2466,7 +2546,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s12 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #ffffff;
@@ -2479,7 +2559,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s54 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2496,7 +2576,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s32 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2510,7 +2590,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s25 {
 		border-left: none;
 		text-align: left;
@@ -2521,7 +2601,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s21 {
 		border-left: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2533,7 +2613,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s37 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px DASHED #000000;
@@ -2545,7 +2625,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s4 {
 		border-bottom: 1px SOLID #000000;
 		text-align: left;
@@ -2556,7 +2636,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s7 {
 		border-top: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #ffffff;
@@ -2569,7 +2649,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s41 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2582,7 +2662,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s50 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2599,7 +2679,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s18 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2612,7 +2692,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s27 {
 		border-left: none;
 		text-align: left;
@@ -2623,7 +2703,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s39 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2635,7 +2715,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s60 {
 		border-right: 1px SOLID #000000;
 		border-bottom: 0px SOLID #ffffff;
@@ -2649,7 +2729,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s2 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2663,7 +2743,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s15 {
 		border-bottom: 1px SOLID #000000;
 		text-align: left;
@@ -2675,7 +2755,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s19 {
 		border-left: 1px SOLID #ffffff;
 		border-bottom: 1px SOLID #000000;
@@ -2688,7 +2768,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s64 {
 		border-bottom: 1px SOLID #ffffff;
 		text-align: center;
@@ -2699,7 +2779,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s6 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2711,7 +2791,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s34 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2725,7 +2805,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s20 {
 		border-right: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2739,7 +2819,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s47 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2756,7 +2836,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s33 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2768,7 +2848,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s36 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px DASHED #000000;
@@ -2782,7 +2862,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s40 {
 		border-bottom: 1px SOLID #ffffff;
 		border-left: 1px SOLID #ffffff;
@@ -2797,7 +2877,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s57 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2825,7 +2905,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s46 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2842,7 +2922,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s1 {
 		border-top: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2855,7 +2935,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s66 {
 		border-left: 1px SOLID #ffffff;
 		border-right: 1px SOLID #ffffff;
@@ -2869,7 +2949,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s61 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;
@@ -2883,7 +2963,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s49 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
@@ -2900,7 +2980,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s62 {
 		border: 1px SOLID #ffffff;
 		text-align: left;
@@ -2911,7 +2991,7 @@
 		direction: ltr;
 		padding: 0px 3px 0px 3px;
 	}
-	
+
 	.ritz .waffle .s58 {
 		border-bottom: 1px DASHED #000000;
 		border-right: 1px SOLID #000000;

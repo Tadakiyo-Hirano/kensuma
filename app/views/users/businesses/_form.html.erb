@@ -103,12 +103,17 @@
 <br>
 <%= f.label :business_retirement_benefit_mutual_aid_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last, class: "radio") do |b| %>
+  <div class="radio">
+    <%= b.label { b.radio_button + b.text } %>
+  </div>
+<% end %><br>
 <br>
 <%= f.label :construction_license_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <div id="available-form">
   <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last) %><br>
+  <div id="error" class="text-red">【エラー】：残っているフォームを削除してからチェックを変更してください。</div>
 </div>
 
 <!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
@@ -124,7 +129,7 @@
       <% end %>
     <% end %>
     <div id="license-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :business_industries,
+    <%= link_to_add_association "＋フォーム追加", f, :business_industries, id: "form-link",
       data: {
         association_insertion_node: '#license-insertion-point',
         association_insertion_method: 'append'
@@ -155,12 +160,20 @@
 //建設許可証の有無によってフォームの表示・非表示の切り替え
   const available_form = document.getElementById('available-form')
   const list_group = document.getElementById('hidden-form')
+  const error = document.getElementById('error')
   function getRadioHealthInsuranceName(object) {
     const value = $('input[name="business[construction_license_status]"]:checked').val();
     if (value == 'available'){
       list_group.classList.remove('hidden');
+      //建設許可証「有」をチェック時は、エラー文を非表示
+      
+      error.classList.add('hidden');
     } else {
       list_group.classList.add('hidden');
+      //建設許可証「無」をチェック、かつフォームが残っている場合は、エラー文を表示し残フォーム削除を促す（nilが送信されてしまう為）
+      if ($("#nest-field").length) {
+        error.classList.remove('hidden');
+      }
     }
   };
   getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
@@ -168,31 +181,35 @@
   $('input[name="business[construction_license_status]"]').change(function() {
     if ($(this).val() == 'available') {
       list_group.classList.remove('hidden');
+      error.classList.add('hidden');
     } else {
       list_group.classList.add('hidden');
+      if ($("#nest-field").length) {
+        error.classList.remove('hidden');
+      }
     }
   });
 
-// フォームを29個まで制限かける（実装途中）
-  // $(function() {
-  //   var max_fields = 29;
-  //   var current_fields = $('form .nested-fields').length;
+// 建設許可証のフォーム追加を29個までで制限かける（実装途中）
+  // $(document).on('turbolinks:load', function() {
+  //   var maxForms = 4;
+  //   var formsCount = $('#nest-field').length;
+  //   updateAddButtonState(formsCount);
 
-  //   $('#new_sample').on('cocoon:after-insert', function() {
-  //     current_fields++;
-
-  //     if (current_fields >= max_fields) {
-  //       $('form .links').hide();
-  //     }
+  //   $('#hidden-form').on('cocoon:after-insert', function(e, insertedItem) {
+  //     formsCount = $('#nest-field').length;
+  //     updateAddButtonState(formsCount);
   //   });
 
-  //   $('#new_sample').on('cocoon:after-remove', function() {
-  //     current_fields--;
-
-  //     if (current_fields < max_fields) {
-  //       $('form .links').show();
+  //   function updateAddButtonState(count) {
+  //     if (count >= maxForms) {
+  //       $('#form-link').addClass('disabled').off('click');
+  //     } else {
+  //       $('#form-link').removeClass('disabled').on('click', function() {
+  //         return true;
+  //       });
   //     }
-  //   });
+  //   }
   // });
 </script>
 
@@ -254,7 +271,7 @@
         "business[construction_license_status]": {
           required: true
         },
-        "business[industry_ids][]": {
+        "business[industry_id][]": {
           required: true
         },
         "business[tem_industry_ids][]": {
@@ -263,25 +280,25 @@
         "business[occupation_ids][]": {
           required: true
         },
-        "business[construction_license_permission_type_minister_governor]": {
+        "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
           required: true
         },
-        "business[construction_license_governor_permission_prefecture]": {
+        "business[business_industries_attributes][construction_license_governor_permission_prefecture]": {
           required: true
         },
-        "business[construction_license_permission_type_identification_general]": {
+        "business[business_industries_attributes][construction_license_permission_type_identification_general]": {
           required: true
         },
-        "business[construction_license_number_double_digit]": {
+        "business[business_industries_attributes][construction_license_number_double_digit]": {
           required: true
         },
-        "business[construction_license_number_six_digits]": {
+        "business[business_industries_attributes][construction_license_number_six_digits]": {
           required: true
         },
-        "business[construction_license_number]": {
+        "business[business_industries_attributes][construction_license_number]": {
           required: true
         },
-        "business[construction_license_updated_at]": {
+        "business[business_industries_attributes][construction_license_updated_at]": {
           required: true
         }
       },
@@ -334,7 +351,7 @@
         "business[construction_license_status]": {
           required: "どちらかを選択してください。"
         },
-        "business[industry_ids][]": {
+        "business[industry_id][]": {
           required: "業種を選択してください。"
         },
         "business[tem_industry_ids][]": {
@@ -343,22 +360,22 @@
         "business[occupation_ids][]": {
           required: "職種を選択してください。"
         },
-        "business[construction_license_permission_type_minister_governor]": {
+        "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
           required: "どちらかを選択してください。"
         },
-        "business[construction_license_governor_permission_prefecture]": {
+        "business[business_industries_attributes][construction_license_governor_permission_prefecture]": {
           required: "どれか一つを選択してください。"
         },
-        "business[construction_license_permission_type_identification_general]": {
+        "business[business_industries_attributes][construction_license_permission_type_identification_general]": {
           required: "どちらかを選択してください。"
         },
-        "business[construction_license_number_double_digit]": {
+        "business[business_industries_attributes][construction_license_number_double_digit]": {
           required: "2桁の番号を入力してください。"
         },
-        "business[construction_license_number_six_digits]": {
+        "business[business_industries_attributes][construction_license_number_six_digits]": {
           required: "6桁以下の番号を入力してください。"
         },
-        "business[construction_license_updated_at]": {
+        "business[business_industries_attributes][construction_license_updated_at]": {
           required: "日付を選択してください。"
         }
       },

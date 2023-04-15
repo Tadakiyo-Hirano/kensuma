@@ -103,13 +103,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         resources :documents, only: %i[index show edit update], param: :uuid, controller: 'sub_request_orders/documents'
       end
       resources :documents, only: %i[index show edit update], param: :uuid
-      resources :documents, except: :index, param: :uuid do
-        get 'set_safety_officer_name', to: 'documents#set_safety_officer_name'
-        get 'set_general_manager_name', to: 'documents#set_general_manager_name'
-        get 'set_safety_manager_name', to: 'documents#set_safety_manager_name'
-        get 'set_hygiene_manager_name', to: 'documents#set_hygiene_manager_name'
-        get 'set_health_and_safety_promoter_name', to: 'documents#set_health_and_safety_promoter_name'
-      end
       resources :field_cars, except: %i[new show edit update], module: :request_orders, param: :uuid do
         collection do
           get 'edit_cars'
@@ -157,6 +150,15 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     post 'request_orders/:uuid/sub_request_orders/:sub_request_uuid/approve', to: 'request_orders#approve', as: :request_order_approve
     get 'request_orders/:uuid/edit_approval_status', to: 'request_orders#edit_approval_status', as: :request_order_edit_approval_status
     post 'request_orders/:uuid/update_approval_status', to: 'request_orders#update_approval_status', as: :request_order_update_approval_status
+
+    get '/professional_engineer_1st_skill_training_options', to: 'orders#professional_engineer_1st_skill_training_options'
+    get '/professional_engineer_2nd_skill_training_options', to: 'orders#professional_engineer_2nd_skill_training_options'
+    get '/supervising_engineer_skill_training_options', to: 'orders#supervising_engineer_skill_training_options'
+    get '/supervising_engineer_assistant_skill_training_options', to: 'orders#supervising_engineer_assistant_skill_training_options'
+
+    get '/professional_engineer_skill_training_options', to: 'request_orders#professional_engineer_skill_training_options'
+    get '/lead_engineer_skill_training_options', to: 'request_orders#lead_engineer_skill_training_options'
+    get '/registered_core_engineer_license_options', to: 'request_orders#registered_core_engineer_license_options'
   end
   # =================================================================
 

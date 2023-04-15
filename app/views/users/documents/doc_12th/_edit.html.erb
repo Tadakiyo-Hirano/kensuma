@@ -1,6 +1,6 @@
 <!-- (12)参考様式第8号(工事用・通勤⽤⾞両届) -->
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
-  <div class="card">  
+  <div class="card">
     <div class="card-body">
       <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
       <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -40,8 +40,8 @@
                     元 請<br />
                     確認欄
                   </td>
-                  <td class="doc_12_s5" dir="ltr" colspan="8" rowspan="2">
-                    <%= document_info_for_prime_contractor_name %> <!-- 12-001 元請会社の確認欄 -->
+                  <td class="doc_12_s32" dir="ltr" colspan="8" rowspan="2">
+                    <%= f.text_field name = 'content[prime_contractor_confirmation]',value: @document.content&.[]('prime_contractor_confirmation') %> <!-- 12-001 元請会社の確認欄 -->
                   </td>
                 </tr>
                 <tr style="height: 25px">

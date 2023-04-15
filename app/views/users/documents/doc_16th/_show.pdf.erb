@@ -18,7 +18,7 @@
               <td class="doc_16_" dir="ltr" colspan="15"></td>
               <td class="doc_16_m001 d16_l_full" dir="ltr" colspan="3" rowspan="2">元 請<br>確認欄</td>
               <td id="d16_size14" class="doc_16_m002 d16_l_full" dir="ltr" colspan="8" rowspan="2">
-                <%= document_info_for_prime_contractor_name %> <!-- 16-001 元請会社の確認欄 -->
+                <%= @document.approval_content&.[]('prime_contractor_confirmation')%> <!-- 16-001 元請会社の確認欄 -->
               </td>
             </tr>
             <tr style="height: 29px">
@@ -74,7 +74,7 @@
               </td>
             </tr>
             <tr style="height: 29px">
-              
+
               <td class="doc_16_" dir="ltr" colspan="2"></td>
               <td class="doc_16_m001" dir="ltr" colspan="1">（</td>
               <td id="d16_size14" class="doc_16_m004" dir="ltr" colspan="2">
@@ -353,7 +353,7 @@
     margin: 0;
     padding: 0;
   }
-    
+
   .ritz .waffle .doc_16_m001 {
     background-color: #ffffff;
     text-align: center;
@@ -363,7 +363,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m002 {
     text-align: center;
     -webkit-text-decoration-skip: none;
@@ -373,7 +373,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m003 {
     background-color: #ffffff;
     text-align: center;
@@ -384,7 +384,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m004 {
     text-align: center;
     -webkit-text-decoration-skip: none;
@@ -395,7 +395,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m005 {
     background-color: #ffffff;
     text-align: start;
@@ -405,7 +405,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m006 {
     background-color: #ffffff;
     text-align: center;
@@ -415,7 +415,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m007 {
     text-align: center;
     color: #000000;
@@ -424,7 +424,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m008 {
     background-color: #ffffff;
     text-align: center;
@@ -435,7 +435,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .doc_16_m009 {
     text-align: start;
     -webkit-text-decoration-skip: none;
@@ -445,7 +445,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-    
+
   .ritz .waffle .d16_l_full {
     border-top: 1px SOLID #000000;
     border-right: 1px SOLID #000000;
@@ -453,47 +453,47 @@
     border-left: 1px SOLID #000000;
     border-spacing: 0;
   }
-    
+
   .ritz .waffle .d16_l_tb {
     border-top: 1px SOLID #000000;
     border-bottom: 1px SOLID #000000;
     border-spacing: 0;
   }
-    
+
   .ritz .waffle .d16_l_rl {
     border-right: 1px SOLID #000000;
     border-left: 1px SOLID #000000;
     border-spacing: 0;
   }
-    
+
   .ritz .waffle .d16_l_top {
     border-top: 1px SOLID #000000;
     border-spacing: 0;
   }
-    
+
   .ritz .waffle .d16_l_bottom {
     border-bottom: 1px SOLID #000000;
     border-spacing: 0;
   }
-    
+
   .ritz .waffle .d16_l_left {
     border-left: 1px SOLID #000000;
     border-spacing: 0;
   }
-    
+
   .ritz .waffle .d16_l_right {
     border-right: 1px SOLID #000000;
     border-spacing: 0;
   }
-    
+
   #d16_size14{
     font-size: 14pt;
   }
-    
+
   #d16_size12{
     font-size: 12pt;
   }
-    
+
   #d16_size10{
     font-size: 10pt;
   }

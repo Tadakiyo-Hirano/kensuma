@@ -1,6 +1,7 @@
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
+    before_action :convert_to_full_width, only: %i[create update]
 
     def index
       @workers = current_business.workers
@@ -192,6 +193,13 @@ module Users
       @worker = current_business.workers.find_by(uuid: params[:uuid])
     end
 
+    # 半角カタカナを全角カタカナに変換する
+    def convert_to_full_width
+      if params[:worker][:name_kana].present?
+        params[:worker][:name_kana] = params[:worker][:name_kana].gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
+      end
+    end
+
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 半角スペースがある場合、全角スペースに変換
@@ -229,6 +237,7 @@ module Users
         :family_phone_number, :birth_day_on, :abo_blood_type,
         :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex,
+        :status_of_residence,
         worker_licenses_attributes:           [:id, :got_on, :license_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:    [:id, :got_on, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes: [:id, :got_on, :special_education_id, { images: [] }, :_destroy],

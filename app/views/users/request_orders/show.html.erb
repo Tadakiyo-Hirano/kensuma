@@ -18,7 +18,7 @@
                 <% else %>
                   <% if @request_order.submitted? %>
                     <button class="btn btn-block btn-outline-primary"disabled>提出済</button>
-                  <% elsif @request_order.approved? %> 
+                  <% elsif @request_order.approved? %>
                     <button class="btn btn-block btn-outline-primary"disabled>承認済</button>
                   <% elsif @sub_request_orders.blank? %>
                     <%= link_to "提出する", users_request_order_submit_path(@request_order), method: :post, data: { confirm: "下請けへ未依頼ですが、提出して宜しいですか？" }, class: "btn btn-block btn-outline-primary" %>
@@ -60,7 +60,7 @@
             </button>
           </div>
         </div>
-        
+
         <div class="card-body table-responsive p-0">
           <% unless @request_order.parent_id.nil? || @request_order.construction_name.nil? %>
             <table class="table table-hover text-nowrap">
@@ -74,76 +74,103 @@
                   </td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:construction_name) %></th> <!-- 工事名 -->
+                  <th><%= RequestOrder.human_attribute_name(:request_order_infomation) %></th> <!--現場情報-->
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:occupation) %></th> <!-- 職種 -->
+                  <td><%= @request_order.occupation %></td>
+                </tr>
+                <tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:construction_name) %></th> <!-- 工事名 -->
                   <td><%= @request_order.construction_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:construction_details) %></th> <!-- 工事内容 -->
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:construction_details) %></th> <!-- 工事内容 -->
                   <td><%= @request_order.construction_details %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:start_date) %></th> <!-- 工期(自) -->
-                  <td><%= @request_order.start_date %></td>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:start_date) %></th> <!-- 工期(自) -->
+                  <td><%= l(@request_order.start_date, format: :ja_kan) %>(<%= l(@request_order.start_date, format: :long) %>)</td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:end_date) %></th> <!-- 工期(至) -->
-                  <td><%= @request_order.end_date %></td>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:end_date) %></th> <!-- 工期(至) -->
+                  <td><%= l(@request_order.end_date, format: :ja_kan) %>(<%= l(@request_order.end_date, format: :long) %>)</td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:contract_date) %></th> <!-- 契約日 -->
-                  <td><%= @request_order.contract_date %></td>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:contract_date) %></th> <!-- 契約日 -->
+                  <td><%= l(@request_order.contract_date, format: :ja_kan) %>(<%= l(@request_order.contract_date, format: :long) %>)</td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:supervisor_name) %></th> <!-- 監督員(氏名) -->
+                  <th><%= RequestOrder.human_attribute_name(:site_agent) %></th> <!--現場代理人-->
+                  <td></td>
+                </tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:site_agent_name) %></th> <!-- 現場代理人(氏名) -->
+                  <td><%= @request_order.site_agent_name %></td>
+                </tr>
+                <tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:site_agent_apply) %></th> <!-- 現場代理人(権限及び意見の申出方法) -->
+                  <td><%= @request_order.site_agent_apply %></td>
+                </tr>
+                <tr>
+                  <th><%= RequestOrder.human_attribute_name(:supervisor) %></th> <!--監督員-->
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:supervisor_name) %></th> <!-- 監督員(氏名) -->
                   <td><%= @request_order.supervisor_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:supervisor_apply) %></th> <!-- 監督員(権限及び意見の申出方法) -->
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:supervisor_apply) %></th> <!-- 監督員(権限及び意見の申出方法) -->
                   <td><%= @request_order.supervisor_apply %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:professional_engineer_name) %></th> <!-- 専門技術者(氏名) -->
+                  <th><%= RequestOrder.human_attribute_name(:professional_engineer) %></th> <!--専門技術者-->
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:professional_engineer_name) %></th> <!-- 専門技術者(氏名) -->
                   <td><%= @request_order.professional_engineer_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:professional_engineer_qualification) %></th> <!-- 専門技術者(資格内容) -->
-                  <td><%= skill_info("professional_engineer_qualification", @request_order) %></td>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:professional_engineer_qualification) %></th> <!-- 専門技術者(資格内容) -->
+                  <td><%= SkillTraining.find(@request_order.professional_engineer_qualification).name if @request_order.professional_engineer_qualification.present? %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:professional_engineer_details) %></th> <!-- 専門技術者(担当工事内容) -->
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:professional_engineer_details) %></th> <!-- 専門技術者(担当工事内容) -->
                   <td><%= @request_order.professional_engineer_details %></td>
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:professional_construction) %></th> <!-- 特定専門工事(有無) -->
-                  <td><%= @request_order.professional_construction_i18n %></td>
+                  <td><%= @request_order.professional_construction_i18n %>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:construction_manager_name) %></th> <!-- 工事担任責任者(氏名) -->
+                  <th><%= RequestOrder.human_attribute_name(:construction_manager) %></th> <!--工事担当責任者-->
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:construction_manager_name) %></th> <!-- 工事担任責任者(氏名) -->
                   <td><%= @request_order.construction_manager_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:construction_manager_position_name) %></th> <!-- 工事担任責任者(役職名) -->
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:construction_manager_position_name) %></th> <!-- 工事担任責任者(役職名) -->
                   <td><%= @request_order.construction_manager_position_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:site_agent_name) %></th> <!-- 現場代理人(氏名) -->
-                  <td><%= @request_order.site_agent_name %></td>
+                  <th><%= RequestOrder.human_attribute_name(:lead_engineer) %></th> <!--主任技術者-->
+                  <td></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:site_agent_apply) %></th> <!-- 現場代理人(権限及び意見の申出方法) -->
-                  <td><%= @request_order.site_agent_apply %></td>
-                </tr>
-                <tr>
-                  <th><%= RequestOrder.human_attribute_name(:lead_engineer_name) %></th> <!-- 主任技術者(氏名) -->
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:lead_engineer_name) %></th> <!-- 主任技術者(氏名) -->
                   <td><%= @request_order.lead_engineer_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:lead_engineer_qualification) %></th> <!-- 主任技術者(資格内容) -->
-                  <td><%= skill_info("lead_engineer_qualification", @request_order) %></td>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:lead_engineer_check) %></th> <!-- 主任技術者(専任or非専任) -->
+                  <td><%= @request_order.lead_engineer_check_i18n %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:lead_engineer_check) %></th> <!-- 主任技術者(専任or非専任) -->
-                  <td><%= @request_order.lead_engineer_check_i18n %></td>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:lead_engineer_qualification) %></th> <!-- 主任技術者(資格内容) -->
+                  <td><%= SkillTraining.find(@request_order.lead_engineer_qualification).name if @request_order.lead_engineer_qualification.present? %></td>
                 </tr>
                 <tr>
                   <th><%= RequestOrder.human_attribute_name(:work_chief_name) %></th> <!-- 作業主任者(氏名) -->
@@ -170,12 +197,26 @@
                   <td><%= @request_order.foreman_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:registered_core_engineer_name) %></th> <!-- 登録基幹技能者(氏名) -->
+                  <th><%= RequestOrder.human_attribute_name(:registered_core_engineer) %></th> <!--登録基幹技能者-->
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:registered_core_engineer_name) %></th> <!-- 登録基幹技能者(氏名) -->
                   <td><%= @request_order.registered_core_engineer_name %></td>
                 </tr>
                 <tr>
-                  <th><%= RequestOrder.human_attribute_name(:registered_core_engineer_qualification) %></th> <!-- 登録基幹技能者(資格内容) -->
-                  <td><%= skill_info("registered_core_engineer_qualification", @request_order) %></td>
+                  <th>&emsp;&emsp;<%= RequestOrder.human_attribute_name(:registered_core_engineer_qualification) %></th> <!-- 登録基幹技能者(資格内容) -->
+                  <td><%= License.find(@request_order.registered_core_engineer_qualification)&.name if @request_order.registered_core_engineer_qualification.present? %></td>
+                </tr>
+                <tr>
+                  <th><%= RequestOrder.human_attribute_name(:construction_license) %></th> <!-- 工場に必要な建設許可証 -->
+                  <td>
+                    <% if @request_order.construction_license.present? %>
+                      <% @request_order.construction_license.each_with_index do |id, index| %>
+                        <%= BusinessIndustry.find(id).construction_license_number %><%= ',' unless index == @request_order.construction_license.size - 1 %>
+                      <% end %>
+                    <% end %>
+                  </td>
                 </tr>
               </tbody>
             </table>

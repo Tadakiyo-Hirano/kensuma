@@ -74,6 +74,7 @@ module Users::SubRequestOrders
       when 'doc_16th'
         params.require(:document).permit(approval_content:
           %i[
+            prime_contractor_confirmation
             fire_permit_number
             fire_permit_date
             fire_prevention_manager
