@@ -230,9 +230,9 @@ module Users
           # genecon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
           # genecon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
           # genecon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
-          genecon_specific_skilled_foreigners_exist:                           current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
-          genecon_foreign_construction_workers_exist:                          current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
-          genecon_foreign_technical_intern_trainees_exist:                     current_business.foreign_technical_intern_trainees_exist_i18n                      # 外国人技能実習生の従事の状況(有無)
+          genecon_specific_skilled_foreigners_exist:       current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
+          genecon_foreign_construction_workers_exist:      current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
+          genecon_foreign_technical_intern_trainees_exist: current_business.foreign_technical_intern_trainees_exist_i18n                      # 外国人技能実習生の従事の状況(有無)
         }
       )
     end
