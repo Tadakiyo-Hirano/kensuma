@@ -199,7 +199,7 @@
       <%= render "worker_safety_health_education_fields", f: w_safety_health_education %>
     <% end %>
     <div id="safety-health-education-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_licenses,
+    <%= link_to_add_association "＋フォーム追加", f, :worker_safety_health_educations,
       data: {
         association_insertion_node: '#safety-health-education-insertion-point',
         association_insertion_method: 'append'

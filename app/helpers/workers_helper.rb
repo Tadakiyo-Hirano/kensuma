@@ -7,7 +7,7 @@ module WorkersHelper
       country:                       'JP',
       email:                         "test_#{Worker.last.id + 1}@email.com",
       my_address:                    '東京都港区1-1',
-      my_phone_number:               '012345678901',
+      my_phone_number:               '12345678901',
       family_name:                   'フェルナンデス',
       relationship:                  '父親',
       family_address:                '埼玉県三郷市1-1',

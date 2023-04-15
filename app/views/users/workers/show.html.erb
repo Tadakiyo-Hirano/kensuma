@@ -222,12 +222,27 @@
         <% end %>
 
         <%# worker_safety_health_educationここから %>
-        <tr>
-          <th><%= WorkerSafetyHealthEducation.human_attribute_name(:safety_health_education_id) %></th>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>        
+          <tr bgcolor="#dee2e6">
+            <th></th>
+            <th><%= SpecialEducation.human_attribute_name(:name) %></th>
+            <th><%= WorkerSpecialEducation.human_attribute_name(:images) %></th>
+            <th></th>
+          </tr>
+          <% @worker.worker_safety_health_educations.each do |worker_safety_health_education| %>
+            <tr>
+              <% if @worker.safety_health_educations.first.id == worker_safety_health_education.safety_health_education_id %>
+                <th><%= WorkerSafetyHealthEducation.human_attribute_name(:safety_health_education_id) %></th>
+              <% else %>
+                <th></th>
+              <% end %>
+              <td><%= worker_safety_health_education.safety_health_education.name %></td>
+              <td>
+                <% worker_safety_health_education.images.each do |image| %>
+                  <%= image_tag(image.url) %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>       
         <%# worker_safety_health_educationここまで %>
         <tr>
           <th><%= Worker.human_attribute_name(:driver_licence) %></th>
