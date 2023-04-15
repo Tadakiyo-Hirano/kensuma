@@ -67,6 +67,36 @@ module Users::RequestOrders
       end
     end
 
+    def update_sds_images
+      @field_solvent = @request_order.field_solvents.find_by(uuid: params[:field_solvent_uuid])
+      remain_sds_images = @field_solvent.sds_images
+      deleted_sds_image = remain_sds_images.delete_at(params[:index].to_i)
+      deleted_sds_image.try(:remove!)
+      @field_solvent.update!(sds_images: remain_sds_images)
+      flash[:danger] = '削除しました'
+      redirect_to edit_users_request_order_field_solvent_url(@request_order, @field_solvent)
+    end
+
+    def update_ventilation_control_images
+      @field_solvent = @request_order.field_solvents.find_by(uuid: params[:field_solvent_uuid])
+      remain_ventilation_control_images = @field_solvent.ventilation_control_images
+      deleted_ventilation_control_image = remain_ventilation_control_images.delete_at(params[:index].to_i)
+      deleted_ventilation_control_image.try(:remove!)
+      @field_solvent.update!(sds_images: remain_ventilation_control_images)
+      flash[:danger] = '削除しました'
+      redirect_to edit_users_request_order_field_solvent_url(@request_order, @field_solvent)
+    end
+
+    def update_working_process_images
+      @field_solvent = @request_order.field_solvents.find_by(uuid: params[:field_solvent_uuid])
+      remain_working_process_images = @field_solvent.working_process_images
+      deleted_working_process_image = remain_working_process_images.delete_at(params[:index].to_i)
+      deleted_working_process_image.try(:remove!)
+      @field_solvent.update!(sds_images: remain_working_process_images)
+      flash[:danger] = '削除しました'
+      redirect_to edit_users_request_order_field_solvent_url(@request_order, @field_solvent)
+    end
+
     private
 
     def set_request_order
@@ -99,7 +129,8 @@ module Users::RequestOrders
         :solvent_classification_five,
         :solvent_ingredients_one, :solvent_ingredients_two, :solvent_ingredients_three, :solvent_ingredients_four,
         :solvent_ingredients_five, :date_submitted,
-        :using_location, :storing_place, :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control
+        :using_location, :storing_place, :using_tool, :usage_period_start, :usage_period_end, :working_process, :sds, :ventilation_control,
+        { sds_images: [], ventilation_control_images: [], working_process_images: [] }
       )
     end
   end

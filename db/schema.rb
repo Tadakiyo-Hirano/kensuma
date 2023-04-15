@@ -294,7 +294,10 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.date "usage_period_end"
     t.integer "working_process"
     t.integer "sds"
+    t.json "sds_images"
     t.string "ventilation_control"
+    t.json "ventilation_control_images"
+    t.json "working_process_images"
     t.string "field_solventable_type"
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false

@@ -121,6 +121,20 @@
       <% end %><br>
 
       <!-- SDS(安全シート)の写し -->
+      <%= f.label :sds_images %>
+      <%= f.file_field :sds_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+      <br>
+      <p>
+        <% if @field_solvent.sds_images.present? %>
+          <% @field_solvent.sds_images.each_with_index do |image, index| %>
+            <%= image_tag(image.url) %>
+            <%= link_to "削除", users_request_order_field_solvent_update_sds_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            &nbsp;
+          <% end %>
+          <br>
+        <% end %>
+      </p>
+      <br>
 
       <!-- 換気等対策 -->
       <%= f.label :ventilation_control %>
@@ -129,8 +143,36 @@
       <br>
 
       <!-- 有機溶剤・特定化学物質等の換気等対策・別紙 -->
+      <%= f.label :ventilation_control_images %>
+      <%= f.file_field :ventilation_control_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+      <br>
+      <p>
+        <% if @field_solvent.ventilation_control_images.present? %>
+          <% @field_solvent.ventilation_control_images.each_with_index do |image, index| %>
+            <%= image_tag(image.url) %>
+            <%= link_to "削除", users_request_order_field_solvent_update_ventilation_control_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            &nbsp;
+          <% end %>
+          <br>
+        <% end %>
+      </p>
+      <br>
 
       <!-- 有機溶剤・特定化学物質等の作業手順書 -->
+      <%= f.label :working_process_images %>
+      <%= f.file_field :working_process_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+      <br>
+      <p>
+        <% if @field_solvent.working_process_images.present? %>
+          <% @field_solvent.working_process_images.each_with_index do |image, index| %>
+            <%= image_tag(image.url) %>
+            <%= link_to "削除", users_request_order_field_solvent_update_working_process_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            &nbsp;
+          <% end %>
+          <br>
+        <% end %>
+      </p>
+      <br>
 
       <script>
         const numString = ["one", "two", "three", "four", "five"]

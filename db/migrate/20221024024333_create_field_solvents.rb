@@ -29,7 +29,10 @@ class CreateFieldSolvents < ActiveRecord::Migration[6.1]
       t.date :usage_period_end
       t.integer :working_process
       t.integer :sds
+      t.json :sds_images
       t.string :ventilation_control
+      t.json :ventilation_control_images
+      t.json :working_process_images
       t.references :field_solventable, polymorphic: true
 
       t.timestamps

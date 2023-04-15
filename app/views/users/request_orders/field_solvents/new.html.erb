@@ -121,6 +121,9 @@
       <% end %><br>
 
       <!-- SDS(安全シート)の写し -->
+      <%= f.label :sds_images %>
+      <%= f.file_field :sds_images, accept: 'image/jpg, image/jpeg, image/png, application/pdf', multiple: true, class: "form-control" %>
+      <br>
 
       <!-- 換気等対策 -->
       <%= f.label :ventilation_control %>
@@ -129,8 +132,14 @@
       <br>
 
       <!-- 有機溶剤・特定化学物質等の換気等対策・別紙 -->
+      <%= f.label :ventilation_control_images %>
+      <%= f.file_field :ventilation_control_images, accept: 'image/jpg, image/jpeg, image/png, application/pdf', multiple: true, class: "form-control" %>
+      <br>
 
       <!-- 有機溶剤・特定化学物質等の作業手順書 -->
+      <%= f.label :working_process_images %>
+      <%= f.file_field :working_process_images, accept: 'image/jpg, image/jpeg, image/png, application/pdf', multiple: true, class: "form-control" %>
+      <br>
 
       <script>
         const numString = ["one", "two", "three", "four", "five"]
@@ -304,4 +313,3 @@
     <% end %>
   </div>
 </div>
-<%= Solvent.where(business_id: @request_order.business_id).to_json %>

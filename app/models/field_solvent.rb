@@ -16,6 +16,10 @@ class FieldSolvent < ApplicationRecord
   validates :storing_place, length: { maximum: 100 }
   validates :using_tool, length: { maximum: 40 }
 
+  mount_uploaders :sds_images, FieldSolventsUploader
+  mount_uploaders :ventilation_control_images, FieldSolventsUploader
+  mount_uploaders :working_process_images, FieldSolventsUploader
+
   def to_param
     uuid
   end
