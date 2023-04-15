@@ -62,6 +62,7 @@ class Worker < ApplicationRecord
   validates :relationship, presence: true
   validates :sex, presence: true
   validates :driver_licences, acceptance: true
+  validates :driver_licence_number, absence: true, unless: :driver_licence_present?
   validates :driver_licence_number, presence: true, if: :driver_licence_present?
   validates :driver_licence_number, format: FORMAT_D_LICENCE, allow_nil: true, if: :driver_licence_present?
   # validates :status_of_residence, presence: true

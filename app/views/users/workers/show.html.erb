@@ -231,7 +231,7 @@
         <%# worker_safety_health_educationここまで %>
         <tr>
           <th><%= Worker.human_attribute_name(:driver_licence) %></th>
-          <td><%= @worker.driver_licence %></td>
+          <td><%= driver_licence_short_form(@worker.driver_licence) %></td>
           <td></td>
           <td></td>
         </tr>

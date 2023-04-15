@@ -85,7 +85,7 @@ module ApplicationHelper
 
   # 任意の複数箇所にハイフン差し込み
   def add_hyphen(array_delimiter, colum_name)
-    unless colum_name.include?('-') && colum_name.blank?
+    if colum_name.present?
       delimiter_sum = 0
       array_delimiter.each_with_index do |delimiter, number_of_hyphens|
         delimiter_sum += array_delimiter[number_of_hyphens - 1] if number_of_hyphens.positive?
@@ -99,37 +99,38 @@ module ApplicationHelper
   def phone_number_add_hyphen(phone_number)
     case phone_number.size
     when 10
-      return add_hyphen([4, 2], phone_number)
+      add_hyphen([4, 2], phone_number)
     when 11
-      return add_hyphen([3, 4], phone_number)
+      add_hyphen([3, 4], phone_number)
+    else
+      phone_number
     end
   end
 
   # 運転免許種類省略名インデックス
   def all_driver_licences_index_ry
     {
-      LL: "大型",
-      ML: "中型",
-      MLC: "中型(8t)まで",
-      MLL: "準中型",
-      SL: "普通",
-      SLL: "大特",
-      LLT: "大自二",
-      SLT: "普自二",
-      SLSP: "小特",
-      MOP: "原付",
-      TDL: "牽引"
+      '大型免許'         => '大型',
+      '中型免許'         => '中型',
+      '中型免許(8t)に限る'  => '中型(8t)まで',
+      '準中型免許'        => '準中型',
+      '普通免許'         => '普通',
+      '大型特殊免許'       => '大特',
+      '大型二輪免許'       => '大自二',
+      '普通二輪免許'       => '普自二',
+      '小型特殊免許'       => '小特',
+      '原付免許'         => '原付',
+      '牽引自動車第一種運転免許' => '牽引'
     }
   end
 
   # 半角スペースのある文字列を配列にする
   def format_array(driver_licences)
-    driver_licences.split(" ")
+    driver_licences.split(' ')
   end
 
-  def driver_licences_array_ry(driver_licences)
-    format_array(driver_licences).map do |driver_licence|
-    end
+  # 自動車運転免許を短縮表記に変換する
+  def driver_licence_short_form(driver_licence)
+    format_array(driver_licence).map { |licence| all_driver_licences_index_ry[licence] }.join(' ')
   end
-
 end

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   include DocumentsHelper
   include FieldWorkersHelper
+  include WorkersHelper
 
   rescue_from StandardError, with: :handle_server_error if Rails.env.production?
   rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found if Rails.env.production?
