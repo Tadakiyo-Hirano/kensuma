@@ -77,10 +77,6 @@ class Worker < ApplicationRecord
     uuid
   end
 
-  def set_worker
-    @worker = current_business.workers.find_by(uuid: params[:uuid])
-  end
-
   def driver_licence_present?
     driver_licence.present?
   end

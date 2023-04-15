@@ -10,6 +10,11 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :name_kana, class: "form-control", placeholder: example_name_kana %><br>
 
+<%# 事業主または一人親方 %>
+<%= f.label :business_owner_or_master %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<div class="md-3"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master,:as => :boolean %> はい</div><br>
+
 <%# 国籍 %>
 <%= f.label :country %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -288,22 +293,31 @@
       <div class="mt-3 mb-3" id="health_insurance_type">
         <%= worker_insurance.label :health_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
-          <div class="radio">
-            <%= b.label { b.radio_button + b.text } %>
+        <div class="list-group-item">
+          <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+            <div class="radio">
+              <%= b.label { b.radio_button + b.text } %>
+            </div>
+          <% end %>
+          <!-- health_insurance_typeがhealth_insurance_associationまたはconstruction_national_health_insuranceで入力可能 -->
+          <div id="health_insurance_name">
+            <%= worker_insurance.label :health_insurance_name %>
+            <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
           </div>
-        <% end %><br>
-      </div>
-
-      <!-- health_insurance_typeがhealth_insurance_associationまたはconstruction_national_health_insuranceで入力可能 -->
-      <div class="mb-3 hidden" id="health_insurance_name">
-        <%= worker_insurance.label :health_insurance_name %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
+        </div>
       </div>
 
       <%# 健康保険証の写し %>
       <%= worker_insurance.label :health_insurance_image %>
+      <div class="col-md-3" style="margin-bottom: 10px;">
+        <%= worker_insurance.file_field :health_insurance_image, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+        <% if @worker.worker_insurance.health_insurance_image.present? %>
+          <% @worker.worker_insurance.health_insurance_image.each do |image| %>
+            <%= image_tag(image.url) %>
+          <% end %>
+        <% end %>
+      </div>
+      <br>
 
       <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
@@ -318,18 +332,18 @@
       <div class="mb-3" id="employment_insurance_type">
         <%= worker_insurance.label :employment_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
-          <div class="radio">
-            <%= b.label { b.radio_button + b.text } %>
+        <div class="list-group-item">
+          <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+            <div class="radio">
+              <%= b.label { b.radio_button + b.text } %>
+            </div>
+          <% end %>
+          <!-- employment_insurance_numberが被保険者(0)で入力可能 -->
+          <div id="employment_insurance_number">
+            <%= worker_insurance.label :employment_insurance_number %>
+            <%= worker_insurance.text_field :employment_insurance_number, class: "form-control" %>
           </div>
-        <% end %><br>
-      </div>
-
-      <!-- employment_insurance_numberが被保険者(0)で入力可能 -->
-      <div class="mt-3 hidden" id="employment_insurance_number">
-        <%= worker_insurance.label :employment_insurance_number %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.text_field :employment_insurance_number, class: "form-control" %>
+        </div>
       </div>
       
       <div class="mt-3" id="has_labor_insurance">
@@ -344,18 +358,18 @@
       <div class="mb-3">
         <%= worker_insurance.label :severance_pay_mutual_aid_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, class: "radio") do |b| %>
-          <div class="radio">
-            <%= b.label { b.radio_button + b.text } %>
+        <div class="list-group-item">
+          <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, class: "radio") do |b| %>
+            <div class="radio">
+              <%= b.label { b.radio_button + b.text } %>
+            </div>
+          <% end %>
+          <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
+          <div class="mb-3" id="mutual_aid_number">
+            <%= worker_insurance.label :severance_pay_mutual_aid_name %>
+            <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
           </div>
-        <% end %>
-      </div>
-
-      <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
-      <div class="mb-3 hidden" id="mutual_aid_number">
-        <%= worker_insurance.label :severance_pay_mutual_aid_name %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
+        </div>
       </div>
     <% end %>
   </div><br>

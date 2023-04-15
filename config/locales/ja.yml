@@ -604,6 +604,7 @@ ja:
       has_labor_insurance: # 労働保険特別加入
         join: 加入
         not_join: 未加入
+        exemption: 適応除外
     worker_medical:
       health_condition: # 最近の健康状態
         good: よい

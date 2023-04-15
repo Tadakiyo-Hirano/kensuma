@@ -3,6 +3,7 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
     create_table :workers do |t|
       t.string :name, null: false # 氏名
       t.string :name_kana, null: false # フリガナ
+      t.boolean :business_owner_or_master, default: false # 事業主もしくは一人親方
       t.string :country, null: false # 国籍
       t.string :my_address, null: false # 住所
       t.string :my_phone_number, null: false # 電話番号

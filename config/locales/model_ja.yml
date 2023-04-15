@@ -310,6 +310,7 @@ ja:
       worker:
         name: 氏名
         name_kana: フリガナ
+        business_owner_or_master: 事業主または一人親方ですか？
         country: 国籍
         my_address: 住所
         my_phone_number: 電話番号

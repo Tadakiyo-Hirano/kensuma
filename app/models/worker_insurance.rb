@@ -28,7 +28,7 @@ class WorkerInsurance < ApplicationRecord
     other:     3
   }, _prefix: true
 
-  enum has_labor_insurance: { join: 0, not_join: 1 }, _prefix: true       # 労働保険特別加入の有無
+  enum has_labor_insurance: { join: 0, not_join: 1, exemption: 2 }, _prefix: true       # 労働保険特別加入の有無
 
   validates :health_insurance_type, presence: true
   validates :health_insurance_name, presence: true, if: :insurance_name_valid?

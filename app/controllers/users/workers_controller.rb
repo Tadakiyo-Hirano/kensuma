@@ -226,7 +226,7 @@ module Users
       params.require(:worker).permit(:name, :name_kana,
         :country, :my_address, :my_phone_number, :family_address, :post_code, { career_up_images: [] },
         :family_phone_number, :birth_day_on, :abo_blood_type, { employee_cards: [] }, :driver_licence,
-        :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring, :driver_licence_number,
+        :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring, :driver_licence_number, :business_owner_or_master,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, :seal, :status_of_residence,
         worker_licenses_attributes:                 [:id, :license_id, { images: [] }, :_destroy],
         worker_safety_health_educations_attributes: [:id, :safety_health_education_id, { images: [] }, :_destroy],

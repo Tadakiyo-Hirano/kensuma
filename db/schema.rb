@@ -782,6 +782,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "workers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "name_kana", null: false
+    t.boolean "business_owner_or_master", default: false
     t.string "country", null: false
     t.string "my_address", null: false
     t.string "my_phone_number", null: false
