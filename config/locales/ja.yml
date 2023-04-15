@@ -377,6 +377,18 @@ ja:
       day: 日
       month: 月
       year: 年
+  driver_licences:
+    LL: 大型免許
+    ML: 中型免許
+    MLC: 中型免許(8t)に限る
+    MLL: 準中型免許
+    SL: 普通免許
+    SLL: 大型特殊免許
+    LLT: 大型二輪免許
+    SLT: 普通二輪免許
+    SLSP: 小型特殊免許
+    MOP: 原付免許
+    TDL: 牽引自動車第一種運転免許
   enums:
     user:
       gender:

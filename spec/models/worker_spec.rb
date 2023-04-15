@@ -487,7 +487,7 @@ RSpec.describe Worker, type: :model do
           expect(subject.errors.full_messages).to include('雇用契約書の取り交わし状況を入力してください')
         end
       end
-    end
+    end 
 
     describe '#driver_licence_number' do
       context '自動車運転免許証を持っていて免許証番号が存在しない場合' do
@@ -496,11 +496,22 @@ RSpec.describe Worker, type: :model do
           subject.driver_licence_number = nil
         end
 
-        it 'バリデーションに落ちること' do
+        it 'バリデーションに落ちること(nil)' do
           expect(subject).to be_invalid
         end
 
         it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('免許証番号を入力してください')
+        end
+
+        it 'バリデーションに落ちること('')' do
+          subject.driver_licence_number = ''
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.driver_licence_number = ''
           subject.valid?
           expect(subject.errors.full_messages).to include('免許証番号を入力してください')
         end
