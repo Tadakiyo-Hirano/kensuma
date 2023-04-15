@@ -6,7 +6,6 @@ FactoryBot.define do
     sequence(:vehicle_name) { |n| "vehicle_name#{n}" }
     sequence(:content) { |n| { "id": n + 1 } }
     sequence(:carry_on_company_name) { |n| "carry_on_company_name#{n}" }
-    sequence(:owning_company_name) { |n| "owning_company_name#{n}" }
     sequence(:owning_company_representative_name) { |n| "owning_company_representative_name#{n}" }
     sequence(:use_company_name) { |n| "use_company_name#{n}" }
     sequence(:use_company_representative_name) { |n| "use_company_representative_name#{n}" }
@@ -23,7 +22,6 @@ FactoryBot.define do
     sequence(:vehicle_name) { |n| "vehicle_name#{n}" }
     sequence(:content) { |n| { "id": n + 1 } }
     sequence(:carry_on_company_name) { |n| "carry_on_company_name#{n}" }
-    sequence(:owning_company_name) { |n| "owning_company_name#{n}" }
     sequence(:owning_company_representative_name) { |n| "owning_company_representative_name#{n}" }
     sequence(:use_company_name) { |n| "use_company_name#{n}" }
     sequence(:use_company_representative_name) { |n| "use_company_representative_name#{n}" }
