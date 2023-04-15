@@ -208,6 +208,26 @@
   </div>
   <%# worker_safety_health_educationここまで %>
 
+  <%# 運転免許及び認印ここから %>
+  <div class="list-group-item">
+    <%= f.label :driver_licence %>
+    <div class="list-group-item">
+      <% I18n.t('driver_licences').each do |key, value| %>
+        <%= check_box_tag "driver_licences[#{key}]", value, @driver_licence.include?(value), id: "driver_licences[#{key}]" %>
+        <%= label_tag "driver_licences_#{key}", value %><br>
+      <% end %><br>
+      <%# worker_params_with_convertedでパラメーターを扱えるように定義 %>
+      <%= f.hidden_field :driver_licence, value: '' %>
+      <div id = "driver_licence_number">
+        <%= f.label :driver_licence_number %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= f.text_field :driver_licence_number, value: @driver_licence_number, class: "form-control", placeholder: annotation_hyphen %>
+      </div>
+      <%= f.label :seal %>
+      <%= f.file_field :seal, accept: 'image/jpg, image/jpeg, image/png', class: "form-control" %>
+    </div>
+  </div><br>
+
   <!-- WorkerMedicalここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_medical do |worker_medical| %>
@@ -252,12 +272,12 @@
         <%= render "worker_exam_fields", f: worker_exam %>
       <% end %>
       <div id='worker-exam-insertion-point'></div>
-        <%= link_to_add_association "＋フォーム追加", worker_medical, :worker_exams,
-          data: {
-            association_insertion_node: '#worker-exam-insertion-point',
-            association_insertion_method: 'append'
-          } 
-        %>
+      <%= link_to_add_association "＋フォーム追加", worker_medical, :worker_exams,
+        data: {
+          association_insertion_node: '#worker-exam-insertion-point',
+          association_insertion_method: 'append'
+        } 
+      %>
     <% end %>
   </div>
   <!-- WorkerMedicalここまで -->
@@ -438,6 +458,64 @@
     };
   };
   getSelectedMutualAidType(mutual_aid_type); //ページの読み込み時に判定
+
+  // 免許証番号表示・非表示処理
+  // 免許証番号項目表示・非表示のクラスを操作するメソッド
+  function driverLicenceNumberShowHide(driver_licence_check, driver_licence_number) {
+    if (driver_licence_check > 1) {
+      driver_licence_number.classList.remove('hidden');
+    } else {
+      driver_licence_number.classList.add('hidden');
+    }
+  }
+  const driver_licence_number = document.getElementById('driver_licence_number');
+  const all_driver_licences = ["LL", "ML", "MLC", "MLL", "SL", "SLL", "LLT", "SLT", "SLSP", "MOP", "TDL"];
+  // const all_driver_licences = {
+  //   LL: "大型免許",
+  //   ML: "中型免許",
+  //   MLC: "中型免許(8t)に限る",
+  //   MLL: "準中型免許",
+  //   SL: "普通免許",
+  //   SLL: "大型特殊免許",
+  //   LLT: "大型二輪免許",
+  //   SLT: "普通 二輪免許",
+  //   SLSP: "小型特殊免許",
+  //   MOP: "原付免許",
+  //   TDL: "牽引自動車第一種運転免許"
+  // };
+
+  function increment_driver_licence_check(key, driver_licence_check) {
+    if ($(`input[name="driver_licences[${key}]"]`).is(':checked');) {
+      debugger
+      driver_licence_check++;
+    }
+  };
+
+  function decrement_driver_licence_check(key, driver_licence_check) {
+    if (!$(`input[name="driver_licences[${key}]"]`).is(':checked');) {
+      debugger
+      driver_licence_check--;
+    }
+  };
+
+  function getCheckDriverLicence() {
+    let driver_licence_check = 0
+    all_driver_licences.forEach(function(key) {
+      debugger
+      increment_driver_licence_check(key, driver_licence_check);
+    });
+    debugger
+    driverLicenceNumberShowHide(driver_licence_check, driver_licence_number);
+  };
+  getCheckDriverLicence(); //ページの読み込み時に判定
+
+  let change_driver_licence_check = 0
+  let driver_licence_key = LL
+  $(`input[name="driver_licences[${driver_licence_key}]"]`).change(function() {
+    increment_driver_licence_check(driver_licence_key, change_driver_licence_check)
+    decrement_driver_licence_check(driver_licence_key, change_driver_licence_check)
+    driverLicenceNumberShowHide(change_driver_licence_check, driver_licence_number);
+  });
 </script>
 
 <script>

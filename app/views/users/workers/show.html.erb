@@ -157,6 +157,7 @@
           <th></th>
           <th><%= License.human_attribute_name(:name) %></th>
           <th><%= WorkerLicense.human_attribute_name(:images) %></th>
+          <th></th>
         </tr>
         <% @worker.worker_licenses.each do |worker_license| %>
           <tr>
@@ -179,6 +180,7 @@
           <th></th>
           <th><%= SkillTraining.human_attribute_name(:name) %></th>
           <th><%= WorkerSkillTraining.human_attribute_name(:images) %></th>
+          <th></th>
         </tr>
         <% @worker.worker_skill_trainings.each do |worker_skill_training| %>
           <tr>
@@ -201,6 +203,7 @@
           <th></th>
           <th><%= SpecialEducation.human_attribute_name(:name) %></th>
           <th><%= WorkerSpecialEducation.human_attribute_name(:images) %></th>
+          <th></th>
         </tr>
         <% @worker.worker_special_educations.each do |worker_special_education| %>
           <tr>
@@ -224,8 +227,28 @@
           <td></td>
           <td></td>
           <td></td>
-        </tr>
+        </tr>        
         <%# worker_safety_health_educationここまで %>
+        <tr>
+          <th><%= Worker.human_attribute_name(:driver_licence) %></th>
+          <td><%= @worker.driver_licence %></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th><%= Worker.human_attribute_name(:driver_licence_number) %></th>
+          <td><%= @worker.driver_licence_number %></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th><%= Worker.human_attribute_name(:seal) %></th>
+          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>          
+          <td></td>
+          <td></td>
+        </tr>
         <!-- 資格情報ここまで -->
         
         <!-- worker_medicalここから -->

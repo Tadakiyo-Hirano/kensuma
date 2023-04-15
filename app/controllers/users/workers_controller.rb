@@ -15,11 +15,11 @@ module Users
           country:                       'JP',
           email:                         "test_#{Worker.last.id + 1}@email.com",
           my_address:                    '東京都港区1-1',
-          my_phone_number:               '01234567898',
+          my_phone_number:               '012345678901',
           family_name:                   'フェルナンデス',
           relationship:                  '父親',
           family_address:                '埼玉県三郷市1-1',
-          family_phone_number:           '09876543210',
+          family_phone_number:           '1234567890',
           birth_day_on:                  '2000-01-28',
           abo_blood_type:                :a,
           rh_blood_type:                 :plus,
@@ -30,9 +30,10 @@ module Users
           driver_licence:                '普通',
           career_up_id:                  '%14d' % rand(99999999999999),
           sex:                           :man,
-          post_code:                     1234567
+          post_code:                     "1234567"
           # ============================================
         )
+        worker_add_hyhpen(@worker)
         @worker.worker_licenses.build(
           # テスト用デフォルト値 ==========================
           license_id: 1
@@ -89,6 +90,7 @@ module Users
           sex:            :man
           # ============================================
         )
+        worker_add_hyhpen(@worker)
         @worker.worker_licenses.build
         @worker.worker_skill_trainings.build
         @worker.worker_special_educations.build
@@ -108,6 +110,7 @@ module Users
           # ============================================
         )
       end
+      @driver_licence = []
     end
 
     def create
@@ -117,6 +120,11 @@ module Users
         redirect_to users_worker_path(@worker)
       else
         worker_add_hyhpen(@worker)
+        if driver_licences_params[:driver_licences].present?
+          @driver_licence = driver_licences_params[:driver_licences].values
+        else
+          @driver_licence = []
+        end
         render :new
       end
     end
@@ -130,6 +138,7 @@ module Users
       @worker.worker_skill_trainings.build if @worker.skill_trainings.blank?
       @worker.worker_special_educations.build if @worker.special_educations.blank?
       worker_add_hyhpen(@worker)
+      @driver_licence = format_array(@worker.driver_licence)
     end
 
     def update
@@ -138,6 +147,11 @@ module Users
         redirect_to users_worker_path(@worker)
       else
         worker_add_hyhpen(@worker)
+        if driver_licences_params[:driver_licences].present?
+          @driver_licence = driver_licences_params[:driver_licences].values
+        else
+          @driver_licence = []
+        end
         render :edit
       end
     end
@@ -205,6 +219,10 @@ module Users
 
     private
 
+    def set_worker
+      @worker = current_business.workers.find_by(uuid: params[:uuid])
+    end
+
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 全角スペースを半角スペースに変換
@@ -222,7 +240,7 @@ module Users
       end
 
       # スペースを除去する
-      %i[career_up_id].each do |key|
+      %i[career_up_id driver_licence_number].each do |key|
         next unless converted_params[key].present?
 
         converted_params[key] = reject_space(converted_params[key])
@@ -237,6 +255,7 @@ module Users
         driver_licence_number
         blank_term
         experience_term_before_hiring
+        driver_licence_number
       ].each do |key|
         next unless converted_params[key].present?
 
@@ -249,6 +268,12 @@ module Users
 
         converted_params[key] = health_insurance_name_nil(converted_params[health_insurance_type])
         converted_params[key] = health_insurance_name_nil(converted_params[employment_insurance_type])
+      end
+      # 運転免許証のデータを作成
+      if driver_licences_params[:driver_licences].present?
+        converted_params[:driver_licence] = driver_licences_string(driver_licences_params[:driver_licences])
+      else
+        converted_params[:driver_licence_number] = ''
       end
       converted_params
     end
@@ -274,6 +299,12 @@ module Users
       @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
       @post_code = add_hyphen([3], worker.post_code)
       @career_up_id = add_hyphen([4, 4, 4], worker.career_up_id)
+      @driver_licence_number = add_hyphen([4, 4], worker.driver_licence_number)
+    end
+
+    # 送られたハッシュの値をつなげた文字列に変換
+    def driver_licences_string(driver_licences_params)
+      driver_licences_params.values.join(' ')
     end
 
     def worker_params
@@ -302,6 +333,10 @@ module Users
           has_labor_insurance
         ]
       )
+    end
+
+    def driver_licences_params
+      params.permit(driver_licences: [:LL, :ML, :MLC, :MLL, :SL, :SLL, :LLT, :SLT, :SLSP, :MOP, :TDL])
     end
   end
 end

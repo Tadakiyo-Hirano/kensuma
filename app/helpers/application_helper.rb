@@ -97,11 +97,39 @@ module ApplicationHelper
 
   # 電話番号のハイフン差し込み
   def phone_number_add_hyphen(phone_number)
-    case phone_number
+    case phone_number.size
     when 10
-      add_hyphen([4, 2], phone_number)
+      return add_hyphen([4, 2], phone_number)
     when 11
-      add_hyphen([3, 4], phone_number)
+      return add_hyphen([3, 4], phone_number)
     end
   end
+
+  # 運転免許種類省略名インデックス
+  def all_driver_licences_index_ry
+    {
+      LL: "大型",
+      ML: "中型",
+      MLC: "中型(8t)まで",
+      MLL: "準中型",
+      SL: "普通",
+      SLL: "大特",
+      LLT: "大自二",
+      SLT: "普自二",
+      SLSP: "小特",
+      MOP: "原付",
+      TDL: "牽引"
+    }
+  end
+
+  # 半角スペースのある文字列を配列にする
+  def format_array(driver_licences)
+    driver_licences.split(" ")
+  end
+
+  def driver_licences_array_ry(driver_licences)
+    format_array(driver_licences).map do |driver_licence|
+    end
+  end
+
 end
