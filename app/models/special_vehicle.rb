@@ -3,14 +3,20 @@ class SpecialVehicle < ApplicationRecord
 
   before_create -> { self.uuid = SecureRandom.uuid }
 
+  mount_uploaders :periodic_self_inspections, PeriodicSelfInspectionsUploader
+  mount_uploaders :in_house_inspections, InHouseInspectionsUploader
+  
+  enum vehicle_type: { crane: 0, construction: 1 }
+  
   validates :name, presence: true
   validates :maker, presence: true
+  validates :owning_company_name, presence: true
+  validates :vehicle_type, presence: true
   validates :standards_performance, presence: true
   validates :year_manufactured, presence: true
   validates :control_number, presence: true
   validates :check_exp_date_year, presence: true
   validates :check_exp_date_month, presence: true
-  validates :check_exp_date_specific, presence: true
   validates :check_exp_date_machine, presence: true
   validates :check_exp_date_car, presence: true
 

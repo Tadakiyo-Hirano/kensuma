@@ -1,0 +1,2 @@
+class PeriodicSelfInspectionsUploader < Base
+end

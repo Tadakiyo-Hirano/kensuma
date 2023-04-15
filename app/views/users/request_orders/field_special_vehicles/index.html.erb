@@ -51,8 +51,10 @@
                     <%= FieldSpecialVehicle.human_attribute_name(:vehicle_name) %><br>
                     <%= field_special_vehicle.vehicle_name %>
                   </td>
-                  <td></td>
-                  <td></td>
+                  <td colspan="2">
+                    <%= "メーカー / 規格・性能 / 製造年 / 管理番号" %><br>
+                    <%= field_special_vehicle.content.values_at("maker", "standards_performance", "year_manufactured", "control_number").join(" / ") %>
+                  </td>
                   <td>
                     <%= link_to "削除", users_request_order_field_special_vehicle_path(@request_order, field_special_vehicle), method: :delete, data: { confirm: "#{field_special_vehicle.vehicle_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %>
                   </td>
@@ -63,16 +65,16 @@
                     <%= not_input_display(field_special_vehicle.driver_name) %>
                   </td>
                   <td>
-                    <%= FieldSpecialVehicle.human_attribute_name(:driver_license) %><br>
-                    <%= not_input_display(License.find_by(field_special_vehicle.driver_license).name) %>
+                    <%= FieldSpecialVehicle.human_attribute_name(:driver_licenses) %><br>
+                    <%= not_input_display(field_special_vehicle.driver_licenses.shift && field_special_vehicle.driver_licenses.join(", ")) %>
                   </td>
                   <td>
                     <%= FieldSpecialVehicle.human_attribute_name(:sub_driver_name) %><br>
                     <%= not_input_display(field_special_vehicle.sub_driver_name) %>
                   </td>
                   <td>
-                    <%= FieldSpecialVehicle.human_attribute_name(:sub_driver_license) %><br>
-                    <%= not_input_display(License.find_by(field_special_vehicle.sub_driver_license).name) %>
+                    <%= FieldSpecialVehicle.human_attribute_name(:sub_driver_licenses) %><br>
+                    <%= not_input_display(field_special_vehicle.sub_driver_licenses.shift && field_special_vehicle.sub_driver_licenses.join(", ")) %>
                   </td>
                 </tr>
                 <tr style="border: 0px #fff;">

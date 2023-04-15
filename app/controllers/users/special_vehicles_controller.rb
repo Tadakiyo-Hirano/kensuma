@@ -22,6 +22,7 @@ module Users
         check_exp_date_specific: Date.today.since(2.years).since(6.month),
         check_exp_date_machine:  Date.today.since(3.years),
         check_exp_date_car:      Date.today.since(5.years),
+        vehicle_type:            0,
         personal_insurance:      1,
         objective_insurance:     2,
         passenger_insurance:     3,
@@ -56,6 +57,17 @@ module Users
       flash[:danger] = "#{@special_vehicle.name}を削除しました"
       redirect_to users_special_vehicles_url
     end
+    
+    def destroy_image
+      special_vehicle = SpecialVehicle.find(params[:id])
+      column = params[:column]
+      current_images = special_vehicle.send(column.to_sym)
+      deleting_images = current_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      special_vehicle.update!(column.to_sym => current_images)
+      flash[:danger] = '削除しました'
+      redirect_to edit_users_special_vehicle_path(special_vehicle)
+    end
 
     private
 
@@ -68,7 +80,8 @@ module Users
         :year_manufactured, :control_number, :check_exp_date_year, :check_exp_date_month,
         :check_exp_date_specific, :check_exp_date_machine, :check_exp_date_car,
         :personal_insurance, :objective_insurance, :passenger_insurance, :other_insurance,
-        :exp_date_insurance
+        :exp_date_insurance, :vehicle_type, :owning_company_name,
+        { periodic_self_inspections: [] }, { in_house_inspections: [] }
       )
     end
   end

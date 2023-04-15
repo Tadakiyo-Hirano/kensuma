@@ -167,8 +167,7 @@ module DocumentsHelper
   end
 
   def foreign_exist(foreign_type, d_info, yes_no) # 「有」か「無」判定
-  #logger.debug(d_info.conten)
-
+  
     f_type = d_info&.content&.[]("subcon_#{foreign_type}")
     if f_type == "available"
       f_type = "有"
@@ -1396,8 +1395,26 @@ module DocumentsHelper
   
   # 現場情報-特殊車両-資格内容
   def target_license(vehicle_info)
-    worker = Worker.find_by(id: vehicle_info.driver_worker_id)
-    License.where(id: worker.worker_licenses.pluck(:license_id)).pluck(:name, :id)
+      worker = Worker.find_by(id: vehicle_info.driver_worker_id)
+    if worker.present?
+      skill_tr_table = worker.skill_trainings.where(driving_related: 1)
+      sp_education_table = worker.special_educations.where(driving_related: 1)
+      dr_license_table = ["大型免許", "中型免許", "中型免許(8t)に限る", "準中型免許",
+                            "普通免許", "大型特殊免許", "大型二輪免許", "普通二輪免許",
+                            "小型特殊免許", "原付免許", "牽引自動車第一種運転免許"]
+      tem_table = skill_tr_table + sp_education_table
+      tem_table = tem_table.pluck(:name) + dr_license_table
+    else
+      License.all.pluck(:name)
+    end
+  end
+  
+  def use_company_info(target)
+    if target == "company"
+      @field_special_vehicles.distinct.pluck(:use_company_name)
+    elsif target == "person"
+      @field_special_vehicles.distinct.pluck(:use_company_representative_name)
+    end
   end
 
   # 自身の書類一覧取得
