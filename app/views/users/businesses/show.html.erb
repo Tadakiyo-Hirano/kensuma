@@ -248,7 +248,7 @@
               <td><%= business_industry.construction_license_permission_type_identification_general_i18n %></td>
               <td><%= business_industry.construction_license_number_double_digit %></td>
               <td><%= business_industry.construction_license_number_six_digits %></td>
-              <td><%= business_industry.construction_license_number %></td>
+              <td><%= construction_license_number_string(business_industry) %></td>
               <td><%= business_industry.construction_license_updated_at %></td>
             </tr>
           <% end %>

@@ -33,6 +33,27 @@ module ApplicationHelper
     end
   end
 
+  # 建設許可証番号の組み合わせ表示
+  def construction_license_number_string(business_industry)
+    if business_industry.construction_license_permission_type_minister_governor == 'governor_permission'
+      "#{BusinessIndustry.construction_license_governor_permission_prefectures_i18n[business_industry.construction_license_governor_permission_prefecture]}知事(#{construction_license_permission_type_identification_text(business_industry.construction_license_permission_type_identification_general)}-#{business_industry.construction_license_number_double_digit.to_s.rjust(2, '0')})第#{business_industry.construction_license_number_six_digits.to_s.rjust(6)}号"
+    else
+      "国土交通大臣(#{construction_license_permission_type_identification_text(business_industry.construction_license_permission_type_identification_general)}-#{business_industry.construction_license_number_double_digit.to_s.rjust(2, '0')})第#{business_industry.construction_license_number_six_digits.to_s.rjust(6)}号"
+    end
+  end
+  
+  private
+  
+  def construction_license_permission_type_identification_text(type)
+    if type == 'identification'
+      '特'
+    elsif type == 'general'
+      '般'
+    else
+      ''
+    end
+  end  
+
   # 未入力表示
   def not_input_display(text)
     text.nil? || text.blank? ? '未登録' : text
