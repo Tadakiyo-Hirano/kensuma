@@ -842,68 +842,8 @@ class Document < ApplicationRecord
     error_msg_for_doc_20th.push('安全衛生行事(3月)を30字以内にしてください') if document_params[:content][:events_march].length > $CHARACTER_LIMIT30
     # 安全衛生担当役員名
     error_msg_for_doc_20th.push('安全衛生担当役員を選択してください') if document_params[:content][:safety_officer_name].blank?
-    # 安全衛生担当役員役職
-    error_msg_for_doc_20th.push('安全衛生担当役員の役職を入力してください') if document_params[:content][:safety_officer_post].blank?
-    # 総括安全衛生管理者名
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_name].blank?)
-      error_msg_for_doc_20th.push('総括安全衛生管理者を選択してください')
-    end
-    # 総括安全衛生管理者の役職
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_post].blank?)
-      error_msg_for_doc_20th.push('総括安全衛生管理者の役職を入力してください')
-    end
-    # 安全管理者名
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_name].blank?)
-      error_msg_for_doc_20th.push('安全管理者を選択してください')
-    end
-    # 安全管理者の役職
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_post].blank?)
-      error_msg_for_doc_20th.push('安全管理者の役職を入力してください')
-    end
-    # 衛生管理者名
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_name].blank?)
-      error_msg_for_doc_20th.push('衛生管理者を選択してください')
-    end
-    # 衛生管理者名の役職
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_post].blank?)
-      error_msg_for_doc_20th.push('衛生管理者の役職を入力してください')
-    end
-    # 安全衛生推進者名
-    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_name].blank?)
-      error_msg_for_doc_20th.push('安全衛生推進者を選択してください')
-    end
-    # 安全衛生推進者の役職
-    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_post].blank?)
-      error_msg_for_doc_20th.push('安全衛生推進者の役職を入力してください')
-    end
-    # 特記事項
     error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $CHARACTER_LIMIT300
     error_msg_for_doc_20th
-  end
-
-  #現場作業員の人数の取得(doc_20th)
-  def number_of_field_workers(order)
-    #元請の作業員の人数
-    prime_contractor = FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: order.id)
-    prime_contractor.nil? ? number_of_prime_contractor = 0 : number_of_prime_contractor = prime_contractor.size
-    #一次下請け以下の作業員の人数
-    request_order = RequestOrder.where(order_id: order.id)
-      array = []
-      request_order.each do |record|
-        array << record.id
-      end
-    number_of_primary_subcontractor = FieldWorker.where(field_workerable_type: RequestOrder).where("field_workerable_id IN (?)", array).size
-    return (number_of_prime_contractor + number_of_primary_subcontractor)
-  end
-
-  # 自身と、自身の階層下の現場情報(現場人数の取得がバリデーションで必要だったため)(doc_20th)
-  def document_site_info(request_order_uuid, sub_request_order_uuid)
-    request_order = RequestOrder.find_by(uuid: request_order_uuid)
-    if sub_request_order_uuid
-      RequestOrder.find_by(uuid: sub_request_order_uuid).order
-    else
-      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
-    end
   end
 
   # エラーメッセージ(持込機械等(電動工具電気溶接機等)使用届用)
