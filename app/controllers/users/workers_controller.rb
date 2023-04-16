@@ -242,7 +242,7 @@ module Users
         worker_special_educations_attributes:       [:id, :special_education_id, { images: [] }, :_destroy],
         worker_medical_attributes:                  [
           :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
-          { worker_exams_attributes: [:id, :worker_medical_id, :special_med_exam_id, :others, :_destroy] }
+          { worker_exams_attributes: %i[id worker_medical_id special_med_exam_id others _destroy] }
         ],
         worker_insurance_attributes:                %i[
           id
