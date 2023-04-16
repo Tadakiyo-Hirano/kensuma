@@ -12,4 +12,26 @@ class BusinessIndustry < ApplicationRecord
   validates :construction_license_number_double_digit, format: { with: /\A\d{2}\z/, message: 'は数字2桁で入力してください' }, presence: true, if: -> { business.construction_license_status == 'available' }
   validates :construction_license_number_six_digits, format: { with: /\A\d{1,6}\z/, message: 'は数字6桁以下で入力してください' }, presence: true, if: -> { business.construction_license_status == 'available' }
   validates :construction_license_updated_at, presence: true, if: -> { business.construction_license_status == 'available' }
+
+  # 建設許可証番号の組み合わせ表示
+  def construction_license_number_string
+    if construction_license_permission_type_minister_governor == 'governor_permission'
+      "#{BusinessIndustry.construction_license_governor_permission_prefectures_i18n[construction_license_governor_permission_prefecture]}知事(#{construction_license_permission_type_identification_text(construction_license_permission_type_identification_general)}-#{construction_license_number_double_digit.to_s.rjust(2, '0')})第#{construction_license_number_six_digits.to_s.rjust(6)}号"
+    else
+      "国土交通大臣(#{construction_license_permission_type_identification_text(construction_license_permission_type_identification_general)}-#{construction_license_number_double_digit.to_s.rjust(2, '0')})第#{construction_license_number_six_digits.to_s.rjust(6)}号"
+    end
+  end
+
+  private
+
+  # 建設許可証の特定・一般の整形
+  def construction_license_permission_type_identification_text(type)
+    if type == 'identification'
+      '特'
+    elsif type == 'general'
+      '般'
+    else
+      ''
+    end
+  end
 end

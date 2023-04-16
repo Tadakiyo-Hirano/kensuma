@@ -286,13 +286,12 @@
           required: true
         },
         "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: true
+          required: true,
+          maxlength: 2
         },
         "business[business_industries_attributes][construction_license_number_six_digits]": {
           required: true
-        },
-        "business[business_industries_attributes][construction_license_number]": {
-          required: true
+          maxlength: 6
         },
         "business[business_industries_attributes][construction_license_updated_at]": {
           required: true
@@ -357,10 +356,12 @@
           required: "どちらかを選択してください。"
         },
         "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: "2桁の番号を入力してください。"
+          required: "2桁の番号を入力してください。",
+          maxlength: "2桁以内で入力してください。"
         },
         "business[business_industries_attributes][construction_license_number_six_digits]": {
-          required: "6桁以下の番号を入力してください。"
+          required: "6桁以下の番号を入力してください。",
+          maxlength: "6桁以下で入力してください。"
         },
         "business[business_industries_attributes][construction_license_updated_at]": {
           required: "日付を選択してください。"
@@ -368,16 +369,19 @@
       },
       errorClass: "input_form_error"
     });
+
+
     // 入力欄を変更したときにバリデーションを実行
     $(".business-form-validation").change(function () {
       $(this).valid();
     });
   });
+
   // $(document).on('blur', '.business-form-validation input[type="text"]', function() {
   //   $(this).rules('add', {
   //     required: true,
   //     messages: {
-  //       required: "必須項目です。"
+  //       required: "入力してください。"
   //     }
   //   });
   // });
