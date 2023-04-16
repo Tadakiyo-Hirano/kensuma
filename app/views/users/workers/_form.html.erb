@@ -88,7 +88,7 @@
 <%# 生年月日 %>
 <%= f.label :birth_day_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :birth_day_on, class: "form-control", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
+<%= f.date_field :birth_day_on, class: "form-control", style: "width: 25%;", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
 
 <%# 血液型（ABO） %>
 <%= f.label :abo_blood_type %>
@@ -116,7 +116,7 @@
 <%# 雇入年月日 %>
 <%= f.label :hiring_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :hiring_on, class: "form-control", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
+<%= f.date_field :hiring_on, class: "form-control", style: "width: 25%;", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
 
 <%# 雇入前経験年数 %>
 <%= f.label :experience_term_before_hiring %>
@@ -238,8 +238,9 @@
   </div><br>
 
   <!-- WorkerMedicalここから -->
-  <div class="list-group-item">
-    <%= f.fields_for :worker_medical do |worker_medical| %>
+  
+  <%= f.fields_for :worker_medical do |worker_medical| %>
+    <div class="list-group-item">
       <%# 健康診断の受診状況 %>
       <div class="mb-3">
         <%= worker_medical.label :is_med_exam %>
@@ -253,7 +254,7 @@
       <%# 健康診断日 %>
       <div class="row mb-3">
         <%= worker_medical.label :med_exam_on %>
-        <%= worker_medical.date_field :med_exam_on, class: "form-control" %>
+        <%= worker_medical.date_field :med_exam_on, class: "form-control", style: "width: 25%;" %>
       </div>
       <%# 最近の健康状態 %>
       <div class="mb-3">
@@ -275,6 +276,9 @@
         <%= worker_medical.label :min_blood_pressure %>
         <%= worker_medical.number_field :min_blood_pressure, class: "form-control" %>
       </div>
+    </div>
+
+    <div class="list-group-item">
       <%# 特別健康診断の受診状況 %>
       <div class="mb-3">
         <%= worker_medical.label :is_special_med_exam %>
@@ -288,7 +292,7 @@
       <%# 特別健康診断日   %>
       <div class="row mb-3">
         <%= worker_medical.label :special_med_exam_on %>
-        <%= worker_medical.date_field :special_med_exam_on, class: "form-control" %>
+        <%= worker_medical.date_field :special_med_exam_on, class: "form-control", style: "width: 25%;" %>
       </div>
       <%# 特別健康診断 %>
       <%= worker_medical.fields_for :worker_exams do |worker_exam| %>
@@ -303,8 +307,8 @@
         },
         class: "btn btn-sm btn-primary"
       %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   <!-- WorkerMedicalここまで -->
 
   <!-- WorkerInsuranceここから -->
