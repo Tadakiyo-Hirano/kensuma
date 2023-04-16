@@ -52,6 +52,7 @@ module Users
     end
 
     def update
+      binding.pry
       if @business.update(business_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_business_url
@@ -115,7 +116,7 @@ module Users
     def business_params
       params.require(:business).permit(
         :uuid, :name, :name_kana, :branch_name, :representative_name, :address, :post_code,
-        :phone_number, :fax_number, :career_up_id, { career_up_card_copy: [] }, :business_type, { stamp_images: [] }, :employment_manager_name, :user_id,
+        :phone_number, :fax_number, :email, :career_up_id, { career_up_card_copy: [] }, :business_type, { stamp_images: [] }, :employment_manager_name, :user_id,
         :business_health_insurance_status, :business_health_insurance_association,
         :business_health_insurance_office_number, :business_welfare_pension_insurance_join_status,
         :business_welfare_pension_insurance_office_number,

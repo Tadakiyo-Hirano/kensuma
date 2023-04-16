@@ -13,7 +13,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.string :address, null: false
       t.string :phone_number, null: false
       t.string :fax_number
-      # t.string :email, null: false
+      t.string :email, null: false
       t.json :career_up_card_copy
       t.json :stamp_images
       t.json :industry_ids

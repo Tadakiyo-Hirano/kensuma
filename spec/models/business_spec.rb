@@ -73,40 +73,40 @@ RSpec.describe Business, type: :model do
       end
     end
 
-    # describe '#email' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.email = nil }
+    describe '#email' do
+      context '存在しない場合' do
+        before(:each) { subject.email = nil }
 
-    #     it 'バリデーションが通ること' do
-    #       expect(subject).to be_invalid
-    #     end
+        it 'バリデーションが通ること' do
+          expect(subject).to be_invalid
+        end
 
-    #     it 'バリデーションのエラーが正しいこと' do
-    #       subject.valid?
-    #       expect(subject.errors.full_messages).to include('メールアドレスを入力してください')
-    #     end
-    #   end
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('メールアドレスを入力してください')
+        end
+      end
 
-    #   %i[
-    #     email0.com
-    #     あああ.com
-    #     今井.com
-    #     @@.com
-    #   ].each do |email|
-    #     context '不正なemailの場合' do
-    #       before(:each) { subject.email = email }
+      %i[
+        email0.com
+        あああ.com
+        今井.com
+        @@.com
+      ].each do |email|
+        context '不正なemailの場合' do
+          before(:each) { subject.email = email }
 
-    #       it 'バリデーションに落ちること' do
-    #         expect(subject).to be_invalid
-    #       end
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
 
-    #       it 'バリデーションのエラーが正しいこと' do
-    #         subject.valid?
-    #         expect(subject.errors.full_messages).to include('メールアドレスは不正な値です')
-    #       end
-    #     end
-    #   end
-    # end
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('メールアドレスは不正な値です')
+          end
+        end
+      end
+    end
 
     describe '#address' do
       context '存在しない場合' do

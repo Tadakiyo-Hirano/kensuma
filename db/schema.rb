@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "address", null: false
     t.string "phone_number", null: false
     t.string "fax_number"
+    t.string "email", null: false
     t.json "career_up_card_copy"
     t.json "stamp_images"
     t.json "industry_ids"

@@ -6,7 +6,7 @@ User.where(role: 'admin').all.each do |user|
       name_kana:                                        "テストケンセツ#{user.id}",
       branch_name:                                      "テスト支店#{user.id}",
       representative_name:                              user.name,
-      # email:                                            "test_kensetu#{user.id}@email.com",
+      email:                                            "test_kensetu#{user.id}@email.com",
       address:                                          "東京都テスト区1-2-#{user.id}",
       post_code:                                        '0123456',
       phone_number:                                     '01234567898',
