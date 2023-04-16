@@ -317,6 +317,9 @@
           <th></th>
         </tr>
         <% @worker.worker_medical.worker_exams.each do |worker_exam| %>
+          <th><%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
+          <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
+          <td></td>
           <tr>
             <% if @worker.worker_medical.special_med_exams.first.id == worker_exam.special_med_exam_id %>
               <th><%= WorkerExam.human_attribute_name(:special_med_exam_id) %></th>

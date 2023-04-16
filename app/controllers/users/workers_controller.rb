@@ -241,7 +241,7 @@ module Users
         worker_skill_trainings_attributes:          [:id, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes:       [:id, :special_education_id, { images: [] }, :_destroy],
         worker_medical_attributes:                  [
-          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
+          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam, :is_special_med_exam,
           { worker_exams_attributes: %i[id worker_medical_id special_med_exam_id others _destroy] }
         ],
         worker_insurance_attributes:                %i[
@@ -254,6 +254,7 @@ module Users
           severance_pay_mutual_aid_type
           severance_pay_mutual_aid_name
           has_labor_insurance
+          health_insurance_image
         ]
       )
     end
