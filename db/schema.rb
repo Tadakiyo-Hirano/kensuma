@@ -299,6 +299,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "carried_quantity_three"
     t.string "carried_quantity_four"
     t.string "carried_quantity_five"
+    t.date "date_submitted", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
@@ -306,12 +307,13 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "uuid", null: false
     t.integer "driver_worker_id"
     t.string "driver_name"
-    t.string "driver_license"
+    t.json "driver_licenses"
+    t.integer "sub_driver_worker_id"
+    t.string "sub_driver_name"
+    t.json "sub_driver_licenses"
     t.string "vehicle_name", null: false
     t.json "content", null: false
-    t.integer "vehicle_type"
     t.string "carry_on_company_name"
-    t.string "owning_company_name"
     t.string "use_company_name"
     t.date "carry_on_date"
     t.date "carry_out_date"
@@ -323,9 +325,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.bigint "field_special_vehicleable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "sub_driver_worker_id"
-    t.string "sub_driver_name"
-    t.string "sub_driver_license"
     t.string "use_company_representative_name"
     t.string "owning_company_representative_name"
     t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
@@ -473,7 +472,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
     t.string "site_uu_id", null: false
     t.string "site_name", null: false
     t.string "order_name", null: false
@@ -488,43 +486,30 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "order_supervisor_company"
     t.string "order_supervisor_apply", null: false
     t.string "construction_name", null: false
-    t.string "construction_details", null: false
+    t.string "construction_details"
     t.date "start_date"
     t.date "end_date"
     t.date "contract_date"
-    t.string "submission_destination", null: false
-    t.string "general_safety_responsible_person_name", null: false
-    t.string "vice_president_name", null: false
-    t.string "vice_president_company_name", null: false
-    t.string "secretary_name", null: false
-    t.string "health_and_safety_manager_name", null: false
-    t.string "general_safety_agent_name", null: false
-    t.string "supervisor_name", null: false
-    t.string "supervisor_apply", null: false
     t.string "site_agent_name", null: false
     t.string "site_agent_apply", null: false
+    t.string "supervisor_name", null: false
+    t.string "supervisor_apply", null: false
+    t.string "professional_engineer_name_1st"
+    t.string "professional_engineer_qualification_1st"
+    t.string "professional_engineer_details_1st"
+    t.string "professional_engineer_name_2nd"
+    t.string "professional_engineer_qualification_2nd"
+    t.string "professional_engineer_details_2nd"
     t.string "supervising_engineer_name", null: false
     t.integer "supervising_engineer_check", null: false
     t.string "supervising_engineer_qualification"
     t.string "supervising_engineer_assistant_name"
     t.string "supervising_engineer_assistant_qualification"
-    t.string "professional_engineer_name"
-    t.string "professional_engineer_qualification"
-    t.string "professional_engineer_construction_details"
-    t.string "professional_engineer_required_qualification"
-    t.string "safety_officer_name", null: false
-    t.string "safety_officer_position_name", null: false
-    t.string "general_safety_manager_name"
-    t.string "general_safety_manager_position_name"
-    t.string "safety_manager_name"
-    t.string "safety_manager_position_name"
-    t.string "health_manager_name"
-    t.string "health_manager_position_name"
-    t.string "health_and_safety_promoter_name"
-    t.string "health_and_safety_promoter_position_name"
-    t.string "confirm_name", null: false
-    t.date "accept_confirm_date"
-    t.string "subcontractor_name", null: false
+    t.string "general_safety_responsible_person_name"
+    t.string "general_safety_agent_name"
+    t.string "health_and_safety_manager_name", null: false
+    t.string "submission_destination", null: false
+    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
@@ -545,22 +530,22 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_id"
     t.string "uuid", null: false
+    t.string "occupation"
     t.string "construction_name"
     t.string "construction_details"
     t.date "start_date"
     t.date "end_date"
     t.date "contract_date"
+    t.string "site_agent_name"
+    t.string "site_agent_apply"
     t.string "supervisor_name"
     t.string "supervisor_apply"
     t.string "professional_engineer_name"
-    t.string "professional_engineer_qualification"
     t.string "professional_engineer_details"
-    t.string "professional_engineer_required_qualification"
+    t.string "professional_engineer_qualification"
     t.integer "professional_construction"
     t.string "construction_manager_name"
     t.string "construction_manager_position_name"
-    t.string "site_agent_name"
-    t.string "site_agent_apply"
     t.string "lead_engineer_name"
     t.integer "lead_engineer_check"
     t.string "lead_engineer_qualification"
@@ -572,9 +557,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
     t.string "registered_core_engineer_qualification"
-    t.integer "professional_engineer_skill_training"
-    t.integer "lead_engineer_skill_training"
-    t.integer "registered_core_engineer_skill_training"
+    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
@@ -590,6 +573,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "short_name", null: false
+    t.integer "driving_related"
     t.json "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -609,6 +593,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "special_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
+    t.integer "driving_related"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -624,18 +609,22 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "name", null: false
     t.string "maker", null: false
     t.string "standards_performance", null: false
+    t.string "owning_company_name", null: false
+    t.integer "vehicle_type"
     t.date "year_manufactured", null: false
     t.string "control_number", null: false
     t.date "check_exp_date_year", null: false
     t.date "check_exp_date_month", null: false
-    t.date "check_exp_date_specific", null: false
+    t.date "check_exp_date_specific"
     t.date "check_exp_date_machine", null: false
     t.date "check_exp_date_car", null: false
+    t.date "exp_date_insurance"
     t.integer "personal_insurance"
     t.integer "objective_insurance"
     t.integer "passenger_insurance"
     t.integer "other_insurance"
-    t.date "exp_date_insurance"
+    t.json "periodic_self_inspections"
+    t.json "in_house_inspections"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

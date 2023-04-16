@@ -107,6 +107,16 @@ class Document < ApplicationRecord
     end
   end
 
+  # エラーメッセージ(工事作業所災害防止協議会兼施工体系図用)
+  def error_msg_for_doc_18th(document_params)
+    error_msg_for_doc_18th = []
+    # 元方安全衛生管理者名
+    # if document_params[:content][:health_and_safety_manager_name].blank?
+    #   error_msg_for_doc_18th.push('元方安全衛生管理者名を入力してください')
+    # end
+    error_msg_for_doc_18th
+  end
+
   # エラーメッセージ(工事安全衛生計画書用)
   def error_msg_for_doc_19th(document_params)
     error_msg_for_doc_19th = []
@@ -832,68 +842,8 @@ class Document < ApplicationRecord
     error_msg_for_doc_20th.push('安全衛生行事(3月)を30字以内にしてください') if document_params[:content][:events_march].length > $CHARACTER_LIMIT30
     # 安全衛生担当役員名
     error_msg_for_doc_20th.push('安全衛生担当役員を選択してください') if document_params[:content][:safety_officer_name].blank?
-    # 安全衛生担当役員役職
-    error_msg_for_doc_20th.push('安全衛生担当役員の役職を入力してください') if document_params[:content][:safety_officer_post].blank?
-    # 総括安全衛生管理者名
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_name].blank?)
-      error_msg_for_doc_20th.push('総括安全衛生管理者を選択してください')
-    end
-    # 総括安全衛生管理者の役職
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT100) && (document_params[:content][:general_manager_post].blank?)
-      error_msg_for_doc_20th.push('総括安全衛生管理者の役職を入力してください')
-    end
-    # 安全管理者名
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_name].blank?)
-      error_msg_for_doc_20th.push('安全管理者を選択してください')
-    end
-    # 安全管理者の役職
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:safety_manager_post].blank?)
-      error_msg_for_doc_20th.push('安全管理者の役職を入力してください')
-    end
-    # 衛生管理者名
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_name].blank?)
-      error_msg_for_doc_20th.push('衛生管理者を選択してください')
-    end
-    # 衛生管理者名の役職
-    if (number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT50) && (document_params[:content][:hygiene_manager_post].blank?)
-      error_msg_for_doc_20th.push('衛生管理者の役職を入力してください')
-    end
-    # 安全衛生推進者名
-    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_name].blank?)
-      error_msg_for_doc_20th.push('安全衛生推進者を選択してください')
-    end
-    # 安全衛生推進者の役職
-    if ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid)) >= $WORKER_NUMBER_LIMIT10) && ((number_of_field_workers(document_site_info(request_order_uuid, sub_request_order_uuid))) < $WORKER_NUMBER_LIMIT50)) && (document_params[:content][:health_and_safety_promoter_post].blank?)
-      error_msg_for_doc_20th.push('安全衛生推進者の役職を入力してください')
-    end
-    # 特記事項
     error_msg_for_doc_20th.push('特記事項を300字以内にしてください') if document_params[:content][:remarks].length > $CHARACTER_LIMIT300
     error_msg_for_doc_20th
-  end
-
-  #現場作業員の人数の取得(doc_20th)
-  def number_of_field_workers(order)
-    #元請の作業員の人数
-    prime_contractor = FieldWorker.where(field_workerable_type: Order).where(field_workerable_id: order.id)
-    prime_contractor.nil? ? number_of_prime_contractor = 0 : number_of_prime_contractor = prime_contractor.size
-    #一次下請け以下の作業員の人数
-    request_order = RequestOrder.where(order_id: order.id)
-      array = []
-      request_order.each do |record|
-        array << record.id
-      end
-    number_of_primary_subcontractor = FieldWorker.where(field_workerable_type: RequestOrder).where("field_workerable_id IN (?)", array).size
-    return (number_of_prime_contractor + number_of_primary_subcontractor)
-  end
-
-  # 自身と、自身の階層下の現場情報(現場人数の取得がバリデーションで必要だったため)(doc_20th)
-  def document_site_info(request_order_uuid, sub_request_order_uuid)
-    request_order = RequestOrder.find_by(uuid: request_order_uuid)
-    if sub_request_order_uuid
-      RequestOrder.find_by(uuid: sub_request_order_uuid).order
-    else
-      request_order.parent_id.nil? ? Order.find(request_order.order_id) : request_order
-    end
   end
 
   # エラーメッセージ(持込機械等(電動工具電気溶接機等)使用届用)
@@ -989,12 +939,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push('打合日を入力してください') if document_params[:content][:meeting_date].blank?
     #実作業日
     error_msg_for_doc_22nd.push('実作業日を入力してください') if document_params[:content][:actual_work_date].blank?
-    #職種1
-    if ((subcontractor_array(request_order_uuid).slice(0)).present?) && (document_params[:content][:occupation_1st].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(0))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:occupation_1st].present?)
-      error_msg_for_doc_22nd.push("1行目の職種は入力しないでください")
-    end
     #必要資格1
     error_msg_for_doc_22nd.push("1行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:required_qualification_1st].present?)
     #作業内容1
@@ -1035,12 +979,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("1行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:corrective_action_confirmation_date_1st].present?)
     #是正確認者1
     error_msg_for_doc_22nd.push("1行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(0)).blank?) && (document_params[:content][:corrective_action_reviewer_1st].present?)
-    #職種2
-    if ((subcontractor_array(request_order_uuid).slice(1)).present?) && (document_params[:content][:occupation_2nd].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(1))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:occupation_2nd].present?)
-      error_msg_for_doc_22nd.push("2行目の職種を入力しないでください")
-    end
     #必要資格2
     error_msg_for_doc_22nd.push("2行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:required_qualification_2nd].present?)
     #作業内容2
@@ -1081,12 +1019,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("2行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:corrective_action_confirmation_date_2nd].present?)
     #是正確認者2
     error_msg_for_doc_22nd.push("2行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(1)).blank?) && (document_params[:content][:corrective_action_reviewer_2nd].present?)
-    #職種3
-    if ((subcontractor_array(request_order_uuid).slice(2)).present?) && (document_params[:content][:occupation_3rd].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(2))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:occupation_3rd].present?)
-      error_msg_for_doc_22nd.push("3行目の職種を入力しないでください")
-    end
     #必要資格3
     error_msg_for_doc_22nd.push("3行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:required_qualification_3rd].present?)
     #作業内容3
@@ -1127,12 +1059,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("3行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:corrective_action_confirmation_date_3rd].present?)
     #是正確認者3
     error_msg_for_doc_22nd.push("3行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(2)).blank?) && (document_params[:content][:corrective_action_reviewer_3rd].present?)
-    #職種4
-    if ((subcontractor_array(request_order_uuid).slice(3)).present?) && (document_params[:content][:occupation_4th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(3))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:occupation_4th].present?)
-      error_msg_for_doc_22nd.push("4行目の職種を入力しないでください")
-    end
     #必要資格4
     error_msg_for_doc_22nd.push("4行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:required_qualification_4th].present?)
     #作業内容4
@@ -1173,12 +1099,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("4行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:corrective_action_confirmation_date_4th].present?)
     #是正確認者4
     error_msg_for_doc_22nd.push("4行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(3)).blank?) && (document_params[:content][:corrective_action_reviewer_4th].present?)
-    #職種5
-    if ((subcontractor_array(request_order_uuid).slice(4)).present?) && (document_params[:content][:occupation_5th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(4))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:occupation_5th].present?)
-      error_msg_for_doc_22nd.push("5行目の職種を入力しないでください")
-    end
     #必要資格5
     error_msg_for_doc_22nd.push("5行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:required_qualification_5th].present?)
     #作業内容5
@@ -1219,12 +1139,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("5行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:corrective_action_confirmation_date_5th].present?)
     #是正確認者5
     error_msg_for_doc_22nd.push("5行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(4)).blank?) && (document_params[:content][:corrective_action_reviewer_5th].present?)
-    #職種6
-    if ((subcontractor_array(request_order_uuid).slice(5)).present?) && (document_params[:content][:occupation_6th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(5))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:occupation_6th].present?)
-      error_msg_for_doc_22nd.push("6行目の職種を入力しないでください")
-    end
     #必要資格6
     error_msg_for_doc_22nd.push("6行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:required_qualification_6th].present?)
     #作業内容6
@@ -1265,12 +1179,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("6行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:corrective_action_confirmation_date_6th].present?)
     #是正確認者6
     error_msg_for_doc_22nd.push("6行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(5)).blank?) && (document_params[:content][:corrective_action_reviewer_6th].present?)
-    #職種7
-    if ((subcontractor_array(request_order_uuid).slice(6)).present?) && (document_params[:content][:occupation_7th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(6))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:occupation_7th].present?)
-      error_msg_for_doc_22nd.push("7行目の職種を入力しないでください")
-    end
     #必要資格7
     error_msg_for_doc_22nd.push("7行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:required_qualification_7th].present?)
     #作業内容7
@@ -1311,12 +1219,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("7行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:corrective_action_confirmation_date_7th].present?)
     #是正確認者7
     error_msg_for_doc_22nd.push("7行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(6)).blank?) && (document_params[:content][:corrective_action_reviewer_7th].present?)
-    #職種8
-    if ((subcontractor_array(request_order_uuid).slice(7)).present?) && (document_params[:content][:occupation_8th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(7))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:occupation_8th].present?)
-      error_msg_for_doc_22nd.push("8行目の職種を入力しないでください")
-    end
     #必要資格8
     error_msg_for_doc_22nd.push("8行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:required_qualification_8th].present?)
     #作業内容8
@@ -1357,12 +1259,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("8行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:corrective_action_confirmation_date_8th].present?)
     #是正確認者8
     error_msg_for_doc_22nd.push("8行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(7)).blank?) && (document_params[:content][:corrective_action_reviewer_8th].present?)
-    #職種9
-    if ((subcontractor_array(request_order_uuid).slice(8)).present?) && (document_params[:content][:occupation_9th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(8))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:occupation_9th].present?)
-      error_msg_for_doc_22nd.push("9行目の職種を入力しないでください")
-    end
     #必要資格9
     error_msg_for_doc_22nd.push("9行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:required_qualification_9th].present?)
     #作業内容9
@@ -1403,12 +1299,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("9行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:corrective_action_confirmation_date_9th].present?)
     #是正確認者9
     error_msg_for_doc_22nd.push("9行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(8)).blank?) && (document_params[:content][:corrective_action_reviewer_9th].present?)
-    #職種10
-    if ((subcontractor_array(request_order_uuid).slice(9)).present?) && (document_params[:content][:occupation_10th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(9))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:occupation_10th].present?)
-      error_msg_for_doc_22nd.push("10行目の職種を入力しないでください")
-    end
     #必要資格10
     error_msg_for_doc_22nd.push("10行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:required_qualification_10th].present?)
     #作業内容10
@@ -1449,12 +1339,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("10行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:corrective_action_confirmation_date_10th].present?)
     #是正確認者10
     error_msg_for_doc_22nd.push("10行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(9)).blank?) && (document_params[:content][:corrective_action_reviewer_10th].present?)
-    #職種11
-    if ((subcontractor_array(request_order_uuid).slice(10)).present?) && (document_params[:content][:occupation_11th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(10))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:occupation_11th].present?)
-      error_msg_for_doc_22nd.push("11行目の職種を入力しないでください")
-    end
     #必要資格11
     error_msg_for_doc_22nd.push("11行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:required_qualification_11th].present?)
     #作業内容11
@@ -1495,12 +1379,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("11行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:corrective_action_confirmation_date_11th].present?)
     #是正確認者11
     error_msg_for_doc_22nd.push("11行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(10)).blank?) && (document_params[:content][:corrective_action_reviewer_11th].present?)
-    #職種12
-    if ((subcontractor_array(request_order_uuid).slice(11)).present?) && (document_params[:content][:occupation_12th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(11))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:occupation_12th].present?)
-      error_msg_for_doc_22nd.push("12行目の職種を入力しないでください")
-    end
     #必要資格12
     error_msg_for_doc_22nd.push("12行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:required_qualification_12th].present?)
     #作業内容12
@@ -1541,12 +1419,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("12行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:corrective_action_confirmation_date_12th].present?)
     #是正確認者12
     error_msg_for_doc_22nd.push("12行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(11)).blank?) && (document_params[:content][:corrective_action_reviewer_12th].present?)
-    #職種13
-    if ((subcontractor_array(request_order_uuid).slice(12)).present?) && (document_params[:content][:occupation_13th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(12))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:occupation_13th].present?)
-      error_msg_for_doc_22nd.push("13行目の職種を入力しないでください")
-    end
     #必要資格13
     error_msg_for_doc_22nd.push("13行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:required_qualification_13th].present?)
     #作業内容13
@@ -1587,12 +1459,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("13行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:corrective_action_confirmation_date_13th].present?)
     #是正確認者13
     error_msg_for_doc_22nd.push("13行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(12)).blank?) && (document_params[:content][:corrective_action_reviewer_13th].present?)
-    #職種14
-    if ((subcontractor_array(request_order_uuid).slice(13)).present?) && (document_params[:content][:occupation_14th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(13))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:occupation_14th].present?)
-      error_msg_for_doc_22nd.push("14行目の職種を入力しないでください")
-    end
     #必要資格14
     error_msg_for_doc_22nd.push("14行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:required_qualification_14th].present?)
     #作業内容14
@@ -1633,12 +1499,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("14行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:corrective_action_confirmation_date_14th].present?)
     #是正確認者14
     error_msg_for_doc_22nd.push("14行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(13)).blank?) && (document_params[:content][:corrective_action_reviewer_14th].present?)
-    #職種15
-    if ((subcontractor_array(request_order_uuid).slice(14)).present?) && (document_params[:content][:occupation_15th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(14))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:occupation_15th].present?)
-      error_msg_for_doc_22nd.push("15行目の職種を入力しないでください")
-    end
     #必要資格15
     error_msg_for_doc_22nd.push("15行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:required_qualification_15th].present?)
     #作業内容15
@@ -1679,12 +1539,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("15行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:corrective_action_confirmation_date_15th].present?)
     #是正確認者15
     error_msg_for_doc_22nd.push("15行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(14)).blank?) && (document_params[:content][:corrective_action_reviewer_15th].present?)
-    #職種16
-    if ((subcontractor_array(request_order_uuid).slice(15)).present?) && (document_params[:content][:occupation_16th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(15))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:occupation_16th].present?)
-      error_msg_for_doc_22nd.push("16行目の職種を入力しないでください")
-    end
     #必要資格16
     error_msg_for_doc_22nd.push("16行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:required_qualification_16th].present?)
     #作業内容16
@@ -1725,12 +1579,6 @@ class Document < ApplicationRecord
     error_msg_for_doc_22nd.push("16行目の是正確認日を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:corrective_action_confirmation_date_16th].present?)
     #是正確認者16
     error_msg_for_doc_22nd.push("16行目の確認者(是正確認)を選択しないでください") if ((subcontractor_array(request_order_uuid).slice(15)).blank?) && (document_params[:content][:corrective_action_reviewer_16th].present?)
-    #職種17
-    if ((subcontractor_array(request_order_uuid).slice(16)).present?) && (document_params[:content][:occupation_17th].blank?)
-      error_msg_for_doc_22nd.push("#{business_name(subcontractor_array(request_order_uuid).slice(16))}の職種を入力してください")
-    elsif ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:occupation_17th].present?)
-      error_msg_for_doc_22nd.push("17行目の職種を入力しないでください")
-    end
     #必要資格17
     error_msg_for_doc_22nd.push("17行目の危険作業の名称、及び各種免許・資格の名称を入力しないでください") if ((subcontractor_array(request_order_uuid).slice(16)).blank?) && (document_params[:content][:required_qualification_17th].present?)
     #作業内容17

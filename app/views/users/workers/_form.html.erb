@@ -21,7 +21,7 @@
 <%= f.country_select :country, { priority_countries: ["JP"] }, { class: "form-control", id: "country-select" } %>
 <br>
 
-<!-- 外国人建設就労者情報 -->
+<%# 外国人建設就労者情報 %>
 <div class="list-group" id="status-of-residence-field" style="display: none;">
   <h5>外国人就労者の方</h5>
   <div class="list-group-item">
@@ -34,8 +34,8 @@
         </div>
       <% end %>
     </div>
-  </div>
-</div><br>
+  </div><br>
+</div>
 
 <%# 性別 %>
 <%= f.label :sex %>

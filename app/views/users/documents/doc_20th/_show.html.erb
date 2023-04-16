@@ -74,10 +74,10 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s7"></td>
           <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
-          <td class="doc_20_s49" colspan="9" rowspan="2">
-            <%= document_info_for_prime_contractor_name %>
+          <td class="doc_20_s52" colspan="9" rowspan="2">
+            <%= @document.content&.[]('prime_contractor_confirmation')%>
           </td>
-          <!--「統括安全衛生責任者名」22-001-->
+         <!--「元請会社の確認欄」20-001-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
@@ -1262,8 +1262,8 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全衛生担当役員</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= @document.content&.[]('safety_officer_post') %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('safety_officer_name')) %>
           </td>
           <!--「安全衛生担当役員の役職名」20-040-->
           <td class="doc_20_s52" colspan="13">
@@ -1275,19 +1275,21 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">雇用管理責任者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= @document.content&.[]('employment_manager_post') %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(Worker.find(request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id'))&.name) if request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id').present? %>
           </td>
           <!--「雇用管理責任者・役職名」20-042-->
-          <td class="doc_20_s50" colspan="13"></td>
+          <td class="doc_20_s50" colspan="13">
+            <%= Worker.find(request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id'))&.name if request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id').present? %>
+          </td>
           <!--「雇用管理責任者名」20-043-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">総括安全衛生管理者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= @document.content&.[]('general_manager_post') %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('general_manager_name')) %>
           </td>
           <!--「総括安全衛生管理者の役職名」20-044-->
           <td class="doc_20_s52" colspan="13">
@@ -1299,10 +1301,10 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全管理者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= @document.content&.[]('safety_manager_post') %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('safety_manager_name')) %>
           </td>
-          <!--「安全管理者の役員名」20-046-->
+          <!--「安全管理者の役職名」20-046-->
           <td class="doc_20_s52" colspan="13">
             <%= @document.content&.[]('safety_manager_name') %>
           </td>
@@ -1312,8 +1314,8 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">衛生管理者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= @document.content&.[]('hygiene_manager_post') %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('hygiene_manager_name')) %>
           </td>
           <!--「衛生管理者の役職名」20-048-->
           <td class="doc_20_s52" colspan="13">
@@ -1325,8 +1327,8 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">安全衛生推進者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= @document.content&.[]('health_and_safety_promoter_post') %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('health_and_safety_promoter_name')) %>
           </td>
           <!--「安全衛生推進の役職名」20-050-->
           <td class="doc_20_s52" colspan="13">
@@ -1338,12 +1340,12 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">工事担当責任者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= @document.content&.[]('construction_manager_post') %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(request_order_site_agent_name) %>
           </td>
           <!--「各会社の工事担当責任者の役職名」20-052-->
           <td class="doc_20_s50" colspan="13">
-            <%= document_site_info.site_agent_name %>
+            <%= request_order_site_agent_name %>
           </td>
           <!--「各会社の工事担当責任者」20-053-->
           <td class="doc_20_s3"></td>

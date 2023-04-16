@@ -30,7 +30,7 @@ class Worker < ApplicationRecord
   enum rh_blood_type: { plus: 0, minus: 1, rh_null: 2 }
   enum employment_contract: { available: 0, not_available: 1, not_applicable: 2 }, _prefix: true       # 雇用契約書取り交わし状況
   enum sex: { man: 0, woman: 1 }
-  enum status_of_residence: { permanent_resident: 0, specified_skill: 1, specific_activity: 2 }, _prefix: true # 在留資格
+  enum status_of_residence: { permanent_resident: 0, skill_practice: 1, construction_employment: 2, specified_skill: 3 }, _prefix: true # 在留資格
   enum confirmed_check: { checked: 1, unchecked: 0 }, _prefix: true # キャリアアップシステム登録情報が最新であることの確認日
 
   before_create -> { self.uuid = SecureRandom.uuid }

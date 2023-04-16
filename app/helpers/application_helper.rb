@@ -63,74 +63,83 @@ module ApplicationHelper
     current_user.business.name || current_user.admin_user.business.name unless current_user.business.nil?
   end
 
-  # プレースホルダー（氏名）
-  def example_name
-    '例 建築　太郎'
+  # 主任技術者(専任･非専任) (現場情報)
+  def order_lead_engineer_check_yes(type)
+    type == '専任' ? tag.span('専任', class: :circle) : '専任'
   end
 
-  # プレースホルダー（フリガナ）
-  def example_name_kana
-    '例 ケンチク　タロウ'
+  def order_lead_engineer_check_no(type)
+    type == '非専任' ? tag.span('非専任', class: :circle) : '非専任'
   end
 
-  # プレースホルダー（メールアドレス）
-  def example_email
-    '例 example@email.com'
-  end
-
-  # プレースホルダー（ハイフン入力の注釈）
-  def annotation_hyphen
-    'ハイフンありでも、なしでも入力出来ます'
-  end
-
-  # 任意の複数箇所にハイフン差し込み
-  def add_hyphen(array_delimiter, colum_name)
-    if colum_name.present?
-      delimiter_sum = 0
-      array_delimiter.each_with_index do |delimiter, number_of_hyphens|
-        delimiter_sum += array_delimiter[number_of_hyphens - 1] if number_of_hyphens.positive?
-        colum_name.insert(delimiter + delimiter_sum + number_of_hyphens, '-')
+    # プレースホルダー（氏名）
+    def example_name
+      '例 建築　太郎'
+    end
+  
+    # プレースホルダー（フリガナ）
+    def example_name_kana
+      '例 ケンチク　タロウ'
+    end
+  
+    # プレースホルダー（メールアドレス）
+    def example_email
+      '例 example@email.com'
+    end
+  
+    # プレースホルダー（ハイフン入力の注釈）
+    def annotation_hyphen
+      'ハイフンありでも、なしでも入力出来ます'
+    end
+  
+    # 任意の複数箇所にハイフン差し込み
+    def add_hyphen(array_delimiter, colum_name)
+      if colum_name.present?
+        delimiter_sum = 0
+        array_delimiter.each_with_index do |delimiter, number_of_hyphens|
+          delimiter_sum += array_delimiter[number_of_hyphens - 1] if number_of_hyphens.positive?
+          colum_name.insert(delimiter + delimiter_sum + number_of_hyphens, '-')
+        end
+      end
+      colum_name
+    end
+  
+    # 電話番号のハイフン差し込み
+    def phone_number_add_hyphen(phone_number)
+      case phone_number.size
+      when 10
+        add_hyphen([4, 2], phone_number)
+      when 11
+        add_hyphen([3, 4], phone_number)
+      else
+        phone_number
       end
     end
-    colum_name
-  end
-
-  # 電話番号のハイフン差し込み
-  def phone_number_add_hyphen(phone_number)
-    case phone_number.size
-    when 10
-      add_hyphen([4, 2], phone_number)
-    when 11
-      add_hyphen([3, 4], phone_number)
-    else
-      phone_number
+  
+    # 運転免許種類省略名インデックス
+    def all_driver_licences_index_ry
+      {
+        '大型免許'         => '大型',
+        '中型免許'         => '中型',
+        '中型免許(8t)に限る'  => '中型(8t)まで',
+        '準中型免許'        => '準中型',
+        '普通免許'         => '普通',
+        '大型特殊免許'       => '大特',
+        '大型二輪免許'       => '大自二',
+        '普通二輪免許'       => '普自二',
+        '小型特殊免許'       => '小特',
+        '原付免許'         => '原付',
+        '牽引自動車第一種運転免許' => '牽引'
+      }
     end
-  end
-
-  # 運転免許種類省略名インデックス
-  def all_driver_licences_index_ry
-    {
-      '大型免許'         => '大型',
-      '中型免許'         => '中型',
-      '中型免許(8t)に限る'  => '中型(8t)まで',
-      '準中型免許'        => '準中型',
-      '普通免許'         => '普通',
-      '大型特殊免許'       => '大特',
-      '大型二輪免許'       => '大自二',
-      '普通二輪免許'       => '普自二',
-      '小型特殊免許'       => '小特',
-      '原付免許'         => '原付',
-      '牽引自動車第一種運転免許' => '牽引'
-    }
-  end
-
-  # 半角スペースのある文字列を配列にする
-  def format_array(driver_licences)
-    driver_licences.split(' ')
-  end
-
-  # 自動車運転免許を短縮表記に変換する
-  def driver_licence_short_form(driver_licence)
-    format_array(driver_licence).map { |licence| all_driver_licences_index_ry[licence] }.join(' ')
-  end
+  
+    # 半角スペースのある文字列を配列にする
+    def format_array(driver_licences)
+      driver_licences.split(' ')
+    end
+  
+    # 自動車運転免許を短縮表記に変換する
+    def driver_licence_short_form(driver_licence)
+      format_array(driver_licence).map { |licence| all_driver_licences_index_ry[licence] }.join(' ')
+    end
 end

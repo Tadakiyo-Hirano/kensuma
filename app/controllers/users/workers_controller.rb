@@ -1,6 +1,7 @@
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
+    before_action :convert_to_full_width, only: %i[create update]
 
     def index
       @workers = current_business.workers
@@ -124,6 +125,13 @@ module Users
 
     def set_worker
       @worker = current_business.workers.find_by(uuid: params[:uuid])
+    end
+
+    # 半角カタカナを全角カタカナに変換する
+    def convert_to_full_width
+      if params[:worker][:name_kana].present?
+        params[:worker][:name_kana] = params[:worker][:name_kana].gsub(/[\uFF61-\uFF9F]+/) { |str| str.unicode_normalize(:nfkc) }
+      end
     end
 
     def worker_params_with_converted

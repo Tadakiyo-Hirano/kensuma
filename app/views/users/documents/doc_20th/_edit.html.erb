@@ -81,8 +81,8 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s7"></td>
           <td class="doc_20_s6" colspan="2" rowspan="2">元 請<br> 確認欄</td>
-          <td class="doc_20_s49" colspan="9" rowspan="2">
-            <%= document_info_for_prime_contractor_name %>
+          <td class="doc_20_s52" colspan="9" rowspan="2">
+            <%= f.text_field name = 'content[prime_contractor_confirmation]',value: @document.content&.[]('prime_contractor_confirmation') %>
           </td><!-- 20-001「元請会社の確認欄」-->
           <td class="doc_20_s3"></td>
         </tr>
@@ -1451,16 +1451,13 @@
           <td class="doc_20_s42" colspan="14">
             安全衛生担当役員  <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
           </td>
-          <td class="doc_20_s52" colspan="13">
-            <%= f.text_field name = 'content[safety_officer_post]', id: :safety_officer_post,
-                              value: @document.content&.[]('safety_officer_post'),
-                              class: "form-control"
-            %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('safety_officer_name')) %>
           </td><!--20-040「安全衛生担当役員の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[safety_officer_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[safety_officer_name]', name_of_workers,
                                 { selected: @document.content&.[]('safety_officer_name'), include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm', :onchange => "catchSafetyOfficerName($(this).val())" }
+                                { class: 'form-control form-control-sm'}
             %>
           </td><!--20-041「安全衛生担当役員名」-->
           <td class="doc_20_s3"></td>
@@ -1468,34 +1465,26 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">雇用管理責任者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= f.text_field name = 'content[employment_manager_post]',
-                              value: @document.content&.[]('employment_manager_post'),
-                              class: "form-control"
-            %>
-          </td><!--20-042「雇用管理責任者・役職名」※1/17時点で未実装のためペンディング-->
           <td class="doc_20_s50" colspan="13">
-          </td><!--20-043「雇用管理責任者名」※1/17時点で未実装のためペンディング-->
+            <%= workers_post(Worker.find(request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id'))&.name) if request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id').present? %>
+          </td><!--20-042「雇用管理責任者・役職名」-->
+          <td class="doc_20_s50" colspan="13">
+            <%= Worker.find(request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id'))&.name if request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id').present? %>
+          </td><!--20-043「雇用管理責任者名」-->
           <td class="doc_20_s3"></td>
         </tr>
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">
             総括安全衛生管理者
-          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT100) %>
-            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <% end %>
           </td>
-          <td class="doc_20_s52" colspan="13">
-            <%= f.text_field name = 'content[general_manager_post]', id: :general_manager_post,
-                              value: @document.content&.[]('general_manager_post'),
-                              class: "form-control"
-            %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('general_manager_name')) %>
           </td><!--20-044「総括安全衛生管理の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[general_manager_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[general_manager_name]', name_of_workers,
                                 { selected: @document.content&.[]('general_manager_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm', :onchange => "catchGeneralManagerName($(this).val())" }
+                                { class: 'form-control form-control-sm'}
             %>
           </td><!--20-045「総括安全衛生管理者名」-->
           <td class="doc_20_s3"></td>
@@ -1504,20 +1493,14 @@
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">
             安全管理者
-          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT50) %>
-            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <% end %>
           </td>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('safety_manager_name')) %>
+          </td><!--20-046「安全管理の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.text_field name = 'content[safety_manager_post]', id: :safety_manager_post,
-                              value: @document.content&.[]('safety_manager_post'),
-                              class: "form-control"
-            %>
-          </td><!--20-046「安全管理の役員名」-->
-          <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[safety_manager_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[safety_manager_name]', name_of_workers,
                                 { selected: @document.content&.[]('safety_manager_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm', :onchange => "catchSafetyManagerName($(this).val())" }
+                                { class: 'form-control form-control-sm'}
             %>
           </td><!--20-047「安全管理者名」-->
           <td class="doc_20_s3"></td>
@@ -1526,20 +1509,14 @@
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">
             衛生管理者
-          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT50) %>
-            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <% end %>
           </td>
-          <td class="doc_20_s52" colspan="13">
-            <%= f.text_field name = 'content[hygiene_manager_post]', id: :hygiene_manager_post,
-                              value: @document.content&.[]('hygiene_manager_post'),
-                              class: "form-control"
-            %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('hygiene_manager_name')) %>
           </td><!--20-048「衛生管理者の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[hygiene_manager_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[hygiene_manager_name]', name_of_workers,
                                 { selected: @document.content&.[]('hygiene_manager_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm', :onchange => "catchHygieneManagerName($(this).val())" }
+                                { class: 'form-control form-control-sm'}
             %>
           </td><!--20-049「衛生管理者名」-->
           <td class="doc_20_s3"></td>
@@ -1548,20 +1525,13 @@
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">
             安全衛生推進者
-          <% if (number_of_field_workers(document_site_info) >= $WORKER_NUMBER_LIMIT10) && (number_of_field_workers(document_site_info) < $WORKER_NUMBER_LIMIT50) %>
-            <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <% end %>
-          </td>
-          <td class="doc_20_s52" colspan="13">
-            <%= f.text_field name = 'content[health_and_safety_promoter_post]', id: :health_and_safety_promoter_post,
-                              value: @document.content&.[]('health_and_safety_promoter_post'),
-                              class: "form-control"
-            %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(@document.content&.[]('health_and_safety_promoter_name')) %>
           </td><!--20-050「安全衛生推進の役職名」-->
           <td class="doc_20_s52" colspan="13">
-            <%= f.select name = 'content[health_and_safety_promoter_name]', name_of_field_workers_order,
+            <%= f.select name = 'content[health_and_safety_promoter_name]', name_of_workers,
                                 { selected: @document.content&.[]('health_and_safety_promoter_name'),include_blank: "選択して下さい" },
-                                { class: 'form-control form-control-sm', :onchange => "catchHealthAndSafetyPromoterName($(this).val())" }
+                                { class: 'form-control form-control-sm'}
             %>
           </td><!--20-051「安全衛生推進者名」-->
           <td class="doc_20_s3"></td>
@@ -1569,14 +1539,11 @@
         <tr style="height: 24px">
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">工事担当責任者</td>
-          <td class="doc_20_s52" colspan="13">
-            <%= f.text_field name = 'content[construction_manager_post]',
-                              value: workers_post(document_site_info.site_agent_name),
-                              class: "form-control"
-            %>
+          <td class="doc_20_s50" colspan="13">
+            <%= workers_post(request_order_site_agent_name) %>
           </td><!--20-052「各会社の工事担当責任者の役職名」-->
           <td class="doc_20_s50" colspan="13">
-            <%= document_site_info.site_agent_name %>
+            <%= request_order_site_agent_name %>
           </td><!--20-053「各会社の工事担当責任者」※ 現場の現場代理人名が該当する-->
           <td class="doc_20_s3"></td>
         </tr>
@@ -1714,69 +1681,6 @@
         </tr>
       </tbody>
     </table>
-
-    <script>
-      function catchSafetyOfficerName(val){
-        var safety_officer_name = val;
-
-        $.ajax({
-          url: 'set_safety_officer_name',
-          type: "GET",
-          data: {
-            safety_officer_name: safety_officer_name
-          }
-        })
-      }
-
-      function catchGeneralManagerName(val){
-        var general_manager_name = val;
-
-        $.ajax({
-          url: 'set_general_manager_name',
-          type: "GET",
-          data: {
-            general_manager_name: general_manager_name
-          }
-        })
-      }
-
-      function catchSafetyManagerName(val){
-        var safety_manager_name = val;
-
-        $.ajax({
-          url: 'set_safety_manager_name',
-          type: "GET",
-          data: {
-            safety_manager_name: safety_manager_name
-          }
-        })
-      }
-
-      function catchHygieneManagerName(val){
-        var hygiene_manager_name = val;
-
-        $.ajax({
-          url: 'set_hygiene_manager_name',
-          type: "GET",
-          data: {
-            hygiene_manager_name: hygiene_manager_name
-          }
-        })
-      }
-
-      function catchHealthAndSafetyPromoterName(val){
-        var health_and_safety_promoter_name = val;
-
-        $.ajax({
-          url: 'set_health_and_safety_promoter_name',
-          type: "GET",
-          data: {
-            health_and_safety_promoter_name: health_and_safety_promoter_name
-          }
-        })
-      }
-
-    </script>
 
     <div class="center">
       <%= f.submit "更新", class: "btn btn-block btn-outline-secondary" %>

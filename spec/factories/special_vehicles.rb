@@ -6,6 +6,8 @@ FactoryBot.define do
     sequence(:standards_performance) { |n| "standards_performance#{n}" }
     year_manufactured { '2021-01-30' }
     sequence(:control_number) { |n| "12345#{n}" }
+    owning_company_name { 'テスト建設' }
+    vehicle_type { 0 }
     check_exp_date_year { '2022-01-30' }
     check_exp_date_month { '2022-02-28' }
     check_exp_date_specific { '2022-03-30' }

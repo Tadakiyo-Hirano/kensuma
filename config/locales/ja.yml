@@ -2,6 +2,57 @@
 ja:
   activerecord:
     errors:
+      models:
+        order:
+          attributes:
+            order_name:
+              blank: "(発注者)を入力してください"
+            order_post_code:
+              blank: "(発注者)を入力してください"
+              invalid: "(発注者)は不正な値です"
+            order_address:
+              blank: "(発注者)を入力してください"
+            order_supervisor_name:
+              blank: "(監督員)を入力してください"
+            order_supervisor_apply:
+              blank: "(監督員)を入力してください"
+              too_long: "(監督員)を%{count}字以内で入力してください"
+            site_agent_name:
+              blank: "(現場代理人)を入力してください"
+            site_agent_apply:
+              blank: "(現場代理人)を入力してください"
+              too_long: "(現場代理人)を%{count}字以内で入力してください"
+            supervisor_name:
+              blank: "(監督員)を入力してください"
+            supervisor_apply:
+              blank: "(監督員)を入力してください"
+              too_long: "(監督員)を%{count}字以内で入力してください。"
+            professional_engineer_details_1st:
+              too_long: "(専門技術者)を%{count}字以内で入力してください。"
+            professional_engineer_details_2nd:
+              too_long: "(専門技術者)を%{count}字以内で入力してください。"
+            supervisor_name:
+              blank: "(監督員)を入力してください"
+            supervising_engineer_name:
+              blank: "(監督技術者・主任技術者)を入力してください"
+        request_order:
+          attributes:
+            site_agent_name:
+              blank: "(現場代理人)を入力してください"
+            site_agent_apply:
+              blank: "(現場代理人)を入力してください"
+              too_long: "(現場代理人)を%{count}字以内で入力してください"
+            supervisor_name:
+              blank: "(監督員)を入力してください"
+            supervisor_apply:
+              blank: "(監督員)を入力してください"
+              too_long: "(監督員)を%{count}字以内で入力してください。"
+            professional_engineer_details:
+              too_long: "(専門技術者)を%{count}字以内で入力してください。"
+            construction_manager_name:
+              blank: "(工事担当責任者)を入力してください"
+            lead_engineer_name:
+              blank: "(主任技術者)を入力してください"
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:
@@ -421,7 +472,8 @@ ja:
         not_join: 未加入
         not_coverd: 対象外
       business_retirement_benefit_mutual_aid_status: # 退職金共済制度(加入状況)
-        available: 有
+        construction_industry: 建設業退職金共済制度
+        smaller_companies: 中小企業退職金共済制度
         not_available: 無
       construction_license_status: # 建設許可証(取得状況)
         available: 有
@@ -490,6 +542,10 @@ ja:
         miyazaki: 宮崎県
         kagoshima: 鹿児島県
         okinawa: 沖縄県
+    special_vehicle:
+      vehicle_type:
+        crane: 移動式クレーン
+        construction: 車両系建設機械
     document:
       document_type:
         cover_document: 表紙
@@ -547,9 +603,9 @@ ja:
         non_dedicated: 非専任
     request_order:
       status:
-        requested: リクエスト済
-        submitted: 提出済
-        fix_requested: 修正依頼済
+        requested: 作成中
+        submitted: 提出済(未承認)
+        fix_requested: 差し戻し
         approved: 承認済
       professional_construction:
         y: 有
@@ -576,8 +632,9 @@ ja:
         woman: 女性
       status_of_residence:
         permanent_resident: 定住者
-        specified_skill: 特定技能(外国人技能実習生)
-        specific_activity: 特定活動(外国人建設就労者)
+        skill_practice: 外国人技能実習生
+        construction_employment: 外国人建設就労者
+        specified_skill: 特定技能
       confirmed_check:
         checked: 有
         unchecked: 無

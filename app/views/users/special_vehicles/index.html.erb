@@ -10,8 +10,9 @@
           <tr align="center">
             <th><%= SpecialVehicle.human_attribute_name(:name) %></th>
             <th><%= SpecialVehicle.human_attribute_name(:maker) %></th>
-            <th></th>
-            <th></th>
+            <th><%= SpecialVehicle.human_attribute_name(:standards_performance) %></th>
+            <th><%= SpecialVehicle.human_attribute_name(:year_manufactured) %></th>
+            <th><%= SpecialVehicle.human_attribute_name(:control_number) %></th>
           </tr>
         </thead>
         <tbody>
@@ -19,6 +20,9 @@
           <tr align="center">
             <td><%= link_to special_vehicle.name, users_special_vehicle_path(special_vehicle) %></td>
             <td><%= special_vehicle.maker %></td>
+            <td><%= special_vehicle.standards_performance %></td>
+            <td><%= special_vehicle.year_manufactured %></td>
+            <td><%= special_vehicle.control_number %></td>
             <td><%= link_to "編集", edit_users_special_vehicle_path(special_vehicle), class: "btn btn-md btn-success" %></td>
             <td><%= link_to "削除", users_special_vehicle_path(special_vehicle), method: :delete, data: { confirm: "#{special_vehicle.name}の特殊車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
           </tr>
