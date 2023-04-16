@@ -21,7 +21,7 @@ RSpec.describe Worker, type: :model do
           before :each do
             subject.career_up_id = blank
           end
-          
+
           it "バリデーションに通ること(#{blank})" do
             expect(subject).to be_valid
           end
@@ -108,7 +108,8 @@ RSpec.describe Worker, type: :model do
           before :each do
             subject.email = blank
           end
-          it "バリデーションに通ること" do
+
+          it 'バリデーションに通ること' do
             expect(subject).to be_valid
           end
         end
@@ -244,10 +245,10 @@ RSpec.describe Worker, type: :model do
       end
 
       [
-        "123456789",
-        "123456789012",
-        "123-4567-8901",
-        "123/4567/8901"
+        '123456789',
+        '123456789012',
+        '123-4567-8901',
+        '123/4567/8901'
       ].each do |my_phone_number|
         context '不正なmy_phone_numberの場合' do
           before :each do
@@ -391,8 +392,7 @@ RSpec.describe Worker, type: :model do
     end
 
     describe '#experience_term_before_hiring' do
-      context 'nil、''の場合' do
-
+      context "nil、''の場合" do
         before :each do
           subject.experience_term_before_hiring = nil
         end
@@ -487,7 +487,7 @@ RSpec.describe Worker, type: :model do
           expect(subject.errors.full_messages).to include('雇用契約書の取り交わし状況を入力してください')
         end
       end
-    end 
+    end
 
     describe '#driver_licence_number' do
       context '自動車運転免許証を持っていて免許証番号が存在しない場合' do
@@ -500,17 +500,17 @@ RSpec.describe Worker, type: :model do
           expect(subject).to be_invalid
         end
 
-        it 'バリデーションのエラーが正しいこと' do
+        it 'バリデーションのエラーが正しいこと(nil)' do
           subject.valid?
           expect(subject.errors.full_messages).to include('免許証番号を入力してください')
         end
 
-        it 'バリデーションに落ちること('')' do
+        it "バリデーションに落ちること('')" do
           subject.driver_licence_number = ''
           expect(subject).to be_invalid
         end
 
-        it 'バリデーションのエラーが正しいこと' do
+        it "バリデーションのエラーが正しいこと('')" do
           subject.driver_licence_number = ''
           subject.valid?
           expect(subject.errors.full_messages).to include('免許証番号を入力してください')

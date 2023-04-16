@@ -15,7 +15,7 @@ RSpec.describe WorkerSafetyHealthEducation, type: :model do
     it 'バリデーションが通ること' do
       expect(subject).to be_valid
     end
-    
+
     describe '#worker_id' do
       context '存在しない場合' do
         before :each do

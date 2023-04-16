@@ -126,7 +126,7 @@ RSpec.describe WorkerInsurance, type: :model do
           it 'バリデーションに落ちること' do
             expect(subject).to be_invalid
           end
-  
+
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
             expect(subject.errors.full_messages).to include('被保険者番号は11文字で入力してください')
@@ -148,7 +148,7 @@ RSpec.describe WorkerInsurance, type: :model do
             subject.employment_insurance_type = :day
             expect(subject).to be_valid
           end
-  
+
           it 'バリデーションにとおること(適応除外)' do
             subject.employment_insurance_type = :exemption
             expect(subject).to be_valid

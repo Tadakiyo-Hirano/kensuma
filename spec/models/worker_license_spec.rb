@@ -49,10 +49,10 @@ RSpec.describe WorkerLicense, type: :model do
         end
       end
       # it "重複したemailが存在する場合登録できないこと" do
-        # user = create(:user) # createメソッドを使用して変数userとデータベースにfactory_botのダミーデータを保存
-        # another_user = build(:user, email: user.email) # 2人目のanother_userを変数として作成し、buildメソッドを使用して、意図的にemailの内容を重複させる
-        # another_user.valid? # another_userの「バリデーションにより保存ができない状態であるか」をテスト
-        # expect(another_user.errors[:email]).to include("はすでに存在します")
+      # user = create(:user) # createメソッドを使用して変数userとデータベースにfactory_botのダミーデータを保存
+      # another_user = build(:user, email: user.email) # 2人目のanother_userを変数として作成し、buildメソッドを使用して、意図的にemailの内容を重複させる
+      # another_user.valid? # another_userの「バリデーションにより保存ができない状態であるか」をテスト
+      # expect(another_user.errors[:email]).to include("はすでに存在します")
     end
   end
 
