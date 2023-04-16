@@ -4,10 +4,6 @@
       <%= f.label :license_id %>
       <%= f.collection_select :license_id, License.all, :id, :name, { prompt: '免許を選択してください' }, { class: "form-control" } %><br>
     </div>
-    <div class="col-md-2">
-      <%= f.label :got_on %>
-      <%= f.date_field :got_on, class: "form-control" %>
-    </div>
     <div class="col-md-3">
       <%= f.label :images %>
       <%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>

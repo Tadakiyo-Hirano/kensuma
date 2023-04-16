@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe WorkerSkillTraining, type: :model do
+RSpec.describe WorkerSafetyHealthEducation, type: :model do
   let(:worker) { create(:worker) }
-  let(:skill_training) { create(:skill_training) }
-  let :worker_skill_training do
-    create(:worker_skill_training, worker: worker, skill_training: skill_training)
+  let(:safety_health_education) { create(:safety_health_education) }
+  let :worker_safety_health_education do
+    create(:worker_safety_health_education, worker: worker, safety_health_education: safety_health_education)
   end
 
   describe 'バリデーションについて' do
     subject do
-      worker_skill_training
+      worker_safety_health_education
     end
 
     it 'バリデーションが通ること' do
@@ -33,10 +33,10 @@ RSpec.describe WorkerSkillTraining, type: :model do
       end
     end
 
-    describe '#skill_training_id' do
+    describe '#safety_health_education' do
       context '存在しない場合' do
         before :each do
-          subject.skill_training_id = ''
+          subject.safety_health_education_id = ''
         end
 
         it 'バリデーションに落ちること' do
@@ -45,7 +45,7 @@ RSpec.describe WorkerSkillTraining, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('Skill trainingを入力してください')
+          expect(subject.errors.full_messages).to include('Safety health educationを入力してください')
         end
       end
     end
@@ -54,7 +54,7 @@ RSpec.describe WorkerSkillTraining, type: :model do
   describe 'アソシエーションについて' do
     context '紐づく作業員がいる場合' do
       subject do
-        worker_skill_training.worker
+        worker_safety_health_education.worker
       end
 
       it '紐づく作業員を返すこと' do
@@ -62,13 +62,13 @@ RSpec.describe WorkerSkillTraining, type: :model do
       end
     end
 
-    context '紐づく技能講習マスタがある場合' do
+    context '紐づく特別教育マスタがある場合' do
       subject do
-        worker_skill_training.skill_training
+        worker_safety_health_education.safety_health_education
       end
 
-      it '紐づく技能講習マスタを返すこと' do
-        expect(subject).to eq(skill_training)
+      it '紐づく特別教育マスタを返すこと' do
+        expect(subject).to eq(safety_health_education)
       end
     end
   end
