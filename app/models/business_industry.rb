@@ -26,9 +26,10 @@ class BusinessIndustry < ApplicationRecord
 
   # 建設許可証の特定・一般の整形
   def construction_license_permission_type_identification_text(type)
-    if type == 'identification'
+    case type
+    when 'identification'
       '特'
-    elsif type == 'general'
+    when 'general'
       '般'
     else
       ''

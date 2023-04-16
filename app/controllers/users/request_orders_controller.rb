@@ -214,7 +214,7 @@ module Users
           # subcon_construction_construction_license_number_double_digit:       current_business.business_industries.map { |bi| bi.construction_license_number_double_digit },                         # 建設業許可番号(2桁)
           # subcon_construction_license_number_six_digits:                      current_business.business_industries.map { |bi| bi.construction_license_number_six_digits },                           # 建設業許可番号(6桁)
           # subcon_construction_license_updated_at:                             current_business.business_industries.map { |bi| bi.construction_license_updated_at },                                   # 建設許可証(更新日)
-          subcon_retirement_benefit_mutual_aid_status:    current_business.business_retirement_benefit_mutual_aid_status,    # 退職金共済制度(加入状況)
+          subcon_retirement_benefit_mutual_aid_status:    current_business.business_retirement_benefit_mutual_aid_status, # 退職金共済制度(加入状況)
           subcon_employment_manager_name_id:              @business_workers_name_id.find_by(name: current_business.employment_manager_name)&.id, # 雇用管理責任者名
           subcon_specific_skilled_foreigners_exist:       current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
           subcon_foreign_construction_workers_exist:      current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
