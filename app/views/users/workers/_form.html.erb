@@ -1,12 +1,19 @@
 <%= render 'shared/error_massages', object: f.object %>
 
+<%# 氏名 %>
 <%= f.label :name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :name, class: "form-control", placeholder: Worker.human_attribute_name(:name) %><br>
+<%= f.text_field :name, class: "form-control", placeholder: example_name %><br>
 
+<%# フリガナ %>
 <%= f.label :name_kana %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :name_kana, class: "form-control", placeholder: Worker.human_attribute_name(:name_kana) %><br>
+<%= f.text_field :name_kana, class: "form-control", placeholder: example_name_kana %><br>
+
+<%# 事業主または一人親方 %>
+<%= f.label :business_owner_or_master %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<div class="md-3"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master,:as => :boolean %> はい</div><br>
 
 <%# 国籍 %>
 <%= f.label :country %>
@@ -40,33 +47,45 @@
 <% end %>
 <br>
 
+<%# 郵便番号 %>
+<%= f.label :post_code %>
+<%= f.text_field :post_code, value: @post_code, class: "form-control", placeholder: annotation_hyphen %><br>
+
+<%# 住所 %>
 <%= f.label :my_address %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :my_address, class: "form-control", placeholder: Worker.human_attribute_name(:my_address) %><br>
 
+<%# 電話番号 %>
 <%= f.label :my_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.telephone_field :my_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:my_phone_number) %><br>
+<%= f.telephone_field :my_phone_number, value: @my_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
+<%# メールアドレス %>
 <%= f.label :email %>
-<%= f.text_field :email, class: "form-control", placeholder: Worker.human_attribute_name(:email) %><br>
+<%= f.text_field :email, class: "form-control", placeholder: example_email %><br>
 
+<%# 緊急連絡先：氏名 %>
 <%= f.label :family_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :family_name, class: "form-control", placeholder: Worker.human_attribute_name(:family_name) %><br>
 
+<%# 緊急連絡先：続柄 %>
 <%= f.label :relationship %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :relationship, class: "form-control", placeholder: Worker.human_attribute_name(:relationship) %><br>
 
+<%# 緊急連絡先：住所 %>
 <%= f.label :family_address %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :family_address, class: "form-control", placeholder: Worker.human_attribute_name(:family_address) %><br>
 
+<%# 緊急連絡先：電話番号 %>
 <%= f.label :family_phone_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.telephone_field :family_phone_number, class: "form-control", placeholder: Worker.human_attribute_name(:family_phone_number) %><br>
+<%= f.telephone_field :family_phone_number, value: @family_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
+<%# 生年月日 %>
 <%= f.label :birth_day_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :birth_day_on, class: "form-control", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
@@ -89,22 +108,25 @@
   </div>
 <% end %><br>
 
-<!-- 下記役職はひとまずテキスト入力にしています -->
+<%# 役職 %>
 <%= f.label :job_title %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
 <%= f.text_field :job_title, class: "form-control", placeholder: Worker.human_attribute_name(:job_title) %><br>
 
+<%# 雇入年月日 %>
 <%= f.label :hiring_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :hiring_on, class: "form-control", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
 
+<%# 雇入前経験年数 %>
 <%= f.label :experience_term_before_hiring %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.number_field :experience_term_before_hiring, class: "form-control", min: 0 %><br>
+<%= f.text_field :experience_term_before_hiring, class: "form-control" %><br>
 
+<%# ブランク年数 %>
 <%= f.label :blank_term %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.number_field :blank_term, class: "form-control", min: 0 %><br>
+<%= f.text_field :blank_term, class: "form-control" %><br>
 
 <%# 契約条件の確認 %>
 <%= f.label :employment_contract %>
@@ -115,8 +137,20 @@
   </div>
 <% end %><br>
 
+<%# 技能者ID(キャリアアップシステム) %>
 <%= f.label :career_up_id %>
-<%= f.text_field :career_up_id, class: "form-control", placeholder: Worker.human_attribute_name(:career_up_id) %><br>
+<%= f.text_field :career_up_id, value: @career_up_id, class: "form-control", placeholder: annotation_hyphen %><br>
+
+<%# キャリアアップシステムカードの写し %>
+<%= f.label :career_up_images %>
+<%= f.file_field :career_up_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+<% if @worker.career_up_images.present? %>
+  <% @worker.career_up_images.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_worker_update_workerskilltraining_images_path(@worker, index: index, worker_skill_training_id: f.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+<% end %>
+<br>
 
 <div class="list-group">
   <!-- WorkerLicenseここから -->
@@ -164,6 +198,41 @@
   </div>
   <!-- WorkerSpecialEducationここまで -->
 
+  <%# worker_safety_health_educationここから %>
+  <div class="list-group-item">
+    <%= f.fields_for :worker_safety_health_educations do |w_safety_health_education| %>
+      <%= render "worker_safety_health_education_fields", f: w_safety_health_education %>
+    <% end %>
+    <div id="safety-health-education-insertion-point"></div>
+    <%= link_to_add_association "＋フォーム追加", f, :worker_safety_health_educations,
+      data: {
+        association_insertion_node: '#safety-health-education-insertion-point',
+        association_insertion_method: 'append'
+      }
+    %>
+  </div>
+  <%# worker_safety_health_educationここまで %>
+
+  <%# 運転免許及び認印ここから %>
+  <div class="list-group-item">
+    <%= f.label :driver_licence %>
+    <div class="list-group-item">
+      <% I18n.t('driver_licences').each do |key, value| %>
+        <%= check_box_tag "driver_licences[#{key}]", value, @driver_licence.include?(value), id: "driver_licences[#{key}]" %>
+        <%= label_tag "driver_licences_#{key}", value %><br>
+      <% end %><br>
+      <%# worker_params_with_convertedでパラメーターを扱えるように定義 %>
+      <%= f.hidden_field :driver_licence, value: '' %>
+      <div id = "driver_licence_number">
+        <%= f.label :driver_licence_number %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= f.text_field :driver_licence_number, value: @driver_licence_number, class: "form-control", placeholder: annotation_hyphen %>
+      </div>
+      <%= f.label :seal %>
+      <%= f.file_field :seal, accept: 'image/jpg, image/jpeg, image/png', class: "form-control" %>
+    </div>
+  </div><br>
+
   <!-- WorkerMedicalここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_medical do |worker_medical| %>
@@ -187,6 +256,7 @@
           </div>
         <% end %>
       </div>
+
       <div class="row mb-3">
         <%= worker_medical.label :med_exam_on %>
         <%= worker_medical.date_field :med_exam_on, class: "form-control" %>
@@ -207,12 +277,12 @@
         <%= render "worker_exam_fields", f: worker_exam %>
       <% end %>
       <div id='worker-exam-insertion-point'></div>
-        <%= link_to_add_association "＋フォーム追加", worker_medical, :worker_exams,
-          data: {
-            association_insertion_node: '#worker-exam-insertion-point',
-            association_insertion_method: 'append'
-          } 
-        %>
+      <%= link_to_add_association "＋フォーム追加", worker_medical, :worker_exams,
+        data: {
+          association_insertion_node: '#worker-exam-insertion-point',
+          association_insertion_method: 'append'
+        } 
+      %>
     <% end %>
   </div>
   <!-- WorkerMedicalここまで -->
@@ -223,19 +293,31 @@
       <div class="mt-3 mb-3" id="health_insurance_type">
         <%= worker_insurance.label :health_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
-          <div class="radio">
-            <%= b.label { b.radio_button + b.text } %>
+        <div class="list-group-item">
+          <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+            <div class="radio">
+              <%= b.label { b.radio_button + b.text } %>
+            </div>
+          <% end %>
+          <!-- health_insurance_typeがhealth_insurance_associationまたはconstruction_national_health_insuranceで入力可能 -->
+          <div id="health_insurance_name">
+            <%= worker_insurance.label :health_insurance_name %>
+            <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
           </div>
-        <% end %><br>
+        </div>
       </div>
 
-      <!-- health_insurance_typeがhealth_insurance_associationまたはconstruction_national_health_insuranceで入力可能 -->
-      <div class="mb-3 hidden" id="health_insurance_name">
-        <%= worker_insurance.label :health_insurance_name %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
+      <%# 健康保険証の写し %>
+      <%= worker_insurance.label :health_insurance_image %>
+      <div class="col-md-3" style="margin-bottom: 10px;">
+        <%= worker_insurance.file_field :health_insurance_image, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+        <% if @worker.worker_insurance.health_insurance_image.present? %>
+          <% @worker.worker_insurance.health_insurance_image.each do |image| %>
+            <%= image_tag(image.url) %>
+          <% end %>
+        <% end %>
       </div>
+      <br>
 
       <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
@@ -250,18 +332,18 @@
       <div class="mb-3" id="employment_insurance_type">
         <%= worker_insurance.label :employment_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
-          <div class="radio">
-            <%= b.label { b.radio_button + b.text } %>
+        <div class="list-group-item">
+          <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+            <div class="radio">
+              <%= b.label { b.radio_button + b.text } %>
+            </div>
+          <% end %>
+          <!-- employment_insurance_numberが被保険者(0)で入力可能 -->
+          <div id="employment_insurance_number">
+            <%= worker_insurance.label :employment_insurance_number %>
+            <%= worker_insurance.text_field :employment_insurance_number, class: "form-control" %>
           </div>
-        <% end %><br>
-      </div>
-
-      <!-- employment_insurance_numberが被保険者(0)で入力可能 -->
-      <div class="mt-3 hidden" id="employment_insurance_number">
-        <%= worker_insurance.label :employment_insurance_number %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= worker_insurance.text_field :employment_insurance_number, class: "form-control" %>
+        </div>
       </div>
       
       <div class="mt-3" id="has_labor_insurance">
@@ -276,23 +358,23 @@
       <div class="mb-3">
         <%= worker_insurance.label :severance_pay_mutual_aid_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, class: "radio") do |b| %>
-          <div class="radio">
-            <%= b.label { b.radio_button + b.text } %>
+        <div class="list-group-item">
+          <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, class: "radio") do |b| %>
+            <div class="radio">
+              <%= b.label { b.radio_button + b.text } %>
+            </div>
+          <% end %>
+          <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
+          <div class="mb-3" id="mutual_aid_number">
+            <%= worker_insurance.label :severance_pay_mutual_aid_name %>
+            <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
           </div>
-        <% end %>
-      </div>
-
-      <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
-      <div class="mb-3 hidden" id="mutual_aid_number">
-        <%= worker_insurance.label :severance_pay_mutual_aid_name %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
+        </div>
       </div>
     <% end %>
   </div><br>
   <!-- WorkerInsuranceここまで -->
-</div>
+</div><br>
 
 <script>
   // 国籍が日本以外の選択時に外国人就労者情報のフォームを表示させる
@@ -390,6 +472,64 @@
     };
   };
   getSelectedMutualAidType(mutual_aid_type); //ページの読み込み時に判定
+
+  // 免許証番号表示・非表示処理
+  // 免許証番号項目表示・非表示のクラスを操作するメソッド
+  function driverLicenceNumberShowHide(driver_licence_check, driver_licence_number) {
+    if (driver_licence_check > 1) {
+      driver_licence_number.classList.remove('hidden');
+    } else {
+      driver_licence_number.classList.add('hidden');
+    }
+  }
+  const driver_licence_number = document.getElementById('driver_licence_number');
+  const all_driver_licences = ["LL", "ML", "MLC", "MLL", "SL", "SLL", "LLT", "SLT", "SLSP", "MOP", "TDL"];
+  // const all_driver_licences = {
+  //   LL: "大型免許",
+  //   ML: "中型免許",
+  //   MLC: "中型免許(8t)に限る",
+  //   MLL: "準中型免許",
+  //   SL: "普通免許",
+  //   SLL: "大型特殊免許",
+  //   LLT: "大型二輪免許",
+  //   SLT: "普通 二輪免許",
+  //   SLSP: "小型特殊免許",
+  //   MOP: "原付免許",
+  //   TDL: "牽引自動車第一種運転免許"
+  // };
+
+  function increment_driver_licence_check(key, driver_licence_check) {
+    if ($(`input[name="driver_licences[${key}]"]`).is(':checked');) {
+      debugger
+      driver_licence_check++;
+    }
+  };
+
+  function decrement_driver_licence_check(key, driver_licence_check) {
+    if (!$(`input[name="driver_licences[${key}]"]`).is(':checked');) {
+      debugger
+      driver_licence_check--;
+    }
+  };
+
+  function getCheckDriverLicence() {
+    let driver_licence_check = 0
+    all_driver_licences.forEach(function(key) {
+      debugger
+      increment_driver_licence_check(key, driver_licence_check);
+    });
+    debugger
+    driverLicenceNumberShowHide(driver_licence_check, driver_licence_number);
+  };
+  getCheckDriverLicence(); //ページの読み込み時に判定
+
+  let change_driver_licence_check = 0
+  let driver_licence_key = LL
+  $(`input[name="driver_licences[${driver_licence_key}]"]`).change(function() {
+    increment_driver_licence_check(driver_licence_key, change_driver_licence_check)
+    decrement_driver_licence_check(driver_licence_key, change_driver_licence_check)
+    driverLicenceNumberShowHide(change_driver_licence_check, driver_licence_number);
+  });
 </script>
 
 <script>

@@ -1,0 +1,2 @@
+class InHouseInspectionsUploader < Base
+end

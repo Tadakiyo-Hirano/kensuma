@@ -431,9 +431,10 @@
   //     }
   //   }
   // });
+</script>
 
-//各フォームのバリデーション
-  $(function(){
+<script>
+  $(document).ready(function(){
     $.each(function(key){
       $.validator.addMethod(key, this);
     });

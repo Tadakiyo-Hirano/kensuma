@@ -59,6 +59,7 @@ ja:
         fax_number: FAX
         email: メールアドレス
         stamp_images: 社印
+        tem_industry_ids: 業種
         occupation_ids: 職種
         employment_manager_name: 雇用管理責任者名
         social_insurance_info: 社会保険情報
@@ -133,16 +134,20 @@ ja:
         standards_performance: 規格・性能
         year_manufactured: 製造年
         control_number: 管理番号(整理番号)
-        check_exp_date_year: 自主検査有効期限(正規・年次)
-        check_exp_date_month: 自主検査有効期限(正規・月次)
-        check_exp_date_specific: 自主検査有効期限(特定)
+        vehicle_type: 登録する車両
+        owning_company_name: 所有会社名
+        check_exp_date_year: 年次
+        check_exp_date_month: 月次
+        check_exp_date_specific: 特定
         check_exp_date_machine: 移動式クレーン等の性能検査有効期限
         check_exp_date_car: 自動車検査証有効期限
-        personal_insurance: 任意保険加入額(対人)
-        objective_insurance: 任意保険加入額(対物)
-        passenger_insurance: 任意保険加入額(搭乗者)
-        other_insurance: 任意保険加入額(その他)
-        exp_date_insurance: 任意保険加入有効期限
+        personal_insurance: 対人
+        objective_insurance: 対物
+        passenger_insurance: 搭乗者
+        other_insurance: その他
+        exp_date_insurance: 有効期限
+        periodic_self_inspections: 特定(年次)及び月例の定期自主検査帳票の写し
+        in_house_inspections: 自社の点検表の写し
       field_car:
         car_name: 車両名
         driver_name: 運転者名
@@ -203,14 +208,17 @@ ja:
         usage_period_end: 使用期間(終期)
         working_process: 作業手順書の添付
         sds: SDS(安全データシート)の添付
+        sds_images: SDS(安全シート)の写し
         ventilation_control: 換気等対策
+        ventilation_control_images: 有機溶剤・特定化学物質等の換気等対策・別紙
+        working_process_images: 有機溶剤・特定化学物質等の作業手順書
       field_special_vehicle:
-        driver_name: 運転者名(正)
-        sub_driver_name: 運転者名(副)
-        vehicle_name: 特殊車両名
-        vehicle_type: 区分
+        driver_name: 氏名(正)
+        driver_licenses: 運転の種類(正)
+        sub_driver_name: 氏名(副)
+        sub_driver_licenses: 運転の種類(副)
+        vehicle_name: 使用する車両
         carry_on_company_name: 持込会社名
-        owning_company_name: 所有会社名
         owning_company_representative_name: 所有会社の代表者名
         use_company_name: 使用会社名
         use_company_representative_name: 使用会社の代表者名
@@ -329,13 +337,14 @@ ja:
         registered_core_engineer_qualification: 資格内容
         construction_license: 工事に必要な建設許可証
       worker:
-        name: 名前
-        name_kana: 名前カナ
+        name: 氏名
+        name_kana: フリガナ
+        business_owner_or_master: 事業主または一人親方ですか？
         country: 国籍
         my_address: 住所
         my_phone_number: 電話番号
-        family_address: 家族住所
-        family_phone_number: 家族電話番号
+        family_address: 住所
+        family_phone_number: 電話番号
         birth_day_on: 生年月日
         abo_blood_type: 血液型(ABO)
         rh_blood_type: 血液型(Rh)
@@ -343,14 +352,19 @@ ja:
         hiring_on: 雇入年月日
         experience_term_before_hiring: 雇入前経験年数
         blank_term: ブランク年数
-        career_up_id: 技能者ID
-        images: 免許
+        career_up_id: 技能者ID(キャリアアップシステム)
+        career_up_images: 建設キャリアアップシステムカードの写し
         business: 事業所
         employment_contract: 雇用契約書の取り交わし状況
-        family_name: 家族名
-        relationship: 家族続柄
+        family_name: 氏名
+        relationship: 続柄
         email: メールアドレス
         sex: 性別
+        post_code: 郵便番号
+        employee_cards: 従業員証
+        driver_licence: 自動車運転免許証
+        driver_licence_number: 免許証番号
+        seal: 認印
         status_of_residence: 在留資格
         # maturity_date: 在留期間満期日
         # confirmed_check: CCUS登録情報が最新であることの確認
@@ -362,10 +376,9 @@ ja:
         description: 説明
         license_type: 種別
       worker_license:
-        license_id: ライセンス
+        license_id: 技能検定
         worker_id: 作業員
-        got_on: 取得年月日
-        images: 証明画像
+        images: 技能検定の写し
       skill_training:
         name: 名称
         short_name: 略称
@@ -373,26 +386,29 @@ ja:
       worker_skill_training:
         skill_training_id: 技能講習
         worker_id: 作業員
-        got_on: 取得年月日
-        images: 証明画像
+        images: 技能講習修了証明書の写し
       special_education:
         name: 名称
         description: 説明
       worker_special_education:
         special_education_id: 特別教育
         worker_id: 作業員
-        got_on: 取得年月日
-        images: 証明画像
+        images: 特別教育修了証明書の写し
       worker_insurance:
         id: 保険情報
-        health_insurance_type: 健康保険のタイプ
-        health_insurance_name: 健康保険の名前
-        pension_insurance_type: 年金保険のタイプ
-        employment_insurance_type: 雇用保険のタイプ
-        employment_insurance_number: 被保険者番号の下4桁
-        severance_pay_mutual_aid_type: 建設業退職金共済制度
-        severance_pay_mutual_aid_name: 建設業退職金共済制度名前
+        health_insurance_type: 健康保険
+        health_insurance_name: 保険名
+        health_insurance_image: 健康保険証の写し
+        pension_insurance_type: 年金保険
+        employment_insurance_type: 雇用保険
+        employment_insurance_number: 被保険者番号
         has_labor_insurance: 労働保険特別加入
+        severance_pay_mutual_aid_type: 建設業退職金共済手帳
+        severance_pay_mutual_aid_name: その他（建設業退職金共済手帳）
+      worker_safety_health_education:
+       safety_health_education_id: 安全衛生教育
+       worker_id: 作業員
+       images: 証明画像
       news:
         title: タイトル
         content: 内容
@@ -426,6 +442,7 @@ ja:
         name: 名称
       solvent:
         name: 商品名
+        maker: メーカー名
         classification: 種別
         ingredients: 含有成分
       machine:
