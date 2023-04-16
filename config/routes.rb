@@ -23,7 +23,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   namespace :users do
     resources :cars, param: :uuid
-    resources :special_vehicles, param: :uuid
+    resources :special_vehicles, param: :uuid do
+      delete 'destroy_image'
+    end
     resources :cars, except: %i[index create new show edit update destroy] do
       patch 'update_images'
     end
@@ -132,6 +134,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         collection do
           get 'edit_special_vehicles'
           patch 'update_special_vehicles'
+          get 'dr_license_select', to: 'field_special_vehicles#dr_license_select'
         end
       end
       resources :field_workers, except: %i[new show edit update], module: :request_orders, param: :uuid do
