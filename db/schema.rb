@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.json "stamp_images"
     t.json "industry_ids"
     t.json "tem_industry_ids"
-    t.integer "specific_skilled_foreigners_exist"
-    t.integer "foreign_construction_workers_exist"
-    t.integer "foreign_technical_intern_trainees_exist"
+    t.integer "specific_skilled_foreigners_exist", default: 1, null: false
+    t.integer "foreign_construction_workers_exist", default: 1, null: false
+    t.integer "foreign_technical_intern_trainees_exist", default: 1, null: false
     t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
     t.string "employment_manager_name"
