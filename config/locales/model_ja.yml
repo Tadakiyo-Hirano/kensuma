@@ -426,8 +426,14 @@ ja:
         inspector: 点検者
         handler: 取扱者
         inspection_date: 点検年月日
-        inspection_check: 点検事項
-        extra_inspection_item1: 追加の点検事項
+        inspection_check: 持込時の点検表
+        extra_inspection: 点検追加項目
+        extra_inspection_item1: 追加項目①
+        extra_inspection_item2: 追加項目②
+        extra_inspection_item3: 追加項目③
+        extra_inspection_item4: 追加項目④
+        extra_inspection_item5: 追加項目⑤
+        extra_inspection_item6: 追加項目⑥
       tag:
         name: 点検事項の名称
   attributes:
