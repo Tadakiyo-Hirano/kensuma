@@ -47,26 +47,31 @@ SpecialEducation.seed(
   {
     id: 10,
     name: 'フォークリフト（1t未満）',
+    driving_related: 1,
     description: 'フォークリフトの運転の業務に係る特別教育（最大荷重1トン未満）'
   },
   {
     id: 11,
     name: 'ショベルローダー（1t未満）',
+    driving_related: 1,
     description: 'ショベルローダー等の運転の業務に係る特別教育（最大荷重1トン未満）'
   },
   {
     id: 12,
     name: '不整地運搬車（1t未満）',
+    driving_related: 1,
     description: '不整地運搬車の運転の業務に係る特別教育（最大積載量1トン未満）'
   },
   {
     id: 13,
     name: '揚貨装置（5t未満）',
+    driving_related: 1,
     description: '揚貨装置の運転の業務に係る特別教育（制限荷重5トン未満）'
   },
   {
     id: 14,
     name: '機械集材装置',
+    driving_related: 1,
     description: '機械集材装置の運転の業務に係る特別教育'
   },
   {
@@ -82,96 +87,115 @@ SpecialEducation.seed(
   {
     id: 17,
     name: '小型車両系建設機械（整地・運搬・積込み用及び掘削用）（3t未満）',
+    driving_related: 1,
     description: '小型車両系建設機械（整地・運搬・積込み用及び掘削用）の運転の業務に係る特別教育（機体質量3トン未満）'
   },
   {
     id: 18,
     name: '小型車両系建設機械（基礎工事用）（3t未満）',
+    driving_related: 1,
     description: '小型車両系建設機械（基礎工事用）の運転の業務に係る特別教育（機体重量3トン未満）'
   },
   {
     id: 19,
     name: '小型車両系建設機械（解体用）（3t未満）',
+    driving_related: 1,
     description: '小型車両系建設機械（解体用）の運転の業務に係る特別教育（機体重量3トン未満）'
   },
   {
     id: 20,
     name: '基礎工事用建設機械（非自走式）',
+    driving_related: 1,
     description: '基礎工事用建設機械の運転の業務に係る特別教育（非自走式のみ）'
   },
   {
     id: 21,
     name: '車両系建設機械（基礎工事用）',
+    driving_related: 1,
     description: '車両系建設機械（基礎工事用）の作業装置の操作の業務に係る特別教育'
   },
   {
     id: 22,
     name: 'ローラー',
+    driving_related: 1,
     description: 'ローラーの運転の業務に係る特別教育'
   },
   {
     id: 23,
     name: '車両系建設機械（コンクリート打設用）',
+    driving_related: 1,
     description: '車両系建設機械（コンクリート打設用）の作業装置の操作の業務に係る特別教育'
   },
   {
     id: 24,
     name: 'ボーリングマシン',
+    driving_related: 1,
     description: 'ボーリングマシンの運転の業務に係る特別教育'
   },
   {
     id: 25,
     name: 'ジャッキ式つり上げ機械',
+    driving_related: 1,
     description: 'ジャッキ式つり上げ機械の調整又は運転の業務に係る特別教育'
   },
   {
     id: 26,
     name: '高所作業車(10m未満）',
+    driving_related: 1,
     description: '高所作業車の運転の業務に係る特別教育(作業床の高さが10メートル未満のもの）'
   },
   {
     id: 27,
     name: '巻上げ機',
+    driving_related: 1,
     description: '巻上げ機の運転の業務に係る特別教育'
   },
   {
     id: 28,
     name: '軌道装置の動力車',
+    driving_related: 1,
     description: '軌道装置の動力車の運転の業務に係る特別教育'
   },
   {
     id: 29,
     name: '小型ボイラー',
+    driving_related: 1,
     description: '小型ボイラー取扱業務特別教育'
   },
   {
     id: 30,
     name: 'クレーン（5t未満）',
+    driving_related: 1,
     description: 'クレーンの運転の業務に係る特別教育（つり上げ荷重5トン未満。ただし、跨線テルハはつり上げ荷重5トン以上）'
   },
   {
     id: 31,
     name: '移動式クレーン（1t未満）',
+    driving_related: 1,
     description: '移動式クレーンの運転の業務に係る特別教育（つり上げ荷重1トン未満）'
   },
   {
     id: 32,
     name: 'デリック（5t未満）',
+    driving_related: 1,
     description: 'デリックの運転の業務に係る特別教育（つり上げ荷重5トン未満）'
   },
   {
     id: 33,
     name: '建設用リフト',
+    driving_related: 1,
     description: '建設用リフトの運転の業務に係る特別教育'
   },
   {
     id: 34,
     name: '玉掛け（1t未満）',
+    driving_related: 1,
     description: '玉掛けの業務に係る特別教育（つり上げ荷重1トン未満のクレーン等にかかわる作業）'
   },
   {
     id: 35,
     name: 'ゴンドラ',
+    driving_related: 1,
     description: 'ゴンドラの操作の業務に係る特別教育'
   },
   {

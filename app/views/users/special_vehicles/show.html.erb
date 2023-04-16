@@ -25,6 +25,14 @@
           <td><%= @special_vehicle.control_number %></td>
         </tr>
         <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:vehicle_type) %></th>
+          <td><%= @special_vehicle.vehicle_type_i18n %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:owning_company_name) %></th>
+          <td><%= @special_vehicle.owning_company_name %></td>
+        </tr>
+        <tr>
           <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_year) %></th>
           <td><%= @special_vehicle.check_exp_date_year %></td>
         </tr>
@@ -63,6 +71,22 @@
         <tr>
           <th><%= SpecialVehicle.human_attribute_name(:exp_date_insurance) %></th>
           <td><%= @special_vehicle.exp_date_insurance %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:periodic_self_inspections) %></th>
+          <% if @special_vehicle.periodic_self_inspections.present? %>
+            <% @special_vehicle.periodic_self_inspections.each_with_index do |image, index| %>
+              <td><%= image_tag(image.url) %></td>
+            <% end %>
+          <% end %>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:in_house_inspections) %></th>
+          <% if @special_vehicle.in_house_inspections.present? %>
+            <% @special_vehicle.in_house_inspections.each_with_index do |image, index| %>
+              <td><%= image_tag(image.url) %></td>
+            <% end %>
+          <% end %>
         </tr>
       </tbody>
     </table>

@@ -1,0 +1,2 @@
+class WorkerSafetyHealthEducationUploader < Base
+end

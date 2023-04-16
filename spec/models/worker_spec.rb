@@ -15,6 +15,35 @@ RSpec.describe Worker, type: :model do
       expect(subject).to be_valid
     end
 
+    describe '#career_up_id' do
+      context 'nil,未入力の場合' do
+        [nil, ''].each do |blank|
+          before :each do
+            subject.career_up_id = blank
+          end
+
+          it "バリデーションに通ること(#{blank})" do
+            expect(subject).to be_valid
+          end
+        end
+      end
+
+      context '14文字ではない場合' do
+        before :each do
+          subject.career_up_id = '1234567890123'
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('技能者ID(キャリアアップシステム)は14桁の数字で入力してください')
+        end
+      end
+    end
+
     describe '#name' do
       context '存在しない場合' do
         before :each do
@@ -27,43 +56,82 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('名前を入力してください')
+          expect(subject.errors.full_messages).to include('氏名を入力してください')
         end
       end
     end
 
     describe '#name_kana' do
-      context '存在しない場合' do
-        before :each do
-          subject.name_kana = nil
-        end
+      context 'nil、未入力の場合' do
+        [nil, ''].each do |blank|
+          before :each do
+            subject.name_kana = blank
+          end
 
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
+          it "バリデーションに落ちること(#{blank})" do
+            expect(subject).to be_invalid
+          end
 
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('名前カナを入力してください')
+          it "バリデーションのエラーが正しいこと(#{blank})" do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('フリガナを入力してください')
+          end
         end
+      end
 
+      %i[
+        てすとわーかー
+        テストわーかー
+        TestWorker
+        !"#$%&'=~|"
+      ].each do |name_kana|
+        context '不正なname_kanaの場合' do
+          before :each do
+            subject.name_kana = name_kana
+          end
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('フリガナはカタカナで入力してください')
+          end
+        end
+      end
+    end
+
+    describe '#email' do
+      context 'nil,未入力の場合' do
+        [nil, ''].each do |blank|
+          before :each do
+            subject.email = blank
+          end
+
+          it 'バリデーションに通ること' do
+            expect(subject).to be_valid
+          end
+        end
+      end
+
+      context '正しい形式ではない場合' do
         %i[
-          てすとわーかー
-          TestWorker
-        ].each do |name_kana|
-          context '不正なname_kanaの場合' do
-            before :each do
-              subject.name_kana = name_kana
-            end
+          abc
+          a@bc
+          ab.c
+        ].each do |email|
+          before :each do
+            subject.email = email
+          end
 
-            it 'バリデーションに落ちること' do
-              expect(subject).to be_invalid
-            end
+          it "バリデーションに落ちること#{email}" do
+            expect(subject).to be_invalid
+          end
 
-            it 'バリデーションのエラーが正しいこと' do
-              subject.valid?
-              expect(subject.errors.full_messages).to include('名前カナはカタカナで入力してください')
-            end
+          it "バリデーションのエラーが正しいこと\#{email}" do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('メールアドレスはexample@email.comのような形式で入力してください')
           end
         end
       end
@@ -82,6 +150,63 @@ RSpec.describe Worker, type: :model do
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
           expect(subject.errors.full_messages).to include('国籍を入力してください')
+        end
+      end
+    end
+
+    describe '#post_code' do
+      context '全角7桁の場合' do
+        before :each do
+          subject.post_code = '１２３４５６７'
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+      end
+
+      %i[
+        123ー4567
+        123-4567
+      ].each do |post_code|
+        context 'ハイフンありの7桁の場合' do
+          before :each do
+            subject.post_code = post_code
+          end
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('郵便番号は7桁の数字で入力してください')
+          end
+        end
+      end
+
+      context '未入力の場合' do
+        before :each do
+          subject.post_code = ''
+        end
+
+        it 'バリデーションに通ること' do
+          expect(subject).to be_valid
+        end
+      end
+
+      context '7桁ではない場合' do
+        before :each do
+          subject.post_code = '123456'
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('郵便番号は7桁の数字で入力してください')
         end
       end
     end
@@ -117,26 +242,26 @@ RSpec.describe Worker, type: :model do
           subject.valid?
           expect(subject.errors.full_messages).to include('電話番号を入力してください')
         end
+      end
 
-        %i[
-          123456789
-          123456789012
-          123-4567-8901
-          123/4567/8901
-        ].each do |my_phone_number|
-          context '不正なmy_phone_numberの場合' do
-            before :each do
-              subject.my_phone_number = my_phone_number
-            end
+      [
+        '123456789',
+        '123456789012',
+        '123-4567-8901',
+        '123/4567/8901'
+      ].each do |my_phone_number|
+        context '不正なmy_phone_numberの場合' do
+          before :each do
+            subject.my_phone_number = my_phone_number
+          end
 
-            it 'バリデーションに落ちること' do
-              expect(subject).to be_invalid
-            end
+          it "バリデーションに落ちること#{my_phone_number}" do
+            expect(subject).to be_invalid
+          end
 
-            it 'バリデーションのエラーが正しいこと' do
-              subject.valid?
-              expect(subject.errors.full_messages).to include('電話番号はハイフン無しの10桁または11桁で入力してください')
-            end
+          it "バリデーションのエラーが正しいこと#{my_phone_number}" do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('電話番号は10桁または11桁の数字で入力してください')
           end
         end
       end
@@ -154,7 +279,7 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('家族住所を入力してください')
+          expect(subject.errors.full_messages).to include('住所を入力してください')
         end
       end
     end
@@ -171,7 +296,7 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('家族電話番号を入力してください')
+          expect(subject.errors.full_messages).to include('電話番号を入力してください')
         end
 
         %i[
@@ -191,7 +316,7 @@ RSpec.describe Worker, type: :model do
 
             it 'バリデーションのエラーが正しいこと' do
               subject.valid?
-              expect(subject.errors.full_messages).to include('家族電話番号はハイフン無しの10桁または11桁で入力してください')
+              expect(subject.errors.full_messages).to include('電話番号は10桁または11桁の数字で入力してください')
             end
           end
         end
@@ -249,23 +374,6 @@ RSpec.describe Worker, type: :model do
       end
     end
 
-    describe '#job_title' do
-      context '存在しない場合' do
-        before :each do
-          subject.job_title = nil
-        end
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('役職を入力してください')
-        end
-      end
-    end
-
     describe '#hiring_on' do
       context '存在しない場合' do
         before :each do
@@ -284,7 +392,7 @@ RSpec.describe Worker, type: :model do
     end
 
     describe '#experience_term_before_hiring' do
-      context '存在しない場合' do
+      context "nil、''の場合" do
         before :each do
           subject.experience_term_before_hiring = nil
         end
@@ -296,6 +404,21 @@ RSpec.describe Worker, type: :model do
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
           expect(subject.errors.full_messages).to include('雇入前経験年数を入力してください')
+        end
+      end
+
+      context '三桁以上の場合' do
+        before :each do
+          subject.experience_term_before_hiring = 123
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('雇入前経験年数は3桁以上は入力できません')
         end
       end
     end
@@ -315,6 +438,21 @@ RSpec.describe Worker, type: :model do
           expect(subject.errors.full_messages).to include('ブランク年数を入力してください')
         end
       end
+
+      context '三桁以上の場合' do
+        before :each do
+          subject.blank_term = 123
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('ブランク年数は3桁以上は入力できません')
+        end
+      end
     end
 
     describe '#sex' do
@@ -330,6 +468,67 @@ RSpec.describe Worker, type: :model do
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
           expect(subject.errors.full_messages).to include('性別を入力してください')
+        end
+      end
+    end
+
+    describe '#employment_contract' do
+      context '存在しない場合' do
+        before :each do
+          subject.employment_contract = nil
+        end
+
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('雇用契約書の取り交わし状況を入力してください')
+        end
+      end
+    end
+
+    describe '#driver_licence_number' do
+      context '自動車運転免許証を持っていて免許証番号が存在しない場合' do
+        before :each do
+          subject.driver_licence = 'テスト免許'
+          subject.driver_licence_number = nil
+        end
+
+        it 'バリデーションに落ちること(nil)' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと(nil)' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('免許証番号を入力してください')
+        end
+
+        it "バリデーションに落ちること('')" do
+          subject.driver_licence_number = ''
+          expect(subject).to be_invalid
+        end
+
+        it "バリデーションのエラーが正しいこと('')" do
+          subject.driver_licence_number = ''
+          subject.valid?
+          expect(subject.errors.full_messages).to include('免許証番号を入力してください')
+        end
+
+        context 'driver_licence_numberが12桁でない場合' do
+          before :each do
+            subject.driver_licence_number = 12345678901
+          end
+
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
+
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('免許証番号は12桁の数字で入力してください')
+          end
         end
       end
     end
