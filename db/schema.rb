@@ -730,6 +730,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.date "med_exam_on", null: false
     t.integer "max_blood_pressure", null: false
     t.integer "min_blood_pressure", null: false
+    t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
     t.integer "health_condition", default: 0, null: false
     t.integer "is_med_exam", default: 0, null: false

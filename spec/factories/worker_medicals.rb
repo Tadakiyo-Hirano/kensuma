@@ -5,6 +5,7 @@ FactoryBot.define do
     special_med_exam_on { '2021-12-24' }
     max_blood_pressure { 120 }
     min_blood_pressure { 70 }
+    is_special_med_exam { 1 }
     health_condition { 0 }
     is_med_exam { 0 }
 

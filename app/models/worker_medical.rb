@@ -14,8 +14,8 @@ class WorkerMedical < ApplicationRecord
   enum is_med_exam: { y: 0, n: 1 }, _prefix: true       # 労働保険特別加入の有無
 
   validates :med_exam_on, presence: true
-  validates :max_blood_pressure, presence: true
-  validates :min_blood_pressure, presence: true
+  validates :max_blood_pressure, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 999 }
+  validates :min_blood_pressure, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 999 }
   validates :health_condition, presence: true
   validates :is_med_exam, presence: true
 end
