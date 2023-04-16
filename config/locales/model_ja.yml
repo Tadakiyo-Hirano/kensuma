@@ -428,8 +428,6 @@ ja:
         is_med_exam: 健康診断の受診状況
       worker_exam:
         special_med_exam_id: 特別健康診断
-        got_on: 取得年月日
-        images: 証明画像
       special_med_exam:
         name: 名称
       solvent:

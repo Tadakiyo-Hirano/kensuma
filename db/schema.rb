@@ -689,8 +689,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "worker_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_medical_id", null: false
     t.bigint "special_med_exam_id", null: false
-    t.date "got_on", null: false
-    t.json "images"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["special_med_exam_id"], name: "index_worker_exams_on_special_med_exam_id"

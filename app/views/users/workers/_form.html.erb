@@ -236,7 +236,7 @@
   <!-- WorkerMedicalここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_medical do |worker_medical| %>
-      <%# 健康診断の受診 %>
+      <%# 健康診断の受診状況 %>
       <div class="mb-3">
         <%= worker_medical.label :is_med_exam %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
@@ -245,6 +245,11 @@
             <%= b.label { b.radio_button + b.text } %>
           </div>
         <% end %>
+      </div>
+      <%# 健康診断日 %>
+      <div class="row mb-3">
+        <%= worker_medical.label :med_exam_on %>
+        <%= worker_medical.date_field :med_exam_on, class: "form-control" %>
       </div>
       <%# 最近の健康状態 %>
       <div class="mb-3">
@@ -256,23 +261,32 @@
           </div>
         <% end %>
       </div>
-
-      <div class="row mb-3">
-        <%= worker_medical.label :med_exam_on %>
-        <%= worker_medical.date_field :med_exam_on, class: "form-control" %>
-      </div>
+      <%# 最高血圧 (mmHg) %>
       <div class="row mb-3">
         <%= worker_medical.label :max_blood_pressure %>
         <%= worker_medical.number_field :max_blood_pressure, class: "form-control" %>
       </div>
+      <%# 最低血圧 (mmHg) %>
       <div class="row mb-3">
         <%= worker_medical.label :min_blood_pressure %>
         <%= worker_medical.number_field :min_blood_pressure, class: "form-control" %>
       </div>
+      <%# 特別健康診断の受診状況 %>
+      <div class="mb-3">
+        <%= worker_medical.label :is_special_med_exam %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_medical.collection_radio_buttons(:is_special_med_exam, WorkerMedical.is_special_med_exams_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
+      </div>
+      <%# 特別健康診断日   %>
       <div class="row mb-3">
         <%= worker_medical.label :special_med_exam_on %>
         <%= worker_medical.date_field :special_med_exam_on, class: "form-control" %>
       </div>
+      <%# 特別健康診断 %>
       <%= worker_medical.fields_for :worker_exams do |worker_exam| %>
         <%= render "worker_exam_fields", f: worker_exam %>
       <% end %>
@@ -309,7 +323,7 @@
 
       <%# 健康保険証の写し %>
       <%= worker_insurance.label :health_insurance_image %>
-      <div class="col-md-3" style="margin-bottom: 10px;">
+      <div style="margin-bottom: 10px;">
         <%= worker_insurance.file_field :health_insurance_image, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
         <% if @worker.worker_insurance.health_insurance_image.present? %>
           <% @worker.worker_insurance.health_insurance_image.each do |image| %>

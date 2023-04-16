@@ -670,6 +670,9 @@ ja:
       is_med_exam: # 健康診断の受診
         y: 受けた
         n: 受けていない
+      is_special_med_exam: # 健康診断の受診
+        y: 受けた
+        n: 受けていない
   errors:
     format: "%{attribute}%{message}"
     messages:
