@@ -16,6 +16,15 @@
           <td></td>
           <td></td>
         </tr>
+
+        <tr>
+          <th><%= Worker.human_attribute_name(:business_owner_or_master) %></th>
+          <% byebug %>
+          <td><%= 'はい' if @worker.business_owner_or_master %></td>
+          <td></td>
+          <td></td>
+        </tr>
+
         <tr>
           <th><%= Worker.human_attribute_name(:country) %></th>
           <td><%= I18n.t("countries.#{@worker.country}") %>
@@ -30,6 +39,12 @@
           <td></td>
         </tr>
         <tr>
+          <th><%= Worker.human_attribute_name(:post_code) %></th>
+          <td><%= @post_code %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <th><%= Worker.human_attribute_name(:my_address) %></th>
           <td><%= @worker.my_address %></td>
           <td></td>
@@ -37,7 +52,7 @@
         </tr>
         <tr>
           <th><%= Worker.human_attribute_name(:my_phone_number) %></th>
-          <td><%= @worker.my_phone_number %></td>
+          <td><%= @my_phone_number %></td>
           <td></td>
           <td></td>
         </tr>
@@ -67,7 +82,7 @@
         </tr>
         <tr>
           <th><%= Worker.human_attribute_name(:family_phone_number) %></th>
-          <td><%= @worker.family_phone_number %></td>
+          <td><%= @family_phone_number %></td>
           <td></td>
           <td></td>
         </tr>
@@ -115,7 +130,7 @@
         </tr>
         <tr>
           <th><%= Worker.human_attribute_name(:career_up_id) %></th>
-          <td><%= @worker.career_up_id %></td>
+          <td><%= @career_up_id %></td>
           <td></td>
           <td></td>
         </tr>
@@ -142,12 +157,16 @@
           </tr>
         <% end %>
         
+        <!-- 資格情報ここから -->
+        <tr bgcolor="#dee2e6">
+          <th colspan="4">資格情報</th>
+        </tr>
         <!-- worker_liceseここから -->
         <tr bgcolor="#dee2e6">
           <th></th>
           <th><%= License.human_attribute_name(:name) %></th>
-          <th><%= WorkerLicense.human_attribute_name(:got_on) %></th>
           <th><%= WorkerLicense.human_attribute_name(:images) %></th>
+          <th></th>
         </tr>
         <% @worker.worker_licenses.each do |worker_license| %>
           <tr>
@@ -157,7 +176,6 @@
               <th></th>
             <% end %>
             <td><%= worker_license.license.name %></td>
-            <td><%= worker_license.got_on %></td>
             <td>
               <% worker_license.images.each do |image| %>
                 <%= image_tag(image.url) %>
@@ -170,8 +188,8 @@
         <tr bgcolor="#dee2e6">
           <th></th>
           <th><%= SkillTraining.human_attribute_name(:name) %></th>
-          <th><%= WorkerSkillTraining.human_attribute_name(:got_on) %></th>
           <th><%= WorkerSkillTraining.human_attribute_name(:images) %></th>
+          <th></th>
         </tr>
         <% @worker.worker_skill_trainings.each do |worker_skill_training| %>
           <tr>
@@ -181,7 +199,6 @@
               <th></th>
             <% end %>
             <td><%= worker_skill_training.skill_training.name %></td>
-            <td><%= worker_skill_training.got_on %></td>
             <td>
               <% worker_skill_training.images.each do |image| %>
                 <%= image_tag(image.url) %>
@@ -194,8 +211,8 @@
         <tr bgcolor="#dee2e6">
           <th></th>
           <th><%= SpecialEducation.human_attribute_name(:name) %></th>
-          <th><%= WorkerSpecialEducation.human_attribute_name(:got_on) %></th>
           <th><%= WorkerSpecialEducation.human_attribute_name(:images) %></th>
+          <th></th>
         </tr>
         <% @worker.worker_special_educations.each do |worker_special_education| %>
           <tr>
@@ -205,7 +222,6 @@
               <th></th>
             <% end %>
             <td><%= worker_special_education.special_education.name %></td>
-            <td><%= worker_special_education.got_on %></td>
             <td>
               <% worker_special_education.images.each do |image| %>
                 <%= image_tag(image.url) %>
@@ -213,6 +229,52 @@
             </td>
           </tr>
         <% end %>
+
+        <%# worker_safety_health_educationここから %>
+          <tr bgcolor="#dee2e6">
+            <th></th>
+            <th><%= SpecialEducation.human_attribute_name(:name) %></th>
+            <th><%= WorkerSpecialEducation.human_attribute_name(:images) %></th>
+            <th></th>
+          </tr>
+          <% @worker.worker_safety_health_educations.each do |worker_safety_health_education| %>
+            <tr>
+              <% if @worker.safety_health_educations.first.id == worker_safety_health_education.safety_health_education_id %>
+                <th><%= WorkerSafetyHealthEducation.human_attribute_name(:safety_health_education_id) %></th>
+              <% else %>
+                <th></th>
+              <% end %>
+              <td><%= worker_safety_health_education.safety_health_education.name %></td>
+              <td>
+                <% worker_safety_health_education.images.each do |image| %>
+                  <%= image_tag(image.url) %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>       
+        <%# worker_safety_health_educationここまで %>
+        <tr>
+          <th><%= Worker.human_attribute_name(:driver_licence) %></th>
+          <td><%= driver_licence_short_form(@worker.driver_licence) %></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th><%= Worker.human_attribute_name(:driver_licence_number) %></th>
+          <td><%= @worker.driver_licence_number %></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <th><%= Worker.human_attribute_name(:seal) %></th>
+          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>          
+          <td></td>
+          <td></td>
+        </tr>
+        <!-- 資格情報ここまで -->
+        
         <!-- worker_medicalここから -->
         <tr bgcolor="#dee2e6">
           <th colspan="4"><%= WorkerMedical.human_attribute_name(:id) %></th>

@@ -24,7 +24,7 @@ RSpec.describe WorkerInsurance, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('健康保険のタイプを入力してください')
+          expect(subject.errors.full_messages).to include('健康保険を入力してください')
         end
       end
     end
@@ -36,8 +36,12 @@ RSpec.describe WorkerInsurance, type: :model do
         end
 
         it 'バリデーションに落ちること(健康保険組合)' do
-          subject.health_insurance_type = :health_insurance_association
           expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと(健康保険組合)' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('保険名を入力してください')
         end
 
         it 'バリデーションに落ちること(建設国保)' do
@@ -45,16 +49,10 @@ RSpec.describe WorkerInsurance, type: :model do
           expect(subject).to be_invalid
         end
 
-        it 'バリデーションのエラーが正しいこと(健康保険組合)' do
-          subject.health_insurance_type = :health_insurance_association
-          subject.valid?
-          expect(subject.errors.full_messages).to include('健康保険の名前を入力してください')
-        end
-
         it 'バリデーションのエラーが正しいこと(建設国保)' do
           subject.health_insurance_type = :construction_national_health_insurance
           subject.valid?
-          expect(subject.errors.full_messages).to include('健康保険の名前を入力してください')
+          expect(subject.errors.full_messages).to include('保険名を入力してください')
         end
       end
 
@@ -92,7 +90,7 @@ RSpec.describe WorkerInsurance, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('年金保険のタイプを入力してください')
+          expect(subject.errors.full_messages).to include('年金保険を入力してください')
         end
       end
     end
@@ -109,52 +107,52 @@ RSpec.describe WorkerInsurance, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('雇用保険のタイプを入力してください')
+          expect(subject.errors.full_messages).to include('雇用保険を入力してください')
         end
       end
     end
 
     describe '#employment_insurance_number' do
       context '被保険者の場合' do
-        before :each do
-          %i[
-            12345
-            123
-          ].each do |number|
+        %i[
+          1234567890
+          123456789012
+          nil
+        ].each do |number|
+          before :each do
             subject.employment_insurance_number = number
           end
-        end
 
-        it 'バリデーションに落ちること' do
-          subject.employment_insurance_type = :insured
-          expect(subject).to be_invalid
-        end
+          it 'バリデーションに落ちること' do
+            expect(subject).to be_invalid
+          end
 
-        it 'バリデーションのエラーが正しいこと' do
-          subject.employment_insurance_type = :insured
-          subject.valid?
-          expect(subject.errors.full_messages).to include('被保険者番号の下4桁は4文字で入力してください')
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include('被保険者番号は11文字で入力してください')
+          end
         end
       end
 
       context '被保険者以外の場合' do
-        before :each do
-          %i[
-            12345
-            123
-          ].each do |number|
+        %i[
+          1234567890
+          123456789012
+          nil
+        ].each do |number|
+          before :each do
             subject.employment_insurance_number = number
           end
-        end
 
-        it 'バリデーションにとおること(日雇保険)' do
-          subject.employment_insurance_type = :day
-          expect(subject).to be_valid
-        end
+          it 'バリデーションにとおること(日雇保険)' do
+            subject.employment_insurance_type = :day
+            expect(subject).to be_valid
+          end
 
-        it 'バリデーションにとおること(適応除外)' do
-          subject.employment_insurance_type = :exemption
-          expect(subject).to be_valid
+          it 'バリデーションにとおること(適応除外)' do
+            subject.employment_insurance_type = :exemption
+            expect(subject).to be_valid
+          end
         end
       end
     end
@@ -171,7 +169,41 @@ RSpec.describe WorkerInsurance, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('建設業退職金共済制度を入力してください')
+          expect(subject.errors.full_messages).to include('建設業退職金共済手帳を入力してください')
+        end
+      end
+    end
+
+    describe '#severance_pay_mutual_aid_name' do
+      before :each do
+        subject.severance_pay_mutual_aid_name = nil
+      end
+
+      context '建設業退職金共済手帳がその他の時、存在しない場合' do
+        it 'バリデーションに落ちること' do
+          expect(subject).to be_invalid
+        end
+
+        it 'バリデーションのエラーが正しいこと' do
+          subject.valid?
+          expect(subject.errors.full_messages).to include('その他（建設業退職金共済手帳）を入力してください')
+        end
+      end
+
+      context '建設業退職金共済手帳がその他以外の場合' do
+        it 'バリデーションに通ること（建退共手帳）' do
+          subject.severance_pay_mutual_aid_type = :kentaikyo
+          expect(subject).to be_valid
+        end
+
+        it 'バリデーションに通ること中退共手帳）' do
+          subject.severance_pay_mutual_aid_type = :tyutaikyo
+          expect(subject).to be_valid
+        end
+
+        it 'バリデーションに通ること（無し）' do
+          subject.severance_pay_mutual_aid_type = :none
+          expect(subject).to be_valid
         end
       end
     end
