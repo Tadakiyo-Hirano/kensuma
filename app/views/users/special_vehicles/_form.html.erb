@@ -20,6 +20,19 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :control_number, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:control_number) %>
 <br>
+<%= f.label :vehicle_type %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+<% SpecialVehicle.vehicle_types_i18n.each do |key, value| %>
+<%= f.radio_button :vehicle_type, key, id: "vehicle_type_#{key}" %>
+  <%= label_tag "vehicle_type_#{key}", value %>
+  <span class="radio-spacing"></span>
+<% end %>
+<br>
+<br>
+<%= f.label :owning_company_name %>
+<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+<%= f.text_field :owning_company_name, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:owning_company_name) %>
+<br>
 <%= f.label :check_exp_date_year %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :check_exp_date_year, class: "form-control" %>
@@ -29,7 +42,6 @@
 <%= f.date_field :check_exp_date_month, class: "form-control" %>
 <br>
 <%= f.label :check_exp_date_specific %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :check_exp_date_specific, class: "form-control" %>
 <br>
 <%= f.label :check_exp_date_machine %>
@@ -55,7 +67,24 @@
 <%= f.label :exp_date_insurance %>
 <%= f.date_field :exp_date_insurance, class: "form-control" %>
 <br>
-
+<%= f.label :periodic_self_inspections %>
+<%= f.file_field :periodic_self_inspections, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+<% if f.object.periodic_self_inspections.present? %>
+  <% f.object.periodic_self_inspections.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_special_vehicle_destroy_image_path(special_vehicle_uuid: f.object.uuid, column: "periodic_self_inspections", id: f.object.id, index: index), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+<% end %>
+<br>
+<br>
+<%= f.label :in_house_inspections %>
+<%= f.file_field :in_house_inspections, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+  <% if f.object.in_house_inspections.present? %>
+    <% f.object.in_house_inspections.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_special_vehicle_destroy_image_path(special_vehicle_uuid: f.object.uuid, column: "in_house_inspections", id: f.object.id, index: index), method: :delete, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+<% end %>
 <script>
   $(function(){
     $.each(function(key){
@@ -67,6 +96,9 @@
           required: true
         },
         "special_vehicle[maker]": {
+          required: true
+        },
+        "special_vehicle[owning_company_name]": {
           required: true
         },
         "special_vehicle[standards_performance]": {
@@ -84,7 +116,7 @@
         "special_vehicle[check_exp_date_month]": {
           required: true
         },
-        "special_vehicle[check_exp_date_specific]": {
+        "special_vehicle[vehicle_type]": {
           required: true
         },
         "special_vehicle[check_exp_date_machine]": {
@@ -102,6 +134,9 @@
         "special_vehicle[maker]": {
           required: "メーカーを入力してください。"
         },
+        "special_vehicle[owning_company_name]": {
+          required: "会社名を入力してください。"
+        },
         "special_vehicle[standards_performance]": {
           required: "規格・性能を入力してください。"
         },
@@ -117,8 +152,8 @@
         "special_vehicle[check_exp_date_month]": {
           required: "年月日を入力または選択してください。"
         },
-        "special_vehicle[check_exp_date_specific]": {
-          required: "年月日を入力または選択してください。"
+        "special_vehicle[vehicle_type]": {
+          required: "登録車両を選択してください。"
         },
         "special_vehicle[check_exp_date_machine]": {
           required: "年月日を入力または選択してください。"

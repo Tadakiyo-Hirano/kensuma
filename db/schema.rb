@@ -309,12 +309,13 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "uuid", null: false
     t.integer "driver_worker_id"
     t.string "driver_name"
-    t.string "driver_license"
+    t.json "driver_licenses"
+    t.integer "sub_driver_worker_id"
+    t.string "sub_driver_name"
+    t.json "sub_driver_licenses"
     t.string "vehicle_name", null: false
     t.json "content", null: false
-    t.integer "vehicle_type"
     t.string "carry_on_company_name"
-    t.string "owning_company_name"
     t.string "use_company_name"
     t.date "carry_on_date"
     t.date "carry_out_date"
@@ -326,9 +327,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.bigint "field_special_vehicleable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "sub_driver_worker_id"
-    t.string "sub_driver_name"
-    t.string "sub_driver_license"
     t.string "use_company_representative_name"
     t.string "owning_company_representative_name"
     t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
@@ -577,6 +575,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "short_name", null: false
+    t.integer "driving_related"
     t.json "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -597,6 +596,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "special_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
+    t.integer "driving_related"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -612,18 +612,22 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "name", null: false
     t.string "maker", null: false
     t.string "standards_performance", null: false
+    t.string "owning_company_name", null: false
+    t.integer "vehicle_type"
     t.date "year_manufactured", null: false
     t.string "control_number", null: false
     t.date "check_exp_date_year", null: false
     t.date "check_exp_date_month", null: false
-    t.date "check_exp_date_specific", null: false
+    t.date "check_exp_date_specific"
     t.date "check_exp_date_machine", null: false
     t.date "check_exp_date_car", null: false
+    t.date "exp_date_insurance"
     t.integer "personal_insurance"
     t.integer "objective_insurance"
     t.integer "passenger_insurance"
     t.integer "other_insurance"
-    t.date "exp_date_insurance"
+    t.json "periodic_self_inspections"
+    t.json "in_house_inspections"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

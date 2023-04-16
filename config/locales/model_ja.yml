@@ -58,6 +58,7 @@ ja:
         career_up_id: 事業者ID(キャリアアップシステム)
         career_up_card_copy: キャリアアップシステムカードの写し
         stamp_images: 社印
+        tem_industry_ids: 業種
         occupation_ids: 職種
         business_health_insurance_status: 健康保険
         business_health_insurance_association: 組合名
@@ -124,16 +125,20 @@ ja:
         standards_performance: 規格・性能
         year_manufactured: 製造年
         control_number: 管理番号(整理番号)
-        check_exp_date_year: 自主検査有効期限(正規・年次)
-        check_exp_date_month: 自主検査有効期限(正規・月次)
-        check_exp_date_specific: 自主検査有効期限(特定)
+        vehicle_type: 登録する車両
+        owning_company_name: 所有会社名
+        check_exp_date_year: 年次
+        check_exp_date_month: 月次
+        check_exp_date_specific: 特定
         check_exp_date_machine: 移動式クレーン等の性能検査有効期限
         check_exp_date_car: 自動車検査証有効期限
-        personal_insurance: 任意保険加入額(対人)
-        objective_insurance: 任意保険加入額(対物)
-        passenger_insurance: 任意保険加入額(搭乗者)
-        other_insurance: 任意保険加入額(その他)
-        exp_date_insurance: 任意保険加入有効期限
+        personal_insurance: 対人
+        objective_insurance: 対物
+        passenger_insurance: 搭乗者
+        other_insurance: その他
+        exp_date_insurance: 有効期限
+        periodic_self_inspections: 特定(年次)及び月例の定期自主検査帳票の写し
+        in_house_inspections: 自社の点検表の写し
       field_car:
         car_name: 車両名
         driver_name: 運転者名
@@ -199,12 +204,12 @@ ja:
         ventilation_control_images: 有機溶剤・特定化学物質等の換気等対策・別紙
         working_process_images: 有機溶剤・特定化学物質等の作業手順書
       field_special_vehicle:
-        driver_name: 運転者名(正)
-        sub_driver_name: 運転者名(副)
-        vehicle_name: 特殊車両名
-        vehicle_type: 区分
+        driver_name: 氏名(正)
+        driver_licenses: 運転の種類(正)
+        sub_driver_name: 氏名(副)
+        sub_driver_licenses: 運転の種類(副)
+        vehicle_name: 使用する車両
         carry_on_company_name: 持込会社名
-        owning_company_name: 所有会社名
         owning_company_representative_name: 所有会社の代表者名
         use_company_name: 使用会社名
         use_company_representative_name: 使用会社の代表者名
