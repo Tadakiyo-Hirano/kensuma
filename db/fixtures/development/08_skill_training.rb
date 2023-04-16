@@ -3,6 +3,7 @@ SkillTraining.seed(
     id: 1,
     name: '車両系建設機械（整地・運搬・積込み用及び掘削用）運転技能講習',
     short_name: '整地',
+    driving_related: 1,
     details: {
       allocation_numbers: [
         '80[車特]',
@@ -15,6 +16,7 @@ SkillTraining.seed(
     id: 2,
     name: '車両系建設機械（基礎工事用）運転技能講習',
     short_name: '基礎',
+    driving_related: 1,
     details: {
       allocation_numbers: [
         '82[基研]',
@@ -26,36 +28,42 @@ SkillTraining.seed(
     id: 3,
     name: '車両系建設機械（解体用）運転技能講習',
     short_name: '解体',
+    driving_related: 1,
     details: { allocation_numbers: [ '84[解特]' ] }
   },
   {
     id: 4,
     name: '不整地運搬車運転技能講習',
     short_name: '不整',
+    driving_related: 1,
     details: { allocation_numbers: [ '85[不特]' ] }
   },
   {
     id: 5,
     name: '高所作業車運転技能講習',
     short_name: '高所',
+    driving_related: 1,
     details: { allocation_numbers: [ '86[高特]' ] }
   },
   {
     id: 6,
     name: 'フオークリフト運転技能講習',
     short_name: 'フォ',
+    driving_related: 1,
     details: { allocation_numbers: [ '87[ホー]' ] }
   },
   {
     id: 7,
     name: 'シヨベルローダー等運転技能講習',
     short_name: 'ショ',
+    driving_related: 1,
     details: { allocation_numbers: [ '88[シ特]' ] }
   },
   {
     id: 8,
     name: '玉掛け技能講習',
     short_name: '玉掛',
+    driving_related: 1,
     details: { 
       allocation_numbers: [
         '77[玉特]',
@@ -67,12 +75,14 @@ SkillTraining.seed(
     id: 9,
     name: '床上操作式クレーン運転技能講習',
     short_name: '床ク',
+    driving_related: 1,
     details: { allocation_numbers: [ '90[床特]' ] }
   },
   {
     id: 10,
     name: '小型移動式クレーン運転技能講習',
     short_name: '小ク',
+    driving_related: 1,
     details: { allocation_numbers: [ '91[小特]' ] }
   },
   {

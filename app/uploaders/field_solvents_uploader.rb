@@ -1,0 +1,2 @@
+class FieldSolventsUploader < Base
+end

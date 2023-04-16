@@ -8,7 +8,7 @@ module DocumentsHelper
   # document.contentの日付
   def doc_content_date(date)
     if action_name == 'edit'
-      date.nil? ? '' : date # nilの場合のstrftime表示エラー回避
+      date.nil? ? '' : date.to_date&.strftime('%Y年%-m月%-d日') # nilの場合のstrftime表示エラー回避
     else
       date.nil? || date == [''] || date == '' ? '年　月　日' : date.to_date&.strftime('%Y年%-m月%-d日')
     end
@@ -167,8 +167,7 @@ module DocumentsHelper
   end
 
   def foreign_exist(foreign_type, d_info, yes_no) # 「有」か「無」判定
-  #logger.debug(d_info.conten)
-
+  
     f_type = d_info&.content&.[]("subcon_#{foreign_type}")
     if f_type == "available"
       f_type = "有"
@@ -652,6 +651,17 @@ module DocumentsHelper
 
   # (20)年間安全衛生計画書
 
+  # 下請現場情報のidの取得
+  def request_order_id
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).id
+  end
+
+  # 下請現場情報の現場代理人の取得
+  def request_order_site_agent_name
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    request_order.site_agent_name
+  end
+
   # 代表者名の役職取得
   def representative_name(business_id)
     Business.find(business_id).representative_name
@@ -659,10 +669,7 @@ module DocumentsHelper
 
   # 作業員の役職取得
   def workers_post(worker_name)
-    field_workers = document_info.field_workers
-    if field_workers.present?
-      Worker.find_by(name: worker_name).job_title
-    end
+    Worker.find_by(name: worker_name)&.job_title
   end
 
   # 和暦表示(date_select用)
@@ -1446,6 +1453,30 @@ module DocumentsHelper
   end
 
   # 下請発注情報詳細画面
+  
+  # 現場情報-特殊車両-資格内容
+  def target_license(vehicle_info)
+      worker = Worker.find_by(id: vehicle_info.driver_worker_id)
+    if worker.present?
+      skill_tr_table = worker.skill_trainings.where(driving_related: 1)
+      sp_education_table = worker.special_educations.where(driving_related: 1)
+      dr_license_table = ["大型免許", "中型免許", "中型免許(8t)に限る", "準中型免許",
+                            "普通免許", "大型特殊免許", "大型二輪免許", "普通二輪免許",
+                            "小型特殊免許", "原付免許", "牽引自動車第一種運転免許"]
+      tem_table = skill_tr_table + sp_education_table
+      tem_table = tem_table.pluck(:name) + dr_license_table
+    else
+      License.all.pluck(:name)
+    end
+  end
+  
+  def use_company_info(target)
+    if target == "company"
+      @field_special_vehicles.distinct.pluck(:use_company_name)
+    elsif target == "person"
+      @field_special_vehicles.distinct.pluck(:use_company_representative_name)
+    end
+  end
 
   # 自身の書類一覧取得
   def current_user_documents(request_order)
@@ -1504,9 +1535,11 @@ module DocumentsHelper
     if @request_order.order.business_id == @current_business.id
       case hierarchy_document.document_type
       when 'doc_13th'
-        link_to '点検事項 記入', url
+        link_to '確認・点検事項 記入', url
+      when 'doc_15th'
+        link_to '確認事項 記入', url
       when 'doc_16th'
-        link_to '火気使用許可欄 記入', url
+        link_to '確認・火気使用許可事項 記入', url
       end
     end
   end

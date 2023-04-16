@@ -43,7 +43,7 @@ module Users
 
     # 自社(事業所)の建設許可証番号を取得
     def set_business_construction_licenses
-      @business_construction_licenses = current_business.business_industries.pluck(:id, :construction_license_number)
+      @business_construction_licenses = Hash[current_business.business_industries.pluck(:id, :construction_license_number)]
     end
 
     # 書類に反映させる作業員情報

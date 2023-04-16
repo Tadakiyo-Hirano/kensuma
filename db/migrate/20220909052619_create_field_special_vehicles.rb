@@ -4,12 +4,13 @@ class CreateFieldSpecialVehicles < ActiveRecord::Migration[6.1]
       t.string :uuid, null: false
       t.integer :driver_worker_id
       t.string :driver_name
-      t.string :driver_license
+      t.json :driver_licenses
+      t.integer :sub_driver_worker_id
+      t.string :sub_driver_name
+      t.json :sub_driver_licenses
       t.string :vehicle_name, null: false
       t.json :content, null: false
-      t.integer :vehicle_type
       t.string :carry_on_company_name
-      t.string :owning_company_name
       t.string :use_company_name
       t.date :carry_on_date
       t.date :carry_out_date

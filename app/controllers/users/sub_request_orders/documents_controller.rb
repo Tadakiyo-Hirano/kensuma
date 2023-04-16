@@ -44,7 +44,7 @@ module Users::SubRequestOrders
     def update
       if @document.request_order.order.business_id == current_business.id # 元請けのみが編集できる
         case @document.document_type
-        when 'doc_13th', 'doc_16th'
+        when 'doc_13th', 'doc_15th', 'doc_16th'
           if @document.update(document_params(@document))
             redirect_to users_request_order_sub_request_order_document_url, success: '保存に成功しました'
           else
@@ -71,17 +71,6 @@ module Users::SubRequestOrders
 
     def document_params(document)
       case document.document_type
-      when 'doc_16th'
-        params.require(:document).permit(approval_content:
-          %i[
-            prime_contractor_confirmation
-            fire_permit_number
-            fire_permit_date
-            fire_prevention_manager
-            manager
-            permit_criteria
-          ]
-                                        )
       when 'doc_13th'
         field_special_vehicle_ids = @document.request_order.field_special_vehicles.ids
         field_special_vehicle_keys = field_special_vehicle_ids.map { |field_special_vehicle_id| "field_special_vehicle_#{field_special_vehicle_id}" }
@@ -165,6 +154,23 @@ module Users::SubRequestOrders
             h_add_item_check_8th:          field_special_vehicle_keys, # 13-182 (a)Hその他　                   追加項目8(13-110)
             inspection_date:               field_special_vehicle_keys, # 13-255 (a)点検年月日
             inspector:                     field_special_vehicle_keys  # 13-256 (a)点検者
+          ]
+                                        )
+      when 'doc_15th'
+        params.require(:document).permit(approval_content:
+          %i[
+            prime_contractor_confirmation
+          ]
+                                        )
+      when 'doc_16th'
+        params.require(:document).permit(approval_content:
+          %i[
+            prime_contractor_confirmation
+            fire_permit_number
+            fire_permit_date
+            fire_prevention_manager
+            manager
+            permit_criteria
           ]
                                         )
       end

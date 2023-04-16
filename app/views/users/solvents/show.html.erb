@@ -9,6 +9,10 @@
           <td><%= @solvent.name %></td>
         </tr>
         <tr>
+          <th><%= Solvent.human_attribute_name(:maker) %></th>
+          <td><%= @solvent.maker %></td>
+        </tr>
+        <tr>
           <th><%= Solvent.human_attribute_name(:classification) %></th>
           <td><%= @solvent.classification %></td>
         </tr>
