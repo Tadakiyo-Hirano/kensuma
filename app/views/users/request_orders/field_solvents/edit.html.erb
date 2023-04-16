@@ -7,13 +7,7 @@
 
       <%= render 'shared/error_massages', object: f.object %>
 
-      <div class="row">
-        <div class="col-md-3">
-          <%= f.label :date_submitted %>
-          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-          <%= f.date_field :date_submitted, class: "form-control" %>
-        </div>
-      </div><br>
+      <!-- 溶剤1 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_one %>
@@ -26,6 +20,8 @@
           <%= f.text_field :carried_quantity_one, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_one) %>
         </div>
       </div><br>
+
+      <!-- 溶剤2 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_two %>
@@ -36,6 +32,8 @@
           <%= f.text_field :carried_quantity_two, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_two) %>
         </div>
       </div><br>
+
+      <!-- 溶剤3 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_three %>
@@ -46,6 +44,8 @@
           <%= f.text_field :carried_quantity_three, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_three) %>
         </div>
       </div><br>
+
+      <!-- 溶剤4 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_four %>
@@ -56,6 +56,8 @@
           <%= f.text_field :carried_quantity_four, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:carried_quantity_four) %>
         </div>
       </div><br>
+
+      <!-- 溶剤5 -->
       <div class="row">
         <div class="col-md-3">
           <%= f.label :solvent_name_five %>
@@ -67,39 +69,109 @@
         </div>
       </div><br>
       <br>
+
+      <!-- 使用場所 -->
       <%= f.label :using_location %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :using_location, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:using_location), maxlength: 100 %>
       <br>
+
+      <!-- 保管場所 -->
       <%= f.label :storing_place %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :storing_place, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:storing_place), maxlength: 100 %>
       <br>
+
+      <!-- 使用機械又は工具 -->
       <%= f.label :using_tool %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :using_tool, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:using_tool), maxlength: 40 %>
       <br>
+
+      <!-- 使用期間(始期) -->
       <%= f.label :usage_period_start %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <br>
       <%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
       <br><br>
+
+      <!-- 使用期間(終期) -->
       <%= f.label :usage_period_end %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <br>
       <%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
       <br><br>
-      <%= f.label :working_process %>
+
+      <!-- 作業手順書の添付 -->
+      <%= f.label :working_process, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :working_process, FieldSolvent.working_processes_i18n.invert,{include_blank: true}, {class: "form-control"} %>
-      <br>
-      <%= f.label :sds %>
+      <%= f.collection_radio_buttons(:working_process, FieldSolvent.working_processes_i18n, :first, :last, class: "radio") do |b| %>
+        <div class="radio">
+          <%= b.label { b.radio_button + b.text } %>
+        </div>
+      <% end %><br>
+
+      <!-- SDS(安全データシート)の添付 -->
+      <%= f.label :sds, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.select :sds, FieldSolvent.sds_i18n.invert,{include_blank: true}, {class: "form-control"} %>
+      <%= f.collection_radio_buttons(:sds, FieldSolvent.sds_i18n, :first, :last, class: "radio") do |b| %>
+        <div class="radio">
+          <%= b.label { b.radio_button + b.text } %>
+        </div>
+      <% end %><br>
+
+      <!-- SDS(安全シート)の写し -->
+      <%= f.label :sds_images %>
+      <%= f.file_field :sds_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
       <br>
+      <p>
+        <% if @field_solvent.sds_images.present? %>
+          <% @field_solvent.sds_images.each_with_index do |image, index| %>
+            <%= image_tag(image.url) %>
+            <%= link_to "削除", users_request_order_field_solvent_update_sds_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            &nbsp;
+          <% end %>
+          <br>
+        <% end %>
+      </p>
+      <br>
+
+      <!-- 換気等対策 -->
       <%= f.label :ventilation_control %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :ventilation_control, class: "form-control", placeholder: FieldSolvent.human_attribute_name(:ventilation_control) %>
+      <br>
+
+      <!-- 有機溶剤・特定化学物質等の換気等対策・別紙 -->
+      <%= f.label :ventilation_control_images %>
+      <%= f.file_field :ventilation_control_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+      <br>
+      <p>
+        <% if @field_solvent.ventilation_control_images.present? %>
+          <% @field_solvent.ventilation_control_images.each_with_index do |image, index| %>
+            <%= image_tag(image.url) %>
+            <%= link_to "削除", users_request_order_field_solvent_update_ventilation_control_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            &nbsp;
+          <% end %>
+          <br>
+        <% end %>
+      </p>
+      <br>
+
+      <!-- 有機溶剤・特定化学物質等の作業手順書 -->
+      <%= f.label :working_process_images %>
+      <%= f.file_field :working_process_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+      <br>
+      <p>
+        <% if @field_solvent.working_process_images.present? %>
+          <% @field_solvent.working_process_images.each_with_index do |image, index| %>
+            <%= image_tag(image.url) %>
+            <%= link_to "削除", users_request_order_field_solvent_update_working_process_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            &nbsp;
+          <% end %>
+          <br>
+        <% end %>
+      </p>
       <br>
 
       <script>

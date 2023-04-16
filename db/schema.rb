@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_030912) do
+ActiveRecord::Schema.define(version: 2023_03_13_135036) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -268,7 +268,25 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "solvent_name_one", null: false
+    t.string "solvent_name_two"
+    t.string "solvent_name_three"
+    t.string "solvent_name_four"
+    t.string "solvent_name_five"
     t.string "carried_quantity_one", null: false
+    t.string "carried_quantity_two"
+    t.string "carried_quantity_three"
+    t.string "carried_quantity_four"
+    t.string "carried_quantity_five"
+    t.string "solvent_classification_one", null: false
+    t.string "solvent_classification_two"
+    t.string "solvent_classification_three"
+    t.string "solvent_classification_four"
+    t.string "solvent_classification_five"
+    t.string "solvent_ingredients_one", null: false
+    t.string "solvent_ingredients_two"
+    t.string "solvent_ingredients_three"
+    t.string "solvent_ingredients_four"
+    t.string "solvent_ingredients_five"
     t.string "using_location"
     t.string "storing_place"
     t.string "using_tool"
@@ -276,30 +294,14 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.date "usage_period_end"
     t.integer "working_process"
     t.integer "sds"
+    t.json "sds_images"
     t.string "ventilation_control"
+    t.json "ventilation_control_images"
+    t.json "working_process_images"
     t.string "field_solventable_type"
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "solvent_classification_one", null: false
-    t.string "solvent_ingredients_one", null: false
-    t.string "solvent_name_two"
-    t.string "solvent_name_three"
-    t.string "solvent_name_four"
-    t.string "solvent_name_five"
-    t.string "solvent_classification_two"
-    t.string "solvent_classification_three"
-    t.string "solvent_classification_four"
-    t.string "solvent_classification_five"
-    t.string "solvent_ingredients_two"
-    t.string "solvent_ingredients_three"
-    t.string "solvent_ingredients_four"
-    t.string "solvent_ingredients_five"
-    t.string "carried_quantity_two"
-    t.string "carried_quantity_three"
-    t.string "carried_quantity_four"
-    t.string "carried_quantity_five"
-    t.date "date_submitted", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
@@ -307,12 +309,13 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "uuid", null: false
     t.integer "driver_worker_id"
     t.string "driver_name"
-    t.string "driver_license"
+    t.json "driver_licenses"
+    t.integer "sub_driver_worker_id"
+    t.string "sub_driver_name"
+    t.json "sub_driver_licenses"
     t.string "vehicle_name", null: false
     t.json "content", null: false
-    t.integer "vehicle_type"
     t.string "carry_on_company_name"
-    t.string "owning_company_name"
     t.string "use_company_name"
     t.date "carry_on_date"
     t.date "carry_out_date"
@@ -324,9 +327,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.bigint "field_special_vehicleable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "sub_driver_worker_id"
-    t.string "sub_driver_name"
-    t.string "sub_driver_license"
     t.string "use_company_representative_name"
     t.string "owning_company_representative_name"
     t.index ["field_special_vehicleable_type", "field_special_vehicleable_id"], name: "index_field_special_vehicles_on_field_special_vehicleable"
@@ -575,6 +575,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "short_name", null: false
+    t.integer "driving_related"
     t.json "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -583,6 +584,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "name", null: false
+    t.string "maker", null: false
     t.string "classification", null: false
     t.string "ingredients", null: false
     t.bigint "business_id", null: false
@@ -594,6 +596,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "special_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
+    t.integer "driving_related"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -609,18 +612,22 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "name", null: false
     t.string "maker", null: false
     t.string "standards_performance", null: false
+    t.string "owning_company_name", null: false
+    t.integer "vehicle_type"
     t.date "year_manufactured", null: false
     t.string "control_number", null: false
     t.date "check_exp_date_year", null: false
     t.date "check_exp_date_month", null: false
-    t.date "check_exp_date_specific", null: false
+    t.date "check_exp_date_specific"
     t.date "check_exp_date_machine", null: false
     t.date "check_exp_date_car", null: false
+    t.date "exp_date_insurance"
     t.integer "personal_insurance"
     t.integer "objective_insurance"
     t.integer "passenger_insurance"
     t.integer "other_insurance"
-    t.date "exp_date_insurance"
+    t.json "periodic_self_inspections"
+    t.json "in_house_inspections"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -694,20 +701,20 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "worker_insurances", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "health_insurance_type", null: false
     t.string "health_insurance_name"
+    t.json "health_insurance_image"
     t.integer "pension_insurance_type", null: false
     t.integer "employment_insurance_type", null: false
+    t.integer "has_labor_insurance", default: 0
     t.string "employment_insurance_number"
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"
     t.bigint "worker_id", null: false
-    t.integer "has_labor_insurance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
   end
 
   create_table "worker_licenses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "license_id", null: false
@@ -731,8 +738,18 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
   end
 
+  create_table "worker_safety_health_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.json "images"
+    t.bigint "worker_id", null: false
+    t.bigint "safety_health_education_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["safety_health_education_id"], name: "index_safety_health_education_id"
+    t.index ["worker_id", "safety_health_education_id"], name: "idx_w_s_h_e", unique: true
+    t.index ["worker_id"], name: "index_worker_safety_health_educations_on_worker_id"
+  end
+
   create_table "worker_skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "skill_training_id", null: false
@@ -744,7 +761,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   end
 
   create_table "worker_special_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "special_education_id", null: false
@@ -758,6 +774,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "workers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "name_kana", null: false
+    t.boolean "business_owner_or_master", default: false
     t.string "country", null: false
     t.string "my_address", null: false
     t.string "my_phone_number", null: false
@@ -770,10 +787,10 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.integer "experience_term_before_hiring", null: false
     t.integer "blank_term", null: false
     t.string "career_up_id"
-    t.json "images"
+    t.json "career_up_images"
     t.bigint "business_id", null: false
     t.string "uuid", null: false
-    t.string "job_title", null: false
+    t.string "job_title"
     t.integer "employment_contract", default: 0, null: false
     t.string "family_name", null: false
     t.string "relationship", null: false
@@ -788,7 +805,11 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "residence_card_front"
     t.string "residence_card_back"
     t.string "employment_condition"
-    t.integer "post_code"
+    t.string "post_code"
+    t.string "driver_licence"
+    t.string "driver_licence_number"
+    t.string "seal"
+    t.json "employee_cards"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
@@ -829,6 +850,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   add_foreign_key "worker_licenses", "licenses"
   add_foreign_key "worker_licenses", "workers"
   add_foreign_key "worker_medicals", "workers"
+  add_foreign_key "worker_safety_health_educations", "safety_health_educations"
+  add_foreign_key "worker_safety_health_educations", "workers"
   add_foreign_key "worker_skill_trainings", "skill_trainings"
   add_foreign_key "worker_skill_trainings", "workers"
   add_foreign_key "worker_special_educations", "special_educations"

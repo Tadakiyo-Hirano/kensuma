@@ -16,23 +16,6 @@ RSpec.describe WorkerLicense, type: :model do
       expect(subject).to be_valid
     end
 
-    describe '#got_on' do
-      context '存在しない場合' do
-        before :each do
-          subject.got_on = ''
-        end
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('取得年月日を入力してください')
-        end
-      end
-    end
-
     describe '#worker_id' do
       context '存在しない場合' do
         before :each do
@@ -65,6 +48,11 @@ RSpec.describe WorkerLicense, type: :model do
           expect(subject.errors.full_messages).to include('Licenseを入力してください')
         end
       end
+      # it "重複したemailが存在する場合登録できないこと" do
+      # user = create(:user) # createメソッドを使用して変数userとデータベースにfactory_botのダミーデータを保存
+      # another_user = build(:user, email: user.email) # 2人目のanother_userを変数として作成し、buildメソッドを使用して、意図的にemailの内容を重複させる
+      # another_user.valid? # another_userの「バリデーションにより保存ができない状態であるか」をテスト
+      # expect(another_user.errors[:email]).to include("はすでに存在します")
     end
   end
 

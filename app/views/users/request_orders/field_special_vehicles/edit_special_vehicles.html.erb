@@ -1,6 +1,14 @@
 <% provide(:title, "現場特殊車両編集") %>
 <% provide(:btn_text, "更新") %>
 
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <!-- validateプラグインの読み込み -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
 <div class="card">
   <div class="card-body table-responsive p-0">
     <table class="table text-nowrap">
@@ -18,79 +26,87 @@
 
 <section class="content">
   <div class="col-md-12">
-    <%= form_with model: @request_order, url: update_special_vehicles_users_request_order_field_special_vehicles_path, method: :patch, local: true do |f| %>
+    <%= form_with model: @request_order, url: update_special_vehicles_users_request_order_field_special_vehicles_path, method: :patch, local: true, class: "special-vehicle-form-validation" do |f| %>
       <div class="card">
         <div class="card-body table-responsive p-0">
           <table class="table text-nowrap">
             </thead>
             <tbody>
-              <% @field_special_vehicles.each do |field_special_vehicle| %>
+              <% @field_special_vehicles.each_with_index do |field_special_vehicle, i| %>
                 <%= f.fields_for "field_special_vehicles[]", field_special_vehicle do |fs| %>
                   <tr style="border-bottom: 0px #fff;">
-                    <td> 
+                    <td>
                       <%= fs.label :vehicle_name %><br>
-                      <%= field_special_vehicle.vehicle_name %>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr style="border-bottom: 0px #fff;">
-                    <td>
-                      <%= fs.label :driver_name %><br>
-                      <%= fs.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
+                      <%= fs.text_field :vehicle_name, readonly: true, class: "form-control" %>
+                      
+                      <%#= fs.label :vehicle_name %><br>
+                        <%#= select_tag 'dummy_select', options_for_select(field_special_vehicle.content.values_at("name", "maker", "standards_performance", "year_manufactured", "control_number")), class: "form-control" %>
                     </td>
                     <td>
-                      <%= fs.label :sub_driver_name %><br>
-                      <%= fs.select :sub_driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
+                      <%= fs.label "メーカー / 規格・性能" %><br>
+                      <%= text_field_tag "maker_and_standards", field_special_vehicle.content.values_at("maker", "standards_performance").join(" / "), readonly: true, class: "form-control" %>
                     </td>
                     <td>
-                      <%= fs.label :vehicle_type %><br>
-                      <%= fs.select :vehicle_type, FieldSpecialVehicle.vehicle_types_i18n.invert, { prompt: true }, { class: "form-control" } %>
+                      <%= fs.label "製造年" %><br>
+                      <%= text_field_tag "year_manufactured", field_special_vehicle.content['year_manufactured'], readonly: true, class: "form-control" %>
                     </td>
                     <td>
-                      <%= fs.label :carry_on_company_name %>
-                      <%= fs.text_field :carry_on_company_name, list: 'carry_on', class: "form-control" %>
-                      <datalist id="carry_on">
-                        <% @carry_on_companies.each do |company| %>
-                        <option><%= company %></option>
-                        <% end %>
-                      </datalist>
+                      <%= fs.label "管理番号" %><br>
+                      <%= text_field_tag "control_number", field_special_vehicle.content['control_number'], readonly: true, class: "form-control" %>
                     </td>
                   </tr>
                   <tr style="border-bottom: 0px #fff;">
                     <td>
-                      <%= fs.label :owning_company_name %>
-                      <%= fs.text_field :owning_company_name, list: 'owning', class: "form-control" %>
-                      <datalist id="owning">
-                        <% @owning_companies.each do |company| %>
-                        <option><%= company %></option>
-                        <% end %>
-                      </datalist>
+                      <%= fs.label :driver_name %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+                      <%= fs.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control", id: "driver_name_#{i}" } %>
                     </td>
                     <td>
-                      <%= fs.label :owning_company_representative_name %>
-                      <%= fs.text_field :owning_company_representative_name, list: 'owning_representative', class: "form-control" %>
-                      <datalist id="owning_representative">
-                        <% @owning_company_representatives.each do |owning_company_representative| %>
-                        <option><%= owning_company_representative %></option>
-                        <% end %>
-                      </datalist>
+                      <%= fs.label :driver_licenses %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+                      <%= fs.select :driver_licenses, target_license(field_special_vehicle), { prompt: '選択してください', selected: field_special_vehicle.driver_licenses }, { class: 'form-control select2', id: "driver_license_#{i}", multiple: true, style: "width: 100%" } %>
+                    </td>
+                    <td>
+                      <%= fs.label :sub_driver_name %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+                      <%= fs.select :sub_driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control", id: "sub_driver_name_#{i}" } %>
+                    </td>
+                    <td>
+                      <%= fs.label :sub_driver_licenses %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+                      <%= fs.select :sub_driver_licenses, target_license(field_special_vehicle), { prompt: '選択してください', selected: field_special_vehicle.sub_driver_licenses }, { class: 'form-control select2', id: "sub_driver_license_#{i}", multiple: true, style: "width: 100%" } %>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 0px #fff;">
+                    <td>
+                      <%= fs.label :carry_on_company_name %><br>
+                      <%= fs.text_field :carry_on_company_name, value: @current_business.name, readonly: true, class: "form-control" %>
+                    </td>
+                    <td>
+                      <%= fs.label :lease_type %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+                      <% FieldSpecialVehicle.lease_types_i18n.each do |key, value| %>
+                        <%= fs.radio_button :lease_type, key, id: "lease_type_#{key}" %>
+                        <%= label_tag "lease_type_#{key}", value %>
+                        <span class="radio-spacing"></span>
+                      <% end %>
                     </td>
                     <td>
                       <%= fs.label :use_company_name %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
                       <%= fs.text_field :use_company_name, list: 'use', class: "form-control" %>
                       <datalist id="use">
-                        <% @use_companies.each do |company| %>
+                        <% use_company_info("company").each do |company| %>
                         <option><%= company %></option>
                         <% end %>
                       </datalist>
                     </td>
                     <td>
                       <%= fs.label :use_company_representative_name %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
                       <%= fs.text_field :use_company_representative_name, list: 'use_representative', class: "form-control" %>
                       <datalist id="use_representative">
-                        <% @use_company_representatives.each do |use_company_representative| %>
+                        <% use_company_info("person").each do |use_company_representative| %>
                         <option><%= use_company_representative %></option>
                         <% end %>
                       </datalist>
@@ -99,25 +115,24 @@
                   <tr style="border: 0px #fff;">
                     <td>
                       <%= fs.label :carry_on_date %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
                       <%= fs.date_field :carry_on_date, class: "form-control" %>
                     </td>
                     <td>
                       <%= fs.label :carry_out_date %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
                       <%= fs.date_field :carry_out_date, class: "form-control" %>
                     </td>
-                    <td>
-                      <%= fs.label :use_place %>
-                      <%= fs.text_field :use_place, placeholder: "100文字以内", class: "form-control" %>
-                    </td>
-                    <td>
-                      <%= fs.label :lease_type %>
-                      <%= fs.select :lease_type, FieldSpecialVehicle.lease_types_i18n.invert, { prompt: true }, { class: "form-control" } %>
+                    <td colspan="2" >
+                      <%= fs.label :contact_prevention %>
+                      <%= fs.text_field :contact_prevention, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
                     </td>
                   </tr>
                   <tr style="border-top: 0px #fff;">
-                    <td colspan="2" >
-                      <%= fs.label :contact_prevention %>
-                      <%= fs.text_area :contact_prevention, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                    <td colspan="2">
+                      <%= fs.label :use_place %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+                      <%= fs.text_area :use_place, maxlength: 100, placeholder: "100文字以内", class: "form-control" %>
                     </td>
                     <td colspan="2">
                       <%= fs.label :precautions %>
@@ -135,3 +150,210 @@
     <% end %>
   </div>
 </section>
+
+<script>
+$(function(){
+  $.each(function(key){
+    $.validator.addMethod(key, this);
+  });
+  $(".special-vehicle-form-validation").validate({
+    rules:{
+      <% @field_special_vehicles.each_with_index do |field_special_vehicle, index| %>
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][driver_worker_id]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][driver_licenses]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][sub_driver_worker_id]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][sub_driver_licenses]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][lease_type]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_company_name]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_company_representative_name]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][carry_on_date]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][carry_out_date]": {
+        required: true
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_place]": {
+        required: true
+      },
+      <% end %>
+    },
+    messages:{
+      <% @field_special_vehicles.each_with_index do |field_special_vehicle, index| %>
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][driver_worker_id]": {
+        required: "資格を選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][driver_licenses]": {
+        required: "資格を選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][sub_driver_worker_id]": {
+        required: "運転者を選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][sub_driver_licenses]": {
+        required: "資格を選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][lease_type]": {
+        required: "リース区分を選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_company_name]": {
+        required: "使用会社を入力または選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_company_representative_name]": {
+        required: "使用会社の代表者を入力してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][carry_on_date]": {
+        required: "年月日を入力または選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][carry_out_date]": {
+        required: "年月日を入力または選択してください。"
+      },
+      "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_place]": {
+        required: "使用場所を入力してください。"
+      },
+      <% end %>
+    },
+    errorClass: "input_form_error",
+    
+    errorPlacement: function(error, element) {
+      /* if (element.attr("type") === "radio") {*/
+      /*#  error.insertAfter($(element).closest('td').find('label:last'));*/
+      if (element.is(":radio")) {
+        error.appendTo(element.parent());
+      } else if (element.attr("name").startsWith("request_order[field_special_vehicles]")) {
+        var label = element.parents("td").find("label");
+        error.insertAfter(label);
+      } else {
+        error.insertAfter(element);
+      }
+    }
+  });
+  // 入力欄を変更したときにバリデーションを実行
+  $(".special-vehicle-form-validation").change(function () {
+    $(this).valid();
+  });
+});
+
+</script>
+
+<script>
+  <% @field_special_vehicles.each_with_index do |field_special_vehicle, index| %>
+  $(document).ready(function(){
+    var isInitialized = false;
+    var driver_name_index = '<%= index %>'; // driver_name_#{index} に変更
+    
+    function initializeSelect2() {
+      $('#driver_name_' + driver_name_index).on('change', function() {
+        var category_id = $(this).val();
+        $('#driver_license_' + driver_name_index).empty(); // ID を driver_name_#{index} に変更
+        var selectedValues = [];
+        if(category_id){
+          $.ajax({
+            url: 'dr_license_select',
+            type: 'GET',
+            dataType: 'html',
+            data: {worker_id: category_id},
+            success: function(data) {
+              var options = '<option value=""></option>';
+              $('<div>').html(data).find('option').each(function() {
+                var child = $(this);
+                var selected = '';
+                options += '<option value="' + child.val() + '"' + selected + '>' + child.text() + '</option>';
+              });
+              $('#driver_license_' + driver_name_index).html(options); // ID を driver_name_#{index} に変更
+              $('#driver_license_' + driver_name_index).select2({ // ID を driver_name_#{index} に変更
+                width: 'resolve',
+                theme: 'classic',
+                multiple: 'multiple',
+                allowClear: true
+              });
+            }
+          });
+        }
+      });
+      $('#driver_license_' + driver_name_index).select2({ // ID を driver_name_#{index} に変更
+        width: 'resolve',
+        theme: 'classic',
+        multiple: 'multiple',
+        allowClear: true
+      });
+      isInitialized = true;
+    }
+  
+    var checkExist = setInterval(function() {
+      if ($('#driver_license_' + driver_name_index).length && !isInitialized) { // ID を driver_name_#{index} に変更
+        clearInterval(checkExist);
+        initializeSelect2();
+      }
+    }, 100);
+  
+  });
+  <% end %>
+</script>
+
+<script>
+  <% @field_special_vehicles.each_with_index do |field_special_vehicle, index| %>
+  $(document).ready(function(){
+    var isInitialized = false;
+    var driver_name_index = '<%= index %>'; // driver_name_#{index} に変更
+    
+    function initializeSelect2() {
+      $('#sub_driver_name_' + driver_name_index).on('change', function() {
+        var category_id = $(this).val();
+        $('#sub_driver_license_' + driver_name_index).empty(); // ID を driver_name_#{index} に変更
+        var selectedValues = [];
+        if(category_id){
+          $.ajax({
+            url: 'dr_license_select',
+            type: 'GET',
+            dataType: 'html',
+            data: {worker_id: category_id},
+            success: function(data) {
+              var options = '<option value=""></option>';
+              $('<div>').html(data).find('option').each(function() {
+                var child = $(this);
+                var selected = '';
+                options += '<option value="' + child.val() + '"' + selected + '>' + child.text() + '</option>';
+              });
+              $('#sub_driver_license_' + driver_name_index).html(options); // ID を driver_name_#{index} に変更
+              $('#sub_driver_license_' + driver_name_index).select2({ // ID を driver_name_#{index} に変更
+                width: 'resolve',
+                theme: 'classic',
+                multiple: 'multiple',
+                allowClear: true
+              });
+            }
+          });
+        }
+      });
+      $('#sub_driver_license_' + driver_name_index).select2({ // ID を driver_name_#{index} に変更
+        width: 'resolve',
+        theme: 'classic',
+        multiple: 'multiple',
+        allowClear: true
+      });
+      isInitialized = true;
+    }
+  
+    var checkExist = setInterval(function() {
+      if ($('#sub_driver_license_' + driver_name_index).length && !isInitialized) { // ID を driver_name_#{index} に変更
+        clearInterval(checkExist);
+        initializeSelect2();
+      }
+    }, 100);
+  
+  });
+  <% end %>
+</script>

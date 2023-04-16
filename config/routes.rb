@@ -23,7 +23,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   namespace :users do
     resources :cars, param: :uuid
-    resources :special_vehicles, param: :uuid
+    resources :special_vehicles, param: :uuid do
+      delete 'destroy_image'
+    end
     resources :cars, except: %i[index create new show edit update destroy] do
       patch 'update_images'
     end
@@ -49,6 +51,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :workers, param: :uuid
     resources :workers, except: %i[index create new show edit update destroy] do
       patch 'update_workerlicense_images'
+      patch 'update_worker_safety_health_education_images'
       patch 'update_workerskilltraining_images'
       patch 'update_workerspecialeducation_images'
       patch 'update_workerexam_images'
@@ -65,20 +68,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         collection do
           get 'edit_machines'
           patch 'update_machines'
-        end
-      end
-      resources :field_solvents, except: :index, module: :orders, param: :uuid do
-        get 'set_solvent_name_one', to: 'field_solvents#set_solvent_name_one'
-        get 'set_solvent_name_two', to: 'field_solvents#set_solvent_name_two'
-        get 'set_solvent_name_three', to: 'field_solvents#set_solvent_name_three'
-        get 'set_solvent_name_four', to: 'field_solvents#set_solvent_name_four'
-        get 'set_solvent_name_five', to: 'field_solvents#set_solvent_name_five'
-        collection do
-          get 'set_solvent_name_one'
-          get 'set_solvent_name_two'
-          get 'set_solvent_name_three'
-          get 'set_solvent_name_four'
-          get 'set_solvent_name_five'
         end
       end
       resources :field_special_vehicles, except: %i[new show edit update], module: :orders, param: :uuid do
@@ -120,6 +109,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         get 'set_solvent_name_three', to: 'field_solvents#set_solvent_name_three'
         get 'set_solvent_name_four', to: 'field_solvents#set_solvent_name_four'
         get 'set_solvent_name_five', to: 'field_solvents#set_solvent_name_five'
+        patch 'update_sds_images'
+        patch 'update_ventilation_control_images'
+        patch 'update_working_process_images'
         collection do
           get 'set_solvent_name_one'
           get 'set_solvent_name_two'
@@ -132,6 +124,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         collection do
           get 'edit_special_vehicles'
           patch 'update_special_vehicles'
+          get 'dr_license_select', to: 'field_special_vehicles#dr_license_select'
         end
       end
       resources :field_workers, except: %i[new show edit update], module: :request_orders, param: :uuid do

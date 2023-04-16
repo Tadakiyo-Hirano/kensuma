@@ -4,10 +4,6 @@
       <%= f.label :skill_training_id %>
       <%= f.collection_select :skill_training_id, SkillTraining.all, :id, :name, { prompt: '技能講習を選択してください' }, { class: "form-control" } %><br>
     </div>
-    <div class="col-md-2">
-      <%= f.label :got_on %>
-      <%= f.date_field :got_on, class: "form-control" %>
-    </div>
     <div class="col-md-3">
       <%= f.label :images %>
       <%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
