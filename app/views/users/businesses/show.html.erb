@@ -5,224 +5,161 @@
     <table class="table table-hover text-nowrap">
       <tbody>
         <tr>
-          <th><%= Business.human_attribute_name(:name) %></th>
-          <td><%= @business.name %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <th style='font-size:22px'><%= Business.human_attribute_name(:business_info) %></th> <!--会社情報-->
           <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:name_kana) %></th>
-          <td><%= @business.name_kana %></td>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:business_type) %></th>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:branch_name) %></th>
-          <td><%= @business.branch_name %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:representative_name) %></th>
-          <td><%= @business.representative_name %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:email) %></th>
-          <td><%= @business.email %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:address) %></th>
-          <td><%= @business.address %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:post_code) %></th>
-          <td><%= @business.post_code %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:phone_number) %></th>
-          <td><%= @business.phone_number %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:fax_number) %></th>
-          <td><%= @business.fax_number %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:career_up_id) %></th>
-          <td><%= @business.career_up_id %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:business_type) %></th>
           <td><%= @business.business_type_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:industry_ids) %></th>
-          <td><%= Industry.where(id: @business.tem_industry_ids).pluck(:name).join(', ') %></td>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:name) %></th>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= @business.name %></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:occupation_ids) %></th>
-          <td><%= @business.occupations.pluck(:name).join(', ') %></td>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:name_kana) %></th>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= @business.name_kana %></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:stamp_images) %></th>
-          <td>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:branch_name) %></th>
+          <td></td>
+          <td><%= @business.branch_name %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:career_up_id) %></th>
+          <td></td>
+          <td><%= @business.career_up_id %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:career_up_card_copy) %></th>
+          <td></td>
+          <td class="career-up-card-copy-input">
+            <% @business.career_up_card_copy.each do |image| %>
+              <%= image_tag(image.url) %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:representative_name) %></th>
+          <td></td>
+          <td><%= @business.representative_name %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:post_code) %></th>
+          <td></td>
+          <td><%= @business.post_code[0,3] + '-' + @business.post_code[3,4] %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:address) %></th>
+          <td></td>
+          <td><%= @business.address %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:phone_number) %></th>
+          <td></td>
+          <td><%= @business.phone_number %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:fax_number) %></th>
+          <td></td>
+          <td><%= @business.fax_number %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:email) %></th>
+          <td></td>
+          <td><%= current_user.email %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:stamp_images) %></th>
+          <td></td>
+          <td class="stamp-images-input">
             <% @business.stamp_images.each do |image| %>
               <%= image_tag(image.url) %>
             <% end %>
           </td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:industry_ids) %></th>
           <td></td>
+          <td><%= Industry.where(id: @business.tem_industry_ids).pluck(:name).join(', ') %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:occupation_ids) %></th>
           <td></td>
+          <td><%= @business.occupations.pluck(:name).join(', ') %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:employment_manager_name) %></th>
           <td></td>
-          <td></td>
+          <td><%= @business.employment_manager_name %></td>
+        </tr>
+        <tr>
+          <th style='font-size:22px'><%= Business.human_attribute_name(:social_insurance_info) %></th> <!--社会保険情報-->
           <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_health_insurance_status) %></th>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:business_health_insurance) %></th> <!--健康保険-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_health_insurance_status) %></th>
+          <td></td>
           <td><%= @business.business_health_insurance_status_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_health_insurance_association) %></th>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_health_insurance_association) %></th>
+          <td></td>
           <td><%= @business.business_health_insurance_association %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_health_insurance_office_number) %></th>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_health_insurance_office_number) %></th>
+          <td></td>
           <td><%= @business.business_health_insurance_office_number %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:business_welfare_pension_insurance) %></th> <!--厚生年金保険-->
           <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_welfare_pension_insurance_join_status) %></th>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_welfare_pension_insurance_join_status) %></th>
+          <td></td>
           <td><%= @business.business_welfare_pension_insurance_join_status_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_welfare_pension_insurance_office_number) %></th>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_welfare_pension_insurance_office_number) %></th>
+          <td></td>
           <td><%= @business.business_welfare_pension_insurance_office_number %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:business_employment_insurance) %></th> <!--雇用保険-->
           <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_pension_insurance_join_status) %></th>
-          <td><%= @business.business_pension_insurance_join_status_i18n %></td>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_employment_insurance_join_status) %></th>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th><%= Business.human_attribute_name(:business_employment_insurance_join_status) %></th>
           <td><%= @business.business_employment_insurance_join_status_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_employment_insurance_number) %></th>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_employment_insurance_number) %></th>
+          <td></td>
           <td><%= @business.business_employment_insurance_number %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:business_retirement_benefit_mutual_aid) %></th> <!--退職金共済制度-->
           <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:business_retirement_benefit_mutual_aid_status) %></th>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= Business.human_attribute_name(:business_retirement_benefit_mutual_aid_status) %></th>
+          <td></td>
           <td><%= @business.business_retirement_benefit_mutual_aid_status_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:construction_license_status) %></th>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:construction_license_status) %></th>
+          <td></td>
           <td><%= @business.construction_license_status_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <!-- business_industryここから（建設許可証「有」の場合のみ下記表示 -->
         <% if @business.construction_license_status_available? %>
@@ -255,44 +192,36 @@
         <% end %>
         <!-- business_industryここまで -->
         <tr>
-          <th><%= Business.human_attribute_name(:specific_skilled_foreigners_exist) %></th>
+          <th style='font-size:22px'><%= Business.human_attribute_name(:foreign_construction_workers) %></th> <!--外国人建設就労者-->
+          <td></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:foreign_work_status_exist) %></th>
+          <td></td>
+          <td><%= @business.foreign_work_status_exist_i18n %></td>
+        </tr>
+        <tr>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:specific_skilled_foreigners_exist) %></th>
+          <td></td>
           <td><%= @business.specific_skilled_foreigners_exist_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:foreign_construction_workers_exist) %></th>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:foreign_construction_workers_exist) %></th>
+          <td></td>
           <td><%= @business.foreign_construction_workers_exist_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:foreign_technical_intern_trainees_exist) %></th>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:foreign_technical_intern_trainees_exist) %></th>
+          <td></td>
           <td><%= @business.foreign_technical_intern_trainees_exist_i18n %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tr>
         <tr>
-          <th><%= Business.human_attribute_name(:employment_manager_name) %></th>
-          <td><%= @business.employment_manager_name %></td>
+          <th>&emsp;&emsp;<%= Business.human_attribute_name(:foreigners_employment_manager) %></th>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= @business.foreigners_employment_manager %></td>
         </tr>
       </tbody>
     </table>
-
   </div>
   <div class="card-footer">
     <%= link_to "編集", edit_users_business_path, class: "btn btn-md btn-block btn-success" %>

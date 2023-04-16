@@ -13,7 +13,7 @@ module Users
           name:                                                        'test企業',
           name_kana:                                                   'テストキギョウ',
           branch_name:                                                 'test支店',
-          branch_address:                                              'test支店住所',
+          # branch_address:                                              'test支店住所',
           representative_name:                                         'test代表',
           email:                                                       'test@email.com',
           address:                                                     'test',
@@ -26,7 +26,6 @@ module Users
           business_health_insurance_office_number:                     '01234567', # 健康保険(事業所整理記号及び事業所番号)
           business_welfare_pension_insurance_join_status:              0, # 厚生年金保険(加入状況)
           business_welfare_pension_insurance_office_number:            '01234567890123', # 厚生年金保険(事業所整理記号)
-          business_pension_insurance_join_status:                      0, # 年金保険(加入状況)
           business_employment_insurance_join_status:                   0, # 雇用保険(加入状況)
           business_employment_insurance_number:                        '01234567890', # 雇用保険(番号)
           business_retirement_benefit_mutual_aid_status:               0, # 退職金共済制度(加入状況)
@@ -69,7 +68,7 @@ module Users
       render partial: 'occupation-select', locals: { occupations: @occupations }
     end
 
-    def update_images
+    def update_stamp_images
       # 残りstamp_imageを定義
       remain_stamp_images = @business.stamp_images
       # stamp_imageを削除する
@@ -77,6 +76,18 @@ module Users
       deleted_stamp_image.try(:remove!)
       # 削除した後のstamp_imageをupdateする
       @business.update!(stamp_images: remain_stamp_images)
+      flash[:danger] = '削除しました'
+      redirect_to edit_users_business_url
+    end
+
+    def update_career_up_card_copy
+      # 残りcareer_up_card_copyを定義
+      remain_career_up_card_copy = @business.career_up_card_copy
+      # career_up_card_copyを削除する
+      deleted_career_up_card_copy = remain_career_up_card_copy.delete_at(params[:index].to_i)
+      deleted_career_up_card_copy.try(:remove!)
+      # 削除した後のscareer_up_card_copyをupdateする
+      @business.update!(career_up_card_copy: remain_career_up_card_copy)
       flash[:danger] = '削除しました'
       redirect_to edit_users_business_url
     end
@@ -103,15 +114,15 @@ module Users
 
     def business_params
       params.require(:business).permit(
-        :uuid, :name, :name_kana, :branch_name, :branch_address, :representative_name, :email, :address, :post_code,
-        :phone_number, :fax_number, :career_up_id, :business_type, { stamp_images: [] }, :user_id,
+        :uuid, :name, :name_kana, :branch_name, :representative_name, :address, :post_code,
+        :phone_number, :fax_number, :career_up_id, { career_up_card_copy: [] }, :business_type, { stamp_images: [] }, :employment_manager_name, :user_id,
         :business_health_insurance_status, :business_health_insurance_association,
         :business_health_insurance_office_number, :business_welfare_pension_insurance_join_status,
-        :business_welfare_pension_insurance_office_number, :business_pension_insurance_join_status,
+        :business_welfare_pension_insurance_office_number,
         :business_employment_insurance_join_status, :business_employment_insurance_number,
         :business_retirement_benefit_mutual_aid_status,
-        :construction_license_status, :specific_skilled_foreigners_exist,
-        :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist, :employment_manager_name,
+        :construction_license_status, :foreign_work_status_exist, :specific_skilled_foreigners_exist,
+        :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist, :foreigners_employment_manager,
         business_industries_attributes: %i[id industry_id construction_license_permission_type_minister_governor
                                            construction_license_governor_permission_prefecture construction_license_permission_type_identification_general
                                            construction_license_number_double_digit construction_license_number_six_digits

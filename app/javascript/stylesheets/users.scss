@@ -89,3 +89,37 @@ form.cmxform label.error, label.error {
 .radio input[type="radio"] {
   margin-right: 5px;
 }
+
+.error-message {
+  display: inline-block;
+  margin-left: 10px;
+  color: red;
+}
+
+// キャリアアップシステムカードの写し
+.career-up-card-copy-input {
+  width: 30%;
+  height: 30%;
+}
+
+// キャリアアップシステムカードの写し
+.career-up-card-copy-input img {
+  width: 30%;
+  height: 30%;
+  max-width: none;
+  height: auto;
+}
+
+// 社印
+.stamp-images-input {
+  width: 30%;
+  height: 30%;
+}
+
+// 社印
+.stamp-images-input img {
+  width: 30%;
+  height: 30%;
+  max-width: none;
+  height: auto;
+}
