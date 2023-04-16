@@ -3,6 +3,7 @@ class CreateWorkerExams < ActiveRecord::Migration[6.1]
     create_table :worker_exams do |t|
       t.references :worker_medical, null: false, foreign_key: true
       t.references :special_med_exam, null: false, foreign_key: true
+      t.string :others # その他
 
       t.timestamps
     end

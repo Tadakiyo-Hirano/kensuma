@@ -163,7 +163,8 @@
       data: {
         association_insertion_node: '#license-insertion-point',
         association_insertion_method: 'append'
-      }
+      },
+      class: "btn btn-sm btn-primary"
     %>
   </div>
   <!-- WorkerLicenseここまで -->
@@ -178,7 +179,8 @@
       data: {
         association_insertion_node: '#skill-insertion-point',
         association_insertion_method: 'append'
-        }
+      },
+      class: "btn btn-sm btn-primary"
     %>
   </div>
   <!-- WorkerSkillTrainingここまで -->
@@ -193,8 +195,9 @@
       data: {
         association_insertion_node: '#special-insertion-point',
         association_insertion_method: 'append'
-        }
-    %>
+      } ,
+      class: "btn btn-sm btn-primary"
+      %>
   </div>
   <!-- WorkerSpecialEducationここまで -->
 
@@ -208,7 +211,8 @@
       data: {
         association_insertion_node: '#safety-health-education-insertion-point',
         association_insertion_method: 'append'
-      }
+      },
+      class: "btn btn-sm btn-primary"
     %>
   </div>
   <%# worker_safety_health_educationここまで %>
@@ -291,11 +295,13 @@
         <%= render "worker_exam_fields", f: worker_exam %>
       <% end %>
       <div id='worker-exam-insertion-point'></div>
+      <br>
       <%= link_to_add_association "＋フォーム追加", worker_medical, :worker_exams,
         data: {
           association_insertion_node: '#worker-exam-insertion-point',
           association_insertion_method: 'append'
-        } 
+        },
+        class: "btn btn-sm btn-primary"
       %>
     <% end %>
   </div>

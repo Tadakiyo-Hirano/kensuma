@@ -323,7 +323,12 @@
             <% else %>
               <th></th>
             <% end %>
-            <td colspan="4"><%= worker_exam.special_med_exam.name %></td>
+            <td colspan="4">
+              <%= worker_exam.special_med_exam.name %>
+              <% if worker_exam.special_med_exam.name == 'その他' %>
+                （<%= worker_exam.others %>）
+              <% end %>
+            </td>
           </tr>
         <% end %>
         <!-- worker_examここまで -->

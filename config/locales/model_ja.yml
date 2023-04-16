@@ -428,6 +428,7 @@ ja:
         is_med_exam: 健康診断の受診状況
       worker_exam:
         special_med_exam_id: 特別健康診断
+        others: その他
       special_med_exam:
         name: 名称
       solvent:
