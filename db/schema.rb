@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_31_030912) do
+ActiveRecord::Schema.define(version: 2023_03_13_135036) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -700,20 +700,20 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "worker_insurances", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "health_insurance_type", null: false
     t.string "health_insurance_name"
+    t.json "health_insurance_image"
     t.integer "pension_insurance_type", null: false
     t.integer "employment_insurance_type", null: false
+    t.integer "has_labor_insurance", default: 0
     t.string "employment_insurance_number"
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"
     t.bigint "worker_id", null: false
-    t.integer "has_labor_insurance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["worker_id"], name: "index_worker_insurances_on_worker_id"
   end
 
   create_table "worker_licenses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "license_id", null: false
@@ -737,8 +737,18 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
   end
 
+  create_table "worker_safety_health_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.json "images"
+    t.bigint "worker_id", null: false
+    t.bigint "safety_health_education_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["safety_health_education_id"], name: "index_safety_health_education_id"
+    t.index ["worker_id", "safety_health_education_id"], name: "idx_w_s_h_e", unique: true
+    t.index ["worker_id"], name: "index_worker_safety_health_educations_on_worker_id"
+  end
+
   create_table "worker_skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "skill_training_id", null: false
@@ -750,7 +760,6 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   end
 
   create_table "worker_special_educations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.date "got_on", null: false
     t.json "images"
     t.bigint "worker_id", null: false
     t.bigint "special_education_id", null: false
@@ -764,6 +773,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "workers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "name_kana", null: false
+    t.boolean "business_owner_or_master", default: false
     t.string "country", null: false
     t.string "my_address", null: false
     t.string "my_phone_number", null: false
@@ -776,10 +786,10 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.integer "experience_term_before_hiring", null: false
     t.integer "blank_term", null: false
     t.string "career_up_id"
-    t.json "images"
+    t.json "career_up_images"
     t.bigint "business_id", null: false
     t.string "uuid", null: false
-    t.string "job_title", null: false
+    t.string "job_title"
     t.integer "employment_contract", default: 0, null: false
     t.string "family_name", null: false
     t.string "relationship", null: false
@@ -794,7 +804,11 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.string "residence_card_front"
     t.string "residence_card_back"
     t.string "employment_condition"
-    t.integer "post_code"
+    t.string "post_code"
+    t.string "driver_licence"
+    t.string "driver_licence_number"
+    t.string "seal"
+    t.json "employee_cards"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_workers_on_business_id"
@@ -835,6 +849,8 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   add_foreign_key "worker_licenses", "licenses"
   add_foreign_key "worker_licenses", "workers"
   add_foreign_key "worker_medicals", "workers"
+  add_foreign_key "worker_safety_health_educations", "safety_health_educations"
+  add_foreign_key "worker_safety_health_educations", "workers"
   add_foreign_key "worker_skill_trainings", "skill_trainings"
   add_foreign_key "worker_skill_trainings", "workers"
   add_foreign_key "worker_special_educations", "special_educations"
