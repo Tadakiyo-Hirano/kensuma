@@ -199,7 +199,10 @@ ja:
         usage_period_end: 使用期間(終期)
         working_process: 作業手順書の添付
         sds: SDS(安全データシート)の添付
+        sds_images: SDS(安全シート)の写し
         ventilation_control: 換気等対策
+        ventilation_control_images: 有機溶剤・特定化学物質等の換気等対策・別紙
+        working_process_images: 有機溶剤・特定化学物質等の作業手順書
       field_special_vehicle:
         driver_name: 氏名(正)
         driver_licenses: 運転の種類(正)
@@ -422,6 +425,7 @@ ja:
         name: 名称
       solvent:
         name: 商品名
+        maker: メーカー名
         classification: 種別
         ingredients: 含有成分
       machine:

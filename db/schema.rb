@@ -268,7 +268,25 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "field_solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "solvent_name_one", null: false
+    t.string "solvent_name_two"
+    t.string "solvent_name_three"
+    t.string "solvent_name_four"
+    t.string "solvent_name_five"
     t.string "carried_quantity_one", null: false
+    t.string "carried_quantity_two"
+    t.string "carried_quantity_three"
+    t.string "carried_quantity_four"
+    t.string "carried_quantity_five"
+    t.string "solvent_classification_one", null: false
+    t.string "solvent_classification_two"
+    t.string "solvent_classification_three"
+    t.string "solvent_classification_four"
+    t.string "solvent_classification_five"
+    t.string "solvent_ingredients_one", null: false
+    t.string "solvent_ingredients_two"
+    t.string "solvent_ingredients_three"
+    t.string "solvent_ingredients_four"
+    t.string "solvent_ingredients_five"
     t.string "using_location"
     t.string "storing_place"
     t.string "using_tool"
@@ -276,30 +294,14 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
     t.date "usage_period_end"
     t.integer "working_process"
     t.integer "sds"
+    t.json "sds_images"
     t.string "ventilation_control"
+    t.json "ventilation_control_images"
+    t.json "working_process_images"
     t.string "field_solventable_type"
     t.bigint "field_solventable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "solvent_classification_one", null: false
-    t.string "solvent_ingredients_one", null: false
-    t.string "solvent_name_two"
-    t.string "solvent_name_three"
-    t.string "solvent_name_four"
-    t.string "solvent_name_five"
-    t.string "solvent_classification_two"
-    t.string "solvent_classification_three"
-    t.string "solvent_classification_four"
-    t.string "solvent_classification_five"
-    t.string "solvent_ingredients_two"
-    t.string "solvent_ingredients_three"
-    t.string "solvent_ingredients_four"
-    t.string "solvent_ingredients_five"
-    t.string "carried_quantity_two"
-    t.string "carried_quantity_three"
-    t.string "carried_quantity_four"
-    t.string "carried_quantity_five"
-    t.date "date_submitted", null: false
     t.index ["field_solventable_type", "field_solventable_id"], name: "index_field_solvents_on_field_solventable"
   end
 
@@ -582,6 +584,7 @@ ActiveRecord::Schema.define(version: 2023_01_31_030912) do
   create_table "solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "uuid", null: false
     t.string "name", null: false
+    t.string "maker", null: false
     t.string "classification", null: false
     t.string "ingredients", null: false
     t.bigint "business_id", null: false
