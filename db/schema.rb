@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.json "stamp_images"
     t.json "industry_ids"
     t.json "tem_industry_ids"
-    t.string "employment_manager_name", null: false
+    t.string "employment_manager_name"
     t.integer "foreign_work_status_exist"
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
