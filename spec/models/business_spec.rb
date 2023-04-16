@@ -218,7 +218,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('健康保険を入力してください')
+          expect(subject.errors.full_messages).to include('加入状況を入力してください')
         end
       end
     end
@@ -252,7 +252,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('事業所整理記号及び事業所番号は数字6桁または8桁で入力してください')
+            expect(subject.errors.full_messages).to include('事業所整理記号及び事業所番号(健康保険)は数字8桁で入力してください')
           end
         end
       end
@@ -268,7 +268,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('厚生年金保険を入力してください')
+          expect(subject.errors.full_messages).to include('加入状況を入力してください')
         end
       end
     end
@@ -287,7 +287,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('事業所整理記号は数字14桁で入力してください')
+            expect(subject.errors.full_messages).to include('事業所整理記号(厚生年金保険)は数字14桁で入力してください')
           end
         end
       end
@@ -318,7 +318,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('雇用保険を入力してください')
+          expect(subject.errors.full_messages).to include('加入状況を入力してください')
         end
       end
     end
@@ -337,7 +337,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('番号は数字11桁で入力してください')
+            expect(subject.errors.full_messages).to include('番号(雇用保険)は数字11桁で入力してください')
           end
         end
       end
@@ -353,7 +353,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('退職金共済制度を入力してください')
+          expect(subject.errors.full_messages).to include('制度を入力してください')
         end
       end
     end

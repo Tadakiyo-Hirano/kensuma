@@ -52,7 +52,6 @@ module Users
     end
 
     def update
-      binding.pry
       if @business.update(business_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_business_url
