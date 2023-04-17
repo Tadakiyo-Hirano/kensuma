@@ -122,7 +122,11 @@ module DocumentsHelper
 
   # (5)再下請負通知書（変更届）
   def skill_info(license, model)
-    SkillTraining.find_by(id: model&.send(license))&.name
+    if license == "registered_core_engineer_qualification"
+      License.find_by(id: model&.send(license))&.name
+    else
+      SkillTraining.find_by(id: model&.send(license))&.name
+    end
   end
 
   def child_check(child)
@@ -133,31 +137,29 @@ module DocumentsHelper
     end
   end
 
-  def c_license_permission_type_minister_or_governor(d_info) # 「大臣」か「知事」判定
-    if d_info == document_info
-      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_minister_governor_i18n.delete("許可")
-    elsif @child.present?
-      permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_minister_governor').delete("許可")
+  def c_license_permission_type_minister_or_governor(ordinal_number, d_info) # 「大臣」か「知事」判定
+    constr_count = d_info.construction_license.size
+    if ordinal_number <= constr_count
+      element = d_info.construction_license[(ordinal_number.to_i) -1]
+      permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_minister_governor_i18n").delete("許可")
     end
-    return permission_type
   end
 
-  def construction_license_construction_certification(owner, d_info)
-    permission_type = c_license_permission_type_minister_or_governor(d_info)
+  def construction_license_construction_certification(ordinal_number, owner, d_info)
+    permission_type = c_license_permission_type_minister_or_governor(ordinal_number, d_info)
     permission_type == owner ? tag.span(owner, class: :circle) : owner
   end
 
-  def c_license_permission_type_identification_or_general(d_info) # 「特定」か「一般」判定
-    if d_info == document_info
-      permission_type = BusinessIndustry.find(d_info.business_id).construction_license_permission_type_identification_general_i18n
-    elsif @child.present?
-      permission_type = d_info&.content&.[]('subcon_construction_license_permission_type_identification_general')
+  def c_license_permission_type_identification_or_general(ordinal_number, d_info) # 「特定」か「一般」判定
+    constr_count = d_info.construction_license.size
+    if ordinal_number <= constr_count
+      element = d_info.construction_license[(ordinal_number.to_i) -1]
+      permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_identification_general_i18n")
     end
-    return permission_type
   end
 
-  def construction_license_construction_type(type, d_info)
-    permission_type = c_license_permission_type_identification_or_general(d_info)
+  def construction_license_construction_type(ordinal_number, type, d_info)
+    permission_type = c_license_permission_type_identification_or_general(ordinal_number, d_info)
     permission_type == type ? tag.span(type, class: :circle) : type
   end
 
@@ -183,6 +185,20 @@ module DocumentsHelper
       Occupation.where(industry_id: @business.tem_industry_ids.map(&:to_i).reject(&:zero?))
     else
       Occupation.all
+    end
+  end
+  
+  def constr_license_info(ordinal_number, document_type, column)
+    constr_count = document_type.construction_license.size
+    if ordinal_number <= constr_count
+      element = document_type.construction_license[(ordinal_number.to_i) -1]
+      if column == "industry_name"
+        constr_value = Industry.find(BusinessIndustry.find(element).industry_id).name.gsub("工事業", "")
+        return constr_value
+      else
+        constr_value = BusinessIndustry.find(element).send("construction_license_#{column}")
+        return constr_value
+      end
     end
   end
 
@@ -972,7 +988,9 @@ module DocumentsHelper
   def questionnaire_business_type_yes(worker)
     w_name = worker&.content&.[]('name')
     r_name = Business.find(document_info.business_id).representative_name
-    if w_name == r_name
+    if worker.content&.[]('business_owner_or_master') == true
+      tag.span('1. はい', class: :circle) 
+    elsif w_name == r_name
       company_status = Business.find(document_info.business_id).business_type_i18n
       company_status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
     else
@@ -984,7 +1002,9 @@ module DocumentsHelper
   def questionnaire_business_type_no(worker)
     w_name = worker&.content&.[]('name')
     r_name = Business.find(document_info.business_id).representative_name
-    if w_name != r_name
+    if worker.content&.[]('business_owner_or_master') == true
+      '2. いいえ'
+    elsif w_name != r_name
       tag.span('2. いいえ', class: :circle)
     else
       company_status = Business.find(document_info.business_id).business_type_i18n
@@ -997,7 +1017,7 @@ module DocumentsHelper
     company_status = Business.find(document_info.business_id).business_type_i18n
     insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
 
-    if company_status != '法人'
+    if questionnaire_business_type_yes(worker) == tag.span('1. はい', class: :circle)
       insurance_status == 'join' ? tag.span('1. はい', class: :circle) : '1. はい'
     else
       '1. はい'
