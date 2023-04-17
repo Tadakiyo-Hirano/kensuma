@@ -128,7 +128,7 @@ module Users
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
       worker_insurance.update!(health_insurance_image: remaining_images)
-      flash[:danger] = '健康保険証の写しを削除しました'
+      flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
 
@@ -138,7 +138,14 @@ module Users
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
       worker.update!(career_up_images: remaining_images)
-      flash[:danger] = '健康保険証の写しを削除しました'
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def delete_seal
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      worker.update(seal: nil)
+      flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
 
