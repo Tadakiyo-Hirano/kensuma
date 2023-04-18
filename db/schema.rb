@@ -404,6 +404,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "control_number", null: false
     t.string "inspector", null: false
     t.string "handler", null: false
+    t.date "inspection_date", null: false
     t.string "inspection_check"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -731,8 +732,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.integer "min_blood_pressure", null: false
     t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
-    t.json "special_medical_ids"
-    t.string "special_medical_others"
     t.integer "health_condition", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
