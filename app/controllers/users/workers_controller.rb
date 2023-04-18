@@ -67,7 +67,7 @@ module Users
     end
 
     def update_workerlicense_images
-      worker = current_business.workers.find(params[:worker_id])
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
       worker_license = worker.worker_licenses.find(params[:worker_license_id])
       remain_images = worker_license.images
       deleted_image = remain_images.delete_at(params[:index].to_i)
@@ -78,7 +78,7 @@ module Users
     end
 
     def update_workerskilltraining_images
-      worker = current_business.workers.find(params[:worker_id])
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
       worker_skill_training = worker.worker_skill_trainings.find(params[:worker_skill_training_id])
       remain_images = worker_skill_training.images
       deleted_image = remain_images.delete_at(params[:index].to_i)
@@ -89,7 +89,7 @@ module Users
     end
 
     def update_workerspecialeducation_images
-      worker = current_business.workers.find(params[:worker_id])
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
       worker_special_education = worker.worker_special_educations.find(params[:worker_special_education_id])
       remain_images = worker_special_education.images
       deleted_image = remain_images.delete_at(params[:index].to_i)
@@ -100,7 +100,7 @@ module Users
     end
 
     def update_workerexam_images
-      worker = current_business.workers.find(params[:worker_id])
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
       worker_exam = worker.worker_medical.worker_exams.find(params[:worker_exam_id])
       remaining_images = worker_exam.images
       deleting_images = remaining_images.delete_at(params[:index].to_i)
@@ -111,12 +111,40 @@ module Users
     end
 
     def update_worker_safety_health_education_images
-      worker = current_business.workers.find(params[:worker_id])
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
       worker_safety_health_education = worker.worker_safety_health_educations.find(params[:safety_health_education_id])
       remaining_images = worker_safety_health_education.images
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
       worker_safety_health_education.update!(images: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def update_health_insurance_image
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      worker_insurance = worker.worker_insurance
+      remaining_images = worker_insurance.health_insurance_image
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker_insurance.update!(health_insurance_image: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def update_career_up_images
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.career_up_images
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(career_up_images: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def delete_seal
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      worker.update(seal: nil)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -244,17 +272,19 @@ module Users
           :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
           { worker_exams_attributes: [:id, :got_on, :worker_medical_id, :special_med_exam_id, { images: [] }, :_destroy] }
         ],
-        worker_insurance_attributes:                %i[
-          id
-          health_insurance_type
-          health_insurance_name
-          pension_insurance_type
-          employment_insurance_type
-          employment_insurance_number
-          severance_pay_mutual_aid_type
-          severance_pay_mutual_aid_name
-          has_labor_insurance
-        ]
+        worker_insurance_attributes:
+                                                    [
+                                                      :id,
+                                                      :health_insurance_type,
+                                                      :health_insurance_name,
+                                                      :pension_insurance_type,
+                                                      :employment_insurance_type,
+                                                      :employment_insurance_number,
+                                                      :severance_pay_mutual_aid_type,
+                                                      :severance_pay_mutual_aid_name,
+                                                      :has_labor_insurance,
+                                                      { health_insurance_image: [] }
+                                                    ]
       )
     end
 

@@ -46,7 +46,9 @@
 <br>
 <%= f.label :business_type %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+  <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+<% end %>
 <br>
 <%= f.label :tem_industry_ids %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -75,7 +77,9 @@
 <br>
 <%= f.label :business_health_insurance_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:business_health_insurance_status, Business.business_health_insurance_statuses_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:business_health_insurance_status, Business.business_health_insurance_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+  <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+<% end %>
 <br>
 <%= f.label :business_health_insurance_association %>
 <%= f.text_field :business_health_insurance_association, class: "form-control", placeholder: "Enter business_health_insurance_association" %>
@@ -85,7 +89,9 @@
 <br>
 <%= f.label :business_welfare_pension_insurance_join_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+  <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+<% end %>
 <br>
 <%= f.label :business_welfare_pension_insurance_office_number %>
 <%= f.text_field :business_welfare_pension_insurance_office_number, class: "form-control", placeholder: "Enter business_welfare_pension_insurance_office_number" %>
@@ -96,7 +102,9 @@
 <br>
 <%= f.label :business_employment_insurance_join_status %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<%= f.collection_radio_buttons(:business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n, :first, :last) %><br>
+<%= f.collection_radio_buttons(:business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+  <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+<% end %>
 <br>
 <%= f.label :business_employment_insurance_number %>
 <%= f.text_field :business_employment_insurance_number, class: "form-control", placeholder: "Enter business_employment_insurance_number" %>
@@ -250,7 +258,7 @@
         "business[tem_industry_ids][]": {
           required: true
         },
-        "business_industries[occupation_ids][]": {
+        "business_occupations[occupation_id][]": {
           required: true
         },
         "business[business_health_insurance_status]": {
@@ -271,13 +279,7 @@
         "business[construction_license_status]": {
           required: true
         },
-        "business[industry_id][]": {
-          required: true
-        },
         "business[tem_industry_ids][]": {
-          required: true
-        },
-        "business[occupation_ids][]": {
           required: true
         },
         "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
@@ -290,12 +292,9 @@
           required: true
         },
         "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: true
+          required: true,
         },
         "business[business_industries_attributes][construction_license_number_six_digits]": {
-          required: true
-        },
-        "business[business_industries_attributes][construction_license_number]": {
           required: true
         },
         "business[business_industries_attributes][construction_license_updated_at]": {
@@ -330,9 +329,6 @@
         "business[business_type]": {
           required: "どれか一つを選択してください。"
         },
-        "business[occupation_ids][]": {
-          required: "職種を選択してください。"
-        },
         "business[business_health_insurance_status]": {
           required: "どれか一つを選択してください。"
         },
@@ -351,14 +347,8 @@
         "business[construction_license_status]": {
           required: "どちらかを選択してください。"
         },
-        "business[industry_id][]": {
-          required: "業種を選択してください。"
-        },
         "business[tem_industry_ids][]": {
           required: "業種を選択してください。"
-        },
-        "business[occupation_ids][]": {
-          required: "職種を選択してください。"
         },
         "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
           required: "どちらかを選択してください。"
@@ -370,10 +360,10 @@
           required: "どちらかを選択してください。"
         },
         "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: "2桁の番号を入力してください。"
+          required: "2桁の番号を入力してください。",
         },
         "business[business_industries_attributes][construction_license_number_six_digits]": {
-          required: "6桁以下の番号を入力してください。"
+          required: "6桁以下の番号を入力してください。",
         },
         "business[business_industries_attributes][construction_license_updated_at]": {
           required: "日付を選択してください。"
@@ -381,11 +371,31 @@
       },
       errorClass: "input_form_error"
     });
+
+
     // 入力欄を変更したときにバリデーションを実行
     $(".business-form-validation").change(function () {
       $(this).valid();
     });
   });
+
+  // $(document).on('blur', '.business-form-validation input[type="text"]', function() {
+  //   $(this).rules('add', {
+  //     required: true,
+  //     messages: {
+  //       required: "入力してください。"
+  //     }
+  //   });
+  // });
+  // $(document).on('change', '.business-form-validation input[type="radio"]', function() {
+  //   var name = $(this).attr('name');
+  //   $('input[name="' + name + '"]').rules('add', {
+  //     required: true,
+  //     messages: {
+  //       required: "どちらかを選択してください。"
+  //     }
+  //   });
+  // });
 </script>
 
 <script>
@@ -411,7 +421,7 @@
               url: '/users/business/occupation_select',
               type: 'GET',
               dataType: 'html', // HTML形式で返される
-              data: {industry_ids: category_id},
+              data: {industry_id: category_id},
               success: function(data) {
                 var options = '<option value=""></option>'; // 初期化
                 $('<div>').html(data).find('option').each(function() {

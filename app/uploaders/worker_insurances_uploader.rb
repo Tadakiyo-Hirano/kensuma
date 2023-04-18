@@ -1,0 +1,2 @@
+class WorkerInsurancesUploader < Base
+end

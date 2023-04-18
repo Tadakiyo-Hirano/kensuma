@@ -16,7 +16,6 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.string :career_up_id
       t.json :career_up_card_copy
       t.json :stamp_images
-      t.json :industry_ids
       t.json :tem_industry_ids
       t.integer :specific_skilled_foreigners_exist,default: 1, null: false
       t.integer :foreign_construction_workers_exist,default: 1, null: false

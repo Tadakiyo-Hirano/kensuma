@@ -18,7 +18,7 @@
     <div class="col-md-3" style="margin-bottom: 10px;">
       <% f.object.images.each_with_index do |image, index| %>
         <%= image_tag(image.url) %>
-        <%= link_to "削除", users_worker_update_workerexam_images_path(@worker.worker_medical, index: index, worker_exam_id: f.object.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+        <%= link_to "削除", users_worker_update_workerexam_images_path(@worker, @worker.worker_medical, index: index, worker_exam_id: f.object.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
       <% end %>
     </div>
   </div><!-- row -->

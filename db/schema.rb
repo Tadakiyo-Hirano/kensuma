@@ -64,10 +64,10 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   end
 
   create_table "business_industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(種別) enum"
+    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(許可種別) enum"
     t.integer "construction_license_governor_permission_prefecture", comment: "建設許可証(都道府県) enum"
     t.integer "construction_license_permission_type_identification_general", comment: "建設許可証(種別) enum"
-    t.string "construction_license_number_double_digit", comment: "建設許可証(番号)"
+    t.string "construction_license_number_double_digit", comment: "建設許可証(和暦年度)"
     t.string "construction_license_number_six_digits", comment: "建設許可証(番号)"
     t.string "construction_license_number", comment: "建設許可証(建設許可番号)"
     t.date "construction_license_updated_at", comment: "建設許可証(更新日)"
@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "career_up_id"
     t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.json "industry_ids"
     t.json "tem_industry_ids"
     t.integer "specific_skilled_foreigners_exist", default: 1, null: false
     t.integer "foreign_construction_workers_exist", default: 1, null: false
