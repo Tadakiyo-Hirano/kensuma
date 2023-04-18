@@ -5,6 +5,8 @@ ja:
       admin: 管理者
       comment: コメント
       business: 事業部
+      business_industry: 中間テーブル（業種）
+      business_occupation: 中間テーブル（職種）
       car: 車両情報
       car_insurance_company: ⾃動⾞保険会社
       car_voluntary_insurance: 任意保険
@@ -70,7 +72,7 @@ ja:
         business_employment_insurance_number: 番号
         business_retirement_benefit_mutual_aid_status: 退職金共済制度
         construction_license_status: 建設許可証
-        industry_ids: 業種
+        tem_industry_ids: 業種
         specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
         foreign_construction_workers_exist: 外国人建設就労者従事状況
         foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
@@ -86,9 +88,9 @@ ja:
         industry_id: 業種
         construction_license_permission_type_minister_governor: 建設許可種別
         construction_license_governor_permission_prefecture: 都道府県知事許可
-        construction_license_permission_type_identification_general: 建設許可証(種別)
-        construction_license_number_double_digit: 建設許可証(和暦年度)
-        construction_license_number_six_digits: 建設許可証(番号)
+        construction_license_permission_type_identification_general: 種別
+        construction_license_number_double_digit: 和暦年度
+        construction_license_number_six_digits: 番号
         construction_license_number: 建設許可番号
         construction_license_updated_at: 更新日
       car:
@@ -443,8 +445,14 @@ ja:
         inspector: 点検者
         handler: 取扱者
         inspection_date: 点検年月日
-        inspection_check: 点検事項
-        extra_inspection_item1: 追加の点検事項
+        inspection_check: 持込時の点検表
+        extra_inspection: 点検追加項目
+        extra_inspection_item1: 追加項目①
+        extra_inspection_item2: 追加項目②
+        extra_inspection_item3: 追加項目③
+        extra_inspection_item4: 追加項目④
+        extra_inspection_item5: 追加項目⑤
+        extra_inspection_item6: 追加項目⑥
       tag:
         name: 点検事項の名称
   attributes:

@@ -147,7 +147,7 @@
 <% if @worker.career_up_images.present? %>
   <% @worker.career_up_images.each_with_index do |image, index| %>
     <%= image_tag(image.url) %>
-    <%= link_to "削除", users_worker_update_workerskilltraining_images_path(@worker, index: index, worker_skill_training_id: f.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+    <%= link_to "削除", users_worker_update_career_up_images_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
   <% end %>
 <% end %>
 <br>
@@ -234,6 +234,10 @@
       </div>
       <%= f.label :seal %>
       <%= f.file_field :seal, accept: 'image/jpg, image/jpeg, image/png', class: "form-control" %>
+      <% if @worker.seal.present? %>
+        <%= image_tag(@worker.seal.url) %>
+        <%= link_to "削除", users_worker_delete_seal_path(@worker), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+      <% end %>
     </div>
   </div><br>
 
@@ -336,8 +340,9 @@
       <div style="margin-bottom: 10px;">
         <%= worker_insurance.file_field :health_insurance_image, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
         <% if @worker.worker_insurance.health_insurance_image.present? %>
-          <% @worker.worker_insurance.health_insurance_image.each do |image| %>
+          <% @worker.worker_insurance.health_insurance_image.each_with_index do |image, index| %>
             <%= image_tag(image.url) %>
+            <%= link_to "削除", users_worker_update_health_insurance_image_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
           <% end %>
         <% end %>
       </div>

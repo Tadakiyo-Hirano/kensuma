@@ -224,12 +224,13 @@ module Users
           genecon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
           genecon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
           genecon_employment_insurance_number:             current_business.business_employment_insurance_number # 雇用保険番号
-          # genecon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 業種　エラー回避の為コメントアウト
-          # genecon_construction_license_permission_type_minister_governor:      current_business.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)
-          # genecon_construction_license_permission_type_identification_general: current_business.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)
-          # genecon_construction_construction_license_number_double_digit:       current_business.construction_license_number_double_digit,                         # 建設業許可番号(2桁)
-          # genecon_construction_license_number_six_digits:                      current_business.construction_license_number_six_digits,                           # 建設業許可番号(5桁)
-          # genecon_construction_license_updated_at:                             current_business.construction_license_updated_at                                   # 建設許可証(更新日)
+          # contentではなく、カラムで格納する為下記6行不要？（影響確認中）
+          # genecon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 職種　エラー回避の為コメントアウト
+          # genecon_construction_license_permission_type_minister_governor:      current_business.business_industries.map { |bi| bi.construction_license_permission_type_minister_governor_i18n },      # 建設業許可種別(大臣,知事)
+          # genecon_construction_license_permission_type_identification_general: current_business.business_industries.map { |bi| bi.construction_license_permission_type_identification_general_i18n }, # 建設業許可種別(特定,一般)
+          # genecon_construction_construction_license_number_double_digit:       current_business.business_industries.map { |bi| bi.construction_license_number_double_digit },                         # 建設業許可番号(2桁)
+          # genecon_construction_license_number_six_digits:                      current_business.business_industries.map { |bi| bi.construction_license_number_six_digits },                           # 建設業許可番号(6桁)
+          # genecon_construction_license_updated_at:                             current_business.business_industries.map { |bi| bi.construction_license_updated_at }                                   # 建設許可証(更新日)
         }
       )
     end

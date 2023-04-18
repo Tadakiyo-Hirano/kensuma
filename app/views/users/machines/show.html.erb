@@ -25,21 +25,24 @@
           <td><%= @machine.handler %></td>
         </tr>
         <tr>
+          <th><%= Machine.human_attribute_name(:inspection_date) %></th>
+          <td><%= wareki(@machine.inspection_date) %></td>
+        </tr>
+        <tr>
+          <th><%= Machine.human_attribute_name(:extra_inspection) %></th>
+        </tr>
+        <% @count.times do |k| %>
+        <tr>
+          <th class="text_ind_1"><%= Machine.human_attribute_name(:"extra_inspection_item#{k+1}") %></th>
+          <td>
+            <%= @machine.send("extra_inspection_item#{k+1}") %>
+          </td>
+        </tr>
+        <% end %>
+        <tr>
           <th><%= Machine.human_attribute_name(:inspection_check) %></th>
           <% tag_arrays = Tag.where(id: Machine.find(@machine.id).tag_ids).pluck(:name) %>
           <td><%= tag_arrays.join(' / ') %></td>
-        </tr>
-        <tr>
-          <th><%= Machine.human_attribute_name(:extra_inspection_item1) %></th>
-          <td>
-            <% @count.times do |k| %>
-              <% if @count == k + 1 %>
-                <%= @machine.send("extra_inspection_item#{k + 1}") %>
-              <% else %>
-                <%= @machine.send("extra_inspection_item#{k + 1}") + " / " %>
-              <% end %>
-            <% end %>
-          </td>
         </tr>
       </tbody>
     </table>

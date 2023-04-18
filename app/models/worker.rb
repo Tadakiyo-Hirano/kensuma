@@ -73,6 +73,9 @@ class Worker < ApplicationRecord
   # validates :responsible_name
   # validates :responsible_contact_address
 
+  mount_uploader :seal, WorkersUploader
+  mount_uploaders :career_up_images, WorkersUploader
+
   def to_param
     uuid
   end
