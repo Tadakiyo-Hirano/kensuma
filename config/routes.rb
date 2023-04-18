@@ -45,7 +45,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :machines, param: :uuid
     resources :solvents, param: :uuid
     resource :business, except: %i[index destroy] do
-      patch 'update_images'
+      patch 'update_stamp_images'
+      patch 'update_career_up_card_copy'
       get 'occupation_select'
     end
     resources :workers, param: :uuid

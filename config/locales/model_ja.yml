@@ -46,38 +46,47 @@ ja:
         role: 権限
         is_prime_contractor: 元請け
       business:
+        business_info: 会社情報
         uuid: 会社ID
         business_type: 会社形態
         name: 会社名
         name_kana: 会社名(カナ)
         branch_name: 支店名 又は 営業所名
+        career_up_id: 事業者ID(キャリアアップシステム)
+        career_up_card_copy: 建設キャリアアップシステムカードの写し
         representative_name: 代表者名
-        email: メールアドレス
-        address: 住所
         post_code: 郵便番号
+        address: 住所
         phone_number: 電話番号
         fax_number: FAX
-        career_up_id: 事業者ID(キャリアアップシステム)
-        career_up_card_copy: キャリアアップシステムカードの写し
+        email: メールアドレス
         stamp_images: 社印
         tem_industry_ids: 業種
         occupation_ids: 職種
-        business_health_insurance_status: 健康保険
+        employment_manager_name: 雇用管理責任者名
+        social_insurance_info: 社会保険情報
+        business_health_insurance: 健康保険
+        business_health_insurance_status: 加入状況
         business_health_insurance_association: 組合名
         business_health_insurance_office_number: 事業所整理記号及び事業所番号
-        business_welfare_pension_insurance_join_status: 厚生年金保険
+        business_welfare_pension_insurance: 厚生年金保険
+        business_welfare_pension_insurance_join_status: 加入状況
         business_welfare_pension_insurance_office_number: 事業所整理記号
-        business_pension_insurance_join_status: 年金保険(削除予定)
-        business_employment_insurance_join_status: 雇用保険
+        # business_pension_insurance_join_status: 年金保険(削除予定)
+        business_employment_insurance: 雇用保険
+        business_employment_insurance_join_status: 加入状況
         business_employment_insurance_number: 番号
-        business_retirement_benefit_mutual_aid_status: 退職金共済制度
+        business_retirement_benefit_mutual_aid: 退職金共済制度
+        business_retirement_benefit_mutual_aid_status: 制度
         construction_license_status: 建設許可証
-        tem_industry_ids: 業種
-        specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
-        foreign_construction_workers_exist: 外国人建設就労者従事状況
-        foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
-        employment_manager_name: 雇用管理責任者(氏名)
-        employment_manager_post: 雇用管理責任者(役職名)
+        industry_ids: 業種
+        foreign_construction_workers: 外国人建設就労者
+        foreign_work_status_exist: 外国人就労の有無
+        specific_skilled_foreigners_exist: 一号特定技能外国人の従事の状況
+        foreign_construction_workers_exist: 外国人建設就労者の従事の状況
+        foreign_technical_intern_trainees_exist: 外国人技能実習生の従事の状況
+        foreigners_employment_manager: 外国人雇用管理責任者名
+        # employment_manager_post: 雇用管理責任者(役職名)
       occupation:
         name: 職種名
       business_occupation:
@@ -413,9 +422,9 @@ ja:
         document_type: 書類項目
         created_on: 書類作成日
         submitted_on: 書類提出日
-        secretary_name: 書記名
-        vice_president_name: 副会長名
-        vice_president_company_name: 副会長会社名
+        placeholder_secretary_name: 書記名
+        placeholder_vice_president_name: 副会長名
+        placeholder_vice_president_company_name: 副会長会社名
       cover_document:
         business_name: 事業所名
         submitted_on: 書類提出日

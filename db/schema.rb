@@ -93,25 +93,24 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.integer "business_type", null: false
     t.string "name", null: false
     t.string "name_kana", null: false
-    t.string "branch_name", null: false
-    t.string "branch_address"
+    t.string "branch_name"
+    t.string "career_up_id"
     t.string "representative_name", null: false
-    t.string "email", null: false
-    t.string "address", null: false
     t.string "post_code", null: false
+    t.string "address", null: false
     t.string "phone_number", null: false
     t.string "fax_number"
-    t.string "career_up_id"
+    t.string "email", null: false
     t.json "career_up_card_copy"
     t.json "stamp_images"
     t.json "tem_industry_ids"
+    t.string "employment_manager_name"
+    t.integer "foreign_work_status_exist"
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
     t.integer "foreign_technical_intern_trainees_exist"
     t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
-    t.string "employment_manager_name"
-    t.string "employment_manager_post"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -120,7 +119,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "business_health_insurance_office_number"
     t.integer "business_welfare_pension_insurance_join_status", null: false
     t.string "business_welfare_pension_insurance_office_number"
-    t.integer "business_pension_insurance_join_status", null: false
     t.integer "business_employment_insurance_join_status", null: false
     t.string "business_employment_insurance_number"
     t.integer "business_retirement_benefit_mutual_aid_status", null: false
@@ -404,6 +402,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "control_number", null: false
     t.string "inspector", null: false
     t.string "handler", null: false
+    t.date "inspection_date", null: false
     t.string "inspection_check"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
