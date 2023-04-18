@@ -64,7 +64,7 @@
                     <td>
                       <%= fs.label :driver_licenses %>
                       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-                      <%= fs.select :driver_licenses, target_license(field_special_vehicle), { prompt: '選択してください', selected: field_special_vehicle.driver_licenses }, { class: 'form-control select2', id: "driver_license_#{i}", multiple: true, style: "width: 100%" } %>
+                      <%= fs.select :driver_licenses, target_license(field_special_vehicle&.driver_worker_id), { prompt: '選択してください', selected: field_special_vehicle&.driver_licenses }, { class: 'form-control select2', id: "driver_license_#{i}", multiple: true, style: "width: 100%" } %>
                     </td>
                     <td>
                       <%= fs.label :sub_driver_name %>
@@ -74,7 +74,7 @@
                     <td>
                       <%= fs.label :sub_driver_licenses %>
                       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-                      <%= fs.select :sub_driver_licenses, target_license(field_special_vehicle), { prompt: '選択してください', selected: field_special_vehicle.sub_driver_licenses }, { class: 'form-control select2', id: "sub_driver_license_#{i}", multiple: true, style: "width: 100%" } %>
+                      <%= fs.select :sub_driver_licenses, target_license(field_special_vehicle&.sub_driver_worker_id), { prompt: '選択してください', selected: field_special_vehicle&.sub_driver_licenses }, { class: 'form-control select2', id: "sub_driver_license_#{i}", multiple: true, style: "width: 100%" } %>
                     </td>
                   </tr>
                   <tr style="border-bottom: 0px #fff;">
