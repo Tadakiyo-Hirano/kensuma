@@ -64,7 +64,7 @@ module Users
 
     # ajax
     def occupation_select
-      @occupations = Occupation.where(industry_id: params[:industry_ids]).pluck(:short_name, :id)
+      @occupations = Occupation.where(industry_id: params[:industry_id]).pluck(:short_name, :id)
       render partial: 'occupation-select', locals: { occupations: @occupations }
     end
 

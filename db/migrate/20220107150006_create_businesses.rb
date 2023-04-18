@@ -16,7 +16,6 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.string :email, null: false
       t.json :career_up_card_copy
       t.json :stamp_images
-      t.json :industry_ids
       t.json :tem_industry_ids
       t.string :employment_manager_name
       t.integer :foreign_work_status_exist

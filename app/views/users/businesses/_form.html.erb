@@ -472,7 +472,7 @@
         "business[tem_industry_ids][]": {
           required: true
         },
-        "business_industries[occupation_ids][]": {
+        "business_occupations[occupation_id][]": {
           required: true
         },
         // "business[employment_manager_name]": {
@@ -506,13 +506,7 @@
         "business[construction_license_status]": {
           required: true
         },
-        "business[industry_id][]": {
-          required: true
-        },
         "business[tem_industry_ids][]": {
-          required: true
-        },
-        "business[occupation_ids][]": {
           required: true
         },
         "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
@@ -525,7 +519,7 @@
           required: true
         },
         "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: true
+          required: true,
         },
         "business[business_industries_attributes][construction_license_number_six_digits]": {
           required: true
@@ -551,7 +545,6 @@
         // "business[foreigners_employment_manager]": {
         //   required: true
         // },
-      },
       messages: {
         "business[uuid]": {
           required: "事業所IDを入力してください。"
@@ -615,14 +608,8 @@
         "business[construction_license_status]": {
           required: "どちらかを選択してください。"
         },
-        "business[industry_id][]": {
-          required: "業種を選択してください。"
-        },
         "business[tem_industry_ids][]": {
           required: "業種を選択してください。"
-        },
-        "business[occupation_ids][]": {
-          required: "職種を選択してください。"
         },
         "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
           required: "どちらかを選択してください。"
@@ -634,10 +621,10 @@
           required: "どちらかを選択してください。"
         },
         "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: "2桁の番号を入力してください。"
+          required: "2桁の番号を入力してください。",
         },
         "business[business_industries_attributes][construction_license_number_six_digits]": {
-          required: "6桁以下の番号を入力してください。"
+          required: "6桁以下の番号を入力してください。",
         },
         "business[business_industries_attributes][construction_license_updated_at]": {
           required: "日付を選択してください。"
@@ -660,11 +647,31 @@
       },
       errorClass: "input_form_error"
     });
+
+
     // 入力欄を変更したときにバリデーションを実行
     $(".business-form-validation").change(function () {
       $(this).valid();
     });
   });
+
+  // $(document).on('blur', '.business-form-validation input[type="text"]', function() {
+  //   $(this).rules('add', {
+  //     required: true,
+  //     messages: {
+  //       required: "入力してください。"
+  //     }
+  //   });
+  // });
+  // $(document).on('change', '.business-form-validation input[type="radio"]', function() {
+  //   var name = $(this).attr('name');
+  //   $('input[name="' + name + '"]').rules('add', {
+  //     required: true,
+  //     messages: {
+  //       required: "どちらかを選択してください。"
+  //     }
+  //   });
+  // });
 </script>
 
 <script>
@@ -690,7 +697,7 @@
               url: '/users/business/occupation_select',
               type: 'GET',
               dataType: 'html', // HTML形式で返される
-              data: {industry_ids: category_id},
+              data: {industry_id: category_id},
               success: function(data) {
                 var options = '<option value=""></option>'; // 初期化
                 $('<div>').html(data).find('option').each(function() {

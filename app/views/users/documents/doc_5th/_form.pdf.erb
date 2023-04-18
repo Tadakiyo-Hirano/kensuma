@@ -915,22 +915,15 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">
-                  <%= child_check(@child) == "FALSE" ? "" : Industry.find(Business.find(@child.business_id).industry_ids.join("','")).name.delete("工事業") %> <!-- 5-112 各会社の建設許可業種 -->
-                </td>
+                <td class="s_5b_205" dir="ltr" colspan="10" rowspan="4"><%= constr_license_info(1, @child, "industry_name") %></td>
                 <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
-                <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("大臣", @child) %></td>
-                <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("特定", @child) %></td>
-                <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%#= @child&.content&.[]('subcon_construction_construction_license_number_double_digit') %></td>
+                <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(1, "大臣", @child) %></td>
+                <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(1, "特定", @child) %></td>
+                <td class="s_5b_211" dir="ltr" colspan="3" rowspan="4"><%= constr_license_info(1, @child, "number_double_digit") %></td>
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
-                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">
-                  <%#= @child&.content&.[]('subcon_construction_license_number_six_digits') %> <!-- 5-115 建設許可番号 -->
-                </td>
+                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= constr_license_info(1, @child, "number_six_digits") %> <!-- 5-145 建設許可番号 --></td>
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">
-                  <%#= @child&.content&.[]('subcon_construction_license_updated_at') %> <!--5-116 建設許可証更新日(西暦) -->
-                </td>
-              </tr>
+                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= constr_license_info(1, @child, "updated_at") %> <!-- 5-115 建設許可証更新日(西暦) --></td>
               <tr><!-- 24行目 -->
                 <td class="s_5a_000"></td><!-- 1列目 -->
                 <td class="s_5a_000"></td>
@@ -1018,8 +1011,8 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_208" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("知事", @child) %></td>
-                <td class="s_5b_210" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("一般", @child) %></td>
+                <td class="s_5b_208" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(1, "知事", @child) %></td>
+                <td class="s_5b_210" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(1, "一般", @child) %></td>
               </tr>
               <tr><!-- 26行目 -->
                 <td class="s_5c_00"></td>
@@ -1036,21 +1029,15 @@
                 <td class="s_5c_00"></td>
               </tr>
               <tr><!-- 27行目 -->
-              <td class="s_5a_305" dir="ltr" colspan="10" rowspan="4">
-                <%= Industry.find(Business.find(document_info.business_id).industry_ids.join("','")).name.delete("工事業") %> <!-- 5-019 各会社の建設許可業種 -->
-              </td>
-              <td class="s_5a_306" dir="ltr" colspan="4" rowspan="4">工事業</td>
-              <td class="s_5a_307" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification("大臣", document_info) %></td>
-              <td class="s_5a_309" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type("特定", document_info) %></td>
-              <td class="s_5a_311" dir="ltr" colspan="3" rowspan="4"><%#= document_info&.content&.[]('subcon_construction_construction_license_number_double_digit') %></td>
-              <td class="s_5a_312" dir="ltr" colspan="2" rowspan="4">第</td>
-              <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4">
-                <%#= document_info&.content&.[]('subcon_construction_license_number_six_digits') %> <!-- 5-022 建設許可番号 -->
-              </td>
-              <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
-              <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4">
-                <%#= document_info&.content&.[]('subcon_construction_license_updated_at') %> <!-- 5-023 建設許可証更新日(西暦) -->
-              </td>
+                <td class="s_5a_305" dir="ltr" colspan="10" rowspan="4"><%= constr_license_info(1, document_info, "industry_name") %></td>
+                <td class="s_5a_306" dir="ltr" colspan="4" rowspan="4">工事業</td>
+                <td class="s_5a_307" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(1, "大臣", document_info) %></td>
+                <td class="s_5a_309" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(1, "特定", document_info) %></td>
+                <td class="s_5a_311" dir="ltr" colspan="3" rowspan="4"><%= constr_license_info(1, document_info, "number_double_digit") %></td>
+                <td class="s_5a_312" dir="ltr" colspan="2" rowspan="4">第</td>
+                <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4"><%= constr_license_info(1, document_info, "number_six_digits") %> <!-- 5-022 建設許可番号 --></td>
+                <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
+                <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= constr_license_info(1, document_info, "updated_at") %> <!-- 5-023 建設許可証更新日(西暦) --></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -1063,22 +1050,15 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_205" dir="ltr" colspan="11" rowspan="4">
-                  <%#= child_check(@child) == "FALSE" ? "" : Industry.find(Business.find(@child.business_id).industry_ids.join("','")).name %> <!-- 5-117 各会社の建設許可業種 -->
-                </td>
+                <td class="s_5b_205" dir="ltr" colspan="10" rowspan="4"><%= constr_license_info(2, @child, "industry_name") %></td>
                 <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
-                <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("大臣", @child) %></td>
-                <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("特定", @child) %></td>
-                <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%#= @child&.content&.[]('subcon_construction_construction_license_number_double_digit') %></td>
+                <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(2, "大臣", @child) %></td>
+                <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(2, "特定", @child) %></td>
+                <td class="s_5b_211" dir="ltr" colspan="3" rowspan="4"><%= constr_license_info(2, @child, "number_double_digit") %></td>
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
-                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4">
-                  <%#= @child&.content&.[]('subcon_construction_license_number_six_digits') %> <!--5-120 建設許可番号 -->
-                </td>
+                <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= constr_license_info(2, @child, "number_six_digits") %> <!-- 5-146 建設許可番号 --></td>
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4">
-                  <%#= @child&.content&.[]('subcon_construction_license_updated_at') %> <!-- 5-121 建設許可証更新日(西暦) -->
-                </td>
-              </tr>
+                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= constr_license_info(2, @child, "updated_at") %> <!-- 5-120 建設許可証更新日(西暦) --></td>
               <tr><!-- 28行目 -->
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -1094,8 +1074,8 @@
                 <td class="s_5c_00"></td>
               </tr>
               <tr><!-- 29行目 -->
-                <td class="s_5a_308" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification("知事", document_info) %></td>
-                <td class="s_5a_310" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type("一般", document_info) %></td>
+                <td class="s_5a_308" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(1, "知事", document_info) %></td>
+                <td class="s_5a_310" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(1, "一般", document_info) %></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -1108,8 +1088,8 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
-                <td class="s_5b_208" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("知事", @child) %></td>
-                <td class="s_5b_210" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("一般", @child) %></td>
+                <td class="s_5b_208" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(2, "知事", @child) %></td>
+                <td class="s_5b_210" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(2, "一般", @child) %></td>
               </tr>
               <tr><!-- 30行目 -->
                 <td class="s_5c_00"></td>
@@ -1126,21 +1106,15 @@
                 <td class="s_5c_00"></td>
               </tr>
               <tr><!-- 31行目 -->
-                <td class="s_5a_305" dir="ltr" colspan="10" rowspan="4">
-                  <%#= Industry.find(Business.find(document_info.business_id).industry_ids.join("','")).name %> <!-- 5-024 各会社の建設許可業種 -->
-                </td>
+                <td class="s_5a_305" dir="ltr" colspan="10" rowspan="4"><%= constr_license_info(2, document_info, "industry_name") %></td>
                 <td class="s_5a_306" dir="ltr" colspan="4" rowspan="4">工事業</td>
-                <td class="s_5a_307" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("大臣", document_info) %></td>
-                <td class="s_5a_309" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("特定", document_info) %></td>
-                <td class="s_5a_311" dir="ltr" colspan="3" rowspan="4"><%#= document_info&.content&.[]('subcon_construction_construction_license_number_double_digit') %></td>
+                <td class="s_5a_307" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(2, "大臣", document_info) %></td>
+                <td class="s_5a_309" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(2, "特定", document_info) %></td>
+                <td class="s_5a_311" dir="ltr" colspan="3" rowspan="4"><%= constr_license_info(2, document_info, "number_double_digit") %></td>
                 <td class="s_5a_312" dir="ltr" colspan="2" rowspan="4">第</td>
-                <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4">
-                  <%#= document_info&.content&.[]('subcon_construction_license_number_six_digits') %> <!-- 5-027 建設許可番号 -->
-                </td>
+                <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4"><%= constr_license_info(2, document_info, "number_six_digits") %> <!-- 5-027 建設許可番号 --></td>
                 <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4">
-                  <%#= document_info&.content&.[]('subcon_construction_license_updated_at') %> <!-- 5-028 建設許可証更新日(西暦) -->
-                </td>
+                <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= constr_license_info(2, document_info, "updated_at") %> <!-- 5-028 建設許可証更新日(西暦) --></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -1211,8 +1185,8 @@
                 </td>
               </tr>
               <tr><!-- 33行目 -->
-                <td class="s_5a_308" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_certification("知事", document_info) %></td>
-                <td class="s_5a_310" dir="ltr" colspan="4" rowspan="2"><%#= construction_license_construction_type("一般", document_info) %></td>
+                <td class="s_5a_308" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_certification(2, "知事", document_info) %></td>
+                <td class="s_5a_310" dir="ltr" colspan="4" rowspan="2"><%= construction_license_construction_type(2, "一般", document_info) %></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -1362,7 +1336,7 @@
                 <td class="s_5b_000"></td><!-- 70列目 -->
                 <td class="s_5b_303" dir="ltr" colspan="10" rowspan="3">雇用管理責任者名</td>
                 <td class="s_5b_302" dir="ltr" colspan="16" rowspan="3">
-                  <%= @child&.content&.[]('subcon_employment_manager_name') %> <!-- 5-129 各会社の雇用管理責任者名 -->
+                  <%= Business.find(@child.business_id).employment_manager_name %> <!-- 5-129 各会社の雇用管理責任者名 -->
                 </td>
               </tr>
               <tr><!-- 39行目 -->
@@ -1437,7 +1411,7 @@
                 <td class="s_5a_000"></td>
                 <td class="s_5a_403" dir="ltr" colspan="10" rowspan="3">雇用管理責任者名</td>
                 <td class="s_5a_402" dir="ltr" colspan="16" rowspan="3">
-                  <%= document_info&.content&.[]('subcon_employment_manager_name') %> <!-- 5-038 各会社の雇用管理責任者名 -->
+                  <%= @current_business.employment_manager_name %> <!-- 5-038 各会社の雇用管理責任者名 -->
                 </td><!-- 30列目 -->
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
