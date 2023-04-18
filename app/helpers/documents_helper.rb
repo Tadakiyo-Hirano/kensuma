@@ -1475,18 +1475,16 @@ module DocumentsHelper
   # 下請発注情報詳細画面
   
   # 現場情報-特殊車両-資格内容
-  def target_license(vehicle_info)
-      worker = Worker.find_by(id: vehicle_info.driver_worker_id)
+  def target_license(worker_id)
+      worker = Worker.find_by(id: worker_id)
     if worker.present?
       skill_tr_table = worker.skill_trainings.where(driving_related: 1)
       sp_education_table = worker.special_educations.where(driving_related: 1)
-      dr_license_table = ["大型免許", "中型免許", "中型免許(8t)に限る", "準中型免許",
-                            "普通免許", "大型特殊免許", "大型二輪免許", "普通二輪免許",
-                            "小型特殊免許", "原付免許", "牽引自動車第一種運転免許"]
+      dr_license_table = worker.driver_licence&.split(" ")
       tem_table = skill_tr_table + sp_education_table
-      tem_table = tem_table.pluck(:name) + dr_license_table
+      tem_table.pluck(:name) + dr_license_table
     else
-      License.all.pluck(:name)
+      "作業員を選択してください。"
     end
   end
   
