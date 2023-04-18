@@ -246,7 +246,7 @@
       <br>
       <%= f.label :foreigners_employment_manager %><!-- 外国人雇用管理責任者名 -->
       <div class="list-group-item">
-        <%= f.select :foreigners_employment_manager, ([""] + (@business_workers_name&.uniq || [])),
+        <%= f.select :foreigners_employment_manager, (@business_workers_name&.uniq || []),
                       { include_blank: true },
                       { class: "form-select form-select-sm", style: "width: 100%" }
         %><br>

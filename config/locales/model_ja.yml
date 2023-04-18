@@ -420,9 +420,9 @@ ja:
         document_type: 書類項目
         created_on: 書類作成日
         submitted_on: 書類提出日
-        secretary_name: 書記名
-        vice_president_name: 副会長名
-        vice_president_company_name: 副会長会社名
+        placeholder_secretary_name: 書記名
+        placeholder_vice_president_name: 副会長名
+        placeholder_vice_president_company_name: 副会長会社名
       cover_document:
         business_name: 事業所名
         submitted_on: 書類提出日
