@@ -22,7 +22,7 @@ FactoryBot.define do
     blank_term { 1 }
     career_up_id { '12345678901234' }
     sex { 0 }
-    driver_licences { ["大型免許", "普通免許"] }
+    driver_licences { %w[大型免許 普通免許] }
     driver_licence_number { '123456789012' }
     status_of_residence { '' }
     maturity_date { '' }

@@ -144,6 +144,36 @@ module Users
       redirect_to edit_users_worker_url(worker)
     end
 
+    def update_passports
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.passports
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(passports: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def update_residence_cards
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.residence_cards
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(residence_cards: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def update_employment_conditions
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.employment_conditions
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(employment_conditions: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
     private
 
     def set_worker

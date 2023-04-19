@@ -75,6 +75,9 @@ class Worker < ApplicationRecord
 
   mount_uploader :seal, WorkersUploader
   mount_uploaders :career_up_images, WorkersUploader
+  mount_uploaders :passports, WorkersUploader
+  mount_uploaders :residence_cards, WorkersUploader
+  mount_uploaders :employment_conditions, WorkersUploader
 
   def to_param
     uuid

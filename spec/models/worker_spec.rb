@@ -505,8 +505,8 @@ RSpec.describe Worker, type: :model do
         end
 
         it "バリデーションに落ちること('')" do
-          subject.driver_licence_number = 
-          expect(subject).to be_invalid
+          subject.driver_licence_number =
+            expect(subject).to be_invalid
         end
 
         it "バリデーションのエラーが正しいこと('')" do
