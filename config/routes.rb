@@ -45,7 +45,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     resources :machines, param: :uuid
     resources :solvents, param: :uuid
     resource :business, except: %i[index destroy] do
-      patch 'update_images'
+      patch 'update_stamp_images'
+      patch 'update_career_up_card_copy'
       get 'occupation_select'
     end
     resources :workers, param: :uuid
@@ -55,6 +56,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       patch 'update_workerskilltraining_images'
       patch 'update_workerspecialeducation_images'
       patch 'update_workerexam_images'
+      patch 'update_health_insurance_image'
+      patch 'update_career_up_images'
+      patch 'delete_seal'
     end
     resources :orders, param: :site_uu_id do
       resources :field_cars, except: %i[new show edit update], module: :orders, param: :uuid do

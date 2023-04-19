@@ -9,7 +9,7 @@
       <%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
     </div>
     <div class="col-md-1" style="margin-top: 30px;">
-      <%= link_to_remove_association "×", f, class: 'btn btn-danger' %>
+      <%= link_to_remove_association "×", f, class: 'btn btn-sm btn-danger' %>
     </div>
     <div class="col-md-3" style="margin-bottom: 10px;">
       <% f.object.images.each_with_index do |image, index| %>

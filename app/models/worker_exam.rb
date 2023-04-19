@@ -3,7 +3,4 @@ class WorkerExam < ApplicationRecord
   belongs_to :special_med_exam
 
   validates :worker_medical_id, uniqueness: { scope: :special_med_exam_id }
-  validates :got_on, presence: true
-
-  mount_uploaders :images, WorkerExamsUploader
 end

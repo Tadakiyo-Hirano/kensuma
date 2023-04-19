@@ -5,6 +5,8 @@ ja:
       admin: 管理者
       comment: コメント
       business: 事業部
+      business_industry: 中間テーブル（業種）
+      business_occupation: 中間テーブル（職種）
       car: 車両情報
       car_insurance_company: ⾃動⾞保険会社
       car_voluntary_insurance: 任意保険
@@ -44,38 +46,47 @@ ja:
         role: 権限
         is_prime_contractor: 元請け
       business:
+        business_info: 会社情報
         uuid: 会社ID
         business_type: 会社形態
         name: 会社名
         name_kana: 会社名(カナ)
         branch_name: 支店名 又は 営業所名
+        career_up_id: 事業者ID(キャリアアップシステム)
+        career_up_card_copy: 建設キャリアアップシステムカードの写し
         representative_name: 代表者名
-        email: メールアドレス
-        address: 住所
         post_code: 郵便番号
+        address: 住所
         phone_number: 電話番号
         fax_number: FAX
-        career_up_id: 事業者ID(キャリアアップシステム)
-        career_up_card_copy: キャリアアップシステムカードの写し
+        email: メールアドレス
         stamp_images: 社印
         tem_industry_ids: 業種
         occupation_ids: 職種
-        business_health_insurance_status: 健康保険
+        employment_manager_name: 雇用管理責任者名
+        social_insurance_info: 社会保険情報
+        business_health_insurance: 健康保険
+        business_health_insurance_status: 加入状況
         business_health_insurance_association: 組合名
         business_health_insurance_office_number: 事業所整理記号及び事業所番号
-        business_welfare_pension_insurance_join_status: 厚生年金保険
+        business_welfare_pension_insurance: 厚生年金保険
+        business_welfare_pension_insurance_join_status: 加入状況
         business_welfare_pension_insurance_office_number: 事業所整理記号
-        business_pension_insurance_join_status: 年金保険(削除予定)
-        business_employment_insurance_join_status: 雇用保険
+        # business_pension_insurance_join_status: 年金保険(削除予定)
+        business_employment_insurance: 雇用保険
+        business_employment_insurance_join_status: 加入状況
         business_employment_insurance_number: 番号
-        business_retirement_benefit_mutual_aid_status: 退職金共済制度
+        business_retirement_benefit_mutual_aid: 退職金共済制度
+        business_retirement_benefit_mutual_aid_status: 制度
         construction_license_status: 建設許可証
         industry_ids: 業種
-        specific_skilled_foreigners_exist: 一号特定技能外国人従事状況
-        foreign_construction_workers_exist: 外国人建設就労者従事状況
-        foreign_technical_intern_trainees_exist: 外国人技能実習生従事状況
-        employment_manager_name: 雇用管理責任者(氏名)
-        employment_manager_post: 雇用管理責任者(役職名)
+        foreign_construction_workers: 外国人建設就労者
+        foreign_work_status_exist: 外国人就労の有無
+        specific_skilled_foreigners_exist: 一号特定技能外国人の従事の状況
+        foreign_construction_workers_exist: 外国人建設就労者の従事の状況
+        foreign_technical_intern_trainees_exist: 外国人技能実習生の従事の状況
+        foreigners_employment_manager: 外国人雇用管理責任者名
+        # employment_manager_post: 雇用管理責任者(役職名)
       occupation:
         name: 職種名
       business_occupation:
@@ -86,9 +97,9 @@ ja:
         industry_id: 業種
         construction_license_permission_type_minister_governor: 建設許可種別
         construction_license_governor_permission_prefecture: 都道府県知事許可
-        construction_license_permission_type_identification_general: 建設許可証(種別)
-        construction_license_number_double_digit: 建設許可証(和暦年度)
-        construction_license_number_six_digits: 建設許可証(番号)
+        construction_license_permission_type_identification_general: 種別
+        construction_license_number_double_digit: 和暦年度
+        construction_license_number_six_digits: 番号
         construction_license_number: 建設許可番号
         construction_license_updated_at: 更新日
       car:
@@ -412,9 +423,9 @@ ja:
         document_type: 書類項目
         created_on: 書類作成日
         submitted_on: 書類提出日
-        secretary_name: 書記名
-        vice_president_name: 副会長名
-        vice_president_company_name: 副会長会社名
+        placeholder_secretary_name: 書記名
+        placeholder_vice_president_name: 副会長名
+        placeholder_vice_president_company_name: 副会長会社名
       cover_document:
         business_name: 事業所名
         submitted_on: 書類提出日
@@ -423,13 +434,13 @@ ja:
         med_exam_on: 健康診断日
         max_blood_pressure: 最高血圧 (mmHg)
         min_blood_pressure: 最低血圧 (mmHg)
+        is_special_med_exam: 特別健康診断の受診状況
         special_med_exam_on: 特別健康診断日
         health_condition: 最近の健康状態
         is_med_exam: 健康診断の受診状況
       worker_exam:
         special_med_exam_id: 特別健康診断
-        got_on: 取得年月日
-        images: 証明画像
+        others: その他
       special_med_exam:
         name: 名称
       solvent:

@@ -43,7 +43,7 @@ class Worker < ApplicationRecord
   UNDER_THREE_DIGITS_MS = 'は3桁以上は入力できません'.freeze
   validates :career_up_id, format: { with: /\A^$|\A\z|\A\d{14}\z/, message: 'は14桁の数字で入力してください' }, allow_nil: true
   validates :name, presence: true
-  validates :name_kana, presence: true, format: { with: /\A^$|\A[ァ-ヴ][ァ-ヴー ]+\ [ァ-ヴー]+\z/, message: 'はカタカナで入力してください' }
+  validates :name_kana, presence: true, format: { with: /\A^$|\A[ァ-ヴ][ァ-ヴー\s]*[ァ-ヴー]\z/, message: 'はカタカナで入力してください' }
   validates :country, presence: true
   validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }, allow_nil: true
   validates :post_code, format: { with: /\A^$|\A\z|\A\d{7}\z/, message: 'は7桁の数字で入力してください' }, allow_nil: true
@@ -72,6 +72,9 @@ class Worker < ApplicationRecord
   validates :confirmed_check, absence: true, unless: :specified_skill_or_construction_employment?
   validates :confirmed_check_date, presence: true, if: :confirmed_check_checked?
   validates :confirmed_check_date, absence: true, unless: :confirmed_check_checked?
+
+  mount_uploader :seal, WorkersUploader
+  mount_uploaders :career_up_images, WorkersUploader
 
   def to_param
     uuid

@@ -1,2 +1,0 @@
-class WorkerExamsUploader < Base
-end

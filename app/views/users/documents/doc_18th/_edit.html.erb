@@ -1512,7 +1512,7 @@
                       <td class="doc_18_s0"></td>
                       <% if i == 0 %>
                         <td class="doc_18_s55" dir="ltr" colspan="7">
-                          <%= f.text_field name = 'content[secretary_name]', placeholder: Document.human_attribute_name(:secretary_name),
+                          <%= f.text_field name = 'content[secretary_name]', placeholder: Document.human_attribute_name(:placeholder_secretary_name),
                                           value: @document.content&.[]('secretary_name'),
                                           class: "form-control form-control-sm"
                           %>
@@ -1565,7 +1565,8 @@
                       <td class="doc_18_s7" colspan="8" rowspan="2">副 会 長</td>
                       <% if i == 0 %>
                         <td class="doc_18_s55" dir="ltr" colspan="9">
-                          <%= f.select 'content[vice_president_company_name]', primary_subcon_business_name, { include_blank: Document.human_attribute_name(:vice_president_company_name)}, { class: 'form-control form-control-sm', required: true } %></td>
+                          <%= f.select 'content[vice_president_company_name]', primary_subcon_business_name, { include_blank: Document.human_attribute_name(:placeholder_vice_president_company_name)},
+                                      { class: 'form-control form-control-sm', id: 'primary_subcon_business_name_select', required: true } %></td>
                       <% else %>
                         <td class="doc_18_s22" dir="ltr" colspan="9">同上</td>
                       <% end %>
@@ -1614,7 +1615,7 @@
                       <td class="doc_18_s0"></td>
                       <% if i == 0 %>
                         <td class="doc_18_s55" dir="ltr" colspan="9">
-                          <%= f.text_field name = 'content[vice_president_name]', placeholder: Document.human_attribute_name(:vice_president_name),
+                          <%= f.text_field name = 'content[vice_president_name]', placeholder: Document.human_attribute_name(:placeholder_vice_president_name),
                                           value: @document.content&.[]('vice_president_name'),
                                           class: "form-control form-control-sm"
                           %>

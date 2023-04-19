@@ -64,10 +64,10 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   end
 
   create_table "business_industries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(種別) enum"
+    t.integer "construction_license_permission_type_minister_governor", comment: "建設許可証(許可種別) enum"
     t.integer "construction_license_governor_permission_prefecture", comment: "建設許可証(都道府県) enum"
     t.integer "construction_license_permission_type_identification_general", comment: "建設許可証(種別) enum"
-    t.string "construction_license_number_double_digit", comment: "建設許可証(番号)"
+    t.string "construction_license_number_double_digit", comment: "建設許可証(和暦年度)"
     t.string "construction_license_number_six_digits", comment: "建設許可証(番号)"
     t.string "construction_license_number", comment: "建設許可証(建設許可番号)"
     t.date "construction_license_updated_at", comment: "建設許可証(更新日)"
@@ -93,26 +93,24 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.integer "business_type", null: false
     t.string "name", null: false
     t.string "name_kana", null: false
-    t.string "branch_name", null: false
-    t.string "branch_address"
+    t.string "branch_name"
+    t.string "career_up_id"
     t.string "representative_name", null: false
-    t.string "email", null: false
-    t.string "address", null: false
     t.string "post_code", null: false
+    t.string "address", null: false
     t.string "phone_number", null: false
     t.string "fax_number"
-    t.string "career_up_id"
+    t.string "email", null: false
     t.json "career_up_card_copy"
     t.json "stamp_images"
-    t.json "industry_ids"
     t.json "tem_industry_ids"
+    t.string "employment_manager_name"
+    t.integer "foreign_work_status_exist"
     t.integer "specific_skilled_foreigners_exist"
     t.integer "foreign_construction_workers_exist"
     t.integer "foreign_technical_intern_trainees_exist"
     t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
-    t.string "employment_manager_name"
-    t.string "employment_manager_post"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -121,7 +119,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "business_health_insurance_office_number"
     t.integer "business_welfare_pension_insurance_join_status", null: false
     t.string "business_welfare_pension_insurance_office_number"
-    t.integer "business_pension_insurance_join_status", null: false
     t.integer "business_employment_insurance_join_status", null: false
     t.string "business_employment_insurance_number"
     t.integer "business_retirement_benefit_mutual_aid_status", null: false
@@ -690,8 +687,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "worker_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_medical_id", null: false
     t.bigint "special_med_exam_id", null: false
-    t.date "got_on", null: false
-    t.json "images"
+    t.string "others"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["special_med_exam_id"], name: "index_worker_exams_on_special_med_exam_id"
@@ -728,12 +724,13 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
 
   create_table "worker_medicals", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_id", null: false
+    t.integer "is_med_exam", default: 0, null: false
     t.date "med_exam_on", null: false
     t.integer "max_blood_pressure", null: false
     t.integer "min_blood_pressure", null: false
+    t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
     t.integer "health_condition", default: 0, null: false
-    t.integer "is_med_exam", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"

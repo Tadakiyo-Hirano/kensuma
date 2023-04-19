@@ -16,6 +16,10 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
+          when 'doc_4th'
+            request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
+            @prime_contractor_business = Business.find(request_order.business_id)
+            @business = Business.find(@document.business_id)
           when 'doc_8th', 'doc_9th', 'doc_23rd'
             if @document.request_order.field_workers.empty?
               flash[:danger] = '作業員関連の書類を閲覧するには入場作業員情報を登録してください'
@@ -44,6 +48,7 @@ module Users
           end
         end
         format.pdf do
+          @business = Business.find(@document.business_id)
           case @document.document_type
           when 'cover_document', 'table_of_contents_document',
                 'doc_3rd', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_12th', 'doc_15th', 'doc_16th',
@@ -66,11 +71,12 @@ module Users
       @error_msg_for_doc_19th = nil
       @error_msg_for_doc_20th = nil
       @error_msg_for_doc_21st = nil
+      @business = Business.find(@document.business_id)
     end
 
     def update
       case @document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_12th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_4th', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_8th', 'doc_9th', 'doc_12th', 'doc_16th', 'doc_17th'
         if @document.update(document_params(@document))
           redirect_to users_request_order_document_url, success: '保存に成功しました'
         else
@@ -738,7 +744,7 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_4th', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
         params.require(:document).permit(content:
           %i[
             date_submitted
@@ -1122,18 +1128,11 @@ module Users
             events_january
             events_february
             events_march
-            safety_officer_post
             safety_officer_name
-            employment_manager_post
-            general_manager_post
             general_manager_name
-            safety_manager_post
             safety_manager_name
-            hygiene_manager_post
             hygiene_manager_name
-            health_and_safety_promoter_post
             health_and_safety_promoter_name
-            construction_manager_post
             remarks
           ]
                                         )

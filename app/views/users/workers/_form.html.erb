@@ -72,7 +72,7 @@
 <%# 生年月日 %>
 <%= f.label :birth_day_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :birth_day_on, class: "form-control", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
+<%= f.date_field :birth_day_on, class: "form-control", style: "width: 25%;", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
 
 <%# 血液型（ABO） %>
 <%= f.label :abo_blood_type %>
@@ -100,7 +100,7 @@
 <%# 雇入年月日 %>
 <%= f.label :hiring_on %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.date_field :hiring_on, class: "form-control", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
+<%= f.date_field :hiring_on, class: "form-control", style: "width: 25%;", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
 
 <%# 雇入前経験年数 %>
 <%= f.label :experience_term_before_hiring %>
@@ -131,7 +131,7 @@
 <% if @worker.career_up_images.present? %>
   <% @worker.career_up_images.each_with_index do |image, index| %>
     <%= image_tag(image.url) %>
-    <%= link_to "削除", users_worker_update_workerskilltraining_images_path(@worker, index: index, worker_skill_training_id: f.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+    <%= link_to "削除", users_worker_update_career_up_images_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
   <% end %>
 <% end %>
 <br>
@@ -147,7 +147,8 @@
       data: {
         association_insertion_node: '#license-insertion-point',
         association_insertion_method: 'append'
-      }
+      },
+      class: "btn btn-sm btn-primary"
     %>
   </div>
   <!-- WorkerLicenseここまで -->
@@ -162,7 +163,8 @@
       data: {
         association_insertion_node: '#skill-insertion-point',
         association_insertion_method: 'append'
-        }
+      },
+      class: "btn btn-sm btn-primary"
     %>
   </div>
   <!-- WorkerSkillTrainingここまで -->
@@ -177,8 +179,9 @@
       data: {
         association_insertion_node: '#special-insertion-point',
         association_insertion_method: 'append'
-        }
-    %>
+      } ,
+      class: "btn btn-sm btn-primary"
+      %>
   </div>
   <!-- WorkerSpecialEducationここまで -->
 
@@ -192,7 +195,8 @@
       data: {
         association_insertion_node: '#safety-health-education-insertion-point',
         association_insertion_method: 'append'
-      }
+      },
+      class: "btn btn-sm btn-primary"
     %>
   </div>
   <%# worker_safety_health_educationここまで %>
@@ -220,9 +224,10 @@
   </div><br>
 
   <!-- WorkerMedicalここから -->
-  <div class="list-group-item">
-    <%= f.fields_for :worker_medical do |worker_medical| %>
-      <%# 健康診断の受診 %>
+  
+  <%= f.fields_for :worker_medical do |worker_medical| %>
+    <div class="list-group-item">
+      <%# 健康診断の受診状況 %>
       <div class="mb-3">
         <%= worker_medical.label :is_med_exam %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
@@ -231,6 +236,11 @@
             <%= b.label { b.radio_button + b.text } %>
           </div>
         <% end %>
+      </div>
+      <%# 健康診断日 %>
+      <div class="row mb-3">
+        <%= worker_medical.label :med_exam_on %>
+        <%= worker_medical.date_field :med_exam_on, class: "form-control", style: "width: 25%;" %>
       </div>
       <%# 最近の健康状態 %>
       <div class="mb-3">
@@ -242,35 +252,49 @@
           </div>
         <% end %>
       </div>
-
-      <div class="row mb-3">
-        <%= worker_medical.label :med_exam_on %>
-        <%= worker_medical.date_field :med_exam_on, class: "form-control" %>
-      </div>
+      <%# 最高血圧 (mmHg) %>
       <div class="row mb-3">
         <%= worker_medical.label :max_blood_pressure %>
         <%= worker_medical.number_field :max_blood_pressure, class: "form-control" %>
       </div>
+      <%# 最低血圧 (mmHg) %>
       <div class="row mb-3">
         <%= worker_medical.label :min_blood_pressure %>
         <%= worker_medical.number_field :min_blood_pressure, class: "form-control" %>
       </div>
+    </div>
+
+    <div class="list-group-item">
+      <%# 特別健康診断の受診状況 %>
+      <div class="mb-3">
+        <%= worker_medical.label :is_special_med_exam %>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_medical.collection_radio_buttons(:is_special_med_exam, WorkerMedical.is_special_med_exams_i18n, :first, :last, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
+      </div>
+      <%# 特別健康診断日   %>
       <div class="row mb-3">
         <%= worker_medical.label :special_med_exam_on %>
-        <%= worker_medical.date_field :special_med_exam_on, class: "form-control" %>
+        <%= worker_medical.date_field :special_med_exam_on, class: "form-control", style: "width: 25%;" %>
       </div>
+      <%# 特別健康診断 %>
       <%= worker_medical.fields_for :worker_exams do |worker_exam| %>
         <%= render "worker_exam_fields", f: worker_exam %>
       <% end %>
       <div id='worker-exam-insertion-point'></div>
+      <br>
       <%= link_to_add_association "＋フォーム追加", worker_medical, :worker_exams,
         data: {
           association_insertion_node: '#worker-exam-insertion-point',
           association_insertion_method: 'append'
-        } 
+        },
+        class: "btn btn-sm btn-primary"
       %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   <!-- WorkerMedicalここまで -->
 
   <!-- WorkerInsuranceここから -->
@@ -295,11 +319,12 @@
 
       <%# 健康保険証の写し %>
       <%= worker_insurance.label :health_insurance_image %>
-      <div class="col-md-3" style="margin-bottom: 10px;">
+      <div style="margin-bottom: 10px;">
         <%= worker_insurance.file_field :health_insurance_image, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
         <% if @worker.worker_insurance.health_insurance_image.present? %>
-          <% @worker.worker_insurance.health_insurance_image.each do |image| %>
+          <% @worker.worker_insurance.health_insurance_image.each_with_index do |image, index| %>
             <%= image_tag(image.url) %>
+            <%= link_to "削除", users_worker_update_health_insurance_image_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
           <% end %>
         <% end %>
       </div>

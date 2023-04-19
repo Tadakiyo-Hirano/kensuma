@@ -39,6 +39,8 @@ class WorkerInsurance < ApplicationRecord
   validates :severance_pay_mutual_aid_type, presence: true
   validates :severance_pay_mutual_aid_name, presence: true, if: :severance_pay_mutual_aid_name_valid?
 
+  mount_uploaders :health_insurance_image, WorkerInsurancesUploader
+
   private
 
   # 健康保険が健康保険組合もしくは建設国保であればtrue

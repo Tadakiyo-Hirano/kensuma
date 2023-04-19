@@ -313,21 +313,23 @@
         <tr bgcolor="#dee2e6">
           <th></th>
           <th><%= SpecialMedExam.human_attribute_name(:name) %></th>
-          <th><%= WorkerExam.human_attribute_name(:got_on) %></th>
-          <th><%= WorkerExam.human_attribute_name(:images) %></th>
+          <th></th>
+          <th></th>
         </tr>
         <% @worker.worker_medical.worker_exams.each do |worker_exam| %>
+          <th><%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
+          <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
+          <td></td>
           <tr>
             <% if @worker.worker_medical.special_med_exams.first.id == worker_exam.special_med_exam_id %>
               <th><%= WorkerExam.human_attribute_name(:special_med_exam_id) %></th>
             <% else %>
               <th></th>
             <% end %>
-            <td><%= worker_exam.special_med_exam.name %></td>
-            <td><%= worker_exam.got_on %></td>
-            <td>
-              <% worker_exam.images.each do |image| %>
-                <%= image_tag(image.url) %>
+            <td colspan="4">
+              <%= worker_exam.special_med_exam.name %>
+              <% if worker_exam.special_med_exam.name == 'その他' %>
+                （<%= worker_exam.others %>）
               <% end %>
             </td>
           </tr>

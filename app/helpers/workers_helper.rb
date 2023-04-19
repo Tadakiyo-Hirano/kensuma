@@ -60,8 +60,7 @@ module WorkersHelper
     )
     worker_medical.worker_exams.build(
       # テスト用デフォルト値 ==========================
-      special_med_exam_id: 4,
-      got_on:              '2022-03-01'
+      special_med_exam_id: 4
       # ============================================
     )
     @worker.build_worker_insurance(
