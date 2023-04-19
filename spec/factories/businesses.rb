@@ -16,7 +16,7 @@ FactoryBot.define do
     business_health_insurance_office_number { '01234567' } # 健康保険(事業所整理記号及び事業所番号)
     business_welfare_pension_insurance_join_status { 0 } # 厚生年金保険(加入状況)
     business_welfare_pension_insurance_office_number { '01234567890123' } # 厚生年金保険(事業所整理記号)
-    business_pension_insurance_join_status { 0 } # 年金保険(加入状況)
+    # business_pension_insurance_join_status { 0 } # 年金保険(加入状況)
     business_employment_insurance_join_status { 0 } # 雇用保険(加入状況)
     business_employment_insurance_number { '01234567890' } # 雇用保険(番号)
     business_retirement_benefit_mutual_aid_status { 0 } # 退職金共済制度(加入状況)
@@ -29,5 +29,6 @@ FactoryBot.define do
     # construction_license_number_six_digits { '5000' } # 建設許可証(番号)
     # construction_license_number { '国土交通大臣(特－29)第5000号' } # 建設許可証(建設許可番号)
     # construction_license_updated_at { Date.today } # 建設許可証(更新日)
+    foreign_work_status_exist { 0 } # 外国人就労の有無
   end
 end
