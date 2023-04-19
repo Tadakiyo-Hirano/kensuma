@@ -22,8 +22,12 @@ FactoryBot.define do
     blank_term { 1 }
     career_up_id { '12345678901234' }
     sex { 0 }
-    driver_licence { '普通' }
+    driver_licences { ["大型免許", "普通免許"] }
     driver_licence_number { '123456789012' }
+    status_of_residence { '' }
+    maturity_date { '' }
+    confirmed_check { '' }
+    confirmed_check_date { '' }
     after(:create) do |worker|
       create_list(:worker_license, 1, worker: worker, license: License.create!(name: 'テストライセンス', license_type: 0))
       create_list(:worker_skill_training, 1, worker: worker, skill_training: SkillTraining.create!(name: 'テスト技能講習', short_name: 'テス技'))

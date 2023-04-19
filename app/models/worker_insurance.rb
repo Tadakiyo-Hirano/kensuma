@@ -6,7 +6,8 @@ class WorkerInsurance < ApplicationRecord
     japan_health_insurance_association:     1,
     construction_national_health_insurance: 2,
     national_health_insurance:              3,
-    exemption:                              4
+    exemption:                              4,
+    not_health_insurance:                   5
   }, _prefix: true
 
   enum pension_insurance_type: {

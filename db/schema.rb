@@ -405,6 +405,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "control_number", null: false
     t.string "inspector", null: false
     t.string "handler", null: false
+    t.date "inspection_date", null: false
     t.string "inspection_check"
     t.bigint "business_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -800,13 +801,11 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.date "maturity_date"
     t.integer "confirmed_check"
     t.date "confirmed_check_date"
-    t.string "passport_front"
-    t.string "passport_back"
-    t.string "residence_card_front"
-    t.string "residence_card_back"
-    t.string "employment_condition"
+    t.json "passports"
+    t.json "residence_cards"
+    t.json "employment_conditions"
     t.string "post_code"
-    t.string "driver_licence"
+    t.json "driver_licences"
     t.string "driver_licence_number"
     t.string "seal"
     t.json "employee_cards"

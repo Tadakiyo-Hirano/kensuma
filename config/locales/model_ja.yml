@@ -353,15 +353,16 @@ ja:
         sex: 性別
         post_code: 郵便番号
         employee_cards: 従業員証
-        driver_licence: 自動車運転免許証
+        driver_licences: 自動車運転免許証
         driver_licence_number: 免許証番号
         seal: 認印
         status_of_residence: 在留資格
-        # maturity_date: 在留期間満期日
-        # confirmed_check: CCUS登録情報が最新であることの確認
-        # passport: パスポートの写し
-        # residence_card: 在留カードの写し
-        # employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
+        maturity_date: 在留期間満期日
+        confirmed_check: CCUS登録情報が最新であることの確認
+        confirmed_check_date: キャリアアップシステム登録情報が最新であることの確認日
+        passports: パスポートの写し
+        residence_cards: 在留カードの写し
+        employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
       license:
         name: 名称
         description: 説明
@@ -397,9 +398,9 @@ ja:
         severance_pay_mutual_aid_type: 建設業退職金共済手帳
         severance_pay_mutual_aid_name: その他（建設業退職金共済手帳）
       worker_safety_health_education:
-       safety_health_education_id: 安全衛生教育
-       worker_id: 作業員
-       images: 証明画像
+        safety_health_education_id: 安全衛生教育
+        worker_id: 作業員
+        images: 証明画像
       news:
         title: タイトル
         content: 内容

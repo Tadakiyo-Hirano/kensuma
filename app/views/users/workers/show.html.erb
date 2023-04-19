@@ -19,7 +19,6 @@
 
         <tr>
           <th><%= Worker.human_attribute_name(:business_owner_or_master) %></th>
-          <% byebug %>
           <td><%= 'はい' if @worker.business_owner_or_master %></td>
           <td></td>
           <td></td>
@@ -254,8 +253,8 @@
           <% end %>       
         <%# worker_safety_health_educationここまで %>
         <tr>
-          <th><%= Worker.human_attribute_name(:driver_licence) %></th>
-          <td><%= driver_licence_short_form(@worker.driver_licence) %></td>
+          <th><%= Worker.human_attribute_name(:driver_licences) %></th>
+          <td><%= driver_licence_short_form(@worker.driver_licences) %></td>
           <td></td>
           <td></td>
         </tr>
@@ -405,7 +404,69 @@
             <td></td>
             <td></td>
           </tr>
-          <!-- 外国人建設就労者情報ここまで -->
+
+          <% if ['特定技能', '外国人建設就労者'].include?(@worker.status_of_residence_i18n) %>
+            <tr>
+              <th><%= Worker.human_attribute_name(:maturity_date) %></th>
+              <td><%= @worker.maturity_date %></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <th><%= Worker.human_attribute_name(:confirmed_check) %></th>
+              <td><%= @worker.confirmed_check_i18n %></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <th><%= Worker.human_attribute_name(:confirmed_check_date) %></th>
+              <td><%= @worker.confirmed_check_date %></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <th><%= Worker.human_attribute_name(:passports) %></th>
+              <td>
+                <% if @worker.passports.present? %>
+                  <% @worker.passports.each do |image| %>
+                    <%= image_tag(image.url) %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <th><%= Worker.human_attribute_name(:residence_cards) %></th>
+              <td>
+                <% if @worker.residence_cards.present? %>
+                  <% @worker.residence_cards.each do |image| %>
+                    <%= image_tag(image.url) %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <th><%= Worker.human_attribute_name(:employment_conditions) %></th>
+              <td>
+                <% if @worker.employment_conditions.present? %>
+                  <% @worker.employment_conditions.each do |image| %>
+                    <%= image_tag(image.url) %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+            <!-- 外国人建設就労者情報ここまで -->
+          <% end %>
         <% end %>
       </tbody>
     </table>

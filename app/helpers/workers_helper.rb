@@ -19,11 +19,13 @@ module WorkersHelper
       hiring_on:                     '2022-01-28',
       experience_term_before_hiring: 10,
       blank_term:                    3,
-      driver_licence:                '普通免許',
-      driver_licence_number:         '123456789012',
-      career_up_id:                  '%14d' % rand(99999999999999),
+      career_up_id:                  '12345678901234',
       sex:                           :man,
-      post_code:                     '1234567'
+      post_code:                     '1234567',
+      status_of_residence:           :permanent_resident,
+      maturity_date:                 '2000-01-28',
+      confirmed_check:               :checked,
+      confirmed_check_date:          '2000-01-28'
       # ============================================
     )
     @worker.worker_licenses.build(
@@ -102,5 +104,27 @@ module WorkersHelper
       severance_pay_mutual_aid_type: :kentaikyo
       # ============================================
     )
+  end
+
+  # 日本人であるか？
+  def japanese?(country)
+    country == 'JP'
+  end
+
+  # 外国人であり外国人労働者に当たらないか？
+  def skill_practice_or_permanent_resident?(country, status_of_residence, key)
+    country != 'JP' && %w[permanent_resident skill_practice].include?(status_of_residence) && key != :status_of_residence
+  end
+
+  def foreigner_converted(converted_params)
+    arg_array = [converted_params[:country], converted_params[:status_of_residence], converted_params[:confirmed_check]]
+    %i[status_of_residence maturity_date confirmed_check confirmed_check_date passports residence_cards employment_conditions].each do |key|
+      if converted_params[key].present?
+        converted_params[key] = '' if japanese?(arg_array[0])
+        converted_params[key] = '' if skill_practice_or_permanent_resident?(arg_array[0], arg_array[1], key)
+      else
+        converted_params[key] = ''
+      end
+    end
   end
 end
