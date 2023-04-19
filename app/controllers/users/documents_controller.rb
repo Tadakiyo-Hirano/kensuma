@@ -1122,18 +1122,11 @@ module Users
             events_january
             events_february
             events_march
-            safety_officer_post
             safety_officer_name
-            employment_manager_post
-            general_manager_post
             general_manager_name
-            safety_manager_post
             safety_manager_name
-            hygiene_manager_post
             hygiene_manager_name
-            health_and_safety_promoter_post
             health_and_safety_promoter_name
-            construction_manager_post
             remarks
           ]
                                         )
