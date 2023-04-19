@@ -218,7 +218,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('健康保険を入力してください')
+          expect(subject.errors.full_messages).to include('加入状況を入力してください')
         end
       end
     end
@@ -252,7 +252,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('事業所整理記号及び事業所番号は数字6桁または8桁で入力してください')
+            expect(subject.errors.full_messages).to include('事業所整理記号及び事業所番号(健康保険)は数字8桁で入力してください')
           end
         end
       end
@@ -268,7 +268,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('厚生年金保険を入力してください')
+          expect(subject.errors.full_messages).to include('加入状況を入力してください')
         end
       end
     end
@@ -287,26 +287,26 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('事業所整理記号は数字14桁で入力してください')
+            expect(subject.errors.full_messages).to include('事業所整理記号(厚生年金保険)は数字14桁で入力してください')
           end
         end
       end
     end
 
-    describe '#business_pension_insurance_join_status' do
-      context '存在しない場合' do
-        before(:each) { subject.business_pension_insurance_join_status = nil }
+    # describe '#business_pension_insurance_join_status' do
+    #   context '存在しない場合' do
+    #     before(:each) { subject.business_pension_insurance_join_status = nil }
 
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
+    #     it 'バリデーションに落ちること' do
+    #       expect(subject).to be_invalid
+    #     end
 
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('年金保険(削除予定)を入力してください')
-        end
-      end
-    end
+    #     it 'バリデーションのエラーが正しいこと' do
+    #       subject.valid?
+    #       expect(subject.errors.full_messages).to include('年金保険(削除予定)を入力してください')
+    #     end
+    #   end
+    # end
 
     describe '#business_employment_insurance_join_status' do
       context '存在しない場合' do
@@ -318,7 +318,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('雇用保険を入力してください')
+          expect(subject.errors.full_messages).to include('加入状況を入力してください')
         end
       end
     end
@@ -337,7 +337,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('番号は数字11桁で入力してください')
+            expect(subject.errors.full_messages).to include('番号(雇用保険)は数字11桁で入力してください')
           end
         end
       end
@@ -353,7 +353,7 @@ RSpec.describe Business, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('退職金共済制度を入力してください')
+          expect(subject.errors.full_messages).to include('制度を入力してください')
         end
       end
     end

@@ -1,0 +1,2 @@
+class CareerUpCardCopyUploader < Base
+end

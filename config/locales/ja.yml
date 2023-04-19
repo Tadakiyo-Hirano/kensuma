@@ -53,6 +53,10 @@ ja:
               blank: "(工事担当責任者)を入力してください"
             lead_engineer_name:
               blank: "(主任技術者)を入力してください"
+        business:
+          attributes:
+            foreign_work_status_exist:
+              blank: "のどちらかを選択してください"
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:
@@ -463,10 +467,10 @@ ja:
         join: 加入
         not_join: 未加入
         not_coverd: 対象外
-      business_pension_insurance_join_status: # 年金保険(加入状況)
-        welfare: 厚生年金
-        national: 国民年金
-        recipient: 受給者
+      # business_pension_insurance_join_status: # 年金保険(加入状況)
+      #   welfare: 厚生年金
+      #   national: 国民年金
+      #   recipient: 受給者
       business_employment_insurance_join_status: # 雇用保険(加入状況)
         join: 加入
         not_join: 未加入
@@ -476,6 +480,9 @@ ja:
         smaller_companies: 中小企業退職金共済制度
         not_available: 無
       construction_license_status: # 建設許可証(取得状況)
+        available: 有
+        not_available: 無
+      foreign_work_status_exist: # 外国人就労の有無
         available: 有
         not_available: 無
       specific_skilled_foreigners_exist: # 一号特定技能外国人の従事の状況
