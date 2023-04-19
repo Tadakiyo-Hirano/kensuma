@@ -1562,20 +1562,6 @@ module DocumentsHelper
     end
   end
 
-  # 書類一覧テーブルの色分け
-  def document_table_color(document)
-    case document.document_type_before_type_cast
-    when 3, 4, 5, 6, 7
-      'table-success'
-    when 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24
-      'table-warning'
-    when 17, 19, 20, 23
-      'table-primary'
-    when 18, 22
-      'bg-warning'
-    end
-  end
-
   #doc_9
   # 自身の一つ上階層の会社情報&現場情報取得
   def get_myself_and_myparent_site
