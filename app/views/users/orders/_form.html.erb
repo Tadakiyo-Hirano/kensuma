@@ -230,8 +230,8 @@
           <% industry = BusinessIndustry.find_by(id: id) %>
           <% if industry %>
             <div class="form-check">
-              <%= f.check_box :construction_license, { multiple: true, checked: (@order.construction_license.present? && @order.construction_license&.include?(id.to_s)) }, id, nil %>
-              <%= f.label industry.construction_license_number %>
+              <%= f.check_box :construction_license, { multiple: true, checked: (@order.construction_license.present? && @order.construction_license&.include?(id.to_s)), id: "construction_license_number_#{id}" }, id, nil %>
+              <label for='construction_license_number_<%= id %>'><%= industry.construction_license_number %></label>
             </div>
           <% end %>
         <% end %>

@@ -3,8 +3,7 @@ WorkerMedical.all.each do |worker_medical|
     WorkerExam.seed(:worker_medical_id, :special_med_exam_id,
       {
         worker_medical_id:   worker_medical.id,
-        special_med_exam_id: rand(1..8),
-        got_on:              rand(Date.current.years_ago(1) .. Date.current.prev_month)
+        special_med_exam_id: rand(1..8)
       }
     )
   end

@@ -687,8 +687,7 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "worker_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_medical_id", null: false
     t.bigint "special_med_exam_id", null: false
-    t.date "got_on", null: false
-    t.json "images"
+    t.string "others"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["special_med_exam_id"], name: "index_worker_exams_on_special_med_exam_id"
@@ -725,12 +724,13 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
 
   create_table "worker_medicals", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_id", null: false
+    t.integer "is_med_exam", default: 0, null: false
     t.date "med_exam_on", null: false
     t.integer "max_blood_pressure", null: false
     t.integer "min_blood_pressure", null: false
+    t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
     t.integer "health_condition", default: 0, null: false
-    t.integer "is_med_exam", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["worker_id"], name: "index_worker_medicals_on_worker_id"
