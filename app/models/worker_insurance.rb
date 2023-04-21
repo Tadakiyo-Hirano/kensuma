@@ -50,7 +50,7 @@ class WorkerInsurance < ApplicationRecord
 
   # 雇用保険が被保険者であればtrue
   def employment_insurance_number_valid?
-    employment_insurance_type == 'insured'
+    %w[insured, day].include?(employment_insurance_type)
   end
 
   def severance_pay_mutual_aid_name_valid?

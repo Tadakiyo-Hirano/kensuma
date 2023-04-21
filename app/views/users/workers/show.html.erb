@@ -365,7 +365,7 @@
           <td></td>
           <td></td>
         </tr>
-        <% if @worker.worker_insurance && (@worker.worker_insurance.employment_insurance_type == 'insured') %>
+        <% if @worker.worker_insurance && (%w[insured day].include?(@worker.worker_insurance.employment_insurance_type)) %>
           <tr>
             <th><%= WorkerInsurance.human_attribute_name(:employment_insurance_number) %></th>
             <td><%= @worker.worker_insurance.employment_insurance_number %></td>
