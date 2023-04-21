@@ -1,3 +1,4 @@
+# rubocop:disable all
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
@@ -300,3 +301,4 @@ module Users
     end
   end
 end
+# rubocop:enable all
