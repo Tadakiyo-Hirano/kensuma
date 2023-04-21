@@ -226,12 +226,24 @@ module Users
         converted_params[key] = full_width_to_half_width(converted_params[key])
       end
 
-      # 保険名及び被保険者番号が必須でない場合パラメータを空文字にする
-      %i[health_insurance_name employment_insurance_number].each do |key|
-        next unless converted_params[key].present?
-
-        converted_params[key] = health_insurance_name_nil(converted_params[health_insurance_type])
-        converted_params[key] = health_insurance_name_nil(converted_params[employment_insurance_type])
+      # 保険名、被保険者番号、建設業退職金共済手帳その他、労働保険特別加入が必須でない場合パラメータを空文字にする
+      %i[health_insurance_name employment_insurance_number severance_pay_mutual_aid_name has_labor_insurance].each do |key|
+        if converted_params[:worker_insurance_attributes][key].present?
+          worker_insurance_attributes_params = converted_params[:worker_insurance_attributes]
+          unchenge_params = worker_insurance_attributes_params[key]
+          worker_insurance_attributes_params[key] = case key
+                                                    when :health_insurance_name
+                                                      health_insurance_name_nil(worker_insurance_attributes_params[:health_insurance_type], unchenge_params)
+                                                    when :employment_insurance_number
+                                                      employment_insurance_number_nil(worker_insurance_attributes_params[:employment_insurance_type], unchenge_params)
+                                                    when :severance_pay_mutual_aid_name
+                                                      severance_pay_mutual_aid_name_nil(worker_insurance_attributes_params[:severance_pay_mutual_aid_type], unchenge_params)
+                                                    when :has_labor_insurance
+                                                      empty_has_labor_insurance(converted_params[:business_owner_or_master], unchenge_params)
+                                                    end
+        else
+          converted_params[:worker_insurance_attributes].merge(key => '')
+        end
       end
       # 運転免許証のデータを作成
       if converted_params[:driver_licences].blank?
@@ -245,17 +257,39 @@ module Users
     end
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
-    def health_insurance_name_nil(key, health_insurance_type)
+    def health_insurance_name_nil(_health_insurance_type, params)
       health_insurance_name_precenses = %w[health_insurance_association construction_national_health_insurance]
-      if key == 'health_insurance_name' && health_insurance_name_precenses.exclude?(health_insurance_type)
+      if health_insurance_name_precenses.exclude?(health_insurance_type)
         ''
+      else
+        params
       end
     end
 
     # 雇用保険が被保険者で無ければ被保険者番号を空文字にする
-    def employment_insurance_number_nil(key, employment_insurance_type)
-      if key == 'employment_insurance_number' && employment_insurance_type != :insured
+    def employment_insurance_number_nil(employment_insurance_type, params)
+      if employment_insurance_type != 'insured'
         ''
+      else
+        params
+      end
+    end
+
+    # 建設業退職金共済手帳がその他で無ければその他（建設業退職金共済手帳）を空文字にする
+    def severance_pay_mutual_aid_name_nil(_severance_pay_mutual_aid_type, params)
+      if severance_pay_mutual_aid_type != 'other'
+        ''
+      else
+        params
+      end
+    end
+
+    # 事業主もしくは一人親方であれば、労働保険特別加入を空文字にする
+    def empty_has_labor_insurance(_business_owner_or_master, params)
+      if business_owner_or_master != '1'
+        ''
+      else
+        params
       end
     end
 

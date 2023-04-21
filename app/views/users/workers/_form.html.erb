@@ -13,7 +13,7 @@
 <%# 事業主または一人親方 %>
 <%= f.label :business_owner_or_master %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<div class="md-3"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master,:as => :boolean %> はい</div><br>
+<div class="md-3"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい</div><br>
 
 <%# 国籍 %>
 <%= f.label :country %>
@@ -211,7 +211,7 @@
       <% end %>
       <div id = "driver_licence_number">
         <%= f.label :driver_licence_number %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white" id="driver-licence-number-precense">必須</span><br>
         <%= f.text_field :driver_licence_number, value: @driver_licence_number, class: "form-control", placeholder: annotation_hyphen %>
       </div>
       <%= f.label :seal %>
@@ -300,7 +300,7 @@
   <!-- WorkerInsuranceここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_insurance do |worker_insurance| %>
-      <div class="mt-3 mb-3" id="health_insurance_type">
+      <div class="mt-3 mb-3">
         <%= worker_insurance.label :health_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <div class="list-group-item">
@@ -358,7 +358,7 @@
       </div>
       
       <div class="mt-3" id="has_labor_insurance">
-        <%= worker_insurance.label :has_labor_insurance %><br>
+        <%= worker_insurance.label :has_labor_insurance %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last, class: "radio") do |b| %>
           <div class="radio">
             <%= b.label { b.radio_button + b.text } %>
@@ -535,68 +535,128 @@
     checkCountrySelection();
     radioStatusOfResidenceSelection();
     confirmedCheckDate_Disabled();
-  });
+  })
 </script>
 
 <script>
-  // 健康保険の名前の表示・非表示
-  // function getRadioHealthInsuranceName() {
-  //   const value = $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]:checked').val();
-  //   if (value == 'health_insurance_association' || value == 'construction_national_health_insurance'){
-  //     $('input[name="worker[worker_insurance_attributes][employment_insurance_number]"]').prop('disabled', true);
-  //   } else {
-  //     $('input[name="worker[worker_insurance_attributes][employment_insurance_number]"]').prop('disabled', false);
-  //   }
-  // };
-  // getRadioHealthInsuranceName(); //ページの読み込み時に判定
+  // 健康保険名項目フォームの有効・無効
+  // 健康保険組合、建設国保の時、健康保険名項目フォームを有効、それ以外は無効にするメソッド
+  const radioHealthInsuranceTypes = document.getElementsByName('worker[worker_insurance_attributes][health_insurance_type]')
+  function HealthInsuranceNameDisabled(radioHealthInsuranceTypes) {
+    let checkedValue;
+    for (const radio of radioHealthInsuranceTypes) {
+      if (radio.checked) {
+        checkedValue = radio.value;
+        break;
+      }
+    }
 
-  // $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]').change(getRadioHealthInsuranceName())
+    if (checkedValue == 'health_insurance_association' || checkedValue == 'construction_national_health_insurance'){
+      document.getElementById('health_insurance_name').style.display = "block";
+    } else {
+      document.getElementById('health_insurance_name').style.display = "none";
+    }
+  }
+  HealthInsuranceNameDisabled(radioHealthInsuranceTypes); //ページの読み込み時に判定
+
+  // 健康保険名の変更時、健康保険名項目フォームを有効、それ以外は無効にするメソッドを実行
+  for(let i = 0; i < radioHealthInsuranceTypes.length; i++) {
+  radioHealthInsuranceTypes[i].addEventListener('change', function() {HealthInsuranceNameDisabled(radioHealthInsuranceTypes);});
+  }
 </script>
 
 <script>
-  // 被保険者番号の下4桁の表示・非表示
-  // function getSelectedEmploymentInsuranceType() {
-  //   const value = $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]:checked').val();
-  //   if (value === 'insured') {
-  //     employment_insurance_number.prop('disabled', false);
-  //   } else {
-  //     employment_insurance_number.prop('disabled', true);
-  //   }
-  // };
-  // getSelectedEmploymentInsuranceType(); //ページの読み込み時に判定
+  $(document).ready(function() {
+    // 保険証番号処理
+    // 被保険者の時、保険証番号フォームを有効にし、それ以外は無効にする
+    const employmentInsuranceType = document.getElementsByName('worker[worker_insurance_attributes][employment_insurance_type]')
+    function HealthInsuranceNumberDisabled(employmentInsuranceType) {
+      let checkedValue;
+      for (const radio of employmentInsuranceType) {
+        if (radio.checked) {
+          checkedValue = radio.value;
+          break;
+        }
+      }
 
-  // $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]').change(getSelectedEmploymentInsuranceType())
+      if (checkedValue == 'insured'){
+        document.getElementById('employment_insurance_number').style.display = "block";
+      } else {
+        document.getElementById('employment_insurance_number').style.display = "none";
+      }
+    }
+    HealthInsuranceNumberDisabled(employmentInsuranceType); //ページの読み込み時に判定
+
+    // 雇用保険の変更時、被保険者番号項目フォームを有効、それ以外は無効にするメソッドを実行
+    for(let i = 0; i < employmentInsuranceType.length; i++) {
+      employmentInsuranceType[i].addEventListener('change', function() {HealthInsuranceNumberDisabled(employmentInsuranceType);})
+    }
+  })
 </script>
 
 <script>
-  // mutual_aid_type mutual_aid_number
-  // const mutual_aid_type = document.getElementById('mutual_aid_type');
-  // const mutual_aid_number = document.getElementById('mutual_aid_number');
-  // function getSelectedMutualAidType(object){
-  //   const index = object.selectedIndex;
-  //   const value = object.options[index].value;
-  //   if (value === 'other'){
-  //     mutual_aid_number.classList.remove('hidden');
-  //   } else {
-  //     mutual_aid_number.classList.add('hidden');
-  //   }
-  // };
-  // getSelectedMutualAidType(mutual_aid_type); //ページの読み込み時に判定
+  $(document).ready(function() {
+    // 建設業退職金共済手帳 の表示非表示
+    // その他の時、建設業退職金共済手帳フォームを表示にし、それ以外は非表示にする
+    const severancePayMutualAidType = document.getElementsByName('worker[worker_insurance_attributes][severance_pay_mutual_aid_type]')
+    function severancePayMutualAidOtherDisabled(severancePayMutualAidType) {
+      let checkedValue;
+      for (const radio of severancePayMutualAidType) {
+        if (radio.checked) {
+          checkedValue = radio.value;
+          break;
+        }
+      }
+
+      if (checkedValue == 'other'){
+        document.getElementById('mutual_aid_number').style.display = "block";
+      } else {
+        document.getElementById('mutual_aid_number').style.display = "none";
+      }
+    }
+    severancePayMutualAidOtherDisabled(severancePayMutualAidType); //ページの読み込み時に判定
+
+    // 雇用保険の変更時、被保険者番号項目フォームを有効、それ以外は無効にするメソッドを実行
+    for(let i = 0; i < severancePayMutualAidType.length; i++) {
+      severancePayMutualAidType[i].addEventListener('change', function() {severancePayMutualAidOtherDisabled(severancePayMutualAidType);})
+    }
+  })
 </script>
 
 <script>
-  // 免許証番号表示・非表示処理
-  // 免許証番号項目表示・非表示のクラスを操作するメソッド
-  // function driverLicenceNumberShowHide() {
-  //   if ($('input[name="worker[driver_licences][]"]:checked').length > 0) {
-  //     $('input[name="worker[driver_licence_number]"]').prop('disabled', false);
-  //   } else {
-  //     $('input[name="worker[driver_licence_number]"]').prop('disabled', true);
-  //   }
-  // };
-  // $('input[name="worker[driver_licences][]"]').change(driverLicenceNumberShowHide);
+  $(document).ready(function() {
+    // 免許証番号フォームの有効・無効
+    // 免許証番号項目フォームの有効・無効を操作するメソッド
+    function driverLicenceNumberShowHide() {
+      if ($('input[name="worker[driver_licences][]"]:checked').length > 0) {
+        $('#driver_licence_number').show();
+      } else {
+        $('#driver_licence_number').hide();
+      }
+    };
+    // 免許証チェックボックスが変更されたとき、免許証番号項目フォームの有効・無効を操作するメソッドを実行する
+    $('input[name="worker[driver_licences][]"]').change(driverLicenceNumberShowHide);
 
-  // driverLicenceNumberShowHide(); //ページの読み込み時に判定
+    driverLicenceNumberShowHide(); //ページの読み込み時に判定
+  })
+</script>
+
+<script>
+  $(document).ready(function() {
+    // 労働保険特別加入フォームの表示・非表示
+    // 一人親方項目ではいであるとき、労働保険特別加入フォームの表示・非表示を操作するメソッド
+    function has_labor_insuranceShowHide() {
+      if ($('#business_owner_or_master').is(':checked')) {
+        $('#has_labor_insurance').show();
+      } else {
+        $('#has_labor_insurance').hide();
+      }
+    };
+    // 免許証チェックボックスが変更されたとき、免許証番号項目フォームの有効・無効を操作するメソッドを実行する
+    ($('#business_owner_or_master')).change(has_labor_insuranceShowHide);
+
+    has_labor_insuranceShowHide(); //ページの読み込み時に判定
+  })
 </script>
 
 <script>
@@ -694,7 +754,7 @@
         },
         "worker[sex]": {
           required: "性別を入力してください。"
-        }
+        },
         "worker[my_address]": {
           required: "住所を入力してください。"
         },

@@ -381,18 +381,14 @@
         </tr>
         <tr>
           <th><%= WorkerInsurance.human_attribute_name(:severance_pay_mutual_aid_type) %></th>
-          <td><%= @worker.worker_insurance.severance_pay_mutual_aid_type_i18n %></td>
+          <% if @worker.worker_insurance && (@worker.worker_insurance.severance_pay_mutual_aid_type == 'other') %>
+            <td><%= @worker.worker_insurance.severance_pay_mutual_aid_name %></td>
+          <% else %>
+            <td><%= @worker.worker_insurance.severance_pay_mutual_aid_type_i18n %></td>
+            <% end %>
           <td></td>
           <td></td>
         </tr>
-        <% if @worker.worker_insurance && (@worker.worker_insurance.severance_pay_mutual_aid_type == 'other') %>
-          <tr>
-            <th><%= WorkerInsurance.human_attribute_name(:severance_pay_mutual_aid_name) %></th>
-            <td><%= @worker.worker_insurance.severance_pay_mutual_aid_name %></td>
-            <td></td>
-            <td></td>
-          </tr>
-        <% end %>
         <!-- worker_insuranceここまで -->
 
         <% if @worker.status_of_residence.present? %>
