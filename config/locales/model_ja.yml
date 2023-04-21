@@ -411,7 +411,7 @@ ja:
       worker_safety_health_education:
         safety_health_education_id: 安全衛生教育
         worker_id: 作業員
-        images: 証明画像
+        images: 安全衛生教育の写し
       news:
         title: タイトル
         content: 内容

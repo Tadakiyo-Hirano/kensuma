@@ -4,26 +4,35 @@
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tbody>
+        <%# 名前 %>
         <tr>
           <th><%= Worker.human_attribute_name(:name) %></th>
           <td><%= @worker.name %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# フリガナ %>
         <tr>
           <th><%= Worker.human_attribute_name(:name_kana) %></th>
           <td><%= @worker.name_kana %></td>
           <td></td>
           <td></td>
         </tr>
-
+        <%# 事業主もしくは一人親方ですか？ %>
         <tr>
           <th><%= Worker.human_attribute_name(:business_owner_or_master) %></th>
           <td><%= 'はい' if @worker.business_owner_or_master %></td>
           <td></td>
           <td></td>
         </tr>
-
+        <%# 役職 %>
+        <tr>
+          <th><%= Worker.human_attribute_name(:job_title) %></th>
+          <td><%=@worker.job_title %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <%# 国籍 %>
         <tr>
           <th><%= Worker.human_attribute_name(:country) %></th>
           <td><%= I18n.t("countries.#{@worker.country}") %>
@@ -31,130 +40,125 @@
           <td></td>
           <td></td>
         </tr>
+        <%# 性別 %>
         <tr>
           <th><%= Worker.human_attribute_name(:sex) %></th>
           <td><%= @worker.sex_i18n %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 郵便番号 %>
         <tr>
           <th><%= Worker.human_attribute_name(:post_code) %></th>
           <td><%= @post_code %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 住所 %>
         <tr>
           <th><%= Worker.human_attribute_name(:my_address) %></th>
           <td><%= @worker.my_address %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 電話番号 %>
         <tr>
           <th><%= Worker.human_attribute_name(:my_phone_number) %></th>
           <td><%= @my_phone_number %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# メールアドレス %>
         <tr>
           <th><%= Worker.human_attribute_name(:email) %></th>
           <td><%= @worker.email %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 緊急連絡先：氏名 %>
         <tr>
           <th><%= Worker.human_attribute_name(:family_name) %></th>
           <td><%= @worker.family_name %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 緊急連絡先：続柄 %>
         <tr>
           <th><%= Worker.human_attribute_name(:relationship) %></th>
           <td><%= @worker.relationship %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 緊急連絡先：住所 %>
         <tr>
           <th><%= Worker.human_attribute_name(:family_address) %></th>
           <td><%= @worker.family_address %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 緊急連絡先：電話番号 %>
         <tr>
           <th><%= Worker.human_attribute_name(:family_phone_number) %></th>
           <td><%= @family_phone_number %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 生年月日 %>
         <tr>
           <th><%= Worker.human_attribute_name(:birth_day_on) %></th>
           <td><%= @worker.birth_day_on %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 血液型ABO型 %>
         <tr>
           <th><%= Worker.human_attribute_name(:abo_blood_type) %></th>
           <td><%= @worker.abo_blood_type_i18n %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 血液型RH型 %>
         <tr>
           <th><%= Worker.human_attribute_name(:rh_blood_type) %></th>
           <td><%= @worker.rh_blood_type_i18n %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 雇入年月日 %>
         <tr>
           <th><%= Worker.human_attribute_name(:hiring_on) %></th>
           <td><%= @worker.hiring_on %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 雇入前経験年数 %>
         <tr>
           <th><%= Worker.human_attribute_name(:experience_term_before_hiring) %></th>
           <td><%= @worker.experience_term_before_hiring %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# ブランク年数 %>
         <tr>
           <th><%= Worker.human_attribute_name(:blank_term) %></th>
           <td><%= @worker.blank_term %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 雇用契約書の取り交わし状況 %>
         <tr>
           <th><%= Worker.human_attribute_name(:employment_contract) %></th>
           <td><%= @worker.employment_contract_i18n %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 技能者ID(キャリアアップシステム) %>
         <tr>
           <th><%= Worker.human_attribute_name(:career_up_id) %></th>
           <td><%= @career_up_id %></td>
           <td></td>
           <td></td>
         </tr>
-
-        <!-- 外国人労働者用表示 -->
-        <% unless @worker.country == "JP" %>
-          <tr>
-            <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
-            <td><%= @worker.status_of_residence_i18n %></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th><%= Worker.human_attribute_name(:maturity_date) %></th>
-            <td><%= wareki(@worker.maturity_date) %></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th><%= Worker.human_attribute_name(:confirmed_check) %></th>
-            <td><%= @worker.status_of_residence_i18n %></td>
-            <td></td>
-            <td></td>
-          </tr>
-        <% end %>
         
         <!-- 資格情報ここから -->
         <tr bgcolor="#dee2e6">
@@ -170,13 +174,16 @@
         <% @worker.worker_licenses.each do |worker_license| %>
           <tr>
             <% if @worker.licenses.first.id == worker_license.license_id %>
+              <%# 資格情報 %>
               <th><%= WorkerLicense.human_attribute_name(:license_id) %></th>
             <% else %>
               <th></th>
             <% end %>
+            <%# 名称 %>
             <td><%= worker_license.license.name %></td>
             <td>
               <% worker_license.images.each do |image| %>
+                <%# 技能講習修了証明書の写し %>
                 <%= image_tag(image.url) %>
               <% end %>
             </td>
@@ -197,8 +204,10 @@
             <% else %>
               <th></th>
             <% end %>
+            <%# 名称 %>
             <td><%= worker_skill_training.skill_training.name %></td>
             <td>
+              <%# 技能講習修了証明書の写し %>
               <% worker_skill_training.images.each do |image| %>
                 <%= image_tag(image.url) %>
               <% end %>
@@ -220,9 +229,11 @@
             <% else %>
               <th></th>
             <% end %>
+            <%# 名称 %>
             <td><%= worker_special_education.special_education.name %></td>
             <td>
               <% worker_special_education.images.each do |image| %>
+                <%# 特別教育修了証明書の写し %>
                 <%= image_tag(image.url) %>
               <% end %>
             </td>
@@ -233,7 +244,8 @@
           <tr bgcolor="#dee2e6">
             <th></th>
             <th><%= SpecialEducation.human_attribute_name(:name) %></th>
-            <th><%= WorkerSpecialEducation.human_attribute_name(:images) %></th>
+            <%# 安全衛生教育の写し %>
+            <th><%= WorkerSafetyHealthEducation.human_attribute_name(:images) %></th>
             <th></th>
           </tr>
           <% @worker.worker_safety_health_educations.each do |worker_safety_health_education| %>
@@ -243,6 +255,7 @@
               <% else %>
                 <th></th>
               <% end %>
+              <%# 安全衛生教育の写し %>
               <td><%= worker_safety_health_education.safety_health_education.name %></td>
               <td>
                 <% worker_safety_health_education.images.each do |image| %>
@@ -252,13 +265,14 @@
             </tr>
           <% end %>       
         <%# worker_safety_health_educationここまで %>
+        <%# 自動車運転免許証 %>
         <tr>
           <th><%= Worker.human_attribute_name(:driver_licences) %></th>
           <td><%= driver_licence_short_form(@worker.driver_licences) %></td>
           <td></td>
           <td></td>
         </tr>
-
+        <%# 免許証番号 %>
         <tr>
           <th><%= Worker.human_attribute_name(:driver_licence_number) %></th>
           <td><%= @worker.driver_licence_number %></td>
@@ -266,6 +280,7 @@
           <td></td>
         </tr>
 
+        <%# 認印 %>
         <tr>
           <th><%= Worker.human_attribute_name(:seal) %></th>
           <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>          
@@ -275,34 +290,41 @@
         <!-- 資格情報ここまで -->
         
         <!-- worker_medicalここから -->
+        <%# 健康診断 %>
         <tr bgcolor="#dee2e6">
           <th colspan="4"><%= WorkerMedical.human_attribute_name(:id) %></th>
         </tr>
+        <%# 健康診断の受診状況 %>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
           <td><%= @worker.worker_medical.is_med_exam_i18n %><td>
           <td></td>
         </tr>
+        <%# 最近の健康状態 %>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:health_condition) %></th>
           <td><%= @worker.worker_medical.health_condition_i18n %><td>
           <td></td>
         </tr>
+        <%# 健康診断日 %>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
           <td><%= @worker.worker_medical.med_exam_on %><td>
           <td></td>
         </tr>
+        <%# 最高血圧 (mmHg) %>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:max_blood_pressure) %></th>
           <td><%= @worker.worker_medical.max_blood_pressure %><td>
           <td></td>
         </tr>
+        <%# 最低血圧 (mmHg) %>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:min_blood_pressure) %></th>
           <td><%= @worker.worker_medical.min_blood_pressure %><td>
           <td></td>
         </tr>
+        <%# 最低血圧 (mmHg) %>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
           <td><%= @worker.worker_medical.special_med_exam_on %><td>
@@ -317,11 +339,13 @@
           <th></th>
         </tr>
         <% @worker.worker_medical.worker_exams.each do |worker_exam| %>
+          <%# 特別健康診断の受診状況 %>
           <th><%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
           <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
           <td></td>
           <tr>
             <% if @worker.worker_medical.special_med_exams.first.id == worker_exam.special_med_exam_id %>
+              <%# 特別健康診断 %>
               <th><%= WorkerExam.human_attribute_name(:special_med_exam_id) %></th>
             <% else %>
               <th></th>
@@ -337,6 +361,7 @@
         <!-- worker_examここまで -->
         <!-- worker_insuranceここから -->
         <tr bgcolor="#dee2e6">
+          <%# 保険情報 %>
           <th colspan="4"><%= WorkerInsurance.human_attribute_name(:id) %></th>
         </tr>
         <tr>
@@ -345,6 +370,7 @@
           <td></td>
           <td></td>
         </tr>
+        <%# 健康保険 %>
         <% if @worker.worker_insurance && (@worker.worker_insurance.health_insurance_type == ('health_insurance_association' || 'construction_national_health_insurance')) %>
           <tr>
             <th><%= WorkerInsurance.human_attribute_name(:health_insurance_name) %></th>
@@ -353,12 +379,14 @@
             <td></td>
           </tr>
         <% end %>
+        <%# 年金保険 %>
         <tr>
           <th><%= WorkerInsurance.human_attribute_name(:pension_insurance_type) %></th>
           <td><%= @worker.worker_insurance.pension_insurance_type_i18n %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 雇用保険 %>
         <tr>
           <th><%= WorkerInsurance.human_attribute_name(:employment_insurance_type) %></th>
           <td><%= @worker.worker_insurance.employment_insurance_type_i18n %></td>
@@ -366,6 +394,7 @@
           <td></td>
         </tr>
         <% if @worker.worker_insurance && (%w[insured day].include?(@worker.worker_insurance.employment_insurance_type)) %>
+          <%# 被保険者番号 %>
           <tr>
             <th><%= WorkerInsurance.human_attribute_name(:employment_insurance_number) %></th>
             <td><%= @worker.worker_insurance.employment_insurance_number %></td>
@@ -373,12 +402,14 @@
             <td></td>
           </tr>
         <% end %>
+        <%# 労働保険特別加入 %>
         <tr>
           <th><%= WorkerInsurance.human_attribute_name(:has_labor_insurance) %></th>
           <td><%= @worker.worker_insurance.has_labor_insurance_i18n %></td>
           <td></td>
           <td></td>
         </tr>
+        <%# 建設業退職金共済手帳 %>
         <tr>
           <th><%= WorkerInsurance.human_attribute_name(:severance_pay_mutual_aid_type) %></th>
           <% if @worker.worker_insurance && (@worker.worker_insurance.severance_pay_mutual_aid_type == 'other') %>
@@ -396,6 +427,7 @@
           <tr bgcolor="#dee2e6">
             <th colspan="4">外国人建設就労者情報</th>
           </tr>
+          <%# 在留資格 %>
           <tr>
             <th><%= Worker.human_attribute_name(:status_of_residence) %></th>
             <td><%= @worker.status_of_residence_i18n %></td>
@@ -404,27 +436,28 @@
           </tr>
 
           <% if ['特定技能', '外国人建設就労者'].include?(@worker.status_of_residence_i18n) %>
+            <%# 在留期間満期日 %>
             <tr>
               <th><%= Worker.human_attribute_name(:maturity_date) %></th>
               <td><%= @worker.maturity_date %></td>
               <td></td>
               <td></td>
             </tr>
-
+            <%# CCUS登録情報が最新であることの確認 %>
             <tr>
               <th><%= Worker.human_attribute_name(:confirmed_check) %></th>
               <td><%= @worker.confirmed_check_i18n %></td>
               <td></td>
               <td></td>
             </tr>
-
+            <%# キャリアアップシステム登録情報が最新であることの確認日 %>
             <tr>
               <th><%= Worker.human_attribute_name(:confirmed_check_date) %></th>
               <td><%= @worker.confirmed_check_date %></td>
               <td></td>
               <td></td>
             </tr>
-
+            <%# パスポートの写し %>
             <tr>
               <th><%= Worker.human_attribute_name(:passports) %></th>
               <td>
@@ -437,7 +470,7 @@
               <td></td>
               <td></td>
             </tr>
-
+            <%# 在留カードの写し %>
             <tr>
               <th><%= Worker.human_attribute_name(:residence_cards) %></th>
               <td>
@@ -450,7 +483,7 @@
               <td></td>
               <td></td>
             </tr>
-
+            <%# 受入企業と外国人建設就労者等との間の雇用条件書の写し %>
             <tr>
               <th><%= Worker.human_attribute_name(:employment_conditions) %></th>
               <td>
