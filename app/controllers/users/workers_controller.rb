@@ -268,7 +268,6 @@ module Users
 
     # 雇用保険が被保険者で無ければ被保険者番号を空文字にする
     def employment_insurance_number_nil(employment_insurance_type, params)
-      byebug
       if %w[insured day].exclude?(employment_insurance_type)
         ''
       else
