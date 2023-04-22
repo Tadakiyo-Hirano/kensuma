@@ -61,20 +61,24 @@ class Worker < ApplicationRecord
   validates :family_name, presence: true
   validates :relationship, presence: true
   validates :sex, presence: true
-  validates :driver_licences, acceptance: true
   validates :driver_licence_number, absence: true, unless: :driver_licence_present?
   validates :driver_licence_number, presence: true, if: :driver_licence_present?
   validates :driver_licence_number, format: FORMAT_D_LICENCE, allow_nil: true, if: :driver_licence_present?
-  # validates :status_of_residence, presence: true
-  # validates :maturity_date
-  # validates :confirmed_check, presence: true
-  # validates :confirmed_check_date
-  # validates :responsible_director
-  # validates :responsible_name
-  # validates :responsible_contact_address
+  validates :status_of_residence, presence: true, if: :foreigner?
+  validates :status_of_residence, absence: true, unless: :foreigner?
+  validates :maturity_date, presence: true, if: :specified_skill_or_construction_employment?
+  validates :maturity_date, absence: true, unless: :specified_skill_or_construction_employment?
+  validates :confirmed_check, presence: true, if: :specified_skill_or_construction_employment?
+  validates :confirmed_check, absence: true, unless: :specified_skill_or_construction_employment?
+  validates :confirmed_check_date, presence: true, if: :confirmed_check_checked?
+  validates :confirmed_check_date, absence: true, unless: :confirmed_check_checked?
 
   mount_uploader :seal, WorkersUploader
+  mount_uploader :employee_cards, WorkersUploader
   mount_uploaders :career_up_images, WorkersUploader
+  mount_uploaders :passports, WorkersUploader
+  mount_uploaders :residence_cards, WorkersUploader
+  mount_uploaders :employment_conditions, WorkersUploader
 
   def to_param
     uuid
@@ -82,5 +86,21 @@ class Worker < ApplicationRecord
 
   def driver_licence_present?
     driver_licence.present?
+  end
+
+  def foreigner?
+    country != 'JP'
+  end
+
+  def specified_skill_or_construction_employment?
+    foreigner? && %w[construction_employment specified_skill].include?(status_of_residence)
+  end
+
+  def confirmed_check_checked?
+    specified_skill_or_construction_employment? && confirmed_check == 'checked'
+  end
+
+  def disabled_convert(params, key)
+    self.update(key => '') if params.blank?
   end
 end
