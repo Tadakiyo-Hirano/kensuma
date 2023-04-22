@@ -290,7 +290,7 @@
         </tr>
         <tr>
           <th><%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
-          <td><%= @worker.worker_medical.med_exam_on %><td>
+          <td><%= wareki(@worker.worker_medical.med_exam_on) %><td>
           <td></td>
         </tr>
         <tr>
@@ -303,38 +303,37 @@
           <td><%= @worker.worker_medical.min_blood_pressure %><td>
           <td></td>
         </tr>
-        <tr>
-          <th><%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
-          <td><%= @worker.worker_medical.special_med_exam_on %><td>
-          <td></td>
-        </tr>
         <!-- worker_medicalここまで -->
+
         <!-- worker_examここから -->
-        <tr bgcolor="#dee2e6">
-          <th></th>
-          <th><%= SpecialMedExam.human_attribute_name(:name) %></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <% @worker.worker_medical.worker_exams.each do |worker_exam| %>
-          <th><%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
-          <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
-          <td></td>
+        <% if @worker.worker_medical.is_special_med_exam == "y" %>
+          <tr bgcolor="#dee2e6">
+            <th>特別健康診断</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
           <tr>
-            <% if @worker.worker_medical.special_med_exams.first.id == worker_exam.special_med_exam_id %>
-              <th><%= WorkerExam.human_attribute_name(:special_med_exam_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
-            <td colspan="4">
-              <%= worker_exam.special_med_exam.name %>
-              <% if worker_exam.special_med_exam.name == 'その他' %>
-                （<%= worker_exam.others %>）
-              <% end %>
+            <th><%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
+            <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
+          </tr>
+          <tr>
+            <th><%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
+            <td colspan="3"><%= wareki(@worker.worker_medical.special_med_exam_on) %><td>
+          </tr>
+          <tr>
+            <th><%= WorkerMedical.human_attribute_name(:special_med_exam_ids) %></th>
+            <td colspan="3">
+              <%= @worker.worker_medical.special_med_exam_ids.map { |id| SpecialMedExam.find(id).name }.join(', ') %>
             </td>
+          </tr>
+          <tr>
+            <th>その他</th>
+            <td colspan="3"><%= @worker.worker_medical.special_med_exam_others %></td>
           </tr>
         <% end %>
         <!-- worker_examここまで -->
+
         <!-- worker_insuranceここから -->
         <tr bgcolor="#dee2e6">
           <th colspan="4"><%= WorkerInsurance.human_attribute_name(:id) %></th>

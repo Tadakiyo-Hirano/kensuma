@@ -435,6 +435,8 @@ ja:
         min_blood_pressure: 最低血圧 (mmHg)
         is_special_med_exam: 特別健康診断の受診状況
         special_med_exam_on: 特別健康診断日
+        special_med_exam_ids: 特別健康診断
+        special_med_exam_others: 特別健康診断(その他)
         health_condition: 最近の健康状態
         is_med_exam: 健康診断の受診状況
       worker_exam:

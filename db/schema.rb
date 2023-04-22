@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.json "tem_industry_ids"
     t.string "employment_manager_name"
     t.integer "foreign_work_status_exist"
-    t.integer "specific_skilled_foreigners_exist"
-    t.integer "foreign_construction_workers_exist"
-    t.integer "foreign_technical_intern_trainees_exist"
+    t.integer "specific_skilled_foreigners_exist", default: 1, null: false
+    t.integer "foreign_construction_workers_exist", default: 1, null: false
+    t.integer "foreign_technical_intern_trainees_exist", default: 1, null: false
     t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
     t.bigint "user_id", null: false
@@ -687,7 +687,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "worker_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_medical_id", null: false
     t.bigint "special_med_exam_id", null: false
-    t.string "others"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["special_med_exam_id"], name: "index_worker_exams_on_special_med_exam_id"
@@ -730,6 +729,8 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.integer "min_blood_pressure", null: false
     t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
+    t.json "special_med_exam_ids"
+    t.string "special_med_exam_others"
     t.integer "health_condition", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
