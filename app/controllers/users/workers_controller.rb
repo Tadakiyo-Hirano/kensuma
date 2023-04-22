@@ -285,7 +285,7 @@ module Users
     end
 
     # 事業主もしくは一人親方であれば、労働保険特別加入を空文字にする
-    def empty_has_labor_insurance(_business_owner_or_master, params)
+    def empty_has_labor_insurance(business_owner_or_master, params)
       if business_owner_or_master != '1'
         ''
       else
