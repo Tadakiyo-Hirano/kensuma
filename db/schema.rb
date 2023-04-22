@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.json "tem_industry_ids"
     t.string "employment_manager_name"
     t.integer "foreign_work_status_exist"
-    t.integer "specific_skilled_foreigners_exist"
-    t.integer "foreign_construction_workers_exist"
-    t.integer "foreign_technical_intern_trainees_exist"
+    t.integer "specific_skilled_foreigners_exist", default: 1, null: false
+    t.integer "foreign_construction_workers_exist", default: 1, null: false
+    t.integer "foreign_technical_intern_trainees_exist", default: 1, null: false
     t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
     t.bigint "user_id", null: false
@@ -798,13 +798,11 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.date "maturity_date"
     t.integer "confirmed_check"
     t.date "confirmed_check_date"
-    t.string "passport_front"
-    t.string "passport_back"
-    t.string "residence_card_front"
-    t.string "residence_card_back"
-    t.string "employment_condition"
+    t.json "passports"
+    t.json "residence_cards"
+    t.json "employment_conditions"
     t.string "post_code"
-    t.string "driver_licence"
+    t.json "driver_licences"
     t.string "driver_licence_number"
     t.string "seal"
     t.json "employee_cards"

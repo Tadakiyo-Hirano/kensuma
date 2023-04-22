@@ -432,7 +432,7 @@ ja:
       day: 日
       month: 月
       year: 年
-  driver_licences:
+  driver_licence_params:
     LL: 大型免許
     ML: 中型免許
     MLC: 中型免許(8t)に限る
@@ -652,6 +652,7 @@ ja:
         construction_national_health_insurance: 建設国保
         national_health_insurance: 国民健康保険
         exemption: 適応除外
+        not_health_insurance: 未加入
       pension_insurance_type:
         welfare: 厚生年金
         national: 国民年金

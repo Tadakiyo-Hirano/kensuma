@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
@@ -14,7 +15,6 @@ module Users
       else
         production_data_new
       end
-      @driver_licence = []
     end
 
     def create
@@ -24,11 +24,6 @@ module Users
         redirect_to users_worker_path(@worker)
       else
         worker_add_hyhpen(@worker)
-        if driver_licences_params[:driver_licences].present?
-          @driver_licence = driver_licences_params[:driver_licences].values
-        else
-          @driver_licence = []
-        end
         render :new
       end
     end
@@ -42,20 +37,21 @@ module Users
       @worker.worker_skill_trainings.build if @worker.skill_trainings.blank?
       @worker.worker_special_educations.build if @worker.special_educations.blank?
       worker_add_hyhpen(@worker)
-      @driver_licence = format_array(@worker.driver_licence)
+      if @worker.status_of_residence.blank?
+        @worker.status_of_residence = :construction_employment
+        @worker.confirmed_check = :checked
+      elsif @worker.maturity_date.blank?
+        @worker.confirmed_check = :checked
+      end
     end
 
     def update
       if @worker.update(worker_params_with_converted)
+        @worker.disabled_convert(worker_params[:confirmed_check_date], :confirmed_check_date)
         flash[:success] = '更新しました'
         redirect_to users_worker_path(@worker)
       else
         worker_add_hyhpen(@worker)
-        if driver_licences_params[:driver_licences].present?
-          @driver_licence = driver_licences_params[:driver_licences].values
-        else
-          @driver_licence = []
-        end
         render :edit
       end
     end
@@ -149,6 +145,46 @@ module Users
       redirect_to edit_users_worker_url(worker)
     end
 
+    def update_passports
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.passports
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(passports: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def update_residence_cards
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.residence_cards
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(residence_cards: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def update_employment_conditions
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.employment_conditions
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(employment_conditions: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
+    def update_employee_cards
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.employee_cards
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(employee_cards: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
     private
 
     def set_worker
@@ -194,76 +230,126 @@ module Users
         driver_licence_number
         blank_term
         experience_term_before_hiring
-        driver_licence_number
       ].each do |key|
         next unless converted_params[key].present?
 
         converted_params[key] = full_width_to_half_width(converted_params[key])
       end
 
-      # 保険名及び被保険者番号が必須でない場合パラメータを空文字にする
-      %i[health_insurance_name employment_insurance_number].each do |key|
-        next unless converted_params[key].present?
-
-        converted_params[key] = health_insurance_name_nil(converted_params[health_insurance_type])
-        converted_params[key] = health_insurance_name_nil(converted_params[employment_insurance_type])
+      # 保険名、被保険者番号、建設業退職金共済手帳その他、労働保険特別加入が必須でない場合パラメータを空文字にする
+      %i[health_insurance_name employment_insurance_number severance_pay_mutual_aid_name has_labor_insurance].each do |key|
+        if converted_params[:worker_insurance_attributes][key].present?
+          worker_insurance_attributes_params = converted_params[:worker_insurance_attributes]
+          unchenge_params = worker_insurance_attributes_params[key]
+          worker_insurance_attributes_params[key] = case key
+                                                    when :health_insurance_name
+                                                      health_insurance_name_nil(worker_insurance_attributes_params[:health_insurance_type], unchenge_params)
+                                                    when :employment_insurance_number
+                                                      employment_insurance_number_nil(worker_insurance_attributes_params[:employment_insurance_type], unchenge_params)
+                                                    when :severance_pay_mutual_aid_name
+                                                      severance_pay_mutual_aid_name_nil(worker_insurance_attributes_params[:severance_pay_mutual_aid_type], unchenge_params)
+                                                    when :has_labor_insurance
+                                                      empty_has_labor_insurance(converted_params[:business_owner_or_master], unchenge_params)
+                                                    end
+        else
+          converted_params[:worker_insurance_attributes].merge(key => '')
+        end
       end
       # 運転免許証のデータを作成
-      if driver_licences_params[:driver_licences].present?
-        converted_params[:driver_licence] = driver_licences_string(driver_licences_params[:driver_licences])
-      else
+      if converted_params[:driver_licences].blank?
+        converted_params[:driver_licences] = []
         converted_params[:driver_licence_number] = ''
+      end
+
+      # 外国人情報の整形
+      arg_array = [converted_params[:country], converted_params[:status_of_residence], converted_params[:confirmed_check]]
+      %i[status_of_residence maturity_date confirmed_check confirmed_check_date passports residence_cards employment_conditions].each do |key|
+        if converted_params[key].present?
+          if japanese?(arg_array[0])
+            converted_params = converted_params.merge(key => '')
+          elsif skill_practice_or_permanent_resident?(arg_array[1], key)
+            converted_params = converted_params.merge(key => '')
+          elsif confirmed_check_unchecked?(arg_array[2], key)
+            converted_params = converted_params.merge(key => '')
+          else
+            converted_params[key]
+          end
+        else
+          converted_params[key]
+        end
       end
       converted_params
     end
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
-    def health_insurance_name_nil(key, health_insurance_type)
+    def health_insurance_name_nil(health_insurance_type, params)
       health_insurance_name_precenses = %w[health_insurance_association construction_national_health_insurance]
-      if key == 'health_insurance_name' && health_insurance_name_precenses.exclude?(health_insurance_type)
+      if health_insurance_name_precenses.exclude?(health_insurance_type)
         ''
+      else
+        params
       end
     end
 
     # 雇用保険が被保険者で無ければ被保険者番号を空文字にする
-    def employment_insurance_number_nil(key, employment_insurance_type)
-      if key == 'employment_insurance_number' && employment_insurance_type != :insured
+    def employment_insurance_number_nil(employment_insurance_type, params)
+      if %w[insured day].exclude?(employment_insurance_type)
         ''
+      else
+        params
       end
     end
 
-    # 単数作業員情報のハイフン差し込み
+    # 日本人であるか？
+    def japanese?(country)
+      country == 'JP'
+    end
+
+    # 外国人労働者に当たらないか？
+    def skill_practice_or_permanent_resident?(status_of_residence, key)
+      %w[permanent_resident skill_practice].include?(status_of_residence) && key != :status_of_residence
+    end
+
+    # CCUS登録情報が最新でないか？
+    def confirmed_check_unchecked?(confirmed_check, key)
+      confirmed_check == 'unchecked' && key == :confirmed_check_date
+    end
+
+    # 建設業退職金共済手帳がその他で無ければその他（建設業退職金共済手帳）を空文字にする
+    def severance_pay_mutual_aid_name_nil(severance_pay_mutual_aid_type, params)
+      if severance_pay_mutual_aid_type != 'other'
+        ''
+      else
+        params
+      end
+    end
+
+    # 事業主もしくは一人親方であれば、労働保険特別加入を空文字にする
+    def empty_has_labor_insurance(business_owner_or_master, params)
+      if business_owner_or_master != '1'
+        ''
+      else
+        params
+      end
+    end
+
+    # 作業員情報のハイフン差し込み
     def worker_add_hyhpen(worker)
       @my_phone_number = phone_number_add_hyphen(worker.my_phone_number)
       @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
-      if worker.post_code.size == 7
-        @post_code = add_hyphen([3], worker.post_code)
-      else
-        @post_code = worker.post_code
-      end
-      if worker.career_up_id.size == 14
-        @career_up_id = add_hyphen([4, 4, 4], worker.career_up_id)
-      else
-        @career_up_id = worker.career_up_id
-      end
-      if worker.driver_licence_number.size == 12
-        @driver_licence_number = add_hyphen([4, 4], worker.driver_licence_number)
-      else
-        @driver_licence_number = worker.driver_licence_number
-      end
-    end
-
-    # 送られたハッシュの値をつなげた文字列に変換
-    def driver_licences_string(driver_licences_params)
-      driver_licences_params.values.join(' ')
+      @post_code = post_code_add_hyphen(worker)
+      @career_up_id = career_up_id_add_hyphen(worker)
+      @driver_licence_number = driver_licence_number_add_hyphen(worker)
     end
 
     def worker_params
       params.require(:worker).permit(:name, :name_kana,
         :country, :my_address, :my_phone_number, :family_address, :post_code, { career_up_images: [] },
-        :family_phone_number, :birth_day_on, :abo_blood_type, { employee_cards: [] }, :driver_licence,
+        :family_phone_number, :birth_day_on, :abo_blood_type, { employee_cards: [] }, { driver_licences: [] },
         :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring, :driver_licence_number, :business_owner_or_master,
-        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, :seal, :status_of_residence,
+        :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, :seal,
+        :status_of_residence, :maturity_date, :confirmed_check, :confirmed_check_date,
+        { passports: [] }, { residence_cards: [] }, { employment_conditions: [] },
         worker_licenses_attributes:                 [:id, :license_id, { images: [] }, :_destroy],
         worker_safety_health_educations_attributes: [:id, :safety_health_education_id, { images: [] }, :_destroy],
         worker_skill_trainings_attributes:          [:id, :skill_training_id, { images: [] }, :_destroy],
@@ -287,9 +373,6 @@ module Users
                                                     ]
       )
     end
-
-    def driver_licences_params
-      params.permit(driver_licences: %i[LL ML MLC MLL SL SLL LLT SLT SLSP MOP TDL])
-    end
   end
 end
+# rubocop:enable Metrics/ClassLength
