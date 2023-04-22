@@ -159,7 +159,17 @@
           <td></td>
           <td></td>
         </tr>
-        
+
+        <%# 技能者ID(キャリアアップシステム)の写し %>
+        <tr>
+          <th><%= Worker.human_attribute_name(:career_up_images) %></th>
+            <td>
+              <% @worker.career_up_images.each do |image| %>
+                <%# 技能講習修了証明書の写し %>
+                <%= image_tag(image.url) %>
+              <% end %>
+            </td>
+        </tr>
         <!-- 資格情報ここから -->
         <tr bgcolor="#dee2e6">
           <th colspan="4">資格情報</th>

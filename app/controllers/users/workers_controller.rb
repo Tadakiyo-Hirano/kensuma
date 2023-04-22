@@ -257,7 +257,7 @@ module Users
     end
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
-    def health_insurance_name_nil(_health_insurance_type, params)
+    def health_insurance_name_nil(health_insurance_type, params)
       health_insurance_name_precenses = %w[health_insurance_association construction_national_health_insurance]
       if health_insurance_name_precenses.exclude?(health_insurance_type)
         ''
@@ -276,7 +276,7 @@ module Users
     end
 
     # 建設業退職金共済手帳がその他で無ければその他（建設業退職金共済手帳）を空文字にする
-    def severance_pay_mutual_aid_name_nil(_severance_pay_mutual_aid_type, params)
+    def severance_pay_mutual_aid_name_nil(severance_pay_mutual_aid_type, params)
       if severance_pay_mutual_aid_type != 'other'
         ''
       else
