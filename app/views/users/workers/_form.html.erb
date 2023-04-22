@@ -121,6 +121,16 @@
   </div>
 <% end %><br>
 
+<%# 従業員証の写し %>
+<%= f.label :employee_cards %>
+<%= f.file_field :employee_cards, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+<% if @worker.employee_cards.present? %>
+  <% @worker.employee_cards.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_worker_update_employee_cards_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+<% end %>
+
 <%# 技能者ID(キャリアアップシステム) %>
 <%= f.label :career_up_id %>
 <%= f.text_field :career_up_id, value: @career_up_id, class: "form-control", placeholder: annotation_hyphen %><br>
@@ -143,12 +153,12 @@
       <%= render "worker_license_fields", f: w_license %>
     <% end %>
     <div id="license-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_licenses,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_licenses,
       data: {
         association_insertion_node: '#license-insertion-point',
         association_insertion_method: 'append'
       },
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
     %>
   </div>
   <!-- WorkerLicenseここまで -->
@@ -159,12 +169,12 @@
       <%= render "worker_skill_training_fields", f: w_skill_training %>
     <% end %>
     <div id="skill-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_skill_trainings,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_skill_trainings,
       data: {
         association_insertion_node: '#skill-insertion-point',
         association_insertion_method: 'append'
       },
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
     %>
   </div>
   <!-- WorkerSkillTrainingここまで -->
@@ -175,12 +185,12 @@
       <%= render "worker_special_education_fields", f: w_special_education %>
     <% end %>
     <div id="special-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_special_educations,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_special_educations,
       data: {
         association_insertion_node: '#special-insertion-point',
         association_insertion_method: 'append'
       } ,
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
       %>
   </div>
   <!-- WorkerSpecialEducationここまで -->
@@ -191,12 +201,12 @@
       <%= render "worker_safety_health_education_fields", f: w_safety_health_education %>
     <% end %>
     <div id="safety-health-education-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_safety_health_educations,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_safety_health_educations,
       data: {
         association_insertion_node: '#safety-health-education-insertion-point',
         association_insertion_method: 'append'
       },
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
     %>
   </div>
   <%# worker_safety_health_educationここまで %>
@@ -418,9 +428,11 @@
         </div>
 
         <%# キャリアアップシステム登録情報が最新であることの確認日 %>
-        <%= f.label :confirmed_check_date %>
-        <span class="p-1 mb-2 rounded bg-danger text-white" id="confirmed_check_date_label">必須</span>
-        <%= f.date_field :confirmed_check_date, class: "form-control", placeholder: Worker.human_attribute_name(:confirmed_check_date) %><br>
+        <div id="confirmed_check_date">
+          <%= f.label :confirmed_check_date %>
+          <span class="p-1 mb-2 rounded bg-danger text-white" id="confirmed_check_date_label">必須</span>
+          <%= f.date_field :confirmed_check_date, class: "form-control", placeholder: Worker.human_attribute_name(:confirmed_check_date) %><br>
+        </div>
 
         <%# パスポートの写し %>
         <%= f.label :passports %>
@@ -514,11 +526,9 @@
     function confirmedCheckDate_Disabled() {
       var confirmedCheckVlue = $('input[name="worker[confirmed_check]"]:checked').val();
       if (confirmedCheckVlue == 'unchecked') {
-        $('input[name="worker[confirmed_check_date]"]').prop('disabled', true);
-        $('#confirmed_check_date_label').hide();
+        $('#confirmed_check_date').hide();
       } else {
-        $('input[name="worker[confirmed_check_date]"]').prop('disabled', false);
-        $('#confirmed_check_date_label').show();
+        $('#confirmed_check_date').show();
       }
     }
 

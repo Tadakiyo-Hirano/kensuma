@@ -8,14 +8,14 @@
       <%= f.label :images %>
       <%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
     </div>
-    <div class="col-md-1" style="margin-top: 30px;">
-      <%= link_to_remove_association "×", f, class: 'btn btn-sm btn-danger' %>
-    </div>
     <div class="col-md-3" style="margin-bottom: 10px;">
       <% f.object.images.each_with_index do |image, index| %>
         <%= image_tag(image.url) %>
         <%= link_to "削除", users_worker_update_worker_safety_health_education_images_path(@worker, index: index, safety_health_education_id: f.object.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
       <% end %>
+    </div>
+    <div class="col-md-1" style="margin-top: 8px;">
+      <span>　　</span><%= link_to_remove_association "フォームを削除", f, class: 'btn btn-sm btn-danger' %>
     </div>
   </div>
 </div>

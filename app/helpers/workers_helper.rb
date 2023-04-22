@@ -105,25 +105,26 @@ module WorkersHelper
     )
   end
 
-  # 日本人であるか？
-  def japanese?(country)
-    country == 'JP'
-  end
-
-  # 外国人であり外国人労働者に当たらないか？
-  def skill_practice_or_permanent_resident?(country, status_of_residence, key)
-    country != 'JP' && %w[permanent_resident skill_practice].include?(status_of_residence) && key != :status_of_residence
-  end
-
-  def foreigner_converted(converted_params)
-    arg_array = [converted_params[:country], converted_params[:status_of_residence], converted_params[:confirmed_check]]
-    %i[status_of_residence maturity_date confirmed_check confirmed_check_date passports residence_cards employment_conditions].each do |key|
-      if converted_params[key].present?
-        converted_params[key] = '' if japanese?(arg_array[0])
-        converted_params[key] = '' if skill_practice_or_permanent_resident?(arg_array[0], arg_array[1], key)
-      else
-        converted_params[key] = ''
-      end
-    end
-  end
+  # def foreigner_converted(converted_params)
+  #   arg_array = [converted_params[:country], converted_params[:status_of_residence], converted_params[:confirmed_check]]
+  #   %i[status_of_residence maturity_date confirmed_check confirmed_check_date passports residence_cards employment_conditions].each do |key|
+  #     if converted_params[key].present?
+  #       byebug
+  #       converted_params[key] = if japanese?(arg_array[0])
+  #                                 ''
+  #                               elsif skill_practice_or_permanent_resident?(arg_array[1], key)
+  #                                 ''
+  #                               elsif confirmed_check_unchecked?(arg_array[2], key)
+  #                                 byebug
+  #                                 ''
+  #                                 byebug
+  #                               else
+  #                                 converted_params[key]
+  #                               end
+  #                               byebug
+  #     else
+  #       converted_params[key] = ''
+  #     end
+  #   end
+  # end
 end

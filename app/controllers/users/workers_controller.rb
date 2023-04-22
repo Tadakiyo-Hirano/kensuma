@@ -175,6 +175,16 @@ module Users
       redirect_to edit_users_worker_url(worker)
     end
 
+    def update_employee_cards
+      worker = current_business.workers.find_by(uuid: params[:worker_id])
+      remaining_images = worker.employee_cards
+      deleting_images = remaining_images.delete_at(params[:index].to_i)
+      deleting_images.try(:remove!)
+      worker.update!(employee_cards: remaining_images)
+      flash[:danger] = '証明画像を削除しました'
+      redirect_to edit_users_worker_url(worker)
+    end
+
     private
 
     def set_worker
@@ -252,7 +262,22 @@ module Users
       end
 
       # 外国人情報の整形
-      foreigner_converted(converted_params)
+      arg_array = [converted_params[:country], converted_params[:status_of_residence], converted_params[:confirmed_check]]
+      %i[status_of_residence maturity_date confirmed_check confirmed_check_date passports residence_cards employment_conditions].each do |key|
+        if converted_params[key].present?
+          if japanese?(arg_array[0])
+            converted_params = converted_params.merge(key => '')
+          elsif skill_practice_or_permanent_resident?(arg_array[1], key)
+            converted_params = converted_params.merge(key => '')
+          elsif confirmed_check_unchecked?(arg_array[2], key)
+            converted_params = converted_params.merge(key => '')
+          else
+            converted_params[key]
+          end
+        else
+          converted_params[key]
+        end
+      end
       converted_params
     end
 
@@ -273,6 +298,21 @@ module Users
       else
         params
       end
+    end
+
+    # 日本人であるか？
+    def japanese?(country)
+      country == 'JP'
+    end
+
+    # 外国人労働者に当たらないか？
+    def skill_practice_or_permanent_resident?(status_of_residence, key)
+      %w[permanent_resident skill_practice].include?(status_of_residence) && key != :status_of_residence
+    end
+
+    # CCUS登録情報が最新でないか？
+    def confirmed_check_unchecked?(confirmed_check, key)
+      confirmed_check == 'unchecked' && key == :confirmed_check_date
     end
 
     # 建設業退職金共済手帳がその他で無ければその他（建設業退職金共済手帳）を空文字にする

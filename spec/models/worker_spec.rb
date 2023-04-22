@@ -484,7 +484,7 @@ RSpec.describe Worker, type: :model do
 
         it 'バリデーションのエラーが正しいこと' do
           subject.valid?
-          expect(subject.errors.full_messages).to include('雇用契約書の取り交わし状況を入力してください')
+          expect(subject.errors.full_messages).to include('雇用契約書を入力してください')
         end
       end
     end

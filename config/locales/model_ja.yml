@@ -357,13 +357,13 @@ ja:
         career_up_id: 技能者ID(キャリアアップシステム)
         career_up_images: 建設キャリアアップシステムカードの写し
         business: 事業所
-        employment_contract: 雇用契約書の取り交わし状況
+        employment_contract: 雇用契約書
         family_name: 氏名
         relationship: 続柄
         email: メールアドレス
         sex: 性別
         post_code: 郵便番号
-        employee_cards: 従業員証
+        employee_cards: 従業員証の写し
         driver_licences: 自動車運転免許証
         driver_licence_number: 免許証番号
         seal: 認印
@@ -432,14 +432,14 @@ ja:
       worker_medical:
         id: 健康診断
         med_exam_on: 健康診断日
-        max_blood_pressure: 最高血圧 (mmHg)
-        min_blood_pressure: 最低血圧 (mmHg)
-        is_special_med_exam: 特別健康診断の受診状況
-        special_med_exam_on: 特別健康診断日
+        max_blood_pressure: 最高
+        min_blood_pressure: 最低
+        is_special_med_exam: 特別健康診断
+        special_med_exam_on: 診断日
         health_condition: 最近の健康状態
-        is_med_exam: 健康診断の受診状況
+        is_med_exam: 健康診断の受診
       worker_exam:
-        special_med_exam_id: 特別健康診断
+        special_med_exam_id: 診断種類
         others: その他
       special_med_exam:
         name: 名称
