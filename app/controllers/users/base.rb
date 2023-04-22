@@ -53,7 +53,7 @@ module Users
           worker.to_json(
             except:  %i[uuid images created_at updated_at], # 作業員情報
             include: {
-              worker_medical:            {
+              worker_medical:                  {
                 except:  %i[id worker_id created_at updated_at], # 作業員の健康情報
                 include: {
                   worker_exams: {
@@ -61,16 +61,19 @@ module Users
                   }
                 }
               },
-              worker_insurance:          {
+              worker_insurance:                {
                 except: %i[id worker_id created_at updated_at] # 保険情報
               },
-              worker_skill_trainings:    {
+              worker_skill_trainings:          {
                 only: [:skill_training_id] # 中間テーブル(技能講習マスタ)
               },
-              worker_special_educations: {
+              worker_special_educations:       {
                 only: [:special_education_id] # 中間テーブル(特別教育マスタ)
               },
-              worker_licenses:           {
+              worker_safety_health_educations: {
+                only: [:safety_health_education_id] # 中間テーブル(安全教育マスタ)
+              },
+              worker_licenses:                 {
                 only: [:license_id] # 中間テーブル(免許マスタ)
               }
             }

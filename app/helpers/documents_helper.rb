@@ -34,7 +34,26 @@ module DocumentsHelper
       @subcon
     end
   end
-
+  
+  # 元請の許可業種
+  def industry_name_genecon(n)
+    Industry.find(BusinessIndustry.find(document_site_info.construction_license[n]).industry_id).name if document_site_info.construction_license[n].present?
+  end
+  
+  # 下請の許可業種
+  def industry_name_subcon(n)
+    Industry.find(BusinessIndustry.find(document_subcon_info.construction_license[n]).industry_id).name if document_subcon_info.construction_license[n].present?
+  end
+  
+  # 元請の建設許可証
+  def businessindustry_genecon_info(n)
+    BusinessIndustry.find(document_site_info.construction_license[n])
+  end
+  
+  # 下請の建設許可証
+  def businessindustry_subcon_info(n)
+    BusinessIndustry.find(document_subcon_info.construction_license[n])
+  end
   # def document_info_for_prime_contractor_name
   #   request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
   #   if request_order.parent_id.present?
@@ -98,6 +117,22 @@ module DocumentsHelper
     status == '非専任' ? tag.span(status, class: :circle) : '非専任'
   end
 
+  # 外国人従事の状況
+  ENGAGED_TYPE = {
+    '有'             => '有',
+    '無'             => '無'
+  }.freeze
+  
+  def engaged_yes(engaged_type)
+    status = ENGAGED_TYPE[engaged_type]
+    status == '有' ? tag.span(status, class: :circle) : '有'
+  end
+  
+  def engaged_no(engaged_type)
+    status = ENGAGED_TYPE[engaged_type]
+    status == '無' ? tag.span(status, class: :circle) : '無'
+  end
+  
   # 会社の保険加入状況
   INSURANCE_TYPE = {
     'join'       => '加入',
@@ -435,7 +470,7 @@ module DocumentsHelper
     if worker.present?
       id = worker&.content&.[]('id')
       birth_day_on = worker&.content&.[]('birth_day_on')
-      # safety_health_education = worker&.content&.[]('safety_sanitary_education_ids').to_json
+      safety_health_education = worker&.content&.[]('worker_safety_health_educations').to_json
       foreigner = worker&.content&.[]('status_of_residence')
 
       site_agent = "現" if id == document_info.content&.[]('subcon_site_agent_name_id') # (現)現場代理人
@@ -447,13 +482,13 @@ module DocumentsHelper
       lead_engineer = "主" if id == document_info.content&.[]('subcon_lead_engineer_name_id') # (主)主任技術者
       foreman = "職" if id == document_info.content&.[]('subcon_foreman_name_id') # (主)主任技術者
       safety_manager = "安" if id == document_info.content&.[]('subcon_safety_manager_name_id') # (安)安全衛生責任者
-      # ability_improving_education = "歳" if safety_health_education.include?("19") # (歳)能力向上教育
-      # danger_harmful_business = "再" if safety_health_education.include?("6") # (再)危険有害業務・再発防止教育
+      ability_improving_education = "歳" if safety_health_education.include?("19") # (歳)能力向上教育
+      danger_harmful_business = "再" if safety_health_education.include?("6") # (再)危険有害業務・再発防止教育
       skill_practice = "習" if foreigner == "skill_practice" # (習)外国人技能実習生
       construction_employment = "就" if foreigner == "construction_employment" # (就)外国人建設就労者
       specified_skill = "1特" if foreigner == "specified_skill" # (1特)1号特定技能外国人
 
-      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, skill_practice, construction_employment, specified_skill
+      worker_symbols = site_agent, work_chief, under_18, sex, lead_engineer, foreman, safety_manager, ability_improving_education, danger_harmful_business, skill_practice, construction_employment, specified_skill
       worker_symbols.size > 1 ? worker_symbols.join(' ') : worker_symbols
     end
   end

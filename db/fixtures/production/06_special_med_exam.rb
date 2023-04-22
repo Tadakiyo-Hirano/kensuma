@@ -6,5 +6,6 @@ SpecialMedExam.seed(
   { id: 5, name: '特定化学物質' },
   { id: 6, name: '高気圧業務' },
   { id: 7, name: '四アルキル鉛' },
-  { id: 8, name: '石綿' }
+  { id: 8, name: '石綿' },
+  { id: 9, name: 'その他' }
 )

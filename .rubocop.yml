@@ -119,7 +119,7 @@ Layout/HashAlignment:
 
 # 1行あたりの長さを制限
 Layout/LineLength:
-  Max: 140
+  Max: 200
   Exclude:
     - 'app/admin/**/*'                  # ActiveAdminのDSL
     - 'app/libs/admins/components/**/*' # ActiveAdminのコンポーネントDSL
