@@ -11,10 +11,11 @@ class Document < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.uuid }
 
   # 自身の書類一覧取得(自身が元請の場合、一次の場合、二次の場合、三次以降の場合)
-  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 7, 18, 19, 20, 22, 23]).order(Arel.sql("FIELD(document_type, 1, 2, 3, 4, 7, 19, 20, 23, 18, 22)")) }
-  scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]).order(Arel.sql("FIELD(document_type, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 23, 18, 22)")) }
-  scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]).order(Arel.sql("FIELD(document_type, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24, 18, 22)")) }
-  scope :third_or_later_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 21, 22, 24]).order(Arel.sql("FIELD(document_type, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24, 18, 22)")) }
+  scope :system_chart_documents_type, -> { where(document_type: [18, 22]) }
+  scope :genecon_documents_type, -> { where(document_type: [1, 2, 3, 4, 7, 19, 20, 23]) }
+  scope :first_subcon_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 23]) }
+  scope :second_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
+  scope :third_or_later_subcon_documents_type, -> { where(document_type: [3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 24]) }
   # 元請け配下の一次下請け書類一覧取得
   scope :current_lower_first_documents_type, -> { where(document_type: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 23, 24]) }
   # 一次下請け配下の二次下請け書類一覧取得
