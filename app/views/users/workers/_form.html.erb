@@ -13,29 +13,13 @@
 <%# 事業主または一人親方 %>
 <%= f.label :business_owner_or_master %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<div class="md-3"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master,:as => :boolean %> はい</div><br>
+<div class="md-3"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい</div><br>
 
 <%# 国籍 %>
 <%= f.label :country %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.country_select :country, { priority_countries: ["JP"] }, { class: "form-control", id: "country-select" } %>
 <br>
-
-<%# 外国人建設就労者情報 %>
-<div class="list-group" id="status-of-residence-field" style="display: none;">
-  <h5>外国人就労者の方</h5>
-  <div class="list-group-item">
-    <div class="mt-3 mb-3">
-      <%= f.label :status_of_residence, class: "required" %>
-      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.collection_radio_buttons(:status_of_residence, Worker.status_of_residences_i18n, :first, :last, class: "radio") do |b| %>
-        <div class="radio">
-          <%= b.label { b.radio_button + b.text } %>
-        </div>
-      <% end %>
-    </div>
-  </div><br>
-</div>
 
 <%# 性別 %>
 <%= f.label :sex %>
@@ -137,6 +121,16 @@
   </div>
 <% end %><br>
 
+<%# 従業員証の写し %>
+<%= f.label :employee_cards %>
+<%= f.file_field :employee_cards, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+<% if @worker.employee_cards.present? %>
+  <% @worker.employee_cards.each_with_index do |image, index| %>
+    <%= image_tag(image.url) %>
+    <%= link_to "削除", users_worker_update_employee_cards_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+  <% end %>
+<% end %>
+
 <%# 技能者ID(キャリアアップシステム) %>
 <%= f.label :career_up_id %>
 <%= f.text_field :career_up_id, value: @career_up_id, class: "form-control", placeholder: annotation_hyphen %><br>
@@ -159,12 +153,12 @@
       <%= render "worker_license_fields", f: w_license %>
     <% end %>
     <div id="license-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_licenses,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_licenses,
       data: {
         association_insertion_node: '#license-insertion-point',
         association_insertion_method: 'append'
       },
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
     %>
   </div>
   <!-- WorkerLicenseここまで -->
@@ -175,12 +169,12 @@
       <%= render "worker_skill_training_fields", f: w_skill_training %>
     <% end %>
     <div id="skill-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_skill_trainings,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_skill_trainings,
       data: {
         association_insertion_node: '#skill-insertion-point',
         association_insertion_method: 'append'
       },
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
     %>
   </div>
   <!-- WorkerSkillTrainingここまで -->
@@ -191,12 +185,12 @@
       <%= render "worker_special_education_fields", f: w_special_education %>
     <% end %>
     <div id="special-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_special_educations,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_special_educations,
       data: {
         association_insertion_node: '#special-insertion-point',
         association_insertion_method: 'append'
       } ,
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
       %>
   </div>
   <!-- WorkerSpecialEducationここまで -->
@@ -207,29 +201,27 @@
       <%= render "worker_safety_health_education_fields", f: w_safety_health_education %>
     <% end %>
     <div id="safety-health-education-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :worker_safety_health_educations,
+    <span>　　</span><%= link_to_add_association "＋フォーム追加", f, :worker_safety_health_educations,
       data: {
         association_insertion_node: '#safety-health-education-insertion-point',
         association_insertion_method: 'append'
       },
-      class: "btn btn-sm btn-primary"
+      class: "btn btn-sm btn-primary mb-3"
     %>
   </div>
   <%# worker_safety_health_educationここまで %>
 
   <%# 運転免許及び認印ここから %>
   <div class="list-group-item">
-    <%= f.label :driver_licence %>
+    <%= f.label :driver_licences %>
     <div class="list-group-item">
-      <% I18n.t('driver_licences').each do |key, value| %>
-        <%= check_box_tag "driver_licences[#{key}]", value, @driver_licence.include?(value), id: "driver_licences[#{key}]" %>
-        <%= label_tag "driver_licences_#{key}", value %><br>
-      <% end %><br>
-      <%# worker_params_with_convertedでパラメーターを扱えるように定義 %>
-      <%= f.hidden_field :driver_licence, value: '' %>
+      <% I18n.t('driver_licence_params').each do |key, value| %>
+        <%= f.check_box :driver_licences, {multiple: true}, value, nil %>
+        <%= f.label value %><br>
+      <% end %>
       <div id = "driver_licence_number">
         <%= f.label :driver_licence_number %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white" id="driver-licence-number-precense">必須</span><br>
         <%= f.text_field :driver_licence_number, value: @driver_licence_number, class: "form-control", placeholder: annotation_hyphen %>
       </div>
       <%= f.label :seal %>
@@ -318,7 +310,7 @@
   <!-- WorkerInsuranceここから -->
   <div class="list-group-item">
     <%= f.fields_for :worker_insurance do |worker_insurance| %>
-      <div class="mt-3 mb-3" id="health_insurance_type">
+      <div class="mt-3 mb-3">
         <%= worker_insurance.label :health_insurance_type %>
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <div class="list-group-item">
@@ -376,7 +368,7 @@
       </div>
       
       <div class="mt-3" id="has_labor_insurance">
-        <%= worker_insurance.label :has_labor_insurance %><br>
+        <%= worker_insurance.label :has_labor_insurance %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last, class: "radio") do |b| %>
           <div class="radio">
             <%= b.label { b.radio_button + b.text } %>
@@ -403,6 +395,86 @@
     <% end %>
   </div><br>
   <!-- WorkerInsuranceここまで -->
+  <%# 外国人用フォームここから %>
+  <div class="list-group" id="foreigner-field">
+    <h5>外国人就労者の方<span class="p-1 mb-2 rounded bg-danger text-white">必須</span></h5>
+    <div class="list-group-item">
+      <div class="mt-3 mb-3">
+        <%= f.label :status_of_residence, class: "required" %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <div class="list-group-item">
+          <%= f.collection_radio_buttons(:status_of_residence, Worker.status_of_residences_i18n, :first, :last, class: "radio") do |b| %>
+            <div class="radio">
+              <%= b.label { b.radio_button + b.text } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="list-group" id="non-resident-foreigner-field">
+        <%# 在留期間満期日 %>
+        <%= f.label :maturity_date %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <div><%= f.date_field :maturity_date, class: "form-control", placeholder: Worker.human_attribute_name(:maturity_date) %><br></div>
+
+        <%# キャリアアップシステム登録情報が最新であることの確認済 %>
+        <div class="mt-3 mb-3">
+          <%= f.label :confirmed_check, class: "required" %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+          <div class="list-group-item">
+            <%= f.collection_radio_buttons(:confirmed_check, Worker.confirmed_checks_i18n, :first, :last, class: "radio") do |b| %>
+              <div class="radio">
+                <%= b.label { b.radio_button + b.text } %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <%# キャリアアップシステム登録情報が最新であることの確認日 %>
+        <div id="confirmed_check_date">
+          <%= f.label :confirmed_check_date %>
+          <span class="p-1 mb-2 rounded bg-danger text-white" id="confirmed_check_date_label">必須</span>
+          <%= f.date_field :confirmed_check_date, class: "form-control", placeholder: Worker.human_attribute_name(:confirmed_check_date) %><br>
+        </div>
+
+        <%# パスポートの写し %>
+        <%= f.label :passports %>
+        <div class="col-md-8" style="margin-bottom: 10px;">
+          <%= f.file_field :passports, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+          <% if @worker.passports.present? %>
+            <% @worker.passports.each_with_index do |image, index| %>
+              <%= image_tag(image.url) %>
+              <%= link_to "削除", users_worker_update_passports_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            <% end %>
+          <% end %>
+        </div>
+        <br>
+
+        <%# 在留カードの写し %>
+        <%= f.label :residence_cards %>
+        <div class="col-md-8" style="margin-bottom: 10px;">
+          <%= f.file_field :residence_cards, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+          <% if @worker.residence_cards.present? %>
+            <% @worker.residence_cards.each_with_index do |image, index| %>
+              <%= image_tag(image.url) %>
+              <%= link_to "削除", users_worker_update_residence_cards_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            <% end %>
+          <% end %>          
+        </div>
+        <br>
+
+        <%# 受入企業と外国人建設就労者等との間の雇用条件書の写し %>
+        <%= f.label :employment_conditions %>
+        <div class="col-md-8" style="margin-bottom: 10px;">
+          <%= f.file_field :employment_conditions, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+          <% if @worker.employment_conditions.present? %>
+            <% @worker.employment_conditions.each_with_index do |image, index| %>
+              <%= image_tag(image.url) %>
+              <%= link_to "削除", users_worker_update_employment_conditions_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# 外国人用フォームここまで %>
 </div><br>
 
 <script>
@@ -413,16 +485,50 @@
       var selectedCountry = $('#country-select').val();
       // 国がJP以外の場合には、居住状況フィールドを表示する
       if (selectedCountry !== 'JP') {
-        $('#status-of-residence-field').show();
+        $('#foreigner-field').show();
         // 居住状況フィールドを必須にする
         $('input[name="worker[status_of_residence]"]').prop('required', true);
+        $('input[name="worker[maturity_date]"]').prop('required', true);
+        $('input[name="worker[confirmed_check]"]').prop('required', true);
+        $('input[name="worker[confirmed_check_date]"]').prop('required', true);
       } else {
         // 国がJPの場合には、居住状況フィールドを非表示にする
-        $('#status-of-residence-field').hide();
+        $('#foreigner-field').hide();
         // 居住状況フィールドを必須ではなくする
         $('input[name="worker[status_of_residence]"]').prop('required', false);
-        // ラジオボタンの選択を外す
-        $('input[name="worker[status_of_residence]"]').prop('checked', false);
+        $('input[name="worker[maturity_date]"]').prop('required', false);
+        $('input[name="worker[confirmed_check]"]').prop('required', false);
+        $('input[name="worker[confirmed_check_date]"]').prop('required', false);
+      }
+    }
+
+    // 在留資格が外国人建設就労者、特定技能の時、外国人就労者情報のフォームを表示させる
+    function radioStatusOfResidenceSelection() {
+      var selectedCountry = $('#country-select').val();
+      var radioStatusOfResidenceSelection = $('input[name="worker[status_of_residence]"]:checked').val();
+      // 国がJP以外の場合には、居住状況フィールドを表示する
+      if (selectedCountry !== 'JP' && ['construction_employment', 'specified_skill'].includes(radioStatusOfResidenceSelection)) {
+        $('#non-resident-foreigner-field').show();
+        // 居住状況フィールドを必須にする
+        $('input[name="worker[maturity_date]"]').prop('required', true);
+        $('input[name="worker[confirmed_check]"]').prop('required', true);
+        $('input[name="worker[confirmed_check_date]"]').prop('required', true);
+      } else {
+        $('#non-resident-foreigner-field').hide();
+        // 居住状況フィールドを必須ではなくする
+        $('input[name="worker[maturity_date]"]').prop('required', false);
+        $('input[name="worker[confirmed_check]"]').prop('required', false);
+        $('input[name="worker[confirmed_check_date]"]').prop('required', false);
+      }
+    }
+
+    // CCUS登録情報が最新であることの確認がありの時、キャリアアップシステム登録情報が最新であることの確認日フォームを無効にする
+    function confirmedCheckDate_Disabled() {
+      var confirmedCheckVlue = $('input[name="worker[confirmed_check]"]:checked').val();
+      if (confirmedCheckVlue == 'unchecked') {
+        $('#confirmed_check_date').hide();
+      } else {
+        $('#confirmed_check_date').show();
       }
     }
 
@@ -431,134 +537,136 @@
 
     // 国の選択肢が変更されたときにcheckCountrySelectionを呼び出す
     $('#country-select').change(checkCountrySelection);
-
-    // フォームが送信されたときにラジオボタンの選択を外す
-    $('form').submit(function() {
-      if ($('#country-select').val() === 'JP') {
-        $('input[name="worker[status_of_residence]"]').prop('checked', false);
-      }
-    });
+    $('#country-select').change(radioStatusOfResidenceSelection);
+    $('input[name="worker[status_of_residence]"]').change(radioStatusOfResidenceSelection);
+    $('input[name="worker[confirmed_check]"]').change(confirmedCheckDate_Disabled);
 
     // ページの読み込み時にcheckCountrySelectionを呼び出す
     checkCountrySelection();
-  });
+    radioStatusOfResidenceSelection();
+    confirmedCheckDate_Disabled();
+  })
 </script>
 
 <script>
-  // 健康保険の名前の表示・非表示
-  const health_insurance_type = document.getElementById('health_insurance_type')
-  const health_insurance_name = document.getElementById('health_insurance_name')
-  function getRadioHealthInsuranceName(object) {
-    const value = $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]:checked').val();
-    if (value == 'health_insurance_association' || value == 'construction_national_health_insurance'){
-      health_insurance_name.classList.remove('hidden');
-    } else {
-      health_insurance_name.classList.add('hidden');
+  // 健康保険名項目フォームの有効・無効
+  // 健康保険組合、建設国保の時、健康保険名項目フォームを有効、それ以外は無効にするメソッド
+  const radioHealthInsuranceTypes = document.getElementsByName('worker[worker_insurance_attributes][health_insurance_type]')
+  function HealthInsuranceNameDisabled(radioHealthInsuranceTypes) {
+    let checkedValue;
+    for (const radio of radioHealthInsuranceTypes) {
+      if (radio.checked) {
+        checkedValue = radio.value;
+        break;
+      }
     }
-  };
-  getRadioHealthInsuranceName(health_insurance_type); //ページの読み込み時に判定
 
-  $('input[name="worker[worker_insurance_attributes][health_insurance_type]"]').change(function() {
-    if ($(this).val() == 'health_insurance_association' || $(this).val() == 'construction_national_health_insurance'){
-      health_insurance_name.classList.remove('hidden');
+    if (checkedValue == 'health_insurance_association' || checkedValue == 'construction_national_health_insurance'){
+      document.getElementById('health_insurance_name').style.display = "block";
     } else {
-      health_insurance_name.classList.add('hidden');
-    }
-  });
-    
-
-  // 被保険者番号の下4桁の表示・非表示
-  const employment_insurance_type = document.getElementById('employment_insurance_type');
-  const employment_insurance_number = document.getElementById('employment_insurance_number');
-  function getSelectedEmploymentInsuranceType(object) {
-    const value = $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]:checked').val();
-    if (value === 'insured') {
-      employment_insurance_number.classList.remove('hidden');
-    } else {
-      employment_insurance_number.classList.add('hidden');
-    }
-  };
-  getSelectedEmploymentInsuranceType(employment_insurance_type); //ページの読み込み時に判定
-
-  $('input[name="worker[worker_insurance_attributes][employment_insurance_type]"]').change(function() {
-    if ($(this).val() === 'insured') {
-      employment_insurance_number.classList.remove('hidden');
-    } else {
-      employment_insurance_number.classList.add('hidden');
-    }
-  });
-
-  // mutual_aid_type mutual_aid_number
-  const mutual_aid_type = document.getElementById('mutual_aid_type');
-  const mutual_aid_number = document.getElementById('mutual_aid_number');
-  function getSelectedMutualAidType(object){
-    const index = object.selectedIndex;
-    const value = object.options[index].value;
-    if (value === 'other'){
-      mutual_aid_number.classList.remove('hidden');
-    } else {
-      mutual_aid_number.classList.add('hidden');
-    };
-  };
-  getSelectedMutualAidType(mutual_aid_type); //ページの読み込み時に判定
-
-  // 免許証番号表示・非表示処理
-  // 免許証番号項目表示・非表示のクラスを操作するメソッド
-  function driverLicenceNumberShowHide(driver_licence_check, driver_licence_number) {
-    if (driver_licence_check > 1) {
-      driver_licence_number.classList.remove('hidden');
-    } else {
-      driver_licence_number.classList.add('hidden');
+      document.getElementById('health_insurance_name').style.display = "none";
     }
   }
-  const driver_licence_number = document.getElementById('driver_licence_number');
-  const all_driver_licences = ["LL", "ML", "MLC", "MLL", "SL", "SLL", "LLT", "SLT", "SLSP", "MOP", "TDL"];
-  // const all_driver_licences = {
-  //   LL: "大型免許",
-  //   ML: "中型免許",
-  //   MLC: "中型免許(8t)に限る",
-  //   MLL: "準中型免許",
-  //   SL: "普通免許",
-  //   SLL: "大型特殊免許",
-  //   LLT: "大型二輪免許",
-  //   SLT: "普通 二輪免許",
-  //   SLSP: "小型特殊免許",
-  //   MOP: "原付免許",
-  //   TDL: "牽引自動車第一種運転免許"
-  // };
+  HealthInsuranceNameDisabled(radioHealthInsuranceTypes); //ページの読み込み時に判定
 
-  function increment_driver_licence_check(key, driver_licence_check) {
-    if ($(`input[name="driver_licences[${key}]"]`).is(':checked');) {
-      debugger
-      driver_licence_check++;
+  // 健康保険名の変更時、健康保険名項目フォームを有効、それ以外は無効にするメソッドを実行
+  for(let i = 0; i < radioHealthInsuranceTypes.length; i++) {
+  radioHealthInsuranceTypes[i].addEventListener('change', function() {HealthInsuranceNameDisabled(radioHealthInsuranceTypes);});
+  }
+</script>
+
+<script>
+  $(document).ready(function() {
+    // 保険証番号処理
+    // 被保険者の時、保険証番号フォームを有効にし、それ以外は無効にする
+    const employmentInsuranceType = document.getElementsByName('worker[worker_insurance_attributes][employment_insurance_type]')
+    function HealthInsuranceNumberDisabled(employmentInsuranceType) {
+      let checkedValue;
+      for (const radio of employmentInsuranceType) {
+        if (radio.checked) {
+          checkedValue = radio.value;
+          break;
+        }
+      }
+
+      if (checkedValue == 'insured' || checkedValue == 'day'){
+        document.getElementById('employment_insurance_number').style.display = "block";
+      } else {
+        document.getElementById('employment_insurance_number').style.display = "none";
+      }
     }
-  };
+    HealthInsuranceNumberDisabled(employmentInsuranceType); //ページの読み込み時に判定
 
-  function decrement_driver_licence_check(key, driver_licence_check) {
-    if (!$(`input[name="driver_licences[${key}]"]`).is(':checked');) {
-      debugger
-      driver_licence_check--;
+    // 雇用保険の変更時、被保険者番号項目フォームを有効、それ以外は無効にするメソッドを実行
+    for(let i = 0; i < employmentInsuranceType.length; i++) {
+      employmentInsuranceType[i].addEventListener('change', function() {HealthInsuranceNumberDisabled(employmentInsuranceType);})
     }
-  };
+  })
+</script>
 
-  function getCheckDriverLicence() {
-    let driver_licence_check = 0
-    all_driver_licences.forEach(function(key) {
-      debugger
-      increment_driver_licence_check(key, driver_licence_check);
-    });
-    debugger
-    driverLicenceNumberShowHide(driver_licence_check, driver_licence_number);
-  };
-  getCheckDriverLicence(); //ページの読み込み時に判定
+<script>
+  $(document).ready(function() {
+    // 建設業退職金共済手帳 の表示非表示
+    // その他の時、建設業退職金共済手帳フォームを表示にし、それ以外は非表示にする
+    const severancePayMutualAidType = document.getElementsByName('worker[worker_insurance_attributes][severance_pay_mutual_aid_type]')
+    function severancePayMutualAidOtherDisabled(severancePayMutualAidType) {
+      let checkedValue;
+      for (const radio of severancePayMutualAidType) {
+        if (radio.checked) {
+          checkedValue = radio.value;
+          break;
+        }
+      }
 
-  let change_driver_licence_check = 0
-  let driver_licence_key = LL
-  $(`input[name="driver_licences[${driver_licence_key}]"]`).change(function() {
-    increment_driver_licence_check(driver_licence_key, change_driver_licence_check)
-    decrement_driver_licence_check(driver_licence_key, change_driver_licence_check)
-    driverLicenceNumberShowHide(change_driver_licence_check, driver_licence_number);
-  });
+      if (checkedValue == 'other'){
+        document.getElementById('mutual_aid_number').style.display = "block";
+      } else {
+        document.getElementById('mutual_aid_number').style.display = "none";
+      }
+    }
+    severancePayMutualAidOtherDisabled(severancePayMutualAidType); //ページの読み込み時に判定
+
+    // 雇用保険の変更時、被保険者番号項目フォームを有効、それ以外は無効にするメソッドを実行
+    for(let i = 0; i < severancePayMutualAidType.length; i++) {
+      severancePayMutualAidType[i].addEventListener('change', function() {severancePayMutualAidOtherDisabled(severancePayMutualAidType);})
+    }
+  })
+</script>
+
+<script>
+  $(document).ready(function() {
+    // 免許証番号フォームの有効・無効
+    // 免許証番号項目フォームの有効・無効を操作するメソッド
+    function driverLicenceNumberShowHide() {
+      if ($('input[name="worker[driver_licences][]"]:checked').length > 0) {
+        $('#driver_licence_number').show();
+      } else {
+        $('#driver_licence_number').hide();
+      }
+    };
+    // 免許証チェックボックスが変更されたとき、免許証番号項目フォームの有効・無効を操作するメソッドを実行する
+    $('input[name="worker[driver_licences][]"]').change(driverLicenceNumberShowHide);
+
+    driverLicenceNumberShowHide(); //ページの読み込み時に判定
+  })
+</script>
+
+<script>
+  $(document).ready(function() {
+    // 労働保険特別加入フォームの表示・非表示
+    // 一人親方項目ではいであるとき、労働保険特別加入フォームの表示・非表示を操作するメソッド
+    function has_labor_insuranceShowHide() {
+      if ($('#business_owner_or_master').is(':checked')) {
+        $('#has_labor_insurance').show();
+      } else {
+        $('#has_labor_insurance').hide();
+      }
+    };
+    // 免許証チェックボックスが変更されたとき、免許証番号項目フォームの有効・無効を操作するメソッドを実行する
+    ($('#business_owner_or_master')).change(has_labor_insuranceShowHide);
+
+    has_labor_insuranceShowHide(); //ページの読み込み時に判定
+  })
 </script>
 
 <script>
@@ -656,7 +764,7 @@
         },
         "worker[sex]": {
           required: "性別を入力してください。"
-        }
+        },
         "worker[my_address]": {
           required: "住所を入力してください。"
         },
@@ -709,7 +817,7 @@
           required: "雇用保険のタイプを選択してください。"
         },
         "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: "被保険者番号の下4桁を入力してください。"
+          required: "被保険者番号は11桁で入力してください。"
         },
         "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
           required: "建設業退職金共済制度を選択してください。"

@@ -357,22 +357,23 @@ ja:
         career_up_id: 技能者ID(キャリアアップシステム)
         career_up_images: 建設キャリアアップシステムカードの写し
         business: 事業所
-        employment_contract: 雇用契約書の取り交わし状況
+        employment_contract: 雇用契約書
         family_name: 氏名
         relationship: 続柄
         email: メールアドレス
         sex: 性別
         post_code: 郵便番号
-        employee_cards: 従業員証
-        driver_licence: 自動車運転免許証
+        employee_cards: 従業員証の写し
+        driver_licences: 自動車運転免許証
         driver_licence_number: 免許証番号
         seal: 認印
         status_of_residence: 在留資格
-        # maturity_date: 在留期間満期日
-        # confirmed_check: CCUS登録情報が最新であることの確認
-        # passport: パスポートの写し
-        # residence_card: 在留カードの写し
-        # employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
+        maturity_date: 在留期間満期日
+        confirmed_check: CCUS登録情報が最新であることの確認
+        confirmed_check_date: キャリアアップシステム登録情報が最新であることの確認日
+        passports: パスポートの写し
+        residence_cards: 在留カードの写し
+        employment_conditions: 受入企業と外国人建設就労者等との間の雇用条件書の写し
       license:
         name: 名称
         description: 説明
@@ -408,9 +409,9 @@ ja:
         severance_pay_mutual_aid_type: 建設業退職金共済手帳
         severance_pay_mutual_aid_name: その他（建設業退職金共済手帳）
       worker_safety_health_education:
-       safety_health_education_id: 安全衛生教育
-       worker_id: 作業員
-       images: 証明画像
+        safety_health_education_id: 安全衛生教育
+        worker_id: 作業員
+        images: 安全衛生教育の写し
       news:
         title: タイトル
         content: 内容
@@ -431,14 +432,14 @@ ja:
       worker_medical:
         id: 健康診断
         med_exam_on: 健康診断日
-        max_blood_pressure: 最高血圧 (mmHg)
-        min_blood_pressure: 最低血圧 (mmHg)
-        is_special_med_exam: 特別健康診断の受診状況
-        special_med_exam_on: 特別健康診断日
+        max_blood_pressure: 最高
+        min_blood_pressure: 最低
+        is_special_med_exam: 特別健康診断
+        special_med_exam_on: 診断日
         health_condition: 最近の健康状態
-        is_med_exam: 健康診断の受診状況
+        is_med_exam: 健康診断の受診
       worker_exam:
-        special_med_exam_id: 特別健康診断
+        special_med_exam_id: 診断種類
         others: その他
       special_med_exam:
         name: 名称

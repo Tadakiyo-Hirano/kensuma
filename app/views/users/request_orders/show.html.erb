@@ -237,6 +237,40 @@
   </section>
 <% end %>
 
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-primary card-outline">
+          <div class="card-body">
+            <div class="row">
+              <div class="card-body table-responsive p-0">
+                <table class="table table-sm text-nowrap">
+                  <tbody>
+                    <% @system_chart_documents.each do |current_user_document| %>
+                      <tr>
+                        <td>
+                          <%= current_user_document.document_type_i18n %>
+                        </td>
+                        <td class="text-right">
+                          <%= link_to '詳細', users_request_order_document_path(@request_order.uuid, current_user_document.uuid) %>
+                        </td>
+                        <td class="text-right">
+                          <%= link_to 'PDF', users_request_order_document_path(@request_order.uuid, current_user_document.uuid, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<section>
+
 <!-- 元請（自身の情報） -->
 <section class="content">
   <div class="container-fluid">
@@ -247,20 +281,21 @@
           <%= '下請け' if sc_hierarchy(@request_order) != '元請' %>
           （自身の情報）
         </h5>
+
         <div class="card card-primary card-outline">
           <div class="card-body">
             <div class="row">
-            <div class="col-md-4 mb-2">
-              <%= RequestOrder.human_attribute_name(:status) %>：<%= @request_order.status_i18n %>
-            </div>
-            <div class="col-md-8 mb-2">
-              <%= Business.human_attribute_name(:name) %>：<%= @request_order.business.name %>
-              <%= link_to "(書類一覧)", users_request_order_documents_path(@request_order) %>
-            </div>
-            <div class="card-body table-responsive p-0">
-              <!-- 自身の書類一覧 -->
-              <%= render 'current_user_documents', request_order: @request_order %>
-            </div>
+              <div class="col-md-4 mb-2">
+                <%= RequestOrder.human_attribute_name(:status) %>：<%= @request_order.status_i18n %>
+              </div>
+              <div class="col-md-8 mb-2">
+                <%= Business.human_attribute_name(:name) %>：<%= @request_order.business.name %>
+                <%= link_to "(書類一覧)", users_request_order_documents_path(@request_order) %>
+              </div>
+              <div class="card-body table-responsive p-0">
+                <!-- 自身の書類一覧 -->
+                <%= render 'current_user_documents', request_order: @request_order %>
+              </div>
             </div>
           </div>
         </div>
