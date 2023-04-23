@@ -52,6 +52,7 @@ module Users
     end
 
     def update
+      clear_hidden_fields #ラジオボタンで非表示になった項目を強制的にnilにする
       if @business.update(business_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_business_url
@@ -110,6 +111,25 @@ module Users
         converted_params[key] = converted_params[key].to_s.gsub(/[-ー]/, '')
       end
       converted_params
+    end
+
+    def clear_hidden_fields
+      if params[:business][:business_health_insurance_status] != "join"
+        params[:business][:business_health_insurance_association] = nil
+        params[:business][:business_health_insurance_office_number] = nil
+      end
+      if params[:business][:business_welfare_pension_insurance_join_status] != "join"
+        params[:business][:business_welfare_pension_insurance_office_number] = nil
+      end
+      if params[:business][:business_employment_insurance_join_status] != "join"
+        params[:business][:business_employment_insurance_number] = nil
+      end
+      if params[:business][:foreign_work_status_exist] != "available"
+        params[:business][:specific_skilled_foreigners_exist] = nil
+        params[:business][:foreign_construction_workers_exist] = nil
+        params[:business][:foreign_technical_intern_trainees_exist] = nil
+        params[:business][:foreigners_employment_manager] = nil
+      end
     end
 
     def business_params
