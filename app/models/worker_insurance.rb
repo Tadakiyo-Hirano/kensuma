@@ -55,7 +55,7 @@ class WorkerInsurance < ApplicationRecord
 
   # 雇用保険が被保険者であればtrue
   def employment_insurance_number_valid?
-    if business_owner_or_master
+    if worker.business_owner_or_master
       false
     else
       %w[insured day].include?(employment_insurance_type)

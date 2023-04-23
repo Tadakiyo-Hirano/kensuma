@@ -627,7 +627,7 @@
 
 <script>
   // 健康保険名項目フォームの有効・無効
-  // 健康保険組合、建設国保の時、健康保険名項目フォームを有効、それ以外は無効にするメソッド
+  // 健康保険組合、建設国保の時、健康保険名項目フォームを表示、それ以外は非表示にするメソッド
   const radioHealthInsuranceTypes = document.getElementsByName('worker[worker_insurance_attributes][health_insurance_type]')
   function HealthInsuranceNameDisabled(radioHealthInsuranceTypes) {
     let checkedValue;
@@ -646,7 +646,7 @@
   }
   HealthInsuranceNameDisabled(radioHealthInsuranceTypes); //ページの読み込み時に判定
 
-  // 健康保険名の変更時、健康保険名項目フォームを有効、それ以外は無効にするメソッドを実行
+  // 健康保険名の変更時、健康保険名項目フォームを表示、それ以外は非表示にするメソッドを実行
   for(let i = 0; i < radioHealthInsuranceTypes.length; i++) {
   radioHealthInsuranceTypes[i].addEventListener('change', function() {HealthInsuranceNameDisabled(radioHealthInsuranceTypes);});
   }
@@ -806,6 +806,12 @@
         "worker[employment_contract]": {
           required: true
         },
+        "worker[maturity_date]": {
+          required: true
+        },
+        "worker[confirmed_check_date]": {
+          required: true
+        },
         "worker[worker_insurance_attributes][health_insurance_type]": {
           required: true
         },
@@ -883,11 +889,17 @@
         "worker[employment_contract]": {
           required: "雇用契約書を取り交わしたかどうかを選択してください。"
         },
+        "worker[maturity_date]": {
+          required: "CCUS登録情報が最新であることの確認を選択してください"
+        },
+        "worker[confirmed_check_date]": {
+          required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください"
+        },
         "worker[worker_insurance_attributes][health_insurance_type]": {
           required: "健康保険のタイプを選択してください。"
         },
         "worker[worker_insurance_attributes][health_insurance_name]": {
-          required: "健康保険の名前を入力してください。"
+          required: "健康保険名を入力してください。"
         },
         "worker[worker_insurance_attributes][pension_insurance_type]": {
           required: "年金保険のタイプを選択してください。"
