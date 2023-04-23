@@ -33,9 +33,14 @@ class WorkerInsurance < ApplicationRecord
 
   validates :health_insurance_type, presence: true
   validates :health_insurance_name, presence: true, if: :insurance_name_valid?
+  validates :health_insurance_name, absence: true, unless: :insurance_name_valid?
   validates :pension_insurance_type, presence: true
-  validates :employment_insurance_type, presence: true
+  validates :employment_insurance_type, presence: true, unless: :business_owner_or_master
+  validates :employment_insurance_type, absence: true, if: :business_owner_or_master
   validates :employment_insurance_number, length: { is: 11 }, if: :employment_insurance_number_valid?
+  validates :employment_insurance_number, absence: true, unless: :employment_insurance_number_valid?
+  validates :has_labor_insurance, presence: true, if: :business_owner_or_master
+  validates :has_labor_insurance, absence: true, unless: :business_owner_or_master
   validates :severance_pay_mutual_aid_type, presence: true
   validates :severance_pay_mutual_aid_name, presence: true, if: :severance_pay_mutual_aid_name_valid?
 
@@ -50,10 +55,18 @@ class WorkerInsurance < ApplicationRecord
 
   # 雇用保険が被保険者であればtrue
   def employment_insurance_number_valid?
-    %w[insured day].include?(employment_insurance_type)
+    if business_owner_or_master
+      false
+    else
+      %w[insured day].include?(employment_insurance_type)
+    end
   end
 
   def severance_pay_mutual_aid_name_valid?
     severance_pay_mutual_aid_type == 'other'
+  end
+
+  def business_owner_or_master
+    worker.business_owner_or_master
   end
 end

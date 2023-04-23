@@ -95,23 +95,6 @@ RSpec.describe WorkerInsurance, type: :model do
       end
     end
 
-    describe '#employment_insurance_type' do
-      context '存在しない場合' do
-        before :each do
-          subject.employment_insurance_type = nil
-        end
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('雇用保険を入力してください')
-        end
-      end
-    end
-
     describe '#employment_insurance_number' do
       context '被保険者の場合' do
         %i[
