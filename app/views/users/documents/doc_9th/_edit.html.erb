@@ -450,13 +450,13 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7">性別</td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    男<%# <%= worker_str(w1, "") %> <!-- ※未実装・カラム無※9-011 性別1-->
+                    <%= worker_str(w1, "sex") %> <!-- ※未実装・カラム無※9-011 性別1-->
                   </td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    男<%# <%= worker_str(w2, "") %> <!-- ※未実装・カラム無※9-011 性別2-->
+                    <%= worker_str(w2, "sex") %> <!-- ※未実装・カラム無※9-011 性別2-->
                   </td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    男<%# <%= worker_str(w3, "") %> <!-- ※未実装・カラム無※9-011 性別3-->
+                    <%= worker_str(w3, "sex") %> <!-- ※未実装・カラム無※9-011 性別3-->
                   </td>
                 </tr>
                 <tr style="height: 29px">
@@ -474,10 +474,10 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7" rowspan="2">従事させる業務</td>
                   <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
-                    資材搬入及び組み立て<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-013 従事させる業務1 -->
+                    <%= worker_str(w1, "foreign_job") %> <!-- ※未実装・カラム無※9-013 従事させる業務1 -->
                   </td>
                   <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
-                    資材搬入及び組み立て<%# <%= worker_str(w2, "") %> <!-- ※未実装・カラム無※9-013 従事させる業務2 -->
+                    <%= worker_str(w2, "foreign_job") %> <!-- ※未実装・カラム無※9-013 従事させる業務2 -->
                   </td>
                   <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
                     資材搬入及び組み立て<%# <%= worker_str(w3, "") %> <!-- ※未実装・カラム無※9-013 従事させる業務3 -->
@@ -488,11 +488,11 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7">現場入場の期間</td>
                   <td class="doc_9_s15" dir="ltr" colspan="4">
-                    令和５年 １２月 １１日<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期1 -->
+                    <%= wareki(w1.admission_date_start) %><!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期1 -->
                   </td>
                   <td class="doc_9_s16" dir="ltr">～</td>
                   <td class="doc_9_s17" dir="ltr" colspan="4">
-                    令和６年 １２月 １１日<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期1 -->
+                    <%= wareki(w1.admission_date_end) %><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期1 -->
                   </td>
                   <td class="doc_9_s15" dir="ltr" colspan="4">
                     令和５年 １２月 １１日<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期2 -->
@@ -513,11 +513,11 @@
                   <td class="doc_9_s10" dir="ltr" colspan="7" rowspan="2">在留資格<br> ※いずれかをチェック</td>
                   <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
                   <td class="doc_9_s21" dir="ltr" colspan="8">
-                    特定活動(外国人建設就労者)<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)1 -->
+                    <%= worker_str(w1, "status_of_residence") %> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)1 -->
                   </td>
                   <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
                   <td class="doc_9_s21" dir="ltr" colspan="8">
-                    特定活動(外国人建設就労者)<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)2 -->
+                    特定活動(外国人建設就労者)<%= worker_str(w2, "status_of_residence") %> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)2 -->
                   </td>
                   <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
                   <td class="doc_9_s21" dir="ltr" colspan="8">
@@ -527,7 +527,7 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
                   <td class="doc_9_s25" dir="ltr" colspan="8">
-                    特定技能<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-017 特定技能1 -->
+                    <%= worker_str(w1, "status_of_residence") %> <!-- ※未実装・カラム無※9-017 特定技能1 -->
                   </td>
                   <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
                   <td class="doc_9_s25" dir="ltr" colspan="8">
@@ -541,7 +541,7 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7">在留期間満了日</td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="9">
-                    令和６年 １２月 １１日<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日1 -->
+                    <%= worker_str(w1, "maturity_date") %> <!-- ※未実装・カラム無※9-018 在留期間満期日1 -->
                   </td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="9">
                     令和６年 １２月 １１日<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日2 -->
@@ -562,7 +562,7 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
                   <td class="doc_9_s31" dir="ltr" colspan="5">
-                    令和5年 ６月 １１日）<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-020 確認日1 -->
+                    <%= worker_str(w1, "confirmed_check_date") %><!-- ※未実装・カラム無※9-020 確認日1 -->
                   </td>
                   <td class="doc_9_s40" dir="ltr">）</td>
                   <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
@@ -627,13 +627,13 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="9">就労場所</td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="25">
-                    東京都サイト区1-2-1<%# <%= document_site_info.business.work_preace %><!-- ※未実装・カラム無※9-21 就労場所 -->
+                    <%# <%= document_subcon_info.foreign_work_place %><!-- ※未実装・カラム無※9-21 就労場所 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="9">従事させる業務の内容</td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="25">
-                    資材搬入及び組み立て<%# <%= document_site_info.business.working %><!-- ※未実装・カラム無※9-022 従事させる業務の内容 -->
+                    資材搬入及び組み立て<%# <%= document_site_info.working %><!-- ※未実装・カラム無※9-022 従事させる業務の内容 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
