@@ -1,11 +1,11 @@
 <% provide(:title, "作業員情報詳細") %>
-<% provide(:worker_info, "作業員情報") %>
-<% provide(:worker_emergency_contact_info, "緊急連絡先") %>
-<% provide(:worker_health_info, "健康情報") %>
+<% provide(:worker_info, "【作業員情報】") %>
+<% provide(:worker_emergency_contact_info, "【緊急連絡先】") %>
+<% provide(:worker_health_info, "【健康情報】") %>
 <% provide(:worker_health_info_blood_pressure, "血圧") %>
-<% provide(:worker_insurances_info, "保険情報") %>
-<% provide(:worker_licenses_info, "資格情報") %>
-<% provide(:worker_foreign_construction_workers_info, "外国人建設就労者情報") %>
+<% provide(:worker_insurances_info, "【保険情報】") %>
+<% provide(:worker_licenses_info, "【資格情報】") %>
+<% provide(:worker_foreign_construction_workers_info, "【外国人建設就労者情報】") %>
 
 <div class="card">
   <div class="card-body table-responsive p-0">
@@ -151,10 +151,10 @@
           <td></td>
           <td></td>
         </tr>
-        <%# 緊急連絡先：続柄 %>
+        <%# 緊急連絡先：電話番号 %>
         <tr>
-          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:relationship) %></th>
-          <td><%= @worker.relationship %></td>
+          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:family_phone_number) %></th>
+          <td><%= @family_phone_number %></td>
           <td></td>
           <td></td>
         </tr>
@@ -165,13 +165,14 @@
           <td></td>
           <td></td>
         </tr>
-        <%# 緊急連絡先：電話番号 %>
+        <%# 緊急連絡先：続柄 %>
         <tr>
-          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:family_phone_number) %></th>
-          <td><%= @family_phone_number %></td>
+          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:relationship) %></th>
+          <td><%= @worker.relationship %></td>
           <td></td>
           <td></td>
         </tr>
+
         <tr>
           <td><div style="font-size: 22px; font-weight: bold;"><%=  yield(:worker_health_info) %></div><!-- 作業員健康情報 --></td>
         </tr>
@@ -312,28 +313,32 @@
           <td></td>
         </tr>
         <%# 雇用保険 %>
-        <tr>
-          <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:employment_insurance_type) %></th>
-          <td><%= @worker.worker_insurance.employment_insurance_type_i18n %></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <%# <% if @worker.worker_insurance && (%w[insured day].include?(@worker.worker_insurance.employment_insurance_type)) %>
-          <%# 被保険者番号 %>
+        <%if @worker.worker_insurance && @worker.business_owner_or_master == false %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:employment_insurance_type) %></th>
+            <td><%= @worker.worker_insurance.employment_insurance_type_i18n %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
+        <%# 被保険者番号 %>
+        <% if @worker.worker_insurance && (%w[insured day].include?(@worker.worker_insurance.employment_insurance_type)) %>
           <tr>
             <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:employment_insurance_number) %></th>
             <td><%= @worker.worker_insurance.employment_insurance_number %></td>
             <td></td>
             <td></td>
           </tr>
-        <%# <% end %> 
+        <% end %>
         <%# 労働保険特別加入 %>
-        <tr>
-          <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:has_labor_insurance) %></th>
-          <td><%= @worker.worker_insurance.has_labor_insurance_i18n %></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <% if @worker.worker_insurance && @worker.business_owner_or_master %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:has_labor_insurance) %></th>
+            <td><%= @worker.worker_insurance.has_labor_insurance_i18n %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
         <%# 建設業退職金共済手帳 %>
         <tr>
           <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:severance_pay_mutual_aid_type) %></th>
@@ -452,19 +457,21 @@
           <% end %>       
         <%# worker_safety_health_educationここまで %>
         <%# 自動車運転免許証 %>
-        <tr>
-          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:driver_licences) %></th>
-          <td><%= driver_licence_short_form(@worker.driver_licences) %></td>
-          <td></td>
-          <td></td>
-        </tr>
+          <tr>
+            <th>&emsp;&emsp;<%= Worker.human_attribute_name(:driver_licences) %></th>
+            <td><%= driver_licence_short_form(@worker.driver_licences) %></td>
+            <td></td>
+            <td></td>
+          </tr>
         <%# 免許証番号 %>
-        <tr>
-          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:driver_licence_number) %></th>
-          <td><%= @worker.driver_licence_number %></td>
-          <td></td>
-          <td></td>
-        </tr>
+        <% if @worker.driver_licences.present? %>
+          <tr>
+            <th>&emsp;&emsp;<%= Worker.human_attribute_name(:driver_licence_number) %></th>
+            <td><%= @worker.driver_licence_number %></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
 
         <%# 認印 %>
         <tr>
@@ -505,12 +512,14 @@
               <td></td>
             </tr>
             <%# キャリアアップシステム登録情報が最新であることの確認日 %>
-            <tr>
-              <th>&emsp;&emsp;<%= Worker.human_attribute_name(:confirmed_check_date) %></th>
-              <td><%= @worker.confirmed_check_date %></td>
-              <td></td>
-              <td></td>
-            </tr>
+            <% if @worker.confirmed_check_i18n == '有' %>
+              <tr>
+                <th>&emsp;&emsp;<%= Worker.human_attribute_name(:confirmed_check_date) %></th>
+                <td><%= @worker.confirmed_check_date %></td>
+                <td></td>
+                <td></td>
+              </tr>
+            <% end %>
             <%# パスポートの写し %>
             <tr>
               <th>&emsp;&emsp;<%= Worker.human_attribute_name(:passports) %></th>

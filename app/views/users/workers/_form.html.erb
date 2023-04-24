@@ -1,10 +1,10 @@
-<% provide(:worker_info, "作業員情報") %>
-<% provide(:worker_emergency_contact_info, "緊急連絡先") %>
-<% provide(:worker_health_info, "健康情報") %>
+<% provide(:worker_info, "【作業員情報】") %>
+<% provide(:worker_emergency_contact_info, "【緊急連絡先】") %>
+<% provide(:worker_health_info, "【健康情報】") %>
 <% provide(:worker_health_info_blood_pressure, "血圧") %>
-<% provide(:worker_insurances_info, "保険情報") %>
-<% provide(:worker_licenses_info, "資格情報") %>
-<% provide(:worker_foreign_construction_workers_info, "外国人建設就労者情報") %>
+<% provide(:worker_insurances_info, "【保険情報】") %>
+<% provide(:worker_licenses_info, "【資格情報】") %>
+<% provide(:worker_foreign_construction_workers_info, "【外国人建設就労者情報】") %>
 
 <%= render 'shared/error_massages', object: f.object %>
 
@@ -119,20 +119,21 @@
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :family_name, class: "form-control", placeholder: Worker.human_attribute_name(:family_name) %><br>
 
-    <%# 緊急連絡先：続柄 %>
-    <%= f.label :relationship %>
+    <%# 緊急連絡先：電話番号 %>
+    <%= f.label :family_phone_number %>
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.text_field :relationship, class: "form-control", placeholder: Worker.human_attribute_name(:relationship) %><br>
+    <%= f.telephone_field :family_phone_number, value: @family_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
     <%# 緊急連絡先：住所 %>
     <%= f.label :family_address %>
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :family_address, class: "form-control", placeholder: Worker.human_attribute_name(:family_address) %><br>
-
-    <%# 緊急連絡先：電話番号 %>
-    <%= f.label :family_phone_number %>
+    
+    <%# 緊急連絡先：続柄 %>
+    <%= f.label :relationship %>
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.telephone_field :family_phone_number, value: @family_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
+    <%= f.text_field :relationship, class: "form-control", placeholder: Worker.human_attribute_name(:relationship) %><br>
+
   </div>
 </div><br>
 <!-- 作業員緊急連絡先情報ここまで -->
@@ -287,21 +288,22 @@
             <%= worker_insurance.label :health_insurance_name %>
             <%= worker_insurance.text_field :health_insurance_name, class: "form-control" %>
           </div>
+
+          <%# 健康保険証の写し %>
+          <div id="health_insurance_image">
+            <%= worker_insurance.label :health_insurance_image %>
+            <div style="margin-bottom: 10px;">
+              <%= worker_insurance.file_field :health_insurance_image, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+              <% if @worker.worker_insurance.health_insurance_image.present? %>
+                <% @worker.worker_insurance.health_insurance_image.each_with_index do |image, index| %>
+                  <%= image_tag(image.url) %>
+                  <%= link_to "削除", users_worker_update_health_insurance_image_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
-
-      <%# 健康保険証の写し %>
-      <%= worker_insurance.label :health_insurance_image %>
-      <div style="margin-bottom: 10px;">
-        <%= worker_insurance.file_field :health_insurance_image, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
-        <% if @worker.worker_insurance.health_insurance_image.present? %>
-          <% @worker.worker_insurance.health_insurance_image.each_with_index do |image, index| %>
-            <%= image_tag(image.url) %>
-            <%= link_to "削除", users_worker_update_health_insurance_image_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
-          <% end %>
-        <% end %>
-      </div>
-      <br>
 
       <%# 年金保険 %>
       <div class="mb-3" id="pension_insurance_type">
@@ -329,7 +331,7 @@
           <% end %>
           <!-- employment_insurance_numberが0(被保険者・日雇保険)で入力可能 -->
           <%# 被保険者番号 %>
-          <div id="employment_insurance_number">
+          <div id="employment_insurance_number" class="mb-3">
             <%= worker_insurance.label :employment_insurance_number %>
             <%= worker_insurance.text_field :employment_insurance_number, class: "form-control" %>
           </div>
@@ -644,11 +646,33 @@
       document.getElementById('health_insurance_name').style.display = "none";
     }
   }
+
+  function HealthInsuranceImage(radioHealthInsuranceTypes) {
+    let checkedValue;
+    for (const radio of radioHealthInsuranceTypes) {
+      if (radio.checked) {
+        checkedValue = radio.value;
+        break;
+      }
+    }
+    if ([
+         'health_insurance_association',
+         'japan_health_insurance_association',
+         'construction_national_health_insurance',
+         'national_health_insurance'
+        ].includes(checkedValue)){
+      document.getElementById('health_insurance_image').style.display = "block";
+    } else {
+      document.getElementById('health_insurance_image').style.display = "none";
+    }
+  }
   HealthInsuranceNameDisabled(radioHealthInsuranceTypes); //ページの読み込み時に判定
+  HealthInsuranceImage(radioHealthInsuranceTypes);
 
   // 健康保険名の変更時、健康保険名項目フォームを表示、それ以外は非表示にするメソッドを実行
   for(let i = 0; i < radioHealthInsuranceTypes.length; i++) {
-  radioHealthInsuranceTypes[i].addEventListener('change', function() {HealthInsuranceNameDisabled(radioHealthInsuranceTypes);});
+    radioHealthInsuranceTypes[i].addEventListener('change', function() {HealthInsuranceNameDisabled(radioHealthInsuranceTypes);});
+    radioHealthInsuranceTypes[i].addEventListener('change', function() {HealthInsuranceImage(radioHealthInsuranceTypes);});
   }
 </script>
 
