@@ -649,14 +649,14 @@
     // 免許証番号フォームの有効・無効
     // 免許証番号項目フォームの有効・無効を操作するメソッド
     function driverLicenceNumberShowHide() {
-      if ($('input[name="worker[driver_licence][]"]:checked').length > 0) {
+      if ($('input[name="worker[driver_licences][]"]:checked').length > 0) {
         $('#driver_licence_number').show();
       } else {
         $('#driver_licence_number').hide();
       }
     };
     // 免許証チェックボックスが変更されたとき、免許証番号項目フォームの有効・無効を操作するメソッドを実行する
-    $('input[name="worker[driver_licence][]"]').change(driverLicenceNumberShowHide);
+    $('input[name="worker[driver_licences][]"]').change(driverLicenceNumberShowHide);
 
     driverLicenceNumberShowHide(); //ページの読み込み時に判定
   })

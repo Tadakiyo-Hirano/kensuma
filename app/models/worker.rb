@@ -85,7 +85,7 @@ class Worker < ApplicationRecord
   end
 
   def driver_licence_present?
-    driver_licence.present?
+    driver_licences.present?
   end
 
   def foreigner?

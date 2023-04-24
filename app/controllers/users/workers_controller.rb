@@ -256,8 +256,8 @@ module Users
         end
       end
       # 運転免許証のデータを作成
-      if converted_params[:driver_licence].blank?
-        converted_params[:driver_licence] = []
+      if converted_params[:driver_licences].blank?
+        converted_params[:driver_licences] = []
         converted_params[:driver_licence_number] = ''
       end
 
@@ -345,7 +345,7 @@ module Users
     def worker_params
       params.require(:worker).permit(:name, :name_kana,
         :country, :my_address, :my_phone_number, :family_address, :post_code, { career_up_images: [] },
-        :family_phone_number, :birth_day_on, :abo_blood_type, { employee_cards: [] }, { driver_licence: [] },
+        :family_phone_number, :birth_day_on, :abo_blood_type, { employee_cards: [] }, { driver_licences: [] },
         :rh_blood_type, :job_title, :hiring_on, :experience_term_before_hiring, :driver_licence_number, :business_owner_or_master,
         :blank_term, :career_up_id, :employment_contract, :family_name, :relationship, :email, :sex, :seal,
         :status_of_residence, :maturity_date, :confirmed_check, :confirmed_check_date,
