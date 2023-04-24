@@ -95,17 +95,6 @@ module Users
       redirect_to edit_users_worker_url(worker)
     end
 
-    def update_workerexam_images
-      worker = current_business.workers.find_by(uuid: params[:worker_id])
-      worker_exam = worker.worker_medical.worker_exams.find(params[:worker_exam_id])
-      remaining_images = worker_exam.images
-      deleting_images = remaining_images.delete_at(params[:index].to_i)
-      deleting_images.try(:remove!)
-      worker_exam.update!(images: remaining_images)
-      flash[:danger] = '証明画像を削除しました'
-      redirect_to edit_users_worker_url(worker)
-    end
-
     def update_worker_safety_health_education_images
       worker = current_business.workers.find_by(uuid: params[:worker_id])
       worker_safety_health_education = worker.worker_safety_health_educations.find(params[:safety_health_education_id])
@@ -356,8 +345,7 @@ module Users
         worker_special_educations_attributes:       [:id, :special_education_id, { images: [] }, :_destroy],
         worker_medical_attributes:                  [
           :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
-          :is_special_med_exam, { special_med_exam_ids: [] }, :special_med_exam_others,
-          # { worker_exams_attributes: %i[id worker_medical_id special_med_exam_id others _destroy] }
+          :is_special_med_exam, { special_med_exam_list: [] }, :special_med_exam_others
         ],
         worker_insurance_attributes:
                                                     [
