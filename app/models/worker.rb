@@ -74,7 +74,7 @@ class Worker < ApplicationRecord
   validates :confirmed_check_date, absence: true, unless: :confirmed_check_checked?
 
   mount_uploader :seal, WorkersUploader
-  mount_uploader :employee_cards, WorkersUploader
+  mount_uploaders :employee_cards, WorkersUploader
   mount_uploaders :career_up_images, WorkersUploader
   mount_uploaders :passports, WorkersUploader
   mount_uploaders :residence_cards, WorkersUploader
