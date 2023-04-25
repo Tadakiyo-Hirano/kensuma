@@ -20,6 +20,9 @@ module Users
     def create
       @worker = current_business.workers.build(worker_params_with_converted)
       if @worker.save
+        unless @worker.worker_medical.is_special_med_exam == 'y' && @worker.worker_medical.worker_exams.blank?
+          @worker.worker_medical.worker_exams.destroy_all
+        end
         flash[:success] = '作業員情報を作成しました'
         redirect_to users_worker_path(@worker)
       else
@@ -47,6 +50,7 @@ module Users
 
     def update
       if @worker.update(worker_params_with_converted)
+        @worker.worker_medical.worker_exams.destroy_all unless @worker.worker_medical.is_special_med_exam == 'y'
         flash[:success] = '更新しました'
         redirect_to users_worker_path(@worker)
       else

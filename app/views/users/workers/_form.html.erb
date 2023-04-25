@@ -226,7 +226,7 @@
 
       <%# 特別健康診断項目 %>
       <label><%= yield(:special_med_exam_info) %></label><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <div class="list-group-item">
+      <div class="list-group-item mb-3">
         <%# 特別健康診断の受診状況 %>
         <div class="mb-1">
           <%= worker_medical.label :is_special_med_exam %><br>
@@ -248,7 +248,7 @@
 
           <%# 特別健康診断 %>
           <label><%= yield(:special_med_exam_id_info) %></label>
-          <div class="list-group-item">
+          <div class="list-group-item mb-2">
             <%= worker_medical.fields_for :worker_exams do |worker_exam| %>
               <%= render "worker_exam_fields", f: worker_exam %>
             <% end %>
