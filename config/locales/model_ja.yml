@@ -363,7 +363,7 @@ ja:
         sex: 性別
         post_code: 郵便番号
         employee_cards: 従業員証の写し
-        driver_licence: 自動車運転免許証
+        driver_licences: 自動車運転免許証
         driver_licence_number: 免許証番号
         seal: 認印
         status_of_residence: 在留資格
@@ -380,7 +380,7 @@ ja:
       worker_license:
         license_id: 技能検定
         worker_id: 作業員
-        images: 技能検定の写し
+        images: 技能検定合格証明書の写し
       skill_training:
         name: 名称
         short_name: 略称
@@ -410,7 +410,7 @@ ja:
       worker_safety_health_education:
         safety_health_education_id: 安全衛生教育
         worker_id: 作業員
-        images: 安全衛生教育の写し
+        images: 安全衛生教育修了証明書の写し
       news:
         title: タイトル
         content: 内容

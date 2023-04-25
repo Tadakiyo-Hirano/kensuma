@@ -227,23 +227,28 @@ module Users
 
       # 保険名、被保険者番号、建設業退職金共済手帳その他、労働保険特別加入が必須でない場合パラメータを空文字にする
       %i[health_insurance_name employment_insurance_number severance_pay_mutual_aid_name has_labor_insurance].each do |key|
-        if converted_params[:worker_insurance_attributes][key].present?
-          worker_insurance_attributes_params = converted_params[:worker_insurance_attributes]
-          unchenge_params = worker_insurance_attributes_params[key]
-          worker_insurance_attributes_params[key] = case key
-                                                    when :health_insurance_name
-                                                      health_insurance_name_nil(worker_insurance_attributes_params[:health_insurance_type], unchenge_params)
-                                                    when :employment_insurance_number
-                                                      employment_insurance_number_nil(worker_insurance_attributes_params[:employment_insurance_type], unchenge_params)
-                                                    when :severance_pay_mutual_aid_name
-                                                      severance_pay_mutual_aid_name_nil(worker_insurance_attributes_params[:severance_pay_mutual_aid_type], unchenge_params)
-                                                    when :has_labor_insurance
-                                                      empty_has_labor_insurance(converted_params[:business_owner_or_master], unchenge_params)
-                                                    end
-        else
-          converted_params[:worker_insurance_attributes].merge(key => '')
-        end
+        next unless converted_params[:worker_insurance_attributes][key].present?
+
+        worker_insurance_attributes_params = converted_params[:worker_insurance_attributes]
+        unchenge_params = worker_insurance_attributes_params[key]
+        worker_insurance_attributes_params[key] = case key
+                                                  when :health_insurance_name
+                                                    health_insurance_name_nil(worker_insurance_attributes_params[:health_insurance_type], unchenge_params)
+                                                  when :employment_insurance_number
+                                                    employment_insurance_number_nil(worker_insurance_attributes_params[:employment_insurance_type], unchenge_params)
+                                                  when :severance_pay_mutual_aid_name
+                                                    severance_pay_mutual_aid_name_nil(worker_insurance_attributes_params[:severance_pay_mutual_aid_type], unchenge_params)
+                                                  when :has_labor_insurance
+                                                    empty_has_labor_insurance(converted_params[:business_owner_or_master], unchenge_params)
+                                                  end
       end
+
+      # 事業主もしくは一人親方であれば、雇用保険に関する項目を空文字にする
+      if converted_params[:business_owner_or_master] == '1'
+        converted_params[:worker_insurance_attributes][:employment_insurance_type] = ''
+        converted_params[:worker_insurance_attributes][:employment_insurance_number] = ''
+      end
+
       # 運転免許証のデータを作成
       if converted_params[:driver_licences].blank?
         converted_params[:driver_licences] = []
@@ -252,7 +257,7 @@ module Users
 
       # 外国人情報の整形
       arg_array = [converted_params[:country], converted_params[:status_of_residence], converted_params[:confirmed_check]]
-      %i[status_of_residence maturity_date confirmed_check confirmed_check_date passports residence_cards employment_conditions].each do |key|
+      %i[status_of_residence maturity_date confirmed_check confirmed_check_date].each do |key|
         if converted_params[key].present?
           if japanese?(arg_array[0])
             converted_params = converted_params.merge(key => '')
@@ -260,6 +265,21 @@ module Users
             converted_params = converted_params.merge(key => '')
           elsif confirmed_check_unchecked?(arg_array[2], key)
             converted_params = converted_params.merge(key => '')
+          else
+            converted_params[key]
+          end
+        else
+          converted_params[key]
+        end
+      end
+      %i[passports residence_cards employment_conditions].each do |key|
+        if converted_params[key].present?
+          if japanese?(arg_array[0])
+            converted_params = converted_params.merge(key => [])
+          elsif skill_practice_or_permanent_resident?(arg_array[1], key)
+            converted_params = converted_params.merge(key => [])
+          elsif confirmed_check_unchecked?(arg_array[2], key)
+            converted_params = converted_params.merge(key => [])
           else
             converted_params[key]
           end
@@ -313,7 +333,7 @@ module Users
       end
     end
 
-    # 事業主もしくは一人親方であれば、労働保険特別加入を空文字にする
+    # 事業主もしくは一人親方で無ければ、労働保険特別加入を空文字にする
     def empty_has_labor_insurance(business_owner_or_master, params)
       if business_owner_or_master != '1'
         ''
