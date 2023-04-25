@@ -434,10 +434,10 @@ ja:
         med_exam_on: 健康診断日
         max_blood_pressure: 最高
         min_blood_pressure: 最低
-        is_special_med_exam: 特別健康診断
+        is_special_med_exam: 受診の有無
         special_med_exam_on: 診断日
         health_condition: 最近の健康状態
-        is_med_exam: 健康診断の受診
+        is_med_exam: 受診の有無
       worker_exam:
         special_med_exam_id: 診断種類
         others: その他
