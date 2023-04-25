@@ -2,7 +2,9 @@
 <% provide(:worker_info, "【作業員情報】") %>
 <% provide(:worker_emergency_contact_info, "【緊急連絡先】") %>
 <% provide(:worker_health_info, "【健康情報】") %>
+<% provide(:is_med_exam_info, "健康診断") %>
 <% provide(:worker_health_info_blood_pressure, "血圧") %>
+<% provide(:special_med_exam_info, "特別健康診断") %>
 <% provide(:worker_insurances_info, "【保険情報】") %>
 <% provide(:worker_licenses_info, "【資格情報】") %>
 <% provide(:worker_foreign_construction_workers_info, "【外国人建設就労者情報】") %>
@@ -205,68 +207,84 @@
           <td></td>
         </tr>
         <!-- worker_medicalここから -->
-        <%# 健康診断 %>
-          <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
+
+        <%# 健康診断項目 %>
+        <tr>
+          <td><label>&emsp;&emsp;<%= yield(:is_med_exam_info) %></label></td>
+        </tr>
+        <%# 受診の有無 %>
+        <tr>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
           <td><%= @worker.worker_medical.is_med_exam_i18n %><td>
           <td></td>
         </tr>
-        <%# 健康診断日 %>
-        <tr>
-          <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
-          <td><%= @worker.worker_medical.med_exam_on %><td>
-          <td></td>
-        </tr>
-        <%# 血圧 %>
-        <tr>
-          <th>&emsp;&emsp;<%= yield(:worker_health_info_blood_pressure) %></th>
-        </tr>
-        <%# 最高 %>
-        <tr>
-          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:max_blood_pressure) %></th>
-          <td><%= @worker.worker_medical.max_blood_pressure %><td>
-          <td></td>
-        </tr>
-        <%# 最低 %>
-        <tr>
-          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:min_blood_pressure) %></th>
-          <td><%= @worker.worker_medical.min_blood_pressure %><td>
-          <td></td>
-        </tr>
-        <%# 診断日 %>
-        <tr>
-          <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
-          <td><%= @worker.worker_medical.special_med_exam_on %><td>
-          <td></td>
-        </tr>
-        <!-- worker_medicalここまで -->
-        <!-- worker_examここから -->
-        <%# 特別健康診断 %>
-        <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
-        <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
-        <tr bgcolor="#dee2e6">
-          <th></th>
-          <th>&emsp;&emsp;<%= SpecialMedExam.human_attribute_name(:name) %></th>
-          <th></th>
-          <th></th>
-        </tr>
-        
-        <% @worker.worker_medical.worker_exams.each do |worker_exam| %>
+        <% if @worker.worker_medical.is_med_exam_i18n == '有' %>
+          <%# 健康診断日 %>
           <tr>
-            <% if @worker.worker_medical.special_med_exams.first.id == worker_exam.special_med_exam_id %>
-              <%# 診断種類 %>
-              <th>&emsp;&emsp;<%= WorkerExam.human_attribute_name(:special_med_exam_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
-            <td colspan="4">
-              <%= worker_exam.special_med_exam.name %>
-              <% if worker_exam.special_med_exam.name == 'その他' %>
-                （<%= worker_exam.others %>）
-              <% end %>
-            </td>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
+            <td><%= @worker.worker_medical.med_exam_on %><td>
+            <td></td>
+          </tr>
+          <%# 血圧 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= yield(:worker_health_info_blood_pressure) %></th>
+          </tr>
+          <%# 最高 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:max_blood_pressure) %></th>
+            <td><%= @worker.worker_medical.max_blood_pressure %><td>
+            <td></td>
+          </tr>
+          <%# 最低 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:min_blood_pressure) %></th>
+            <td><%= @worker.worker_medical.min_blood_pressure %><td>
+            <td></td>
           </tr>
         <% end %>
+        <!-- worker_medicalここまで -->
+        <!-- worker_examここから -->
+        <%# 特別健康診断項目 %>
+        <tr>
+          <td><label>&emsp;&emsp;<%= yield(:special_med_exam_info) %></label></td>
+        </tr>
+        <%# 受診の有無 %>
+        <tr>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
+          <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
+        </td>
+        <% if @worker.worker_medical.is_special_med_exam_i18n == '有' %>
+          <%# 診断日 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
+            <td><%= @worker.worker_medical.special_med_exam_on %><td>
+            <td></td>
+          </tr>
+
+          <tr bgcolor="#dee2e6">
+            <th></th>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= SpecialMedExam.human_attribute_name(:name) %></th>
+            <th></th>
+            <th></th>
+          </tr>
         
+          <% @worker.worker_medical.worker_exams.each do |worker_exam| %>
+            <tr>
+              <% if @worker.worker_medical.special_med_exams.first.id == worker_exam.special_med_exam_id %>
+                <%# 診断種類 %>
+                <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerExam.human_attribute_name(:special_med_exam_id) %></th>
+              <% else %>
+                <th></th>
+              <% end %>
+              <td colspan="4">
+                <%= worker_exam.special_med_exam.name %>
+                <% if worker_exam.special_med_exam.name == 'その他' %>
+                  （<%= worker_exam.others %>）
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
 
         <!-- worker_examここまで -->
         <%# 最近の健康状態 %>
