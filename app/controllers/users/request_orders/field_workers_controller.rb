@@ -3,6 +3,7 @@ module Users::RequestOrders
     before_action :set_request_order
     before_action :set_field_worker, only: :destroy
     before_action :set_field_workers, only: %i[index edit_workers update_workers]
+    before_action :check_status_order
 
     def index
       field_worker_ids = @field_workers.map { |field_worker| field_worker.content['id'] }

@@ -8,6 +8,7 @@ module Users
     before_action :set_business_occupations, only: %i[edit update]
     before_action :set_business_construction_licenses, only: %i[edit update]
     before_action :set_construction_manager_position_name, only: %i[update]
+    before_action :check_status_order, except: :show
 
     def show
       @sub_request_orders = @request_order.children
@@ -60,14 +61,18 @@ module Users
     end
 
     def submit
-      if @request_order.parent_id.nil? && @request_order.children.all? { |r| r.status == 'approved' }
-        @request_order.update_column(:status, 'approved')
-        flash[:success] = '下請発注情報を承認しました'
-      elsif @request_order.children.all? { |r| r.status == 'approved' }
-        @request_order.submitted!
-        flash[:success] = '下請発注情報を提出済にしました'
-      else
-        flash[:danger] = '下請けの書類がまだ未承認です'
+      begin
+        if @request_order.parent_id.nil? && @request_order.children.all? { |r| r.status == 'approved' }
+          @request_order.update_column(:status, 'approved')
+          flash[:success] = '下請発注情報を承認しました'
+        elsif @request_order.children.all? { |r| r.status == 'approved' }
+          @request_order.submitted!
+          flash[:success] = '下請発注情報を提出済にしました'
+        else
+          flash[:danger] = '下請けの書類がまだ未承認です'
+        end
+      rescue ActiveRecord::RecordInvalid
+        flash[:danger] = '現場情報を登録してください'
       end
       redirect_to users_request_order_path(@request_order)
     end
