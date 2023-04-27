@@ -700,8 +700,8 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "health_insurance_name"
     t.json "health_insurance_image"
     t.integer "pension_insurance_type", null: false
-    t.integer "employment_insurance_type", null: false
-    t.integer "has_labor_insurance", default: 0
+    t.integer "employment_insurance_type"
+    t.integer "has_labor_insurance"
     t.string "employment_insurance_number"
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"

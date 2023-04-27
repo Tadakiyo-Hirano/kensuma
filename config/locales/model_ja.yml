@@ -381,7 +381,7 @@ ja:
       worker_license:
         license_id: 技能検定
         worker_id: 作業員
-        images: 技能検定の写し
+        images: 技能検定合格証明書の写し
       skill_training:
         name: 名称
         short_name: 略称
@@ -411,7 +411,7 @@ ja:
       worker_safety_health_education:
         safety_health_education_id: 安全衛生教育
         worker_id: 作業員
-        images: 安全衛生教育の写し
+        images: 安全衛生教育修了証明書の写し
       news:
         title: タイトル
         content: 内容
