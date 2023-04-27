@@ -168,6 +168,6 @@ module ApplicationHelper
 
   # 自動車運転免許を短縮表記の一文に変換する
   def driver_licence_short_form(driver_licence)
-    driver_licence.map { |licence| all_driver_licences_index_ry[licence] }.join(' ')
+    driver_licence.map { |licence| all_driver_licences_index_ry[licence] }.join('　')
   end
 end
