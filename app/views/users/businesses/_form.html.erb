@@ -79,7 +79,7 @@
     <br>
     <%= f.label :occupation_ids %><!-- 職種 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.collection_select :occupation_ids, occupation_default(@business), :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
+    <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
     <br>
     <br>
     <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
@@ -195,8 +195,10 @@
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
     <div class="list-group-item">
       <div id="available-form-foreign-work">
-        <%= f.collection_radio_buttons(:foreign_work_status_exist, Business.foreign_work_status_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.foreign_work_status_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :foreign_work_status_exist, key, id: "foreign_work_status_exist_#{key}" %>
+          <%= label_tag "foreign_work_status_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
     </div>
@@ -205,24 +207,30 @@
       <%= f.label :specific_skilled_foreigners_exist %><!-- 一号特定技能外国人従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-            <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.specific_skilled_foreigners_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :specific_skilled_foreigners_exist, key, id: "specific_skilled_foreigners_exist_#{key}" %>
+          <%= label_tag "specific_skilled_foreigners_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
       <br>
       <%= f.label :foreign_construction_workers_exist %><!-- 外国人建設就労者従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.foreign_construction_workers_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :foreign_construction_workers_exist, key, id: "foreign_construction_workers_exist_#{key}" %>
+          <%= label_tag "foreign_construction_workers_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
       <br>
       <%= f.label :foreign_technical_intern_trainees_exist %><!-- 外国人技能実習生従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.foreign_technical_intern_trainees_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :foreign_technical_intern_trainees_exist, key, id: "foreign_technical_intern_trainees_exist_#{key}" %>
+          <%= label_tag "foreign_technical_intern_trainees_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
       <br>
@@ -418,7 +426,7 @@
         "business[tem_industry_ids][]": {
           required: true
         },
-        "business_occupations[occupation_id][]": {
+        "business[occupation_ids][]": {
           required: true
         },
         // "business[employment_manager_name]": {
@@ -450,9 +458,6 @@
           required: true
         },
         "business[construction_license_status]": {
-          required: true
-        },
-        "business[tem_industry_ids][]": {
           required: true
         },
         "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
@@ -558,6 +563,9 @@
         "business[tem_industry_ids][]": {
           required: "業種を選択してください。"
         },
+        "business[occupation_ids][]": {
+          required: "職種を選択してください。"
+        },
         "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
           required: "どちらかを選択してください。"
         },
@@ -580,19 +588,27 @@
           required: "どちらかを選択してください。"
         },
         "business[specific_skilled_foreigners_exist]": {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         },
         "business[foreign_construction_workers_exist]": {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         },
         "business[foreign_technical_intern_trainees_exist]": {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         },
         // "business[foreigners_employment_manager]": {
         //   required: "外国人雇用管理責任者名を選択してください。"
         // },
       },
-      errorClass: "input_form_error"
+      errorClass: "input_form_error",
+      
+      errorPlacement: function(error, element) {
+        if (element.is(":radio")) {
+          error.insertBefore(element.parent());
+        } else {
+          error.insertBefore(element);
+        }     
+      }
     });
 
 

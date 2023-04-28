@@ -89,12 +89,7 @@ module Users
             except:  %i[uuid images created_at updated_at], # 作業員情報
             include: {
               worker_medical:                  {
-                except:  %i[id worker_id created_at updated_at], # 作業員の健康情報
-                include: {
-                  worker_exams: {
-                    except: %i[id worker_medical_id images created_at updated_at] # 中間テーブル(特別健康診断種類マスタ))
-                  }
-                }
+                except: %i[id worker_id created_at updated_at] # 作業員の健康情報
               },
               worker_insurance:                {
                 except: %i[id worker_id created_at updated_at] # 保険情報
