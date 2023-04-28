@@ -71,7 +71,8 @@ module WorkersHelper
       employment_insurance_type:     :insured,
       employment_insurance_number:   '12345678901',
       severance_pay_mutual_aid_type: :kentaikyo,
-      severance_pay_mutual_aid_name: 'テスト共済制度'
+      severance_pay_mutual_aid_name: 'テスト共済制度',
+      has_labor_insurance:           :join
       # ============================================
     )
   end
@@ -79,10 +80,12 @@ module WorkersHelper
   def production_data_new
     @worker = current_business.workers.new(
       # 本番環境用デフォルト値 ==========================
-      country:        'JP',
-      abo_blood_type: :a,
-      rh_blood_type:  :plus,
-      sex:            :man
+      country:             'JP',
+      abo_blood_type:      :a,
+      rh_blood_type:       :plus,
+      sex:                 :man,
+      status_of_residence: :permanent_resident,
+      confirmed_check:     :checked
       # ============================================
     )
     @worker.worker_licenses.build
@@ -101,7 +104,8 @@ module WorkersHelper
       health_insurance_type:         :health_insurance_association,
       pension_insurance_type:        :welfare,
       employment_insurance_type:     :insured,
-      severance_pay_mutual_aid_type: :kentaikyo
+      severance_pay_mutual_aid_type: :kentaikyo,
+      has_labor_insurance:           :join
       # ============================================
     )
   end
