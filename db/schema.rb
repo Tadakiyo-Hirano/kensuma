@@ -686,17 +686,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "worker_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "worker_medical_id", null: false
-    t.bigint "special_med_exam_id", null: false
-    t.string "others"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["special_med_exam_id"], name: "index_worker_exams_on_special_med_exam_id"
-    t.index ["worker_medical_id", "special_med_exam_id"], name: "index_worker_exams_on_worker_medical_id_and_special_med_exam_id", unique: true
-    t.index ["worker_medical_id"], name: "index_worker_exams_on_worker_medical_id"
-  end
-
   create_table "worker_insurances", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "health_insurance_type", null: false
     t.string "health_insurance_name"
@@ -727,11 +716,13 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "worker_medicals", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_id", null: false
     t.integer "is_med_exam", default: 0, null: false
-    t.date "med_exam_on", null: false
-    t.integer "max_blood_pressure", null: false
-    t.integer "min_blood_pressure", null: false
+    t.date "med_exam_on"
+    t.integer "max_blood_pressure"
+    t.integer "min_blood_pressure"
     t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
+    t.json "special_med_exam_list"
+    t.string "special_med_exam_others"
     t.integer "health_condition", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -842,8 +833,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   add_foreign_key "request_orders", "orders"
   add_foreign_key "solvents", "businesses"
   add_foreign_key "special_vehicles", "businesses"
-  add_foreign_key "worker_exams", "special_med_exams"
-  add_foreign_key "worker_exams", "worker_medicals"
   add_foreign_key "worker_insurances", "workers"
   add_foreign_key "worker_licenses", "licenses"
   add_foreign_key "worker_licenses", "workers"

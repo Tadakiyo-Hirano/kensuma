@@ -17,7 +17,7 @@ module Users
       respond_to do |format|
         format.html do
           case @document.document_type
-          when 'doc_4th'
+          when 'doc_4th', 'doc_9th'
             request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).root
             @prime_contractor_business = Business.find(request_order.business_id)
             @business = Business.find(@document.business_id)
@@ -745,7 +745,7 @@ module Users
 
     def document_params(document)
       case document.document_type
-      when 'doc_3rd', 'doc_4th', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
+      when 'doc_3rd', 'doc_4th', 'doc_5th', 'doc_6th', 'doc_7th', 'doc_9th', 'doc_10th', 'doc_11th', 'doc_16th', 'doc_17th'
         params.require(:document).permit(content:
           %i[
             date_submitted

@@ -36,6 +36,7 @@ module Users
       @worker.worker_licenses.build if @worker.licenses.blank?
       @worker.worker_skill_trainings.build if @worker.skill_trainings.blank?
       @worker.worker_special_educations.build if @worker.special_educations.blank?
+      @worker.worker_safety_health_educations.build if @worker.worker_safety_health_educations.blank?
       worker_add_hyhpen(@worker)
       if @worker.status_of_residence.blank?
         @worker.status_of_residence = :construction_employment
@@ -47,7 +48,6 @@ module Users
 
     def update
       if @worker.update(worker_params_with_converted)
-        @worker.disabled_convert(worker_params[:confirmed_check_date], :confirmed_check_date)
         flash[:success] = '更新しました'
         redirect_to users_worker_path(@worker)
       else
@@ -91,17 +91,6 @@ module Users
       deleted_image = remain_images.delete_at(params[:index].to_i)
       deleted_image.try(:remove!)
       worker_special_education.update!(images: remain_images)
-      flash[:danger] = '証明画像を削除しました'
-      redirect_to edit_users_worker_url(worker)
-    end
-
-    def update_workerexam_images
-      worker = current_business.workers.find_by(uuid: params[:worker_id])
-      worker_exam = worker.worker_medical.worker_exams.find(params[:worker_exam_id])
-      remaining_images = worker_exam.images
-      deleting_images = remaining_images.delete_at(params[:index].to_i)
-      deleting_images.try(:remove!)
-      worker_exam.update!(images: remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -236,6 +225,22 @@ module Users
         converted_params[key] = full_width_to_half_width(converted_params[key])
       end
 
+      # 作業員健康情報のパラメーター整理
+      # 健康診断項目の受診の有無が無の時、診断日と血圧をnilにする
+      worker_medical_attributes = converted_params[:worker_medical_attributes]
+      if worker_medical_attributes[:is_med_exam] == 'n'
+        worker_medical_attributes[:med_exam_on] = nil
+        worker_medical_attributes[:max_blood_pressure] = nil
+        worker_medical_attributes[:min_blood_pressure] = nil
+      end
+
+      # 健康診断項目の受診の有無が無の時、診断日と診断種類をnilにする
+      if worker_medical_attributes[:is_special_med_exam] == 'n'
+        worker_medical_attributes[:special_med_exam_on] = nil
+        worker_medical_attributes[:special_med_exam_list] = nil
+        worker_medical_attributes[:special_med_exam_others] = nil
+      end
+
       # 保険名、被保険者番号、建設業退職金共済手帳その他、労働保険特別加入が必須でない場合パラメータを空文字にする
       %i[health_insurance_name employment_insurance_number severance_pay_mutual_aid_name has_labor_insurance].each do |key|
         next unless converted_params[:worker_insurance_attributes][key].present?
@@ -355,11 +360,13 @@ module Users
 
     # 作業員情報のハイフン差し込み
     def worker_add_hyhpen(worker)
-      @my_phone_number = phone_number_add_hyphen(worker.my_phone_number)
-      @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
-      @post_code = post_code_add_hyphen(worker)
-      @career_up_id = career_up_id_add_hyphen(worker)
-      @driver_licence_number = driver_licence_number_add_hyphen(worker)
+      if worker.present?
+        @my_phone_number = phone_number_add_hyphen(worker.my_phone_number)
+        @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
+        @post_code = post_code_add_hyphen(worker.post_code)
+        @career_up_id = career_up_id_add_hyphen(worker.career_up_id)
+        @driver_licence_number = driver_licence_number_add_hyphen(worker.driver_licence_number)
+      end
     end
 
     def worker_params
@@ -375,8 +382,8 @@ module Users
         worker_skill_trainings_attributes:          [:id, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes:       [:id, :special_education_id, { images: [] }, :_destroy],
         worker_medical_attributes:                  [
-          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam, :is_special_med_exam,
-          { worker_exams_attributes: %i[id worker_medical_id special_med_exam_id others _destroy] }
+          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
+          :is_special_med_exam, { special_med_exam_list: [] }, :special_med_exam_others
         ],
         worker_insurance_attributes:
                                                     [
