@@ -44,7 +44,7 @@ module Users
     # 自社(事業所)および現場で取得している建設許可証番号を取得
     def set_business_construction_licenses
       # 元請の建設許可証番号
-      @order_construction_licenses = current_business&.business_industries.distinct.pluck(:id, :construction_license_number).to_h
+      @order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h || {}
       order_content = @order&.content || {}
       if order_content['genecon_construction_license_number_1st'].present? && !@order_construction_licenses.has_value?(order_content['genecon_construction_license_number_1st'])
         if @order_construction_licenses.has_key?(:genecon_construction_license_id_1st)
@@ -61,18 +61,20 @@ module Users
         @order_construction_licenses[order_content['genecon_construction_license_id_2nd']] = order_content['genecon_construction_license_number_2nd']
       end
       # 下請けの建設許可証番号
-      @request_order_construction_licenses = current_business&.business_industries.distinct.pluck(:id, :construction_license_number).to_h
+      @request_order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h || {}
       request_order_content = @request_order&.content || {}
       if request_order_content['subcon_construction_license_number_1st'].present? && !@request_order_construction_licenses.has_value?(request_order_content['subcon_construction_license_number_1st'])
         if @request_order_construction_licenses.has_key?(:subcon_construction_license_id_1st)
-          @request_order_construction_licenses[@request_order_construction_licenses[:subcon_construction_license_id_1st]] = @request_order_construction_licenses[:subcon_construction_license_number_1st]
+          @request_order_construction_licenses[@request_order_construction_licenses[:subcon_construction_license_id_1st]] =
+            @request_order_construction_licenses[:subcon_construction_license_number_1st]
           @request_order_construction_licenses.delete(:subcon_construction_license_id_1st)
         end
         @request_order_construction_licenses[request_order_content['subcon_construction_license_id_1st']] = request_order_content['subcon_construction_license_number_1st']
       end
       if request_order_content['subcon_construction_license_number_2nd'].present? && !@request_order_construction_licenses.has_value?(request_order_content['subcon_construction_license_number_2nd'])
         if @request_order_construction_licenses.has_key?(:subcon_construction_license_id_2nd)
-          @request_order_construction_licenses[@request_order_construction_licenses[:genecon_construction_license_id_2nd]] = @request_order_construction_licenses[:subcon_construction_license_number_2nd]
+          @request_order_construction_licenses[@request_order_construction_licenses[:genecon_construction_license_id_2nd]] =
+            @request_order_construction_licenses[:subcon_construction_license_number_2nd]
           @request_order_construction_licenses.delete(:subcon_construction_license_id_2nd)
         end
         @request_order_construction_licenses[request_order_content['subcon_construction_license_id_2nd']] = request_order_content['subcon_construction_license_number_2nd']
