@@ -10,8 +10,7 @@ module Users
 
     def new
       if Rails.env.development?
-        # test_data_new
-        production_data_new
+        test_data_new
         worker_add_hyhpen(@worker)
       else
         production_data_new
