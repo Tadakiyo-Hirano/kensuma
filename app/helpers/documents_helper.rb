@@ -417,11 +417,17 @@ module DocumentsHelper
 
   # 作業員の特別健康診断の種類
   def worker_special_med_exam(worker)
-    exams = worker&.content&.[]('worker_medical')&.[]('worker_exams')
+    exams = worker&.content&.[]('worker_medical')&.[]('special_med_exam_list')
     unless exams.nil?
-      exams = exams.map { |exam| SpecialMedExam.find(exam['special_med_exam_id']).name }
-      exams.to_s.gsub(/,|"|\[|\]/) { '' }
+      exams = exams.map { |exam| SpecialMedExam.find(exam).name }
+      exams.join(' ')
     end
+  end
+
+  # 作業員の特別健康診断の種類その他
+  def worker_special_med_exam_other(worker)
+    exam_other = worker&.content&.[]('worker_medical')&.[]('special_med_exam_others')
+    exam_other unless exam_other.nil?
   end
 
   # 作業員の特別教育情報

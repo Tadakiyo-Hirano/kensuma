@@ -20,9 +20,6 @@ module Users
     def create
       @worker = current_business.workers.build(worker_params_with_converted)
       if @worker.save
-        unless @worker.worker_medical.is_special_med_exam == 'y' && @worker.worker_medical.worker_exams.blank?
-          @worker.worker_medical.worker_exams.destroy_all
-        end
         flash[:success] = '作業員情報を作成しました'
         redirect_to users_worker_path(@worker)
       else
@@ -51,7 +48,6 @@ module Users
 
     def update
       if @worker.update(worker_params_with_converted)
-        @worker.worker_medical.worker_exams.destroy_all unless @worker.worker_medical.is_special_med_exam == 'y'
         flash[:success] = '更新しました'
         redirect_to users_worker_path(@worker)
       else
@@ -95,17 +91,6 @@ module Users
       deleted_image = remain_images.delete_at(params[:index].to_i)
       deleted_image.try(:remove!)
       worker_special_education.update!(images: remain_images)
-      flash[:danger] = '証明画像を削除しました'
-      redirect_to edit_users_worker_url(worker)
-    end
-
-    def update_workerexam_images
-      worker = current_business.workers.find_by(uuid: params[:worker_id])
-      worker_exam = worker.worker_medical.worker_exams.find(params[:worker_exam_id])
-      remaining_images = worker_exam.images
-      deleting_images = remaining_images.delete_at(params[:index].to_i)
-      deleting_images.try(:remove!)
-      worker_exam.update!(images: remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -252,6 +237,8 @@ module Users
       # 健康診断項目の受診の有無が無の時、診断日と診断種類をnilにする
       if worker_medical_attributes[:is_special_med_exam] == 'n'
         worker_medical_attributes[:special_med_exam_on] = nil
+        worker_medical_attributes[:special_med_exam_list] = nil
+        worker_medical_attributes[:special_med_exam_others] = nil
       end
 
       # 保険名、被保険者番号、建設業退職金共済手帳その他、労働保険特別加入が必須でない場合パラメータを空文字にする
@@ -395,8 +382,8 @@ module Users
         worker_skill_trainings_attributes:          [:id, :skill_training_id, { images: [] }, :_destroy],
         worker_special_educations_attributes:       [:id, :special_education_id, { images: [] }, :_destroy],
         worker_medical_attributes:                  [
-          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam, :is_special_med_exam,
-          { worker_exams_attributes: %i[id worker_medical_id special_med_exam_id others _destroy] }
+          :id, :med_exam_on, :max_blood_pressure, :min_blood_pressure, :special_med_exam_on, :health_condition, :is_med_exam,
+          :is_special_med_exam, { special_med_exam_list: [] }, :special_med_exam_others
         ],
         worker_insurance_attributes:
                                                     [

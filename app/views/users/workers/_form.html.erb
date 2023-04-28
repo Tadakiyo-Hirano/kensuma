@@ -247,19 +247,18 @@
           </div>
 
           <%# 特別健康診断 %>
-          <label><%= yield(:special_med_exam_id_info) %></label>
-          <div class="list-group-item mb-2">
-            <%= worker_medical.fields_for :worker_exams do |worker_exam| %>
-              <%= render "worker_exam_fields", f: worker_exam %>
-            <% end %>
-            <div id='worker-exam-insertion-point'></div>
-            <span>　　</span><%= link_to_add_association "＋フォーム追加", worker_medical, :worker_exams,
-              data: {
-                association_insertion_node: '#worker-exam-insertion-point',
-                association_insertion_method: 'append'
-              },
-              class: "btn btn-sm btn-primary mb-3"
-            %>
+          <div class="mb-3">
+            <%= worker_medical.label :special_med_exam_list %>
+            <div class="list-group-item">
+              <%= worker_medical.collection_check_boxes :special_med_exam_list, SpecialMedExam.all, :id, :name, checked: @worker.worker_medical.special_med_exam_list, include_hidden: false do |b| %>
+                <div>
+                  <%= b.check_box %>
+                  <%= b.label %>
+                </div>
+              <% end %>
+              &emsp;<%= worker_medical.label "その他" %>
+              <%= worker_medical.text_field :special_med_exam_others, placeholder: "その他がある場合は入力してください", class: "form-control" %>
+            </div>
           </div>
         </div>
       </div>

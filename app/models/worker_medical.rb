@@ -1,9 +1,6 @@
 class WorkerMedical < ApplicationRecord
   belongs_to :worker
-  has_many :worker_exams, dependent: :destroy # 中間テーブル
-  has_many :special_med_exams, through: :worker_exams
-  accepts_nested_attributes_for :worker_exams, allow_destroy: true,
-    reject_if:     proc { |attributes| attributes['special_med_exam_id'].blank? }
+  has_many :special_med_exams
 
   enum health_condition: {
     good:   0,
