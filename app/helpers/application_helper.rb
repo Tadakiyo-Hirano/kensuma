@@ -106,45 +106,47 @@ module ApplicationHelper
 
   # 電話番号のハイフン差し込み
   def phone_number_add_hyphen(phone_number)
-    case phone_number.size
-    when 10
-      add_hyphen([4, 2], phone_number)
-    when 11
-      add_hyphen([3, 4], phone_number)
-    else
-      phone_number
+    if phone_number.present?
+      case phone_number.size
+      when 10
+        add_hyphen([4, 2], phone_number)
+      when 11
+        add_hyphen([3, 4], phone_number)
+      else
+        phone_number
+      end
     end
   end
 
   # 郵便番号のハイフン追加
-  def post_code_add_hyphen(worker)
-    if worker.post_code.present?
-      if worker.post_code.size == 7
-        add_hyphen([3], worker.post_code)
+  def post_code_add_hyphen(post_code)
+    if post_code.present?
+      if post_code.size == 7
+        add_hyphen([3], post_code)
       else
-        worker.post_code
+        post_code
       end
     end
   end
 
   # キャリアアップidのハイフン追加
-  def career_up_id_add_hyphen(worker)
-    if worker.career_up_id.present?
-      if worker.career_up_id.size == 14
-        add_hyphen([4, 4, 4], worker.career_up_id)
+  def career_up_id_add_hyphen(career_up_id)
+    if career_up_id.present?
+      if career_up_id.size == 14
+        add_hyphen([4, 4, 4], career_up_id)
       else
-        worker.career_up_id
+        career_up_id
       end
     end
   end
 
   # 運転免許証のハイフン追加
-  def driver_licence_number_add_hyphen(worker)
-    if worker.driver_licence_number.present?
-      if worker.driver_licence_number.size == 12
-        add_hyphen([4, 4], worker.driver_licence_number)
+  def driver_licence_number_add_hyphen(driver_licence_number)
+    if driver_licence_number.present?
+      if driver_licence_number.size == 12
+        add_hyphen([4, 4], driver_licence_number)
       else
-        worker.driver_licence_number
+        driver_licence_number
       end
     end
   end

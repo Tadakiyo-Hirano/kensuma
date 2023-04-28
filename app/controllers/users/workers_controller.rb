@@ -10,7 +10,8 @@ module Users
 
     def new
       if Rails.env.development?
-        test_data_new
+        # test_data_new
+        production_data_new
         worker_add_hyhpen(@worker)
       else
         production_data_new
@@ -372,11 +373,13 @@ module Users
 
     # 作業員情報のハイフン差し込み
     def worker_add_hyhpen(worker)
-      @my_phone_number = phone_number_add_hyphen(worker.my_phone_number)
-      @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
-      @post_code = post_code_add_hyphen(worker)
-      @career_up_id = career_up_id_add_hyphen(worker)
-      @driver_licence_number = driver_licence_number_add_hyphen(worker)
+      if worker.present?
+        @my_phone_number = phone_number_add_hyphen(worker.my_phone_number)
+        @family_phone_number = phone_number_add_hyphen(worker.family_phone_number)
+        @post_code = post_code_add_hyphen(worker.post_code)
+        @career_up_id = career_up_id_add_hyphen(worker.career_up_id)
+        @driver_licence_number = driver_licence_number_add_hyphen(worker.driver_licence_number)
+      end
     end
 
     def worker_params

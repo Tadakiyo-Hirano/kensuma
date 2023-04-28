@@ -94,6 +94,7 @@ module WorkersHelper
       health_condition: :good
       # ============================================
     )
+    @worker.worker_safety_health_educations.build
     worker_medical.worker_exams.build
     @worker.build_worker_insurance(
       # 本番環境用デフォルト値 ==========================
