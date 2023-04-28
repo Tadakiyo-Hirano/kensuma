@@ -303,7 +303,20 @@ module DocumentsHelper
   def worker_str(worker, column)
     worker&.content&.[](column)
   end
-
+  
+  # 作業員の性別を日本語に変換
+  def worker_str_sex(worker, gender_key)
+    gender = worker&.content&.[](gender_key)
+    case gender
+    when 'man'
+      '男性'
+    when 'woman'
+      '女性'
+    else
+      '性別不明'
+    end
+  end
+  
   # 作業員の日付情報
   def worker_date(worker, column)
     date = worker&.content&.[](column)
@@ -504,8 +517,8 @@ module DocumentsHelper
   def worker_occupation(worker)
     worker&.occupation_id.nil? ? nil : Occupation.find(worker.occupation_id).short_name
   end
-
-  # (12)工事・通勤用車両届
+  
+    # (12)工事・通勤用車両届
 
   # 車両情報(工事･通勤)
   def car_usage_commute(usage)
@@ -869,6 +882,36 @@ module DocumentsHelper
 
   def checked_box(checked_status)
     if checked_status == '1'
+      '☑︎'
+    else
+      '▢'
+    end
+  end
+
+  #  ➈外国人建設就労者建設現場入場届出書
+  # 'status_of_residence'に'construction_employment'が入っていた場合「特定活動(外国人建設就労者)」にチェックを入れる
+  def checked_box_construction_employment(checked_status)
+    if checked_status == 'construction_employment'
+      '☑︎'
+    else
+      '▢'
+    end
+  end
+  
+  #  ➈外国人建設就労者建設現場入場届出書
+  # 'status_of_residence'に'specified_skill'が入っていた場合「特定技能」にチェックを入れる
+  def checked_box_specified_skill(checked_status)
+    if checked_status == 'specified_skill'
+      '☑︎'
+    else
+      '▢'
+    end
+  end
+
+  #  ➈外国人建設就労者建設現場入場届出書
+  # 'confirmed_check_date'に日付が入っていた場合「確認済み」にチェックを入れる
+  def checked_box_confirmed_check_date(checked_status)
+    if checked_status.present? && checked_status != 'false'
       '☑︎'
     else
       '▢'
