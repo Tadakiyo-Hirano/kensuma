@@ -55,6 +55,7 @@ module WorkersHelper
       med_exam_on:         '2022-03-01',
       max_blood_pressure:  120,
       min_blood_pressure:  70,
+      is_special_med_exam: :y,
       special_med_exam_on: '2022-03-01'
       # ============================================
     )
@@ -71,7 +72,8 @@ module WorkersHelper
       employment_insurance_type:     :insured,
       employment_insurance_number:   '12345678901',
       severance_pay_mutual_aid_type: :kentaikyo,
-      severance_pay_mutual_aid_name: 'テスト共済制度'
+      severance_pay_mutual_aid_name: 'テスト共済制度',
+      has_labor_insurance:           :join
       # ============================================
     )
   end
@@ -79,10 +81,12 @@ module WorkersHelper
   def production_data_new
     @worker = current_business.workers.new(
       # 本番環境用デフォルト値 ==========================
-      country:        'JP',
-      abo_blood_type: :a,
-      rh_blood_type:  :plus,
-      sex:            :man
+      country:             'JP',
+      abo_blood_type:      :a,
+      rh_blood_type:       :plus,
+      sex:                 :man,
+      status_of_residence: :permanent_resident,
+      confirmed_check:     :checked
       # ============================================
     )
     @worker.worker_licenses.build
@@ -90,17 +94,20 @@ module WorkersHelper
     @worker.worker_special_educations.build
     worker_medical = @worker.build_worker_medical(
       # 本番環境用デフォルト値 ==========================
-      is_med_exam:      :y,
-      health_condition: :good
+      is_med_exam:         :y,
+      is_special_med_exam: :y,
+      health_condition:    :good
       # ============================================
     )
+    @worker.worker_safety_health_educations.build
     worker_medical.worker_exams.build
     @worker.build_worker_insurance(
       # 本番環境用デフォルト値 ==========================
       health_insurance_type:         :health_insurance_association,
       pension_insurance_type:        :welfare,
       employment_insurance_type:     :insured,
-      severance_pay_mutual_aid_type: :kentaikyo
+      severance_pay_mutual_aid_type: :kentaikyo,
+      has_labor_insurance:           :join
       # ============================================
     )
   end

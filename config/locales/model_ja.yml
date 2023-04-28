@@ -24,11 +24,12 @@ ja:
       request_order: 下請発注情報
       worker: 作業員情報
       license: 免許マスタ
-      worker_license: 中間テーブル(免許マスタ)
+      worker_license: 技能検定
       skill_training: 技能講習マスタ
-      worker_skill_training: 中間テーブル(技能講習マスタ)
+      worker_skill_training: 技能講習
       special_education: 特別教育マスタ
-      worker_special_education: 中間テーブル(特別教育マスタ)
+      worker_special_education: 特別教育
+      worker_safety_health_education: 安全衛生教育
       worker_insurance: 保険情報
       news: お知らせ
       document: 書類
@@ -434,10 +435,10 @@ ja:
         med_exam_on: 健康診断日
         max_blood_pressure: 最高
         min_blood_pressure: 最低
-        is_special_med_exam: 特別健康診断
+        is_special_med_exam: 受診の有無
         special_med_exam_on: 診断日
         health_condition: 最近の健康状態
-        is_med_exam: 健康診断の受診
+        is_med_exam: 受診の有無
       worker_exam:
         special_med_exam_id: 診断種類
         others: その他
