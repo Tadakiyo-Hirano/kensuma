@@ -1,6 +1,9 @@
 <% provide(:worker_info, "【作業員情報】") %>
 <% provide(:worker_emergency_contact_info, "【緊急連絡先】") %>
 <% provide(:worker_health_info, "【健康情報】") %>
+<% provide(:is_med_exam_info, "健康診断") %>
+<% provide(:special_med_exam_info, "特別健康診断") %>
+<% provide(:special_med_exam_id_info, "診断種類") %>
 <% provide(:worker_health_info_blood_pressure, "血圧") %>
 <% provide(:worker_insurances_info, "【保険情報】") %>
 <% provide(:worker_licenses_info, "【資格情報】") %>
@@ -184,68 +187,79 @@
 
     <!-- WorkerMedicalテーブル情報ここから -->
     <%= f.fields_for :worker_medical do |worker_medical| %>
-      <%# 健康診断の受診状況 %>
-      <div class="mb-3">
-        <%= worker_medical.label :is_med_exam %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <div class="list-group-item">
-          <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
-            </div>
-          <% end %>
+      <label><%= yield(:is_med_exam_info) %></label><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <div class="list-group-item mb-3">
+        <%# 健康診断の受診状況 %>
+        <div class="mb-1">
+          <%= worker_medical.label :is_med_exam %><br>
+          <div class="list-group-item">
+            <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last, class: "radio") do |b| %>
+              <div class="radio">
+                <%= b.label { b.radio_button + b.text } %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
-      <%# 健康診断日 %>
-      <div class="mb-3">
-        <%= worker_medical.label :med_exam_on %>
-        <%= worker_medical.date_field :med_exam_on, class: "form-control", style: "width: 25%;" %>
-      </div>
 
-      <!-- 作業員健康保険情報血圧 -->
-      <div class="mb-3">
-        <%= f.label yield(:worker_health_info_blood_pressure) %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <div class="list-group-item" style="border: none;">
-          <%# 最高血圧 (mmHg) %>
-          <%= worker_medical.label :max_blood_pressure %>
-          <%= worker_medical.number_field :max_blood_pressure, class: "form-control" %>
-          <%# 最低血圧 (mmHg) %>
-          <%= worker_medical.label :min_blood_pressure %>
-          <%= worker_medical.number_field :min_blood_pressure, class: "form-control" %>
-        </div>
-      </div>
+        <%# 健康保険が適用除外もしくは、未加入の場合、非表示にする要素 %>
+        <div id="is_med_exam_n_hide">
+          <%# 健康診断日 %>
+          <div class="mb-1">
+            <%= worker_medical.label :med_exam_on %>
+            <%= worker_medical.date_field :med_exam_on, class: "form-control", style: "width: 25%;" %>
+          </div>
 
-      <%# 特別健康診断の受診状況 %>
-      <div class="mb-3">
-        <%= worker_medical.label :is_special_med_exam %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <div class="list-group-item">
-          <%= worker_medical.collection_radio_buttons(:is_special_med_exam, WorkerMedical.is_special_med_exams_i18n, :first, :last, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
+          <!-- 作業員健康保険情報血圧 -->
+          <div class="mb-1">
+            <%= f.label yield(:worker_health_info_blood_pressure) %>
+            <div class="list-group-item" style="border: none;">
+              <%# 最高血圧 (mmHg) %>
+              <%= worker_medical.label :max_blood_pressure %>
+              <%= worker_medical.number_field :max_blood_pressure, class: "form-control" %>
+              <%# 最低血圧 (mmHg) %>
+              <%= worker_medical.label :min_blood_pressure %>
+              <%= worker_medical.number_field :min_blood_pressure, class: "form-control" %>
             </div>
-          <% end %>
+          </div>
         </div>
       </div>
 
-      <%# 特別健康診断日   %>
-      <div class="mb-3">
-        <%= worker_medical.label :special_med_exam_on %>
-        <%= worker_medical.date_field :special_med_exam_on, class: "form-control", style: "width: 25%;" %>
-      </div>
+      <%# 特別健康診断項目 %>
+      <label><%= yield(:special_med_exam_info) %></label><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <div class="list-group-item mb-3">
+        <%# 特別健康診断の受診状況 %>
+        <div class="mb-1">
+          <%= worker_medical.label :is_special_med_exam %><br>
+          <div class="list-group-item">
+            <%= worker_medical.collection_radio_buttons(:is_special_med_exam, WorkerMedical.is_special_med_exams_i18n, :first, :last, class: "radio") do |b| %>
+              <div class="radio">
+                <%= b.label { b.radio_button + b.text } %>
+              </div>
+            <% end %>
+          </div>
+        </div>
 
-      <%# 特別健康診断 %>
-      <div class="mb-3">
-        <%= worker_medical.label :special_med_exam_list %>
-        <div class="list-group-item">
-          <%= worker_medical.collection_check_boxes :special_med_exam_list, SpecialMedExam.all, :id, :name, checked: @worker.worker_medical.special_med_exam_list, include_hidden: false do |b| %>
-            <div>
-              <%= b.check_box %>
-              <%= b.label %>
+        <div id="is_special_med_exam_n_hide">
+          <%# 特別健康診断日%>
+          <div class="mb-1">
+            <%= worker_medical.label :special_med_exam_on %>
+            <%= worker_medical.date_field :special_med_exam_on, class: "form-control", style: "width: 25%;" %>
+          </div>
+
+          <%# 特別健康診断 %>
+          <div class="mb-3">
+            <%= worker_medical.label :special_med_exam_list %>
+            <div class="list-group-item">
+              <%= worker_medical.collection_check_boxes :special_med_exam_list, SpecialMedExam.all, :id, :name, checked: @worker.worker_medical.special_med_exam_list, include_hidden: false do |b| %>
+                <div>
+                  <%= b.check_box %>
+                  <%= b.label %>
+                </div>
+              <% end %>
+              &emsp;<%= worker_medical.label "その他" %>
+              <%= worker_medical.text_field :special_med_exam_others, placeholder: "その他がある場合は入力してください", class: "form-control" %>
             </div>
-          <% end %>
-          &emsp;<%= worker_medical.label "その他" %>
-          <%= worker_medical.text_field :special_med_exam_others, placeholder: "その他がある場合は入力してください", class: "form-control" %>
+          </div>
         </div>
       </div>
 
@@ -559,6 +573,64 @@
 <!-- 作業員外国人建設就労者情報ここから -->
 
 <script>
+  // 保険情報：健康診断の受診の有無が無であれば診断日、血圧を非表示にする処理
+  $(document).ready(function() {
+    const radioIsMedExam = document.getElementsByName('worker[worker_medical_attributes][is_med_exam]')
+    function HealthInsuranceNameShowOrHide(radioIsMedExam) {
+      let checkedValue;
+      for (const radio of radioIsMedExam) {
+        if (radio.checked) {
+          checkedValue = radio.value;
+          break;
+        }
+      }
+
+      if (checkedValue == 'n'){
+        document.getElementById('is_med_exam_n_hide').style.display = "none";
+      } else {
+        document.getElementById('is_med_exam_n_hide').style.display = "block";
+      }
+    }
+
+    // 健康診断の受診の有無の変更時、非表示処理を実行する
+    for(let i = 0; i < radioIsMedExam.length; i++) {
+      radioIsMedExam[i].addEventListener('change', function() {HealthInsuranceNameShowOrHide(radioIsMedExam);});
+    }
+
+    HealthInsuranceNameShowOrHide(radioIsMedExam); //画面が読み込まれたとき非表示処理を実行する
+  })
+</script>
+
+<script>
+  // 保険情報：特別健康診断の受診の有無が無であれば診断日、診断種類を非表示にする処理
+  $(document).ready(function() {
+    const radioIsSpecialMedExam = document.getElementsByName('worker[worker_medical_attributes][is_special_med_exam]')
+    function IsSpecialMedExamNHideShowOrHide(radioIsSpecialMedExam) {
+      let checkedValue;
+      for (const radio of radioIsSpecialMedExam) {
+        if (radio.checked) {
+          checkedValue = radio.value;
+          break;
+        }
+      }
+
+      if (checkedValue == 'n'){
+        document.getElementById('is_special_med_exam_n_hide').style.display = "none";
+      } else {
+        document.getElementById('is_special_med_exam_n_hide').style.display = "block";
+      }
+    }
+
+    // 健康診断の受診の有無の変更時、非表示処理を実行する
+    for(let i = 0; i < radioIsSpecialMedExam.length; i++) {
+      radioIsSpecialMedExam[i].addEventListener('change', function() {IsSpecialMedExamNHideShowOrHide(radioIsSpecialMedExam);});
+    }
+
+    IsSpecialMedExamNHideShowOrHide(radioIsSpecialMedExam); //画面が読み込まれたとき非表示処理を実行する
+  })
+</script>
+
+<script>
   // 国籍が日本以外の選択時に外国人就労者情報のフォームを表示させる
   $(document).ready(function() {
     // 国の選択肢が変更されたときに呼び出される関数を定義する
@@ -649,6 +721,7 @@
     }
   }
 
+  // 健康保険が適用除外もしくは、未加入の場合、健康保険証の写しを非表示にする
   function HealthInsuranceImage(radioHealthInsuranceTypes) {
     let checkedValue;
     for (const radio of radioHealthInsuranceTypes) {

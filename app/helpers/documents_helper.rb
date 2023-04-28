@@ -215,12 +215,19 @@ module DocumentsHelper
     f_type == yes_no ? tag.span(yes_no, class: :circle) : yes_no
   end
 
-  def occupation_default(list)
-    if params[:action] == "edit" && @business.tem_industry_ids.present?
-      Occupation.where(industry_id: @business.tem_industry_ids.map(&:to_i).reject(&:zero?))
-    else
-      Occupation.all
-    end
+  def get_occupations_for_selected_industries
+    industry_ids =
+      if params.dig(:business, :tem_industry_ids)&.any? # 新規 - 業種のみ選択
+        params[:business][:tem_industry_ids].map(&:to_i).compact
+      elsif @business&.tem_industry_ids&.any? # 編集 - 既定選択
+        @business.tem_industry_ids.map(&:to_i).compact
+      elsif session[:tem_industry_ids]&.any? # 新規 - 業種＆職種を選択
+        session[:tem_industry_ids].map(&:to_i).compact
+      else # 一切未選択
+        []
+      end
+  
+    Occupation.where(industry_id: industry_ids)
   end
   
   def constr_license_info(ordinal_number, document_type, column)
@@ -296,7 +303,20 @@ module DocumentsHelper
   def worker_str(worker, column)
     worker&.content&.[](column)
   end
-
+  
+  # 作業員の性別を日本語に変換
+  def worker_str_sex(worker, gender_key)
+    gender = worker&.content&.[](gender_key)
+    case gender
+    when 'man'
+      '男性'
+    when 'woman'
+      '女性'
+    else
+      '性別不明'
+    end
+  end
+  
   # 作業員の日付情報
   def worker_date(worker, column)
     date = worker&.content&.[](column)
@@ -503,8 +523,8 @@ module DocumentsHelper
   def worker_occupation(worker)
     worker&.occupation_id.nil? ? nil : Occupation.find(worker.occupation_id).short_name
   end
-
-  # (12)工事・通勤用車両届
+  
+    # (12)工事・通勤用車両届
 
   # 車両情報(工事･通勤)
   def car_usage_commute(usage)
@@ -868,6 +888,36 @@ module DocumentsHelper
 
   def checked_box(checked_status)
     if checked_status == '1'
+      '☑︎'
+    else
+      '▢'
+    end
+  end
+
+  #  ➈外国人建設就労者建設現場入場届出書
+  # 'status_of_residence'に'construction_employment'が入っていた場合「特定活動(外国人建設就労者)」にチェックを入れる
+  def checked_box_construction_employment(checked_status)
+    if checked_status == 'construction_employment'
+      '☑︎'
+    else
+      '▢'
+    end
+  end
+  
+  #  ➈外国人建設就労者建設現場入場届出書
+  # 'status_of_residence'に'specified_skill'が入っていた場合「特定技能」にチェックを入れる
+  def checked_box_specified_skill(checked_status)
+    if checked_status == 'specified_skill'
+      '☑︎'
+    else
+      '▢'
+    end
+  end
+
+  #  ➈外国人建設就労者建設現場入場届出書
+  # 'confirmed_check_date'に日付が入っていた場合「確認済み」にチェックを入れる
+  def checked_box_confirmed_check_date(checked_status)
+    if checked_status.present? && checked_status != 'false'
       '☑︎'
     else
       '▢'

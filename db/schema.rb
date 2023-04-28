@@ -714,9 +714,9 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "worker_medicals", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_id", null: false
     t.integer "is_med_exam", default: 0, null: false
-    t.date "med_exam_on", null: false
-    t.integer "max_blood_pressure", null: false
-    t.integer "min_blood_pressure", null: false
+    t.date "med_exam_on"
+    t.integer "max_blood_pressure"
+    t.integer "min_blood_pressure"
     t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
     t.json "special_med_exam_list"

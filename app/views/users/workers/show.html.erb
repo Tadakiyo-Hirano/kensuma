@@ -2,7 +2,9 @@
 <% provide(:worker_info, "【作業員情報】") %>
 <% provide(:worker_emergency_contact_info, "【緊急連絡先】") %>
 <% provide(:worker_health_info, "【健康情報】") %>
+<% provide(:is_med_exam_info, "健康診断") %>
 <% provide(:worker_health_info_blood_pressure, "血圧") %>
+<% provide(:special_med_exam_info, "特別健康診断") %>
 <% provide(:worker_insurances_info, "【保険情報】") %>
 <% provide(:worker_licenses_info, "【資格情報】") %>
 <% provide(:worker_foreign_construction_workers_info, "【外国人建設就労者情報】") %>
@@ -13,6 +15,9 @@
       <tbody>
         <tr>
           <td><div style="font-size: 22px; font-weight: bold;"><%= yield(:worker_info) %></div><!-- 作業員情報 --></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         <%# 技能者ID(キャリアアップシステム) %>
         <tr>
@@ -31,6 +36,8 @@
                 <%= image_tag(image.url) %>
               <% end %>
             </td>
+            <td></td>
+            <td></td>
         </tr>
         <%# 名前 %>
         <tr>
@@ -131,18 +138,23 @@
         <%# 従業員証の写し %>
         <tr>
           <th>&emsp;&emsp;<%= Worker.human_attribute_name(:employee_cards) %></th>
-            <td>
-              <% if @worker.employee_cards.present? %>
-                <% @worker.employee_cards.each do |image| %>
-                  <%# 技能講習修了証明書の写し %>
-                  <%= image_tag(image.url) %>
-                <% end %>
+          <td>
+            <% if @worker.employee_cards.present? %>
+              <% @worker.employee_cards.each do |image| %>
+                <%# 技能講習修了証明書の写し %>
+                <%= image_tag(image.url) %>
               <% end %>
-            </td>
+            <% end %>
+          </td>
+          <td></td>
+          <td></td>
         </tr>
 
         <tr>
           <td><div style="font-size: 22px; font-weight: bold;"><%=  yield(:worker_emergency_contact_info) %></div><!-- 作業員緊急連絡先 --></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         <%# 緊急連絡先：氏名 %>
         <tr>
@@ -175,6 +187,9 @@
 
         <tr>
           <td><div style="font-size: 22px; font-weight: bold;"><%=  yield(:worker_health_info) %></div><!-- 作業員健康情報 --></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         <%# 生年月日 %>
         <tr>
@@ -206,57 +221,88 @@
         </tr>
 
         <!-- worker_medicalここから -->
-        <%# 健康診断 %>
-          <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
+
+        <%# 健康診断項目 %>
+        <tr>
+          <td><label>&emsp;&emsp;<%= yield(:is_med_exam_info) %></label></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <%# 受診の有無 %>
+        <tr>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
           <td><%= @worker.worker_medical.is_med_exam_i18n %><td>
           <td></td>
         </tr>
-        <%# 健康診断日 %>
+        <% if @worker.worker_medical.is_med_exam_i18n == '有' %>
+          <%# 健康診断日 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
+            <td><%= @worker.worker_medical.med_exam_on %><td>
+            <td></td>
+          </tr>
+          <%# 血圧 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= yield(:worker_health_info_blood_pressure) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <%# 最高 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:max_blood_pressure) %></th>
+            <td><%= @worker.worker_medical.max_blood_pressure %><td>
+            <td></td>
+          </tr>
+          <%# 最低 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:min_blood_pressure) %></th>
+            <td><%= @worker.worker_medical.min_blood_pressure %><td>
+            <td></td>
+          </tr>
+        <% end %>
+        <!-- worker_medicalここまで -->
+        <!-- worker_examここから -->
+        <%# 特別健康診断項目 %>
         <tr>
-          <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
-          <td><%= @worker.worker_medical.med_exam_on %><td>
+          <td><label>&emsp;&emsp;<%= yield(:special_med_exam_info) %></label></td>
+          <td></td>
+          <td></td>
           <td></td>
         </tr>
-        <%# 血圧 %>
+        <%# 受診の有無 %>
         <tr>
-          <th>&emsp;&emsp;<%= yield(:worker_health_info_blood_pressure) %></th>
-        </tr>
-        <%# 最高 %>
-        <tr>
-          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:max_blood_pressure) %></th>
-          <td><%= @worker.worker_medical.max_blood_pressure %><td>
+          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
+          <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
           <td></td>
-        </tr>
-        <%# 最低 %>
-        <tr>
-          <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:min_blood_pressure) %></th>
-          <td><%= @worker.worker_medical.min_blood_pressure %><td>
-          <td></td>
-        </tr>
-        <%# 診断日 %>
-        <tr>
-          <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
-          <td><%= @worker.worker_medical.special_med_exam_on %><td>
-          <td></td>
-        </tr>
-        <%# 特別健康診断 %>
-        <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
-        <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
-        <tr bgcolor="#dee2e6">
-          <th></th>
-          <th>&emsp;&emsp;<%= SpecialMedExam.human_attribute_name(:name) %></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <%# 特別健康診断種類 %>
-          <th>&emsp;&emsp;特別健康診断</th>
-          <td colspan="4">
-            <%= @worker.worker_medical.special_med_exam_list.map { |id| SpecialMedExam.find(id).name }.join(', ') %>
-            <%= ',' if @worker.worker_medical.special_med_exam_others.present? %>
-            <%= @worker.worker_medical.special_med_exam_others %>
-          </td>
-        </tr>
+        </td>
+        <% if @worker.worker_medical.is_special_med_exam_i18n == '有' %>
+          <%# 診断日 %>
+          <tr>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
+            <td><%= @worker.worker_medical.special_med_exam_on %><td>
+            <td></td>
+          </tr>
+          <tr>
+            <%# 特別健康診断種類 %>
+            <th>&emsp;&emsp;&emsp;&emsp;特別健康診断</th>
+            <td colspan="4">
+              <%= @worker.worker_medical.special_med_exam_list.map { |id| SpecialMedExam.find(id).name }.join(', ') %>
+              <%= ',' if @worker.worker_medical.special_med_exam_others.present? %>
+              <%= @worker.worker_medical.special_med_exam_others %>
+            </td>
+          </tr>
+
+          <tr bgcolor="#dee2e6">
+            <th></th>
+            <th>&emsp;&emsp;&emsp;&emsp;<%= SpecialMedExam.human_attribute_name(:name) %></th>
+            <th></th>
+            <th></th>
+          </tr>
+        <% end %>
+
+        <!-- worker_examここまで -->
         <%# 最近の健康状態 %>
         <tr>
           <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:health_condition) %></th>
@@ -269,6 +315,9 @@
         <tr >
           <%# 保険情報 %>
           <td><div style="font-size: 22px; font-weight: bold;"><%=  yield(:worker_insurances_info) %></div></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         <%# 健康保険 %>
         <tr>
@@ -289,11 +338,13 @@
         <%# 健康保険証の写し %>
         <tr>
           <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:health_insurance_image) %></th>
-            <td>
-              <% @worker.worker_insurance.health_insurance_image.each do |image| %>
-                <%= image_tag(image.url) %>
-              <% end %>
-            </td>
+          <td>
+            <% @worker.worker_insurance.health_insurance_image.each do |image| %>
+              <%= image_tag(image.url) %>
+            <% end %>
+          </td>
+          <td></td>
+          <td></td>
         </tr>
         <%# 年金保険 %>
         <tr>
@@ -340,11 +391,12 @@
           <td></td>
           <td></td>
         </tr>
-        <!-- worker_insuranceここまで -->
-
         <!-- 資格情報ここから -->
         <tr>
           <td><div style="font-size: 22px; font-weight: bold;"><%=  yield(:worker_licenses_info) %></div><!-- 作業員資格情報 --></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
         <!-- worker_special_educationここから -->
         <tr bgcolor="#dee2e6">
@@ -353,21 +405,31 @@
           <th><%= WorkerSpecialEducation.human_attribute_name(:images) %></th>
           <th></th>
         </tr>
-        <% @worker.worker_special_educations.each do |worker_special_education| %>
-          <tr>
-            <% if @worker.special_educations.first.id == worker_special_education.special_education_id %>
-              <th>&emsp;&emsp;<%= WorkerSpecialEducation.human_attribute_name(:special_education_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
-            <%# 名称 %>
-            <td><%= worker_special_education.special_education.name %></td>
-            <td>
-              <% worker_special_education.images.each do |image| %>
-                <%# 特別教育修了証明書の写し %>
-                <%= image_tag(image.url) %>
+        <% if @worker.worker_special_educations.present? %>
+          <% @worker.worker_special_educations.each do |worker_special_education| %>
+            <tr>
+              <% if @worker.special_educations.first.id == worker_special_education.special_education_id %>
+                <th>&emsp;&emsp;<%= WorkerSpecialEducation.human_attribute_name(:special_education_id) %></th>
+              <% else %>
+                <th></th>
               <% end %>
-            </td>
+            <%# 名称 %>
+              <td><%= worker_special_education.special_education.name %></td>
+              <td>
+                <% worker_special_education.images.each do |image| %>
+                  <%# 特別教育修了証明書の写し %>
+                  <%= image_tag(image.url) %>
+                <% end %>
+              </td>
+              <td></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerSpecialEducation.human_attribute_name(:special_education_id) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         <% end %>
         <!-- worker_special_educationここまで -->
@@ -379,13 +441,14 @@
           <th><%= WorkerSkillTraining.human_attribute_name(:images) %></th>
           <th></th>
         </tr>
-        <% @worker.worker_skill_trainings.each do |worker_skill_training| %>
-          <tr>
-            <% if @worker.skill_trainings.first.id == worker_skill_training.skill_training_id %>
-              <th>&emsp;&emsp;<%= WorkerSkillTraining.human_attribute_name(:skill_training_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
+        <% if @worker.worker_special_educations.present? %>
+          <% @worker.worker_skill_trainings.each do |worker_skill_training| %>
+            <tr>
+              <% if @worker.skill_trainings.first.id == worker_skill_training.skill_training_id %>
+                <th>&emsp;&emsp;<%= WorkerSkillTraining.human_attribute_name(:skill_training_id) %></th>
+              <% else %>
+                <th></th>
+              <% end %>
             <%# 名称 %>
             <td><%= worker_skill_training.skill_training.name %></td>
             <td>
@@ -394,26 +457,36 @@
                 <%= image_tag(image.url) %>
               <% end %>
             </td>
+            <td></td>
+          </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerSkillTraining.human_attribute_name(:skill_training_id) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         <% end %>
         <!-- worker_skill_trainingここまで -->
 
         <!-- worker_liceseここから -->
+        <%# 技能検定 %>
         <tr bgcolor="#dee2e6">
           <th></th>
           <th>&emsp;&emsp;<%= License.human_attribute_name(:name) %></th>
           <th><%= WorkerLicense.human_attribute_name(:images) %></th>
           <th></th>
         </tr>
-        <%# 技能検定 %>
-        <% @worker.worker_licenses.each do |worker_license| %>
-          <tr>
-            <% if @worker.licenses.first.id == worker_license.license_id %>
-              <%# 技能検定 %>
+        <% if @worker.worker_licenses.present? %>
+          <% @worker.worker_licenses.each do |worker_license| %>
+            <tr>
+              <% if @worker.licenses.first.id == worker_license.license_id %>
+                <%# 技能検定 %>
               <th>&emsp;&emsp;<%= WorkerLicense.human_attribute_name(:license_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
+              <% else %>
+                <th></th>
+              <% end %>
             <%# 名称 %>
             <td><%= worker_license.license.name %></td>
             <td>
@@ -422,18 +495,28 @@
                 <%= image_tag(image.url) %>
               <% end %>
             </td>
+            <td></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerLicense.human_attribute_name(:license_id) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         <% end %>
         <!-- worker_liceseここまで -->
 
         <%# worker_safety_health_educationここから %>
-          <tr bgcolor="#dee2e6">
-            <th></th>
-            <th>&emsp;&emsp;<%= SpecialEducation.human_attribute_name(:name) %></th>
-            <%# 安全衛生教育の写し %>
-            <th><%= WorkerSafetyHealthEducation.human_attribute_name(:images) %></th>
-            <th></th>
-          </tr>
+        <tr bgcolor="#dee2e6">
+          <th></th>
+          <th>&emsp;&emsp;<%= SpecialEducation.human_attribute_name(:name) %></th>
+          <%# 安全衛生教育の写し %>
+          <th><%= WorkerSafetyHealthEducation.human_attribute_name(:images) %></th>
+          <th></th>
+        </tr>
+        <% if @worker.worker_safety_health_educations.present? %>
           <% @worker.worker_safety_health_educations.each do |worker_safety_health_education| %>
             <tr>
               <% if @worker.safety_health_educations.first.id == worker_safety_health_education.safety_health_education_id %>
@@ -448,8 +531,17 @@
                   <%= image_tag(image.url) %>
                 <% end %>
               </td>
+              <td></td>
             </tr>
-          <% end %>       
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerSafetyHealthEducation.human_attribute_name(:safety_health_education_id) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
         <%# worker_safety_health_educationここまで %>
         <%# 自動車運転免許証 %>
           <tr>
@@ -482,6 +574,9 @@
           <!-- 外国人建設就労者情報ここから -->
           <tr>
             <td><div style="font-size: 22px; font-weight: bold;"><%=  yield(:worker_foreign_construction_workers_info) %></div></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
           <%# 在留資格 %>
           <tr>

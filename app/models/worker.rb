@@ -84,6 +84,8 @@ class Worker < ApplicationRecord
     uuid
   end
 
+  private
+
   def driver_licence_present?
     driver_licences.present?
   end
@@ -98,9 +100,5 @@ class Worker < ApplicationRecord
 
   def confirmed_check_checked?
     specified_skill_or_construction_employment? && confirmed_check == 'checked'
-  end
-
-  def disabled_convert(params, key)
-    self.update(key => '') if params.blank?
   end
 end
