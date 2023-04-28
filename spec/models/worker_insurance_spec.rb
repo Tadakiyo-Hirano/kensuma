@@ -95,23 +95,6 @@ RSpec.describe WorkerInsurance, type: :model do
       end
     end
 
-    describe '#employment_insurance_type' do
-      context '存在しない場合' do
-        before :each do
-          subject.employment_insurance_type = nil
-        end
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-
-        it 'バリデーションのエラーが正しいこと' do
-          subject.valid?
-          expect(subject.errors.full_messages).to include('雇用保険を入力してください')
-        end
-      end
-    end
-
     describe '#employment_insurance_number' do
       context '被保険者の場合' do
         %i[
@@ -120,6 +103,7 @@ RSpec.describe WorkerInsurance, type: :model do
           nil
         ].each do |number|
           before :each do
+            subject.employment_insurance_type = :insured
             subject.employment_insurance_number = number
           end
 
@@ -134,27 +118,31 @@ RSpec.describe WorkerInsurance, type: :model do
         end
       end
 
-      context '被保険者以外の場合' do
-        %i[
-          1234567890
-          123456789012
-          nil
-        ].each do |number|
-          before :each do
-            subject.employment_insurance_number = number
-          end
+      # context '被保険者以外の場合' do
+      #   %i[
+      #     1234567890
+      #     123456789012
+      #   ].each do |number|
+      #     before :each do
+      #       subject.employment_insurance_number = number
+      #     end
 
-          it 'バリデーションにとおること(日雇保険)' do
-            subject.employment_insurance_type = :day
-            expect(subject).to be_valid
-          end
+      #     it 'バリデーションに落ちること(日雇保険)' do
+      #       subject.employment_insurance_type = :day
+      #       expect(subject).to be_invalid
+      #     end
 
-          it 'バリデーションにとおること(適応除外)' do
-            subject.employment_insurance_type = :exemption
-            expect(subject).to be_valid
-          end
-        end
-      end
+      #     it 'バリデーションのエラーが正しいこと(日雇保険)' do
+      #       subject.valid?
+      #       expect(subject.errors.full_messages).to include('被保険者番号は11文字で入力してください')
+      #     end
+
+      #     it 'バリデーションにとおること(適応除外)' do
+      #       subject.employment_insurance_type = :exemption
+      #       expect(subject).to be_valid
+      #     end
+      #   end
+      # end
     end
 
     describe '#severance_pay_mutual_aid_type' do

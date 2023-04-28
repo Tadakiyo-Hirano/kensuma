@@ -5,7 +5,7 @@ module WorkersHelper
       name:                          'サンプル作業員',
       name_kana:                     'サンプル サギョウイン',
       country:                       'JP',
-      email:                         "test_#{Worker.last.id + 1}@email.com",
+      email:                         'test_user@email.com',
       my_address:                    '東京都港区1-1',
       my_phone_number:               '12345678901',
       family_name:                   'フェルナンデス',
@@ -19,11 +19,13 @@ module WorkersHelper
       hiring_on:                     '2022-01-28',
       experience_term_before_hiring: 10,
       blank_term:                    3,
-      driver_licence:                '普通免許',
-      driver_licence_number:         '123456789012',
-      career_up_id:                  '%14d' % rand(99999999999999),
+      career_up_id:                  '12345678901234',
       sex:                           :man,
-      post_code:                     '1234567'
+      post_code:                     '1234567',
+      status_of_residence:           :permanent_resident,
+      maturity_date:                 '2000-01-28',
+      confirmed_check:               :checked,
+      confirmed_check_date:          '2000-01-28'
       # ============================================
     )
     @worker.worker_licenses.build(

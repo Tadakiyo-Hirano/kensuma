@@ -245,116 +245,80 @@
 //健康保険の加入状況によってフォームの表示・非表示の切り替え
   const available_form_health_insurance = document.getElementById('available-form-health-insurance')
   const list_group_health_insurance = document.getElementById('hidden-form-health-insurance')
-  const error_health_insurance = document.getElementById('error')
   function getRadioBusinessHealthInsuranceStatus(object) {
     const value = $('input[name="business[business_health_insurance_status]"]:checked').val();
     if (value == 'join'){
       list_group_health_insurance.classList.remove('hidden');
-      error_health_insurance.classList.add('hidden');
     } else {
       list_group_health_insurance.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_health_insurance.classList.remove('hidden');
-      }
     }
   };
   getRadioBusinessHealthInsuranceStatus(available_form_health_insurance); //ページの読み込み時に判定
   $('input[name="business[business_health_insurance_status]"]').change(function() {
     if ($(this).val() == 'join') {
       list_group_health_insurance.classList.remove('hidden');
-      error_health_insurance.classList.add('hidden');
     } else {
       list_group_health_insurance.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_health_insurance.classList.remove('hidden');
-      }
     }
   });
 
 //厚生年金保険の加入状況によってフォームの表示・非表示の切り替え
   const available_form_welfare_pension_insurance = document.getElementById('available-form-welfare-pension-insurance')
   const list_group_welfare_pension_insurance = document.getElementById('hidden-form-welfare-pension-insurance')
-  const error_welfare_pension_insurance = document.getElementById('error')
   function getRadioBusinessWelfarePensionInsuranceJoinStatus(object) {
     const value = $('input[name="business[business_welfare_pension_insurance_join_status]"]:checked').val();
     if (value == 'join'){
       list_group_welfare_pension_insurance.classList.remove('hidden');
-      error_welfare_pension_insurance.classList.add('hidden');
     } else {
       list_group_welfare_pension_insurance.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_welfare_pension_insurance.classList.remove('hidden');
-      }
     }
   };
   getRadioBusinessWelfarePensionInsuranceJoinStatus(available_form_welfare_pension_insurance); //ページの読み込み時に判定
   $('input[name="business[business_welfare_pension_insurance_join_status]"]').change(function() {
     if ($(this).val() == 'join') {
       list_group_welfare_pension_insurance.classList.remove('hidden');
-      error_welfare_pension_insurance.classList.add('hidden');
     } else {
       list_group_welfare_pension_insurance.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_welfare_pension_insurance.classList.remove('hidden');
-      }
     }
   });
 
 //雇用保険の加入状況によってフォームの表示・非表示の切り替え
   const available_form_employment_insurance = document.getElementById('available-form-employmentーinsurance')
   const list_group_employment_insurance = document.getElementById('hidden-form-employmentーinsurance')
-  const error_employment_insurance = document.getElementById('error')
   function getRadioBusinessEmploymentInsuranceJoinStatus(object) {
     const value = $('input[name="business[business_employment_insurance_join_status]"]:checked').val();
     if (value == 'join'){
       list_group_employment_insurance.classList.remove('hidden');
-      error_employment_insurance.classList.add('hidden');
     } else {
       list_group_employment_insurance.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_employment_insurance.classList.remove('hidden');
-      }
     }
   };
   getRadioBusinessEmploymentInsuranceJoinStatus(available_form_employment_insurance); //ページの読み込み時に判定
   $('input[name="business[business_employment_insurance_join_status]"]').change(function() {
     if ($(this).val() == 'join') {
       list_group_employment_insurance.classList.remove('hidden');
-      error_employment_insurance.classList.add('hidden');
     } else {
       list_group_employment_insurance.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_employment_insurance.classList.remove('hidden');
-      }
     }
   });
 
 //外国人就労者の有無によってフォームの表示・非表示の切り替え
   const available_form_foreign_work = document.getElementById('available-form-foreign-work')
   const list_group_foreign_work = document.getElementById('hidden-form-foreign-work')
-  const error_foreign_work = document.getElementById('error')
   function getRadioForeignWorkStatusExist(object) {
     const value = $('input[name="business[foreign_work_status_exist]"]:checked').val();
     if (value == 'available'){
       list_group_foreign_work.classList.remove('hidden');
-      error_foreign_work.classList.add('hidden');
     } else {
       list_group_foreign_work.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_foreign_work.classList.remove('hidden');
-      }
     }
   };
   getRadioForeignWorkStatusExist(available_form_foreign_work); //ページの読み込み時に判定
   $('input[name="business[foreign_work_status_exist]"]').change(function() {
     if ($(this).val() == 'available') {
       list_group_foreign_work.classList.remove('hidden');
-      error_foreign_work.classList.add('hidden');
     } else {
       list_group_foreign_work.classList.add('hidden');
-      if ($("#nest-field").length) {
-        error_foreign_work.classList.remove('hidden');
-      }
     }
   });
 </script>
