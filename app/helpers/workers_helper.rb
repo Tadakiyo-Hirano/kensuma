@@ -55,6 +55,7 @@ module WorkersHelper
       med_exam_on:         '2022-03-01',
       max_blood_pressure:  120,
       min_blood_pressure:  70,
+      is_special_med_exam: :y,
       special_med_exam_on: '2022-03-01'
       # ============================================
     )
@@ -93,8 +94,9 @@ module WorkersHelper
     @worker.worker_special_educations.build
     worker_medical = @worker.build_worker_medical(
       # 本番環境用デフォルト値 ==========================
-      is_med_exam:      :y,
-      health_condition: :good
+      is_med_exam:         :y,
+      is_special_med_exam: :y,
+      health_condition:    :good
       # ============================================
     )
     @worker.worker_safety_health_educations.build

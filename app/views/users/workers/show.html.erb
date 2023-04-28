@@ -396,7 +396,6 @@
           <td></td>
           <td></td>
         </tr>
-        <!-- worker_insuranceここまで -->
         <!-- 資格情報ここから -->
         <tr>
           <td><div style="font-size: 22px; font-weight: bold;"><%=  yield(:worker_licenses_info) %></div><!-- 作業員資格情報 --></td>
@@ -411,21 +410,30 @@
           <th><%= WorkerSpecialEducation.human_attribute_name(:images) %></th>
           <th></th>
         </tr>
-        <% @worker.worker_special_educations.each do |worker_special_education| %>
-          <tr>
-            <% if @worker.special_educations.first.id == worker_special_education.special_education_id %>
-              <th>&emsp;&emsp;<%= WorkerSpecialEducation.human_attribute_name(:special_education_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
-            <%# 名称 %>
-            <td><%= worker_special_education.special_education.name %></td>
-            <td>
-              <% worker_special_education.images.each do |image| %>
-                <%# 特別教育修了証明書の写し %>
-                <%= image_tag(image.url) %>
+        <% if @worker.worker_special_educations.present? %>
+          <% @worker.worker_special_educations.each do |worker_special_education| %>
+            <tr>
+              <% if @worker.special_educations.first.id == worker_special_education.special_education_id %>
+                <th>&emsp;&emsp;<%= WorkerSpecialEducation.human_attribute_name(:special_education_id) %></th>
+              <% else %>
+                <th></th>
               <% end %>
-            </td>
+            <%# 名称 %>
+              <td></td>
+              <td>
+                <% worker_special_education.images.each do |image| %>
+                  <%# 特別教育修了証明書の写し %>
+                  <%= image_tag(image.url) %>
+                <% end %>
+              </td>
+              <td></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerSpecialEducation.human_attribute_name(:special_education_id) %></th>
+            <td></td>
+            <td></td>
             <td></td>
           </tr>
         <% end %>
@@ -436,13 +444,14 @@
           <th><%= WorkerSkillTraining.human_attribute_name(:images) %></th>
           <th></th>
         </tr>
-        <% @worker.worker_skill_trainings.each do |worker_skill_training| %>
-          <tr>
-            <% if @worker.skill_trainings.first.id == worker_skill_training.skill_training_id %>
-              <th>&emsp;&emsp;<%= WorkerSkillTraining.human_attribute_name(:skill_training_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
+        <% if @worker.worker_special_educations.present? %>
+          <% @worker.worker_skill_trainings.each do |worker_skill_training| %>
+            <tr>
+              <% if @worker.skill_trainings.first.id == worker_skill_training.skill_training_id %>
+                <th>&emsp;&emsp;<%= WorkerSkillTraining.human_attribute_name(:skill_training_id) %></th>
+              <% else %>
+                <th></th>
+              <% end %>
             <%# 名称 %>
             <td><%= worker_skill_training.skill_training.name %></td>
             <td>
@@ -453,23 +462,32 @@
             </td>
             <td></td>
           </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerSkillTraining.human_attribute_name(:skill_training_id) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         <% end %>
         <!-- worker_liceseここから -->
+        <%# 技能検定 %>
         <tr bgcolor="#dee2e6">
           <th></th>
           <th>&emsp;&emsp;<%= License.human_attribute_name(:name) %></th>
           <th><%= WorkerLicense.human_attribute_name(:images) %></th>
           <th></th>
         </tr>
-        <%# 技能検定 %>
-        <% @worker.worker_licenses.each do |worker_license| %>
-          <tr>
-            <% if @worker.licenses.first.id == worker_license.license_id %>
-              <%# 技能検定 %>
+        <% if @worker.worker_licenses.present? %>
+          <% @worker.worker_licenses.each do |worker_license| %>
+            <tr>
+              <% if @worker.licenses.first.id == worker_license.license_id %>
+                <%# 技能検定 %>
               <th>&emsp;&emsp;<%= WorkerLicense.human_attribute_name(:license_id) %></th>
-            <% else %>
-              <th></th>
-            <% end %>
+              <% else %>
+                <th></th>
+              <% end %>
             <%# 名称 %>
             <td><%= worker_license.license.name %></td>
             <td>
@@ -479,18 +497,27 @@
               <% end %>
             </td>
             <td></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerLicense.human_attribute_name(:license_id) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         <% end %>
         <!-- worker_liceseここまで -->
         <!-- worker_skill_trainingここまで -->
         <%# worker_safety_health_educationここから %>
-          <tr bgcolor="#dee2e6">
-            <th></th>
-            <th>&emsp;&emsp;<%= SpecialEducation.human_attribute_name(:name) %></th>
-            <%# 安全衛生教育の写し %>
-            <th><%= WorkerSafetyHealthEducation.human_attribute_name(:images) %></th>
-            <th></th>
-          </tr>
+        <tr bgcolor="#dee2e6">
+          <th></th>
+          <th>&emsp;&emsp;<%= SpecialEducation.human_attribute_name(:name) %></th>
+          <%# 安全衛生教育の写し %>
+          <th><%= WorkerSafetyHealthEducation.human_attribute_name(:images) %></th>
+          <th></th>
+        </tr>
+        <% if @worker.worker_safety_health_educations.present? %>
           <% @worker.worker_safety_health_educations.each do |worker_safety_health_education| %>
             <tr>
               <% if @worker.safety_health_educations.first.id == worker_safety_health_education.safety_health_education_id %>
@@ -507,7 +534,15 @@
               </td>
               <td></td>
             </tr>
-          <% end %>       
+          <% end %>
+        <% else %>
+          <tr>
+            <th>&emsp;&emsp;<%= WorkerSafetyHealthEducation.human_attribute_name(:safety_health_education_id) %></th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        <% end %>
         <%# worker_safety_health_educationここまで %>
         <%# 自動車運転免許証 %>
           <tr>
