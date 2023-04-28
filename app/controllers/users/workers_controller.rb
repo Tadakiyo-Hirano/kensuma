@@ -39,6 +39,7 @@ module Users
       @worker.worker_licenses.build if @worker.licenses.blank?
       @worker.worker_skill_trainings.build if @worker.skill_trainings.blank?
       @worker.worker_special_educations.build if @worker.special_educations.blank?
+      @worker.worker_safety_health_educations.build if @worker.worker_safety_health_educations.blank?
       worker_add_hyhpen(@worker)
       if @worker.status_of_residence.blank?
         @worker.status_of_residence = :construction_employment
