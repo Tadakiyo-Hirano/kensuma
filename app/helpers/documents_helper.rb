@@ -215,12 +215,19 @@ module DocumentsHelper
     f_type == yes_no ? tag.span(yes_no, class: :circle) : yes_no
   end
 
-  def occupation_default(list)
-    if params[:action] == "edit" && @business.tem_industry_ids.present?
-      Occupation.where(industry_id: @business.tem_industry_ids.map(&:to_i).reject(&:zero?))
-    else
-      Occupation.all
-    end
+  def get_occupations_for_selected_industries
+    industry_ids =
+      if params.dig(:business, :tem_industry_ids)&.any? # 新規 - 業種のみ選択
+        params[:business][:tem_industry_ids].map(&:to_i).compact
+      elsif @business&.tem_industry_ids&.any? # 編集 - 既定選択
+        @business.tem_industry_ids.map(&:to_i).compact
+      elsif session[:tem_industry_ids]&.any? # 新規 - 業種＆職種を選択
+        session[:tem_industry_ids].map(&:to_i).compact
+      else # 一切未選択
+        []
+      end
+  
+    Occupation.where(industry_id: industry_ids)
   end
   
   def constr_license_info(ordinal_number, document_type, column)
