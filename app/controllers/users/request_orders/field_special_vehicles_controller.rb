@@ -3,7 +3,7 @@ module Users::RequestOrders
     before_action :set_request_order
     before_action :set_field_special_vehicle, only: :destroy
     before_action :set_field_special_vehicles, only: %i[index edit_special_vehicles update_special_vehicles]
-    before_action :check_status_order
+    before_action :check_status_request_order
 
     def index
       field_special_vehicle_ids = @field_special_vehicles.map { |field_special_vehicle| field_special_vehicle.content['id'] }

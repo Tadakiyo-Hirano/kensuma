@@ -3,7 +3,7 @@ module Users::RequestOrders
     before_action :set_request_order
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_field_fire, only: %i[show edit update destroy]
-    before_action :check_status_order
+    before_action :check_status_request_order
 
     def show; end
 

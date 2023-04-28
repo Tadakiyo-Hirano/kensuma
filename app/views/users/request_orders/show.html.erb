@@ -237,26 +237,50 @@
   </section>
 <% end %>
 
+<!-- 工事作業所災害防止協議会兼施工体系図,作業間連絡調整書 -->
 <section class="content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <div class="card card-primary card-outline">
+        <div class="card <%= @request_order.order.system_chart_status ? 'card-primary' : 'card-danger' %> card-outline">
           <div class="card-body">
             <div class="row">
               <div class="card-body table-responsive p-0">
                 <table class="table table-sm text-nowrap">
                   <tbody>
+                    <% if @request_order.parent_id.nil? %>
+                      <tr>
+                        <th>
+                          <% if @request_order.order.system_chart_status %>
+                            <span class="text-primary"><i class="fas fa-check-circle"></i> 現在公開中です</span>
+                          <% else %>
+                            <span class="text-danger"><i class="fas fa-times-circle"></i> 現在非公開です</span>
+                          <% end %>
+                          <%= link_to_if(@request_order.order.system_chart_status, '　→ 非公開にする'.html_safe, system_chart_status_users_order_path(@request_order.order), method: :patch,
+                                                                                    data: { confirm: "工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を非公開にします。よろしいですか？" }, class: "text-danger no-underline") do %>
+                            <%= link_to '　→ 公開する', system_chart_status_users_order_path(@request_order.order), method: :patch,
+                                                      data: { confirm: "工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を下請けに公開にします。よろしいですか？" }, class: "text-primary no-underline" %>
+                          <% end %>
+                        </th>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    <% end %>
+
                     <% @system_chart_documents.each do |current_user_document| %>
                       <tr>
                         <td>
                           <%= current_user_document.document_type_i18n %>
                         </td>
                         <td class="text-right">
-                          <%= link_to '詳細', users_request_order_document_path(@request_order.uuid, current_user_document.uuid) %>
+                          <% if @request_order.order.system_chart_status || @request_order.parent_id.nil? %>
+                              <%= link_to '詳細', users_request_order_document_path(@request_order.uuid, current_user_document.uuid) %>
+                            <% else %>
+                              <span class="text-danger">元請にて作成中</span> 
+                            <% end %>
                         </td>
                         <td class="text-right">
-                          <%= link_to 'PDF', users_request_order_document_path(@request_order.uuid, current_user_document.uuid, format: :pdf), target: :_blank, rel: "noopener noreferrer" %>
+                          <%= link_to 'PDF', users_request_order_document_path(@request_order.uuid, current_user_document.uuid, format: :pdf), target: :_blank, rel: "noopener noreferrer" if @request_order.order.system_chart_status? || @request_order.parent_id.nil? %>
                         </td>
                       </tr>
                     <% end %>
