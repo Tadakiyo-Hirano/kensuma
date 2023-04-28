@@ -161,6 +161,7 @@ module Users
         Worker.find_by(name: request_order_params[:construction_manager_name])&.job_title
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def request_order_params
       params.require(:request_order).permit(
         :occupation,
@@ -239,5 +240,6 @@ module Users
         }
       )
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

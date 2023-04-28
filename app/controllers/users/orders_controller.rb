@@ -160,6 +160,7 @@ module Users
       redirect_to users_orders_path, flash: { danger: '現場情報作成機能は有料サービスとなります' } if current_user.is_prime_contractor == false
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def order_params
       params.require(:order).permit(
         :site_career_up_id,
@@ -247,5 +248,6 @@ module Users
         }
       )
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end
