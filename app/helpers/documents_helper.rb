@@ -75,6 +75,8 @@ module DocumentsHelper
     elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
       request_order
       # 下請けが存在しない場合
+    else
+      nil
     end
   end
 
@@ -87,12 +89,13 @@ module DocumentsHelper
   # 書類作成会社の名前
   def document_preparation_company_name
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil? # 元請が下請の書類確認するとき
       sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-      Business.find_by(id: sub_request_order.business_id).name
-    # 下請けが自身の書類確認するとき
-    else
-      Business.find_by(id: request_order.business_id).name
+      sub_request_order.content&.[]('subcon_name')
+    elsif params[:sub_request_order_uuid].nil? && request_order.parent_id.nil? # 元請が自身の書類確認するとき
+      request_order.order.content&.[]('genecon_name')
+    else # 下請けが自身の書類確認するとき
+      request_order.content&.[]('subcon_name')
     end
   end
 
@@ -275,18 +278,6 @@ module DocumentsHelper
   def company_name(worker_id)
     worker = Worker.find_by(uuid: worker_id)
     Business.find_by(id: worker&.business_id)&.name
-  end
-
-  # 書類作成会社の名前
-  def document_preparation_company_name
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
-      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-      Business.find_by(id: sub_request_order.business_id).name
-    # 下請けが自身の書類確認するとき
-    else
-      Business.find_by(id: request_order.business_id).name
-    end
   end
 
   # 作業員情報
