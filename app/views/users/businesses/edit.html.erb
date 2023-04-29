@@ -2,7 +2,7 @@
 <% provide(:btn_text, "更新") %>
 
 <div class="card">
-  <%= form_with model: @business, url: users_business_path, method: :patch, local: true, class: "business-form-validation" do |f| %>
+  <%= form_with model: @business, url: users_business_path, method: :patch, local: true, html: { multipart: true }, class: "business-form-validation" do |f| %>
     <div class="card-body">
       <%= render partial: "form", locals: { f: f, business: @business } %>
     </div>

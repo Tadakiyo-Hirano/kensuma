@@ -41,9 +41,44 @@ module Users
       @business_occupations = current_business.business_occupations.includes(:occupation).map { |bo| bo.occupation.short_name }
     end
 
-    # 自社(事業所)の建設許可証番号を取得
+    # 自社(事業所)および現場で取得している建設許可証番号を取得
     def set_business_construction_licenses
-      @business_construction_licenses = Hash[current_business.business_industries.pluck(:id, :construction_license_number)]
+      # 元請の建設許可証番号
+      @order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h || {}
+      order_content = @order&.content || {}
+      if order_content['genecon_construction_license_number_1st'].present? && !@order_construction_licenses.value?(order_content['genecon_construction_license_number_1st'])
+        if @order_construction_licenses.key?(:genecon_construction_license_id_1st)
+          @order_construction_licenses[@order_construction_licenses[:genecon_construction_license_id_1st]] = @order_construction_licenses[:genecon_construction_license_number_1st]
+          @order_construction_licenses.delete(:genecon_construction_license_id_1st)
+        end
+        @order_construction_licenses[order_content['genecon_construction_license_id_1st']] = order_content['genecon_construction_license_number_1st']
+      end
+      if order_content['genecon_construction_license_number_2nd'].present? && !@order_construction_licenses.value?(order_content['genecon_construction_license_number_2nd'])
+        if @order_construction_licenses.key?(:genecon_construction_license_id_2nd)
+          @order_construction_licenses[@order_construction_licenses[:genecon_construction_license_id_2nd]] = @order_construction_licenses[:genecon_construction_license_number_2nd]
+          @order_construction_licenses.delete(:genecon_construction_license_id_2nd)
+        end
+        @order_construction_licenses[order_content['genecon_construction_license_id_2nd']] = order_content['genecon_construction_license_number_2nd']
+      end
+      # 下請けの建設許可証番号
+      @request_order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h || {}
+      request_order_content = @request_order&.content || {}
+      if request_order_content['subcon_construction_license_number_1st'].present? && !@request_order_construction_licenses.value?(request_order_content['subcon_construction_license_number_1st'])
+        if @request_order_construction_licenses.key?(:subcon_construction_license_id_1st)
+          @request_order_construction_licenses[@request_order_construction_licenses[:subcon_construction_license_id_1st]] =
+            @request_order_construction_licenses[:subcon_construction_license_number_1st]
+          @request_order_construction_licenses.delete(:subcon_construction_license_id_1st)
+        end
+        @request_order_construction_licenses[request_order_content['subcon_construction_license_id_1st']] = request_order_content['subcon_construction_license_number_1st']
+      end
+      if request_order_content['subcon_construction_license_number_2nd'].present? && !@request_order_construction_licenses.value?(request_order_content['subcon_construction_license_number_2nd'])
+        if @request_order_construction_licenses.key?(:subcon_construction_license_id_2nd)
+          @request_order_construction_licenses[@request_order_construction_licenses[:genecon_construction_license_id_2nd]] =
+            @request_order_construction_licenses[:subcon_construction_license_number_2nd]
+          @request_order_construction_licenses.delete(:subcon_construction_license_id_2nd)
+        end
+        @request_order_construction_licenses[request_order_content['subcon_construction_license_id_2nd']] = request_order_content['subcon_construction_license_number_2nd']
+      end
     end
 
     # 書類に反映させる作業員情報
