@@ -511,7 +511,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "general_safety_agent_name"
     t.string "health_and_safety_manager_name", null: false
     t.string "submission_destination", null: false
-    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
@@ -559,7 +558,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
     t.string "registered_core_engineer_qualification"
-    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
