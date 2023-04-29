@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :request_order do
     uuid { SecureRandom.uuid }
+    status { 0 }
     sequence(:occupation) { |n| "occupation#{n}" }
     sequence(:construction_name) { |n| "construction_name#{n}" }
     sequence(:construction_details) { |n| "construction_details#{n}" }
