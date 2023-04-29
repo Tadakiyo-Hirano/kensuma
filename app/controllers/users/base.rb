@@ -48,7 +48,7 @@ module Users
 
     # 提出済みの場合は現場情報の編集を不可にする
     def check_status_request_order
-      if @request_order.edit_status == 'submitted'
+      if @request_order.order.edit_status == 'submitted'
         flash[:danger] = '提出済のため、編集できません。'
         redirect_to users_request_order_path(@request_order)
       end
@@ -56,7 +56,7 @@ module Users
 
     # 提出済みの場合は書類の編集を不可にする
     def check_status_document
-      if @document.request_order.edit_status == 'submitted'
+      if @document.request_order.order.edit_status == 'submitted'
         flash[:danger] = '提出済のため、編集できません。'
         redirect_to users_request_order_path(@document.request_order)
       end
