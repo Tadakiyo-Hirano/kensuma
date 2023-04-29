@@ -8,8 +8,8 @@ module Users
     def new
       if current_user.invited_user_ids.present?
         businesses = current_user.invited_user_ids.compact.reject { |id|
-                      User.find_by(id: id).nil? || User.find_by(id: id).business.nil?
-                    }.map { |id| User.find(id).business }
+                       User.find_by(id: id).nil? || User.find_by(id: id).business.nil?
+                     }.map { |id| User.find(id).business }
         @request_order.children.map { |child| businesses.delete(Business.find(child.business_id)) }.compact
         @businesses = businesses
       end
