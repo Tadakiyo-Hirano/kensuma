@@ -4,6 +4,7 @@ module Users::RequestOrders
     before_action :set_business_workers_name, only: %i[edit_cars update_cars]
     before_action :set_field_car, only: :destroy
     before_action :set_field_cars, only: %i[index edit_cars update_cars]
+    before_action :check_status_request_order
 
     def index
       field_car_ids = @field_cars.map { |field_car| field_car.content['id'] }

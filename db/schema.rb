@@ -472,6 +472,8 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.boolean "system_chart_status", default: false, null: false
+    t.boolean "edit_status", default: false, null: false
     t.string "site_uu_id", null: false
     t.string "site_name", null: false
     t.string "order_name", null: false

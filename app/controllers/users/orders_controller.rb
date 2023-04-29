@@ -4,6 +4,7 @@ module Users
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_order, except: %i[index new create]
     before_action :set_business_construction_licenses, only: %i[new create edit update]
+    before_action :check_system_chart_status, only: :system_chart_status
 
     def index
       @orders = current_business.orders
@@ -110,6 +111,8 @@ module Users
       redirect_to users_orders_url
     end
 
+    def system_chart_status; end
+
     # 専門技術者1
     def professional_engineer_1st_skill_training_options
       professional_engineer_name_1st = params[:professional_engineer_name_1st]
@@ -158,6 +161,20 @@ module Users
 
     def prime_contractor_access
       redirect_to users_orders_path, flash: { danger: '現場情報作成機能は有料サービスとなります' } if current_user.is_prime_contractor == false
+    end
+
+    # 工事作業所災害防止協議会兼施工体系図,作業間連絡調整書の公開の有無の切り替え
+    def check_system_chart_status
+      request_order = RequestOrder.find_by(params[:uuid])
+      order = request_order.order
+      order.update_attribute(:system_chart_status, !order.system_chart_status)
+
+      if order.system_chart_status
+        flash[:success] = '工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を公開しました'
+      else
+        flash[:danger] = '工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を非公開にしました'
+      end
+      redirect_to users_request_order_path(uuid: request_order)
     end
 
     # rubocop:disable Metrics/CyclomaticComplexity
