@@ -191,27 +191,6 @@ module DocumentsHelper
     license_permission_type == '一般' ? tag.span('一般', class: :circle) : '一般'
   end
 
-  # def c_license_permission_type_minister_or_governor(ordinal_number, d_info) # 「大臣」か「知事」判定
-  #   constr_count = d_info.construction_license.size
-  #   if ordinal_number <= constr_count
-  #     element = d_info.construction_license[(ordinal_number.to_i) -1]
-  #     permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_minister_governor_i18n").delete("許可")
-  #   end
-  # end
-
-  # def construction_license_construction_certification(ordinal_number, owner, d_info)
-  #   permission_type = c_license_permission_type_minister_or_governor(ordinal_number, d_info)
-  #   permission_type == owner ? tag.span(owner, class: :circle) : owner
-  # end
-
-  # def c_license_permission_type_identification_or_general(ordinal_number, d_info) # 「特定」か「一般」判定
-  #   constr_count = d_info.construction_license.size
-  #   if ordinal_number <= constr_count
-  #     element = d_info.construction_license[(ordinal_number.to_i) -1]
-  #     permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_identification_general_i18n")
-  #   end
-  # end
-
   def construction_license_construction_type(ordinal_number, type, d_info)
     permission_type = c_license_permission_type_identification_or_general(ordinal_number, d_info)
     permission_type == type ? tag.span(type, class: :circle) : type
