@@ -206,6 +206,7 @@ module Users
           subcon_representative_name:                                             current_business.representative_name, # 会社代表者名
           subcon_phone_number:                                                    current_business.phone_number,                                     # 会社電話番号
           subcon_fax_number:                                                      current_business.fax_number,                                       # 会社FAX番号
+          subcon_business_type:                                                   current_business.business_type_i18n,                               # 会社形態
           subcon_career_up_id:                                                    current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
           subcon_representative_name:                                             current_business.representative_name,                              # 会社代表者名
           subcon_employment_manager_name:                                         current_business.employment_manager_name,                          # 会社雇用管理責任者名

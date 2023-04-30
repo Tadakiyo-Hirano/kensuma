@@ -1058,11 +1058,11 @@ module DocumentsHelper
   # アンケート設問：（法人規模-「はい」）
   def questionnaire_business_type_yes(worker)
     w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
+    r_name = document_info&.content&.[]("subcon_representative_name")
     if worker.content&.[]('business_owner_or_master') == true
       tag.span('1. はい', class: :circle)
     elsif w_name == r_name
-      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status = document_info&.content&.[]("subcon_business_type")
       company_status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
     else
       '1. はい'
@@ -1072,20 +1072,20 @@ module DocumentsHelper
   # アンケート設問：（法人規模-「いいえ」）
   def questionnaire_business_type_no(worker)
     w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
+    r_name = document_info&.content&.[]("subcon_representative_name")
     if worker.content&.[]('business_owner_or_master') == true
       '2. いいえ'
     elsif w_name != r_name
       tag.span('2. いいえ', class: :circle)
     else
-      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status = document_info&.content&.[]("subcon_business_type")
       company_status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
     end
   end
 
   # アンケート設問：（労災保険-「はい」）
   def questionnaire_labor_insurance_yes(worker)
-    company_status = Business.find(document_info.business_id).business_type_i18n
+    company_status = document_info&.content&.[]("subcon_business_type")
     insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
 
     if questionnaire_business_type_yes(worker) == tag.span('1. はい', class: :circle)

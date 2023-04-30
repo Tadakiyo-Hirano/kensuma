@@ -8,7 +8,7 @@
   <div class="page-break">
   <div class="document-outer">
     <div id="tenth-document" class="document-inner">
-      <div class="tenth-text-container">	
+      <div class="tenth-text-container">
         <div class="ritz grid-container" dir="ltr">
           <table class="waffle no-grid td-no-border" cellspacing="0" cellpadding="0">
             <tbody>
@@ -192,7 +192,7 @@
                 <td class="t0"></td>
                 <td class="t0"></td>
                 <td class="t8" dir="ltr" colspan="2" rowspan="2">一次会社名</td>
-                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= document_site_info.business.name %></td><!--「一次会社名」10-004 -->
+                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= document_site_info&.content&.[]("genecon_name") %></td><!--「一次会社名」10-004 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -231,7 +231,7 @@
                 <td class="t0"></td>
                 <td></td>
                 <td class="h11" dir="ltr"></td>
-                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= Business.find(document_info.business_id).name %></td><!-- 「会社名」10-006 -->
+                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= document_info&.content&.[]("subcon_name") %></td><!-- 「会社名」10-006 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -275,7 +275,7 @@
                 <td class="t0"></td>
                 <td class="t0"></td>
                 <td class="t8" dir="ltr" colspan="2" rowspan="2">代表者名</td>
-                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= Business.find(document_info.business_id).representative_name %></td><!--「代表者名」10-007 -->
+                <td class="t9" dir="ltr" colspan="6" rowspan="2"><%= document_info&.content&.[]("subcon_representative_name") %></td><!--「代表者名」10-007 -->
               </tr>
               <tr style="height: 19px">
                 <td class="t0"></td>
@@ -811,7 +811,7 @@
     direction: ltr;
     padding: 0px 3px 0px 3px;
   }
-  
+
   .page-break {
   page-break-after:always;
   &:last-child {
