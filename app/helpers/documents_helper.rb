@@ -65,6 +65,8 @@ module DocumentsHelper
     elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
       request_order
       # 下請けが存在しない場合
+    else
+      nil
     end
   end
 
@@ -77,12 +79,13 @@ module DocumentsHelper
   # 書類作成会社の名前
   def document_preparation_company_name
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil? # 元請が下請の書類確認するとき
       sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-      Business.find_by(id: sub_request_order.business_id).name
-    # 下請けが自身の書類確認するとき
-    else
-      Business.find_by(id: request_order.business_id).name
+      sub_request_order.content&.[]('subcon_name')
+    elsif params[:sub_request_order_uuid].nil? && request_order.parent_id.nil? # 元請が自身の書類確認するとき
+      request_order.order.content&.[]('genecon_name')
+    else # 下請けが自身の書類確認するとき
+      request_order.content&.[]('subcon_name')
     end
   end
 
@@ -162,25 +165,20 @@ module DocumentsHelper
     end
   end
 
-  def c_license_permission_type_minister_or_governor(ordinal_number, d_info) # 「大臣」か「知事」判定
-    constr_count = d_info.construction_license.size
-    if ordinal_number <= constr_count
-      element = d_info.construction_license[(ordinal_number.to_i) -1]
-      permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_minister_governor_i18n").delete("許可")
-    end
+  def minister(license_permission_type)
+    license_permission_type == '大臣許可' ? tag.span('大臣', class: :circle) : '大臣'
   end
 
-  def construction_license_construction_certification(ordinal_number, owner, d_info)
-    permission_type = c_license_permission_type_minister_or_governor(ordinal_number, d_info)
-    permission_type == owner ? tag.span(owner, class: :circle) : owner
+  def governor(license_permission_type)
+    license_permission_type == '知事許可' ? tag.span('知事', class: :circle) : '知事'
   end
 
-  def c_license_permission_type_identification_or_general(ordinal_number, d_info) # 「特定」か「一般」判定
-    constr_count = d_info.construction_license.size
-    if ordinal_number <= constr_count
-      element = d_info.construction_license[(ordinal_number.to_i) -1]
-      permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_identification_general_i18n")
-    end
+  def identification(license_permission_type)
+    license_permission_type == '特定' ? tag.span('特定', class: :circle) : '特定'
+  end
+
+  def general(license_permission_type)
+    license_permission_type == '一般' ? tag.span('一般', class: :circle) : '一般'
   end
 
   def construction_license_construction_type(ordinal_number, type, d_info)
@@ -270,18 +268,6 @@ module DocumentsHelper
   def company_name(worker_id)
     worker = Worker.find_by(uuid: worker_id)
     Business.find_by(id: worker&.business_id)&.name
-  end
-
-  # 書類作成会社の名前
-  def document_preparation_company_name
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
-      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-      Business.find_by(id: sub_request_order.business_id).name
-    # 下請けが自身の書類確認するとき
-    else
-      Business.find_by(id: request_order.business_id).name
-    end
   end
 
   # 作業員情報

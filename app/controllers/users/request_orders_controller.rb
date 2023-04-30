@@ -8,6 +8,7 @@ module Users
     before_action :set_business_occupations, only: %i[edit update]
     before_action :set_business_construction_licenses, only: %i[edit update]
     before_action :set_construction_manager_position_name, only: %i[update]
+    before_action :check_status_request_order, except: :show
 
     def show
       @sub_request_orders = @request_order.children
@@ -60,14 +61,18 @@ module Users
     end
 
     def submit
-      if @request_order.parent_id.nil? && @request_order.children.all? { |r| r.status == 'approved' }
-        @request_order.update_column(:status, 'approved')
-        flash[:success] = '下請発注情報を承認しました'
-      elsif @request_order.children.all? { |r| r.status == 'approved' }
-        @request_order.submitted!
-        flash[:success] = '下請発注情報を提出済にしました'
-      else
-        flash[:danger] = '下請けの書類がまだ未承認です'
+      begin
+        if @request_order.parent_id.nil? && @request_order.children.all? { |r| r.status == 'approved' }
+          @request_order.update_column(:status, 'approved')
+          flash[:success] = '下請発注情報を承認しました'
+        elsif @request_order.children.all? { |r| r.status == 'approved' }
+          @request_order.submitted!
+          flash[:success] = '下請発注情報を提出済にしました'
+        else
+          flash[:danger] = '下請けの書類がまだ未承認です'
+        end
+      rescue ActiveRecord::RecordInvalid
+        flash[:danger] = '現場情報を登録してください'
       end
       redirect_to users_request_order_path(@request_order)
     end
@@ -230,7 +235,7 @@ module Users
           subcon_construction_license_number_2nd:                                 BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_number,                                      # 建設許可証番号2
 
           subcon_retirement_benefit_mutual_aid_status:                            current_business.business_retirement_benefit_mutual_aid_status, # 退職金共済制度(加入状況)
-          subcon_employment_manager_name_id:                                      @business_workers_name_id.find_by(name: current_business.employment_manager_name)&.id, # 雇用管理責任者名
+          subcon_employment_manager_name:                                         @business_workers_name_id.find_by(name: current_business.employment_manager_name)&.name, # 雇用管理責任者名
           subcon_specific_skilled_foreigners_exist:                               current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
           subcon_foreign_construction_workers_exist:                              current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
           subcon_foreign_technical_intern_trainees_exist:                         current_business.foreign_technical_intern_trainees_exist_i18n, # 外国人技能実習生の従事の状況(有無)

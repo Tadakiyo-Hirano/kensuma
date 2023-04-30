@@ -21,7 +21,7 @@
     <div class="card">
       <div class="card-body">
         <%= form_with url: users_request_order_field_cars_path, method: :post, local: true do |f| %>
-          <%= f.label "追加する作業員を選択してください。" %>
+          <%= f.label "追加する車両を選択してください。" %>
           <div class="pb-1">
             <%= f.collection_select :car_ids, @car, :id, :vehicle_name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
           </div>
