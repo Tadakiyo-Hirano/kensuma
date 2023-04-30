@@ -226,14 +226,11 @@
     <div class="error-message"></div>
     <div class="list-group-item">
       <div class="form-check">
-        <% @business_construction_licenses.each do |id, license| %>
-          <% industry = BusinessIndustry.find_by(id: id) %>
-          <% if industry %>
-            <div class="form-check">
-              <%= f.check_box :construction_license, { multiple: true, checked: (@order.construction_license.present? && @order.construction_license&.include?(id.to_s)), id: "construction_license_number_#{id}" }, id, nil %>
-              <label for='construction_license_number_<%= id %>'><%= industry.construction_license_number %></label>
-            </div>
-          <% end %>
+        <% @order_construction_licenses&.each do |id, license| %>
+          <div class="form-check">
+            <%= f.check_box name = 'content[construction_license_number]', { multiple: true, checked: [@order.content&.[]('genecon_construction_license_number_1st'), @order.content&.[]('genecon_construction_license_number_2nd')].include?(license), id: "construction_license_number_#{id}" }, id, nil %>
+            <label for='construction_license_number_<%= id %>'><%= license %></label>
+          </div>
         <% end %>
       </div>
     </div>
@@ -401,7 +398,7 @@
         "order[submission_destination]": {
           required: true
         },
-        'order[construction_license][]': {
+        'order[content[construction_license_number]][]': {
           maxlength: 2
         },
         // "order[general_safety_responsible_person_name]": {
@@ -506,7 +503,7 @@
         "order[submission_destination]": {
           required: "提出先及び担当者を入力してください。"
         },
-        'order[construction_license][]': {
+        'order[content[construction_license_number]][]': {
           maxlength: "チェックボックスは最大2つまでしか選択できません。"
         },
         // "order[general_safety_responsible_person_name]": {
@@ -541,7 +538,7 @@
         // },
       },
       errorPlacement: function(error, element) {
-        if (element.attr("name") == "order[construction_license][]") {
+        if (element.attr("name") == "order[content[construction_license_number]][]") {
           error.appendTo(".error-message");
         } else {
           error.insertAfter(element);
