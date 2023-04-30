@@ -34,22 +34,22 @@ module DocumentsHelper
       @subcon
     end
   end
-  
+
   # 元請の許可業種
   def industry_name_genecon(n)
     Industry.find(BusinessIndustry.find(document_site_info.construction_license[n]).industry_id).name if document_site_info.construction_license[n].present?
   end
-  
+
   # 下請の許可業種
   def industry_name_subcon(n)
     Industry.find(BusinessIndustry.find(document_subcon_info.construction_license[n]).industry_id).name if document_subcon_info.construction_license[n].present?
   end
-  
+
   # 元請の建設許可証
   def businessindustry_genecon_info(n)
     BusinessIndustry.find(document_site_info.construction_license[n])
   end
-  
+
   # 下請の建設許可証
   def businessindustry_subcon_info(n)
     BusinessIndustry.find(document_subcon_info.construction_license[n])
@@ -125,17 +125,17 @@ module DocumentsHelper
     '有'             => '有',
     '無'             => '無'
   }.freeze
-  
+
   def engaged_yes(engaged_type)
     status = ENGAGED_TYPE[engaged_type]
     status == '有' ? tag.span(status, class: :circle) : '有'
   end
-  
+
   def engaged_no(engaged_type)
     status = ENGAGED_TYPE[engaged_type]
     status == '無' ? tag.span(status, class: :circle) : '無'
   end
-  
+
   # 会社の保険加入状況
   INSURANCE_TYPE = {
     'join'       => '加入',
@@ -202,7 +202,7 @@ module DocumentsHelper
   end
 
   def foreign_exist(foreign_type, d_info, yes_no) # 「有」か「無」判定
-  
+
     f_type = d_info&.content&.[]("subcon_#{foreign_type}")
     if f_type == "available"
       f_type = "有"
@@ -224,10 +224,10 @@ module DocumentsHelper
       else # 一切未選択
         []
       end
-  
+
     Occupation.where(industry_id: industry_ids)
   end
-  
+
   def constr_license_info(ordinal_number, document_type, column)
     constr_count = document_type.construction_license.size
     if ordinal_number <= constr_count
@@ -289,7 +289,7 @@ module DocumentsHelper
   def worker_str(worker, column)
     worker&.content&.[](column)
   end
-  
+
   # 作業員の性別を日本語に変換
   def worker_str_sex(worker, gender_key)
     gender = worker&.content&.[](gender_key)
@@ -302,7 +302,7 @@ module DocumentsHelper
       '性別不明'
     end
   end
-  
+
   # 作業員の日付情報
   def worker_date(worker, column)
     date = worker&.content&.[](column)
@@ -509,7 +509,7 @@ module DocumentsHelper
   def worker_occupation(worker)
     worker&.occupation_id.nil? ? nil : Occupation.find(worker.occupation_id).short_name
   end
-  
+
     # (12)工事・通勤用車両届
 
   # 車両情報(工事･通勤)
@@ -889,7 +889,7 @@ module DocumentsHelper
       '▢'
     end
   end
-  
+
   #  ➈外国人建設就労者建設現場入場届出書
   # 'status_of_residence'に'specified_skill'が入っていた場合「特定技能」にチェックを入れる
   def checked_box_specified_skill(checked_status)
@@ -1064,11 +1064,11 @@ module DocumentsHelper
   # アンケート設問：（法人規模-「はい」）
   def questionnaire_business_type_yes(worker)
     w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
+    r_name = document_info&.content&.[]("subcon_representative_name")
     if worker.content&.[]('business_owner_or_master') == true
-      tag.span('1. はい', class: :circle) 
+      tag.span('1. はい', class: :circle)
     elsif w_name == r_name
-      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status = document_info&.content&.[]("subcon_business_type")
       company_status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
     else
       '1. はい'
@@ -1078,20 +1078,20 @@ module DocumentsHelper
   # アンケート設問：（法人規模-「いいえ」）
   def questionnaire_business_type_no(worker)
     w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
+    r_name = document_info&.content&.[]("subcon_representative_name")
     if worker.content&.[]('business_owner_or_master') == true
       '2. いいえ'
     elsif w_name != r_name
       tag.span('2. いいえ', class: :circle)
     else
-      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status = document_info&.content&.[]("subcon_business_type")
       company_status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
     end
   end
 
   # アンケート設問：（労災保険-「はい」）
   def questionnaire_labor_insurance_yes(worker)
-    company_status = Business.find(document_info.business_id).business_type_i18n
+    company_status = document_info&.content&.[]("subcon_business_type")
     insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
 
     if questionnaire_business_type_yes(worker) == tag.span('1. はい', class: :circle)
@@ -1550,7 +1550,7 @@ module DocumentsHelper
   end
 
   # 下請発注情報詳細画面
-  
+
   # 現場情報-特殊車両-資格内容
   def target_license(worker_id)
       worker = Worker.find_by(id: worker_id)
@@ -1564,7 +1564,7 @@ module DocumentsHelper
       "作業員を選択してください。"
     end
   end
-  
+
   def use_company_info(target)
     if target == "company"
       @field_special_vehicles.distinct.pluck(:use_company_name)
