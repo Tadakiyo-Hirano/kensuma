@@ -467,10 +467,6 @@ ja:
         join: 加入
         not_join: 未加入
         not_coverd: 対象外
-      # business_pension_insurance_join_status: # 年金保険(加入状況)
-      #   welfare: 厚生年金
-      #   national: 国民年金
-      #   recipient: 受給者
       business_employment_insurance_join_status: # 雇用保険(加入状況)
         join: 加入
         not_join: 未加入
