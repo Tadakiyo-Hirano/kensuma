@@ -202,6 +202,7 @@ module Users
       end
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 全角スペースを半角スペースに変換
@@ -301,6 +302,7 @@ module Users
           converted_params[key]
         end
       end
+      # 外国人労働者の画像を削除する
       %i[passports residence_cards employment_conditions].each do |key|
         if converted_params[key].present?
           if japanese?(arg_array[0])
@@ -316,8 +318,27 @@ module Users
           converted_params[key]
         end
       end
+
+      # 健康保険の写し、キャリアアップシステムの写しの削除
+      insurance_attributes = converted_params[:worker_insurance_attributes]
+      %i[health_insurance_image career_up_images].each do |key|
+        case key
+        when :health_insurance_image
+          # 健康保険の写しの削除
+          if %w[health_insurance_association
+                japan_health_insurance_association
+                construction_national_health_insurance
+                national_health_insurance].exclude?(insurance_attributes[:health_insurance_type])
+            converted_params = insurance_attributes.merge(key => [])
+          end
+        when :career_up_images
+          # キャリアアップシステムの写しの削除
+          converted_params = converted_params.merge(key => []) if converted_params[:career_up_id].blank?
+        end
+      end
       converted_params
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
     def health_insurance_name_nil(health_insurance_type, params)

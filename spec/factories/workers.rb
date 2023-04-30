@@ -20,7 +20,8 @@ FactoryBot.define do
     experience_term_before_hiring { 1 }
     employment_contract { 1 }
     blank_term { 1 }
-    career_up_id { '12345678901234' }
+    career_up_id { nil }
+    career_up_images { nil }
     sex { 0 }
     driver_licences { %w[大型免許 普通免許] }
     driver_licence_number { '123456789012' }

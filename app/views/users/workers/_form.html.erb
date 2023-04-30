@@ -43,7 +43,9 @@
     <%# 事業主または一人親方 %>
     <%= f.label :business_owner_or_master %>
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-    <div class="md-3 list-group-item"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい</div><br>
+    <div class="md-3 list-group-item">
+      <%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい　　　※いいえの場合はチェックを外してください</div>
+    <br>
 
     <%# 役職 %>
     <%= f.label :job_title %>

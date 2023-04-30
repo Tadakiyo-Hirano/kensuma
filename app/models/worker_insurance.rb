@@ -43,14 +43,34 @@ class WorkerInsurance < ApplicationRecord
   validates :has_labor_insurance, absence: true, unless: :business_owner_or_master
   validates :severance_pay_mutual_aid_type, presence: true
   validates :severance_pay_mutual_aid_name, presence: true, if: :severance_pay_mutual_aid_name_valid?
+  validate :valid_health_insurance_image
 
   mount_uploaders :health_insurance_image, WorkerInsurancesUploader
 
   private
 
+  # 保険証の写しのバリデーション
+  def valid_health_insurance_image
+    # 健康保険が適用除外、未加入以外の場合、保険証の写しが必須
+    if health_insurance_image_required?
+      errors.add(:health_insurance_image, 'を入力してください') && return if health_insurance_image.blank?
+    else
+      errors.add(:health_insurance_image, 'は登録しないでください') && return if health_insurance_image.present?
+    end
+  end
+
   # 健康保険が健康保険組合もしくは建設国保であればtrue
   def insurance_name_valid?
     %w[health_insurance_association construction_national_health_insurance].include?(health_insurance_type)
+  end
+
+  # 健康保険が適用除外、未加入以外の場合true
+  def health_insurance_image_required?
+    %w[health_insurance_association
+      japan_health_insurance_association
+      construction_national_health_insurance
+      national_health_insurance
+    ].include?(health_insurance_type)
   end
 
   # 雇用保険が被保険者であればtrue
