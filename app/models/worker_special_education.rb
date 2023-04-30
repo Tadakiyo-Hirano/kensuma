@@ -2,7 +2,6 @@ class WorkerSpecialEducation < ApplicationRecord
   belongs_to :worker
   belongs_to :special_education
 
-  validates :worker_id, uniqueness: { scope: :special_education_id }
   validates :special_education_id, presence: true, if: :special_education_id_valid?
   validate :valid_images
 
@@ -15,8 +14,8 @@ class WorkerSpecialEducation < ApplicationRecord
   end
 
   def valid_images
-    if special_education_id.present? && images.blank?
-      errors.add(:images, '特別教育修了証明書の写しを入力してください') && return
+    if special_education_id.present? && (images.blank? || images == [])
+      errors.add(:images, 'を入力してください') && return
     end
   end
 end

@@ -378,7 +378,7 @@ ja:
         name: 名称
         description: 説明
         license_type: 種別
-      worker_license:
+      worker_licenses:
         license_id: 技能検定
         worker_id: 作業員
         images: 技能検定合格証明書の写し
@@ -386,14 +386,14 @@ ja:
         name: 名称
         short_name: 略称
         details: 引き当て番号
-      worker_skill_training:
+      worker_skill_trainings:
         skill_training_id: 技能講習
         worker_id: 作業員
         images: 技能講習修了証明書の写し
       special_education:
         name: 名称
         description: 説明
-      worker_special_education:
+      worker_special_educations:
         special_education_id: 特別教育
         worker_id: 作業員
         images: 特別教育修了証明書の写し
@@ -408,7 +408,7 @@ ja:
         has_labor_insurance: 労働保険特別加入
         severance_pay_mutual_aid_type: 建設業退職金共済手帳
         severance_pay_mutual_aid_name: その他（建設業退職金共済手帳）
-      worker_safety_health_education:
+      worker_safety_health_educations:
         safety_health_education_id: 安全衛生教育
         worker_id: 作業員
         images: 安全衛生教育修了証明書の写し

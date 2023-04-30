@@ -393,7 +393,11 @@
 
 <!-- 作業員資格情報ここから -->
 <div class="list-group">
-  <div style="font-size: 22px; font-weight: bold;"><%= f.label yield(:worker_licenses_info) %></div><!-- 作業員資格情報 -->
+  <div style="font-size: 22px; font-weight: bold;">
+    <%= f.label yield(:worker_licenses_info) %>
+  </div>
+  <span>　　※誤ってフォームを削除してしまった場合、フォームを再追加せず、下の更新ボタンを押してください</span>
+  <!-- 作業員資格情報 -->
   <!-- WorkerSpecialEducationテーブル情報ここから -->
   <%# 特別教育情報 %>
   <div class="list-group-item">

@@ -2,7 +2,6 @@ class WorkerLicense < ApplicationRecord
   belongs_to :worker
   belongs_to :license
 
-  validates :worker_id, uniqueness: { scope: :license_id }
   validates :license_id, presence: true, if: :license_valid?
   validate :valid_images
 
@@ -15,8 +14,8 @@ class WorkerLicense < ApplicationRecord
   end
 
   def valid_images
-    if license_id.present? && images.blank?
-      errors.add(:images, '技能検定合格証明書の写しを入力してください') && return
+    if license_id.present? && (images.blank? || images == [])
+      errors.add(:images, 'を入力してください') && return
     end
   end
 end
