@@ -293,21 +293,6 @@ RSpec.describe Business, type: :model do
       end
     end
 
-    # describe '#business_pension_insurance_join_status' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.business_pension_insurance_join_status = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-
-    #     it 'バリデーションのエラーが正しいこと' do
-    #       subject.valid?
-    #       expect(subject.errors.full_messages).to include('年金保険(削除予定)を入力してください')
-    #     end
-    #   end
-    # end
-
     describe '#business_employment_insurance_join_status' do
       context '存在しない場合' do
         before(:each) { subject.business_employment_insurance_join_status = nil }

@@ -4,6 +4,7 @@ module Users
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_order, except: %i[index new create]
     before_action :set_business_construction_licenses, only: %i[new create edit update]
+    before_action :check_system_chart_status, only: :system_chart_status
 
     def index
       @orders = current_business.orders
@@ -40,32 +41,8 @@ module Users
           site_agent_name:                     'テスト作業員1',
           site_agent_apply:                    %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
           supervising_engineer_name:           'テスト作業員1',
-          # supervising_engineer_qualification:           '監督技術者･主任技術者(資格内容)',
           supervising_engineer_check:          0,
           supervising_engineer_assistant_name: 'テスト作業員1'
-          # supervising_engineer_assistant_qualification: '監督技術者補佐(資格内容)',
-          # general_safety_responsible_person_name:       '統括安全衛生責任者名',
-          # vice_president_name:                          '副会長名',
-          # vice_president_company_name:                  '副会長会社',
-          # secretary_name:                               '書記名',
-          # health_and_safety_manager_name:               '元方安全衛生管理者名',
-          # general_safety_agent_name:                    '統括安全衛生責任者代行者',
-          # professional_engineer_name:                   '専門技術者名',
-          # professional_engineer_qualification:          '専門技術者(資格内容)',
-          # professional_engineer_details:                '専門技術者(担当工事内容)',
-          # safety_officer_name:                          '安全衛生担当役名',
-          # safety_officer_position_name:                 '安全衛生担当役員(役職名)',
-          # general_safety_manager_name:                  '総括安全衛生管理者名',
-          # general_safety_manager_position_name:         '総括安全衛生管理(役職名)',
-          # safety_manager_name:                          '安全管理者名',
-          # safety_manager_position_name:                 '安全管理者(役職名)',
-          # health_manager_name:                          '衛生管理者名',
-          # health_manager_position_name:                 '衛生管理者(役職名)',
-          # health_and_safety_promoter_name:              '安全衛生推進者名',
-          # health_and_safety_promoter_position_name:     '安全衛生推進者(役職名)',
-          # confirm_name:                                 '確認欄(氏名)',
-          # accept_confirm_date:                          Date.yesterday,
-          # subcontractor_name:                           '下請会社'
           # =============================================
         )
       else
@@ -109,6 +86,8 @@ module Users
       flash[:danger] = "#{@order.site_uu_id}を削除しました"
       redirect_to users_orders_url
     end
+
+    def system_chart_status; end
 
     # 専門技術者1
     def professional_engineer_1st_skill_training_options
@@ -160,6 +139,20 @@ module Users
       redirect_to users_orders_path, flash: { danger: '現場情報作成機能は有料サービスとなります' } if current_user.is_prime_contractor == false
     end
 
+    # 工事作業所災害防止協議会兼施工体系図,作業間連絡調整書の公開の有無の切り替え
+    def check_system_chart_status
+      request_order = RequestOrder.find_by(params[:uuid])
+      order = request_order.order
+      order.update_attribute(:system_chart_status, !order.system_chart_status)
+
+      if order.system_chart_status
+        flash[:success] = '工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を公開しました'
+      else
+        flash[:danger] = '工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を非公開にしました'
+      end
+      redirect_to users_request_order_path(uuid: request_order)
+    end
+
     # rubocop:disable Metrics/CyclomaticComplexity
     def order_params
       params.require(:order).permit(
@@ -196,23 +189,6 @@ module Users
         :health_and_safety_manager_name,
         :submission_destination,
         construction_license: []
-        # :status,
-        # :vice_president_name,
-        # :vice_president_company_name,
-        # :secretary_name,
-        # :safety_officer_name,
-        # :safety_officer_position_name,
-        # :general_safety_manager_name,
-        # :general_safety_manager_position_name,
-        # :safety_manager_name,
-        # :safety_manager_position_name,
-        # :health_manager_name,
-        # :health_manager_position_name,
-        # :health_and_safety_promoter_name,
-        # :health_and_safety_promoter_position_name,
-        # :confirm_name,
-        # :accept_confirm_date,
-        # :subcontractor_name
       ).merge(
         content: {
           genecon_name:                                                            current_business.name,                                             # 会社名

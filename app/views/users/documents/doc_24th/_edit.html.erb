@@ -1,6 +1,6 @@
 <!-- (24)参考資料第4号(新規入場者調査票) -->
 <%= form_with(model: @document, url: users_request_order_document_path, local: true, method: :patch) do |f| %>
-  <div class="card">  
+  <div class="card">
     <div class="card-body">
       <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
       <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -295,7 +295,7 @@
           <td class="doc_24_s7"></td>
           <td class="doc_24_s8" dir="ltr" colspan="3">事 業 者 名</td>
           <td class="doc_24_s17" dir="ltr" colspan="2">（一次）</td>
-          <td class="doc_24_s15" dir="ltr" colspan="7"><%= document_site_info.business.name %></td> <!-- 「一次会社名」24-015 -->
+          <td class="doc_24_s15" dir="ltr" colspan="7"><%= document_site_info&.content&.[]("genecon_name") %></td> <!-- 「一次会社名」24-015 -->
           <td class="doc_24_s17" dir="ltr" colspan="3">雇用年月日：</td>
           <td class="doc_24_s9" dir="ltr" colspan="8"><%= field_worker.content["hiring_on"] %></td> <!-- 「雇入年月日（年月日）」24-016 -->
           <td class="doc_24_s3"></td>
@@ -305,7 +305,7 @@
           <td class="doc_24_s3"></td>
           <td class="doc_24_s7"></td>
           <td class="doc_24_s8" dir="ltr" colspan="3">所 属 会 社</td>
-          <td class="doc_24_s96" dir="ltr" colspan="20"><%= Business.find(document_info.business_id).name %></td> <!-- 「会社名」24-017 -->
+          <td class="doc_24_s96" dir="ltr" colspan="20"><%= document_info&.content&.[]("subcon_name") %></td> <!-- 「会社名」24-017 -->
           <td class="doc_24_s3"></td>
           <td class="doc_24_s3"></td>
         </tr>
