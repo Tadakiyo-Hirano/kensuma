@@ -411,7 +411,7 @@
 					<td class="s2"></td>
 					<td class="s11" colspan="4" rowspan="2">一次会社名</td>
 					<td class="s15" colspan="8" rowspan="2">
-						<%= document_site_info.business.name %> <!-- 8-005 一次会社名 -->
+						<%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 8-005 一次会社名 -->
 					</td>
 					<td class="s2"></td>
 					<td class="s2"></td>
