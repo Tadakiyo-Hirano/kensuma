@@ -106,13 +106,48 @@ module ApplicationHelper
 
   # 電話番号のハイフン差し込み
   def phone_number_add_hyphen(phone_number)
-    case phone_number.size
-    when 10
-      add_hyphen([4, 2], phone_number)
-    when 11
-      add_hyphen([3, 4], phone_number)
-    else
-      phone_number
+    if phone_number.present?
+      case phone_number.size
+      when 10
+        add_hyphen([4, 2], phone_number)
+      when 11
+        add_hyphen([3, 4], phone_number)
+      else
+        phone_number
+      end
+    end
+  end
+
+  # 郵便番号のハイフン追加
+  def post_code_add_hyphen(post_code)
+    if post_code.present?
+      if post_code.size == 7
+        add_hyphen([3], post_code)
+      else
+        post_code
+      end
+    end
+  end
+
+  # キャリアアップidのハイフン追加
+  def career_up_id_add_hyphen(career_up_id)
+    if career_up_id.present?
+      if career_up_id.size == 14
+        add_hyphen([4, 4, 4], career_up_id)
+      else
+        career_up_id
+      end
+    end
+  end
+
+  # 運転免許証のハイフン追加
+  def driver_licence_number_add_hyphen(driver_licence_number)
+    if driver_licence_number.present?
+      if driver_licence_number.size == 12
+        add_hyphen([4, 4], driver_licence_number)
+      else
+        driver_licence_number
+      end
     end
   end
 
@@ -133,13 +168,8 @@ module ApplicationHelper
     }
   end
 
-  # 半角スペースのある文字列を配列にする
-  def format_array(driver_licences)
-    driver_licences.split(' ')
-  end
-
-  # 自動車運転免許を短縮表記に変換する
+  # 自動車運転免許を短縮表記の一文に変換する
   def driver_licence_short_form(driver_licence)
-    format_array(driver_licence).map { |licence| all_driver_licences_index_ry[licence] }.join(' ')
+    driver_licence.map { |licence| all_driver_licences_index_ry[licence] }.join('　')
   end
 end

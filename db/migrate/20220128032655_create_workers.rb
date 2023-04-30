@@ -29,13 +29,11 @@ class CreateWorkers < ActiveRecord::Migration[6.1]
       t.date :maturity_date # 在留期間満期日
       t.integer :confirmed_check # キャリアアップシステム登録情報が最新であることの確認済
       t.date :confirmed_check_date # キャリアアップシステム登録情報が最新であることの確認日
-      t.string :passport_front # パスポートの写し表
-      t.string :passport_back # パスポートの写し裏
-      t.string :residence_card_front # 在留カードの写し表
-      t.string :residence_card_back # 在留カードの写し裏
-      t.string :employment_condition # 受入企業と外国人建設就労者等との間の雇用条件書の写し
+      t.json :passports # パスポートの写し
+      t.json :residence_cards # 在留カードの写し
+      t.json :employment_conditions # 受入企業と外国人建設就労者等との間の雇用条件書の写し
       t.string :post_code # 郵便番号
-      t.string :driver_licence # 自動車運転免許
+      t.json :driver_licences # 自動車運転免許
       t.string :driver_licence_number # 免許証番号
       t.string :seal # 認印
       t.json :employee_cards # 従業員証

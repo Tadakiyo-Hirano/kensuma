@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.json "tem_industry_ids"
     t.string "employment_manager_name"
     t.integer "foreign_work_status_exist"
-    t.integer "specific_skilled_foreigners_exist", default: 1, null: false
-    t.integer "foreign_construction_workers_exist", default: 1, null: false
-    t.integer "foreign_technical_intern_trainees_exist", default: 1, null: false
+    t.integer "specific_skilled_foreigners_exist"
+    t.integer "foreign_construction_workers_exist"
+    t.integer "foreign_technical_intern_trainees_exist"
     t.integer "construction_license_status", null: false, comment: "建設許可証(取得状況) enum"
     t.string "foreigners_employment_manager"
     t.bigint "user_id", null: false
@@ -472,6 +472,8 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.boolean "system_chart_status", default: false, null: false
+    t.boolean "edit_status", default: false, null: false
     t.string "site_uu_id", null: false
     t.string "site_name", null: false
     t.string "order_name", null: false
@@ -509,7 +511,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "general_safety_agent_name"
     t.string "health_and_safety_manager_name", null: false
     t.string "submission_destination", null: false
-    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_orders_on_business_id"
   end
@@ -557,7 +558,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.string "foreman_name"
     t.string "registered_core_engineer_name"
     t.string "registered_core_engineer_qualification"
-    t.json "construction_license"
     t.json "content"
     t.index ["business_id"], name: "index_request_orders_on_business_id"
     t.index ["order_id"], name: "index_request_orders_on_order_id"
@@ -684,24 +684,13 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  create_table "worker_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "worker_medical_id", null: false
-    t.bigint "special_med_exam_id", null: false
-    t.string "others"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["special_med_exam_id"], name: "index_worker_exams_on_special_med_exam_id"
-    t.index ["worker_medical_id", "special_med_exam_id"], name: "index_worker_exams_on_worker_medical_id_and_special_med_exam_id", unique: true
-    t.index ["worker_medical_id"], name: "index_worker_exams_on_worker_medical_id"
-  end
-
   create_table "worker_insurances", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "health_insurance_type", null: false
     t.string "health_insurance_name"
     t.json "health_insurance_image"
     t.integer "pension_insurance_type", null: false
-    t.integer "employment_insurance_type", null: false
-    t.integer "has_labor_insurance", default: 0
+    t.integer "employment_insurance_type"
+    t.integer "has_labor_insurance"
     t.string "employment_insurance_number"
     t.integer "severance_pay_mutual_aid_type", null: false
     t.string "severance_pay_mutual_aid_name"
@@ -725,11 +714,13 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   create_table "worker_medicals", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "worker_id", null: false
     t.integer "is_med_exam", default: 0, null: false
-    t.date "med_exam_on", null: false
-    t.integer "max_blood_pressure", null: false
-    t.integer "min_blood_pressure", null: false
+    t.date "med_exam_on"
+    t.integer "max_blood_pressure"
+    t.integer "min_blood_pressure"
     t.integer "is_special_med_exam", default: 1, null: false
     t.date "special_med_exam_on"
+    t.json "special_med_exam_list"
+    t.string "special_med_exam_others"
     t.integer "health_condition", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -798,13 +789,11 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
     t.date "maturity_date"
     t.integer "confirmed_check"
     t.date "confirmed_check_date"
-    t.string "passport_front"
-    t.string "passport_back"
-    t.string "residence_card_front"
-    t.string "residence_card_back"
-    t.string "employment_condition"
+    t.json "passports"
+    t.json "residence_cards"
+    t.json "employment_conditions"
     t.string "post_code"
-    t.string "driver_licence"
+    t.json "driver_licences"
     t.string "driver_licence_number"
     t.string "seal"
     t.json "employee_cards"
@@ -842,8 +831,6 @@ ActiveRecord::Schema.define(version: 2023_03_13_135036) do
   add_foreign_key "request_orders", "orders"
   add_foreign_key "solvents", "businesses"
   add_foreign_key "special_vehicles", "businesses"
-  add_foreign_key "worker_exams", "special_med_exams"
-  add_foreign_key "worker_exams", "worker_medicals"
   add_foreign_key "worker_insurances", "workers"
   add_foreign_key "worker_licenses", "licenses"
   add_foreign_key "worker_licenses", "workers"

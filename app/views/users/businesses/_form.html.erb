@@ -38,12 +38,12 @@
     <% if business.career_up_card_copy.present? %>
       <% business.career_up_card_copy.each_with_index do |image, index| %>
         <%= image_tag(image.url) %>
-        <%= link_to "削除", update_career_up_card_copy_users_business_path(index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+        <%= link_to "削除", delete_career_up_card_copy_users_business_path(index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
       <% end %>
       <br>
     <% end %>
-    <%= f.file_field :career_up_card_copy, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
-    <br>
+    <%= f.file_field :career_up_card_copy, multiple: true %>
+    <br><br>
     <%= f.label :representative_name %><!-- 代表者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :representative_name, class: "form-control" %>
@@ -63,9 +63,6 @@
     <%= f.label :fax_number %><!-- FAX -->
     <%= f.telephone_field :fax_number, class: "form-control" %>
     <br>
-    <!--<%= f.label :email %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.email_field :email, class: "form-control", placeholder: "Enter email" %>-->
     <%= f.label :stamp_images %><br><!-- 社印 -->
     <% if business.stamp_images.present? %>
       <% business.stamp_images.each_with_index do |image, index| %>
@@ -83,7 +80,7 @@
     <br>
     <%= f.label :occupation_ids %><!-- 職種 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.collection_select :occupation_ids, occupation_default(@business), :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
+    <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
     <br>
     <br>
     <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
@@ -97,25 +94,20 @@
 <div class="list-group-item">
   <div style="font-size: 22px; font-weight: bold;"><%= f.label :social_insurance_info %></div><!-- 社会保険情報 -->
   <div class="list-group-item">
-    <div><%= f.label :business_health_insurance %></div><!-- 健康保険 -->
-    <div class="list-group-item">
-      <%= f.label :business_health_insurance_status %><!-- 加入状況 -->
-      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-      <div id="available-form-health-insurance" class="list-group-item">
-        <%= f.collection_radio_buttons(:business_health_insurance_status, Business.business_health_insurance_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
-        <% end %>
-      </div>
+    <div><%= f.label :business_health_insurance %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span></div><!-- 健康保険 -->
+    <div id="available-form-health-insurance" class="list-group-item">
+      <%= f.collection_radio_buttons(:business_health_insurance_status, Business.business_health_insurance_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+        <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+      <% end %>
       <br>
       <div id="hidden-form-health-insurance">
         <div class="list-group">
           <%= f.label :business_health_insurance_association %><!-- 組合名 -->
-          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
           <%= f.text_field :business_health_insurance_association, class: "form-control" %>
         </div><br>
         <div class="list-group">
           <%= f.label :business_health_insurance_office_number %><!-- 事業所整理記号及び事業所番号 -->
-          <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
           <%= f.text_field :business_health_insurance_office_number, class: "form-control" %>
         </div>
         <br>
@@ -124,53 +116,43 @@
   </div>
 
   <div class="list-group-item">
-    <div><%= f.label :business_welfare_pension_insurance %></div><!-- 厚生年金保険 -->
-    <div class="list-group-item">
-      <%= f.label :business_welfare_pension_insurance_join_status %><!-- 加入状況 -->
-      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-      <div id="available-form-welfare-pension-insurance" class="list-group-item">
-        <%= f.collection_radio_buttons(:business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
-        <% end %>
-      </div>
+    <div><%= f.label :business_welfare_pension_insurance %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span></div><!-- 厚生年金保険 -->
+    <div id="available-form-welfare-pension-insurance" class="list-group-item">
+      <%= f.collection_radio_buttons(:business_welfare_pension_insurance_join_status, Business.business_welfare_pension_insurance_join_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+        <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+      <% end %>
       <br>
       <div id="hidden-form-welfare-pension-insurance">
         <%= f.label :business_welfare_pension_insurance_office_number %><!-- 事業所整理番号 -->
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= f.text_field :business_welfare_pension_insurance_office_number, class: "form-control" %>
       </div>
     </div>
   </div>
   <div class="list-group-item">
-    <div><%= f.label :business_employment_insurance %></div><!-- 雇用保険 -->
-    <div class="list-group-item">
-      <%= f.label :business_employment_insurance_join_status %><!-- 加入状況 -->
-      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-      <div id="available-form-employmentーinsurance" class="list-group-item">
-        <%= f.collection_radio_buttons(:business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
-        <% end %>
-      </div>
-      <br>
+    <div><%= f.label :business_employment_insurance %><!-- 雇用保険 -->
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span></div>
+    <div id="available-form-employmentーinsurance" class="list-group-item">
+      <%= f.collection_radio_buttons(:business_employment_insurance_join_status, Business.business_employment_insurance_join_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+        <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+      <% end %>
+    <br>
       <div id="hidden-form-employmentーinsurance">
         <%= f.label :business_employment_insurance_number %><!-- 番号 -->
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
         <%= f.text_field :business_employment_insurance_number, class: "form-control" %>
       </div>
     </div>
   </div>
   <div class="list-group-item">
-    <div><%= f.label :business_retirement_benefit_mutual_aid %></div><!-- 退職金共済制度 -->
+    <div><%= f.label :business_retirement_benefit_mutual_aid %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span></div><!-- 退職金共済制度 -->
     <div class="list-group-item">
-      <%= f.label :business_retirement_benefit_mutual_aid_status %>
-      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-      <div class="list-group-item">
-        <%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
-        <% end %>
-      </div>
+      <%= f.collection_radio_buttons(:business_retirement_benefit_mutual_aid_status, Business.business_retirement_benefit_mutual_aid_statuses_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+        <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+      <% end %>
       <br>
     </div>
+    <br>
   </div>
 
   <div class="list-group-item">
@@ -219,8 +201,10 @@
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
     <div class="list-group-item">
       <div id="available-form-foreign-work">
-        <%= f.collection_radio_buttons(:foreign_work_status_exist, Business.foreign_work_status_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.foreign_work_status_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :foreign_work_status_exist, key, id: "foreign_work_status_exist_#{key}" %>
+          <%= label_tag "foreign_work_status_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
     </div>
@@ -229,24 +213,30 @@
       <%= f.label :specific_skilled_foreigners_exist %><!-- 一号特定技能外国人従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:specific_skilled_foreigners_exist, Business.specific_skilled_foreigners_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-            <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.specific_skilled_foreigners_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :specific_skilled_foreigners_exist, key, id: "specific_skilled_foreigners_exist_#{key}" %>
+          <%= label_tag "specific_skilled_foreigners_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
       <br>
       <%= f.label :foreign_construction_workers_exist %><!-- 外国人建設就労者従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:foreign_construction_workers_exist, Business.foreign_construction_workers_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.foreign_construction_workers_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :foreign_construction_workers_exist, key, id: "foreign_construction_workers_exist_#{key}" %>
+          <%= label_tag "foreign_construction_workers_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
       <br>
       <%= f.label :foreign_technical_intern_trainees_exist %><!-- 外国人技能実習生従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:foreign_technical_intern_trainees_exist, Business.foreign_technical_intern_trainees_exists_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <% Business.foreign_technical_intern_trainees_exists_i18n.each do |key, value| %>
+          <%= f.radio_button :foreign_technical_intern_trainees_exist, key, id: "foreign_technical_intern_trainees_exist_#{key}" %>
+          <%= label_tag "foreign_technical_intern_trainees_exist_#{key}", value %>
+          <span class="radio-spacing"></span>
         <% end %>
       </div>
       <br>
@@ -420,7 +410,7 @@
         "business[tem_industry_ids][]": {
           required: true
         },
-        "business_occupations[occupation_id][]": {
+        "business[occupation_ids][]": {
           required: true
         },
         // "business[employment_manager_name]": {
@@ -543,19 +533,27 @@
           required: "どちらかを選択してください。"
         },
         "business[specific_skilled_foreigners_exist]": {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         },
         "business[foreign_construction_workers_exist]": {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         },
         "business[foreign_technical_intern_trainees_exist]": {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         },
         // "business[foreigners_employment_manager]": {
         //   required: "外国人雇用管理責任者名を選択してください。"
         // },
       },
-      errorClass: "input_form_error"
+      errorClass: "input_form_error",
+      
+      errorPlacement: function(error, element) {
+        if (element.is(":radio")) {
+          error.insertBefore(element.parent());
+        } else {
+          error.insertBefore(element);
+        }     
+      }
     });
 
     // 入力欄を変更したときにバリデーションを実行
