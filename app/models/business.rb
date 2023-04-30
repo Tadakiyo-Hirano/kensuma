@@ -20,7 +20,6 @@ class Business < ApplicationRecord
   enum business_type: { corporation: 0, freelance: 1, Individual_five_over: 2, Individual_five_less: 3 }
   enum business_health_insurance_status: { join: 0, not_join: 1, not_coverd: 2 }, _prefix: true               # 健康保険(加入状況)
   enum business_welfare_pension_insurance_join_status: { join: 0, not_join: 1, not_coverd: 2 }, _prefix: true # 厚生年金保険(加入状況)
-  # enum business_pension_insurance_join_status: { welfare: 0, national: 1, recipient: 2 }                      # 年金保険(加入状況)
   enum business_employment_insurance_join_status: { join: 0, not_join: 1, not_coverd: 2 }, _prefix: true # 雇用保険(加入状況)
   enum business_retirement_benefit_mutual_aid_status: { construction_industry: 0, smaller_companies: 1, not_available: 2 }, _prefix: true # 退職金共済制度(加入状況)
   enum construction_license_status: { available: 0, not_available: 1 }, _prefix: true                         # 建設許可証(許可状況)
@@ -45,7 +44,6 @@ class Business < ApplicationRecord
   # validates :business_health_insurance_office_number, allow_blank: true, format: { with: /\A\d{6,8}\z/, message: 'は数字6桁または8桁で入力してください' } # 健康保険(事業所整理記号及び事業所番号) 一旦6桁から8桁で保存可能として実装
   validates :business_welfare_pension_insurance_join_status, presence: true # 厚生年金保険(加入状況)
   validates :business_welfare_pension_insurance_office_number, length: { is: 14, message: '(厚生年金保険)は数字14桁で入力してください' }, allow_blank: true # 厚生年金保険(事業所整理記号)
-  # validates :business_pension_insurance_join_status, presence: true # 年金保険(加入状況)
   validates :business_employment_insurance_join_status, presence: true # 雇用保険(加入状況)
   validates :business_employment_insurance_number, length: { is: 11, message: '(雇用保険)は数字11桁で入力してください' }, allow_blank: true # 雇用保険(番号)
   validates :business_retirement_benefit_mutual_aid_status, presence: true # 退職金共済制度(加入状況)

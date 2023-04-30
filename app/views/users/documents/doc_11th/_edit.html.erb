@@ -2,7 +2,7 @@
 <h1 align="center">編集中</h1>
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
 <%#= render 'users/documents/doc_19th/error_messages_for_doc_19th.html.erb' %>
-  <div class="card">  
+  <div class="card">
     <div class="card-body">
       <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
       <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -24,13 +24,13 @@
             <p>　所　長　名<span class="ml-3"><%= document_site_info.site_agent_name %>　殿　</span></p><!-- 元請会社の「現場代理人名」10-003 -->
           </div>
           <div class="company_name">
-            <p>一次会社名 <span class="ml-3"><%= document_site_info.business.name %></span></p><!--「一次会社名」10-004 -->
+            <p>一次会社名 <span class="ml-3"><%= document_site_info&.content&.[]("genecon_name") %></span></p><!--「一次会社名」10-004 -->
           </div>
           <div class="subcontractor">
-            <p>会社名(<%= sc_hierarchy(document_info)[0,1] %>)次<span class="ml-3"><%= Business.find(document_info.business_id).name %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
+            <p>会社名(<%= sc_hierarchy(document_info)[0,1] %>)次<span class="ml-3"><%= document_info&.content&.[]("subcon_name") %></span></p><!-- 「自社の施工体系(◯)次会社」11-005、「会社名」10-006 -->
           </div>
           <div class="representative">
-            <p>代表者名<span class="ml-3"><%= Business.find(document_info.business_id).representative_name %></span></p><!--「代表者名」10-007 -->
+            <p>代表者名<span class="ml-3"><%= document_info&.content&.[]("subcon_representative_name") %></span></p><!--「代表者名」10-007 -->
           </div>
           <div class="description">
             <p>

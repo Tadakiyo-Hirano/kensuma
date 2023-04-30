@@ -7,8 +7,6 @@ class AddBusinessHealthInsuranceStatusesToBusinesses < ActiveRecord::Migration[6
     add_column :businesses, :business_welfare_pension_insurance_join_status,   :integer, null: false  # 厚生年金保険(加入状況) enum
     add_column :businesses, :business_welfare_pension_insurance_office_number, :string                # 厚生年金保険(事業所整理記号)
 
-    # add_column :businesses, :business_pension_insurance_join_status,           :integer, null: false  # 年金保険(加入状況) enum
-
     add_column :businesses, :business_employment_insurance_join_status,        :integer, null: false  # 雇用保険(加入状況) enum
     add_column :businesses, :business_employment_insurance_number,             :string                # 雇用保険(番号)
 

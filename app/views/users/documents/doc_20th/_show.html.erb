@@ -158,7 +158,7 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s3"></td>
           <td class="doc_20_s9" colspan="3" rowspan="2">会社名</td>
-          <td class="doc_20_s10" colspan="10" rowspan="2"><%= Business.find(document_info.business_id).name %></td>
+          <td class="doc_20_s10" colspan="10" rowspan="2"><%= document_info.content&.[]('subcon_name') %></td>
           <!-- 20-004「会社名」-->
           <td class="doc_20_s3"></td>
         </tr>
@@ -245,9 +245,7 @@
           <td class="doc_20_s3"></td>
           <td class="doc_20_s3"></td>
           <td class="doc_20_s9" colspan="3" rowspan="2">代表者名</td>
-          <td class="doc_20_s10" colspan="9" rowspan="2">
-            <%= representative_name(document_info.business_id) %>
-          </td>
+          <td class="doc_20_s10" colspan="9" rowspan="2"><%= document_info.content&.[]('subcon_representative_name') %></td>
           <!--20-005「代表者名」-->
           <td class="doc_20_s14" rowspan="2"></td>
           <!--20-006「㊞」-->
@@ -1276,11 +1274,11 @@
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">雇用管理責任者</td>
           <td class="doc_20_s50" colspan="13">
-            <%= workers_post(Worker.find(request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id'))&.name) if request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id').present? %>
+            <%= workers_post(document_info.content&.[]('subcon_employment_manager_name')) %>
           </td>
           <!--「雇用管理責任者・役職名」20-042-->
           <td class="doc_20_s50" colspan="13">
-            <%= Worker.find(request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id'))&.name if request_order_info(request_order_id).content&.[]('subcon_employment_manager_name_id').present? %>
+            <%= document_info.content&.[]('subcon_employment_manager_name') %>
           </td>
           <!--「雇用管理責任者名」20-043-->
           <td class="doc_20_s3"></td>
@@ -1341,11 +1339,11 @@
           <td class="doc_20_s7"></td>
           <td class="doc_20_s42" colspan="14">工事担当責任者</td>
           <td class="doc_20_s50" colspan="13">
-            <%= workers_post(request_order_site_agent_name) %>
+            <%= workers_post(document_info.site_agent_name) %>
           </td>
           <!--「各会社の工事担当責任者の役職名」20-052-->
           <td class="doc_20_s50" colspan="13">
-            <%= request_order_site_agent_name %>
+            <%= document_info.site_agent_name %>
           </td>
           <!--「各会社の工事担当責任者」20-053-->
           <td class="doc_20_s3"></td>

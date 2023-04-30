@@ -34,36 +34,26 @@ module DocumentsHelper
       @subcon
     end
   end
-  
+
   # 元請の許可業種
   def industry_name_genecon(n)
     Industry.find(BusinessIndustry.find(document_site_info.construction_license[n]).industry_id).name if document_site_info.construction_license[n].present?
   end
-  
+
   # 下請の許可業種
   def industry_name_subcon(n)
     Industry.find(BusinessIndustry.find(document_subcon_info.construction_license[n]).industry_id).name if document_subcon_info.construction_license[n].present?
   end
-  
+
   # 元請の建設許可証
   def businessindustry_genecon_info(n)
     BusinessIndustry.find(document_site_info.construction_license[n])
   end
-  
+
   # 下請の建設許可証
   def businessindustry_subcon_info(n)
     BusinessIndustry.find(document_subcon_info.construction_license[n])
   end
-  # def document_info_for_prime_contractor_name
-  #   request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-  #   if request_order.parent_id.present?
-  #     loop do
-  #       request_order = request_order.parent
-  #       break if request_order.parent_id.nil?
-  #     end
-  #   end
-  #   Order.find(request_order.order_id).confirm_name
-  # end
 
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
@@ -75,6 +65,8 @@ module DocumentsHelper
     elsif request_order.parent_id && request_order.parent_id == request_order.parent&.id
       request_order
       # 下請けが存在しない場合
+    else
+      nil
     end
   end
 
@@ -87,12 +79,13 @@ module DocumentsHelper
   # 書類作成会社の名前
   def document_preparation_company_name
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
+    if params[:sub_request_order_uuid] && request_order.parent_id.nil? # 元請が下請の書類確認するとき
       sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-      Business.find_by(id: sub_request_order.business_id).name
-    # 下請けが自身の書類確認するとき
-    else
-      Business.find_by(id: request_order.business_id).name
+      sub_request_order.content&.[]('subcon_name')
+    elsif params[:sub_request_order_uuid].nil? && request_order.parent_id.nil? # 元請が自身の書類確認するとき
+      request_order.order.content&.[]('genecon_name')
+    else # 下請けが自身の書類確認するとき
+      request_order.content&.[]('subcon_name')
     end
   end
 
@@ -122,17 +115,17 @@ module DocumentsHelper
     '有'             => '有',
     '無'             => '無'
   }.freeze
-  
+
   def engaged_yes(engaged_type)
     status = ENGAGED_TYPE[engaged_type]
     status == '有' ? tag.span(status, class: :circle) : '有'
   end
-  
+
   def engaged_no(engaged_type)
     status = ENGAGED_TYPE[engaged_type]
     status == '無' ? tag.span(status, class: :circle) : '無'
   end
-  
+
   # 会社の保険加入状況
   INSURANCE_TYPE = {
     'join'       => '加入',
@@ -172,25 +165,20 @@ module DocumentsHelper
     end
   end
 
-  def c_license_permission_type_minister_or_governor(ordinal_number, d_info) # 「大臣」か「知事」判定
-    constr_count = d_info.construction_license.size
-    if ordinal_number <= constr_count
-      element = d_info.construction_license[(ordinal_number.to_i) -1]
-      permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_minister_governor_i18n").delete("許可")
-    end
+  def minister(license_permission_type)
+    license_permission_type == '大臣許可' ? tag.span('大臣', class: :circle) : '大臣'
   end
 
-  def construction_license_construction_certification(ordinal_number, owner, d_info)
-    permission_type = c_license_permission_type_minister_or_governor(ordinal_number, d_info)
-    permission_type == owner ? tag.span(owner, class: :circle) : owner
+  def governor(license_permission_type)
+    license_permission_type == '知事許可' ? tag.span('知事', class: :circle) : '知事'
   end
 
-  def c_license_permission_type_identification_or_general(ordinal_number, d_info) # 「特定」か「一般」判定
-    constr_count = d_info.construction_license.size
-    if ordinal_number <= constr_count
-      element = d_info.construction_license[(ordinal_number.to_i) -1]
-      permission_type = BusinessIndustry.find(element).send("construction_license_permission_type_identification_general_i18n")
-    end
+  def identification(license_permission_type)
+    license_permission_type == '特定' ? tag.span('特定', class: :circle) : '特定'
+  end
+
+  def general(license_permission_type)
+    license_permission_type == '一般' ? tag.span('一般', class: :circle) : '一般'
   end
 
   def construction_license_construction_type(ordinal_number, type, d_info)
@@ -204,7 +192,7 @@ module DocumentsHelper
   end
 
   def foreign_exist(foreign_type, d_info, yes_no) # 「有」か「無」判定
-  
+
     f_type = d_info&.content&.[]("subcon_#{foreign_type}")
     if f_type == "available"
       f_type = "有"
@@ -226,10 +214,10 @@ module DocumentsHelper
       else # 一切未選択
         []
       end
-  
+
     Occupation.where(industry_id: industry_ids)
   end
-  
+
   def constr_license_info(ordinal_number, document_type, column)
     constr_count = document_type.construction_license.size
     if ordinal_number <= constr_count
@@ -244,19 +232,24 @@ module DocumentsHelper
     end
   end
 
-  # (8)作業員名簿
+  # (6)(7)安全衛生管理に関する契約書
 
-  # 元請の確認欄
-  # def document_info_for_prime_contractor_name
-  #   request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-  #   if request_order.parent_id.present?
-  #     loop do
-  #       request_order = request_order.parent
-  #       break if request_order.parent_id.nil?
-  #     end
-  #   end
-  #   Order.find(request_order.order_id).confirm_name
-  # end
+  # 一次下請の情報
+  def primary_subcon_info_for_6th
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order.parent_id.nil?
+      RequestOrder.find_by(parent_id: request_order.id)
+    elsif request_order.depth == 1
+      request_order
+    else
+      while request_order.depth != 1
+        request_order = RequestOrder.find(request_order.parent_id)
+      end
+      request_order
+    end
+  end
+
+  # (8)作業員名簿
 
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
@@ -277,18 +270,6 @@ module DocumentsHelper
     Business.find_by(id: worker&.business_id)&.name
   end
 
-  # 書類作成会社の名前
-  def document_preparation_company_name
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    if params[:sub_request_order_uuid] && request_order.parent_id.nil?
-      sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_order_uuid])
-      Business.find_by(id: sub_request_order.business_id).name
-    # 下請けが自身の書類確認するとき
-    else
-      Business.find_by(id: request_order.business_id).name
-    end
-  end
-
   # 作業員情報
   def worker(worker_uuid)
     Worker.find_by(uuid: worker_uuid)&.name
@@ -303,7 +284,7 @@ module DocumentsHelper
   def worker_str(worker, column)
     worker&.content&.[](column)
   end
-  
+
   # 作業員の性別を日本語に変換
   def worker_str_sex(worker, gender_key)
     gender = worker&.content&.[](gender_key)
@@ -316,7 +297,7 @@ module DocumentsHelper
       '性別不明'
     end
   end
-  
+
   # 作業員の日付情報
   def worker_date(worker, column)
     date = worker&.content&.[](column)
@@ -523,7 +504,7 @@ module DocumentsHelper
   def worker_occupation(worker)
     worker&.occupation_id.nil? ? nil : Occupation.find(worker.occupation_id).short_name
   end
-  
+
     # (12)工事・通勤用車両届
 
   # 車両情報(工事･通勤)
@@ -733,12 +714,6 @@ module DocumentsHelper
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).id
   end
 
-  # 下請現場情報の現場代理人の取得
-  def request_order_site_agent_name
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.site_agent_name
-  end
-
   # 代表者名の役職取得
   def representative_name(business_id)
     Business.find(business_id).representative_name
@@ -815,17 +790,6 @@ module DocumentsHelper
     Business.find(id).name if id.present?
   end
 
-  #下請会社(協力会社)のidの取得
-  def subcontractor_id(number)
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
-    subcontractor_array = []
-    request_order_list.each do |record|
-      subcontractor_array << record.id
-    end
-    subcontractor_array.slice(number) if subcontractor_array[number].present?
-  end
-
   #下請会社(協力会社)の職種名の取得
   def subcontractor_occupation(id)
     RequestOrder.find_by(business_id: id).occupation if id.present?
@@ -833,7 +797,8 @@ module DocumentsHelper
 
   #入場作業員の人数の取得
   def number_of_field_workers_of_subcontractor(id)
-    number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).size
+    request_order_id = RequestOrder.find_by(business_id: id)&.id
+    number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: request_order_id).size
     if number_of_workers == 0
       return nil
     else
@@ -847,10 +812,25 @@ module DocumentsHelper
     Worker.where(business_id: current_business.business_id).pluck(:name)
   end
 
+  #元請の作業員の名前を取得
+  def name_of_genecon_workers
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    while request_order.parent_id.present?
+      request_order = RequestOrder.find(request_order.parent_id)
+    end
+    genecon_id = request_order.business_id
+    Worker.where(business_id: genecon_id).pluck(:name)
+  end
+
+  #下請けの作業員の名前を取得
+  def name_of_subcon_workers(business_id)
+    Worker.where(business_id: business_id).pluck(:name)
+  end
+
   #元請・下請け以下の入場作業員の取得
   def name_of_field_workers_request_order(id)
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    field_workers_name_request_order = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).pluck(:admission_worker_name)
+    request_order_id = RequestOrder.find_by(business_id: id)&.id
+    field_workers_name_request_order = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: request_order_id).pluck(:admission_worker_name)
   end
 
   # document.contentの時間表示
@@ -903,7 +883,7 @@ module DocumentsHelper
       '▢'
     end
   end
-  
+
   #  ➈外国人建設就労者建設現場入場届出書
   # 'status_of_residence'に'specified_skill'が入っていた場合「特定技能」にチェックを入れる
   def checked_box_specified_skill(checked_status)
@@ -1078,11 +1058,11 @@ module DocumentsHelper
   # アンケート設問：（法人規模-「はい」）
   def questionnaire_business_type_yes(worker)
     w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
+    r_name = document_info&.content&.[]("subcon_representative_name")
     if worker.content&.[]('business_owner_or_master') == true
-      tag.span('1. はい', class: :circle) 
+      tag.span('1. はい', class: :circle)
     elsif w_name == r_name
-      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status = document_info&.content&.[]("subcon_business_type")
       company_status != '法人' ? tag.span('1. はい', class: :circle) : '1. はい'
     else
       '1. はい'
@@ -1092,20 +1072,20 @@ module DocumentsHelper
   # アンケート設問：（法人規模-「いいえ」）
   def questionnaire_business_type_no(worker)
     w_name = worker&.content&.[]('name')
-    r_name = Business.find(document_info.business_id).representative_name
+    r_name = document_info&.content&.[]("subcon_representative_name")
     if worker.content&.[]('business_owner_or_master') == true
       '2. いいえ'
     elsif w_name != r_name
       tag.span('2. いいえ', class: :circle)
     else
-      company_status = Business.find(document_info.business_id).business_type_i18n
+      company_status = document_info&.content&.[]("subcon_business_type")
       company_status == '法人' ? tag.span('2. いいえ', class: :circle) : '2. いいえ'
     end
   end
 
   # アンケート設問：（労災保険-「はい」）
   def questionnaire_labor_insurance_yes(worker)
-    company_status = Business.find(document_info.business_id).business_type_i18n
+    company_status = document_info&.content&.[]("subcon_business_type")
     insurance_status = worker&.content&.[]('worker_insurance')['has_labor_insurance']
 
     if questionnaire_business_type_yes(worker) == tag.span('1. はい', class: :circle)
@@ -1564,7 +1544,7 @@ module DocumentsHelper
   end
 
   # 下請発注情報詳細画面
-  
+
   # 現場情報-特殊車両-資格内容
   def target_license(worker_id)
       worker = Worker.find_by(id: worker_id)
@@ -1578,7 +1558,7 @@ module DocumentsHelper
       "作業員を選択してください。"
     end
   end
-  
+
   def use_company_info(target)
     if target == "company"
       @field_special_vehicles.distinct.pluck(:use_company_name)

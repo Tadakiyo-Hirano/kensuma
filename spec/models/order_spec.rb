@@ -10,18 +10,6 @@ RSpec.describe Order, type: :model do
       expect(subject).to be_valid
     end
 
-    # describe '#status' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.status = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #       subject.valid?
-    #       expect(subject.errors.full_messages).to include('ステータスを入力してください')
-    #     end
-    #   end
-    # end
-
     describe '#site_uu_id' do
       context '存在しない場合' do
         before(:each) { subject.site_uu_id = nil }
@@ -327,44 +315,6 @@ RSpec.describe Order, type: :model do
       end
     end
 
-    # describe 'professional_engineer_construction_details' do
-    #   context '40文字の場合' do
-    #     before(:each) { subject.professional_engineer_construction_details = 'a' * 40 }
-
-    #     it 'バリデーションが通ること' do
-    #       expect(subject).to be_valid
-    #     end
-    #   end
-
-    #   context '41文字の場合' do
-    #     before(:each) { subject.professional_engineer_construction_details = 'a' * 41 }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
-    # describe '#general_safety_responsible_person_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.general_safety_responsible_person_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
-    # describe '#general_safety_agent_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.general_safety_agent_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
     describe '#supervising_engineer_name' do
       context '存在しない場合' do
         before(:each) { subject.supervising_engineer_name = nil }
@@ -395,58 +345,6 @@ RSpec.describe Order, type: :model do
       end
     end
 
-    # # 年間安全計画書
-    # describe '#safety_officer_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.safety_officer_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
-    # describe '#safety_officer_position_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.safety_officer_position_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
-    # # 工事作業所災害防止協議会兼施工体系図
-    # describe '#vice_president_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.vice_president_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
-    # describe '#vice_president_company_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.vice_president_company_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
-    # describe '#secretary_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.secretary_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
     describe '#health_and_safety_manager_name' do
       context '存在しない場合' do
         before(:each) { subject.health_and_safety_manager_name = nil }
@@ -456,27 +354,6 @@ RSpec.describe Order, type: :model do
         end
       end
     end
-
-    # 認証
-    # describe '#confirm_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.confirm_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
-
-    # describe '#subcontractor_name' do
-    #   context '存在しない場合' do
-    #     before(:each) { subject.subcontractor_name = nil }
-
-    #     it 'バリデーションに落ちること' do
-    #       expect(subject).to be_invalid
-    #     end
-    #   end
-    # end
   end
 
   describe '下請発注情報とのアソシエーションについて' do
