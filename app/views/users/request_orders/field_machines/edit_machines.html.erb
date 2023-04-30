@@ -34,8 +34,8 @@
                 <%= f.fields_for "field_machines[]", field_machine do |fm| %>
                   <tr>
                     <td><%= field_machine.machine_name %></td>
-                    <td><%= fm.date_field :carry_on_date, class: "form-control" %></td>
-                    <td><%= fm.date_field :carry_out_date, class: "form-control" %></td>
+                    <td><%= fm.date_field :carry_on_date, class: "form-control", required: true %></td>
+                    <td><%= fm.date_field :carry_out_date, class: "form-control", required: true %></td>
                   </tr>
                 <% end %>
               <% end %>
