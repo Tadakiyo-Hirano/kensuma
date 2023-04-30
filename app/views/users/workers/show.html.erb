@@ -219,6 +219,7 @@
           <td></td>
           <td></td>
         </tr>
+
         <!-- worker_medicalここから -->
 
         <%# 健康診断項目 %>
@@ -283,6 +284,15 @@
             <td><%= @worker.worker_medical.special_med_exam_on %><td>
             <td></td>
           </tr>
+          <tr>
+            <%# 特別健康診断種類 %>
+            <th>&emsp;&emsp;&emsp;&emsp;特別健康診断</th>
+            <td colspan="4">
+              <%= @worker.worker_medical.special_med_exam_list.map { |id| SpecialMedExam.find(id).name }.join(', ') %>
+              <%= ',' if @worker.worker_medical.special_med_exam_others.present? %>
+              <%= @worker.worker_medical.special_med_exam_others %>
+            </td>
+          </tr>
 
           <tr bgcolor="#dee2e6">
             <th></th>
@@ -290,23 +300,6 @@
             <th></th>
             <th></th>
           </tr>
-        
-          <% @worker.worker_medical.worker_exams.each do |worker_exam| %>
-            <tr>
-              <% if @worker.worker_medical.special_med_exams.first.id == worker_exam.special_med_exam_id %>
-                <%# 診断種類 %>
-                <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerExam.human_attribute_name(:special_med_exam_id) %></th>
-              <% else %>
-                <th></th>
-              <% end %>
-              <td colspan="4">
-                <%= worker_exam.special_med_exam.name %>
-                <% if worker_exam.special_med_exam.name == 'その他' %>
-                  （<%= worker_exam.others %>）
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
         <% end %>
 
         <!-- worker_examここまで -->
@@ -316,6 +309,8 @@
           <td><%= @worker.worker_medical.health_condition_i18n %><td>
           <td></td>
         </tr>
+        <!-- worker_medicalここまで -->
+
         <!-- worker_insuranceここから -->
         <tr >
           <%# 保険情報 %>
@@ -437,6 +432,8 @@
             <td></td>
           </tr>
         <% end %>
+        <!-- worker_special_educationここまで -->
+
         <!-- worker_skill_trainingここから -->
         <tr bgcolor="#dee2e6">
           <th></th>
@@ -471,6 +468,8 @@
             <td></td>
           </tr>
         <% end %>
+        <!-- worker_skill_trainingここまで -->
+
         <!-- worker_liceseここから -->
         <%# 技能検定 %>
         <tr bgcolor="#dee2e6">
@@ -508,7 +507,7 @@
           </tr>
         <% end %>
         <!-- worker_liceseここまで -->
-        <!-- worker_skill_trainingここまで -->
+
         <%# worker_safety_health_educationここから %>
         <tr bgcolor="#dee2e6">
           <th></th>

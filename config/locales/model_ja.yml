@@ -35,7 +35,6 @@ ja:
       document: 書類
       cover_document: 表紙
       worker_medical: 作業員の健康情報
-      worker_exam: 中間テーブル(特別健康診断種類マスタ)
       special_med_exam: 特別健康診断種類マスタ
       solvent: 有機溶剤情報
       machine: 持込機械情報
@@ -433,15 +432,14 @@ ja:
       worker_medical:
         id: 健康診断
         med_exam_on: 健康診断日
-        max_blood_pressure: 最高
-        min_blood_pressure: 最低
-        is_special_med_exam: 受診の有無
-        special_med_exam_on: 診断日
+        max_blood_pressure: 最高血圧 (mmHg)
+        min_blood_pressure: 最低血圧 (mmHg)
+        is_special_med_exam: 特別健康診断の受診状況
+        special_med_exam_on: 特別健康診断日
+        special_med_exam_list: 特別健康診断
+        special_med_exam_others: 特別健康診断(その他)
         health_condition: 最近の健康状態
-        is_med_exam: 受診の有無
-      worker_exam:
-        special_med_exam_id: 診断種類
-        others: その他
+        is_med_exam: 健康診断の受診
       special_med_exam:
         name: 名称
       solvent:

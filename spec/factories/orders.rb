@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :order do
-    # status { 0 }
     site_uu_id { SecureRandom.uuid }
     site_career_up_id { 12345678901234 }
     sequence(:site_name) { |n| "site_name#{n}" }

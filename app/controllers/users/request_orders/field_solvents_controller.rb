@@ -2,6 +2,7 @@ module Users::RequestOrders
   class FieldSolventsController < Users::Base
     before_action :set_request_order
     before_action :set_field_solvent, only: %i[show edit update destroy]
+    before_action :check_status_request_order
 
     def show; end
 

@@ -1,10 +1,10 @@
 # rubocop:disable all
 module Users
   class BusinessesController < Users::Base
-    before_action :set_business, except: %i[new create]
+    before_action :set_business, except: %i[new create occupation_select]
     before_action :set_business_workers_name, only: %i[edit update]
     before_action :business_present_access, only: %i[new create]
-    skip_before_action :business_nil_access, only: %i[new create]
+    skip_before_action :business_nil_access, only: %i[new create occupation_select]
 
     def new
       if Rails.env.development?
@@ -43,6 +43,7 @@ module Users
       if @business.save
         redirect_to users_orders_url
       else
+        session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
         render :new
       end
     end
@@ -81,9 +82,9 @@ module Users
       redirect_to edit_users_business_url
     end
 
-    def update_career_up_card_copy
+    def delete_career_up_card_copy
       # 残りcareer_up_card_copyを定義
-      remain_career_up_card_copy = @business.career_up_card_copy
+      remain_career_up_card_copy = @business.career_up_card_copy.to_a
       # career_up_card_copyを削除する
       deleted_career_up_card_copy = remain_career_up_card_copy.delete_at(params[:index].to_i)
       deleted_career_up_card_copy.try(:remove!)

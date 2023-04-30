@@ -411,7 +411,7 @@
 								<td class="doc_8th_s2"></td>
 								<td class="doc_8th_s11" colspan="4" rowspan="2">一次会社名</td>
 								<td class="doc_8th_s15" colspan="8" rowspan="2">
-									<%= document_site_info.business.name %> <!-- 8-005 一次会社名 -->
+									<%= primary_subcon_info(document_info)&.content&.[]("subcon_name") %> <!-- 8-005 一次会社名 -->
 								</td>
 								<td class="doc_8th_s2"></td>
 								<td class="doc_8th_s2"></td>
@@ -768,6 +768,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w1) %> <!-- 8-030 特別健康診断種類(1) -->
+									<%= worker_special_med_exam_other(w1) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w1) %> <!-- 8-040 新規入場時教育年月日(1) -->
@@ -884,6 +885,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w2) %> <!-- 8-030 特別健康診断種類(2) -->
+									<%= worker_special_med_exam_other(w2) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w2) %> <!-- 8-040 新規入場時教育年月日(2) -->
@@ -1000,6 +1002,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w3) %> <!-- 8-030 特別健康診断種類(3) -->
+									<%= worker_special_med_exam_other(w3) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w3) %> <!-- 8-040 新規入場時教育年月日(3) -->
@@ -1116,6 +1119,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w4) %> <!-- 8-030 特別健康診断種類(4) -->
+									<%= worker_special_med_exam_other(w4) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w4) %> <!-- 8-040 新規入場時教育年月日(4) -->
@@ -1232,6 +1236,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w5) %> <!-- 8-030 特別健康診断種類(5) -->
+									<%= worker_special_med_exam_other(w5) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w5) %> <!-- 8-040 新規入場時教育年月日(5) -->
@@ -1348,6 +1353,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w6) %> <!-- 8-030 特別健康診断種類(6) -->
+									<%= worker_special_med_exam_other(w6) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w6) %> <!-- 8-040 新規入場時教育年月日(6) -->
@@ -1464,6 +1470,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w7) %> <!-- 8-030 特別健康診断種類(7) -->
+									<%= worker_special_med_exam_other(w7) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w7) %> <!-- 8-040 新規入場時教育年月日(7) -->
@@ -1580,6 +1587,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w8) %> <!-- 8-030 特別健康診断種類(8) -->
+									<%= worker_special_med_exam_other(w8) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w8) %> <!-- 8-040 新規入場時教育年月日(8) -->
@@ -1696,6 +1704,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w9) %> <!-- 8-030 特別健康診断種類(9) -->
+									<%= worker_special_med_exam_other(w9) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w9) %> <!-- 8-040 新規入場時教育年月日(9) -->
@@ -1812,6 +1821,7 @@
 								</td>
 								<td class="doc_8th_s57_1" colspan="4" rowspan="3">
 									<%= worker_special_med_exam(w10) %> <!-- 8-030 特別健康診断種類(10) -->
+									<%= worker_special_med_exam_other(w10) %>
 								</td>
 								<td class="doc_8th_s59_1" colspan="4" rowspan="3">
 									<%= field_worker_education_date(w10) %> <!-- 8-040 新規入場時教育年月日(10) -->

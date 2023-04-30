@@ -1,5 +1,13 @@
 <!-- (9)全建統一様式第1号-甲-別紙(外国人建設就労者建設現場入場届出書) -->
+<%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
 <div class="document-outer">
+  <div class="card">  
+    <div class="card-body">
+      <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
+      <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
+    </div>
+  </div>
+
   <%= form_with(model: @document, url: (controller.controller_path == 'users/documents' ?
     users_request_order_document_path :
     users_request_order_sub_request_order_document_path),
@@ -176,10 +184,9 @@
                   <td class="doc_9_s7" dir="ltr"></td>
                   <td class="doc_9_s7" dir="ltr"></td>
                   <td class="doc_9_s8" dir="ltr" colspan="9">
-                  <%= f.text_field name = "content[date_submitted]",
-                    value: @document.content&.[]("date_submitted"),
-                    class: 'form-control'
-                  %> <!-- 9-002 提出日 -->
+                  <%= f.date_field :content, name: "document[content][date_submitted]",
+                                    value: doc_content_date(@document.content&.[]("date_submitted"))                 
+                %> <!-- 9-002 提出日 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
@@ -438,25 +445,25 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7">生年月日</td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    <%= worker_str(w1, "birth_day_on") %> <!-- 9-010 生年月日1-->
+                    <%= wareki(worker_str(w1, "birth_day_on")) %> <!-- 9-010 生年月日1-->
                   </td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    <%= worker_str(w2, "birth_day_on") %> <!-- 9-010 生年月日2-->
+                    <%= wareki(worker_str(w2, "birth_day_on")) %> <!-- 9-010 生年月日2-->
                   </td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    <%= worker_str(w3, "birth_day_on") %> <!-- 9-010 生年月日3-->
+                    <%= wareki(worker_str(w3, "birth_day_on")) %> <!-- 9-010 生年月日3-->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7">性別</td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    男<%# <%= worker_str(w1, "") %> <!-- ※未実装・カラム無※9-011 性別1-->
+                    <%= worker_str_sex(w1, "sex") %> <!-- 9-011 性別1-->
                   </td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    男<%# <%= worker_str(w2, "") %> <!-- ※未実装・カラム無※9-011 性別2-->
+                    <%= worker_str_sex(w2, "sex") %> <!-- 9-011 性別2-->
                   </td>
                   <td class="doc_9_s13" dir="ltr" colspan="9">
-                    男<%# <%= worker_str(w3, "") %> <!-- ※未実装・カラム無※9-011 性別3-->
+                    <%= worker_str_sex(w3, "sex") %> <!-- 9-011 性別3-->
                   </td>
                 </tr>
                 <tr style="height: 29px">
@@ -474,13 +481,13 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7" rowspan="2">従事させる業務</td>
                   <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
-                    資材搬入及び組み立て<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-013 従事させる業務1 -->
+                    <%= w1.foreign_job %> <!-- 9-013 従事させる業務1 -->
                   </td>
                   <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
-                    資材搬入及び組み立て<%# <%= worker_str(w2, "") %> <!-- ※未実装・カラム無※9-013 従事させる業務2 -->
+                    <%= w2.foreign_job %> <!-- 9-013 従事させる業務2 -->
                   </td>
                   <td class="doc_9_s13_2" dir="ltr" colspan="9" rowspan="2">
-                    資材搬入及び組み立て<%# <%= worker_str(w3, "") %> <!-- ※未実装・カラム無※9-013 従事させる業務3 -->
+                    <%= w3.foreign_job %> <!-- 9-013 従事させる業務3 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
@@ -488,91 +495,109 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7">現場入場の期間</td>
                   <td class="doc_9_s15" dir="ltr" colspan="4">
-                    令和５年 １２月 １１日<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期1 -->
+                    <%= wareki(w1.admission_date_start) if w1.admission_date_start.present? %><!-- 9-014 各作業員の入場年月日・始期1 -->
                   </td>
                   <td class="doc_9_s16" dir="ltr">～</td>
                   <td class="doc_9_s17" dir="ltr" colspan="4">
-                    令和６年 １２月 １１日<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期1 -->
+                    <%= wareki(w1.admission_date_end) if w1.admission_date_end.present? %><!-- 9-015 各作業員の入場年月日・終期1 -->
                   </td>
                   <td class="doc_9_s15" dir="ltr" colspan="4">
-                    令和５年 １２月 １１日<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期2 -->
+                    <%= wareki(w2.admission_date_start) if w2.admission_date_start.present? %> <!-- 9-014 各作業員の入場年月日・始期2 -->
                   </td>
                   <td class="doc_9_s16" dir="ltr">～</td>
                   <td class="doc_9_s17" dir="ltr" colspan="4">
-                    令和６年 １２月 １１日<%# <%= worker_str(w2, "")　%><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期2 -->
+                    <%= wareki(w2.admission_date_end) if w2.admission_date_end.present? %><!-- 9-015 各作業員の入場年月日・終期2 -->
                   </td>
                   <td class="doc_9_s15" dir="ltr" colspan="4">
-                    令和５年 １２月 １１日<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期3 -->
+                    <%= wareki(w3.admission_date_start) if w3.admission_date_start.present? %> <!-- 9-014 各作業員の入場年月日・始期3 -->
                   </td>
                   <td class="doc_9_s16" dir="ltr">～</td>
                   <td class="doc_9_s17" dir="ltr" colspan="4">
-                    令和６年 １２月 １１日<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期3 -->
+                    <%= wareki(w3.admission_date_end) if w3.admission_date_end.present? %> <!-- 9-015 各作業員の入場年月日・終期3 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7" rowspan="2">在留資格<br> ※いずれかをチェック</td>
-                  <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
-                  <td class="doc_9_s21" dir="ltr" colspan="8">
-                    特定活動(外国人建設就労者)<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)1 -->
+                  <td class="doc_9_s20" dir="ltr">
+                    <%=checked_box_construction_employment(w1.content&.[]('status_of_residence'))%>
                   </td>
-                  <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
                   <td class="doc_9_s21" dir="ltr" colspan="8">
-                    特定活動(外国人建設就労者)<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)2 -->
+                    特定活動(外国人建設就労者) <!-- 9-016 特定活動(外国人建設就労者)1 -->
                   </td>
-                  <td class="doc_9_s20" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s20" dir="ltr">
+                    <%=checked_box_construction_employment(w2.content&.[]('status_of_residence'))%>
+                  </td>
                   <td class="doc_9_s21" dir="ltr" colspan="8">
-                    特定活動(外国人建設就労者)<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-016 特定活動(外国人建設就労者)3 -->
+                    特定活動(外国人建設就労者) <!-- 9-016 特定活動(外国人建設就労者)2 -->
+                  </td>
+                  <td class="doc_9_s20" dir="ltr">
+                    <%=checked_box_construction_employment(w3.content&.[]('status_of_residence'))%>
+                  </td>
+                  <td class="doc_9_s21" dir="ltr" colspan="8">
+                    特定活動(外国人建設就労者) <!-- 9-016 特定活動(外国人建設就労者)3 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
-                  <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
-                  <td class="doc_9_s25" dir="ltr" colspan="8">
-                    特定技能<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-017 特定技能1 -->
+                  <td class="doc_9_s24" dir="ltr">
+                    <%=checked_box_specified_skill(w1.content&.[]('status_of_residence'))%>
                   </td>
-                  <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
                   <td class="doc_9_s25" dir="ltr" colspan="8">
-                    特定技能<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-017 特定技能2 -->
+                    特定技能 <!-- 9-017 特定技能1 -->
                   </td>
-                  <td class="doc_9_s24" dir="ltr"><%= checked_box(2)%></td>
+                  <td class="doc_9_s24" dir="ltr">
+                    <%=checked_box_specified_skill(w2.content&.[]('status_of_residence'))%>
+                  </td>
                   <td class="doc_9_s25" dir="ltr" colspan="8">
-                    特定技能<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-017 特定技能3 -->
+                    特定技能 <!-- 9-017 特定技能2 -->
+                  </td>
+                  <td class="doc_9_s24" dir="ltr">
+                    <%=checked_box_specified_skill(w3.content&.[]('status_of_residence'))%>
+                  </td>
+                  <td class="doc_9_s25" dir="ltr" colspan="8">
+                    特定技能 <!-- 9-017 特定技能3 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="7">在留期間満了日</td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="9">
-                    令和６年 １２月 １１日<%# <%= worker_str(w1, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日1 -->
+                    <%= wareki(worker_str(w1,"maturity_date")) %> <!-- 9-018 在留期間満期日1 -->
                   </td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="9">
-                    令和６年 １２月 １１日<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日2 -->
+                    <%= wareki(worker_str(w2,"maturity_date")) %> <!-- 9-018 在留期間満期日2 -->
                   </td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="9">
-                    令和６年 １２月 １１日<%# <%= worker_str(w3, "")　%> <!-- ※未実装・カラム無※9-018 在留期間満期日3 -->
+                    <%= wareki(worker_str(w3,"maturity_date")) %> <!-- 9-018 在留期間満期日3 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                 <td class="doc_9_s26" dir="ltr" colspan="7" rowspan="2">CCUS登録情報が最新であることの確認<br> ※登録義務のある者のみ</td>
-                <td class="doc_9_s27" dir="ltr">▢</td><!-- ※未実装・カラム無※9-019 確認済1 -->
+                <td class="doc_9_s27" dir="ltr">
+                  <%= checked_box_confirmed_check_date(w1.content&.[]('confirmed_check_date')) %>
+                </td><!-- 9-019 確認済1 -->
                 <td class="doc_9_s28" dir="ltr" colspan="8">確認済み</td>
-                <td class="doc_9_s27" dir="ltr">▢</td><!-- ※未実装・カラム無※9-019 確認済2 -->
+                <td class="doc_9_s27" dir="ltr">
+                  <%= checked_box_confirmed_check_date(w2.content&.[]('confirmed_check_date')) %>
+                </td><!-- 9-019 確認済2 -->
                 <td class="doc_9_s28" dir="ltr" colspan="8">確認済み</td>
-                <td class="doc_9_s27" dir="ltr">▢</td><!-- ※未実装・カラム無※9-019 確認済3 -->
+                <td class="doc_9_s27" dir="ltr">
+                  <%= checked_box_confirmed_check_date(w3.content&.[]('confirmed_check_date')) %>
+                </td><!-- 9-019 確認済3 -->
                 <td class="doc_9_s28" dir="ltr" colspan="8">確認済み</td>
               </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
                   <td class="doc_9_s31" dir="ltr" colspan="5">
-                    令和5年 ６月 １１日）<%# <%= worker_str(w1, "")　%><!-- ※未実装・カラム無※9-020 確認日1 -->
+                    <%= wareki(worker_str(w1, "confirmed_check_date")) %><!-- 9-020 確認日1 -->
                   </td>
                   <td class="doc_9_s40" dir="ltr">）</td>
                   <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
                   <td class="doc_9_s31" dir="ltr" colspan="5">
-                    令和5年 ６月 １１日）<%# <%= worker_str(w2, "")　%> <!-- ※未実装・カラム無※9-020 確認日2 -->
+                    <%= wareki(worker_str(w2, "confirmed_check_date")) %> <!-- 9-020 確認日2 -->
                   </td>
                   <td class="doc_9_s40" dir="ltr">）</td>
                   <td class="doc_9_s5" dir="ltr" colspan="3"> （確認日：</td>
                   <td class="doc_9_s31" dir="ltr" colspan="5">
-                    令和5年 ６月 １１日）<%# <%= worker_str(w3, "")　%><!-- ※未実装・カラム無※9-020 確認日3 -->
+                    <%= wareki(worker_str(w3, "confirmed_check_date")) %><!-- 9-020 確認日3 -->
                   </td>
                   <td class="doc_9_s40" dir="ltr">）</td>
                 </tr>
@@ -627,36 +652,36 @@
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="9">就労場所</td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="25">
-                    東京都サイト区1-2-1<%# <%= document_site_info.business.work_preace %><!-- ※未実装・カラム無※9-21 就労場所 -->
+                    <%= w1.foreign_work_place %><!-- 9-021 就労場所 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="9">従事させる業務の内容</td>
                   <td class="doc_9_s11_2" dir="ltr" colspan="25">
-                    資材搬入及び組み立て<%# <%= document_site_info.business.working %><!-- ※未実装・カラム無※9-022 従事させる業務の内容 -->
+                    <%= w1.foreign_job_description %><!-- 9-022 従事させる業務の内容 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="9">従事させる期間（計画期間）</td>
                   <td class="doc_9_s15" dir="ltr" colspan="12">
-                    令和５年 １２月 １１日<%# <%= document_site_info.business.working_start_date %><!-- ※未実装・カラム無※9-014 各作業員の入場年月日・始期1 -->
+                    <%= wareki(w1.foreign_date_start) %><!-- 9-014 各作業員の入場年月日・始期1 -->
                   </td>
                   <td class="doc_9_s16" dir="ltr" colspan="1">～</td>
                   <td class="doc_9_s17" dir="ltr" colspan="12">
-                    令和６年 １２月 １１日<%# <%= document_site_info.business.working_end_date %><!-- ※未実装・カラム無※9-015 各作業員の入場年月日・終期1 -->
+                    <%= wareki(w1.foreign_date_end) %><!-- 9-015 各作業員の入場年月日・終期1 -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
                   <td class="doc_9_s10" dir="ltr" colspan="9">責任者（連絡窓口）</td>
                   <td class="doc_9_s5" dir="ltr" colspan="2">役職</td>
                   <td class="doc_9_s32" dir="ltr" colspan="6">
-                    部長<%# <%= document_site_info.business.foreign_worker_person_in_charge_director %> <!-- ※未実装・カラム無※9-024 責任者・役職 -->
+                    <%= worker_str(w1, "job_title") %> <!-- 9-024 責任者・役職 -->
                   <td class="doc_9_s5" dir="ltr" colspan="2">氏名</td>
                   <td class="doc_9_s32" dir="ltr" colspan="6">
-                    責任 徒労<%# <%= document_site_info.business.foreign_worker_person_in_charge_name %> <!-- ※未実装・カラム無※9-025 責任者・氏名 -->
+                    <%= @business.foreigners_employment_manager %> <!-- 9-025 責任者・氏名 -->
                   <td class="doc_9_s5" dir="ltr" colspan="2">連絡先</td>
                   <td class="doc_9_s43" dir="ltr" colspan="7">
-                    1234-5678-9101<%# <%= document_site_info.business.foreign_worker_person_in_charge_tel %> <!-- ※未実装・カラム無※9-026 責任者・連絡先(TEL) -->
+                    <%= phone_number_add_hyphen(worker_str(w1, "my_phone_number")) %> <!-- 9-026 責任者・連絡先(TEL) -->
                   </td>
                 </tr>
                 <tr style="height: 29px">
@@ -698,4 +723,5 @@
       </div>
     <% end %>
   <% end %>
+<% end %>
 </div>
