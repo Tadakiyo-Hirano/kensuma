@@ -204,7 +204,15 @@
           required: "任意保険会社を選択してください。"
         },
       },
-      errorClass: "input_form_error"
+      
+      errorPlacement: function(error, element) {
+        // radioとcheckboxのみ表示位置を個別調整
+        if (element.is(":radio") || element.is(":checkbox")) {
+          error.insertBefore(element.closest('.list-group-item'));
+        } else {
+          error.insertBefore(element);
+        }
+      }
     });
     // 入力欄を変更したときにバリデーションを実行
     $(".car-form-validation").change(function () {

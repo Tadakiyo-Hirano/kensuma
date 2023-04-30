@@ -56,10 +56,10 @@
 
 }
 
-label.input_form_error {
+label[id$="-error"] {
   color: red;
   font-weight: normal !important;
-  text-indent: 2rem
+  text-indent: 1rem
 }
 
 .rounded {
