@@ -40,9 +40,9 @@ ja:
       machine: 持込機械情報
     attributes:
       user:
-      # 下記記述は、businessのカラムと名称が重複が発生してしまうので、どちらを使うか決まるまで一旦コメントアウト
-      #   name: 会社名
-      #   email: 会社メール
+        # 下記記述は、businessのカラムと名称が重複が発生してしまうので、どちらを使うか決まるまで一旦コメントアウト
+        #   name: 会社名
+        #   email: 会社メール
         role: 権限
         is_prime_contractor: 元請け
       business:
@@ -72,7 +72,6 @@ ja:
         business_welfare_pension_insurance: 厚生年金保険
         business_welfare_pension_insurance_join_status: 加入状況
         business_welfare_pension_insurance_office_number: 事業所整理記号
-        # business_pension_insurance_join_status: 年金保険(削除予定)
         business_employment_insurance: 雇用保険
         business_employment_insurance_join_status: 加入状況
         business_employment_insurance_number: 番号
@@ -86,7 +85,6 @@ ja:
         foreign_construction_workers_exist: 外国人建設就労者の従事の状況
         foreign_technical_intern_trainees_exist: 外国人技能実習生の従事の状況
         foreigners_employment_manager: 外国人雇用管理責任者名
-        # employment_manager_post: 雇用管理責任者(役職名)
       occupation:
         name: 職種名
       business_occupation:

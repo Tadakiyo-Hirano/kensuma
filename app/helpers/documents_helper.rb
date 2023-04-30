@@ -54,16 +54,6 @@ module DocumentsHelper
   def businessindustry_subcon_info(n)
     BusinessIndustry.find(document_subcon_info.construction_license[n])
   end
-  # def document_info_for_prime_contractor_name
-  #   request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-  #   if request_order.parent_id.present?
-  #     loop do
-  #       request_order = request_order.parent
-  #       break if request_order.parent_id.nil?
-  #     end
-  #   end
-  #   Order.find(request_order.order_id).confirm_name
-  # end
 
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
@@ -242,19 +232,24 @@ module DocumentsHelper
     end
   end
 
-  # (8)作業員名簿
+  # (6)(7)安全衛生管理に関する契約書
 
-  # 元請の確認欄
-  # def document_info_for_prime_contractor_name
-  #   request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-  #   if request_order.parent_id.present?
-  #     loop do
-  #       request_order = request_order.parent
-  #       break if request_order.parent_id.nil?
-  #     end
-  #   end
-  #   Order.find(request_order.order_id).confirm_name
-  # end
+  # 一次下請の情報
+  def primary_subcon_info_for_6th
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order.parent_id.nil?
+      RequestOrder.find_by(parent_id: request_order.id)
+    elsif request_order.depth == 1
+      request_order
+    else
+      while request_order.depth != 1
+        request_order = RequestOrder.find(request_order.parent_id)
+      end
+      request_order
+    end
+  end
+
+  # (8)作業員名簿
 
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
@@ -719,12 +714,6 @@ module DocumentsHelper
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid]).id
   end
 
-  # 下請現場情報の現場代理人の取得
-  def request_order_site_agent_name
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order.site_agent_name
-  end
-
   # 代表者名の役職取得
   def representative_name(business_id)
     Business.find(business_id).representative_name
@@ -801,17 +790,6 @@ module DocumentsHelper
     Business.find(id).name if id.present?
   end
 
-  #下請会社(協力会社)のidの取得
-  def subcontractor_id(number)
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    request_order_list = RequestOrder.where(order_id: request_order.order_id).where.not(parent_id: nil)
-    subcontractor_array = []
-    request_order_list.each do |record|
-      subcontractor_array << record.id
-    end
-    subcontractor_array.slice(number) if subcontractor_array[number].present?
-  end
-
   #下請会社(協力会社)の職種名の取得
   def subcontractor_occupation(id)
     RequestOrder.find_by(business_id: id).occupation if id.present?
@@ -819,7 +797,8 @@ module DocumentsHelper
 
   #入場作業員の人数の取得
   def number_of_field_workers_of_subcontractor(id)
-    number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).size
+    request_order_id = RequestOrder.find_by(business_id: id)&.id
+    number_of_workers = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: request_order_id).size
     if number_of_workers == 0
       return nil
     else
@@ -833,10 +812,25 @@ module DocumentsHelper
     Worker.where(business_id: current_business.business_id).pluck(:name)
   end
 
+  #元請の作業員の名前を取得
+  def name_of_genecon_workers
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    while request_order.parent_id.present?
+      request_order = RequestOrder.find(request_order.parent_id)
+    end
+    genecon_id = request_order.business_id
+    Worker.where(business_id: genecon_id).pluck(:name)
+  end
+
+  #下請けの作業員の名前を取得
+  def name_of_subcon_workers(business_id)
+    Worker.where(business_id: business_id).pluck(:name)
+  end
+
   #元請・下請け以下の入場作業員の取得
   def name_of_field_workers_request_order(id)
-    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
-    field_workers_name_request_order = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: id).pluck(:admission_worker_name)
+    request_order_id = RequestOrder.find_by(business_id: id)&.id
+    field_workers_name_request_order = FieldWorker.where(field_workerable_type: RequestOrder).where(field_workerable_id: request_order_id).pluck(:admission_worker_name)
   end
 
   # document.contentの時間表示
