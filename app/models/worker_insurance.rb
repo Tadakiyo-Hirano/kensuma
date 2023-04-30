@@ -54,8 +54,8 @@ class WorkerInsurance < ApplicationRecord
     # 健康保険が適用除外、未加入以外の場合、保険証の写しが必須
     if health_insurance_image_required?
       errors.add(:health_insurance_image, 'を入力してください') && return if health_insurance_image.blank?
-    else
-      errors.add(:health_insurance_image, 'は登録しないでください') && return if health_insurance_image.present?
+    elsif health_insurance_image.present?
+      errors.add(:health_insurance_image, 'は登録しないでください') && return
     end
   end
 
@@ -67,10 +67,9 @@ class WorkerInsurance < ApplicationRecord
   # 健康保険が適用除外、未加入以外の場合true
   def health_insurance_image_required?
     %w[health_insurance_association
-      japan_health_insurance_association
-      construction_national_health_insurance
-      national_health_insurance
-    ].include?(health_insurance_type)
+       japan_health_insurance_association
+       construction_national_health_insurance
+       national_health_insurance].include?(health_insurance_type)
   end
 
   # 雇用保険が被保険者であればtrue
