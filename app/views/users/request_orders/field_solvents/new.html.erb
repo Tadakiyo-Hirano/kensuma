@@ -91,35 +91,37 @@
       <!-- 使用期間(始期) -->
       <%= f.label :usage_period_start %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :usage_period_start, class: "form-control", style: "width: auto;" %>
       <br>
-      <%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
-      <br><br>
 
       <!-- 使用期間(終期) -->
       <%= f.label :usage_period_end %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.date_field :usage_period_end, class: "form-control", style: "width: auto;"%>
       <br>
-      <%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
-      <br><br>
 
       <!-- 作業手順書の添付 -->
       <%= f.label :working_process, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.collection_radio_buttons(:working_process, FieldSolvent.working_processes_i18n, :first, :last, class: "radio") do |b| %>
-        <div class="radio">
-          <%= b.label { b.radio_button + b.text } %>
-        </div>
-      <% end %><br>
-
+      <div class="list-group-item">
+        <%= f.collection_radio_buttons(:working_process, FieldSolvent.working_processes_i18n, :first, :last, { checked: @field_solvent&.working_process? ? @field_solvent&.working_process : false }, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
+      </div>
+      <br>
       <!-- SDS(安全データシート)の添付 -->
       <%= f.label :sds, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.collection_radio_buttons(:sds, FieldSolvent.sds_i18n, :first, :last, class: "radio") do |b| %>
-        <div class="radio">
-          <%= b.label { b.radio_button + b.text } %>
-        </div>
-      <% end %><br>
-
+      <div class="list-group-item">
+        <%= f.collection_radio_buttons(:sds, FieldSolvent.sds_i18n, :first, :last, { checked: @busfield_solventiness&.sds? ? @field_solvent&.sds : false }, class: "radio") do |b| %>
+          <div class="radio">
+            <%= b.label { b.radio_button + b.text } %>
+          </div>
+        <% end %>
+      </div>
+      <br>
       <!-- SDS(安全シート)の写し -->
       <%= f.label :sds_images %>
       <%= f.file_field :sds_images, accept: 'image/jpg, image/jpeg, image/png, application/pdf', multiple: true, class: "form-control" %>
@@ -142,6 +144,7 @@
       <br>
 
       <script>
+        // 商品1-商品5までのname属性値名末尾文字
         const numString = ["one", "two", "three", "four", "five"]
         $(function(){
           $.each(function(key){
@@ -230,11 +233,20 @@
                 required: "換気等対策を入力してください。"
               },
             },
-            errorClass: "input_form_error"
+
+            errorPlacement: function(error, element) {
+              // radioとcheckboxのみ表示位置を個別調整
+              if (element.is(":radio") || element.is(":checkbox")) {
+                error.insertBefore(element.closest('.list-group-item'));
+              } else {
+                error.insertBefore(element);
+              }
+            }
           });
           // 入力欄を変更したときにバリデーションを実行
           $(".field_solvent-form-validation").change(function () {
-            for(i = 0; i < 5; i++){
+            //商品名が選択された場合のみ搬入量を必須入力にする
+            for(i = 0; i < numString.length; i++){
               if ($(`select[name="field_solvent[solvent_name_${numString[i]}]"]`).val() == '') {
                 $(`input[name="field_solvent[carried_quantity_${numString[i]}]"]`).rules('remove', 'required');
               } else {

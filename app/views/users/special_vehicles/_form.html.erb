@@ -21,13 +21,14 @@
 <%= f.text_field :control_number, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:control_number) %>
 <br>
 <%= f.label :vehicle_type %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-<% SpecialVehicle.vehicle_types_i18n.each do |key, value| %>
-<%= f.radio_button :vehicle_type, key, id: "vehicle_type_#{key}" %>
-  <%= label_tag "vehicle_type_#{key}", value %>
-  <span class="radio-spacing"></span>
-<% end %>
-<br>
+  <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+  <div class="list-group-item">
+    <%= f.collection_radio_buttons(:vehicle_type, SpecialVehicle.vehicle_types_i18n.each, :first, :last, { checked: @special_vehicle&.vehicle_type? ? @special_vehicle&.vehicle_type : false }) do |b| %>
+      <div>
+        <%= b.label { b.radio_button + b.text } %>
+      </div>
+    <% end %>
+  </div>
 <br>
 <%= f.label :owning_company_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -162,7 +163,15 @@
           required: "年月日を入力または選択してください。"
         },
       },
-      errorClass: "input_form_error"
+
+      errorPlacement: function(error, element) {
+        // radioとcheckboxのみ表示位置を個別調整
+        if (element.is(":radio") || element.is(":checkbox")) {
+          error.insertBefore(element.closest('.list-group-item'));
+        } else {
+          error.insertBefore(element);
+        }
+      }
     });
     // 入力欄を変更したときにバリデーションを実行
     $(".special-vehicle-form-validation").change(function () {
