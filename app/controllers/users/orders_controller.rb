@@ -4,6 +4,7 @@ module Users
     before_action :set_business_workers_name, only: %i[new create edit update]
     before_action :set_order, except: %i[index new create]
     before_action :set_business_construction_licenses, only: %i[new create edit update]
+    before_action :check_system_chart_status, only: :system_chart_status
 
     def index
       @orders = current_business.orders
@@ -40,32 +41,8 @@ module Users
           site_agent_name:                     'テスト作業員1',
           site_agent_apply:                    %w[基本契約約款の通り 契約書に準拠する 口頭及び文書による].sample,
           supervising_engineer_name:           'テスト作業員1',
-          # supervising_engineer_qualification:           '監督技術者･主任技術者(資格内容)',
           supervising_engineer_check:          0,
           supervising_engineer_assistant_name: 'テスト作業員1'
-          # supervising_engineer_assistant_qualification: '監督技術者補佐(資格内容)',
-          # general_safety_responsible_person_name:       '統括安全衛生責任者名',
-          # vice_president_name:                          '副会長名',
-          # vice_president_company_name:                  '副会長会社',
-          # secretary_name:                               '書記名',
-          # health_and_safety_manager_name:               '元方安全衛生管理者名',
-          # general_safety_agent_name:                    '統括安全衛生責任者代行者',
-          # professional_engineer_name:                   '専門技術者名',
-          # professional_engineer_qualification:          '専門技術者(資格内容)',
-          # professional_engineer_details:                '専門技術者(担当工事内容)',
-          # safety_officer_name:                          '安全衛生担当役名',
-          # safety_officer_position_name:                 '安全衛生担当役員(役職名)',
-          # general_safety_manager_name:                  '総括安全衛生管理者名',
-          # general_safety_manager_position_name:         '総括安全衛生管理(役職名)',
-          # safety_manager_name:                          '安全管理者名',
-          # safety_manager_position_name:                 '安全管理者(役職名)',
-          # health_manager_name:                          '衛生管理者名',
-          # health_manager_position_name:                 '衛生管理者(役職名)',
-          # health_and_safety_promoter_name:              '安全衛生推進者名',
-          # health_and_safety_promoter_position_name:     '安全衛生推進者(役職名)',
-          # confirm_name:                                 '確認欄(氏名)',
-          # accept_confirm_date:                          Date.yesterday,
-          # subcontractor_name:                           '下請会社'
           # =============================================
         )
       else
@@ -109,6 +86,8 @@ module Users
       flash[:danger] = "#{@order.site_uu_id}を削除しました"
       redirect_to users_orders_url
     end
+
+    def system_chart_status; end
 
     # 専門技術者1
     def professional_engineer_1st_skill_training_options
@@ -160,6 +139,21 @@ module Users
       redirect_to users_orders_path, flash: { danger: '現場情報作成機能は有料サービスとなります' } if current_user.is_prime_contractor == false
     end
 
+    # 工事作業所災害防止協議会兼施工体系図,作業間連絡調整書の公開の有無の切り替え
+    def check_system_chart_status
+      request_order = RequestOrder.find_by(params[:uuid])
+      order = request_order.order
+      order.update_attribute(:system_chart_status, !order.system_chart_status)
+
+      if order.system_chart_status
+        flash[:success] = '工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を公開しました'
+      else
+        flash[:danger] = '工事作業所災害防止協議会兼施工体系図と作業間連絡調整書を非公開にしました'
+      end
+      redirect_to users_request_order_path(uuid: request_order)
+    end
+
+    # rubocop:disable Metrics/CyclomaticComplexity
     def order_params
       params.require(:order).permit(
         :site_career_up_id,
@@ -195,47 +189,41 @@ module Users
         :health_and_safety_manager_name,
         :submission_destination,
         construction_license: []
-        # :status,
-        # :vice_president_name,
-        # :vice_president_company_name,
-        # :secretary_name,
-        # :safety_officer_name,
-        # :safety_officer_position_name,
-        # :general_safety_manager_name,
-        # :general_safety_manager_position_name,
-        # :safety_manager_name,
-        # :safety_manager_position_name,
-        # :health_manager_name,
-        # :health_manager_position_name,
-        # :health_and_safety_promoter_name,
-        # :health_and_safety_promoter_position_name,
-        # :confirm_name,
-        # :accept_confirm_date,
-        # :subcontractor_name
       ).merge(
         content: {
-          genecon_name:                                    current_business.name,                                             # 会社名
-          genecon_address:                                 current_business.address,                                          # 会社住所
-          genecon_career_up_id:                            current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
-          genecon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
-          genecon_health_insurance_association:            current_business.business_health_insurance_association,            # 健康保険会社
-          genecon_health_insurance_office_number:          current_business.business_health_insurance_office_number,          # 健康保険番号
-          genecon_welfare_pension_insurance_join_status:   current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
-          genecon_welfare_pension_insurance_office_number: current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
-          genecon_employment_insurance_join_status:        current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
-          genecon_employment_insurance_number:             current_business.business_employment_insurance_number, # 雇用保険番号
-          # contentではなく、カラムで格納する為下記6行不要？（影響確認中）
-          # genecon_occupation:                                                  Occupation.find(current_business.business_occupations.first.occupation_id).name, # 職種　エラー回避の為コメントアウト
-          # genecon_construction_license_permission_type_minister_governor:      current_business.business_industries.map { |bi| bi.construction_license_permission_type_minister_governor_i18n },      # 建設業許可種別(大臣,知事)
-          # genecon_construction_license_permission_type_identification_general: current_business.business_industries.map { |bi| bi.construction_license_permission_type_identification_general_i18n }, # 建設業許可種別(特定,一般)
-          # genecon_construction_construction_license_number_double_digit:       current_business.business_industries.map { |bi| bi.construction_license_number_double_digit },                         # 建設業許可番号(2桁)
-          # genecon_construction_license_number_six_digits:                      current_business.business_industries.map { |bi| bi.construction_license_number_six_digits },                           # 建設業許可番号(6桁)
-          # genecon_construction_license_updated_at:                             current_business.business_industries.map { |bi| bi.construction_license_updated_at }                                   # 建設許可証(更新日)
-          genecon_specific_skilled_foreigners_exist:       current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
-          genecon_foreign_construction_workers_exist:      current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
-          genecon_foreign_technical_intern_trainees_exist: current_business.foreign_technical_intern_trainees_exist_i18n                      # 外国人技能実習生の従事の状況(有無)
+          genecon_name:                                                            current_business.name,                                             # 会社名
+          genecon_address:                                                         current_business.address,                                          # 会社住所
+          genecon_career_up_id:                                                    current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
+          genecon_health_insurance_status:                                         current_business.business_health_insurance_status,                 # 健康保険加入状況
+          genecon_health_insurance_association:                                    current_business.business_health_insurance_association,            # 健康保険会社
+          genecon_health_insurance_office_number:                                  current_business.business_health_insurance_office_number,          # 健康保険番号
+          genecon_welfare_pension_insurance_join_status:                           current_business.business_welfare_pension_insurance_join_status,   # 厚生年金加入状況
+          genecon_welfare_pension_insurance_office_number:                         current_business.business_welfare_pension_insurance_office_number, # 厚生年金番号
+          genecon_employment_insurance_join_status:                                current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
+          genecon_employment_insurance_number:                                     current_business.business_employment_insurance_number, # 雇用保険番号
+          # 建設許可証関連
+          genecon_construction_license_id_1st:                                     params.dig(:order, :content, :construction_license_number)&.slice(0),                                                                                                 # 建設許可証番号のid1
+          genecon_occupation_1st:                                                  Industry.find_by(id: BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(0))&.industry_id)&.name,                          # 業種1
+          genecon_construction_license_permission_type_minister_governor_1st:      BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(0))&.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)1
+          genecon_construction_license_permission_type_identification_general_1st: BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(0))&.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)1
+          genecon_construction_construction_license_number_double_digit_1st:       BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(0))&.construction_license_number_double_digit,                         # 建設業許可番号(2桁)1
+          genecon_construction_license_number_six_digits_1st:                      BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(0))&.construction_license_number_six_digits,                           # 建設業許可番号(6桁)1
+          genecon_construction_license_updated_at_1st:                             BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(0))&.construction_license_updated_at,                                  # 建設許可証(更新日)1
+          genecon_construction_license_number_1st:                                 BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(0))&.construction_license_number,                                      # 建設許可証番号1
+          genecon_construction_license_id_2nd:                                     params.dig(:order, :content, :construction_license_number)&.slice(1),                                                                                                 # 建設許可証番号のid2
+          genecon_occupation_2nd:                                                  Industry.find_by(id: BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(1))&.industry_id)&.name,                          # 業種2
+          genecon_construction_license_permission_type_minister_governor_2nd:      BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(1))&.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)2
+          genecon_construction_license_permission_type_identification_general_2nd: BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(1))&.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)2
+          genecon_construction_construction_license_number_double_digit_2nd:       BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(1))&.construction_license_number_double_digit,                         # 建設業許可番号(2桁)2
+          genecon_construction_license_number_six_digits_2nd:                      BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(1))&.construction_license_number_six_digits,                           # 建設業許可番号(6桁)2
+          genecon_construction_license_updated_at_2nd:                             BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(1))&.construction_license_updated_at,                                  # 建設許可証(更新日)2
+          genecon_construction_license_number_2nd:                                 BusinessIndustry.find_by(id: params.dig(:order, :content, :construction_license_number)&.slice(1))&.construction_license_number,                                      # 建設許可証番号2
+          genecon_specific_skilled_foreigners_exist:                               current_business.specific_skilled_foreigners_exist_i18n,                           # 一号特定技能外国人の従事の状況(有無)
+          genecon_foreign_construction_workers_exist:                              current_business.foreign_construction_workers_exist_i18n,                          # 外国人建設就労者の従事の状況(有無)
+          genecon_foreign_technical_intern_trainees_exist:                         current_business.foreign_technical_intern_trainees_exist_i18n                      # 外国人技能実習生の従事の状況(有無)
         }
       )
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

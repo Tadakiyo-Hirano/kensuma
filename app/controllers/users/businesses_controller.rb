@@ -13,7 +13,6 @@ module Users
           name:                                                        'test企業',
           name_kana:                                                   'テストキギョウ',
           branch_name:                                                 'test支店',
-          # branch_address:                                              'test支店住所',
           representative_name:                                         'test代表',
           email:                                                       'test@email.com',
           address:                                                     'test',
@@ -82,9 +81,9 @@ module Users
       redirect_to edit_users_business_url
     end
 
-    def update_career_up_card_copy
+    def delete_career_up_card_copy
       # 残りcareer_up_card_copyを定義
-      remain_career_up_card_copy = @business.career_up_card_copy
+      remain_career_up_card_copy = @business.career_up_card_copy.to_a
       # career_up_card_copyを削除する
       deleted_career_up_card_copy = remain_career_up_card_copy.delete_at(params[:index].to_i)
       deleted_career_up_card_copy.try(:remove!)

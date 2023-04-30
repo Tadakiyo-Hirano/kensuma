@@ -9,6 +9,7 @@ module Users
     before_action :edit_restriction_after_approved, only: %i[edit update]
     before_action :get_subcon_info_17th, only: %i[show edit] #doc_17thの配置を決定させるためのロジック
     before_action :get_subcon_info_18th, only: %i[show edit] #doc_18thの配置を決定させるためのロジック
+    before_action :check_status_document, except: :show
 
     def index; end
 

@@ -38,7 +38,7 @@
                     <td>
                       <%= fs.label :vehicle_name %><br>
                       <%= fs.text_field :vehicle_name, readonly: true, class: "form-control" %>
-                      
+
                       <%#= fs.label :vehicle_name %><br>
                         <%#= select_tag 'dummy_select', options_for_select(field_special_vehicle.content.values_at("name", "maker", "standards_performance", "year_manufactured", "control_number")), class: "form-control" %>
                     </td>
@@ -227,20 +227,7 @@ $(function(){
       },
       <% end %>
     },
-    // errorClass: "input_form_error",
     
-    // errorPlacement: function(error, element) {
-    //   /* if (element.attr("type") === "radio") {*/
-    //   /*#  error.insertAfter($(element).closest('td').find('label:last'));*/
-    //   if (element.is(":radio")) {
-    //     error.appendTo(element.parent());
-    //   } else if (element.attr("name").startsWith("request_order[field_special_vehicles]")) {
-    //     var label = element.parents("td").find("label");
-    //     error.insertAfter(label);
-    //   } else {
-    //     error.insertAfter(element);
-    //   }
-    // }
     errorPlacement: function(error, element) {
         // radioとcheckboxのみ表示位置を個別調整
         if (element.is(":radio") || element.is(":checkbox")) {
@@ -263,7 +250,7 @@ $(function(){
   $(document).ready(function(){
     var isInitialized = false;
     var driver_name_index = '<%= index %>'; // driver_name_#{index} に変更
-    
+
     function initializeSelect2() {
       $('#driver_name_' + driver_name_index).on('change', function() {
         var category_id = $(this).val();
@@ -301,14 +288,14 @@ $(function(){
       });
       isInitialized = true;
     }
-  
+
     var checkExist = setInterval(function() {
       if ($('#driver_license_' + driver_name_index).length && !isInitialized) { // ID を driver_name_#{index} に変更
         clearInterval(checkExist);
         initializeSelect2();
       }
     }, 100);
-  
+
   });
   <% end %>
 </script>
@@ -318,7 +305,7 @@ $(function(){
   $(document).ready(function(){
     var isInitialized = false;
     var driver_name_index = '<%= index %>'; // driver_name_#{index} に変更
-    
+
     function initializeSelect2() {
       $('#sub_driver_name_' + driver_name_index).on('change', function() {
         var category_id = $(this).val();
@@ -356,14 +343,14 @@ $(function(){
       });
       isInitialized = true;
     }
-  
+
     var checkExist = setInterval(function() {
       if ($('#sub_driver_license_' + driver_name_index).length && !isInitialized) { // ID を driver_name_#{index} に変更
         clearInterval(checkExist);
         initializeSelect2();
       }
     }, 100);
-  
+
   });
   <% end %>
 </script>

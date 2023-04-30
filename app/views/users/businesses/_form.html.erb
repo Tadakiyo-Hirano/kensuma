@@ -39,12 +39,12 @@
     <% if business.career_up_card_copy.present? %>
       <% business.career_up_card_copy.each_with_index do |image, index| %>
         <%= image_tag(image.url) %>
-        <%= link_to "削除", update_career_up_card_copy_users_business_path(index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+        <%= link_to "削除", delete_career_up_card_copy_users_business_path(index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
       <% end %>
       <br>
     <% end %>
-    <%= f.file_field :career_up_card_copy, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
-    <br>
+    <%= f.file_field :career_up_card_copy, multiple: true %>
+    <br><br>
     <%= f.label :representative_name %><!-- 代表者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :representative_name, class: "form-control" %>
@@ -64,9 +64,6 @@
     <%= f.label :fax_number %><!-- FAX -->
     <%= f.telephone_field :fax_number, class: "form-control" %>
     <br>
-    <!--<%= f.label :email %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.email_field :email, class: "form-control", placeholder: "Enter email" %>-->
     <%= f.label :stamp_images %><br><!-- 社印 -->
     <% if business.stamp_images.present? %>
       <% business.stamp_images.each_with_index do |image, index| %>
@@ -163,7 +160,8 @@
     </div>
   </div>
   <div class="list-group-item">
-    <div><%= f.label :business_retirement_benefit_mutual_aid %></div><!-- 退職金共済制度 -->
+    <div><%= f.label :business_retirement_benefit_mutual_aid %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span></div><!-- 退職金共済制度 -->
     <div class="list-group-item">
       <%= f.label :business_retirement_benefit_mutual_aid_status %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -176,6 +174,7 @@
       </div>
       <br>
     </div>
+    <br>
   </div>
 
   <div class="list-group-item">

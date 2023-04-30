@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :order do
-    # status { 0 }
     site_uu_id { SecureRandom.uuid }
     site_career_up_id { 12345678901234 }
     sequence(:site_name) { |n| "site_name#{n}" }
@@ -27,24 +26,6 @@ FactoryBot.define do
     sequence(:general_safety_agent_name) { |n| "general_safety_agent_name#{n}" }
     sequence(:health_and_safety_manager_name) { |n| "health_and_safety_manager_name#{n}" }
     sequence(:submission_destination) { |n| "submission_destination#{n}" }
-    # sequence(:vice_president_name) { |n| "vice_president_name#{n}" }
-    # sequence(:vice_president_company_name) { |n| "vice_president_company_name#{n}" }
-    # sequence(:secretary_name) { |n| "secretary_name#{n}" }
-    # sequence(:professional_engineer_name) { |n| "professional_engineer_name#{n}" }
-    # sequence(:professional_engineer_construction_details) { |n| "details#{n}" }
-    # sequence(:safety_officer_name) { |n| "safety_officer_name#{n}" }
-    # sequence(:safety_officer_position_name) { |n| "safety_officer_position_name#{n}" }
-    # sequence(:general_safety_manager_name) { |n| "general_safety_manager_name#{n}" }
-    # sequence(:general_safety_manager_position_name) { |n| "general_safety_manager_position_name#{n}" }
-    # sequence(:safety_manager_name) { |n| "safety_manager_name#{n}" }
-    # sequence(:safety_manager_position_name) { |n| "safety_manager_position_name#{n}" }
-    # sequence(:health_manager_name) { |n| "health_manager_name#{n}" }
-    # sequence(:health_manager_position_name) { |n| "health_manager_position_name#{n}" }
-    # sequence(:health_and_safety_promoter_name) { |n| "health_and_safety_promoter_name#{n}" }
-    # sequence(:health_and_safety_promoter_position_name) { |n| "health_and_safety_promoter_position_name#{n}" }
-    # sequence(:confirm_name) { |n| "confirm_name#{n}" }
-    # accept_confirm_date { '2022-01-01' }
-    # sequence(:subcontractor_name) { |n| "subcontractor_name#{n}" }
     business
   end
 end

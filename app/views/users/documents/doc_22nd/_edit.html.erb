@@ -198,7 +198,7 @@
             </td><!--「元方安全衛生管理者名」22-002-->
             <td class="doc_22_s0" colspan="6" rowspan="2">記録者<br><span class="p-1 mb-2 rounded bg-danger text-white">必須</span></td>
             <td class="doc_22_s46" colspan="5" rowspan="2">
-              <%= f.select name = 'content[recorder]', name_of_workers,
+              <%= f.select name = 'content[recorder]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('recorder'),include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -206,7 +206,7 @@
             <td class="doc_22_s5" colspan="16" rowspan="2"></td>
             <td class="doc_22_s0" colspan="4" rowspan="2">安全当番<br><span class="p-1 mb-2 rounded bg-danger text-white">必須</span></td>
             <td class="doc_22_s46" colspan="5" rowspan="2">
-              <%= f.select name = 'content[safety_duty_person]', name_of_workers,
+              <%= f.select name = 'content[safety_duty_person]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('safety_duty_person'),include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -282,7 +282,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(0)) %>
             </td><!--「職種1」22-010-->
             <td class="doc_22_s13" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(0)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(0)) %>
             </td>
             <td class="doc_22_s16" colspan="7">
               <%= f.text_area name = 'content[required_qualification_1st]', placeholder: "例）３",
@@ -303,7 +303,7 @@
               %>
             </td><!--「危険予測1」22-014-->
             <td class="doc_22_s17" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_1st]', name_of_field_workers_request_order(subcontractor_id(0)),
+              <%= f.select name = 'content[foreman_confirmation_1st]', name_of_field_workers_request_order(subcontractor_business_id(0)),
                                   { selected: @document.content&.[]('foreman_confirmation_1st'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -317,7 +317,7 @@
               <% end %>
             </td><!--「実施確認良否1」22-016-->
             <td class="doc_22_s15" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_1st]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_1st]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_1st'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -333,7 +333,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_1st') %>
             </td><!--「是正確認日1」22-019-->
             <td class="doc_22_s15" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_1st]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_1st]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_1st'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -349,7 +349,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(1)) %>
             </td><!--「職種2」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(1)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(1)) %>
             </td><!--「作業員人数2」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_2nd]', placeholder: "例）１３",
@@ -370,7 +370,7 @@
               %>
             </td><!--「危険予測2」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_2nd]', name_of_field_workers_request_order(subcontractor_id(1)),
+              <%= f.select name = 'content[foreman_confirmation_2nd]', name_of_field_workers_request_order(subcontractor_business_id(1)),
                                   { selected: @document.content&.[]('foreman_confirmation_2nd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -384,7 +384,7 @@
               <% end %>
             </td><!--「良 否2」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_2nd]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_2nd]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_2nd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -400,7 +400,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_2nd') %>
             </td><!--「是正確認日2」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_2nd]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_2nd]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_2nd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -416,7 +416,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(2)) %>
             </td><!--「職種3」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(2)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(2)) %>
             </td><!--「作業員人数3」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_3rd]', placeholder: "例）１、９",
@@ -437,7 +437,7 @@
               %>
             </td><!--「危険予測3」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_3rd]', name_of_field_workers_request_order(subcontractor_id(2)),
+              <%= f.select name = 'content[foreman_confirmation_3rd]', name_of_field_workers_request_order(subcontractor_business_id(2)),
                                   { selected: @document.content&.[]('foreman_confirmation_3rd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -451,7 +451,7 @@
               <% end %>
             </td><!--「良 否3」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_3rd]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_3rd]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_3rd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -467,7 +467,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_3rd') %>
             </td><!--「是正確認日3」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_3rd]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_3rd]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_3rd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -483,7 +483,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(3)) %>
             </td><!--「職種4」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(3)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(3)) %>
             </td><!--「作業員人数4」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_4th]',
@@ -504,7 +504,7 @@
               %>
             </td><!--「危険予測4」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_4th]', name_of_field_workers_request_order(subcontractor_id(3)),
+              <%= f.select name = 'content[foreman_confirmation_4th]', name_of_field_workers_request_order(subcontractor_business_id(3)),
                                   { selected: @document.content&.[]('foreman_confirmation_4th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -518,7 +518,7 @@
               <% end %>
             </td><!--「良 否4」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_4th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_4th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_4th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -534,7 +534,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_4th') %>
             </td><!--「是正確認日4」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_4th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_4th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_4th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -550,7 +550,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(4)) %>
             </td><!--「職種5」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(4)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(4)) %>
             </td><!--「作業員人数5」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_5th]',
@@ -571,7 +571,7 @@
               %>
             </td><!--「危険予測5」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_5th]', name_of_field_workers_request_order(subcontractor_id(4)),
+              <%= f.select name = 'content[foreman_confirmation_5th]', name_of_field_workers_request_order(subcontractor_business_id(4)),
                                   { selected: @document.content&.[]('foreman_confirmation_5th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -585,7 +585,7 @@
               <% end %>
             </td><!--「良 否5」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_5th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_5th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_5th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -601,7 +601,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_5th') %>
             </td><!--「是正確認日5」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_5th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_5th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_5th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -617,7 +617,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(5)) %>
             </td><!--「職種6」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(5)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(5)) %>
             </td><!--「作業員人数6」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_6th]',
@@ -638,7 +638,7 @@
               %>
             </td><!--「危険予測6」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_6th]', name_of_field_workers_request_order(subcontractor_id(5)),
+              <%= f.select name = 'content[foreman_confirmation_6th]', name_of_field_workers_request_order(subcontractor_business_id(5)),
                                   { selected: @document.content&.[]('foreman_confirmation_6th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -652,7 +652,7 @@
               <% end %>
             </td><!--「良 否6」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_6th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_6th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_6th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -668,7 +668,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_6th') %>
             </td><!--「是正確認日6」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_6th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_6th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_6th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -684,7 +684,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(6)) %>
             </td><!--「職種7」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(6)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(6)) %>
             </td><!--「作業員人数7」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_7th]',
@@ -705,7 +705,7 @@
               %>
             </td><!--「危険予測7」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_7th]', name_of_field_workers_request_order(subcontractor_id(6)),
+              <%= f.select name = 'content[foreman_confirmation_7th]', name_of_field_workers_request_order(subcontractor_business_id(6)),
                                   { selected: @document.content&.[]('foreman_confirmation_7th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -719,7 +719,7 @@
               <% end %>
             </td><!--「良 否7」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_7th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_7th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_7th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -735,7 +735,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_7th') %>
             </td><!--「是正確認日7」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_7th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_7th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_7th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -751,7 +751,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(7)) %>
             </td><!--「職種8」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(7)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(7)) %>
             </td><!--「作業員人数8」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_8th]',
@@ -772,7 +772,7 @@
               %>
             </td><!--「危険予測8」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_8th]', name_of_field_workers_request_order(subcontractor_id(7)),
+              <%= f.select name = 'content[foreman_confirmation_8th]', name_of_field_workers_request_order(subcontractor_business_id(7)),
                                   { selected: @document.content&.[]('foreman_confirmation_8th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -786,7 +786,7 @@
               <% end %>
             </td><!--「良 否8」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_8th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_8th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_8th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -802,7 +802,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_8th') %>
             </td><!--「是正確認日8」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_8th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_8th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_8th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -818,7 +818,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(8)) %>
             </td><!--「職種9」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(8)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(8)) %>
             </td><!--「作業員人数9」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_9th]',
@@ -839,7 +839,7 @@
               %>
             </td><!--「危険予測9」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_9th]', name_of_field_workers_request_order(subcontractor_id(8)),
+              <%= f.select name = 'content[foreman_confirmation_9th]', name_of_field_workers_request_order(subcontractor_business_id(8)),
                                   { selected: @document.content&.[]('foreman_confirmation_9th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -853,7 +853,7 @@
               <% end %>
             </td><!--「良 否9」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_9th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_9th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_9th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -869,7 +869,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_9th') %>
             </td><!--「是正確認日9」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_9th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_9th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_9th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -885,7 +885,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(9)) %>
             </td><!--「職種10」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(9)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(9)) %>
             </td><!--「作業員人数10」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_10th]',
@@ -906,7 +906,7 @@
               %>
             </td><!--「危険予測10」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_10th]', name_of_field_workers_request_order(subcontractor_id(9)),
+              <%= f.select name = 'content[foreman_confirmation_10th]', name_of_field_workers_request_order(subcontractor_business_id(9)),
                                   { selected: @document.content&.[]('foreman_confirmation_10th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -920,7 +920,7 @@
               <% end %>
             </td><!--「良 否10」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_10th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_10th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_10th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -936,7 +936,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_10th') %>
             </td><!--「是正確認日10」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_10th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_10th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_10th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -952,7 +952,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(10)) %>
             </td><!--「職種11」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(10)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(10)) %>
             </td><!--「作業員人数11」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_11th]',
@@ -973,7 +973,7 @@
               %>
             </td><!--「危険予測11」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_11th]', name_of_field_workers_request_order(subcontractor_id(10)),
+              <%= f.select name = 'content[foreman_confirmation_11th]', name_of_field_workers_request_order(subcontractor_business_id(10)),
                                   { selected: @document.content&.[]('foreman_confirmation_11th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -987,7 +987,7 @@
               <% end %>
             </td><!--「良 否11」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_11th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_11th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_11th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1003,7 +1003,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_11th') %>
             </td><!--「是正確認日11」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_11th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_11th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_11th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1019,7 +1019,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(11)) %>
             </td><!--「職種12」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(11)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(11)) %>
             </td><!--「作業員人数12」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_12th]',
@@ -1040,7 +1040,7 @@
               %>
             </td><!--「危険予測12」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_12th]', name_of_field_workers_request_order(subcontractor_id(11)),
+              <%= f.select name = 'content[foreman_confirmation_12th]', name_of_field_workers_request_order(subcontractor_business_id(11)),
                                   { selected: @document.content&.[]('foreman_confirmation_12th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1054,7 +1054,7 @@
               <% end %>
             </td><!--「良 否12」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_12th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_12th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_12th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1070,7 +1070,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_12th') %>
             </td><!--「是正確認日12」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_12th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_12th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_12th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1086,7 +1086,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(12)) %>
             </td><!--「職種13」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(12)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(12)) %>
             </td><!--「作業員人数13」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_13th]',
@@ -1107,7 +1107,7 @@
               %>
             </td><!--「危険予測13」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_13th]', name_of_field_workers_request_order(subcontractor_id(12)),
+              <%= f.select name = 'content[foreman_confirmation_13th]', name_of_field_workers_request_order(subcontractor_business_id(12)),
                                   { selected: @document.content&.[]('foreman_confirmation_13th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1121,7 +1121,7 @@
               <% end %>
             </td><!--「良 否13」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_13th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_13th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_13th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1137,7 +1137,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_13th') %>
             </td><!--「是正確認日13」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_13th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_13th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_13th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1153,7 +1153,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(13)) %>
             </td><!--「職種14」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(13)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(13)) %>
             </td><!--「作業員人数14」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_14th]',
@@ -1174,7 +1174,7 @@
               %>
             </td><!--「危険予測14」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_14th]', name_of_field_workers_request_order(subcontractor_id(13)),
+              <%= f.select name = 'content[foreman_confirmation_14th]', name_of_field_workers_request_order(subcontractor_business_id(13)),
                                   { selected: @document.content&.[]('foreman_confirmation_14th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1188,7 +1188,7 @@
               <% end %>
             </td><!--「良 否14」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_14th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_14th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_14th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1204,7 +1204,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_14th') %>
             </td><!--「是正確認日14」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_14th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_14th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_14th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1220,7 +1220,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(14)) %>
             </td><!--「職種15」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(14)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(14)) %>
             </td><!--「作業員人数15」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_15th]',
@@ -1241,7 +1241,7 @@
               %>
             </td><!--「危険予測15」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_15th]', name_of_field_workers_request_order(subcontractor_id(14)),
+              <%= f.select name = 'content[foreman_confirmation_15th]', name_of_field_workers_request_order(subcontractor_business_id(14)),
                                   { selected: @document.content&.[]('foreman_confirmation_15th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1255,7 +1255,7 @@
               <% end %>
             </td><!--「良 否15」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_15th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_15th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_15th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1271,7 +1271,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_15th') %>
             </td><!--「是正確認日15」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_15th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_15th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_15th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1287,7 +1287,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(15)) %>
             </td><!--「職種16」22-010-->
             <td class="doc_22_s20" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(15)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(15)) %>
             </td><!--「作業員人数16」22-011-->
             <td class="doc_22_s22" colspan="7">
               <%= f.text_area name = 'content[required_qualification_16th]',
@@ -1308,7 +1308,7 @@
               %>
             </td><!--「危険予測16」22-014-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_16th]', name_of_field_workers_request_order(subcontractor_id(15)),
+              <%= f.select name = 'content[foreman_confirmation_16th]', name_of_field_workers_request_order(subcontractor_business_id(15)),
                                   { selected: @document.content&.[]('foreman_confirmation_16th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1322,7 +1322,7 @@
               <% end %>
             </td><!--「良 否16」22-016-->
             <td class="doc_22_s21" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_16th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_16th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_16th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1338,7 +1338,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_16th') %>
             </td><!--「是正確認日16」22-019-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_16th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_16th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_16th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1354,7 +1354,7 @@
               <%= subcontractor_occupation(subcontractor_business_id(16)) %>
             </td><!--「職種17」22-010-->
             <td class="doc_22_s47" colspan="3">
-              <%= number_of_field_workers_of_subcontractor(subcontractor_id(16)) %>
+              <%= number_of_field_workers_of_subcontractor(subcontractor_business_id(16)) %>
             </td><!--「作業員人数17」22-011-->
             <td class="doc_22_s24" colspan="7">
               <%= f.text_area name = 'content[required_qualification_17th]',
@@ -1375,7 +1375,7 @@
               %>
             </td><!--「危険予測17」22-014-->
             <td class="doc_22_s24" colspan="5">
-              <%= f.select name = 'content[foreman_confirmation_17th]', name_of_field_workers_request_order(subcontractor_id(16)),
+              <%= f.select name = 'content[foreman_confirmation_17th]', name_of_field_workers_request_order(subcontractor_business_id(16)),
                                   { selected: @document.content&.[]('foreman_confirmation_17th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1389,7 +1389,7 @@
               <% end %>
             </td><!--「良 否17」22-016-->
             <td class="doc_22_s24" colspan="5">
-              <%= f.select name = 'content[implementation_confirmation_person_17th]', name_of_workers,
+              <%= f.select name = 'content[implementation_confirmation_person_17th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('implementation_confirmation_person_17th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1405,7 +1405,7 @@
                               value:@document.content&.[]('corrective_action_confirmation_date_17th') %>
             </td><!--「是正確認日17」22-019-->
             <td class="doc_22_s24" colspan="5">
-              <%= f.select name = 'content[corrective_action_reviewer_17th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_reviewer_17th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_reviewer_17th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1457,7 +1457,7 @@
               %>
             </td><!--「是正処理・報告1」22-025-->
             <td class="doc_22_s17" colspan="5">
-              <%= f.select name = 'content[corrective_action_report_confirmer_1st]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_report_confirmer_1st]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_report_confirmer_1st'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1500,7 +1500,7 @@
               %>
             </td><!--「是正処理・報告2」22-025-->
             <td class="doc_22_s17" colspan="5">
-              <%= f.select name = 'content[corrective_action_report_confirmer_2nd]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_report_confirmer_2nd]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_report_confirmer_2nd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1543,7 +1543,7 @@
               %>
             </td><!--「是正処理・報告3」22-025-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_report_confirmer_3rd]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_report_confirmer_3rd]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_report_confirmer_3rd'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1586,7 +1586,7 @@
               %>
             </td><!--「是正処理・報告4」22-025-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_report_confirmer_4th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_report_confirmer_4th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_report_confirmer_4th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1629,7 +1629,7 @@
               %>
             </td><!--「是正処理・報告5」22-025-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_report_confirmer_5th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_report_confirmer_5th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_report_confirmer_5th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1672,7 +1672,7 @@
               %>
             </td><!--「是正処理・報告6」22-025-->
             <td class="doc_22_s22" colspan="5">
-              <%= f.select name = 'content[corrective_action_report_confirmer_6th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_report_confirmer_6th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_report_confirmer_6th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
@@ -1715,7 +1715,7 @@
               %>
             </td><!--「是正処理・報告7」22-025-->
             <td class="doc_22_s24" colspan="5">
-              <%= f.select name = 'content[corrective_action_report_confirmer_7th]', name_of_workers,
+              <%= f.select name = 'content[corrective_action_report_confirmer_7th]', name_of_genecon_workers,
                                   { selected: @document.content&.[]('corrective_action_report_confirmer_7th'), include_blank: "選択してください" },
                                   { class: 'form-control form-control-sm'}
               %>
