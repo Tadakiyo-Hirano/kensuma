@@ -199,6 +199,7 @@ module Users
           subcon_post_code:                               current_business.post_code,                                        # 会社郵便番号
           subcon_phone_number:                            current_business.phone_number,                                     # 会社電話番号
           subcon_fax_number:                              current_business.fax_number,                                       # 会社FAX番号
+          subcon_business_type:                           current_business.business_type_i18n,                               # 会社区分
           subcon_career_up_id:                            current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
           subcon_representative_name:                     current_business.representative_name,                              # 代表者名
           subcon_health_insurance_status:                 current_business.business_health_insurance_status,                 # 健康保険加入状況
