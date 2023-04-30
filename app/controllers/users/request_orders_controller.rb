@@ -166,7 +166,7 @@ module Users
         Worker.find_by(name: request_order_params[:construction_manager_name])&.job_title
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable all
     def request_order_params
       params.require(:request_order).permit(
         :occupation,
@@ -203,10 +203,13 @@ module Users
           subcon_branch_name:                                                     current_business.branch_name,                                      # 支店･営業所名
           subcon_address:                                                         current_business.address,                                          # 会社住所
           subcon_post_code:                                                       current_business.post_code,                                        # 会社郵便番号
+          subcon_representative_name:                                             current_business.representative_name, # 会社代表者名
           subcon_phone_number:                                                    current_business.phone_number,                                     # 会社電話番号
           subcon_fax_number:                                                      current_business.fax_number,                                       # 会社FAX番号
+          subcon_business_type:                                                   current_business.business_type_i18n,                               # 会社形態
           subcon_career_up_id:                                                    current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
-          subcon_representative_name:                                             current_business.representative_name,                              # 代表者名
+          subcon_representative_name:                                             current_business.representative_name,                              # 会社代表者名
+          subcon_employment_manager_name:                                         current_business.employment_manager_name,                          # 会社雇用管理責任者名
           subcon_health_insurance_status:                                         current_business.business_health_insurance_status,                 # 健康保険加入状況
           subcon_health_insurance_association:                                    current_business.business_health_insurance_association,            # 健康保険会社
           subcon_health_insurance_office_number:                                  current_business.business_health_insurance_office_number,          # 健康保険番号
@@ -245,6 +248,6 @@ module Users
         }
       )
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable all
   end
 end
