@@ -43,7 +43,9 @@
     <%# 事業主または一人親方 %>
     <%= f.label :business_owner_or_master %>
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <div class="md-3 list-group-item"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい</div><br>
+    <div class="md-3 list-group-item">
+      <%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい　　　※いいえの場合はチェックを外してください</div><br>
+    <br>
 
     <%# 役職 %>
     <%= f.label :job_title %>
@@ -391,7 +393,11 @@
 
 <!-- 作業員資格情報ここから -->
 <div class="list-group">
-  <div style="font-size: 22px; font-weight: bold;"><%= f.label yield(:worker_licenses_info) %></div><!-- 作業員資格情報 -->
+  <div style="font-size: 22px; font-weight: bold;">
+    <%= f.label yield(:worker_licenses_info) %>
+  </div>
+  <span>　　※誤ってフォームを削除してしまった場合、フォームを再追加せず、下の更新ボタンを押してください</span>
+  <!-- 作業員資格情報 -->
   <!-- WorkerSpecialEducationテーブル情報ここから -->
   <%# 特別教育情報 %>
   <div class="list-group-item">

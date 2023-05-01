@@ -68,7 +68,7 @@ module Users
       remain_images = worker_license.images
       deleted_image = remain_images.delete_at(params[:index].to_i)
       deleted_image.try(:remove!)
-      worker_license.update!(images: remain_images)
+      worker_license.update_column(:images, remain_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker) and return
     end
@@ -79,7 +79,7 @@ module Users
       remain_images = worker_skill_training.images
       deleted_image = remain_images.delete_at(params[:index].to_i)
       deleted_image.try(:remove!)
-      worker_skill_training.update!(images: remain_images)
+      worker_skill_training.update_column(:images, remain_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -90,7 +90,7 @@ module Users
       remain_images = worker_special_education.images
       deleted_image = remain_images.delete_at(params[:index].to_i)
       deleted_image.try(:remove!)
-      worker_special_education.update!(images: remain_images)
+      worker_special_education.update_column(:images, remain_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -101,7 +101,7 @@ module Users
       remaining_images = worker_safety_health_education.images
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
-      worker_safety_health_education.update!(images: remaining_images)
+      worker_safety_health_education.update_column(:images, remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -112,7 +112,7 @@ module Users
       remaining_images = worker_insurance.health_insurance_image
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
-      worker_insurance.update!(health_insurance_image: remaining_images)
+      worker_insurance.update_column(:health_insurance_image, remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -122,14 +122,14 @@ module Users
       remaining_images = worker.career_up_images
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
-      worker.update!(career_up_images: remaining_images)
+      worker.update_column(:career_up_images, remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
 
     def delete_seal
       worker = current_business.workers.find_by(uuid: params[:worker_id])
-      worker.update(seal: nil)
+      worker.update_column(:seal, nil)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -139,7 +139,7 @@ module Users
       remaining_images = worker.passports
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
-      worker.update!(passports: remaining_images)
+      worker.update_column(:passports, remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -149,7 +149,7 @@ module Users
       remaining_images = worker.residence_cards
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
-      worker.update!(residence_cards: remaining_images)
+      worker.update_column(:residence_cards, remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -159,7 +159,7 @@ module Users
       remaining_images = worker.employment_conditions
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
-      worker.update!(employment_conditions: remaining_images)
+      worker.update_column(:employment_conditions, remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -169,7 +169,7 @@ module Users
       remaining_images = worker.employee_cards
       deleting_images = remaining_images.delete_at(params[:index].to_i)
       deleting_images.try(:remove!)
-      worker.update!(employee_cards: remaining_images)
+      worker.update_column(:employee_cards, remaining_images)
       flash[:danger] = '証明画像を削除しました'
       redirect_to edit_users_worker_url(worker)
     end
@@ -187,6 +187,7 @@ module Users
       end
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 全角スペースを半角スペースに変換
@@ -234,7 +235,7 @@ module Users
         worker_medical_attributes[:min_blood_pressure] = nil
       end
 
-      # 健康診断項目の受診の有無が無の時、診断日と診断種類をnilにする
+      # 特別健康診断項目の受診の有無が無の時、診断日と診断種類をnilにする
       if worker_medical_attributes[:is_special_med_exam] == 'n'
         worker_medical_attributes[:special_med_exam_on] = nil
         worker_medical_attributes[:special_med_exam_list] = nil
@@ -288,23 +289,45 @@ module Users
           converted_params[key]
         end
       end
+      # 外国人労働者の画像を削除する
       %i[passports residence_cards employment_conditions].each do |key|
-        if converted_params[key].present?
-          if japanese?(arg_array[0])
-            converted_params = converted_params.merge(key => [])
-          elsif skill_practice_or_permanent_resident?(arg_array[1], key)
-            converted_params = converted_params.merge(key => [])
-          elsif confirmed_check_unchecked?(arg_array[2], key)
-            converted_params = converted_params.merge(key => [])
-          else
-            converted_params[key]
-          end
+        if japanese?(arg_array[0])
+          converted_params = converted_params.merge(key => [])
+        elsif skill_practice_or_permanent_resident?(arg_array[1], key)
+          converted_params = converted_params.merge(key => [])
+        elsif confirmed_check_unchecked?(arg_array[2], key)
+          converted_params = converted_params.merge(key => [])
         else
           converted_params[key]
         end
       end
+
+      # 健康保険の写し、キャリアアップシステムの写しの削除
+      insurance_attributes = converted_params[:worker_insurance_attributes]
+      %i[health_insurance_image career_up_images].each do |key|
+        case key
+        when :health_insurance_image
+          # 健康保険の写しの削除
+          if %w[health_insurance_association
+                japan_health_insurance_association
+                construction_national_health_insurance
+                national_health_insurance].exclude?(insurance_attributes[:health_insurance_type])
+            converted_params = converted_params.merge('worker_insurance_attributes'=>insurance_attributes.merge(key => []))
+          end
+        when :career_up_images
+          # キャリアアップシステムの写しの削除
+          converted_params = converted_params.merge(key => []) if converted_params[:career_up_id].blank?
+        end
+      end
+
+      # 特別健康診断のチェックが入っていない時、特別健康診断を空にする
+      worker_medical_attributes = converted_params[:worker_medical_attributes]
+      if worker_medical_attributes[:special_med_exam_list].blank?
+        converted_params = converted_params.merge('worker_medical_attributes'=>worker_medical_attributes.merge(special_med_exam_list: []))
+      end
       converted_params
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
     def health_insurance_name_nil(health_insurance_type, params)
