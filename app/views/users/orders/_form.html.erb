@@ -163,8 +163,10 @@
       <%= f.label :supervising_engineer_check %> <!-- 監督技術者･主任技術者(専任・非専任) -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:supervising_engineer_check, Order.supervising_engineer_checks_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-          <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
+        <%= f.collection_radio_buttons(:supervising_engineer_check, Order.supervising_engineer_checks_i18n, :first, :last, { checked: @order&.supervising_engineer_check? ? @order&.supervising_engineer_check : false }, item_wrapper_class: 'radio-button-item') do |b| %>
+          <div>
+            <%= b.label { b.radio_button + b.text } %>
+        </div>
         <% end %>
       </div>
       <br>
@@ -222,8 +224,7 @@
     %><br>
   </div>
   <div class="list-group-item">
-    <%= f.label :construction_license %> <!-- 工場に必要な建設許可証 -->
-    <div class="error-message"></div>
+    <%= f.label :construction_license %><span class="error_msg construction_license-error"></span> <!-- 工場に必要な建設許可証 -->
     <div class="list-group-item">
       <div class="form-check">
         <% @order_construction_licenses&.each do |id, license| %>
@@ -336,6 +337,7 @@
           maxlength: 100
         },
         "order[site_address]": {
+          required: true,
           maxlength: 50
         },
         "order[order_name]": {
@@ -411,6 +413,7 @@
           maxlength: "現場名は100字以内で入力してください。"
         },
         "order[site_address]": {
+          required: "施工場所住所を入力してください。",
           maxlength: "施工場所の住所は50字以内で入力してください。"
         },
         "order[order_name]": {
@@ -477,14 +480,15 @@
           maxlength: "チェックボックスは最大2つまでしか選択できません。"
         },
       },
+      
       errorPlacement: function(error, element) {
-        if (element.attr("name") == "order[content[construction_license_number]][]") {
-          error.appendTo(".error-message");
+        // radioとcheckboxのみ表示位置を個別調整
+        if (element.is(":radio") || element.is(":checkbox")) {
+          error.insertBefore(element.closest('.list-group-item'));
         } else {
-          error.insertAfter(element);
+          error.insertBefore(element);
         }
-      },
-      errorClass: "input_form_error"
+      }
     });
     // 入力欄を変更したときにバリデーションを実行
     $(".order-form-validation").change(function () {
