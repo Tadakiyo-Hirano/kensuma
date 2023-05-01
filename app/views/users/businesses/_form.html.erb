@@ -14,11 +14,13 @@
     <%= f.label :business_type %><!--会社形態-->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
+      <div id="available-form-business-type">
       <%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last, { checked: @business&.business_type? ? @business&.business_type : false }) do |b| %>
         <div>
           <%= b.label { b.radio_button + b.text } %>
         </div>
       <% end %>
+      </div>
     </div>
     <br>
     <%= f.label :name %><!-- 会社名 -->
@@ -84,11 +86,13 @@
     <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business&.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
     <br>
     <br>
+    <div id="hidden-form-business-type">
     <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
     <%= f.select :employment_manager_name, (@business_workers_name&.uniq || []),
                   { include_blank: true },
                   { class: "form-select form-select-sm", style: "width: 100%" }
     %><br>
+    </div>
   </div>
 </div>
 
@@ -229,7 +233,7 @@
       </div>
     </div>
     <br>
-    
+
     <div id="hidden-form-foreign-work">
       <%= f.label :specific_skilled_foreigners_exist %><!-- 一号特定技能外国人従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -275,6 +279,25 @@
 <%= f.hidden_field :email, value: current_user.email %>
 
 <script>
+//一人親方かどうかによってフォームの表示・非表示の切り替え
+  const available_form_business_type = document.getElementById('available-form-business-type')
+  const list_group_business_type = document.getElementById('hidden-form-business-type')
+  function getRadioBusinessType(object) {
+    const value = $('input[name="business[business_type]"]:checked').val();
+    if (value != 'freelance'){
+      list_group_business_type.classList.remove('hidden');
+    } else {
+      list_group_business_type.classList.add('hidden');
+    }
+  };
+  getRadioBusinessType(available_form_business_type); //ページの読み込み時に判定
+  $('input[name="business[business_type]"]').change(function() {
+    if ($(this).val() != 'freelance') {
+      list_group_business_type.classList.remove('hidden');
+    } else {
+      list_group_business_type.classList.add('hidden');
+    }
+  });
 //健康保険の加入状況によってフォームの表示・非表示の切り替え
   const available_form_health_insurance = document.getElementById('available-form-health-insurance')
   const list_group_health_insurance = document.getElementById('hidden-form-health-insurance')
@@ -629,6 +652,7 @@
         //   required: "外国人雇用管理責任者名を選択してください。"
         // },
       },
+      errorClass: "input_form_error",
 
       errorPlacement: function(error, element) {
         // radioとcheckboxのみ表示位置を個別調整
