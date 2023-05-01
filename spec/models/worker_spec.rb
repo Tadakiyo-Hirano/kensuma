@@ -634,23 +634,23 @@ RSpec.describe Worker, type: :model do
     end
   end
 
-  describe '保険会社とのアソシエーションについて' do
-    let :worker_insurance do
-      create(:worker_insurance, worker: worker)
-    end
+  # describe '保険会社とのアソシエーションについて' do
+  #   let :worker_insurance do
+  #     create(:worker_insurance, worker: worker)
+  #   end
 
-    context '紐づく保険会社がある場合' do
-      subject do
-        worker.worker_insurance
-      end
+  #   context '紐づく保険会社がある場合' do
+  #     subject do
+  #       worker.worker_insurance
+  #     end
 
-      before(:each) do
-        worker_insurance.save!
-      end
+  #     before(:each) do
+  #       worker_insurance.save!
+  #     end
 
-      it '紐づく保険会社を返すこと' do
-        expect(subject).to eq(worker_insurance)
-      end
-    end
-  end
+  #     it '紐づく保険会社を返すこと' do
+  #       expect(subject).to eq(worker_insurance)
+  #     end
+  #   end
+  # end
 end

@@ -7,6 +7,7 @@
 </head>
 <%= render 'shared/error_massages', object: f.object %>
 
+
 <!-- 会社情報 -->
 <div class="list-group-item">
   <div style="font-size: 22px; font-weight: bold;"><%= f.label :business_info %></div>
@@ -14,11 +15,13 @@
     <%= f.label :business_type %><!--会社形態-->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
+      <div id="available-form-business-type">
       <%= f.collection_radio_buttons(:business_type, Business.business_types_i18n, :first, :last, { checked: @business&.business_type? ? @business&.business_type : false }) do |b| %>
         <div>
           <%= b.label { b.radio_button + b.text } %>
         </div>
       <% end %>
+      </div>
     </div>
     <br>
     <%= f.label :name %><!-- 会社名 -->
@@ -84,11 +87,13 @@
     <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business&.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
     <br>
     <br>
+    <div id="hidden-form-business-type">
     <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
     <%= f.select :employment_manager_name, (@business_workers_name&.uniq || []),
                   { include_blank: true },
                   { class: "form-select form-select-sm", style: "width: 100%" }
     %><br>
+    </div>
   </div>
 </div>
 
@@ -187,33 +192,34 @@
             <%= b.label { b.radio_button + b.text } %>
           </div>
         <% end %>
-        <div id="error" class="text-red">【エラー】：残っているフォームを削除してからチェックを変更してください。</div>
+        <div id="error" class="text-red">【ご案内】：残っているフォームを削除してからチェックを変更してください。</div>
       </div>
     </div>
+
+    <!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
+    <div id="hidden-form" class="list-group">
+      <div class="list-group-item">
+        <% if f.object.business_industries.size == 0 %>
+          <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
+            <%= render "business_industry_fields", f: b_industry %>
+          <% end %>
+        <% else %>
+          <%= f.fields_for :business_industries do |b_industry| %>
+            <%= render "business_industry_fields", f: b_industry %>
+          <% end %>
+        <% end %>
+        <div id="license-insertion-point"></div>
+        <%= link_to_add_association "＋フォーム追加", f, :business_industries, id: "form-link",
+          data: {
+            association_insertion_node: '#license-insertion-point',
+            association_insertion_method: 'append'
+          }
+        %>
+      </div>
+    </div>
+    <!-- BusinessIndustryここまで -->
   </div>
 
-<!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
-<div id="hidden-form" class="list-group">
-  <div class="list-group-item">
-    <% if f.object.business_industries.size == 0 %>
-      <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
-        <%= render "business_industry_fields", f: b_industry %>
-      <% end %>
-    <% else %>
-      <%= f.fields_for :business_industries do |b_industry| %>
-        <%= render "business_industry_fields", f: b_industry %>
-      <% end %>
-    <% end %>
-    <div id="license-insertion-point"></div>
-    <%= link_to_add_association "＋フォーム追加", f, :business_industries, id: "form-link",
-      data: {
-        association_insertion_node: '#license-insertion-point',
-        association_insertion_method: 'append'
-      }
-    %>
-  </div>
-</div>
-<!-- BusinessIndustryここまで -->
 
 <div class="list-group-item">
   <div style="font-size: 22px; font-weight: bold;"><%= f.label :foreign_construction_workers %></div><!-- 外国人建設就労者 -->
@@ -229,7 +235,7 @@
       </div>
     </div>
     <br>
-    
+
     <div id="hidden-form-foreign-work">
       <%= f.label :specific_skilled_foreigners_exist %><!-- 一号特定技能外国人従事状況 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -275,6 +281,25 @@
 <%= f.hidden_field :email, value: current_user.email %>
 
 <script>
+//一人親方かどうかによってフォームの表示・非表示の切り替え
+  const available_form_business_type = document.getElementById('available-form-business-type')
+  const list_group_business_type = document.getElementById('hidden-form-business-type')
+  function getRadioBusinessType(object) {
+    const value = $('input[name="business[business_type]"]:checked').val();
+    if (value != 'freelance'){
+      list_group_business_type.classList.remove('hidden');
+    } else {
+      list_group_business_type.classList.add('hidden');
+    }
+  };
+  getRadioBusinessType(available_form_business_type); //ページの読み込み時に判定
+  $('input[name="business[business_type]"]').change(function() {
+    if ($(this).val() != 'freelance') {
+      list_group_business_type.classList.remove('hidden');
+    } else {
+      list_group_business_type.classList.add('hidden');
+    }
+  });
 //健康保険の加入状況によってフォームの表示・非表示の切り替え
   const available_form_health_insurance = document.getElementById('available-form-health-insurance')
   const list_group_health_insurance = document.getElementById('hidden-form-health-insurance')
@@ -375,7 +400,7 @@
     } else {
       list_group.classList.add('hidden');
       //建設許可証「無」をチェック、かつフォームが残っている場合は、エラー文を表示し残フォーム削除を促す（nilが送信されてしまう為）
-      if ($("#nest-field").length) {
+      if ($(".nested-fields").filter(function() {return $(this).css('display') !== 'none'}).length) {
         error.classList.remove('hidden');
       }
     }
@@ -388,33 +413,11 @@
       error.classList.add('hidden');
     } else {
       list_group.classList.add('hidden');
-      if ($("#nest-field").length) {
+      if ($(".nested-fields").filter(function() {return $(this).css('display') !== 'none'}).length) {
         error.classList.remove('hidden');
       }
     }
   });
-
-// 建設許可証のフォーム追加を29個までで制限かける（実装途中）
-  // $(document).on('turbolinks:load', function() {
-  //   var maxForms = 4;
-  //   var formsCount = $('#nest-field').length;
-  //   updateAddButtonState(formsCount);
-
-  //   $('#hidden-form').on('cocoon:after-insert', function(e, insertedItem) {
-  //     formsCount = $('#nest-field').length;
-  //     updateAddButtonState(formsCount);
-  //   });
-
-  //   function updateAddButtonState(count) {
-  //     if (count >= maxForms) {
-  //       $('#form-link').addClass('disabled').off('click');
-  //     } else {
-  //       $('#form-link').removeClass('disabled').on('click', function() {
-  //         return true;
-  //       });
-  //     }
-  //   }
-  // });
 </script>
 
 <script>
@@ -422,7 +425,7 @@
     $.each(function(key){
       $.validator.addMethod(key, this);
     });
-    $(".business-form-validation").validate({
+    var validator = $(".business-form-validation").validate({
       rules: {
         "business[uuid]": {
           required: true
@@ -489,25 +492,7 @@
         "business[construction_license_status]": {
           required: true
         },
-        "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
-          required: true
-        },
-        "business[business_industries_attributes][construction_license_governor_permission_prefecture]": {
-          required: true
-        },
-        "business[business_industries_attributes][construction_license_permission_type_identification_general]": {
-          required: true
-        },
-        "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: true,
-        },
-        "business[business_industries_attributes][construction_license_number_six_digits]": {
-          required: true
-        },
-        "business[business_industries_attributes][construction_license_number]": {
-          required: true
-        },
-        "business[business_industries_attributes][construction_license_updated_at]": {
+        "business[tem_industry_ids][]": {
           required: true
         },
         "business[foreign_work_status_exist]": {
@@ -592,27 +577,6 @@
         "business[tem_industry_ids][]": {
           required: "業種を選択してください。"
         },
-        "business[occupation_ids][]": {
-          required: "職種を選択してください。"
-        },
-        "business[business_industries_attributes][construction_license_permission_type_minister_governor]": {
-          required: "どちらかを選択してください。"
-        },
-        "business[business_industries_attributes][construction_license_governor_permission_prefecture]": {
-          required: "どれか一つを選択してください。"
-        },
-        "business[business_industries_attributes][construction_license_permission_type_identification_general]": {
-          required: "どちらかを選択してください。"
-        },
-        "business[business_industries_attributes][construction_license_number_double_digit]": {
-          required: "2桁の番号を入力してください。",
-        },
-        "business[business_industries_attributes][construction_license_number_six_digits]": {
-          required: "6桁以下の番号を入力してください。",
-        },
-        "business[business_industries_attributes][construction_license_updated_at]": {
-          required: "日付を選択してください。"
-        },
         "business[foreign_work_status_exist]": {
           required: "どちらかを選択してください。"
         },
@@ -629,6 +593,7 @@
         //   required: "外国人雇用管理責任者名を選択してください。"
         // },
       },
+      errorClass: "input_form_error",
 
       errorPlacement: function(error, element) {
         // radioとcheckboxのみ表示位置を個別調整
@@ -644,25 +609,76 @@
     $(".business-form-validation").change(function () {
       $(this).valid();
     });
-  });
 
-  // $(document).on('blur', '.business-form-validation input[type="text"]', function() {
-  //   $(this).rules('add', {
-  //     required: true,
-  //     messages: {
-  //       required: "入力してください。"
-  //     }
-  //   });
-  // });
-  // $(document).on('change', '.business-form-validation input[type="radio"]', function() {
-  //   var name = $(this).attr('name');
-  //   $('input[name="' + name + '"]').rules('add', {
-  //     required: true,
-  //     messages: {
-  //       required: "どちらかを選択してください。"
-  //     }
-  //   });
-  // });
+    // 増えていくフォーム（建設許可証）に対するバリデーションを実行（要リファクタリング）
+    $(".business-form-validation").on('change', 'select[name$="[industry_id]"]', function () {
+      $(this).rules("add", {
+        required: true,
+        messages: {
+          required: "どれか一つを選択してください。"
+        }
+      });
+      validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
+    });
+    $(".business-form-validation").on('change', 'input[type="radio"][name$="[construction_license_permission_type_minister_governor]"]', function () {
+      $(this).rules("add", {
+        required: true,
+        messages: {
+          required: "どちらかを選択してください。"
+        }
+      });
+      validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
+    });
+    $(".business-form-validation").on('change', 'select[name$="[construction_license_governor_permission_prefecture]"]', function () {
+      $(this).rules("add", {
+        required: true,
+        messages: {
+          required: "どれか一つを選択してください。"
+        }
+      });
+      validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
+    });
+    $(".business-form-validation").on('change', 'input[type="radio"][name$="[construction_license_permission_type_identification_general]"]', function () {
+      $(this).rules("add", {
+        required: true,
+        messages: {
+          required: "どちらかを選択してください。"
+        }
+      });
+      validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
+    });
+    $(".business-form-validation").on('change', 'input[name$="[construction_license_number_double_digit]"]', function () {
+      $(this).rules("add", {
+        required: true,
+        maxlength: 2,
+        messages: {
+          required: "2桁以内の番号を入力してください。",
+          maxlength: "2桁以内で入力してください。"
+        }
+      });
+      validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
+    });
+    $(".business-form-validation").on('change', 'input[name$="[construction_license_number_six_digits]"]', function () {
+      $(this).rules("add", {
+        required: true,
+        maxlength: 6,
+        messages: {
+          required: "6桁の番号を入力してください。",
+          maxlength: "6桁以内で入力してください。"
+        }
+      });
+      validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
+    });
+    $(".business-form-validation").on('change', 'input[name$="[construction_license_updated_at]"]', function () {
+      $(this).rules("add", {
+        required: true,
+        messages: {
+          required: "日付を選択してください。"
+        }
+      });
+      validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
+    });
+  });
 </script>
 
 <script>
