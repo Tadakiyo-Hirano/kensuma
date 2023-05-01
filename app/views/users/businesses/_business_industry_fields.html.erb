@@ -6,35 +6,35 @@
       <%= f.collection_select :industry_id, Industry.all, :id, :name, { prompt: '業種を選択してください' }, { class: "form-control" } %><br>
     </div>
     <div id="minister-radio" class="col-md-1">
-      <%= f.label :construction_license_permission_type_minister_governor %>
+      <%= f.label :construction_license_permission_type_minister_governor, "建設許可種別" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <%= f.collection_radio_buttons(:construction_license_permission_type_minister_governor, BusinessIndustry.construction_license_permission_type_minister_governors_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
         <%= b.label(class: 'radio-button-label') { b.radio_button(checked: f.object.construction_license_permission_type_minister_governor.nil? ? b.value == "governor_permission" : b.value == f.object.construction_license_permission_type_minister_governor) + ' ' + b.text } %><br>
       <% end %>
     </div>
     <div id="disabled-form" class="col-md-2">
-      <%= f.label :construction_license_governor_permission_prefecture %>
+      <%= f.label :construction_license_governor_permission_prefecture, "都道府県知事許可" %>
       <%= f.select :construction_license_governor_permission_prefecture, BusinessIndustry.construction_license_governor_permission_prefectures_i18n.invert, {include_blank: true}, {class: "form-control", disabled: (f.object.construction_license_permission_type_minister_governor == 'minister_permission')} %>
     </div>
     <div class="col-md-1">
-      <%= f.label :construction_license_permission_type_identification_general %>
+      <%= f.label :construction_license_permission_type_identification_general, "種別" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <%= f.collection_radio_buttons(:construction_license_permission_type_identification_general, BusinessIndustry.construction_license_permission_type_identification_generals_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
         <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
       <% end %>
     </div>
     <div class="col-md-1">
-      <%= f.label :construction_license_number_double_digit %>
+      <%= f.label :construction_license_number_double_digit, "和暦年度" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :construction_license_number_double_digit, class: "form-control", placeholder: "2桁の番号" %>
     </div>
     <div class="col-md-2">
-      <%= f.label :construction_license_number_six_digits %>
+      <%= f.label :construction_license_number_six_digits, "番号" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.text_field :construction_license_number_six_digits, class: "form-control", placeholder: "6桁以下の番号" %>
     </div>
     <div class="col-md-2">
-      <%= f.label :construction_license_updated_at %>
+      <%= f.label :construction_license_updated_at, "更新日" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <%= f.date_field :construction_license_updated_at, class: "form-control", placeholder: BusinessIndustry.human_attribute_name(:construction_license_updated_at) %><br>
     </div>
