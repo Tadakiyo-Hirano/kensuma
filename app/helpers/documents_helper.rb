@@ -275,7 +275,7 @@ module DocumentsHelper
     when 'woman'
       '女性'
     else
-      '性別不明'
+      ''
     end
   end
 
