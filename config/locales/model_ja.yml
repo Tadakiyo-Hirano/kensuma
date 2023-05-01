@@ -93,7 +93,7 @@ ja:
         occupation_id: 職種
       industry:
         name: 業種名
-      business_industry:
+      business_industries:
         industry: 業種
         industry_id: 業種
         construction_license_permission_type_minister_governor: 建設許可種別

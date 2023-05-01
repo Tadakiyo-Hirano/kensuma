@@ -5,7 +5,7 @@
   <!-- validateプラグインの読み込み -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<%= render 'shared/error_massages', object: @business %>
+<%= render 'shared/error_massages', object: f.object %>
 
 
 <!-- 会社情報 -->
@@ -172,12 +172,10 @@
       <div class="list-group-item">
         <% if f.object.business_industries.size == 0 %>
           <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
-            <%= render 'shared/error_massages', object: b_industry.object %>
             <%= render "business_industry_fields", f: b_industry %>
           <% end %>
         <% else %>
           <%= f.fields_for :business_industries do |b_industry| %>
-            <%= render 'shared/error_massages', object: b_industry.object %>
             <%= render "business_industry_fields", f: b_industry %>
           <% end %>
         <% end %>
@@ -575,7 +573,7 @@
       $(this).rules("add", {
         required: true,
         messages: {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         }
       });
       validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
@@ -593,7 +591,7 @@
       $(this).rules("add", {
         required: true,
         messages: {
-          required: "どれか一つを選択してください。"
+          required: "どちらかを選択してください。"
         }
       });
       validator.element(this); // フィールドが変更されたときに即座にエラーを表示する
