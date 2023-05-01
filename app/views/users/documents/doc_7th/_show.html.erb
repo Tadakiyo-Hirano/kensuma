@@ -82,7 +82,7 @@
               <td class="doc_7_s7"></td>
               <td class="doc_7_s7"></td>
               <td class="doc_7_s8" colspan="5">
-                <%= doc_content_date(@document.content&.[]("date_submitted")) %> 
+                <%= doc_content_date(@document.content&.[]("date_submitted")) %>
               <!--「提出日（西暦）」7-001 -->
               </td>
               <td class="doc_7_s7"></td>
@@ -92,7 +92,7 @@
                 <div class="row-header-wrapper" style="line-height: 19px"></div>
               </th>
               <td class="doc_7_s9" colspan="2" rowspan="2">会 社 名</td>
-              <td class="doc_7_s10" colspan="5" rowspan="2"><%= document_site_info.site_name %><!--「元請会社名」7-002 --></td>
+              <td class="doc_7_s10" colspan="5" rowspan="2"><%= document_site_info&.content&.[]('genecon_name') %><!--「元請会社名」7-002 --></td>
               <td class="doc_7_s5"></td>
               <td class="doc_7_s6"></td>
               <td class="doc_7_s6"></td>
@@ -208,7 +208,7 @@
                 <div class="row-header-wrapper" style="line-height: 19px"></div>
               </th>
               <td class="doc_7_s9" colspan="4" rowspan="2">統括安全衛生責任者</td>
-              <td class="doc_7_s12" colspan="5" rowspan="2"><%= document_site_info.general_safety_manager_name %><!-- 元請会社の「統括安全衛生責任者名」7-004 --></td>
+              <td class="doc_7_s12" colspan="5" rowspan="2"><%= document_site_info.general_safety_responsible_person_name %><!-- 元請会社の「統括安全衛生責任者名」7-004 --></td>
               <td class="doc_7_s6"></td>
               <td class="doc_7_s5"></td>
               <td class="doc_7_s6"></td>
@@ -228,7 +228,7 @@
               <td class="doc_7_s14">殿</td>
               <td class="doc_7_s5"></td>
               <td class="doc_7_s9" colspan="2" rowspan="2">一次会社名</td>
-              <td class="doc_7_s10" colspan="6" rowspan="2"><%= document_site_info.business.name %><!--「一次会社名」7-005 --></td>
+              <td class="doc_7_s10" colspan="6" rowspan="2"><%= primary_subcon_info_for_6th&.content&.[]("subcon_name") %><!--「一次会社名」7-005 --></td>
               <td class="doc_7_s7"></td>
             </tr>
             <tr class="doc_7_s18" style="height: 19px">
@@ -412,7 +412,7 @@
               <td class="doc_7_s6"></td>
               <td class="doc_7_s9" colspan="2" rowspan="2">代　表　者</td>
               <td class="doc_7_s10" colspan="5" rowspan="2"><%= document_info&.content&.[]('subcon_representative_name') %><!--「代表者名」7-008 --></td>
-              <td class="doc_7_s15" rowspan="2">㊞</td> <!-- ㊞ 7-009 -->
+              <td class="doc_7_s15" rowspan="2"></td> <!-- ㊞ 7-009 -->
               <td class="doc_7_s7"></td>
             </tr>
             <tr class="doc_7_s18" style="height: 19px">

@@ -281,7 +281,7 @@
                     <td class="doc_17_s3"></td>
                     <td class="doc_17_s8"></td>
                     <td class="doc_17_s9" dir="ltr" colspan="1" rowspan="12">
-                      <%= request_order_info(@primary_subcon_id_17th)&.construction_name %>
+                      <%= request_order_info(@primary_subcon_id_17th)&.occupation %>
                     </td><!--17-002 工事名(一次)-->
                     <td class="doc_17_s10" colspan="7" rowspan="2">会社名</td>
                     <td class="doc_17_s11" dir="ltr" colspan="8" rowspan="2">
@@ -389,7 +389,8 @@
                     <td class="doc_17_s8"></td>
                     <td class="doc_17_s10" colspan="7" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s13" dir="ltr" colspan="8" rowspan="2">
-                      <%= request_order_info(@primary_subcon_id_17th)&.construction_license %>
+                      <%= request_order_info(@primary_subcon_id_17th)&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(@primary_subcon_id_17th)&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-005 建設業許可番号(短縮)(一次) -->
                     <td class="doc_17_s6"></td>
                     <td class="doc_17_s6"></td>
@@ -438,7 +439,7 @@
                     <td class="doc_17_s14"></td>
                     <td class="doc_17_s14"></td>
                     <td class="doc_17_s14"></td>
-                    <td class="doc_17_s15" rowspan="3"></td>
+                    <td class="doc_17_s14" rowspan="3"></td>
                     <td class="doc_17_s10" colspan="7" rowspan="2">安全衛生責任者</td>
                     <td class="doc_17_s13" dir="ltr" colspan="8" rowspan="2">
                       <%= request_order_info(@primary_subcon_id_17th)&.safety_manager_name %>
@@ -881,7 +882,7 @@
                   </tr>
                   <tr class="doc_17_s45" style="height: 12px">
                     <td class="doc_17_s9" dir="ltr" rowspan="12">
-                      <%= provisional_secondary_subcon_info(instance_variable_get("@secondary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.construction_name %>
+                      <%= provisional_secondary_subcon_info(instance_variable_get("@secondary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s11" dir="ltr" colspan="6" rowspan="2">
@@ -889,7 +890,7 @@
                     </td><!--17-015-1 会社名(二次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s9" rowspan="12">
-                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{2+3*(i)}"))&.construction_name %>
+                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{2+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -897,7 +898,7 @@
                     </td><!--17-015-2 会社名(二次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s9" rowspan="12">
-                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{3+3*(i)}"))&.construction_name %>
+                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{3+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -931,17 +932,28 @@
                   <tr class="doc_17_s45" style="height: 12px">
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s13" dir="ltr" colspan="6" rowspan="2">
-                      <%= provisional_secondary_subcon_info(instance_variable_get("@secondary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.construction_license %>
+                      <%= provisional_secondary_subcon_info(
+                            instance_variable_get("@secondary_subcon_id_17th_#{1+3*(i)}"),
+                            instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),
+                            instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}")
+                          )&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= provisional_secondary_subcon_info(
+                            instance_variable_get("@secondary_subcon_id_17th_#{1+3*(i)}"),
+                            instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),
+                            instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}")
+                          )&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-1 建設業許可番号(短縮)(二次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{2+3*(i)}"))&.construction_license %>
+                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{2+3*(i)}"))&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{2+3*(i)}"))&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-2 建設業許可番号(短縮)(二次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{3+3*(i)}"))&.construction_license %>
+                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{3+3*(i)}"))&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(instance_variable_get("@secondary_subcon_id_17th_#{3+3*(i)}"))&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-3 建設業許可番号(短縮)(二次)-->
                   </tr>
                   <tr class="doc_17_s45" style="height: 12px">
@@ -1196,7 +1208,7 @@
                   </tr>
                   <tr class="doc_17_s45" style="height: 12px">
                     <td class="doc_17_s9" rowspan="12">
-                      <%= provisional_tertiary_subcon_info(instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.construction_name %>
+                      <%= provisional_tertiary_subcon_info(instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -1204,7 +1216,7 @@
                     </td><!--17-015-1 会社名(三次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s9" rowspan="12">
-                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{2+3*(i)}"))&.construction_name %>
+                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{2+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -1212,7 +1224,7 @@
                     </td><!--17-015-2 会社名(三次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s9" rowspan="12">
-                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{3+3*(i)}"))&.construction_name %>
+                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{3+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -1246,17 +1258,26 @@
                   <tr class="doc_17_s45" style="height: 12px">
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= provisional_tertiary_subcon_info(instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.construction_license %>
+                      <%= provisional_tertiary_subcon_info(
+                            instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),
+                            instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}")
+                          )&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= provisional_tertiary_subcon_info(
+                            instance_variable_get("@tertiary_subcon_id_17th_#{1+3*(i)}"),
+                            instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}")
+                          )&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-1 建設業許可番号(短縮)(三次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{2+3*(i)}"))&.construction_license %>
+                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{2+3*(i)}"))&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{2+3*(i)}"))&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-2 建設業許可番号(短縮)(三次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{3+3*(i)}"))&.construction_license %>
+                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{3+3*(i)}"))&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(instance_variable_get("@tertiary_subcon_id_17th_#{3+3*(i)}"))&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-3 建設業許可番号(短縮)(三次)-->
                   </tr>
                   <tr class="doc_17_s45" style="height: 12px">
@@ -1511,7 +1532,7 @@
                   </tr>
                   <tr class="doc_17_s45" style="height: 12px">
                     <td class="doc_17_s9" rowspan="12">
-                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.construction_name %>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -1519,7 +1540,7 @@
                     </td><!--17-015-1 会社名(四次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s9" rowspan="12">
-                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{2+3*(i)}"))&.construction_name %>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{2+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -1527,7 +1548,7 @@
                     </td><!--17-015-2 会社名(四次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s9" rowspan="12">
-                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{3+3*(i)}"))&.construction_name %>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{3+3*(i)}"))&.occupation %>
                     </td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">会社名</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
@@ -1561,17 +1582,20 @@
                   <tr class="doc_17_s45" style="height: 12px">
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.construction_license %>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{1+3*(i)}"))&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-1 建設業許可番号(短縮)(四次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{2+3*(i)}"))&.construction_license %>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{2+3*(i)}"))&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{2+3*(i)}"))&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-2 建設業許可番号(短縮)(四次)-->
                     <td class="doc_17_s16"></td>
                     <td class="doc_17_s10" colspan="5" rowspan="2">建設業許可番号</td>
                     <td class="doc_17_s35" colspan="6" rowspan="2">
-                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{3+3*(i)}"))&.construction_license %>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{3+3*(i)}"))&.content&.[]('subcon_construction_license_number_1st') %><br>
+                      <%= request_order_info(instance_variable_get("@quaternary_subcon_id_17th_#{3+3*(i)}"))&.content&.[]('subcon_construction_license_number_2nd') %>
                     </td><!--17-017-3 建設業許可番号(短縮)(四次)-->
                   </tr>
                   <tr class="doc_17_s45" style="height: 12px">

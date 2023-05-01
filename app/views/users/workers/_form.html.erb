@@ -42,12 +42,12 @@
 
     <%# 事業主または一人親方 %>
     <%= f.label :business_owner_or_master %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="md-3 list-group-item"><%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい</div><br>
 
     <%# 役職 %>
     <%= f.label :job_title %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :job_title, class: "form-control", placeholder: Worker.human_attribute_name(:job_title) %><br>
 
     <%# メールアドレス %>
@@ -91,9 +91,9 @@
 
     <%# 契約条件の確認 %>
     <%= f.label :employment_contract %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
-      <%= f.collection_radio_buttons(:employment_contract, Worker.employment_contracts_i18n, :first, :last, class: "radio") do |b| %>
+      <%= f.collection_radio_buttons(:employment_contract, Worker.employment_contracts_i18n, :first, :last, { checked: @worker&.employment_contract? ? @worker&.employment_contract : false }, class: "radio") do |b| %>
         <div class="radio">
           <%= b.label { b.radio_button + b.text } %>
         </div>
@@ -153,9 +153,9 @@
 
     <%# 性別 %>
     <%= f.label :sex %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
-      <%= f.collection_radio_buttons(:sex, Worker.sexes_i18n, :first, :last, class: "radio") do |b| %>
+      <%= f.collection_radio_buttons(:sex, Worker.sexes_i18n, :first, :last, { checked: @worker&.sex? ? @worker&.sex : false }, class: "radio") do |b| %>
         <div class="radio">
           <%= b.label { b.radio_button + b.text } %>
         </div>
@@ -165,9 +165,9 @@
 
     <%# 血液型（ABO）%>
     <%= f.label :abo_blood_type %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
-      <%= f.collection_radio_buttons(:abo_blood_type, Worker.abo_blood_types_i18n, :first, :last, class: "radio") do |b| %>
+      <%= f.collection_radio_buttons(:abo_blood_type, Worker.abo_blood_types_i18n, :first, :last, { checked: @worker&.abo_blood_type? ? @worker&.abo_blood_type : false }, class: "radio") do |b| %>
         <div class="radio">
           <%= b.label { b.radio_button + b.text } %>
         </div>
@@ -176,9 +176,9 @@
 
     <%# 血液型（RH） %>
     <%= f.label :rh_blood_type %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
-      <%= f.collection_radio_buttons(:rh_blood_type, Worker.rh_blood_types_i18n, :first, :last, class: "radio") do |b| %>
+      <%= f.collection_radio_buttons(:rh_blood_type, Worker.rh_blood_types_i18n, :first, :last, { checked: @worker&.rh_blood_type? ? @worker&.rh_blood_type : false }, class: "radio") do |b| %>
         <div class="radio">
           <%= b.label { b.radio_button + b.text } %>
         </div>
@@ -191,9 +191,9 @@
       <div class="list-group-item mb-3">
         <%# 健康診断の受診状況 %>
         <div class="mb-1">
-          <%= worker_medical.label :is_med_exam %><br>
+          <%= worker_medical.label :is_med_exam %>
           <div class="list-group-item">
-            <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last, class: "radio") do |b| %>
+            <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last, { checked: @worker&.worker_medical&.is_med_exam? ? @worker&.worker_medical&.is_med_exam : false }, class: "radio") do |b| %>
               <div class="radio">
                 <%= b.label { b.radio_button + b.text } %>
               </div>
@@ -229,9 +229,9 @@
       <div class="list-group-item mb-3">
         <%# 特別健康診断の受診状況 %>
         <div class="mb-1">
-          <%= worker_medical.label :is_special_med_exam %><br>
+          <%= worker_medical.label :is_special_med_exam %>
           <div class="list-group-item">
-            <%= worker_medical.collection_radio_buttons(:is_special_med_exam, WorkerMedical.is_special_med_exams_i18n, :first, :last, class: "radio") do |b| %>
+            <%= worker_medical.collection_radio_buttons(:is_special_med_exam, WorkerMedical.is_special_med_exams_i18n, :first, :last, { checked: @worker&.worker_medical&.is_special_med_exam? ? @worker&.worker_medical&.is_special_med_exam : false }, class: "radio") do |b| %>
               <div class="radio">
                 <%= b.label { b.radio_button + b.text } %>
               </div>
@@ -266,9 +266,9 @@
       <%# 最近の健康状態 %>
       <div class="mb-3">
         <%= worker_medical.label :health_condition %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <div class="list-group-item">
-          <%= worker_medical.collection_radio_buttons(:health_condition, WorkerMedical.health_conditions_i18n, :first, :last, class: "radio") do |b| %>
+          <%= worker_medical.collection_radio_buttons(:health_condition, WorkerMedical.health_conditions_i18n, :first, :last, { checked: @worker&.worker_medical&.health_condition? ? @worker&.worker_medical&.health_condition : false }, class: "radio") do |b| %>
             <div class="radio">
               <%= b.label { b.radio_button + b.text } %>
             </div>
@@ -291,9 +291,9 @@
       <%# 健康保険 %>
       <div class="mb-3">
         <%= worker_insurance.label :health_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <div class="list-group-item">
-          <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+          <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, { checked: @worker.worker_insurance&.health_insurance_type? ? @worker&.worker_insurance&.health_insurance_type : false }, class: "radio") do |b| %>
             <div class="radio">
               <%= b.label { b.radio_button + b.text } %>
             </div>
@@ -324,9 +324,9 @@
       <%# 年金保険 %>
       <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <div class="list-group-item">
-          <%= worker_insurance.collection_radio_buttons(:pension_insurance_type, WorkerInsurance.pension_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+          <%= worker_insurance.collection_radio_buttons(:pension_insurance_type, WorkerInsurance.pension_insurance_types_i18n, :first, :last, { checked: @worker&.worker_insurance&.pension_insurance_type? ? @worker&.worker_insurance&.pension_insurance_type : false }, class: "radio") do |b| %>
             <div class="radio">
               <%= b.label { b.radio_button + b.text } %>
             </div>
@@ -338,9 +338,9 @@
       <div class="mb-3" id="employment_insurance_type">
         <%# 雇用保険 %>
         <%= worker_insurance.label :employment_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <div class="list-group-item">
-          <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, class: "radio") do |b| %>
+          <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, { checked: @worker&.worker_insurance&.employment_insurance_type? ? @worker&.worker_insurance&.employment_insurance_type : false }, class: "radio") do |b| %>
             <div class="radio">
               <%= b.label { b.radio_button + b.text } %>
             </div>
@@ -356,9 +356,9 @@
 
       <%# 労働保険特別加入 %>
       <div class="mt-3" id="has_labor_insurance">
-        <%= worker_insurance.label :has_labor_insurance %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <%= worker_insurance.label :has_labor_insurance %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <div class="list-group-item">
-          <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last, class: "radio") do |b| %>
+          <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last, { checked: @worker&.worker_insurance&.has_labor_insurance? ? @worker&.worker_insurance&.has_labor_insurance : false }, class: "radio") do |b| %>
             <div class="radio">
               <%= b.label { b.radio_button + b.text } %>
             </div>
@@ -369,16 +369,16 @@
       <%# 建設業退職金共済手帳 %>
       <div class="mb-3">
         <%= worker_insurance.label :severance_pay_mutual_aid_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <div class="list-group-item">
-          <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, class: "radio") do |b| %>
+          <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, { checked: @worker&.worker_insurance&.severance_pay_mutual_aid_type? ? @worker&.worker_insurance&.severance_pay_mutual_aid_type : false }, class: "radio") do |b| %>
             <div class="radio">
               <%= b.label { b.radio_button + b.text } %>
             </div>
           <% end %>
           <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
           <div class="mb-3" id="mutual_aid_number">
-            <%= worker_insurance.label :severance_pay_mutual_aid_name %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+            <%= worker_insurance.label :severance_pay_mutual_aid_name %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
             <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
           </div>
         </div>
@@ -471,7 +471,7 @@
       <% end %>
       <div id = "driver_licence_number">
         <%= f.label :driver_licence_number %>
-        <span class="p-1 mb-2 rounded bg-danger text-white" id="driver-licence-number-precense">必須</span><br>
+        <span class="p-1 mb-2 rounded bg-danger text-white" id="driver-licence-number-precense">必須</span> 
         <%= f.text_field :driver_licence_number, value: @driver_licence_number, class: "form-control", placeholder: annotation_hyphen %>
       </div>
     </div>
@@ -498,7 +498,7 @@
     <div class="mt-3 mb-3">
       <%= f.label :status_of_residence, class: "required" %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:status_of_residence, Worker.status_of_residences_i18n, :first, :last, class: "radio") do |b| %>
+        <%= f.collection_radio_buttons(:status_of_residence, Worker.status_of_residences_i18n, :first, :last, { checked: @worker&.status_of_residence? ? @worker&.status_of_residence : false }, class: "radio") do |b| %>
           <div class="radio">
             <%= b.label { b.radio_button + b.text } %>
           </div>
@@ -515,7 +515,7 @@
       <div class="mt-3 mb-3">
         <%= f.label :confirmed_check, class: "required" %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
         <div class="list-group-item">
-          <%= f.collection_radio_buttons(:confirmed_check, Worker.confirmed_checks_i18n, :first, :last, class: "radio") do |b| %>
+          <%= f.collection_radio_buttons(:confirmed_check, Worker.confirmed_checks_i18n, :first, :last, { checked: @worker&.confirmed_check? ? @worker&.confirmed_check : false }, class: "radio") do |b| %>
             <div class="radio">
               <%= b.label { b.radio_button + b.text } %>
             </div>
@@ -890,6 +890,48 @@
         "worker[abo_blood_type]": {
           required: true
         },
+        "worker[rh_blood_type]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][is_med_exam]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][med_exam_on]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][max_blood_pressure]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][min_blood_pressure]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][is_special_med_exam]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][special_med_exam_on]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][special_med_exam_list][]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][health_condition]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][status_of_residence]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][maturity_date]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][confirmed_check]": {
+          required: true
+        },
+        "worker[worker_medical_attributes][confirmed_check_date]": {
+          required: true
+        },
+        "worker[driver_licence_number]": {
+          required: true
+        },
         "worker[job_title]": {
           required: true
         },
@@ -973,6 +1015,48 @@
         "worker[abo_blood_type]": {
           required: "血液型(ABO)を入力してください。"
         },
+        "worker[rh_blood_type]": {
+          required: "血液型(Rh)を入力してください。"
+        },
+        "worker[worker_medical_attributes][is_med_exam]": {
+          required: "健康診断の受信の有無を選択してください。"
+        },
+        "worker[worker_medical_attributes][med_exam_on]": {
+          required: "健康診断日を選択してください。"
+        },
+        "worker[worker_medical_attributes][max_blood_pressure]": {
+          required: "最高血圧を入力してください。"
+        },
+        "worker[worker_medical_attributes][min_blood_pressure]": {
+          required: "最低血圧を入力してください。"
+        },
+        "worker[worker_medical_attributes][is_special_med_exam]": {
+          required: "特別健康診断の受信の有無を選択してください。"
+        },
+        "worker[worker_medical_attributes][special_med_exam_on]": {
+          required: "特別健康診断日を選択してください。"
+        },
+        "worker[worker_medical_attributes][special_med_exam_list][]": {
+          required: "特別健康診断内容を選択してください。"
+        },
+        "worker[worker_medical_attributes][health_condition]": {
+          required: "最近の健康状態を選択してください。"
+        },
+        "worker[worker_medical_attributes][status_of_residence]": {
+          required: "在留資格を選択してください。"
+        },
+        "worker[worker_medical_attributes][maturity_date]": {
+          required: "在留期間満期日を選択してください。"
+        },
+        "worker[worker_medical_attributes][confirmed_check]": {
+          required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください。"
+        },
+        "worker[worker_medical_attributes][confirmed_check_date]": {
+          required: "最近の健康状態を選択してください。"
+        },
+        "worker[driver_licence_number]": {
+          required: "免許証番号を入力してください。"
+        },
         "worker[job_title]": {
           required: "役職を入力してください。"
         },
@@ -1019,7 +1103,15 @@
           required: "労働特別保険に加入しているかどうかを選択してください。"
         },
       },
-      errorClass: "input_form_error"
+      
+      errorPlacement: function(error, element) {
+        // radioとcheckboxのみ表示位置を個別調整
+        if (element.is(":radio") || element.is(":checkbox")) {
+          error.insertBefore(element.closest('.list-group-item'));
+        } else {
+          error.insertBefore(element);
+        }
+      }
     });
      // 入力欄を変更したときにバリデーションを実行
     $(".worker-form-validation").change(function () {

@@ -32,21 +32,21 @@
                     </td>
                     <td>
                       <%= fc.label :driver_name %>
-                      <%= fc.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control" } %>
+                      <%= fc.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control", required: true } %>
                     </td>
                     <td>
                       <%= fc.label :usage_period_start %>
-                      <%= fc.date_field :usage_period_start, class: "form-control" %>
+                      <%= fc.date_field :usage_period_start, class: "form-control", required: true %>
                     </td>
                     <td>
                       <%= fc.label :usage_period_end %>
-                      <%= fc.date_field :usage_period_end, class: "form-control" %>
+                      <%= fc.date_field :usage_period_end, class: "form-control", required: true %>
                     </td>
                   </tr>
                   <tr style="border-top: 0px #fff;">
                     <td>
                       <%= fc.label :starting_point %>
-                      <%= fc.text_field :starting_point, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                      <%= fc.text_field :starting_point, maxlength: 40, placeholder: "40文字以内", class: "form-control", required: true %>
                     </td>
                     <td>
                       <%= fc.label :waypoint_first %>
@@ -58,7 +58,7 @@
                     </td>
                     <td>
                       <%= fc.label :arrival_point %>
-                      <%= fc.text_field :arrival_point, maxlength: 40, placeholder: "40文字以内", class: "form-control" %>
+                      <%= fc.text_field :arrival_point, maxlength: 40, placeholder: "40文字以内", class: "form-control", required: true %>
                     </td>
                   </tr>
                 <% end %>
@@ -72,3 +72,5 @@
     <% end %>
   </div>
 </section>
+
+

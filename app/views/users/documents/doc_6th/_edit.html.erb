@@ -1,7 +1,7 @@
 <!-- (6)安全衛生管理に関する契約書(一次会社用) -->
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
   <div id="doc_6" class="document-outer">
-    <div class="card">  
+    <div class="card">
       <div class="card-body">
         <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
         <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -103,7 +103,7 @@
                   <div class="row-header-wrapper" style="line-height: 19px"></div>
                 </th>
                 <td class="doc_6_s9" colspan="2" rowspan="2">会 社 名</td>
-                <td class="doc_6_s10" colspan="5" rowspan="2"><%= document_site_info.site_name %><!--「元請会社名」6-002 --></td>
+                <td class="doc_6_s10" colspan="5" rowspan="2"><%= document_site_info&.content&.[]('genecon_name') %><!--「元請会社名」6-002 --></td>
                 <td class="doc_6_s5"></td>
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s6"></td>
@@ -219,7 +219,7 @@
                   <div class="row-header-wrapper" style="line-height: 19px"></div>
                 </th>
                 <td class="doc_6_s9" colspan="4" rowspan="2">統括安全衛生責任者</td>
-                <td class="doc_6_s12" colspan="5" rowspan="2"><%= document_site_info.general_safety_manager_name %><!-- 元請会社の「統括安全衛生責任者名」6-004 --></td>
+                <td class="doc_6_s12" colspan="5" rowspan="2"><%= document_site_info.general_safety_responsible_person_name %><!-- 元請会社の「統括安全衛生責任者名」6-004 --></td>
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s5"></td>
                 <td class="doc_6_s6"></td>
@@ -239,7 +239,7 @@
                 <td class="doc_6_s14">殿</td>
                 <td class="doc_6_s5"></td>
                 <td class="doc_6_s9" colspan="2" rowspan="2">会　社　名</td>
-                <td class="doc_6_s10" colspan="6" rowspan="2"><%= document_info.content&.[]('subcon_name') %><!-- 「会社名」6-005 --></td>
+                <td class="doc_6_s10" colspan="6" rowspan="2"><%= primary_subcon_info_for_6th&.content&.[]('subcon_name') %><!-- 「会社名」6-005 --></td>
                 <td class="doc_6_s7"></td>
               </tr>
               <tr class="doc_6_s18" style="height: 19px">
@@ -300,7 +300,7 @@
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s9" colspan="2" rowspan="2">住　　　所</td>
-                <td class="doc_6_s10" colspan="6" rowspan="2"><%= document_info.content&.[]('subcon_address') %><!-- 「住所」6-006 --></td>
+                <td class="doc_6_s10" colspan="6" rowspan="2"><%= primary_subcon_info_for_6th&.content&.[]('subcon_address') %><!-- 「住所」6-006 --></td>
                 <td class="doc_6_s7"></td>
               </tr>
               <tr class="doc_6_s18" style="height: 19px">
@@ -361,8 +361,8 @@
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s9" colspan="2" rowspan="2">代　表　者</td>
-                <td class="doc_6_s10" colspan="5" rowspan="2"><%= document_info.content&.[]('subcon_representative_name') %><!--「代表者名」6-007 --></td>
-                <td class="doc_6_s15" rowspan="2">㊞</td> <!-- ㊞ 6-008 -->
+                <td class="doc_6_s10" colspan="5" rowspan="2"><%= primary_subcon_info_for_6th&.content&.[]('subcon_representative_name') %><!--「代表者名」6-007 --></td>
+                <td class="doc_6_s15" rowspan="2"></td> <!-- ㊞ 6-008 -->
                 <td class="doc_6_s7"></td>
               </tr>
               <tr class="doc_6_s18" style="height: 19px">
@@ -381,7 +381,7 @@
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s6"></td>
                 <td class="doc_6_s6"></td>
-                
+
               </tr>
               <tr class="doc_6_s18" style="height: 19px">
                 <th id="1127441738R18" class="doc_6_s20" style="height: 19px;" class="row-headers-background">
@@ -841,14 +841,14 @@
                 </th>
                 <td class="doc_6_s0" colspan="19"></td>
                 <td class="doc_6_s0"></td>
-              </tr> 
+              </tr>
               <tr class="doc_6_s19" style="height: 19px">
                 <th class="doc_6_s20" style="height: 19px;" class="row-headers-background">
                   <div class="row-header-wrapper" style="line-height: 19px">&emsp;</div>
                 </th>
                 <td class="doc_6_s0" colspan="19"></td>
                 <td class="doc_6_s0"></td>
-              </tr> 
+              </tr>
             </tbody>
           </table>
         </div>

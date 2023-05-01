@@ -10,23 +10,27 @@
 <br>
 <%= f.label :usage_period_start %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<br>
-<%= f.date_field :usage_period_start, class: "form-control", style: "width: auto; display: inline-block;" %>
+<%= f.date_field :usage_period_start, class: "form-control", style: "width: auto;" %>
 <br><br>
 <%= f.label :usage_period_end %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<br>
-<%= f.date_field :usage_period_end, class: "form-control", style: "width: auto; display: inline-block;" %>
+<%= f.date_field :usage_period_end, class: "form-control", style: "width: auto;" %>
 <br><br>
 <%= f.label :usage_time_start %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<br>
-<%= f.time_select :usage_time_start, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+  <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+  <div class="list-group">
+    <div>
+      <%= f.time_select :usage_time_start, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+    </div>
+  </div>
 <br><br>
 <%= f.label :usage_time_end %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<br>
-<%= f.time_select :usage_time_end, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+  <div class="list-group">
+    <div>
+      <%= f.time_select :usage_time_end, { include_blank: true, minute_step: 15, ignore_date: true }, { class: "form-control", style: "width: auto; display: inline-block;" } %>
+    </div>
+  </div>
 <br><br>
 <%= f.label FireType.human_attribute_name(:name) %><br>
 <%= f.collection_check_boxes :fire_type_ids, FireType.all, :id, :name %>
@@ -118,7 +122,17 @@
           required: "火気使用責任者を入力してください。"
         },
       },
-      errorClass: "input_form_error"
+      errorPlacement: function(error, element) {
+        // radioとcheckboxのみ表示位置を個別調整
+        if (element.is(":radio") || element.is(":checkbox")) {
+          error.insertBefore(element.closest('.list-group-item'));
+        } else if(element.attr("name") == "field_fire[usage_time_start(4i)]" || element.attr("name") == "field_fire[usage_time_start(5i)]" || element.attr("name") == "field_fire[usage_time_end(4i)]" || element.attr("name") == "field_fire[usage_time_end(5i)]") {
+          console.log("test")
+          error.insertBefore(element.parent().parent());
+        }else {
+          error.insertBefore(element);
+        }
+      }
     });
     // 入力欄を変更したときにバリデーションを実行
     $(".field_fire-form-validation").change(function () {

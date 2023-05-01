@@ -38,7 +38,7 @@
                     <td>
                       <%= fs.label :vehicle_name %><br>
                       <%= fs.text_field :vehicle_name, readonly: true, class: "form-control" %>
-                      
+
                       <%#= fs.label :vehicle_name %><br>
                         <%#= select_tag 'dummy_select', options_for_select(field_special_vehicle.content.values_at("name", "maker", "standards_performance", "year_manufactured", "control_number")), class: "form-control" %>
                     </td>
@@ -58,7 +58,7 @@
                   <tr style="border-bottom: 0px #fff;">
                     <td>
                       <%= fs.label :driver_name %>
-                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
                       <%= fs.select :driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control", id: "driver_name_#{i}" } %>
                     </td>
                     <td>
@@ -68,7 +68,7 @@
                     </td>
                     <td>
                       <%= fs.label :sub_driver_name %>
-                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
                       <%= fs.select :sub_driver_worker_id, @current_business.workers.pluck(:name, :id), { prompt: '選択してください' }, { class: "form-control", id: "sub_driver_name_#{i}" } %>
                     </td>
                     <td>
@@ -84,12 +84,14 @@
                     </td>
                     <td>
                       <%= fs.label :lease_type %>
-                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-                      <% FieldSpecialVehicle.lease_types_i18n.each do |key, value| %>
-                        <%= fs.radio_button :lease_type, key, id: "lease_type_#{key}" %>
-                        <%= label_tag "lease_type_#{key}", value %>
-                        <span class="radio-spacing"></span>
-                      <% end %>
+                      <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+                      <div class="list-group-item">
+                        <% FieldSpecialVehicle.lease_types_i18n.each do |key, value| %>
+                          <%= fs.radio_button :lease_type, key, id: "lease_type_#{key}" %>
+                          <%= label_tag "lease_type_#{key}", value %>
+                          <span class="radio-spacing"></span>
+                        <% end %>
+                      </div>
                     </td>
                     <td>
                       <%= fs.label :use_company_name %>
@@ -209,36 +211,31 @@ $(function(){
         required: "リース区分を選択してください。"
       },
       "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_company_name]": {
-        required: "使用会社を入力または選択してください。"
+        required: "使用会社を入力してください。"
       },
       "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_company_representative_name]": {
         required: "使用会社の代表者を入力してください。"
       },
       "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][carry_on_date]": {
-        required: "年月日を入力または選択してください。"
+        required: "年月日を選択してください。"
       },
       "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][carry_out_date]": {
-        required: "年月日を入力または選択してください。"
+        required: "年月日を選択してください。"
       },
       "request_order[field_special_vehicles][<%= field_special_vehicle.id %>][use_place]": {
         required: "使用場所を入力してください。"
       },
       <% end %>
     },
-    errorClass: "input_form_error",
     
     errorPlacement: function(error, element) {
-      /* if (element.attr("type") === "radio") {*/
-      /*#  error.insertAfter($(element).closest('td').find('label:last'));*/
-      if (element.is(":radio")) {
-        error.appendTo(element.parent());
-      } else if (element.attr("name").startsWith("request_order[field_special_vehicles]")) {
-        var label = element.parents("td").find("label");
-        error.insertAfter(label);
-      } else {
-        error.insertAfter(element);
+        // radioとcheckboxのみ表示位置を個別調整
+        if (element.is(":radio") || element.is(":checkbox")) {
+          error.insertBefore(element.closest('.list-group-item'));
+        } else {
+          error.insertBefore(element);
+        }
       }
-    }
   });
   // 入力欄を変更したときにバリデーションを実行
   $(".special-vehicle-form-validation").change(function () {
@@ -253,7 +250,7 @@ $(function(){
   $(document).ready(function(){
     var isInitialized = false;
     var driver_name_index = '<%= index %>'; // driver_name_#{index} に変更
-    
+
     function initializeSelect2() {
       $('#driver_name_' + driver_name_index).on('change', function() {
         var category_id = $(this).val();
@@ -291,14 +288,14 @@ $(function(){
       });
       isInitialized = true;
     }
-  
+
     var checkExist = setInterval(function() {
       if ($('#driver_license_' + driver_name_index).length && !isInitialized) { // ID を driver_name_#{index} に変更
         clearInterval(checkExist);
         initializeSelect2();
       }
     }, 100);
-  
+
   });
   <% end %>
 </script>
@@ -308,7 +305,7 @@ $(function(){
   $(document).ready(function(){
     var isInitialized = false;
     var driver_name_index = '<%= index %>'; // driver_name_#{index} に変更
-    
+
     function initializeSelect2() {
       $('#sub_driver_name_' + driver_name_index).on('change', function() {
         var category_id = $(this).val();
@@ -346,14 +343,14 @@ $(function(){
       });
       isInitialized = true;
     }
-  
+
     var checkExist = setInterval(function() {
       if ($('#sub_driver_license_' + driver_name_index).length && !isInitialized) { // ID を driver_name_#{index} に変更
         clearInterval(checkExist);
         initializeSelect2();
       }
     }, 100);
-  
+
   });
   <% end %>
 </script>
