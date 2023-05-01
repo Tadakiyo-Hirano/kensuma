@@ -82,7 +82,7 @@
     <div class="list-group-item">
       <div style="font-weight: bold;"><%= f.label :professional_construction %></div> <!-- 有・無(特定専門工事) -->
       <div class="list-group-item">
-        <%= f.collection_radio_buttons(:professional_construction, RequestOrder.professional_constructions_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+        <%= f.collection_radio_buttons(:professional_construction, RequestOrder.professional_constructions_i18n, :first, :last, { checked: @request_order&.professional_construction? ? @request_order&.professional_construction : false }, item_wrapper_class: 'radio-button-item') do |b| %>
           <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
         <% end %>
       </div>
@@ -115,7 +115,7 @@
         </div>
         <br>
         <div class="list-group-item">
-          <%= f.collection_radio_buttons(:lead_engineer_check, RequestOrder.lead_engineer_checks_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
+          <%= f.collection_radio_buttons(:lead_engineer_check, RequestOrder.lead_engineer_checks_i18n, :first, :last, { checked: @request_order&.lead_engineer_check? ? @request_order&.lead_engineer_check : false }, item_wrapper_class: 'radio-button-item') do |b| %>
             <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
           <% end %>
         </div><br>
@@ -415,14 +415,15 @@
           maxlength: "チェックボックスは最大2つまでしか選択できません。"
         },
       },
+      
       errorPlacement: function(error, element) {
-        if (element.attr("name") == "request_order[construction_license][]") {
-          error.appendTo(".error-message");
+        // radioとcheckboxのみ表示位置を個別調整
+        if (element.is(":radio") || element.is(":checkbox")) {
+          error.insertBefore(element.closest('.list-group-item'));
         } else {
-          error.insertAfter(element);
+          error.insertBefore(element);
         }
-      },
-      errorClass: "input_form_error"
+      }
     });
     // 入力欄を変更したときにバリデーションを実行
     $(".order-form-validation").change(function () {
