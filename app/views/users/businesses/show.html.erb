@@ -167,8 +167,8 @@
         <% if @business.construction_license_status_available? %>
           <tr bgcolor="#dee2e6">
             <th>&emsp;&emsp;&emsp;&emsp;<%= Industry.human_attribute_name(:name) %></th>
-            <th><%= BusinessIndustry.human_attribute_name(:construction_license_number) %></th>
-            <th><%= BusinessIndustry.human_attribute_name(:construction_license_updated_at) %></th>
+            <th><%= "建設許可証番号" %></th>
+            <th><%= "更新日" %></th>
           </tr>
           <% @business.business_industries.each do |business_industry| %>
             <tr>
