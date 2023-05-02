@@ -340,7 +340,7 @@
         "request_order[foreman_name]": {
           required: true
         },
-        'request_order[construction_license][]': {
+        'request_order[content[construction_license_number]][]': {
           maxlength: 2
         },
       },
@@ -411,12 +411,12 @@
         "request_order[foreman_name]": {
           required: "職長名を入力してください。"
         },
-        'request_order[construction_license][]': {
+        'request_order[content[construction_license_number]][]': {
           maxlength: "チェックボックスは最大2つまでしか選択できません。"
         },
       },
       errorPlacement: function(error, element) {
-        if (element.attr("name") == "request_order[construction_license][]") {
+        if (element.attr("name") == "request_order[content[construction_license_number]][]") {
           error.appendTo(".error-message");
         } else {
           error.insertAfter(element);
