@@ -8,7 +8,7 @@ module Users
     before_action :set_business_occupations, only: %i[edit update]
     before_action :set_business_construction_licenses, only: %i[edit update]
     before_action :set_construction_manager_position_name, only: %i[update]
-    before_action :check_status_request_order, except: :show
+    before_action :check_status_request_order, only: %i[edit update]
 
     def show
       @sub_request_orders = @request_order.children
@@ -244,7 +244,8 @@ module Users
           subcon_work_chief_name_id:                                              @business_workers_name_id.find_by(name: params[:request_order][:work_chief_name])&.id,    # 記号 (作)作業主任者に使用
           subcon_lead_engineer_name_id:                                           @business_workers_name_id.find_by(name: params[:request_order][:lead_engineer_name])&.id, # 記号 (主)主任技術者に使用
           subcon_foreman_name_id:                                                 @business_workers_name_id.find_by(name: params[:request_order][:foreman_name])&.id,       # 記号 (職)職長に使用
-          subcon_safety_manager_name_id:                                          @business_workers_name_id.find_by(name: params[:request_order][:safety_manager_name])&.id # 記号 (安)安全衛生責任者に使用
+          subcon_safety_manager_name_id:                                          @business_workers_name_id.find_by(name: params[:request_order][:safety_manager_name])&.id, # 記号 (安)安全衛生責任者に使用
+          subcon_foreigners_employment_manager:                                   current_business.foreigners_employment_manager # 外国人雇用管理責任者名
         }
       )
     end

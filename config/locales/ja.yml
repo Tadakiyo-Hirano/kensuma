@@ -1,6 +1,23 @@
 ---
 ja:
   activerecord:
+    attributes:
+      worker_special_education:
+        special_education_id: 特別教育
+        worker_id: 作業員
+        images: 特別教育修了証明書の写し
+      worker_skill_training:
+        skill_training_id: 技能講習
+        worker_id: 作業員
+        images: 技能講習修了証明書の写し
+      worker_license:
+        license_id: 技能検定
+        worker_id: 作業員
+        images: 技能検定合格証明書の写し
+      worker_safety_health_education:
+        safety_health_education_id: 安全衛生教育
+        worker_id: 作業員
+        images: 安全衛生教育修了証明書の写し
     errors:
       models:
         order:
