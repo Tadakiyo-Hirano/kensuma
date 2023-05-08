@@ -1,7 +1,7 @@
 <!-- (3)全建統一様式(第2号施⼯体制台帳作成建設⼯事の通知) -->
 <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
   <div class="document-outer">
-    <div class="card">  
+    <div class="card">
       <div class="card-body">
         <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
         <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -22,7 +22,7 @@
               <td>(全建統一様式第3号)</td>
               <td class="text-right">
                 <%= f.date_field :content, name: "document[content][date_submitted]",
-                                    value: doc_content_date(@document.content&.[]("date_submitted"))                 
+                                    value: doc_content_date(@document.content&.[]("date_submitted"))
                 %> <!-- 3-001 提出日（西暦 -->
               </td>
             </tr>
@@ -85,9 +85,9 @@
                 <td width="6%"><span class="circle">特定</span></td><!-- 「特定or一般」⇩　4-008 -->
               <% else %>
                 <td width="4%">特定</td><!-- 「特定or一般」⇩　4-008 -->
-              <% end %> 
+              <% end %>
               <td rowspan="2">
-                <%= document_site_info.content["genecon_construction_construction_license_number_double_digit_1st"] %> <!-- 4-063元請会社の建設許可番号･前半 -->
+                <%= document_site_info.content["genecon_construction_license_number_double_digit_1st"] %> <!-- 4-063元請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2" width="3%">第</td>
               <td rowspan="2">
@@ -124,9 +124,9 @@
                 <td width="6%"><span class="circle">特定</span></td><!-- 「特定or一般」⇩　4-013 -->
               <% else %>
                 <td width="4%">特定</td><!-- 「特定or一般」⇩　4-013 -->
-              <% end %> 
+              <% end %>
               <td rowspan="2">
-                <%= document_site_info.content["genecon_construction_construction_license_number_double_digit_2nd"] %> <!-- 4-064 元請会社の建設許可番号･前半 -->
+                <%= document_site_info.content["genecon_construction_license_number_double_digit_2nd"] %> <!-- 4-064 元請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2">第</td>
               <td rowspan="2">
@@ -565,9 +565,9 @@
                 <td width="6%"><span class="circle">特定</span></td><!-- 「特定or一般」⇩　4-114 -->
               <% else %>
                 <td width="4%">特定</td><!-- 「特定or一般」⇩　4-114 -->
-              <% end %> 
+              <% end %>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_construction_license_number_double_digit_1st"] %> <!-- 4-145 下請会社の建設許可番号･前半 -->
+                <%= document_subcon_info.content["subcon_construction_license_number_double_digit_1st"] %> <!-- 4-145 下請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2" width="3%">第</td>
               <td rowspan="2">
@@ -604,9 +604,9 @@
                 <td width="6%"><span class="circle">特定</span></td><!-- 「特定or一般」⇩　4-119 -->
               <% else %>
                 <td width="4%">特定</td><!-- 「特定or一般」⇩　4-119 -->
-              <% end %> 
+              <% end %>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_construction_license_number_double_digit_2nd"] %> <!-- 4-146 下請会社の建設許可番号･前半 -->
+                <%= document_subcon_info.content["subcon_construction_license_number_double_digit_2nd"] %> <!-- 4-146 下請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2">第</td>
               <td rowspan="2">
@@ -693,7 +693,7 @@
               <td rowspan="2"></td>
               <td>資 格 内 容</td>
               <td>
-                <%= SkillTraining.find(document_subcon_info.professional_engineer_qualification)&.name %> <!-- 4-131 専門技術者の必要資格 --> 
+                <%= SkillTraining.find(document_subcon_info.professional_engineer_qualification)&.name %> <!-- 4-131 専門技術者の必要資格 -->
               </td>
             </tr>
             <tr>
