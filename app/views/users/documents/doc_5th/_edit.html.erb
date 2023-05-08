@@ -1,7 +1,7 @@
 <% document_info.children.each do |child| @child = child %>
   <%= form_with model: @document, url: users_request_order_document_path, method: :patch, local: true do |f| %>
     <div class="document-outer">
-      <div class="card">  
+      <div class="card">
         <div class="card-body">
           <%= f.submit '登録', class: 'btn btn-block btn-primary' %>
           <%= link_to '詳細画面へ', users_request_order_document_url, class: "btn btn-md btn-block btn-default" %>
@@ -921,7 +921,7 @@
                 <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
                 <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%= minister(@child&.content&.[]('subcon_construction_license_permission_type_minister_governor_1st')) %></td> <!-- 5-113 大臣(右) -->
                 <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%= identification(@child&.content&.[]('subcon_construction_license_permission_type_identification_general_1st')) %></td> <!-- 5-114 特定(右) -->
-                <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= @child&.content&.[]('subcon_construction_construction_license_number_double_digit_1st') %></td> <!-- 5-145 許可番号 第(右) -->
+                <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_double_digit_1st') %></td> <!-- 5-145 許可番号 第(右) -->
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
                 <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_six_digits_1st') %></td> <!-- 5-115 建設許可番号 号(右) -->
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
@@ -1036,7 +1036,7 @@
                 <td class="s_5a_306" dir="ltr" colspan="4" rowspan="4">工事業</td>
                 <td class="s_5a_307" dir="ltr" colspan="4" rowspan="2"><%= minister(document_info.content&.[]('subcon_construction_license_permission_type_minister_governor_1st')) %></td> <!-- 5-020 大臣(左) -->
                 <td class="s_5a_309" dir="ltr" colspan="4" rowspan="2"><%= identification(document_info.content&.[]('subcon_construction_license_permission_type_identification_general_1st')) %></td> <!-- 5-021 特定(左) -->
-                <td class="s_5a_311" dir="ltr" colspan="3" rowspan="4"><%= document_info.content&.[]('subcon_construction_construction_license_number_double_digit_1st') %></td> <!-- 5-055 許可番号 第(左) -->
+                <td class="s_5a_311" dir="ltr" colspan="3" rowspan="4"><%= document_info.content&.[]('subcon_construction_license_number_double_digit_1st') %></td> <!-- 5-055 許可番号 第(左) -->
                 <td class="s_5a_312" dir="ltr" colspan="2" rowspan="4">第</td>
                 <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4"><%= document_info.content&.[]('subcon_construction_license_number_six_digits_1st') %></td> <!-- 5-022 建設許可番号 号(左) -->
                 <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
@@ -1057,7 +1057,7 @@
                 <td class="s_5b_206" dir="ltr" colspan="4" rowspan="4">工事業</td>
                 <td class="s_5b_207" dir="ltr" colspan="4" rowspan="2"><%= minister(@child&.content&.[]('subcon_construction_license_permission_type_minister_governor_2nd')) %></td> <!-- 5-118 大臣(右) -->
                 <td class="s_5b_209" dir="ltr" colspan="4" rowspan="2"><%= identification(@child&.content&.[]('subcon_construction_license_permission_type_identification_general_2nd')) %></td> <!-- 5-119 特定(右) -->
-                <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= @child&.content&.[]('subcon_construction_construction_license_number_double_digit_2nd') %></td> <!-- 5-146 許可番号 第(右) -->
+                <td class="s_5b_211" dir="ltr" colspan="2" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_double_digit_2nd') %></td> <!-- 5-146 許可番号 第(右) -->
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
                 <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_six_digits_2nd') %></td> <!-- 5-120 建設許可番号 号(右) -->
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
@@ -1679,14 +1679,14 @@
                 </td>
                 </td>
                 <td class="s_5a_601" dir="ltr" colspan="8" rowspan="4">外国人建設就<br>労者の従事の<br>状況(有無)</td>
-                
+
                 <td class="s_5a_704" dir="ltr" colspan="5" rowspan="4"><%= foreign_exist("foreign_construction_workers_exist", @child, "有") %> <!-- 5-136 「各会社の外国人建設就労者の従事の状況(有無)」 -->
                 </td>
                 <td class="s_5a_706" dir="ltr" colspan="5" rowspan="4"><%= foreign_exist("foreign_construction_workers_exist", @child, "無") %> <!-- 5-136 「各会社の外国人建設就労者の従事の状況(有無)」 -->
                 </td>
                 </td><!-- 30列目 -->
                 <td class="s_5a_601" dir="ltr" colspan="8" rowspan="4">外国人技能実<br>習生の従事の<br>状況(有無)</td>
-                
+
                 <td class="s_5a_704" dir="ltr" colspan="5" rowspan="4"><%= foreign_exist("foreign_technical_intern_trainees_exist", @child, "有") %> <!-- 5-137 「各会社の外国人技能実習生の従事の状況(有無)」 -->
                 </td>
                 <td class="s_5a_706" dir="ltr" colspan="5" rowspan="4"><%= foreign_exist("foreign_technical_intern_trainees_exist", @child, "無") %> <!-- 5-137 「各会社の外国人技能実習生の従事の状況(有無)」 -->
