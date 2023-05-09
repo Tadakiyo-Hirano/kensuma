@@ -8,7 +8,7 @@ module Users
     before_action :set_business_occupations, only: %i[edit update]
     before_action :set_business_construction_licenses, only: %i[edit update]
     before_action :set_construction_manager_position_name, only: %i[update]
-    before_action :check_status_request_order, only: %i[edit update]
+    before_action :check_status_request_order, only: %i[edit update] # 提出済、承認済の場合は下請けの現場情報を編集できないようにする
 
     def show
       @sub_request_orders = @request_order.children
@@ -150,6 +150,14 @@ module Users
 
     def set_sub_request_order
       @sub_request_order = RequestOrder.find_by(uuid: params[:sub_request_uuid])
+    end
+
+    # 提出済みの場合は下請けの現場情報の編集を不可にする
+    def check_status_request_order
+      if @request_order&.submitted? || @request_order&.approved?
+        flash[:danger] = '提出済のため、編集できません。'
+        redirect_to users_request_order_path(@request_order)
+      end
     end
 
     # 元請けは除外
