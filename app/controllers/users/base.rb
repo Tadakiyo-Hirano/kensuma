@@ -30,6 +30,14 @@ module Users
       end
     end
 
+    # 提出済みの場合は下請けの現場情報の編集を不可にする
+    def check_status_request_order
+      if @request_order&.submitted? || @request_order&.approved?
+        flash[:danger] = '提出済のため、編集できません。'
+        redirect_to users_request_order_path(@request_order)
+      end
+    end
+
     # 自社(事業所)の作業員名を取得
     def set_business_workers_name
       @business_workers_name = current_business.workers.pluck(:name)
