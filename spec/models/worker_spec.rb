@@ -20,6 +20,7 @@ RSpec.describe Worker, type: :model do
         [nil, ''].each do |blank|
           before :each do
             subject.career_up_id = blank
+            subject.career_up_images = []
           end
 
           it "バリデーションに通ること(#{blank})" do
@@ -31,6 +32,7 @@ RSpec.describe Worker, type: :model do
       context '14文字ではない場合' do
         before :each do
           subject.career_up_id = '1234567890123'
+          subject.career_up_images = []
         end
 
         it 'バリデーションに落ちること' do
