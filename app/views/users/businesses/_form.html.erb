@@ -81,7 +81,7 @@
     <br>
     <%= f.label :occupation_ids %><!-- 職種 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business&.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
+    <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business&.occupation_ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
     <br>
     <br>
     <%= f.label :employment_manager_name %> <!-- 雇用管理責任者 -->
