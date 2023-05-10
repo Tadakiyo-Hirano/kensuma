@@ -213,33 +213,33 @@
               </tr>
               <tr style="height: 8px">
                 <td class="s19" colspan="10" rowspan="4">
-                  <%= industry_name_genecon(0) %> <!-- 4-006 元請会社の建設許可業種 -->
+                  <%= document_site_info.content["genecon_occupation_1st"] %> <!-- 4-006 元請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4" style="border: 1px solid;">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_genecon_info(0).construction_license_permission_type_minister_governor == "minister_permission" %> <!-- 4-007 建設許可証（大臣or知事） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_1st"] == "大臣許可" %> <!-- 4-007 建設許可証（大臣or知事） -->
                     <span class="circle">大臣</span>
                   <% else %>
                     <span>大臣</span>
                   <% end %>
                 </td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_genecon_info(0).construction_license_permission_type_identification_general == "identification" %> <!-- 4-008 建設許可証（特定or一般） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_identification_general_1st"] == "特定" %> <!-- 4-008 建設許可証（特定or一般） -->
                     <span class="circle">特定</span>
                   <% else %>
                     <span>特定</span>
                   <% end %>
                 </td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_site_info.construction_license[0]).construction_license_number_double_digit %> <!-- 4-063元請会社の建設許可番号･前半 -->
+                  <%= document_site_info.content["genecon_construction_license_number_double_digit_1st"] %> <!-- 4-063元請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s25" colspan="4" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_site_info.construction_license[0]).construction_license_number_six_digits %> <!-- 4-009　元請会社の建設許可番号･後半 -->
+                  <%= document_site_info.content["genecon_construction_license_number_six_digits_1st"] %> <!-- 4-009　元請会社の建設許可番号･後半 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_site_info.construction_license[0]).construction_license_updated_at %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
+                  <%= document_site_info.content["genecon_construction_license_updated_at_1st"] %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -257,14 +257,14 @@
               </tr>
               <tr style="height: 8px">
                 <td class="s24" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_genecon_info(0).construction_license_permission_type_minister_governor == "governor_permission" %> <!-- 4-007 建設許可証（大臣or知事） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_1st"] == "知事許可" %> <!-- 4-007 建設許可証（大臣or知事） -->
                     <span class="circle">知事</span>
                   <% else %>
                     <span>知事</span>
                   <% end %>
                 </td>
                 <td class="s16" colspan="4" rowspan="2">
-                  <% if businessindustry_genecon_info(0).construction_license_permission_type_identification_general == "general" %> <!-- 4-008 建設許可証（特定or一般） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_identification_general_1st"] == "一般" %> <!-- 4-008 建設許可証（特定or一般） -->
                     <span class="circle">一般</span>
                   <% else %>
                     <span>一般</span>
@@ -281,33 +281,33 @@
               </tr>
               <tr style="height: 8px">
                 <td class="s19" colspan="10" rowspan="4">
-                  <%= industry_name_genecon(1) %> <!-- 4-011 元請会社の建設許可業種 -->
+                  <%= document_site_info.content["genecon_occupation_2nd"] %> <!-- 4-011 元請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4" style="border: 1px solid;">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_genecon_info(1).construction_license_permission_type_minister_governor == "minister_permission" %> <!-- 4-012 建設許可証（大臣or知事） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_2nd"] == "大臣許可" %> <!-- 4-012 建設許可証（大臣or知事） -->
                     <span class="circle">大臣</span>
                   <% else %>
                     <span>大臣</span>
                   <% end %>
                 </td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_genecon_info(1).construction_license_permission_type_identification_general == "identification" %> <!-- 4-013 建設許可証（特定or一般） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_identification_general_2nd"] == "特定" %> <!-- 4-013 建設許可証（特定or一般） -->
                     <span class="circle">特定</span>
                   <% else %>
                     <span>特定</span>
                   <% end %>
                 </td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_site_info.construction_license[1]).construction_license_number_double_digit %> <!-- 4-064 元請会社の建設許可番号･前半 -->
+                  <%= document_site_info.content["genecon_construction_license_number_double_digit_2nd"] %> <!-- 4-064 元請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s25" colspan="4" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_site_info.construction_license[1]).construction_license_number_six_digits %> <!-- 4-014 元請会社の建設許可番号･後半 -->
+                  <%= document_site_info.content["genecon_construction_license_number_six_digits_2nd"] %> <!-- 4-014 元請会社の建設許可番号･後半 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_site_info.construction_license[1]).construction_license_updated_at %> <!-- 4-015 元請会社の建設許可証更新日(西暦) -->
+                  <%= document_site_info.content["genecon_construction_license_updated_at_2nd"] %> <!-- 4-015 元請会社の建設許可証更新日(西暦) -->
                 </td>
                 <td class="s30"></td>
               </tr>
@@ -370,14 +370,14 @@
               </tr>
               <tr style="height: 8px">
                 <td class="s24" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_genecon_info(1).construction_license_permission_type_minister_governor == "governor_permission" %> <!-- 4-012 建設許可証（大臣or知事） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_2nd"] == "知事許可" %> <!-- 4-012 建設許可証（大臣or知事） -->
                     <span class="circle">知事</span>
                   <% else %>
                     <span>知事</span>
                   <% end %>
                 </td>
                 <td class="s16" colspan="4" rowspan="2">
-                  <% if businessindustry_genecon_info(1).construction_license_permission_type_identification_general == "general" %> <!-- 4-013 建設許可証（特定or一般） -->
+                  <% if document_site_info.content["genecon_construction_license_permission_type_identification_general_2nd"] == "一般" %> <!-- 4-013 建設許可証（特定or一般） -->
                     <span class="circle">一般</span>
                   <% else %>
                     <span>一般</span>
@@ -449,33 +449,33 @@
                 <td class="s32"></td>
                 <td class="s5"></td>
                 <td class="s19" colspan="10" rowspan="4" style="border: 1px solid;">
-                  <%= industry_name_subcon(0) %> <!-- 4-112 下請会社の建設許可業種 -->
+                  <%= document_subcon_info.content["subcon_occupation_1st"] %> <!-- 4-112 下請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_subcon_info(0).construction_license_permission_type_minister_governor == "minister_permission" %> <!-- 4-113 建設許可証（大臣or知事） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_1st"] == "大臣許可" %> <!-- 4-113 建設許可証（大臣or知事） -->
                     <span class="circle">大臣</span>
                   <% else %>
                     <span>大臣</span>
                   <% end %>
                 </td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_subcon_info(0).construction_license_permission_type_identification_general == "identification" %> <!-- 4-114 建設許可証（特定or一般） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_1st"] == "特定" %> <!-- 4-114 建設許可証（特定or一般） -->
                     <span class="circle">特定</span>
                   <% else %>
                     <span>特定</span>
                   <% end %>
                 </td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_subcon_info.construction_license[0]).construction_license_number_double_digit %> <!-- 4-145 下請会社の建設許可番号･前半 -->
+                  <%= document_subcon_info.content["subcon_construction_license_number_double_digit_1st"] %> <!-- 4-145 下請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s34" colspan="4" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_subcon_info.construction_license[0]).construction_license_number_six_digits %> <!-- 4-115 下請会社の建設許可番号 -->
+                  <%= document_subcon_info.content["subcon_construction_license_number_six_digits_1st"] %> <!-- 4-115 下請会社の建設許可番号 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_subcon_info.construction_license[0]).construction_license_updated_at %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
+                  <%= document_subcon_info.content["subcon_construction_license_updated_at_1st"] %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
                 </td>
               </tr>
               <tr style="height: 20px">
@@ -488,14 +488,14 @@
               <tr style="height: 8px">
                 <td class="s5"></td>
                 <td class="s24" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_subcon_info(0).construction_license_permission_type_minister_governor == "governor_permission" %> <!-- 4-113 建設許可証（大臣or知事） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_1st"] == "知事許可" %> <!-- 4-113 建設許可証（大臣or知事） -->
                     <span class="circle">知事</span>
                   <% else %>
                     <span>知事</span>
                   <% end %>
                 </td>
                 <td class="s16" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_genecon_info(1).construction_license_permission_type_identification_general == "general" %> <!-- 4-114 建設許可証（特定or一般） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_1st"] == "一般" %> <!-- 4-114 建設許可証（特定or一般） -->
                     <span class="circle">一般</span>
                   <% else %>
                     <span>一般</span>
@@ -511,33 +511,33 @@
               <tr style="height: 8px">
                 <td class="s5"></td>
                 <td class="s19" colspan="10" rowspan="4" style="border: 1px solid;">
-                  <%= industry_name_subcon(1) %> <!--4-117 下請会社の建設許可業種 -->
+                  <%= document_subcon_info.content["subcon_occupation_2nd"] %> <!--4-117 下請会社の建設許可業種 -->
                 </td>
                 <td class="s20" colspan="4" rowspan="4">工事業</td>
                 <td class="s21" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_subcon_info(1).construction_license_permission_type_minister_governor == "minister_permission" %> <!-- 4-118 建設許可証（大臣or知事） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_2nd"] == "大臣許可" %> <!-- 4-118 建設許可証（大臣or知事） -->
                     <span class="circle">大臣</span>
                   <% else %>
                     <span>大臣</span>
                   <% end %>
                 </td>
                 <td class="s22" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_subcon_info(1).construction_license_permission_type_identification_general == "identification" %> <!-- 4-119 建設許可証（特定or一般） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_2nd"] == "特定" %> <!-- 4-119 建設許可証（特定or一般） -->
                     <span class="circle">特定</span>
                   <% else %>
                     <span>特定</span>
                   <% end %>
                 </td>
                 <td class="s23" colspan="3" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_subcon_info.construction_license[1]).construction_license_number_double_digit %> <!-- 4-146　下請会社の建設許可番号･前半 -->
+                  <%= document_subcon_info.content["subcon_construction_license_number_double_digit_2nd"] %> <!-- 4-146　下請会社の建設許可番号･前半 -->
                 </td>
                 <td class="s24" colspan="2" rowspan="4" style="border: 1px solid;">第</td>
                 <td class="s34" colspan="4" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_subcon_info.construction_license[1]).construction_license_number_six_digits %> <!-- 4-120 下請会社の建設許可番号 -->
+                  <%= document_subcon_info.content["subcon_construction_license_number_six_digits_2nd"] %> <!-- 4-120 下請会社の建設許可番号 -->
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= BusinessIndustry.find_by_id(document_subcon_info.construction_license[1]).construction_license_updated_at %> <!-- 4-121 下請会社の建設許可証更新日(西暦) -->
+                  <%= document_subcon_info.content["subcon_construction_license_updated_at_2nd"] %> <!-- 4-121 下請会社の建設許可証更新日(西暦) -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -550,14 +550,14 @@
               <tr style="height: 8px">
                 <td class="s5"></td>
                 <td class="s24" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_subcon_info(1).construction_license_permission_type_minister_governor == "governor_permission" %> <!-- 4-118 建設許可証（大臣or知事） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_2nd"] == "知事許可" %> <!-- 4-118 建設許可証（大臣or知事） -->
                     <span class="circle">知事</span>
                   <% else %>
                     <span>知事</span>
                   <% end %>
                 </td>
                 <td class="s16" colspan="4" rowspan="2" style="border: 1px solid;">
-                  <% if businessindustry_subcon_info(1).construction_license_permission_type_identification_general == "general" %> <!-- 4-119 建設許可証（特定or一般） -->
+                  <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_2nd"] == "一般" %> <!-- 4-119 建設許可証（特定or一般） -->
                     <span class="circle">一般</span>
                   <% else %>
                     <span>一般</span>
@@ -755,7 +755,7 @@
                 <td class="s5"></td>
                 <td class="s6" colspan="10" rowspan="3">雇用管理責任者名</td>
                 <td class="s43" colspan="16" rowspan="3">
-                  <%= @business.employment_manager_name %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
+                  <%= Worker.find(document_subcon_info.content["subcon_employment_manager_name_id"])&.name %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -1172,7 +1172,7 @@
                 </td>
                 <td class="s6" colspan="6" rowspan="3">資格内容</td>
                 <td class="s40" colspan="20" rowspan="3">
-                    <%= document_site_info.supervising_engineer_qualification %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
+                    <%= SkillTraining.find(document_site_info.supervising_engineer_qualification)&.name %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -1218,7 +1218,7 @@
                 </td>
                 <td class="s6" colspan="6" rowspan="3">資格内容</td>
                 <td class="s40" colspan="20" rowspan="3">
-                    <%= document_site_info.supervising_engineer_assistant_qualification %> <!-- 4-040 監督技術者補佐の必要資格 -->
+                    <%= SkillTraining.find(document_site_info.supervising_engineer_assistant_qualification)&.name %> <!-- 4-040 監督技術者補佐の必要資格 -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -1320,14 +1320,14 @@
                 <td class="s42" rowspan="6" style="border: 1px solid;"></td>
                 <td class="s6" colspan="5" rowspan="3">資格内容</td>
                 <td class="s8" colspan="22" rowspan="3">
-                  
+
                     <%= SkillTraining.find(document_site_info.professional_engineer_qualification_1st)&.name %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
-                  
+
                 </td>
                 <td class="s42" rowspan="6"></td>
                 <td class="s6" colspan="5" rowspan="3">資格内容</td>
                 <td class="s8" colspan="20" rowspan="3">
-                    <%= document_site_info.professional_engineer_qualification_2nd %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
+                    <%= SkillTraining.find(document_site_info.professional_engineer_qualification_2nd)&.name %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
                 </td>
                 <td class="s2"></td>
                 <td class="s2"></td>

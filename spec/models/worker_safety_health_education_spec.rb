@@ -4,7 +4,7 @@ RSpec.describe WorkerSafetyHealthEducation, type: :model do
   let(:worker) { create(:worker) }
   let(:safety_health_education) { create(:safety_health_education) }
   let :worker_safety_health_education do
-    create(:worker_safety_health_education, worker: worker, safety_health_education: safety_health_education)
+    create(:worker_safety_health_education, worker: worker, safety_health_education: safety_health_education, images: [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg'))])
   end
 
   describe 'バリデーションについて' do

@@ -9,9 +9,11 @@
       <%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
     </div>
     <div class="col-md-3" style="margin-bottom: 10px;">
-      <% f.object.images.each_with_index do |image, index| %>
-        <%= image_tag(image.url) %>
-        <%= link_to "削除", users_worker_update_workerskilltraining_images_path(@worker, index: index, worker_skill_training_id: f.object.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+      <% if @worker.id.present? %>
+        <% f.object.images.each_with_index do |image, index| %>
+          <%= image_tag(image.url) %>
+          <%= link_to "削除", users_worker_update_workerskilltraining_images_path(@worker, index: index, worker_skill_training_id: f.object.id), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md-2" style="margin-top: 8px;">

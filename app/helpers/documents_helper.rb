@@ -34,27 +34,8 @@ module DocumentsHelper
       @subcon
     end
   end
-
-  # 元請の許可業種
-  def industry_name_genecon(n)
-    Industry.find(BusinessIndustry.find(document_site_info.construction_license[n]).industry_id).name if document_site_info.construction_license[n].present?
-  end
-
-  # 下請の許可業種
-  def industry_name_subcon(n)
-    Industry.find(BusinessIndustry.find(document_subcon_info.construction_license[n]).industry_id).name if document_subcon_info.construction_license[n].present?
-  end
-
-  # 元請の建設許可証
-  def businessindustry_genecon_info(n)
-    BusinessIndustry.find(document_site_info.construction_license[n])
-  end
-
-  # 下請の建設許可証
-  def businessindustry_subcon_info(n)
-    BusinessIndustry.find(document_subcon_info.construction_license[n])
-  end
-
+  
+  
   # 一次下請の情報 (工事安全衛生計画書用)
   def document_subcon_info_for_19th
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
@@ -294,7 +275,7 @@ module DocumentsHelper
     when 'woman'
       '女性'
     else
-      '性別不明'
+      ''
     end
   end
 

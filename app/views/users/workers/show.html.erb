@@ -441,7 +441,7 @@
           <th><%= WorkerSkillTraining.human_attribute_name(:images) %></th>
           <th></th>
         </tr>
-        <% if @worker.worker_special_educations.present? %>
+        <% if @worker.worker_skill_trainings.present? %>
           <% @worker.worker_skill_trainings.each do |worker_skill_training| %>
             <tr>
               <% if @worker.skill_trainings.first.id == worker_skill_training.skill_training_id %>

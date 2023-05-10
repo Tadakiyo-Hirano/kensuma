@@ -22,8 +22,24 @@ class WorkerMedical < ApplicationRecord
   validates :special_med_exam_on, absence: true, unless: :special_med_exam_y?
   validates :health_condition, presence: true
   validates :is_med_exam, presence: true
+  validates :special_med_exam_others, presence: true, if: :special_med_exam_others_valid?
+  validate :valid_special_med_exam_list
+
+  def valid_special_med_exam_list
+    if special_med_exam_y? && (special_med_exam_list_blank? && special_med_exam_others.blank?)
+      errors.add(:special_med_exam_list, 'が入力されていません。')
+    end
+  end
 
   private
+
+  def special_med_exam_others_valid?
+    special_med_exam_list_blank? && special_med_exam_y?
+  end
+
+  def special_med_exam_list_blank?
+    special_med_exam_list.blank?
+  end
 
   def special_med_exam_y?
     is_special_med_exam == 'y'

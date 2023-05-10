@@ -4,7 +4,7 @@ RSpec.describe WorkerSkillTraining, type: :model do
   let(:worker) { create(:worker) }
   let(:skill_training) { create(:skill_training) }
   let :worker_skill_training do
-    create(:worker_skill_training, worker: worker, skill_training: skill_training)
+    create(:worker_skill_training, worker: worker, skill_training: skill_training, images: [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg'))])
   end
 
   describe 'バリデーションについて' do

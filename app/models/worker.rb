@@ -72,6 +72,14 @@ class Worker < ApplicationRecord
   validates :confirmed_check, absence: true, unless: :specified_skill_or_construction_employment?
   validates :confirmed_check_date, presence: true, if: :confirmed_check_checked?
   validates :confirmed_check_date, absence: true, unless: :confirmed_check_checked?
+  validate :valid_career_up_images
+  validate :valid_passports
+  validate :valid_residence_cards
+  validate :valid_employment_conditions
+  validate :check_uniqueness_skill_training
+  validate :check_uniqueness_safety_health_education
+  validate :check_uniqueness_special_education
+  validate :check_uniqueness_licenses
 
   mount_uploader :seal, WorkersUploader
   mount_uploaders :employee_cards, WorkersUploader
@@ -84,7 +92,67 @@ class Worker < ApplicationRecord
     uuid
   end
 
+  def check_uniqueness_skill_training
+    skill_training_ids = worker_skill_trainings.map(&:skill_training_id)
+    errors.add(:base, '技能講習が重複しています。') if skill_training_ids.uniq.length != skill_training_ids.length
+  end
+
+  def check_uniqueness_safety_health_education
+    safety_health_education_ids = worker_safety_health_educations.map(&:safety_health_education_id)
+    errors.add(:base, '安全衛生教育が重複しています。') if safety_health_education_ids.uniq.length != safety_health_education_ids.length
+  end
+
+  def check_uniqueness_special_education
+    special_education_ids = worker_special_educations.map(&:special_education_id)
+    errors.add(:base, '特別教育が重複しています。') if special_education_ids.uniq.length != special_education_ids.length
+  end
+
+  def check_uniqueness_licenses
+    license_ids = worker_licenses.map(&:license_id)
+    errors.add(:base, '技能検定が重複しています。') if license_ids.uniq.length != license_ids.length
+  end
+
   private
+
+  # キャリアアップシステムの写しのバリデーション
+  def valid_career_up_images
+    # キャリアアップidが入力されている場合、キャリアアップシステムの写しが必須
+    if career_up_id.present?
+      errors.add(:career_up_images, 'を入力してください') && return if career_up_images.blank?
+    elsif career_up_images.present?
+      errors.add(:career_up_images, 'は登録しないでください') && return
+    end
+  end
+
+  # パスポートの写しのバリデーション
+  def valid_passports
+    # 外国人就労者に当たるとき、パスポートが必須
+    if specified_skill_or_construction_employment?
+      errors.add(:passports, 'を入力してください') && return if passports.blank?
+    elsif passports.present?
+      errors.add(:passports, 'は登録しないでください') && return
+    end
+  end
+
+  # 在留カードの写しのバリデーション
+  def valid_residence_cards
+    # 外国人就労者に当たるとき、在留カードの写しが必須
+    if specified_skill_or_construction_employment?
+      errors.add(:residence_cards, 'を入力してください') && return if residence_cards.blank?
+    elsif residence_cards.present?
+      errors.add(:residence_cards, 'は登録しないでください') && return
+    end
+  end
+
+  # 雇用条件書の写しのバリデーション
+  def valid_employment_conditions
+    # 外国人就労者に当たるとき、雇用条件書の写しが必須
+    if specified_skill_or_construction_employment?
+      errors.add(:employment_conditions, 'を入力してください') && return if employment_conditions.blank?
+    elsif employment_conditions.present?
+      errors.add(:employment_conditions, 'は登録しないでください') && return
+    end
+  end
 
   def driver_licence_present?
     driver_licences.present?

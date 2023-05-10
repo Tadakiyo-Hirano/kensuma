@@ -85,7 +85,7 @@ module WorkersHelper
     @worker.worker_licenses.build
     @worker.worker_skill_trainings.build
     @worker.worker_special_educations.build
-    worker_medical = @worker.build_worker_medical(
+    @worker.build_worker_medical(
       # 本番環境用デフォルト値 ==========================
       is_med_exam:         :y,
       is_special_med_exam: :y,
@@ -93,7 +93,6 @@ module WorkersHelper
       # ============================================
     )
     @worker.worker_safety_health_educations.build
-    worker_medical.worker_exams.build
     @worker.build_worker_insurance(
       # 本番環境用デフォルト値 ==========================
       health_insurance_type:         :health_insurance_association,

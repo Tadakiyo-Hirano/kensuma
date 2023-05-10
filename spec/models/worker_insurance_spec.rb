@@ -73,6 +73,7 @@ RSpec.describe WorkerInsurance, type: :model do
 
         it 'バリデーションにとおること(適応除外)' do
           subject.health_insurance_type = :exemption
+          subject.health_insurance_image = []
           expect(subject).to be_valid
         end
       end
