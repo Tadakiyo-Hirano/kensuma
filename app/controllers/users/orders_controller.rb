@@ -136,6 +136,15 @@ module Users
       converted_params
     end
 
+    # 提出済みの場合は現場情報の編集を不可にする
+    def check_status_order
+      if @order.request_orders.where(parent_id: nil).approved
+        flash[:danger] = '提出済のため、編集できません。'
+        redirect_to users_order_path(@order)
+      end
+    end
+
+    # 有料、無料ユーザーの切り分け(無料ユーザーは元請機能の使用を制限する)
     def prime_contractor_access
       redirect_to users_orders_path, flash: { danger: '現場情報作成機能は有料サービスとなります' } if current_user.is_prime_contractor == false
     end

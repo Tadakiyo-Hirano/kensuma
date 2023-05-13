@@ -9,27 +9,31 @@ module Users
     def show; end
 
     def new
-      @special_vehicle = current_business.special_vehicles.new(
-        # テスト用デフォルト値 ==========================
-        name:                    'コンテナ用セミトレーラ1',
-        maker:                   '三菱',
-        owning_company_name:     'テスト建設',
-        standards_performance:   '幅2.5M',
-        year_manufactured:       Date.today.ago(3.years),
-        control_number:          '52e22363d7',
-        check_exp_date_year:     Date.today.since(2.years),
-        check_exp_date_month:    Date.today.since(2.years).since(3.month),
-        check_exp_date_specific: Date.today.since(2.years).since(6.month),
-        check_exp_date_machine:  Date.today.since(3.years),
-        check_exp_date_car:      Date.today.since(5.years),
-        vehicle_type:            0,
-        personal_insurance:      1,
-        objective_insurance:     2,
-        passenger_insurance:     3,
-        other_insurance:         4,
-        exp_date_insurance:      Date.today.since(5.years)
-        # ============================================
-      )
+      if Rails.env.development?
+        @special_vehicle = current_business.special_vehicles.new(
+          # テスト用デフォルト値 ==========================
+          name:                    'コンテナ用セミトレーラ1',
+          maker:                   '三菱',
+          owning_company_name:     'テスト建設',
+          standards_performance:   '幅2.5M',
+          year_manufactured:       Date.today.ago(3.years),
+          control_number:          '52e22363d7',
+          check_exp_date_year:     Date.today.since(2.years),
+          check_exp_date_month:    Date.today.since(2.years).since(3.month),
+          check_exp_date_specific: Date.today.since(2.years).since(6.month),
+          check_exp_date_machine:  Date.today.since(3.years),
+          check_exp_date_car:      Date.today.since(5.years),
+          vehicle_type:            0,
+          personal_insurance:      1,
+          objective_insurance:     2,
+          passenger_insurance:     3,
+          other_insurance:         4,
+          exp_date_insurance:      Date.today.since(5.years)
+          # ============================================
+        )
+      else
+        @special_vehicle = current_business.special_vehicles.new
+      end
     end
 
     def create

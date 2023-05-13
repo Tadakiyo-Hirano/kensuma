@@ -1,31 +1,44 @@
 <%= render 'shared/error_massages', object: f.object %>
 
+<!-- 使用目的 -->
 <%= f.label :usage %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :usage, Car.usages.keys.to_a, { prompt: true }, { class: "form-select" } %>
 <br>
+
+<!-- 車両所有者名 -->
 <%= f.label :owner_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :owner_name, (@current_business.workers.map { |workers|workers.name }).uniq, { include_blank: true },{ class: "single-select", style: "width: 100%" } %>
 <br><br>
+
+<!-- 安全運転管理者名 -->
 <%= f.label :safety_manager %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.select :safety_manager, (@current_business.workers.map { |workers|workers.name }).uniq, { include_blank: true },{ class: "single-select", style: "width: 100%" } %>
 <br><br>
+
+<!-- 車両名 -->
 <%= f.label :vehicle_name %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.select :vehicle_name, (@current_business.cars.map { |cars|cars.vehicle_model }).uniq, { include_blank: true },{ class: "single-select", style: "width: 100%" }
-%>
-<br><br>
+<%= f.text_field :vehicle_name, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_name) %>
+<br>
+
+<!-- 車両型式 -->
 <%= f.label :vehicle_model %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-<%= f.text_field :vehicle_model, class: "form-control", placeholder: Car.human_attribute_name(:vehicle_model) %>
-<br>
+<span class="p-1 mb-2 rounded">例：普通自動車・ワンボックスワゴン・マイクロバス等</span>
+<%= f.select :vehicle_model, (@current_business.cars.map { |cars|cars.vehicle_model }).uniq, { include_blank: true }, { class: "single-select", style: "width: 100%" }
+%>
+<br><br>
+
+<!-- 車両番号(ナンバープレート) -->
 <%= f.label :vehicle_number %>
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :vehicle_number, class: "form-control", placeholder: "#{Car.human_attribute_name(:vehicle_number)} 例: 品川500あ1234" %>
 <br>
 
+<!-- 車検期間 -->
 <div class="list-group">
   <%= f.label :vehicle_inspection_period %>
   <div class="list-group-item">
@@ -40,6 +53,7 @@
   </div>
 </div>
 <br>
+
 <!-- 自賠責保険ここから -->
 <div class="list-group">
   <%= f.label :liability_insurance %>
@@ -69,6 +83,7 @@
 </div>
 <!-- 自賠責保険ここまで -->
 <br>
+
 <!-- 任意保険ここから -->
 <div class="list-group">
   <%= f.fields_for :car_voluntary_insurances do |voluntary| %>

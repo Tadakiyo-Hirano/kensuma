@@ -30,6 +30,14 @@ module Users
       end
     end
 
+    # 提出済みの場合は下請けの現場情報の編集を不可にする
+    def check_status_request_order
+      if @request_order&.submitted? || @request_order&.approved?
+        flash[:danger] = '提出済のため、編集できません。'
+        redirect_to users_request_order_path(@request_order)
+      end
+    end
+
     # 自社(事業所)の作業員名を取得
     def set_business_workers_name
       @business_workers_name = current_business.workers.pluck(:name)
@@ -78,22 +86,6 @@ module Users
           @request_order_construction_licenses.delete(:subcon_construction_license_id_2nd)
         end
         @request_order_construction_licenses[request_order_content['subcon_construction_license_id_2nd']] = request_order_content['subcon_construction_license_number_2nd']
-      end
-    end
-
-    # 提出済みの場合は現場情報の編集を不可にする
-    def check_status_request_order
-      if @request_order.order.edit_status == 'submitted'
-        flash[:danger] = '提出済のため、編集できません。'
-        redirect_to users_request_order_path(@request_order)
-      end
-    end
-
-    # 提出済みの場合は書類の編集を不可にする
-    def check_status_document
-      if @document.request_order.order.edit_status == 'submitted'
-        flash[:danger] = '提出済のため、編集できません。'
-        redirect_to users_request_order_path(@document.request_order)
       end
     end
 

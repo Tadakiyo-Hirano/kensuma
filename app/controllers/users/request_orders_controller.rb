@@ -9,7 +9,7 @@ module Users
     before_action :set_business_occupations, only: %i[edit update]
     before_action :set_business_construction_licenses, only: %i[edit update]
     before_action :set_construction_manager_position_name, only: %i[update]
-    before_action :check_status_request_order, only: %i[edit update]
+    before_action :check_status_request_order, only: %i[edit update] # 提出済、承認済の場合は下請けの現場情報を編集できないようにする
 
     def show
       @sub_request_orders = @request_order.children
