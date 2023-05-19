@@ -43,6 +43,7 @@ module Users
         redirect_to users_orders_url
       else
         session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
+        session[:occupation_ids] = params[:business][:occupation_ids].map(&:to_i).reject(&:zero?)
         render :new
       end
     end
@@ -53,11 +54,18 @@ module Users
 
     def update
       clear_hidden_fields #ラジオボタンで非表示になった項目を強制的にnilにする
-      if @business.update(business_params_with_converted)
-        flash[:success] = '更新しました'
-        redirect_to users_business_url
-      else
+      if params[:business][:occupation_ids].compact_blank.blank?
+        session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
+        session[:occupation_ids] = params[:business][:occupation_ids].map(&:to_i).reject(&:zero?)
+        @business.errors.add(:base, "職種を入力してください")
         render 'edit'
+      else
+        if @business.update(business_params_with_converted)
+          flash[:success] = '更新しました'
+          redirect_to users_business_url
+        else
+          render 'edit'
+        end
       end
     end
 

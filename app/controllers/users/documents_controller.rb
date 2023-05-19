@@ -9,7 +9,7 @@ module Users
     before_action :edit_restriction_after_approved, only: %i[edit update]
     before_action :get_subcon_info_17th, only: %i[show edit] #doc_17thの配置を決定させるためのロジック
     before_action :get_subcon_info_18th, only: %i[show edit] #doc_18thの配置を決定させるためのロジック
-    before_action :check_status_document, except: :show
+    before_action :check_status_document, except: :show # 提出済、承認済の場合は書類を編集できないようにする
 
     def index; end
 
@@ -357,6 +357,14 @@ module Users
 
     def set_document
       @document = current_business.request_orders.find_by(uuid: params[:request_order_uuid]).documents.find_by(uuid: params[:uuid])
+    end
+
+    # 提出済みの場合は書類の編集を不可にする
+    def check_status_document
+      if @document.request_order.submitted? || @document.request_order.approved?
+        flash[:danger] = '提出済のため、編集できません。'
+        redirect_to users_request_order_path(@document.request_order)
+      end
     end
 
     #年度パラメータを再セット(doc_20th)
