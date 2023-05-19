@@ -231,7 +231,8 @@
         <%= f.collection_radio_buttons(:foreign_work_status_exist, Business.foreign_work_status_exists_i18n, :first, :last, { checked: @business&.foreign_work_status_exist? ? @business&.foreign_work_status_exist : false }) do |b| %>
           <div>
             <%= b.label { b.radio_button + b.text } %>
-          </div>        <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
     <br>
