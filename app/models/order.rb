@@ -49,21 +49,21 @@ class Order < ApplicationRecord
 
   private
 
-    def name_is_required_professional_engineer_name_1st
-      if professional_engineer_name_1st.blank? && (professional_engineer_details_1st.present? || professional_engineer_qualification_1st.present?)
-        errors.add(:professional_engineer_name_1st, '専門技術者の氏名を入力してください')
-      end
+  def name_is_required_professional_engineer_name_1st
+    if professional_engineer_name_1st.blank? && (professional_engineer_details_1st.present? || professional_engineer_qualification_1st.present?)
+      errors.add(:professional_engineer_name_1st, '専門技術者の氏名を入力してください')
     end
-
-    def name_is_required_professional_engineer_name_2nd
-      if professional_engineer_name_2nd.blank? && (professional_engineer_details_2nd.present? || professional_engineer_qualification_2nd.present?)
-        errors.add(:professional_engineer_name_2nd, '専門技術者2の氏名を入力してください')
-      end
-    end  
-
-    def name_is_required_supervising_engineer_assistant_qualification
-      if supervising_engineer_assistant_name.blank? && supervising_engineer_assistant_qualification.present?
-        errors.add(:supervising_engineer_assistant_name, '監督技術者補佐の氏名を入力してください')
-      end
-    end    
   end
+
+  def name_is_required_professional_engineer_name_2nd
+    if professional_engineer_name_2nd.blank? && (professional_engineer_details_2nd.present? || professional_engineer_qualification_2nd.present?)
+      errors.add(:professional_engineer_name_2nd, '専門技術者2の氏名を入力してください')
+    end
+  end
+
+  def name_is_required_supervising_engineer_assistant_qualification
+    if supervising_engineer_assistant_name.blank? && supervising_engineer_assistant_qualification.present?
+      errors.add(:supervising_engineer_assistant_name, '監督技術者補佐の氏名を入力してください')
+    end
+  end
+end

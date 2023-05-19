@@ -36,10 +36,10 @@ class RequestOrder < ApplicationRecord
   validates :safety_promoter_name,               presence: true, on: :update                            # 安全推進者(氏名)
   validates :foreman_name,                       presence: true, on: :update                            # 職長(氏名)
 
-  #　氏名無しで更新させない
+  # 　氏名無しで更新させない
   validate :name_is_required_professional_engineer
   validate :name_is_required_registered_core_engineer
-  
+
   has_closure_tree
 
   before_create -> { self.uuid = SecureRandom.uuid }
@@ -60,5 +60,5 @@ class RequestOrder < ApplicationRecord
     if registered_core_engineer_name.blank? && registered_core_engineer_qualification.present?
       errors.add(:registered_core_engineer_name, '登録基幹技能者の氏名を入力してください')
     end
-  end  
+  end
 end
