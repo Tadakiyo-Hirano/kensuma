@@ -52,6 +52,7 @@ module Users
     # 自社(事業所)および現場で取得している建設許可証番号を取得
     def set_business_construction_licenses
       # 元請の建設許可証番号
+      @industry = @current_business&.business_industries.map {|industry|Industry.find(industry.industry_id).name}
       @order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h || {}
       order_content = @order&.content || {}
       if order_content['genecon_construction_license_number_1st'].present? && !@order_construction_licenses.value?(order_content['genecon_construction_license_number_1st'])
