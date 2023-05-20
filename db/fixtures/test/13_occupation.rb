@@ -8,8 +8,8 @@ Occupation.seed(
   {
     id: 2,
     industry_id: 2,
-    name: '建設一式工事業',
-    short_name: '建設一式',
+    name: '建築一式工事業',
+    short_name: '建築一式',
   },
   {
     id: 3,
