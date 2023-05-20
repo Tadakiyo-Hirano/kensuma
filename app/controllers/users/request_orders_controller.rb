@@ -20,6 +20,12 @@ module Users
       @third_or_later_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.third_or_later_subcon_documents_type
     end
 
+    def new
+      @professional_engineer_qualification = SkillTraining.all.order(:id)
+      @lead_engineer_qualification = SkillTraining.all.order(:id)
+      @registered_core_engineer_qualification = SkillTraining.all.order(:id)
+    end
+
     def edit
       # テスト用デフォルト値 ==========================
       if Rails.env.development? && @request_order.construction_name.nil?
@@ -50,6 +56,49 @@ module Users
         end
       end
       # =============================================
+    
+      # request_orderの技術者名から作業員テーブルのレコードを特定する
+      worker = Worker.find_by(name: @request_order.professional_engineer_name, business_id: current_business.id)
+      # 作業員のidで作業員と技能講習マスターの中間テーブルを特定する
+      worker_skill_training = WorkerSkillTraining.where(worker_id: worker&.id)
+      array = []
+      worker_skill_training.each do |record|
+        array << record.skill_training_id
+      end
+      if worker.nil?
+        @professional_engineer_qualification = SkillTraining.all.order(:id)
+      else
+        @professional_engineer_qualification = SkillTraining.where("id IN (?)", array)
+      end
+    
+      # request_orderの主任技術者名から作業員テーブルのレコードを特定する
+      worker = Worker.find_by(name: @request_order.lead_engineer_name, business_id: current_business.id)
+      # 作業員のidで作業員と技能講習マスターの中間テーブルを特定する
+      worker_skill_training = WorkerSkillTraining.where(worker_id: worker&.id)
+      array = []
+      worker_skill_training.each do |record|
+        array << record.skill_training_id
+      end
+      if worker.nil?
+        @lead_engineer_qualification = SkillTraining.all.order(:id)
+      else
+        @lead_engineer_qualification = SkillTraining.where("id IN (?)", array)
+      end
+    
+      # requestorderの登録基幹技能者名から作業員テーブルのレコードを特定する
+      worker = Worker.find_by(name: @request_order.registered_core_engineer_name, business_id: current_business.id)
+      # 作業員のidで作業員と技能講習マスターの中間テーブルを特定する
+      worker_skill_training = WorkerSkillTraining.where(worker_id: worker&.id)
+      array = []
+      worker_skill_training.each do |record|
+        array << record.skill_training_id
+      end
+      if worker.nil?
+        @registered_core_engineer_qualification = SkillTraining.all.order(:id)
+      else
+        @registered_core_engineer_qualification = SkillTraining.where("id IN (?)", array)
+      end
+    
     end
 
     def update
@@ -115,7 +164,7 @@ module Users
     def professional_engineer_skill_training_options
       professional_engineer_name = params[:professional_engineer_name]
       worker = Worker.find_by(name: professional_engineer_name)
-      options = worker.skill_trainings
+      options = worker&.skill_trainings
       render json: options
     end
 
@@ -131,7 +180,7 @@ module Users
     def lead_engineer_skill_training_options
       lead_engineer_name = params[:lead_engineer_name]
       worker = Worker.find_by(name: lead_engineer_name)
-      options = worker.skill_trainings
+      options = worker&.skill_trainings
       render json: options
     end
 
@@ -139,7 +188,7 @@ module Users
     def registered_core_engineer_license_options
       registered_core_engineer_name = params[:registered_core_engineer_name]
       worker = Worker.find_by(name: registered_core_engineer_name)
-      options = worker.licenses
+      options = worker&.licenses
       render json: options
     end
 

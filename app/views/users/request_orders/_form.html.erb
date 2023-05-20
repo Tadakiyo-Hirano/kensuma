@@ -75,8 +75,11 @@
         <%= f.text_field :professional_engineer_details, class: "form-control" %>
         <br>
         <%= f.label :professional_engineer_qualification %> <!-- 資格内容(専門技術者) -->
-        <%= f.select :professional_engineer_qualification, options_for_select(@request_order.professional_engineer_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], include_blank: true), {},
-                    { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id' } %>
+        <% if @professional_engineer_qualification.blank? %>
+        <%= f.select :professional_engineer_qualification, options_for_select(SkillTraining.all.order(:id).map{ |skill| [skill.name, skill.id] }, selected: @request_order.professional_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id' } %>
+        <% else %>
+        <%= f.select :professional_engineer_qualification, options_for_select(@professional_engineer_qualification.map{ |skill| [skill.name, skill.id] }, selected: @request_order.professional_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id' } %>
+        <% end %>
       </div><br>
     </div>
     <div class="list-group-item">
@@ -121,9 +124,11 @@
         </div><br>
         <%= f.label :lead_engineer_qualification %> <!-- 資格内容(主任技術者)) -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
-        <%= f.select :lead_engineer_qualification, options_for_select(@request_order.lead_engineer_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @request_order.lead_engineer_qualification, include_blank: true), {},
-            { class: "form-select form-select-sm", style: "width: 100%", id: 'lead_engineer_qualification_id' }
-        %><br>
+        <% if @lead_engineer_qualification.blank? %>
+        <%= f.select :lead_engineer_qualification, options_for_select(SkillTraining.all.order(:id).map{ |skill| [skill.name, skill.id] }, selected: @request_order.lead_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'lead_engineer_qualification_id' } %>
+        <% else %>
+        <%= f.select :lead_engineer_qualification, options_for_select(@lead_engineer_qualification.map{ |skill| [skill.name, skill.id] }, selected: @request_order.lead_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'lead_engineer_qualification_id' } %>
+        <% end %><br>
       </div>
     </div>
     <div class="list-group-item">
@@ -183,9 +188,11 @@
                           { id: "registered_core_engineer_name", class: "form-select form-select-sm", style: "width: 100%" }
         %><br>
         <%= f.label :registered_core_engineer_qualification %> <!-- 資格内容(登録基幹技能者) -->
-        <%= f.select :registered_core_engineer_qualification, options_for_select(@request_order.registered_core_engineer_qualification.to_s.split(',')&.map{ |id| [License.find(id).name, id] }, include_blank: true), {},
-                      { class: "form-select form-select-sm", style: "width: 100%", id: 'registered_core_engineer_qualification_id' }
-        %><br>
+        <% if @registered_core_engineer_qualification.blank? %>
+        <%= f.select :registered_core_engineer_qualification, options_for_select(SkillTraining.all.order(:id).map{ |skill| [skill.name, skill.id] }, selected: @request_order.registered_core_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'registered_core_engineer_qualification_id' } %>
+        <% else %>
+        <%= f.select :registered_core_engineer_qualification, options_for_select(@registered_core_engineer_qualification.map{ |skill| [skill.name, skill.id] }, selected: @request_order.registered_core_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'registered_core_engineer_qualification_id' } %>
+        <% end %><br>
       </div>
     </div>
     <div class="list-group-item">
