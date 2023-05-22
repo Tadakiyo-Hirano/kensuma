@@ -99,9 +99,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     # get 'orders/:order_site_uu_id/field_solvents/:uuid/set_solvent_name_one', to: 'users/orders/field_solvents#edit_set_solvent_name_one', as: :set_solvent_name_one_users_order_field_solvents
     resources :request_orders, only: %i[show edit update], param: :uuid do
       resources :sub_request_orders, except: %i[edit destroy show], param: :uuid do
-        resources :documents, only: %i[index show edit update], param: :uuid, controller: 'sub_request_orders/documents'
+        resources :documents, only: %i[show edit update], param: :uuid, controller: 'sub_request_orders/documents'
       end
-      resources :documents, only: %i[index show edit update], param: :uuid
+      resources :documents, only: %i[show edit update], param: :uuid
       resources :field_cars, except: %i[new show edit update], module: :request_orders, param: :uuid do
         collection do
           get 'edit_cars'
