@@ -240,8 +240,8 @@ RSpec.describe Business, type: :model do
 
     describe '#business_health_insurance_office_number' do
       %i[
-        01234
-        012345678
+        012あ
+        01-ア
       ].each do |business_health_insurance_office_number|
         context '不正なbusiness_health_insurance_office_numberの場合' do
           before(:each) { subject.business_health_insurance_office_number = business_health_insurance_office_number }
@@ -252,7 +252,7 @@ RSpec.describe Business, type: :model do
 
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
-            expect(subject.errors.full_messages).to include('事業所整理記号及び事業所番号(健康保険)は数字8桁で入力してください')
+            expect(subject.errors.full_messages).to include('事業所整理記号及び事業所番号(健康保険)は数字4桁以内で入力してください')
           end
         end
       end

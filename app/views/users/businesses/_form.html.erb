@@ -118,7 +118,8 @@
         <%= f.text_field :business_health_insurance_association, class: "form-control" %><br>
         <%= f.label :business_health_insurance_office_number %><!-- 事業所整理記号及び事業所番号 -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.text_field :business_health_insurance_office_number, class: "form-control" %>
+        <span class="p-1 mb-2 rounded">※末番4桁 半角の数字・ｶﾀｶﾅ・ハイフンのみ</span>
+        <%= f.text_field :business_health_insurance_office_number, maxlength: 22, class: "form-control", placeholder: "例) 01-ｲ" %>
         <br>
       </div>
     </div>

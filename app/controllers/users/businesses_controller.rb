@@ -22,7 +22,7 @@ module Users
           business_type:                                               0,
           business_health_insurance_status:                            0, # 健康保険(加入状況)
           business_health_insurance_association:                       'テスト健康保険組合', # 健康保険(組合名)
-          business_health_insurance_office_number:                     '01234567', # 健康保険(事業所整理記号及び事業所番号)
+          business_health_insurance_office_number:                     '1234', # 健康保険(事業所整理記号及び事業所番号)
           business_welfare_pension_insurance_join_status:              0, # 厚生年金保険(加入状況)
           business_welfare_pension_insurance_office_number:            '01234567890123', # 厚生年金保険(事業所整理記号)
           business_employment_insurance_join_status:                   0, # 雇用保険(加入状況)
@@ -112,7 +112,7 @@ module Users
       # 半角スペースがある場合、全角スペースに変換
       converted_params[:representative_name] = business_params[:representative_name].gsub(/[\s　]+/, ' ')
       # ハイフンを除外
-      %i[post_code phone_number fax_number business_health_insurance_office_number business_welfare_pension_insurance_office_number
+      %i[post_code phone_number fax_number business_welfare_pension_insurance_office_number
          business_employment_insurance_number].each do |key|
         next unless converted_params[key]
 
