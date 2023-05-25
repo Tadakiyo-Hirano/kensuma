@@ -12,7 +12,6 @@
     <%= f.text_field :site_name, class: "form-control", maxlength: 100 %>
     <br>
     <%= f.label :site_address %> <!-- 施工場所住所 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :site_address, class: "form-control", maxlength: 50 %>
     <br>
   </div>
@@ -340,7 +339,6 @@
           maxlength: 100
         },
         "order[site_address]": {
-          required: true,
           maxlength: 50
         },
         "order[order_name]": {
@@ -416,7 +414,6 @@
           maxlength: "現場名は100字以内で入力してください。"
         },
         "order[site_address]": {
-          required: "施工場所住所を入力してください。",
           maxlength: "施工場所の住所は50字以内で入力してください。"
         },
         "order[order_name]": {
