@@ -6,10 +6,10 @@
       <%= f.collection_select :industry_id, Industry.all, :id, :name, { prompt: '業種を選択してください' }, { class: "form-control" } %><br>
     </div>
     <div id="minister-radio" class="col-md-1">
-      <%= f.label :construction_license_permission_type_minister_governor, "建設許可種別" %>
+      <%= f.label :construction_license_permission_type_minister_governor, "種類" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span><br>
       <%= f.collection_radio_buttons(:construction_license_permission_type_minister_governor, BusinessIndustry.construction_license_permission_type_minister_governors_i18n, :first, :last, item_wrapper_class: 'radio-button-item') do |b| %>
-        <%= b.label(class: 'radio-button-label') { b.radio_button(checked: f.object.construction_license_permission_type_minister_governor.nil? ? b.value == "governor_permission" : b.value == f.object.construction_license_permission_type_minister_governor) + ' ' + b.text } %><br>
+        <%= b.label(class: 'radio-button-label') { b.radio_button + ' ' + b.text } %><br>
       <% end %>
     </div>
     <div id="disabled-form" class="col-md-2">
@@ -26,12 +26,12 @@
     <div class="col-md-1">
       <%= f.label :construction_license_number_double_digit, "和暦年度" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.text_field :construction_license_number_double_digit, class: "form-control", placeholder: "2桁の番号" %>
+      <%= f.text_field :construction_license_number_double_digit, class: "form-control", maxlength: 2, placeholder: "2桁以下の番号" %>
     </div>
     <div class="col-md-2">
       <%= f.label :construction_license_number_six_digits, "番号" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-      <%= f.text_field :construction_license_number_six_digits, class: "form-control", placeholder: "6桁以下の番号" %>
+      <%= f.text_field :construction_license_number_six_digits, class: "form-control", maxlength: 6, placeholder: "6桁以下の番号" %>
     </div>
     <div class="col-md-2">
       <%= f.label :construction_license_updated_at, "更新日" %>
@@ -45,14 +45,14 @@
 </div>
 
 <script>
-//建設許可種別の内容（大臣・知事）によって、都道府県知事許可フォームの有効・無効切り替え
+//種類の内容（大臣・知事）によって、都道府県知事許可フォームの有効・無効切り替え
   $(document).on('change', 'input[name^="business[business_industries_attributes]"][name$="[construction_license_permission_type_minister_governor]"]', function() {
     var index = $(this).attr('name').match(/\d+/)[0];
-    // 「大臣許可」が選択されたら、テキストボックスを有効化する
+    // 「大臣」が選択されたら、テキストボックスを有効化する
     if ($(this).val() == "governor_permission") {
       $('#business_business_industries_attributes_' + index + '_construction_license_governor_permission_prefecture').prop('disabled', false);
     }
-    // 「大臣許可」以外が選択されたら、テキストボックスを無効化し、中身を空にする
+    // 「大臣」以外が選択されたら、テキストボックスを無効化し、中身を空にする
     else {
       $('#business_business_industries_attributes_' + index + '_construction_license_governor_permission_prefecture').val('').prop('disabled', true);
     }

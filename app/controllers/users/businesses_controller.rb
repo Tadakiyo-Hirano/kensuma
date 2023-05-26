@@ -39,11 +39,16 @@ module Users
 
     def create
       @business = Business.new(business_params_with_converted)
-      if @business.save
-        redirect_to users_orders_url
-      else
-        session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
+      if business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
+        flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
         render :new
+      else 
+        if @business.save
+          redirect_to users_orders_url
+        else
+          session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
+          render :new
+        end
       end
     end
 
@@ -53,11 +58,16 @@ module Users
 
     def update
       clear_hidden_fields #ラジオボタンで非表示になった項目を強制的にnilにする
-      if @business.update(business_params_with_converted)
-        flash[:success] = '更新しました'
-        redirect_to users_business_url
-      else
+      if business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
+        flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
         render 'edit'
+      else
+        if @business.update(business_params_with_converted)
+          flash[:success] = '更新しました'
+          redirect_to users_business_url
+        else
+          render 'edit'
+        end
       end
     end
 
