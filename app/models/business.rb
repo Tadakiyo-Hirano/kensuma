@@ -43,7 +43,7 @@ class Business < ApplicationRecord
   validates :business_health_insurance_office_number, format: { with: /\A[\d\-ｦ-ﾟa-z]+\z/i }, length: { maximum: 4, message: '(健康保険)は末番4桁以内で入力してください' }, allow_blank: true # 健康保険(事業所整理記号及び事業所番号)
   # validates :business_health_insurance_office_number, allow_blank: true, format: { with: /\A\d{6,8}\z/, message: 'は数字6桁または8桁で入力してください' } # 健康保険(事業所整理記号及び事業所番号) 一旦6桁から8桁で保存可能として実装
   validates :business_welfare_pension_insurance_join_status, presence: true # 厚生年金保険(加入状況)
-  validates :business_welfare_pension_insurance_office_number, length: { is: 14, message: '(厚生年金保険)は数字14桁で入力してください' }, allow_blank: true # 厚生年金保険(事業所整理記号)
+  validates :business_welfare_pension_insurance_office_number, format: { with: /\A[\d\-ｦ-ﾟa-z]+\z/i }, length: { maximum: 4, message: '(厚生年金保険)は末番4桁以内で入力してください' }, allow_blank: true # 厚生年金保険(事業所整理記号)
   validates :business_employment_insurance_join_status, presence: true # 雇用保険(加入状況)
   validates :business_employment_insurance_number, length: { is: 11, message: '(雇用保険)は数字11桁で入力してください' }, allow_blank: true # 雇用保険(番号)
   validates :business_retirement_benefit_mutual_aid_status, presence: true # 退職金共済制度(加入状況)
