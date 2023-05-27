@@ -275,7 +275,9 @@
               </td>
               <td colspan="2" width="8%">資格内容</td>
               <td>
-                <%= SkillTraining.find(document_site_info.supervising_engineer_qualification)&.name %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
+                <% if document_site_info.supervising_engineer_qualification.present? %>
+                  <%= SkillTraining.find_by(id: document_site_info.supervising_engineer_qualification)&.name %> <!-- 4-038 監理技術者･主任技術者名の必要資格 -->
+                <% end %>
               </td>
             </tr>
             <tr>
@@ -285,7 +287,9 @@
               </td>
               <td colspan="2" width="8%">資格内容</td>
               <td>
-                <%= SkillTraining.find(document_site_info.supervising_engineer_assistant_qualification)&.name %> <!-- 4-040 監督技術者補佐の必要資格 -->
+                <% if document_site_info.supervising_engineer_assistant_qualification.present? %>
+                  <%= SkillTraining.find_by(id: document_site_info.supervising_engineer_assistant_qualification)&.name %> <!-- 4-040 監督技術者補佐の必要資格 -->
+                <% end %>
               </td>
             </tr>
             <tr>
@@ -302,12 +306,16 @@
               <td rowspan="2" width="2%"></td>
               <td width="8%">資格内容</td>
               <td colspan="2">
-                <%= SkillTraining.find(document_site_info.professional_engineer_qualification_1st)&.name %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
+                <% if document_site_info.professional_engineer_qualification_1st.present? %>
+                  <%= SkillTraining.find_by(id: document_site_info.professional_engineer_qualification_1st)&.name %> <!-- 4-042 元請会社の専門技術者の必要資格 -->
+                <% end %>
               </td>
               <td rowspan="2" width="2%"></td>
               <td>資格内容</td>
               <td>
-                <%= SkillTraining.find(document_site_info.professional_engineer_qualification_2nd)&.name %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
+                <% if document_site_info.professional_engineer_qualification_2nd.present? %>
+                  <%= SkillTraining.find_by(id: document_site_info.professional_engineer_qualification_2nd)&.name %> <!-- 4-045 元請会社の専門技術者の必要資格 -->
+                <% end %>
               </td>
             </tr>
             <tr>
@@ -470,31 +478,31 @@
             <tr>
               <td rowspan="2" width="10%">会 社 名</td>
               <td colspan="2" width="40%">
-                <%= document_subcon_info.content["subcon_name"] %> <!-- 4-101 下請会社名 -->
+                <%= document_subcon_info.content&.[]("subcon_name") %> <!-- 4-101 下請会社名 -->
               </td>
               <td rowspan="2" width="15%">代表者名</td>
               <td rowspan="2" width="35%">
-                <%= document_subcon_info.content["subcon_representative_name"] %> <!-- 4-103 下請会社の代表者名 -->
+                <%= document_subcon_info.content&.[]("subcon_representative_name") %> <!-- 4-103 下請会社の代表者名 -->
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <%= document_subcon_info.content["subcon_career_up_id"] %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
+                <%= document_subcon_info.content&.[]("subcon_career_up_id") %> <!-- 4-102 下請会社の事業者ID(キャリアアップ) -->
               </td>
             </tr>
             <tr>
               <td rowspan="2">住 所<Br />電話番号</td>
               <td width="5%">〒</td>
               <td width="35%">
-                <%= document_subcon_info.content["subcon_post_code"] %> <!-- 4-104 下請会社の郵便番号 -->
+                <%= document_subcon_info.content&.[]("subcon_post_code") %> <!-- 4-104 下請会社の郵便番号 -->
               </td>
               <td colspan="2">
-                <%= document_subcon_info.content["subcon_address"] %> <!-- 4-105 下請会社の住所 -->
+                <%= document_subcon_info.content&.[]("subcon_address") %> <!-- 4-105 下請会社の住所 -->
               </td>
             </tr>
             <tr>
               <td colspan="4">
-                <%= document_subcon_info.content["subcon_phone_number"] %> <!-- 4-106 下請会社の電話番号 -->
+                <%= document_subcon_info.content&.[]("subcon_phone_number") %> <!-- 4-106 下請会社の電話番号 -->
               </td>
             </tr>
             <tr>
@@ -539,38 +547,38 @@
             </tr>
             <tr>
               <td rowspan="2" width="20%">
-                <%= document_subcon_info.content["subcon_occupation_1st"] %> <!-- 4-112 下請会社の建設許可業種 -->
+                <%= document_subcon_info.content&.[]("subcon_occupation_1st") %> <!-- 4-112 下請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="10%">工事業</td>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_1st"] == "大臣許可" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_minister_governor_1st") == "大臣許可" %>
                 <td width="6%"><span class="circle">大臣</span></td><!-- 「大臣or知事」⇩　4-113 -->
               <% else %>
                 <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-113 -->
               <% end %>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_1st"] == "特定" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_identification_general_1st") == "特定" %>
                 <td width="6%"><span class="circle">特定</span></td><!-- 「特定or一般」⇩　4-114 -->
               <% else %>
                 <td width="4%">特定</td><!-- 「特定or一般」⇩　4-114 -->
               <% end %>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_license_number_double_digit_1st"] %> <!-- 4-145 下請会社の建設許可番号･前半 -->
+                <%= document_subcon_info.content&.[]("subcon_construction_license_number_double_digit_1st") %> <!-- 4-145 下請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2" width="3%">第</td>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_license_number_six_digits_1st"] %> <!-- 4-115 下請会社の建設許可番号 -->
+                <%= document_subcon_info.content&.[]("subcon_construction_license_number_six_digits_1st") %> <!-- 4-115 下請会社の建設許可番号 -->
               </td>
               <td rowspan="2" width="3%">号</td>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_license_updated_at_1st"] %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
+                <%= document_subcon_info.content&.[]("subcon_construction_license_updated_at_1st") %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
               </td>
             </tr>
             <tr>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_1st"] == "知事許可" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_minister_governor_1st") == "知事許可" %>
                 <td width="6%"><span class="circle">知事</span></td><!-- 「大臣or知事」⇩　4-113 -->
               <% else %>
                 <td width="4%">知事</td><!-- 「大臣or知事」⇩　4-113 -->
               <% end %>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_1st"] == "一般" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_identification_general_1st") == "一般" %>
                 <td width="6%"><span class="circle">一般</span></td><!-- 「特定or一般」⇩　4-114 -->
               <% else %>
                 <td width="4%">一般</td><!-- 「特定or一般」⇩　4-114 -->
@@ -578,38 +586,38 @@
             </tr>
             <tr>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_occupation_2nd"] %> <!--4-117 下請会社の建設許可業種 -->
+                <%= document_subcon_info.content&.[]("subcon_occupation_2nd") %> <!--4-117 下請会社の建設許可業種 -->
               </td>
               <td rowspan="2">工事業</td>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_2nd"] == "大臣許可" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_minister_governor_2nd") == "大臣許可" %>
                 <td width="6%"><span class="circle">大臣</span></td><!-- 「大臣or知事」⇩　4-118 -->
               <% else %>
                 <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-118 -->
               <% end %>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_2nd"] == "特定" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_identification_general_2nd") == "特定" %>
                 <td width="6%"><span class="circle">特定</span></td><!-- 「特定or一般」⇩　4-119 -->
               <% else %>
                 <td width="4%">特定</td><!-- 「特定or一般」⇩　4-119 -->
               <% end %>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_license_number_double_digit_2nd"] %> <!-- 4-146 下請会社の建設許可番号･前半 -->
+                <%= document_subcon_info.content&.[]("subcon_construction_license_number_double_digit_2nd") %> <!-- 4-146 下請会社の建設許可番号･前半 -->
               </td>
               <td rowspan="2">第</td>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_license_number_six_digits_2nd"] %> <!-- 4-120 下請会社の建設許可番号 -->
+                <%= document_subcon_info.content&.[]("subcon_construction_license_number_six_digits_2nd") %> <!-- 4-120 下請会社の建設許可番号 -->
               </td>
               <td rowspan="2">号</td>
               <td rowspan="2">
-                <%= document_subcon_info.content["subcon_construction_license_updated_at_2nd"] %> <!-- 4-121 下請会社の建設許可証更新日(西暦) -->
+                <%= document_subcon_info.content&.[]("subcon_construction_license_updated_at_2nd") %> <!-- 4-121 下請会社の建設許可証更新日(西暦) -->
               </td>
             </tr>
             <tr>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_minister_governor_2nd"] == "知事許可" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_minister_governor_2nd") == "知事許可" %>
                 <td width="6%"><span class="circle">知事</span></td><!-- 「大臣or知事」⇩　4-118 -->
               <% else %>
                 <td width="4%">知事</td><!-- 「大臣or知事」⇩　4-118 -->
               <% end %>
-              <% if document_subcon_info.content["subcon_construction_license_permission_type_identification_general_2nd"] == "一般" %>
+              <% if document_subcon_info.content&.[]("subcon_construction_license_permission_type_identification_general_2nd") == "一般" %>
                 <td width="6%"><span class="circle">一般</span></td><!-- 「特定or一般」⇩　4-119 -->
               <% else %>
                 <td width="4%">一般</td><!-- 「特定or一般」⇩　4-119 -->
@@ -653,14 +661,16 @@
               </td>
               <td colspan="2">雇用管理責任者名</td>
               <td>
-                <%= Worker.find(document_subcon_info.content["subcon_employment_manager_name_id"])&.name %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
+                <%= document_subcon_info.content&.[]('subcon_foreigners_employment_manager') %> <!-- 4-129 各下請会社の雇用管理責任者名 -->
               </td>
             </tr>
             <tr>
               <td width="1%"></td>
               <td width="14%">資 格 内 容</td>
               <td colspan="2">
-                <%= SkillTraining.find(document_subcon_info.lead_engineer_qualification)&.name %> <!-- 4-126 主任技術者の必要資格 -->
+                <% if document_subcon_info.lead_engineer_qualification.present? %>
+                  <%= SkillTraining.find_by(id: document_subcon_info.lead_engineer_qualification)&.name %> <!-- 4-126 主任技術者の必要資格 -->
+                <% end %>
               </td>
               <td colspan="2">※専 門 技 術 者 名</td>
               <td>
@@ -679,12 +689,16 @@
               <td rowspan="2"></td>
               <td>資 格 内 容</td>
               <td>
-                <%= SkillTraining.find(document_subcon_info.professional_engineer_qualification)&.name %> <!-- 4-131 専門技術者の必要資格 -->
+                <% if document_subcon_info.professional_engineer_qualification.present? %>
+                  <%= SkillTraining.find_by(id: document_subcon_info.professional_engineer_qualification)&.name %> <!-- 4-131 専門技術者の必要資格 -->
+                <% end %>
               </td>
             </tr>
             <tr>
               <td colspan="2">
-                <%= SkillTraining.find(document_subcon_info.registered_core_engineer_qualification)&.name %> <!-- 4-134 下請会社の登録基幹技能者の必要資格 -->
+                <% if document_subcon_info.registered_core_engineer_qualification.present? %>
+                  <%= SkillTraining.find_by(id: document_subcon_info.registered_core_engineer_qualification)&.name %> <!-- 4-134 下請会社の登録基幹技能者の必要資格 -->
+                <% end %>
               </td>
               <td>担当工事内容</td>
               <td>
