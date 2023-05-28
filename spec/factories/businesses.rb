@@ -9,7 +9,7 @@ FactoryBot.define do
     address { 'TEST' }
     post_code { '0120123' }
     phone_number { '09001230123' }
-    career_up_id { '1' }
+    career_up_id { '12345678901234' }
     business_type { 0 }
     business_health_insurance_status { 0 } # 健康保険(加入状況)
     business_health_insurance_association { 'TEST健康保険組合' } # 健康保険(組合名)

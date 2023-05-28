@@ -31,6 +31,7 @@ class Business < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: true
   validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー・]+\z/u, message: 'はカタカナで入力して下さい。' }
+  validates :career_up_id, length: { maximum: 14, minimum: 14 }, allow_blank: true
   validates :representative_name, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   validates :address, presence: true

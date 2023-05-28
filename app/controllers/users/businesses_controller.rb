@@ -18,7 +18,7 @@ module Users
           address:                                                     'test',
           post_code:                                                   '0123456',
           phone_number:                                                '01234567898',
-          career_up_id:                                                1,
+          career_up_id:                                                '12345678901234',
           business_type:                                               0,
           business_health_insurance_status:                            0, # 健康保険(加入状況)
           business_health_insurance_association:                       'テスト健康保険組合', # 健康保険(組合名)
