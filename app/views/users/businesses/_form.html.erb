@@ -36,7 +36,7 @@
     <%= f.text_field :branch_name, class: "form-control" %>
     <br>
     <%= f.label :career_up_id %><!--事業者ID(キャリアアップシステム)-->
-    <%= f.text_field :career_up_id, class: "form-control", minlength: 14, maxlength: 14 %>
+    <%= f.text_field :career_up_id, class: "form-control", maxlength: 14 %>
     <br>
     <%= f.label :career_up_card_copy %><br><!--キャリアアップシステムカードの写し-->
     <% if business.career_up_card_copy.present? %>
