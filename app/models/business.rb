@@ -45,7 +45,7 @@ class Business < ApplicationRecord
   validates :business_welfare_pension_insurance_join_status, presence: true # 厚生年金保険(加入状況)
   validates :business_welfare_pension_insurance_office_number, format: { with: /\A[\d\-ｦ-ﾟa-z]+\z/i }, length: { maximum: 4, message: '(厚生年金保険)は末番4桁以内で入力してください' }, allow_blank: true # 厚生年金保険(事業所整理記号)
   validates :business_employment_insurance_join_status, presence: true # 雇用保険(加入状況)
-  validates :business_employment_insurance_number, length: { is: 11, message: '(雇用保険)は数字11桁で入力してください' }, allow_blank: true # 雇用保険(番号)
+  validates :business_employment_insurance_number, format: { with: /\A[\d\-ｦ-ﾟa-z]+\z/i }, length: { maximum: 4, message: '(雇用保険)は末番4桁以内で入力してください' }, allow_blank: true # 雇用保険(番号)
   validates :business_retirement_benefit_mutual_aid_status, presence: true # 退職金共済制度(加入状況)
   validates :construction_license_status, presence: true
   validates :foreign_work_status_exist, presence: true # 外国人就労の有無

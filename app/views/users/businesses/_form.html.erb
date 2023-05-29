@@ -162,7 +162,8 @@
       <div id="hidden-form-employmentーinsurance">
         <%= f.label :business_employment_insurance_number %><!-- 番号 -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <%= f.text_field :business_employment_insurance_number, class: "form-control" %>
+        <span class="p-1 mb-2 rounded">※末番4桁 半角の数字・ｶﾀｶﾅ・ハイフンのみ</span>
+        <%= f.text_field :business_employment_insurance_number, maxlength: 4, class: "form-control", placeholder: "例) 01-ｲ" %>
       </div>
     </div>
   </div>
