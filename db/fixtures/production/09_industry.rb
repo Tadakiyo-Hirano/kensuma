@@ -5,7 +5,7 @@ Industry.seed(
   },
   {
     id: 2,
-    name: '建設一式工事業',
+    name: '建築一式工事業',
   },
   {
     id: 3,
