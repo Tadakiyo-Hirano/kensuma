@@ -1,92 +1,94 @@
 <%= stylesheet_link_tag "users", :media => "all" %>
 <%= csrf_meta_tags %>
 
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <!-- Brand Logo -->
-  <%= link_to users_orders_path, class:"brand-link", style: "display: flex" do %>
-    <table>
-      <tr>
-        <td><%= image_tag "kensuma/03", class:"brand-image elevation-3", style: "opacity: .8", size: "40x40" %>
-          <div class="logo-item-side">
-            <span>&reg;</span>
-          </div>
-        </td>
-      </tr>
-    </table>
-  <% end %>
-
-	<!-- Sidebar -->
-  <div class="sidebar">
-    <!-- Sidebar business panel (optional) -->
-    <div class="business-panel mt-3 d-flex">
-      <p>会社名：<%= current_business_name %></p>
-    </div>
-
-    <!-- Sidebar -->
-    <% unless controller_path == 'users/businesses' && action_name == 'new' %>
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-          <!--スライドメニュー追記-->
-          <p class="non-slide-link-menu"><%= paying_display %></p>
-          <li class="nav-item">
-            <%= link_to users_orders_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-users"></i>
-              <p>現場情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_subcon_users_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-building"></i>
-              <p>協力会社情報</p>
-            <% end %>
-          </li>
-          <p class="non-slide-link-menu text-danger">↓ 初回ログイン時入力必須</p>
-          <li class="nav-item">
-            <%= link_to users_business_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-building"></i>
-              <p>会社情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_workers_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-user"></i>
-              <p>作業員情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_cars_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-car"></i>
-              <p>車両情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_special_vehicles_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-truck"></i>
-              <p>特殊車両情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_machines_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-cogs"></i>
-              <p>持込機械情報</p>
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_solvents_path, class:"nav-link" do %>
-              <i class="nav-icon fas fa-flask"></i>
-              <p>有機溶剤情報</p>
-            <% end %>
-          </li>
-          <p></p>
-          <p></p>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    <% else %>
-      <p class="non-slide-link-menu text-danger">会社情報を登録してください</p>
+<div class="fixed-sidebar">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <%= link_to users_orders_path, class:"brand-link", style: "display: flex" do %>
+      <table>
+        <tr>
+          <td><%= image_tag "kensuma/03", class:"brand-image elevation-3", style: "opacity: .8", size: "40x40" %>
+            <div class="logo-item-side">
+              <span>&reg;</span>
+            </div>
+          </td>
+        </tr>
+      </table>
     <% end %>
-  </div>
-  <!-- /.sidebar -->
-</aside>
+  
+  	<!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar business panel (optional) -->
+      <div class="business-panel mt-3 d-flex">
+        <p>会社名：<%= current_business_name %></p>
+      </div>
+  
+      <!-- Sidebar -->
+      <% unless controller_path == 'users/businesses' && action_name == 'new' %>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  
+            <!--スライドメニュー追記-->
+            <p class="non-slide-link-menu"><%= paying_display %></p>
+            <li class="nav-item">
+              <%= link_to users_orders_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-users"></i>
+                <p>現場情報</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_subcon_users_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-building"></i>
+                <p>協力会社情報</p>
+              <% end %>
+            </li>
+            <p class="non-slide-link-menu text-danger">↓ 初回ログイン時入力必須</p>
+            <li class="nav-item">
+              <%= link_to users_business_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-building"></i>
+                <p>会社情報</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_workers_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-user"></i>
+                <p>作業員情報</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_cars_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-car"></i>
+                <p>車両情報</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_special_vehicles_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-truck"></i>
+                <p>特殊車両情報</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_machines_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-cogs"></i>
+                <p>持込機械情報</p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_solvents_path, class:"nav-link" do %>
+                <i class="nav-icon fas fa-flask"></i>
+                <p>有機溶剤情報</p>
+              <% end %>
+            </li>
+            <p></p>
+            <p></p>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      <% else %>
+        <p class="non-slide-link-menu text-danger">会社情報を登録してください</p>
+      <% end %>
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+</div>
