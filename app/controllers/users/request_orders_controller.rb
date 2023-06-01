@@ -1,3 +1,4 @@
+# rubocop:disable all
 module Users
   class RequestOrdersController < Users::Base
     before_action :set_business_workers_name, only: %i[edit update]
@@ -8,7 +9,7 @@ module Users
     before_action :set_business_occupations, only: %i[edit update]
     before_action :set_business_construction_licenses, only: %i[edit update]
     before_action :set_construction_manager_position_name, only: %i[update]
-    before_action :check_status_request_order, except: :show
+    before_action :check_status_request_order, only: %i[edit update] # 提出済、承認済の場合は下請けの現場情報を編集できないようにする
 
     def show
       @sub_request_orders = @request_order.children
@@ -17,6 +18,12 @@ module Users
       @first_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.first_subcon_documents_type
       @second_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.second_subcon_documents_type
       @third_or_later_subcon_documents = RequestOrder.find_by(uuid: @request_order.uuid).documents.third_or_later_subcon_documents_type
+    end
+
+    def new
+      @professional_engineer_qualification = SkillTraining.all.order(:id)
+      @lead_engineer_qualification = SkillTraining.all.order(:id)
+      @registered_core_engineer_qualification = SkillTraining.all.order(:id)
     end
 
     def edit
@@ -49,6 +56,49 @@ module Users
         end
       end
       # =============================================
+    
+      # request_orderの技術者名から作業員テーブルのレコードを特定する
+      worker = Worker.find_by(name: @request_order.professional_engineer_name, business_id: current_business.id)
+      # 作業員のidで作業員と技能講習マスターの中間テーブルを特定する
+      worker_skill_training = WorkerSkillTraining.where(worker_id: worker&.id)
+      array = []
+      worker_skill_training.each do |record|
+        array << record.skill_training_id
+      end
+      if worker.nil?
+        @professional_engineer_qualification = SkillTraining.all.order(:id)
+      else
+        @professional_engineer_qualification = SkillTraining.where("id IN (?)", array)
+      end
+    
+      # request_orderの主任技術者名から作業員テーブルのレコードを特定する
+      worker = Worker.find_by(name: @request_order.lead_engineer_name, business_id: current_business.id)
+      # 作業員のidで作業員と技能講習マスターの中間テーブルを特定する
+      worker_skill_training = WorkerSkillTraining.where(worker_id: worker&.id)
+      array = []
+      worker_skill_training.each do |record|
+        array << record.skill_training_id
+      end
+      if worker.nil?
+        @lead_engineer_qualification = SkillTraining.all.order(:id)
+      else
+        @lead_engineer_qualification = SkillTraining.where("id IN (?)", array)
+      end
+    
+      # requestorderの登録基幹技能者名から作業員テーブルのレコードを特定する
+      worker = Worker.find_by(name: @request_order.registered_core_engineer_name, business_id: current_business.id)
+      # 作業員のidで作業員と技能講習マスターの中間テーブルを特定する
+      worker_skill_training = WorkerSkillTraining.where(worker_id: worker&.id)
+      array = []
+      worker_skill_training.each do |record|
+        array << record.skill_training_id
+      end
+      if worker.nil?
+        @registered_core_engineer_qualification = SkillTraining.all.order(:id)
+      else
+        @registered_core_engineer_qualification = SkillTraining.where("id IN (?)", array)
+      end
+    
     end
 
     def update
@@ -114,7 +164,7 @@ module Users
     def professional_engineer_skill_training_options
       professional_engineer_name = params[:professional_engineer_name]
       worker = Worker.find_by(name: professional_engineer_name)
-      options = worker.skill_trainings
+      options = worker&.skill_trainings
       render json: options
     end
 
@@ -130,7 +180,7 @@ module Users
     def lead_engineer_skill_training_options
       lead_engineer_name = params[:lead_engineer_name]
       worker = Worker.find_by(name: lead_engineer_name)
-      options = worker.skill_trainings
+      options = worker&.skill_trainings
       render json: options
     end
 
@@ -138,7 +188,7 @@ module Users
     def registered_core_engineer_license_options
       registered_core_engineer_name = params[:registered_core_engineer_name]
       worker = Worker.find_by(name: registered_core_engineer_name)
-      options = worker.licenses
+      options = worker&.licenses
       render json: options
     end
 
@@ -166,7 +216,218 @@ module Users
         Worker.find_by(name: request_order_params[:construction_manager_name])&.job_title
     end
 
-    # rubocop:disable all
+    # 業種1(建設許可証番号)がbusiness_industryにない時も取得する
+    def occupation_1st
+      occupation_info_1st = params.dig(:request_order, :content, :construction_license_number)&.slice(0)
+      if occupation_info_1st.present?
+        business_industry_occupation_1st = BusinessIndustry.find_by(id: occupation_info_1st)
+        industry_id_1st = BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.industry_id
+        if business_industry_occupation_1st.nil? && (occupation_info_1st == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_occupation_1st')
+        elsif business_industry_occupation_1st.nil? && (occupation_info_1st == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_occupation_2nd')
+        else
+          Industry.find_by(id: industry_id_1st)&.name
+        end
+      end
+    end
+
+    # 業種2(建設許可証番号)がbusiness_industryにない時も取得する
+    def occupation_2nd
+      occupation_info_2nd = params.dig(:request_order, :content, :construction_license_number)&.slice(1)
+      if occupation_info_2nd.present?
+        business_industry_occupation_2nd = BusinessIndustry.find_by(id: occupation_info_2nd)
+        industry_id_2nd = BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.industry_id
+        if business_industry_occupation_2nd.nil? && (occupation_info_2nd == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_occupation_1st')
+        elsif business_industry_occupation_2nd.nil? && (occupation_info_2nd == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_occupation_2nd')
+        else
+          Industry.find_by(id: industry_id_2nd)&.name
+        end
+      end
+    end
+
+    # 建設業許可種別(大臣,知事)1(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_permission_type_minister_governor_1st
+      construction_license_permission_type_minister_governor_info_1st = params.dig(:request_order, :content, :construction_license_number)&.slice(0)
+      if construction_license_permission_type_minister_governor_info_1st.present?
+        business_industry_minister_governor_1st = BusinessIndustry.find_by(id: construction_license_permission_type_minister_governor_info_1st)
+        if business_industry_minister_governor_1st.nil? && (construction_license_permission_type_minister_governor_info_1st == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_minister_governor_1st')
+        elsif business_industry_minister_governor_1st.nil? && (construction_license_permission_type_minister_governor_info_1st == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_minister_governor_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_permission_type_minister_governor_i18n
+        end
+      end
+    end
+
+    # 建設業許可種別(大臣,知事)2(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_permission_type_minister_governor_2nd
+      construction_license_permission_type_minister_governor_info_2nd = params.dig(:request_order, :content, :construction_license_number)&.slice(1)
+      if construction_license_permission_type_minister_governor_info_2nd.present?
+        business_industry_minister_governor_2nd = BusinessIndustry.find_by(id: construction_license_permission_type_minister_governor_info_2nd)
+        if business_industry_minister_governor_2nd.nil? && (construction_license_permission_type_minister_governor_info_2nd == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_minister_governor_1st')
+        elsif business_industry_minister_governor_2nd.nil? && (construction_license_permission_type_minister_governor_info_2nd == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_minister_governor_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_permission_type_minister_governor_i18n
+        end
+      end
+    end
+
+    # 建設業許可種別(特定,一般)1(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_permission_type_identification_general_1st
+      construction_license_permission_type_identification_general_info_1st = params.dig(:request_order, :content, :construction_license_number)&.slice(0)
+      if construction_license_permission_type_identification_general_info_1st.present?
+        business_industry_identification_general_1st = BusinessIndustry.find_by(id: construction_license_permission_type_identification_general_info_1st)
+        if business_industry_identification_general_1st.nil? && (construction_license_permission_type_identification_general_info_1st == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_identification_general_1st')
+        elsif business_industry_identification_general_1st.nil? && (construction_license_permission_type_identification_general_info_1st == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_identification_general_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_permission_type_identification_general_i18n
+        end
+      end
+    end
+
+    # 建設業許可種別(特定,一般)2(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_permission_type_identification_general_2nd
+      construction_license_permission_type_identification_general_info_2nd = params.dig(:request_order, :content, :construction_license_number)&.slice(1)
+      if construction_license_permission_type_identification_general_info_2nd.present?
+        business_industry_identification_general_2nd = BusinessIndustry.find_by(id: construction_license_permission_type_identification_general_info_2nd)
+        if business_industry_identification_general_2nd.nil? && (construction_license_permission_type_identification_general_info_2nd == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_identification_general_1st')
+        elsif business_industry_identification_general_2nd.nil? && (construction_license_permission_type_identification_general_info_2nd == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_permission_type_identification_general_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_permission_type_identification_general_i18n
+        end
+      end
+    end
+
+    # 建設業許可番号(2桁)1(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_number_double_digit_1st
+      construction_license_number_double_digit_info_1st = params.dig(:request_order, :content, :construction_license_number)&.slice(0)
+      if construction_license_number_double_digit_info_1st.present?
+        business_industry_double_digit_1st = BusinessIndustry.find_by(id: construction_license_number_double_digit_info_1st)
+        if business_industry_double_digit_1st.nil? && (construction_license_number_double_digit_info_1st == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_number_double_digit_1st')
+        elsif business_industry_double_digit_1st.nil? && (construction_license_number_double_digit_info_1st == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_number_double_digit_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_number_double_digit
+        end
+      end
+    end
+
+    # 建設業許可番号(2桁)2(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_number_double_digit_2nd
+      construction_license_number_double_digit_info_2nd = params.dig(:request_order, :content, :construction_license_number)&.slice(1)
+      if construction_license_number_double_digit_info_2nd.present?
+        business_industry_double_digit_2nd = BusinessIndustry.find_by(id: construction_license_number_double_digit_info_2nd)
+        if business_industry_double_digit_2nd.nil? && (construction_license_number_double_digit_info_2nd == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_number_double_digit_1st')
+        elsif business_industry_double_digit_2nd.nil? && (construction_license_number_double_digit_info_2nd == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_number_double_digit_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_number_double_digit
+        end
+      end
+    end
+
+    # 建設業許可番号(6桁)1(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_number_six_digits_1st
+      construction_license_number_six_digits_info_1st = params.dig(:request_order, :content, :construction_license_number)&.slice(0)
+      if construction_license_number_six_digits_info_1st.present?
+        business_industry_six_digits_1st = BusinessIndustry.find_by(id: construction_license_number_six_digits_info_1st)
+        if business_industry_six_digits_1st.nil? && (construction_license_number_six_digits_info_1st == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_number_six_digits_1st')
+        elsif business_industry_six_digits_1st.nil? && (construction_license_number_six_digits_info_1st == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_number_six_digits_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_number_six_digits
+        end
+      end
+    end
+
+    # 建設業許可番号(6桁)2(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_number_six_digits_2nd
+      construction_license_number_six_digits_info_2nd = params.dig(:request_order, :content, :construction_license_number)&.slice(1)
+      if construction_license_number_six_digits_info_2nd.present?
+        business_industry_six_digits_2nd = BusinessIndustry.find_by(id: construction_license_number_six_digits_info_2nd)
+        if business_industry_six_digits_2nd.nil? && (construction_license_number_six_digits_info_2nd == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_number_six_digits_1st')
+        elsif business_industry_six_digits_2nd.nil? && (construction_license_number_six_digits_info_2nd == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_number_six_digits_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_number_six_digits
+        end
+      end
+    end
+
+    # 建設許可証(更新日)1(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_updated_at_1st
+      construction_license_updated_at_info_1st = params.dig(:request_order, :content, :construction_license_number)&.slice(0)
+      if construction_license_updated_at_info_1st.present?
+        business_industry_updated_at_1st = BusinessIndustry.find_by(id: construction_license_updated_at_info_1st)
+        if business_industry_updated_at_1st.nil? && (construction_license_updated_at_info_1st == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_updated_at_1st')
+        elsif business_industry_updated_at_1st.nil? && (construction_license_updated_at_info_1st == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_updated_at_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_updated_at
+        end
+      end
+    end
+
+    # 建設許可証(更新日)2(建設許可証番号)がbusiness_industryにない時も取得する
+    def construction_license_updated_at_2nd
+      construction_license_updated_at_info_2nd = params.dig(:request_order, :content, :construction_license_number)&.slice(1)
+      if construction_license_updated_at_info_2nd.present?
+        business_industry_updated_at_2nd = BusinessIndustry.find_by(id: construction_license_updated_at_info_2nd)
+        if business_industry_updated_at_2nd.nil? && (construction_license_updated_at_info_2nd == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_updated_at_1st')
+        elsif business_industry_updated_at_2nd.nil? && (construction_license_updated_at_info_2nd == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_updated_at_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_updated_at
+        end
+      end
+    end
+
+    # 建設許可証番号1がbusiness_industryにない時も取得する
+    def construction_license_number_1st
+      construction_license_number_info_1st = params.dig(:request_order, :content, :construction_license_number)&.slice(0)
+      if construction_license_number_info_1st.present?
+        business_industry_construction_license_1st = BusinessIndustry.find_by(id: construction_license_number_info_1st)
+        if business_industry_construction_license_1st.nil? && (construction_license_number_info_1st == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_number_1st')
+        elsif business_industry_construction_license_1st.nil? && (construction_license_number_info_1st == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_number_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_number
+        end
+      end
+    end
+
+    # 建設許可証番号2がbusiness_industryにない時も取得する
+    def construction_license_number_2nd
+      construction_license_number_info_2nd = params.dig(:request_order, :content, :construction_license_number)&.slice(1)
+      if construction_license_number_info_2nd.present?
+        business_industry_construction_license_2nd = BusinessIndustry.find_by(id: construction_license_number_info_2nd)
+        if business_industry_construction_license_2nd.nil? && (construction_license_number_info_2nd == @request_order.content&.[]('subcon_construction_license_id_1st'))
+          @request_order.content&.[]('subcon_construction_license_number_1st')
+        elsif business_industry_construction_license_2nd.nil? && (construction_license_number_info_2nd == @request_order.content&.[]('subcon_construction_license_id_2nd'))
+          @request_order.content&.[]('subcon_construction_license_number_2nd')
+        else
+          BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_number
+        end
+      end
+    end
+
     def request_order_params
       params.require(:request_order).permit(
         :occupation,
@@ -218,22 +479,22 @@ module Users
           subcon_employment_insurance_join_status:                                current_business.business_employment_insurance_join_status,        # 雇用保険加入状況
           subcon_employment_insurance_number:                                     current_business.business_employment_insurance_number,             # 雇用保険番号
           # 建設許可証関連
-          subcon_construction_license_id_1st:                                     params.dig(:request_order, :content, :construction_license_number)&.slice(0),                                                                                                 # 建設許可証番号のid1
-          subcon_occupation_1st:                                                  Industry.find_by(id: BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.industry_id)&.name,                          # 業種1
-          subcon_construction_license_permission_type_minister_governor_1st:      BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)1
-          subcon_construction_license_permission_type_identification_general_1st: BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)1
-          subcon_construction_construction_license_number_double_digit_1st:       BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_number_double_digit,                         # 建設業許可番号(2桁)1
-          subcon_construction_license_number_six_digits_1st:                      BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_number_six_digits,                           # 建設業許可番号(6桁)1
-          subcon_construction_license_updated_at_1st:                             BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_updated_at,                                  # 建設許可証(更新日)1
-          subcon_construction_license_number_1st:                                 BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(0))&.construction_license_number,                                      # 建設許可証番号1
+          subcon_construction_license_id_1st:                                     params.dig(:request_order, :content, :construction_license_number)&.slice(0), # 建設許可証番号のid1
+          subcon_occupation_1st:                                                  occupation_1st,                                                               # 業種1
+          subcon_construction_license_permission_type_minister_governor_1st:      construction_license_permission_type_minister_governor_1st,                   # 建設業許可種別(大臣,知事)1
+          subcon_construction_license_permission_type_identification_general_1st: construction_license_permission_type_identification_general_1st,              # 建設業許可種別(特定,一般)1
+          subcon_construction_license_number_double_digit_1st:                    construction_license_number_double_digit_1st,                                 # 建設業許可番号(2桁)1
+          subcon_construction_license_number_six_digits_1st:                      construction_license_number_six_digits_1st,                                   # 建設業許可番号(6桁)1
+          subcon_construction_license_updated_at_1st:                             construction_license_updated_at_1st,                                          # 建設許可証(更新日)1
+          subcon_construction_license_number_1st:                                 construction_license_number_1st,                                              # 建設許可証番号1
           subcon_construction_license_id_2nd:                                     params.dig(:request_order, :content, :construction_license_number)&.slice(1), # 建設許可証番号のid2
-          subcon_occupation_2nd:                                                  Industry.find_by(id: BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.industry_id)&.name,                          # 業種2
-          subcon_construction_license_permission_type_minister_governor_2nd:      BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_permission_type_minister_governor_i18n,      # 建設業許可種別(大臣,知事)2
-          subcon_construction_license_permission_type_identification_general_2nd: BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_permission_type_identification_general_i18n, # 建設業許可種別(特定,一般)2
-          subcon_construction_construction_license_number_double_digit_2nd:       BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_number_double_digit,                         # 建設業許可番号(2桁)2
-          subcon_construction_license_number_six_digits_2nd:                      BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_number_six_digits,                           # 建設業許可番号(6桁)2
-          subcon_construction_license_updated_at_2nd:                             BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_updated_at,                                  # 建設許可証(更新日)2
-          subcon_construction_license_number_2nd:                                 BusinessIndustry.find_by(id: params.dig(:request_order, :content, :construction_license_number)&.slice(1))&.construction_license_number,                                      # 建設許可証番号2
+          subcon_occupation_2nd:                                                  occupation_2nd,                                                               # 業種2
+          subcon_construction_license_permission_type_minister_governor_2nd:      construction_license_permission_type_minister_governor_2nd,                   # 建設業許可種別(大臣,知事)2
+          subcon_construction_license_permission_type_identification_general_2nd: construction_license_permission_type_identification_general_2nd,              # 建設業許可種別(特定,一般)2
+          subcon_construction_license_number_double_digit_2nd:                    construction_license_number_double_digit_2nd,                                 # 建設業許可番号(2桁)2
+          subcon_construction_license_number_six_digits_2nd:                      construction_license_number_six_digits_2nd,                                   # 建設業許可番号(6桁)2
+          subcon_construction_license_updated_at_2nd:                             construction_license_updated_at_2nd,                                          # 建設許可証(更新日)2
+          subcon_construction_license_number_2nd:                                 construction_license_number_2nd,                                              # 建設許可証番号2
 
           subcon_retirement_benefit_mutual_aid_status:                            current_business.business_retirement_benefit_mutual_aid_status, # 退職金共済制度(加入状況)
           subcon_employment_manager_name:                                         @business_workers_name_id.find_by(name: current_business.employment_manager_name)&.name, # 雇用管理責任者名
@@ -244,10 +505,11 @@ module Users
           subcon_work_chief_name_id:                                              @business_workers_name_id.find_by(name: params[:request_order][:work_chief_name])&.id,    # 記号 (作)作業主任者に使用
           subcon_lead_engineer_name_id:                                           @business_workers_name_id.find_by(name: params[:request_order][:lead_engineer_name])&.id, # 記号 (主)主任技術者に使用
           subcon_foreman_name_id:                                                 @business_workers_name_id.find_by(name: params[:request_order][:foreman_name])&.id,       # 記号 (職)職長に使用
-          subcon_safety_manager_name_id:                                          @business_workers_name_id.find_by(name: params[:request_order][:safety_manager_name])&.id # 記号 (安)安全衛生責任者に使用
+          subcon_safety_manager_name_id:                                          @business_workers_name_id.find_by(name: params[:request_order][:safety_manager_name])&.id, # 記号 (安)安全衛生責任者に使用
+          subcon_foreigners_employment_manager:                                   current_business.foreigners_employment_manager # 外国人雇用管理責任者名
         }
       )
     end
-    # rubocop:enable all
   end
 end
+# rubocop:enable all

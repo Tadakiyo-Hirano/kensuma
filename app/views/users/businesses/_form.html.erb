@@ -36,7 +36,7 @@
     <%= f.text_field :branch_name, class: "form-control" %>
     <br>
     <%= f.label :career_up_id %><!--事業者ID(キャリアアップシステム)-->
-    <%= f.text_field :career_up_id, class: "form-control", minlength: 14, maxlength: 14 %>
+    <%= f.text_field :career_up_id, class: "form-control", maxlength: 14 %>
     <br>
     <%= f.label :career_up_card_copy %><br><!--キャリアアップシステムカードの写し-->
     <% if business.career_up_card_copy.present? %>
@@ -84,7 +84,7 @@
     <br>
     <%= f.label :occupation_ids %><!-- 職種 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-    <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business&.occupations.ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
+    <%= f.collection_select :occupation_ids, get_occupations_for_selected_industries, :id, :short_name, { selected: @business&.occupation_ids }, { class: 'form-control select2', id: 'child-select', multiple: true, style: "width: 100%" } %>
     <br>
     <br>
     <div id="hidden-form-business-type">
@@ -228,7 +228,8 @@
         <%= f.collection_radio_buttons(:foreign_work_status_exist, Business.foreign_work_status_exists_i18n, :first, :last, { checked: @business&.foreign_work_status_exist? ? @business&.foreign_work_status_exist : false }) do |b| %>
           <div>
             <%= b.label { b.radio_button + b.text } %>
-          </div>        <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
     <br>

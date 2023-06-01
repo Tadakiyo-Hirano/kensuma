@@ -18,7 +18,7 @@ module Users
           address:                                                     'test',
           post_code:                                                   '0123456',
           phone_number:                                                '01234567898',
-          career_up_id:                                                1,
+          career_up_id:                                                '12345678901234',
           business_type:                                               0,
           business_health_insurance_status:                            0, # 健康保険(加入状況)
           business_health_insurance_association:                       'テスト健康保険組合', # 健康保険(組合名)
@@ -41,14 +41,12 @@ module Users
       @business = Business.new(business_params_with_converted)
       if business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
         flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
+      elsif @business.save
+        redirect_to users_orders_url
+      else
+        session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
+        session[:occupation_ids] = params[:business][:occupation_ids].map(&:to_i).reject(&:zero?)
         render :new
-      else 
-        if @business.save
-          redirect_to users_orders_url
-        else
-          session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
-          render :new
-        end
       end
     end
 
@@ -58,9 +56,13 @@ module Users
 
     def update
       clear_hidden_fields #ラジオボタンで非表示になった項目を強制的にnilにする
-      if business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
-        flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
+      if params[:business][:occupation_ids].compact_blank.blank?
+        session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
+        session[:occupation_ids] = params[:business][:occupation_ids].map(&:to_i).reject(&:zero?)
+        @business.errors.add(:base, "職種を入力してください")
         render 'edit'
+      elsif business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
+        flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
       else
         if @business.update(business_params_with_converted)
           flash[:success] = '更新しました'

@@ -123,9 +123,11 @@
       %>
       <br>
       <%= f.label :professional_engineer_qualification_1st %> <!-- 専門技術者1(資格内容) -->
-      <%= f.select :professional_engineer_qualification_1st, options_for_select(@order.professional_engineer_qualification_1st.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.professional_engineer_qualification_1st, include_blank: true), {},
-                    { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_1st' }
-      %>
+      <% if @professional_engineer_qualification_1st.blank? %>
+        <%= f.select :professional_engineer_qualification_1st, options_for_select(SkillTraining.all.order(:id).map{ |skill| [skill.name, skill.id] }, selected: @order.professional_engineer_qualification_1st), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_1st' } %>
+      <% else %>
+        <%= f.select :professional_engineer_qualification_1st, options_for_select(@professional_engineer_qualification_1st.map{ |skill| [skill.name, skill.id] }, selected: @order.professional_engineer_qualification_1st), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_1st' } %>
+      <% end %>
       <br><br>
       <%= f.label :professional_engineer_details_1st %> <!-- 専門技術者1(担当工事内容) -->
       <%= f.text_field :professional_engineer_details_1st, class: "form-control" %>
@@ -142,9 +144,11 @@
       %>
       <br>
       <%= f.label :professional_engineer_qualification_2nd %> <!-- 専門技術者2(資格内容) -->
-      <%= f.select :professional_engineer_qualification_2nd, options_for_select(@order.professional_engineer_qualification_2nd.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.professional_engineer_qualification_2nd, include_blank: true), {},
-                    { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_2nd' }
-                   %>
+      <% if @professional_engineer_qualification_2nd.blank? %>
+        <%= f.select :professional_engineer_qualification_2nd, options_for_select(SkillTraining.all.order(:id).map{ |skill| [skill.name, skill.id] }, selected: @order.professional_engineer_qualification_2nd), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_2nd' } %>
+      <% else %>
+        <%= f.select :professional_engineer_qualification_2nd, options_for_select(@professional_engineer_qualification_2nd.map{ |skill| [skill.name, skill.id] }, selected: @order.professional_engineer_qualification_2nd), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'professional_engineer_qualification_id_2nd' } %>
+      <% end %>
       <br><br>
       <%= f.label :professional_engineer_details_2nd %> <!-- 専門技術者2(担当工事内容) -->
       <%= f.text_field :professional_engineer_details_2nd, class: "form-control" %>
@@ -171,9 +175,11 @@
       </div>
       <br>
       <%= f.label :supervising_engineer_qualification %> <!-- 監督技術者･主任技術者(資格内容) -->
-      <%= f.select :supervising_engineer_qualification, options_for_select(@order.supervising_engineer_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.supervising_engineer_qualification, include_blank: true), {},
-                    { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_qualification_id' }
-                   %>
+      <% if @supervising_engineer_qualification.blank? %>
+        <%= f.select :supervising_engineer_qualification, options_for_select(SkillTraining.all.order(:id).map{ |skill| [skill.name, skill.id] }, selected: @order.supervising_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_qualification_id' } %>
+      <% else %>
+        <%= f.select :supervising_engineer_qualification, options_for_select(@supervising_engineer_qualification.map{ |skill| [skill.name, skill.id] }, selected: @order.supervising_engineer_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_qualification_id' } %>
+      <% end %>
       <br>
     </div>
   </div>
@@ -186,9 +192,11 @@
                     { id: "supervising_engineer_assistant_name", class: "form-select form-select-sm", style: "width: 100%" }
       %><br>
       <%= f.label :supervising_engineer_assistant_qualification %><br> <!-- 監督技術者補佐(資格内容) -->
-      <%= f.select :supervising_engineer_assistant_qualification, options_for_select(@order.supervising_engineer_assistant_qualification.to_s.split(',')&.map{ |id| [SkillTraining.find(id).name, id] } || [], selected: @order.supervising_engineer_assistant_qualification, include_blank: true), {},
-                    { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_assistant_qualification_id' }
-                   %>
+      <% if @supervising_engineer_assistant_qualification.blank? %>
+        <%= f.select :supervising_engineer_assistant_qualification, options_for_select(SkillTraining.all.order(:id).map{ |skill| [skill.name, skill.id] }, selected: @order.supervising_engineer_assistant_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_assistant_qualification_id' } %>
+      <% else %>
+        <%= f.select :supervising_engineer_assistant_qualification, options_for_select(@supervising_engineer_assistant_qualification.map{ |skill| [skill.name, skill.id] }, selected: @order.supervising_engineer_assistant_qualification), { include_blank: true }, { class: "form-select form-select-sm", style: "width: 100%", id: 'supervising_engineer_assistant_qualification_id' } %>
+      <% end %>
     </div>
   </div>
   <div class="list-group-item">
@@ -227,10 +235,10 @@
     <%= f.label :construction_license %><span class="error_msg construction_license-error"></span> <!-- 工場に必要な建設許可証 -->
     <div class="list-group-item">
       <div class="form-check">
-        <% @order_construction_licenses&.each do |id, license| %>
+        <% @order_construction_licenses&.each_with_index do |(id, license), index| %>
           <div class="form-check">
             <%= f.check_box name = 'content[construction_license_number]', { multiple: true, checked: [@order.content&.[]('genecon_construction_license_number_1st'), @order.content&.[]('genecon_construction_license_number_2nd')].include?(license), id: "construction_license_number_#{id}" }, id, nil %>
-            <label for='construction_license_number_<%= id %>'><%= license %></label>
+            <label for='construction_license_number_<%= id %>'><%= @industry[index] %>&emsp;<%= license %></label>
           </div>
         <% end %>
       </div>
