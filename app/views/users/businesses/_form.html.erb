@@ -187,7 +187,7 @@
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
       <div id="available-form">
-        <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last, { checked: @business&.construction_license_status? ? @business&.construction_license_status : false }) do |b| %>
+        <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n.to_a.reverse, :first, :last, { checked: @business&.construction_license_status? ? @business&.construction_license_status : false }) do |b| %>
           <div>
             <%= b.label { b.radio_button + b.text } %>
           </div>
@@ -196,7 +196,7 @@
         <div id="license-insertion-point"></div>
         <!-- BusinessIndustryここから -->
         <div id="hidden-form" class="list-group">
-          <% if f.object.construction_license_status != "not_available" %>
+          <% if f.object.construction_license_status != "not_available" && f.object.business_industries.size == 0 %>
             <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
               <%= render "business_industry_fields", f: b_industry %>
             <% end %>
