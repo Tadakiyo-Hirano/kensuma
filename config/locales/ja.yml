@@ -509,8 +509,8 @@ ja:
         not_available: 無
     business_industry:
       construction_license_permission_type_minister_governor: # 建設許可証(種別)
-        minister_permission: 大臣許可
-        governor_permission: 知事許可
+        minister_permission: 大臣
+        governor_permission: 知事
       construction_license_permission_type_identification_general: # 建設許可証(種別)
         identification: 特定
         general: 一般

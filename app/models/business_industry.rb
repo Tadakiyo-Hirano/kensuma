@@ -21,9 +21,9 @@ class BusinessIndustry < ApplicationRecord
   # 建設許可証番号の組み合わせ表示
   def construction_license_number_string
     if construction_license_permission_type_minister_governor == 'governor_permission'
-      "#{BusinessIndustry.construction_license_governor_permission_prefectures_i18n[construction_license_governor_permission_prefecture]}知事(#{construction_license_permission_type_identification_text(construction_license_permission_type_identification_general)}-#{construction_license_number_double_digit.to_s.rjust(2)})第#{construction_license_number_six_digits.to_s.rjust(6)}号"
+      "#{BusinessIndustry.construction_license_governor_permission_prefectures_i18n[construction_license_governor_permission_prefecture]}知事(#{construction_license_permission_type_identification_text(construction_license_permission_type_identification_general)}-#{construction_license_number_double_digit.to_s.rjust(2)})第#{construction_license_number_six_digits.to_s.rjust(6)}号".gsub(/第\s+/, '第')
     else
-      "国土交通大臣(#{construction_license_permission_type_identification_text(construction_license_permission_type_identification_general)}-#{construction_license_number_double_digit.to_s.rjust(2)})第#{construction_license_number_six_digits.to_s.rjust(6)}号"
+      "国土交通大臣(#{construction_license_permission_type_identification_text(construction_license_permission_type_identification_general)}-#{construction_license_number_double_digit.to_s.rjust(2)})第#{construction_license_number_six_digits.to_s.rjust(6)}号".gsub(/第\s+/, '第')
     end
   end
 

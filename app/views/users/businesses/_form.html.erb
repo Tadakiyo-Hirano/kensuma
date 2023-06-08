@@ -171,37 +171,34 @@
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <div class="list-group-item">
       <div id="available-form">
-        <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n, :first, :last, { checked: @business&.construction_license_status? ? @business&.construction_license_status : false }) do |b| %>
+        <%= f.collection_radio_buttons(:construction_license_status, Business.construction_license_statuses_i18n.to_a.reverse, :first, :last, { checked: @business&.construction_license_status? ? @business&.construction_license_status : false }) do |b| %>
           <div>
             <%= b.label { b.radio_button + b.text } %>
           </div>
         <% end %>
-        <div id="error" class="text-red">【ご案内】：残っているフォームを削除してからチェックを変更してください。</div>
-      </div>
-    </div>
-
-    <!-- BusinessIndustryここから（建設許可証「有」かつデータがまだ無い場合は、一つのフォームのみデフォルトで表示） -->
-    <div id="hidden-form" class="list-group">
-      <div class="list-group-item">
-        <% if f.object.business_industries.size == 0 %>
-          <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
-            <%= render "business_industry_fields", f: b_industry %>
-          <% end %>
-        <% else %>
-          <%= f.fields_for :business_industries do |b_industry| %>
-            <%= render "business_industry_fields", f: b_industry %>
-          <% end %>
-        <% end %>
+        <div id="error" class="text-red">【ご案内】：残っているフォームを全て削除してからチェックを「無」に変更してください。</div>
         <div id="license-insertion-point"></div>
-        <%= link_to_add_association "＋フォーム追加", f, :business_industries, id: "form-link",
-          data: {
-            association_insertion_node: '#license-insertion-point',
-            association_insertion_method: 'append'
-          }
-        %>
+        <!-- BusinessIndustryここから -->
+        <div id="hidden-form" class="list-group">
+          <% if f.object.construction_license_status != "not_available" && f.object.business_industries.size == 0 %>
+            <%= f.fields_for :business_industries, BusinessIndustry.new do |b_industry| %>
+              <%= render "business_industry_fields", f: b_industry %>
+            <% end %>
+          <% else %>
+            <%= f.fields_for :business_industries do |b_industry| %>
+              <%= render "business_industry_fields", f: b_industry %>
+            <% end %>
+          <% end %>
+          <%= link_to_add_association "＋フォーム追加", f, :business_industries, id: "form-link",
+            data: {
+              association_insertion_node: '#license-insertion-point',
+              association_insertion_method: 'append'
+            }
+          %>
+        </div>
+        <!-- BusinessIndustryここまで -->
       </div>
     </div>
-    <!-- BusinessIndustryここまで -->
   </div>
 
 
@@ -371,7 +368,7 @@
   const available_form = document.getElementById('available-form')
   const list_group = document.getElementById('hidden-form')
   const error = document.getElementById('error')
-  function getRadioHealthInsuranceName(object) {
+  function getRadioConstructionLicense(object) {
     const value = $('input[name="business[construction_license_status]"]:checked').val();
     console.log(value)
     if(value == undefined){
@@ -380,17 +377,18 @@
     }else if (value == 'available'){
       list_group.classList.remove('hidden');
       //建設許可証「有」をチェック時は、エラー文を非表示
-
       error.classList.add('hidden');
     } else {
       list_group.classList.add('hidden');
-      //建設許可証「無」をチェック、かつフォームが残っている場合は、エラー文を表示し残フォーム削除を促す（nilが送信されてしまう為）
+      //建設許可証「無」をチェック、かつフォームが残っている場合は、エラー文を表示し残フォーム削除を促す（nilが送信されると外部キーでエラーが出る為）
       if ($(".nested-fields").filter(function() {return $(this).css('display') !== 'none'}).length) {
         error.classList.remove('hidden');
+      } else {
+        error.classList.add('hidden');
       }
     }
   };
-  getRadioHealthInsuranceName(available_form); //ページの読み込み時に判定
+  getRadioConstructionLicense(available_form); //ページの読み込み時に判定
 
   $('input[name="business[construction_license_status]"]').change(function() {
     if ($(this).val() == 'available') {
@@ -400,9 +398,14 @@
       list_group.classList.add('hidden');
       if ($(".nested-fields").filter(function() {return $(this).css('display') !== 'none'}).length) {
         error.classList.remove('hidden');
+      } else {
+        error.classList.add('hidden');
       }
     }
   });
+
+
+
 </script>
 
 <script>

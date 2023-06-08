@@ -94,7 +94,7 @@ ja:
       business_industries:
         industry: 業種
         industry_id: 業種
-        construction_license_permission_type_minister_governor: 建設許可種別
+        construction_license_permission_type_minister_governor: 種類
         construction_license_governor_permission_prefecture: 都道府県知事許可
         construction_license_permission_type_identification_general: 種別
         construction_license_number_double_digit: 和暦年度

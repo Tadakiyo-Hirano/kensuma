@@ -76,7 +76,7 @@
                 <%= document_site_info.content["genecon_occupation_1st"] %> <!-- 4-006 元請会社の建設許可業種 -->
               </td>
               <td rowspan="2" width="6%">工事業</td>
-              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_1st"] == "大臣許可" %>
+              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_1st"] == "大臣" %>
                 <td width="6%"><span class="circle">大臣</span></td><!-- 「大臣or知事」⇩　4-007 -->
               <% else %>
                 <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-007 -->
@@ -99,7 +99,7 @@
               </td>
             </tr>
             <tr>
-              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_1st"] == "知事許可" %>
+              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_1st"] == "知事" %>
                 <td width="6%"><span class="circle">知事</span></td><!-- 「大臣or知事」⇩　4-007 -->
               <% else %>
                 <td width="4%">知事</td><!-- 「大臣or知事」⇩　4-007 -->
@@ -115,7 +115,7 @@
                 <%= document_site_info.content["genecon_occupation_2nd"] %> <!-- 4-011 元請会社の建設許可業種 -->
               </td>
               <td rowspan="2">工事業</td>
-              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_2nd"] == "大臣許可" %>
+              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_2nd"] == "大臣" %>
                 <td width="6%"><span class="circle">大臣</span></td><!-- 「大臣or知事」⇩　4-012 -->
               <% else %>
                 <td width="4%">大臣</td><!-- 「大臣or知事」⇩　4-012 -->
@@ -138,7 +138,7 @@
               </td>
             </tr>
             <tr>
-              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_2nd"] == "知事許可" %>
+              <% if document_site_info.content["genecon_construction_license_permission_type_minister_governor_2nd"] == "知事" %>
                 <td width="6%"><span class="circle">知事</span></td><!-- 「大臣or知事」⇩　4-012 -->
               <% else %>
                 <td width="4%">知事</td><!-- 「大臣or知事」⇩　4-012 -->
