@@ -35,15 +35,6 @@
           <td></td>
         </tr>
         <tr>
-          <th>&emsp;&emsp;<%= Business.human_attribute_name(:career_up_card_copy) %></th>
-          <td class="career-up-card-copy-input">
-            <% @business.career_up_card_copy.each do |image| %>
-              <%= image_tag(image.url) %>
-            <% end %>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
           <th>&emsp;&emsp;<%= Business.human_attribute_name(:representative_name) %></th>
           <td><%= @business.representative_name %></td>
           <td></td>

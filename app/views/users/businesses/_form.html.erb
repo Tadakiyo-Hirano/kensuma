@@ -38,15 +38,6 @@
     <%= f.label :career_up_id %><!--事業者ID(キャリアアップシステム)-->
     <%= f.text_field :career_up_id, class: "form-control", maxlength: 14 %>
     <br>
-    <%= f.label :career_up_card_copy %><br><!--キャリアアップシステムカードの写し-->
-    <% if business.career_up_card_copy.present? %>
-      <% business.career_up_card_copy.each_with_index do |image, index| %>
-        <%= image_tag(image.url) %>
-        <%= link_to "削除", delete_career_up_card_copy_users_business_path(index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
-      <% end %>
-      <br>
-    <% end %>
-    <%= f.file_field :career_up_card_copy, multiple: true %>
     <br><br>
     <%= f.label :representative_name %><!-- 代表者名 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
