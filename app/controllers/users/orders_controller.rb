@@ -473,7 +473,9 @@ module Users
       ).merge(
         content: {
           genecon_name:                                                            current_business.name,                                             # 会社名
+          genecon_branch_name:                                                     current_business.branch_name,                                      # 支店･営業所名
           genecon_address:                                                         current_business.address,                                          # 会社住所
+          genecon_branch_address:                                                  current_business.branch_address,                                   # 支店･営業所住所
           genecon_career_up_id:                                                    current_business.career_up_id,                                     # 事業所ID(キャリアアップ)
           genecon_health_insurance_status:                                         current_business.business_health_insurance_status,                 # 健康保険加入状況
           genecon_health_insurance_association:                                    current_business.business_health_insurance_association,            # 健康保険会社

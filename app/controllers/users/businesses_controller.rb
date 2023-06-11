@@ -155,7 +155,7 @@ module Users
         :business_employment_insurance_join_status, :business_employment_insurance_number,
         :business_retirement_benefit_mutual_aid_status,
         :construction_license_status, :foreign_work_status_exist, :specific_skilled_foreigners_exist,
-        :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist, :foreigners_employment_manager,
+        :foreign_construction_workers_exist, :foreign_technical_intern_trainees_exist, :foreigners_employment_manager, :branch_address,
         business_industries_attributes: %i[id industry_id construction_license_permission_type_minister_governor
                                            construction_license_governor_permission_prefecture construction_license_permission_type_identification_general
                                            construction_license_number_double_digit construction_license_number_six_digits

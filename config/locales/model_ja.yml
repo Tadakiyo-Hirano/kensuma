@@ -57,6 +57,7 @@ ja:
         representative_name: 代表者名
         post_code: 郵便番号
         address: 住所
+        branch_address: 支店 又は 営業所住所
         phone_number: 電話番号
         fax_number: FAX
         email: メールアドレス
