@@ -368,7 +368,7 @@ RSpec.describe Business, type: :model do
 
     #     it 'バリデーションのエラーが正しいこと' do
     #       subject.valid?
-    #       expect(subject.errors.full_messages).to include('建設許可種別を入力してください')
+    #       expect(subject.errors.full_messages).to include('種類を入力してください')
     #     end
     #   end
     # end

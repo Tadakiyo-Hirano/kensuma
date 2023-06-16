@@ -147,11 +147,11 @@ module DocumentsHelper
   end
 
   def minister(license_permission_type)
-    license_permission_type == '大臣許可' ? tag.span('大臣', class: :circle) : '大臣'
+    license_permission_type == '大臣' ? tag.span('大臣', class: :circle) : '大臣'
   end
 
   def governor(license_permission_type)
-    license_permission_type == '知事許可' ? tag.span('知事', class: :circle) : '知事'
+    license_permission_type == '知事' ? tag.span('知事', class: :circle) : '知事'
   end
 
   def identification(license_permission_type)

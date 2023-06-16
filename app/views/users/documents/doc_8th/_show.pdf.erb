@@ -326,6 +326,8 @@
 					<td class="s11"></td>
 					<td class="s11" colspan="3" rowspan="2">事業所の名称</td>
 					<td class="s12" colspan="14" rowspan="2">
+						<%= document_site_info.content&.[]("genecon_name") %> <!-- 8-045 元請会社の「会社名」-->
+						<span>&nbsp;</span>
 						<%= document_site_info.site_name %> <!-- 8-001 事業所名(現場名)-->
 					</td>
 					<td class="s2"></td>

@@ -39,7 +39,9 @@ module Users
 
     def create
       @business = Business.new(business_params_with_converted)
-      if @business.save
+      if business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
+        flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
+      elsif @business.save
         redirect_to users_orders_url
       else
         session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
@@ -54,7 +56,10 @@ module Users
 
     def update
       clear_hidden_fields #ラジオボタンで非表示になった項目を強制的にnilにする
-      if params[:business][:occupation_ids].compact_blank.blank?
+      if business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
+        flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
+        render 'edit'
+      elsif params[:business][:occupation_ids].compact_blank.blank?
         session[:tem_industry_ids] = params[:business][:tem_industry_ids].map(&:to_i).reject(&:zero?)
         session[:occupation_ids] = params[:business][:occupation_ids].map(&:to_i).reject(&:zero?)
         @business.errors.add(:base, "職種を入力してください")
