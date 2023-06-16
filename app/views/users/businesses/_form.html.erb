@@ -118,8 +118,8 @@
         <%= f.text_field :business_health_insurance_association, class: "form-control" %><br>
         <%= f.label :business_health_insurance_office_number %><!-- 事業所整理記号及び事業所番号 -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <span class="p-1 mb-2 rounded">※末番4桁 半角の数字・ｶﾀｶﾅ・ハイフンのみ</span>
-        <%= f.text_field :business_health_insurance_office_number, maxlength: 4, class: "form-control", placeholder: "例) 01-ｲ" %>
+        <span class="p-1 mb-2 rounded">※20桁(1桁～20桁)漢字・かな・カタカナ・数字・ハイフン使用可能</span>
+        <%= f.text_field :business_health_insurance_office_number, maxlength: 20, class: "form-control" %>
         <br>
       </div>
     </div>
@@ -141,8 +141,8 @@
       <div id="hidden-form-welfare-pension-insurance">
         <%= f.label :business_welfare_pension_insurance_office_number %><!-- 厚生年金事業所整理番号 -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <span class="p-1 mb-2 rounded">※末番4桁 半角の数字・ｶﾀｶﾅ・ハイフンのみ</span>
-        <%= f.text_field :business_welfare_pension_insurance_office_number, maxlength: 4, class: "form-control", placeholder: "例) 01-ｲ" %>
+        <span class="p-1 mb-2 rounded">※20桁(1桁～20桁)漢字・かな・カタカナ・数字・ハイフン使用可能</span>
+        <%= f.text_field :business_welfare_pension_insurance_office_number, maxlength: 20, class: "form-control" %>
       </div>
     </div>
   </div>
@@ -162,8 +162,8 @@
       <div id="hidden-form-employmentーinsurance">
         <%= f.label :business_employment_insurance_number %><!-- 番号 -->
         <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
-        <span class="p-1 mb-2 rounded">※末番4桁 半角の数字・ｶﾀｶﾅ・ハイフンのみ</span>
-        <%= f.text_field :business_employment_insurance_number, maxlength: 4, class: "form-control", placeholder: "例) 01-ｲ" %>
+        <span class="p-1 mb-2 rounded">※20桁(1桁～20桁)漢字・かな・カタカナ・数字・ハイフン使用可能</span>
+        <%= f.text_field :business_employment_insurance_number, maxlength: 20, class: "form-control" %>
       </div>
     </div>
   </div>
