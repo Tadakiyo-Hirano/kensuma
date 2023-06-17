@@ -52,8 +52,8 @@
             <th></th>
             <th>受注日</th>
             <th>元請<%= Business.human_attribute_name(:name) %></th>
-            <th><%= Order.human_attribute_name(:site_agent_name) %></th>
             <th><%= Order.human_attribute_name(:site_name) %></th>
+            <th><%= Order.human_attribute_name(:site_agent) %></th>
             <th>工期</th>
           </tr>
         </thead>
@@ -64,9 +64,9 @@
               <%= link_to "受注書類作成", users_request_order_path(received_order), class: "btn btn-sm btn-primary" %>
             </td>
             <td><%= wareki(received_order.created_at) %></td>
+            <td><%= received_order.order.business.name %></td>
             <td><%= received_order.order.site_name %></td>
             <td><%= received_order.order.site_agent_name %></td>
-            <td><%= received_order.order.business.name %></td>
             <td>
               <%= wareki(received_order.order.start_date) %> 〜 <%= wareki(received_order.order.end_date) %>
             </td>
