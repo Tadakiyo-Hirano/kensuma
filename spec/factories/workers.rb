@@ -29,8 +29,6 @@ FactoryBot.define do
     maturity_date { '' }
     confirmed_check { '' }
     confirmed_check_date { '' }
-    branch_name { '' }
-    branch_address { '' }
     after(:create) do |worker|
       test_image = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg'), 'image/jpeg')
       create_list(:worker_license, 1, worker: worker, license: License.create!(name: 'テストライセンス', license_type: 0), images: [test_image])
