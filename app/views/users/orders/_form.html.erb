@@ -12,7 +12,6 @@
     <%= f.text_field :site_name, class: "form-control", maxlength: 100 %>
     <br>
     <%= f.label :site_address %> <!-- 施工場所住所 -->
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :site_address, class: "form-control", maxlength: 50 %>
     <br>
   </div>
@@ -51,6 +50,7 @@
       <br>
       <%= f.label :order_supervisor_apply %> <!-- 権限及び意見の申出方法 -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <span class="p-1 mb-2 rounded">例）・書面にて ・請負契約書第〇〇条記載のとおり </span>
       <%= f.text_field :order_supervisor_apply, class: "form-control" %>
     </div>
   </div>
@@ -94,6 +94,7 @@
       %><br>
       <%= f.label :site_agent_apply %> <!-- 現場代理人(権限及び意見の申出方法) -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <span class="p-1 mb-2 rounded">例）・書面にて ・請負契約書第〇〇条記載のとおり </span>
       <%= f.text_field :site_agent_apply, class: "form-control" %>
       <br>
     </div>
@@ -109,6 +110,7 @@
       %><br>
       <%= f.label :supervisor_apply %> <!-- 監督員(権限及び意見の申出方法) -->
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <span class="p-1 mb-2 rounded">例）・書面にて ・請負契約書第〇〇条記載のとおり </span>
       <%= f.text_field :supervisor_apply, class: "form-control" %>
       <br>
     </div>
@@ -345,7 +347,6 @@
           maxlength: 100
         },
         "order[site_address]": {
-          required: true,
           maxlength: 50
         },
         "order[order_name]": {
@@ -421,7 +422,6 @@
           maxlength: "現場名は100字以内で入力してください。"
         },
         "order[site_address]": {
-          required: "施工場所住所を入力してください。",
           maxlength: "施工場所の住所は50字以内で入力してください。"
         },
         "order[order_name]": {
