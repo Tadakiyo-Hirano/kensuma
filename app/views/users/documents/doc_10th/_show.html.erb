@@ -48,8 +48,8 @@
             <td class="gray"><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
             <td class="gray"><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
             <td class="gray"><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
-            <td class="green"><%= field_worker.content&.[]("occupation") %></td><!--「職種」10-011 -->
-            <td class="green"><%= field_worker.content&.[]("work_notice") %></td><!--「高年齢就労者・作業内容」10-012 -->
+            <td class="green"><%= worker_occupation(field_worker) %></td><!--「職種」10-011 -->
+            <td class="green"><%= field_worker&.job_description %></td><!--「高年齢就労者・作業内容」10-012 -->
           </tr>
         <% j += 1 %>
         <% end %>
