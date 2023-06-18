@@ -193,7 +193,7 @@
             <td class="s2"></td>
             <td class="s2"></td>
             <td class="s2"></td>
-            <td class="s10" dir="ltr" colspan="8">
+            <td class="s10" dir="ltr" colspan="8" style="background-color: #ccffcc;">
               <%= doc_content_date(@document.content&.[]('date_submitted')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 提出日(西暦) 13-001 -->
             </td>
             <td class="s4"></td>
@@ -666,7 +666,7 @@
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_none_box(@document.approval_content&.[]('a_control_of_hoisting_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-186 (b)Aクレーン部 安全装置 起伏装置制御 -->
             </td>
-            <td class="s32" dir="ltr" colspan="7">
+            <td class="s32" dir="ltr" colspan="7" style="background-color: #ccffcc;">
               <%= @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-103 追加項目内容1 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
@@ -716,7 +716,7 @@
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_none_box(@document.approval_content&.[]('a_swivel_warning_device')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-187 (b)Aクレーン部 安全装置 旋回警報装置 -->
             </td>
-            <td class="s32" dir="ltr" colspan="7">
+            <td class="s32" dir="ltr" colspan="7" style="background-color: #ccffcc;">
               <%= @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-104 追加項目内容2 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
@@ -784,7 +784,7 @@
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_none_box(@document.approval_content&.[]('a_main_supplemental')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-188 (b)Aクレーン部 制御装置･作業装置 主巻･補巻 -->
             </td>
-            <td class="s32" dir="ltr" colspan="7">
+            <td class="s32" dir="ltr" colspan="7" style="background-color: #ccffcc;">
               <%= @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-105 追加項目内容3 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
@@ -1584,7 +1584,7 @@
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_none_box(@document.approval_content&.[]('c_piercing')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-214 (b)Cゴンドラ 突りょう -->
             </td>
-            <td class="s41" dir="ltr" colspan="8">
+            <td class="s41" dir="ltr" colspan="8" style="background-color: #ccffcc;">
               <%= @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-106 追加項目内容4 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
@@ -1619,7 +1619,7 @@
               <%= checked_none_box(@document.approval_content&.[]('c_workbench')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-215 (b)Cゴンドラ 作業床 -->
             </td>
             <td class="s28" colspan="2" rowspan="4">Ｈその他</td>
-            <td class="s41" dir="ltr" colspan="8">
+            <td class="s41" dir="ltr" colspan="8" style="background-color: #ccffcc;">
               <%= @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-107 追加項目内容5 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
@@ -1649,7 +1649,7 @@
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_none_box(@document.approval_content&.[]('c_elevator')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-216 (b)Cゴンドラ 昇降装置 -->
             </td>
-            <td class="s41" dir="ltr" colspan="8">
+            <td class="s41" dir="ltr" colspan="8" style="background-color: #ccffcc;">
               <%= @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-108 追加項目内容6 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
@@ -1683,15 +1683,15 @@
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_none_box(@document.approval_content&.[]('c_electrical_equipment')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-217 (b)Cゴンドラ 電気装置 -->
             </td>
-            <td class="s41" dir="ltr" colspan="8">
+            <td class="s41" dir="ltr" colspan="8" style="background-color: #ccffcc;">
               <%= @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-109 追加項目内容7 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
+              <%= checked_none_box(@document.content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-181) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
               <% unless @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %>
-                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-253 (b)Hその他 追加項目7(13-109) -->
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-253 (b)Hその他 追加項目7(13-253) -->
               <% end %>
             </td>
             <td class="s5"></td>
@@ -1713,15 +1713,15 @@
             <td class="s30" dir="ltr" colspan="2">
               <%= checked_none_box(@document.approval_content&.[]('c_wire_lifeline')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-218 (b)Cゴンドラ ワイヤ･ライフライン -->
             </td>
-            <td class="s41" dir="ltr" colspan="8">
+            <td class="s41" dir="ltr" colspan="8" style="background-color: #ccffcc;">
               <%= @document.content&.[]('d_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-110 追加項目内容8 -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
-              <%= checked_none_box(@document.content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
+              <%= checked_none_box(@document.content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-182) -->
             </td>
             <td class="s30" dir="ltr" colspan="2">
               <% unless @document.content&.[]('h_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
-                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-254 (b)Hその他 追加項目8(13-110) -->
+                <%= checked_none_box(@document.approval_content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-254 (b)Hその他 追加項目8(13-254) -->
               <% end %>
             </td>
             <td class="s5"></td>
@@ -1753,7 +1753,7 @@
             <td class="s28" rowspan="3">点検日</td>
             <td class="s42" colspan="6">年 月 日</td>
             <td class="s28" rowspan="3">点検者</td>
-            <td class="s24" dir="ltr" colspan="4" rowspan="3">
+            <td class="s24" dir="ltr" colspan="4" rowspan="3" style="background-color: #ccffcc;">
               <%= @document.content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-256 (a)点検者 -->
             </td>
             <td class="s43" dir="ltr" rowspan="3">
@@ -1763,7 +1763,7 @@
             <td class="s28" rowspan="3">点検日</td>
             <td class="s42" colspan="6">年 月 日</td>
             <td class="s28" rowspan="3">点検者</td>
-            <td class="s24" dir="ltr" colspan="4" rowspan="3">
+            <td class="s24" dir="ltr" colspan="4" rowspan="3" style="background-color: #ccffcc;">
               <%= @document.approval_content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-258 (b)点検者名 -->
             </td>
             <td class="s43" dir="ltr" rowspan="3">
@@ -1781,10 +1781,10 @@
             <td class="s4"></td>
             <td class="s4"></td>
             <td class="s20"></td>
-            <td class="s38" dir="ltr" colspan="6" rowspan="2">
+            <td class="s38" dir="ltr" colspan="6" rowspan="2" style="background-color: #ccffcc;">
               <%= wareki(@document.content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-255 (a)点検年月日 --> 
             </td>
-            <td class="s38" dir="ltr" colspan="6" rowspan="2">
+            <td class="s38" dir="ltr" colspan="6" rowspan="2" style="background-color: #ccffcc;">
               <%= wareki(@document.approval_content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-257 (b)点検年月日 -->
             </td>
             <td class="s4"></td>
@@ -2111,10 +2111,10 @@
             <td class="s23" dir="ltr" colspan="12" rowspan="3">
               <%= @document.approval_content&.[]('receipt_number')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-038 受付番号 -->
             </td>
-            <td class="s36" dir="ltr" colspan="7" rowspan="3">
+            <td class="s36" dir="ltr" colspan="7" rowspan="3" style="background-color: #ccffcc;">
               <%= wareki(@document.content&.[]('reception_confirmation_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-039 受付確認年月日 -->
             </td>
-            <td class="s36" dir="ltr" colspan="5" rowspan="3">
+            <td class="s36" dir="ltr" colspan="5" rowspan="3" style="background-color: #ccffcc;">
               <%= @document.content&.[]('person_confirming_receipt')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-040 受付確認者 -->
             </td>
             <td class="s4"></td>
@@ -2521,7 +2521,7 @@
     white-space: nowrap;
     direction: ltr;
     padding: 0px 3px 0px 3px;
-    background-color: #e9ecef
+    background-color: #ccffcc
   }
 
   .ritz .waffle .s3 {

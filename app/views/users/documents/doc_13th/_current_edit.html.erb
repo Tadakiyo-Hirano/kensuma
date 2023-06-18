@@ -240,7 +240,7 @@
                 <td class="doc_13_s6" style="font-size: 100px;" rowspan="5">［ </td>
                 <td class="doc_13_s6"></td>
                 <td class="doc_13_s14" colspan="9" rowspan="2">
-                  <%= vehicle_type_crane(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
+                  <%= vehicle_type_crane(field_special_vehicle.content&.[]('vehicle_type')) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
                 </td>
                 <td class="doc_13_s15" colspan="2" rowspan="4" style="background-color: #e9ecef;">等</td>
                 <td class="doc_13_s6" style="font-size: 100px;" rowspan="5">］</td>
@@ -324,7 +324,7 @@
                 <td class="doc_13_s19"></td>
                 <td class="doc_13_s6"></td>
                 <td class="doc_13_s14" colspan="9" rowspan="2">
-                  <%= vehicle_type_construction(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
+                  <%= vehicle_type_construction(field_special_vehicle.content&.[]('vehicle_type')) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
                 </td>
                 <td class="doc_13_s2"></td>
                 <td class="doc_13_s3"></td>
@@ -338,10 +338,10 @@
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s23" dir="ltr" colspan="14" rowspan="3" style="border-left: 1px solid #000;">
-                  <%= field_special_vehicle.owning_company_name %> <!-- 13-101 所有会社名 -->
+                  <%= field_special_vehicle.content&.[]('owning_company_name') %> <!-- 13-101 所有会社名 -->
                 </td>
                 <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3">
-                  <%= field_special_vehicle.owning_company_name %>　<!-- 13-102 所有会社の代表者名 -->
+                  <%= @current_business.representative_name %> <!-- 13-102 所有会社の代表者名 -->
                 </td>
                 <td class="doc_13_s24" dir="ltr" colspan="2" rowspan="3">
                   ㊞ <!-- 13-261 印 -->
@@ -1591,7 +1591,7 @@
                   <%= field_special_vehicle.driver_name %> <!-- 13-021 入場する作業員名(運転者名・正) -->
                 </td>
                 <td class="doc_13_s23" dir="ltr" colspan="19" rowspan="2">
-                  <%= field_special_vehicle.driver_license.split[0][0..20] if field_special_vehicle.driver_license %>　<!-- 13-022 資格の種類 --> 
+                  <%= field_special_vehicle.driver_licenses&.shift && field_special_vehicle.driver_licenses&.join(", ") if field_special_vehicle.driver_licenses %> <!-- 13-022 資格の種類 --> 
                 </td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s35"></td>
@@ -1662,7 +1662,7 @@
                   <%= field_special_vehicle.sub_driver_name %> <!-- 13-023 入場する作業員名(運転者名・副) -->
                 </td>
                 <td class="doc_13_s23" dir="ltr" colspan="19" rowspan="2">
-                  <%= field_special_vehicle.sub_driver_license.split[0][0..20] if field_special_vehicle.sub_driver_license %>　<!-- 13-024 資格の種類 --> 
+                  <%= field_special_vehicle.sub_driver_licenses&.shift && field_special_vehicle.sub_driver_licenses&.join(", ") if field_special_vehicle.sub_driver_licenses %> <!-- 13-024 資格の種類 --> 
                 </td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s35"></td>
@@ -2022,7 +2022,7 @@
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s20"></td>
-                <td class="doc_13_s38" dir="ltr" colspan="6" rowspan="2">
+                <td class="doc_13_s38" dir="ltr" colspan="6" rowspan="2" style="background-color: #ccffcc;">
                   <%= f.date_field name = "content[inspection_date][field_special_vehicle_#{field_special_vehicle.id}]",
                                       value: doc_content_date(@document.content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                       class: 'form-control form-control-sm'
