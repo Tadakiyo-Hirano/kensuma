@@ -40,7 +40,6 @@
 <%= f.collection_check_boxes :fire_management_ids, FireManagement.all, :id, :name %>
 <br><br>
 <%= f.label :precautions %>
-<span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.text_field :precautions, class: "form-control", placeholder: FieldFire.human_attribute_name(:precautions), maxlength: 40 %>
 <br>
 <%= f.label :fire_origin_responsible %>
@@ -80,9 +79,6 @@
         "field_fire[usage_time_end(5i)]": {
           required: true
         },
-        "field_fire[precautions]": {
-          required: true
-        },
         "field_fire[fire_origin_responsible]": {
           required: true
         },
@@ -111,9 +107,6 @@
         },
         "field_fire[usage_time_end(5i)]": {
           required: "使用時間(終時)を入力してください。"
-        },
-        "field_fire[precautions]": {
-          required: "取扱上の注意を入力してください。"
         },
         "field_fire[fire_origin_responsible]": {
           required: "火元責任者(後始末巡回者)を入力してください。"
