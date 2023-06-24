@@ -198,8 +198,8 @@
                 <td class="doc_13_s2"></td>
                 <td class="doc_13_s2"></td>
                 <td class="doc_13_s2"></td>
-                <td class="doc_13_s10" dir="ltr" colspan="8" style="background-color: #e9ecef;">
-                  <%= @document.content&.[]('date_submitted')&.[]("field_special_vehicle_#{field_special_vehicle.id}")&.to_date&.strftime('%Y年%-m月%-d日') %> <!-- 提出日(西暦) 13-001 -->
+                <td class="doc_13_s10" dir="ltr" colspan="8" style="background-color: #ccffcc;">
+                  <%= doc_content_date(@document.content&.[]('date_submitted')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 提出日(西暦) 13-001 -->
                 </td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s4"></td>
@@ -237,7 +237,7 @@
                 <td class="doc_13_s6" style="font-size: 100px;" rowspan="5">［ </td>
                 <td class="doc_13_s6"></td>
                 <td class="doc_13_s14" colspan="9" rowspan="2">
-                  <%= vehicle_type_crane(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
+                  <%= vehicle_type_crane(field_special_vehicle.content&.[]('vehicle_type')) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
                 </td>
                 <td class="doc_13_s15" colspan="2" rowspan="4" style="background-color: #e9ecef;">等</td>
                 <td class="doc_13_s6" style="font-size: 100px;" rowspan="5">］</td>
@@ -321,7 +321,7 @@
                 <td class="doc_13_s19"></td>
                 <td class="doc_13_s6"></td>
                 <td class="doc_13_s14" colspan="9" rowspan="2">
-                  <%= vehicle_type_construction(field_special_vehicle.vehicle_type) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
+                  <%= vehicle_type_construction(field_special_vehicle.content&.[]('vehicle_type')) %> <!-- 13-002 移動式クレーンor車両系建設機械 -->
                 </td>
                 <td class="doc_13_s2"></td>
                 <td class="doc_13_s3"></td>
@@ -335,7 +335,7 @@
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s23" dir="ltr" colspan="14" rowspan="3" style="border-left: 1px solid #000;">
-                  <%= field_special_vehicle.owning_company_name %> <!-- 13-101 所有会社名 -->
+                  <%= field_special_vehicle.content&.[]('owning_company_name') %> <!-- 13-101 所有会社名 -->
                 </td>
                 <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3">
                   <%= field_special_vehicle.owning_company_representative_name %>　<!-- 13-102 所有会社の代表者名 -->
@@ -699,13 +699,13 @@
                                     class: "checkbox_list_crane#{field_special_vehicle.id}"
                   %> <!-- 13-186 (b)Aクレーン部 安全装置 起伏装置制御 -->
                 </td>
-                <td class="doc_13_s32" dir="ltr" colspan="7">
+                <td class="doc_13_s32" dir="ltr" colspan="7" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-103 追加項目内容1 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-150 (a)D安全装置 各種ロック 追加項目1(13-103) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('d_add_item_content_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[d_add_item_check_1st][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('d_add_item_check_1st')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -755,13 +755,13 @@
                                     class: "checkbox_list_crane#{field_special_vehicle.id}"
                   %> <!-- 13-187 (b)Aクレーン部 安全装置 旋回警報装置 -->
                 </td>
-                <td class="doc_13_s32" dir="ltr" colspan="7">
+                <td class="doc_13_s32" dir="ltr" colspan="7" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-104 追加項目内容2 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-151 (a)D安全装置 各種ロック 追加項目2(13-104) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('d_add_item_content_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[d_add_item_check_2nd][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('d_add_item_check_2nd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -829,13 +829,13 @@
                                     class: "checkbox_list_crane#{field_special_vehicle.id}"
                   %> <!-- 13-188 (b)Aクレーン部 制御装置･作業装置 主巻･補巻 -->
                 </td>
-                <td class="doc_13_s32" dir="ltr" colspan="7">
+                <td class="doc_13_s32" dir="ltr" colspan="7" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-105 追加項目内容3 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-152 (a)D安全装置 各種ロック 追加項目3(13-105) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('d_add_item_content_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[d_add_item_check_3rd][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('d_add_item_check_3rd')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -1585,7 +1585,7 @@
                   <%= field_special_vehicle.driver_name %> <!-- 13-021 入場する作業員名(運転者名・正) -->
                 </td>
                 <td class="doc_13_s23" dir="ltr" colspan="19" rowspan="2">
-                  <%= field_special_vehicle.driver_license.split[0][0..20] if field_special_vehicle.driver_license %>　<!-- 13-022 資格の種類 --> 
+                  <%= field_special_vehicle.driver_licenses&.shift && field_special_vehicle.driver_licenses&.join(", ") if field_special_vehicle.driver_licenses %> <!-- 13-022 資格の種類 --> <!-- 13-022 資格の種類 --> 
                 </td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s35"></td>
@@ -1656,7 +1656,7 @@
                   <%= field_special_vehicle.sub_driver_name %> <!-- 13-023 入場する作業員名(運転者名・副) -->
                 </td>
                 <td class="doc_13_s23" dir="ltr" colspan="19" rowspan="2">
-                  <%= field_special_vehicle.sub_driver_license.split[0][0..20] if field_special_vehicle.sub_driver_license %>　<!-- 13-024 資格の種類 --> 
+                  <%= field_special_vehicle.sub_driver_licenses&.shift && field_special_vehicle.sub_driver_licenses&.join(", ") if field_special_vehicle.sub_driver_licenses %> <!-- 13-024 資格の種類 --> 
                 </td>
                 <td class="doc_13_s4"></td>
                 <td class="doc_13_s35"></td>
@@ -1784,13 +1784,13 @@
                                     class: "checkbox_list_crane#{field_special_vehicle.id}"
                   %> <!-- 13-214 (b)Cゴンドラ 突りょう -->
                 </td>
-                <td class="doc_13_s41" dir="ltr" colspan="8">
+                <td class="doc_13_s41" dir="ltr" colspan="8" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-106 追加項目内容4 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-178 (a)Hその他 追加項目4(13-106) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('h_add_item_content_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[h_add_item_check_4th][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('h_add_item_check_4th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -1825,13 +1825,13 @@
                   %> <!-- 13-215 (b)Cゴンドラ 作業床 -->
                 </td>
                 <td class="doc_13_s28" colspan="2" rowspan="4">Ｈその他</td>
-                <td class="doc_13_s41" dir="ltr" colspan="8">
+                <td class="doc_13_s41" dir="ltr" colspan="8" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-107 追加項目内容5 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-179 (a)Hその他 追加項目5(13-107) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('h_add_item_content_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[h_add_item_check_5th][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('h_add_item_check_5th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -1861,13 +1861,13 @@
                                     class: "checkbox_list_crane#{field_special_vehicle.id}"
                   %> <!-- 13-216 (b)Cゴンドラ 昇降装置 -->
                 </td>
-                <td class="doc_13_s41" dir="ltr" colspan="8">
+                <td class="doc_13_s41" dir="ltr" colspan="8" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-108 追加項目内容6 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-180 (a)Hその他 追加項目6(13-108) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('h_add_item_content_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[h_add_item_check_6th][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('h_add_item_check_6th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -1901,13 +1901,13 @@
                                     class: "checkbox_list_crane#{field_special_vehicle.id}"
                   %> <!-- 13-217 (b)Cゴンドラ 電気装置 -->
                 </td>
-                <td class="doc_13_s41" dir="ltr" colspan="8">
+                <td class="doc_13_s41" dir="ltr" colspan="8" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-109 追加項目内容7 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-181 (a)Hその他 追加項目7(13-109) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('h_add_item_content_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[h_add_item_check_7th][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('h_add_item_check_7th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -1937,13 +1937,13 @@
                                     class: "checkbox_list_crane#{field_special_vehicle.id}"
                   %> <!-- 13-218 (b)Cゴンドラ ワイヤ･ライフライン -->
                 </td>
-                <td class="doc_13_s41" dir="ltr" colspan="8">
+                <td class="doc_13_s41" dir="ltr" colspan="8" style="background-color: #e9ecef;">
                   <%= @document.content&.[]('h_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-110 追加項目内容8 -->
                 </td>
                 <td class="doc_13_s30_1" dir="ltr" colspan="2">
                   <%= checked_none_box(@document.content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-182 (a)Hその他 追加項目8(13-110) -->
                 </td>
-                <td class="doc_13_s30" dir="ltr" colspan="2">
+                <td class="doc_13_s30" dir="ltr" colspan="2" style="background-color: #e9ecef;">
                   <% unless @document.content&.[]('h_add_item_content_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}").blank? %>
                     <%= f.check_box name = "approval_content[h_add_item_check_8th][field_special_vehicle_#{field_special_vehicle.id}]",
                                       checked: box_checked?(@document.approval_content&.[]('h_add_item_check_8th')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
@@ -2014,7 +2014,7 @@
                 <td class="doc_13_s38" dir="ltr" colspan="6" rowspan="2" style="background-color: #e9ecef;">
                   <%= wareki(@document.content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-255 (a)点検年月日 --> 
                 </td>
-                <td class="doc_13_s38" dir="ltr" colspan="6" rowspan="2">
+                <td class="doc_13_s38" dir="ltr" colspan="6" rowspan="2" style="background-color: #ccffcc;">
                   <%= f.date_field name = "approval_content[inspection_date][field_special_vehicle_#{field_special_vehicle.id}]",
                                       value: doc_content_date(@document.approval_content&.[]('inspection_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")),
                                       class: 'form-control form-control-sm'
