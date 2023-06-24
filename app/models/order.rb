@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   # 現場
   validates :site_career_up_id, numericality: { only_integer: true }, length: { minimum: 14, maximum: 14 }, allow_blank: true
   validates :site_name,    presence: true, length: { maximum: 100 } # 事業所名(現場名)
-  validates :site_address, presence: true, length: { maximum: 50 }  # 施工場所(住所)
+  validates :site_address, length: { maximum: 50 } # 施工場所(住所)
 
   # 発注者
   validates :order_name,             presence: true                                          # 発注者(会社名or氏名)
