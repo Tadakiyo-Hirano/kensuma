@@ -80,9 +80,9 @@ module Users
 
       # 保険金額が未加入、無制限の場合は金額をnullにして登録・更新する
       %i[personal_insurance objective_insurance passenger_insurance other_insurance].each do |param|
-        converted_params[param] = nil if ["not_joined", "unlimited"].include?(converted_params[:"#{param}_unlimited"])
+        converted_params[param] = nil if %w[not_joined unlimited].include?(converted_params[:"#{param}_unlimited"])
       end
-      
+
       converted_params
     end
 

@@ -153,9 +153,9 @@ module Users
         )
 
       %w[personal_insurance objective_insurance passenger_insurance other_insurance].each do |attr|
-        json[attr] = "無制限" if special_vehicle.send("#{attr}_unlimited") == "unlimited"
+        json[attr] = '無制限' if special_vehicle.send("#{attr}_unlimited") == 'unlimited'
       end
-    
+
       json
     end
 

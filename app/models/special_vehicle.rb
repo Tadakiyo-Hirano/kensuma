@@ -31,19 +31,19 @@ class SpecialVehicle < ApplicationRecord
   validate :insurance_presence_if_price_entry_exists
 
   def insurance_presence_if_price_entry_exists
-    if personal_insurance_unlimited == "price_entry" && personal_insurance.blank?
-      errors.add(:personal_insurance, message: "の保険金額を入力してください")
+    if personal_insurance_unlimited == 'price_entry' && personal_insurance.blank?
+      errors.add(:personal_insurance, message: 'の保険金額を入力してください')
     end
 
-    if objective_insurance_unlimited == "price_entry" && objective_insurance.blank?
-      errors.add(:objective_insurance, message: "の保険金額を入力してください")
+    if objective_insurance_unlimited == 'price_entry' && objective_insurance.blank?
+      errors.add(:objective_insurance, message: 'の保険金額を入力してください')
     end
 
-    if passenger_insurance_unlimited == "price_entry" && passenger_insurance.blank?
-      errors.add(:passenger_insurance, message: "の保険金額を入力してください")
+    if passenger_insurance_unlimited == 'price_entry' && passenger_insurance.blank?
+      errors.add(:passenger_insurance, message: 'の保険金額を入力してください')
     end
-    if other_insurance_unlimited == "price_entry" && other_insurance.blank?
-      errors.add(:other_insurance, message: "の保険金額を入力してください")
+    if other_insurance_unlimited == 'price_entry' && other_insurance.blank?
+      errors.add(:other_insurance, message: 'の保険金額を入力してください')
     end
   end
 
