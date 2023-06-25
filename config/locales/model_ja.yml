@@ -215,9 +215,9 @@ ja:
         working_process_images: 有機溶剤・特定化学物質等の作業手順書
       field_special_vehicle:
         driver_name: 氏名(正)
-        driver_licenses: 運転の種類(正)
+        driver_licenses: 免許の種類(正)
         sub_driver_name: 氏名(副)
-        sub_driver_licenses: 運転の種類(副)
+        sub_driver_licenses: 免許の種類(副)
         vehicle_name: 使用する車両
         carry_on_company_name: 持込会社名
         owning_company_representative_name: 所有会社の代表者名

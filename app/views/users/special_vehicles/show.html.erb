@@ -54,19 +54,19 @@
         </tr>
         <tr>
           <th><%= SpecialVehicle.human_attribute_name(:personal_insurance) %></th>
-          <td><%= @special_vehicle.personal_insurance %></td>
+          <td><%= @special_vehicle.personal_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.personal_insurance}千円" %></td>
         </tr>
         <tr>
           <th><%= SpecialVehicle.human_attribute_name(:objective_insurance) %></th>
-          <td><%= @special_vehicle.objective_insurance %></td>
+          <td><%= @special_vehicle.objective_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.objective_insurance}千円" %></td>
         </tr>
         <tr>
           <th><%= SpecialVehicle.human_attribute_name(:passenger_insurance) %></th>
-          <td><%= @special_vehicle.passenger_insurance %></td>
+          <td><%= @special_vehicle.passenger_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.passenger_insurance}千円" %></td>
         </tr>
         <tr>
           <th><%= SpecialVehicle.human_attribute_name(:other_insurance) %></th>
-          <td><%= @special_vehicle.other_insurance %></td>
+          <td><%= @special_vehicle.other_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.other_insurance}千円" %></td>
         </tr>
         <tr>
           <th><%= SpecialVehicle.human_attribute_name(:exp_date_insurance) %></th>
@@ -78,6 +78,8 @@
             <% @special_vehicle.periodic_self_inspections.each_with_index do |image, index| %>
               <td><%= image_tag(image.url) %></td>
             <% end %>
+          <% else %>
+            <td></td>
           <% end %>
         </tr>
         <tr>
@@ -86,6 +88,8 @@
             <% @special_vehicle.in_house_inspections.each_with_index do |image, index| %>
               <td><%= image_tag(image.url) %></td>
             <% end %>
+          <% else %>
+            <td></td>
           <% end %>
         </tr>
       </tbody>
