@@ -24,10 +24,6 @@ module Users
           check_exp_date_machine:  Date.today.since(3.years),
           check_exp_date_car:      Date.today.since(5.years),
           vehicle_type:            0,
-          personal_insurance:      1,
-          objective_insurance:     2,
-          passenger_insurance:     3,
-          other_insurance:         4,
           exp_date_insurance:      Date.today.since(5.years)
           # ============================================
         )
@@ -37,7 +33,7 @@ module Users
     end
 
     def create
-      @special_vehicle = current_business.special_vehicles.build(special_vehicle_params)
+      @special_vehicle = current_business.special_vehicles.build(special_vehicle_params_with_converted)
       if @special_vehicle.save
         redirect_to users_special_vehicle_url(@special_vehicle)
       else
@@ -48,7 +44,7 @@ module Users
     def edit; end
 
     def update
-      if @special_vehicle.update(special_vehicle_params)
+      if @special_vehicle.update(special_vehicle_params_with_converted)
         flash[:success] = '更新しました'
         redirect_to users_special_vehicle_url
       else
@@ -79,13 +75,25 @@ module Users
       @special_vehicle = current_business.special_vehicles.find_by(uuid: params[:uuid])
     end
 
+    def special_vehicle_params_with_converted
+      converted_params = special_vehicle_params.dup
+
+      # 保険金額が未加入、無制限の場合は金額をnullにして登録・更新する
+      %i[personal_insurance objective_insurance passenger_insurance other_insurance].each do |param|
+        converted_params[param] = nil if ["not_joined", "unlimited"].include?(converted_params[:"#{param}_unlimited"])
+      end
+      
+      converted_params
+    end
+
     def special_vehicle_params
       params.require(:special_vehicle).permit(:name, :maker, :standards_performance,
         :year_manufactured, :control_number, :check_exp_date_year, :check_exp_date_month,
         :check_exp_date_specific, :check_exp_date_machine, :check_exp_date_car,
         :personal_insurance, :objective_insurance, :passenger_insurance, :other_insurance,
         :exp_date_insurance, :vehicle_type, :owning_company_name,
-        { periodic_self_inspections: [] }, { in_house_inspections: [] }
+        { periodic_self_inspections: [] }, { in_house_inspections: [] },
+        :personal_insurance_unlimited, :objective_insurance_unlimited, :passenger_insurance_unlimited, :other_insurance_unlimited
       )
     end
   end
