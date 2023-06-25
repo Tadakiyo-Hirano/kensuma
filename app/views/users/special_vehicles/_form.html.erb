@@ -54,16 +54,40 @@
 <%= f.date_field :check_exp_date_car, class: "form-control" %>
 <br>
 <%= f.label :personal_insurance %>
-<%= f.select :personal_insurance, SpecialVehicle.personal_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="input-group w-50">
+  <%= f.number_field :personal_insurance, class: "form-control", id: "personal-insurance-input" %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
+<%#= f.select :personal_insurance, SpecialVehicle.personal_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
 <br>
 <%= f.label :objective_insurance %>
-<%= f.select :objective_insurance, SpecialVehicle.objective_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="input-group w-50">
+  <%= f.number_field :objective_insurance, class: "form-control", id: "objective-insurance-input" %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
+<%# <%= f.select :objective_insurance, SpecialVehicle.objective_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
 <br>
 <%= f.label :passenger_insurance %>
-<%= f.select :passenger_insurance, SpecialVehicle.passenger_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="input-group w-50">
+  <%= f.number_field :passenger_insurance, class: "form-control", id: "passenger_insurance-input" %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
+<%#= f.select :passenger_insurance, SpecialVehicle.passenger_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
 <br>
 <%= f.label :other_insurance %>
-<%= f.select :other_insurance, SpecialVehicle.other_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="input-group w-50">
+  <%= f.number_field :other_insurance, class: "form-control", id: "other_insurance-input" %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
+<%#= f.select :other_insurance, SpecialVehicle.other_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
 <br>
 <%= f.label :exp_date_insurance %>
 <%= f.date_field :exp_date_insurance, class: "form-control" %>
@@ -177,5 +201,22 @@
     $(".special-vehicle-form-validation").change(function () {
       $(this).valid();
     });
+
+    // 保険金額の入力制限(10桁まで)
+    var personalInput = document.getElementById("personal-insurance-input");
+    var objectiveInput = document.getElementById("objective-insurance-input");
+    var passengerInput = document.getElementById("passenger_insurance-input");
+    var otherInput = document.getElementById("other_insurance-input");
+
+    personalInput.addEventListener("input", restrictInputLength);
+    objectiveInput.addEventListener("input", restrictInputLength);
+    passengerInput.addEventListener("input", restrictInputLength);
+    otherInput.addEventListener("input", restrictInputLength);
+
+    function restrictInputLength() {
+      if (this.value.length > 9) {
+        this.value = this.value.slice(0, 9);
+      }
+    }
   });
 </script>
