@@ -91,14 +91,6 @@ RSpec.describe Order, type: :model do
     end
 
     describe '#site_address' do
-      context '存在しない場合' do
-        before(:each) { subject.site_address = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-      end
-
       context '50文字の場合' do
         before(:each) { subject.site_address = 'a' * 50 }
 

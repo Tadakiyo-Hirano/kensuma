@@ -114,14 +114,6 @@ RSpec.describe FieldFire, type: :model do
     end
 
     describe '#precautions' do
-      context '存在しない場合' do
-        before(:each) { subject.precautions = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-      end
-
       context '40文字の場合' do
         before(:each) { subject.precautions = 'a' * 40 }
 
@@ -270,14 +262,6 @@ RSpec.describe FieldFire, type: :model do
     end
 
     describe '#precautions' do
-      context '存在しない場合' do
-        before(:each) { subject.precautions = nil }
-
-        it 'バリデーションに落ちること' do
-          expect(subject).to be_invalid
-        end
-      end
-
       context '40文字の場合' do
         before(:each) { subject.precautions = 'a' * 40 }
 

@@ -1532,7 +1532,7 @@ module DocumentsHelper
     if worker.present?
       skill_tr_table = worker.skill_trainings.where(driving_related: 1)
       sp_education_table = worker.special_educations.where(driving_related: 1)
-      dr_license_table = worker.driver_licence&.split(" ")
+      dr_license_table = worker.driver_licences
       tem_table = skill_tr_table + sp_education_table
       tem_table.pluck(:name) + dr_license_table
     else
