@@ -461,6 +461,7 @@ ja:
         extra_inspection_item4: 追加項目④
         extra_inspection_item5: 追加項目⑤
         extra_inspection_item6: 追加項目⑥
+        insulation_resistance_measurement: 絶縁抵抗測定値
       tag:
         name: 点検事項の名称
   attributes:
