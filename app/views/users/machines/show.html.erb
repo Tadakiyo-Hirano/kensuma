@@ -29,6 +29,15 @@
           <td><%= wareki(@machine.inspection_date) %></td>
         </tr>
         <tr>
+          <th><%= Machine.human_attribute_name(:inspection_check) %></th>
+          <% tag_arrays = Tag.where(id: Machine.find(@machine.id).tag_ids).pluck(:name) %>
+          <td><%= tag_arrays.join(' / ') %></td>
+        </tr>
+        <tr>
+          <th><%= Machine.human_attribute_name(:insulation_resistance_measurement) %></th>
+          <td><%= @machine.insulation_resistance_measurement %>Ω</td>
+        </tr>
+        <tr>
           <th><%= Machine.human_attribute_name(:extra_inspection) %></th>
         </tr>
         <% @count.times do |k| %>
@@ -39,11 +48,6 @@
           </td>
         </tr>
         <% end %>
-        <tr>
-          <th><%= Machine.human_attribute_name(:inspection_check) %></th>
-          <% tag_arrays = Tag.where(id: Machine.find(@machine.id).tag_ids).pluck(:name) %>
-          <td><%= tag_arrays.join(' / ') %></td>
-        </tr>
       </tbody>
     </table>
   </div>
