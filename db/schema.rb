@@ -413,6 +413,7 @@ ActiveRecord::Schema.define(version: 2023_05_25_151249) do
     t.string "extra_inspection_item4"
     t.string "extra_inspection_item5"
     t.string "extra_inspection_item6"
+    t.integer "insulation_resistance_measurement"
     t.index ["business_id"], name: "index_machines_on_business_id"
   end
 
