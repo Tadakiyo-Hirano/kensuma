@@ -566,6 +566,22 @@ ja:
       vehicle_type:
         crane: 移動式クレーン
         construction: 車両系建設機械
+      personal_insurance_unlimited:
+        not_joined: 未加入
+        unlimited: 無制限
+        price_entry: 金額入力
+      objective_insurance_unlimited:
+        not_joined: 未加入
+        unlimited: 無制限
+        price_entry: 金額入力
+      passenger_insurance_unlimited:
+        not_joined: 未加入
+        unlimited: 無制限
+        price_entry: 金額入力
+      other_insurance_unlimited:
+        not_joined: 未加入
+        unlimited: 無制限
+        price_entry: 金額入力
     document:
       document_type:
         cover_document: 表紙

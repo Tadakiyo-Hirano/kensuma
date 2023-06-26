@@ -90,6 +90,16 @@ form.cmxform label.error, label.error {
   margin-right: 5px;
 }
 
+// ラジオボタン横並び
+
+.radio-container {
+  display: flex;
+}
+
+.radio-item {
+  margin-right: 10px; /* ラジオボタン間の余白を調整 */
+}
+
 .error-message {
   display: inline-block;
   margin-left: 10px;
