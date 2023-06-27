@@ -202,7 +202,7 @@
           <td class="doc_10_s0"></td>
           <td class="doc_10_s0"></td>
           <td class="doc_10_s5" colspan="2" rowspan="2">一次会社名</td>
-          <td class="doc_10_s6" dir="ltr" colspan="6" rowspan="2"><%= document_site_info&.content&.[]("genecon_name") %></td>
+          <td class="doc_10_s6" dir="ltr" colspan="6" rowspan="2"><%= document_subcon_info_for_10th_11th_19th&.content&.[]("subcon_name") %></td>
           <td class="doc_10_s0"></td>
         </tr>
         <tr style="height: 19px">
@@ -485,7 +485,7 @@
           <tr>
             <td class="doc_10_s0"></td>
             <td class="doc_10_s16" colspan="3"><%= worker_str(field_worker, "name") %></td><!-- 65歳以上の「入場する作業員」10-008 -->
-            <td class="doc_10_s16" colspan="4"><%= worker_str(field_worker, "birth_day_on") %></td><!--「生年月日」10-009 -->
+            <td class="doc_10_s16" colspan="4"><%= wareki(worker_str(field_worker, "birth_day_on")) %></td><!--「生年月日」10-009 -->
             <td class="doc_10_s16" colspan="2"><%= age_for_admission_date_start(field_worker) %></td><!--「年齢」10-010 -->
             <td class="doc_10_s16" colspan="3"><%= field_worker.content&.[]("occupation") %></td><!--「職種」10-011 -->
             <td class="doc_10_s16" colspan="4"><%= field_worker.content&.[]("work_notice")%></td><!--「高年齢就労者・作業内容」10-012 -->

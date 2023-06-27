@@ -37,7 +37,7 @@ module DocumentsHelper
   
   
   # 一次下請の情報 (工事安全衛生計画書用)
-  def document_subcon_info_for_19th
+  def document_subcon_info_for_10th_11th_19th
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     # 元請が下請の書類確認するとき
     if params[:sub_request_order_uuid] && request_order.parent_id.nil?
@@ -233,7 +233,7 @@ module DocumentsHelper
   # (8)作業員名簿
 
   # 一次下請の情報 (工事安全衛生計画書用)
-  def document_subcon_info_for_19th
+  def document_subcon_info_for_10th_11th_19th
     request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
     # 元請が下請の書類確認するとき
     if params[:sub_request_order_uuid] && request_order.parent_id.nil?
