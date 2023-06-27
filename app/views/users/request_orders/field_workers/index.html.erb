@@ -65,31 +65,31 @@
                 <td><%= not_input_display(field_worker.job_description) %></td>
                 <td><%= link_to "削除", users_request_order_field_worker_path(@request_order, field_worker), method: :delete, data: { confirm: "#{field_worker.admission_worker_name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
               </tr>
-              <% if field_worker.content['country'] != "日本" %>
-                <tr align="center">
-                  <th></th>
-                  <th><%= FieldWorker.human_attribute_name(:foreign_work_place) %></th>
-                  <th><%= FieldWorker.human_attribute_name(:foreign_date_start) %></th>
-                  <th><%= FieldWorker.human_attribute_name(:foreign_date_end) %></th>
-                  <th><%= FieldWorker.human_attribute_name(:foreign_job) %></th>
-                  <th><%= FieldWorker.human_attribute_name(:foreign_job_description) %></th>
-                  <th><%= FieldWorker.human_attribute_name(:proper_management_licenses) %></th>
-                </tr>
-                <tr align="center">
-                  <td></td>
-                  <td><%= not_input_display(field_worker.foreign_work_place) %></td>
-                  <td><%= not_input_display(field_worker.foreign_date_start) %></td>
-                  <td><%= not_input_display(field_worker.foreign_date_end) %></td>
-                  <td><%= not_input_display(field_worker.foreign_job) %></td>
-                  <td><%= not_input_display(field_worker.foreign_job_description) %></td>
-                  <% if field_worker.proper_management_licenses.present? %>
-                    <% field_worker.proper_management_licenses.each_with_index do |image, index| %>
-                      <td><%= image_tag(image.url) %></td>
-                    <% end %>
-                  <% end %>
-                </tr>
-              <% end %>
             <% end %>
+            <% if @foreigners.count > 0%>
+              <tr align="center">
+                <th>外国人建設就労者</th>
+                <th><%= FieldWorker.human_attribute_name(:foreign_work_place) %></th>
+                <th><%= FieldWorker.human_attribute_name(:foreign_date_start) %></th>
+                <th><%= FieldWorker.human_attribute_name(:foreign_date_end) %></th>
+                <th><%= FieldWorker.human_attribute_name(:foreign_job) %></th>
+                <th><%= FieldWorker.human_attribute_name(:foreign_job_description) %></th>
+                <th><%= FieldWorker.human_attribute_name(:proper_management_licenses) %></th>
+              </tr>
+              <tr align="center">
+                <td></td>
+                <td><%= not_input_display(@foreigners.first.foreign_work_place) %></td>
+                <td><%= not_input_display(@foreigners.first.foreign_date_start) %></td>
+                <td><%= not_input_display(@foreigners.first.foreign_date_end) %></td>
+                <td><%= not_input_display(@foreigners.first.foreign_job) %></td>
+                <td><%= not_input_display(@foreigners.first.foreign_job_description) %></td>
+                <% if @foreigners.first.proper_management_licenses.present? %>
+                  <% @foreigners.first.proper_management_licenses.each_with_index do |image, index| %>
+                    <td><%= image_tag(image.url) %></td>
+                  <% end %>
+                <% end %>
+              </tr>
+            <%end%>
           </table>
         </div>
       </div>

@@ -8,6 +8,7 @@ module Users::RequestOrders
     def index
       field_worker_ids = @field_workers.map { |field_worker| field_worker.content['id'] }
       @worker = current_business.workers.where.not(id: field_worker_ids)
+      @foreigners = @field_workers.select { |f| f.content['country'] != "日本" }
     end
 
     def create
@@ -32,7 +33,9 @@ module Users::RequestOrders
       redirect_to users_request_order_field_workers_url
     end
 
-    def edit_workers; end
+    def edit_workers
+      @foreigners = @field_workers.select { |f| f.content['country'] != "日本" }
+    end
 
     def update_workers
       workers_params = params[:request_order][:field_workers]
