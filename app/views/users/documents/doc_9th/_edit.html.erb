@@ -12,7 +12,9 @@
     users_request_order_document_path :
     users_request_order_sub_request_order_document_path),
     local: true, method: :patch) do |f| %>
-    <% foreign_field_workers = document_info.field_workers.where.not("JSON_CONTAINS(content, ?, '$.country')", "\"JP\"") %>
+    <% foreign_field_workers = document_info.field_workers.where.not("JSON_CONTAINS(content, ?, '$.country')", "\"日本\"")
+                                                        .where.not("JSON_CONTAINS(content, ?, '$.status_of_residence')", "\"permanent_resident\"")
+                                                        .where.not("JSON_CONTAINS(content, ?, '$.status_of_residence')", "\"skill_practice\"")%>
     <% get_myself_and_myparent_site %>
     <% number_of_pages = 1%>
     <% total_number_of_pages = foreign_field_workers.each_slice(3).size%>
