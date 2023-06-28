@@ -1,6 +1,8 @@
 <!-- (9)全建統一様式第1号-甲-別紙(外国人建設就労者建設現場入場届出書) -->
 <div class="document-outer">
-  <% foreign_field_workers = document_info.field_workers.where.not("JSON_CONTAINS(content, ?, '$.country')", "\"日本\"") %>
+  <% foreign_field_workers = document_info.field_workers.where.not("JSON_CONTAINS(content, ?, '$.country')", "\"日本\"")
+                                                        .where.not("JSON_CONTAINS(content, ?, '$.status_of_residence')", "\"permanent_resident\"")
+                                                        .where.not("JSON_CONTAINS(content, ?, '$.status_of_residence')", "\"skill_practice\"")%>
   <% get_myself_and_myparent_site %>
   <% parent_subcon_info = sc_hierarchy(@parent_request_orber)[0..2] %>
   <% number_of_pages = 1 %>
