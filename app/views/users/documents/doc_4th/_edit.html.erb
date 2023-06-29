@@ -223,12 +223,15 @@
             <tr>
               <td>下請契約</td>
               <td>
-                <span><%= document_subcon_info&.content&.[]('subcon_name') %></span> <!-- 4-026 下請会社名 -->
-                <span><%= document_subcon_info&.content&.[]('subcon_branch_name') %></span> <!-- 4-027 下請会社の支店･営業所名-->
-                <!-- ※支店 又は 営業所がない場合は、“同上”と記載 -->
+                <% if document_site_info.content&.[]('genecon_branch_name').present? %>
+                  <span><%= document_site_info.content['genecon_name'] %></span> <!-- 4-026 元請会社名 -->
+                  <span><%= document_site_info.content['genecon_branch_name'] %></span> <!-- 4-027 元請会社の支店･営業所名-->
+                <% else %>
+                  <span>同上</span> <!-- ※支店 又は 営業所がない場合は、元請会社名は表示させず“同上”と記載 -->
+                <% end %>
               </td>
               <td>
-                <%= document_subcon_info&.content&.[]('subcon_address') %> <!-- 4-028 下請会社の住所4-028 -->
+                <%= document_site_info.content&.[]('genecon_branch_name').presence ? document_site_info.content&.[]('genecon_branch_address') : '同上' %> <!-- 4-028 元請会社の住所4-028 -->
                 <!-- ※支店 又は 営業所がない場合は、“同上”と記載 -->
               </td>
             </tr>
@@ -435,7 +438,12 @@
             <tr>
               <td>下請契約</td>
               <td colspan="2">
-                <%= document_subcon_info&.content&.[]('subcon_name') %> <!-- 4-058 下請会社名 -->
+                <% if document_site_info.content&.[]('genecon_branch_name').present? %>
+                  <span><%= document_site_info.content['genecon_name'] %></span> <!-- 4-058 元請会社名 -->
+                  <span><%= document_site_info.content['genecon_branch_name'] %></span> <!-- 元請会社の支店･営業所名-->
+                <% else %>
+                  <span>同上</span> <!-- ※支店 又は 営業所がない場合は、元請会社名は表示させず“同上”と記載 -->
+                <% end %>
               </td>
               <td colspan="2">
                 <%= document_subcon_info&.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->

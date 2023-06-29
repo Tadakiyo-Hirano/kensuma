@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2023_06_25_100210) do
     t.integer "business_employment_insurance_join_status", null: false
     t.string "business_employment_insurance_number"
     t.integer "business_retirement_benefit_mutual_aid_status", null: false
+    t.string "branch_address"
     t.index ["user_id"], name: "index_businesses_on_user_id"
   end
 
