@@ -791,7 +791,7 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="3">下請契約</td>
                 <td class="s12" colspan="8" rowspan="2">
-                  <% if document_site_info.content&.[]('genecon_branch_name').presence %>
+                  <% if document_site_info.content&.[]('genecon_branch_name').present? %>
                     <span><%= document_site_info.content['genecon_name'] %></span> <!-- 4-026 元請会社名 -->
                     <span><%= document_site_info.content['genecon_branch_name'] %></span> <!-- 4-027 元請会社の支店･営業所名-->
                   <% else %>
@@ -1867,7 +1867,7 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="2">下請契約</td>
                 <td class="s8" colspan="8" rowspan="2">
-                  <% if document_site_info.content&.[]('genecon_branch_name').presence %>
+                  <% if document_site_info.content&.[]('genecon_branch_name').present? %>
                   <span><%= document_site_info.content['genecon_name'] %></span> <!-- 4-058 元請会社名 -->
                   <span><%= document_site_info.content['genecon_branch_name'] %></span> <!-- 元請会社の支店･営業所名-->
                 <% else %>
