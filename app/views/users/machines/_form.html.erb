@@ -25,6 +25,20 @@
 <%= f.date_field :inspection_date, class: "form-control", placeholder: SpecialVehicle.human_attribute_name(:inspection_date) %><br>
 
 <div class="list-group">
+  <div class="field">
+    <%= f.label :inspection_check %><br />
+    <div class="list-group-item">
+      <%= collection_check_boxes(:machine, :tag_ids, Tag.where(id: ..17), :id, :name, include_hidden: false) do |t| %>
+        <%= t.label { t.check_box + t.text } %>
+      <% end %>
+    </div>
+  </div>
+</div><br>
+
+<%= f.label :insulation_resistance_measurement %>【Ω】
+<%= f.text_field :insulation_resistance_measurement, class: "form-control", placeholder: Machine.human_attribute_name(:insulation_resistance_measurement) %><br>
+
+<div class="list-group">
   <%= f.label :extra_inspection %>
   <div class="list-group-item">
     <% i = 1 %>
@@ -35,16 +49,6 @@
     <% end %>
   </div>
 <div><br>
-<div class="list-group">
-  <div class="field">
-    <%= f.label :inspection_check %><br />
-    <div class="list-group-item">
-      <%= collection_check_boxes(:machine, :tag_ids, Tag.where(id: ..18), :id, :name, include_hidden: false) do |t| %>
-        <%= t.label { t.check_box + t.text } %>
-      <% end %>
-    </div>
-  </div>
-</div><br>
 <script>
 // hidden
   $(document).ready(function(){

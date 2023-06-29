@@ -99,7 +99,7 @@ module Users
     def machine_params
       params.require(:machine).permit(
         :id, :name, :standards_performance, :control_number, :inspector, :handler,
-        :inspection_date, :inspection_check,
+        :inspection_date, :inspection_check, :insulation_resistance_measurement,
         :extra_inspection_item1, :extra_inspection_item2, :extra_inspection_item3,
         :extra_inspection_item4, :extra_inspection_item5, :extra_inspection_item6, tag_ids: []
       )
@@ -107,7 +107,7 @@ module Users
 
     def machine_update_params
       params.require(:machine).permit(
-        :id, :name, :standards_performance, :control_number, :inspector, :handler,
+        :id, :name, :standards_performance, :control_number, :inspector, :handler, :insulation_resistance_measurement,
         :inspection_date, :inspection_check, tag_ids: []
       )
     end
