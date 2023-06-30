@@ -111,6 +111,10 @@
         <% end %>
       </div>
       <br>
+      <!-- 有機溶剤・特定化学物質等の作業手順書 -->
+      <%= f.label :working_process_images %>
+      <%= f.file_field :working_process_images, accept: 'image/jpg, image/jpeg, image/png, application/pdf', multiple: true, class: "form-control" %>
+      <br>
       <!-- SDS(安全データシート)の添付 -->
       <%= f.label :sds, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -138,10 +142,7 @@
       <%= f.file_field :ventilation_control_images, accept: 'image/jpg, image/jpeg, image/png, application/pdf', multiple: true, class: "form-control" %>
       <br>
 
-      <!-- 有機溶剤・特定化学物質等の作業手順書 -->
-      <%= f.label :working_process_images %>
-      <%= f.file_field :working_process_images, accept: 'image/jpg, image/jpeg, image/png, application/pdf', multiple: true, class: "form-control" %>
-      <br>
+      
 
       <script>
         // 商品1-商品5までのname属性値名末尾文字
