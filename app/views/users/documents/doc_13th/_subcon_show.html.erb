@@ -2108,10 +2108,10 @@
               <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3" style="background-color: #ccffcc;">
                 <%= @document.approval_content&.[]('receipt_number')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-038 受付番号 -->
               </td>
-              <td class="doc_13_s36" dir="ltr" colspan="7" rowspan="3" style="background-color: #e9ecef;">
+              <td class="doc_13_s36" dir="ltr" colspan="7" rowspan="3" style="background-color: #ccffcc;">
                 <%= wareki(@document.content&.[]('reception_confirmation_date')&.[]("field_special_vehicle_#{field_special_vehicle.id}")) %> <!-- 13-039 受付確認年月日 -->
               </td>
-              <td class="doc_13_s36" dir="ltr" colspan="5" rowspan="3" style="background-color: #e9ecef;">
+              <td class="doc_13_s36" dir="ltr" colspan="5" rowspan="3" style="background-color: #ccffcc;">
                 <%= @document.content&.[]('person_confirming_receipt')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-040 受付確認者 -->
               </td>
               <td class="doc_13_s4"></td>
