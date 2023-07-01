@@ -120,7 +120,8 @@ module Users
         )
 
       country = { country: I18n.t("countries.#{worker.country}") }
-      experience_years = { experience_years: worker.hiring_on.year - Date.today.year + worker.experience_term_before_hiring - worker.blank_term }
+      experience_days = (Date.today - worker.hiring_on).to_i + ((worker.experience_term_before_hiring - worker.blank_term) * 365)
+      experience_years = { experience_years: (experience_days / 365).to_i }
       json.merge(country, experience_years)
     end
 
