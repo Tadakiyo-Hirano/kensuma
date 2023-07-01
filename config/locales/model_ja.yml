@@ -57,6 +57,7 @@ ja:
         representative_name: 代表者名
         post_code: 郵便番号
         address: 住所
+        branch_address: 支店 又は 営業所住所
         phone_number: 電話番号
         fax_number: FAX
         email: メールアドレス
@@ -215,9 +216,9 @@ ja:
         working_process_images: 有機溶剤・特定化学物質等の作業手順書
       field_special_vehicle:
         driver_name: 氏名(正)
-        driver_licenses: 運転の種類(正)
+        driver_licenses: 免許の種類(正)
         sub_driver_name: 氏名(副)
-        sub_driver_licenses: 運転の種類(副)
+        sub_driver_licenses: 免許の種類(副)
         vehicle_name: 使用する車両
         carry_on_company_name: 持込会社名
         owning_company_representative_name: 所有会社の代表者名
@@ -461,6 +462,7 @@ ja:
         extra_inspection_item4: 追加項目④
         extra_inspection_item5: 追加項目⑤
         extra_inspection_item6: 追加項目⑥
+        insulation_resistance_measurement: 絶縁抵抗測定値
       tag:
         name: 点検事項の名称
   attributes:

@@ -791,13 +791,18 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="3">下請契約</td>
                 <td class="s12" colspan="8" rowspan="2">
-                  <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-026 下請会社名 -->
+                  <% if document_site_info.content&.[]('genecon_branch_name').present? %>
+                    <span><%= document_site_info.content['genecon_name'] %></span> <!-- 4-026 元請会社名 -->
+                    <span><%= document_site_info.content['genecon_branch_name'] %></span> <!-- 4-027 元請会社の支店･営業所名-->
+                  <% else %>
+                    <span>同上</span> <!-- ※支店 又は 営業所がない場合は、元請会社名は表示させず“同上”と記載 -->
+                  <% end %>
                 </td>
                 <td class="s45" colspan="9" rowspan="2">
-                  <%= document_subcon_info.content&.[]('subcon_branch_name') %> <!-- 4-027 下請会社の支店･営業所名-->
+                  <!--<%= document_subcon_info.content&.[]('subcon_branch_name') %>  4-027 下請会社の支店･営業所名-->
                 </td>
                 <td class="s7" colspan="26" rowspan="2">
-                  <%= document_subcon_info.content&.[]('subcon_address') %> <!-- 4-028 下請会社の住所4-028 -->
+                  <%= document_site_info.content&.[]('genecon_branch_name').presence ? document_site_info.content&.[]('genecon_branch_address') : '同上' %> <!-- 4-028 元請会社の住所4-028 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s5"></td>
@@ -1862,7 +1867,12 @@
               <tr style="height: 8px">
                 <td class="s6" colspan="5" rowspan="2">下請契約</td>
                 <td class="s8" colspan="8" rowspan="2">
-                  <%= document_subcon_info.content&.[]('subcon_name') %> <!-- 4-058 下請会社名 -->
+                  <% if document_site_info.content&.[]('genecon_branch_name').present? %>
+                    <span><%= document_site_info.content['genecon_name'] %></span> <!-- 4-058 元請会社名 -->
+                    <span><%= document_site_info.content['genecon_branch_name'] %></span> <!-- 元請会社の支店･営業所名-->
+                  <% else %>
+                    <span>同上</span> <!-- ※支店 又は 営業所がない場合は、元請会社名は表示させず“同上”と記載 -->
+                  <% end %>
                 </td>
                 <td class="s54" colspan="9">
                   <%= document_subcon_info.content&.[]('subcon_health_insurance_association') %> <!-- 4-059 下請会社の健康保険会社名 -->
@@ -2518,7 +2528,7 @@
   }
 	.ritz .waffle .s24 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		color: #000000;
 		font-family: 'Arial';
@@ -2531,7 +2541,7 @@
 	.ritz .waffle .s55 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2556,7 +2566,7 @@
 	.ritz .waffle .s49 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2581,7 +2591,7 @@
 	}
 	.ritz .waffle .s54 {
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2595,7 +2605,7 @@
 	.ritz .waffle .s8 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2608,7 +2618,7 @@
 	}
 	.ritz .waffle .s7 {
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2620,7 +2630,7 @@
 		padding: 2px 3px 2px 3px;
 	}
 	.ritz .waffle .s10 {
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2633,7 +2643,7 @@
 	}
 	.ritz .waffle .s13 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: left;
 		color: #000000;
 		font-family: 'docs-Calibri', Arial;
@@ -2645,7 +2655,7 @@
 	}
 	.ritz .waffle .s22 {
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		color: #000000;
 		font-family: 'Arial';
@@ -2670,7 +2680,7 @@
 	.ritz .waffle .s46 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		font-family: 'Arial';
 		font-size: 7.5pt;
@@ -2693,7 +2703,7 @@
 		padding: 2px 3px 2px 3px;
 	}
 	.ritz .waffle .s21 {
-		background-color: #e9ecef;
+		
 		text-align: center;
 		color: #000000;
 		font-family: 'Arial';
@@ -2705,7 +2715,7 @@
 	}
 	.ritz .waffle .s17 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: left;
 		color: #000000;
 		font-family: 'Arial';
@@ -2717,7 +2727,7 @@
 	}
 	.ritz .waffle .s37 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2782,7 +2792,7 @@
 	}
 	.ritz .waffle .s44 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2797,7 +2807,7 @@
 	}
 	.ritz .waffle .s15 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2845,7 +2855,7 @@
 	}
 	.ritz .waffle .s25 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2860,7 +2870,7 @@
 	}
 	.ritz .waffle .s48 {
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2897,7 +2907,7 @@
 	}
 	.ritz .waffle .s34 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -2975,7 +2985,7 @@
 	}
 	.ritz .waffle .s45 {
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3001,7 +3011,7 @@
 	}
 	.ritz .waffle .s14 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: right;
 		color: #000000;
 		font-family: 'Arial';
@@ -3039,7 +3049,7 @@
 		padding: 2px 3px 2px 3px;
 	}
 	.ritz .waffle .s11 {
-		background-color: #e9ecef;
+		
 		text-align: left;
 		color: #000000;
 		font-family: 'Arial';
@@ -3074,7 +3084,7 @@
 	.ritz .waffle .s16 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		color: #000000;
 		font-family: 'Arial';
@@ -3097,7 +3107,7 @@
 	}
 	.ritz .waffle .s23 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3160,7 +3170,7 @@
 	.ritz .waffle .s40 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3185,7 +3195,7 @@
 		padding: 2px 3px 2px 3px;
 	}
 	.ritz .waffle .s1 {
-		background-color: #e9ecef;
+		
 		text-align: left;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3209,7 +3219,7 @@
 	}
 	.ritz .waffle .s36 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		color: #000000;
 		font-family: 'Arial';
@@ -3235,7 +3245,7 @@
 	.ritz .waffle .s53 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3262,7 +3272,7 @@
 	}
 	.ritz .waffle .s19 {
 		border-bottom: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3277,7 +3287,7 @@
 	}
 	.ritz .waffle .s50 {
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3315,7 +3325,7 @@
 	.ritz .waffle .s43 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3340,7 +3350,7 @@
 		padding: 2px 3px 2px 3px;
 	}
 	.ritz .waffle .s12 {
-		background-color: #e9ecef;
+		
 		text-align: center;
 		-webkit-text-decoration-skip: none;
 		text-decoration-skip-ink: none;
@@ -3356,7 +3366,7 @@
 	.ritz .waffle .s20 {
 		border-bottom: 1px SOLID #000000;
 		border-right: 1px SOLID #000000;
-		background-color: #e9ecef;
+		
 		text-align: left;
 		color: #000000;
 		font-family: 'Arial';

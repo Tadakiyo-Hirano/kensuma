@@ -146,11 +146,18 @@ module Users
 
     # 書類に反映させる特殊車両情報
     def special_vehicle_info(special_vehicle)
-      JSON.parse(
-        special_vehicle.to_json(
-          except: %i[uuid created_at updated_at] # 特殊車両情報
+      json =
+        JSON.parse(
+          special_vehicle.to_json(
+            except: %i[uuid created_at updated_at] # 特殊車両情報
+          )
         )
-      )
+
+      %w[personal_insurance objective_insurance passenger_insurance other_insurance].each do |attr|
+        json[attr] = '無制限' if special_vehicle.send("#{attr}_unlimited") == 'unlimited'
+      end
+
+      json
     end
 
     # 書類に反映させる機械情報

@@ -53,18 +53,79 @@
 <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
 <%= f.date_field :check_exp_date_car, class: "form-control" %>
 <br>
+
+<!-- 対人 -->
 <%= f.label :personal_insurance %>
-<%= f.select :personal_insurance, SpecialVehicle.personal_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="radio-container">
+  <%= f.collection_radio_buttons(:personal_insurance_unlimited, SpecialVehicle.personal_insurance_unlimiteds_i18n, :first, :last, { checked: @special_vehicle&.personal_insurance_unlimited? ? @special_vehicle&.personal_insurance_unlimited : "not_joined" }) do |b| %>
+    <div class="radio-item">
+      <%= b.label { b.radio_button + b.text } %>
+    </div>
+  <% end %>
+</div>
+
+<div class="input-group w-50">
+  <%= f.number_field :personal_insurance, class: "form-control", id: "personal-insurance-input", min: 1 %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
 <br>
+
+<!-- 対物 -->
 <%= f.label :objective_insurance %>
-<%= f.select :objective_insurance, SpecialVehicle.objective_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="radio-container">
+  <%= f.collection_radio_buttons(:objective_insurance_unlimited, SpecialVehicle.objective_insurance_unlimiteds_i18n, :first, :last, { checked: @special_vehicle&.objective_insurance_unlimited? ? @special_vehicle&.objective_insurance_unlimited : "not_joined" }) do |b| %>
+    <div class="radio-item">
+      <%= b.label { b.radio_button + b.text } %>
+    </div>
+  <% end %>
+</div>
+
+<div class="input-group w-50">
+  <%= f.number_field :objective_insurance, class: "form-control", id: "objective-insurance-input", min: 1 %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
 <br>
+
+<!-- 搭乗者 -->
 <%= f.label :passenger_insurance %>
-<%= f.select :passenger_insurance, SpecialVehicle.passenger_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="radio-container">
+  <%= f.collection_radio_buttons(:passenger_insurance_unlimited, SpecialVehicle.passenger_insurance_unlimiteds_i18n, :first, :last, { checked: @special_vehicle&.passenger_insurance_unlimited? ? @special_vehicle&.passenger_insurance_unlimited : "not_joined" }) do |b| %>
+    <div class="radio-item">
+      <%= b.label { b.radio_button + b.text } %>
+    </div>
+  <% end %>
+</div>
+
+<div class="input-group w-50">
+  <%= f.number_field :passenger_insurance, class: "form-control", id: "passenger_insurance-input", min: 1 %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
 <br>
+
+<!-- その他 -->
 <%= f.label :other_insurance %>
-<%= f.select :other_insurance, SpecialVehicle.other_insurances.keys.to_a, { prompt: true }, { class: "form-control" } %>
+<div class="radio-container">
+  <%= f.collection_radio_buttons(:other_insurance_unlimited, SpecialVehicle.other_insurance_unlimiteds_i18n, :first, :last, { checked: @special_vehicle&.other_insurance_unlimited? ? @special_vehicle&.other_insurance_unlimited : "not_joined" }) do |b| %>
+    <div class="radio-item">
+      <%= b.label { b.radio_button + b.text } %>
+    </div>
+  <% end %>
+</div>
+
+<div class="input-group w-50">
+  <%= f.number_field :other_insurance, class: "form-control", id: "other_insurance-input", min: 1 %>
+  <div class="input-group-append">
+    <span class="input-group-text">千円</span>
+  </div>
+</div>
 <br>
+
 <%= f.label :exp_date_insurance %>
 <%= f.date_field :exp_date_insurance, class: "form-control" %>
 <br>
@@ -177,5 +238,22 @@
     $(".special-vehicle-form-validation").change(function () {
       $(this).valid();
     });
+
+    // 保険金額の入力制限(10桁まで)
+    var personalInput = document.getElementById("personal-insurance-input");
+    var objectiveInput = document.getElementById("objective-insurance-input");
+    var passengerInput = document.getElementById("passenger_insurance-input");
+    var otherInput = document.getElementById("other_insurance-input");
+
+    personalInput.addEventListener("input", restrictInputLength);
+    objectiveInput.addEventListener("input", restrictInputLength);
+    passengerInput.addEventListener("input", restrictInputLength);
+    otherInput.addEventListener("input", restrictInputLength);
+
+    function restrictInputLength() {
+      if (this.value.length > 9) {
+        this.value = this.value.slice(0, 9);
+      }
+    }
   });
 </script>

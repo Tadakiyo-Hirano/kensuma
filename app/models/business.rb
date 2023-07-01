@@ -30,11 +30,13 @@ class Business < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: true
+  validates :branch_address, presence: true, unless: proc { |b| b.branch_name.blank? }
   validates :name_kana, presence: true, format: { with: /\A[ァ-ヴー・]+\z/u, message: 'はカタカナで入力して下さい。' }
   validates :career_up_id, length: { maximum: 14, minimum: 14 }, allow_blank: true
   validates :representative_name, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   validates :address, presence: true
+  validates :branch_name, presence: true, unless: proc { |b| b.branch_address.blank? }
   validates :post_code, presence: true, format: { with: /\A\^\d{5}$|^\d{7}\z/ }
   validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/ }
   validates :fax_number, format: { with: /\A\d{10,11}\z/ }, allow_blank: true

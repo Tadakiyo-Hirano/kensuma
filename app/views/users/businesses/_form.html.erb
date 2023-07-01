@@ -44,6 +44,9 @@
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.text_field :address, class: "form-control" %>
     <br>
+    <%= f.label :branch_address %><!-- 支店住所 -->
+    <%= f.text_field :branch_address, class: "form-control" %>
+    <br>
     <%= f.label :phone_number %><!-- 電話番号 -->
     <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= f.telephone_field :phone_number, class: "form-control" %>

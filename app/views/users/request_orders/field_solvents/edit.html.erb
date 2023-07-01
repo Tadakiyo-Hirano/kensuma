@@ -111,6 +111,23 @@
         </div>
       <% end %><br>
 
+      <!-- 有機溶剤・特定化学物質等の作業手順書 -->
+      <%= f.label :working_process_images %>
+      <%= f.file_field :working_process_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+      <br>
+      
+      <p>
+        <% if @field_solvent.working_process_images.present? %>
+          <% @field_solvent.working_process_images.each_with_index do |image, index| %>
+            <%= image_tag(image.url) %>
+            <%= link_to "削除", users_request_order_field_solvent_update_working_process_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
+            &nbsp;
+          <% end %>
+          <br>
+        <% end %>
+      </p>
+      <br>
+      
       <!-- SDS(安全データシート)の添付 -->
       <%= f.label :sds, class: "required" %>
       <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
@@ -151,22 +168,6 @@
           <% @field_solvent.ventilation_control_images.each_with_index do |image, index| %>
             <%= image_tag(image.url) %>
             <%= link_to "削除", users_request_order_field_solvent_update_ventilation_control_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
-            &nbsp;
-          <% end %>
-          <br>
-        <% end %>
-      </p>
-      <br>
-
-      <!-- 有機溶剤・特定化学物質等の作業手順書 -->
-      <%= f.label :working_process_images %>
-      <%= f.file_field :working_process_images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
-      <br>
-      <p>
-        <% if @field_solvent.working_process_images.present? %>
-          <% @field_solvent.working_process_images.each_with_index do |image, index| %>
-            <%= image_tag(image.url) %>
-            <%= link_to "削除", users_request_order_field_solvent_update_working_process_images_path(@request_order, @field_solvent, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
             &nbsp;
           <% end %>
           <br>

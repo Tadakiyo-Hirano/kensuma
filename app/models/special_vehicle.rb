@@ -7,6 +7,10 @@ class SpecialVehicle < ApplicationRecord
   mount_uploaders :in_house_inspections, InHouseInspectionsUploader
 
   enum vehicle_type: { crane: 0, construction: 1 }
+  enum personal_insurance_unlimited: { not_joined: 0, unlimited: 1, price_entry: 2 }, _prefix: true
+  enum objective_insurance_unlimited: { not_joined: 0, unlimited: 1, price_entry: 2 }, _prefix: true
+  enum passenger_insurance_unlimited: { not_joined: 0, unlimited: 1, price_entry: 2 }, _prefix: true
+  enum other_insurance_unlimited: { not_joined: 0, unlimited: 1, price_entry: 2 }, _prefix: true
 
   validates :name, presence: true
   validates :maker, presence: true
@@ -19,38 +23,29 @@ class SpecialVehicle < ApplicationRecord
   validates :check_exp_date_month, presence: true
   validates :check_exp_date_machine, presence: true
   validates :check_exp_date_car, presence: true
+  validates :personal_insurance, length: { maximum: 9 }, numericality: { greater_than: 0 }, allow_nil: true
+  validates :objective_insurance, length: { maximum: 9 }, numericality: { greater_than: 0 }, allow_nil: true
+  validates :passenger_insurance, length: { maximum: 9 }, numericality: { greater_than: 0 }, allow_nil: true
+  validates :other_insurance, length: { maximum: 9 }, numericality: { greater_than: 0 }, allow_nil: true
 
-  enum personal_insurance: {
-    無制限: 0,
-    "1,000": 1, "2,000": 2, "3,000": 3, "4,000": 4, "5,000": 5,
-    "6,000": 6, "7,000": 7, "8,000": 8, "9,000": 9, "10,000": 10,
-    "11,000": 11, "12,000": 12, "13,000": 13, "14,000": 14, "15,000": 15,
-    "16,000": 16, "17,000": 17, "18,000": 18, "19,000": 19, "20,000": 20
-  }, _prefix: true
+  validate :insurance_presence_if_price_entry_exists
 
-  enum objective_insurance: {
-    無制限: 0,
-    "1,000": 1, "2,000": 2, "3,000": 3, "4,000": 4, "5,000": 5,
-    "6,000": 6, "7,000": 7, "8,000": 8, "9,000": 9, "10,000": 10,
-    "11,000": 11, "12,000": 12, "13,000": 13, "14,000": 14, "15,000": 15,
-    "16,000": 16, "17,000": 17, "18,000": 18, "19,000": 19, "20,000": 20
-  }, _prefix: true
+  def insurance_presence_if_price_entry_exists
+    if personal_insurance_unlimited == 'price_entry' && personal_insurance.blank?
+      errors.add(:personal_insurance, message: 'の保険金額を入力してください')
+    end
 
-  enum passenger_insurance: {
-    無制限: 0,
-    "1,000": 1, "2,000": 2, "3,000": 3, "4,000": 4, "5,000": 5,
-    "6,000": 6, "7,000": 7, "8,000": 8, "9,000": 9, "10,000": 10,
-    "11,000": 11, "12,000": 12, "13,000": 13, "14,000": 14, "15,000": 15,
-    "16,000": 16, "17,000": 17, "18,000": 18, "19,000": 19, "20,000": 20
-  }, _prefix: true
+    if objective_insurance_unlimited == 'price_entry' && objective_insurance.blank?
+      errors.add(:objective_insurance, message: 'の保険金額を入力してください')
+    end
 
-  enum other_insurance: {
-    無制限: 0,
-    "1,000": 1, "2,000": 2, "3,000": 3, "4,000": 4, "5,000": 5,
-    "6,000": 6, "7,000": 7, "8,000": 8, "9,000": 9, "10,000": 10,
-    "11,000": 11, "12,000": 12, "13,000": 13, "14,000": 14, "15,000": 15,
-    "16,000": 16, "17,000": 17, "18,000": 18, "19,000": 19, "20,000": 20
-  }, _prefix: true
+    if passenger_insurance_unlimited == 'price_entry' && passenger_insurance.blank?
+      errors.add(:passenger_insurance, message: 'の保険金額を入力してください')
+    end
+    if other_insurance_unlimited == 'price_entry' && other_insurance.blank?
+      errors.add(:other_insurance, message: 'の保険金額を入力してください')
+    end
+  end
 
   def to_param
     uuid

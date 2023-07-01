@@ -4,6 +4,7 @@ FactoryBot.define do
     sequence(:name) { |n| "TEST企業#{n}" }
     name_kana { 'テストキギョウ' }
     branch_name { 'TEST支店' }
+    branch_address { 'TEST支店住所' }
     representative_name { 'TEST代表' }
     sequence(:email) { |n| "test#{n}@example.com" }
     address { 'TEST' }
