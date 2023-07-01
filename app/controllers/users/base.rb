@@ -120,7 +120,8 @@ module Users
         )
 
       country = { country: I18n.t("countries.#{worker.country}") }
-      json.merge(country)
+      experience_years = { experience_years: worker.hiring_on.year - Date.today.year + worker.experience_term_before_hiring - worker.blank_term }
+      json.merge(country, experience_years)
     end
 
     # 書類に反映させる車両情報
