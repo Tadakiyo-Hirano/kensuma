@@ -628,11 +628,11 @@
 					<td class="s33" colspan="4" rowspan="3">生年月日</td>
 					<td class="s33" colspan="9" rowspan="3">現住所</td>
 					<td class="s33" colspan="4" rowspan="3">（ＴＥＬ）</td>
-					<td class="s33" colspan="4" rowspan="3">最近の健康診断日</td>
+					<td class="s33" colspan="3" rowspan="3">最近の健康診断日</td>
 					<td class="s32" rowspan="6">血液型</td>
 					<td class="s33" colspan="4" rowspan="3">特殊健康診断日</td>
 					<td class="s33" colspan="4" rowspan="2">健康保険</td>
-					<td class="s34" colspan="4" rowspan="2">建設業退職金共済制度</td>
+					<td class="s34" colspan="5" rowspan="2">建設業退職金共済制度</td>
 					<td class="s33" colspan="6" rowspan="3">教育・資格・免許</td>
 					<td class="s33" colspan="4" rowspan="3">入場年月日</td>
 					<td class="s35" colspan="2" rowspan="6">退職金共済手帳所有の有無</td>
@@ -646,7 +646,7 @@
 					<td class="s31"></td>
 					<td class="s33" colspan="6" rowspan="2">氏　　　　　名</td>
 					<td class="s33" colspan="4" rowspan="2">年金保険</td>
-					<td class="s34" colspan="4" rowspan="2">中小企業退職金共済制度</td>
+					<td class="s34" colspan="5" rowspan="2">中小企業退職金共済制度</td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R17" style="height: 13px;" class="row-headers-background"></th>
@@ -655,7 +655,7 @@
 					<td class="s6" colspan="4" rowspan="3">年齢</td>
 					<td class="s6" colspan="9" rowspan="3">家族連絡先</td>
 					<td class="s6" colspan="4" rowspan="3">（ＴＥＬ）</td>
-					<td class="s6" colspan="4" rowspan="3">血圧</td>
+					<td class="s6" colspan="3" rowspan="3">血圧</td>
 					<td class="s6" colspan="4" rowspan="3">種類</td>
 					<td class="s36" colspan="1" rowspan="3">雇入・職長特別教育</td>
 					<td class="s37" colspan="1" rowspan="3" >技能講習</td>
@@ -667,7 +667,7 @@
 					<td class="s31"></td>
 					<td class="s6" colspan="6" rowspan="2">技　能　者　ID</td>
 					<td class="s6" colspan="4" rowspan="2">雇用保険</td>
-					<td class="s39" colspan="4" rowspan="2"></td>
+					<td class="s39" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R19" style="height: 13px;" class="row-headers-background"></th>
@@ -700,7 +700,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w1, "my_phone_number") %> <!-- 8-023 電話番号(1) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w1, "med_exam_on") %> <!-- 8-025 健康診断日(1) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -712,7 +712,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w1, "health_insurance_type") %> <!-- 8-031 健康保険(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(1) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -744,7 +744,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w1, "pension_insurance_type") %> <!-- 8-032 年金保険(1) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(1) -->
 					</td>
 				</tr>
@@ -763,7 +763,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w1, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(1) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w1) %> <!-- 8-026 8-027 血圧(1) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -784,7 +784,7 @@
 						<%= worker_str(w1, "career_up_id") %> <!-- 8-014 キャリアップID(1) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R31" style="height: 13px;" class="row-headers-background"></th>
@@ -818,7 +818,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w2, "my_phone_number") %> <!-- 8-023 電話番号(2) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w2, "med_exam_on") %> <!-- 8-025 健康診断日(2) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -830,7 +830,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "health_insurance_type") %> <!-- 8-031 健康保険(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(2) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -862,7 +862,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w2, "pension_insurance_type") %> <!-- 8-032 年金保険(2) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(2) -->
 					</td>
 				</tr>
@@ -881,7 +881,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w2, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(2) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w2) %> <!-- 8-026 8-027 血圧(2) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -902,7 +902,7 @@
 						<%= worker_str(w2, "career_up_id") %> <!-- 8-014 キャリアップID(2) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R31" style="height: 13px;" class="row-headers-background"></th>
@@ -935,7 +935,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w3, "my_phone_number") %> <!-- 8-023 電話番号(3) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w3, "med_exam_on") %> <!-- 8-025 健康診断日(3) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -947,7 +947,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w3, "health_insurance_type") %> <!-- 8-031 健康保険(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(3) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -979,7 +979,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w3, "pension_insurance_type") %> <!-- 8-032 年金保険(3) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(3) -->
 					</td>
 				</tr>
@@ -998,7 +998,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w3, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(3) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w3) %> <!-- 8-026 8-027 血圧(3) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1019,7 +1019,7 @@
 						<%= worker_str(w3, "career_up_id") %> <!-- 8-014 キャリアップID(3) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R37" style="height: 13px;" class="row-headers-background"></th>
@@ -1052,7 +1052,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w4, "my_phone_number") %> <!-- 8-023 電話番号(4) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w4, "med_exam_on") %> <!-- 8-025 健康診断日(4) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -1064,7 +1064,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w4, "health_insurance_type") %> <!-- 8-031 健康保険(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(4) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -1096,7 +1096,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w4, "pension_insurance_type") %> <!-- 8-032 年金保険(4) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(4) -->
 					</td>
 				</tr>
@@ -1115,7 +1115,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w4, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(4) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w4) %> <!-- 8-026 8-027 血圧(4) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1136,7 +1136,7 @@
 						<%= worker_str(w4, "career_up_id") %> <!-- 8-014 キャリアップID(4) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R43" style="height: 13px;" class="row-headers-background"></th>
@@ -1169,7 +1169,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w5, "my_phone_number") %> <!-- 8-023 電話番号(5) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w5, "med_exam_on") %> <!-- 8-025 健康診断日(5) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -1181,7 +1181,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w5, "health_insurance_type") %> <!-- 8-031 健康保険(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(5) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -1213,7 +1213,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w5, "pension_insurance_type") %> <!-- 8-032 年金保険(5) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(5) -->
 					</td>
 				</tr>
@@ -1232,7 +1232,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w5, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(5) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w5) %> <!-- 8-026 8-027 血圧(5) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1253,7 +1253,7 @@
 						<%= worker_str(w5, "career_up_id") %> <!-- 8-014 キャリアップID(5) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R49" style="height: 13px;" class="row-headers-background"></th>
@@ -1286,7 +1286,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w6, "my_phone_number") %> <!-- 8-023 電話番号(6) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w6, "med_exam_on") %> <!-- 8-025 健康診断日(6) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -1298,7 +1298,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w6, "health_insurance_type") %> <!-- 8-031 健康保険(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(6) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -1330,7 +1330,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w6, "pension_insurance_type") %> <!-- 8-032 年金保険(6) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(6) -->
 					</td>
 				</tr>
@@ -1349,7 +1349,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w6, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(6) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w6) %> <!-- 8-026 8-027 血圧(6) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1370,7 +1370,7 @@
 						<%= worker_str(w6, "career_up_id") %> <!-- 8-014 キャリアップID(6) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R55" style="height: 13px;" class="row-headers-background"></th>
@@ -1403,7 +1403,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w7, "my_phone_number") %> <!-- 8-023 電話番号(7) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w7, "med_exam_on") %> <!-- 8-025 健康診断日(7) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -1415,7 +1415,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w7, "health_insurance_type") %> <!-- 8-031 健康保険(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(7) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -1447,7 +1447,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w7, "pension_insurance_type") %> <!-- 8-032 年金保険(7) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(7) -->
 					</td>
 				</tr>
@@ -1466,7 +1466,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w7, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(7) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w7) %> <!-- 8-026 8-027 血圧(7) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1487,7 +1487,7 @@
 						<%= worker_str(w7, "career_up_id") %> <!-- 8-014 キャリアップID(7) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R61" style="height: 13px;" class="row-headers-background"></th>
@@ -1520,7 +1520,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w8, "my_phone_number") %> <!-- 8-023 電話番号(8) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w8, "med_exam_on") %> <!-- 8-025 健康診断日(8) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -1532,7 +1532,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w8, "health_insurance_type") %> <!-- 8-031 健康保険(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(8) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -1564,7 +1564,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w8, "pension_insurance_type") %> <!-- 8-032 年金保険(8) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(8) -->
 					</td>
 				</tr>
@@ -1583,7 +1583,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w8, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(8) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w8) %> <!-- 8-026 8-027 血圧(8) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1604,7 +1604,7 @@
 						<%= worker_str(w8, "career_up_id") %> <!-- 8-014 キャリアップID(8) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R67" style="height: 13px;" class="row-headers-background"></th>
@@ -1637,7 +1637,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w9, "my_phone_number") %> <!-- 8-023 電話番号(9) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w9, "med_exam_on") %> <!-- 8-025 健康診断日(9) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -1649,7 +1649,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w9, "health_insurance_type") %> <!-- 8-031 健康保険(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(9) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -1681,7 +1681,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w9, "pension_insurance_type") %> <!-- 8-032 年金保険(9) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(9) -->
 					</td>
 				</tr>
@@ -1700,7 +1700,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w9, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(9) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w9) %> <!-- 8-026 8-027 血圧(9) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1721,7 +1721,7 @@
 						<%= worker_str(w9, "career_up_id") %> <!-- 8-014 キャリアップID(9) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R73" style="height: 13px;" class="row-headers-background"></th>
@@ -1754,7 +1754,7 @@
 					<td class="s58" colspan="4" rowspan="3">
 						<%= worker_phone_number(w10, "my_phone_number") %> <!-- 8-023 電話番号(10) -->
 					</td>
-					<td class="s58" colspan="4" rowspan="3">
+					<td class="s58" colspan="3" rowspan="3">
 						<%= worker_medical_date(w10, "med_exam_on") %> <!-- 8-025 健康診断日(10) -->
 					</td>
 					<td class="s59" rowspan="6">
@@ -1766,7 +1766,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w10, "health_insurance_type") %> <!-- 8-031 健康保険(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= construction_industry(document_info) %> <!-- 8-034 建設業退職金共済制度(10) -->
 					</td>
 					<td class="s57_1" colspan="1" rowspan="6">
@@ -1798,7 +1798,7 @@
 					<td class="s56_1" colspan="4" rowspan="2">
 						<%= worker_insurance(w10, "pension_insurance_type") %> <!-- 8-032 年金保険(10) -->
 					</td>
-					<td class="s56" colspan="4" rowspan="2">
+					<td class="s56" colspan="5" rowspan="2">
 						<%= smaller_companies(document_info) %> <!-- 8-034 中小企業退職金共済制度(10) -->
 					</td>
 				</tr>
@@ -1817,7 +1817,7 @@
 					<td class="s59" colspan="4" rowspan="3">
 						<%= worker_phone_number(w10, "family_phone_number") %> <!-- 8-024 緊急連絡先電話番号(10) -->
 					</td>
-					<td class="s59" colspan="4" rowspan="3">
+					<td class="s59" colspan="3" rowspan="3">
 						<%= blood_pressure(w10) %> <!-- 8-026 8-027 血圧(10) -->
 					</td>
 					<td class="s57_1" colspan="4" rowspan="3">
@@ -1838,7 +1838,7 @@
 						<%= worker_str(w10, "career_up_id") %> <!-- 8-014 キャリアップID(10) -->
 					</td>
 					<td class="s57" colspan="4" rowspan="2"></td>
-					<td class="s57" colspan="4" rowspan="2"></td>
+					<td class="s57" colspan="5" rowspan="2"></td>
 				</tr>
 				<tr style="height: 13px">
 					<th id="758879504R79" style="height: 13px;" class="row-headers-background"></th>
