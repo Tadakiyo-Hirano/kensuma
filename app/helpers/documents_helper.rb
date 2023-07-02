@@ -329,7 +329,7 @@ module DocumentsHelper
   # 作業員健康診断の日付情報
   def worker_medical_date(worker, column)
     date = worker&.content&.[]('worker_medical')&.[](column)
-    date.nil? ? '年　月　日' : l(date.to_date, format: :long)
+    date.nil? ? '年　月　日' : wareki(date.to_date)
   end
 
   # 作業員の血液型情報
@@ -432,13 +432,14 @@ module DocumentsHelper
   # 作業員の入場年月日
   def field_worker_admission_date(worker)
     date = worker&.admission_date_start
-    date.blank? ? '年　月　日' : l(date, format: :long)
+    # date.blank? ? '年　月　日' : l(date, format: :long)
+    date.blank? ? '年　月　日' : wareki(date)
   end
 
   # 作業員の受入教育実施年月日
   def field_worker_education_date(worker)
     date = worker&.education_date
-    date.blank? ? '年　月　日' : l(date, format: :long)
+    date.blank? ? '年　月　日' : wareki(date)
   end
 
   # 作業員の記号
