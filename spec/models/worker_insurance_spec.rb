@@ -97,48 +97,43 @@ RSpec.describe WorkerInsurance, type: :model do
     end
 
     describe '#employment_insurance_number' do
-      context '被保険者の場合' do
-        %i[
-          12345
-          123あ
-          ア123
-        ].each do |number|
-          before :each do
+      shared_examples '無効な被保険者番号' do |numbers, error_message|
+        numbers.each do |number|
+          before do
             subject.employment_insurance_type = :insured
             subject.employment_insurance_number = number
           end
-
+    
           it 'バリデーションに落ちること' do
             expect(subject).to be_invalid
           end
+    
+          it 'バリデーションのエラーが正しいこと' do
+            subject.valid?
+            expect(subject.errors.full_messages).to include(error_message)
+          end
         end
       end
-
-      # context '被保険者以外の場合' do
-      #   %i[
-      #     1234567890
-      #     123456789012
-      #   ].each do |number|
-      #     before :each do
-      #       subject.employment_insurance_number = number
-      #     end
-
-      #     it 'バリデーションに落ちること(日雇保険)' do
-      #       subject.employment_insurance_type = :day
-      #       expect(subject).to be_invalid
-      #     end
-
-      #     it 'バリデーションのエラーが正しいこと(日雇保険)' do
-      #       subject.valid?
-      #       expect(subject.errors.full_messages).to include('被保険者番号は11文字で入力してください')
-      #     end
-
-      #     it 'バリデーションにとおること(適応除外)' do
-      #       subject.employment_insurance_type = :exemption
-      #       expect(subject).to be_valid
-      #     end
-      #   end
-      # end
+    
+      context '被保険者の場合' do
+        context '無効な形式の場合' do
+          numbers = %i[
+            123あ
+            ア123
+          ]
+          error_message = '被保険者番号は数字と半角カタカナのみ使用できます'
+          include_examples '無効な被保険者番号', numbers, error_message
+        end
+    
+        context '無効な長さの場合' do
+          numbers = %i[
+            12345
+            1234a
+          ]
+          error_message = '被保険者番号は4文字以内で入力してください'
+          include_examples '無効な被保険者番号', numbers, error_message
+        end
+      end
     end
 
     describe '#severance_pay_mutual_aid_type' do
