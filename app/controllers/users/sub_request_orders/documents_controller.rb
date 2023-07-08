@@ -80,6 +80,8 @@ module Users::SubRequestOrders
             date_submitted:                field_special_vehicle_keys, # 13-001 提出日(西暦)
             prime_contractor_confirmation: field_special_vehicle_keys, # 13-037 元請確認欄･担当者
             receipt_number:                field_special_vehicle_keys, # 13-038 受付番号
+            reception_confirmation_date:   field_special_vehicle_keys, # 13-039 受付確認年月日
+            person_confirming_receipt:     field_special_vehicle_keys, # 13-040 受付確認者
             a_over_winding_prevention:     field_special_vehicle_keys, # 13-111 (a)Aクレーン部 安全装置         巻過防止装置
             a_overload_protector:          field_special_vehicle_keys, # 13-112 (a)Aクレーン部 安全装置         過負荷防止装置
             a_anti_slip_hook:              field_special_vehicle_keys, # 13-113 (a)Aクレーン部 安全装置         フックのはずれ
