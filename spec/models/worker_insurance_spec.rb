@@ -99,22 +99,22 @@ RSpec.describe WorkerInsurance, type: :model do
     describe '#employment_insurance_number' do
       shared_examples '無効な被保険者番号' do |numbers, error_message|
         numbers.each do |number|
-          before do
+          before(:each) do
             subject.employment_insurance_type = :insured
             subject.employment_insurance_number = number
           end
-    
+
           it 'バリデーションに落ちること' do
             expect(subject).to be_invalid
           end
-    
+
           it 'バリデーションのエラーが正しいこと' do
             subject.valid?
             expect(subject.errors.full_messages).to include(error_message)
           end
         end
       end
-    
+
       context '被保険者の場合' do
         context '無効な形式の場合' do
           numbers = %i[
@@ -124,7 +124,7 @@ RSpec.describe WorkerInsurance, type: :model do
           error_message = '被保険者番号は数字と半角カタカナのみ使用できます'
           include_examples '無効な被保険者番号', numbers, error_message
         end
-    
+
         context '無効な長さの場合' do
           numbers = %i[
             12345
