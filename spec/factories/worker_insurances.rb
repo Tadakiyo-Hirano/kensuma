@@ -6,7 +6,7 @@ FactoryBot.define do
     health_insurance_image { [Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg'))] }
     pension_insurance_type { rand(2) }
     employment_insurance_type { :insured }
-    employment_insurance_number { '%.11d' % rand(100000000000) }
+    employment_insurance_number { '1Aaｱ' }
     severance_pay_mutual_aid_type { :other }
     severance_pay_mutual_aid_name { 'テスト' }
   end
