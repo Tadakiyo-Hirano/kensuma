@@ -26,7 +26,7 @@ module Users
           business_welfare_pension_insurance_join_status:              0, # 厚生年金保険(加入状況)
           business_welfare_pension_insurance_office_number:            '01234567890', # 厚生年金保険(事業所整理記号)
           business_employment_insurance_join_status:                   0, # 雇用保険(加入状況)
-          business_employment_insurance_number:                        '01234567890', # 雇用保険(番号)
+          business_employment_insurance_number:                        '0123', # 雇用保険(番号)
           business_retirement_benefit_mutual_aid_status:               0, # 退職金共済制度(加入状況)
           construction_license_status:                                 0 # 建設許可証(取得状況)
           # =============================================

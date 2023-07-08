@@ -351,7 +351,8 @@
           <%# 被保険者番号 %>
           <div id="employment_insurance_number" class="mb-3">
             <%= worker_insurance.label :employment_insurance_number %>
-            <%= worker_insurance.text_field :employment_insurance_number, class: "form-control" %>
+            <span class="p-1 mb-2 rounded">※下4桁(1桁～4桁)数字・半角カタカナ使用可能</span>
+            <%= worker_insurance.text_field :employment_insurance_number, maxlength: 4, class: "form-control" %>
           </div>
         </div>
       </div>
@@ -1103,7 +1104,7 @@
           required: "雇用保険のタイプを選択してください。"
         },
         "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: "被保険者番号は11桁で入力してください。"
+          required: "被保険者番号は4桁以内で入力してください。"
         },
         "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
           required: "建設業退職金共済制度を選択してください。"

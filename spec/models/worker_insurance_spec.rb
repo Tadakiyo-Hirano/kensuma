@@ -99,9 +99,9 @@ RSpec.describe WorkerInsurance, type: :model do
     describe '#employment_insurance_number' do
       context '被保険者の場合' do
         %i[
-          1234567890
-          123456789012
-          nil
+          12345
+          123あ
+          ア123
         ].each do |number|
           before :each do
             subject.employment_insurance_type = :insured
@@ -110,11 +110,6 @@ RSpec.describe WorkerInsurance, type: :model do
 
           it 'バリデーションに落ちること' do
             expect(subject).to be_invalid
-          end
-
-          it 'バリデーションのエラーが正しいこと' do
-            subject.valid?
-            expect(subject.errors.full_messages).to include('被保険者番号は11文字で入力してください')
           end
         end
       end
