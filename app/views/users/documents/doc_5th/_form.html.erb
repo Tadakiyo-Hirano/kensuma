@@ -916,7 +916,7 @@
             <td class="s_5b_216" dir="ltr" colspan="2" rowspan="4">第</td>
             <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_six_digits_1st') %></td> <!-- 5-115 建設許可番号 号(右) -->
             <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-            <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_1st'))) %></td> <!-- 5-116 建設許可証更新日(西暦)(右) -->
+            <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_1st')) %></td> <!-- 5-116 建設許可証更新日(西暦)(右) -->
           <tr><!-- 24行目 -->
             <td class="s_5a_000"></td><!-- 1列目 -->
             <td class="s_5a_000"></td>
@@ -1030,7 +1030,7 @@
             <td class="s_5a_316" dir="ltr" colspan="2" rowspan="4">第</td>
             <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4"><%= document_info.content&.[]('subcon_construction_license_number_six_digits_1st') %></td> <!-- 5-022 建設許可番号 号(左) -->
             <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
-            <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_1st'))) %></td> <!-- 5-023 建設許可証更新日(西暦) -->
+            <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_1st')) %></td> <!-- 5-023 建設許可証更新日(西暦) -->
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -1051,7 +1051,7 @@
             <td class="s_5b_216" dir="ltr" colspan="2" rowspan="4">第</td>
             <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_six_digits_2nd') %></td> <!-- 5-120 建設許可番号 号(右) -->
             <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-            <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_2nd'))) %></td> <!-- 5-121 建設許可証更新日(西暦)(右) -->
+            <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_2nd')) %></td> <!-- 5-121 建設許可証更新日(西暦)(右) -->
           <tr><!-- 28行目 -->
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -1107,7 +1107,7 @@
             <td class="s_5a_316" dir="ltr" colspan="2" rowspan="4">第</td>
             <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4"><%= document_info.content&.[]('subcon_construction_license_number_six_digits_2nd') %></td> <!-- 5-027 許可番号 号(左) -->
             <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
-            <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_2nd'))) %></td> <!-- 5-028 建設許可証更新日(西暦)(左) -->
+            <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_2nd')) %></td> <!-- 5-028 建設許可証更新日(西暦)(左) -->
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
