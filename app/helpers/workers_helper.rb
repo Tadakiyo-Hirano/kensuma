@@ -63,7 +63,7 @@ module WorkersHelper
       health_insurance_name:         'サンプル健康保険',
       pension_insurance_type:        :welfare,
       employment_insurance_type:     :insured,
-      employment_insurance_number:   '12345678901',
+      employment_insurance_number:   '1234',
       severance_pay_mutual_aid_type: :kentaikyo,
       severance_pay_mutual_aid_name: 'テスト共済制度',
       has_labor_insurance:           :join
