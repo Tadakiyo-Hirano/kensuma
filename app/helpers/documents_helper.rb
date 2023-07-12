@@ -432,7 +432,6 @@ module DocumentsHelper
   # 作業員の入場年月日
   def field_worker_admission_date(worker)
     date = worker&.admission_date_start
-    # date.blank? ? '年　月　日' : l(date, format: :long)
     date.blank? ? '年　月　日' : wareki(date)
   end
 
