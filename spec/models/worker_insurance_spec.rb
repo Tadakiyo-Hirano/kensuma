@@ -128,7 +128,7 @@ RSpec.describe WorkerInsurance, type: :model do
         context '無効な長さの場合' do
           numbers = %i[
             12345
-            1234a
+            1234ｱ
           ]
           error_message = '被保険者番号は4文字以内で入力してください'
           include_examples '無効な被保険者番号', numbers, error_message
