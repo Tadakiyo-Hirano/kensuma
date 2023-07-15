@@ -239,7 +239,7 @@
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= document_site_info.content["genecon_construction_license_updated_at_1st"] %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
+                  <%= wareki(document_site_info.content["genecon_construction_license_updated_at_1st"]) %> <!-- 4-010 元請会社の建設許可証更新日(西暦) -->
                 </td>
                 <td class="s5"></td>
               </tr>
@@ -248,11 +248,11 @@
                 <td class="s6" colspan="6" rowspan="4">工 期</td>
                 <td class="s26" colspan="2" rowspan="2" style="border: 1px solid;">自</td>
                 <td class="s7" colspan="19" rowspan="2" style="border: 1px solid;">
-                  <%= document_date(document_subcon_info.start_date) %> <!-- 4-109 各下請会社の工期(自) -->
+                  <%= wareki(document_date(document_subcon_info.start_date)) %> <!-- 4-109 各下請会社の工期(自) -->
                 </td>
                 <td class="s6" colspan="6" rowspan="4">契 約 日</td>
                 <td class="s8" colspan="21" rowspan="4">
-                  <%= document_date(document_subcon_info.contract_date) %> <!-- 4-111 各下請会社の契約日 -->
+                  <%= wareki(document_date(document_subcon_info.contract_date)) %> <!-- 4-111 各下請会社の契約日 -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -276,7 +276,7 @@
                 <td class="s28"></td>
                 <td class="s29" colspan="2" rowspan="2" style="border: 1px solid;">至</td>
                 <td class="s8" colspan="19" rowspan="2">
-                  <%= document_date(document_subcon_info.start_date) %> <!-- 4-110 各下請会社の工期(至) -->
+                  <%= wareki(document_date(document_subcon_info.start_date)) %> <!-- 4-110 各下請会社の工期(至) -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -307,7 +307,7 @@
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= document_site_info.content["genecon_construction_license_updated_at_2nd"] %> <!-- 4-015 元請会社の建設許可証更新日(西暦) -->
+                  <%= wareki(document_site_info.content["genecon_construction_license_updated_at_2nd"]) %> <!-- 4-015 元請会社の建設許可証更新日(西暦) -->
                 </td>
                 <td class="s30"></td>
               </tr>
@@ -475,7 +475,7 @@
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= document_subcon_info.content&.[]("subcon_construction_license_updated_at_1st") %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
+                  <%= wareki(document_subcon_info.content&.[]("subcon_construction_license_updated_at_1st")) %> <!-- 4-116 下請会社の建設許可証更新日(西暦) -->
                 </td>
               </tr>
               <tr style="height: 20px">
@@ -537,7 +537,7 @@
                 </td>
                 <td class="s16" colspan="2" rowspan="4" style="border: 1px solid;">号</td>
                 <td class="s8" colspan="15" rowspan="4">
-                  <%= document_subcon_info.content&.[]("subcon_construction_license_updated_at_2nd") %> <!-- 4-121 下請会社の建設許可証更新日(西暦) -->
+                  <%= wareki(document_subcon_info.content&.[]("subcon_construction_license_updated_at_2nd")) %> <!-- 4-121 下請会社の建設許可証更新日(西暦) -->
                 </td>
               </tr>
               <tr style="height: 8px">
@@ -635,11 +635,11 @@
                 <td class="s6" colspan="6" rowspan="4" style="border: 1px solid;">工 期</td>
                 <td class="s26" colspan="3" rowspan="2" style="border: 1px solid;">自</td>
                 <td class="s7" colspan="19" rowspan="2" style="border: 1px solid;">
-                  <%= document_date(document_site_info.start_date) %> <!-- 4-021　元請会社の工期(自) -->
+                  <%= wareki(document_date(document_site_info.start_date)) %> <!-- 4-021　元請会社の工期(自) -->
                 </td>
                 <td class="s6" colspan="6" rowspan="4">契 約 日</td>
                 <td class="s8" colspan="20" rowspan="4">
-                  <%= document_date(document_site_info.contract_date) %> <!-- 4-023 元請会社の契約日 -->
+                  <%= wareki(document_date(document_site_info.contract_date)) %> <!-- 4-023 元請会社の契約日 -->
                 </td>
                 <td class="s5"></td>
                 <td class="s39" colspan="10" rowspan="3" style="border: 1px solid;">現 場 代 理 人 名</td>
@@ -659,7 +659,7 @@
               <tr style="height: 8px">
                 <td class="s29" colspan="3" rowspan="2" style="border: 1px solid;">至</td>
                 <td class="s8" colspan="19" rowspan="2">
-                  <%= l document_site_info.end_date, format: :long %> <!-- 4-022 元請会社の工期(至) -->
+                  <%= wareki(document_site_info.end_date, format: :long) %> <!-- 4-022 元請会社の工期(至) -->
                 </td>
                 <td class="s5"></td>
                 <td class="s5"></td>
