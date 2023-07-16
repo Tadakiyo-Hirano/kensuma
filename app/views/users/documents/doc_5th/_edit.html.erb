@@ -733,11 +733,11 @@
                 <td class="s_5b_103" dir="ltr" colspan="6" rowspan="4">工 期</td>
                 <td class="s_5b_103" dir="ltr" colspan="2" rowspan="2">自</td>
                 <td class="s_5b_103" dir="ltr" colspan="19" rowspan="2">
-                  <%= document_date(@child&.start_date) %> <!-- 5-109 各下請会社の工期(自) -->
+                  <%= wareki(document_date(@child&.start_date)) %> <!-- 5-109 各下請会社の工期(自) -->
                 </td>
                 <td class="s_5b_103" dir="ltr" colspan="6" rowspan="4">契約日</td>
                 <td class="s_5b_106" dir="ltr" colspan="21" rowspan="4">
-                  <%= document_date(@child&.contract_date) %> <!-- 5-111 各下請会社の契約日 -->
+                  <%= wareki(document_date(@child&.contract_date)) %> <!-- 5-111 各下請会社の契約日 -->
                 </td>
               </tr>
               <tr><!-- 17行目 -->
@@ -772,7 +772,7 @@
                 <td class="s_5c_00"></td>
                 <td class="s_5b_103" dir="ltr" colspan="2" rowspan="2">至</td>
                 <td class="s_5b_105" dir="ltr" colspan="19" rowspan="2">
-                  <%= document_date(@child&.start_date) %> <!-- 5-110 各下請会社の工期(至) -->
+                  <%= wareki(document_date(@child&.start_date)) %> <!-- 5-110 各下請会社の工期(至) -->
                 </td>
               </tr>
               <tr><!-- 19行目 -->
@@ -793,11 +793,11 @@
                 <td class="s_5a_202" dir="ltr" colspan="6" rowspan="4">工 期</td><!-- 1列目 -->
                 <td class="s_5a_202" dir="ltr" colspan="3" rowspan="2">自</td>
                 <td class="s_5a_203" dir="ltr" colspan="19" rowspan="2">
-                  <%= document_date(document_info.start_date) %> <!-- 5-016 各下請会社の工期(自) -->
+                  <%= wareki(document_date(document_info.start_date)) %> <!-- 5-016 各下請会社の工期(自) -->
                 </td><!-- 10列目 -->
                 <td class="s_5a_204" dir="ltr" colspan="6" rowspan="4">注文者と<br>の契約日</td>
                 <td class="s_5a_202" dir="ltr" colspan="20" rowspan="4">
-                  <%= document_date(document_info.contract_date) %> <!-- 5-018 各下請会社の契約日 -->
+                  <%= wareki(document_date(document_info.contract_date)) %> <!-- 5-018 各下請会社の契約日 -->
                 </td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -889,7 +889,7 @@
               <tr><!-- 22行目 -->
                 <td class="s_5a_202" dir="ltr" colspan="3" rowspan="2">至</td>
                 <td class="s_5a_203" dir="ltr" colspan="19" rowspan="2">
-                  <%= document_date(document_info.end_date) %> <!-- 5-017 各下請会社の工期(至) -->
+                  <%= wareki(document_date(document_info.end_date)) %> <!-- 5-017 各下請会社の工期(至) -->
                 </td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -925,7 +925,7 @@
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
                 <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_six_digits_1st') %></td> <!-- 5-115 建設許可番号 号(右) -->
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_1st')) %></td> <!-- 5-116 建設許可証更新日(西暦)(右) -->
+                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_1st'))) %></td> <!-- 5-116 建設許可証更新日(西暦)(右) -->
               </tr>
               <tr><!-- 24行目 -->
                 <td class="s_5a_000"></td><!-- 1列目 -->
@@ -1040,7 +1040,7 @@
                 <td class="s_5a_312" dir="ltr" colspan="2" rowspan="4">第</td>
                 <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4"><%= document_info.content&.[]('subcon_construction_license_number_six_digits_1st') %></td> <!-- 5-022 建設許可番号 号(左) -->
                 <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_1st')) %></td> <!-- 5-023 建設許可証更新日(西暦) -->
+                <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_1st'))) %></td> <!-- 5-023 建設許可証更新日(西暦) -->
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
@@ -1061,7 +1061,7 @@
                 <td class="s_5b_212" dir="ltr" colspan="2" rowspan="4">第</td>
                 <td class="s_5b_212" dir="ltr" colspan="4" rowspan="4"><%= @child&.content&.[]('subcon_construction_license_number_six_digits_2nd') %></td> <!-- 5-120 建設許可番号 号(右) -->
                 <td class="s_5b_213" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_2nd')) %></td> <!-- 5-121 建設許可証更新日(西暦)(右) -->
+                <td class="s_5b_214" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(@child&.content&.[]('subcon_construction_license_updated_at_2nd'))) %></td> <!-- 5-121 建設許可証更新日(西暦)(右) -->
               </tr>
               <tr><!-- 28行目 -->
                 <td class="s_5c_00"></td>
@@ -1118,7 +1118,7 @@
                 <td class="s_5a_312" dir="ltr" colspan="2" rowspan="4">第</td>
                 <td class="s_5a_312" dir="ltr" colspan="4" rowspan="4"><%= document_info.content&.[]('subcon_construction_license_number_six_digits_2nd') %></td> <!-- 5-027 許可番号 号(左) -->
                 <td class="s_5a_313" dir="ltr" colspan="2" rowspan="4">号</td>
-                <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_2nd')) %></td> <!-- 5-028 建設許可証更新日(西暦)(左) -->
+                <td class="s_5a_314" dir="ltr" colspan="15" rowspan="4"><%= wareki(doc_content_date(document_info.content&.[]('subcon_construction_license_updated_at_2nd'))) %></td> <!-- 5-028 建設許可証更新日(西暦)(左) -->
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
                 <td class="s_5c_00"></td>
