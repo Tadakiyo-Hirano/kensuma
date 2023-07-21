@@ -1605,10 +1605,15 @@ module DocumentsHelper
   #doc_9
   # 自身の一つ上階層の会社情報&現場情報取得
   def get_myself_and_myparent_site
-    if @parent_request_order&.parent?
-      @parent_request_order = RequestOrder.find_by(id: @parent_request_order.parent_id)
+    request_order = RequestOrder.find_by(uuid: params[:request_order_uuid])
+    if request_order&.prime_contractor?
+      @parent_request_order = nil
+      @parent_business = nil
+    else
+      @parent_request_order = RequestOrder.find(request_order.parent_id)
       @parent_business = @parent_request_order.business
     end
   end
+  
   # rubocop:enable all
 end

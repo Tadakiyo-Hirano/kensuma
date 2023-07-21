@@ -48,7 +48,7 @@ class RequestOrder < ApplicationRecord
     uuid
   end
 
-  def parent?
+  def prime_contractor?
     parent_id.nil?
   end
 
