@@ -1614,6 +1614,5 @@ module DocumentsHelper
       @parent_business = @parent_request_order.business
     end
   end
-  
   # rubocop:enable all
 end
