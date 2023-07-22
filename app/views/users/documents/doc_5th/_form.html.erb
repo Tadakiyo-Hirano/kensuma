@@ -724,11 +724,11 @@
             <td class="s_5b_103" dir="ltr" colspan="6" rowspan="4">工 期</td>
             <td class="s_5b_103" dir="ltr" colspan="2" rowspan="2">自</td>
             <td class="s_5b_103" dir="ltr" colspan="19" rowspan="2">
-              <%= document_date(@child&.start_date) %> <!-- 5-109 各下請会社の工期(自) -->
+              <%= wareki(document_date(@child&.start_date)) %> <!-- 5-109 各下請会社の工期(自) -->
             </td>
             <td class="s_5b_103" dir="ltr" colspan="6" rowspan="4">契約日</td>
             <td class="s_5b_106" dir="ltr" colspan="21" rowspan="4">
-              <%= document_date(@child&.contract_date) %> <!-- 5-111 各下請会社の契約日 -->
+              <%= wareki(document_date(@child&.contract_date)) %> <!-- 5-111 各下請会社の契約日 -->
             </td>
           </tr>
           <tr><!-- 17行目 -->
@@ -763,7 +763,7 @@
             <td class="s_5c_00"></td>
             <td class="s_5b_103" dir="ltr" colspan="2" rowspan="2">至</td>
             <td class="s_5b_105" dir="ltr" colspan="19" rowspan="2">
-              <%= document_date(@child&.start_date) %> <!-- 5-110 各下請会社の工期(至) -->
+              <%= wareki(document_date(@child&.start_date)) %> <!-- 5-110 各下請会社の工期(至) -->
             </td>
           </tr>
           <tr><!-- 19行目 -->
@@ -784,11 +784,11 @@
             <td class="s_5a_202" dir="ltr" colspan="6" rowspan="4">工 期</td><!-- 1列目 -->
             <td class="s_5a_202" dir="ltr" colspan="3" rowspan="2">自</td>
             <td class="s_5a_203" dir="ltr" colspan="19" rowspan="2">
-              <%= document_date(document_info.start_date) %> <!-- 5-016 各下請会社の工期(自) -->
+              <%= wareki(document_date(document_info.start_date)) %> <!-- 5-016 各下請会社の工期(自) -->
             </td><!-- 10列目 -->
             <td class="s_5a_204" dir="ltr" colspan="6" rowspan="4">注文者と<br>の契約日</td>
             <td class="s_5a_202" dir="ltr" colspan="20" rowspan="4">
-              <%= document_date(document_info.contract_date) %> <!-- 5-018 各下請会社の契約日 -->
+              <%= wareki(document_date(document_info.contract_date)) %> <!-- 5-018 各下請会社の契約日 -->
             </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>
@@ -880,7 +880,7 @@
           <tr><!-- 22行目 -->
             <td class="s_5a_202" dir="ltr" colspan="3" rowspan="2">至</td>
             <td class="s_5a_203" dir="ltr" colspan="19" rowspan="2">
-              <%= document_date(document_info.end_date) %> <!-- 5-017 各下請会社の工期(至) -->
+              <%= wareki(document_date(document_info.end_date)) %> <!-- 5-017 各下請会社の工期(至) -->
             </td>
             <td class="s_5c_00"></td>
             <td class="s_5c_00"></td>

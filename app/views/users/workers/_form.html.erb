@@ -856,6 +856,10 @@
 
 <script>
   $(function(){
+    $.validator.addMethod("alphanumericKatakanaOnly", function(value, element) {
+      return this.optional(element) || /^[0-9｡-ﾟ]+$/.test(value);
+    }, "数字と半角カタカナのみ入力してください。");
+
     $.each(function(key){
       $.validator.addMethod(key, this);
     });
@@ -973,7 +977,8 @@
           required: true
         },
         "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: true
+          required: true,
+          alphanumericKatakanaOnly: true
         },
         "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
           required: true
@@ -1104,7 +1109,8 @@
           required: "雇用保険のタイプを選択してください。"
         },
         "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: "被保険者番号は数字と半角カタカナの4桁以内で入力してください。"
+          required: "被保険者番号は数字と半角カタカナの4桁以内で入力してください。",
+          alphanumericKatakanaOnly: "数字と半角カタカナのみ入力してください。"
         },
         "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
           required: "建設業退職金共済制度を選択してください。"

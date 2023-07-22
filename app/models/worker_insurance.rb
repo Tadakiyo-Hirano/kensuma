@@ -37,7 +37,7 @@ class WorkerInsurance < ApplicationRecord
   validates :pension_insurance_type, presence: true
   validates :employment_insurance_type, presence: true, unless: :business_owner_or_master
   validates :employment_insurance_type, absence: true, if: :business_owner_or_master
-  validates :employment_insurance_number, length: { maximum: 4 }, format: { with: /\A[a-zA-Z0-9｡-ﾟ]+\z/, message: 'は数字と半角カタカナのみ使用できます' }, if: :employment_insurance_number_valid?
+  validates :employment_insurance_number, length: { maximum: 4 }, format: { with: /\A[0-9｡-ﾟ]+\z/, message: 'は数字と半角カタカナのみ使用できます' }, if: :employment_insurance_number_valid?
   validates :employment_insurance_number, absence: true, unless: :employment_insurance_number_valid?
   validates :has_labor_insurance, presence: true, if: :business_owner_or_master
   validates :has_labor_insurance, absence: true, unless: :business_owner_or_master
