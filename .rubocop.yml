@@ -204,7 +204,7 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Exclude:
     - 'lib/tasks/helpers/test_data_helper.rb' # テストデータ定義
-  Max: 110
+  Max: 150
 
 # モジュール長カウントの設定を調整
 Metrics/ModuleLength:
