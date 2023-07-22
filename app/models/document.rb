@@ -81,13 +81,13 @@ class Document < ApplicationRecord
         nil
       end
       # 元請会社の確認欄
-      if document_params[:content][:prime_contractor_confirmation].blank?
-        error_msg_for_doc_14th.push('元請会社の確認者名を入力してください')
-      end
+      # if document_params[:content][:prime_contractor_confirmation].blank?
+      #   error_msg_for_doc_14th.push('元請会社の確認者名を入力してください')
+      # end
       # 元請会社の受付確認年月日
-      if document_params[:content][:reception_confirmation_date].blank?
-        error_msg_for_doc_14th.push('元請会社の受付確認年月日を入力してください')
-      end
+      # if document_params[:content][:reception_confirmation_date].blank?
+      #   error_msg_for_doc_14th.push('元請会社の受付確認年月日を入力してください')
+      # end
       # 点検年月日
       if document_params[:content][:inspection_date].blank?
         error_msg_for_doc_14th.push('点検年月日を入力してください')

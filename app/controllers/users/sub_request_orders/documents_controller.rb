@@ -44,7 +44,7 @@ module Users::SubRequestOrders
     def update
       if @document.request_order.order.business_id == current_business.id # 元請けのみが編集できる
         case @document.document_type
-        when 'doc_13th', 'doc_15th', 'doc_16th'
+        when 'doc_13th', 'doc_14th', 'doc_15th', 'doc_16th'
           if @document.update(document_params(@document))
             redirect_to users_request_order_sub_request_order_document_url, success: '保存に成功しました'
           else
@@ -156,6 +156,13 @@ module Users::SubRequestOrders
             h_add_item_check_8th:          field_special_vehicle_keys, # 13-182 (a)Hその他　                   追加項目8(13-110)
             inspection_date:               field_special_vehicle_keys, # 13-255 (a)点検年月日
             inspector:                     field_special_vehicle_keys  # 13-256 (a)点検者
+          ]
+                                        )
+      when 'doc_14th'
+        params.require(:document).permit(approval_content:
+          %i[
+            prime_contractor_confirmation
+            reception_confirmation_date
           ]
                                         )
       when 'doc_15th'

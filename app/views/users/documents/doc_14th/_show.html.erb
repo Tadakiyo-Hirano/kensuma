@@ -36,7 +36,7 @@
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
               <td class="doc_14_s4"></td>
-              <td class="doc_14_s5" dir="ltr" colspan="9" rowspan="2">
+              <td class="<%= document_background_color('doc_14_s5_1', 'doc_14_s5') %>" dir="ltr" colspan="9" rowspan="2">
                 <%= machine_doc_date(@document.content&.[]('date_submitted')) %> <!-- 14-001 「提出日（西暦）」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -142,7 +142,7 @@
                 <td class="doc_14_s6"></td>
                 <td class="doc_14_s14" colspan="6" rowspan="3"></td>
                 <td class="doc_14_s1" colspan="2" rowspan="3">点検</td>
-                <td class="doc_14_s15" dir="ltr" colspan="11" rowspan="3">
+                <td class="<%= document_background_color('doc_14_s15_1', 'doc_14_s15') %>" dir="ltr" colspan="11" rowspan="3">
                   <%= wareki(@document.content&.[]('inspection_date')) %> <!-- 14-021 「点検年月日」 -->
                 </td>
                 <td class="doc_14_s4"></td>
@@ -455,10 +455,9 @@
                 <div class="row-header-wrapper" style="line-height: 12px; border-bottom: 1px SOLID #ffffff;"></div>
               </th>
               <td class="doc_14_s1" rowspan="2">（</td>
-              <td class="doc_14_s26" dir="ltr" colspan="2" rowspan="2">
+              <td class="doc_14_s26" dir="ltr" colspan="3" rowspan="2">
                 <%= sc_hierarchy(document_info) %> <!-- 14-005 次 -->
               </td>
-              <td class="doc_14_s1" rowspan="2">次</td>
               <td class="doc_14_s1" rowspan="2">）</td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -539,7 +538,7 @@
                 <%= document_info.content&.[]('subcon_representative_name') %> <!-- 14-007 「代表者名」 -->
               </td>
               <td class="doc_14_s27" dir="ltr" colspan="2" rowspan="4">
-                ㊞<%= '※14-268未実装※' %> <!-- 14-268 ㊞ -->
+                ㊞ <!-- 14-268 ㊞ -->
               </td>
               <td class="doc_14_s6"></td>
               <td class="doc_14_s6"></td>
@@ -988,10 +987,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">1</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m1, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m1, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1000,10 +999,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m1&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m1, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m1, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1119,10 +1118,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">2</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m2, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m2, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1131,10 +1130,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m2&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m2, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m2, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1218,10 +1217,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">3</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m3, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m3, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1230,10 +1229,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m3&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m3, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m3, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1316,10 +1315,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">4</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m4, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m4, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1328,10 +1327,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m4&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m4, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m4, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1445,10 +1444,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">5</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m5, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m5, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1457,10 +1456,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m5&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m5, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m5, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1543,10 +1542,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">6</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m6, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m6, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1555,10 +1554,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m6&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m6, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m6, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1641,10 +1640,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">7</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m7, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m7, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1653,10 +1652,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m7&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m7, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m7, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1742,10 +1741,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">8</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m8, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m8, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1754,10 +1753,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m8&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m8, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m8, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1842,10 +1841,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">9</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m9, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m9, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1854,10 +1853,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m9&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m9, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m9, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -1942,10 +1941,10 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s3" colspan="2" rowspan="4">10</td>
-              <td class="doc_14_s28" dir="ltr" colspan="9" rowspan="4">
+              <td class="doc_14_s28_1" dir="ltr" colspan="9" rowspan="4">
                 <%= machine_str(m10, "name") %> <!-- 14-009 「使用する機械名」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="7" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="4">
                 <%= machine_str(m10, "standards_performance") %> <!-- 14-010 「 規格・性能」 -->
               </td>
               <td class="doc_14_s30" dir="ltr" colspan="4" rowspan="2">
@@ -1954,10 +1953,10 @@
               <td class="doc_14_s32" dir="ltr" colspan="7" rowspan="2">
                 <%= wareki(m10&.carry_on_date) %> <!-- 14-013 「持込年月日」 ※field_machine-->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m10, "inspector") %> <!-- 14-015 「点検者」 -->
               </td>
-              <td class="doc_14_s29" dir="ltr" colspan="4" rowspan="4">
+              <td class="doc_14_s29_1" dir="ltr" colspan="4" rowspan="4">
                 <%= machine_str(m10, "handler") %> <!-- 14-016 「取扱者」 -->
               </td>
               <td class="doc_14_s6"></td>
@@ -2074,7 +2073,7 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s22" colspan="11" rowspan="8">機械の特性、その他<br> その使用上注意すべき<br> 事項</td>
-              <td class="doc_14_s35" dir="ltr" colspan="26" rowspan="8">
+              <td class="<%= document_background_color('doc_14_s35_1', 'doc_14_s35') %>" dir="ltr" colspan="26" rowspan="8">
                 <%= machine_doc_str(@document.content&.[]('precautions')) %> <!-- 14-017 「機械の特性・使用上注意すべき事項」 ※document-->
               </td>
               <td class="doc_14_s6"></td>
@@ -2218,13 +2217,13 @@
               </th>
               <td class="doc_14_s2"></td>
               <td class="doc_14_s36" colspan="2" rowspan="5">担<br>当<br>者</td>
-              <td class="doc_14_s28_1" dir="ltr" colspan="20" rowspan="5">
-                <%= machine_doc_str(@document.content&.[]('prime_contractor_confirmation')) %> <!-- 14-018 「元請会社の確認欄」 ※document-->
+              <td class="<%= document_background_color('doc_14_s28', 'doc_14_s28_1') %>" dir="ltr" colspan="20" rowspan="5">
+                <%= machine_doc_str(@document.approval_content&.[]('prime_contractor_confirmation')) %> <!-- 14-018 「元請会社の確認欄」 ※document-->
               </td>
-              <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="5">
-                <%= wareki(@document.content&.[]('reception_confirmation_date')) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
+              <td class="<%= document_background_color('doc_14_s29', 'doc_14_s29_1') %>" dir="ltr" colspan="7" rowspan="5">
+                <%= wareki(@document.approval_content&.[]('reception_confirmation_date')) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
               </td>
-              <td class="doc_14_s28" dir="ltr" colspan="8" rowspan="5">
+              <td class="<%= document_background_color('doc_14_s28', 'doc_14_s28_1') %>" dir="ltr" colspan="8" rowspan="5">
                 <!-- 14-020 ㊞ -->
               </td>
               <td class="doc_14_s6"></td>
