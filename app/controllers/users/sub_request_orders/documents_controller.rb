@@ -44,12 +44,25 @@ module Users::SubRequestOrders
     def update
       if @document.request_order.order.business_id == current_business.id # 元請けのみが編集できる
         case @document.document_type
-        when 'doc_13th', 'doc_14th', 'doc_15th', 'doc_16th'
+        when 'doc_13th', 'doc_15th', 'doc_16th'
           if @document.update(document_params(@document))
             redirect_to users_request_order_sub_request_order_document_url, success: '保存に成功しました'
           else
             flash[:danger] = '更新に失敗しました'
             render :edit
+          end
+        when 'doc_14th'
+          @error_msg_for_approval_doc_14th = @document.error_msg_for_approval_doc_14th(document_params(@document))
+
+          if @error_msg_for_approval_doc_14th.present?
+            flash[:danger] = @error_msg_for_approval_doc_14th.first
+            render template: 'users/documents/doc_14th/_subcon_edit'
+          elsif @document.update(document_params(@document))
+            flash[:success] = '保存に成功しました'
+            redirect_to users_request_order_sub_request_order_document_url
+          else
+            flash[:danger] = '保存に失敗しました'
+            render template: 'users/documents/doc_14th/_subcon_edit'
           end
         end
       else
