@@ -48,6 +48,10 @@ class RequestOrder < ApplicationRecord
     uuid
   end
 
+  def prime_contractor?
+    parent_id.nil?
+  end
+
   private
 
   def name_is_required_professional_engineer
