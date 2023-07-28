@@ -8,7 +8,7 @@ module DocumentsHelper
   # document.contentの日付
   def doc_content_date(date)
     if action_name == 'edit'
-      date.nil? ? '' : date.to_date&.strftime('%Y年%-m月%-d日') # nilの場合のstrftime表示エラー回避
+      date.nil? ? '年　月　日' : date.to_date&.strftime('%Y年%-m月%-d日') # nilの場合のstrftime表示エラー回避
     else
       date.nil? ? '年　月　日' : wareki(date.to_date)
     end
