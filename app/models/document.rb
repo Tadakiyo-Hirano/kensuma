@@ -80,18 +80,27 @@ class Document < ApplicationRecord
       else
         nil
       end
-      # 元請会社の確認欄
-      if document_params[:content][:prime_contractor_confirmation].blank?
-        error_msg_for_doc_14th.push('元請会社の確認者名を入力してください')
-      end
-      # 元請会社の受付確認年月日
-      if document_params[:content][:reception_confirmation_date].blank?
-        error_msg_for_doc_14th.push('元請会社の受付確認年月日を入力してください')
-      end
       # 点検年月日
       if document_params[:content][:inspection_date].blank?
         error_msg_for_doc_14th.push('点検年月日を入力してください')
       end
+        error_msg_for_doc_14th
+    end
+  end
+
+  # エラーメッセージ(元請確認画面の持込機械等(電動工具電気溶接機等)使用届用)
+  def error_msg_for_approval_doc_14th(document_params)
+    if document_type == 'doc_14th'
+      error_msg_for_doc_14th = []
+      # 元請会社の確認欄
+      if document_params[:approval_content][:prime_contractor_confirmation].blank?
+        error_msg_for_doc_14th.push('元請確認欄の担当者を選択してください')
+      end
+      # 元請会社の受付確認年月日
+      if document_params[:approval_content][:reception_confirmation_date].blank?
+        error_msg_for_doc_14th.push('受付確認の年月日を入力してください')
+      end
+      # 点検年月日
         error_msg_for_doc_14th
     end
   end

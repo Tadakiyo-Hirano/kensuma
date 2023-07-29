@@ -892,8 +892,6 @@ module Users
             reception_number9
             reception_number10
             precautions
-            prime_contractor_confirmation
-            reception_confirmation_date
             inspection_date
           ]
         )
