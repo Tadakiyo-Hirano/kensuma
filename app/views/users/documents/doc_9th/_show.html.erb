@@ -4,7 +4,7 @@
                                                         .where.not("JSON_CONTAINS(content, ?, '$.status_of_residence')", "\"permanent_resident\"")
                                                         .where.not("JSON_CONTAINS(content, ?, '$.status_of_residence')", "\"skill_practice\"")%>
   <% get_myself_and_myparent_site %>
-  <% parent_subcon_info = sc_hierarchy(@parent_request_orber)[0..2] %>
+  <% parent_subcon_info = sc_hierarchy(@parent_request_order)[0..2] %>
   <% number_of_pages = 1 %>
   <% total_number_of_pages = foreign_field_workers.each_slice(3).size %>
   <% foreign_field_workers.each_slice(3).each_with_index do |(w1, w2, w3), i| %>
@@ -666,7 +666,7 @@
                   <%= worker_str(w1, "job_title") if w1.present? %> <!-- 9-024 責任者・役職 -->
                 <td class="doc_9_s5" dir="ltr" colspan="2">氏名</td>
                 <td class="doc_9_s32" dir="ltr" colspan="6">
-                  <%= document_subcon_info.content["foreigners_employment_manager"] %> <!-- 9-025 責任者・氏名 -->
+                  <%= document_subcon_info&.content&.[]("foreigners_employment_manager") %> <!-- 9-025 責任者・氏名 -->
                 <td class="doc_9_s5" dir="ltr" colspan="2">連絡先</td>
                 <td class="doc_9_s43" dir="ltr" colspan="7">
                   <%= phone_number_add_hyphen(worker_str(w1, "my_phone_number")) if w1.present? %> <!-- 9-026 責任者・連絡先(TEL) -->
