@@ -56,7 +56,7 @@ module Users::SubRequestOrders
           error_msg_for_approval_doc_14th = @document.error_msg_for_approval_doc_14th(document_params(@document)).join("<br>").html_safe
 
           if error_msg_for_approval_doc_14th.present?
-            flash[:danger] = error_msg_for_approval_doc_14th 
+            flash[:danger] = error_msg_for_approval_doc_14th
             render template: 'users/documents/doc_14th/_subcon_edit'
           else
             if @document.update(document_params(@document))
