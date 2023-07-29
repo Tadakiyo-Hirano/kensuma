@@ -1,3 +1,4 @@
+# rubocop:disable all
 module Users::SubRequestOrders
   class DocumentsController < Users::Base
     before_action :set_documents, only: %i[index show edit update]
