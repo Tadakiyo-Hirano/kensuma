@@ -53,17 +53,19 @@ module Users::SubRequestOrders
             render :edit
           end
         when 'doc_14th'
-          @error_msg_for_approval_doc_14th = @document.error_msg_for_approval_doc_14th(document_params(@document))
+          error_msg_for_approval_doc_14th = @document.error_msg_for_approval_doc_14th(document_params(@document)).join("<br>").html_safe
 
-          if @error_msg_for_approval_doc_14th.present?
-            flash[:danger] = @error_msg_for_approval_doc_14th.first
+          if error_msg_for_approval_doc_14th.present?
+            flash[:danger] = error_msg_for_approval_doc_14th 
             render template: 'users/documents/doc_14th/_subcon_edit'
-          elsif @document.update(document_params(@document))
-            flash[:success] = '保存に成功しました'
-            redirect_to users_request_order_sub_request_order_document_url
           else
-            flash[:danger] = '保存に失敗しました'
-            render template: 'users/documents/doc_14th/_subcon_edit'
+            if @document.update(document_params(@document))
+              flash[:success] = '保存に成功しました'
+              redirect_to users_request_order_sub_request_order_document_url
+            else
+              flash[:danger] = '保存に失敗しました'
+              render template: 'users/documents/doc_14th/_subcon_edit'
+            end
           end
         end
       else
