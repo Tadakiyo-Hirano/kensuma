@@ -1,3 +1,4 @@
+# rubocop:disable all
 module Users::SubRequestOrders
   class DocumentsController < Users::Base
     before_action :set_documents, only: %i[index show edit update]
@@ -50,6 +51,21 @@ module Users::SubRequestOrders
           else
             flash[:danger] = '更新に失敗しました'
             render :edit
+          end
+        when 'doc_14th'
+          error_msg_for_approval_doc_14th = @document.error_msg_for_approval_doc_14th(document_params(@document)).join("<br>").html_safe
+
+          if error_msg_for_approval_doc_14th.present?
+            flash[:danger] = error_msg_for_approval_doc_14th
+            render template: 'users/documents/doc_14th/_subcon_edit'
+          else
+            if @document.update(document_params(@document))
+              flash[:success] = '保存に成功しました'
+              redirect_to users_request_order_sub_request_order_document_url
+            else
+              flash[:danger] = '保存に失敗しました'
+              render template: 'users/documents/doc_14th/_subcon_edit'
+            end
           end
         end
       else
@@ -156,6 +172,13 @@ module Users::SubRequestOrders
             h_add_item_check_8th:          field_special_vehicle_keys, # 13-182 (a)Hその他　                   追加項目8(13-110)
             inspection_date:               field_special_vehicle_keys, # 13-255 (a)点検年月日
             inspector:                     field_special_vehicle_keys  # 13-256 (a)点検者
+          ]
+                                        )
+      when 'doc_14th'
+        params.require(:document).permit(approval_content:
+          %i[
+            prime_contractor_confirmation
+            reception_confirmation_date
           ]
                                         )
       when 'doc_15th'

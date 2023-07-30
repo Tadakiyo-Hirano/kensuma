@@ -1532,15 +1532,15 @@
               <td class="doc_13_s8" colspan="2" rowspan="4">定 期</td>
               <td class="doc_13_s8" colspan="2" rowspan="2">年次</td>
               <td class="doc_13_s24" dir="ltr" colspan="7" rowspan="2">
-                <%= field_special_vehicle.content&.[]("check_exp_date_year").to_date.strftime('%Y年%-m月%-d日') %> <!-- 13-025 自主検査有効期限・定期・年次 -->
+                <%= doc_content_date(field_special_vehicle.content&.[]("check_exp_date_year")) %> <!-- 13-025 自主検査有効期限・定期・年次 -->
               </td>
               <td class="doc_13_s34" colspan="5" rowspan="6">移動式<br> クレーン等<br> の性能検査<br> 有効期限</td>
               <td class="doc_13_s36" dir="ltr" colspan="7" rowspan="6">
-                <%= field_special_vehicle.content&.[]("check_exp_date_machine").to_date.strftime('%Y年%-m月%-d日') %> <!-- 13-028 移動式クレーン等の性能検査有効期限 -->
+                <%= doc_content_date(field_special_vehicle.content&.[]("check_exp_date_machine")) %> <!-- 13-028 移動式クレーン等の性能検査有効期限 -->
               </td>
               <td class="doc_13_s8" colspan="5" rowspan="6">自 動 車<br> 検 査 証<br> 有効期限</td>
               <td class="doc_13_s36" dir="ltr" colspan="7" rowspan="6">
-                <%= field_special_vehicle.content&.[]("check_exp_date_car").to_date.strftime('%Y年%-m月%-d日') %> <!-- 13-029 自動車検査証有効期限 -->
+                <%= doc_content_date(field_special_vehicle.content&.[]("check_exp_date_car")) %> <!-- 13-029 自動車検査証有効期限 -->
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s35"></td>
@@ -1602,7 +1602,7 @@
               <td class="doc_13_s39"></td>
               <td class="doc_13_s8" colspan="2" rowspan="2">月次</td>
               <td class="doc_13_s24" dir="ltr" colspan="7" rowspan="2">
-                <%= field_special_vehicle.content&.[]("check_exp_date_month").to_date.strftime('%Y年%-m月%-d日') %> <!-- 13-026 自主検査有効期限・定期・月次 -->
+                <%= doc_content_date(field_special_vehicle.content&.[]("check_exp_date_month")) %> <!-- 13-026 自主検査有効期限・定期・月次 -->
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s4"></td>
@@ -1667,7 +1667,7 @@
               <td class="doc_13_s39"></td>
               <td class="doc_13_s8" colspan="4" rowspan="2">特 定</td>
               <td class="doc_13_s24" dir="ltr" colspan="7" rowspan="2">
-                <%= field_special_vehicle.content&.[]("check_exp_date_specific").to_date.strftime('%Y年%-m月%-d日') %> <!-- 13-027 自主検査有効期限・特定 -->
+                <%= doc_content_date(field_special_vehicle.content&.[]("check_exp_date_specific")) %> <!-- 13-027 自主検査有効期限・特定 -->
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s4"></td>
@@ -1803,7 +1803,7 @@
               </td>
               <td class="doc_13_s8" colspan="2" rowspan="2">千円</td>
               <td class="doc_13_s36" dir="ltr" colspan="7" rowspan="2">
-                <%= field_special_vehicle.content&.[]("exp_date_insurance").to_date.strftime('%Y年%-m月%-d日') %> <!-- 13-034 有効期限 -->
+                <%= doc_content_date(field_special_vehicle.content&.[]("exp_date_insurance")) %> <!-- 13-034 有効期限 -->
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s4"></td>

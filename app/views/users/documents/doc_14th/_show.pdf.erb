@@ -2226,10 +2226,10 @@
             <td class="doc_14_s2"></td>
             <td class="doc_14_s36" colspan="2" rowspan="5">担<br>当<br>者</td>
             <td class="doc_14_s28_1" dir="ltr" colspan="20" rowspan="5">
-              <%= machine_doc_str(@document.content&.[]('prime_contractor_confirmation')) %> <!-- 14-018 「元請会社の確認欄」 ※document-->
+              <%= machine_doc_str(@document.approval_content&.[]('prime_contractor_confirmation')) %> <!-- 14-018 「元請会社の確認欄」 ※document-->
             </td>
             <td class="doc_14_s29_1" dir="ltr" colspan="7" rowspan="5">
-              <%= wareki(@document.content&.[]('reception_confirmation_date')) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
+              <%= wareki(@document.approval_content&.[]('reception_confirmation_date')) %> <!-- 14-019 「元請会社の受付確認年月日」 ※document-->
             </td>
             <td class="doc_14_s28" dir="ltr" colspan="8" rowspan="5">
               <!-- 14-020 ㊞ -->

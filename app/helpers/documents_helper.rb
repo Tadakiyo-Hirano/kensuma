@@ -8,7 +8,7 @@ module DocumentsHelper
   # document.contentの日付
   def doc_content_date(date)
     if action_name == 'edit'
-      date.nil? ? '' : date.to_date&.strftime('%Y年%-m月%-d日') # nilの場合のstrftime表示エラー回避
+      date.nil? ? '年　月　日' : date.to_date&.strftime('%Y年%-m月%-d日') # nilの場合のstrftime表示エラー回避
     else
       date.nil? ? '年　月　日' : wareki(date.to_date)
     end
@@ -1450,6 +1450,11 @@ module DocumentsHelper
     end
   end
 
+  # 書類の背景色
+  def document_background_color(genecon, subcon)
+    controller.controller_path == 'users/sub_request_orders/documents' ? genecon : subcon
+  end
+
   # (21) 新規入場時等教育実施報告書
 
   # 受講者氏名の時間情報　（編集ページで入力、documentsに保存）
@@ -1594,7 +1599,7 @@ module DocumentsHelper
       case hierarchy_document.document_type
       when 'doc_13th'
         link_to '確認・点検事項 記入', url
-      when 'doc_15th'
+      when 'doc_14th', 'doc_15th'
         link_to '確認事項 記入', url
       when 'doc_16th'
         link_to '確認・火気使用許可事項 記入', url

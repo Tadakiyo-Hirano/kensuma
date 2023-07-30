@@ -1,15 +1,33 @@
-<% if @error_msg_for_doc_14th.present? %>
-  <div id= "error_explantion">
-    <div class="row">
-      <div class="mx-auto">
-        <ul>
-          <% @error_msg_for_doc_14th.each do |msg| %>
-            <font color="red">
-              <li><%= msg %></li>
-            </font>
-          <% end %>
-        </ul>
+<% if RequestOrder.find_by(uuid: params[:sub_request_order_uuid]).nil? %>
+  <% if @error_msg_for_doc_14th.present? %>
+    <div id= "error_explantion">
+      <div class="row">
+        <div class="mx-auto">
+          <ul>
+            <% @error_msg_for_doc_14th.each do |msg| %>
+              <font color="red">
+                <li><%= msg %></li>
+              </font>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
+<% else %>
+  <% if @error_msg_for_approval_doc_14th.present? %>
+    <div id= "error_explantion">
+      <div class="row">
+        <div class="mx-auto">
+          <ul>
+            <% @error_msg_for_approval_doc_14th.each do |msg| %>
+              <font color="red">
+                <li><%= msg %></li>
+              </font>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% end %>
