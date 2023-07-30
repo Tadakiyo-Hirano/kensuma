@@ -4,76 +4,66 @@
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
       <tbody>
-        <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:name) %></th>
-          <td><%= @special_vehicle.name %></td>
-        </tr>
-        <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:maker) %></th>
-          <td><%= @special_vehicle.maker %></td>
-        </tr>
-        <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:standards_performance) %></th>
-          <td><%= @special_vehicle.standards_performance %></td>
-        </tr>
-        <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:year_manufactured) %></th>
-          <td><%= @special_vehicle.year_manufactured %></td>
-        </tr>
-        <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:control_number) %></th>
-          <td><%= @special_vehicle.control_number %></td>
-        </tr>
-        <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:vehicle_type) %></th>
-          <td><%= @special_vehicle.vehicle_type_i18n %></td>
-        </tr>
-        <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:owning_company_name) %></th>
+                <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:owning_company_name) %></th> <!-- 所有会社名 -->
           <td><%= @special_vehicle.owning_company_name %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_year) %></th>
-          <td><%= @special_vehicle.check_exp_date_year %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:vehicle_type) %></th> <!-- 登録する車両 -->
+          <td><%= @special_vehicle.vehicle_type_i18n %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_month) %></th>
-          <td><%= @special_vehicle.check_exp_date_month %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:name) %></th> <!-- 名称 -->
+          <td><%= @special_vehicle.name %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_specific) %></th>
-          <td><%= @special_vehicle.check_exp_date_specific %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:maker) %></th> <!-- メーカー -->
+          <td><%= @special_vehicle.maker %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_machine) %></th>
-          <td><%= @special_vehicle.check_exp_date_machine %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:standards_performance) %></th> <!-- 規格・性能 -->
+          <td><%= @special_vehicle.standards_performance %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_car) %></th>
-          <td><%= @special_vehicle.check_exp_date_car %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:year_manufactured) %></th> <!-- 製造年 -->
+          <td><%= wareki(@special_vehicle.year_manufactured) %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:personal_insurance) %></th>
-          <td><%= @special_vehicle.personal_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.personal_insurance}千円" %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:control_number) %></th> <!-- 管理番号(整理番号) -->
+          <td><%= @special_vehicle.control_number %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:objective_insurance) %></th>
-          <td><%= @special_vehicle.objective_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.objective_insurance}千円" %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_year) %></th> <!-- 年次 -->
+          <td><%= wareki(@special_vehicle.check_exp_date_year) %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:passenger_insurance) %></th>
-          <td><%= @special_vehicle.passenger_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.passenger_insurance}千円" %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_month) %></th> <!-- 月次 -->
+          <td><%= wareki(@special_vehicle.check_exp_date_month) %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:other_insurance) %></th>
-          <td><%= @special_vehicle.other_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.other_insurance}千円" %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_specific) %></th> <!-- 特定 -->
+          <td><%= wareki(@special_vehicle.check_exp_date_specific) %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:exp_date_insurance) %></th>
-          <td><%= @special_vehicle.exp_date_insurance %></td>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_machine) %></th> <!-- 移動式クレーン等の性能検査有効期限 -->
+          <td><%= wareki(@special_vehicle.check_exp_date_machine) %></td>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:periodic_self_inspections) %></th>
+          <th><%= SpecialVehicle.human_attribute_name(:check_exp_date_car) %></th> <!-- 自動車検査証有効期限 -->
+          <td><%= wareki(@special_vehicle.check_exp_date_car) %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:in_house_inspections) %></th> <!-- 自社の点検表の写し -->
+          <% if @special_vehicle.in_house_inspections.present? %>
+            <% @special_vehicle.in_house_inspections.each_with_index do |image, index| %>
+              <td><%= image_tag(image.url) %></td>
+            <% end %>
+          <% else %>
+            <td></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:periodic_self_inspections) %></th> <!-- 特定(年次)及び月例の定期自主検査帳票の写し -->
           <% if @special_vehicle.periodic_self_inspections.present? %>
             <% @special_vehicle.periodic_self_inspections.each_with_index do |image, index| %>
               <td><%= image_tag(image.url) %></td>
@@ -83,14 +73,24 @@
           <% end %>
         </tr>
         <tr>
-          <th><%= SpecialVehicle.human_attribute_name(:in_house_inspections) %></th>
-          <% if @special_vehicle.in_house_inspections.present? %>
-            <% @special_vehicle.in_house_inspections.each_with_index do |image, index| %>
-              <td><%= image_tag(image.url) %></td>
-            <% end %>
-          <% else %>
-            <td></td>
-          <% end %>
+          <th><%= SpecialVehicle.human_attribute_name(:personal_insurance) %></th> <!-- 対人 -->
+          <td><%= @special_vehicle.personal_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.personal_insurance}千円" %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:objective_insurance) %></th> <!-- 対物 -->
+          <td><%= @special_vehicle.objective_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.objective_insurance}千円" %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:passenger_insurance) %></th> <!-- 搭乗者 -->
+          <td><%= @special_vehicle.passenger_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.passenger_insurance}千円" %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:other_insurance) %></th> <!-- その他 -->
+          <td><%= @special_vehicle.other_insurance_unlimited == "unlimited" ? "無制限" : "#{@special_vehicle.other_insurance}千円" %></td>
+        </tr>
+        <tr>
+          <th><%= SpecialVehicle.human_attribute_name(:exp_date_insurance) %></th> <!-- 有効期限 -->
+          <td><%= wareki(@special_vehicle.exp_date_insurance) %></td>
         </tr>
       </tbody>
     </table>
