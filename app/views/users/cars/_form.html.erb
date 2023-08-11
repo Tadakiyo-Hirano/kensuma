@@ -94,7 +94,7 @@
       <%= voluntary.collection_select :company_voluntary_id, CarInsuranceCompany.all, :id, :name, { prompt: true }, { class: "form-select" } %>
       <br>
       <%= voluntary.label :voluntary_securities_number %>
-      <%= voluntary.text_field :voluntary_securities_number, class: "form-control", placeholder: Car.human_attribute_name(:voluntary_securities_number) %>
+      <%= voluntary.text_field :voluntary_securities_number, class: "form-control", placeholder: CarVoluntaryInsurance.human_attribute_name(:voluntary_securities_number) %>
       <br>
       <%= voluntary.label :personal_insurance %>
       <%= voluntary.select :personal_insurance, CarVoluntaryInsurance.personal_insurances.keys.to_a, { prompt: true }, { class: "form-select" } %>
