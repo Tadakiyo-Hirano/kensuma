@@ -172,17 +172,17 @@
               <td rowspan="2" width="10%">工期</td>
               <td width="40%">
                 <span>自　</span>
-                <%= wareki(document_site_info.start_date, format: :long) %> <!-- 4-021　元請会社の工期(自) -->
+                <%= wareki(document_site_info.start_date) %> <!-- 4-021　元請会社の工期(自) -->
               </td>
               <td rowspan="2" width="10%">契 約 日</td>
               <td rowspan="2" width="40%">
-                <%= wareki(document_site_info.contract_date, format: :long) %> <!-- 4-023 元請会社の契約日 -->
+                <%= wareki(document_site_info.contract_date) %> <!-- 4-023 元請会社の契約日 -->
               </td>
             </tr>
             <tr>
               <td>
                 <span>至　</span>
-                <%= wareki(document_site_info.end_date, format: :long) %> <!-- 4-022 元請会社の工期(至) -->
+                <%= wareki(document_site_info.end_date) %> <!-- 4-022 元請会社の工期(至) -->
               </td>
             </tr>
           </tbody>
