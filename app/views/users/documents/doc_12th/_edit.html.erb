@@ -614,11 +614,11 @@
                 <tr style="height: 25px">
                   <td class="doc_12_s4" colspan="5" rowspan="2">免許の種類</td>
                   <td class="doc_12_s25" colspan="13" rowspan="2">
-                    <%#= @document.content["vehicle_operator_driving_license_type"] %> 12-023
+                    <%= driver_licence_short_form(field_car.driver_licences) %>
                   </td>
                   <td class="doc_12_s29" colspan="5" rowspan="2">免許番号</td>
                   <td class="doc_12_s25" colspan="12" rowspan="2">
-                    <%#= @document.content["vehicle_operator_driving_license_number"] %> 12-024
+                    <%= field_car.driver_licence_number %>
                   </td>
                 </tr>
                 <tr style="height: 25px">
