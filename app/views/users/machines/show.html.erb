@@ -55,5 +55,6 @@
     <%= link_to "編集", edit_users_machine_path(@machine), class: "btn btn-success btn-md btn-block" %>
     <%= link_to "削除", users_machine_path(@machine), method: :delete,
                               data: { confirm: "#{@machine.name}の持込機械情報を削除します。本当によろしいですか？" }, class: "btn btn-danger btn-md btn-block" %>
+    <%= link_to "一覧画面へ", users_machines_path, class: "btn btn-default btn-md btn-block" %>
   </div>
 </div>
