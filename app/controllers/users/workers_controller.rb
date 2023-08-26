@@ -197,7 +197,7 @@ module Users
       end
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockNesting
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 全角スペースを半角スペースに変換
@@ -436,7 +436,7 @@ module Users
       end
       converted_params
     end
-    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockNesting
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
     def health_insurance_name_nil(health_insurance_type, params)
