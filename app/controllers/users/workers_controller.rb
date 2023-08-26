@@ -197,7 +197,7 @@ module Users
       end
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockNesting
     def worker_params_with_converted
       converted_params = worker_params.dup
       # 全角スペースを半角スペースに変換
@@ -312,119 +312,121 @@ module Users
         end
       end
 
-      # 健康保険の写し、キャリアアップシステムの写しの追加/削除
-      insurance_attributes = converted_params[:worker_insurance_attributes]
-      %i[health_insurance_image career_up_images].each do |key|
-        case key
-        when :health_insurance_image
-          # 健康保険の写しの追加/削除
-          if %w[health_insurance_association
-                japan_health_insurance_association
-                construction_national_health_insurance
-                national_health_insurance].exclude?(insurance_attributes[:health_insurance_type])
-            converted_params = converted_params.merge('worker_insurance_attributes'=>insurance_attributes.merge(key => []))
-          elsif converted_params[:worker_insurance_attributes][:health_insurance_image]
-            converted_params = converted_params.merge('worker_insurance_attributes'=>insurance_attributes.merge(key => @worker.worker_insurance.health_insurance_image.push(converted_params[:worker_insurance_attributes][:health_insurance_image]).flatten))
-          end
-        when :career_up_images
-          # キャリアアップシステムの写しの追加/削除
-          if converted_params[:career_up_id].blank?
-            converted_params = converted_params.merge(key => [])
-          elsif converted_params[:career_up_images]
-            converted_params = converted_params.merge(key => @worker.career_up_images.push(converted_params[:career_up_images]).flatten)
-          end
-        end
-      end
-
-      # 従業員証の写し追加処理
-      converted_params = converted_params.merge('employee_cards' => @worker.employee_cards.push(converted_params[:employee_cards]).flatten) if converted_params[:employee_cards]
-
-      # パスパートの写し追加処理
-      converted_params = converted_params.merge('passports' => @worker.passports.push(converted_params[:passports]).flatten) if converted_params[:passports]
-
-      # 在留カードの写し追加処理
-      converted_params = converted_params.merge('residence_cards' => @worker.residence_cards.push(converted_params[:residence_cards]).flatten) if converted_params[:residence_cards]
-
-      # 在留カードの写し追加処理
-      converted_params = converted_params.merge('residence_cards' => @worker.residence_cards.push(converted_params[:residence_cards]).flatten) if converted_params[:residence_cards]
-
-      # 受入企業と外国人建設就労者等との間の雇用条件書の写し追加処理
-      converted_params = converted_params.merge('employment_conditions' => @worker.employment_conditions.push(converted_params[:employment_conditions]).flatten) if converted_params[:employment_conditions]
-
-      # 技能講習修了証明書の写し追加処理
-      special_educations_attributes = converted_params[:worker_special_educations_attributes]
-      if @worker.worker_special_educations.present?
-        worker_special_educations_attributes = []
-        special_educations_attributes.each do |special_educations_attribute|
-          worker_special_education = @worker.worker_special_educations.find_by(special_education_id: special_educations_attribute[1]['special_education_id'].to_i)
-          if worker_special_education
-            if special_educations_attribute[1]['images']
-              worker_special_educations_attributes.push(special_educations_attribute[1].merge('images' => worker_special_education.images
-                                                                                                                                  .push(special_educations_attribute[1]['images'])
-                                                                                                                                  .flatten))
+      if params[:action] == 'update'
+        # 健康保険の写し、キャリアアップシステムの写しの追加/削除
+        insurance_attributes = converted_params[:worker_insurance_attributes]
+        %i[health_insurance_image career_up_images].each do |key|
+          case key
+          when :health_insurance_image
+            # 健康保険の写しの追加/削除
+            if %w[health_insurance_association
+                  japan_health_insurance_association
+                  construction_national_health_insurance
+                  national_health_insurance].exclude?(insurance_attributes[:health_insurance_type])
+              converted_params = converted_params.merge('worker_insurance_attributes'=>insurance_attributes.merge(key => []))
+            elsif converted_params[:worker_insurance_attributes][:health_insurance_image]
+              converted_params = converted_params.merge('worker_insurance_attributes'=>insurance_attributes.merge(key => @worker.worker_insurance.health_insurance_image.push(converted_params[:worker_insurance_attributes][:health_insurance_image]).flatten))
             end
-          elsif special_educations_attribute[1]['images']
-            worker_special_educations_attributes.push(special_educations_attribute[1].merge('images' =>special_educations_attribute[1]['images']))
-          end
-        end
-        converted_params = converted_params.merge('worker_special_educations_attributes'=> worker_special_educations_attributes)
-      end
-
-      # 特別教育修了証明書の写しの写し追加処理
-      skill_trainings_attributes = converted_params[:worker_skill_trainings_attributes]
-      if @worker.worker_skill_trainings.present?
-        worker_skill_trainings_attributes = []
-        skill_trainings_attributes.each do |skill_trainings_attribute|
-          worker_skill_training = @worker.worker_skill_trainings.find_by(skill_training_id: skill_trainings_attribute[1]['skill_training_id'].to_i)
-          if worker_skill_training
-            if skill_trainings_attribute[1]['images']
-              worker_skill_trainings_attributes.push(skill_trainings_attribute[1].merge('images' => worker_skill_training.images
-                                                                                                                        .push(skill_trainings_attribute[1]['images'])
-                                                                                                                        .flatten))
+          when :career_up_images
+            # キャリアアップシステムの写しの追加/削除
+            if converted_params[:career_up_id].blank?
+              converted_params = converted_params.merge(key => [])
+            elsif converted_params[:career_up_images]
+              converted_params = converted_params.merge(key => @worker.career_up_images.push(converted_params[:career_up_images]).flatten)
             end
-          elsif skill_trainings_attribute[1]['images']
-            worker_skill_trainings_attributes.push(skill_trainings_attribute[1].merge('images' => skill_trainings_attribute[1]['images']))
           end
         end
-        converted_params = converted_params.merge('worker_skill_trainings_attributes' => worker_skill_trainings_attributes)
-      end
 
-      # 技能検定合格証明書の写し追加処理
-      licenses_attributes = converted_params[:worker_licenses_attributes]
-      if @worker.worker_licenses.present?
-        worker_licenses_attributes = []
-        licenses_attributes.each do |licenses_attribute|
-          worker_licenses = @worker.worker_licenses.find_by(license_id: licenses_attribute[1]['license_id'].to_i)
-          if worker_licenses
-            if licenses_attribute[1]['images']
-              worker_licenses_attributes.push(licenses_attribute[1].merge('images' => worker_licenses.images
-                                                                                                    .push(licenses_attribute[1]['images'])
-                                                                                                    .flatten))
-            end
-          elsif licenses_attribute[1]['images']
-            worker_licenses_attributes.push(licenses_attribute[1].merge('images' => licenses_attribute[1]['images']))
-          end
-        end
-        converted_params = converted_params.merge('worker_licenses_attributes' => worker_licenses_attributes)
-      end
+        # 従業員証の写し追加処理
+        converted_params = converted_params.merge('employee_cards' => @worker.employee_cards.push(converted_params[:employee_cards]).flatten) if converted_params[:employee_cards]
 
-      # 安全衛生教育修了証明書写し追加処理
-      safety_health_educations_attributes = converted_params[:worker_safety_health_educations_attributes]
-      if @worker.worker_safety_health_educations.present?
-        worker_safety_health_educations_attributes = []
-        safety_health_educations_attributes.each do |safety_health_educations_attribute|
-          worker_safety_health_education = @worker.worker_safety_health_educations.find_by(safety_health_education_id: safety_health_educations_attribute[1]['safety_health_education_id'].to_i)
-          if worker_safety_health_education
-            if safety_health_educations_attribute[1]['images']
-              worker_safety_health_educations_attributes.push(safety_health_educations_attribute[1].merge('images' => worker_safety_health_education.images
-                                                                                                                                                    .push(safety_health_educations_attribute[1]['images'])
-                                                                                                                                                    .flatten))
+        # パスパートの写し追加処理
+        converted_params = converted_params.merge('passports' => @worker.passports.push(converted_params[:passports]).flatten) if converted_params[:passports]
+
+        # 在留カードの写し追加処理
+        converted_params = converted_params.merge('residence_cards' => @worker.residence_cards.push(converted_params[:residence_cards]).flatten) if converted_params[:residence_cards]
+
+        # 在留カードの写し追加処理
+        converted_params = converted_params.merge('residence_cards' => @worker.residence_cards.push(converted_params[:residence_cards]).flatten) if converted_params[:residence_cards]
+
+        # 受入企業と外国人建設就労者等との間の雇用条件書の写し追加処理
+        converted_params = converted_params.merge('employment_conditions' => @worker.employment_conditions.push(converted_params[:employment_conditions]).flatten) if converted_params[:employment_conditions]
+
+        # 技能講習修了証明書の写し追加処理
+        special_educations_attributes = converted_params[:worker_special_educations_attributes]
+        if @worker.worker_special_educations.present?
+          worker_special_educations_attributes = []
+          special_educations_attributes.each do |special_educations_attribute|
+            worker_special_education = @worker.worker_special_educations.find_by(special_education_id: special_educations_attribute[1]['special_education_id'].to_i)
+            if worker_special_education
+              if special_educations_attribute[1]['images']
+                worker_special_educations_attributes.push(special_educations_attribute[1].merge('images' => worker_special_education.images
+                                                                                                                                    .push(special_educations_attribute[1]['images'])
+                                                                                                                                    .flatten))
+              end
+            elsif special_educations_attribute[1]['images']
+              worker_special_educations_attributes.push(special_educations_attribute[1].merge('images' =>special_educations_attribute[1]['images']))
             end
-          elsif safety_health_educations_attribute[1]['images']
-            worker_safety_health_educations_attributes.push(safety_health_educations_attribute[1].merge('images' => safety_health_educations_attribute[1]['images']))
           end
+          converted_params = converted_params.merge('worker_special_educations_attributes'=> worker_special_educations_attributes)
         end
-        converted_params = converted_params.merge('worker_safety_health_educations_attributes' => worker_safety_health_educations_attributes)
+
+        # 特別教育修了証明書の写しの写し追加処理
+        skill_trainings_attributes = converted_params[:worker_skill_trainings_attributes]
+        if @worker.worker_skill_trainings.present?
+          worker_skill_trainings_attributes = []
+          skill_trainings_attributes.each do |skill_trainings_attribute|
+            worker_skill_training = @worker.worker_skill_trainings.find_by(skill_training_id: skill_trainings_attribute[1]['skill_training_id'].to_i)
+            if worker_skill_training
+              if skill_trainings_attribute[1]['images']
+                worker_skill_trainings_attributes.push(skill_trainings_attribute[1].merge('images' => worker_skill_training.images
+                                                                                                                          .push(skill_trainings_attribute[1]['images'])
+                                                                                                                          .flatten))
+              end
+            elsif skill_trainings_attribute[1]['images']
+              worker_skill_trainings_attributes.push(skill_trainings_attribute[1].merge('images' => skill_trainings_attribute[1]['images']))
+            end
+          end
+          converted_params = converted_params.merge('worker_skill_trainings_attributes' => worker_skill_trainings_attributes)
+        end
+
+        # 技能検定合格証明書の写し追加処理
+        licenses_attributes = converted_params[:worker_licenses_attributes]
+        if @worker.worker_licenses.present?
+          worker_licenses_attributes = []
+          licenses_attributes.each do |licenses_attribute|
+            worker_licenses = @worker.worker_licenses.find_by(license_id: licenses_attribute[1]['license_id'].to_i)
+            if worker_licenses
+              if licenses_attribute[1]['images']
+                worker_licenses_attributes.push(licenses_attribute[1].merge('images' => worker_licenses.images
+                                                                                                      .push(licenses_attribute[1]['images'])
+                                                                                                      .flatten))
+              end
+            elsif licenses_attribute[1]['images']
+              worker_licenses_attributes.push(licenses_attribute[1].merge('images' => licenses_attribute[1]['images']))
+            end
+          end
+          converted_params = converted_params.merge('worker_licenses_attributes' => worker_licenses_attributes)
+        end
+
+        # 安全衛生教育修了証明書写し追加処理
+        safety_health_educations_attributes = converted_params[:worker_safety_health_educations_attributes]
+        if @worker.worker_safety_health_educations.present?
+          worker_safety_health_educations_attributes = []
+          safety_health_educations_attributes.each do |safety_health_educations_attribute|
+            worker_safety_health_education = @worker.worker_safety_health_educations.find_by(safety_health_education_id: safety_health_educations_attribute[1]['safety_health_education_id'].to_i)
+            if worker_safety_health_education
+              if safety_health_educations_attribute[1]['images']
+                worker_safety_health_educations_attributes.push(safety_health_educations_attribute[1].merge('images' => worker_safety_health_education.images
+                                                                                                                                                      .push(safety_health_educations_attribute[1]['images'])
+                                                                                                                                                      .flatten))
+              end
+            elsif safety_health_educations_attribute[1]['images']
+              worker_safety_health_educations_attributes.push(safety_health_educations_attribute[1].merge('images' => safety_health_educations_attribute[1]['images']))
+            end
+          end
+          converted_params = converted_params.merge('worker_safety_health_educations_attributes' => worker_safety_health_educations_attributes)
+        end
       end
 
       # 特別健康診断のチェックが入っていない時、特別健康診断を空にする
@@ -434,7 +436,7 @@ module Users
       end
       converted_params
     end
-    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/MethodLength, Metrics/BlockNesting
 
     # 健康保険が健康保険組合もしくは建設国保でなければ保険名を空文字にする
     def health_insurance_name_nil(health_insurance_type, params)
