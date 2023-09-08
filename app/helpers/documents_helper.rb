@@ -1212,6 +1212,11 @@ module DocumentsHelper
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
   end
 
+  # 作業員職種情報
+  def worker_occupations(business)
+    business.occupations.pluck(:name).join(', ')
+  end
+
   # (14) 持込機械の機械名情報（持込時の点検表）
   def machine_tag_1st(machine)
     tags = machine&.content&.[]('machine_tags')
