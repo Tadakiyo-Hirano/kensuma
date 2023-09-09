@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_21_134656) do
+ActiveRecord::Schema.define(version: 2023_09_03_131717) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -387,6 +387,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.integer "license_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "machine_tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -572,6 +573,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -581,6 +583,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.json "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -601,6 +604,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.integer "driving_related"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "special_med_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
