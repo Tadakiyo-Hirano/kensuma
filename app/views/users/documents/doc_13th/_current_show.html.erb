@@ -331,12 +331,12 @@
               <td class="doc_13_s23" dir="ltr" colspan="14" rowspan="3" style="border-left: 1px solid #000;">
                 <%= field_special_vehicle.content&.[]('owning_company_name') %> <!-- 13-101 所有会社名 -->
               </td>
-              <td class="doc_13_s23" dir="ltr" colspan="12" rowspan="3">
+              <td class="doc_13_s23" dir="ltr" colspan="14" rowspan="3">
                 <%= @current_business.representative_name %> <!-- 13-102 所有会社の代表者名 -->
               </td>
-              <td class="doc_13_s24" dir="ltr" colspan="2" rowspan="3">
-                ㊞ <!-- 13-261 印 -->
-              </td>
+              <%# <td class="doc_13_s24" dir="ltr" colspan="2" rowspan="3">
+                <!-- 13-261 印 -->
+              </td> %>
               <td class="doc_13_s5"></td>
               <td class="doc_13_s22" colspan="7">(２) 移動式クレーン</td>
             </tr>
@@ -555,7 +555,7 @@
                 <%= document_info.content&.[]('subcon_representative_name') %> <!-- 13-008 持込会社の代表者名 -->
               </td>
               <td class="doc_13_s31" dir="ltr" colspan="2" rowspan="2">
-                ㊞ <!-- 13-259 印 -->
+                <!-- 13-259 印 -->
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s4"></td>
@@ -980,7 +980,7 @@
                 <%= field_special_vehicle.use_company_representative_name %> <!-- 13-011 使用会社の代表者名 -->
               </td>
               <td class="doc_13_s24" dir="ltr" colspan="2" rowspan="3">
-                ㊞ <!-- 印 13-260 -->
+                <!-- 印 13-260 -->
               </td>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s4"></td>
@@ -1750,22 +1750,22 @@
               <td class="doc_13_s28" rowspan="3">点検日</td>
               <td class="doc_13_s42" colspan="6">年 月 日</td>
               <td class="doc_13_s28" rowspan="3">点検者</td>
-              <td class="doc_13_s24" dir="ltr" colspan="4" rowspan="3" style="background-color: #ccffcc;">
+              <td class="doc_13_s24" dir="ltr" colspan="5" rowspan="3" style="background-color: #ccffcc;">
                 <%= @document.content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-256 (a)点検者 -->
               </td>
-              <td class="doc_13_s43" dir="ltr" rowspan="3">
+              <%# <td class="doc_13_s43" dir="ltr" rowspan="3">
                 ㊞ <!-- 13-262 印 -->
-              </td>
+              </td> %>
               <td class="doc_13_s21" rowspan="3">(b)</td>
               <td class="doc_13_s28" rowspan="3">点検日</td>
               <td class="doc_13_s42" colspan="6">年 月 日</td>
               <td class="doc_13_s28" rowspan="3">点検者</td>
-              <td class="doc_13_s24" dir="ltr" colspan="4" rowspan="3" style="background-color: #e9ecef;">
+              <td class="doc_13_s24" dir="ltr" colspan="5" rowspan="3" style="background-color: #e9ecef;">
                 <%= @document.approval_content&.[]('inspector')&.[]("field_special_vehicle_#{field_special_vehicle.id}") %> <!-- 13-258 (b)点検者名 -->
               </td>
-              <td class="doc_13_s43" dir="ltr" rowspan="3">
+              <%# <td class="doc_13_s43" dir="ltr" rowspan="3">
                 ㊞ <!-- 13-263 印 -->
-              </td>
+              </td> %>
               <td class="doc_13_s4"></td>
               <td class="doc_13_s22" colspan="7">(40) 鉄骨切断機</td>
             </tr>
