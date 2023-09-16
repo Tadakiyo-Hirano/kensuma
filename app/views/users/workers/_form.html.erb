@@ -856,285 +856,287 @@
 
 <script>
   $(function(){
-    $.validator.addMethod("alphanumericKatakanaOnly", function(value, element) {
-      return this.optional(element) || /^[0-9｡-ﾟ]+$/.test(value);
-    }, "数字と半角カタカナのみ入力してください。");
+    if (<%= @current_business.user.is_prime_contractor == false %>) {
+      $.validator.addMethod("alphanumericKatakanaOnly", function(value, element) {
+        return this.optional(element) || /^[0-9｡-ﾟ]+$/.test(value);
+      }, "数字と半角カタカナのみ入力してください。");
 
-    $.each(function(key){
-      $.validator.addMethod(key, this);
-    });
-    $(".worker-form-validation").validate({
-      rules:{
-        "worker[name]": {
-          required: true
-        },
-        "worker[name_kana]": {
-          required: true
-        },
-        "worker[country]": {
-          required: true
-        },
-        "worker[sex]": {
-          required: true
-        },
-        "worker[my_address]": {
-          required: true
-        },
-        "worker[my_phone_number]": {
-          required: true
-        },
-        "worker[family_name]": {
-          required: true
-        },
-        "worker[relationship]": {
-          required: true
-        },
-        "worker[family_address]": {
-          required: true
-        },
-        "worker[family_phone_number]": {
-          required: true
-        },
-        "worker[birth_day_on]": {
-          required: true
-        },
-        "worker[abo_blood_type]": {
-          required: true
-        },
-        "worker[rh_blood_type]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][is_med_exam]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][med_exam_on]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][max_blood_pressure]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][min_blood_pressure]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][is_special_med_exam]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][special_med_exam_on]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][special_med_exam_list][]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][health_condition]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][status_of_residence]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][maturity_date]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][confirmed_check]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][confirmed_check_date]": {
-          required: true
-        },
-        "worker[driver_licence_number]": {
-          required: true
-        },
-        "worker[job_title]": {
-          required: true
-        },
-        "worker[hiring_on]": {
-          required: true
-        },
-        "worker[experience_term_before_hiring]": {
-          required: true
-        },
-        "worker[blank_term]": {
-          required: true
-        },
-        "worker[employment_contract]": {
-          required: true
-        },
-        "worker[maturity_date]": {
-          required: true
-        },
-        "worker[confirmed_check_date]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][health_insurance_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][health_insurance_name]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][pension_insurance_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][employment_insurance_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: true,
-          alphanumericKatakanaOnly: true
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][has_labor_insurance]": {
-          required: true
-        },
-      },
-      messages:{
-        "worker[name]": {
-          required: "名前を入力してください。"
-        },
-        "worker[name_kana]": {
-          required: "名前カナを入力してください。"
-        },
-        "worker[country]": {
-          required: "国籍を入力してください。"
-        },
-        "worker[sex]": {
-          required: "性別を入力してください。"
-        },
-        "worker[my_address]": {
-          required: "住所を入力してください。"
-        },
-        "worker[my_phone_number]": {
-          required: "電話番号を入力してください。"
-        },
-        "worker[family_name]": {
-          required: "家族の氏名を入力してください。"
-        },
-        "worker[relationship]": {
-          required: "家族の続柄を入力してください。"
-        },
-        "worker[family_address]": {
-          required: "家族の住所を入力してください。"
-        },
-        "worker[family_phone_number]": {
-          required: "家族の電話番号を入力してください。"
-        },
-        "worker[birth_day_on]": {
-          required: "生年月日を入力してください。"
-        },
-        "worker[abo_blood_type]": {
-          required: "血液型(ABO)を入力してください。"
-        },
-        "worker[rh_blood_type]": {
-          required: "血液型(Rh)を入力してください。"
-        },
-        "worker[worker_medical_attributes][is_med_exam]": {
-          required: "健康診断の受信の有無を選択してください。"
-        },
-        "worker[worker_medical_attributes][med_exam_on]": {
-          required: "健康診断日を選択してください。"
-        },
-        "worker[worker_medical_attributes][max_blood_pressure]": {
-          required: "最高血圧を入力してください。"
-        },
-        "worker[worker_medical_attributes][min_blood_pressure]": {
-          required: "最低血圧を入力してください。"
-        },
-        "worker[worker_medical_attributes][is_special_med_exam]": {
-          required: "特別健康診断の受信の有無を選択してください。"
-        },
-        "worker[worker_medical_attributes][special_med_exam_on]": {
-          required: "特別健康診断日を選択してください。"
-        },
-        "worker[worker_medical_attributes][special_med_exam_list][]": {
-          required: "特別健康診断内容を選択してください。"
-        },
-        "worker[worker_medical_attributes][health_condition]": {
-          required: "最近の健康状態を選択してください。"
-        },
-        "worker[worker_medical_attributes][status_of_residence]": {
-          required: "在留資格を選択してください。"
-        },
-        "worker[worker_medical_attributes][maturity_date]": {
-          required: "在留期間満期日を選択してください。"
-        },
-        "worker[worker_medical_attributes][confirmed_check]": {
-          required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください。"
-        },
-        "worker[worker_medical_attributes][confirmed_check_date]": {
-          required: "最近の健康状態を選択してください。"
-        },
-        "worker[driver_licence_number]": {
-          required: "免許証番号を入力してください。"
-        },
-        "worker[job_title]": {
-          required: "役職を入力してください。"
-        },
-        "worker[hiring_on]": {
-          required: "雇入年月日を入力してください。"
-        },
-        "worker[experience_term_before_hiring]": {
-          required: "雇入前経験年数を入力してください。"
-        },
-        "worker[blank_term]": {
-          required: "ブランク年数を入力してください。"
-        },
-        "worker[employment_contract]": {
-          required: "雇用契約書を取り交わしたかどうかを選択してください。"
-        },
-        "worker[status_of_residence]": {
-          required: "在留資格を選択してください。"
-        },
-        "worker[confirmed_check]": {
-          required: "CCUS登録情報が最新であることの確認を選択してください。"
-        },
-        "worker[maturity_date]": {
-          required: "在留期間満期日を入力してください"
-        },
-        "worker[confirmed_check_date]": {
-          required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください"
-        },
-        "worker[worker_insurance_attributes][health_insurance_type]": {
-          required: "健康保険のタイプを選択してください。"
-        },
-        "worker[worker_insurance_attributes][health_insurance_name]": {
-          required: "健康保険名を入力してください。"
-        },
-        "worker[worker_insurance_attributes][pension_insurance_type]": {
-          required: "年金保険のタイプを選択してください。"
-        },
-        "worker[worker_insurance_attributes][employment_insurance_type]": {
-          required: "雇用保険のタイプを選択してください。"
-        },
-        "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: "被保険者番号は数字と半角カタカナの4桁以内で入力してください。",
-          alphanumericKatakanaOnly: "数字と半角カタカナのみ入力してください。"
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
-          required: "建設業退職金共済制度を選択してください。"
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
-          required: "建設業退職金共済制度名前を入力してください。"
-        },
-        "worker[worker_insurance_attributes][has_labor_insurance]": {
-          required: "労働特別保険に加入しているかどうかを選択してください。"
-        },
-      },
-      
-      errorPlacement: function(error, element) {
-        // radioとcheckboxのみ表示位置を個別調整
-        if (element.is(":radio") || element.is(":checkbox")) {
-          error.insertBefore(element.closest('.list-group-item'));
-        } else {
-          error.insertBefore(element);
+      $.each(function(key){
+        $.validator.addMethod(key, this);
+      });
+      $(".worker-form-validation").validate({
+        rules:{
+          "worker[name]": {
+            required: true
+          },
+          "worker[name_kana]": {
+            required: true
+          },
+          "worker[country]": {
+            required: true
+          },
+          "worker[sex]": {
+            required: true
+          },
+          "worker[my_address]": {
+            required: true
+          },
+          "worker[my_phone_number]": {
+            required: true
+          },
+          "worker[family_name]": {
+            required: true
+          },
+          "worker[relationship]": {
+            required: true
+          },
+          "worker[family_address]": {
+            required: true
+          },
+          "worker[family_phone_number]": {
+            required: true
+          },
+          "worker[birth_day_on]": {
+            required: true
+          },
+          "worker[abo_blood_type]": {
+            required: true
+          },
+          "worker[rh_blood_type]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][is_med_exam]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][med_exam_on]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][max_blood_pressure]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][min_blood_pressure]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][is_special_med_exam]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][special_med_exam_on]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][special_med_exam_list][]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][health_condition]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][status_of_residence]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][maturity_date]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][confirmed_check]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][confirmed_check_date]": {
+            required: true
+          },
+          "worker[driver_licence_number]": {
+            required: true
+          },
+          "worker[job_title]": {
+            required: true
+          },
+          "worker[hiring_on]": {
+            required: true
+          },
+          "worker[experience_term_before_hiring]": {
+            required: true
+          },
+          "worker[blank_term]": {
+            required: true
+          },
+          "worker[employment_contract]": {
+            required: true
+          },
+          "worker[maturity_date]": {
+            required: true
+          },
+          "worker[confirmed_check_date]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][health_insurance_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][health_insurance_name]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][pension_insurance_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][employment_insurance_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][employment_insurance_number]": {
+            required: true,
+            alphanumericKatakanaOnly: true
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][has_labor_insurance]": {
+            required: true
+          },
+        },
+        messages:{
+          "worker[name]": {
+            required: "名前を入力してください。"
+          },
+          "worker[name_kana]": {
+            required: "名前カナを入力してください。"
+          },
+          "worker[country]": {
+            required: "国籍を入力してください。"
+          },
+          "worker[sex]": {
+            required: "性別を入力してください。"
+          },
+          "worker[my_address]": {
+            required: "住所を入力してください。"
+          },
+          "worker[my_phone_number]": {
+            required: "電話番号を入力してください。"
+          },
+          "worker[family_name]": {
+            required: "家族の氏名を入力してください。"
+          },
+          "worker[relationship]": {
+            required: "家族の続柄を入力してください。"
+          },
+          "worker[family_address]": {
+            required: "家族の住所を入力してください。"
+          },
+          "worker[family_phone_number]": {
+            required: "家族の電話番号を入力してください。"
+          },
+          "worker[birth_day_on]": {
+            required: "生年月日を入力してください。"
+          },
+          "worker[abo_blood_type]": {
+            required: "血液型(ABO)を入力してください。"
+          },
+          "worker[rh_blood_type]": {
+            required: "血液型(Rh)を入力してください。"
+          },
+          "worker[worker_medical_attributes][is_med_exam]": {
+            required: "健康診断の受信の有無を選択してください。"
+          },
+          "worker[worker_medical_attributes][med_exam_on]": {
+            required: "健康診断日を選択してください。"
+          },
+          "worker[worker_medical_attributes][max_blood_pressure]": {
+            required: "最高血圧を入力してください。"
+          },
+          "worker[worker_medical_attributes][min_blood_pressure]": {
+            required: "最低血圧を入力してください。"
+          },
+          "worker[worker_medical_attributes][is_special_med_exam]": {
+            required: "特別健康診断の受信の有無を選択してください。"
+          },
+          "worker[worker_medical_attributes][special_med_exam_on]": {
+            required: "特別健康診断日を選択してください。"
+          },
+          "worker[worker_medical_attributes][special_med_exam_list][]": {
+            required: "特別健康診断内容を選択してください。"
+          },
+          "worker[worker_medical_attributes][health_condition]": {
+            required: "最近の健康状態を選択してください。"
+          },
+          "worker[worker_medical_attributes][status_of_residence]": {
+            required: "在留資格を選択してください。"
+          },
+          "worker[worker_medical_attributes][maturity_date]": {
+            required: "在留期間満期日を選択してください。"
+          },
+          "worker[worker_medical_attributes][confirmed_check]": {
+            required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください。"
+          },
+          "worker[worker_medical_attributes][confirmed_check_date]": {
+            required: "最近の健康状態を選択してください。"
+          },
+          "worker[driver_licence_number]": {
+            required: "免許証番号を入力してください。"
+          },
+          "worker[job_title]": {
+            required: "役職を入力してください。"
+          },
+          "worker[hiring_on]": {
+            required: "雇入年月日を入力してください。"
+          },
+          "worker[experience_term_before_hiring]": {
+            required: "雇入前経験年数を入力してください。"
+          },
+          "worker[blank_term]": {
+            required: "ブランク年数を入力してください。"
+          },
+          "worker[employment_contract]": {
+            required: "雇用契約書を取り交わしたかどうかを選択してください。"
+          },
+          "worker[status_of_residence]": {
+            required: "在留資格を選択してください。"
+          },
+          "worker[confirmed_check]": {
+            required: "CCUS登録情報が最新であることの確認を選択してください。"
+          },
+          "worker[maturity_date]": {
+            required: "在留期間満期日を入力してください"
+          },
+          "worker[confirmed_check_date]": {
+            required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください"
+          },
+          "worker[worker_insurance_attributes][health_insurance_type]": {
+            required: "健康保険のタイプを選択してください。"
+          },
+          "worker[worker_insurance_attributes][health_insurance_name]": {
+            required: "健康保険名を入力してください。"
+          },
+          "worker[worker_insurance_attributes][pension_insurance_type]": {
+            required: "年金保険のタイプを選択してください。"
+          },
+          "worker[worker_insurance_attributes][employment_insurance_type]": {
+            required: "雇用保険のタイプを選択してください。"
+          },
+          "worker[worker_insurance_attributes][employment_insurance_number]": {
+            required: "被保険者番号は数字と半角カタカナの4桁以内で入力してください。",
+            alphanumericKatakanaOnly: "数字と半角カタカナのみ入力してください。"
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
+            required: "建設業退職金共済制度を選択してください。"
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
+            required: "建設業退職金共済制度名前を入力してください。"
+          },
+          "worker[worker_insurance_attributes][has_labor_insurance]": {
+            required: "労働特別保険に加入しているかどうかを選択してください。"
+          },
+        },
+        
+        errorPlacement: function(error, element) {
+          // radioとcheckboxのみ表示位置を個別調整
+          if (element.is(":radio") || element.is(":checkbox")) {
+            error.insertBefore(element.closest('.list-group-item'));
+          } else {
+            error.insertBefore(element);
+          }
         }
-      }
-    });
-     // 入力欄を変更したときにバリデーションを実行
-    $(".worker-form-validation").change(function () {
-      $(this).valid();
-    });
+      });
+      // 入力欄を変更したときにバリデーションを実行
+      $(".worker-form-validation").change(function () {
+        $(this).valid();
+      });
+    }
   });
 </script>

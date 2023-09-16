@@ -44,23 +44,26 @@ class Worker < ApplicationRecord
   validates :career_up_id, format: { with: /\A^$|\A\z|\A\d{14}\z/, message: 'は14桁の数字で入力してください' }, allow_nil: true
   validates :name, presence: true
   validates :name_kana, presence: true, format: { with: /\A^$|\A[ァ-ヴ][ァ-ヴー\s]*[ァ-ヴー]\z/, message: 'はカタカナで入力してください' }
-  validates :country, presence: true
+
   validates :email, format: { with: VALID_EMAIL_REGEX, message: 'はexample@email.comのような形式で入力してください' }, allow_nil: true
   validates :post_code, format: { with: /\A^$|\A\z|\A\d{7}\z/, message: 'は7桁の数字で入力してください' }, allow_nil: true
-  validates :my_address, presence: true
-  validates :my_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
-  validates :family_address, presence: true
-  validates :family_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
-  validates :birth_day_on, presence: true
-  validates :abo_blood_type, presence: true
-  validates :rh_blood_type, presence: true
-  validates :hiring_on, presence: true
-  validates :experience_term_before_hiring, presence: true, format: { with: VALID_UNDER_THREE_DIGITS_REGEX, message: UNDER_THREE_DIGITS_MS }
-  validates :blank_term, presence: true, format: { with: VALID_UNDER_THREE_DIGITS_REGEX, message: UNDER_THREE_DIGITS_MS }
-  validates :employment_contract, presence: true
-  validates :family_name, presence: true
-  validates :relationship, presence: true
-  validates :sex, presence: true
+  with_options unless: -> { business&.user&.is_prime_contractor == true } do
+    validates :country, presence: true
+    validates :my_address, presence: true
+    validates :my_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
+    validates :family_address, presence: true
+    validates :family_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
+    validates :birth_day_on, presence: true
+    validates :abo_blood_type, presence: true
+    validates :rh_blood_type, presence: true
+    validates :hiring_on, presence: true
+    validates :experience_term_before_hiring, presence: true, format: { with: VALID_UNDER_THREE_DIGITS_REGEX, message: UNDER_THREE_DIGITS_MS }
+    validates :blank_term, presence: true, format: { with: VALID_UNDER_THREE_DIGITS_REGEX, message: UNDER_THREE_DIGITS_MS }
+    validates :employment_contract, presence: true
+    validates :family_name, presence: true
+    validates :relationship, presence: true
+    validates :sex, presence: true
+  end
   validates :driver_licence_number, absence: true, unless: :driver_licence_present?
   validates :driver_licence_number, presence: true, if: :driver_licence_present?
   validates :driver_licence_number, format: FORMAT_D_LICENCE, allow_nil: true, if: :driver_licence_present?
