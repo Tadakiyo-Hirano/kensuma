@@ -2,6 +2,7 @@
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
+    before_action :set_sorted_credentials, only: %i[new create edit update]
     before_action :convert_to_full_width, only: %i[create update]
 
     def index
@@ -9,7 +10,6 @@ module Users
     end
 
     def new
-      set_sorted_credentials
       if Rails.env.development?
         test_data_new
         worker_add_hyhpen(@worker)
@@ -39,7 +39,6 @@ module Users
       @worker.worker_special_educations.build if @worker.special_educations.blank?
       @worker.worker_safety_health_educations.build if @worker.worker_safety_health_educations.blank?
       worker_add_hyhpen(@worker)
-      set_sorted_credentials
       if @worker.status_of_residence.blank?
         @worker.status_of_residence = :construction_employment
         @worker.confirmed_check = :checked
