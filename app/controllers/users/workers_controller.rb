@@ -15,6 +15,19 @@ module Users
       else
         production_data_new
       end
+
+      # ユーザーが元請設定の場合はラジオボタンのデフォルトのチェックを外す
+      if @current_business.user.is_prime_contractor
+        default_attributes = {
+          country:             nil, # 国籍
+          employment_contract: nil, # 雇用契約書
+          sex:                 nil, # 性別
+          rh_blood_type:       nil, # 血液型
+          abo_blood_type:      nil # 血液型(Rh)
+        }
+        @worker.assign_attributes(default_attributes)
+
+      end
     end
 
     def create
