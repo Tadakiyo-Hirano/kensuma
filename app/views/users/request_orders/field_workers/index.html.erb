@@ -23,7 +23,7 @@
         <%= form_with url: users_request_order_field_workers_path, method: :post, local: true do |f| %>
           <%= f.label "追加する作業員を選択してください。" %>
           <div class="pb-1">
-            <%= f.collection_select :worker_ids, @worker, :id, :name, { include_hidden: false }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
+            <%= f.collection_select :worker_ids, @worker, :id, :name, { include_hidden: false, include_blank: '選択肢がありません' }, { required: true, multiple: true, class: "multiple-select", style: "width: 100%" } %>
           </div>
           <div>
             <%= f.submit "作業員追加", class: "btn btn-md btn-primary" %>
