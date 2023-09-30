@@ -323,7 +323,7 @@ module DocumentsHelper
   def blood_pressure(worker)
     min = worker&.content&.[]('worker_medical')&.[]('min_blood_pressure')
     max = worker&.content&.[]('worker_medical')&.[]('max_blood_pressure')
-    min.nil? || max.nil? ? '~' : "#{min} ~ #{max}"
+    min.nil? || max.nil? ? '~' : "#{max} ~ #{min}"
   end
 
   # 作業員健康診断の日付情報
