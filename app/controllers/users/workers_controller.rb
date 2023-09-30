@@ -2,6 +2,7 @@
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
+    before_action :set_sorted_credentials, only: %i[new create edit update]
     before_action :convert_to_full_width, only: %i[create update]
 
     def index
@@ -188,6 +189,13 @@ module Users
 
     def set_worker
       @worker = current_business.workers.find_by(uuid: params[:uuid])
+    end
+
+    def set_sorted_credentials
+      @sorted_special_educations = SpecialEducation.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
+      @sorted_skill_trainings = SkillTraining.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
+      @sorted_licenses = License.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
+      @sorted_safety_health_educations = SafetyHealthEducation.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
     end
 
     # 半角カタカナを全角カタカナに変換する
