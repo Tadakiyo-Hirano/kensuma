@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3">
       <%= f.label :license_id %>
-      <%= f.collection_select :license_id, License.all, :id, :name, { prompt: '技能検定を選択してください' }, { class: "form-control" } %><br>
+      <%= f.collection_select :license_id, License.all, :id, :name, { prompt: '技能検定を選択してください' }, { class: "form-control custom-select", id: "license-select" } %><br>
     </div>
     <div class="col-md-4">
       <%= f.label :images %>
@@ -21,3 +21,22 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function() {
+  // セレクトボックスが変更されたときの処理
+  $('#license-select').change(function() {
+    // プロンプトテキストの文字色を変更
+    if ($(this).val() === '') {
+      $(this).css('color', '#6c757d'); // 薄いグレイの色
+    } else {
+      $(this).css('color', ''); // デフォルトの文字色に戻す
+    }
+  });
+
+  // ページ読み込み時に初期設定
+  if ($('#license-select').val() === '') {
+    $('#license-select').css('color', '#6c757d'); // 薄いグレイの色
+  }
+});
+</script>

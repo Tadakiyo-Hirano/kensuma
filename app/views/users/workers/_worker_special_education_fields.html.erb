@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-md-3">
       <%= f.label :special_education_id %>
-      <%= f.collection_select :special_education_id, SpecialEducation.all, :id, :name, { prompt: '特別教育を選択してください' }, { class: "form-control" } %><br>
+      <%= f.collection_select :special_education_id, SpecialEducation.all, :id, :name, { prompt: '特別教育を選択してください' }, { class: "form-control text-muted" } %><br>
     </div>
     <div class="col-md-4">
       <%= f.label :images %>
-      <%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+      <%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control text-muted" %>
     </div>
     <div class="col-md-3" style="margin-bottom: 10px;">
       <% if @worker.id.present? %>
