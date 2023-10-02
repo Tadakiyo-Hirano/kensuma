@@ -323,7 +323,7 @@ module DocumentsHelper
   def blood_pressure(worker)
     min = worker&.content&.[]('worker_medical')&.[]('min_blood_pressure')
     max = worker&.content&.[]('worker_medical')&.[]('max_blood_pressure')
-    min.nil? || max.nil? ? '~' : "#{min} ~ #{max}"
+    min.nil? || max.nil? ? '~' : "#{max} ~ #{min}"
   end
 
   # 作業員健康診断の日付情報
@@ -1210,6 +1210,11 @@ module DocumentsHelper
 
   def wareki(date)
     date.blank? ? '年　月　日' : l(date.to_date, format: :ja_kan)
+  end
+
+  # 作業員職種情報
+  def worker_occupations(business)
+    business.occupations.pluck(:name).join(', ')
   end
 
   # (14) 持込機械の機械名情報（持込時の点検表）

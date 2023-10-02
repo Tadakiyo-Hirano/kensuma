@@ -248,7 +248,7 @@
         <td class="doc_24_s27" dir="ltr" colspan="2"><%= employment_contract_no(field_worker) %></td>
         <td class="doc_24_s28" dir="ltr" colspan="3"></td>
         <td class="doc_24_s17" dir="ltr" colspan="2">職 種：</td>
-        <td class="doc_24_s29" dir="ltr" colspan="7"><%= field_worker.occupation %></td> <!-- 「職種」24-019 -->
+        <td class="doc_24_s29" dir="ltr" colspan="7"><%= worker_occupations(field_worker.field_workerable.business) %></td> <!-- 「職種」24-019 -->
         <td class="doc_24_s8" dir="ltr">工</td>
         <td class="doc_24_s3"></td>
       </tr>
