@@ -1,4 +1,14 @@
 module WorkersHelper
+  # ユーザーが元請設定の場合は必須マークの表示をさせない
+  def required_label
+    if @current_business.user.is_prime_contractor
+      # もし prime_contractor なら空の文字列を返す
+      ''
+    else
+      content_tag(:span, '必須', class: 'p-1 mb-2 rounded bg-danger text-white')
+    end
+  end
+
   def test_data_new
     @worker = current_business.workers.new(
       # テスト用デフォルト値 ==========================
@@ -28,6 +38,7 @@ module WorkersHelper
       confirmed_check_date:          '2000-01-28'
       # ============================================
     )
+
     @worker.worker_licenses.build(
       # テスト用デフォルト値 ==========================
       license_id: 1
