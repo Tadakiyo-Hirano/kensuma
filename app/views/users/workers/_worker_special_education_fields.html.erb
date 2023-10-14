@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3">
       <%= f.label :special_education_id %>
-      <%= f.collection_select :special_education_id, SpecialEducation.all, :id, :name, { prompt: '特別教育を選択してください' }, { class: "form-control text-muted" } %><br>
+      <%= f.collection_select :special_education_id, SpecialEducation.all, :id, :name, { prompt: '特別教育を選択してください' }, { class: "form-control", id: "special_education-select" } %><br>
     </div>
     <div class="col-md-4">
       <%= f.label :images %>
@@ -21,3 +21,24 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    // document全体を監視し、指定セレクトボックスの変更イベントをキャッチ
+    $(document).on('change', 'select[id^="special_education-select"]', function() {
+      // プロンプトテキストの文字色を変更
+      if ($(this).val() === '') {
+        $(this).css('color', '#6c757d'); // 薄いグレイの色
+      } else {
+        $(this).css('color', ''); // デフォルトの文字色に戻す
+      }
+    });
+
+    // ページ読み込み時に初期設定
+    $('select[id^="special_education-select"]').each(function() {
+      if ($(this).val() === '') {
+        $(this).css('color', '#6c757d'); // 薄いグレイの色
+      }
+    });
+  });
+</script>
