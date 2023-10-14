@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_21_134656) do
+ActiveRecord::Schema.define(version: 2023_09_09_095340) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -387,6 +387,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.integer "license_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "machine_tags", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -572,6 +573,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "skill_trainings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -581,6 +583,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.json "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "solvents", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -601,6 +604,7 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.integer "driving_related"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_kana"
   end
 
   create_table "special_med_exams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -772,27 +776,27 @@ ActiveRecord::Schema.define(version: 2023_08_21_134656) do
     t.string "name", null: false
     t.string "name_kana", null: false
     t.boolean "business_owner_or_master", default: false
-    t.string "country", null: false
-    t.string "my_address", null: false
-    t.string "my_phone_number", null: false
-    t.string "family_address", null: false
-    t.string "family_phone_number", null: false
-    t.date "birth_day_on", null: false
-    t.integer "abo_blood_type", default: 0, null: false
-    t.integer "rh_blood_type", default: 0, null: false
-    t.date "hiring_on", null: false
-    t.integer "experience_term_before_hiring", null: false
-    t.integer "blank_term", null: false
+    t.string "country"
+    t.string "my_address"
+    t.string "my_phone_number"
+    t.string "family_address"
+    t.string "family_phone_number"
+    t.date "birth_day_on"
+    t.integer "abo_blood_type", default: 0
+    t.integer "rh_blood_type", default: 0
+    t.date "hiring_on"
+    t.integer "experience_term_before_hiring"
+    t.integer "blank_term"
     t.string "career_up_id"
     t.json "career_up_images"
     t.bigint "business_id", null: false
     t.string "uuid", null: false
     t.string "job_title"
-    t.integer "employment_contract", default: 0, null: false
-    t.string "family_name", null: false
-    t.string "relationship", null: false
+    t.integer "employment_contract", default: 0
+    t.string "family_name"
+    t.string "relationship"
     t.string "email"
-    t.integer "sex", default: 0, null: false
+    t.integer "sex", default: 0
     t.integer "status_of_residence"
     t.date "maturity_date"
     t.integer "confirmed_check"

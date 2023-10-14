@@ -42,14 +42,14 @@
 
     <%# 事業主または一人親方 %>
     <%= f.label :business_owner_or_master %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <div class="md-3 list-group-item">
       <%= f.check_box :business_owner_or_master, id: :business_owner_or_master %> はい　　　※いいえの場合はチェックを外してください</div><br>
     <br>
 
     <%# 役職 %>
     <%= f.label :job_title %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.text_field :job_title, class: "form-control", placeholder: Worker.human_attribute_name(:job_title) %><br>
 
     <%# メールアドレス %>
@@ -58,12 +58,12 @@
 
     <%# 電話番号 %>
     <%= f.label :my_phone_number %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.telephone_field :my_phone_number, value: @my_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
     <%# 国籍 %>
     <%= f.label :country %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.country_select :country, { priority_countries: ["JP"] }, { class: "form-control", id: "country-select" } %>
     <br>
 
@@ -73,32 +73,30 @@
 
     <%# 住所 %>
     <%= f.label :my_address %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.text_field :my_address, class: "form-control", placeholder: Worker.human_attribute_name(:my_address) %><br>
 
     <%# 雇入年月日 %>
     <%= f.label :hiring_on %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.date_field :hiring_on, class: "form-control", style: "width: 25%;", placeholder: Worker.human_attribute_name(:hiring_on) %><br>
 
     <%# 雇入前経験年数 %>
     <%= f.label :experience_term_before_hiring %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.text_field :experience_term_before_hiring, class: "form-control" %><br>
 
     <%# ブランク年数 %>
     <%= f.label :blank_term %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.text_field :blank_term, class: "form-control" %><br>
 
     <%# 契約条件の確認 %>
     <%= f.label :employment_contract %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <div class="list-group-item">
       <%= f.collection_radio_buttons(:employment_contract, Worker.employment_contracts_i18n, :first, :last, { checked: @worker&.employment_contract? ? @worker&.employment_contract : false }, class: "radio") do |b| %>
-        <div class="radio">
-          <%= b.label { b.radio_button + b.text } %>
-        </div>
+        <%= b.label { b.radio_button + b.text } %><br>
       <% end %>
     </div><br>
 
@@ -121,22 +119,22 @@
   <div class="list-group-item">
     <%# 緊急連絡先：氏名 %>
     <%= f.label :family_name %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.text_field :family_name, class: "form-control", placeholder: Worker.human_attribute_name(:family_name) %><br>
 
     <%# 緊急連絡先：電話番号 %>
     <%= f.label :family_phone_number %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.telephone_field :family_phone_number, value: @family_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
     <%# 緊急連絡先：住所 %>
     <%= f.label :family_address %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.text_field :family_address, class: "form-control", placeholder: Worker.human_attribute_name(:family_address) %><br>
     
     <%# 緊急連絡先：続柄 %>
     <%= f.label :relationship %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.text_field :relationship, class: "form-control", placeholder: Worker.human_attribute_name(:relationship) %><br>
 
   </div>
@@ -150,55 +148,47 @@
 
     <%# 生年月日 %>
     <%= f.label :birth_day_on %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <%= f.date_field :birth_day_on, class: "form-control", style: "width: 25%;", placeholder: Worker.human_attribute_name(:birth_day_on) %><br>
 
     <%# 性別 %>
     <%= f.label :sex %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <div class="list-group-item">
       <%= f.collection_radio_buttons(:sex, Worker.sexes_i18n, :first, :last, { checked: @worker&.sex? ? @worker&.sex : false }, class: "radio") do |b| %>
-        <div class="radio">
-          <%= b.label { b.radio_button + b.text } %>
-        </div>
+        <%= b.label { b.radio_button + b.text } %><br>
       <% end %>
     </div>
     <br>
 
     <%# 血液型（ABO）%>
     <%= f.label :abo_blood_type %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <div class="list-group-item">
       <%= f.collection_radio_buttons(:abo_blood_type, Worker.abo_blood_types_i18n, :first, :last, { checked: @worker&.abo_blood_type? ? @worker&.abo_blood_type : false }, class: "radio") do |b| %>
-        <div class="radio">
-          <%= b.label { b.radio_button + b.text } %>
-        </div>
+        <%= b.label { b.radio_button + b.text } %><br>
       <% end %>
     </div><br>
 
     <%# 血液型（RH） %>
     <%= f.label :rh_blood_type %>
-    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+    <%= required_label %>
     <div class="list-group-item">
       <%= f.collection_radio_buttons(:rh_blood_type, Worker.rh_blood_types_i18n, :first, :last, { checked: @worker&.rh_blood_type? ? @worker&.rh_blood_type : false }, class: "radio") do |b| %>
-        <div class="radio">
-          <%= b.label { b.radio_button + b.text } %>
-        </div>
+        <%= b.label { b.radio_button + b.text } %><br>
       <% end %>
     </div><br>
 
     <!-- WorkerMedicalテーブル情報ここから -->
     <%= f.fields_for :worker_medical do |worker_medical| %>
-      <label><%= yield(:is_med_exam_info) %></label><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <label><%= yield(:is_med_exam_info) %></label><%= required_label %>
       <div class="list-group-item mb-3">
         <%# 健康診断の受診状況 %>
         <div class="mb-1">
           <%= worker_medical.label :is_med_exam %>
           <div class="list-group-item">
             <%= worker_medical.collection_radio_buttons(:is_med_exam, WorkerMedical.is_med_exams_i18n, :first, :last, { checked: @worker&.worker_medical&.is_med_exam? ? @worker&.worker_medical&.is_med_exam : false }, class: "radio") do |b| %>
-              <div class="radio">
-                <%= b.label { b.radio_button + b.text } %>
-              </div>
+              <%= b.label { b.radio_button + b.text } %><br>
             <% end %>
           </div>
         </div>
@@ -227,16 +217,14 @@
       </div>
 
       <%# 特別健康診断項目 %>
-      <label><%= yield(:special_med_exam_info) %></label><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <label><%= yield(:special_med_exam_info) %></label><%= required_label %>
       <div class="list-group-item mb-3">
         <%# 特別健康診断の受診状況 %>
         <div class="mb-1">
           <%= worker_medical.label :is_special_med_exam %>
           <div class="list-group-item">
             <%= worker_medical.collection_radio_buttons(:is_special_med_exam, WorkerMedical.is_special_med_exams_i18n, :first, :last, { checked: @worker&.worker_medical&.is_special_med_exam? ? @worker&.worker_medical&.is_special_med_exam : false }, class: "radio") do |b| %>
-              <div class="radio">
-                <%= b.label { b.radio_button + b.text } %>
-              </div>
+              <%= b.label { b.radio_button + b.text } %><br>
             <% end %>
           </div>
         </div>
@@ -268,12 +256,10 @@
       <%# 最近の健康状態 %>
       <div class="mb-3">
         <%= worker_medical.label :health_condition %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= required_label %>
         <div class="list-group-item">
           <%= worker_medical.collection_radio_buttons(:health_condition, WorkerMedical.health_conditions_i18n, :first, :last, { checked: @worker&.worker_medical&.health_condition? ? @worker&.worker_medical&.health_condition : false }, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
-            </div>
+            <%= b.label { b.radio_button + b.text } %><br>
           <% end %>
         </div>
       </div>
@@ -293,12 +279,10 @@
       <%# 健康保険 %>
       <div class="mb-3">
         <%= worker_insurance.label :health_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= required_label %>
         <div class="list-group-item">
           <%= worker_insurance.collection_radio_buttons(:health_insurance_type, WorkerInsurance.health_insurance_types_i18n, :first, :last, { checked: @worker.worker_insurance&.health_insurance_type? ? @worker&.worker_insurance&.health_insurance_type : false }, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
-            </div>
+            <%= b.label { b.radio_button + b.text } %><br>
           <% end %>
           <!-- health_insurance_typeがhealth_insurance_associationまたはconstruction_national_health_insuranceで入力可能 -->
           <%# 保険名 %>
@@ -326,12 +310,10 @@
       <%# 年金保険 %>
       <div class="mb-3" id="pension_insurance_type">
         <%= worker_insurance.label :pension_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= required_label %>
         <div class="list-group-item">
           <%= worker_insurance.collection_radio_buttons(:pension_insurance_type, WorkerInsurance.pension_insurance_types_i18n, :first, :last, { checked: @worker&.worker_insurance&.pension_insurance_type? ? @worker&.worker_insurance&.pension_insurance_type : false }, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
-            </div>
+            <%= b.label { b.radio_button + b.text } %><br>
           <% end %>
         </div><br>
       </div>
@@ -340,12 +322,10 @@
       <div class="mb-3" id="employment_insurance_type">
         <%# 雇用保険 %>
         <%= worker_insurance.label :employment_insurance_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= required_label %>
         <div class="list-group-item">
           <%= worker_insurance.collection_radio_buttons(:employment_insurance_type, WorkerInsurance.employment_insurance_types_i18n, :first, :last, { checked: @worker&.worker_insurance&.employment_insurance_type? ? @worker&.worker_insurance&.employment_insurance_type : false }, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
-            </div>
+            <%= b.label { b.radio_button + b.text } %><br>
           <% end %>
           <!-- employment_insurance_numberが0(被保険者・日雇保険)で入力可能 -->
           <%# 被保険者番号 %>
@@ -359,7 +339,7 @@
 
       <%# 労働保険特別加入 %>
       <div class="mt-3" id="has_labor_insurance">
-        <%= worker_insurance.label :has_labor_insurance %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= worker_insurance.label :has_labor_insurance %><%= required_label %>
         <div class="list-group-item">
           <%= worker_insurance.collection_radio_buttons(:has_labor_insurance, WorkerInsurance.has_labor_insurances_i18n, :first, :last, { checked: @worker&.worker_insurance&.has_labor_insurance? ? @worker&.worker_insurance&.has_labor_insurance : false }, class: "radio") do |b| %>
             <div class="radio">
@@ -372,16 +352,14 @@
       <%# 建設業退職金共済手帳 %>
       <div class="mb-3">
         <%= worker_insurance.label :severance_pay_mutual_aid_type %>
-        <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= required_label %>
         <div class="list-group-item">
           <%= worker_insurance.collection_radio_buttons(:severance_pay_mutual_aid_type, WorkerInsurance.severance_pay_mutual_aid_types_i18n, :first, :last, { checked: @worker&.worker_insurance&.severance_pay_mutual_aid_type? ? @worker&.worker_insurance&.severance_pay_mutual_aid_type : false }, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
-            </div>
+            <%= b.label { b.radio_button + b.text } %><br>
           <% end %>
           <!-- severance_pay_mutual_aid_typeがその他(2)のときに入力可能 -->
           <div class="mb-3" id="mutual_aid_number">
-            <%= worker_insurance.label :severance_pay_mutual_aid_name %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+            <%= worker_insurance.label :severance_pay_mutual_aid_name %><%= required_label %>
             <%= worker_insurance.text_field :severance_pay_mutual_aid_name, class: "form-control" %>
           </div>
         </div>
@@ -503,29 +481,25 @@
   <%# 在留資格 %>
   <div class="list-group-item">
     <div class="mt-3 mb-3">
-      <%= f.label :status_of_residence, class: "required" %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+      <%= f.label :status_of_residence, class: "required" %><%= required_label %>
       <div class="list-group-item">
         <%= f.collection_radio_buttons(:status_of_residence, Worker.status_of_residences_i18n, :first, :last, { checked: @worker&.status_of_residence? ? @worker&.status_of_residence : false }, class: "radio") do |b| %>
-          <div class="radio">
-            <%= b.label { b.radio_button + b.text } %>
-          </div>
+          <%= b.label { b.radio_button + b.text } %><br>
         <% end %>
       </div>
     </div>
 
     <div id="non-resident-foreigner-field">
       <%# 在留期間満期日 %>
-      <div><%= f.label :maturity_date %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span></div>
+      <div><%= f.label :maturity_date %><%= required_label %></div>
       <%= f.date_field :maturity_date, class: "form-control", placeholder: Worker.human_attribute_name(:maturity_date) %><br>
 
       <%# キャリアアップシステム登録情報が最新であることの確認済 %>
       <div class="mt-3 mb-3">
-        <%= f.label :confirmed_check, class: "required" %><span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
+        <%= f.label :confirmed_check, class: "required" %><%= required_label %>
         <div class="list-group-item">
           <%= f.collection_radio_buttons(:confirmed_check, Worker.confirmed_checks_i18n, :first, :last, { checked: @worker&.confirmed_check? ? @worker&.confirmed_check : false }, class: "radio") do |b| %>
-            <div class="radio">
-              <%= b.label { b.radio_button + b.text } %>
-            </div>
+            <%= b.label { b.radio_button + b.text } %><br>
           <% end %>
         </div>
       </div>
@@ -856,285 +830,287 @@
 
 <script>
   $(function(){
-    $.validator.addMethod("alphanumericKatakanaOnly", function(value, element) {
-      return this.optional(element) || /^[0-9｡-ﾟ]+$/.test(value);
-    }, "数字と半角カタカナのみ入力してください。");
+    if (<%= @current_business.user.is_prime_contractor == false %>) {
+      $.validator.addMethod("alphanumericKatakanaOnly", function(value, element) {
+        return this.optional(element) || /^[0-9｡-ﾟ]+$/.test(value);
+      }, "数字と半角カタカナのみ入力してください。");
 
-    $.each(function(key){
-      $.validator.addMethod(key, this);
-    });
-    $(".worker-form-validation").validate({
-      rules:{
-        "worker[name]": {
-          required: true
-        },
-        "worker[name_kana]": {
-          required: true
-        },
-        "worker[country]": {
-          required: true
-        },
-        "worker[sex]": {
-          required: true
-        },
-        "worker[my_address]": {
-          required: true
-        },
-        "worker[my_phone_number]": {
-          required: true
-        },
-        "worker[family_name]": {
-          required: true
-        },
-        "worker[relationship]": {
-          required: true
-        },
-        "worker[family_address]": {
-          required: true
-        },
-        "worker[family_phone_number]": {
-          required: true
-        },
-        "worker[birth_day_on]": {
-          required: true
-        },
-        "worker[abo_blood_type]": {
-          required: true
-        },
-        "worker[rh_blood_type]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][is_med_exam]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][med_exam_on]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][max_blood_pressure]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][min_blood_pressure]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][is_special_med_exam]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][special_med_exam_on]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][special_med_exam_list][]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][health_condition]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][status_of_residence]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][maturity_date]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][confirmed_check]": {
-          required: true
-        },
-        "worker[worker_medical_attributes][confirmed_check_date]": {
-          required: true
-        },
-        "worker[driver_licence_number]": {
-          required: true
-        },
-        "worker[job_title]": {
-          required: true
-        },
-        "worker[hiring_on]": {
-          required: true
-        },
-        "worker[experience_term_before_hiring]": {
-          required: true
-        },
-        "worker[blank_term]": {
-          required: true
-        },
-        "worker[employment_contract]": {
-          required: true
-        },
-        "worker[maturity_date]": {
-          required: true
-        },
-        "worker[confirmed_check_date]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][health_insurance_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][health_insurance_name]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][pension_insurance_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][employment_insurance_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: true,
-          alphanumericKatakanaOnly: true
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
-          required: true
-        },
-        "worker[worker_insurance_attributes][has_labor_insurance]": {
-          required: true
-        },
-      },
-      messages:{
-        "worker[name]": {
-          required: "名前を入力してください。"
-        },
-        "worker[name_kana]": {
-          required: "名前カナを入力してください。"
-        },
-        "worker[country]": {
-          required: "国籍を入力してください。"
-        },
-        "worker[sex]": {
-          required: "性別を入力してください。"
-        },
-        "worker[my_address]": {
-          required: "住所を入力してください。"
-        },
-        "worker[my_phone_number]": {
-          required: "電話番号を入力してください。"
-        },
-        "worker[family_name]": {
-          required: "家族の氏名を入力してください。"
-        },
-        "worker[relationship]": {
-          required: "家族の続柄を入力してください。"
-        },
-        "worker[family_address]": {
-          required: "家族の住所を入力してください。"
-        },
-        "worker[family_phone_number]": {
-          required: "家族の電話番号を入力してください。"
-        },
-        "worker[birth_day_on]": {
-          required: "生年月日を入力してください。"
-        },
-        "worker[abo_blood_type]": {
-          required: "血液型(ABO)を入力してください。"
-        },
-        "worker[rh_blood_type]": {
-          required: "血液型(Rh)を入力してください。"
-        },
-        "worker[worker_medical_attributes][is_med_exam]": {
-          required: "健康診断の受信の有無を選択してください。"
-        },
-        "worker[worker_medical_attributes][med_exam_on]": {
-          required: "健康診断日を選択してください。"
-        },
-        "worker[worker_medical_attributes][max_blood_pressure]": {
-          required: "最高血圧を入力してください。"
-        },
-        "worker[worker_medical_attributes][min_blood_pressure]": {
-          required: "最低血圧を入力してください。"
-        },
-        "worker[worker_medical_attributes][is_special_med_exam]": {
-          required: "特別健康診断の受信の有無を選択してください。"
-        },
-        "worker[worker_medical_attributes][special_med_exam_on]": {
-          required: "特別健康診断日を選択してください。"
-        },
-        "worker[worker_medical_attributes][special_med_exam_list][]": {
-          required: "特別健康診断内容を選択してください。"
-        },
-        "worker[worker_medical_attributes][health_condition]": {
-          required: "最近の健康状態を選択してください。"
-        },
-        "worker[worker_medical_attributes][status_of_residence]": {
-          required: "在留資格を選択してください。"
-        },
-        "worker[worker_medical_attributes][maturity_date]": {
-          required: "在留期間満期日を選択してください。"
-        },
-        "worker[worker_medical_attributes][confirmed_check]": {
-          required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください。"
-        },
-        "worker[worker_medical_attributes][confirmed_check_date]": {
-          required: "最近の健康状態を選択してください。"
-        },
-        "worker[driver_licence_number]": {
-          required: "免許証番号を入力してください。"
-        },
-        "worker[job_title]": {
-          required: "役職を入力してください。"
-        },
-        "worker[hiring_on]": {
-          required: "雇入年月日を入力してください。"
-        },
-        "worker[experience_term_before_hiring]": {
-          required: "雇入前経験年数を入力してください。"
-        },
-        "worker[blank_term]": {
-          required: "ブランク年数を入力してください。"
-        },
-        "worker[employment_contract]": {
-          required: "雇用契約書を取り交わしたかどうかを選択してください。"
-        },
-        "worker[status_of_residence]": {
-          required: "在留資格を選択してください。"
-        },
-        "worker[confirmed_check]": {
-          required: "CCUS登録情報が最新であることの確認を選択してください。"
-        },
-        "worker[maturity_date]": {
-          required: "在留期間満期日を入力してください"
-        },
-        "worker[confirmed_check_date]": {
-          required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください"
-        },
-        "worker[worker_insurance_attributes][health_insurance_type]": {
-          required: "健康保険のタイプを選択してください。"
-        },
-        "worker[worker_insurance_attributes][health_insurance_name]": {
-          required: "健康保険名を入力してください。"
-        },
-        "worker[worker_insurance_attributes][pension_insurance_type]": {
-          required: "年金保険のタイプを選択してください。"
-        },
-        "worker[worker_insurance_attributes][employment_insurance_type]": {
-          required: "雇用保険のタイプを選択してください。"
-        },
-        "worker[worker_insurance_attributes][employment_insurance_number]": {
-          required: "被保険者番号は数字と半角カタカナの4桁以内で入力してください。",
-          alphanumericKatakanaOnly: "数字と半角カタカナのみ入力してください。"
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
-          required: "建設業退職金共済制度を選択してください。"
-        },
-        "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
-          required: "建設業退職金共済制度名前を入力してください。"
-        },
-        "worker[worker_insurance_attributes][has_labor_insurance]": {
-          required: "労働特別保険に加入しているかどうかを選択してください。"
-        },
-      },
-      
-      errorPlacement: function(error, element) {
-        // radioとcheckboxのみ表示位置を個別調整
-        if (element.is(":radio") || element.is(":checkbox")) {
-          error.insertBefore(element.closest('.list-group-item'));
-        } else {
-          error.insertBefore(element);
+      $.each(function(key){
+        $.validator.addMethod(key, this);
+      });
+      $(".worker-form-validation").validate({
+        rules:{
+          "worker[name]": {
+            required: true
+          },
+          "worker[name_kana]": {
+            required: true
+          },
+          "worker[country]": {
+            required: true
+          },
+          "worker[sex]": {
+            required: true
+          },
+          "worker[my_address]": {
+            required: true
+          },
+          "worker[my_phone_number]": {
+            required: true
+          },
+          "worker[family_name]": {
+            required: true
+          },
+          "worker[relationship]": {
+            required: true
+          },
+          "worker[family_address]": {
+            required: true
+          },
+          "worker[family_phone_number]": {
+            required: true
+          },
+          "worker[birth_day_on]": {
+            required: true
+          },
+          "worker[abo_blood_type]": {
+            required: true
+          },
+          "worker[rh_blood_type]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][is_med_exam]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][med_exam_on]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][max_blood_pressure]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][min_blood_pressure]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][is_special_med_exam]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][special_med_exam_on]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][special_med_exam_list][]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][health_condition]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][status_of_residence]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][maturity_date]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][confirmed_check]": {
+            required: true
+          },
+          "worker[worker_medical_attributes][confirmed_check_date]": {
+            required: true
+          },
+          "worker[driver_licence_number]": {
+            required: true
+          },
+          "worker[job_title]": {
+            required: true
+          },
+          "worker[hiring_on]": {
+            required: true
+          },
+          "worker[experience_term_before_hiring]": {
+            required: true
+          },
+          "worker[blank_term]": {
+            required: true
+          },
+          "worker[employment_contract]": {
+            required: true
+          },
+          "worker[maturity_date]": {
+            required: true
+          },
+          "worker[confirmed_check_date]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][health_insurance_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][health_insurance_name]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][pension_insurance_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][employment_insurance_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][employment_insurance_number]": {
+            required: true,
+            alphanumericKatakanaOnly: true
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
+            required: true
+          },
+          "worker[worker_insurance_attributes][has_labor_insurance]": {
+            required: true
+          },
+        },
+        messages:{
+          "worker[name]": {
+            required: "名前を入力してください。"
+          },
+          "worker[name_kana]": {
+            required: "名前カナを入力してください。"
+          },
+          "worker[country]": {
+            required: "国籍を入力してください。"
+          },
+          "worker[sex]": {
+            required: "性別を入力してください。"
+          },
+          "worker[my_address]": {
+            required: "住所を入力してください。"
+          },
+          "worker[my_phone_number]": {
+            required: "電話番号を入力してください。"
+          },
+          "worker[family_name]": {
+            required: "家族の氏名を入力してください。"
+          },
+          "worker[relationship]": {
+            required: "家族の続柄を入力してください。"
+          },
+          "worker[family_address]": {
+            required: "家族の住所を入力してください。"
+          },
+          "worker[family_phone_number]": {
+            required: "家族の電話番号を入力してください。"
+          },
+          "worker[birth_day_on]": {
+            required: "生年月日を入力してください。"
+          },
+          "worker[abo_blood_type]": {
+            required: "血液型(ABO)を入力してください。"
+          },
+          "worker[rh_blood_type]": {
+            required: "血液型(Rh)を入力してください。"
+          },
+          "worker[worker_medical_attributes][is_med_exam]": {
+            required: "健康診断の受信の有無を選択してください。"
+          },
+          "worker[worker_medical_attributes][med_exam_on]": {
+            required: "健康診断日を選択してください。"
+          },
+          "worker[worker_medical_attributes][max_blood_pressure]": {
+            required: "最高血圧を入力してください。"
+          },
+          "worker[worker_medical_attributes][min_blood_pressure]": {
+            required: "最低血圧を入力してください。"
+          },
+          "worker[worker_medical_attributes][is_special_med_exam]": {
+            required: "特別健康診断の受信の有無を選択してください。"
+          },
+          "worker[worker_medical_attributes][special_med_exam_on]": {
+            required: "特別健康診断日を選択してください。"
+          },
+          "worker[worker_medical_attributes][special_med_exam_list][]": {
+            required: "特別健康診断内容を選択してください。"
+          },
+          "worker[worker_medical_attributes][health_condition]": {
+            required: "最近の健康状態を選択してください。"
+          },
+          "worker[worker_medical_attributes][status_of_residence]": {
+            required: "在留資格を選択してください。"
+          },
+          "worker[worker_medical_attributes][maturity_date]": {
+            required: "在留期間満期日を選択してください。"
+          },
+          "worker[worker_medical_attributes][confirmed_check]": {
+            required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください。"
+          },
+          "worker[worker_medical_attributes][confirmed_check_date]": {
+            required: "最近の健康状態を選択してください。"
+          },
+          "worker[driver_licence_number]": {
+            required: "免許証番号を入力してください。"
+          },
+          "worker[job_title]": {
+            required: "役職を入力してください。"
+          },
+          "worker[hiring_on]": {
+            required: "雇入年月日を入力してください。"
+          },
+          "worker[experience_term_before_hiring]": {
+            required: "雇入前経験年数を入力してください。"
+          },
+          "worker[blank_term]": {
+            required: "ブランク年数を入力してください。"
+          },
+          "worker[employment_contract]": {
+            required: "雇用契約書を取り交わしたかどうかを選択してください。"
+          },
+          "worker[status_of_residence]": {
+            required: "在留資格を選択してください。"
+          },
+          "worker[confirmed_check]": {
+            required: "CCUS登録情報が最新であることの確認を選択してください。"
+          },
+          "worker[maturity_date]": {
+            required: "在留期間満期日を入力してください"
+          },
+          "worker[confirmed_check_date]": {
+            required: "キャリアアップシステム登録情報が最新であることの確認日を選択してください"
+          },
+          "worker[worker_insurance_attributes][health_insurance_type]": {
+            required: "健康保険のタイプを選択してください。"
+          },
+          "worker[worker_insurance_attributes][health_insurance_name]": {
+            required: "健康保険名を入力してください。"
+          },
+          "worker[worker_insurance_attributes][pension_insurance_type]": {
+            required: "年金保険のタイプを選択してください。"
+          },
+          "worker[worker_insurance_attributes][employment_insurance_type]": {
+            required: "雇用保険のタイプを選択してください。"
+          },
+          "worker[worker_insurance_attributes][employment_insurance_number]": {
+            required: "被保険者番号は数字と半角カタカナの4桁以内で入力してください。",
+            alphanumericKatakanaOnly: "数字と半角カタカナのみ入力してください。"
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_type]": {
+            required: "建設業退職金共済制度を選択してください。"
+          },
+          "worker[worker_insurance_attributes][severance_pay_mutual_aid_name]": {
+            required: "建設業退職金共済制度名前を入力してください。"
+          },
+          "worker[worker_insurance_attributes][has_labor_insurance]": {
+            required: "労働特別保険に加入しているかどうかを選択してください。"
+          },
+        },
+        
+        errorPlacement: function(error, element) {
+          // radioとcheckboxのみ表示位置を個別調整
+          if (element.is(":radio") || element.is(":checkbox")) {
+            error.insertBefore(element.closest('.list-group-item'));
+          } else {
+            error.insertBefore(element);
+          }
         }
-      }
-    });
-     // 入力欄を変更したときにバリデーションを実行
-    $(".worker-form-validation").change(function () {
-      $(this).valid();
-    });
+      });
+      // 入力欄を変更したときにバリデーションを実行
+      $(".worker-form-validation").change(function () {
+        $(this).valid();
+      });
+    }
   });
 </script>
