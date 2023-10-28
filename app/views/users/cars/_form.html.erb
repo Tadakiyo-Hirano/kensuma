@@ -119,16 +119,16 @@
 </div>
 <br>
 <!-- 任意保険ここまで -->
-<% if car.images.present? %>
-  <% car.images.each_with_index do |image, index| %>
+
+<%= f.label :images %>
+<%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
+<% if @car.images.present? %>
+  <% @car.images.each_with_index do |image, index| %>
     <%= image_tag(image.url) %>
     <%= link_to "削除", users_car_update_images_path(car, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
   <% end %>
   <br>
 <% end %>
-
-<%= f.label :images %>
-<%= f.file_field :images, accept: 'image/jpg, image/jpeg, image/png', multiple: true, class: "form-control" %>
 <br>
 
 <script>

@@ -69,7 +69,7 @@ module Users
     end
 
     def update_images
-      car = current_business.cars.find(params[:car_id])
+      car = current_business.cars.find_by(uuid: params[:car_id])
       remain_images = car.images
       deleted_image = remain_images.delete_at(params[:index].to_i)
       deleted_image.try(:remove!)
