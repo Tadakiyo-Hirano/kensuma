@@ -44,7 +44,6 @@ class WorkerInsurance < ApplicationRecord
   validates :employment_insurance_number, absence: true, unless: :employment_insurance_number_valid?
   validates :has_labor_insurance, presence: true, if: :business_owner_or_master
   validates :has_labor_insurance, absence: true, unless: :business_owner_or_master
-  
   validates :severance_pay_mutual_aid_name, presence: true, if: :severance_pay_mutual_aid_name_valid?
   validate :valid_health_insurance_image
 
