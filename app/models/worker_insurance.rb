@@ -30,18 +30,21 @@ class WorkerInsurance < ApplicationRecord
   }, _prefix: true
 
   enum has_labor_insurance: { join: 0, not_join: 1 }, _prefix: true       # 労働保険特別加入の有無
-
-  validates :health_insurance_type, presence: true
+  
+  with_options unless: -> { worker.business&.user&.is_prime_contractor == true } do
+    validates :health_insurance_type, presence: true
+    validates :pension_insurance_type, presence: true
+    validates :employment_insurance_type, presence: true
+    validates :employment_insurance_type, absence: true, if: :business_owner_or_master
+    validates :severance_pay_mutual_aid_type, presence: true
+  end
   validates :health_insurance_name, presence: true, if: :insurance_name_valid?
   validates :health_insurance_name, absence: true, unless: :insurance_name_valid?
-  validates :pension_insurance_type, presence: true
-  validates :employment_insurance_type, presence: true, unless: :business_owner_or_master
-  validates :employment_insurance_type, absence: true, if: :business_owner_or_master
   validates :employment_insurance_number, length: { maximum: 4 }, format: { with: /\A[0-9｡-ﾟ]+\z/, message: 'は数字と半角カタカナのみ使用できます' }, if: :employment_insurance_number_valid?
   validates :employment_insurance_number, absence: true, unless: :employment_insurance_number_valid?
   validates :has_labor_insurance, presence: true, if: :business_owner_or_master
   validates :has_labor_insurance, absence: true, unless: :business_owner_or_master
-  validates :severance_pay_mutual_aid_type, presence: true
+  
   validates :severance_pay_mutual_aid_name, presence: true, if: :severance_pay_mutual_aid_name_valid?
   validate :valid_health_insurance_image
 
