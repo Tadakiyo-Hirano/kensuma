@@ -697,14 +697,14 @@ ActiveRecord::Schema.define(version: 2023_11_12_004308) do
   end
 
   create_table "worker_insurances", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "health_insurance_type", null: false
+    t.integer "health_insurance_type"
     t.string "health_insurance_name"
     t.json "health_insurance_image"
-    t.integer "pension_insurance_type", null: false
+    t.integer "pension_insurance_type"
     t.integer "employment_insurance_type"
     t.integer "has_labor_insurance"
     t.string "employment_insurance_number"
-    t.integer "severance_pay_mutual_aid_type", null: false
+    t.integer "severance_pay_mutual_aid_type"
     t.string "severance_pay_mutual_aid_name"
     t.bigint "worker_id", null: false
     t.datetime "created_at", precision: 6, null: false
