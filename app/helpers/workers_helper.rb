@@ -73,7 +73,7 @@ module WorkersHelper
       health_insurance_type:         :not_health_insurance,
       pension_insurance_type:        :welfare,
       employment_insurance_type:     :exemption,
-      severance_pay_mutual_aid_type: :none,
+      severance_pay_mutual_aid_type: :none
       # has_labor_insurance:           :not_join
       # ============================================
     )
@@ -106,7 +106,7 @@ module WorkersHelper
       health_insurance_type:         :not_health_insurance,
       pension_insurance_type:        :welfare,
       employment_insurance_type:     :exemption,
-      severance_pay_mutual_aid_type: :none,
+      severance_pay_mutual_aid_type: :none
       # has_labor_insurance:           :not_join
       # ============================================
     )
