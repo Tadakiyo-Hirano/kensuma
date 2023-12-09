@@ -70,11 +70,14 @@ module WorkersHelper
     )
     @worker.build_worker_insurance(
       # テスト用デフォルト値 ==========================
-      health_insurance_type:         :not_health_insurance,
+      health_insurance_type:         :health_insurance_association,
+      health_insurance_name:         'サンプル健康保険',
       pension_insurance_type:        :welfare,
-      employment_insurance_type:     :exemption,
-      severance_pay_mutual_aid_type: :none
-      # has_labor_insurance:           :not_join
+      employment_insurance_type:     :insured,
+      employment_insurance_number:   '1234',
+      severance_pay_mutual_aid_type: :kentaikyo,
+      severance_pay_mutual_aid_name: 'テスト共済制度',
+      has_labor_insurance:           :join
       # ============================================
     )
   end
@@ -95,19 +98,19 @@ module WorkersHelper
     @worker.worker_special_educations.build
     @worker.build_worker_medical(
       # 本番環境用デフォルト値 ==========================
-      is_med_exam:         :n,
-      is_special_med_exam: :n,
+      is_med_exam:         :y,
+      is_special_med_exam: :y,
       health_condition:    :good
       # ============================================
     )
     @worker.worker_safety_health_educations.build
     @worker.build_worker_insurance(
       # 本番環境用デフォルト値 ==========================
-      health_insurance_type:         :not_health_insurance,
+      health_insurance_type:         :health_insurance_association,
       pension_insurance_type:        :welfare,
-      employment_insurance_type:     :exemption,
-      severance_pay_mutual_aid_type: :none
-      # has_labor_insurance:           :not_join
+      employment_insurance_type:     :insured,
+      severance_pay_mutual_aid_type: :kentaikyo,
+      has_labor_insurance:           :join
       # ============================================
     )
   end
