@@ -182,6 +182,7 @@
             <%= b.label { b.radio_button + b.text } %>
           </div>
         <% end %>
+        <div id="error" class="text-red">【ご案内】：残っているフォームを全て削除してからチェックを「無」に変更してください。</div>
         <div id="license-insertion-point"></div>
         <!-- BusinessIndustryここから -->
         <div id="hidden-form" class="list-group">
@@ -378,10 +379,19 @@
     console.log(value)
     if(value == undefined){
       list_group.classList.add('hidden');
-    }else if (value == 'available'){ 
+      error.classList.add('hidden');
+    }else if (value == 'available'){
       list_group.classList.remove('hidden');
+      //建設許可証「有」をチェック時は、エラー文を非表示
+      error.classList.add('hidden');
     } else {
       list_group.classList.add('hidden');
+      //建設許可証「無」をチェック、かつフォームが残っている場合は、エラー文を表示し残フォーム削除を促す（nilが送信されると外部キーでエラーが出る為）
+      if ($(".nested-fields").filter(function() {return $(this).css('display') !== 'none'}).length) {
+        error.classList.remove('hidden');
+      } else {
+        error.classList.add('hidden');
+      }
     }
   };
   getRadioConstructionLicense(available_form); //ページの読み込み時に判定

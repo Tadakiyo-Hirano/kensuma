@@ -1,6 +1,6 @@
 class BusinessIndustry < ApplicationRecord
   belongs_to :business
-  belongs_to :industry, optional: true
+  belongs_to :industry
   before_save :set_construction_license_number
 
   enum construction_license_permission_type_minister_governor: { minister_permission: 0, governor_permission: 1 }, _prefix: true # 建設許可証(許可種別)
@@ -13,7 +13,6 @@ class BusinessIndustry < ApplicationRecord
   validates :construction_license_number_double_digit, format: { with: /\A\d{1,2}\z/, message: 'は数字2桁以下で入力してください' }, presence: true, if: -> { business.construction_license_status == 'available' }
   validates :construction_license_number_six_digits, format: { with: /\A\d{1,6}\z/, message: 'は数字6桁以下で入力してください' }, presence: true, if: -> { business.construction_license_status == 'available' }
   validates :construction_license_updated_at, presence: true, if: -> { business.construction_license_status == 'available' }
-  validates :industry_id, presence: true, if: -> { business.construction_license_status == 'available' }
 
   def set_construction_license_number
     self.construction_license_number = construction_license_number_string
