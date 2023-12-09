@@ -8,7 +8,7 @@ SafetyHealthEducation.seed(
   {
     id: 2,
     name: '送り出し教育',
-    name_kana: 'オクリダシキョウイク',
+    name_kana: 'ヤトイイレキョウイク',
     description: 'これから入る現場への送り出し教育と自社内で行う送り出し教育'
   },
   {
