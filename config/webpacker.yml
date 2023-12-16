@@ -8,8 +8,6 @@ default: &default
   cache_path: tmp/cache/webpacker
   webpack_compile_output: true
 
-  node: "16.x"
-
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
   additional_paths: []
