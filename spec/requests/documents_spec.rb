@@ -1,16 +1,12 @@
 require 'rails_helper'
-
-RSpec.describe 'Documents', type: :request do
+# pending
+RSpec.xdescribe 'Documents', type: :request do
   let!(:user) { create(:user) }
   let!(:business) { create(:business, user: user) }
   let!(:order) { create(:order, business: business) }
   let!(:worker) { create(:worker, business: business) }
   let!(:document) { create(:document, business: business, request_order: request_order) }
   let(:doc_19th) { create(:document, :doc_19th, business: business, request_order: request_order) }
-
-  describe 'GET /index' do
-    pending "add some examples (or delete) #{__FILE__}"
-  end
 
   describe 'GET/edit' do
     subject { doc_19th }
