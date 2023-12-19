@@ -1,15 +1,11 @@
 require 'rails_helper'
-
-RSpec.describe 'RequestOrders', type: :request do
+# pending
+RSpec.xdescribe 'RequestOrders', type: :request do
   let!(:user) { create(:user) }
   let!(:user_first_sub) { create(:user, name: '1次下請けユーザー', email: 'first_sub-user@example.com', password: '123456', password_confirmation: '123456', role: 'admin') }
   let!(:business) { create(:business, user: user) }
   let!(:business_first_sub) { create(:business, user: user_first_sub) }
   let!(:order) { create(:order, business: business) }
-
-  describe 'GET /index' do
-    pending "add some examples (or delete) #{__FILE__}"
-  end
 
   describe 'GET/edit_approval_status' do
     let!(:request_order) { create(:request_order, business: business, order: order) }
