@@ -18,7 +18,7 @@ RSpec.xdescribe 'RequestOrders', type: :request do
       end
 
       it '正常レスポンスが返ってくる' do
-        expect(response).to have_http_status '200'
+        expect(response).to have_http_status :ok
       end
     end
 

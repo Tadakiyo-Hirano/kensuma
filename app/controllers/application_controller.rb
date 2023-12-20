@@ -22,11 +22,11 @@ class ApplicationController < ActionController::Base
   def handle_server_error(error)
     if Rails.env.production?
       ExceptionNotifier.notify_exception(error, env: request.env,
-                                         data: {
-                                           RAILS_ENV:    Rails.env,
-                                           message:      error.message,
-                                           current_user: current_user&.inspect
-                                         }
+        data: {
+          RAILS_ENV:    Rails.env,
+          message:      error.message,
+          current_user: current_user&.inspect
+        }
       )
     end
 
