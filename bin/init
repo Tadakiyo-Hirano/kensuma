@@ -3,13 +3,21 @@
 # シェルスクリプトが失敗した場合には、直ちに終了する
 set -e;
 
+# node_modulesを削除
+echo "Removing node_modules...";
+rm -rf node_modules;
+
 # イメージのビルド
 echo "Building Docker images...";
 docker-compose build;
 
-# bundle install
+#bundle install
 echo "Running bundle install...";
 docker-compose run --rm app bundle install;
+
+# yarn installの前にキャッシュをクリア
+echo "Clearing Yarn cache...";
+docker-compose run --rm app yarn cache clean;
 
 # yarn install
 echo "Running yarn install...";
