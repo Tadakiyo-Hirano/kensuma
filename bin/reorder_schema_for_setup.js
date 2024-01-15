@@ -10,11 +10,10 @@ const originSchemaPath = path.join(__dirname, '../db/origin_schema.rb');
 // 元のスキーマファイルを読み込む
 const schemaContent = fs.readFileSync(schemaPath, 'utf8');
 
-// スキーマファイルの全テーブルの定義と外部キー制約を取得
+// スキーマファイルの全テーブルの定義と外部キー制約を取得 ※途中、文字列のendを誤って認識しないように工夫。例、descendant_idのdesc'end'antを認識して処理が止まることのないようにした。
 const createTableRegex = /create_table "(.*?)"(.*?\n)^\s*end/gms;
 
 // 外部キー制約の取得用正規表現
-// 既に宣言されている addForeignKeyRegex を更新する代わりに、ここで初めて宣言する
 const addForeignKeyRegex = /add_foreign_key "(.*?)", "(.*?)"(?:, column: "(.*?)")?/gms;
 
 let match;
@@ -68,6 +67,7 @@ fs.writeFileSync(schemaPath, reorderedSchema);
 console.log(`Original schema file is saved to ${originSchemaPath}`);
 console.log(`Reordered schema file is saved to ${reorderedSchemaPath}`);
 console.log(`New schema file is saved to ${schemaPath}`);
+
 // トポロジカルソートの実装
 function topologicalSort(dependencies) {
   let sorted = [];
