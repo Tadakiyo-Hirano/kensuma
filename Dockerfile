@@ -1,7 +1,7 @@
 FROM ruby:3.0.3
 
 # Node.jsをインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_16.20.2 | bash - && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
 
 # install yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \

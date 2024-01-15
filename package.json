@@ -28,7 +28,8 @@
     "webpack-dev-server": "^3.1.8"
   },
 
-  "engines": {
-    "node": "16.20.2"
+  "scripts": {
+    "start": "NODE_OPTIONS='--openssl-legacy-provider' rails server",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' rails assets:precompile"
   }
 }
