@@ -27,7 +27,8 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8"
   },
-  "scripts": {
-    "start": "bin/rails server"
+
+  "engines": {
+    "node": "16.x"
   }
 }

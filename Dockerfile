@@ -12,7 +12,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN apt-get update && apt-get install -y yarn vim && \
     apt-get install -y graphviz
 
-#rmagickのgemを使用する前提でimagemagickを入れておく必要がある。
+# rmagickのgemを使用する前提でimagemagickを入れておく必要がある。
 RUN apt-get update -qq && apt-get install -y imagemagick
 
 # ルート直下にwebappという名前で作業ディレクトリを作成（コンテナ内のアプリケーションディレクトリ）
