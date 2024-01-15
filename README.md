@@ -33,7 +33,7 @@ docker-compose run --rm app bundle install
 # yarn install
 docker-compose run --rm app yarn install
 
-# db:setup　← エラーになります！
+# db:setup　← エラーになります！!
 docker-compose run --rm app rails db:setup
 　　　　↓　下記で対応して下さい！
 　　　# rails db:create
