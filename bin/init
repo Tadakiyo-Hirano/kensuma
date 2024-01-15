@@ -11,7 +11,7 @@ rm -rf node_modules;
 echo "Building Docker images...";
 docker-compose build;
 
-#bundle install
+# bundle install
 echo "Running bundle install...";
 docker-compose run --rm app bundle install;
 
