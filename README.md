@@ -42,6 +42,8 @@ docker-compose run --rm app rails db:setup
 　　　# rails db:migrate
 　　　docker-compose run --rm app rails db:migrate
 
+　　　# rails db:seed_fu
+　　　docker-compose run --rm app rails db:seed_fu
 
 # railsサーバー起動(ローカルPC用)
 bin/dev
