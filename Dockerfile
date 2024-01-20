@@ -29,8 +29,6 @@ RUN bundle install -j4
 # ホストのアプリケーションディレクトリ内をすべてコンテナにコピー
 ADD . /webapp
 
-# Yarnを使ってWebpackとWebpack CLIをインストール
-RUN yarn add webpack webpack-cli
 
 # アセットのプリコンパイル
 RUN SECRET_KEY_BASE=placeholder RAILS_ENV=production bundle exec rails assets:precompile \
