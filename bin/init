@@ -21,7 +21,7 @@ docker-compose run --rm app yarn cache clean;
 
 # yarn install
 echo "Running yarn install...";
-docker-compose run --rm app yarn install;
+docker-compose run --rm app yarn install --verbose;
 
 # スキーマファイルの並べ替え
 echo "Reordering schema file...";
