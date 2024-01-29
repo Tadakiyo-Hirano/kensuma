@@ -19,6 +19,14 @@ class News < ApplicationRecord
     uuid
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[title status content created_at delivered_at id uuid]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[news_users users]
+  end
+
   private
 
   def unable_to_be_published
