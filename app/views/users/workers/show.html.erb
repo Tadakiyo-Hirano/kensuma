@@ -107,20 +107,7 @@
           <td></td>
           <td></td>
         </tr>
-        <%# 雇入年月日 %>
-        <tr>
-          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:hiring_on) %></th>
-          <td><%= @worker.hiring_on %></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <%# 雇入前経験年数 %>
-        <tr>
-          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:experience_term_before_hiring) %></th>
-          <td><%= @worker.experience_term_before_hiring %></td>
-          <td></td>
-          <td></td>
-        </tr>
+
         <%# ブランク年数 %>
         <tr>
           <th>&emsp;&emsp;<%= Worker.human_attribute_name(:blank_term) %></th>
@@ -565,12 +552,12 @@
         <%# 認印 %>
         <tr>
           <th>&emsp;&emsp;<%= Worker.human_attribute_name(:seal) %></th>
-          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>          
+          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>
           <td></td>
           <td></td>
         </tr>
         <!-- 資格情報ここまで -->
-        
+
 
         <% if @worker.status_of_residence.present? %>
           <!-- 外国人建設就労者情報ここから -->
