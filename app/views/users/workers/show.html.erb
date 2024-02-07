@@ -107,7 +107,20 @@
           <td></td>
           <td></td>
         </tr>
-
+        <%# 雇入年月日 %>
+        <tr>
+          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:hiring_on) %></th>
+          <td><%= @worker.hiring_on %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <%# 雇入前経験年数 %>
+        <tr>
+          <th>&emsp;&emsp;<%= Worker.human_attribute_name(:experience_term_before_hiring) %></th>
+          <td><%= @worker.experience_term_before_hiring %></td>
+          <td></td>
+          <td></td>
+        </tr>
         <%# ブランク年数 %>
         <tr>
           <th>&emsp;&emsp;<%= Worker.human_attribute_name(:blank_term) %></th>
