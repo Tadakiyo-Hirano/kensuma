@@ -171,6 +171,7 @@ module ApplicationHelper
   # 自動車運転免許を短縮表記の一文に変換する
   def driver_licence_short_form(driver_licence)
     return '' if driver_licence.nil?
+
     driver_licence.map { |licence| all_driver_licences_index_ry[licence] }.join('　')
   end
 end
