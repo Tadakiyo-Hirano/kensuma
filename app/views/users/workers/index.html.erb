@@ -11,8 +11,6 @@
             <th><%= Worker.human_attribute_name(:name) %></th>
             <th><%= Worker.human_attribute_name(:name_kana) %></th>
             <th><%= Worker.human_attribute_name(:my_phone_number) %></th>
-            <th><%= Worker.human_attribute_name(:hiring_on) %></th>
-            <th><%= Worker.human_attribute_name(:experience_term_before_hiring) %></th>
             <th></th>
             <th></th>
           </tr>
@@ -23,8 +21,6 @@
             <td><%= link_to worker.name, users_worker_path(worker) %></td>
             <td><%= worker.name_kana %></td>
             <td><%= phone_number_add_hyphen(worker.my_phone_number) %></td>
-            <td><%= wareki(worker.hiring_on) %></td>
-            <td><%= worker.experience_term_before_hiring %></td>
             <td><%= link_to "編集", edit_users_worker_path(worker), class: "btn btn-md btn-success" %></td>
             <td><%= link_to "削除", users_worker_path(worker), method: :delete, data: { confirm: "#{worker.name}を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
           </tr>

@@ -131,7 +131,7 @@
     <%= f.label :family_address %>
     <%= required_label %>
     <%= f.text_field :family_address, class: "form-control", placeholder: Worker.human_attribute_name(:family_address) %><br>
-    
+
     <%# 緊急連絡先：続柄 %>
     <%= f.label :relationship %>
     <%= required_label %>
@@ -318,7 +318,7 @@
         </div><br>
       </div>
 
-      
+
       <div class="mb-3" id="employment_insurance_type">
         <%# 雇用保険 %>
         <%= worker_insurance.label :employment_insurance_type %>
@@ -456,11 +456,11 @@
       <% end %>
       <div id = "driver_licence_number">
         <%= f.label :driver_licence_number %>
-        <span class="p-1 mb-2 rounded bg-danger text-white" id="driver-licence-number-precense">必須</span> 
+        <span class="p-1 mb-2 rounded bg-danger text-white" id="driver-licence-number-precense">必須</span>
         <%= f.text_field :driver_licence_number, value: @driver_licence_number, class: "form-control", placeholder: annotation_hyphen %>
       </div>
     </div>
-    
+
     <%# 認印 %>
     <%= f.label :seal %>
     <%= f.file_field :seal, accept: 'image/jpg, image/jpeg, image/png', class: "form-control" %>
@@ -533,7 +533,7 @@
             <%= image_tag(image.url) %>
             <%= link_to "削除", users_worker_update_residence_cards_path(@worker, index: index), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
           <% end %>
-        <% end %>          
+        <% end %>
       </div>
       <br>
 
@@ -1097,7 +1097,7 @@
             required: "労働特別保険に加入しているかどうかを選択してください。"
           },
         },
-        
+
         errorPlacement: function(error, element) {
           // radioとcheckboxのみ表示位置を個別調整
           if (element.is(":radio") || element.is(":checkbox")) {

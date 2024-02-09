@@ -565,12 +565,12 @@
         <%# 認印 %>
         <tr>
           <th>&emsp;&emsp;<%= Worker.human_attribute_name(:seal) %></th>
-          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>          
+          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>
           <td></td>
           <td></td>
         </tr>
         <!-- 資格情報ここまで -->
-        
+
 
         <% if @worker.status_of_residence.present? %>
           <!-- 外国人建設就労者情報ここから -->
