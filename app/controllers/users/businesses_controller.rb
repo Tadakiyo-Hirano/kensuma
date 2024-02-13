@@ -41,6 +41,7 @@ module Users
       @business = Business.new(business_params_with_converted)
       if business_params[:construction_license_status] == "available" && business_params[:business_industries_attributes].blank?
         flash.now[:danger] = '建設許可証が「有」の場合はフォームを入力してください'
+        render :new
       elsif @business.save
         redirect_to users_orders_url
       else
