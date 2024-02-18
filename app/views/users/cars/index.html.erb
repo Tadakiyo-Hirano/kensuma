@@ -10,6 +10,7 @@
           <tr align="center">
             <th><%= Car.human_attribute_name(:owner_name) %></th>
             <th><%= Car.human_attribute_name(:vehicle_model) %></th>
+            <th><%= Car.human_attribute_name(:vehicle_number) %></th>
             <th></th>
             <th></th>
           </tr>
@@ -19,6 +20,7 @@
           <tr align="center">
             <td><%= link_to car.owner_name, users_car_path(car) %></td>
             <td><%= car.vehicle_model %></td>
+            <td><%= car.vehicle_number %></td>
             <td><%= link_to "編集", edit_users_car_path(car), class: "btn btn-md btn-success" %></td>
             <td><%= link_to "削除", users_car_path(car), method: :delete, data: { confirm: "#{car.vehicle_model}の車両情報を削除します。本当によろしいですか？" }, class: "btn btn-md btn-danger" %></td>
           </tr>
