@@ -8,6 +8,13 @@
   "addons": [
     "jawsdb"
   ],
-  "buildpacks": [],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
   "stack": "container"
 }

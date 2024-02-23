@@ -1,4 +1,14 @@
 module WorkersHelper
+  # ユーザーが元請設定の場合は必須マークの表示をさせない
+  def required_label
+    if @current_business.user.is_prime_contractor
+      # もし prime_contractor なら空の文字列を返す
+      ''
+    else
+      content_tag(:span, '必須', class: 'p-1 mb-2 rounded bg-danger text-white')
+    end
+  end
+
   def test_data_new
     @worker = current_business.workers.new(
       # テスト用デフォルト値 ==========================
@@ -28,6 +38,7 @@ module WorkersHelper
       confirmed_check_date:          '2000-01-28'
       # ============================================
     )
+
     @worker.worker_licenses.build(
       # テスト用デフォルト値 ==========================
       license_id: 1
@@ -59,14 +70,11 @@ module WorkersHelper
     )
     @worker.build_worker_insurance(
       # テスト用デフォルト値 ==========================
-      health_insurance_type:         :health_insurance_association,
-      health_insurance_name:         'サンプル健康保険',
+      health_insurance_type:         :not_health_insurance,
       pension_insurance_type:        :welfare,
-      employment_insurance_type:     :insured,
-      employment_insurance_number:   '1234',
-      severance_pay_mutual_aid_type: :kentaikyo,
-      severance_pay_mutual_aid_name: 'テスト共済制度',
-      has_labor_insurance:           :join
+      employment_insurance_type:     :exemption,
+      severance_pay_mutual_aid_type: :none
+      # has_labor_insurance:           :not_join
       # ============================================
     )
   end
@@ -87,19 +95,19 @@ module WorkersHelper
     @worker.worker_special_educations.build
     @worker.build_worker_medical(
       # 本番環境用デフォルト値 ==========================
-      is_med_exam:         :y,
-      is_special_med_exam: :y,
+      is_med_exam:         :n,
+      is_special_med_exam: :n,
       health_condition:    :good
       # ============================================
     )
     @worker.worker_safety_health_educations.build
     @worker.build_worker_insurance(
       # 本番環境用デフォルト値 ==========================
-      health_insurance_type:         :health_insurance_association,
+      health_insurance_type:         :not_health_insurance,
       pension_insurance_type:        :welfare,
-      employment_insurance_type:     :insured,
-      severance_pay_mutual_aid_type: :kentaikyo,
-      has_labor_insurance:           :join
+      employment_insurance_type:     :exemption,
+      severance_pay_mutual_aid_type: :none
+      # has_labor_insurance:           :not_join
       # ============================================
     )
   end

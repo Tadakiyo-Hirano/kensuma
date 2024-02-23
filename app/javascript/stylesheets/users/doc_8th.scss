@@ -981,6 +981,6 @@
 .doc_8_sheet {
 	/* 用紙サイズ A3 */
 	width: 420mm;
-	height: 420mm;
+	// height: 420mm; 余白調整のためコメントアウト
 	size: A3 landscape;
 }

@@ -2,6 +2,7 @@
 module Users
   class WorkersController < Users::Base
     before_action :set_worker, only: %i[show edit update destroy]
+    before_action :set_sorted_credentials, only: %i[new create edit update]
     before_action :convert_to_full_width, only: %i[create update]
 
     def index
@@ -14,6 +15,19 @@ module Users
         worker_add_hyhpen(@worker)
       else
         production_data_new
+      end
+
+      # ユーザーが元請設定の場合はラジオボタンのデフォルトのチェックを外す
+      if @current_business.user.is_prime_contractor
+        default_attributes = {
+          country:             nil, # 国籍
+          employment_contract: nil, # 雇用契約書
+          sex:                 nil, # 性別
+          rh_blood_type:       nil, # 血液型
+          abo_blood_type:      nil # 血液型(Rh)
+        }
+        @worker.assign_attributes(default_attributes)
+
       end
     end
 
@@ -190,6 +204,13 @@ module Users
       @worker = current_business.workers.find_by(uuid: params[:uuid])
     end
 
+    def set_sorted_credentials
+      @sorted_special_educations = SpecialEducation.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
+      @sorted_skill_trainings = SkillTraining.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
+      @sorted_licenses = License.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
+      @sorted_safety_health_educations = SafetyHealthEducation.order(Arel.sql('CONVERT(name_kana USING utf8mb4) COLLATE utf8mb4_unicode_ci ASC'))
+    end
+
     # 半角カタカナを全角カタカナに変換する
     def convert_to_full_width
       if params[:worker][:name_kana].present?
@@ -236,38 +257,47 @@ module Users
         converted_params[key] = full_width_to_half_width(converted_params[key])
       end
 
-      # 作業員健康情報のパラメーター整理
-      # 健康診断項目の受診の有無が無の時、診断日と血圧をnilにする
-      worker_medical_attributes = converted_params[:worker_medical_attributes]
-      if worker_medical_attributes[:is_med_exam] == 'n'
-        worker_medical_attributes[:med_exam_on] = nil
-        worker_medical_attributes[:max_blood_pressure] = nil
-        worker_medical_attributes[:min_blood_pressure] = nil
-      end
+      # 元請の場合は飛ばす
+      unless current_business.user.is_prime_contractor == true
+        # 作業員健康情報のパラメーター整理
+        # 健康診断項目の受診の有無が無の時、診断日と血圧をnilにする
+        worker_medical_attributes = converted_params[:worker_medical_attributes]
+        if worker_medical_attributes[:is_med_exam] == 'n'
+          worker_medical_attributes[:med_exam_on] = nil
+          worker_medical_attributes[:max_blood_pressure] = nil
+          worker_medical_attributes[:min_blood_pressure] = nil
+        end
 
-      # 特別健康診断項目の受診の有無が無の時、診断日と診断種類をnilにする
-      if worker_medical_attributes[:is_special_med_exam] == 'n'
-        worker_medical_attributes[:special_med_exam_on] = nil
-        worker_medical_attributes[:special_med_exam_list] = nil
-        worker_medical_attributes[:special_med_exam_others] = nil
-      end
+        # 特別健康診断項目の受診の有無が無の時、診断日と診断種類をnilにする
+        if worker_medical_attributes[:is_special_med_exam] == 'n'
+          worker_medical_attributes[:special_med_exam_on] = nil
+          worker_medical_attributes[:special_med_exam_list] = nil
+          worker_medical_attributes[:special_med_exam_others] = nil
+        end
 
-      # 保険名、被保険者番号、建設業退職金共済手帳その他、労働保険特別加入が必須でない場合パラメータを空文字にする
-      %i[health_insurance_name employment_insurance_number severance_pay_mutual_aid_name has_labor_insurance].each do |key|
-        next unless converted_params[:worker_insurance_attributes][key].present?
+        # 保険名、被保険者番号、建設業退職金共済手帳その他、労働保険特別加入が必須でない場合パラメータを空文字にする
+        %i[health_insurance_name employment_insurance_number severance_pay_mutual_aid_name has_labor_insurance].each do |key|
+          next unless converted_params[:worker_insurance_attributes][key].present?
 
-        worker_insurance_attributes_params = converted_params[:worker_insurance_attributes]
-        unchenge_params = worker_insurance_attributes_params[key]
-        worker_insurance_attributes_params[key] = case key
-                                                  when :health_insurance_name
-                                                    health_insurance_name_nil(worker_insurance_attributes_params[:health_insurance_type], unchenge_params)
-                                                  when :employment_insurance_number
-                                                    employment_insurance_number_nil(worker_insurance_attributes_params[:employment_insurance_type], unchenge_params)
-                                                  when :severance_pay_mutual_aid_name
-                                                    severance_pay_mutual_aid_name_nil(worker_insurance_attributes_params[:severance_pay_mutual_aid_type], unchenge_params)
-                                                  when :has_labor_insurance
-                                                    empty_has_labor_insurance(converted_params[:business_owner_or_master], unchenge_params)
-                                                  end
+          worker_insurance_attributes_params = converted_params[:worker_insurance_attributes]
+          unchenge_params = worker_insurance_attributes_params[key]
+          worker_insurance_attributes_params[key] = case key
+                                                    when :health_insurance_name
+                                                      health_insurance_name_nil(worker_insurance_attributes_params[:health_insurance_type], unchenge_params)
+                                                    when :employment_insurance_number
+                                                      employment_insurance_number_nil(worker_insurance_attributes_params[:employment_insurance_type], unchenge_params)
+                                                    when :severance_pay_mutual_aid_name
+                                                      severance_pay_mutual_aid_name_nil(worker_insurance_attributes_params[:severance_pay_mutual_aid_type], unchenge_params)
+                                                    when :has_labor_insurance
+                                                      empty_has_labor_insurance(converted_params[:business_owner_or_master], unchenge_params)
+                                                    end
+        end
+
+        # 特別健康診断のチェックが入っていない時、特別健康診断を空にする
+        worker_medical_attributes = converted_params[:worker_medical_attributes]
+        if worker_medical_attributes[:special_med_exam_list].blank?
+          converted_params = converted_params.merge('worker_medical_attributes'=>worker_medical_attributes.merge(special_med_exam_list: []))
+        end
       end
 
       # 事業主もしくは一人親方であれば、雇用保険に関する項目を空文字にする
@@ -427,12 +457,6 @@ module Users
           end
           converted_params = converted_params.merge('worker_safety_health_educations_attributes' => worker_safety_health_educations_attributes)
         end
-      end
-
-      # 特別健康診断のチェックが入っていない時、特別健康診断を空にする
-      worker_medical_attributes = converted_params[:worker_medical_attributes]
-      if worker_medical_attributes[:special_med_exam_list].blank?
-        converted_params = converted_params.merge('worker_medical_attributes'=>worker_medical_attributes.merge(special_med_exam_list: []))
       end
       converted_params
     end

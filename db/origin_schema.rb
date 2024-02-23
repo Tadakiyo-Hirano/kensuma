@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_12_004308) do
+ActiveRecord::Schema.define(version: 2023_10_21_134834) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2023_11_12_004308) do
     t.string "construction_license_number", comment: "建設許可証(建設許可番号)"
     t.date "construction_license_updated_at", comment: "建設許可証(更新日)"
     t.bigint "business_id", null: false
-    t.bigint "industry_id"
+    t.bigint "industry_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["business_id"], name: "index_business_industries_on_business_id"

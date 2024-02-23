@@ -53,7 +53,7 @@ module Users
     def set_business_construction_licenses
       # 元請の建設許可証番号
       @industry = @current_business.business_industries.map { |industry| Industry.find(industry.industry_id).name }
-      @order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h || {}
+      @order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h
       order_content = @order&.content || {}
       if order_content['genecon_construction_license_number_1st'].present? && !@order_construction_licenses.value?(order_content['genecon_construction_license_number_1st'])
         if @order_construction_licenses.key?(:genecon_construction_license_id_1st)
@@ -70,7 +70,7 @@ module Users
         @order_construction_licenses[order_content['genecon_construction_license_id_2nd']] = order_content['genecon_construction_license_number_2nd']
       end
       # 下請けの建設許可証番号
-      @request_order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h || {}
+      @request_order_construction_licenses = current_business&.business_industries&.distinct&.pluck(:id, :construction_license_number)&.to_h
       request_order_content = @request_order&.content || {}
       if request_order_content['subcon_construction_license_number_1st'].present? && !@request_order_construction_licenses.value?(request_order_content['subcon_construction_license_number_1st'])
         if @request_order_construction_licenses.key?(:subcon_construction_license_id_1st)

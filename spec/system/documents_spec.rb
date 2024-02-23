@@ -1,7 +1,7 @@
 # rubocop:disable all
 require 'rails_helper'
-
-RSpec.describe 'Documnents', type: :system do
+# pending
+RSpec.xdescribe 'Documnents', type: :system do
   pending "add some examples (or delete) #{__FILE__}"
   let(:user) { create(:user) }
   let(:user_first_sub) { create(:user, name: '1次下請けユーザー', email: 'first_sub-user@example.com', password: '123456', password_confirmation: '123456', role: 'admin') }

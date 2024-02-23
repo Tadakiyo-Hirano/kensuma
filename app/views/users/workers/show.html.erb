@@ -232,10 +232,10 @@
         <%# 受診の有無 %>
         <tr>
           <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_med_exam) %></th>
-          <td><%= @worker.worker_medical.is_med_exam_i18n %><td>
+          <td><%= @worker&.worker_medical&.is_med_exam_i18n %><td>
           <td></td>
         </tr>
-        <% if @worker.worker_medical.is_med_exam_i18n == '有' %>
+        <% if @worker&.worker_medical&.is_med_exam_i18n == '有' %>
           <%# 健康診断日 %>
           <tr>
             <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:med_exam_on) %></th>
@@ -274,10 +274,10 @@
         <%# 受診の有無 %>
         <tr>
           <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:is_special_med_exam) %></th>
-          <td><%= @worker.worker_medical.is_special_med_exam_i18n %><td>
+          <td><%= @worker&.worker_medical&.is_special_med_exam_i18n %><td>
           <td></td>
         </td>
-        <% if @worker.worker_medical.is_special_med_exam_i18n == '有' %>
+        <% if @worker&.worker_medical&.is_special_med_exam_i18n == '有' %>
           <%# 診断日 %>
           <tr>
             <th>&emsp;&emsp;&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:special_med_exam_on) %></th>
@@ -306,7 +306,7 @@
         <%# 最近の健康状態 %>
         <tr>
           <th>&emsp;&emsp;<%= WorkerMedical.human_attribute_name(:health_condition) %></th>
-          <td><%= @worker.worker_medical.health_condition_i18n %><td>
+          <td><%= @worker&.worker_medical&.health_condition_i18n %><td>
           <td></td>
         </tr>
         <!-- worker_medicalここまで -->
@@ -322,7 +322,7 @@
         <%# 健康保険 %>
         <tr>
           <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:health_insurance_type) %></th>
-          <td><%= @worker.worker_insurance.health_insurance_type_i18n %></td>
+          <td><%= @worker&.worker_insurance&.health_insurance_type_i18n %></td>
           <td></td>
           <td></td>
         </tr>
@@ -339,8 +339,10 @@
         <tr>
           <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:health_insurance_image) %></th>
           <td>
-            <% @worker.worker_insurance.health_insurance_image.each do |image| %>
-              <%= image_tag(image.url) %>
+            <% if @worker&.worker_insurance&.health_insurance_image %>
+              <% @worker.worker_insurance.health_insurance_image.each do |image| %>
+                <%= image_tag(image.url) %>
+              <% end %>
             <% end %>
           </td>
           <td></td>
@@ -349,7 +351,7 @@
         <%# 年金保険 %>
         <tr>
           <th>&emsp;&emsp;<%= WorkerInsurance.human_attribute_name(:pension_insurance_type) %></th>
-          <td><%= @worker.worker_insurance.pension_insurance_type_i18n %></td>
+          <td><%= @worker&.worker_insurance&.pension_insurance_type_i18n %></td>
           <td></td>
           <td></td>
         </tr>
@@ -386,7 +388,7 @@
           <% if @worker.worker_insurance && (@worker.worker_insurance.severance_pay_mutual_aid_type == 'other') %>
             <td><%= @worker.worker_insurance.severance_pay_mutual_aid_name %></td>
           <% else %>
-            <td><%= @worker.worker_insurance.severance_pay_mutual_aid_type_i18n %></td>
+            <td><%= @worker&.worker_insurance&.severance_pay_mutual_aid_type_i18n %></td>
             <% end %>
           <td></td>
           <td></td>
@@ -563,12 +565,12 @@
         <%# 認印 %>
         <tr>
           <th>&emsp;&emsp;<%= Worker.human_attribute_name(:seal) %></th>
-          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>          
+          <td><%= image_tag(@worker.seal.url) if @worker.seal.present? %></td>
           <td></td>
           <td></td>
         </tr>
         <!-- 資格情報ここまで -->
-        
+
 
         <% if @worker.status_of_residence.present? %>
           <!-- 外国人建設就労者情報ここから -->

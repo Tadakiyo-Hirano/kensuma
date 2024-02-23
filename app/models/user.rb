@@ -31,4 +31,19 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :name,  presence: true
   validates :age,   allow_nil: true, numericality: { greater_than_or_equal_to: 10 }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[
+      admin_user_id age confirmation_sent_at confirmation_token
+      confirmed_at created_at current_sign_in_at current_sign_in_ip
+      email failed_attempts gender id invitation_accepted_at
+      invitation_created_at invitation_limit invitation_sent_at
+      invitation_sent_user_ids invitation_token invitations_count
+      invited_by_id invited_by_type invited_user_ids
+      is_prime_contractor last_sign_in_at last_sign_in_ip
+      locked_at name remember_created_at reset_password_sent_at
+      reset_password_token role sign_in_count unconfirmed_email
+      unlock_token updated_at
+    ]
+  end
 end

@@ -23,7 +23,7 @@ module App
     config.generators do |g|
       g.assets false    # <= css,javascriptファイルを作成しない
       g.helper false    # <= helperファイルを作成しない
-      g.skip_routes true  # <= routes.rbを変更しない
+      g.skip_routes true # <= routes.rbを変更しない
     end
   end
 end
