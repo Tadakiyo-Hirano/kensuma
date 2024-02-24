@@ -58,6 +58,7 @@
 
     <%# 電話番号 %>
     <%= f.label :my_phone_number %>
+    <span class="p-1 mb-2 rounded bg-danger text-white">必須</span>
     <%= required_label %>
     <%= f.telephone_field :my_phone_number, value: @my_phone_number, class: "form-control", placeholder: annotation_hyphen %><br>
 
