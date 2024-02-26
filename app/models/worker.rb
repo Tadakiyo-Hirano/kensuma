@@ -51,7 +51,6 @@ class Worker < ApplicationRecord
   with_options unless: -> { business&.user&.is_prime_contractor == true } do
     validates :country, presence: true
     validates :my_address, presence: true
-    validates :my_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
     validates :family_address, presence: true
     validates :family_phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: PHONE_NUMBER_MS }
     validates :birth_day_on, presence: true
