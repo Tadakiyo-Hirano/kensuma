@@ -255,7 +255,7 @@ ja:
         site_address: 施工場所住所
         # 発注者
         orderer: 発注者
-        order_name: 氏名
+        order_name: 会社名もしくは氏名
         order_post_code: 郵便番号
         hyphen_is_unnecessary: 0123456 -(ハイフン)は不要
         order_address: 住所
