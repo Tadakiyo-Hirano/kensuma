@@ -686,6 +686,7 @@ ja:
         welfare: 厚生年金
         national: 国民年金
         recipient: 受給者
+        not_applicable: 対象外
       employment_insurance_type:
         insured: 被保険者
         day: 日雇保険
