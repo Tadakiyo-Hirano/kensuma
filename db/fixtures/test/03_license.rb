@@ -909,5 +909,11 @@ License.seed(
     id: 180,
     name: '1級計装士',
     license_type: 9
+  },
+  {
+    id: 181,
+    name: '監理技術者',
+    name_kana: 'カンリギジュツシャ',
+    license_type: 9
   }
 )
