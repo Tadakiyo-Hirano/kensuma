@@ -117,7 +117,6 @@ SafetyHealthEducation.seed(
   {
     id: 24,
     name: '職長・安全衛生責任者教育',
-    name_kana: 'ショクチョウアンゼンエイセイセキニンシャキョウイク',
     description: '現場において部下を直接指揮・監督する職長、安全衛生責任者教育の教育'
   }
 )
