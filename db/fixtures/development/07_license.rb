@@ -480,7 +480,7 @@ License.seed(
   {
     id: 79,
     name: '1級建築大工技能士',
-    name_kana: 'イッキュウケンチクダイクギノウし',
+    name_kana: 'イッキュウケンチクダイクギノウシ',
     license_type: 9
   },
   {
