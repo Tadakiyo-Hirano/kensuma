@@ -460,14 +460,6 @@
         <%= f.text_field :driver_licence_number, value: @driver_licence_number, class: "form-control", placeholder: annotation_hyphen %>
       </div>
     </div>
-
-    <%# 認印 %>
-    <%= f.label :seal %>
-    <%= f.file_field :seal, accept: 'image/jpg, image/jpeg, image/png', class: "form-control" %>
-    <% if @worker.seal.present? && @worker.id.present? %>
-      <%= image_tag(@worker.seal.url) %>
-      <%= link_to "削除", users_worker_delete_seal_path(@worker), method: :patch, data: { confirm: "本当に削除してもよろしいですか？" } %>
-    <% end %>
   </div>
 </div><br>
 
